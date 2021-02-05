@@ -1,0 +1,22 @@
+/* tslint:disable */
+/* eslint-disable */
+//
+// THIS IS A GENERATED FILE
+// DO NOT MODIFY IT! YOUR CHANGES WILL BE LOST
+import { InjectionToken } from '@angular/core';
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_INTENTS_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+export const GRPC_INTENTS_CLIENT_SETTINGS = new InjectionToken('GRPC_INTENTS_CLIENT_SETTINGS');
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW50ZW50LnBiY29uZi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL2FwaS9vbmRld28vbmx1L2ludGVudC5wYmNvbmYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsb0JBQW9CO0FBQ3BCLG9CQUFvQjtBQUNwQixFQUFFO0FBQ0YsMkJBQTJCO0FBQzNCLDhDQUE4QztBQUM5QyxPQUFPLEVBQUUsY0FBYyxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRS9DOzs7Ozs7Ozs7Ozs7O0VBYUU7QUFDRixNQUFNLENBQUMsTUFBTSw0QkFBNEIsR0FBRyxJQUFJLGNBQWMsQ0FFNUQsOEJBQThCLENBQUMsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qIHRzbGludDpkaXNhYmxlICovXG4vKiBlc2xpbnQtZGlzYWJsZSAqL1xuLy9cbi8vIFRISVMgSVMgQSBHRU5FUkFURUQgRklMRVxuLy8gRE8gTk9UIE1PRElGWSBJVCEgWU9VUiBDSEFOR0VTIFdJTEwgQkUgTE9TVFxuaW1wb3J0IHsgSW5qZWN0aW9uVG9rZW4gfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IEdycGNDbGllbnRTZXR0aW5ncyB9IGZyb20gJ0BuZ3gtZ3JwYy9jb21tb24nO1xuLypcbiAgVG8gY29uZmlndXJlIHRoZSBzZXJ2aWNlcyB5b3UgbmVlZCB0byBwcm92aWRlIGEgY29uZmlndXJhdGlvbiBmb3IgZWFjaCBvZiB0aGVtLlxuXG4gIEUuZy4geW91IGNhbiBjcmVhdGUgYSBtb2R1bGUgd2hlcmUgeW91IGNvbmZpZ3VyZSBhbGwgb2YgdGhlbSBhbmQgdGhlbiBpbXBvcnQgdGhpcyBtb2R1bGUgaW50byB5b3VyIEFwcE1vZHVsZTpcblxuICBjb25zdCBncnBjU2V0dGluZ3MgPSB7IGhvc3Q6IGVudmlyb25tZW50LmdycGNIb3N0IH07XG5cbiAgQE5nTW9kdWxlKHtcbiAgICBwcm92aWRlcnM6IFtcbiAgICAgIHsgcHJvdmlkZTogR1JQQ19JTlRFTlRTX0NMSUVOVF9TRVRUSU5HUywgdXNlVmFsdWU6IGdycGNTZXR0aW5ncyB9LFxuICAgIF0sXG4gIH0pXG4gIGV4cG9ydCBjbGFzcyBHcnBjQ29uZmlnTW9kdWxlIHsgfVxuKi9cbmV4cG9ydCBjb25zdCBHUlBDX0lOVEVOVFNfQ0xJRU5UX1NFVFRJTkdTID0gbmV3IEluamVjdGlvblRva2VuPFxuICBHcnBjQ2xpZW50U2V0dGluZ3Ncbj4oJ0dSUENfSU5URU5UU19DTElFTlRfU0VUVElOR1MnKTtcbiJdfQ==
