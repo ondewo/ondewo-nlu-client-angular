@@ -51,9 +51,7 @@ export declare class DetectIntentRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -99,9 +97,7 @@ export declare class DetectIntentRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -280,9 +276,7 @@ export declare class DetectIntentResponse implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -316,9 +310,7 @@ export declare class DetectIntentResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -586,9 +578,7 @@ export declare class DetectIntentResponse implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -622,9 +612,7 @@ export declare class DetectIntentResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -807,9 +795,7 @@ export declare class QueryParameters implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
+                [x: string]: ondewoNlu005.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -830,9 +816,7 @@ export declare class QueryParameters implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
+                [x: string]: ondewoNlu005.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -1092,9 +1076,7 @@ export declare class QueryResult implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
+                [x: string]: ondewoNlu005.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -1128,9 +1110,7 @@ export declare class QueryResult implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -1387,9 +1367,7 @@ export declare class QueryResult implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
+                [x: string]: ondewoNlu005.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -1423,9 +1401,7 @@ export declare class QueryResult implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -1601,9 +1577,7 @@ export declare class StreamingDetectIntentRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -1650,9 +1624,7 @@ export declare class StreamingDetectIntentRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -1841,9 +1813,7 @@ export declare class StreamingDetectIntentResponse implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -1877,9 +1847,7 @@ export declare class StreamingDetectIntentResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -2153,9 +2121,7 @@ export declare class StreamingDetectIntentResponse implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -2189,9 +2155,7 @@ export declare class StreamingDetectIntentResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -2520,9 +2484,7 @@ export declare class Session implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -2679,9 +2641,7 @@ export declare class Session implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -2715,9 +2675,7 @@ export declare class Session implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -2866,9 +2824,7 @@ export declare class Session implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -2905,9 +2861,7 @@ export declare class Session implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -3077,9 +3031,7 @@ export declare class Session implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -3236,9 +3188,7 @@ export declare class Session implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -3272,9 +3222,7 @@ export declare class Session implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -3423,9 +3371,7 @@ export declare class Session implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -3462,9 +3408,7 @@ export declare class Session implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -3660,9 +3604,7 @@ export declare class SessionStep implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -3819,9 +3761,7 @@ export declare class SessionStep implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -3855,9 +3795,7 @@ export declare class SessionStep implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -4006,9 +3944,7 @@ export declare class SessionStep implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
+                [x: string]: ondewoNlu005.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -4026,9 +3962,7 @@ export declare class SessionStep implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -4185,9 +4119,7 @@ export declare class SessionStep implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -4221,9 +4153,7 @@ export declare class SessionStep implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -4372,9 +4302,7 @@ export declare class SessionStep implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
+                [x: string]: ondewoNlu005.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -4416,9 +4344,7 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -4575,9 +4501,7 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -4611,9 +4535,7 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -4762,9 +4684,7 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -4786,9 +4706,7 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -4945,9 +4863,7 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -4981,9 +4897,7 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -5132,9 +5046,7 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -5202,9 +5114,7 @@ export declare class ListSessionsRequest implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -5398,9 +5308,7 @@ export declare class ListSessionsRequest implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -5642,9 +5550,7 @@ export declare class SessionFilter implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -5833,9 +5739,7 @@ export declare class SessionFilter implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -6067,9 +5971,7 @@ export declare class SessionInfo implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -6255,9 +6157,7 @@ export declare class SessionInfo implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -6446,9 +6346,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -6605,9 +6503,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -6641,9 +6537,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                                 name: string;
                                 lifespanCount: number;
                                 parameters: {
-                                    fields: {
-                                        [x: string]: googleProtobuf002.Value;
-                                    };
+                                    [x: string]: ondewoNlu005.Context.Parameter;
                                 };
                                 lifespanTime: number;
                             }[];
@@ -6792,9 +6686,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -6831,9 +6723,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -7006,9 +6896,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -7165,9 +7053,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -7201,9 +7087,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                                 name: string;
                                 lifespanCount: number;
                                 parameters: {
-                                    fields: {
-                                        [x: string]: googleProtobuf002.Value;
-                                    };
+                                    [x: string]: ondewoNlu005.Context.Parameter;
                                 };
                                 lifespanTime: number;
                             }[];
@@ -7352,9 +7236,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -7391,9 +7273,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -7678,9 +7558,7 @@ export declare class CreateSessionReviewRequest implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -7916,9 +7794,7 @@ export declare class CreateSessionReviewRequest implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -7980,9 +7856,7 @@ export declare class CreateSessionReviewRequest implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -8218,9 +8092,7 @@ export declare class CreateSessionReviewRequest implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -8298,9 +8170,7 @@ export declare class SessionReview implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -8536,9 +8406,7 @@ export declare class SessionReview implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -8595,9 +8463,7 @@ export declare class SessionReview implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
+                            [x: string]: ondewoNlu005.Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -8833,9 +8699,7 @@ export declare class SessionReview implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -8921,9 +8785,7 @@ export declare class SessionReviewStep implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -9159,9 +9021,7 @@ export declare class SessionReviewStep implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
+                [x: string]: ondewoNlu005.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -9215,9 +9075,7 @@ export declare class SessionReviewStep implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -9453,9 +9311,7 @@ export declare class SessionReviewStep implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
+                [x: string]: ondewoNlu005.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -9519,9 +9375,7 @@ export declare class DetectedIntent implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -9784,9 +9638,7 @@ export declare class DetectedIntent implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
+                    [x: string]: ondewoNlu005.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -10229,9 +10081,7 @@ export declare class ListSessionReviewsResponse implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -10467,9 +10317,7 @@ export declare class ListSessionReviewsResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -10529,9 +10377,7 @@ export declare class ListSessionReviewsResponse implements GrpcMessage {
                             name: string;
                             lifespanCount: number;
                             parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
+                                [x: string]: ondewoNlu005.Context.Parameter;
                             };
                             lifespanTime: number;
                         }[];
@@ -10767,9 +10613,7 @@ export declare class ListSessionReviewsResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
+                        [x: string]: ondewoNlu005.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];

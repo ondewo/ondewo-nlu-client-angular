@@ -1,7 +1,6 @@
 import { GrpcMessage, RecursivePartial } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as googleProtobuf002 from '../../google/protobuf/field-mask.pb';
-import * as googleProtobuf003 from '../../google/protobuf/struct.pb';
 export declare class Context implements GrpcMessage {
     static toBinary(instance: Context): any;
     static fromBinary(bytes: ByteSource): Context;
@@ -21,17 +20,19 @@ export declare class Context implements GrpcMessage {
     set name(value: string | undefined);
     get lifespanCount(): number | undefined;
     set lifespanCount(value: number | undefined);
-    get parameters(): googleProtobuf003.Struct | undefined;
-    set parameters(value: googleProtobuf003.Struct | undefined);
+    get parameters(): {
+        [prop: string]: Context.Parameter;
+    } | undefined;
+    set parameters(value: {
+        [prop: string]: Context.Parameter;
+    } | undefined);
     get lifespanTime(): number | undefined;
     set lifespanTime(value: number | undefined);
     toObject(): {
         name: string;
         lifespanCount: number;
         parameters: {
-            fields: {
-                [x: string]: googleProtobuf003.Value;
-            };
+            [x: string]: Context.Parameter;
         };
         lifespanTime: number;
     };
@@ -39,14 +40,87 @@ export declare class Context implements GrpcMessage {
         name: string;
         lifespanCount: number;
         parameters: {
-            fields: {
-                [x: string]: googleProtobuf003.Value;
-            };
+            [x: string]: Context.Parameter;
         };
         lifespanTime: number;
     };
 }
-export declare module Context { }
+export declare module Context {
+    class Parameter implements GrpcMessage {
+        static toBinary(instance: Parameter): any;
+        static fromBinary(bytes: ByteSource): Parameter;
+        static refineValues(instance: Parameter): void;
+        static fromBinaryReader(instance: Parameter, reader: BinaryReader): void;
+        static toBinaryWriter(instance: Parameter, writer: BinaryWriter): void;
+        private _name?;
+        private _displayName?;
+        private _value?;
+        private _valueOriginal?;
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param Parameter value
+         */
+        constructor(value?: RecursivePartial<Parameter>);
+        get name(): string | undefined;
+        set name(value: string | undefined);
+        get displayName(): string | undefined;
+        set displayName(value: string | undefined);
+        get value(): string | undefined;
+        set value(value: string | undefined);
+        get valueOriginal(): string | undefined;
+        set valueOriginal(value: string | undefined);
+        toObject(): {
+            name: string;
+            displayName: string;
+            value: string;
+            valueOriginal: string;
+        };
+        toJSON(): {
+            name: string;
+            displayName: string;
+            value: string;
+            valueOriginal: string;
+        };
+    }
+    module Parameter { }
+    class ParametersEntry implements GrpcMessage {
+        static toBinary(instance: ParametersEntry): any;
+        static fromBinary(bytes: ByteSource): ParametersEntry;
+        static refineValues(instance: ParametersEntry): void;
+        static fromBinaryReader(instance: ParametersEntry, reader: BinaryReader): void;
+        static toBinaryWriter(instance: ParametersEntry, writer: BinaryWriter): void;
+        private _key?;
+        private _value?;
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ParametersEntry value
+         */
+        constructor(value?: RecursivePartial<ParametersEntry>);
+        get key(): string | undefined;
+        set key(value: string | undefined);
+        get value(): Context.Parameter | undefined;
+        set value(value: Context.Parameter | undefined);
+        toObject(): {
+            key: string;
+            value: {
+                name: string;
+                displayName: string;
+                value: string;
+                valueOriginal: string;
+            };
+        };
+        toJSON(): {
+            key: string;
+            value: {
+                name: string;
+                displayName: string;
+                value: string;
+                valueOriginal: string;
+            };
+        };
+    }
+    module ParametersEntry { }
+}
 export declare class ListContextsRequest implements GrpcMessage {
     static toBinary(instance: ListContextsRequest): any;
     static fromBinary(bytes: ByteSource): ListContextsRequest;
@@ -96,9 +170,7 @@ export declare class ListContextsResponse implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf003.Value;
-                };
+                [x: string]: Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -109,9 +181,7 @@ export declare class ListContextsResponse implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf003.Value;
-                };
+                [x: string]: Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -164,9 +234,7 @@ export declare class CreateContextRequest implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf003.Value;
-                };
+                [x: string]: Context.Parameter;
             };
             lifespanTime: number;
         };
@@ -177,9 +245,7 @@ export declare class CreateContextRequest implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf003.Value;
-                };
+                [x: string]: Context.Parameter;
             };
             lifespanTime: number;
         };
@@ -208,9 +274,7 @@ export declare class UpdateContextRequest implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf003.Value;
-                };
+                [x: string]: Context.Parameter;
             };
             lifespanTime: number;
         };
@@ -223,9 +287,7 @@ export declare class UpdateContextRequest implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf003.Value;
-                };
+                [x: string]: Context.Parameter;
             };
             lifespanTime: number;
         };

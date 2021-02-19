@@ -128,9 +128,7 @@ export declare class Intent implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf006.Value;
-                };
+                [x: string]: ondewoNlu001.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -289,9 +287,7 @@ export declare class Intent implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf006.Value;
-                };
+                [x: string]: ondewoNlu001.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -1725,9 +1721,7 @@ export declare class ListIntentsResponse implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -1889,9 +1883,7 @@ export declare class ListIntentsResponse implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -2116,9 +2108,7 @@ export declare class CreateIntentRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -2282,9 +2272,7 @@ export declare class CreateIntentRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -2472,9 +2460,7 @@ export declare class UpdateIntentRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -2640,9 +2626,7 @@ export declare class UpdateIntentRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -2866,9 +2850,7 @@ export declare class BatchUpdateIntentsRequest implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf006.Value;
-                        };
+                        [x: string]: ondewoNlu001.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -3038,9 +3020,7 @@ export declare class BatchUpdateIntentsRequest implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf006.Value;
-                        };
+                        [x: string]: ondewoNlu001.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -3229,9 +3209,7 @@ export declare class BatchUpdateIntentsResponse implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -3392,9 +3370,7 @@ export declare class BatchUpdateIntentsResponse implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -3575,9 +3551,7 @@ export declare class BatchDeleteIntentsRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -3739,9 +3713,7 @@ export declare class BatchDeleteIntentsRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -3918,9 +3890,7 @@ export declare class IntentBatch implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -4081,9 +4051,7 @@ export declare class IntentBatch implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf006.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];

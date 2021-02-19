@@ -1,29 +1,14 @@
-# README #
+# Ondewo NLU Client Angular #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This package contains a grpc client used to access and communicate the ondewo nlu api.
+It was also configured as an Angular npm package so it can be easily added to any Angular project.
 
-### What is this repository for? ###
+## How to install?
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+**Run:**
+```bash
+git+https://github.com/ondewo/ondewo-nlu-client-angular.git
+```
+inside of your project to install the npm package of this github repository in you angular project.
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+Note: The npm package repository is not supported yet, but will be in the future to make it even easier to install the client. 

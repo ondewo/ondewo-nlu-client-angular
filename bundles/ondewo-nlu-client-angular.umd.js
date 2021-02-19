@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ngx-grpc/common'), require('@ngx-grpc/core'), require('google-protobuf')) :
-    typeof define === 'function' && define.amd ? define('@ondewo/nlu-client-angular', ['exports', '@angular/core', '@ngx-grpc/common', '@ngx-grpc/core', 'google-protobuf'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ondewo = global.ondewo || {}, global.ondewo['nlu-client-angular'] = {}), global.ng.core, global.common, global.i2, global.googleProtobuf));
-}(this, (function (exports, i0, common, i2, googleProtobuf) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('google-protobuf'), require('@angular/core'), require('@ngx-grpc/common'), require('@ngx-grpc/core')) :
+    typeof define === 'function' && define.amd ? define('@ondewo/nlu-client-angular', ['exports', 'google-protobuf', '@angular/core', '@ngx-grpc/common', '@ngx-grpc/core'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ondewo = global.ondewo || {}, global.ondewo['nlu-client-angular'] = {}), global.googleProtobuf, global.ng.core, global.common, global.i2));
+}(this, (function (exports, googleProtobuf, i0, common, i2) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -296,6 +296,7 @@
         return value;
     }
 
+    exports.NullValue = void 0;
     (function (NullValue) {
         NullValue[NullValue["nullValue"] = 0] = "nullValue";
     })(exports.NullValue || (exports.NullValue = {}));
@@ -1050,7 +1051,7 @@
         return FieldMask;
     }());
 
-    var Context = /** @class */ (function () {
+    exports.Context = /** @class */ (function () {
         /**
          * Creates an object and applies default Protobuf values
          * @param Context value
@@ -1059,9 +1060,7 @@
             value = value || {};
             this.name = value.name;
             this.lifespanCount = value.lifespanCount;
-            this.parameters = value.parameters
-                ? new exports.Struct(value.parameters)
-                : undefined;
+            this.parameters = Object.assign({}, (value.parameters || {}));
             this.lifespanTime = value.lifespanTime;
             Context.refineValues(this);
         }
@@ -1078,7 +1077,7 @@
         Context.refineValues = function (instance) {
             instance.name = instance.name || '';
             instance.lifespanCount = instance.lifespanCount || 0;
-            instance.parameters = instance.parameters || undefined;
+            instance.parameters = instance.parameters || {};
             instance.lifespanTime = instance.lifespanTime || 0;
         };
         Context.fromBinaryReader = function (instance, reader) {
@@ -1093,8 +1092,10 @@
                         instance.lifespanCount = reader.readInt32();
                         break;
                     case 3:
-                        instance.parameters = new exports.Struct();
-                        reader.readMessage(instance.parameters, exports.Struct.fromBinaryReader);
+                        var msg_3 = {};
+                        reader.readMessage(msg_3, Context.ParametersEntry.fromBinaryReader);
+                        instance.parameters = instance.parameters || {};
+                        instance.parameters[msg_3.key] = msg_3.value;
                         break;
                     case 4:
                         instance.lifespanTime = reader.readFloat();
@@ -1112,8 +1113,14 @@
             if (instance.lifespanCount) {
                 writer.writeInt32(2, instance.lifespanCount);
             }
-            if (instance.parameters) {
-                writer.writeMessage(3, instance.parameters, exports.Struct.toBinaryWriter);
+            if (!!instance.parameters) {
+                var keys_3 = Object.keys(instance.parameters);
+                if (keys_3.length) {
+                    var repeated_3 = keys_3
+                        .map(function (key) { return ({ key: key, value: instance.parameters[key] }); })
+                        .reduce(function (r, v) { return __spread(r, [v]); }, []);
+                    writer.writeRepeatedMessage(3, repeated_3, Context.ParametersEntry.toBinaryWriter);
+                }
             }
             if (instance.lifespanTime) {
                 writer.writeFloat(4, instance.lifespanTime);
@@ -1163,7 +1170,7 @@
             return {
                 name: this.name,
                 lifespanCount: this.lifespanCount,
-                parameters: this.parameters ? this.parameters.toObject() : undefined,
+                parameters: Object.assign({}, (this.parameters || {})),
                 lifespanTime: this.lifespanTime
             };
         };
@@ -1172,6 +1179,211 @@
         };
         return Context;
     }());
+    (function (Context) {
+        var Parameter = /** @class */ (function () {
+            /**
+             * Creates an object and applies default Protobuf values
+             * @param Parameter value
+             */
+            function Parameter(value) {
+                value = value || {};
+                this.name = value.name;
+                this.displayName = value.displayName;
+                this.value = value.value;
+                this.valueOriginal = value.valueOriginal;
+                Parameter.refineValues(this);
+            }
+            Parameter.toBinary = function (instance) {
+                var writer = new googleProtobuf.BinaryWriter();
+                Parameter.toBinaryWriter(instance, writer);
+                return writer.getResultBuffer();
+            };
+            Parameter.fromBinary = function (bytes) {
+                var instance = new Parameter();
+                Parameter.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            Parameter.refineValues = function (instance) {
+                instance.name = instance.name || '';
+                instance.displayName = instance.displayName || '';
+                instance.value = instance.value || '';
+                instance.valueOriginal = instance.valueOriginal || '';
+            };
+            Parameter.fromBinaryReader = function (instance, reader) {
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            instance.name = reader.readString();
+                            break;
+                        case 2:
+                            instance.displayName = reader.readString();
+                            break;
+                        case 3:
+                            instance.value = reader.readString();
+                            break;
+                        case 4:
+                            instance.valueOriginal = reader.readString();
+                            break;
+                        default:
+                            reader.skipField();
+                    }
+                }
+                Parameter.refineValues(instance);
+            };
+            Parameter.toBinaryWriter = function (instance, writer) {
+                if (instance.name) {
+                    writer.writeString(1, instance.name);
+                }
+                if (instance.displayName) {
+                    writer.writeString(2, instance.displayName);
+                }
+                if (instance.value) {
+                    writer.writeString(3, instance.value);
+                }
+                if (instance.valueOriginal) {
+                    writer.writeString(4, instance.valueOriginal);
+                }
+            };
+            Object.defineProperty(Parameter.prototype, "name", {
+                get: function () {
+                    return this._name;
+                },
+                set: function (value) {
+                    this._name = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(Parameter.prototype, "displayName", {
+                get: function () {
+                    return this._displayName;
+                },
+                set: function (value) {
+                    this._displayName = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(Parameter.prototype, "value", {
+                get: function () {
+                    return this._value;
+                },
+                set: function (value) {
+                    this._value = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(Parameter.prototype, "valueOriginal", {
+                get: function () {
+                    return this._valueOriginal;
+                },
+                set: function (value) {
+                    this._valueOriginal = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Parameter.prototype.toObject = function () {
+                return {
+                    name: this.name,
+                    displayName: this.displayName,
+                    value: this.value,
+                    valueOriginal: this.valueOriginal
+                };
+            };
+            Parameter.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            return Parameter;
+        }());
+        Context.Parameter = Parameter;
+        var ParametersEntry = /** @class */ (function () {
+            /**
+             * Creates an object and applies default Protobuf values
+             * @param ParametersEntry value
+             */
+            function ParametersEntry(value) {
+                value = value || {};
+                this.key = value.key;
+                this.value = value.value ? new Context.Parameter(value.value) : undefined;
+                ParametersEntry.refineValues(this);
+            }
+            ParametersEntry.toBinary = function (instance) {
+                var writer = new googleProtobuf.BinaryWriter();
+                ParametersEntry.toBinaryWriter(instance, writer);
+                return writer.getResultBuffer();
+            };
+            ParametersEntry.fromBinary = function (bytes) {
+                var instance = new ParametersEntry();
+                ParametersEntry.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            ParametersEntry.refineValues = function (instance) {
+                instance.key = instance.key || '';
+                instance.value = instance.value || undefined;
+            };
+            ParametersEntry.fromBinaryReader = function (instance, reader) {
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            instance.key = reader.readString();
+                            break;
+                        case 2:
+                            instance.value = new Context.Parameter();
+                            reader.readMessage(instance.value, Context.Parameter.fromBinaryReader);
+                            break;
+                        default:
+                            reader.skipField();
+                    }
+                }
+                ParametersEntry.refineValues(instance);
+            };
+            ParametersEntry.toBinaryWriter = function (instance, writer) {
+                if (instance.key) {
+                    writer.writeString(1, instance.key);
+                }
+                if (instance.value) {
+                    writer.writeMessage(2, instance.value, Context.Parameter.toBinaryWriter);
+                }
+            };
+            Object.defineProperty(ParametersEntry.prototype, "key", {
+                get: function () {
+                    return this._key;
+                },
+                set: function (value) {
+                    this._key = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(ParametersEntry.prototype, "value", {
+                get: function () {
+                    return this._value;
+                },
+                set: function (value) {
+                    this._value = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            ParametersEntry.prototype.toObject = function () {
+                return {
+                    key: this.key,
+                    value: this.value ? this.value.toObject() : undefined
+                };
+            };
+            ParametersEntry.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            return ParametersEntry;
+        }());
+        Context.ParametersEntry = ParametersEntry;
+    })(exports.Context || (exports.Context = {}));
     var ListContextsRequest = /** @class */ (function () {
         /**
          * Creates an object and applies default Protobuf values
@@ -1260,7 +1472,7 @@
          */
         function ListContextsResponse(value) {
             value = value || {};
-            this.contexts = (value.contexts || []).map(function (m) { return new Context(m); });
+            this.contexts = (value.contexts || []).map(function (m) { return new exports.Context(m); });
             this.nextPageToken = value.nextPageToken;
             ListContextsResponse.refineValues(this);
         }
@@ -1284,8 +1496,8 @@
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        var messageInitializer1 = new Context();
-                        reader.readMessage(messageInitializer1, Context.fromBinaryReader);
+                        var messageInitializer1 = new exports.Context();
+                        reader.readMessage(messageInitializer1, exports.Context.fromBinaryReader);
                         (instance.contexts = instance.contexts || []).push(messageInitializer1);
                         break;
                     case 2:
@@ -1299,7 +1511,7 @@
         };
         ListContextsResponse.toBinaryWriter = function (instance, writer) {
             if (instance.contexts && instance.contexts.length) {
-                writer.writeRepeatedMessage(1, instance.contexts, Context.toBinaryWriter);
+                writer.writeRepeatedMessage(1, instance.contexts, exports.Context.toBinaryWriter);
             }
             if (instance.nextPageToken) {
                 writer.writeString(2, instance.nextPageToken);
@@ -1406,7 +1618,7 @@
         function CreateContextRequest(value) {
             value = value || {};
             this.parent = value.parent;
-            this.context = value.context ? new Context(value.context) : undefined;
+            this.context = value.context ? new exports.Context(value.context) : undefined;
             CreateContextRequest.refineValues(this);
         }
         CreateContextRequest.toBinary = function (instance) {
@@ -1432,8 +1644,8 @@
                         instance.parent = reader.readString();
                         break;
                     case 2:
-                        instance.context = new Context();
-                        reader.readMessage(instance.context, Context.fromBinaryReader);
+                        instance.context = new exports.Context();
+                        reader.readMessage(instance.context, exports.Context.fromBinaryReader);
                         break;
                     default:
                         reader.skipField();
@@ -1446,7 +1658,7 @@
                 writer.writeString(1, instance.parent);
             }
             if (instance.context) {
-                writer.writeMessage(2, instance.context, Context.toBinaryWriter);
+                writer.writeMessage(2, instance.context, exports.Context.toBinaryWriter);
             }
         };
         Object.defineProperty(CreateContextRequest.prototype, "parent", {
@@ -1487,7 +1699,7 @@
          */
         function UpdateContextRequest(value) {
             value = value || {};
-            this.context = value.context ? new Context(value.context) : undefined;
+            this.context = value.context ? new exports.Context(value.context) : undefined;
             this.updateMask = value.updateMask
                 ? new FieldMask(value.updateMask)
                 : undefined;
@@ -1513,8 +1725,8 @@
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        instance.context = new Context();
-                        reader.readMessage(instance.context, Context.fromBinaryReader);
+                        instance.context = new exports.Context();
+                        reader.readMessage(instance.context, exports.Context.fromBinaryReader);
                         break;
                     case 2:
                         instance.updateMask = new FieldMask();
@@ -1528,7 +1740,7 @@
         };
         UpdateContextRequest.toBinaryWriter = function (instance, writer) {
             if (instance.context) {
-                writer.writeMessage(1, instance.context, Context.toBinaryWriter);
+                writer.writeMessage(1, instance.context, exports.Context.toBinaryWriter);
             }
             if (instance.updateMask) {
                 writer.writeMessage(2, instance.updateMask, FieldMask.toBinaryWriter);
@@ -1690,12 +1902,14 @@
         return DeleteAllContextsRequest;
     }());
 
+    exports.IntentView = void 0;
     (function (IntentView) {
         IntentView[IntentView["intentViewUnspecified"] = 0] = "intentViewUnspecified";
         IntentView[IntentView["intentViewFull"] = 1] = "intentViewFull";
         IntentView[IntentView["intentViewPartial"] = 2] = "intentViewPartial";
         IntentView[IntentView["intentViewShallow"] = 3] = "intentViewShallow";
     })(exports.IntentView || (exports.IntentView = {}));
+    exports.IntentCategory = void 0;
     (function (IntentCategory) {
         IntentCategory[IntentCategory["allIntents"] = 0] = "allIntents";
         IntentCategory[IntentCategory["defaultIntents"] = 1] = "defaultIntents";
@@ -1718,7 +1932,7 @@
             this.events = (value.events || []).slice();
             this.trainingPhrases = (value.trainingPhrases || []).map(function (m) { return new Intent.TrainingPhrase(m); });
             this.action = value.action;
-            this.outputContexts = (value.outputContexts || []).map(function (m) { return new Context(m); });
+            this.outputContexts = (value.outputContexts || []).map(function (m) { return new exports.Context(m); });
             this.resetContexts = value.resetContexts;
             this.parameters = (value.parameters || []).map(function (m) { return new Intent.Parameter(m); });
             this.messages = (value.messages || []).map(function (m) { return new Intent.Message(m); });
@@ -1808,8 +2022,8 @@
                         instance.action = reader.readString();
                         break;
                     case 11:
-                        var messageInitializer11 = new Context();
-                        reader.readMessage(messageInitializer11, Context.fromBinaryReader);
+                        var messageInitializer11 = new exports.Context();
+                        reader.readMessage(messageInitializer11, exports.Context.fromBinaryReader);
                         (instance.outputContexts = instance.outputContexts || []).push(messageInitializer11);
                         break;
                     case 12:
@@ -1897,7 +2111,7 @@
                 writer.writeString(10, instance.action);
             }
             if (instance.outputContexts && instance.outputContexts.length) {
-                writer.writeRepeatedMessage(11, instance.outputContexts, Context.toBinaryWriter);
+                writer.writeRepeatedMessage(11, instance.outputContexts, exports.Context.toBinaryWriter);
             }
             if (instance.resetContexts) {
                 writer.writeBool(12, instance.resetContexts);
@@ -6306,12 +6520,14 @@
         })(IntentSortingField = IntentSorting.IntentSortingField || (IntentSorting.IntentSortingField = {}));
     })(exports.IntentSorting || (exports.IntentSorting = {}));
 
+    exports.EntityTypeView = void 0;
     (function (EntityTypeView) {
         EntityTypeView[EntityTypeView["entityTypeViewUnspecified"] = 0] = "entityTypeViewUnspecified";
         EntityTypeView[EntityTypeView["entityTypeViewFull"] = 1] = "entityTypeViewFull";
         EntityTypeView[EntityTypeView["entityTypeViewPartial"] = 2] = "entityTypeViewPartial";
         EntityTypeView[EntityTypeView["entityTypeViewShallow"] = 3] = "entityTypeViewShallow";
     })(exports.EntityTypeView || (exports.EntityTypeView = {}));
+    exports.EntityTypeCategory = void 0;
     (function (EntityTypeCategory) {
         EntityTypeCategory[EntityTypeCategory["allEntityTypes"] = 0] = "allEntityTypes";
         EntityTypeCategory[EntityTypeCategory["defaultEntityTypes"] = 1] = "defaultEntityTypes";
@@ -8102,6 +8318,7 @@
         })(EntityTypeSortingField = EntityTypeSorting.EntityTypeSortingField || (EntityTypeSorting.EntityTypeSortingField = {}));
     })(exports.EntityTypeSorting || (exports.EntityTypeSorting = {}));
 
+    exports.AudioEncoding = void 0;
     (function (AudioEncoding) {
         AudioEncoding[AudioEncoding["audioEncodingUnspecified"] = 0] = "audioEncodingUnspecified";
         AudioEncoding[AudioEncoding["audioEncodingLinear16"] = 1] = "audioEncodingLinear16";
@@ -8358,7 +8575,7 @@
             this.geoLocation = value.geoLocation
                 ? new LatLng(value.geoLocation)
                 : undefined;
-            this.contexts = (value.contexts || []).map(function (m) { return new Context(m); });
+            this.contexts = (value.contexts || []).map(function (m) { return new exports.Context(m); });
             this.resetContexts = value.resetContexts;
             this.payload = value.payload
                 ? new exports.Struct(value.payload)
@@ -8395,8 +8612,8 @@
                         reader.readMessage(instance.geoLocation, LatLng.fromBinaryReader);
                         break;
                     case 3:
-                        var messageInitializer3 = new Context();
-                        reader.readMessage(messageInitializer3, Context.fromBinaryReader);
+                        var messageInitializer3 = new exports.Context();
+                        reader.readMessage(messageInitializer3, exports.Context.fromBinaryReader);
                         (instance.contexts = instance.contexts || []).push(messageInitializer3);
                         break;
                     case 4:
@@ -8420,7 +8637,7 @@
                 writer.writeMessage(2, instance.geoLocation, LatLng.toBinaryWriter);
             }
             if (instance.contexts && instance.contexts.length) {
-                writer.writeRepeatedMessage(3, instance.contexts, Context.toBinaryWriter);
+                writer.writeRepeatedMessage(3, instance.contexts, exports.Context.toBinaryWriter);
             }
             if (instance.resetContexts) {
                 writer.writeBool(4, instance.resetContexts);
@@ -8644,7 +8861,7 @@
             this.webhookPayload = value.webhookPayload
                 ? new exports.Struct(value.webhookPayload)
                 : undefined;
-            this.outputContexts = (value.outputContexts || []).map(function (m) { return new Context(m); });
+            this.outputContexts = (value.outputContexts || []).map(function (m) { return new exports.Context(m); });
             this.intent = value.intent
                 ? new exports.Intent(value.intent)
                 : undefined;
@@ -8724,8 +8941,8 @@
                         reader.readMessage(instance.webhookPayload, exports.Struct.fromBinaryReader);
                         break;
                     case 10:
-                        var messageInitializer10 = new Context();
-                        reader.readMessage(messageInitializer10, Context.fromBinaryReader);
+                        var messageInitializer10 = new exports.Context();
+                        reader.readMessage(messageInitializer10, exports.Context.fromBinaryReader);
                         (instance.outputContexts = instance.outputContexts || []).push(messageInitializer10);
                         break;
                     case 11:
@@ -8777,7 +8994,7 @@
                 writer.writeMessage(9, instance.webhookPayload, exports.Struct.toBinaryWriter);
             }
             if (instance.outputContexts && instance.outputContexts.length) {
-                writer.writeRepeatedMessage(10, instance.outputContexts, Context.toBinaryWriter);
+                writer.writeRepeatedMessage(10, instance.outputContexts, exports.Context.toBinaryWriter);
             }
             if (instance.intent) {
                 writer.writeMessage(11, instance.intent, exports.Intent.toBinaryWriter);
@@ -9790,7 +10007,7 @@
             this.detectIntentResponse = value.detectIntentResponse
                 ? new DetectIntentResponse(value.detectIntentResponse)
                 : undefined;
-            this.contexts = (value.contexts || []).map(function (m) { return new Context(m); });
+            this.contexts = (value.contexts || []).map(function (m) { return new exports.Context(m); });
             SessionStep.refineValues(this);
         }
         SessionStep.toBinary = function (instance) {
@@ -9822,8 +10039,8 @@
                         reader.readMessage(instance.detectIntentResponse, DetectIntentResponse.fromBinaryReader);
                         break;
                     case 3:
-                        var messageInitializer3 = new Context();
-                        reader.readMessage(messageInitializer3, Context.fromBinaryReader);
+                        var messageInitializer3 = new exports.Context();
+                        reader.readMessage(messageInitializer3, exports.Context.fromBinaryReader);
                         (instance.contexts = instance.contexts || []).push(messageInitializer3);
                         break;
                     default:
@@ -9840,7 +10057,7 @@
                 writer.writeMessage(2, instance.detectIntentResponse, DetectIntentResponse.toBinaryWriter);
             }
             if (instance.contexts && instance.contexts.length) {
-                writer.writeRepeatedMessage(3, instance.contexts, Context.toBinaryWriter);
+                writer.writeRepeatedMessage(3, instance.contexts, exports.Context.toBinaryWriter);
             }
         };
         Object.defineProperty(SessionStep.prototype, "detectIntentRequest", {
@@ -11105,7 +11322,7 @@
                 : undefined;
             this.languageCode = value.languageCode;
             this.detectedIntents = (value.detectedIntents || []).map(function (m) { return new DetectedIntent(m); });
-            this.contexts = (value.contexts || []).map(function (m) { return new Context(m); });
+            this.contexts = (value.contexts || []).map(function (m) { return new exports.Context(m); });
             SessionReviewStep.refineValues(this);
         }
         SessionReviewStep.toBinary = function (instance) {
@@ -11142,8 +11359,8 @@
                         (instance.detectedIntents = instance.detectedIntents || []).push(messageInitializer3);
                         break;
                     case 4:
-                        var messageInitializer4 = new Context();
-                        reader.readMessage(messageInitializer4, Context.fromBinaryReader);
+                        var messageInitializer4 = new exports.Context();
+                        reader.readMessage(messageInitializer4, exports.Context.fromBinaryReader);
                         (instance.contexts = instance.contexts || []).push(messageInitializer4);
                         break;
                     default:
@@ -11163,7 +11380,7 @@
                 writer.writeRepeatedMessage(3, instance.detectedIntents, DetectedIntent.toBinaryWriter);
             }
             if (instance.contexts && instance.contexts.length) {
-                writer.writeRepeatedMessage(4, instance.contexts, Context.toBinaryWriter);
+                writer.writeRepeatedMessage(4, instance.contexts, exports.Context.toBinaryWriter);
             }
         };
         Object.defineProperty(SessionReviewStep.prototype, "annotatedUsersays", {
@@ -12047,7 +12264,7 @@
             this.maxNumAnswers = value.maxNumAnswers;
             this.thresholdReader = value.thresholdReader;
             this.thresholdRetriever = value.thresholdRetriever;
-            this.customScoreFormula = value.customScoreFormula;
+            this.thresholdOverall = value.thresholdOverall;
             this.readerModelName = value.readerModelName;
             GetAnswerRequest.refineValues(this);
         }
@@ -12067,7 +12284,7 @@
             instance.maxNumAnswers = instance.maxNumAnswers || 0;
             instance.thresholdReader = instance.thresholdReader || 0;
             instance.thresholdRetriever = instance.thresholdRetriever || 0;
-            instance.customScoreFormula = instance.customScoreFormula || '';
+            instance.thresholdOverall = instance.thresholdOverall || 0;
             instance.readerModelName = instance.readerModelName || '';
         };
         GetAnswerRequest.fromBinaryReader = function (instance, reader) {
@@ -12092,7 +12309,7 @@
                         instance.thresholdRetriever = reader.readFloat();
                         break;
                     case 6:
-                        instance.customScoreFormula = reader.readString();
+                        instance.thresholdOverall = reader.readFloat();
                         break;
                     case 7:
                         instance.readerModelName = reader.readString();
@@ -12119,8 +12336,8 @@
             if (instance.thresholdRetriever) {
                 writer.writeFloat(5, instance.thresholdRetriever);
             }
-            if (instance.customScoreFormula) {
-                writer.writeString(6, instance.customScoreFormula);
+            if (instance.thresholdOverall) {
+                writer.writeFloat(6, instance.thresholdOverall);
             }
             if (instance.readerModelName) {
                 writer.writeString(7, instance.readerModelName);
@@ -12176,12 +12393,12 @@
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(GetAnswerRequest.prototype, "customScoreFormula", {
+        Object.defineProperty(GetAnswerRequest.prototype, "thresholdOverall", {
             get: function () {
-                return this._customScoreFormula;
+                return this._thresholdOverall;
             },
             set: function (value) {
-                this._customScoreFormula = value;
+                this._thresholdOverall = value;
             },
             enumerable: false,
             configurable: true
@@ -12203,7 +12420,7 @@
                 maxNumAnswers: this.maxNumAnswers,
                 thresholdReader: this.thresholdReader,
                 thresholdRetriever: this.thresholdRetriever,
-                customScoreFormula: this.customScoreFormula,
+                thresholdOverall: this.thresholdOverall,
                 readerModelName: this.readerModelName
             };
         };
@@ -12602,6 +12819,4666 @@
         { type: i2.GrpcHandler }
     ]; };
 
+    exports.SortingMode = void 0;
+    (function (SortingMode) {
+        SortingMode[SortingMode["ascending"] = 0] = "ascending";
+        SortingMode[SortingMode["descending"] = 1] = "descending";
+    })(exports.SortingMode || (exports.SortingMode = {}));
+    var StatResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param StatResponse value
+         */
+        function StatResponse(value) {
+            value = value || {};
+            this.value = value.value;
+            StatResponse.refineValues(this);
+        }
+        StatResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            StatResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        StatResponse.fromBinary = function (bytes) {
+            var instance = new StatResponse();
+            StatResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        StatResponse.refineValues = function (instance) {
+            instance.value = instance.value || 0;
+        };
+        StatResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.value = reader.readUint32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            StatResponse.refineValues(instance);
+        };
+        StatResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.value) {
+                writer.writeUint32(1, instance.value);
+            }
+        };
+        Object.defineProperty(StatResponse.prototype, "value", {
+            get: function () {
+                return this._value;
+            },
+            set: function (value) {
+                this._value = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        StatResponse.prototype.toObject = function () {
+            return {
+                value: this.value
+            };
+        };
+        StatResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return StatResponse;
+    }());
+
+    /* tslint:disable */
+    /*
+      To configure the services you need to provide a configuration for each of them.
+
+      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+      const grpcSettings = { host: environment.grpcHost };
+
+      @NgModule({
+        providers: [
+          { provide: GRPC_USERS_CLIENT_SETTINGS, useValue: grpcSettings },
+        ],
+      })
+      export class GrpcConfigModule { }
+    */
+    var GRPC_USERS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_USERS_CLIENT_SETTINGS');
+
+    /* tslint:disable */
+    /*
+      To configure the services you need to provide a configuration for each of them.
+
+      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+      const grpcSettings = { host: environment.grpcHost };
+
+      @NgModule({
+        providers: [
+          { provide: GRPC_INTENTS_CLIENT_SETTINGS, useValue: grpcSettings },
+        ],
+      })
+      export class GrpcConfigModule { }
+    */
+    var GRPC_INTENTS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_INTENTS_CLIENT_SETTINGS');
+
+    var ExtractEntitiesRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ExtractEntitiesRequest value
+         */
+        function ExtractEntitiesRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            this.text = value.text;
+            this.languageCode = value.languageCode;
+            ExtractEntitiesRequest.refineValues(this);
+        }
+        ExtractEntitiesRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            ExtractEntitiesRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        ExtractEntitiesRequest.fromBinary = function (bytes) {
+            var instance = new ExtractEntitiesRequest();
+            ExtractEntitiesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        ExtractEntitiesRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+            instance.text = instance.text || '';
+            instance.languageCode = instance.languageCode || '';
+        };
+        ExtractEntitiesRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    case 2:
+                        instance.text = reader.readString();
+                        break;
+                    case 3:
+                        instance.languageCode = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ExtractEntitiesRequest.refineValues(instance);
+        };
+        ExtractEntitiesRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+            if (instance.text) {
+                writer.writeString(2, instance.text);
+            }
+            if (instance.languageCode) {
+                writer.writeString(3, instance.languageCode);
+            }
+        };
+        Object.defineProperty(ExtractEntitiesRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ExtractEntitiesRequest.prototype, "text", {
+            get: function () {
+                return this._text;
+            },
+            set: function (value) {
+                this._text = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ExtractEntitiesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        ExtractEntitiesRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                text: this.text,
+                languageCode: this.languageCode
+            };
+        };
+        ExtractEntitiesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return ExtractEntitiesRequest;
+    }());
+    var ExtractEntitiesResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ExtractEntitiesResponse value
+         */
+        function ExtractEntitiesResponse(value) {
+            value = value || {};
+            this.entities = (value.entities || []).map(function (m) { return new exports.Intent.TrainingPhrase.Entity(m); });
+            this.text = value.text;
+            ExtractEntitiesResponse.refineValues(this);
+        }
+        ExtractEntitiesResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            ExtractEntitiesResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        ExtractEntitiesResponse.fromBinary = function (bytes) {
+            var instance = new ExtractEntitiesResponse();
+            ExtractEntitiesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        ExtractEntitiesResponse.refineValues = function (instance) {
+            instance.entities = instance.entities || [];
+            instance.text = instance.text || '';
+        };
+        ExtractEntitiesResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Intent.TrainingPhrase.Entity();
+                        reader.readMessage(messageInitializer1, exports.Intent.TrainingPhrase.Entity.fromBinaryReader);
+                        (instance.entities = instance.entities || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        instance.text = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ExtractEntitiesResponse.refineValues(instance);
+        };
+        ExtractEntitiesResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.entities && instance.entities.length) {
+                writer.writeRepeatedMessage(1, instance.entities, exports.Intent.TrainingPhrase.Entity.toBinaryWriter);
+            }
+            if (instance.text) {
+                writer.writeString(2, instance.text);
+            }
+        };
+        Object.defineProperty(ExtractEntitiesResponse.prototype, "entities", {
+            get: function () {
+                return this._entities;
+            },
+            set: function (value) {
+                this._entities = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ExtractEntitiesResponse.prototype, "text", {
+            get: function () {
+                return this._text;
+            },
+            set: function (value) {
+                this._text = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        ExtractEntitiesResponse.prototype.toObject = function () {
+            return {
+                entities: (this.entities || []).map(function (m) { return m.toObject(); }),
+                text: this.text
+            };
+        };
+        ExtractEntitiesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return ExtractEntitiesResponse;
+    }());
+    var GetAlternativeSentencesRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetAlternativeSentencesRequest value
+         */
+        function GetAlternativeSentencesRequest(value) {
+            value = value || {};
+            this.config = value.config
+                ? new DataEnrichmentConfig(value.config)
+                : undefined;
+            this.sentence = value.sentence;
+            this.languageCode = value.languageCode;
+            this.parent = value.parent;
+            this.protectedWords = (value.protectedWords || []).slice();
+            this.wordsToChange = (value.wordsToChange || []).slice();
+            GetAlternativeSentencesRequest.refineValues(this);
+        }
+        GetAlternativeSentencesRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetAlternativeSentencesRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetAlternativeSentencesRequest.fromBinary = function (bytes) {
+            var instance = new GetAlternativeSentencesRequest();
+            GetAlternativeSentencesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetAlternativeSentencesRequest.refineValues = function (instance) {
+            instance.config = instance.config || undefined;
+            instance.sentence = instance.sentence || '';
+            instance.languageCode = instance.languageCode || '';
+            instance.parent = instance.parent || '';
+            instance.protectedWords = instance.protectedWords || [];
+            instance.wordsToChange = instance.wordsToChange || [];
+        };
+        GetAlternativeSentencesRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.config = new DataEnrichmentConfig();
+                        reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 2:
+                        instance.sentence = reader.readString();
+                        break;
+                    case 4:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 5:
+                        instance.parent = reader.readString();
+                        break;
+                    case 6:
+                        (instance.protectedWords = instance.protectedWords || []).push(reader.readString());
+                        break;
+                    case 7:
+                        (instance.wordsToChange = instance.wordsToChange || []).push(reader.readString());
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetAlternativeSentencesRequest.refineValues(instance);
+        };
+        GetAlternativeSentencesRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.config) {
+                writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.sentence) {
+                writer.writeString(2, instance.sentence);
+            }
+            if (instance.languageCode) {
+                writer.writeString(4, instance.languageCode);
+            }
+            if (instance.parent) {
+                writer.writeString(5, instance.parent);
+            }
+            if (instance.protectedWords && instance.protectedWords.length) {
+                writer.writeRepeatedString(6, instance.protectedWords);
+            }
+            if (instance.wordsToChange && instance.wordsToChange.length) {
+                writer.writeRepeatedString(7, instance.wordsToChange);
+            }
+        };
+        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "config", {
+            get: function () {
+                return this._config;
+            },
+            set: function (value) {
+                this._config = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "sentence", {
+            get: function () {
+                return this._sentence;
+            },
+            set: function (value) {
+                this._sentence = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "protectedWords", {
+            get: function () {
+                return this._protectedWords;
+            },
+            set: function (value) {
+                this._protectedWords = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "wordsToChange", {
+            get: function () {
+                return this._wordsToChange;
+            },
+            set: function (value) {
+                this._wordsToChange = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetAlternativeSentencesRequest.prototype.toObject = function () {
+            return {
+                config: this.config ? this.config.toObject() : undefined,
+                sentence: this.sentence,
+                languageCode: this.languageCode,
+                parent: this.parent,
+                protectedWords: (this.protectedWords || []).slice(),
+                wordsToChange: (this.wordsToChange || []).slice()
+            };
+        };
+        GetAlternativeSentencesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetAlternativeSentencesRequest;
+    }());
+    var GenerateUserSaysRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GenerateUserSaysRequest value
+         */
+        function GenerateUserSaysRequest(value) {
+            value = value || {};
+            this.languageCode = value.languageCode;
+            this.parent = value.parent;
+            this.nRepeatSynonym = value.nRepeatSynonym;
+            this.branch = value.branch;
+            GenerateUserSaysRequest.refineValues(this);
+        }
+        GenerateUserSaysRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GenerateUserSaysRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GenerateUserSaysRequest.fromBinary = function (bytes) {
+            var instance = new GenerateUserSaysRequest();
+            GenerateUserSaysRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GenerateUserSaysRequest.refineValues = function (instance) {
+            instance.languageCode = instance.languageCode || '';
+            instance.parent = instance.parent || '';
+            instance.nRepeatSynonym = instance.nRepeatSynonym || 0;
+            instance.branch = instance.branch || '';
+        };
+        GenerateUserSaysRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 4:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 5:
+                        instance.parent = reader.readString();
+                        break;
+                    case 6:
+                        instance.nRepeatSynonym = reader.readInt32();
+                        break;
+                    case 8:
+                        instance.branch = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GenerateUserSaysRequest.refineValues(instance);
+        };
+        GenerateUserSaysRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.languageCode) {
+                writer.writeString(4, instance.languageCode);
+            }
+            if (instance.parent) {
+                writer.writeString(5, instance.parent);
+            }
+            if (instance.nRepeatSynonym) {
+                writer.writeInt32(6, instance.nRepeatSynonym);
+            }
+            if (instance.branch) {
+                writer.writeString(8, instance.branch);
+            }
+        };
+        Object.defineProperty(GenerateUserSaysRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GenerateUserSaysRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GenerateUserSaysRequest.prototype, "nRepeatSynonym", {
+            get: function () {
+                return this._nRepeatSynonym;
+            },
+            set: function (value) {
+                this._nRepeatSynonym = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GenerateUserSaysRequest.prototype, "branch", {
+            get: function () {
+                return this._branch;
+            },
+            set: function (value) {
+                this._branch = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GenerateUserSaysRequest.prototype.toObject = function () {
+            return {
+                languageCode: this.languageCode,
+                parent: this.parent,
+                nRepeatSynonym: this.nRepeatSynonym,
+                branch: this.branch
+            };
+        };
+        GenerateUserSaysRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GenerateUserSaysRequest;
+    }());
+    var GenerateResponsesRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GenerateResponsesRequest value
+         */
+        function GenerateResponsesRequest(value) {
+            value = value || {};
+            this.languageCode = value.languageCode;
+            this.parent = value.parent;
+            this.nRepeatSynonym = value.nRepeatSynonym;
+            this.branch = value.branch;
+            this.dropUnknownParameters = value.dropUnknownParameters;
+            GenerateResponsesRequest.refineValues(this);
+        }
+        GenerateResponsesRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GenerateResponsesRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GenerateResponsesRequest.fromBinary = function (bytes) {
+            var instance = new GenerateResponsesRequest();
+            GenerateResponsesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GenerateResponsesRequest.refineValues = function (instance) {
+            instance.languageCode = instance.languageCode || '';
+            instance.parent = instance.parent || '';
+            instance.nRepeatSynonym = instance.nRepeatSynonym || 0;
+            instance.branch = instance.branch || '';
+            instance.dropUnknownParameters = instance.dropUnknownParameters || false;
+        };
+        GenerateResponsesRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 4:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 5:
+                        instance.parent = reader.readString();
+                        break;
+                    case 7:
+                        instance.nRepeatSynonym = reader.readInt32();
+                        break;
+                    case 8:
+                        instance.branch = reader.readString();
+                        break;
+                    case 9:
+                        instance.dropUnknownParameters = reader.readBool();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GenerateResponsesRequest.refineValues(instance);
+        };
+        GenerateResponsesRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.languageCode) {
+                writer.writeString(4, instance.languageCode);
+            }
+            if (instance.parent) {
+                writer.writeString(5, instance.parent);
+            }
+            if (instance.nRepeatSynonym) {
+                writer.writeInt32(7, instance.nRepeatSynonym);
+            }
+            if (instance.branch) {
+                writer.writeString(8, instance.branch);
+            }
+            if (instance.dropUnknownParameters) {
+                writer.writeBool(9, instance.dropUnknownParameters);
+            }
+        };
+        Object.defineProperty(GenerateResponsesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GenerateResponsesRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GenerateResponsesRequest.prototype, "nRepeatSynonym", {
+            get: function () {
+                return this._nRepeatSynonym;
+            },
+            set: function (value) {
+                this._nRepeatSynonym = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GenerateResponsesRequest.prototype, "branch", {
+            get: function () {
+                return this._branch;
+            },
+            set: function (value) {
+                this._branch = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GenerateResponsesRequest.prototype, "dropUnknownParameters", {
+            get: function () {
+                return this._dropUnknownParameters;
+            },
+            set: function (value) {
+                this._dropUnknownParameters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GenerateResponsesRequest.prototype.toObject = function () {
+            return {
+                languageCode: this.languageCode,
+                parent: this.parent,
+                nRepeatSynonym: this.nRepeatSynonym,
+                branch: this.branch,
+                dropUnknownParameters: this.dropUnknownParameters
+            };
+        };
+        GenerateResponsesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GenerateResponsesRequest;
+    }());
+    var GetAlternativeTrainingPhrasesRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetAlternativeTrainingPhrasesRequest value
+         */
+        function GetAlternativeTrainingPhrasesRequest(value) {
+            value = value || {};
+            this.config = value.config
+                ? new DataEnrichmentConfig(value.config)
+                : undefined;
+            this.trainingPhrase = value.trainingPhrase
+                ? new exports.Intent.TrainingPhrase(value.trainingPhrase)
+                : undefined;
+            this.intentName = value.intentName;
+            this.languageCode = value.languageCode;
+            this.parent = value.parent;
+            this.detectEntities = value.detectEntities;
+            this.similarityThreshold = value.similarityThreshold;
+            this.protectedWords = (value.protectedWords || []).slice();
+            this.wordsToChange = (value.wordsToChange || []).slice();
+            this.branch = value.branch;
+            GetAlternativeTrainingPhrasesRequest.refineValues(this);
+        }
+        GetAlternativeTrainingPhrasesRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetAlternativeTrainingPhrasesRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetAlternativeTrainingPhrasesRequest.fromBinary = function (bytes) {
+            var instance = new GetAlternativeTrainingPhrasesRequest();
+            GetAlternativeTrainingPhrasesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetAlternativeTrainingPhrasesRequest.refineValues = function (instance) {
+            instance.config = instance.config || undefined;
+            instance.trainingPhrase = instance.trainingPhrase || undefined;
+            instance.intentName = instance.intentName || '';
+            instance.languageCode = instance.languageCode || '';
+            instance.parent = instance.parent || '';
+            instance.detectEntities = instance.detectEntities || false;
+            instance.similarityThreshold = instance.similarityThreshold || 0;
+            instance.protectedWords = instance.protectedWords || [];
+            instance.wordsToChange = instance.wordsToChange || [];
+            instance.branch = instance.branch || '';
+        };
+        GetAlternativeTrainingPhrasesRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.config = new DataEnrichmentConfig();
+                        reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 2:
+                        instance.trainingPhrase = new exports.Intent.TrainingPhrase();
+                        reader.readMessage(instance.trainingPhrase, exports.Intent.TrainingPhrase.fromBinaryReader);
+                        break;
+                    case 3:
+                        instance.intentName = reader.readString();
+                        break;
+                    case 4:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 5:
+                        instance.parent = reader.readString();
+                        break;
+                    case 6:
+                        instance.detectEntities = reader.readBool();
+                        break;
+                    case 7:
+                        instance.similarityThreshold = reader.readFloat();
+                        break;
+                    case 8:
+                        (instance.protectedWords = instance.protectedWords || []).push(reader.readString());
+                        break;
+                    case 9:
+                        (instance.wordsToChange = instance.wordsToChange || []).push(reader.readString());
+                        break;
+                    case 10:
+                        instance.branch = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetAlternativeTrainingPhrasesRequest.refineValues(instance);
+        };
+        GetAlternativeTrainingPhrasesRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.config) {
+                writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.trainingPhrase) {
+                writer.writeMessage(2, instance.trainingPhrase, exports.Intent.TrainingPhrase.toBinaryWriter);
+            }
+            if (instance.intentName) {
+                writer.writeString(3, instance.intentName);
+            }
+            if (instance.languageCode) {
+                writer.writeString(4, instance.languageCode);
+            }
+            if (instance.parent) {
+                writer.writeString(5, instance.parent);
+            }
+            if (instance.detectEntities) {
+                writer.writeBool(6, instance.detectEntities);
+            }
+            if (instance.similarityThreshold) {
+                writer.writeFloat(7, instance.similarityThreshold);
+            }
+            if (instance.protectedWords && instance.protectedWords.length) {
+                writer.writeRepeatedString(8, instance.protectedWords);
+            }
+            if (instance.wordsToChange && instance.wordsToChange.length) {
+                writer.writeRepeatedString(9, instance.wordsToChange);
+            }
+            if (instance.branch) {
+                writer.writeString(10, instance.branch);
+            }
+        };
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "config", {
+            get: function () {
+                return this._config;
+            },
+            set: function (value) {
+                this._config = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "trainingPhrase", {
+            get: function () {
+                return this._trainingPhrase;
+            },
+            set: function (value) {
+                this._trainingPhrase = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "intentName", {
+            get: function () {
+                return this._intentName;
+            },
+            set: function (value) {
+                this._intentName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "detectEntities", {
+            get: function () {
+                return this._detectEntities;
+            },
+            set: function (value) {
+                this._detectEntities = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "similarityThreshold", {
+            get: function () {
+                return this._similarityThreshold;
+            },
+            set: function (value) {
+                this._similarityThreshold = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "protectedWords", {
+            get: function () {
+                return this._protectedWords;
+            },
+            set: function (value) {
+                this._protectedWords = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "wordsToChange", {
+            get: function () {
+                return this._wordsToChange;
+            },
+            set: function (value) {
+                this._wordsToChange = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "branch", {
+            get: function () {
+                return this._branch;
+            },
+            set: function (value) {
+                this._branch = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetAlternativeTrainingPhrasesRequest.prototype.toObject = function () {
+            return {
+                config: this.config ? this.config.toObject() : undefined,
+                trainingPhrase: this.trainingPhrase
+                    ? this.trainingPhrase.toObject()
+                    : undefined,
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                parent: this.parent,
+                detectEntities: this.detectEntities,
+                similarityThreshold: this.similarityThreshold,
+                protectedWords: (this.protectedWords || []).slice(),
+                wordsToChange: (this.wordsToChange || []).slice(),
+                branch: this.branch
+            };
+        };
+        GetAlternativeTrainingPhrasesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetAlternativeTrainingPhrasesRequest;
+    }());
+    var GetSynonymsRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetSynonymsRequest value
+         */
+        function GetSynonymsRequest(value) {
+            value = value || {};
+            this.config = value.config
+                ? new DataEnrichmentConfig(value.config)
+                : undefined;
+            this.word = value.word;
+            this.languageCode = value.languageCode;
+            this.parent = value.parent;
+            GetSynonymsRequest.refineValues(this);
+        }
+        GetSynonymsRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetSynonymsRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetSynonymsRequest.fromBinary = function (bytes) {
+            var instance = new GetSynonymsRequest();
+            GetSynonymsRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetSynonymsRequest.refineValues = function (instance) {
+            instance.config = instance.config || undefined;
+            instance.word = instance.word || '';
+            instance.languageCode = instance.languageCode || '';
+            instance.parent = instance.parent || '';
+        };
+        GetSynonymsRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.config = new DataEnrichmentConfig();
+                        reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 2:
+                        instance.word = reader.readString();
+                        break;
+                    case 4:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 5:
+                        instance.parent = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetSynonymsRequest.refineValues(instance);
+        };
+        GetSynonymsRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.config) {
+                writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.word) {
+                writer.writeString(2, instance.word);
+            }
+            if (instance.languageCode) {
+                writer.writeString(4, instance.languageCode);
+            }
+            if (instance.parent) {
+                writer.writeString(5, instance.parent);
+            }
+        };
+        Object.defineProperty(GetSynonymsRequest.prototype, "config", {
+            get: function () {
+                return this._config;
+            },
+            set: function (value) {
+                this._config = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetSynonymsRequest.prototype, "word", {
+            get: function () {
+                return this._word;
+            },
+            set: function (value) {
+                this._word = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetSynonymsRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetSynonymsRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetSynonymsRequest.prototype.toObject = function () {
+            return {
+                config: this.config ? this.config.toObject() : undefined,
+                word: this.word,
+                languageCode: this.languageCode,
+                parent: this.parent
+            };
+        };
+        GetSynonymsRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetSynonymsRequest;
+    }());
+    var GetSynonymsResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetSynonymsResponse value
+         */
+        function GetSynonymsResponse(value) {
+            value = value || {};
+            this.synonyms = (value.synonyms || []).map(function (m) { return new Synonym(m); });
+            GetSynonymsResponse.refineValues(this);
+        }
+        GetSynonymsResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetSynonymsResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetSynonymsResponse.fromBinary = function (bytes) {
+            var instance = new GetSynonymsResponse();
+            GetSynonymsResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetSynonymsResponse.refineValues = function (instance) {
+            instance.synonyms = instance.synonyms || [];
+        };
+        GetSynonymsResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new Synonym();
+                        reader.readMessage(messageInitializer1, Synonym.fromBinaryReader);
+                        (instance.synonyms = instance.synonyms || []).push(messageInitializer1);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetSynonymsResponse.refineValues(instance);
+        };
+        GetSynonymsResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.synonyms && instance.synonyms.length) {
+                writer.writeRepeatedMessage(1, instance.synonyms, Synonym.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(GetSynonymsResponse.prototype, "synonyms", {
+            get: function () {
+                return this._synonyms;
+            },
+            set: function (value) {
+                this._synonyms = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetSynonymsResponse.prototype.toObject = function () {
+            return {
+                synonyms: (this.synonyms || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        GetSynonymsResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetSynonymsResponse;
+    }());
+    var Synonym = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param Synonym value
+         */
+        function Synonym(value) {
+            value = value || {};
+            this.synonym = value.synonym;
+            this.score = value.score;
+            Synonym.refineValues(this);
+        }
+        Synonym.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            Synonym.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        Synonym.fromBinary = function (bytes) {
+            var instance = new Synonym();
+            Synonym.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        Synonym.refineValues = function (instance) {
+            instance.synonym = instance.synonym || '';
+            instance.score = instance.score || 0;
+        };
+        Synonym.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.synonym = reader.readString();
+                        break;
+                    case 2:
+                        instance.score = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            Synonym.refineValues(instance);
+        };
+        Synonym.toBinaryWriter = function (instance, writer) {
+            if (instance.synonym) {
+                writer.writeString(1, instance.synonym);
+            }
+            if (instance.score) {
+                writer.writeInt32(2, instance.score);
+            }
+        };
+        Object.defineProperty(Synonym.prototype, "synonym", {
+            get: function () {
+                return this._synonym;
+            },
+            set: function (value) {
+                this._synonym = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Synonym.prototype, "score", {
+            get: function () {
+                return this._score;
+            },
+            set: function (value) {
+                this._score = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Synonym.prototype.toObject = function () {
+            return {
+                synonym: this.synonym,
+                score: this.score
+            };
+        };
+        Synonym.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return Synonym;
+    }());
+    var GetAlternativeSentencesResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetAlternativeSentencesResponse value
+         */
+        function GetAlternativeSentencesResponse(value) {
+            value = value || {};
+            this.alternativeSentences = (value.alternativeSentences || []).map(function (m) { return new AltSentence(m); });
+            GetAlternativeSentencesResponse.refineValues(this);
+        }
+        GetAlternativeSentencesResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetAlternativeSentencesResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetAlternativeSentencesResponse.fromBinary = function (bytes) {
+            var instance = new GetAlternativeSentencesResponse();
+            GetAlternativeSentencesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetAlternativeSentencesResponse.refineValues = function (instance) {
+            instance.alternativeSentences = instance.alternativeSentences || [];
+        };
+        GetAlternativeSentencesResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new AltSentence();
+                        reader.readMessage(messageInitializer1, AltSentence.fromBinaryReader);
+                        (instance.alternativeSentences =
+                            instance.alternativeSentences || []).push(messageInitializer1);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetAlternativeSentencesResponse.refineValues(instance);
+        };
+        GetAlternativeSentencesResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.alternativeSentences && instance.alternativeSentences.length) {
+                writer.writeRepeatedMessage(1, instance.alternativeSentences, AltSentence.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(GetAlternativeSentencesResponse.prototype, "alternativeSentences", {
+            get: function () {
+                return this._alternativeSentences;
+            },
+            set: function (value) {
+                this._alternativeSentences = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetAlternativeSentencesResponse.prototype.toObject = function () {
+            return {
+                alternativeSentences: (this.alternativeSentences || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        GetAlternativeSentencesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetAlternativeSentencesResponse;
+    }());
+    var GenerateResponsesResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GenerateResponsesResponse value
+         */
+        function GenerateResponsesResponse(value) {
+            value = value || {};
+            this.responses = (value.responses || []).slice();
+            GenerateResponsesResponse.refineValues(this);
+        }
+        GenerateResponsesResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GenerateResponsesResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GenerateResponsesResponse.fromBinary = function (bytes) {
+            var instance = new GenerateResponsesResponse();
+            GenerateResponsesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GenerateResponsesResponse.refineValues = function (instance) {
+            instance.responses = instance.responses || [];
+        };
+        GenerateResponsesResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 2:
+                        (instance.responses = instance.responses || []).push(reader.readString());
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GenerateResponsesResponse.refineValues(instance);
+        };
+        GenerateResponsesResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.responses && instance.responses.length) {
+                writer.writeRepeatedString(2, instance.responses);
+            }
+        };
+        Object.defineProperty(GenerateResponsesResponse.prototype, "responses", {
+            get: function () {
+                return this._responses;
+            },
+            set: function (value) {
+                this._responses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GenerateResponsesResponse.prototype.toObject = function () {
+            return {
+                responses: (this.responses || []).slice()
+            };
+        };
+        GenerateResponsesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GenerateResponsesResponse;
+    }());
+    var GenerateUserSaysResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GenerateUserSaysResponse value
+         */
+        function GenerateUserSaysResponse(value) {
+            value = value || {};
+            this.userSays = (value.userSays || []).slice();
+            GenerateUserSaysResponse.refineValues(this);
+        }
+        GenerateUserSaysResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GenerateUserSaysResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GenerateUserSaysResponse.fromBinary = function (bytes) {
+            var instance = new GenerateUserSaysResponse();
+            GenerateUserSaysResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GenerateUserSaysResponse.refineValues = function (instance) {
+            instance.userSays = instance.userSays || [];
+        };
+        GenerateUserSaysResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 2:
+                        (instance.userSays = instance.userSays || []).push(reader.readString());
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GenerateUserSaysResponse.refineValues(instance);
+        };
+        GenerateUserSaysResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.userSays && instance.userSays.length) {
+                writer.writeRepeatedString(2, instance.userSays);
+            }
+        };
+        Object.defineProperty(GenerateUserSaysResponse.prototype, "userSays", {
+            get: function () {
+                return this._userSays;
+            },
+            set: function (value) {
+                this._userSays = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GenerateUserSaysResponse.prototype.toObject = function () {
+            return {
+                userSays: (this.userSays || []).slice()
+            };
+        };
+        GenerateUserSaysResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GenerateUserSaysResponse;
+    }());
+    var GetAlternativeTrainingPhrasesResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetAlternativeTrainingPhrasesResponse value
+         */
+        function GetAlternativeTrainingPhrasesResponse(value) {
+            value = value || {};
+            this.alternativeTrainingPhrases = (value.alternativeTrainingPhrases || []).map(function (m) { return new AltTrainingPhrase(m); });
+            GetAlternativeTrainingPhrasesResponse.refineValues(this);
+        }
+        GetAlternativeTrainingPhrasesResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetAlternativeTrainingPhrasesResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetAlternativeTrainingPhrasesResponse.fromBinary = function (bytes) {
+            var instance = new GetAlternativeTrainingPhrasesResponse();
+            GetAlternativeTrainingPhrasesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetAlternativeTrainingPhrasesResponse.refineValues = function (instance) {
+            instance.alternativeTrainingPhrases =
+                instance.alternativeTrainingPhrases || [];
+        };
+        GetAlternativeTrainingPhrasesResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new AltTrainingPhrase();
+                        reader.readMessage(messageInitializer1, AltTrainingPhrase.fromBinaryReader);
+                        (instance.alternativeTrainingPhrases =
+                            instance.alternativeTrainingPhrases || []).push(messageInitializer1);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetAlternativeTrainingPhrasesResponse.refineValues(instance);
+        };
+        GetAlternativeTrainingPhrasesResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.alternativeTrainingPhrases &&
+                instance.alternativeTrainingPhrases.length) {
+                writer.writeRepeatedMessage(1, instance.alternativeTrainingPhrases, AltTrainingPhrase.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(GetAlternativeTrainingPhrasesResponse.prototype, "alternativeTrainingPhrases", {
+            get: function () {
+                return this._alternativeTrainingPhrases;
+            },
+            set: function (value) {
+                this._alternativeTrainingPhrases = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetAlternativeTrainingPhrasesResponse.prototype.toObject = function () {
+            return {
+                alternativeTrainingPhrases: (this.alternativeTrainingPhrases || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        GetAlternativeTrainingPhrasesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetAlternativeTrainingPhrasesResponse;
+    }());
+    var AltSentence = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param AltSentence value
+         */
+        function AltSentence(value) {
+            value = value || {};
+            this.sentence = value.sentence;
+            this.score = value.score;
+            AltSentence.refineValues(this);
+        }
+        AltSentence.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            AltSentence.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        AltSentence.fromBinary = function (bytes) {
+            var instance = new AltSentence();
+            AltSentence.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        AltSentence.refineValues = function (instance) {
+            instance.sentence = instance.sentence || '';
+            instance.score = instance.score || 0;
+        };
+        AltSentence.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.sentence = reader.readString();
+                        break;
+                    case 2:
+                        instance.score = reader.readFloat();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            AltSentence.refineValues(instance);
+        };
+        AltSentence.toBinaryWriter = function (instance, writer) {
+            if (instance.sentence) {
+                writer.writeString(1, instance.sentence);
+            }
+            if (instance.score) {
+                writer.writeFloat(2, instance.score);
+            }
+        };
+        Object.defineProperty(AltSentence.prototype, "sentence", {
+            get: function () {
+                return this._sentence;
+            },
+            set: function (value) {
+                this._sentence = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AltSentence.prototype, "score", {
+            get: function () {
+                return this._score;
+            },
+            set: function (value) {
+                this._score = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        AltSentence.prototype.toObject = function () {
+            return {
+                sentence: this.sentence,
+                score: this.score
+            };
+        };
+        AltSentence.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return AltSentence;
+    }());
+    var AltTrainingPhrase = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param AltTrainingPhrase value
+         */
+        function AltTrainingPhrase(value) {
+            value = value || {};
+            this.trainingPhrase = value.trainingPhrase
+                ? new exports.Intent.TrainingPhrase(value.trainingPhrase)
+                : undefined;
+            this.score = value.score;
+            AltTrainingPhrase.refineValues(this);
+        }
+        AltTrainingPhrase.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            AltTrainingPhrase.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        AltTrainingPhrase.fromBinary = function (bytes) {
+            var instance = new AltTrainingPhrase();
+            AltTrainingPhrase.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        AltTrainingPhrase.refineValues = function (instance) {
+            instance.trainingPhrase = instance.trainingPhrase || undefined;
+            instance.score = instance.score || 0;
+        };
+        AltTrainingPhrase.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.trainingPhrase = new exports.Intent.TrainingPhrase();
+                        reader.readMessage(instance.trainingPhrase, exports.Intent.TrainingPhrase.fromBinaryReader);
+                        break;
+                    case 2:
+                        instance.score = reader.readFloat();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            AltTrainingPhrase.refineValues(instance);
+        };
+        AltTrainingPhrase.toBinaryWriter = function (instance, writer) {
+            if (instance.trainingPhrase) {
+                writer.writeMessage(1, instance.trainingPhrase, exports.Intent.TrainingPhrase.toBinaryWriter);
+            }
+            if (instance.score) {
+                writer.writeFloat(2, instance.score);
+            }
+        };
+        Object.defineProperty(AltTrainingPhrase.prototype, "trainingPhrase", {
+            get: function () {
+                return this._trainingPhrase;
+            },
+            set: function (value) {
+                this._trainingPhrase = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AltTrainingPhrase.prototype, "score", {
+            get: function () {
+                return this._score;
+            },
+            set: function (value) {
+                this._score = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        AltTrainingPhrase.prototype.toObject = function () {
+            return {
+                trainingPhrase: this.trainingPhrase
+                    ? this.trainingPhrase.toObject()
+                    : undefined,
+                score: this.score
+            };
+        };
+        AltTrainingPhrase.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return AltTrainingPhrase;
+    }());
+    var DataEnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param DataEnrichmentConfig value
+         */
+        function DataEnrichmentConfig(value) {
+            value = value || {};
+            this.entityEnrichment = value.entityEnrichment
+                ? new EntityEnrichmentConfig(value.entityEnrichment)
+                : undefined;
+            this.thesaurusEnrichment = value.thesaurusEnrichment
+                ? new ThesaurusEnrichmentConfig(value.thesaurusEnrichment)
+                : undefined;
+            this.word2vecEnrichment = value.word2vecEnrichment
+                ? new Word2VecEnrichmentConfig(value.word2vecEnrichment)
+                : undefined;
+            this.wordNetEnrichment = value.wordNetEnrichment
+                ? new WordNetAugEnrichmentConfig(value.wordNetEnrichment)
+                : undefined;
+            this.gpt2Enrichment = value.gpt2Enrichment
+                ? new GPT2EnrichmentConfig(value.gpt2Enrichment)
+                : undefined;
+            this.gloveEnrichment = value.gloveEnrichment
+                ? new GloVeEnrichmentConfig(value.gloveEnrichment)
+                : undefined;
+            this.fasttextEnrichment = value.fasttextEnrichment
+                ? new FastTextEnrichmentConfig(value.fasttextEnrichment)
+                : undefined;
+            this.bertEnrichment = value.bertEnrichment
+                ? new BertAugEnrichmentConfig(value.bertEnrichment)
+                : undefined;
+            this.xlnetEnrichment = value.xlnetEnrichment
+                ? new XLNetAugEnrichmentConfig(value.xlnetEnrichment)
+                : undefined;
+            DataEnrichmentConfig.refineValues(this);
+        }
+        DataEnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            DataEnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        DataEnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new DataEnrichmentConfig();
+            DataEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        DataEnrichmentConfig.refineValues = function (instance) {
+            instance.entityEnrichment = instance.entityEnrichment || undefined;
+            instance.thesaurusEnrichment = instance.thesaurusEnrichment || undefined;
+            instance.word2vecEnrichment = instance.word2vecEnrichment || undefined;
+            instance.wordNetEnrichment = instance.wordNetEnrichment || undefined;
+            instance.gpt2Enrichment = instance.gpt2Enrichment || undefined;
+            instance.gloveEnrichment = instance.gloveEnrichment || undefined;
+            instance.fasttextEnrichment = instance.fasttextEnrichment || undefined;
+            instance.bertEnrichment = instance.bertEnrichment || undefined;
+            instance.xlnetEnrichment = instance.xlnetEnrichment || undefined;
+        };
+        DataEnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.entityEnrichment = new EntityEnrichmentConfig();
+                        reader.readMessage(instance.entityEnrichment, EntityEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 2:
+                        instance.thesaurusEnrichment = new ThesaurusEnrichmentConfig();
+                        reader.readMessage(instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 3:
+                        instance.word2vecEnrichment = new Word2VecEnrichmentConfig();
+                        reader.readMessage(instance.word2vecEnrichment, Word2VecEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 4:
+                        instance.wordNetEnrichment = new WordNetAugEnrichmentConfig();
+                        reader.readMessage(instance.wordNetEnrichment, WordNetAugEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 5:
+                        instance.gpt2Enrichment = new GPT2EnrichmentConfig();
+                        reader.readMessage(instance.gpt2Enrichment, GPT2EnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 6:
+                        instance.gloveEnrichment = new GloVeEnrichmentConfig();
+                        reader.readMessage(instance.gloveEnrichment, GloVeEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 7:
+                        instance.fasttextEnrichment = new FastTextEnrichmentConfig();
+                        reader.readMessage(instance.fasttextEnrichment, FastTextEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 8:
+                        instance.bertEnrichment = new BertAugEnrichmentConfig();
+                        reader.readMessage(instance.bertEnrichment, BertAugEnrichmentConfig.fromBinaryReader);
+                        break;
+                    case 9:
+                        instance.xlnetEnrichment = new XLNetAugEnrichmentConfig();
+                        reader.readMessage(instance.xlnetEnrichment, XLNetAugEnrichmentConfig.fromBinaryReader);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            DataEnrichmentConfig.refineValues(instance);
+        };
+        DataEnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.entityEnrichment) {
+                writer.writeMessage(1, instance.entityEnrichment, EntityEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.thesaurusEnrichment) {
+                writer.writeMessage(2, instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.word2vecEnrichment) {
+                writer.writeMessage(3, instance.word2vecEnrichment, Word2VecEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.wordNetEnrichment) {
+                writer.writeMessage(4, instance.wordNetEnrichment, WordNetAugEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.gpt2Enrichment) {
+                writer.writeMessage(5, instance.gpt2Enrichment, GPT2EnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.gloveEnrichment) {
+                writer.writeMessage(6, instance.gloveEnrichment, GloVeEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.fasttextEnrichment) {
+                writer.writeMessage(7, instance.fasttextEnrichment, FastTextEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.bertEnrichment) {
+                writer.writeMessage(8, instance.bertEnrichment, BertAugEnrichmentConfig.toBinaryWriter);
+            }
+            if (instance.xlnetEnrichment) {
+                writer.writeMessage(9, instance.xlnetEnrichment, XLNetAugEnrichmentConfig.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(DataEnrichmentConfig.prototype, "entityEnrichment", {
+            get: function () {
+                return this._entityEnrichment;
+            },
+            set: function (value) {
+                this._entityEnrichment = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DataEnrichmentConfig.prototype, "thesaurusEnrichment", {
+            get: function () {
+                return this._thesaurusEnrichment;
+            },
+            set: function (value) {
+                this._thesaurusEnrichment = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DataEnrichmentConfig.prototype, "word2vecEnrichment", {
+            get: function () {
+                return this._word2vecEnrichment;
+            },
+            set: function (value) {
+                this._word2vecEnrichment = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DataEnrichmentConfig.prototype, "wordNetEnrichment", {
+            get: function () {
+                return this._wordNetEnrichment;
+            },
+            set: function (value) {
+                this._wordNetEnrichment = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DataEnrichmentConfig.prototype, "gpt2Enrichment", {
+            get: function () {
+                return this._gpt2Enrichment;
+            },
+            set: function (value) {
+                this._gpt2Enrichment = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DataEnrichmentConfig.prototype, "gloveEnrichment", {
+            get: function () {
+                return this._gloveEnrichment;
+            },
+            set: function (value) {
+                this._gloveEnrichment = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DataEnrichmentConfig.prototype, "fasttextEnrichment", {
+            get: function () {
+                return this._fasttextEnrichment;
+            },
+            set: function (value) {
+                this._fasttextEnrichment = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DataEnrichmentConfig.prototype, "bertEnrichment", {
+            get: function () {
+                return this._bertEnrichment;
+            },
+            set: function (value) {
+                this._bertEnrichment = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DataEnrichmentConfig.prototype, "xlnetEnrichment", {
+            get: function () {
+                return this._xlnetEnrichment;
+            },
+            set: function (value) {
+                this._xlnetEnrichment = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        DataEnrichmentConfig.prototype.toObject = function () {
+            return {
+                entityEnrichment: this.entityEnrichment
+                    ? this.entityEnrichment.toObject()
+                    : undefined,
+                thesaurusEnrichment: this.thesaurusEnrichment
+                    ? this.thesaurusEnrichment.toObject()
+                    : undefined,
+                word2vecEnrichment: this.word2vecEnrichment
+                    ? this.word2vecEnrichment.toObject()
+                    : undefined,
+                wordNetEnrichment: this.wordNetEnrichment
+                    ? this.wordNetEnrichment.toObject()
+                    : undefined,
+                gpt2Enrichment: this.gpt2Enrichment
+                    ? this.gpt2Enrichment.toObject()
+                    : undefined,
+                gloveEnrichment: this.gloveEnrichment
+                    ? this.gloveEnrichment.toObject()
+                    : undefined,
+                fasttextEnrichment: this.fasttextEnrichment
+                    ? this.fasttextEnrichment.toObject()
+                    : undefined,
+                bertEnrichment: this.bertEnrichment
+                    ? this.bertEnrichment.toObject()
+                    : undefined,
+                xlnetEnrichment: this.xlnetEnrichment
+                    ? this.xlnetEnrichment.toObject()
+                    : undefined
+            };
+        };
+        DataEnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return DataEnrichmentConfig;
+    }());
+    var EntityEnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param EntityEnrichmentConfig value
+         */
+        function EntityEnrichmentConfig(value) {
+            value = value || {};
+            this.isActive = value.isActive;
+            this.enrichmentFactor = value.enrichmentFactor;
+            this.executionOrder = value.executionOrder;
+            EntityEnrichmentConfig.refineValues(this);
+        }
+        EntityEnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            EntityEnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        EntityEnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new EntityEnrichmentConfig();
+            EntityEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        EntityEnrichmentConfig.refineValues = function (instance) {
+            instance.isActive = instance.isActive || false;
+            instance.enrichmentFactor = instance.enrichmentFactor || 0;
+            instance.executionOrder = instance.executionOrder || 0;
+        };
+        EntityEnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isActive = reader.readBool();
+                        break;
+                    case 2:
+                        instance.enrichmentFactor = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.executionOrder = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            EntityEnrichmentConfig.refineValues(instance);
+        };
+        EntityEnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.isActive) {
+                writer.writeBool(1, instance.isActive);
+            }
+            if (instance.enrichmentFactor) {
+                writer.writeInt32(2, instance.enrichmentFactor);
+            }
+            if (instance.executionOrder) {
+                writer.writeInt32(3, instance.executionOrder);
+            }
+        };
+        Object.defineProperty(EntityEnrichmentConfig.prototype, "isActive", {
+            get: function () {
+                return this._isActive;
+            },
+            set: function (value) {
+                this._isActive = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(EntityEnrichmentConfig.prototype, "enrichmentFactor", {
+            get: function () {
+                return this._enrichmentFactor;
+            },
+            set: function (value) {
+                this._enrichmentFactor = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(EntityEnrichmentConfig.prototype, "executionOrder", {
+            get: function () {
+                return this._executionOrder;
+            },
+            set: function (value) {
+                this._executionOrder = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        EntityEnrichmentConfig.prototype.toObject = function () {
+            return {
+                isActive: this.isActive,
+                enrichmentFactor: this.enrichmentFactor,
+                executionOrder: this.executionOrder
+            };
+        };
+        EntityEnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return EntityEnrichmentConfig;
+    }());
+    var ThesaurusEnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ThesaurusEnrichmentConfig value
+         */
+        function ThesaurusEnrichmentConfig(value) {
+            value = value || {};
+            this.isActive = value.isActive;
+            this.enrichmentFactor = value.enrichmentFactor;
+            this.executionOrder = value.executionOrder;
+            ThesaurusEnrichmentConfig.refineValues(this);
+        }
+        ThesaurusEnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            ThesaurusEnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        ThesaurusEnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new ThesaurusEnrichmentConfig();
+            ThesaurusEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        ThesaurusEnrichmentConfig.refineValues = function (instance) {
+            instance.isActive = instance.isActive || false;
+            instance.enrichmentFactor = instance.enrichmentFactor || 0;
+            instance.executionOrder = instance.executionOrder || 0;
+        };
+        ThesaurusEnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isActive = reader.readBool();
+                        break;
+                    case 2:
+                        instance.enrichmentFactor = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.executionOrder = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ThesaurusEnrichmentConfig.refineValues(instance);
+        };
+        ThesaurusEnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.isActive) {
+                writer.writeBool(1, instance.isActive);
+            }
+            if (instance.enrichmentFactor) {
+                writer.writeInt32(2, instance.enrichmentFactor);
+            }
+            if (instance.executionOrder) {
+                writer.writeInt32(3, instance.executionOrder);
+            }
+        };
+        Object.defineProperty(ThesaurusEnrichmentConfig.prototype, "isActive", {
+            get: function () {
+                return this._isActive;
+            },
+            set: function (value) {
+                this._isActive = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ThesaurusEnrichmentConfig.prototype, "enrichmentFactor", {
+            get: function () {
+                return this._enrichmentFactor;
+            },
+            set: function (value) {
+                this._enrichmentFactor = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ThesaurusEnrichmentConfig.prototype, "executionOrder", {
+            get: function () {
+                return this._executionOrder;
+            },
+            set: function (value) {
+                this._executionOrder = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        ThesaurusEnrichmentConfig.prototype.toObject = function () {
+            return {
+                isActive: this.isActive,
+                enrichmentFactor: this.enrichmentFactor,
+                executionOrder: this.executionOrder
+            };
+        };
+        ThesaurusEnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return ThesaurusEnrichmentConfig;
+    }());
+    var FastTextEnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param FastTextEnrichmentConfig value
+         */
+        function FastTextEnrichmentConfig(value) {
+            value = value || {};
+            this.isActive = value.isActive;
+            this.enrichmentFactor = value.enrichmentFactor;
+            this.executionOrder = value.executionOrder;
+            FastTextEnrichmentConfig.refineValues(this);
+        }
+        FastTextEnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            FastTextEnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        FastTextEnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new FastTextEnrichmentConfig();
+            FastTextEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        FastTextEnrichmentConfig.refineValues = function (instance) {
+            instance.isActive = instance.isActive || false;
+            instance.enrichmentFactor = instance.enrichmentFactor || 0;
+            instance.executionOrder = instance.executionOrder || 0;
+        };
+        FastTextEnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isActive = reader.readBool();
+                        break;
+                    case 2:
+                        instance.enrichmentFactor = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.executionOrder = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            FastTextEnrichmentConfig.refineValues(instance);
+        };
+        FastTextEnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.isActive) {
+                writer.writeBool(1, instance.isActive);
+            }
+            if (instance.enrichmentFactor) {
+                writer.writeInt32(2, instance.enrichmentFactor);
+            }
+            if (instance.executionOrder) {
+                writer.writeInt32(3, instance.executionOrder);
+            }
+        };
+        Object.defineProperty(FastTextEnrichmentConfig.prototype, "isActive", {
+            get: function () {
+                return this._isActive;
+            },
+            set: function (value) {
+                this._isActive = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(FastTextEnrichmentConfig.prototype, "enrichmentFactor", {
+            get: function () {
+                return this._enrichmentFactor;
+            },
+            set: function (value) {
+                this._enrichmentFactor = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(FastTextEnrichmentConfig.prototype, "executionOrder", {
+            get: function () {
+                return this._executionOrder;
+            },
+            set: function (value) {
+                this._executionOrder = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        FastTextEnrichmentConfig.prototype.toObject = function () {
+            return {
+                isActive: this.isActive,
+                enrichmentFactor: this.enrichmentFactor,
+                executionOrder: this.executionOrder
+            };
+        };
+        FastTextEnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return FastTextEnrichmentConfig;
+    }());
+    var BertAugEnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param BertAugEnrichmentConfig value
+         */
+        function BertAugEnrichmentConfig(value) {
+            value = value || {};
+            this.isActive = value.isActive;
+            this.enrichmentFactor = value.enrichmentFactor;
+            this.executionOrder = value.executionOrder;
+            BertAugEnrichmentConfig.refineValues(this);
+        }
+        BertAugEnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            BertAugEnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        BertAugEnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new BertAugEnrichmentConfig();
+            BertAugEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        BertAugEnrichmentConfig.refineValues = function (instance) {
+            instance.isActive = instance.isActive || false;
+            instance.enrichmentFactor = instance.enrichmentFactor || 0;
+            instance.executionOrder = instance.executionOrder || 0;
+        };
+        BertAugEnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isActive = reader.readBool();
+                        break;
+                    case 2:
+                        instance.enrichmentFactor = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.executionOrder = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            BertAugEnrichmentConfig.refineValues(instance);
+        };
+        BertAugEnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.isActive) {
+                writer.writeBool(1, instance.isActive);
+            }
+            if (instance.enrichmentFactor) {
+                writer.writeInt32(2, instance.enrichmentFactor);
+            }
+            if (instance.executionOrder) {
+                writer.writeInt32(3, instance.executionOrder);
+            }
+        };
+        Object.defineProperty(BertAugEnrichmentConfig.prototype, "isActive", {
+            get: function () {
+                return this._isActive;
+            },
+            set: function (value) {
+                this._isActive = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BertAugEnrichmentConfig.prototype, "enrichmentFactor", {
+            get: function () {
+                return this._enrichmentFactor;
+            },
+            set: function (value) {
+                this._enrichmentFactor = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BertAugEnrichmentConfig.prototype, "executionOrder", {
+            get: function () {
+                return this._executionOrder;
+            },
+            set: function (value) {
+                this._executionOrder = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        BertAugEnrichmentConfig.prototype.toObject = function () {
+            return {
+                isActive: this.isActive,
+                enrichmentFactor: this.enrichmentFactor,
+                executionOrder: this.executionOrder
+            };
+        };
+        BertAugEnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return BertAugEnrichmentConfig;
+    }());
+    var GloVeEnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GloVeEnrichmentConfig value
+         */
+        function GloVeEnrichmentConfig(value) {
+            value = value || {};
+            this.isActive = value.isActive;
+            this.enrichmentFactor = value.enrichmentFactor;
+            this.executionOrder = value.executionOrder;
+            GloVeEnrichmentConfig.refineValues(this);
+        }
+        GloVeEnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GloVeEnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GloVeEnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new GloVeEnrichmentConfig();
+            GloVeEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GloVeEnrichmentConfig.refineValues = function (instance) {
+            instance.isActive = instance.isActive || false;
+            instance.enrichmentFactor = instance.enrichmentFactor || 0;
+            instance.executionOrder = instance.executionOrder || 0;
+        };
+        GloVeEnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isActive = reader.readBool();
+                        break;
+                    case 2:
+                        instance.enrichmentFactor = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.executionOrder = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GloVeEnrichmentConfig.refineValues(instance);
+        };
+        GloVeEnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.isActive) {
+                writer.writeBool(1, instance.isActive);
+            }
+            if (instance.enrichmentFactor) {
+                writer.writeInt32(2, instance.enrichmentFactor);
+            }
+            if (instance.executionOrder) {
+                writer.writeInt32(3, instance.executionOrder);
+            }
+        };
+        Object.defineProperty(GloVeEnrichmentConfig.prototype, "isActive", {
+            get: function () {
+                return this._isActive;
+            },
+            set: function (value) {
+                this._isActive = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GloVeEnrichmentConfig.prototype, "enrichmentFactor", {
+            get: function () {
+                return this._enrichmentFactor;
+            },
+            set: function (value) {
+                this._enrichmentFactor = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GloVeEnrichmentConfig.prototype, "executionOrder", {
+            get: function () {
+                return this._executionOrder;
+            },
+            set: function (value) {
+                this._executionOrder = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GloVeEnrichmentConfig.prototype.toObject = function () {
+            return {
+                isActive: this.isActive,
+                enrichmentFactor: this.enrichmentFactor,
+                executionOrder: this.executionOrder
+            };
+        };
+        GloVeEnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GloVeEnrichmentConfig;
+    }());
+    var GPT2EnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GPT2EnrichmentConfig value
+         */
+        function GPT2EnrichmentConfig(value) {
+            value = value || {};
+            this.isActive = value.isActive;
+            this.enrichmentFactor = value.enrichmentFactor;
+            this.executionOrder = value.executionOrder;
+            GPT2EnrichmentConfig.refineValues(this);
+        }
+        GPT2EnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GPT2EnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GPT2EnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new GPT2EnrichmentConfig();
+            GPT2EnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GPT2EnrichmentConfig.refineValues = function (instance) {
+            instance.isActive = instance.isActive || false;
+            instance.enrichmentFactor = instance.enrichmentFactor || 0;
+            instance.executionOrder = instance.executionOrder || 0;
+        };
+        GPT2EnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isActive = reader.readBool();
+                        break;
+                    case 2:
+                        instance.enrichmentFactor = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.executionOrder = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GPT2EnrichmentConfig.refineValues(instance);
+        };
+        GPT2EnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.isActive) {
+                writer.writeBool(1, instance.isActive);
+            }
+            if (instance.enrichmentFactor) {
+                writer.writeInt32(2, instance.enrichmentFactor);
+            }
+            if (instance.executionOrder) {
+                writer.writeInt32(3, instance.executionOrder);
+            }
+        };
+        Object.defineProperty(GPT2EnrichmentConfig.prototype, "isActive", {
+            get: function () {
+                return this._isActive;
+            },
+            set: function (value) {
+                this._isActive = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GPT2EnrichmentConfig.prototype, "enrichmentFactor", {
+            get: function () {
+                return this._enrichmentFactor;
+            },
+            set: function (value) {
+                this._enrichmentFactor = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GPT2EnrichmentConfig.prototype, "executionOrder", {
+            get: function () {
+                return this._executionOrder;
+            },
+            set: function (value) {
+                this._executionOrder = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GPT2EnrichmentConfig.prototype.toObject = function () {
+            return {
+                isActive: this.isActive,
+                enrichmentFactor: this.enrichmentFactor,
+                executionOrder: this.executionOrder
+            };
+        };
+        GPT2EnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GPT2EnrichmentConfig;
+    }());
+    var Word2VecEnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param Word2VecEnrichmentConfig value
+         */
+        function Word2VecEnrichmentConfig(value) {
+            value = value || {};
+            this.isActive = value.isActive;
+            this.enrichmentFactor = value.enrichmentFactor;
+            this.executionOrder = value.executionOrder;
+            Word2VecEnrichmentConfig.refineValues(this);
+        }
+        Word2VecEnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            Word2VecEnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        Word2VecEnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new Word2VecEnrichmentConfig();
+            Word2VecEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        Word2VecEnrichmentConfig.refineValues = function (instance) {
+            instance.isActive = instance.isActive || false;
+            instance.enrichmentFactor = instance.enrichmentFactor || 0;
+            instance.executionOrder = instance.executionOrder || 0;
+        };
+        Word2VecEnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isActive = reader.readBool();
+                        break;
+                    case 2:
+                        instance.enrichmentFactor = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.executionOrder = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            Word2VecEnrichmentConfig.refineValues(instance);
+        };
+        Word2VecEnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.isActive) {
+                writer.writeBool(1, instance.isActive);
+            }
+            if (instance.enrichmentFactor) {
+                writer.writeInt32(2, instance.enrichmentFactor);
+            }
+            if (instance.executionOrder) {
+                writer.writeInt32(3, instance.executionOrder);
+            }
+        };
+        Object.defineProperty(Word2VecEnrichmentConfig.prototype, "isActive", {
+            get: function () {
+                return this._isActive;
+            },
+            set: function (value) {
+                this._isActive = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Word2VecEnrichmentConfig.prototype, "enrichmentFactor", {
+            get: function () {
+                return this._enrichmentFactor;
+            },
+            set: function (value) {
+                this._enrichmentFactor = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Word2VecEnrichmentConfig.prototype, "executionOrder", {
+            get: function () {
+                return this._executionOrder;
+            },
+            set: function (value) {
+                this._executionOrder = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Word2VecEnrichmentConfig.prototype.toObject = function () {
+            return {
+                isActive: this.isActive,
+                enrichmentFactor: this.enrichmentFactor,
+                executionOrder: this.executionOrder
+            };
+        };
+        Word2VecEnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return Word2VecEnrichmentConfig;
+    }());
+    var WordNetAugEnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param WordNetAugEnrichmentConfig value
+         */
+        function WordNetAugEnrichmentConfig(value) {
+            value = value || {};
+            this.isActive = value.isActive;
+            this.enrichmentFactor = value.enrichmentFactor;
+            this.executionOrder = value.executionOrder;
+            WordNetAugEnrichmentConfig.refineValues(this);
+        }
+        WordNetAugEnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            WordNetAugEnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        WordNetAugEnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new WordNetAugEnrichmentConfig();
+            WordNetAugEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        WordNetAugEnrichmentConfig.refineValues = function (instance) {
+            instance.isActive = instance.isActive || false;
+            instance.enrichmentFactor = instance.enrichmentFactor || 0;
+            instance.executionOrder = instance.executionOrder || 0;
+        };
+        WordNetAugEnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isActive = reader.readBool();
+                        break;
+                    case 2:
+                        instance.enrichmentFactor = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.executionOrder = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            WordNetAugEnrichmentConfig.refineValues(instance);
+        };
+        WordNetAugEnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.isActive) {
+                writer.writeBool(1, instance.isActive);
+            }
+            if (instance.enrichmentFactor) {
+                writer.writeInt32(2, instance.enrichmentFactor);
+            }
+            if (instance.executionOrder) {
+                writer.writeInt32(3, instance.executionOrder);
+            }
+        };
+        Object.defineProperty(WordNetAugEnrichmentConfig.prototype, "isActive", {
+            get: function () {
+                return this._isActive;
+            },
+            set: function (value) {
+                this._isActive = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WordNetAugEnrichmentConfig.prototype, "enrichmentFactor", {
+            get: function () {
+                return this._enrichmentFactor;
+            },
+            set: function (value) {
+                this._enrichmentFactor = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WordNetAugEnrichmentConfig.prototype, "executionOrder", {
+            get: function () {
+                return this._executionOrder;
+            },
+            set: function (value) {
+                this._executionOrder = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        WordNetAugEnrichmentConfig.prototype.toObject = function () {
+            return {
+                isActive: this.isActive,
+                enrichmentFactor: this.enrichmentFactor,
+                executionOrder: this.executionOrder
+            };
+        };
+        WordNetAugEnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return WordNetAugEnrichmentConfig;
+    }());
+    var XLNetAugEnrichmentConfig = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param XLNetAugEnrichmentConfig value
+         */
+        function XLNetAugEnrichmentConfig(value) {
+            value = value || {};
+            this.isActive = value.isActive;
+            this.enrichmentFactor = value.enrichmentFactor;
+            this.executionOrder = value.executionOrder;
+            XLNetAugEnrichmentConfig.refineValues(this);
+        }
+        XLNetAugEnrichmentConfig.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            XLNetAugEnrichmentConfig.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        XLNetAugEnrichmentConfig.fromBinary = function (bytes) {
+            var instance = new XLNetAugEnrichmentConfig();
+            XLNetAugEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        XLNetAugEnrichmentConfig.refineValues = function (instance) {
+            instance.isActive = instance.isActive || false;
+            instance.enrichmentFactor = instance.enrichmentFactor || 0;
+            instance.executionOrder = instance.executionOrder || 0;
+        };
+        XLNetAugEnrichmentConfig.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isActive = reader.readBool();
+                        break;
+                    case 2:
+                        instance.enrichmentFactor = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.executionOrder = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            XLNetAugEnrichmentConfig.refineValues(instance);
+        };
+        XLNetAugEnrichmentConfig.toBinaryWriter = function (instance, writer) {
+            if (instance.isActive) {
+                writer.writeBool(1, instance.isActive);
+            }
+            if (instance.enrichmentFactor) {
+                writer.writeInt32(2, instance.enrichmentFactor);
+            }
+            if (instance.executionOrder) {
+                writer.writeInt32(3, instance.executionOrder);
+            }
+        };
+        Object.defineProperty(XLNetAugEnrichmentConfig.prototype, "isActive", {
+            get: function () {
+                return this._isActive;
+            },
+            set: function (value) {
+                this._isActive = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(XLNetAugEnrichmentConfig.prototype, "enrichmentFactor", {
+            get: function () {
+                return this._enrichmentFactor;
+            },
+            set: function (value) {
+                this._enrichmentFactor = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(XLNetAugEnrichmentConfig.prototype, "executionOrder", {
+            get: function () {
+                return this._executionOrder;
+            },
+            set: function (value) {
+                this._executionOrder = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        XLNetAugEnrichmentConfig.prototype.toObject = function () {
+            return {
+                isActive: this.isActive,
+                enrichmentFactor: this.enrichmentFactor,
+                executionOrder: this.executionOrder
+            };
+        };
+        XLNetAugEnrichmentConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return XLNetAugEnrichmentConfig;
+    }());
+
+    /* tslint:disable */
+    /*
+      To configure the services you need to provide a configuration for each of them.
+
+      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+      const grpcSettings = { host: environment.grpcHost };
+
+      @NgModule({
+        providers: [
+          { provide: GRPC_AI_SERVICES_CLIENT_SETTINGS, useValue: grpcSettings },
+        ],
+      })
+      export class GrpcConfigModule { }
+    */
+    var GRPC_AI_SERVICES_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_AI_SERVICES_CLIENT_SETTINGS');
+
+    /* tslint:disable */
+    var AiServicesClient = /** @class */ (function () {
+        function AiServicesClient(settings, clientFactory, handler) {
+            this.handler = handler;
+            this.client = clientFactory.createClient('ondewo.nlu.AiServices', settings);
+        }
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.ExtractEntitiesRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.ExtractEntitiesResponse>
+         */
+        AiServicesClient.prototype.extractEntities = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.extractEntities$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.ExtractEntitiesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>
+         */
+        AiServicesClient.prototype.extractEntities$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.AiServices/ExtractEntities',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: ExtractEntitiesRequest,
+                responseClass: ExtractEntitiesResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GenerateUserSaysRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.GenerateUserSaysResponse>
+         */
+        AiServicesClient.prototype.generateUserSays = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.generateUserSays$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GenerateUserSaysRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.GenerateUserSaysResponse>>
+         */
+        AiServicesClient.prototype.generateUserSays$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.AiServices/GenerateUserSays',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GenerateUserSaysRequest,
+                responseClass: GenerateUserSaysResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GenerateResponsesRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.GenerateResponsesResponse>
+         */
+        AiServicesClient.prototype.generateResponses = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.generateResponses$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GenerateResponsesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.GenerateResponsesResponse>>
+         */
+        AiServicesClient.prototype.generateResponses$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.AiServices/GenerateResponses',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GenerateResponsesRequest,
+                responseClass: GenerateResponsesResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetAlternativeSentencesRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.GetAlternativeSentencesResponse>
+         */
+        AiServicesClient.prototype.getAlternativeSentences = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getAlternativeSentences$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetAlternativeSentencesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.GetAlternativeSentencesResponse>>
+         */
+        AiServicesClient.prototype.getAlternativeSentences$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.AiServices/GetAlternativeSentences',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetAlternativeSentencesRequest,
+                responseClass: GetAlternativeSentencesResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetAlternativeTrainingPhrasesRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.GetAlternativeTrainingPhrasesResponse>
+         */
+        AiServicesClient.prototype.getAlternativeTrainingPhrases = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getAlternativeTrainingPhrases$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetAlternativeTrainingPhrasesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.GetAlternativeTrainingPhrasesResponse>>
+         */
+        AiServicesClient.prototype.getAlternativeTrainingPhrases$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetAlternativeTrainingPhrasesRequest,
+                responseClass: GetAlternativeTrainingPhrasesResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetSynonymsRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.GetSynonymsResponse>
+         */
+        AiServicesClient.prototype.getSynonyms = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getSynonyms$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetSynonymsRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.GetSynonymsResponse>>
+         */
+        AiServicesClient.prototype.getSynonyms$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.AiServices/GetSynonyms',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetSynonymsRequest,
+                responseClass: GetSynonymsResponse
+            });
+        };
+        return AiServicesClient;
+    }());
+    AiServicesClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function AiServicesClient_Factory() { return new AiServicesClient(i0.ɵɵinject(GRPC_AI_SERVICES_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: AiServicesClient, providedIn: "root" });
+    AiServicesClient.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    AiServicesClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_AI_SERVICES_CLIENT_SETTINGS,] }] },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
+        { type: i2.GrpcHandler }
+    ]; };
+
+    var Timestamp = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param Timestamp value
+         */
+        function Timestamp(value) {
+            value = value || {};
+            this.seconds = value.seconds;
+            this.nanos = value.nanos;
+            Timestamp.refineValues(this);
+        }
+        Timestamp.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            Timestamp.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        Timestamp.fromBinary = function (bytes) {
+            var instance = new Timestamp();
+            Timestamp.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        Timestamp.fromDate = function (date) {
+            var timestamp = new Timestamp();
+            timestamp.fromDate(date);
+            return timestamp;
+        };
+        Timestamp.fromISOString = function (isoDate) {
+            var timestamp = new Timestamp();
+            timestamp.fromISOString(isoDate);
+            return timestamp;
+        };
+        Timestamp.refineValues = function (instance) {
+            instance.seconds = instance.seconds || '0';
+            instance.nanos = instance.nanos || 0;
+        };
+        Timestamp.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.seconds = reader.readInt64String();
+                        break;
+                    case 2:
+                        instance.nanos = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            Timestamp.refineValues(instance);
+        };
+        Timestamp.toBinaryWriter = function (instance, writer) {
+            if (instance.seconds) {
+                writer.writeInt64String(1, instance.seconds);
+            }
+            if (instance.nanos) {
+                writer.writeInt32(2, instance.nanos);
+            }
+        };
+        Object.defineProperty(Timestamp.prototype, "seconds", {
+            get: function () {
+                return this._seconds;
+            },
+            set: function (value) {
+                this._seconds = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Timestamp.prototype, "nanos", {
+            get: function () {
+                return this._nanos;
+            },
+            set: function (value) {
+                this._nanos = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Timestamp.prototype.toObject = function () {
+            return {
+                seconds: this.seconds,
+                nanos: this.nanos
+            };
+        };
+        Timestamp.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        Timestamp.prototype.fromDate = function (date) {
+            this.seconds = '' + Math.floor(date.getTime() / 1e3);
+            this.nanos = date.getMilliseconds() * 1e6;
+        };
+        Timestamp.prototype.toDate = function () {
+            return new Date(parseInt(this.seconds || '0') * 1e3 + (this.nanos || 0) / 1e6);
+        };
+        Timestamp.prototype.fromISOString = function (isoDate) {
+            this.fromDate(new Date(isoDate));
+        };
+        Timestamp.prototype.toISOString = function () {
+            return this.toDate().toISOString();
+        };
+        return Timestamp;
+    }());
+
+    exports.OperationMetadata = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param OperationMetadata value
+         */
+        function OperationMetadata(value) {
+            value = value || {};
+            this.status = value.status;
+            this.parentOperationName = value.parentOperationName;
+            this.subOperationNames = (value.subOperationNames || []).slice();
+            this.createTime = value.createTime
+                ? new Timestamp(value.createTime)
+                : undefined;
+            this.startTime = value.startTime
+                ? new Timestamp(value.startTime)
+                : undefined;
+            this.endTime = value.endTime
+                ? new Timestamp(value.endTime)
+                : undefined;
+            this.isCancellationRequested = value.isCancellationRequested;
+            this.cancelCommand = value.cancelCommand;
+            this.userIdCreated = value.userIdCreated;
+            this.userIdCancelled = value.userIdCancelled;
+            this.projectParent = value.projectParent;
+            this.operationType = value.operationType;
+            this.hostName = value.hostName;
+            this.numReruns = value.numReruns;
+            this.maxNumReruns = value.maxNumReruns;
+            OperationMetadata.refineValues(this);
+        }
+        OperationMetadata.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            OperationMetadata.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        OperationMetadata.fromBinary = function (bytes) {
+            var instance = new OperationMetadata();
+            OperationMetadata.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        OperationMetadata.refineValues = function (instance) {
+            instance.status = instance.status || 0;
+            instance.parentOperationName = instance.parentOperationName || '';
+            instance.subOperationNames = instance.subOperationNames || [];
+            instance.createTime = instance.createTime || undefined;
+            instance.startTime = instance.startTime || undefined;
+            instance.endTime = instance.endTime || undefined;
+            instance.isCancellationRequested =
+                instance.isCancellationRequested || false;
+            instance.cancelCommand = instance.cancelCommand || '';
+            instance.userIdCreated = instance.userIdCreated || '';
+            instance.userIdCancelled = instance.userIdCancelled || '';
+            instance.projectParent = instance.projectParent || '';
+            instance.operationType = instance.operationType || 0;
+            instance.hostName = instance.hostName || '';
+            instance.numReruns = instance.numReruns || 0;
+            instance.maxNumReruns = instance.maxNumReruns || 0;
+        };
+        OperationMetadata.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.status = reader.readEnum();
+                        break;
+                    case 2:
+                        instance.parentOperationName = reader.readString();
+                        break;
+                    case 3:
+                        (instance.subOperationNames = instance.subOperationNames || []).push(reader.readString());
+                        break;
+                    case 4:
+                        instance.createTime = new Timestamp();
+                        reader.readMessage(instance.createTime, Timestamp.fromBinaryReader);
+                        break;
+                    case 5:
+                        instance.startTime = new Timestamp();
+                        reader.readMessage(instance.startTime, Timestamp.fromBinaryReader);
+                        break;
+                    case 6:
+                        instance.endTime = new Timestamp();
+                        reader.readMessage(instance.endTime, Timestamp.fromBinaryReader);
+                        break;
+                    case 7:
+                        instance.isCancellationRequested = reader.readBool();
+                        break;
+                    case 8:
+                        instance.cancelCommand = reader.readString();
+                        break;
+                    case 9:
+                        instance.userIdCreated = reader.readString();
+                        break;
+                    case 10:
+                        instance.userIdCancelled = reader.readString();
+                        break;
+                    case 11:
+                        instance.projectParent = reader.readString();
+                        break;
+                    case 12:
+                        instance.operationType = reader.readEnum();
+                        break;
+                    case 13:
+                        instance.hostName = reader.readString();
+                        break;
+                    case 14:
+                        instance.numReruns = reader.readInt32();
+                        break;
+                    case 15:
+                        instance.maxNumReruns = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            OperationMetadata.refineValues(instance);
+        };
+        OperationMetadata.toBinaryWriter = function (instance, writer) {
+            if (instance.status) {
+                writer.writeEnum(1, instance.status);
+            }
+            if (instance.parentOperationName) {
+                writer.writeString(2, instance.parentOperationName);
+            }
+            if (instance.subOperationNames && instance.subOperationNames.length) {
+                writer.writeRepeatedString(3, instance.subOperationNames);
+            }
+            if (instance.createTime) {
+                writer.writeMessage(4, instance.createTime, Timestamp.toBinaryWriter);
+            }
+            if (instance.startTime) {
+                writer.writeMessage(5, instance.startTime, Timestamp.toBinaryWriter);
+            }
+            if (instance.endTime) {
+                writer.writeMessage(6, instance.endTime, Timestamp.toBinaryWriter);
+            }
+            if (instance.isCancellationRequested) {
+                writer.writeBool(7, instance.isCancellationRequested);
+            }
+            if (instance.cancelCommand) {
+                writer.writeString(8, instance.cancelCommand);
+            }
+            if (instance.userIdCreated) {
+                writer.writeString(9, instance.userIdCreated);
+            }
+            if (instance.userIdCancelled) {
+                writer.writeString(10, instance.userIdCancelled);
+            }
+            if (instance.projectParent) {
+                writer.writeString(11, instance.projectParent);
+            }
+            if (instance.operationType) {
+                writer.writeEnum(12, instance.operationType);
+            }
+            if (instance.hostName) {
+                writer.writeString(13, instance.hostName);
+            }
+            if (instance.numReruns) {
+                writer.writeInt32(14, instance.numReruns);
+            }
+            if (instance.maxNumReruns) {
+                writer.writeInt32(15, instance.maxNumReruns);
+            }
+        };
+        Object.defineProperty(OperationMetadata.prototype, "status", {
+            get: function () {
+                return this._status;
+            },
+            set: function (value) {
+                this._status = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "parentOperationName", {
+            get: function () {
+                return this._parentOperationName;
+            },
+            set: function (value) {
+                this._parentOperationName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "subOperationNames", {
+            get: function () {
+                return this._subOperationNames;
+            },
+            set: function (value) {
+                this._subOperationNames = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "createTime", {
+            get: function () {
+                return this._createTime;
+            },
+            set: function (value) {
+                this._createTime = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "startTime", {
+            get: function () {
+                return this._startTime;
+            },
+            set: function (value) {
+                this._startTime = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "endTime", {
+            get: function () {
+                return this._endTime;
+            },
+            set: function (value) {
+                this._endTime = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "isCancellationRequested", {
+            get: function () {
+                return this._isCancellationRequested;
+            },
+            set: function (value) {
+                this._isCancellationRequested = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "cancelCommand", {
+            get: function () {
+                return this._cancelCommand;
+            },
+            set: function (value) {
+                this._cancelCommand = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "userIdCreated", {
+            get: function () {
+                return this._userIdCreated;
+            },
+            set: function (value) {
+                this._userIdCreated = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "userIdCancelled", {
+            get: function () {
+                return this._userIdCancelled;
+            },
+            set: function (value) {
+                this._userIdCancelled = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "projectParent", {
+            get: function () {
+                return this._projectParent;
+            },
+            set: function (value) {
+                this._projectParent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "operationType", {
+            get: function () {
+                return this._operationType;
+            },
+            set: function (value) {
+                this._operationType = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "hostName", {
+            get: function () {
+                return this._hostName;
+            },
+            set: function (value) {
+                this._hostName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "numReruns", {
+            get: function () {
+                return this._numReruns;
+            },
+            set: function (value) {
+                this._numReruns = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OperationMetadata.prototype, "maxNumReruns", {
+            get: function () {
+                return this._maxNumReruns;
+            },
+            set: function (value) {
+                this._maxNumReruns = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        OperationMetadata.prototype.toObject = function () {
+            return {
+                status: this.status,
+                parentOperationName: this.parentOperationName,
+                subOperationNames: (this.subOperationNames || []).slice(),
+                createTime: this.createTime ? this.createTime.toObject() : undefined,
+                startTime: this.startTime ? this.startTime.toObject() : undefined,
+                endTime: this.endTime ? this.endTime.toObject() : undefined,
+                isCancellationRequested: this.isCancellationRequested,
+                cancelCommand: this.cancelCommand,
+                userIdCreated: this.userIdCreated,
+                userIdCancelled: this.userIdCancelled,
+                projectParent: this.projectParent,
+                operationType: this.operationType,
+                hostName: this.hostName,
+                numReruns: this.numReruns,
+                maxNumReruns: this.maxNumReruns
+            };
+        };
+        OperationMetadata.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return OperationMetadata;
+    }());
+    (function (OperationMetadata) {
+        var Status;
+        (function (Status) {
+            Status[Status["statusUnspecified"] = 0] = "statusUnspecified";
+            Status[Status["notStarted"] = 1] = "notStarted";
+            Status[Status["inProgress"] = 2] = "inProgress";
+            Status[Status["done"] = 3] = "done";
+            Status[Status["cancelled"] = 4] = "cancelled";
+            Status[Status["failed"] = 5] = "failed";
+        })(Status = OperationMetadata.Status || (OperationMetadata.Status = {}));
+        var OperationType;
+        (function (OperationType) {
+            OperationType[OperationType["operationTypeUnspecified"] = 0] = "operationTypeUnspecified";
+            OperationType[OperationType["createAgent"] = 1] = "createAgent";
+            OperationType[OperationType["importAgent"] = 2] = "importAgent";
+            OperationType[OperationType["exportAgent"] = 3] = "exportAgent";
+            OperationType[OperationType["deleteAgent"] = 4] = "deleteAgent";
+            OperationType[OperationType["restoreAgent"] = 5] = "restoreAgent";
+            OperationType[OperationType["buildAgentCache"] = 6] = "buildAgentCache";
+            OperationType[OperationType["trainAgent"] = 7] = "trainAgent";
+        })(OperationType = OperationMetadata.OperationType || (OperationMetadata.OperationType = {}));
+    })(exports.OperationMetadata || (exports.OperationMetadata = {}));
+
+    exports.Operation = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param Operation value
+         */
+        function Operation(value) {
+            this._result = Operation.ResultCase.none;
+            value = value || {};
+            this.name = value.name;
+            this.metadata = value.metadata
+                ? new Any(value.metadata)
+                : undefined;
+            this.done = value.done;
+            this.error = value.error ? new Status(value.error) : undefined;
+            this.response = value.response
+                ? new Any(value.response)
+                : undefined;
+            Operation.refineValues(this);
+        }
+        Operation.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            Operation.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        Operation.fromBinary = function (bytes) {
+            var instance = new Operation();
+            Operation.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        Operation.refineValues = function (instance) {
+            instance.name = instance.name || '';
+            instance.metadata = instance.metadata || undefined;
+            instance.done = instance.done || false;
+        };
+        Operation.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.name = reader.readString();
+                        break;
+                    case 2:
+                        instance.metadata = new Any();
+                        reader.readMessage(instance.metadata, Any.fromBinaryReader);
+                        break;
+                    case 3:
+                        instance.done = reader.readBool();
+                        break;
+                    case 4:
+                        instance.error = new Status();
+                        reader.readMessage(instance.error, Status.fromBinaryReader);
+                        break;
+                    case 5:
+                        instance.response = new Any();
+                        reader.readMessage(instance.response, Any.fromBinaryReader);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            Operation.refineValues(instance);
+        };
+        Operation.toBinaryWriter = function (instance, writer) {
+            if (instance.name) {
+                writer.writeString(1, instance.name);
+            }
+            if (instance.metadata) {
+                writer.writeMessage(2, instance.metadata, Any.toBinaryWriter);
+            }
+            if (instance.done) {
+                writer.writeBool(3, instance.done);
+            }
+            if (instance.error) {
+                writer.writeMessage(4, instance.error, Status.toBinaryWriter);
+            }
+            if (instance.response) {
+                writer.writeMessage(5, instance.response, Any.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(Operation.prototype, "name", {
+            get: function () {
+                return this._name;
+            },
+            set: function (value) {
+                this._name = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Operation.prototype, "metadata", {
+            get: function () {
+                return this._metadata;
+            },
+            set: function (value) {
+                this._metadata = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Operation.prototype, "done", {
+            get: function () {
+                return this._done;
+            },
+            set: function (value) {
+                this._done = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Operation.prototype, "error", {
+            get: function () {
+                return this._error;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._response = undefined;
+                    this._result = Operation.ResultCase.error;
+                }
+                this._error = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Operation.prototype, "response", {
+            get: function () {
+                return this._response;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._error = undefined;
+                    this._result = Operation.ResultCase.response;
+                }
+                this._response = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Operation.prototype, "result", {
+            get: function () {
+                return this._result;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Operation.prototype.toObject = function () {
+            return {
+                name: this.name,
+                metadata: this.metadata ? this.metadata.toObject() : undefined,
+                done: this.done,
+                error: this.error ? this.error.toObject() : undefined,
+                response: this.response ? this.response.toObject() : undefined
+            };
+        };
+        Operation.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return Operation;
+    }());
+    (function (Operation) {
+        var ResultCase;
+        (function (ResultCase) {
+            ResultCase[ResultCase["none"] = 0] = "none";
+            ResultCase[ResultCase["error"] = 1] = "error";
+            ResultCase[ResultCase["response"] = 2] = "response";
+        })(ResultCase = Operation.ResultCase || (Operation.ResultCase = {}));
+    })(exports.Operation || (exports.Operation = {}));
+    var GetOperationRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetOperationRequest value
+         */
+        function GetOperationRequest(value) {
+            value = value || {};
+            this.name = value.name;
+            GetOperationRequest.refineValues(this);
+        }
+        GetOperationRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetOperationRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetOperationRequest.fromBinary = function (bytes) {
+            var instance = new GetOperationRequest();
+            GetOperationRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetOperationRequest.refineValues = function (instance) {
+            instance.name = instance.name || '';
+        };
+        GetOperationRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.name = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetOperationRequest.refineValues(instance);
+        };
+        GetOperationRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.name) {
+                writer.writeString(1, instance.name);
+            }
+        };
+        Object.defineProperty(GetOperationRequest.prototype, "name", {
+            get: function () {
+                return this._name;
+            },
+            set: function (value) {
+                this._name = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetOperationRequest.prototype.toObject = function () {
+            return {
+                name: this.name
+            };
+        };
+        GetOperationRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetOperationRequest;
+    }());
+    var ListOperationsRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ListOperationsRequest value
+         */
+        function ListOperationsRequest(value) {
+            value = value || {};
+            this.name = value.name;
+            this.filter = value.filter;
+            this.pageSize = value.pageSize;
+            this.pageToken = value.pageToken;
+            ListOperationsRequest.refineValues(this);
+        }
+        ListOperationsRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListOperationsRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        ListOperationsRequest.fromBinary = function (bytes) {
+            var instance = new ListOperationsRequest();
+            ListOperationsRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        ListOperationsRequest.refineValues = function (instance) {
+            instance.name = instance.name || '';
+            instance.filter = instance.filter || '';
+            instance.pageSize = instance.pageSize || 0;
+            instance.pageToken = instance.pageToken || '';
+        };
+        ListOperationsRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 4:
+                        instance.name = reader.readString();
+                        break;
+                    case 1:
+                        instance.filter = reader.readString();
+                        break;
+                    case 2:
+                        instance.pageSize = reader.readInt32();
+                        break;
+                    case 3:
+                        instance.pageToken = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ListOperationsRequest.refineValues(instance);
+        };
+        ListOperationsRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.name) {
+                writer.writeString(4, instance.name);
+            }
+            if (instance.filter) {
+                writer.writeString(1, instance.filter);
+            }
+            if (instance.pageSize) {
+                writer.writeInt32(2, instance.pageSize);
+            }
+            if (instance.pageToken) {
+                writer.writeString(3, instance.pageToken);
+            }
+        };
+        Object.defineProperty(ListOperationsRequest.prototype, "name", {
+            get: function () {
+                return this._name;
+            },
+            set: function (value) {
+                this._name = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListOperationsRequest.prototype, "filter", {
+            get: function () {
+                return this._filter;
+            },
+            set: function (value) {
+                this._filter = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListOperationsRequest.prototype, "pageSize", {
+            get: function () {
+                return this._pageSize;
+            },
+            set: function (value) {
+                this._pageSize = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListOperationsRequest.prototype, "pageToken", {
+            get: function () {
+                return this._pageToken;
+            },
+            set: function (value) {
+                this._pageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        ListOperationsRequest.prototype.toObject = function () {
+            return {
+                name: this.name,
+                filter: this.filter,
+                pageSize: this.pageSize,
+                pageToken: this.pageToken
+            };
+        };
+        ListOperationsRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return ListOperationsRequest;
+    }());
+    var ListOperationsResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ListOperationsResponse value
+         */
+        function ListOperationsResponse(value) {
+            value = value || {};
+            this.operations = (value.operations || []).map(function (m) { return new exports.Operation(m); });
+            this.nextPageToken = value.nextPageToken;
+            ListOperationsResponse.refineValues(this);
+        }
+        ListOperationsResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListOperationsResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        ListOperationsResponse.fromBinary = function (bytes) {
+            var instance = new ListOperationsResponse();
+            ListOperationsResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        ListOperationsResponse.refineValues = function (instance) {
+            instance.operations = instance.operations || [];
+            instance.nextPageToken = instance.nextPageToken || '';
+        };
+        ListOperationsResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Operation();
+                        reader.readMessage(messageInitializer1, exports.Operation.fromBinaryReader);
+                        (instance.operations = instance.operations || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        instance.nextPageToken = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ListOperationsResponse.refineValues(instance);
+        };
+        ListOperationsResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.operations && instance.operations.length) {
+                writer.writeRepeatedMessage(1, instance.operations, exports.Operation.toBinaryWriter);
+            }
+            if (instance.nextPageToken) {
+                writer.writeString(2, instance.nextPageToken);
+            }
+        };
+        Object.defineProperty(ListOperationsResponse.prototype, "operations", {
+            get: function () {
+                return this._operations;
+            },
+            set: function (value) {
+                this._operations = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListOperationsResponse.prototype, "nextPageToken", {
+            get: function () {
+                return this._nextPageToken;
+            },
+            set: function (value) {
+                this._nextPageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        ListOperationsResponse.prototype.toObject = function () {
+            return {
+                operations: (this.operations || []).map(function (m) { return m.toObject(); }),
+                nextPageToken: this.nextPageToken
+            };
+        };
+        ListOperationsResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return ListOperationsResponse;
+    }());
+    var CancelOperationRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param CancelOperationRequest value
+         */
+        function CancelOperationRequest(value) {
+            value = value || {};
+            this.name = value.name;
+            CancelOperationRequest.refineValues(this);
+        }
+        CancelOperationRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            CancelOperationRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        CancelOperationRequest.fromBinary = function (bytes) {
+            var instance = new CancelOperationRequest();
+            CancelOperationRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        CancelOperationRequest.refineValues = function (instance) {
+            instance.name = instance.name || '';
+        };
+        CancelOperationRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.name = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            CancelOperationRequest.refineValues(instance);
+        };
+        CancelOperationRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.name) {
+                writer.writeString(1, instance.name);
+            }
+        };
+        Object.defineProperty(CancelOperationRequest.prototype, "name", {
+            get: function () {
+                return this._name;
+            },
+            set: function (value) {
+                this._name = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CancelOperationRequest.prototype.toObject = function () {
+            return {
+                name: this.name
+            };
+        };
+        CancelOperationRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return CancelOperationRequest;
+    }());
+    var DeleteOperationRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param DeleteOperationRequest value
+         */
+        function DeleteOperationRequest(value) {
+            value = value || {};
+            this.name = value.name;
+            DeleteOperationRequest.refineValues(this);
+        }
+        DeleteOperationRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            DeleteOperationRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        DeleteOperationRequest.fromBinary = function (bytes) {
+            var instance = new DeleteOperationRequest();
+            DeleteOperationRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        DeleteOperationRequest.refineValues = function (instance) {
+            instance.name = instance.name || '';
+        };
+        DeleteOperationRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.name = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            DeleteOperationRequest.refineValues(instance);
+        };
+        DeleteOperationRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.name) {
+                writer.writeString(1, instance.name);
+            }
+        };
+        Object.defineProperty(DeleteOperationRequest.prototype, "name", {
+            get: function () {
+                return this._name;
+            },
+            set: function (value) {
+                this._name = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        DeleteOperationRequest.prototype.toObject = function () {
+            return {
+                name: this.name
+            };
+        };
+        DeleteOperationRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return DeleteOperationRequest;
+    }());
+
+    /* tslint:disable */
+    /*
+      To configure the services you need to provide a configuration for each of them.
+
+      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+      const grpcSettings = { host: environment.grpcHost };
+
+      @NgModule({
+        providers: [
+          { provide: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, useValue: grpcSettings },
+        ],
+      })
+      export class GrpcConfigModule { }
+    */
+    var GRPC_ENTITY_TYPES_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_ENTITY_TYPES_CLIENT_SETTINGS');
+
+    /* tslint:disable */
+    var EntityTypesClient = /** @class */ (function () {
+        function EntityTypesClient(settings, clientFactory, handler) {
+            this.handler = handler;
+            this.client = clientFactory.createClient('ondewo.nlu.EntityTypes', settings);
+        }
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.ListEntityTypesRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.ListEntityTypesResponse>
+         */
+        EntityTypesClient.prototype.listEntityTypes = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.listEntityTypes$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.ListEntityTypesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>
+         */
+        EntityTypesClient.prototype.listEntityTypes$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/ListEntityTypes',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: ListEntityTypesRequest,
+                responseClass: ListEntityTypesResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.EntityType>
+         */
+        EntityTypesClient.prototype.getEntityType = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getEntityType$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.EntityType>>
+         */
+        EntityTypesClient.prototype.getEntityType$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/GetEntityType',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetEntityTypeRequest,
+                responseClass: exports.EntityType
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.CreateEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.EntityType>
+         */
+        EntityTypesClient.prototype.createEntityType = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.createEntityType$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.CreateEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.EntityType>>
+         */
+        EntityTypesClient.prototype.createEntityType$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/CreateEntityType',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: CreateEntityTypeRequest,
+                responseClass: exports.EntityType
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.UpdateEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.EntityType>
+         */
+        EntityTypesClient.prototype.updateEntityType = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.updateEntityType$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.UpdateEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.EntityType>>
+         */
+        EntityTypesClient.prototype.updateEntityType$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/UpdateEntityType',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: UpdateEntityTypeRequest,
+                responseClass: exports.EntityType
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.DeleteEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<googleProtobuf002.Empty>
+         */
+        EntityTypesClient.prototype.deleteEntityType = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.deleteEntityType$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.DeleteEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
+         */
+        EntityTypesClient.prototype.deleteEntityType$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/DeleteEntityType',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: DeleteEntityTypeRequest,
+                responseClass: Empty
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.BatchUpdateEntityTypesRequest request
+         * @param Metadata metadata
+         * @return Observable<googleLongrunning001.Operation>
+         */
+        EntityTypesClient.prototype.batchUpdateEntityTypes = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.batchUpdateEntityTypes$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.BatchUpdateEntityTypesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+         */
+        EntityTypesClient.prototype.batchUpdateEntityTypes$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: exports.BatchUpdateEntityTypesRequest,
+                responseClass: exports.Operation
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.BatchDeleteEntityTypesRequest request
+         * @param Metadata metadata
+         * @return Observable<googleLongrunning001.Operation>
+         */
+        EntityTypesClient.prototype.batchDeleteEntityTypes = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.batchDeleteEntityTypes$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.BatchDeleteEntityTypesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+         */
+        EntityTypesClient.prototype.batchDeleteEntityTypes$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: BatchDeleteEntityTypesRequest,
+                responseClass: exports.Operation
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.BatchCreateEntitiesRequest request
+         * @param Metadata metadata
+         * @return Observable<googleLongrunning001.Operation>
+         */
+        EntityTypesClient.prototype.batchCreateEntities = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.batchCreateEntities$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.BatchCreateEntitiesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+         */
+        EntityTypesClient.prototype.batchCreateEntities$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/BatchCreateEntities',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: BatchCreateEntitiesRequest,
+                responseClass: exports.Operation
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.BatchUpdateEntitiesRequest request
+         * @param Metadata metadata
+         * @return Observable<googleLongrunning001.Operation>
+         */
+        EntityTypesClient.prototype.batchUpdateEntities = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.batchUpdateEntities$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.BatchUpdateEntitiesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+         */
+        EntityTypesClient.prototype.batchUpdateEntities$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/BatchUpdateEntities',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: BatchUpdateEntitiesRequest,
+                responseClass: exports.Operation
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.BatchDeleteEntitiesRequest request
+         * @param Metadata metadata
+         * @return Observable<googleLongrunning001.Operation>
+         */
+        EntityTypesClient.prototype.batchDeleteEntities = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.batchDeleteEntities$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.BatchDeleteEntitiesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+         */
+        EntityTypesClient.prototype.batchDeleteEntities$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.EntityTypes/BatchDeleteEntities',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: BatchDeleteEntitiesRequest,
+                responseClass: exports.Operation
+            });
+        };
+        return EntityTypesClient;
+    }());
+    EntityTypesClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function EntityTypesClient_Factory() { return new EntityTypesClient(i0.ɵɵinject(GRPC_ENTITY_TYPES_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: EntityTypesClient, providedIn: "root" });
+    EntityTypesClient.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    EntityTypesClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_ENTITY_TYPES_CLIENT_SETTINGS,] }] },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
+        { type: i2.GrpcHandler }
+    ]; };
+
+    /* tslint:disable */
+    /*
+      To configure the services you need to provide a configuration for each of them.
+
+      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+      const grpcSettings = { host: environment.grpcHost };
+
+      @NgModule({
+        providers: [
+          { provide: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, useValue: grpcSettings },
+        ],
+      })
+      export class GrpcConfigModule { }
+    */
+    var GRPC_SERVER_STATISTICS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_SERVER_STATISTICS_CLIENT_SETTINGS');
+
+    var GetIntentCountRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetIntentCountRequest value
+         */
+        function GetIntentCountRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            this.filterByCategory = value.filterByCategory;
+            GetIntentCountRequest.refineValues(this);
+        }
+        GetIntentCountRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetIntentCountRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetIntentCountRequest.fromBinary = function (bytes) {
+            var instance = new GetIntentCountRequest();
+            GetIntentCountRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetIntentCountRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+            instance.filterByCategory = instance.filterByCategory || 0;
+        };
+        GetIntentCountRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    case 2:
+                        instance.filterByCategory = reader.readEnum();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetIntentCountRequest.refineValues(instance);
+        };
+        GetIntentCountRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+            if (instance.filterByCategory) {
+                writer.writeEnum(2, instance.filterByCategory);
+            }
+        };
+        Object.defineProperty(GetIntentCountRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetIntentCountRequest.prototype, "filterByCategory", {
+            get: function () {
+                return this._filterByCategory;
+            },
+            set: function (value) {
+                this._filterByCategory = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetIntentCountRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                filterByCategory: this.filterByCategory
+            };
+        };
+        GetIntentCountRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetIntentCountRequest;
+    }());
+    var GetEntityTypeCountRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetEntityTypeCountRequest value
+         */
+        function GetEntityTypeCountRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            this.filterByCategory = value.filterByCategory;
+            GetEntityTypeCountRequest.refineValues(this);
+        }
+        GetEntityTypeCountRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetEntityTypeCountRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetEntityTypeCountRequest.fromBinary = function (bytes) {
+            var instance = new GetEntityTypeCountRequest();
+            GetEntityTypeCountRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetEntityTypeCountRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+            instance.filterByCategory = instance.filterByCategory || 0;
+        };
+        GetEntityTypeCountRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    case 2:
+                        instance.filterByCategory = reader.readEnum();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetEntityTypeCountRequest.refineValues(instance);
+        };
+        GetEntityTypeCountRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+            if (instance.filterByCategory) {
+                writer.writeEnum(2, instance.filterByCategory);
+            }
+        };
+        Object.defineProperty(GetEntityTypeCountRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetEntityTypeCountRequest.prototype, "filterByCategory", {
+            get: function () {
+                return this._filterByCategory;
+            },
+            set: function (value) {
+                this._filterByCategory = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetEntityTypeCountRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                filterByCategory: this.filterByCategory
+            };
+        };
+        GetEntityTypeCountRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetEntityTypeCountRequest;
+    }());
+    var GetProjectStatRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetProjectStatRequest value
+         */
+        function GetProjectStatRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            GetProjectStatRequest.refineValues(this);
+        }
+        GetProjectStatRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetProjectStatRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetProjectStatRequest.fromBinary = function (bytes) {
+            var instance = new GetProjectStatRequest();
+            GetProjectStatRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetProjectStatRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+        };
+        GetProjectStatRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetProjectStatRequest.refineValues(instance);
+        };
+        GetProjectStatRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+        };
+        Object.defineProperty(GetProjectStatRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetProjectStatRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent
+            };
+        };
+        GetProjectStatRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetProjectStatRequest;
+    }());
+    var GetProjectElementStatRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetProjectElementStatRequest value
+         */
+        function GetProjectElementStatRequest(value) {
+            value = value || {};
+            this.name = value.name;
+            this.languageCode = value.languageCode;
+            GetProjectElementStatRequest.refineValues(this);
+        }
+        GetProjectElementStatRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetProjectElementStatRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetProjectElementStatRequest.fromBinary = function (bytes) {
+            var instance = new GetProjectElementStatRequest();
+            GetProjectElementStatRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetProjectElementStatRequest.refineValues = function (instance) {
+            instance.name = instance.name || '';
+            instance.languageCode = instance.languageCode || '';
+        };
+        GetProjectElementStatRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.name = reader.readString();
+                        break;
+                    case 2:
+                        instance.languageCode = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetProjectElementStatRequest.refineValues(instance);
+        };
+        GetProjectElementStatRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.name) {
+                writer.writeString(1, instance.name);
+            }
+            if (instance.languageCode) {
+                writer.writeString(2, instance.languageCode);
+            }
+        };
+        Object.defineProperty(GetProjectElementStatRequest.prototype, "name", {
+            get: function () {
+                return this._name;
+            },
+            set: function (value) {
+                this._name = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetProjectElementStatRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetProjectElementStatRequest.prototype.toObject = function () {
+            return {
+                name: this.name,
+                languageCode: this.languageCode
+            };
+        };
+        GetProjectElementStatRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetProjectElementStatRequest;
+    }());
+
     /* tslint:disable */
     /*
       To configure the services you need to provide a configuration for each of them.
@@ -12619,6 +17496,435 @@
     */
     var GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS');
 
+    /* tslint:disable */
+    var ProjectStatisticsClient = /** @class */ (function () {
+        function ProjectStatisticsClient(settings, clientFactory, handler) {
+            this.handler = handler;
+            this.client = clientFactory.createClient('ondewo.nlu.ProjectStatistics', settings);
+        }
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetIntentCountRequest request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ProjectStatisticsClient.prototype.getIntentCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getIntentCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetIntentCountRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ProjectStatisticsClient.prototype.getIntentCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ProjectStatistics/GetIntentCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetIntentCountRequest,
+                responseClass: StatResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetEntityTypeCountRequest request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ProjectStatisticsClient.prototype.getEntityTypeCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getEntityTypeCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetEntityTypeCountRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ProjectStatisticsClient.prototype.getEntityTypeCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ProjectStatistics/GetEntityTypeCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetEntityTypeCountRequest,
+                responseClass: StatResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetProjectStatRequest request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ProjectStatisticsClient.prototype.getUserCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getUserCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetProjectStatRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ProjectStatisticsClient.prototype.getUserCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ProjectStatistics/GetUserCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetProjectStatRequest,
+                responseClass: StatResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetProjectStatRequest request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ProjectStatisticsClient.prototype.getSessionCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getSessionCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetProjectStatRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ProjectStatisticsClient.prototype.getSessionCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ProjectStatistics/GetSessionCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetProjectStatRequest,
+                responseClass: StatResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetProjectElementStatRequest request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ProjectStatisticsClient.prototype.getTrainingPhraseCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getTrainingPhraseCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetProjectElementStatRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ProjectStatisticsClient.prototype.getTrainingPhraseCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetProjectElementStatRequest,
+                responseClass: StatResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetProjectElementStatRequest request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ProjectStatisticsClient.prototype.getResponseCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getResponseCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetProjectElementStatRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ProjectStatisticsClient.prototype.getResponseCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ProjectStatistics/GetResponseCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetProjectElementStatRequest,
+                responseClass: StatResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetProjectElementStatRequest request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ProjectStatisticsClient.prototype.getEntityValueCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getEntityValueCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetProjectElementStatRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ProjectStatisticsClient.prototype.getEntityValueCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ProjectStatistics/GetEntityValueCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetProjectElementStatRequest,
+                responseClass: StatResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetProjectElementStatRequest request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ProjectStatisticsClient.prototype.getEntitySynonymCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getEntitySynonymCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetProjectElementStatRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ProjectStatisticsClient.prototype.getEntitySynonymCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetProjectElementStatRequest,
+                responseClass: StatResponse
+            });
+        };
+        return ProjectStatisticsClient;
+    }());
+    ProjectStatisticsClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProjectStatisticsClient_Factory() { return new ProjectStatisticsClient(i0.ɵɵinject(GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: ProjectStatisticsClient, providedIn: "root" });
+    ProjectStatisticsClient.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    ProjectStatisticsClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS,] }] },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
+        { type: i2.GrpcHandler }
+    ]; };
+
+    /* tslint:disable */
+    /*
+      To configure the services you need to provide a configuration for each of them.
+
+      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+      const grpcSettings = { host: environment.grpcHost };
+
+      @NgModule({
+        providers: [
+          { provide: GRPC_AGENTS_CLIENT_SETTINGS, useValue: grpcSettings },
+        ],
+      })
+      export class GrpcConfigModule { }
+    */
+    var GRPC_AGENTS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_AGENTS_CLIENT_SETTINGS');
+
+    var GetUserProjectCountRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param GetUserProjectCountRequest value
+         */
+        function GetUserProjectCountRequest(value) {
+            value = value || {};
+            this.userId = value.userId;
+            GetUserProjectCountRequest.refineValues(this);
+        }
+        GetUserProjectCountRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetUserProjectCountRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        GetUserProjectCountRequest.fromBinary = function (bytes) {
+            var instance = new GetUserProjectCountRequest();
+            GetUserProjectCountRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        GetUserProjectCountRequest.refineValues = function (instance) {
+            instance.userId = instance.userId || '';
+        };
+        GetUserProjectCountRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.userId = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            GetUserProjectCountRequest.refineValues(instance);
+        };
+        GetUserProjectCountRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.userId) {
+                writer.writeString(1, instance.userId);
+            }
+        };
+        Object.defineProperty(GetUserProjectCountRequest.prototype, "userId", {
+            get: function () {
+                return this._userId;
+            },
+            set: function (value) {
+                this._userId = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        GetUserProjectCountRequest.prototype.toObject = function () {
+            return {
+                userId: this.userId
+            };
+        };
+        GetUserProjectCountRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return GetUserProjectCountRequest;
+    }());
+
+    /* tslint:disable */
+    var ServerStatisticsClient = /** @class */ (function () {
+        function ServerStatisticsClient(settings, clientFactory, handler) {
+            this.handler = handler;
+            this.client = clientFactory.createClient('ondewo.nlu.ServerStatistics', settings);
+        }
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param googleProtobuf001.Empty request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ServerStatisticsClient.prototype.getProjectCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getProjectCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param googleProtobuf001.Empty request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ServerStatisticsClient.prototype.getProjectCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ServerStatistics/GetProjectCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: Empty,
+                responseClass: StatResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.GetUserProjectCountRequest request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ServerStatisticsClient.prototype.getUserProjectCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getUserProjectCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.GetUserProjectCountRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ServerStatisticsClient.prototype.getUserProjectCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ServerStatistics/GetUserProjectCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: GetUserProjectCountRequest,
+                responseClass: StatResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param googleProtobuf001.Empty request
+         * @param Metadata metadata
+         * @return Observable<ondewoNlu002.StatResponse>
+         */
+        ServerStatisticsClient.prototype.getUserCount = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.getUserCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param googleProtobuf001.Empty request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         */
+        ServerStatisticsClient.prototype.getUserCount$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.ServerStatistics/GetUserCount',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: Empty,
+                responseClass: StatResponse
+            });
+        };
+        return ServerStatisticsClient;
+    }());
+    ServerStatisticsClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function ServerStatisticsClient_Factory() { return new ServerStatisticsClient(i0.ɵɵinject(GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: ServerStatisticsClient, providedIn: "root" });
+    ServerStatisticsClient.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    ServerStatisticsClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_SERVER_STATISTICS_CLIENT_SETTINGS,] }] },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
+        { type: i2.GrpcHandler }
+    ]; };
+
+    exports.DefaultProjectRole = void 0;
     (function (DefaultProjectRole) {
         DefaultProjectRole[DefaultProjectRole["projectUnspecified"] = 0] = "projectUnspecified";
         DefaultProjectRole[DefaultProjectRole["projectUser"] = 1] = "projectUser";
@@ -12627,6 +17933,7 @@
         DefaultProjectRole[DefaultProjectRole["projectAdmin"] = 4] = "projectAdmin";
         DefaultProjectRole[DefaultProjectRole["projectInactive"] = 5] = "projectInactive";
     })(exports.DefaultProjectRole || (exports.DefaultProjectRole = {}));
+    exports.ProjectRoleView = void 0;
     (function (ProjectRoleView) {
         ProjectRoleView[ProjectRoleView["projectRoleViewUnspecified"] = 0] = "projectRoleViewUnspecified";
         ProjectRoleView[ProjectRoleView["projectRoleViewShallow"] = 1] = "projectRoleViewShallow";
@@ -13364,6 +18671,7 @@
         return ListProjectRolesResponse;
     }());
 
+    exports.DefaultServerRole = void 0;
     (function (DefaultServerRole) {
         DefaultServerRole[DefaultServerRole["serverUnspecified"] = 0] = "serverUnspecified";
         DefaultServerRole[DefaultServerRole["serverUser"] = 1] = "serverUser";
@@ -15115,11 +20423,13 @@
         return LoginResponse;
     }());
 
+    exports.AgentView = void 0;
     (function (AgentView) {
         AgentView[AgentView["agentViewUnspecified"] = 0] = "agentViewUnspecified";
         AgentView[AgentView["agentViewFull"] = 1] = "agentViewFull";
         AgentView[AgentView["agentViewShallow"] = 2] = "agentViewShallow";
     })(exports.AgentView || (exports.AgentView = {}));
+    exports.ReportType = void 0;
     (function (ReportType) {
         ReportType[ReportType["all"] = 0] = "all";
         ReportType[ReportType["intentPerLanguage"] = 1] = "intentPerLanguage";
@@ -15127,11 +20437,13 @@
         ReportType[ReportType["entityCollision"] = 3] = "entityCollision";
         ReportType[ReportType["intentGeneral"] = 4] = "intentGeneral";
     })(exports.ReportType || (exports.ReportType = {}));
+    exports.ReportFormat = void 0;
     (function (ReportFormat) {
         ReportFormat[ReportFormat["csv"] = 0] = "csv";
         ReportFormat[ReportFormat["html"] = 1] = "html";
         ReportFormat[ReportFormat["json"] = 2] = "json";
     })(exports.ReportFormat || (exports.ReportFormat = {}));
+    exports.AgentStatus = void 0;
     (function (AgentStatus) {
         AgentStatus[AgentStatus["active"] = 0] = "active";
         AgentStatus[AgentStatus["inactive"] = 1] = "inactive";
@@ -18678,3413 +23990,221 @@
         return ExportResourcesResponse;
     }());
 
-    (function (SortingMode) {
-        SortingMode[SortingMode["ascending"] = 0] = "ascending";
-        SortingMode[SortingMode["descending"] = 1] = "descending";
-    })(exports.SortingMode || (exports.SortingMode = {}));
-    var StatResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param StatResponse value
-         */
-        function StatResponse(value) {
-            value = value || {};
-            this.value = value.value;
-            StatResponse.refineValues(this);
-        }
-        StatResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            StatResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        StatResponse.fromBinary = function (bytes) {
-            var instance = new StatResponse();
-            StatResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        StatResponse.refineValues = function (instance) {
-            instance.value = instance.value || 0;
-        };
-        StatResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.value = reader.readUint32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            StatResponse.refineValues(instance);
-        };
-        StatResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.value) {
-                writer.writeUint32(1, instance.value);
-            }
-        };
-        Object.defineProperty(StatResponse.prototype, "value", {
-            get: function () {
-                return this._value;
-            },
-            set: function (value) {
-                this._value = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        StatResponse.prototype.toObject = function () {
-            return {
-                value: this.value
-            };
-        };
-        StatResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return StatResponse;
-    }());
-
     /* tslint:disable */
-    /*
-      To configure the services you need to provide a configuration for each of them.
-
-      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-      const grpcSettings = { host: environment.grpcHost };
-
-      @NgModule({
-        providers: [
-          { provide: GRPC_WEBHOOK_CLIENT_SETTINGS, useValue: grpcSettings },
-        ],
-      })
-      export class GrpcConfigModule { }
-    */
-    var GRPC_WEBHOOK_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_WEBHOOK_CLIENT_SETTINGS');
-
-    var PingRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param PingRequest value
-         */
-        function PingRequest(value) {
-            value = value || {};
-            this.session = value.session;
-            PingRequest.refineValues(this);
-        }
-        PingRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            PingRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        PingRequest.fromBinary = function (bytes) {
-            var instance = new PingRequest();
-            PingRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        PingRequest.refineValues = function (instance) {
-            instance.session = instance.session || '';
-        };
-        PingRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.session = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            PingRequest.refineValues(instance);
-        };
-        PingRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.session) {
-                writer.writeString(1, instance.session);
-            }
-        };
-        Object.defineProperty(PingRequest.prototype, "session", {
-            get: function () {
-                return this._session;
-            },
-            set: function (value) {
-                this._session = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        PingRequest.prototype.toObject = function () {
-            return {
-                session: this.session
-            };
-        };
-        PingRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return PingRequest;
-    }());
-    var WebhookRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param WebhookRequest value
-         */
-        function WebhookRequest(value) {
-            value = value || {};
-            this.session = value.session;
-            this.responseId = value.responseId;
-            this.queryResult = value.queryResult
-                ? new QueryResult(value.queryResult)
-                : undefined;
-            this.originalDetectIntentRequest = value.originalDetectIntentRequest
-                ? new OriginalDetectIntentRequest(value.originalDetectIntentRequest)
-                : undefined;
-            this.headers = value.headers
-                ? new exports.Struct(value.headers)
-                : undefined;
-            WebhookRequest.refineValues(this);
-        }
-        WebhookRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            WebhookRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        WebhookRequest.fromBinary = function (bytes) {
-            var instance = new WebhookRequest();
-            WebhookRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        WebhookRequest.refineValues = function (instance) {
-            instance.session = instance.session || '';
-            instance.responseId = instance.responseId || '';
-            instance.queryResult = instance.queryResult || undefined;
-            instance.originalDetectIntentRequest =
-                instance.originalDetectIntentRequest || undefined;
-            instance.headers = instance.headers || undefined;
-        };
-        WebhookRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 4:
-                        instance.session = reader.readString();
-                        break;
-                    case 1:
-                        instance.responseId = reader.readString();
-                        break;
-                    case 2:
-                        instance.queryResult = new QueryResult();
-                        reader.readMessage(instance.queryResult, QueryResult.fromBinaryReader);
-                        break;
-                    case 3:
-                        instance.originalDetectIntentRequest = new OriginalDetectIntentRequest();
-                        reader.readMessage(instance.originalDetectIntentRequest, OriginalDetectIntentRequest.fromBinaryReader);
-                        break;
-                    case 5:
-                        instance.headers = new exports.Struct();
-                        reader.readMessage(instance.headers, exports.Struct.fromBinaryReader);
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            WebhookRequest.refineValues(instance);
-        };
-        WebhookRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.session) {
-                writer.writeString(4, instance.session);
-            }
-            if (instance.responseId) {
-                writer.writeString(1, instance.responseId);
-            }
-            if (instance.queryResult) {
-                writer.writeMessage(2, instance.queryResult, QueryResult.toBinaryWriter);
-            }
-            if (instance.originalDetectIntentRequest) {
-                writer.writeMessage(3, instance.originalDetectIntentRequest, OriginalDetectIntentRequest.toBinaryWriter);
-            }
-            if (instance.headers) {
-                writer.writeMessage(5, instance.headers, exports.Struct.toBinaryWriter);
-            }
-        };
-        Object.defineProperty(WebhookRequest.prototype, "session", {
-            get: function () {
-                return this._session;
-            },
-            set: function (value) {
-                this._session = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WebhookRequest.prototype, "responseId", {
-            get: function () {
-                return this._responseId;
-            },
-            set: function (value) {
-                this._responseId = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WebhookRequest.prototype, "queryResult", {
-            get: function () {
-                return this._queryResult;
-            },
-            set: function (value) {
-                this._queryResult = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WebhookRequest.prototype, "originalDetectIntentRequest", {
-            get: function () {
-                return this._originalDetectIntentRequest;
-            },
-            set: function (value) {
-                this._originalDetectIntentRequest = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WebhookRequest.prototype, "headers", {
-            get: function () {
-                return this._headers;
-            },
-            set: function (value) {
-                this._headers = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        WebhookRequest.prototype.toObject = function () {
-            return {
-                session: this.session,
-                responseId: this.responseId,
-                queryResult: this.queryResult ? this.queryResult.toObject() : undefined,
-                originalDetectIntentRequest: this.originalDetectIntentRequest
-                    ? this.originalDetectIntentRequest.toObject()
-                    : undefined,
-                headers: this.headers ? this.headers.toObject() : undefined
-            };
-        };
-        WebhookRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return WebhookRequest;
-    }());
-    var WebhookResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param WebhookResponse value
-         */
-        function WebhookResponse(value) {
-            value = value || {};
-            this.fulfillmentText = value.fulfillmentText;
-            this.fulfillmentMessages = (value.fulfillmentMessages || []).map(function (m) { return new exports.Intent.Message(m); });
-            this.source = value.source;
-            this.payload = value.payload
-                ? new exports.Struct(value.payload)
-                : undefined;
-            this.outputContexts = (value.outputContexts || []).map(function (m) { return new Context(m); });
-            this.followupEventInput = value.followupEventInput
-                ? new EventInput(value.followupEventInput)
-                : undefined;
-            WebhookResponse.refineValues(this);
-        }
-        WebhookResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            WebhookResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        WebhookResponse.fromBinary = function (bytes) {
-            var instance = new WebhookResponse();
-            WebhookResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        WebhookResponse.refineValues = function (instance) {
-            instance.fulfillmentText = instance.fulfillmentText || '';
-            instance.fulfillmentMessages = instance.fulfillmentMessages || [];
-            instance.source = instance.source || '';
-            instance.payload = instance.payload || undefined;
-            instance.outputContexts = instance.outputContexts || [];
-            instance.followupEventInput = instance.followupEventInput || undefined;
-        };
-        WebhookResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.fulfillmentText = reader.readString();
-                        break;
-                    case 2:
-                        var messageInitializer2 = new exports.Intent.Message();
-                        reader.readMessage(messageInitializer2, exports.Intent.Message.fromBinaryReader);
-                        (instance.fulfillmentMessages =
-                            instance.fulfillmentMessages || []).push(messageInitializer2);
-                        break;
-                    case 3:
-                        instance.source = reader.readString();
-                        break;
-                    case 4:
-                        instance.payload = new exports.Struct();
-                        reader.readMessage(instance.payload, exports.Struct.fromBinaryReader);
-                        break;
-                    case 5:
-                        var messageInitializer5 = new Context();
-                        reader.readMessage(messageInitializer5, Context.fromBinaryReader);
-                        (instance.outputContexts = instance.outputContexts || []).push(messageInitializer5);
-                        break;
-                    case 6:
-                        instance.followupEventInput = new EventInput();
-                        reader.readMessage(instance.followupEventInput, EventInput.fromBinaryReader);
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            WebhookResponse.refineValues(instance);
-        };
-        WebhookResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.fulfillmentText) {
-                writer.writeString(1, instance.fulfillmentText);
-            }
-            if (instance.fulfillmentMessages && instance.fulfillmentMessages.length) {
-                writer.writeRepeatedMessage(2, instance.fulfillmentMessages, exports.Intent.Message.toBinaryWriter);
-            }
-            if (instance.source) {
-                writer.writeString(3, instance.source);
-            }
-            if (instance.payload) {
-                writer.writeMessage(4, instance.payload, exports.Struct.toBinaryWriter);
-            }
-            if (instance.outputContexts && instance.outputContexts.length) {
-                writer.writeRepeatedMessage(5, instance.outputContexts, Context.toBinaryWriter);
-            }
-            if (instance.followupEventInput) {
-                writer.writeMessage(6, instance.followupEventInput, EventInput.toBinaryWriter);
-            }
-        };
-        Object.defineProperty(WebhookResponse.prototype, "fulfillmentText", {
-            get: function () {
-                return this._fulfillmentText;
-            },
-            set: function (value) {
-                this._fulfillmentText = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WebhookResponse.prototype, "fulfillmentMessages", {
-            get: function () {
-                return this._fulfillmentMessages;
-            },
-            set: function (value) {
-                this._fulfillmentMessages = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WebhookResponse.prototype, "source", {
-            get: function () {
-                return this._source;
-            },
-            set: function (value) {
-                this._source = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WebhookResponse.prototype, "payload", {
-            get: function () {
-                return this._payload;
-            },
-            set: function (value) {
-                this._payload = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WebhookResponse.prototype, "outputContexts", {
-            get: function () {
-                return this._outputContexts;
-            },
-            set: function (value) {
-                this._outputContexts = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WebhookResponse.prototype, "followupEventInput", {
-            get: function () {
-                return this._followupEventInput;
-            },
-            set: function (value) {
-                this._followupEventInput = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        WebhookResponse.prototype.toObject = function () {
-            return {
-                fulfillmentText: this.fulfillmentText,
-                fulfillmentMessages: (this.fulfillmentMessages || []).map(function (m) { return m.toObject(); }),
-                source: this.source,
-                payload: this.payload ? this.payload.toObject() : undefined,
-                outputContexts: (this.outputContexts || []).map(function (m) { return m.toObject(); }),
-                followupEventInput: this.followupEventInput
-                    ? this.followupEventInput.toObject()
-                    : undefined
-            };
-        };
-        WebhookResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return WebhookResponse;
-    }());
-    var OriginalDetectIntentRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param OriginalDetectIntentRequest value
-         */
-        function OriginalDetectIntentRequest(value) {
-            value = value || {};
-            this.source = value.source;
-            this.payload = value.payload
-                ? new exports.Struct(value.payload)
-                : undefined;
-            OriginalDetectIntentRequest.refineValues(this);
-        }
-        OriginalDetectIntentRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            OriginalDetectIntentRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        OriginalDetectIntentRequest.fromBinary = function (bytes) {
-            var instance = new OriginalDetectIntentRequest();
-            OriginalDetectIntentRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        OriginalDetectIntentRequest.refineValues = function (instance) {
-            instance.source = instance.source || '';
-            instance.payload = instance.payload || undefined;
-        };
-        OriginalDetectIntentRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.source = reader.readString();
-                        break;
-                    case 3:
-                        instance.payload = new exports.Struct();
-                        reader.readMessage(instance.payload, exports.Struct.fromBinaryReader);
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            OriginalDetectIntentRequest.refineValues(instance);
-        };
-        OriginalDetectIntentRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.source) {
-                writer.writeString(1, instance.source);
-            }
-            if (instance.payload) {
-                writer.writeMessage(3, instance.payload, exports.Struct.toBinaryWriter);
-            }
-        };
-        Object.defineProperty(OriginalDetectIntentRequest.prototype, "source", {
-            get: function () {
-                return this._source;
-            },
-            set: function (value) {
-                this._source = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OriginalDetectIntentRequest.prototype, "payload", {
-            get: function () {
-                return this._payload;
-            },
-            set: function (value) {
-                this._payload = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        OriginalDetectIntentRequest.prototype.toObject = function () {
-            return {
-                source: this.source,
-                payload: this.payload ? this.payload.toObject() : undefined
-            };
-        };
-        OriginalDetectIntentRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return OriginalDetectIntentRequest;
-    }());
-    var PingResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param PingResponse value
-         */
-        function PingResponse(value) {
-            value = value || {};
-            this.isReachable = value.isReachable;
-            PingResponse.refineValues(this);
-        }
-        PingResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            PingResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        PingResponse.fromBinary = function (bytes) {
-            var instance = new PingResponse();
-            PingResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        PingResponse.refineValues = function (instance) {
-            instance.isReachable = instance.isReachable || false;
-        };
-        PingResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isReachable = reader.readBool();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            PingResponse.refineValues(instance);
-        };
-        PingResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.isReachable) {
-                writer.writeBool(1, instance.isReachable);
-            }
-        };
-        Object.defineProperty(PingResponse.prototype, "isReachable", {
-            get: function () {
-                return this._isReachable;
-            },
-            set: function (value) {
-                this._isReachable = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        PingResponse.prototype.toObject = function () {
-            return {
-                isReachable: this.isReachable
-            };
-        };
-        PingResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return PingResponse;
-    }());
-
-    /* tslint:disable */
-    var WebhookClient = /** @class */ (function () {
-        function WebhookClient(settings, clientFactory, handler) {
+    var IntentsClient = /** @class */ (function () {
+        function IntentsClient(settings, clientFactory, handler) {
             this.handler = handler;
-            this.client = clientFactory.createClient('ondewo.nlu.Webhook', settings);
+            this.client = clientFactory.createClient('ondewo.nlu.Intents', settings);
         }
         /**
          * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.WebhookRequest request
+         * @param thisProto.ListIntentsRequest request
          * @param Metadata metadata
-         * @return Observable<thisProto.WebhookResponse>
+         * @return Observable<thisProto.ListIntentsResponse>
          */
-        WebhookClient.prototype.responseRefinement = function (requestData, requestMetadata) {
+        IntentsClient.prototype.listIntents = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.responseRefinement$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            return this.listIntents$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
          * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.WebhookRequest request
+         * @param thisProto.ListIntentsRequest request
          * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.WebhookResponse>>
+         * @return Observable<GrpcEvent<thisProto.ListIntentsResponse>>
          */
-        WebhookClient.prototype.responseRefinement$eventStream = function (requestData, requestMetadata) {
+        IntentsClient.prototype.listIntents$eventStream = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
             return this.handler.handle({
                 type: common.GrpcCallType.unary,
                 client: this.client,
-                path: '/ondewo.nlu.Webhook/ResponseRefinement',
+                path: '/ondewo.nlu.Intents/ListIntents',
                 requestData: requestData,
                 requestMetadata: requestMetadata,
-                requestClass: WebhookRequest,
-                responseClass: WebhookResponse
+                requestClass: ListIntentsRequest,
+                responseClass: ListIntentsResponse
             });
         };
         /**
          * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.WebhookRequest request
+         * @param thisProto.GetIntentRequest request
          * @param Metadata metadata
-         * @return Observable<thisProto.WebhookResponse>
+         * @return Observable<thisProto.Intent>
          */
-        WebhookClient.prototype.slotFilling = function (requestData, requestMetadata) {
+        IntentsClient.prototype.getIntent = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.slotFilling$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            return this.getIntent$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
          * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.WebhookRequest request
+         * @param thisProto.GetIntentRequest request
          * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.WebhookResponse>>
+         * @return Observable<GrpcEvent<thisProto.Intent>>
          */
-        WebhookClient.prototype.slotFilling$eventStream = function (requestData, requestMetadata) {
+        IntentsClient.prototype.getIntent$eventStream = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
             return this.handler.handle({
                 type: common.GrpcCallType.unary,
                 client: this.client,
-                path: '/ondewo.nlu.Webhook/SlotFilling',
+                path: '/ondewo.nlu.Intents/GetIntent',
                 requestData: requestData,
                 requestMetadata: requestMetadata,
-                requestClass: WebhookRequest,
-                responseClass: WebhookResponse
+                requestClass: GetIntentRequest,
+                responseClass: exports.Intent
             });
         };
         /**
          * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.PingRequest request
+         * @param thisProto.CreateIntentRequest request
          * @param Metadata metadata
-         * @return Observable<thisProto.PingResponse>
+         * @return Observable<thisProto.Intent>
          */
-        WebhookClient.prototype.ping = function (requestData, requestMetadata) {
+        IntentsClient.prototype.createIntent = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.ping$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            return this.createIntent$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
          * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.PingRequest request
+         * @param thisProto.CreateIntentRequest request
          * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.PingResponse>>
+         * @return Observable<GrpcEvent<thisProto.Intent>>
          */
-        WebhookClient.prototype.ping$eventStream = function (requestData, requestMetadata) {
+        IntentsClient.prototype.createIntent$eventStream = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
             return this.handler.handle({
                 type: common.GrpcCallType.unary,
                 client: this.client,
-                path: '/ondewo.nlu.Webhook/Ping',
+                path: '/ondewo.nlu.Intents/CreateIntent',
                 requestData: requestData,
                 requestMetadata: requestMetadata,
-                requestClass: PingRequest,
-                responseClass: PingResponse
+                requestClass: CreateIntentRequest,
+                responseClass: exports.Intent
             });
         };
-        return WebhookClient;
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.UpdateIntentRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.Intent>
+         */
+        IntentsClient.prototype.updateIntent = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.updateIntent$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.UpdateIntentRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.Intent>>
+         */
+        IntentsClient.prototype.updateIntent$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Intents/UpdateIntent',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: UpdateIntentRequest,
+                responseClass: exports.Intent
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.DeleteIntentRequest request
+         * @param Metadata metadata
+         * @return Observable<googleProtobuf004.Empty>
+         */
+        IntentsClient.prototype.deleteIntent = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.deleteIntent$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.DeleteIntentRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        IntentsClient.prototype.deleteIntent$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Intents/DeleteIntent',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: DeleteIntentRequest,
+                responseClass: Empty
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.BatchUpdateIntentsRequest request
+         * @param Metadata metadata
+         * @return Observable<googleLongrunning003.Operation>
+         */
+        IntentsClient.prototype.batchUpdateIntents = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.batchUpdateIntents$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.BatchUpdateIntentsRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<googleLongrunning003.Operation>>
+         */
+        IntentsClient.prototype.batchUpdateIntents$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Intents/BatchUpdateIntents',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: exports.BatchUpdateIntentsRequest,
+                responseClass: exports.Operation
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.BatchDeleteIntentsRequest request
+         * @param Metadata metadata
+         * @return Observable<googleLongrunning003.Operation>
+         */
+        IntentsClient.prototype.batchDeleteIntents = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.batchDeleteIntents$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.BatchDeleteIntentsRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<googleLongrunning003.Operation>>
+         */
+        IntentsClient.prototype.batchDeleteIntents$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Intents/BatchDeleteIntents',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: BatchDeleteIntentsRequest,
+                responseClass: exports.Operation
+            });
+        };
+        return IntentsClient;
     }());
-    WebhookClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function WebhookClient_Factory() { return new WebhookClient(i0.ɵɵinject(GRPC_WEBHOOK_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: WebhookClient, providedIn: "root" });
-    WebhookClient.decorators = [
+    IntentsClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function IntentsClient_Factory() { return new IntentsClient(i0.ɵɵinject(GRPC_INTENTS_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: IntentsClient, providedIn: "root" });
+    IntentsClient.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
                 },] }
     ];
-    WebhookClient.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_WEBHOOK_CLIENT_SETTINGS,] }] },
+    IntentsClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_INTENTS_CLIENT_SETTINGS,] }] },
         { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
         { type: i2.GrpcHandler }
     ]; };
-
-    var ExtractEntitiesRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param ExtractEntitiesRequest value
-         */
-        function ExtractEntitiesRequest(value) {
-            value = value || {};
-            this.parent = value.parent;
-            this.text = value.text;
-            this.languageCode = value.languageCode;
-            ExtractEntitiesRequest.refineValues(this);
-        }
-        ExtractEntitiesRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            ExtractEntitiesRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        ExtractEntitiesRequest.fromBinary = function (bytes) {
-            var instance = new ExtractEntitiesRequest();
-            ExtractEntitiesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        ExtractEntitiesRequest.refineValues = function (instance) {
-            instance.parent = instance.parent || '';
-            instance.text = instance.text || '';
-            instance.languageCode = instance.languageCode || '';
-        };
-        ExtractEntitiesRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.parent = reader.readString();
-                        break;
-                    case 2:
-                        instance.text = reader.readString();
-                        break;
-                    case 3:
-                        instance.languageCode = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            ExtractEntitiesRequest.refineValues(instance);
-        };
-        ExtractEntitiesRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.parent) {
-                writer.writeString(1, instance.parent);
-            }
-            if (instance.text) {
-                writer.writeString(2, instance.text);
-            }
-            if (instance.languageCode) {
-                writer.writeString(3, instance.languageCode);
-            }
-        };
-        Object.defineProperty(ExtractEntitiesRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(ExtractEntitiesRequest.prototype, "text", {
-            get: function () {
-                return this._text;
-            },
-            set: function (value) {
-                this._text = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(ExtractEntitiesRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        ExtractEntitiesRequest.prototype.toObject = function () {
-            return {
-                parent: this.parent,
-                text: this.text,
-                languageCode: this.languageCode
-            };
-        };
-        ExtractEntitiesRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return ExtractEntitiesRequest;
-    }());
-    var ExtractEntitiesResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param ExtractEntitiesResponse value
-         */
-        function ExtractEntitiesResponse(value) {
-            value = value || {};
-            this.entities = (value.entities || []).map(function (m) { return new exports.Intent.TrainingPhrase.Entity(m); });
-            this.text = value.text;
-            ExtractEntitiesResponse.refineValues(this);
-        }
-        ExtractEntitiesResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            ExtractEntitiesResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        ExtractEntitiesResponse.fromBinary = function (bytes) {
-            var instance = new ExtractEntitiesResponse();
-            ExtractEntitiesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        ExtractEntitiesResponse.refineValues = function (instance) {
-            instance.entities = instance.entities || [];
-            instance.text = instance.text || '';
-        };
-        ExtractEntitiesResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        var messageInitializer1 = new exports.Intent.TrainingPhrase.Entity();
-                        reader.readMessage(messageInitializer1, exports.Intent.TrainingPhrase.Entity.fromBinaryReader);
-                        (instance.entities = instance.entities || []).push(messageInitializer1);
-                        break;
-                    case 2:
-                        instance.text = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            ExtractEntitiesResponse.refineValues(instance);
-        };
-        ExtractEntitiesResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.entities && instance.entities.length) {
-                writer.writeRepeatedMessage(1, instance.entities, exports.Intent.TrainingPhrase.Entity.toBinaryWriter);
-            }
-            if (instance.text) {
-                writer.writeString(2, instance.text);
-            }
-        };
-        Object.defineProperty(ExtractEntitiesResponse.prototype, "entities", {
-            get: function () {
-                return this._entities;
-            },
-            set: function (value) {
-                this._entities = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(ExtractEntitiesResponse.prototype, "text", {
-            get: function () {
-                return this._text;
-            },
-            set: function (value) {
-                this._text = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        ExtractEntitiesResponse.prototype.toObject = function () {
-            return {
-                entities: (this.entities || []).map(function (m) { return m.toObject(); }),
-                text: this.text
-            };
-        };
-        ExtractEntitiesResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return ExtractEntitiesResponse;
-    }());
-    var GetAlternativeSentencesRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetAlternativeSentencesRequest value
-         */
-        function GetAlternativeSentencesRequest(value) {
-            value = value || {};
-            this.config = value.config
-                ? new DataEnrichmentConfig(value.config)
-                : undefined;
-            this.sentence = value.sentence;
-            this.languageCode = value.languageCode;
-            this.parent = value.parent;
-            this.protectedWords = (value.protectedWords || []).slice();
-            this.wordsToChange = (value.wordsToChange || []).slice();
-            GetAlternativeSentencesRequest.refineValues(this);
-        }
-        GetAlternativeSentencesRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetAlternativeSentencesRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetAlternativeSentencesRequest.fromBinary = function (bytes) {
-            var instance = new GetAlternativeSentencesRequest();
-            GetAlternativeSentencesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetAlternativeSentencesRequest.refineValues = function (instance) {
-            instance.config = instance.config || undefined;
-            instance.sentence = instance.sentence || '';
-            instance.languageCode = instance.languageCode || '';
-            instance.parent = instance.parent || '';
-            instance.protectedWords = instance.protectedWords || [];
-            instance.wordsToChange = instance.wordsToChange || [];
-        };
-        GetAlternativeSentencesRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.config = new DataEnrichmentConfig();
-                        reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 2:
-                        instance.sentence = reader.readString();
-                        break;
-                    case 4:
-                        instance.languageCode = reader.readString();
-                        break;
-                    case 5:
-                        instance.parent = reader.readString();
-                        break;
-                    case 6:
-                        (instance.protectedWords = instance.protectedWords || []).push(reader.readString());
-                        break;
-                    case 7:
-                        (instance.wordsToChange = instance.wordsToChange || []).push(reader.readString());
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetAlternativeSentencesRequest.refineValues(instance);
-        };
-        GetAlternativeSentencesRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.config) {
-                writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.sentence) {
-                writer.writeString(2, instance.sentence);
-            }
-            if (instance.languageCode) {
-                writer.writeString(4, instance.languageCode);
-            }
-            if (instance.parent) {
-                writer.writeString(5, instance.parent);
-            }
-            if (instance.protectedWords && instance.protectedWords.length) {
-                writer.writeRepeatedString(6, instance.protectedWords);
-            }
-            if (instance.wordsToChange && instance.wordsToChange.length) {
-                writer.writeRepeatedString(7, instance.wordsToChange);
-            }
-        };
-        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "config", {
-            get: function () {
-                return this._config;
-            },
-            set: function (value) {
-                this._config = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "sentence", {
-            get: function () {
-                return this._sentence;
-            },
-            set: function (value) {
-                this._sentence = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "protectedWords", {
-            get: function () {
-                return this._protectedWords;
-            },
-            set: function (value) {
-                this._protectedWords = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeSentencesRequest.prototype, "wordsToChange", {
-            get: function () {
-                return this._wordsToChange;
-            },
-            set: function (value) {
-                this._wordsToChange = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetAlternativeSentencesRequest.prototype.toObject = function () {
-            return {
-                config: this.config ? this.config.toObject() : undefined,
-                sentence: this.sentence,
-                languageCode: this.languageCode,
-                parent: this.parent,
-                protectedWords: (this.protectedWords || []).slice(),
-                wordsToChange: (this.wordsToChange || []).slice()
-            };
-        };
-        GetAlternativeSentencesRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetAlternativeSentencesRequest;
-    }());
-    var GenerateUserSaysRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GenerateUserSaysRequest value
-         */
-        function GenerateUserSaysRequest(value) {
-            value = value || {};
-            this.languageCode = value.languageCode;
-            this.parent = value.parent;
-            this.nRepeatSynonym = value.nRepeatSynonym;
-            this.branch = value.branch;
-            GenerateUserSaysRequest.refineValues(this);
-        }
-        GenerateUserSaysRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GenerateUserSaysRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GenerateUserSaysRequest.fromBinary = function (bytes) {
-            var instance = new GenerateUserSaysRequest();
-            GenerateUserSaysRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GenerateUserSaysRequest.refineValues = function (instance) {
-            instance.languageCode = instance.languageCode || '';
-            instance.parent = instance.parent || '';
-            instance.nRepeatSynonym = instance.nRepeatSynonym || 0;
-            instance.branch = instance.branch || '';
-        };
-        GenerateUserSaysRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 4:
-                        instance.languageCode = reader.readString();
-                        break;
-                    case 5:
-                        instance.parent = reader.readString();
-                        break;
-                    case 6:
-                        instance.nRepeatSynonym = reader.readInt32();
-                        break;
-                    case 8:
-                        instance.branch = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GenerateUserSaysRequest.refineValues(instance);
-        };
-        GenerateUserSaysRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.languageCode) {
-                writer.writeString(4, instance.languageCode);
-            }
-            if (instance.parent) {
-                writer.writeString(5, instance.parent);
-            }
-            if (instance.nRepeatSynonym) {
-                writer.writeInt32(6, instance.nRepeatSynonym);
-            }
-            if (instance.branch) {
-                writer.writeString(8, instance.branch);
-            }
-        };
-        Object.defineProperty(GenerateUserSaysRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GenerateUserSaysRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GenerateUserSaysRequest.prototype, "nRepeatSynonym", {
-            get: function () {
-                return this._nRepeatSynonym;
-            },
-            set: function (value) {
-                this._nRepeatSynonym = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GenerateUserSaysRequest.prototype, "branch", {
-            get: function () {
-                return this._branch;
-            },
-            set: function (value) {
-                this._branch = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GenerateUserSaysRequest.prototype.toObject = function () {
-            return {
-                languageCode: this.languageCode,
-                parent: this.parent,
-                nRepeatSynonym: this.nRepeatSynonym,
-                branch: this.branch
-            };
-        };
-        GenerateUserSaysRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GenerateUserSaysRequest;
-    }());
-    var GenerateResponsesRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GenerateResponsesRequest value
-         */
-        function GenerateResponsesRequest(value) {
-            value = value || {};
-            this.languageCode = value.languageCode;
-            this.parent = value.parent;
-            this.nRepeatSynonym = value.nRepeatSynonym;
-            this.branch = value.branch;
-            this.dropUnknownParameters = value.dropUnknownParameters;
-            GenerateResponsesRequest.refineValues(this);
-        }
-        GenerateResponsesRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GenerateResponsesRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GenerateResponsesRequest.fromBinary = function (bytes) {
-            var instance = new GenerateResponsesRequest();
-            GenerateResponsesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GenerateResponsesRequest.refineValues = function (instance) {
-            instance.languageCode = instance.languageCode || '';
-            instance.parent = instance.parent || '';
-            instance.nRepeatSynonym = instance.nRepeatSynonym || 0;
-            instance.branch = instance.branch || '';
-            instance.dropUnknownParameters = instance.dropUnknownParameters || false;
-        };
-        GenerateResponsesRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 4:
-                        instance.languageCode = reader.readString();
-                        break;
-                    case 5:
-                        instance.parent = reader.readString();
-                        break;
-                    case 7:
-                        instance.nRepeatSynonym = reader.readInt32();
-                        break;
-                    case 8:
-                        instance.branch = reader.readString();
-                        break;
-                    case 9:
-                        instance.dropUnknownParameters = reader.readBool();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GenerateResponsesRequest.refineValues(instance);
-        };
-        GenerateResponsesRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.languageCode) {
-                writer.writeString(4, instance.languageCode);
-            }
-            if (instance.parent) {
-                writer.writeString(5, instance.parent);
-            }
-            if (instance.nRepeatSynonym) {
-                writer.writeInt32(7, instance.nRepeatSynonym);
-            }
-            if (instance.branch) {
-                writer.writeString(8, instance.branch);
-            }
-            if (instance.dropUnknownParameters) {
-                writer.writeBool(9, instance.dropUnknownParameters);
-            }
-        };
-        Object.defineProperty(GenerateResponsesRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GenerateResponsesRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GenerateResponsesRequest.prototype, "nRepeatSynonym", {
-            get: function () {
-                return this._nRepeatSynonym;
-            },
-            set: function (value) {
-                this._nRepeatSynonym = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GenerateResponsesRequest.prototype, "branch", {
-            get: function () {
-                return this._branch;
-            },
-            set: function (value) {
-                this._branch = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GenerateResponsesRequest.prototype, "dropUnknownParameters", {
-            get: function () {
-                return this._dropUnknownParameters;
-            },
-            set: function (value) {
-                this._dropUnknownParameters = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GenerateResponsesRequest.prototype.toObject = function () {
-            return {
-                languageCode: this.languageCode,
-                parent: this.parent,
-                nRepeatSynonym: this.nRepeatSynonym,
-                branch: this.branch,
-                dropUnknownParameters: this.dropUnknownParameters
-            };
-        };
-        GenerateResponsesRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GenerateResponsesRequest;
-    }());
-    var GetAlternativeTrainingPhrasesRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetAlternativeTrainingPhrasesRequest value
-         */
-        function GetAlternativeTrainingPhrasesRequest(value) {
-            value = value || {};
-            this.config = value.config
-                ? new DataEnrichmentConfig(value.config)
-                : undefined;
-            this.trainingPhrase = value.trainingPhrase
-                ? new exports.Intent.TrainingPhrase(value.trainingPhrase)
-                : undefined;
-            this.intentName = value.intentName;
-            this.languageCode = value.languageCode;
-            this.parent = value.parent;
-            this.detectEntities = value.detectEntities;
-            this.similarityThreshold = value.similarityThreshold;
-            this.protectedWords = (value.protectedWords || []).slice();
-            this.wordsToChange = (value.wordsToChange || []).slice();
-            this.branch = value.branch;
-            GetAlternativeTrainingPhrasesRequest.refineValues(this);
-        }
-        GetAlternativeTrainingPhrasesRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetAlternativeTrainingPhrasesRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetAlternativeTrainingPhrasesRequest.fromBinary = function (bytes) {
-            var instance = new GetAlternativeTrainingPhrasesRequest();
-            GetAlternativeTrainingPhrasesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetAlternativeTrainingPhrasesRequest.refineValues = function (instance) {
-            instance.config = instance.config || undefined;
-            instance.trainingPhrase = instance.trainingPhrase || undefined;
-            instance.intentName = instance.intentName || '';
-            instance.languageCode = instance.languageCode || '';
-            instance.parent = instance.parent || '';
-            instance.detectEntities = instance.detectEntities || false;
-            instance.similarityThreshold = instance.similarityThreshold || 0;
-            instance.protectedWords = instance.protectedWords || [];
-            instance.wordsToChange = instance.wordsToChange || [];
-            instance.branch = instance.branch || '';
-        };
-        GetAlternativeTrainingPhrasesRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.config = new DataEnrichmentConfig();
-                        reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 2:
-                        instance.trainingPhrase = new exports.Intent.TrainingPhrase();
-                        reader.readMessage(instance.trainingPhrase, exports.Intent.TrainingPhrase.fromBinaryReader);
-                        break;
-                    case 3:
-                        instance.intentName = reader.readString();
-                        break;
-                    case 4:
-                        instance.languageCode = reader.readString();
-                        break;
-                    case 5:
-                        instance.parent = reader.readString();
-                        break;
-                    case 6:
-                        instance.detectEntities = reader.readBool();
-                        break;
-                    case 7:
-                        instance.similarityThreshold = reader.readFloat();
-                        break;
-                    case 8:
-                        (instance.protectedWords = instance.protectedWords || []).push(reader.readString());
-                        break;
-                    case 9:
-                        (instance.wordsToChange = instance.wordsToChange || []).push(reader.readString());
-                        break;
-                    case 10:
-                        instance.branch = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetAlternativeTrainingPhrasesRequest.refineValues(instance);
-        };
-        GetAlternativeTrainingPhrasesRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.config) {
-                writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.trainingPhrase) {
-                writer.writeMessage(2, instance.trainingPhrase, exports.Intent.TrainingPhrase.toBinaryWriter);
-            }
-            if (instance.intentName) {
-                writer.writeString(3, instance.intentName);
-            }
-            if (instance.languageCode) {
-                writer.writeString(4, instance.languageCode);
-            }
-            if (instance.parent) {
-                writer.writeString(5, instance.parent);
-            }
-            if (instance.detectEntities) {
-                writer.writeBool(6, instance.detectEntities);
-            }
-            if (instance.similarityThreshold) {
-                writer.writeFloat(7, instance.similarityThreshold);
-            }
-            if (instance.protectedWords && instance.protectedWords.length) {
-                writer.writeRepeatedString(8, instance.protectedWords);
-            }
-            if (instance.wordsToChange && instance.wordsToChange.length) {
-                writer.writeRepeatedString(9, instance.wordsToChange);
-            }
-            if (instance.branch) {
-                writer.writeString(10, instance.branch);
-            }
-        };
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "config", {
-            get: function () {
-                return this._config;
-            },
-            set: function (value) {
-                this._config = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "trainingPhrase", {
-            get: function () {
-                return this._trainingPhrase;
-            },
-            set: function (value) {
-                this._trainingPhrase = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "intentName", {
-            get: function () {
-                return this._intentName;
-            },
-            set: function (value) {
-                this._intentName = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "detectEntities", {
-            get: function () {
-                return this._detectEntities;
-            },
-            set: function (value) {
-                this._detectEntities = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "similarityThreshold", {
-            get: function () {
-                return this._similarityThreshold;
-            },
-            set: function (value) {
-                this._similarityThreshold = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "protectedWords", {
-            get: function () {
-                return this._protectedWords;
-            },
-            set: function (value) {
-                this._protectedWords = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "wordsToChange", {
-            get: function () {
-                return this._wordsToChange;
-            },
-            set: function (value) {
-                this._wordsToChange = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetAlternativeTrainingPhrasesRequest.prototype, "branch", {
-            get: function () {
-                return this._branch;
-            },
-            set: function (value) {
-                this._branch = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetAlternativeTrainingPhrasesRequest.prototype.toObject = function () {
-            return {
-                config: this.config ? this.config.toObject() : undefined,
-                trainingPhrase: this.trainingPhrase
-                    ? this.trainingPhrase.toObject()
-                    : undefined,
-                intentName: this.intentName,
-                languageCode: this.languageCode,
-                parent: this.parent,
-                detectEntities: this.detectEntities,
-                similarityThreshold: this.similarityThreshold,
-                protectedWords: (this.protectedWords || []).slice(),
-                wordsToChange: (this.wordsToChange || []).slice(),
-                branch: this.branch
-            };
-        };
-        GetAlternativeTrainingPhrasesRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetAlternativeTrainingPhrasesRequest;
-    }());
-    var GetSynonymsRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetSynonymsRequest value
-         */
-        function GetSynonymsRequest(value) {
-            value = value || {};
-            this.config = value.config
-                ? new DataEnrichmentConfig(value.config)
-                : undefined;
-            this.word = value.word;
-            this.languageCode = value.languageCode;
-            this.parent = value.parent;
-            GetSynonymsRequest.refineValues(this);
-        }
-        GetSynonymsRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetSynonymsRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetSynonymsRequest.fromBinary = function (bytes) {
-            var instance = new GetSynonymsRequest();
-            GetSynonymsRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetSynonymsRequest.refineValues = function (instance) {
-            instance.config = instance.config || undefined;
-            instance.word = instance.word || '';
-            instance.languageCode = instance.languageCode || '';
-            instance.parent = instance.parent || '';
-        };
-        GetSynonymsRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.config = new DataEnrichmentConfig();
-                        reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 2:
-                        instance.word = reader.readString();
-                        break;
-                    case 4:
-                        instance.languageCode = reader.readString();
-                        break;
-                    case 5:
-                        instance.parent = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetSynonymsRequest.refineValues(instance);
-        };
-        GetSynonymsRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.config) {
-                writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.word) {
-                writer.writeString(2, instance.word);
-            }
-            if (instance.languageCode) {
-                writer.writeString(4, instance.languageCode);
-            }
-            if (instance.parent) {
-                writer.writeString(5, instance.parent);
-            }
-        };
-        Object.defineProperty(GetSynonymsRequest.prototype, "config", {
-            get: function () {
-                return this._config;
-            },
-            set: function (value) {
-                this._config = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetSynonymsRequest.prototype, "word", {
-            get: function () {
-                return this._word;
-            },
-            set: function (value) {
-                this._word = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetSynonymsRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetSynonymsRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetSynonymsRequest.prototype.toObject = function () {
-            return {
-                config: this.config ? this.config.toObject() : undefined,
-                word: this.word,
-                languageCode: this.languageCode,
-                parent: this.parent
-            };
-        };
-        GetSynonymsRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetSynonymsRequest;
-    }());
-    var GetSynonymsResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetSynonymsResponse value
-         */
-        function GetSynonymsResponse(value) {
-            value = value || {};
-            this.synonyms = (value.synonyms || []).map(function (m) { return new Synonym(m); });
-            GetSynonymsResponse.refineValues(this);
-        }
-        GetSynonymsResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetSynonymsResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetSynonymsResponse.fromBinary = function (bytes) {
-            var instance = new GetSynonymsResponse();
-            GetSynonymsResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetSynonymsResponse.refineValues = function (instance) {
-            instance.synonyms = instance.synonyms || [];
-        };
-        GetSynonymsResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        var messageInitializer1 = new Synonym();
-                        reader.readMessage(messageInitializer1, Synonym.fromBinaryReader);
-                        (instance.synonyms = instance.synonyms || []).push(messageInitializer1);
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetSynonymsResponse.refineValues(instance);
-        };
-        GetSynonymsResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.synonyms && instance.synonyms.length) {
-                writer.writeRepeatedMessage(1, instance.synonyms, Synonym.toBinaryWriter);
-            }
-        };
-        Object.defineProperty(GetSynonymsResponse.prototype, "synonyms", {
-            get: function () {
-                return this._synonyms;
-            },
-            set: function (value) {
-                this._synonyms = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetSynonymsResponse.prototype.toObject = function () {
-            return {
-                synonyms: (this.synonyms || []).map(function (m) { return m.toObject(); })
-            };
-        };
-        GetSynonymsResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetSynonymsResponse;
-    }());
-    var Synonym = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param Synonym value
-         */
-        function Synonym(value) {
-            value = value || {};
-            this.synonym = value.synonym;
-            this.score = value.score;
-            Synonym.refineValues(this);
-        }
-        Synonym.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Synonym.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Synonym.fromBinary = function (bytes) {
-            var instance = new Synonym();
-            Synonym.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        Synonym.refineValues = function (instance) {
-            instance.synonym = instance.synonym || '';
-            instance.score = instance.score || 0;
-        };
-        Synonym.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.synonym = reader.readString();
-                        break;
-                    case 2:
-                        instance.score = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            Synonym.refineValues(instance);
-        };
-        Synonym.toBinaryWriter = function (instance, writer) {
-            if (instance.synonym) {
-                writer.writeString(1, instance.synonym);
-            }
-            if (instance.score) {
-                writer.writeInt32(2, instance.score);
-            }
-        };
-        Object.defineProperty(Synonym.prototype, "synonym", {
-            get: function () {
-                return this._synonym;
-            },
-            set: function (value) {
-                this._synonym = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Synonym.prototype, "score", {
-            get: function () {
-                return this._score;
-            },
-            set: function (value) {
-                this._score = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Synonym.prototype.toObject = function () {
-            return {
-                synonym: this.synonym,
-                score: this.score
-            };
-        };
-        Synonym.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return Synonym;
-    }());
-    var GetAlternativeSentencesResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetAlternativeSentencesResponse value
-         */
-        function GetAlternativeSentencesResponse(value) {
-            value = value || {};
-            this.alternativeSentences = (value.alternativeSentences || []).map(function (m) { return new AltSentence(m); });
-            GetAlternativeSentencesResponse.refineValues(this);
-        }
-        GetAlternativeSentencesResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetAlternativeSentencesResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetAlternativeSentencesResponse.fromBinary = function (bytes) {
-            var instance = new GetAlternativeSentencesResponse();
-            GetAlternativeSentencesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetAlternativeSentencesResponse.refineValues = function (instance) {
-            instance.alternativeSentences = instance.alternativeSentences || [];
-        };
-        GetAlternativeSentencesResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        var messageInitializer1 = new AltSentence();
-                        reader.readMessage(messageInitializer1, AltSentence.fromBinaryReader);
-                        (instance.alternativeSentences =
-                            instance.alternativeSentences || []).push(messageInitializer1);
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetAlternativeSentencesResponse.refineValues(instance);
-        };
-        GetAlternativeSentencesResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.alternativeSentences && instance.alternativeSentences.length) {
-                writer.writeRepeatedMessage(1, instance.alternativeSentences, AltSentence.toBinaryWriter);
-            }
-        };
-        Object.defineProperty(GetAlternativeSentencesResponse.prototype, "alternativeSentences", {
-            get: function () {
-                return this._alternativeSentences;
-            },
-            set: function (value) {
-                this._alternativeSentences = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetAlternativeSentencesResponse.prototype.toObject = function () {
-            return {
-                alternativeSentences: (this.alternativeSentences || []).map(function (m) { return m.toObject(); })
-            };
-        };
-        GetAlternativeSentencesResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetAlternativeSentencesResponse;
-    }());
-    var GenerateResponsesResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GenerateResponsesResponse value
-         */
-        function GenerateResponsesResponse(value) {
-            value = value || {};
-            this.responses = (value.responses || []).slice();
-            GenerateResponsesResponse.refineValues(this);
-        }
-        GenerateResponsesResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GenerateResponsesResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GenerateResponsesResponse.fromBinary = function (bytes) {
-            var instance = new GenerateResponsesResponse();
-            GenerateResponsesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GenerateResponsesResponse.refineValues = function (instance) {
-            instance.responses = instance.responses || [];
-        };
-        GenerateResponsesResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 2:
-                        (instance.responses = instance.responses || []).push(reader.readString());
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GenerateResponsesResponse.refineValues(instance);
-        };
-        GenerateResponsesResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.responses && instance.responses.length) {
-                writer.writeRepeatedString(2, instance.responses);
-            }
-        };
-        Object.defineProperty(GenerateResponsesResponse.prototype, "responses", {
-            get: function () {
-                return this._responses;
-            },
-            set: function (value) {
-                this._responses = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GenerateResponsesResponse.prototype.toObject = function () {
-            return {
-                responses: (this.responses || []).slice()
-            };
-        };
-        GenerateResponsesResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GenerateResponsesResponse;
-    }());
-    var GenerateUserSaysResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GenerateUserSaysResponse value
-         */
-        function GenerateUserSaysResponse(value) {
-            value = value || {};
-            this.userSays = (value.userSays || []).slice();
-            GenerateUserSaysResponse.refineValues(this);
-        }
-        GenerateUserSaysResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GenerateUserSaysResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GenerateUserSaysResponse.fromBinary = function (bytes) {
-            var instance = new GenerateUserSaysResponse();
-            GenerateUserSaysResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GenerateUserSaysResponse.refineValues = function (instance) {
-            instance.userSays = instance.userSays || [];
-        };
-        GenerateUserSaysResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 2:
-                        (instance.userSays = instance.userSays || []).push(reader.readString());
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GenerateUserSaysResponse.refineValues(instance);
-        };
-        GenerateUserSaysResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.userSays && instance.userSays.length) {
-                writer.writeRepeatedString(2, instance.userSays);
-            }
-        };
-        Object.defineProperty(GenerateUserSaysResponse.prototype, "userSays", {
-            get: function () {
-                return this._userSays;
-            },
-            set: function (value) {
-                this._userSays = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GenerateUserSaysResponse.prototype.toObject = function () {
-            return {
-                userSays: (this.userSays || []).slice()
-            };
-        };
-        GenerateUserSaysResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GenerateUserSaysResponse;
-    }());
-    var GetAlternativeTrainingPhrasesResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetAlternativeTrainingPhrasesResponse value
-         */
-        function GetAlternativeTrainingPhrasesResponse(value) {
-            value = value || {};
-            this.alternativeTrainingPhrases = (value.alternativeTrainingPhrases || []).map(function (m) { return new AltTrainingPhrase(m); });
-            GetAlternativeTrainingPhrasesResponse.refineValues(this);
-        }
-        GetAlternativeTrainingPhrasesResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetAlternativeTrainingPhrasesResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetAlternativeTrainingPhrasesResponse.fromBinary = function (bytes) {
-            var instance = new GetAlternativeTrainingPhrasesResponse();
-            GetAlternativeTrainingPhrasesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetAlternativeTrainingPhrasesResponse.refineValues = function (instance) {
-            instance.alternativeTrainingPhrases =
-                instance.alternativeTrainingPhrases || [];
-        };
-        GetAlternativeTrainingPhrasesResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        var messageInitializer1 = new AltTrainingPhrase();
-                        reader.readMessage(messageInitializer1, AltTrainingPhrase.fromBinaryReader);
-                        (instance.alternativeTrainingPhrases =
-                            instance.alternativeTrainingPhrases || []).push(messageInitializer1);
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetAlternativeTrainingPhrasesResponse.refineValues(instance);
-        };
-        GetAlternativeTrainingPhrasesResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.alternativeTrainingPhrases &&
-                instance.alternativeTrainingPhrases.length) {
-                writer.writeRepeatedMessage(1, instance.alternativeTrainingPhrases, AltTrainingPhrase.toBinaryWriter);
-            }
-        };
-        Object.defineProperty(GetAlternativeTrainingPhrasesResponse.prototype, "alternativeTrainingPhrases", {
-            get: function () {
-                return this._alternativeTrainingPhrases;
-            },
-            set: function (value) {
-                this._alternativeTrainingPhrases = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetAlternativeTrainingPhrasesResponse.prototype.toObject = function () {
-            return {
-                alternativeTrainingPhrases: (this.alternativeTrainingPhrases || []).map(function (m) { return m.toObject(); })
-            };
-        };
-        GetAlternativeTrainingPhrasesResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetAlternativeTrainingPhrasesResponse;
-    }());
-    var AltSentence = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param AltSentence value
-         */
-        function AltSentence(value) {
-            value = value || {};
-            this.sentence = value.sentence;
-            this.score = value.score;
-            AltSentence.refineValues(this);
-        }
-        AltSentence.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            AltSentence.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        AltSentence.fromBinary = function (bytes) {
-            var instance = new AltSentence();
-            AltSentence.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        AltSentence.refineValues = function (instance) {
-            instance.sentence = instance.sentence || '';
-            instance.score = instance.score || 0;
-        };
-        AltSentence.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.sentence = reader.readString();
-                        break;
-                    case 2:
-                        instance.score = reader.readFloat();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            AltSentence.refineValues(instance);
-        };
-        AltSentence.toBinaryWriter = function (instance, writer) {
-            if (instance.sentence) {
-                writer.writeString(1, instance.sentence);
-            }
-            if (instance.score) {
-                writer.writeFloat(2, instance.score);
-            }
-        };
-        Object.defineProperty(AltSentence.prototype, "sentence", {
-            get: function () {
-                return this._sentence;
-            },
-            set: function (value) {
-                this._sentence = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(AltSentence.prototype, "score", {
-            get: function () {
-                return this._score;
-            },
-            set: function (value) {
-                this._score = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        AltSentence.prototype.toObject = function () {
-            return {
-                sentence: this.sentence,
-                score: this.score
-            };
-        };
-        AltSentence.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return AltSentence;
-    }());
-    var AltTrainingPhrase = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param AltTrainingPhrase value
-         */
-        function AltTrainingPhrase(value) {
-            value = value || {};
-            this.trainingPhrase = value.trainingPhrase
-                ? new exports.Intent.TrainingPhrase(value.trainingPhrase)
-                : undefined;
-            this.score = value.score;
-            AltTrainingPhrase.refineValues(this);
-        }
-        AltTrainingPhrase.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            AltTrainingPhrase.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        AltTrainingPhrase.fromBinary = function (bytes) {
-            var instance = new AltTrainingPhrase();
-            AltTrainingPhrase.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        AltTrainingPhrase.refineValues = function (instance) {
-            instance.trainingPhrase = instance.trainingPhrase || undefined;
-            instance.score = instance.score || 0;
-        };
-        AltTrainingPhrase.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.trainingPhrase = new exports.Intent.TrainingPhrase();
-                        reader.readMessage(instance.trainingPhrase, exports.Intent.TrainingPhrase.fromBinaryReader);
-                        break;
-                    case 2:
-                        instance.score = reader.readFloat();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            AltTrainingPhrase.refineValues(instance);
-        };
-        AltTrainingPhrase.toBinaryWriter = function (instance, writer) {
-            if (instance.trainingPhrase) {
-                writer.writeMessage(1, instance.trainingPhrase, exports.Intent.TrainingPhrase.toBinaryWriter);
-            }
-            if (instance.score) {
-                writer.writeFloat(2, instance.score);
-            }
-        };
-        Object.defineProperty(AltTrainingPhrase.prototype, "trainingPhrase", {
-            get: function () {
-                return this._trainingPhrase;
-            },
-            set: function (value) {
-                this._trainingPhrase = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(AltTrainingPhrase.prototype, "score", {
-            get: function () {
-                return this._score;
-            },
-            set: function (value) {
-                this._score = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        AltTrainingPhrase.prototype.toObject = function () {
-            return {
-                trainingPhrase: this.trainingPhrase
-                    ? this.trainingPhrase.toObject()
-                    : undefined,
-                score: this.score
-            };
-        };
-        AltTrainingPhrase.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return AltTrainingPhrase;
-    }());
-    var DataEnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param DataEnrichmentConfig value
-         */
-        function DataEnrichmentConfig(value) {
-            value = value || {};
-            this.entityEnrichment = value.entityEnrichment
-                ? new EntityEnrichmentConfig(value.entityEnrichment)
-                : undefined;
-            this.thesaurusEnrichment = value.thesaurusEnrichment
-                ? new ThesaurusEnrichmentConfig(value.thesaurusEnrichment)
-                : undefined;
-            this.word2vecEnrichment = value.word2vecEnrichment
-                ? new Word2VecEnrichmentConfig(value.word2vecEnrichment)
-                : undefined;
-            this.wordNetEnrichment = value.wordNetEnrichment
-                ? new WordNetAugEnrichmentConfig(value.wordNetEnrichment)
-                : undefined;
-            this.gpt2Enrichment = value.gpt2Enrichment
-                ? new GPT2EnrichmentConfig(value.gpt2Enrichment)
-                : undefined;
-            this.gloveEnrichment = value.gloveEnrichment
-                ? new GloVeEnrichmentConfig(value.gloveEnrichment)
-                : undefined;
-            this.fasttextEnrichment = value.fasttextEnrichment
-                ? new FastTextEnrichmentConfig(value.fasttextEnrichment)
-                : undefined;
-            this.bertEnrichment = value.bertEnrichment
-                ? new BertAugEnrichmentConfig(value.bertEnrichment)
-                : undefined;
-            this.xlnetEnrichment = value.xlnetEnrichment
-                ? new XLNetAugEnrichmentConfig(value.xlnetEnrichment)
-                : undefined;
-            DataEnrichmentConfig.refineValues(this);
-        }
-        DataEnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            DataEnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        DataEnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new DataEnrichmentConfig();
-            DataEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        DataEnrichmentConfig.refineValues = function (instance) {
-            instance.entityEnrichment = instance.entityEnrichment || undefined;
-            instance.thesaurusEnrichment = instance.thesaurusEnrichment || undefined;
-            instance.word2vecEnrichment = instance.word2vecEnrichment || undefined;
-            instance.wordNetEnrichment = instance.wordNetEnrichment || undefined;
-            instance.gpt2Enrichment = instance.gpt2Enrichment || undefined;
-            instance.gloveEnrichment = instance.gloveEnrichment || undefined;
-            instance.fasttextEnrichment = instance.fasttextEnrichment || undefined;
-            instance.bertEnrichment = instance.bertEnrichment || undefined;
-            instance.xlnetEnrichment = instance.xlnetEnrichment || undefined;
-        };
-        DataEnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.entityEnrichment = new EntityEnrichmentConfig();
-                        reader.readMessage(instance.entityEnrichment, EntityEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 2:
-                        instance.thesaurusEnrichment = new ThesaurusEnrichmentConfig();
-                        reader.readMessage(instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 3:
-                        instance.word2vecEnrichment = new Word2VecEnrichmentConfig();
-                        reader.readMessage(instance.word2vecEnrichment, Word2VecEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 4:
-                        instance.wordNetEnrichment = new WordNetAugEnrichmentConfig();
-                        reader.readMessage(instance.wordNetEnrichment, WordNetAugEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 5:
-                        instance.gpt2Enrichment = new GPT2EnrichmentConfig();
-                        reader.readMessage(instance.gpt2Enrichment, GPT2EnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 6:
-                        instance.gloveEnrichment = new GloVeEnrichmentConfig();
-                        reader.readMessage(instance.gloveEnrichment, GloVeEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 7:
-                        instance.fasttextEnrichment = new FastTextEnrichmentConfig();
-                        reader.readMessage(instance.fasttextEnrichment, FastTextEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 8:
-                        instance.bertEnrichment = new BertAugEnrichmentConfig();
-                        reader.readMessage(instance.bertEnrichment, BertAugEnrichmentConfig.fromBinaryReader);
-                        break;
-                    case 9:
-                        instance.xlnetEnrichment = new XLNetAugEnrichmentConfig();
-                        reader.readMessage(instance.xlnetEnrichment, XLNetAugEnrichmentConfig.fromBinaryReader);
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            DataEnrichmentConfig.refineValues(instance);
-        };
-        DataEnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.entityEnrichment) {
-                writer.writeMessage(1, instance.entityEnrichment, EntityEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.thesaurusEnrichment) {
-                writer.writeMessage(2, instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.word2vecEnrichment) {
-                writer.writeMessage(3, instance.word2vecEnrichment, Word2VecEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.wordNetEnrichment) {
-                writer.writeMessage(4, instance.wordNetEnrichment, WordNetAugEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.gpt2Enrichment) {
-                writer.writeMessage(5, instance.gpt2Enrichment, GPT2EnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.gloveEnrichment) {
-                writer.writeMessage(6, instance.gloveEnrichment, GloVeEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.fasttextEnrichment) {
-                writer.writeMessage(7, instance.fasttextEnrichment, FastTextEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.bertEnrichment) {
-                writer.writeMessage(8, instance.bertEnrichment, BertAugEnrichmentConfig.toBinaryWriter);
-            }
-            if (instance.xlnetEnrichment) {
-                writer.writeMessage(9, instance.xlnetEnrichment, XLNetAugEnrichmentConfig.toBinaryWriter);
-            }
-        };
-        Object.defineProperty(DataEnrichmentConfig.prototype, "entityEnrichment", {
-            get: function () {
-                return this._entityEnrichment;
-            },
-            set: function (value) {
-                this._entityEnrichment = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DataEnrichmentConfig.prototype, "thesaurusEnrichment", {
-            get: function () {
-                return this._thesaurusEnrichment;
-            },
-            set: function (value) {
-                this._thesaurusEnrichment = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DataEnrichmentConfig.prototype, "word2vecEnrichment", {
-            get: function () {
-                return this._word2vecEnrichment;
-            },
-            set: function (value) {
-                this._word2vecEnrichment = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DataEnrichmentConfig.prototype, "wordNetEnrichment", {
-            get: function () {
-                return this._wordNetEnrichment;
-            },
-            set: function (value) {
-                this._wordNetEnrichment = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DataEnrichmentConfig.prototype, "gpt2Enrichment", {
-            get: function () {
-                return this._gpt2Enrichment;
-            },
-            set: function (value) {
-                this._gpt2Enrichment = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DataEnrichmentConfig.prototype, "gloveEnrichment", {
-            get: function () {
-                return this._gloveEnrichment;
-            },
-            set: function (value) {
-                this._gloveEnrichment = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DataEnrichmentConfig.prototype, "fasttextEnrichment", {
-            get: function () {
-                return this._fasttextEnrichment;
-            },
-            set: function (value) {
-                this._fasttextEnrichment = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DataEnrichmentConfig.prototype, "bertEnrichment", {
-            get: function () {
-                return this._bertEnrichment;
-            },
-            set: function (value) {
-                this._bertEnrichment = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DataEnrichmentConfig.prototype, "xlnetEnrichment", {
-            get: function () {
-                return this._xlnetEnrichment;
-            },
-            set: function (value) {
-                this._xlnetEnrichment = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        DataEnrichmentConfig.prototype.toObject = function () {
-            return {
-                entityEnrichment: this.entityEnrichment
-                    ? this.entityEnrichment.toObject()
-                    : undefined,
-                thesaurusEnrichment: this.thesaurusEnrichment
-                    ? this.thesaurusEnrichment.toObject()
-                    : undefined,
-                word2vecEnrichment: this.word2vecEnrichment
-                    ? this.word2vecEnrichment.toObject()
-                    : undefined,
-                wordNetEnrichment: this.wordNetEnrichment
-                    ? this.wordNetEnrichment.toObject()
-                    : undefined,
-                gpt2Enrichment: this.gpt2Enrichment
-                    ? this.gpt2Enrichment.toObject()
-                    : undefined,
-                gloveEnrichment: this.gloveEnrichment
-                    ? this.gloveEnrichment.toObject()
-                    : undefined,
-                fasttextEnrichment: this.fasttextEnrichment
-                    ? this.fasttextEnrichment.toObject()
-                    : undefined,
-                bertEnrichment: this.bertEnrichment
-                    ? this.bertEnrichment.toObject()
-                    : undefined,
-                xlnetEnrichment: this.xlnetEnrichment
-                    ? this.xlnetEnrichment.toObject()
-                    : undefined
-            };
-        };
-        DataEnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return DataEnrichmentConfig;
-    }());
-    var EntityEnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param EntityEnrichmentConfig value
-         */
-        function EntityEnrichmentConfig(value) {
-            value = value || {};
-            this.isActive = value.isActive;
-            this.enrichmentFactor = value.enrichmentFactor;
-            this.executionOrder = value.executionOrder;
-            EntityEnrichmentConfig.refineValues(this);
-        }
-        EntityEnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            EntityEnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        EntityEnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new EntityEnrichmentConfig();
-            EntityEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        EntityEnrichmentConfig.refineValues = function (instance) {
-            instance.isActive = instance.isActive || false;
-            instance.enrichmentFactor = instance.enrichmentFactor || 0;
-            instance.executionOrder = instance.executionOrder || 0;
-        };
-        EntityEnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isActive = reader.readBool();
-                        break;
-                    case 2:
-                        instance.enrichmentFactor = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.executionOrder = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            EntityEnrichmentConfig.refineValues(instance);
-        };
-        EntityEnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.isActive) {
-                writer.writeBool(1, instance.isActive);
-            }
-            if (instance.enrichmentFactor) {
-                writer.writeInt32(2, instance.enrichmentFactor);
-            }
-            if (instance.executionOrder) {
-                writer.writeInt32(3, instance.executionOrder);
-            }
-        };
-        Object.defineProperty(EntityEnrichmentConfig.prototype, "isActive", {
-            get: function () {
-                return this._isActive;
-            },
-            set: function (value) {
-                this._isActive = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(EntityEnrichmentConfig.prototype, "enrichmentFactor", {
-            get: function () {
-                return this._enrichmentFactor;
-            },
-            set: function (value) {
-                this._enrichmentFactor = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(EntityEnrichmentConfig.prototype, "executionOrder", {
-            get: function () {
-                return this._executionOrder;
-            },
-            set: function (value) {
-                this._executionOrder = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        EntityEnrichmentConfig.prototype.toObject = function () {
-            return {
-                isActive: this.isActive,
-                enrichmentFactor: this.enrichmentFactor,
-                executionOrder: this.executionOrder
-            };
-        };
-        EntityEnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return EntityEnrichmentConfig;
-    }());
-    var ThesaurusEnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param ThesaurusEnrichmentConfig value
-         */
-        function ThesaurusEnrichmentConfig(value) {
-            value = value || {};
-            this.isActive = value.isActive;
-            this.enrichmentFactor = value.enrichmentFactor;
-            this.executionOrder = value.executionOrder;
-            ThesaurusEnrichmentConfig.refineValues(this);
-        }
-        ThesaurusEnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            ThesaurusEnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        ThesaurusEnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new ThesaurusEnrichmentConfig();
-            ThesaurusEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        ThesaurusEnrichmentConfig.refineValues = function (instance) {
-            instance.isActive = instance.isActive || false;
-            instance.enrichmentFactor = instance.enrichmentFactor || 0;
-            instance.executionOrder = instance.executionOrder || 0;
-        };
-        ThesaurusEnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isActive = reader.readBool();
-                        break;
-                    case 2:
-                        instance.enrichmentFactor = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.executionOrder = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            ThesaurusEnrichmentConfig.refineValues(instance);
-        };
-        ThesaurusEnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.isActive) {
-                writer.writeBool(1, instance.isActive);
-            }
-            if (instance.enrichmentFactor) {
-                writer.writeInt32(2, instance.enrichmentFactor);
-            }
-            if (instance.executionOrder) {
-                writer.writeInt32(3, instance.executionOrder);
-            }
-        };
-        Object.defineProperty(ThesaurusEnrichmentConfig.prototype, "isActive", {
-            get: function () {
-                return this._isActive;
-            },
-            set: function (value) {
-                this._isActive = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(ThesaurusEnrichmentConfig.prototype, "enrichmentFactor", {
-            get: function () {
-                return this._enrichmentFactor;
-            },
-            set: function (value) {
-                this._enrichmentFactor = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(ThesaurusEnrichmentConfig.prototype, "executionOrder", {
-            get: function () {
-                return this._executionOrder;
-            },
-            set: function (value) {
-                this._executionOrder = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        ThesaurusEnrichmentConfig.prototype.toObject = function () {
-            return {
-                isActive: this.isActive,
-                enrichmentFactor: this.enrichmentFactor,
-                executionOrder: this.executionOrder
-            };
-        };
-        ThesaurusEnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return ThesaurusEnrichmentConfig;
-    }());
-    var FastTextEnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param FastTextEnrichmentConfig value
-         */
-        function FastTextEnrichmentConfig(value) {
-            value = value || {};
-            this.isActive = value.isActive;
-            this.enrichmentFactor = value.enrichmentFactor;
-            this.executionOrder = value.executionOrder;
-            FastTextEnrichmentConfig.refineValues(this);
-        }
-        FastTextEnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            FastTextEnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        FastTextEnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new FastTextEnrichmentConfig();
-            FastTextEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        FastTextEnrichmentConfig.refineValues = function (instance) {
-            instance.isActive = instance.isActive || false;
-            instance.enrichmentFactor = instance.enrichmentFactor || 0;
-            instance.executionOrder = instance.executionOrder || 0;
-        };
-        FastTextEnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isActive = reader.readBool();
-                        break;
-                    case 2:
-                        instance.enrichmentFactor = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.executionOrder = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            FastTextEnrichmentConfig.refineValues(instance);
-        };
-        FastTextEnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.isActive) {
-                writer.writeBool(1, instance.isActive);
-            }
-            if (instance.enrichmentFactor) {
-                writer.writeInt32(2, instance.enrichmentFactor);
-            }
-            if (instance.executionOrder) {
-                writer.writeInt32(3, instance.executionOrder);
-            }
-        };
-        Object.defineProperty(FastTextEnrichmentConfig.prototype, "isActive", {
-            get: function () {
-                return this._isActive;
-            },
-            set: function (value) {
-                this._isActive = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(FastTextEnrichmentConfig.prototype, "enrichmentFactor", {
-            get: function () {
-                return this._enrichmentFactor;
-            },
-            set: function (value) {
-                this._enrichmentFactor = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(FastTextEnrichmentConfig.prototype, "executionOrder", {
-            get: function () {
-                return this._executionOrder;
-            },
-            set: function (value) {
-                this._executionOrder = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        FastTextEnrichmentConfig.prototype.toObject = function () {
-            return {
-                isActive: this.isActive,
-                enrichmentFactor: this.enrichmentFactor,
-                executionOrder: this.executionOrder
-            };
-        };
-        FastTextEnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return FastTextEnrichmentConfig;
-    }());
-    var BertAugEnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param BertAugEnrichmentConfig value
-         */
-        function BertAugEnrichmentConfig(value) {
-            value = value || {};
-            this.isActive = value.isActive;
-            this.enrichmentFactor = value.enrichmentFactor;
-            this.executionOrder = value.executionOrder;
-            BertAugEnrichmentConfig.refineValues(this);
-        }
-        BertAugEnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            BertAugEnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        BertAugEnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new BertAugEnrichmentConfig();
-            BertAugEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        BertAugEnrichmentConfig.refineValues = function (instance) {
-            instance.isActive = instance.isActive || false;
-            instance.enrichmentFactor = instance.enrichmentFactor || 0;
-            instance.executionOrder = instance.executionOrder || 0;
-        };
-        BertAugEnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isActive = reader.readBool();
-                        break;
-                    case 2:
-                        instance.enrichmentFactor = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.executionOrder = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            BertAugEnrichmentConfig.refineValues(instance);
-        };
-        BertAugEnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.isActive) {
-                writer.writeBool(1, instance.isActive);
-            }
-            if (instance.enrichmentFactor) {
-                writer.writeInt32(2, instance.enrichmentFactor);
-            }
-            if (instance.executionOrder) {
-                writer.writeInt32(3, instance.executionOrder);
-            }
-        };
-        Object.defineProperty(BertAugEnrichmentConfig.prototype, "isActive", {
-            get: function () {
-                return this._isActive;
-            },
-            set: function (value) {
-                this._isActive = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BertAugEnrichmentConfig.prototype, "enrichmentFactor", {
-            get: function () {
-                return this._enrichmentFactor;
-            },
-            set: function (value) {
-                this._enrichmentFactor = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BertAugEnrichmentConfig.prototype, "executionOrder", {
-            get: function () {
-                return this._executionOrder;
-            },
-            set: function (value) {
-                this._executionOrder = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        BertAugEnrichmentConfig.prototype.toObject = function () {
-            return {
-                isActive: this.isActive,
-                enrichmentFactor: this.enrichmentFactor,
-                executionOrder: this.executionOrder
-            };
-        };
-        BertAugEnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return BertAugEnrichmentConfig;
-    }());
-    var GloVeEnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GloVeEnrichmentConfig value
-         */
-        function GloVeEnrichmentConfig(value) {
-            value = value || {};
-            this.isActive = value.isActive;
-            this.enrichmentFactor = value.enrichmentFactor;
-            this.executionOrder = value.executionOrder;
-            GloVeEnrichmentConfig.refineValues(this);
-        }
-        GloVeEnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GloVeEnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GloVeEnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new GloVeEnrichmentConfig();
-            GloVeEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GloVeEnrichmentConfig.refineValues = function (instance) {
-            instance.isActive = instance.isActive || false;
-            instance.enrichmentFactor = instance.enrichmentFactor || 0;
-            instance.executionOrder = instance.executionOrder || 0;
-        };
-        GloVeEnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isActive = reader.readBool();
-                        break;
-                    case 2:
-                        instance.enrichmentFactor = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.executionOrder = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GloVeEnrichmentConfig.refineValues(instance);
-        };
-        GloVeEnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.isActive) {
-                writer.writeBool(1, instance.isActive);
-            }
-            if (instance.enrichmentFactor) {
-                writer.writeInt32(2, instance.enrichmentFactor);
-            }
-            if (instance.executionOrder) {
-                writer.writeInt32(3, instance.executionOrder);
-            }
-        };
-        Object.defineProperty(GloVeEnrichmentConfig.prototype, "isActive", {
-            get: function () {
-                return this._isActive;
-            },
-            set: function (value) {
-                this._isActive = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GloVeEnrichmentConfig.prototype, "enrichmentFactor", {
-            get: function () {
-                return this._enrichmentFactor;
-            },
-            set: function (value) {
-                this._enrichmentFactor = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GloVeEnrichmentConfig.prototype, "executionOrder", {
-            get: function () {
-                return this._executionOrder;
-            },
-            set: function (value) {
-                this._executionOrder = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GloVeEnrichmentConfig.prototype.toObject = function () {
-            return {
-                isActive: this.isActive,
-                enrichmentFactor: this.enrichmentFactor,
-                executionOrder: this.executionOrder
-            };
-        };
-        GloVeEnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GloVeEnrichmentConfig;
-    }());
-    var GPT2EnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GPT2EnrichmentConfig value
-         */
-        function GPT2EnrichmentConfig(value) {
-            value = value || {};
-            this.isActive = value.isActive;
-            this.enrichmentFactor = value.enrichmentFactor;
-            this.executionOrder = value.executionOrder;
-            GPT2EnrichmentConfig.refineValues(this);
-        }
-        GPT2EnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GPT2EnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GPT2EnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new GPT2EnrichmentConfig();
-            GPT2EnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GPT2EnrichmentConfig.refineValues = function (instance) {
-            instance.isActive = instance.isActive || false;
-            instance.enrichmentFactor = instance.enrichmentFactor || 0;
-            instance.executionOrder = instance.executionOrder || 0;
-        };
-        GPT2EnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isActive = reader.readBool();
-                        break;
-                    case 2:
-                        instance.enrichmentFactor = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.executionOrder = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GPT2EnrichmentConfig.refineValues(instance);
-        };
-        GPT2EnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.isActive) {
-                writer.writeBool(1, instance.isActive);
-            }
-            if (instance.enrichmentFactor) {
-                writer.writeInt32(2, instance.enrichmentFactor);
-            }
-            if (instance.executionOrder) {
-                writer.writeInt32(3, instance.executionOrder);
-            }
-        };
-        Object.defineProperty(GPT2EnrichmentConfig.prototype, "isActive", {
-            get: function () {
-                return this._isActive;
-            },
-            set: function (value) {
-                this._isActive = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GPT2EnrichmentConfig.prototype, "enrichmentFactor", {
-            get: function () {
-                return this._enrichmentFactor;
-            },
-            set: function (value) {
-                this._enrichmentFactor = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GPT2EnrichmentConfig.prototype, "executionOrder", {
-            get: function () {
-                return this._executionOrder;
-            },
-            set: function (value) {
-                this._executionOrder = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GPT2EnrichmentConfig.prototype.toObject = function () {
-            return {
-                isActive: this.isActive,
-                enrichmentFactor: this.enrichmentFactor,
-                executionOrder: this.executionOrder
-            };
-        };
-        GPT2EnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GPT2EnrichmentConfig;
-    }());
-    var Word2VecEnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param Word2VecEnrichmentConfig value
-         */
-        function Word2VecEnrichmentConfig(value) {
-            value = value || {};
-            this.isActive = value.isActive;
-            this.enrichmentFactor = value.enrichmentFactor;
-            this.executionOrder = value.executionOrder;
-            Word2VecEnrichmentConfig.refineValues(this);
-        }
-        Word2VecEnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Word2VecEnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Word2VecEnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new Word2VecEnrichmentConfig();
-            Word2VecEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        Word2VecEnrichmentConfig.refineValues = function (instance) {
-            instance.isActive = instance.isActive || false;
-            instance.enrichmentFactor = instance.enrichmentFactor || 0;
-            instance.executionOrder = instance.executionOrder || 0;
-        };
-        Word2VecEnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isActive = reader.readBool();
-                        break;
-                    case 2:
-                        instance.enrichmentFactor = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.executionOrder = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            Word2VecEnrichmentConfig.refineValues(instance);
-        };
-        Word2VecEnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.isActive) {
-                writer.writeBool(1, instance.isActive);
-            }
-            if (instance.enrichmentFactor) {
-                writer.writeInt32(2, instance.enrichmentFactor);
-            }
-            if (instance.executionOrder) {
-                writer.writeInt32(3, instance.executionOrder);
-            }
-        };
-        Object.defineProperty(Word2VecEnrichmentConfig.prototype, "isActive", {
-            get: function () {
-                return this._isActive;
-            },
-            set: function (value) {
-                this._isActive = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Word2VecEnrichmentConfig.prototype, "enrichmentFactor", {
-            get: function () {
-                return this._enrichmentFactor;
-            },
-            set: function (value) {
-                this._enrichmentFactor = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Word2VecEnrichmentConfig.prototype, "executionOrder", {
-            get: function () {
-                return this._executionOrder;
-            },
-            set: function (value) {
-                this._executionOrder = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Word2VecEnrichmentConfig.prototype.toObject = function () {
-            return {
-                isActive: this.isActive,
-                enrichmentFactor: this.enrichmentFactor,
-                executionOrder: this.executionOrder
-            };
-        };
-        Word2VecEnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return Word2VecEnrichmentConfig;
-    }());
-    var WordNetAugEnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param WordNetAugEnrichmentConfig value
-         */
-        function WordNetAugEnrichmentConfig(value) {
-            value = value || {};
-            this.isActive = value.isActive;
-            this.enrichmentFactor = value.enrichmentFactor;
-            this.executionOrder = value.executionOrder;
-            WordNetAugEnrichmentConfig.refineValues(this);
-        }
-        WordNetAugEnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            WordNetAugEnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        WordNetAugEnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new WordNetAugEnrichmentConfig();
-            WordNetAugEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        WordNetAugEnrichmentConfig.refineValues = function (instance) {
-            instance.isActive = instance.isActive || false;
-            instance.enrichmentFactor = instance.enrichmentFactor || 0;
-            instance.executionOrder = instance.executionOrder || 0;
-        };
-        WordNetAugEnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isActive = reader.readBool();
-                        break;
-                    case 2:
-                        instance.enrichmentFactor = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.executionOrder = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            WordNetAugEnrichmentConfig.refineValues(instance);
-        };
-        WordNetAugEnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.isActive) {
-                writer.writeBool(1, instance.isActive);
-            }
-            if (instance.enrichmentFactor) {
-                writer.writeInt32(2, instance.enrichmentFactor);
-            }
-            if (instance.executionOrder) {
-                writer.writeInt32(3, instance.executionOrder);
-            }
-        };
-        Object.defineProperty(WordNetAugEnrichmentConfig.prototype, "isActive", {
-            get: function () {
-                return this._isActive;
-            },
-            set: function (value) {
-                this._isActive = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WordNetAugEnrichmentConfig.prototype, "enrichmentFactor", {
-            get: function () {
-                return this._enrichmentFactor;
-            },
-            set: function (value) {
-                this._enrichmentFactor = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(WordNetAugEnrichmentConfig.prototype, "executionOrder", {
-            get: function () {
-                return this._executionOrder;
-            },
-            set: function (value) {
-                this._executionOrder = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        WordNetAugEnrichmentConfig.prototype.toObject = function () {
-            return {
-                isActive: this.isActive,
-                enrichmentFactor: this.enrichmentFactor,
-                executionOrder: this.executionOrder
-            };
-        };
-        WordNetAugEnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return WordNetAugEnrichmentConfig;
-    }());
-    var XLNetAugEnrichmentConfig = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param XLNetAugEnrichmentConfig value
-         */
-        function XLNetAugEnrichmentConfig(value) {
-            value = value || {};
-            this.isActive = value.isActive;
-            this.enrichmentFactor = value.enrichmentFactor;
-            this.executionOrder = value.executionOrder;
-            XLNetAugEnrichmentConfig.refineValues(this);
-        }
-        XLNetAugEnrichmentConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            XLNetAugEnrichmentConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        XLNetAugEnrichmentConfig.fromBinary = function (bytes) {
-            var instance = new XLNetAugEnrichmentConfig();
-            XLNetAugEnrichmentConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        XLNetAugEnrichmentConfig.refineValues = function (instance) {
-            instance.isActive = instance.isActive || false;
-            instance.enrichmentFactor = instance.enrichmentFactor || 0;
-            instance.executionOrder = instance.executionOrder || 0;
-        };
-        XLNetAugEnrichmentConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.isActive = reader.readBool();
-                        break;
-                    case 2:
-                        instance.enrichmentFactor = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.executionOrder = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            XLNetAugEnrichmentConfig.refineValues(instance);
-        };
-        XLNetAugEnrichmentConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.isActive) {
-                writer.writeBool(1, instance.isActive);
-            }
-            if (instance.enrichmentFactor) {
-                writer.writeInt32(2, instance.enrichmentFactor);
-            }
-            if (instance.executionOrder) {
-                writer.writeInt32(3, instance.executionOrder);
-            }
-        };
-        Object.defineProperty(XLNetAugEnrichmentConfig.prototype, "isActive", {
-            get: function () {
-                return this._isActive;
-            },
-            set: function (value) {
-                this._isActive = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(XLNetAugEnrichmentConfig.prototype, "enrichmentFactor", {
-            get: function () {
-                return this._enrichmentFactor;
-            },
-            set: function (value) {
-                this._enrichmentFactor = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(XLNetAugEnrichmentConfig.prototype, "executionOrder", {
-            get: function () {
-                return this._executionOrder;
-            },
-            set: function (value) {
-                this._executionOrder = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        XLNetAugEnrichmentConfig.prototype.toObject = function () {
-            return {
-                isActive: this.isActive,
-                enrichmentFactor: this.enrichmentFactor,
-                executionOrder: this.executionOrder
-            };
-        };
-        XLNetAugEnrichmentConfig.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return XLNetAugEnrichmentConfig;
-    }());
 
     /* tslint:disable */
     /*
@@ -22497,40 +24617,6 @@
 
       @NgModule({
         providers: [
-          { provide: GRPC_AI_SERVICES_CLIENT_SETTINGS, useValue: grpcSettings },
-        ],
-      })
-      export class GrpcConfigModule { }
-    */
-    var GRPC_AI_SERVICES_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_AI_SERVICES_CLIENT_SETTINGS');
-
-    /* tslint:disable */
-    /*
-      To configure the services you need to provide a configuration for each of them.
-
-      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-      const grpcSettings = { host: environment.grpcHost };
-
-      @NgModule({
-        providers: [
-          { provide: GRPC_USERS_CLIENT_SETTINGS, useValue: grpcSettings },
-        ],
-      })
-      export class GrpcConfigModule { }
-    */
-    var GRPC_USERS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_USERS_CLIENT_SETTINGS');
-
-    /* tslint:disable */
-    /*
-      To configure the services you need to provide a configuration for each of them.
-
-      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-      const grpcSettings = { host: environment.grpcHost };
-
-      @NgModule({
-        providers: [
           { provide: GRPC_CONTEXTS_CLIENT_SETTINGS, useValue: grpcSettings },
         ],
       })
@@ -22597,7 +24683,7 @@
                 requestData: requestData,
                 requestMetadata: requestMetadata,
                 requestClass: GetContextRequest,
-                responseClass: Context
+                responseClass: exports.Context
             });
         };
         /**
@@ -22625,7 +24711,7 @@
                 requestData: requestData,
                 requestMetadata: requestMetadata,
                 requestClass: CreateContextRequest,
-                responseClass: Context
+                responseClass: exports.Context
             });
         };
         /**
@@ -22653,7 +24739,7 @@
                 requestData: requestData,
                 requestMetadata: requestMetadata,
                 requestClass: UpdateContextRequest,
-                responseClass: Context
+                responseClass: exports.Context
             });
         };
         /**
@@ -22727,807 +24813,6 @@
     ]; };
 
     /* tslint:disable */
-    var AiServicesClient = /** @class */ (function () {
-        function AiServicesClient(settings, clientFactory, handler) {
-            this.handler = handler;
-            this.client = clientFactory.createClient('ondewo.nlu.AiServices', settings);
-        }
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.ExtractEntitiesRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.ExtractEntitiesResponse>
-         */
-        AiServicesClient.prototype.extractEntities = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.extractEntities$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.ExtractEntitiesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>
-         */
-        AiServicesClient.prototype.extractEntities$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.AiServices/ExtractEntities',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: ExtractEntitiesRequest,
-                responseClass: ExtractEntitiesResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GenerateUserSaysRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.GenerateUserSaysResponse>
-         */
-        AiServicesClient.prototype.generateUserSays = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.generateUserSays$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GenerateUserSaysRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.GenerateUserSaysResponse>>
-         */
-        AiServicesClient.prototype.generateUserSays$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.AiServices/GenerateUserSays',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GenerateUserSaysRequest,
-                responseClass: GenerateUserSaysResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GenerateResponsesRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.GenerateResponsesResponse>
-         */
-        AiServicesClient.prototype.generateResponses = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.generateResponses$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GenerateResponsesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.GenerateResponsesResponse>>
-         */
-        AiServicesClient.prototype.generateResponses$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.AiServices/GenerateResponses',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GenerateResponsesRequest,
-                responseClass: GenerateResponsesResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetAlternativeSentencesRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.GetAlternativeSentencesResponse>
-         */
-        AiServicesClient.prototype.getAlternativeSentences = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getAlternativeSentences$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetAlternativeSentencesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.GetAlternativeSentencesResponse>>
-         */
-        AiServicesClient.prototype.getAlternativeSentences$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.AiServices/GetAlternativeSentences',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetAlternativeSentencesRequest,
-                responseClass: GetAlternativeSentencesResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetAlternativeTrainingPhrasesRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.GetAlternativeTrainingPhrasesResponse>
-         */
-        AiServicesClient.prototype.getAlternativeTrainingPhrases = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getAlternativeTrainingPhrases$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetAlternativeTrainingPhrasesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.GetAlternativeTrainingPhrasesResponse>>
-         */
-        AiServicesClient.prototype.getAlternativeTrainingPhrases$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetAlternativeTrainingPhrasesRequest,
-                responseClass: GetAlternativeTrainingPhrasesResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetSynonymsRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.GetSynonymsResponse>
-         */
-        AiServicesClient.prototype.getSynonyms = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getSynonyms$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetSynonymsRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.GetSynonymsResponse>>
-         */
-        AiServicesClient.prototype.getSynonyms$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.AiServices/GetSynonyms',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetSynonymsRequest,
-                responseClass: GetSynonymsResponse
-            });
-        };
-        return AiServicesClient;
-    }());
-    AiServicesClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function AiServicesClient_Factory() { return new AiServicesClient(i0.ɵɵinject(GRPC_AI_SERVICES_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: AiServicesClient, providedIn: "root" });
-    AiServicesClient.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root'
-                },] }
-    ];
-    AiServicesClient.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_AI_SERVICES_CLIENT_SETTINGS,] }] },
-        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
-        { type: i2.GrpcHandler }
-    ]; };
-
-    var GetUserProjectCountRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetUserProjectCountRequest value
-         */
-        function GetUserProjectCountRequest(value) {
-            value = value || {};
-            this.userId = value.userId;
-            GetUserProjectCountRequest.refineValues(this);
-        }
-        GetUserProjectCountRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetUserProjectCountRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetUserProjectCountRequest.fromBinary = function (bytes) {
-            var instance = new GetUserProjectCountRequest();
-            GetUserProjectCountRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetUserProjectCountRequest.refineValues = function (instance) {
-            instance.userId = instance.userId || '';
-        };
-        GetUserProjectCountRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.userId = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetUserProjectCountRequest.refineValues(instance);
-        };
-        GetUserProjectCountRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.userId) {
-                writer.writeString(1, instance.userId);
-            }
-        };
-        Object.defineProperty(GetUserProjectCountRequest.prototype, "userId", {
-            get: function () {
-                return this._userId;
-            },
-            set: function (value) {
-                this._userId = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetUserProjectCountRequest.prototype.toObject = function () {
-            return {
-                userId: this.userId
-            };
-        };
-        GetUserProjectCountRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetUserProjectCountRequest;
-    }());
-
-    var GetIntentCountRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetIntentCountRequest value
-         */
-        function GetIntentCountRequest(value) {
-            value = value || {};
-            this.parent = value.parent;
-            this.filterByCategory = value.filterByCategory;
-            GetIntentCountRequest.refineValues(this);
-        }
-        GetIntentCountRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetIntentCountRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetIntentCountRequest.fromBinary = function (bytes) {
-            var instance = new GetIntentCountRequest();
-            GetIntentCountRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetIntentCountRequest.refineValues = function (instance) {
-            instance.parent = instance.parent || '';
-            instance.filterByCategory = instance.filterByCategory || 0;
-        };
-        GetIntentCountRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.parent = reader.readString();
-                        break;
-                    case 2:
-                        instance.filterByCategory = reader.readEnum();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetIntentCountRequest.refineValues(instance);
-        };
-        GetIntentCountRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.parent) {
-                writer.writeString(1, instance.parent);
-            }
-            if (instance.filterByCategory) {
-                writer.writeEnum(2, instance.filterByCategory);
-            }
-        };
-        Object.defineProperty(GetIntentCountRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetIntentCountRequest.prototype, "filterByCategory", {
-            get: function () {
-                return this._filterByCategory;
-            },
-            set: function (value) {
-                this._filterByCategory = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetIntentCountRequest.prototype.toObject = function () {
-            return {
-                parent: this.parent,
-                filterByCategory: this.filterByCategory
-            };
-        };
-        GetIntentCountRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetIntentCountRequest;
-    }());
-    var GetEntityTypeCountRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetEntityTypeCountRequest value
-         */
-        function GetEntityTypeCountRequest(value) {
-            value = value || {};
-            this.parent = value.parent;
-            this.filterByCategory = value.filterByCategory;
-            GetEntityTypeCountRequest.refineValues(this);
-        }
-        GetEntityTypeCountRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetEntityTypeCountRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetEntityTypeCountRequest.fromBinary = function (bytes) {
-            var instance = new GetEntityTypeCountRequest();
-            GetEntityTypeCountRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetEntityTypeCountRequest.refineValues = function (instance) {
-            instance.parent = instance.parent || '';
-            instance.filterByCategory = instance.filterByCategory || 0;
-        };
-        GetEntityTypeCountRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.parent = reader.readString();
-                        break;
-                    case 2:
-                        instance.filterByCategory = reader.readEnum();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetEntityTypeCountRequest.refineValues(instance);
-        };
-        GetEntityTypeCountRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.parent) {
-                writer.writeString(1, instance.parent);
-            }
-            if (instance.filterByCategory) {
-                writer.writeEnum(2, instance.filterByCategory);
-            }
-        };
-        Object.defineProperty(GetEntityTypeCountRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetEntityTypeCountRequest.prototype, "filterByCategory", {
-            get: function () {
-                return this._filterByCategory;
-            },
-            set: function (value) {
-                this._filterByCategory = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetEntityTypeCountRequest.prototype.toObject = function () {
-            return {
-                parent: this.parent,
-                filterByCategory: this.filterByCategory
-            };
-        };
-        GetEntityTypeCountRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetEntityTypeCountRequest;
-    }());
-    var GetProjectStatRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetProjectStatRequest value
-         */
-        function GetProjectStatRequest(value) {
-            value = value || {};
-            this.parent = value.parent;
-            GetProjectStatRequest.refineValues(this);
-        }
-        GetProjectStatRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetProjectStatRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetProjectStatRequest.fromBinary = function (bytes) {
-            var instance = new GetProjectStatRequest();
-            GetProjectStatRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetProjectStatRequest.refineValues = function (instance) {
-            instance.parent = instance.parent || '';
-        };
-        GetProjectStatRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.parent = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetProjectStatRequest.refineValues(instance);
-        };
-        GetProjectStatRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.parent) {
-                writer.writeString(1, instance.parent);
-            }
-        };
-        Object.defineProperty(GetProjectStatRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetProjectStatRequest.prototype.toObject = function () {
-            return {
-                parent: this.parent
-            };
-        };
-        GetProjectStatRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetProjectStatRequest;
-    }());
-    var GetProjectElementStatRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetProjectElementStatRequest value
-         */
-        function GetProjectElementStatRequest(value) {
-            value = value || {};
-            this.name = value.name;
-            this.languageCode = value.languageCode;
-            GetProjectElementStatRequest.refineValues(this);
-        }
-        GetProjectElementStatRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetProjectElementStatRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetProjectElementStatRequest.fromBinary = function (bytes) {
-            var instance = new GetProjectElementStatRequest();
-            GetProjectElementStatRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetProjectElementStatRequest.refineValues = function (instance) {
-            instance.name = instance.name || '';
-            instance.languageCode = instance.languageCode || '';
-        };
-        GetProjectElementStatRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.name = reader.readString();
-                        break;
-                    case 2:
-                        instance.languageCode = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetProjectElementStatRequest.refineValues(instance);
-        };
-        GetProjectElementStatRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.name) {
-                writer.writeString(1, instance.name);
-            }
-            if (instance.languageCode) {
-                writer.writeString(2, instance.languageCode);
-            }
-        };
-        Object.defineProperty(GetProjectElementStatRequest.prototype, "name", {
-            get: function () {
-                return this._name;
-            },
-            set: function (value) {
-                this._name = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(GetProjectElementStatRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetProjectElementStatRequest.prototype.toObject = function () {
-            return {
-                name: this.name,
-                languageCode: this.languageCode
-            };
-        };
-        GetProjectElementStatRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetProjectElementStatRequest;
-    }());
-
-    /* tslint:disable */
-    var ProjectStatisticsClient = /** @class */ (function () {
-        function ProjectStatisticsClient(settings, clientFactory, handler) {
-            this.handler = handler;
-            this.client = clientFactory.createClient('ondewo.nlu.ProjectStatistics', settings);
-        }
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetIntentCountRequest request
-         * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
-         */
-        ProjectStatisticsClient.prototype.getIntentCount = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getIntentCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetIntentCountRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-         */
-        ProjectStatisticsClient.prototype.getIntentCount$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectStatistics/GetIntentCount',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetIntentCountRequest,
-                responseClass: StatResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetEntityTypeCountRequest request
-         * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
-         */
-        ProjectStatisticsClient.prototype.getEntityTypeCount = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getEntityTypeCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetEntityTypeCountRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-         */
-        ProjectStatisticsClient.prototype.getEntityTypeCount$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectStatistics/GetEntityTypeCount',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetEntityTypeCountRequest,
-                responseClass: StatResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetProjectStatRequest request
-         * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
-         */
-        ProjectStatisticsClient.prototype.getUserCount = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getUserCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetProjectStatRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-         */
-        ProjectStatisticsClient.prototype.getUserCount$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectStatistics/GetUserCount',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetProjectStatRequest,
-                responseClass: StatResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetProjectStatRequest request
-         * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
-         */
-        ProjectStatisticsClient.prototype.getSessionCount = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getSessionCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetProjectStatRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-         */
-        ProjectStatisticsClient.prototype.getSessionCount$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectStatistics/GetSessionCount',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetProjectStatRequest,
-                responseClass: StatResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetProjectElementStatRequest request
-         * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
-         */
-        ProjectStatisticsClient.prototype.getTrainingPhraseCount = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getTrainingPhraseCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetProjectElementStatRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-         */
-        ProjectStatisticsClient.prototype.getTrainingPhraseCount$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetProjectElementStatRequest,
-                responseClass: StatResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetProjectElementStatRequest request
-         * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
-         */
-        ProjectStatisticsClient.prototype.getResponseCount = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getResponseCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetProjectElementStatRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-         */
-        ProjectStatisticsClient.prototype.getResponseCount$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectStatistics/GetResponseCount',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetProjectElementStatRequest,
-                responseClass: StatResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetProjectElementStatRequest request
-         * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
-         */
-        ProjectStatisticsClient.prototype.getEntityValueCount = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getEntityValueCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetProjectElementStatRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-         */
-        ProjectStatisticsClient.prototype.getEntityValueCount$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectStatistics/GetEntityValueCount',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetProjectElementStatRequest,
-                responseClass: StatResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetProjectElementStatRequest request
-         * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
-         */
-        ProjectStatisticsClient.prototype.getEntitySynonymCount = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getEntitySynonymCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetProjectElementStatRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-         */
-        ProjectStatisticsClient.prototype.getEntitySynonymCount$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetProjectElementStatRequest,
-                responseClass: StatResponse
-            });
-        };
-        return ProjectStatisticsClient;
-    }());
-    ProjectStatisticsClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProjectStatisticsClient_Factory() { return new ProjectStatisticsClient(i0.ɵɵinject(GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: ProjectStatisticsClient, providedIn: "root" });
-    ProjectStatisticsClient.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root'
-                },] }
-    ];
-    ProjectStatisticsClient.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS,] }] },
-        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
-        { type: i2.GrpcHandler }
-    ]; };
-
-    /* tslint:disable */
     /*
       To configure the services you need to provide a configuration for each of them.
 
@@ -23537,919 +24822,169 @@
 
       @NgModule({
         providers: [
-          { provide: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, useValue: grpcSettings },
+          { provide: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, useValue: grpcSettings },
         ],
       })
       export class GrpcConfigModule { }
     */
-    var GRPC_SERVER_STATISTICS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_SERVER_STATISTICS_CLIENT_SETTINGS');
+    var GRPC_PROJECT_ROLES_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_PROJECT_ROLES_CLIENT_SETTINGS');
 
     /* tslint:disable */
-    var ServerStatisticsClient = /** @class */ (function () {
-        function ServerStatisticsClient(settings, clientFactory, handler) {
+    var ProjectRolesClient = /** @class */ (function () {
+        function ProjectRolesClient(settings, clientFactory, handler) {
             this.handler = handler;
-            this.client = clientFactory.createClient('ondewo.nlu.ServerStatistics', settings);
+            this.client = clientFactory.createClient('ondewo.nlu.ProjectRoles', settings);
         }
         /**
          * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param googleProtobuf001.Empty request
+         * @param thisProto.CreateProjectRoleRequest request
          * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
+         * @return Observable<thisProto.ProjectRole>
          */
-        ServerStatisticsClient.prototype.getProjectCount = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.createProjectRole = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getProjectCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            return this.createProjectRole$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
          * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param googleProtobuf001.Empty request
+         * @param thisProto.CreateProjectRoleRequest request
          * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         * @return Observable<GrpcEvent<thisProto.ProjectRole>>
          */
-        ServerStatisticsClient.prototype.getProjectCount$eventStream = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.createProjectRole$eventStream = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
             return this.handler.handle({
                 type: common.GrpcCallType.unary,
                 client: this.client,
-                path: '/ondewo.nlu.ServerStatistics/GetProjectCount',
+                path: '/ondewo.nlu.ProjectRoles/CreateProjectRole',
                 requestData: requestData,
                 requestMetadata: requestMetadata,
-                requestClass: Empty,
-                responseClass: StatResponse
+                requestClass: CreateProjectRoleRequest,
+                responseClass: ProjectRole
             });
         };
         /**
          * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetUserProjectCountRequest request
+         * @param thisProto.GetProjectRoleRequest request
          * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
+         * @return Observable<thisProto.ProjectRole>
          */
-        ServerStatisticsClient.prototype.getUserProjectCount = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.getProjectRole = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getUserProjectCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            return this.getProjectRole$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
          * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetUserProjectCountRequest request
+         * @param thisProto.GetProjectRoleRequest request
          * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         * @return Observable<GrpcEvent<thisProto.ProjectRole>>
          */
-        ServerStatisticsClient.prototype.getUserProjectCount$eventStream = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.getProjectRole$eventStream = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
             return this.handler.handle({
                 type: common.GrpcCallType.unary,
                 client: this.client,
-                path: '/ondewo.nlu.ServerStatistics/GetUserProjectCount',
+                path: '/ondewo.nlu.ProjectRoles/GetProjectRole',
                 requestData: requestData,
                 requestMetadata: requestMetadata,
-                requestClass: GetUserProjectCountRequest,
-                responseClass: StatResponse
+                requestClass: exports.GetProjectRoleRequest,
+                responseClass: ProjectRole
             });
         };
         /**
          * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param googleProtobuf001.Empty request
+         * @param thisProto.DeleteProjectRoleRequest request
          * @param Metadata metadata
-         * @return Observable<ondewoNlu002.StatResponse>
+         * @return Observable<googleProtobuf002.Empty>
          */
-        ServerStatisticsClient.prototype.getUserCount = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.deleteProjectRole = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getUserCount$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            return this.deleteProjectRole$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
          * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param googleProtobuf001.Empty request
+         * @param thisProto.DeleteProjectRoleRequest request
          * @param Metadata metadata
-         * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+         * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        ServerStatisticsClient.prototype.getUserCount$eventStream = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.deleteProjectRole$eventStream = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
             return this.handler.handle({
                 type: common.GrpcCallType.unary,
                 client: this.client,
-                path: '/ondewo.nlu.ServerStatistics/GetUserCount',
+                path: '/ondewo.nlu.ProjectRoles/DeleteProjectRole',
                 requestData: requestData,
                 requestMetadata: requestMetadata,
-                requestClass: Empty,
-                responseClass: StatResponse
-            });
-        };
-        return ServerStatisticsClient;
-    }());
-    ServerStatisticsClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function ServerStatisticsClient_Factory() { return new ServerStatisticsClient(i0.ɵɵinject(GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: ServerStatisticsClient, providedIn: "root" });
-    ServerStatisticsClient.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root'
-                },] }
-    ];
-    ServerStatisticsClient.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_SERVER_STATISTICS_CLIENT_SETTINGS,] }] },
-        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
-        { type: i2.GrpcHandler }
-    ]; };
-
-    /* tslint:disable */
-    /*
-      To configure the services you need to provide a configuration for each of them.
-
-      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-      const grpcSettings = { host: environment.grpcHost };
-
-      @NgModule({
-        providers: [
-          { provide: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, useValue: grpcSettings },
-        ],
-      })
-      export class GrpcConfigModule { }
-    */
-    var GRPC_ENTITY_TYPES_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_ENTITY_TYPES_CLIENT_SETTINGS');
-
-    exports.Operation = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param Operation value
-         */
-        function Operation(value) {
-            this._result = Operation.ResultCase.none;
-            value = value || {};
-            this.name = value.name;
-            this.metadata = value.metadata
-                ? new Any(value.metadata)
-                : undefined;
-            this.done = value.done;
-            this.error = value.error ? new Status(value.error) : undefined;
-            this.response = value.response
-                ? new Any(value.response)
-                : undefined;
-            Operation.refineValues(this);
-        }
-        Operation.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Operation.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Operation.fromBinary = function (bytes) {
-            var instance = new Operation();
-            Operation.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        Operation.refineValues = function (instance) {
-            instance.name = instance.name || '';
-            instance.metadata = instance.metadata || undefined;
-            instance.done = instance.done || false;
-        };
-        Operation.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.name = reader.readString();
-                        break;
-                    case 2:
-                        instance.metadata = new Any();
-                        reader.readMessage(instance.metadata, Any.fromBinaryReader);
-                        break;
-                    case 3:
-                        instance.done = reader.readBool();
-                        break;
-                    case 4:
-                        instance.error = new Status();
-                        reader.readMessage(instance.error, Status.fromBinaryReader);
-                        break;
-                    case 5:
-                        instance.response = new Any();
-                        reader.readMessage(instance.response, Any.fromBinaryReader);
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            Operation.refineValues(instance);
-        };
-        Operation.toBinaryWriter = function (instance, writer) {
-            if (instance.name) {
-                writer.writeString(1, instance.name);
-            }
-            if (instance.metadata) {
-                writer.writeMessage(2, instance.metadata, Any.toBinaryWriter);
-            }
-            if (instance.done) {
-                writer.writeBool(3, instance.done);
-            }
-            if (instance.error) {
-                writer.writeMessage(4, instance.error, Status.toBinaryWriter);
-            }
-            if (instance.response) {
-                writer.writeMessage(5, instance.response, Any.toBinaryWriter);
-            }
-        };
-        Object.defineProperty(Operation.prototype, "name", {
-            get: function () {
-                return this._name;
-            },
-            set: function (value) {
-                this._name = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Operation.prototype, "metadata", {
-            get: function () {
-                return this._metadata;
-            },
-            set: function (value) {
-                this._metadata = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Operation.prototype, "done", {
-            get: function () {
-                return this._done;
-            },
-            set: function (value) {
-                this._done = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Operation.prototype, "error", {
-            get: function () {
-                return this._error;
-            },
-            set: function (value) {
-                if (value !== undefined && value !== null) {
-                    this._response = undefined;
-                    this._result = Operation.ResultCase.error;
-                }
-                this._error = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Operation.prototype, "response", {
-            get: function () {
-                return this._response;
-            },
-            set: function (value) {
-                if (value !== undefined && value !== null) {
-                    this._error = undefined;
-                    this._result = Operation.ResultCase.response;
-                }
-                this._response = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Operation.prototype, "result", {
-            get: function () {
-                return this._result;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Operation.prototype.toObject = function () {
-            return {
-                name: this.name,
-                metadata: this.metadata ? this.metadata.toObject() : undefined,
-                done: this.done,
-                error: this.error ? this.error.toObject() : undefined,
-                response: this.response ? this.response.toObject() : undefined
-            };
-        };
-        Operation.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return Operation;
-    }());
-    (function (Operation) {
-        var ResultCase;
-        (function (ResultCase) {
-            ResultCase[ResultCase["none"] = 0] = "none";
-            ResultCase[ResultCase["error"] = 1] = "error";
-            ResultCase[ResultCase["response"] = 2] = "response";
-        })(ResultCase = Operation.ResultCase || (Operation.ResultCase = {}));
-    })(exports.Operation || (exports.Operation = {}));
-    var GetOperationRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param GetOperationRequest value
-         */
-        function GetOperationRequest(value) {
-            value = value || {};
-            this.name = value.name;
-            GetOperationRequest.refineValues(this);
-        }
-        GetOperationRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GetOperationRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GetOperationRequest.fromBinary = function (bytes) {
-            var instance = new GetOperationRequest();
-            GetOperationRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        GetOperationRequest.refineValues = function (instance) {
-            instance.name = instance.name || '';
-        };
-        GetOperationRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.name = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            GetOperationRequest.refineValues(instance);
-        };
-        GetOperationRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.name) {
-                writer.writeString(1, instance.name);
-            }
-        };
-        Object.defineProperty(GetOperationRequest.prototype, "name", {
-            get: function () {
-                return this._name;
-            },
-            set: function (value) {
-                this._name = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        GetOperationRequest.prototype.toObject = function () {
-            return {
-                name: this.name
-            };
-        };
-        GetOperationRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return GetOperationRequest;
-    }());
-    var ListOperationsRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param ListOperationsRequest value
-         */
-        function ListOperationsRequest(value) {
-            value = value || {};
-            this.name = value.name;
-            this.filter = value.filter;
-            this.pageSize = value.pageSize;
-            this.pageToken = value.pageToken;
-            ListOperationsRequest.refineValues(this);
-        }
-        ListOperationsRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            ListOperationsRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        ListOperationsRequest.fromBinary = function (bytes) {
-            var instance = new ListOperationsRequest();
-            ListOperationsRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        ListOperationsRequest.refineValues = function (instance) {
-            instance.name = instance.name || '';
-            instance.filter = instance.filter || '';
-            instance.pageSize = instance.pageSize || 0;
-            instance.pageToken = instance.pageToken || '';
-        };
-        ListOperationsRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 4:
-                        instance.name = reader.readString();
-                        break;
-                    case 1:
-                        instance.filter = reader.readString();
-                        break;
-                    case 2:
-                        instance.pageSize = reader.readInt32();
-                        break;
-                    case 3:
-                        instance.pageToken = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            ListOperationsRequest.refineValues(instance);
-        };
-        ListOperationsRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.name) {
-                writer.writeString(4, instance.name);
-            }
-            if (instance.filter) {
-                writer.writeString(1, instance.filter);
-            }
-            if (instance.pageSize) {
-                writer.writeInt32(2, instance.pageSize);
-            }
-            if (instance.pageToken) {
-                writer.writeString(3, instance.pageToken);
-            }
-        };
-        Object.defineProperty(ListOperationsRequest.prototype, "name", {
-            get: function () {
-                return this._name;
-            },
-            set: function (value) {
-                this._name = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(ListOperationsRequest.prototype, "filter", {
-            get: function () {
-                return this._filter;
-            },
-            set: function (value) {
-                this._filter = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(ListOperationsRequest.prototype, "pageSize", {
-            get: function () {
-                return this._pageSize;
-            },
-            set: function (value) {
-                this._pageSize = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(ListOperationsRequest.prototype, "pageToken", {
-            get: function () {
-                return this._pageToken;
-            },
-            set: function (value) {
-                this._pageToken = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        ListOperationsRequest.prototype.toObject = function () {
-            return {
-                name: this.name,
-                filter: this.filter,
-                pageSize: this.pageSize,
-                pageToken: this.pageToken
-            };
-        };
-        ListOperationsRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return ListOperationsRequest;
-    }());
-    var ListOperationsResponse = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param ListOperationsResponse value
-         */
-        function ListOperationsResponse(value) {
-            value = value || {};
-            this.operations = (value.operations || []).map(function (m) { return new exports.Operation(m); });
-            this.nextPageToken = value.nextPageToken;
-            ListOperationsResponse.refineValues(this);
-        }
-        ListOperationsResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            ListOperationsResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        ListOperationsResponse.fromBinary = function (bytes) {
-            var instance = new ListOperationsResponse();
-            ListOperationsResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        ListOperationsResponse.refineValues = function (instance) {
-            instance.operations = instance.operations || [];
-            instance.nextPageToken = instance.nextPageToken || '';
-        };
-        ListOperationsResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        var messageInitializer1 = new exports.Operation();
-                        reader.readMessage(messageInitializer1, exports.Operation.fromBinaryReader);
-                        (instance.operations = instance.operations || []).push(messageInitializer1);
-                        break;
-                    case 2:
-                        instance.nextPageToken = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            ListOperationsResponse.refineValues(instance);
-        };
-        ListOperationsResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.operations && instance.operations.length) {
-                writer.writeRepeatedMessage(1, instance.operations, exports.Operation.toBinaryWriter);
-            }
-            if (instance.nextPageToken) {
-                writer.writeString(2, instance.nextPageToken);
-            }
-        };
-        Object.defineProperty(ListOperationsResponse.prototype, "operations", {
-            get: function () {
-                return this._operations;
-            },
-            set: function (value) {
-                this._operations = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(ListOperationsResponse.prototype, "nextPageToken", {
-            get: function () {
-                return this._nextPageToken;
-            },
-            set: function (value) {
-                this._nextPageToken = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        ListOperationsResponse.prototype.toObject = function () {
-            return {
-                operations: (this.operations || []).map(function (m) { return m.toObject(); }),
-                nextPageToken: this.nextPageToken
-            };
-        };
-        ListOperationsResponse.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return ListOperationsResponse;
-    }());
-    var CancelOperationRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param CancelOperationRequest value
-         */
-        function CancelOperationRequest(value) {
-            value = value || {};
-            this.name = value.name;
-            CancelOperationRequest.refineValues(this);
-        }
-        CancelOperationRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            CancelOperationRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        CancelOperationRequest.fromBinary = function (bytes) {
-            var instance = new CancelOperationRequest();
-            CancelOperationRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        CancelOperationRequest.refineValues = function (instance) {
-            instance.name = instance.name || '';
-        };
-        CancelOperationRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.name = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            CancelOperationRequest.refineValues(instance);
-        };
-        CancelOperationRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.name) {
-                writer.writeString(1, instance.name);
-            }
-        };
-        Object.defineProperty(CancelOperationRequest.prototype, "name", {
-            get: function () {
-                return this._name;
-            },
-            set: function (value) {
-                this._name = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        CancelOperationRequest.prototype.toObject = function () {
-            return {
-                name: this.name
-            };
-        };
-        CancelOperationRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return CancelOperationRequest;
-    }());
-    var DeleteOperationRequest = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param DeleteOperationRequest value
-         */
-        function DeleteOperationRequest(value) {
-            value = value || {};
-            this.name = value.name;
-            DeleteOperationRequest.refineValues(this);
-        }
-        DeleteOperationRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            DeleteOperationRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        DeleteOperationRequest.fromBinary = function (bytes) {
-            var instance = new DeleteOperationRequest();
-            DeleteOperationRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        DeleteOperationRequest.refineValues = function (instance) {
-            instance.name = instance.name || '';
-        };
-        DeleteOperationRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.name = reader.readString();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            DeleteOperationRequest.refineValues(instance);
-        };
-        DeleteOperationRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.name) {
-                writer.writeString(1, instance.name);
-            }
-        };
-        Object.defineProperty(DeleteOperationRequest.prototype, "name", {
-            get: function () {
-                return this._name;
-            },
-            set: function (value) {
-                this._name = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        DeleteOperationRequest.prototype.toObject = function () {
-            return {
-                name: this.name
-            };
-        };
-        DeleteOperationRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return DeleteOperationRequest;
-    }());
-
-    /* tslint:disable */
-    /*
-      To configure the services you need to provide a configuration for each of them.
-
-      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-      const grpcSettings = { host: environment.grpcHost };
-
-      @NgModule({
-        providers: [
-          { provide: GRPC_INTENTS_CLIENT_SETTINGS, useValue: grpcSettings },
-        ],
-      })
-      export class GrpcConfigModule { }
-    */
-    var GRPC_INTENTS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_INTENTS_CLIENT_SETTINGS');
-
-    /* tslint:disable */
-    var IntentsClient = /** @class */ (function () {
-        function IntentsClient(settings, clientFactory, handler) {
-            this.handler = handler;
-            this.client = clientFactory.createClient('ondewo.nlu.Intents', settings);
-        }
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.ListIntentsRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.ListIntentsResponse>
-         */
-        IntentsClient.prototype.listIntents = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.listIntents$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.ListIntentsRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.ListIntentsResponse>>
-         */
-        IntentsClient.prototype.listIntents$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.Intents/ListIntents',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: ListIntentsRequest,
-                responseClass: ListIntentsResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetIntentRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.Intent>
-         */
-        IntentsClient.prototype.getIntent = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getIntent$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetIntentRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.Intent>>
-         */
-        IntentsClient.prototype.getIntent$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.Intents/GetIntent',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetIntentRequest,
-                responseClass: exports.Intent
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.CreateIntentRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.Intent>
-         */
-        IntentsClient.prototype.createIntent = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.createIntent$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.CreateIntentRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.Intent>>
-         */
-        IntentsClient.prototype.createIntent$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.Intents/CreateIntent',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: CreateIntentRequest,
-                responseClass: exports.Intent
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.UpdateIntentRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.Intent>
-         */
-        IntentsClient.prototype.updateIntent = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.updateIntent$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.UpdateIntentRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.Intent>>
-         */
-        IntentsClient.prototype.updateIntent$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.Intents/UpdateIntent',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: UpdateIntentRequest,
-                responseClass: exports.Intent
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.DeleteIntentRequest request
-         * @param Metadata metadata
-         * @return Observable<googleProtobuf004.Empty>
-         */
-        IntentsClient.prototype.deleteIntent = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.deleteIntent$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.DeleteIntentRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleProtobuf004.Empty>>
-         */
-        IntentsClient.prototype.deleteIntent$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.Intents/DeleteIntent',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: DeleteIntentRequest,
+                requestClass: DeleteProjectRoleRequest,
                 responseClass: Empty
             });
         };
         /**
          * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.BatchUpdateIntentsRequest request
+         * @param thisProto.UpdateProjectRoleRequest request
          * @param Metadata metadata
-         * @return Observable<googleLongrunning003.Operation>
+         * @return Observable<thisProto.ProjectRole>
          */
-        IntentsClient.prototype.batchUpdateIntents = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.updateProjectRole = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.batchUpdateIntents$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            return this.updateProjectRole$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
          * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.BatchUpdateIntentsRequest request
+         * @param thisProto.UpdateProjectRoleRequest request
          * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleLongrunning003.Operation>>
+         * @return Observable<GrpcEvent<thisProto.ProjectRole>>
          */
-        IntentsClient.prototype.batchUpdateIntents$eventStream = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.updateProjectRole$eventStream = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
             return this.handler.handle({
                 type: common.GrpcCallType.unary,
                 client: this.client,
-                path: '/ondewo.nlu.Intents/BatchUpdateIntents',
+                path: '/ondewo.nlu.ProjectRoles/UpdateProjectRole',
                 requestData: requestData,
                 requestMetadata: requestMetadata,
-                requestClass: exports.BatchUpdateIntentsRequest,
-                responseClass: exports.Operation
+                requestClass: UpdateProjectRoleRequest,
+                responseClass: ProjectRole
             });
         };
         /**
          * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.BatchDeleteIntentsRequest request
+         * @param thisProto.ListProjectRolesRequest request
          * @param Metadata metadata
-         * @return Observable<googleLongrunning003.Operation>
+         * @return Observable<thisProto.ListProjectRolesResponse>
          */
-        IntentsClient.prototype.batchDeleteIntents = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.listProjectRoles = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.batchDeleteIntents$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            return this.listProjectRoles$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
          * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.BatchDeleteIntentsRequest request
+         * @param thisProto.ListProjectRolesRequest request
          * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleLongrunning003.Operation>>
+         * @return Observable<GrpcEvent<thisProto.ListProjectRolesResponse>>
          */
-        IntentsClient.prototype.batchDeleteIntents$eventStream = function (requestData, requestMetadata) {
+        ProjectRolesClient.prototype.listProjectRoles$eventStream = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = {}; }
             return this.handler.handle({
                 type: common.GrpcCallType.unary,
                 client: this.client,
-                path: '/ondewo.nlu.Intents/BatchDeleteIntents',
+                path: '/ondewo.nlu.ProjectRoles/ListProjectRoles',
                 requestData: requestData,
                 requestMetadata: requestMetadata,
-                requestClass: BatchDeleteIntentsRequest,
-                responseClass: exports.Operation
+                requestClass: ListProjectRolesRequest,
+                responseClass: ListProjectRolesResponse
             });
         };
-        return IntentsClient;
+        return ProjectRolesClient;
     }());
-    IntentsClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function IntentsClient_Factory() { return new IntentsClient(i0.ɵɵinject(GRPC_INTENTS_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: IntentsClient, providedIn: "root" });
-    IntentsClient.decorators = [
+    ProjectRolesClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProjectRolesClient_Factory() { return new ProjectRolesClient(i0.ɵɵinject(GRPC_PROJECT_ROLES_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: ProjectRolesClient, providedIn: "root" });
+    ProjectRolesClient.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
                 },] }
     ];
-    IntentsClient.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_INTENTS_CLIENT_SETTINGS,] }] },
+    ProjectRolesClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_PROJECT_ROLES_CLIENT_SETTINGS,] }] },
         { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
         { type: i2.GrpcHandler }
     ]; };
@@ -24894,6 +25429,535 @@
         { type: i2.GrpcHandler }
     ]; };
 
+    var PingRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param PingRequest value
+         */
+        function PingRequest(value) {
+            value = value || {};
+            this.session = value.session;
+            PingRequest.refineValues(this);
+        }
+        PingRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            PingRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        PingRequest.fromBinary = function (bytes) {
+            var instance = new PingRequest();
+            PingRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        PingRequest.refineValues = function (instance) {
+            instance.session = instance.session || '';
+        };
+        PingRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.session = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            PingRequest.refineValues(instance);
+        };
+        PingRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.session) {
+                writer.writeString(1, instance.session);
+            }
+        };
+        Object.defineProperty(PingRequest.prototype, "session", {
+            get: function () {
+                return this._session;
+            },
+            set: function (value) {
+                this._session = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        PingRequest.prototype.toObject = function () {
+            return {
+                session: this.session
+            };
+        };
+        PingRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return PingRequest;
+    }());
+    var WebhookRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param WebhookRequest value
+         */
+        function WebhookRequest(value) {
+            value = value || {};
+            this.session = value.session;
+            this.responseId = value.responseId;
+            this.queryResult = value.queryResult
+                ? new QueryResult(value.queryResult)
+                : undefined;
+            this.originalDetectIntentRequest = value.originalDetectIntentRequest
+                ? new OriginalDetectIntentRequest(value.originalDetectIntentRequest)
+                : undefined;
+            this.headers = value.headers
+                ? new exports.Struct(value.headers)
+                : undefined;
+            WebhookRequest.refineValues(this);
+        }
+        WebhookRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            WebhookRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        WebhookRequest.fromBinary = function (bytes) {
+            var instance = new WebhookRequest();
+            WebhookRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        WebhookRequest.refineValues = function (instance) {
+            instance.session = instance.session || '';
+            instance.responseId = instance.responseId || '';
+            instance.queryResult = instance.queryResult || undefined;
+            instance.originalDetectIntentRequest =
+                instance.originalDetectIntentRequest || undefined;
+            instance.headers = instance.headers || undefined;
+        };
+        WebhookRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 4:
+                        instance.session = reader.readString();
+                        break;
+                    case 1:
+                        instance.responseId = reader.readString();
+                        break;
+                    case 2:
+                        instance.queryResult = new QueryResult();
+                        reader.readMessage(instance.queryResult, QueryResult.fromBinaryReader);
+                        break;
+                    case 3:
+                        instance.originalDetectIntentRequest = new OriginalDetectIntentRequest();
+                        reader.readMessage(instance.originalDetectIntentRequest, OriginalDetectIntentRequest.fromBinaryReader);
+                        break;
+                    case 5:
+                        instance.headers = new exports.Struct();
+                        reader.readMessage(instance.headers, exports.Struct.fromBinaryReader);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            WebhookRequest.refineValues(instance);
+        };
+        WebhookRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.session) {
+                writer.writeString(4, instance.session);
+            }
+            if (instance.responseId) {
+                writer.writeString(1, instance.responseId);
+            }
+            if (instance.queryResult) {
+                writer.writeMessage(2, instance.queryResult, QueryResult.toBinaryWriter);
+            }
+            if (instance.originalDetectIntentRequest) {
+                writer.writeMessage(3, instance.originalDetectIntentRequest, OriginalDetectIntentRequest.toBinaryWriter);
+            }
+            if (instance.headers) {
+                writer.writeMessage(5, instance.headers, exports.Struct.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(WebhookRequest.prototype, "session", {
+            get: function () {
+                return this._session;
+            },
+            set: function (value) {
+                this._session = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WebhookRequest.prototype, "responseId", {
+            get: function () {
+                return this._responseId;
+            },
+            set: function (value) {
+                this._responseId = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WebhookRequest.prototype, "queryResult", {
+            get: function () {
+                return this._queryResult;
+            },
+            set: function (value) {
+                this._queryResult = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WebhookRequest.prototype, "originalDetectIntentRequest", {
+            get: function () {
+                return this._originalDetectIntentRequest;
+            },
+            set: function (value) {
+                this._originalDetectIntentRequest = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WebhookRequest.prototype, "headers", {
+            get: function () {
+                return this._headers;
+            },
+            set: function (value) {
+                this._headers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        WebhookRequest.prototype.toObject = function () {
+            return {
+                session: this.session,
+                responseId: this.responseId,
+                queryResult: this.queryResult ? this.queryResult.toObject() : undefined,
+                originalDetectIntentRequest: this.originalDetectIntentRequest
+                    ? this.originalDetectIntentRequest.toObject()
+                    : undefined,
+                headers: this.headers ? this.headers.toObject() : undefined
+            };
+        };
+        WebhookRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return WebhookRequest;
+    }());
+    var WebhookResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param WebhookResponse value
+         */
+        function WebhookResponse(value) {
+            value = value || {};
+            this.fulfillmentText = value.fulfillmentText;
+            this.fulfillmentMessages = (value.fulfillmentMessages || []).map(function (m) { return new exports.Intent.Message(m); });
+            this.source = value.source;
+            this.payload = value.payload
+                ? new exports.Struct(value.payload)
+                : undefined;
+            this.outputContexts = (value.outputContexts || []).map(function (m) { return new exports.Context(m); });
+            this.followupEventInput = value.followupEventInput
+                ? new EventInput(value.followupEventInput)
+                : undefined;
+            WebhookResponse.refineValues(this);
+        }
+        WebhookResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            WebhookResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        WebhookResponse.fromBinary = function (bytes) {
+            var instance = new WebhookResponse();
+            WebhookResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        WebhookResponse.refineValues = function (instance) {
+            instance.fulfillmentText = instance.fulfillmentText || '';
+            instance.fulfillmentMessages = instance.fulfillmentMessages || [];
+            instance.source = instance.source || '';
+            instance.payload = instance.payload || undefined;
+            instance.outputContexts = instance.outputContexts || [];
+            instance.followupEventInput = instance.followupEventInput || undefined;
+        };
+        WebhookResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.fulfillmentText = reader.readString();
+                        break;
+                    case 2:
+                        var messageInitializer2 = new exports.Intent.Message();
+                        reader.readMessage(messageInitializer2, exports.Intent.Message.fromBinaryReader);
+                        (instance.fulfillmentMessages =
+                            instance.fulfillmentMessages || []).push(messageInitializer2);
+                        break;
+                    case 3:
+                        instance.source = reader.readString();
+                        break;
+                    case 4:
+                        instance.payload = new exports.Struct();
+                        reader.readMessage(instance.payload, exports.Struct.fromBinaryReader);
+                        break;
+                    case 5:
+                        var messageInitializer5 = new exports.Context();
+                        reader.readMessage(messageInitializer5, exports.Context.fromBinaryReader);
+                        (instance.outputContexts = instance.outputContexts || []).push(messageInitializer5);
+                        break;
+                    case 6:
+                        instance.followupEventInput = new EventInput();
+                        reader.readMessage(instance.followupEventInput, EventInput.fromBinaryReader);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            WebhookResponse.refineValues(instance);
+        };
+        WebhookResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.fulfillmentText) {
+                writer.writeString(1, instance.fulfillmentText);
+            }
+            if (instance.fulfillmentMessages && instance.fulfillmentMessages.length) {
+                writer.writeRepeatedMessage(2, instance.fulfillmentMessages, exports.Intent.Message.toBinaryWriter);
+            }
+            if (instance.source) {
+                writer.writeString(3, instance.source);
+            }
+            if (instance.payload) {
+                writer.writeMessage(4, instance.payload, exports.Struct.toBinaryWriter);
+            }
+            if (instance.outputContexts && instance.outputContexts.length) {
+                writer.writeRepeatedMessage(5, instance.outputContexts, exports.Context.toBinaryWriter);
+            }
+            if (instance.followupEventInput) {
+                writer.writeMessage(6, instance.followupEventInput, EventInput.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(WebhookResponse.prototype, "fulfillmentText", {
+            get: function () {
+                return this._fulfillmentText;
+            },
+            set: function (value) {
+                this._fulfillmentText = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WebhookResponse.prototype, "fulfillmentMessages", {
+            get: function () {
+                return this._fulfillmentMessages;
+            },
+            set: function (value) {
+                this._fulfillmentMessages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WebhookResponse.prototype, "source", {
+            get: function () {
+                return this._source;
+            },
+            set: function (value) {
+                this._source = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WebhookResponse.prototype, "payload", {
+            get: function () {
+                return this._payload;
+            },
+            set: function (value) {
+                this._payload = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WebhookResponse.prototype, "outputContexts", {
+            get: function () {
+                return this._outputContexts;
+            },
+            set: function (value) {
+                this._outputContexts = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(WebhookResponse.prototype, "followupEventInput", {
+            get: function () {
+                return this._followupEventInput;
+            },
+            set: function (value) {
+                this._followupEventInput = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        WebhookResponse.prototype.toObject = function () {
+            return {
+                fulfillmentText: this.fulfillmentText,
+                fulfillmentMessages: (this.fulfillmentMessages || []).map(function (m) { return m.toObject(); }),
+                source: this.source,
+                payload: this.payload ? this.payload.toObject() : undefined,
+                outputContexts: (this.outputContexts || []).map(function (m) { return m.toObject(); }),
+                followupEventInput: this.followupEventInput
+                    ? this.followupEventInput.toObject()
+                    : undefined
+            };
+        };
+        WebhookResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return WebhookResponse;
+    }());
+    var OriginalDetectIntentRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param OriginalDetectIntentRequest value
+         */
+        function OriginalDetectIntentRequest(value) {
+            value = value || {};
+            this.source = value.source;
+            this.payload = value.payload
+                ? new exports.Struct(value.payload)
+                : undefined;
+            OriginalDetectIntentRequest.refineValues(this);
+        }
+        OriginalDetectIntentRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            OriginalDetectIntentRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        OriginalDetectIntentRequest.fromBinary = function (bytes) {
+            var instance = new OriginalDetectIntentRequest();
+            OriginalDetectIntentRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        OriginalDetectIntentRequest.refineValues = function (instance) {
+            instance.source = instance.source || '';
+            instance.payload = instance.payload || undefined;
+        };
+        OriginalDetectIntentRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.source = reader.readString();
+                        break;
+                    case 3:
+                        instance.payload = new exports.Struct();
+                        reader.readMessage(instance.payload, exports.Struct.fromBinaryReader);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            OriginalDetectIntentRequest.refineValues(instance);
+        };
+        OriginalDetectIntentRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.source) {
+                writer.writeString(1, instance.source);
+            }
+            if (instance.payload) {
+                writer.writeMessage(3, instance.payload, exports.Struct.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(OriginalDetectIntentRequest.prototype, "source", {
+            get: function () {
+                return this._source;
+            },
+            set: function (value) {
+                this._source = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(OriginalDetectIntentRequest.prototype, "payload", {
+            get: function () {
+                return this._payload;
+            },
+            set: function (value) {
+                this._payload = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        OriginalDetectIntentRequest.prototype.toObject = function () {
+            return {
+                source: this.source,
+                payload: this.payload ? this.payload.toObject() : undefined
+            };
+        };
+        OriginalDetectIntentRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return OriginalDetectIntentRequest;
+    }());
+    var PingResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param PingResponse value
+         */
+        function PingResponse(value) {
+            value = value || {};
+            this.isReachable = value.isReachable;
+            PingResponse.refineValues(this);
+        }
+        PingResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            PingResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        PingResponse.fromBinary = function (bytes) {
+            var instance = new PingResponse();
+            PingResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        PingResponse.refineValues = function (instance) {
+            instance.isReachable = instance.isReachable || false;
+        };
+        PingResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.isReachable = reader.readBool();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            PingResponse.refineValues(instance);
+        };
+        PingResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.isReachable) {
+                writer.writeBool(1, instance.isReachable);
+            }
+        };
+        Object.defineProperty(PingResponse.prototype, "isReachable", {
+            get: function () {
+                return this._isReachable;
+            },
+            set: function (value) {
+                this._isReachable = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        PingResponse.prototype.toObject = function () {
+            return {
+                isReachable: this.isReachable
+            };
+        };
+        PingResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return PingResponse;
+    }());
+
     /* tslint:disable */
     /*
       To configure the services you need to provide a configuration for each of them.
@@ -24904,29 +25968,116 @@
 
       @NgModule({
         providers: [
-          { provide: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, useValue: grpcSettings },
+          { provide: GRPC_WEBHOOK_CLIENT_SETTINGS, useValue: grpcSettings },
         ],
       })
       export class GrpcConfigModule { }
     */
-    var GRPC_PROJECT_ROLES_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_PROJECT_ROLES_CLIENT_SETTINGS');
+    var GRPC_WEBHOOK_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_WEBHOOK_CLIENT_SETTINGS');
 
     /* tslint:disable */
-    /*
-      To configure the services you need to provide a configuration for each of them.
-
-      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-      const grpcSettings = { host: environment.grpcHost };
-
-      @NgModule({
-        providers: [
-          { provide: GRPC_AGENTS_CLIENT_SETTINGS, useValue: grpcSettings },
-        ],
-      })
-      export class GrpcConfigModule { }
-    */
-    var GRPC_AGENTS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_AGENTS_CLIENT_SETTINGS');
+    var WebhookClient = /** @class */ (function () {
+        function WebhookClient(settings, clientFactory, handler) {
+            this.handler = handler;
+            this.client = clientFactory.createClient('ondewo.nlu.Webhook', settings);
+        }
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.WebhookRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.WebhookResponse>
+         */
+        WebhookClient.prototype.responseRefinement = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.responseRefinement$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.WebhookRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.WebhookResponse>>
+         */
+        WebhookClient.prototype.responseRefinement$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Webhook/ResponseRefinement',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: WebhookRequest,
+                responseClass: WebhookResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.WebhookRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.WebhookResponse>
+         */
+        WebhookClient.prototype.slotFilling = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.slotFilling$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.WebhookRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.WebhookResponse>>
+         */
+        WebhookClient.prototype.slotFilling$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Webhook/SlotFilling',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: WebhookRequest,
+                responseClass: WebhookResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.PingRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.PingResponse>
+         */
+        WebhookClient.prototype.ping = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.ping$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.PingRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.PingResponse>>
+         */
+        WebhookClient.prototype.ping$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Webhook/Ping',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: PingRequest,
+                responseClass: PingResponse
+            });
+        };
+        return WebhookClient;
+    }());
+    WebhookClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function WebhookClient_Factory() { return new WebhookClient(i0.ɵɵinject(GRPC_WEBHOOK_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: WebhookClient, providedIn: "root" });
+    WebhookClient.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    WebhookClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_WEBHOOK_CLIENT_SETTINGS,] }] },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
+        { type: i2.GrpcHandler }
+    ]; };
 
     /* tslint:disable */
     var AgentsClient = /** @class */ (function () {
@@ -25619,932 +26770,6 @@
         { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
         { type: i2.GrpcHandler }
     ]; };
-
-    /* tslint:disable */
-    var EntityTypesClient = /** @class */ (function () {
-        function EntityTypesClient(settings, clientFactory, handler) {
-            this.handler = handler;
-            this.client = clientFactory.createClient('ondewo.nlu.EntityTypes', settings);
-        }
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.ListEntityTypesRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.ListEntityTypesResponse>
-         */
-        EntityTypesClient.prototype.listEntityTypes = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.listEntityTypes$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.ListEntityTypesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>
-         */
-        EntityTypesClient.prototype.listEntityTypes$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/ListEntityTypes',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: ListEntityTypesRequest,
-                responseClass: ListEntityTypesResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetEntityTypeRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.EntityType>
-         */
-        EntityTypesClient.prototype.getEntityType = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getEntityType$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetEntityTypeRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.EntityType>>
-         */
-        EntityTypesClient.prototype.getEntityType$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/GetEntityType',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: GetEntityTypeRequest,
-                responseClass: exports.EntityType
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.CreateEntityTypeRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.EntityType>
-         */
-        EntityTypesClient.prototype.createEntityType = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.createEntityType$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.CreateEntityTypeRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.EntityType>>
-         */
-        EntityTypesClient.prototype.createEntityType$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/CreateEntityType',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: CreateEntityTypeRequest,
-                responseClass: exports.EntityType
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.UpdateEntityTypeRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.EntityType>
-         */
-        EntityTypesClient.prototype.updateEntityType = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.updateEntityType$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.UpdateEntityTypeRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.EntityType>>
-         */
-        EntityTypesClient.prototype.updateEntityType$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/UpdateEntityType',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: UpdateEntityTypeRequest,
-                responseClass: exports.EntityType
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.DeleteEntityTypeRequest request
-         * @param Metadata metadata
-         * @return Observable<googleProtobuf002.Empty>
-         */
-        EntityTypesClient.prototype.deleteEntityType = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.deleteEntityType$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.DeleteEntityTypeRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
-         */
-        EntityTypesClient.prototype.deleteEntityType$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/DeleteEntityType',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: DeleteEntityTypeRequest,
-                responseClass: Empty
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.BatchUpdateEntityTypesRequest request
-         * @param Metadata metadata
-         * @return Observable<googleLongrunning001.Operation>
-         */
-        EntityTypesClient.prototype.batchUpdateEntityTypes = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.batchUpdateEntityTypes$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.BatchUpdateEntityTypesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-         */
-        EntityTypesClient.prototype.batchUpdateEntityTypes$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: exports.BatchUpdateEntityTypesRequest,
-                responseClass: exports.Operation
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.BatchDeleteEntityTypesRequest request
-         * @param Metadata metadata
-         * @return Observable<googleLongrunning001.Operation>
-         */
-        EntityTypesClient.prototype.batchDeleteEntityTypes = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.batchDeleteEntityTypes$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.BatchDeleteEntityTypesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-         */
-        EntityTypesClient.prototype.batchDeleteEntityTypes$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: BatchDeleteEntityTypesRequest,
-                responseClass: exports.Operation
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.BatchCreateEntitiesRequest request
-         * @param Metadata metadata
-         * @return Observable<googleLongrunning001.Operation>
-         */
-        EntityTypesClient.prototype.batchCreateEntities = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.batchCreateEntities$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.BatchCreateEntitiesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-         */
-        EntityTypesClient.prototype.batchCreateEntities$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/BatchCreateEntities',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: BatchCreateEntitiesRequest,
-                responseClass: exports.Operation
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.BatchUpdateEntitiesRequest request
-         * @param Metadata metadata
-         * @return Observable<googleLongrunning001.Operation>
-         */
-        EntityTypesClient.prototype.batchUpdateEntities = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.batchUpdateEntities$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.BatchUpdateEntitiesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-         */
-        EntityTypesClient.prototype.batchUpdateEntities$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/BatchUpdateEntities',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: BatchUpdateEntitiesRequest,
-                responseClass: exports.Operation
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.BatchDeleteEntitiesRequest request
-         * @param Metadata metadata
-         * @return Observable<googleLongrunning001.Operation>
-         */
-        EntityTypesClient.prototype.batchDeleteEntities = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.batchDeleteEntities$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.BatchDeleteEntitiesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-         */
-        EntityTypesClient.prototype.batchDeleteEntities$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.EntityTypes/BatchDeleteEntities',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: BatchDeleteEntitiesRequest,
-                responseClass: exports.Operation
-            });
-        };
-        return EntityTypesClient;
-    }());
-    EntityTypesClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function EntityTypesClient_Factory() { return new EntityTypesClient(i0.ɵɵinject(GRPC_ENTITY_TYPES_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: EntityTypesClient, providedIn: "root" });
-    EntityTypesClient.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root'
-                },] }
-    ];
-    EntityTypesClient.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_ENTITY_TYPES_CLIENT_SETTINGS,] }] },
-        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
-        { type: i2.GrpcHandler }
-    ]; };
-
-    /* tslint:disable */
-    var ProjectRolesClient = /** @class */ (function () {
-        function ProjectRolesClient(settings, clientFactory, handler) {
-            this.handler = handler;
-            this.client = clientFactory.createClient('ondewo.nlu.ProjectRoles', settings);
-        }
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.CreateProjectRoleRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.ProjectRole>
-         */
-        ProjectRolesClient.prototype.createProjectRole = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.createProjectRole$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.CreateProjectRoleRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.ProjectRole>>
-         */
-        ProjectRolesClient.prototype.createProjectRole$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectRoles/CreateProjectRole',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: CreateProjectRoleRequest,
-                responseClass: ProjectRole
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.GetProjectRoleRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.ProjectRole>
-         */
-        ProjectRolesClient.prototype.getProjectRole = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getProjectRole$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.GetProjectRoleRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.ProjectRole>>
-         */
-        ProjectRolesClient.prototype.getProjectRole$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectRoles/GetProjectRole',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: exports.GetProjectRoleRequest,
-                responseClass: ProjectRole
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.DeleteProjectRoleRequest request
-         * @param Metadata metadata
-         * @return Observable<googleProtobuf002.Empty>
-         */
-        ProjectRolesClient.prototype.deleteProjectRole = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.deleteProjectRole$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.DeleteProjectRoleRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
-         */
-        ProjectRolesClient.prototype.deleteProjectRole$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectRoles/DeleteProjectRole',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: DeleteProjectRoleRequest,
-                responseClass: Empty
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.UpdateProjectRoleRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.ProjectRole>
-         */
-        ProjectRolesClient.prototype.updateProjectRole = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.updateProjectRole$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.UpdateProjectRoleRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.ProjectRole>>
-         */
-        ProjectRolesClient.prototype.updateProjectRole$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectRoles/UpdateProjectRole',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: UpdateProjectRoleRequest,
-                responseClass: ProjectRole
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.ListProjectRolesRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.ListProjectRolesResponse>
-         */
-        ProjectRolesClient.prototype.listProjectRoles = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.listProjectRoles$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
-        };
-        /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.ListProjectRolesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.ListProjectRolesResponse>>
-         */
-        ProjectRolesClient.prototype.listProjectRoles$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.nlu.ProjectRoles/ListProjectRoles',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: ListProjectRolesRequest,
-                responseClass: ListProjectRolesResponse
-            });
-        };
-        return ProjectRolesClient;
-    }());
-    ProjectRolesClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProjectRolesClient_Factory() { return new ProjectRolesClient(i0.ɵɵinject(GRPC_PROJECT_ROLES_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: ProjectRolesClient, providedIn: "root" });
-    ProjectRolesClient.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root'
-                },] }
-    ];
-    ProjectRolesClient.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_PROJECT_ROLES_CLIENT_SETTINGS,] }] },
-        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
-        { type: i2.GrpcHandler }
-    ]; };
-
-    var Timestamp = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param Timestamp value
-         */
-        function Timestamp(value) {
-            value = value || {};
-            this.seconds = value.seconds;
-            this.nanos = value.nanos;
-            Timestamp.refineValues(this);
-        }
-        Timestamp.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Timestamp.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Timestamp.fromBinary = function (bytes) {
-            var instance = new Timestamp();
-            Timestamp.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        Timestamp.fromDate = function (date) {
-            var timestamp = new Timestamp();
-            timestamp.fromDate(date);
-            return timestamp;
-        };
-        Timestamp.fromISOString = function (isoDate) {
-            var timestamp = new Timestamp();
-            timestamp.fromISOString(isoDate);
-            return timestamp;
-        };
-        Timestamp.refineValues = function (instance) {
-            instance.seconds = instance.seconds || '0';
-            instance.nanos = instance.nanos || 0;
-        };
-        Timestamp.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.seconds = reader.readInt64String();
-                        break;
-                    case 2:
-                        instance.nanos = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            Timestamp.refineValues(instance);
-        };
-        Timestamp.toBinaryWriter = function (instance, writer) {
-            if (instance.seconds) {
-                writer.writeInt64String(1, instance.seconds);
-            }
-            if (instance.nanos) {
-                writer.writeInt32(2, instance.nanos);
-            }
-        };
-        Object.defineProperty(Timestamp.prototype, "seconds", {
-            get: function () {
-                return this._seconds;
-            },
-            set: function (value) {
-                this._seconds = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Timestamp.prototype, "nanos", {
-            get: function () {
-                return this._nanos;
-            },
-            set: function (value) {
-                this._nanos = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Timestamp.prototype.toObject = function () {
-            return {
-                seconds: this.seconds,
-                nanos: this.nanos
-            };
-        };
-        Timestamp.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        Timestamp.prototype.fromDate = function (date) {
-            this.seconds = '' + Math.floor(date.getTime() / 1e3);
-            this.nanos = date.getMilliseconds() * 1e6;
-        };
-        Timestamp.prototype.toDate = function () {
-            return new Date(parseInt(this.seconds || '0') * 1e3 + (this.nanos || 0) / 1e6);
-        };
-        Timestamp.prototype.fromISOString = function (isoDate) {
-            this.fromDate(new Date(isoDate));
-        };
-        Timestamp.prototype.toISOString = function () {
-            return this.toDate().toISOString();
-        };
-        return Timestamp;
-    }());
-
-    exports.OperationMetadata = /** @class */ (function () {
-        /**
-         * Creates an object and applies default Protobuf values
-         * @param OperationMetadata value
-         */
-        function OperationMetadata(value) {
-            value = value || {};
-            this.status = value.status;
-            this.parentOperationName = value.parentOperationName;
-            this.subOperationNames = (value.subOperationNames || []).slice();
-            this.createTime = value.createTime
-                ? new Timestamp(value.createTime)
-                : undefined;
-            this.startTime = value.startTime
-                ? new Timestamp(value.startTime)
-                : undefined;
-            this.endTime = value.endTime
-                ? new Timestamp(value.endTime)
-                : undefined;
-            this.isCancellationRequested = value.isCancellationRequested;
-            this.cancelCommand = value.cancelCommand;
-            this.userIdCreated = value.userIdCreated;
-            this.userIdCancelled = value.userIdCancelled;
-            this.projectParent = value.projectParent;
-            this.operationType = value.operationType;
-            this.hostName = value.hostName;
-            this.numReruns = value.numReruns;
-            this.maxNumReruns = value.maxNumReruns;
-            OperationMetadata.refineValues(this);
-        }
-        OperationMetadata.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            OperationMetadata.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        OperationMetadata.fromBinary = function (bytes) {
-            var instance = new OperationMetadata();
-            OperationMetadata.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        OperationMetadata.refineValues = function (instance) {
-            instance.status = instance.status || 0;
-            instance.parentOperationName = instance.parentOperationName || '';
-            instance.subOperationNames = instance.subOperationNames || [];
-            instance.createTime = instance.createTime || undefined;
-            instance.startTime = instance.startTime || undefined;
-            instance.endTime = instance.endTime || undefined;
-            instance.isCancellationRequested =
-                instance.isCancellationRequested || false;
-            instance.cancelCommand = instance.cancelCommand || '';
-            instance.userIdCreated = instance.userIdCreated || '';
-            instance.userIdCancelled = instance.userIdCancelled || '';
-            instance.projectParent = instance.projectParent || '';
-            instance.operationType = instance.operationType || 0;
-            instance.hostName = instance.hostName || '';
-            instance.numReruns = instance.numReruns || 0;
-            instance.maxNumReruns = instance.maxNumReruns || 0;
-        };
-        OperationMetadata.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        instance.status = reader.readEnum();
-                        break;
-                    case 2:
-                        instance.parentOperationName = reader.readString();
-                        break;
-                    case 3:
-                        (instance.subOperationNames = instance.subOperationNames || []).push(reader.readString());
-                        break;
-                    case 4:
-                        instance.createTime = new Timestamp();
-                        reader.readMessage(instance.createTime, Timestamp.fromBinaryReader);
-                        break;
-                    case 5:
-                        instance.startTime = new Timestamp();
-                        reader.readMessage(instance.startTime, Timestamp.fromBinaryReader);
-                        break;
-                    case 6:
-                        instance.endTime = new Timestamp();
-                        reader.readMessage(instance.endTime, Timestamp.fromBinaryReader);
-                        break;
-                    case 7:
-                        instance.isCancellationRequested = reader.readBool();
-                        break;
-                    case 8:
-                        instance.cancelCommand = reader.readString();
-                        break;
-                    case 9:
-                        instance.userIdCreated = reader.readString();
-                        break;
-                    case 10:
-                        instance.userIdCancelled = reader.readString();
-                        break;
-                    case 11:
-                        instance.projectParent = reader.readString();
-                        break;
-                    case 12:
-                        instance.operationType = reader.readEnum();
-                        break;
-                    case 13:
-                        instance.hostName = reader.readString();
-                        break;
-                    case 14:
-                        instance.numReruns = reader.readInt32();
-                        break;
-                    case 15:
-                        instance.maxNumReruns = reader.readInt32();
-                        break;
-                    default:
-                        reader.skipField();
-                }
-            }
-            OperationMetadata.refineValues(instance);
-        };
-        OperationMetadata.toBinaryWriter = function (instance, writer) {
-            if (instance.status) {
-                writer.writeEnum(1, instance.status);
-            }
-            if (instance.parentOperationName) {
-                writer.writeString(2, instance.parentOperationName);
-            }
-            if (instance.subOperationNames && instance.subOperationNames.length) {
-                writer.writeRepeatedString(3, instance.subOperationNames);
-            }
-            if (instance.createTime) {
-                writer.writeMessage(4, instance.createTime, Timestamp.toBinaryWriter);
-            }
-            if (instance.startTime) {
-                writer.writeMessage(5, instance.startTime, Timestamp.toBinaryWriter);
-            }
-            if (instance.endTime) {
-                writer.writeMessage(6, instance.endTime, Timestamp.toBinaryWriter);
-            }
-            if (instance.isCancellationRequested) {
-                writer.writeBool(7, instance.isCancellationRequested);
-            }
-            if (instance.cancelCommand) {
-                writer.writeString(8, instance.cancelCommand);
-            }
-            if (instance.userIdCreated) {
-                writer.writeString(9, instance.userIdCreated);
-            }
-            if (instance.userIdCancelled) {
-                writer.writeString(10, instance.userIdCancelled);
-            }
-            if (instance.projectParent) {
-                writer.writeString(11, instance.projectParent);
-            }
-            if (instance.operationType) {
-                writer.writeEnum(12, instance.operationType);
-            }
-            if (instance.hostName) {
-                writer.writeString(13, instance.hostName);
-            }
-            if (instance.numReruns) {
-                writer.writeInt32(14, instance.numReruns);
-            }
-            if (instance.maxNumReruns) {
-                writer.writeInt32(15, instance.maxNumReruns);
-            }
-        };
-        Object.defineProperty(OperationMetadata.prototype, "status", {
-            get: function () {
-                return this._status;
-            },
-            set: function (value) {
-                this._status = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "parentOperationName", {
-            get: function () {
-                return this._parentOperationName;
-            },
-            set: function (value) {
-                this._parentOperationName = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "subOperationNames", {
-            get: function () {
-                return this._subOperationNames;
-            },
-            set: function (value) {
-                this._subOperationNames = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "createTime", {
-            get: function () {
-                return this._createTime;
-            },
-            set: function (value) {
-                this._createTime = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "startTime", {
-            get: function () {
-                return this._startTime;
-            },
-            set: function (value) {
-                this._startTime = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "endTime", {
-            get: function () {
-                return this._endTime;
-            },
-            set: function (value) {
-                this._endTime = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "isCancellationRequested", {
-            get: function () {
-                return this._isCancellationRequested;
-            },
-            set: function (value) {
-                this._isCancellationRequested = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "cancelCommand", {
-            get: function () {
-                return this._cancelCommand;
-            },
-            set: function (value) {
-                this._cancelCommand = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "userIdCreated", {
-            get: function () {
-                return this._userIdCreated;
-            },
-            set: function (value) {
-                this._userIdCreated = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "userIdCancelled", {
-            get: function () {
-                return this._userIdCancelled;
-            },
-            set: function (value) {
-                this._userIdCancelled = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "projectParent", {
-            get: function () {
-                return this._projectParent;
-            },
-            set: function (value) {
-                this._projectParent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "operationType", {
-            get: function () {
-                return this._operationType;
-            },
-            set: function (value) {
-                this._operationType = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "hostName", {
-            get: function () {
-                return this._hostName;
-            },
-            set: function (value) {
-                this._hostName = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "numReruns", {
-            get: function () {
-                return this._numReruns;
-            },
-            set: function (value) {
-                this._numReruns = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(OperationMetadata.prototype, "maxNumReruns", {
-            get: function () {
-                return this._maxNumReruns;
-            },
-            set: function (value) {
-                this._maxNumReruns = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        OperationMetadata.prototype.toObject = function () {
-            return {
-                status: this.status,
-                parentOperationName: this.parentOperationName,
-                subOperationNames: (this.subOperationNames || []).slice(),
-                createTime: this.createTime ? this.createTime.toObject() : undefined,
-                startTime: this.startTime ? this.startTime.toObject() : undefined,
-                endTime: this.endTime ? this.endTime.toObject() : undefined,
-                isCancellationRequested: this.isCancellationRequested,
-                cancelCommand: this.cancelCommand,
-                userIdCreated: this.userIdCreated,
-                userIdCancelled: this.userIdCancelled,
-                projectParent: this.projectParent,
-                operationType: this.operationType,
-                hostName: this.hostName,
-                numReruns: this.numReruns,
-                maxNumReruns: this.maxNumReruns
-            };
-        };
-        OperationMetadata.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        return OperationMetadata;
-    }());
-    (function (OperationMetadata) {
-        var Status;
-        (function (Status) {
-            Status[Status["statusUnspecified"] = 0] = "statusUnspecified";
-            Status[Status["notStarted"] = 1] = "notStarted";
-            Status[Status["inProgress"] = 2] = "inProgress";
-            Status[Status["done"] = 3] = "done";
-            Status[Status["cancelled"] = 4] = "cancelled";
-            Status[Status["failed"] = 5] = "failed";
-        })(Status = OperationMetadata.Status || (OperationMetadata.Status = {}));
-        var OperationType;
-        (function (OperationType) {
-            OperationType[OperationType["operationTypeUnspecified"] = 0] = "operationTypeUnspecified";
-            OperationType[OperationType["createAgent"] = 1] = "createAgent";
-            OperationType[OperationType["importAgent"] = 2] = "importAgent";
-            OperationType[OperationType["exportAgent"] = 3] = "exportAgent";
-            OperationType[OperationType["deleteAgent"] = 4] = "deleteAgent";
-            OperationType[OperationType["restoreAgent"] = 5] = "restoreAgent";
-            OperationType[OperationType["buildAgentCache"] = 6] = "buildAgentCache";
-            OperationType[OperationType["trainAgent"] = 7] = "trainAgent";
-        })(OperationType = OperationMetadata.OperationType || (OperationMetadata.OperationType = {}));
-    })(exports.OperationMetadata || (exports.OperationMetadata = {}));
 
     var FileDescriptorSet = /** @class */ (function () {
         /**
@@ -30865,7 +31090,6 @@
     exports.BertAugEnrichmentConfig = BertAugEnrichmentConfig;
     exports.BuildCacheRequest = BuildCacheRequest;
     exports.CancelOperationRequest = CancelOperationRequest;
-    exports.Context = Context;
     exports.ContextsClient = ContextsClient;
     exports.CreateAgentRequest = CreateAgentRequest;
     exports.CreateContextRequest = CreateContextRequest;

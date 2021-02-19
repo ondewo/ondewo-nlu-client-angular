@@ -176,9 +176,7 @@ export declare class WebhookRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf004.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -212,9 +210,7 @@ export declare class WebhookRequest implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf004.Value;
-                        };
+                        [x: string]: ondewoNlu001.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -488,9 +484,7 @@ export declare class WebhookRequest implements GrpcMessage {
                 name: string;
                 lifespanCount: number;
                 parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf004.Value;
-                    };
+                    [x: string]: ondewoNlu001.Context.Parameter;
                 };
                 lifespanTime: number;
             }[];
@@ -524,9 +518,7 @@ export declare class WebhookRequest implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf004.Value;
-                        };
+                        [x: string]: ondewoNlu001.Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -818,9 +810,7 @@ export declare class WebhookResponse implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
+                [x: string]: ondewoNlu001.Context.Parameter;
             };
             lifespanTime: number;
         }[];
@@ -945,9 +935,7 @@ export declare class WebhookResponse implements GrpcMessage {
             name: string;
             lifespanCount: number;
             parameters: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
+                [x: string]: ondewoNlu001.Context.Parameter;
             };
             lifespanTime: number;
         }[];

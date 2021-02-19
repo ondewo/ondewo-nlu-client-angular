@@ -1,7 +1,7 @@
+import { BinaryWriter, BinaryReader } from 'google-protobuf';
 import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, Injectable, Optional, Inject } from '@angular/core';
 import { GrpcCallType } from '@ngx-grpc/common';
 import { throwStatusErrors, takeMessages, GRPC_CLIENT_FACTORY, GrpcHandler } from '@ngx-grpc/core';
-import { BinaryWriter, BinaryReader } from 'google-protobuf';
 
 var NullValue;
 (function (NullValue) {
@@ -683,9 +683,7 @@ class Context {
         value = value || {};
         this.name = value.name;
         this.lifespanCount = value.lifespanCount;
-        this.parameters = value.parameters
-            ? new Struct(value.parameters)
-            : undefined;
+        this.parameters = Object.assign({}, (value.parameters || {}));
         this.lifespanTime = value.lifespanTime;
         Context.refineValues(this);
     }
@@ -702,7 +700,7 @@ class Context {
     static refineValues(instance) {
         instance.name = instance.name || '';
         instance.lifespanCount = instance.lifespanCount || 0;
-        instance.parameters = instance.parameters || undefined;
+        instance.parameters = instance.parameters || {};
         instance.lifespanTime = instance.lifespanTime || 0;
     }
     static fromBinaryReader(instance, reader) {
@@ -717,8 +715,10 @@ class Context {
                     instance.lifespanCount = reader.readInt32();
                     break;
                 case 3:
-                    instance.parameters = new Struct();
-                    reader.readMessage(instance.parameters, Struct.fromBinaryReader);
+                    const msg_3 = {};
+                    reader.readMessage(msg_3, Context.ParametersEntry.fromBinaryReader);
+                    instance.parameters = instance.parameters || {};
+                    instance.parameters[msg_3.key] = msg_3.value;
                     break;
                 case 4:
                     instance.lifespanTime = reader.readFloat();
@@ -736,8 +736,14 @@ class Context {
         if (instance.lifespanCount) {
             writer.writeInt32(2, instance.lifespanCount);
         }
-        if (instance.parameters) {
-            writer.writeMessage(3, instance.parameters, Struct.toBinaryWriter);
+        if (!!instance.parameters) {
+            const keys_3 = Object.keys(instance.parameters);
+            if (keys_3.length) {
+                const repeated_3 = keys_3
+                    .map(key => ({ key: key, value: instance.parameters[key] }))
+                    .reduce((r, v) => [...r, v], []);
+                writer.writeRepeatedMessage(3, repeated_3, Context.ParametersEntry.toBinaryWriter);
+            }
         }
         if (instance.lifespanTime) {
             writer.writeFloat(4, instance.lifespanTime);
@@ -771,7 +777,7 @@ class Context {
         return {
             name: this.name,
             lifespanCount: this.lifespanCount,
-            parameters: this.parameters ? this.parameters.toObject() : undefined,
+            parameters: Object.assign({}, (this.parameters || {})),
             lifespanTime: this.lifespanTime
         };
     }
@@ -779,6 +785,185 @@ class Context {
         return this.toObject();
     }
 }
+(function (Context) {
+    class Parameter {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param Parameter value
+         */
+        constructor(value) {
+            value = value || {};
+            this.name = value.name;
+            this.displayName = value.displayName;
+            this.value = value.value;
+            this.valueOriginal = value.valueOriginal;
+            Parameter.refineValues(this);
+        }
+        static toBinary(instance) {
+            const writer = new BinaryWriter();
+            Parameter.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        }
+        static fromBinary(bytes) {
+            const instance = new Parameter();
+            Parameter.fromBinaryReader(instance, new BinaryReader(bytes));
+            return instance;
+        }
+        static refineValues(instance) {
+            instance.name = instance.name || '';
+            instance.displayName = instance.displayName || '';
+            instance.value = instance.value || '';
+            instance.valueOriginal = instance.valueOriginal || '';
+        }
+        static fromBinaryReader(instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.name = reader.readString();
+                        break;
+                    case 2:
+                        instance.displayName = reader.readString();
+                        break;
+                    case 3:
+                        instance.value = reader.readString();
+                        break;
+                    case 4:
+                        instance.valueOriginal = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            Parameter.refineValues(instance);
+        }
+        static toBinaryWriter(instance, writer) {
+            if (instance.name) {
+                writer.writeString(1, instance.name);
+            }
+            if (instance.displayName) {
+                writer.writeString(2, instance.displayName);
+            }
+            if (instance.value) {
+                writer.writeString(3, instance.value);
+            }
+            if (instance.valueOriginal) {
+                writer.writeString(4, instance.valueOriginal);
+            }
+        }
+        get name() {
+            return this._name;
+        }
+        set name(value) {
+            this._name = value;
+        }
+        get displayName() {
+            return this._displayName;
+        }
+        set displayName(value) {
+            this._displayName = value;
+        }
+        get value() {
+            return this._value;
+        }
+        set value(value) {
+            this._value = value;
+        }
+        get valueOriginal() {
+            return this._valueOriginal;
+        }
+        set valueOriginal(value) {
+            this._valueOriginal = value;
+        }
+        toObject() {
+            return {
+                name: this.name,
+                displayName: this.displayName,
+                value: this.value,
+                valueOriginal: this.valueOriginal
+            };
+        }
+        toJSON() {
+            return this.toObject();
+        }
+    }
+    Context.Parameter = Parameter;
+    class ParametersEntry {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ParametersEntry value
+         */
+        constructor(value) {
+            value = value || {};
+            this.key = value.key;
+            this.value = value.value ? new Context.Parameter(value.value) : undefined;
+            ParametersEntry.refineValues(this);
+        }
+        static toBinary(instance) {
+            const writer = new BinaryWriter();
+            ParametersEntry.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        }
+        static fromBinary(bytes) {
+            const instance = new ParametersEntry();
+            ParametersEntry.fromBinaryReader(instance, new BinaryReader(bytes));
+            return instance;
+        }
+        static refineValues(instance) {
+            instance.key = instance.key || '';
+            instance.value = instance.value || undefined;
+        }
+        static fromBinaryReader(instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.key = reader.readString();
+                        break;
+                    case 2:
+                        instance.value = new Context.Parameter();
+                        reader.readMessage(instance.value, Context.Parameter.fromBinaryReader);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ParametersEntry.refineValues(instance);
+        }
+        static toBinaryWriter(instance, writer) {
+            if (instance.key) {
+                writer.writeString(1, instance.key);
+            }
+            if (instance.value) {
+                writer.writeMessage(2, instance.value, Context.Parameter.toBinaryWriter);
+            }
+        }
+        get key() {
+            return this._key;
+        }
+        set key(value) {
+            this._key = value;
+        }
+        get value() {
+            return this._value;
+        }
+        set value(value) {
+            this._value = value;
+        }
+        toObject() {
+            return {
+                key: this.key,
+                value: this.value ? this.value.toObject() : undefined
+            };
+        }
+        toJSON() {
+            return this.toObject();
+        }
+    }
+    Context.ParametersEntry = ParametersEntry;
+})(Context || (Context = {}));
 class ListContextsRequest {
     /**
      * Creates an object and applies default Protobuf values
@@ -10234,7 +10419,7 @@ class GetAnswerRequest {
         this.maxNumAnswers = value.maxNumAnswers;
         this.thresholdReader = value.thresholdReader;
         this.thresholdRetriever = value.thresholdRetriever;
-        this.customScoreFormula = value.customScoreFormula;
+        this.thresholdOverall = value.thresholdOverall;
         this.readerModelName = value.readerModelName;
         GetAnswerRequest.refineValues(this);
     }
@@ -10254,7 +10439,7 @@ class GetAnswerRequest {
         instance.maxNumAnswers = instance.maxNumAnswers || 0;
         instance.thresholdReader = instance.thresholdReader || 0;
         instance.thresholdRetriever = instance.thresholdRetriever || 0;
-        instance.customScoreFormula = instance.customScoreFormula || '';
+        instance.thresholdOverall = instance.thresholdOverall || 0;
         instance.readerModelName = instance.readerModelName || '';
     }
     static fromBinaryReader(instance, reader) {
@@ -10279,7 +10464,7 @@ class GetAnswerRequest {
                     instance.thresholdRetriever = reader.readFloat();
                     break;
                 case 6:
-                    instance.customScoreFormula = reader.readString();
+                    instance.thresholdOverall = reader.readFloat();
                     break;
                 case 7:
                     instance.readerModelName = reader.readString();
@@ -10306,8 +10491,8 @@ class GetAnswerRequest {
         if (instance.thresholdRetriever) {
             writer.writeFloat(5, instance.thresholdRetriever);
         }
-        if (instance.customScoreFormula) {
-            writer.writeString(6, instance.customScoreFormula);
+        if (instance.thresholdOverall) {
+            writer.writeFloat(6, instance.thresholdOverall);
         }
         if (instance.readerModelName) {
             writer.writeString(7, instance.readerModelName);
@@ -10343,11 +10528,11 @@ class GetAnswerRequest {
     set thresholdRetriever(value) {
         this._thresholdRetriever = value;
     }
-    get customScoreFormula() {
-        return this._customScoreFormula;
+    get thresholdOverall() {
+        return this._thresholdOverall;
     }
-    set customScoreFormula(value) {
-        this._customScoreFormula = value;
+    set thresholdOverall(value) {
+        this._thresholdOverall = value;
     }
     get readerModelName() {
         return this._readerModelName;
@@ -10362,7 +10547,7 @@ class GetAnswerRequest {
             maxNumAnswers: this.maxNumAnswers,
             thresholdReader: this.thresholdReader,
             thresholdRetriever: this.thresholdRetriever,
-            customScoreFormula: this.customScoreFormula,
+            thresholdOverall: this.thresholdOverall,
             readerModelName: this.readerModelName
         };
     }
@@ -10729,6 +10914,4110 @@ QAClient.ctorParameters = () => [
     { type: GrpcHandler }
 ];
 
+var SortingMode;
+(function (SortingMode) {
+    SortingMode[SortingMode["ascending"] = 0] = "ascending";
+    SortingMode[SortingMode["descending"] = 1] = "descending";
+})(SortingMode || (SortingMode = {}));
+class StatResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param StatResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.value = value.value;
+        StatResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        StatResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new StatResponse();
+        StatResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.value = instance.value || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.value = reader.readUint32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        StatResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.value) {
+            writer.writeUint32(1, instance.value);
+        }
+    }
+    get value() {
+        return this._value;
+    }
+    set value(value) {
+        this._value = value;
+    }
+    toObject() {
+        return {
+            value: this.value
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+
+/* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_USERS_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_USERS_CLIENT_SETTINGS = new InjectionToken('GRPC_USERS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_INTENTS_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_INTENTS_CLIENT_SETTINGS = new InjectionToken('GRPC_INTENTS_CLIENT_SETTINGS');
+
+class ExtractEntitiesRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param ExtractEntitiesRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        this.text = value.text;
+        this.languageCode = value.languageCode;
+        ExtractEntitiesRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        ExtractEntitiesRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new ExtractEntitiesRequest();
+        ExtractEntitiesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+        instance.text = instance.text || '';
+        instance.languageCode = instance.languageCode || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                case 2:
+                    instance.text = reader.readString();
+                    break;
+                case 3:
+                    instance.languageCode = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        ExtractEntitiesRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+        if (instance.text) {
+            writer.writeString(2, instance.text);
+        }
+        if (instance.languageCode) {
+            writer.writeString(3, instance.languageCode);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent,
+            text: this.text,
+            languageCode: this.languageCode
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class ExtractEntitiesResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param ExtractEntitiesResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.entities = (value.entities || []).map(m => new Intent.TrainingPhrase.Entity(m));
+        this.text = value.text;
+        ExtractEntitiesResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        ExtractEntitiesResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new ExtractEntitiesResponse();
+        ExtractEntitiesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.entities = instance.entities || [];
+        instance.text = instance.text || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new Intent.TrainingPhrase.Entity();
+                    reader.readMessage(messageInitializer1, Intent.TrainingPhrase.Entity.fromBinaryReader);
+                    (instance.entities = instance.entities || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    instance.text = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        ExtractEntitiesResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.entities && instance.entities.length) {
+            writer.writeRepeatedMessage(1, instance.entities, Intent.TrainingPhrase.Entity.toBinaryWriter);
+        }
+        if (instance.text) {
+            writer.writeString(2, instance.text);
+        }
+    }
+    get entities() {
+        return this._entities;
+    }
+    set entities(value) {
+        this._entities = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    toObject() {
+        return {
+            entities: (this.entities || []).map(m => m.toObject()),
+            text: this.text
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GetAlternativeSentencesRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetAlternativeSentencesRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.config = value.config
+            ? new DataEnrichmentConfig(value.config)
+            : undefined;
+        this.sentence = value.sentence;
+        this.languageCode = value.languageCode;
+        this.parent = value.parent;
+        this.protectedWords = (value.protectedWords || []).slice();
+        this.wordsToChange = (value.wordsToChange || []).slice();
+        GetAlternativeSentencesRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetAlternativeSentencesRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetAlternativeSentencesRequest();
+        GetAlternativeSentencesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.config = instance.config || undefined;
+        instance.sentence = instance.sentence || '';
+        instance.languageCode = instance.languageCode || '';
+        instance.parent = instance.parent || '';
+        instance.protectedWords = instance.protectedWords || [];
+        instance.wordsToChange = instance.wordsToChange || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.config = new DataEnrichmentConfig();
+                    reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 2:
+                    instance.sentence = reader.readString();
+                    break;
+                case 4:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 5:
+                    instance.parent = reader.readString();
+                    break;
+                case 6:
+                    (instance.protectedWords = instance.protectedWords || []).push(reader.readString());
+                    break;
+                case 7:
+                    (instance.wordsToChange = instance.wordsToChange || []).push(reader.readString());
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetAlternativeSentencesRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.config) {
+            writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.sentence) {
+            writer.writeString(2, instance.sentence);
+        }
+        if (instance.languageCode) {
+            writer.writeString(4, instance.languageCode);
+        }
+        if (instance.parent) {
+            writer.writeString(5, instance.parent);
+        }
+        if (instance.protectedWords && instance.protectedWords.length) {
+            writer.writeRepeatedString(6, instance.protectedWords);
+        }
+        if (instance.wordsToChange && instance.wordsToChange.length) {
+            writer.writeRepeatedString(7, instance.wordsToChange);
+        }
+    }
+    get config() {
+        return this._config;
+    }
+    set config(value) {
+        this._config = value;
+    }
+    get sentence() {
+        return this._sentence;
+    }
+    set sentence(value) {
+        this._sentence = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get protectedWords() {
+        return this._protectedWords;
+    }
+    set protectedWords(value) {
+        this._protectedWords = value;
+    }
+    get wordsToChange() {
+        return this._wordsToChange;
+    }
+    set wordsToChange(value) {
+        this._wordsToChange = value;
+    }
+    toObject() {
+        return {
+            config: this.config ? this.config.toObject() : undefined,
+            sentence: this.sentence,
+            languageCode: this.languageCode,
+            parent: this.parent,
+            protectedWords: (this.protectedWords || []).slice(),
+            wordsToChange: (this.wordsToChange || []).slice()
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GenerateUserSaysRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GenerateUserSaysRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.languageCode = value.languageCode;
+        this.parent = value.parent;
+        this.nRepeatSynonym = value.nRepeatSynonym;
+        this.branch = value.branch;
+        GenerateUserSaysRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GenerateUserSaysRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GenerateUserSaysRequest();
+        GenerateUserSaysRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.languageCode = instance.languageCode || '';
+        instance.parent = instance.parent || '';
+        instance.nRepeatSynonym = instance.nRepeatSynonym || 0;
+        instance.branch = instance.branch || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 4:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 5:
+                    instance.parent = reader.readString();
+                    break;
+                case 6:
+                    instance.nRepeatSynonym = reader.readInt32();
+                    break;
+                case 8:
+                    instance.branch = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GenerateUserSaysRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.languageCode) {
+            writer.writeString(4, instance.languageCode);
+        }
+        if (instance.parent) {
+            writer.writeString(5, instance.parent);
+        }
+        if (instance.nRepeatSynonym) {
+            writer.writeInt32(6, instance.nRepeatSynonym);
+        }
+        if (instance.branch) {
+            writer.writeString(8, instance.branch);
+        }
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get nRepeatSynonym() {
+        return this._nRepeatSynonym;
+    }
+    set nRepeatSynonym(value) {
+        this._nRepeatSynonym = value;
+    }
+    get branch() {
+        return this._branch;
+    }
+    set branch(value) {
+        this._branch = value;
+    }
+    toObject() {
+        return {
+            languageCode: this.languageCode,
+            parent: this.parent,
+            nRepeatSynonym: this.nRepeatSynonym,
+            branch: this.branch
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GenerateResponsesRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GenerateResponsesRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.languageCode = value.languageCode;
+        this.parent = value.parent;
+        this.nRepeatSynonym = value.nRepeatSynonym;
+        this.branch = value.branch;
+        this.dropUnknownParameters = value.dropUnknownParameters;
+        GenerateResponsesRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GenerateResponsesRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GenerateResponsesRequest();
+        GenerateResponsesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.languageCode = instance.languageCode || '';
+        instance.parent = instance.parent || '';
+        instance.nRepeatSynonym = instance.nRepeatSynonym || 0;
+        instance.branch = instance.branch || '';
+        instance.dropUnknownParameters = instance.dropUnknownParameters || false;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 4:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 5:
+                    instance.parent = reader.readString();
+                    break;
+                case 7:
+                    instance.nRepeatSynonym = reader.readInt32();
+                    break;
+                case 8:
+                    instance.branch = reader.readString();
+                    break;
+                case 9:
+                    instance.dropUnknownParameters = reader.readBool();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GenerateResponsesRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.languageCode) {
+            writer.writeString(4, instance.languageCode);
+        }
+        if (instance.parent) {
+            writer.writeString(5, instance.parent);
+        }
+        if (instance.nRepeatSynonym) {
+            writer.writeInt32(7, instance.nRepeatSynonym);
+        }
+        if (instance.branch) {
+            writer.writeString(8, instance.branch);
+        }
+        if (instance.dropUnknownParameters) {
+            writer.writeBool(9, instance.dropUnknownParameters);
+        }
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get nRepeatSynonym() {
+        return this._nRepeatSynonym;
+    }
+    set nRepeatSynonym(value) {
+        this._nRepeatSynonym = value;
+    }
+    get branch() {
+        return this._branch;
+    }
+    set branch(value) {
+        this._branch = value;
+    }
+    get dropUnknownParameters() {
+        return this._dropUnknownParameters;
+    }
+    set dropUnknownParameters(value) {
+        this._dropUnknownParameters = value;
+    }
+    toObject() {
+        return {
+            languageCode: this.languageCode,
+            parent: this.parent,
+            nRepeatSynonym: this.nRepeatSynonym,
+            branch: this.branch,
+            dropUnknownParameters: this.dropUnknownParameters
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GetAlternativeTrainingPhrasesRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetAlternativeTrainingPhrasesRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.config = value.config
+            ? new DataEnrichmentConfig(value.config)
+            : undefined;
+        this.trainingPhrase = value.trainingPhrase
+            ? new Intent.TrainingPhrase(value.trainingPhrase)
+            : undefined;
+        this.intentName = value.intentName;
+        this.languageCode = value.languageCode;
+        this.parent = value.parent;
+        this.detectEntities = value.detectEntities;
+        this.similarityThreshold = value.similarityThreshold;
+        this.protectedWords = (value.protectedWords || []).slice();
+        this.wordsToChange = (value.wordsToChange || []).slice();
+        this.branch = value.branch;
+        GetAlternativeTrainingPhrasesRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetAlternativeTrainingPhrasesRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetAlternativeTrainingPhrasesRequest();
+        GetAlternativeTrainingPhrasesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.config = instance.config || undefined;
+        instance.trainingPhrase = instance.trainingPhrase || undefined;
+        instance.intentName = instance.intentName || '';
+        instance.languageCode = instance.languageCode || '';
+        instance.parent = instance.parent || '';
+        instance.detectEntities = instance.detectEntities || false;
+        instance.similarityThreshold = instance.similarityThreshold || 0;
+        instance.protectedWords = instance.protectedWords || [];
+        instance.wordsToChange = instance.wordsToChange || [];
+        instance.branch = instance.branch || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.config = new DataEnrichmentConfig();
+                    reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 2:
+                    instance.trainingPhrase = new Intent.TrainingPhrase();
+                    reader.readMessage(instance.trainingPhrase, Intent.TrainingPhrase.fromBinaryReader);
+                    break;
+                case 3:
+                    instance.intentName = reader.readString();
+                    break;
+                case 4:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 5:
+                    instance.parent = reader.readString();
+                    break;
+                case 6:
+                    instance.detectEntities = reader.readBool();
+                    break;
+                case 7:
+                    instance.similarityThreshold = reader.readFloat();
+                    break;
+                case 8:
+                    (instance.protectedWords = instance.protectedWords || []).push(reader.readString());
+                    break;
+                case 9:
+                    (instance.wordsToChange = instance.wordsToChange || []).push(reader.readString());
+                    break;
+                case 10:
+                    instance.branch = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetAlternativeTrainingPhrasesRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.config) {
+            writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.trainingPhrase) {
+            writer.writeMessage(2, instance.trainingPhrase, Intent.TrainingPhrase.toBinaryWriter);
+        }
+        if (instance.intentName) {
+            writer.writeString(3, instance.intentName);
+        }
+        if (instance.languageCode) {
+            writer.writeString(4, instance.languageCode);
+        }
+        if (instance.parent) {
+            writer.writeString(5, instance.parent);
+        }
+        if (instance.detectEntities) {
+            writer.writeBool(6, instance.detectEntities);
+        }
+        if (instance.similarityThreshold) {
+            writer.writeFloat(7, instance.similarityThreshold);
+        }
+        if (instance.protectedWords && instance.protectedWords.length) {
+            writer.writeRepeatedString(8, instance.protectedWords);
+        }
+        if (instance.wordsToChange && instance.wordsToChange.length) {
+            writer.writeRepeatedString(9, instance.wordsToChange);
+        }
+        if (instance.branch) {
+            writer.writeString(10, instance.branch);
+        }
+    }
+    get config() {
+        return this._config;
+    }
+    set config(value) {
+        this._config = value;
+    }
+    get trainingPhrase() {
+        return this._trainingPhrase;
+    }
+    set trainingPhrase(value) {
+        this._trainingPhrase = value;
+    }
+    get intentName() {
+        return this._intentName;
+    }
+    set intentName(value) {
+        this._intentName = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get detectEntities() {
+        return this._detectEntities;
+    }
+    set detectEntities(value) {
+        this._detectEntities = value;
+    }
+    get similarityThreshold() {
+        return this._similarityThreshold;
+    }
+    set similarityThreshold(value) {
+        this._similarityThreshold = value;
+    }
+    get protectedWords() {
+        return this._protectedWords;
+    }
+    set protectedWords(value) {
+        this._protectedWords = value;
+    }
+    get wordsToChange() {
+        return this._wordsToChange;
+    }
+    set wordsToChange(value) {
+        this._wordsToChange = value;
+    }
+    get branch() {
+        return this._branch;
+    }
+    set branch(value) {
+        this._branch = value;
+    }
+    toObject() {
+        return {
+            config: this.config ? this.config.toObject() : undefined,
+            trainingPhrase: this.trainingPhrase
+                ? this.trainingPhrase.toObject()
+                : undefined,
+            intentName: this.intentName,
+            languageCode: this.languageCode,
+            parent: this.parent,
+            detectEntities: this.detectEntities,
+            similarityThreshold: this.similarityThreshold,
+            protectedWords: (this.protectedWords || []).slice(),
+            wordsToChange: (this.wordsToChange || []).slice(),
+            branch: this.branch
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GetSynonymsRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetSynonymsRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.config = value.config
+            ? new DataEnrichmentConfig(value.config)
+            : undefined;
+        this.word = value.word;
+        this.languageCode = value.languageCode;
+        this.parent = value.parent;
+        GetSynonymsRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetSynonymsRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetSynonymsRequest();
+        GetSynonymsRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.config = instance.config || undefined;
+        instance.word = instance.word || '';
+        instance.languageCode = instance.languageCode || '';
+        instance.parent = instance.parent || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.config = new DataEnrichmentConfig();
+                    reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 2:
+                    instance.word = reader.readString();
+                    break;
+                case 4:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 5:
+                    instance.parent = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetSynonymsRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.config) {
+            writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.word) {
+            writer.writeString(2, instance.word);
+        }
+        if (instance.languageCode) {
+            writer.writeString(4, instance.languageCode);
+        }
+        if (instance.parent) {
+            writer.writeString(5, instance.parent);
+        }
+    }
+    get config() {
+        return this._config;
+    }
+    set config(value) {
+        this._config = value;
+    }
+    get word() {
+        return this._word;
+    }
+    set word(value) {
+        this._word = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    toObject() {
+        return {
+            config: this.config ? this.config.toObject() : undefined,
+            word: this.word,
+            languageCode: this.languageCode,
+            parent: this.parent
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GetSynonymsResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetSynonymsResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.synonyms = (value.synonyms || []).map(m => new Synonym(m));
+        GetSynonymsResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetSynonymsResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetSynonymsResponse();
+        GetSynonymsResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.synonyms = instance.synonyms || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new Synonym();
+                    reader.readMessage(messageInitializer1, Synonym.fromBinaryReader);
+                    (instance.synonyms = instance.synonyms || []).push(messageInitializer1);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetSynonymsResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.synonyms && instance.synonyms.length) {
+            writer.writeRepeatedMessage(1, instance.synonyms, Synonym.toBinaryWriter);
+        }
+    }
+    get synonyms() {
+        return this._synonyms;
+    }
+    set synonyms(value) {
+        this._synonyms = value;
+    }
+    toObject() {
+        return {
+            synonyms: (this.synonyms || []).map(m => m.toObject())
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class Synonym {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param Synonym value
+     */
+    constructor(value) {
+        value = value || {};
+        this.synonym = value.synonym;
+        this.score = value.score;
+        Synonym.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        Synonym.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new Synonym();
+        Synonym.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.synonym = instance.synonym || '';
+        instance.score = instance.score || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.synonym = reader.readString();
+                    break;
+                case 2:
+                    instance.score = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        Synonym.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.synonym) {
+            writer.writeString(1, instance.synonym);
+        }
+        if (instance.score) {
+            writer.writeInt32(2, instance.score);
+        }
+    }
+    get synonym() {
+        return this._synonym;
+    }
+    set synonym(value) {
+        this._synonym = value;
+    }
+    get score() {
+        return this._score;
+    }
+    set score(value) {
+        this._score = value;
+    }
+    toObject() {
+        return {
+            synonym: this.synonym,
+            score: this.score
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GetAlternativeSentencesResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetAlternativeSentencesResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.alternativeSentences = (value.alternativeSentences || []).map(m => new AltSentence(m));
+        GetAlternativeSentencesResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetAlternativeSentencesResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetAlternativeSentencesResponse();
+        GetAlternativeSentencesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.alternativeSentences = instance.alternativeSentences || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new AltSentence();
+                    reader.readMessage(messageInitializer1, AltSentence.fromBinaryReader);
+                    (instance.alternativeSentences =
+                        instance.alternativeSentences || []).push(messageInitializer1);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetAlternativeSentencesResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.alternativeSentences && instance.alternativeSentences.length) {
+            writer.writeRepeatedMessage(1, instance.alternativeSentences, AltSentence.toBinaryWriter);
+        }
+    }
+    get alternativeSentences() {
+        return this._alternativeSentences;
+    }
+    set alternativeSentences(value) {
+        this._alternativeSentences = value;
+    }
+    toObject() {
+        return {
+            alternativeSentences: (this.alternativeSentences || []).map(m => m.toObject())
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GenerateResponsesResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GenerateResponsesResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.responses = (value.responses || []).slice();
+        GenerateResponsesResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GenerateResponsesResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GenerateResponsesResponse();
+        GenerateResponsesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.responses = instance.responses || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 2:
+                    (instance.responses = instance.responses || []).push(reader.readString());
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GenerateResponsesResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.responses && instance.responses.length) {
+            writer.writeRepeatedString(2, instance.responses);
+        }
+    }
+    get responses() {
+        return this._responses;
+    }
+    set responses(value) {
+        this._responses = value;
+    }
+    toObject() {
+        return {
+            responses: (this.responses || []).slice()
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GenerateUserSaysResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GenerateUserSaysResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.userSays = (value.userSays || []).slice();
+        GenerateUserSaysResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GenerateUserSaysResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GenerateUserSaysResponse();
+        GenerateUserSaysResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.userSays = instance.userSays || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 2:
+                    (instance.userSays = instance.userSays || []).push(reader.readString());
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GenerateUserSaysResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.userSays && instance.userSays.length) {
+            writer.writeRepeatedString(2, instance.userSays);
+        }
+    }
+    get userSays() {
+        return this._userSays;
+    }
+    set userSays(value) {
+        this._userSays = value;
+    }
+    toObject() {
+        return {
+            userSays: (this.userSays || []).slice()
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GetAlternativeTrainingPhrasesResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetAlternativeTrainingPhrasesResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.alternativeTrainingPhrases = (value.alternativeTrainingPhrases || []).map(m => new AltTrainingPhrase(m));
+        GetAlternativeTrainingPhrasesResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetAlternativeTrainingPhrasesResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetAlternativeTrainingPhrasesResponse();
+        GetAlternativeTrainingPhrasesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.alternativeTrainingPhrases =
+            instance.alternativeTrainingPhrases || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new AltTrainingPhrase();
+                    reader.readMessage(messageInitializer1, AltTrainingPhrase.fromBinaryReader);
+                    (instance.alternativeTrainingPhrases =
+                        instance.alternativeTrainingPhrases || []).push(messageInitializer1);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetAlternativeTrainingPhrasesResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.alternativeTrainingPhrases &&
+            instance.alternativeTrainingPhrases.length) {
+            writer.writeRepeatedMessage(1, instance.alternativeTrainingPhrases, AltTrainingPhrase.toBinaryWriter);
+        }
+    }
+    get alternativeTrainingPhrases() {
+        return this._alternativeTrainingPhrases;
+    }
+    set alternativeTrainingPhrases(value) {
+        this._alternativeTrainingPhrases = value;
+    }
+    toObject() {
+        return {
+            alternativeTrainingPhrases: (this.alternativeTrainingPhrases || []).map(m => m.toObject())
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class AltSentence {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param AltSentence value
+     */
+    constructor(value) {
+        value = value || {};
+        this.sentence = value.sentence;
+        this.score = value.score;
+        AltSentence.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        AltSentence.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new AltSentence();
+        AltSentence.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.sentence = instance.sentence || '';
+        instance.score = instance.score || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.sentence = reader.readString();
+                    break;
+                case 2:
+                    instance.score = reader.readFloat();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        AltSentence.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.sentence) {
+            writer.writeString(1, instance.sentence);
+        }
+        if (instance.score) {
+            writer.writeFloat(2, instance.score);
+        }
+    }
+    get sentence() {
+        return this._sentence;
+    }
+    set sentence(value) {
+        this._sentence = value;
+    }
+    get score() {
+        return this._score;
+    }
+    set score(value) {
+        this._score = value;
+    }
+    toObject() {
+        return {
+            sentence: this.sentence,
+            score: this.score
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class AltTrainingPhrase {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param AltTrainingPhrase value
+     */
+    constructor(value) {
+        value = value || {};
+        this.trainingPhrase = value.trainingPhrase
+            ? new Intent.TrainingPhrase(value.trainingPhrase)
+            : undefined;
+        this.score = value.score;
+        AltTrainingPhrase.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        AltTrainingPhrase.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new AltTrainingPhrase();
+        AltTrainingPhrase.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.trainingPhrase = instance.trainingPhrase || undefined;
+        instance.score = instance.score || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.trainingPhrase = new Intent.TrainingPhrase();
+                    reader.readMessage(instance.trainingPhrase, Intent.TrainingPhrase.fromBinaryReader);
+                    break;
+                case 2:
+                    instance.score = reader.readFloat();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        AltTrainingPhrase.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.trainingPhrase) {
+            writer.writeMessage(1, instance.trainingPhrase, Intent.TrainingPhrase.toBinaryWriter);
+        }
+        if (instance.score) {
+            writer.writeFloat(2, instance.score);
+        }
+    }
+    get trainingPhrase() {
+        return this._trainingPhrase;
+    }
+    set trainingPhrase(value) {
+        this._trainingPhrase = value;
+    }
+    get score() {
+        return this._score;
+    }
+    set score(value) {
+        this._score = value;
+    }
+    toObject() {
+        return {
+            trainingPhrase: this.trainingPhrase
+                ? this.trainingPhrase.toObject()
+                : undefined,
+            score: this.score
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class DataEnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param DataEnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.entityEnrichment = value.entityEnrichment
+            ? new EntityEnrichmentConfig(value.entityEnrichment)
+            : undefined;
+        this.thesaurusEnrichment = value.thesaurusEnrichment
+            ? new ThesaurusEnrichmentConfig(value.thesaurusEnrichment)
+            : undefined;
+        this.word2vecEnrichment = value.word2vecEnrichment
+            ? new Word2VecEnrichmentConfig(value.word2vecEnrichment)
+            : undefined;
+        this.wordNetEnrichment = value.wordNetEnrichment
+            ? new WordNetAugEnrichmentConfig(value.wordNetEnrichment)
+            : undefined;
+        this.gpt2Enrichment = value.gpt2Enrichment
+            ? new GPT2EnrichmentConfig(value.gpt2Enrichment)
+            : undefined;
+        this.gloveEnrichment = value.gloveEnrichment
+            ? new GloVeEnrichmentConfig(value.gloveEnrichment)
+            : undefined;
+        this.fasttextEnrichment = value.fasttextEnrichment
+            ? new FastTextEnrichmentConfig(value.fasttextEnrichment)
+            : undefined;
+        this.bertEnrichment = value.bertEnrichment
+            ? new BertAugEnrichmentConfig(value.bertEnrichment)
+            : undefined;
+        this.xlnetEnrichment = value.xlnetEnrichment
+            ? new XLNetAugEnrichmentConfig(value.xlnetEnrichment)
+            : undefined;
+        DataEnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        DataEnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new DataEnrichmentConfig();
+        DataEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.entityEnrichment = instance.entityEnrichment || undefined;
+        instance.thesaurusEnrichment = instance.thesaurusEnrichment || undefined;
+        instance.word2vecEnrichment = instance.word2vecEnrichment || undefined;
+        instance.wordNetEnrichment = instance.wordNetEnrichment || undefined;
+        instance.gpt2Enrichment = instance.gpt2Enrichment || undefined;
+        instance.gloveEnrichment = instance.gloveEnrichment || undefined;
+        instance.fasttextEnrichment = instance.fasttextEnrichment || undefined;
+        instance.bertEnrichment = instance.bertEnrichment || undefined;
+        instance.xlnetEnrichment = instance.xlnetEnrichment || undefined;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.entityEnrichment = new EntityEnrichmentConfig();
+                    reader.readMessage(instance.entityEnrichment, EntityEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 2:
+                    instance.thesaurusEnrichment = new ThesaurusEnrichmentConfig();
+                    reader.readMessage(instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 3:
+                    instance.word2vecEnrichment = new Word2VecEnrichmentConfig();
+                    reader.readMessage(instance.word2vecEnrichment, Word2VecEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 4:
+                    instance.wordNetEnrichment = new WordNetAugEnrichmentConfig();
+                    reader.readMessage(instance.wordNetEnrichment, WordNetAugEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 5:
+                    instance.gpt2Enrichment = new GPT2EnrichmentConfig();
+                    reader.readMessage(instance.gpt2Enrichment, GPT2EnrichmentConfig.fromBinaryReader);
+                    break;
+                case 6:
+                    instance.gloveEnrichment = new GloVeEnrichmentConfig();
+                    reader.readMessage(instance.gloveEnrichment, GloVeEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 7:
+                    instance.fasttextEnrichment = new FastTextEnrichmentConfig();
+                    reader.readMessage(instance.fasttextEnrichment, FastTextEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 8:
+                    instance.bertEnrichment = new BertAugEnrichmentConfig();
+                    reader.readMessage(instance.bertEnrichment, BertAugEnrichmentConfig.fromBinaryReader);
+                    break;
+                case 9:
+                    instance.xlnetEnrichment = new XLNetAugEnrichmentConfig();
+                    reader.readMessage(instance.xlnetEnrichment, XLNetAugEnrichmentConfig.fromBinaryReader);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        DataEnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.entityEnrichment) {
+            writer.writeMessage(1, instance.entityEnrichment, EntityEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.thesaurusEnrichment) {
+            writer.writeMessage(2, instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.word2vecEnrichment) {
+            writer.writeMessage(3, instance.word2vecEnrichment, Word2VecEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.wordNetEnrichment) {
+            writer.writeMessage(4, instance.wordNetEnrichment, WordNetAugEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.gpt2Enrichment) {
+            writer.writeMessage(5, instance.gpt2Enrichment, GPT2EnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.gloveEnrichment) {
+            writer.writeMessage(6, instance.gloveEnrichment, GloVeEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.fasttextEnrichment) {
+            writer.writeMessage(7, instance.fasttextEnrichment, FastTextEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.bertEnrichment) {
+            writer.writeMessage(8, instance.bertEnrichment, BertAugEnrichmentConfig.toBinaryWriter);
+        }
+        if (instance.xlnetEnrichment) {
+            writer.writeMessage(9, instance.xlnetEnrichment, XLNetAugEnrichmentConfig.toBinaryWriter);
+        }
+    }
+    get entityEnrichment() {
+        return this._entityEnrichment;
+    }
+    set entityEnrichment(value) {
+        this._entityEnrichment = value;
+    }
+    get thesaurusEnrichment() {
+        return this._thesaurusEnrichment;
+    }
+    set thesaurusEnrichment(value) {
+        this._thesaurusEnrichment = value;
+    }
+    get word2vecEnrichment() {
+        return this._word2vecEnrichment;
+    }
+    set word2vecEnrichment(value) {
+        this._word2vecEnrichment = value;
+    }
+    get wordNetEnrichment() {
+        return this._wordNetEnrichment;
+    }
+    set wordNetEnrichment(value) {
+        this._wordNetEnrichment = value;
+    }
+    get gpt2Enrichment() {
+        return this._gpt2Enrichment;
+    }
+    set gpt2Enrichment(value) {
+        this._gpt2Enrichment = value;
+    }
+    get gloveEnrichment() {
+        return this._gloveEnrichment;
+    }
+    set gloveEnrichment(value) {
+        this._gloveEnrichment = value;
+    }
+    get fasttextEnrichment() {
+        return this._fasttextEnrichment;
+    }
+    set fasttextEnrichment(value) {
+        this._fasttextEnrichment = value;
+    }
+    get bertEnrichment() {
+        return this._bertEnrichment;
+    }
+    set bertEnrichment(value) {
+        this._bertEnrichment = value;
+    }
+    get xlnetEnrichment() {
+        return this._xlnetEnrichment;
+    }
+    set xlnetEnrichment(value) {
+        this._xlnetEnrichment = value;
+    }
+    toObject() {
+        return {
+            entityEnrichment: this.entityEnrichment
+                ? this.entityEnrichment.toObject()
+                : undefined,
+            thesaurusEnrichment: this.thesaurusEnrichment
+                ? this.thesaurusEnrichment.toObject()
+                : undefined,
+            word2vecEnrichment: this.word2vecEnrichment
+                ? this.word2vecEnrichment.toObject()
+                : undefined,
+            wordNetEnrichment: this.wordNetEnrichment
+                ? this.wordNetEnrichment.toObject()
+                : undefined,
+            gpt2Enrichment: this.gpt2Enrichment
+                ? this.gpt2Enrichment.toObject()
+                : undefined,
+            gloveEnrichment: this.gloveEnrichment
+                ? this.gloveEnrichment.toObject()
+                : undefined,
+            fasttextEnrichment: this.fasttextEnrichment
+                ? this.fasttextEnrichment.toObject()
+                : undefined,
+            bertEnrichment: this.bertEnrichment
+                ? this.bertEnrichment.toObject()
+                : undefined,
+            xlnetEnrichment: this.xlnetEnrichment
+                ? this.xlnetEnrichment.toObject()
+                : undefined
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class EntityEnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param EntityEnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.isActive = value.isActive;
+        this.enrichmentFactor = value.enrichmentFactor;
+        this.executionOrder = value.executionOrder;
+        EntityEnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        EntityEnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new EntityEnrichmentConfig();
+        EntityEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.isActive = instance.isActive || false;
+        instance.enrichmentFactor = instance.enrichmentFactor || 0;
+        instance.executionOrder = instance.executionOrder || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.isActive = reader.readBool();
+                    break;
+                case 2:
+                    instance.enrichmentFactor = reader.readInt32();
+                    break;
+                case 3:
+                    instance.executionOrder = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        EntityEnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.isActive) {
+            writer.writeBool(1, instance.isActive);
+        }
+        if (instance.enrichmentFactor) {
+            writer.writeInt32(2, instance.enrichmentFactor);
+        }
+        if (instance.executionOrder) {
+            writer.writeInt32(3, instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class ThesaurusEnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param ThesaurusEnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.isActive = value.isActive;
+        this.enrichmentFactor = value.enrichmentFactor;
+        this.executionOrder = value.executionOrder;
+        ThesaurusEnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        ThesaurusEnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new ThesaurusEnrichmentConfig();
+        ThesaurusEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.isActive = instance.isActive || false;
+        instance.enrichmentFactor = instance.enrichmentFactor || 0;
+        instance.executionOrder = instance.executionOrder || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.isActive = reader.readBool();
+                    break;
+                case 2:
+                    instance.enrichmentFactor = reader.readInt32();
+                    break;
+                case 3:
+                    instance.executionOrder = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        ThesaurusEnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.isActive) {
+            writer.writeBool(1, instance.isActive);
+        }
+        if (instance.enrichmentFactor) {
+            writer.writeInt32(2, instance.enrichmentFactor);
+        }
+        if (instance.executionOrder) {
+            writer.writeInt32(3, instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class FastTextEnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param FastTextEnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.isActive = value.isActive;
+        this.enrichmentFactor = value.enrichmentFactor;
+        this.executionOrder = value.executionOrder;
+        FastTextEnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        FastTextEnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new FastTextEnrichmentConfig();
+        FastTextEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.isActive = instance.isActive || false;
+        instance.enrichmentFactor = instance.enrichmentFactor || 0;
+        instance.executionOrder = instance.executionOrder || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.isActive = reader.readBool();
+                    break;
+                case 2:
+                    instance.enrichmentFactor = reader.readInt32();
+                    break;
+                case 3:
+                    instance.executionOrder = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        FastTextEnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.isActive) {
+            writer.writeBool(1, instance.isActive);
+        }
+        if (instance.enrichmentFactor) {
+            writer.writeInt32(2, instance.enrichmentFactor);
+        }
+        if (instance.executionOrder) {
+            writer.writeInt32(3, instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class BertAugEnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param BertAugEnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.isActive = value.isActive;
+        this.enrichmentFactor = value.enrichmentFactor;
+        this.executionOrder = value.executionOrder;
+        BertAugEnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        BertAugEnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new BertAugEnrichmentConfig();
+        BertAugEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.isActive = instance.isActive || false;
+        instance.enrichmentFactor = instance.enrichmentFactor || 0;
+        instance.executionOrder = instance.executionOrder || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.isActive = reader.readBool();
+                    break;
+                case 2:
+                    instance.enrichmentFactor = reader.readInt32();
+                    break;
+                case 3:
+                    instance.executionOrder = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        BertAugEnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.isActive) {
+            writer.writeBool(1, instance.isActive);
+        }
+        if (instance.enrichmentFactor) {
+            writer.writeInt32(2, instance.enrichmentFactor);
+        }
+        if (instance.executionOrder) {
+            writer.writeInt32(3, instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GloVeEnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GloVeEnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.isActive = value.isActive;
+        this.enrichmentFactor = value.enrichmentFactor;
+        this.executionOrder = value.executionOrder;
+        GloVeEnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GloVeEnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GloVeEnrichmentConfig();
+        GloVeEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.isActive = instance.isActive || false;
+        instance.enrichmentFactor = instance.enrichmentFactor || 0;
+        instance.executionOrder = instance.executionOrder || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.isActive = reader.readBool();
+                    break;
+                case 2:
+                    instance.enrichmentFactor = reader.readInt32();
+                    break;
+                case 3:
+                    instance.executionOrder = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GloVeEnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.isActive) {
+            writer.writeBool(1, instance.isActive);
+        }
+        if (instance.enrichmentFactor) {
+            writer.writeInt32(2, instance.enrichmentFactor);
+        }
+        if (instance.executionOrder) {
+            writer.writeInt32(3, instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GPT2EnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GPT2EnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.isActive = value.isActive;
+        this.enrichmentFactor = value.enrichmentFactor;
+        this.executionOrder = value.executionOrder;
+        GPT2EnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GPT2EnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GPT2EnrichmentConfig();
+        GPT2EnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.isActive = instance.isActive || false;
+        instance.enrichmentFactor = instance.enrichmentFactor || 0;
+        instance.executionOrder = instance.executionOrder || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.isActive = reader.readBool();
+                    break;
+                case 2:
+                    instance.enrichmentFactor = reader.readInt32();
+                    break;
+                case 3:
+                    instance.executionOrder = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GPT2EnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.isActive) {
+            writer.writeBool(1, instance.isActive);
+        }
+        if (instance.enrichmentFactor) {
+            writer.writeInt32(2, instance.enrichmentFactor);
+        }
+        if (instance.executionOrder) {
+            writer.writeInt32(3, instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class Word2VecEnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param Word2VecEnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.isActive = value.isActive;
+        this.enrichmentFactor = value.enrichmentFactor;
+        this.executionOrder = value.executionOrder;
+        Word2VecEnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        Word2VecEnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new Word2VecEnrichmentConfig();
+        Word2VecEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.isActive = instance.isActive || false;
+        instance.enrichmentFactor = instance.enrichmentFactor || 0;
+        instance.executionOrder = instance.executionOrder || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.isActive = reader.readBool();
+                    break;
+                case 2:
+                    instance.enrichmentFactor = reader.readInt32();
+                    break;
+                case 3:
+                    instance.executionOrder = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        Word2VecEnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.isActive) {
+            writer.writeBool(1, instance.isActive);
+        }
+        if (instance.enrichmentFactor) {
+            writer.writeInt32(2, instance.enrichmentFactor);
+        }
+        if (instance.executionOrder) {
+            writer.writeInt32(3, instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class WordNetAugEnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param WordNetAugEnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.isActive = value.isActive;
+        this.enrichmentFactor = value.enrichmentFactor;
+        this.executionOrder = value.executionOrder;
+        WordNetAugEnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        WordNetAugEnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new WordNetAugEnrichmentConfig();
+        WordNetAugEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.isActive = instance.isActive || false;
+        instance.enrichmentFactor = instance.enrichmentFactor || 0;
+        instance.executionOrder = instance.executionOrder || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.isActive = reader.readBool();
+                    break;
+                case 2:
+                    instance.enrichmentFactor = reader.readInt32();
+                    break;
+                case 3:
+                    instance.executionOrder = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        WordNetAugEnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.isActive) {
+            writer.writeBool(1, instance.isActive);
+        }
+        if (instance.enrichmentFactor) {
+            writer.writeInt32(2, instance.enrichmentFactor);
+        }
+        if (instance.executionOrder) {
+            writer.writeInt32(3, instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class XLNetAugEnrichmentConfig {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param XLNetAugEnrichmentConfig value
+     */
+    constructor(value) {
+        value = value || {};
+        this.isActive = value.isActive;
+        this.enrichmentFactor = value.enrichmentFactor;
+        this.executionOrder = value.executionOrder;
+        XLNetAugEnrichmentConfig.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        XLNetAugEnrichmentConfig.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new XLNetAugEnrichmentConfig();
+        XLNetAugEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.isActive = instance.isActive || false;
+        instance.enrichmentFactor = instance.enrichmentFactor || 0;
+        instance.executionOrder = instance.executionOrder || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.isActive = reader.readBool();
+                    break;
+                case 2:
+                    instance.enrichmentFactor = reader.readInt32();
+                    break;
+                case 3:
+                    instance.executionOrder = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        XLNetAugEnrichmentConfig.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.isActive) {
+            writer.writeBool(1, instance.isActive);
+        }
+        if (instance.enrichmentFactor) {
+            writer.writeInt32(2, instance.enrichmentFactor);
+        }
+        if (instance.executionOrder) {
+            writer.writeInt32(3, instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+
+/* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_AI_SERVICES_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_AI_SERVICES_CLIENT_SETTINGS = new InjectionToken('GRPC_AI_SERVICES_CLIENT_SETTINGS');
+
+/* tslint:disable */
+class AiServicesClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.AiServices', settings);
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ExtractEntitiesRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ExtractEntitiesResponse>
+     */
+    extractEntities(requestData, requestMetadata = {}) {
+        return this.extractEntities$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ExtractEntitiesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>
+     */
+    extractEntities$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.AiServices/ExtractEntities',
+            requestData,
+            requestMetadata,
+            requestClass: ExtractEntitiesRequest,
+            responseClass: ExtractEntitiesResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GenerateUserSaysRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.GenerateUserSaysResponse>
+     */
+    generateUserSays(requestData, requestMetadata = {}) {
+        return this.generateUserSays$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GenerateUserSaysRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.GenerateUserSaysResponse>>
+     */
+    generateUserSays$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.AiServices/GenerateUserSays',
+            requestData,
+            requestMetadata,
+            requestClass: GenerateUserSaysRequest,
+            responseClass: GenerateUserSaysResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GenerateResponsesRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.GenerateResponsesResponse>
+     */
+    generateResponses(requestData, requestMetadata = {}) {
+        return this.generateResponses$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GenerateResponsesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.GenerateResponsesResponse>>
+     */
+    generateResponses$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.AiServices/GenerateResponses',
+            requestData,
+            requestMetadata,
+            requestClass: GenerateResponsesRequest,
+            responseClass: GenerateResponsesResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetAlternativeSentencesRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.GetAlternativeSentencesResponse>
+     */
+    getAlternativeSentences(requestData, requestMetadata = {}) {
+        return this.getAlternativeSentences$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetAlternativeSentencesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.GetAlternativeSentencesResponse>>
+     */
+    getAlternativeSentences$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.AiServices/GetAlternativeSentences',
+            requestData,
+            requestMetadata,
+            requestClass: GetAlternativeSentencesRequest,
+            responseClass: GetAlternativeSentencesResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetAlternativeTrainingPhrasesRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.GetAlternativeTrainingPhrasesResponse>
+     */
+    getAlternativeTrainingPhrases(requestData, requestMetadata = {}) {
+        return this.getAlternativeTrainingPhrases$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetAlternativeTrainingPhrasesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.GetAlternativeTrainingPhrasesResponse>>
+     */
+    getAlternativeTrainingPhrases$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases',
+            requestData,
+            requestMetadata,
+            requestClass: GetAlternativeTrainingPhrasesRequest,
+            responseClass: GetAlternativeTrainingPhrasesResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetSynonymsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.GetSynonymsResponse>
+     */
+    getSynonyms(requestData, requestMetadata = {}) {
+        return this.getSynonyms$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetSynonymsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.GetSynonymsResponse>>
+     */
+    getSynonyms$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.AiServices/GetSynonyms',
+            requestData,
+            requestMetadata,
+            requestClass: GetSynonymsRequest,
+            responseClass: GetSynonymsResponse
+        });
+    }
+}
+AiServicesClient.ɵprov = ɵɵdefineInjectable({ factory: function AiServicesClient_Factory() { return new AiServicesClient(ɵɵinject(GRPC_AI_SERVICES_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: AiServicesClient, providedIn: "root" });
+AiServicesClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+AiServicesClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_AI_SERVICES_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
+
+class Timestamp {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param Timestamp value
+     */
+    constructor(value) {
+        value = value || {};
+        this.seconds = value.seconds;
+        this.nanos = value.nanos;
+        Timestamp.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        Timestamp.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new Timestamp();
+        Timestamp.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static fromDate(date) {
+        var timestamp = new Timestamp();
+        timestamp.fromDate(date);
+        return timestamp;
+    }
+    static fromISOString(isoDate) {
+        var timestamp = new Timestamp();
+        timestamp.fromISOString(isoDate);
+        return timestamp;
+    }
+    static refineValues(instance) {
+        instance.seconds = instance.seconds || '0';
+        instance.nanos = instance.nanos || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.seconds = reader.readInt64String();
+                    break;
+                case 2:
+                    instance.nanos = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        Timestamp.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.seconds) {
+            writer.writeInt64String(1, instance.seconds);
+        }
+        if (instance.nanos) {
+            writer.writeInt32(2, instance.nanos);
+        }
+    }
+    get seconds() {
+        return this._seconds;
+    }
+    set seconds(value) {
+        this._seconds = value;
+    }
+    get nanos() {
+        return this._nanos;
+    }
+    set nanos(value) {
+        this._nanos = value;
+    }
+    toObject() {
+        return {
+            seconds: this.seconds,
+            nanos: this.nanos
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+    fromDate(date) {
+        this.seconds = '' + Math.floor(date.getTime() / 1e3);
+        this.nanos = date.getMilliseconds() * 1e6;
+    }
+    toDate() {
+        return new Date(parseInt(this.seconds || '0') * 1e3 + (this.nanos || 0) / 1e6);
+    }
+    fromISOString(isoDate) {
+        this.fromDate(new Date(isoDate));
+    }
+    toISOString() {
+        return this.toDate().toISOString();
+    }
+}
+
+class OperationMetadata {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param OperationMetadata value
+     */
+    constructor(value) {
+        value = value || {};
+        this.status = value.status;
+        this.parentOperationName = value.parentOperationName;
+        this.subOperationNames = (value.subOperationNames || []).slice();
+        this.createTime = value.createTime
+            ? new Timestamp(value.createTime)
+            : undefined;
+        this.startTime = value.startTime
+            ? new Timestamp(value.startTime)
+            : undefined;
+        this.endTime = value.endTime
+            ? new Timestamp(value.endTime)
+            : undefined;
+        this.isCancellationRequested = value.isCancellationRequested;
+        this.cancelCommand = value.cancelCommand;
+        this.userIdCreated = value.userIdCreated;
+        this.userIdCancelled = value.userIdCancelled;
+        this.projectParent = value.projectParent;
+        this.operationType = value.operationType;
+        this.hostName = value.hostName;
+        this.numReruns = value.numReruns;
+        this.maxNumReruns = value.maxNumReruns;
+        OperationMetadata.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        OperationMetadata.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new OperationMetadata();
+        OperationMetadata.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.status = instance.status || 0;
+        instance.parentOperationName = instance.parentOperationName || '';
+        instance.subOperationNames = instance.subOperationNames || [];
+        instance.createTime = instance.createTime || undefined;
+        instance.startTime = instance.startTime || undefined;
+        instance.endTime = instance.endTime || undefined;
+        instance.isCancellationRequested =
+            instance.isCancellationRequested || false;
+        instance.cancelCommand = instance.cancelCommand || '';
+        instance.userIdCreated = instance.userIdCreated || '';
+        instance.userIdCancelled = instance.userIdCancelled || '';
+        instance.projectParent = instance.projectParent || '';
+        instance.operationType = instance.operationType || 0;
+        instance.hostName = instance.hostName || '';
+        instance.numReruns = instance.numReruns || 0;
+        instance.maxNumReruns = instance.maxNumReruns || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.status = reader.readEnum();
+                    break;
+                case 2:
+                    instance.parentOperationName = reader.readString();
+                    break;
+                case 3:
+                    (instance.subOperationNames = instance.subOperationNames || []).push(reader.readString());
+                    break;
+                case 4:
+                    instance.createTime = new Timestamp();
+                    reader.readMessage(instance.createTime, Timestamp.fromBinaryReader);
+                    break;
+                case 5:
+                    instance.startTime = new Timestamp();
+                    reader.readMessage(instance.startTime, Timestamp.fromBinaryReader);
+                    break;
+                case 6:
+                    instance.endTime = new Timestamp();
+                    reader.readMessage(instance.endTime, Timestamp.fromBinaryReader);
+                    break;
+                case 7:
+                    instance.isCancellationRequested = reader.readBool();
+                    break;
+                case 8:
+                    instance.cancelCommand = reader.readString();
+                    break;
+                case 9:
+                    instance.userIdCreated = reader.readString();
+                    break;
+                case 10:
+                    instance.userIdCancelled = reader.readString();
+                    break;
+                case 11:
+                    instance.projectParent = reader.readString();
+                    break;
+                case 12:
+                    instance.operationType = reader.readEnum();
+                    break;
+                case 13:
+                    instance.hostName = reader.readString();
+                    break;
+                case 14:
+                    instance.numReruns = reader.readInt32();
+                    break;
+                case 15:
+                    instance.maxNumReruns = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        OperationMetadata.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.status) {
+            writer.writeEnum(1, instance.status);
+        }
+        if (instance.parentOperationName) {
+            writer.writeString(2, instance.parentOperationName);
+        }
+        if (instance.subOperationNames && instance.subOperationNames.length) {
+            writer.writeRepeatedString(3, instance.subOperationNames);
+        }
+        if (instance.createTime) {
+            writer.writeMessage(4, instance.createTime, Timestamp.toBinaryWriter);
+        }
+        if (instance.startTime) {
+            writer.writeMessage(5, instance.startTime, Timestamp.toBinaryWriter);
+        }
+        if (instance.endTime) {
+            writer.writeMessage(6, instance.endTime, Timestamp.toBinaryWriter);
+        }
+        if (instance.isCancellationRequested) {
+            writer.writeBool(7, instance.isCancellationRequested);
+        }
+        if (instance.cancelCommand) {
+            writer.writeString(8, instance.cancelCommand);
+        }
+        if (instance.userIdCreated) {
+            writer.writeString(9, instance.userIdCreated);
+        }
+        if (instance.userIdCancelled) {
+            writer.writeString(10, instance.userIdCancelled);
+        }
+        if (instance.projectParent) {
+            writer.writeString(11, instance.projectParent);
+        }
+        if (instance.operationType) {
+            writer.writeEnum(12, instance.operationType);
+        }
+        if (instance.hostName) {
+            writer.writeString(13, instance.hostName);
+        }
+        if (instance.numReruns) {
+            writer.writeInt32(14, instance.numReruns);
+        }
+        if (instance.maxNumReruns) {
+            writer.writeInt32(15, instance.maxNumReruns);
+        }
+    }
+    get status() {
+        return this._status;
+    }
+    set status(value) {
+        this._status = value;
+    }
+    get parentOperationName() {
+        return this._parentOperationName;
+    }
+    set parentOperationName(value) {
+        this._parentOperationName = value;
+    }
+    get subOperationNames() {
+        return this._subOperationNames;
+    }
+    set subOperationNames(value) {
+        this._subOperationNames = value;
+    }
+    get createTime() {
+        return this._createTime;
+    }
+    set createTime(value) {
+        this._createTime = value;
+    }
+    get startTime() {
+        return this._startTime;
+    }
+    set startTime(value) {
+        this._startTime = value;
+    }
+    get endTime() {
+        return this._endTime;
+    }
+    set endTime(value) {
+        this._endTime = value;
+    }
+    get isCancellationRequested() {
+        return this._isCancellationRequested;
+    }
+    set isCancellationRequested(value) {
+        this._isCancellationRequested = value;
+    }
+    get cancelCommand() {
+        return this._cancelCommand;
+    }
+    set cancelCommand(value) {
+        this._cancelCommand = value;
+    }
+    get userIdCreated() {
+        return this._userIdCreated;
+    }
+    set userIdCreated(value) {
+        this._userIdCreated = value;
+    }
+    get userIdCancelled() {
+        return this._userIdCancelled;
+    }
+    set userIdCancelled(value) {
+        this._userIdCancelled = value;
+    }
+    get projectParent() {
+        return this._projectParent;
+    }
+    set projectParent(value) {
+        this._projectParent = value;
+    }
+    get operationType() {
+        return this._operationType;
+    }
+    set operationType(value) {
+        this._operationType = value;
+    }
+    get hostName() {
+        return this._hostName;
+    }
+    set hostName(value) {
+        this._hostName = value;
+    }
+    get numReruns() {
+        return this._numReruns;
+    }
+    set numReruns(value) {
+        this._numReruns = value;
+    }
+    get maxNumReruns() {
+        return this._maxNumReruns;
+    }
+    set maxNumReruns(value) {
+        this._maxNumReruns = value;
+    }
+    toObject() {
+        return {
+            status: this.status,
+            parentOperationName: this.parentOperationName,
+            subOperationNames: (this.subOperationNames || []).slice(),
+            createTime: this.createTime ? this.createTime.toObject() : undefined,
+            startTime: this.startTime ? this.startTime.toObject() : undefined,
+            endTime: this.endTime ? this.endTime.toObject() : undefined,
+            isCancellationRequested: this.isCancellationRequested,
+            cancelCommand: this.cancelCommand,
+            userIdCreated: this.userIdCreated,
+            userIdCancelled: this.userIdCancelled,
+            projectParent: this.projectParent,
+            operationType: this.operationType,
+            hostName: this.hostName,
+            numReruns: this.numReruns,
+            maxNumReruns: this.maxNumReruns
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+(function (OperationMetadata) {
+    let Status;
+    (function (Status) {
+        Status[Status["statusUnspecified"] = 0] = "statusUnspecified";
+        Status[Status["notStarted"] = 1] = "notStarted";
+        Status[Status["inProgress"] = 2] = "inProgress";
+        Status[Status["done"] = 3] = "done";
+        Status[Status["cancelled"] = 4] = "cancelled";
+        Status[Status["failed"] = 5] = "failed";
+    })(Status = OperationMetadata.Status || (OperationMetadata.Status = {}));
+    let OperationType;
+    (function (OperationType) {
+        OperationType[OperationType["operationTypeUnspecified"] = 0] = "operationTypeUnspecified";
+        OperationType[OperationType["createAgent"] = 1] = "createAgent";
+        OperationType[OperationType["importAgent"] = 2] = "importAgent";
+        OperationType[OperationType["exportAgent"] = 3] = "exportAgent";
+        OperationType[OperationType["deleteAgent"] = 4] = "deleteAgent";
+        OperationType[OperationType["restoreAgent"] = 5] = "restoreAgent";
+        OperationType[OperationType["buildAgentCache"] = 6] = "buildAgentCache";
+        OperationType[OperationType["trainAgent"] = 7] = "trainAgent";
+    })(OperationType = OperationMetadata.OperationType || (OperationMetadata.OperationType = {}));
+})(OperationMetadata || (OperationMetadata = {}));
+
+class Operation {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param Operation value
+     */
+    constructor(value) {
+        this._result = Operation.ResultCase.none;
+        value = value || {};
+        this.name = value.name;
+        this.metadata = value.metadata
+            ? new Any(value.metadata)
+            : undefined;
+        this.done = value.done;
+        this.error = value.error ? new Status(value.error) : undefined;
+        this.response = value.response
+            ? new Any(value.response)
+            : undefined;
+        Operation.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        Operation.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new Operation();
+        Operation.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.name = instance.name || '';
+        instance.metadata = instance.metadata || undefined;
+        instance.done = instance.done || false;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.name = reader.readString();
+                    break;
+                case 2:
+                    instance.metadata = new Any();
+                    reader.readMessage(instance.metadata, Any.fromBinaryReader);
+                    break;
+                case 3:
+                    instance.done = reader.readBool();
+                    break;
+                case 4:
+                    instance.error = new Status();
+                    reader.readMessage(instance.error, Status.fromBinaryReader);
+                    break;
+                case 5:
+                    instance.response = new Any();
+                    reader.readMessage(instance.response, Any.fromBinaryReader);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        Operation.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.name) {
+            writer.writeString(1, instance.name);
+        }
+        if (instance.metadata) {
+            writer.writeMessage(2, instance.metadata, Any.toBinaryWriter);
+        }
+        if (instance.done) {
+            writer.writeBool(3, instance.done);
+        }
+        if (instance.error) {
+            writer.writeMessage(4, instance.error, Status.toBinaryWriter);
+        }
+        if (instance.response) {
+            writer.writeMessage(5, instance.response, Any.toBinaryWriter);
+        }
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    get metadata() {
+        return this._metadata;
+    }
+    set metadata(value) {
+        this._metadata = value;
+    }
+    get done() {
+        return this._done;
+    }
+    set done(value) {
+        this._done = value;
+    }
+    get error() {
+        return this._error;
+    }
+    set error(value) {
+        if (value !== undefined && value !== null) {
+            this._response = undefined;
+            this._result = Operation.ResultCase.error;
+        }
+        this._error = value;
+    }
+    get response() {
+        return this._response;
+    }
+    set response(value) {
+        if (value !== undefined && value !== null) {
+            this._error = undefined;
+            this._result = Operation.ResultCase.response;
+        }
+        this._response = value;
+    }
+    get result() {
+        return this._result;
+    }
+    toObject() {
+        return {
+            name: this.name,
+            metadata: this.metadata ? this.metadata.toObject() : undefined,
+            done: this.done,
+            error: this.error ? this.error.toObject() : undefined,
+            response: this.response ? this.response.toObject() : undefined
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+(function (Operation) {
+    let ResultCase;
+    (function (ResultCase) {
+        ResultCase[ResultCase["none"] = 0] = "none";
+        ResultCase[ResultCase["error"] = 1] = "error";
+        ResultCase[ResultCase["response"] = 2] = "response";
+    })(ResultCase = Operation.ResultCase || (Operation.ResultCase = {}));
+})(Operation || (Operation = {}));
+class GetOperationRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetOperationRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.name = value.name;
+        GetOperationRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetOperationRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetOperationRequest();
+        GetOperationRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.name = instance.name || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.name = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetOperationRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.name) {
+            writer.writeString(1, instance.name);
+        }
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    toObject() {
+        return {
+            name: this.name
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class ListOperationsRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param ListOperationsRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.name = value.name;
+        this.filter = value.filter;
+        this.pageSize = value.pageSize;
+        this.pageToken = value.pageToken;
+        ListOperationsRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        ListOperationsRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new ListOperationsRequest();
+        ListOperationsRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.name = instance.name || '';
+        instance.filter = instance.filter || '';
+        instance.pageSize = instance.pageSize || 0;
+        instance.pageToken = instance.pageToken || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 4:
+                    instance.name = reader.readString();
+                    break;
+                case 1:
+                    instance.filter = reader.readString();
+                    break;
+                case 2:
+                    instance.pageSize = reader.readInt32();
+                    break;
+                case 3:
+                    instance.pageToken = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        ListOperationsRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.name) {
+            writer.writeString(4, instance.name);
+        }
+        if (instance.filter) {
+            writer.writeString(1, instance.filter);
+        }
+        if (instance.pageSize) {
+            writer.writeInt32(2, instance.pageSize);
+        }
+        if (instance.pageToken) {
+            writer.writeString(3, instance.pageToken);
+        }
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    get filter() {
+        return this._filter;
+    }
+    set filter(value) {
+        this._filter = value;
+    }
+    get pageSize() {
+        return this._pageSize;
+    }
+    set pageSize(value) {
+        this._pageSize = value;
+    }
+    get pageToken() {
+        return this._pageToken;
+    }
+    set pageToken(value) {
+        this._pageToken = value;
+    }
+    toObject() {
+        return {
+            name: this.name,
+            filter: this.filter,
+            pageSize: this.pageSize,
+            pageToken: this.pageToken
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class ListOperationsResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param ListOperationsResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.operations = (value.operations || []).map(m => new Operation(m));
+        this.nextPageToken = value.nextPageToken;
+        ListOperationsResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        ListOperationsResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new ListOperationsResponse();
+        ListOperationsResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.operations = instance.operations || [];
+        instance.nextPageToken = instance.nextPageToken || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new Operation();
+                    reader.readMessage(messageInitializer1, Operation.fromBinaryReader);
+                    (instance.operations = instance.operations || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    instance.nextPageToken = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        ListOperationsResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.operations && instance.operations.length) {
+            writer.writeRepeatedMessage(1, instance.operations, Operation.toBinaryWriter);
+        }
+        if (instance.nextPageToken) {
+            writer.writeString(2, instance.nextPageToken);
+        }
+    }
+    get operations() {
+        return this._operations;
+    }
+    set operations(value) {
+        this._operations = value;
+    }
+    get nextPageToken() {
+        return this._nextPageToken;
+    }
+    set nextPageToken(value) {
+        this._nextPageToken = value;
+    }
+    toObject() {
+        return {
+            operations: (this.operations || []).map(m => m.toObject()),
+            nextPageToken: this.nextPageToken
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class CancelOperationRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param CancelOperationRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.name = value.name;
+        CancelOperationRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        CancelOperationRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new CancelOperationRequest();
+        CancelOperationRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.name = instance.name || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.name = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        CancelOperationRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.name) {
+            writer.writeString(1, instance.name);
+        }
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    toObject() {
+        return {
+            name: this.name
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class DeleteOperationRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param DeleteOperationRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.name = value.name;
+        DeleteOperationRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        DeleteOperationRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new DeleteOperationRequest();
+        DeleteOperationRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.name = instance.name || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.name = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        DeleteOperationRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.name) {
+            writer.writeString(1, instance.name);
+        }
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    toObject() {
+        return {
+            name: this.name
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+
+/* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_ENTITY_TYPES_CLIENT_SETTINGS = new InjectionToken('GRPC_ENTITY_TYPES_CLIENT_SETTINGS');
+
+/* tslint:disable */
+class EntityTypesClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.EntityTypes', settings);
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListEntityTypesRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListEntityTypesResponse>
+     */
+    listEntityTypes(requestData, requestMetadata = {}) {
+        return this.listEntityTypes$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListEntityTypesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>
+     */
+    listEntityTypes$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/ListEntityTypes',
+            requestData,
+            requestMetadata,
+            requestClass: ListEntityTypesRequest,
+            responseClass: ListEntityTypesResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.EntityType>
+     */
+    getEntityType(requestData, requestMetadata = {}) {
+        return this.getEntityType$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.EntityType>>
+     */
+    getEntityType$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/GetEntityType',
+            requestData,
+            requestMetadata,
+            requestClass: GetEntityTypeRequest,
+            responseClass: EntityType
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CreateEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.EntityType>
+     */
+    createEntityType(requestData, requestMetadata = {}) {
+        return this.createEntityType$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CreateEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.EntityType>>
+     */
+    createEntityType$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/CreateEntityType',
+            requestData,
+            requestMetadata,
+            requestClass: CreateEntityTypeRequest,
+            responseClass: EntityType
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.UpdateEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.EntityType>
+     */
+    updateEntityType(requestData, requestMetadata = {}) {
+        return this.updateEntityType$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.UpdateEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.EntityType>>
+     */
+    updateEntityType$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/UpdateEntityType',
+            requestData,
+            requestMetadata,
+            requestClass: UpdateEntityTypeRequest,
+            responseClass: EntityType
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.DeleteEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<googleProtobuf002.Empty>
+     */
+    deleteEntityType(requestData, requestMetadata = {}) {
+        return this.deleteEntityType$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.DeleteEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
+     */
+    deleteEntityType$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/DeleteEntityType',
+            requestData,
+            requestMetadata,
+            requestClass: DeleteEntityTypeRequest,
+            responseClass: Empty
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.BatchUpdateEntityTypesRequest request
+     * @param Metadata metadata
+     * @return Observable<googleLongrunning001.Operation>
+     */
+    batchUpdateEntityTypes(requestData, requestMetadata = {}) {
+        return this.batchUpdateEntityTypes$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.BatchUpdateEntityTypesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+     */
+    batchUpdateEntityTypes$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
+            requestData,
+            requestMetadata,
+            requestClass: BatchUpdateEntityTypesRequest,
+            responseClass: Operation
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.BatchDeleteEntityTypesRequest request
+     * @param Metadata metadata
+     * @return Observable<googleLongrunning001.Operation>
+     */
+    batchDeleteEntityTypes(requestData, requestMetadata = {}) {
+        return this.batchDeleteEntityTypes$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.BatchDeleteEntityTypesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+     */
+    batchDeleteEntityTypes$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
+            requestData,
+            requestMetadata,
+            requestClass: BatchDeleteEntityTypesRequest,
+            responseClass: Operation
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.BatchCreateEntitiesRequest request
+     * @param Metadata metadata
+     * @return Observable<googleLongrunning001.Operation>
+     */
+    batchCreateEntities(requestData, requestMetadata = {}) {
+        return this.batchCreateEntities$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.BatchCreateEntitiesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+     */
+    batchCreateEntities$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/BatchCreateEntities',
+            requestData,
+            requestMetadata,
+            requestClass: BatchCreateEntitiesRequest,
+            responseClass: Operation
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.BatchUpdateEntitiesRequest request
+     * @param Metadata metadata
+     * @return Observable<googleLongrunning001.Operation>
+     */
+    batchUpdateEntities(requestData, requestMetadata = {}) {
+        return this.batchUpdateEntities$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.BatchUpdateEntitiesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+     */
+    batchUpdateEntities$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/BatchUpdateEntities',
+            requestData,
+            requestMetadata,
+            requestClass: BatchUpdateEntitiesRequest,
+            responseClass: Operation
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.BatchDeleteEntitiesRequest request
+     * @param Metadata metadata
+     * @return Observable<googleLongrunning001.Operation>
+     */
+    batchDeleteEntities(requestData, requestMetadata = {}) {
+        return this.batchDeleteEntities$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.BatchDeleteEntitiesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
+     */
+    batchDeleteEntities$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.EntityTypes/BatchDeleteEntities',
+            requestData,
+            requestMetadata,
+            requestClass: BatchDeleteEntitiesRequest,
+            responseClass: Operation
+        });
+    }
+}
+EntityTypesClient.ɵprov = ɵɵdefineInjectable({ factory: function EntityTypesClient_Factory() { return new EntityTypesClient(ɵɵinject(GRPC_ENTITY_TYPES_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: EntityTypesClient, providedIn: "root" });
+EntityTypesClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+EntityTypesClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_ENTITY_TYPES_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
+
+/* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_SERVER_STATISTICS_CLIENT_SETTINGS = new InjectionToken('GRPC_SERVER_STATISTICS_CLIENT_SETTINGS');
+
+class GetIntentCountRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetIntentCountRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        this.filterByCategory = value.filterByCategory;
+        GetIntentCountRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetIntentCountRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetIntentCountRequest();
+        GetIntentCountRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+        instance.filterByCategory = instance.filterByCategory || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                case 2:
+                    instance.filterByCategory = reader.readEnum();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetIntentCountRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+        if (instance.filterByCategory) {
+            writer.writeEnum(2, instance.filterByCategory);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get filterByCategory() {
+        return this._filterByCategory;
+    }
+    set filterByCategory(value) {
+        this._filterByCategory = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent,
+            filterByCategory: this.filterByCategory
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GetEntityTypeCountRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetEntityTypeCountRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        this.filterByCategory = value.filterByCategory;
+        GetEntityTypeCountRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetEntityTypeCountRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetEntityTypeCountRequest();
+        GetEntityTypeCountRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+        instance.filterByCategory = instance.filterByCategory || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                case 2:
+                    instance.filterByCategory = reader.readEnum();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetEntityTypeCountRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+        if (instance.filterByCategory) {
+            writer.writeEnum(2, instance.filterByCategory);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get filterByCategory() {
+        return this._filterByCategory;
+    }
+    set filterByCategory(value) {
+        this._filterByCategory = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent,
+            filterByCategory: this.filterByCategory
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GetProjectStatRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetProjectStatRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        GetProjectStatRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetProjectStatRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetProjectStatRequest();
+        GetProjectStatRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetProjectStatRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class GetProjectElementStatRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetProjectElementStatRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.name = value.name;
+        this.languageCode = value.languageCode;
+        GetProjectElementStatRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetProjectElementStatRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetProjectElementStatRequest();
+        GetProjectElementStatRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.name = instance.name || '';
+        instance.languageCode = instance.languageCode || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.name = reader.readString();
+                    break;
+                case 2:
+                    instance.languageCode = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetProjectElementStatRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.name) {
+            writer.writeString(1, instance.name);
+        }
+        if (instance.languageCode) {
+            writer.writeString(2, instance.languageCode);
+        }
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    toObject() {
+        return {
+            name: this.name,
+            languageCode: this.languageCode
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+
 /* tslint:disable */
 /*
   To configure the services you need to provide a configuration for each of them.
@@ -10745,6 +15034,405 @@ QAClient.ctorParameters = () => [
   export class GrpcConfigModule { }
 */
 const GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS = new InjectionToken('GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+class ProjectStatisticsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.ProjectStatistics', settings);
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetIntentCountRequest request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getIntentCount(requestData, requestMetadata = {}) {
+        return this.getIntentCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetIntentCountRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getIntentCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectStatistics/GetIntentCount',
+            requestData,
+            requestMetadata,
+            requestClass: GetIntentCountRequest,
+            responseClass: StatResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetEntityTypeCountRequest request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getEntityTypeCount(requestData, requestMetadata = {}) {
+        return this.getEntityTypeCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetEntityTypeCountRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getEntityTypeCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectStatistics/GetEntityTypeCount',
+            requestData,
+            requestMetadata,
+            requestClass: GetEntityTypeCountRequest,
+            responseClass: StatResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetProjectStatRequest request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getUserCount(requestData, requestMetadata = {}) {
+        return this.getUserCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetProjectStatRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getUserCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectStatistics/GetUserCount',
+            requestData,
+            requestMetadata,
+            requestClass: GetProjectStatRequest,
+            responseClass: StatResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetProjectStatRequest request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getSessionCount(requestData, requestMetadata = {}) {
+        return this.getSessionCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetProjectStatRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getSessionCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectStatistics/GetSessionCount',
+            requestData,
+            requestMetadata,
+            requestClass: GetProjectStatRequest,
+            responseClass: StatResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetProjectElementStatRequest request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getTrainingPhraseCount(requestData, requestMetadata = {}) {
+        return this.getTrainingPhraseCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetProjectElementStatRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getTrainingPhraseCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount',
+            requestData,
+            requestMetadata,
+            requestClass: GetProjectElementStatRequest,
+            responseClass: StatResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetProjectElementStatRequest request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getResponseCount(requestData, requestMetadata = {}) {
+        return this.getResponseCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetProjectElementStatRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getResponseCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectStatistics/GetResponseCount',
+            requestData,
+            requestMetadata,
+            requestClass: GetProjectElementStatRequest,
+            responseClass: StatResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetProjectElementStatRequest request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getEntityValueCount(requestData, requestMetadata = {}) {
+        return this.getEntityValueCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetProjectElementStatRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getEntityValueCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectStatistics/GetEntityValueCount',
+            requestData,
+            requestMetadata,
+            requestClass: GetProjectElementStatRequest,
+            responseClass: StatResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetProjectElementStatRequest request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getEntitySynonymCount(requestData, requestMetadata = {}) {
+        return this.getEntitySynonymCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetProjectElementStatRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getEntitySynonymCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount',
+            requestData,
+            requestMetadata,
+            requestClass: GetProjectElementStatRequest,
+            responseClass: StatResponse
+        });
+    }
+}
+ProjectStatisticsClient.ɵprov = ɵɵdefineInjectable({ factory: function ProjectStatisticsClient_Factory() { return new ProjectStatisticsClient(ɵɵinject(GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: ProjectStatisticsClient, providedIn: "root" });
+ProjectStatisticsClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+ProjectStatisticsClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
+
+/* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_AGENTS_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_AGENTS_CLIENT_SETTINGS = new InjectionToken('GRPC_AGENTS_CLIENT_SETTINGS');
+
+class GetUserProjectCountRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param GetUserProjectCountRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.userId = value.userId;
+        GetUserProjectCountRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        GetUserProjectCountRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new GetUserProjectCountRequest();
+        GetUserProjectCountRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.userId = instance.userId || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.userId = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        GetUserProjectCountRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.userId) {
+            writer.writeString(1, instance.userId);
+        }
+    }
+    get userId() {
+        return this._userId;
+    }
+    set userId(value) {
+        this._userId = value;
+    }
+    toObject() {
+        return {
+            userId: this.userId
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+
+/* tslint:disable */
+class ServerStatisticsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.ServerStatistics', settings);
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param googleProtobuf001.Empty request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getProjectCount(requestData, requestMetadata = {}) {
+        return this.getProjectCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param googleProtobuf001.Empty request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getProjectCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ServerStatistics/GetProjectCount',
+            requestData,
+            requestMetadata,
+            requestClass: Empty,
+            responseClass: StatResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetUserProjectCountRequest request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getUserProjectCount(requestData, requestMetadata = {}) {
+        return this.getUserProjectCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetUserProjectCountRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getUserProjectCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ServerStatistics/GetUserProjectCount',
+            requestData,
+            requestMetadata,
+            requestClass: GetUserProjectCountRequest,
+            responseClass: StatResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param googleProtobuf001.Empty request
+     * @param Metadata metadata
+     * @return Observable<ondewoNlu002.StatResponse>
+     */
+    getUserCount(requestData, requestMetadata = {}) {
+        return this.getUserCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param googleProtobuf001.Empty request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     */
+    getUserCount$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ServerStatistics/GetUserCount',
+            requestData,
+            requestMetadata,
+            requestClass: Empty,
+            responseClass: StatResponse
+        });
+    }
+}
+ServerStatisticsClient.ɵprov = ɵɵdefineInjectable({ factory: function ServerStatisticsClient_Factory() { return new ServerStatisticsClient(ɵɵinject(GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: ServerStatisticsClient, providedIn: "root" });
+ServerStatisticsClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+ServerStatisticsClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_SERVER_STATISTICS_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
 
 var DefaultProjectRole;
 (function (DefaultProjectRole) {
@@ -16081,68 +20769,206 @@ class ExportResourcesResponse {
     }
 }
 
-var SortingMode;
-(function (SortingMode) {
-    SortingMode[SortingMode["ascending"] = 0] = "ascending";
-    SortingMode[SortingMode["descending"] = 1] = "descending";
-})(SortingMode || (SortingMode = {}));
-class StatResponse {
+/* tslint:disable */
+class IntentsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.Intents', settings);
+    }
     /**
-     * Creates an object and applies default Protobuf values
-     * @param StatResponse value
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListIntentsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListIntentsResponse>
      */
-    constructor(value) {
-        value = value || {};
-        this.value = value.value;
-        StatResponse.refineValues(this);
+    listIntents(requestData, requestMetadata = {}) {
+        return this.listIntents$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
     }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        StatResponse.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListIntentsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListIntentsResponse>>
+     */
+    listIntents$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Intents/ListIntents',
+            requestData,
+            requestMetadata,
+            requestClass: ListIntentsRequest,
+            responseClass: ListIntentsResponse
+        });
     }
-    static fromBinary(bytes) {
-        const instance = new StatResponse();
-        StatResponse.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Intent>
+     */
+    getIntent(requestData, requestMetadata = {}) {
+        return this.getIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
     }
-    static refineValues(instance) {
-        instance.value = instance.value || 0;
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Intent>>
+     */
+    getIntent$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Intents/GetIntent',
+            requestData,
+            requestMetadata,
+            requestClass: GetIntentRequest,
+            responseClass: Intent
+        });
     }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.value = reader.readUint32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        StatResponse.refineValues(instance);
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CreateIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Intent>
+     */
+    createIntent(requestData, requestMetadata = {}) {
+        return this.createIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
     }
-    static toBinaryWriter(instance, writer) {
-        if (instance.value) {
-            writer.writeUint32(1, instance.value);
-        }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CreateIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Intent>>
+     */
+    createIntent$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Intents/CreateIntent',
+            requestData,
+            requestMetadata,
+            requestClass: CreateIntentRequest,
+            responseClass: Intent
+        });
     }
-    get value() {
-        return this._value;
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.UpdateIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Intent>
+     */
+    updateIntent(requestData, requestMetadata = {}) {
+        return this.updateIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
     }
-    set value(value) {
-        this._value = value;
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.UpdateIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Intent>>
+     */
+    updateIntent$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Intents/UpdateIntent',
+            requestData,
+            requestMetadata,
+            requestClass: UpdateIntentRequest,
+            responseClass: Intent
+        });
     }
-    toObject() {
-        return {
-            value: this.value
-        };
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.DeleteIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<googleProtobuf004.Empty>
+     */
+    deleteIntent(requestData, requestMetadata = {}) {
+        return this.deleteIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
     }
-    toJSON() {
-        return this.toObject();
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.DeleteIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleProtobuf004.Empty>>
+     */
+    deleteIntent$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Intents/DeleteIntent',
+            requestData,
+            requestMetadata,
+            requestClass: DeleteIntentRequest,
+            responseClass: Empty
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.BatchUpdateIntentsRequest request
+     * @param Metadata metadata
+     * @return Observable<googleLongrunning003.Operation>
+     */
+    batchUpdateIntents(requestData, requestMetadata = {}) {
+        return this.batchUpdateIntents$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.BatchUpdateIntentsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleLongrunning003.Operation>>
+     */
+    batchUpdateIntents$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Intents/BatchUpdateIntents',
+            requestData,
+            requestMetadata,
+            requestClass: BatchUpdateIntentsRequest,
+            responseClass: Operation
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.BatchDeleteIntentsRequest request
+     * @param Metadata metadata
+     * @return Observable<googleLongrunning003.Operation>
+     */
+    batchDeleteIntents(requestData, requestMetadata = {}) {
+        return this.batchDeleteIntents$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.BatchDeleteIntentsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleLongrunning003.Operation>>
+     */
+    batchDeleteIntents$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Intents/BatchDeleteIntents',
+            requestData,
+            requestMetadata,
+            requestClass: BatchDeleteIntentsRequest,
+            responseClass: Operation
+        });
     }
 }
+IntentsClient.ɵprov = ɵɵdefineInjectable({ factory: function IntentsClient_Factory() { return new IntentsClient(ɵɵinject(GRPC_INTENTS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: IntentsClient, providedIn: "root" });
+IntentsClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+IntentsClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_INTENTS_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
 
 /* tslint:disable */
 /*
@@ -16154,12 +20980,1136 @@ class StatResponse {
 
   @NgModule({
     providers: [
-      { provide: GRPC_WEBHOOK_CLIENT_SETTINGS, useValue: grpcSettings },
+      { provide: GRPC_SESSIONS_CLIENT_SETTINGS, useValue: grpcSettings },
     ],
   })
   export class GrpcConfigModule { }
 */
-const GRPC_WEBHOOK_CLIENT_SETTINGS = new InjectionToken('GRPC_WEBHOOK_CLIENT_SETTINGS');
+const GRPC_SESSIONS_CLIENT_SETTINGS = new InjectionToken('GRPC_SESSIONS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+class SessionsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.Sessions', settings);
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.DetectIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.DetectIntentResponse>
+     */
+    detectIntent(requestData, requestMetadata = {}) {
+        return this.detectIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.DetectIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.DetectIntentResponse>>
+     */
+    detectIntent$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/DetectIntent',
+            requestData,
+            requestMetadata,
+            requestClass: DetectIntentRequest,
+            responseClass: DetectIntentResponse
+        });
+    }
+    /**
+     * Server streaming RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.StreamingDetectIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.StreamingDetectIntentResponse>
+     */
+    streamingDetectIntent(requestData, requestMetadata = {}) {
+        return this.streamingDetectIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Server streaming RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.StreamingDetectIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.StreamingDetectIntentResponse>>
+     */
+    streamingDetectIntent$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.serverStream,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/StreamingDetectIntent',
+            requestData,
+            requestMetadata,
+            requestClass: StreamingDetectIntentRequest,
+            responseClass: StreamingDetectIntentResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListSessionsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListSessionsResponse>
+     */
+    listSessions(requestData, requestMetadata = {}) {
+        return this.listSessions$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListSessionsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListSessionsResponse>>
+     */
+    listSessions$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/ListSessions',
+            requestData,
+            requestMetadata,
+            requestClass: ListSessionsRequest,
+            responseClass: ListSessionsResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetSessionRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Session>
+     */
+    getSession(requestData, requestMetadata = {}) {
+        return this.getSession$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetSessionRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Session>>
+     */
+    getSession$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/GetSession',
+            requestData,
+            requestMetadata,
+            requestClass: GetSessionRequest,
+            responseClass: Session
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.TrackSessionStepRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Session>
+     */
+    trackSessionStep(requestData, requestMetadata = {}) {
+        return this.trackSessionStep$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.TrackSessionStepRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Session>>
+     */
+    trackSessionStep$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/TrackSessionStep',
+            requestData,
+            requestMetadata,
+            requestClass: TrackSessionStepRequest,
+            responseClass: Session
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.DeleteSessionRequest request
+     * @param Metadata metadata
+     * @return Observable<googleProtobuf001.Empty>
+     */
+    deleteSession(requestData, requestMetadata = {}) {
+        return this.deleteSession$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.DeleteSessionRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
+     */
+    deleteSession$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/DeleteSession',
+            requestData,
+            requestMetadata,
+            requestClass: DeleteSessionRequest,
+            responseClass: Empty
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListSessionLabelsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListSessionLabelsResponse>
+     */
+    listSessionLabels(requestData, requestMetadata = {}) {
+        return this.listSessionLabels$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListSessionLabelsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListSessionLabelsResponse>>
+     */
+    listSessionLabels$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/ListSessionLabels',
+            requestData,
+            requestMetadata,
+            requestClass: ListSessionLabelsRequest,
+            responseClass: ListSessionLabelsResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.AddSessionLabelsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Session>
+     */
+    addSessionLabels(requestData, requestMetadata = {}) {
+        return this.addSessionLabels$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.AddSessionLabelsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Session>>
+     */
+    addSessionLabels$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/AddSessionLabels',
+            requestData,
+            requestMetadata,
+            requestClass: AddSessionLabelsRequest,
+            responseClass: Session
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.RemoveSessionLabelsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Session>
+     */
+    removeSessionLabels(requestData, requestMetadata = {}) {
+        return this.removeSessionLabels$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.RemoveSessionLabelsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Session>>
+     */
+    removeSessionLabels$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/RemoveSessionLabels',
+            requestData,
+            requestMetadata,
+            requestClass: RemoveSessionLabelsRequest,
+            responseClass: Session
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListSessionReviewsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListSessionReviewsResponse>
+     */
+    listSessionReviews(requestData, requestMetadata = {}) {
+        return this.listSessionReviews$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListSessionReviewsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListSessionReviewsResponse>>
+     */
+    listSessionReviews$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/ListSessionReviews',
+            requestData,
+            requestMetadata,
+            requestClass: ListSessionReviewsRequest,
+            responseClass: ListSessionReviewsResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetSessionReviewRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.SessionReview>
+     */
+    getSessionReview(requestData, requestMetadata = {}) {
+        return this.getSessionReview$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetSessionReviewRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.SessionReview>>
+     */
+    getSessionReview$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/GetSessionReview',
+            requestData,
+            requestMetadata,
+            requestClass: GetSessionReviewRequest,
+            responseClass: SessionReview
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetLatestSessionReviewRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.SessionReview>
+     */
+    getLatestSessionReview(requestData, requestMetadata = {}) {
+        return this.getLatestSessionReview$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetLatestSessionReviewRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.SessionReview>>
+     */
+    getLatestSessionReview$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/GetLatestSessionReview',
+            requestData,
+            requestMetadata,
+            requestClass: GetLatestSessionReviewRequest,
+            responseClass: SessionReview
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CreateSessionReviewRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.SessionReview>
+     */
+    createSessionReview(requestData, requestMetadata = {}) {
+        return this.createSessionReview$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CreateSessionReviewRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.SessionReview>>
+     */
+    createSessionReview$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Sessions/CreateSessionReview',
+            requestData,
+            requestMetadata,
+            requestClass: CreateSessionReviewRequest,
+            responseClass: SessionReview
+        });
+    }
+}
+SessionsClient.ɵprov = ɵɵdefineInjectable({ factory: function SessionsClient_Factory() { return new SessionsClient(ɵɵinject(GRPC_SESSIONS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: SessionsClient, providedIn: "root" });
+SessionsClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+SessionsClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_SESSIONS_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
+
+/* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_CONTEXTS_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_CONTEXTS_CLIENT_SETTINGS = new InjectionToken('GRPC_CONTEXTS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+class ContextsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.Contexts', settings);
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListContextsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListContextsResponse>
+     */
+    listContexts(requestData, requestMetadata = {}) {
+        return this.listContexts$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListContextsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListContextsResponse>>
+     */
+    listContexts$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Contexts/ListContexts',
+            requestData,
+            requestMetadata,
+            requestClass: ListContextsRequest,
+            responseClass: ListContextsResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetContextRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Context>
+     */
+    getContext(requestData, requestMetadata = {}) {
+        return this.getContext$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetContextRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Context>>
+     */
+    getContext$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Contexts/GetContext',
+            requestData,
+            requestMetadata,
+            requestClass: GetContextRequest,
+            responseClass: Context
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CreateContextRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Context>
+     */
+    createContext(requestData, requestMetadata = {}) {
+        return this.createContext$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CreateContextRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Context>>
+     */
+    createContext$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Contexts/CreateContext',
+            requestData,
+            requestMetadata,
+            requestClass: CreateContextRequest,
+            responseClass: Context
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.UpdateContextRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.Context>
+     */
+    updateContext(requestData, requestMetadata = {}) {
+        return this.updateContext$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.UpdateContextRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.Context>>
+     */
+    updateContext$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Contexts/UpdateContext',
+            requestData,
+            requestMetadata,
+            requestClass: UpdateContextRequest,
+            responseClass: Context
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.DeleteContextRequest request
+     * @param Metadata metadata
+     * @return Observable<googleProtobuf001.Empty>
+     */
+    deleteContext(requestData, requestMetadata = {}) {
+        return this.deleteContext$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.DeleteContextRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
+     */
+    deleteContext$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Contexts/DeleteContext',
+            requestData,
+            requestMetadata,
+            requestClass: DeleteContextRequest,
+            responseClass: Empty
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.DeleteAllContextsRequest request
+     * @param Metadata metadata
+     * @return Observable<googleProtobuf001.Empty>
+     */
+    deleteAllContexts(requestData, requestMetadata = {}) {
+        return this.deleteAllContexts$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.DeleteAllContextsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
+     */
+    deleteAllContexts$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Contexts/DeleteAllContexts',
+            requestData,
+            requestMetadata,
+            requestClass: DeleteAllContextsRequest,
+            responseClass: Empty
+        });
+    }
+}
+ContextsClient.ɵprov = ɵɵdefineInjectable({ factory: function ContextsClient_Factory() { return new ContextsClient(ɵɵinject(GRPC_CONTEXTS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: ContextsClient, providedIn: "root" });
+ContextsClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+ContextsClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_CONTEXTS_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
+
+/* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_PROJECT_ROLES_CLIENT_SETTINGS = new InjectionToken('GRPC_PROJECT_ROLES_CLIENT_SETTINGS');
+
+/* tslint:disable */
+class ProjectRolesClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.ProjectRoles', settings);
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CreateProjectRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ProjectRole>
+     */
+    createProjectRole(requestData, requestMetadata = {}) {
+        return this.createProjectRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CreateProjectRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ProjectRole>>
+     */
+    createProjectRole$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectRoles/CreateProjectRole',
+            requestData,
+            requestMetadata,
+            requestClass: CreateProjectRoleRequest,
+            responseClass: ProjectRole
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetProjectRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ProjectRole>
+     */
+    getProjectRole(requestData, requestMetadata = {}) {
+        return this.getProjectRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetProjectRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ProjectRole>>
+     */
+    getProjectRole$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectRoles/GetProjectRole',
+            requestData,
+            requestMetadata,
+            requestClass: GetProjectRoleRequest,
+            responseClass: ProjectRole
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.DeleteProjectRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<googleProtobuf002.Empty>
+     */
+    deleteProjectRole(requestData, requestMetadata = {}) {
+        return this.deleteProjectRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.DeleteProjectRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
+     */
+    deleteProjectRole$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectRoles/DeleteProjectRole',
+            requestData,
+            requestMetadata,
+            requestClass: DeleteProjectRoleRequest,
+            responseClass: Empty
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.UpdateProjectRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ProjectRole>
+     */
+    updateProjectRole(requestData, requestMetadata = {}) {
+        return this.updateProjectRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.UpdateProjectRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ProjectRole>>
+     */
+    updateProjectRole$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectRoles/UpdateProjectRole',
+            requestData,
+            requestMetadata,
+            requestClass: UpdateProjectRoleRequest,
+            responseClass: ProjectRole
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListProjectRolesRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListProjectRolesResponse>
+     */
+    listProjectRoles(requestData, requestMetadata = {}) {
+        return this.listProjectRoles$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListProjectRolesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListProjectRolesResponse>>
+     */
+    listProjectRoles$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.ProjectRoles/ListProjectRoles',
+            requestData,
+            requestMetadata,
+            requestClass: ListProjectRolesRequest,
+            responseClass: ListProjectRolesResponse
+        });
+    }
+}
+ProjectRolesClient.ɵprov = ɵɵdefineInjectable({ factory: function ProjectRolesClient_Factory() { return new ProjectRolesClient(ɵɵinject(GRPC_PROJECT_ROLES_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: ProjectRolesClient, providedIn: "root" });
+ProjectRolesClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+ProjectRolesClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_PROJECT_ROLES_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
+
+/* tslint:disable */
+class UsersClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.Users', settings);
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CreateUserRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.User>
+     */
+    createUser(requestData, requestMetadata = {}) {
+        return this.createUser$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CreateUserRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.User>>
+     */
+    createUser$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/CreateUser',
+            requestData,
+            requestMetadata,
+            requestClass: CreateUserRequest,
+            responseClass: User
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetUserRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.User>
+     */
+    getUser(requestData, requestMetadata = {}) {
+        return this.getUser$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetUserRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.User>>
+     */
+    getUser$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/GetUser',
+            requestData,
+            requestMetadata,
+            requestClass: GetUserRequest,
+            responseClass: User
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetUserRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.UserInfo>
+     */
+    getUserInfo(requestData, requestMetadata = {}) {
+        return this.getUserInfo$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetUserRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.UserInfo>>
+     */
+    getUserInfo$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/GetUserInfo',
+            requestData,
+            requestMetadata,
+            requestClass: GetUserRequest,
+            responseClass: UserInfo
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetUserRequest request
+     * @param Metadata metadata
+     * @return Observable<googleProtobuf001.Empty>
+     */
+    deleteUser(requestData, requestMetadata = {}) {
+        return this.deleteUser$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetUserRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
+     */
+    deleteUser$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/DeleteUser',
+            requestData,
+            requestMetadata,
+            requestClass: GetUserRequest,
+            responseClass: Empty
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.UpdateUserRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.User>
+     */
+    updateUser(requestData, requestMetadata = {}) {
+        return this.updateUser$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.UpdateUserRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.User>>
+     */
+    updateUser$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/UpdateUser',
+            requestData,
+            requestMetadata,
+            requestClass: UpdateUserRequest,
+            responseClass: User
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListUsersRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListUsersResponse>
+     */
+    listUsers(requestData, requestMetadata = {}) {
+        return this.listUsers$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListUsersRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListUsersResponse>>
+     */
+    listUsers$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/ListUsers',
+            requestData,
+            requestMetadata,
+            requestClass: ListUsersRequest,
+            responseClass: ListUsersResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListUsersRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListUserInfosResponse>
+     */
+    listUserInfos(requestData, requestMetadata = {}) {
+        return this.listUserInfos$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListUsersRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListUserInfosResponse>>
+     */
+    listUserInfos$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/ListUserInfos',
+            requestData,
+            requestMetadata,
+            requestClass: ListUsersRequest,
+            responseClass: ListUserInfosResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CreateServerRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ServerRole>
+     */
+    createServerRole(requestData, requestMetadata = {}) {
+        return this.createServerRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CreateServerRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ServerRole>>
+     */
+    createServerRole$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/CreateServerRole',
+            requestData,
+            requestMetadata,
+            requestClass: CreateServerRoleRequest,
+            responseClass: ServerRole
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.GetServerRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ServerRole>
+     */
+    getServerRole(requestData, requestMetadata = {}) {
+        return this.getServerRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.GetServerRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ServerRole>>
+     */
+    getServerRole$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/GetServerRole',
+            requestData,
+            requestMetadata,
+            requestClass: GetServerRoleRequest,
+            responseClass: ServerRole
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.DeleteServerRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<googleProtobuf001.Empty>
+     */
+    deleteServerRole(requestData, requestMetadata = {}) {
+        return this.deleteServerRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.DeleteServerRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
+     */
+    deleteServerRole$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/DeleteServerRole',
+            requestData,
+            requestMetadata,
+            requestClass: DeleteServerRoleRequest,
+            responseClass: Empty
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.UpdateServerRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ServerRole>
+     */
+    updateServerRole(requestData, requestMetadata = {}) {
+        return this.updateServerRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.UpdateServerRoleRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ServerRole>>
+     */
+    updateServerRole$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/UpdateServerRole',
+            requestData,
+            requestMetadata,
+            requestClass: UpdateServerRoleRequest,
+            responseClass: ServerRole
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListServerRolesRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListServerRolesResponse>
+     */
+    listServerRoles(requestData, requestMetadata = {}) {
+        return this.listServerRoles$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListServerRolesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListServerRolesResponse>>
+     */
+    listServerRoles$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/ListServerRoles',
+            requestData,
+            requestMetadata,
+            requestClass: ListServerRolesRequest,
+            responseClass: ListServerRolesResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ListServerPermissionsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ListServerPermissionsResponse>
+     */
+    listServerPermissions(requestData, requestMetadata = {}) {
+        return this.listServerPermissions$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ListServerPermissionsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ListServerPermissionsResponse>>
+     */
+    listServerPermissions$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/ListServerPermissions',
+            requestData,
+            requestMetadata,
+            requestClass: ListServerPermissionsRequest,
+            responseClass: ListServerPermissionsResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.LoginRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.LoginResponse>
+     */
+    login(requestData, requestMetadata = {}) {
+        return this.login$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.LoginRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.LoginResponse>>
+     */
+    login$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/Login',
+            requestData,
+            requestMetadata,
+            requestClass: LoginRequest,
+            responseClass: LoginResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param googleProtobuf001.Empty request
+     * @param Metadata metadata
+     * @return Observable<googleProtobuf001.Empty>
+     */
+    checkLogin(requestData, requestMetadata = {}) {
+        return this.checkLogin$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param googleProtobuf001.Empty request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
+     */
+    checkLogin$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Users/CheckLogin',
+            requestData,
+            requestMetadata,
+            requestClass: Empty,
+            responseClass: Empty
+        });
+    }
+}
+UsersClient.ɵprov = ɵɵdefineInjectable({ factory: function UsersClient_Factory() { return new UsersClient(ɵɵinject(GRPC_USERS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: UsersClient, providedIn: "root" });
+UsersClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+UsersClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_USERS_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
 
 class PingRequest {
     /**
@@ -16626,6 +22576,23 @@ class PingResponse {
 }
 
 /* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_WEBHOOK_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_WEBHOOK_CLIENT_SETTINGS = new InjectionToken('GRPC_WEBHOOK_CLIENT_SETTINGS');
+
+/* tslint:disable */
 class WebhookClient {
     constructor(settings, clientFactory, handler) {
         this.handler = handler;
@@ -16721,4964 +22688,6 @@ WebhookClient.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
     { type: GrpcHandler }
 ];
-
-class ExtractEntitiesRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param ExtractEntitiesRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.parent = value.parent;
-        this.text = value.text;
-        this.languageCode = value.languageCode;
-        ExtractEntitiesRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        ExtractEntitiesRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new ExtractEntitiesRequest();
-        ExtractEntitiesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.parent = instance.parent || '';
-        instance.text = instance.text || '';
-        instance.languageCode = instance.languageCode || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.parent = reader.readString();
-                    break;
-                case 2:
-                    instance.text = reader.readString();
-                    break;
-                case 3:
-                    instance.languageCode = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        ExtractEntitiesRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.parent) {
-            writer.writeString(1, instance.parent);
-        }
-        if (instance.text) {
-            writer.writeString(2, instance.text);
-        }
-        if (instance.languageCode) {
-            writer.writeString(3, instance.languageCode);
-        }
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get text() {
-        return this._text;
-    }
-    set text(value) {
-        this._text = value;
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    toObject() {
-        return {
-            parent: this.parent,
-            text: this.text,
-            languageCode: this.languageCode
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class ExtractEntitiesResponse {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param ExtractEntitiesResponse value
-     */
-    constructor(value) {
-        value = value || {};
-        this.entities = (value.entities || []).map(m => new Intent.TrainingPhrase.Entity(m));
-        this.text = value.text;
-        ExtractEntitiesResponse.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        ExtractEntitiesResponse.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new ExtractEntitiesResponse();
-        ExtractEntitiesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.entities = instance.entities || [];
-        instance.text = instance.text || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new Intent.TrainingPhrase.Entity();
-                    reader.readMessage(messageInitializer1, Intent.TrainingPhrase.Entity.fromBinaryReader);
-                    (instance.entities = instance.entities || []).push(messageInitializer1);
-                    break;
-                case 2:
-                    instance.text = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        ExtractEntitiesResponse.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.entities && instance.entities.length) {
-            writer.writeRepeatedMessage(1, instance.entities, Intent.TrainingPhrase.Entity.toBinaryWriter);
-        }
-        if (instance.text) {
-            writer.writeString(2, instance.text);
-        }
-    }
-    get entities() {
-        return this._entities;
-    }
-    set entities(value) {
-        this._entities = value;
-    }
-    get text() {
-        return this._text;
-    }
-    set text(value) {
-        this._text = value;
-    }
-    toObject() {
-        return {
-            entities: (this.entities || []).map(m => m.toObject()),
-            text: this.text
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GetAlternativeSentencesRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetAlternativeSentencesRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.config = value.config
-            ? new DataEnrichmentConfig(value.config)
-            : undefined;
-        this.sentence = value.sentence;
-        this.languageCode = value.languageCode;
-        this.parent = value.parent;
-        this.protectedWords = (value.protectedWords || []).slice();
-        this.wordsToChange = (value.wordsToChange || []).slice();
-        GetAlternativeSentencesRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetAlternativeSentencesRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetAlternativeSentencesRequest();
-        GetAlternativeSentencesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.config = instance.config || undefined;
-        instance.sentence = instance.sentence || '';
-        instance.languageCode = instance.languageCode || '';
-        instance.parent = instance.parent || '';
-        instance.protectedWords = instance.protectedWords || [];
-        instance.wordsToChange = instance.wordsToChange || [];
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.config = new DataEnrichmentConfig();
-                    reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 2:
-                    instance.sentence = reader.readString();
-                    break;
-                case 4:
-                    instance.languageCode = reader.readString();
-                    break;
-                case 5:
-                    instance.parent = reader.readString();
-                    break;
-                case 6:
-                    (instance.protectedWords = instance.protectedWords || []).push(reader.readString());
-                    break;
-                case 7:
-                    (instance.wordsToChange = instance.wordsToChange || []).push(reader.readString());
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetAlternativeSentencesRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.config) {
-            writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.sentence) {
-            writer.writeString(2, instance.sentence);
-        }
-        if (instance.languageCode) {
-            writer.writeString(4, instance.languageCode);
-        }
-        if (instance.parent) {
-            writer.writeString(5, instance.parent);
-        }
-        if (instance.protectedWords && instance.protectedWords.length) {
-            writer.writeRepeatedString(6, instance.protectedWords);
-        }
-        if (instance.wordsToChange && instance.wordsToChange.length) {
-            writer.writeRepeatedString(7, instance.wordsToChange);
-        }
-    }
-    get config() {
-        return this._config;
-    }
-    set config(value) {
-        this._config = value;
-    }
-    get sentence() {
-        return this._sentence;
-    }
-    set sentence(value) {
-        this._sentence = value;
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get protectedWords() {
-        return this._protectedWords;
-    }
-    set protectedWords(value) {
-        this._protectedWords = value;
-    }
-    get wordsToChange() {
-        return this._wordsToChange;
-    }
-    set wordsToChange(value) {
-        this._wordsToChange = value;
-    }
-    toObject() {
-        return {
-            config: this.config ? this.config.toObject() : undefined,
-            sentence: this.sentence,
-            languageCode: this.languageCode,
-            parent: this.parent,
-            protectedWords: (this.protectedWords || []).slice(),
-            wordsToChange: (this.wordsToChange || []).slice()
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GenerateUserSaysRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GenerateUserSaysRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.languageCode = value.languageCode;
-        this.parent = value.parent;
-        this.nRepeatSynonym = value.nRepeatSynonym;
-        this.branch = value.branch;
-        GenerateUserSaysRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GenerateUserSaysRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GenerateUserSaysRequest();
-        GenerateUserSaysRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.languageCode = instance.languageCode || '';
-        instance.parent = instance.parent || '';
-        instance.nRepeatSynonym = instance.nRepeatSynonym || 0;
-        instance.branch = instance.branch || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 4:
-                    instance.languageCode = reader.readString();
-                    break;
-                case 5:
-                    instance.parent = reader.readString();
-                    break;
-                case 6:
-                    instance.nRepeatSynonym = reader.readInt32();
-                    break;
-                case 8:
-                    instance.branch = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GenerateUserSaysRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.languageCode) {
-            writer.writeString(4, instance.languageCode);
-        }
-        if (instance.parent) {
-            writer.writeString(5, instance.parent);
-        }
-        if (instance.nRepeatSynonym) {
-            writer.writeInt32(6, instance.nRepeatSynonym);
-        }
-        if (instance.branch) {
-            writer.writeString(8, instance.branch);
-        }
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get nRepeatSynonym() {
-        return this._nRepeatSynonym;
-    }
-    set nRepeatSynonym(value) {
-        this._nRepeatSynonym = value;
-    }
-    get branch() {
-        return this._branch;
-    }
-    set branch(value) {
-        this._branch = value;
-    }
-    toObject() {
-        return {
-            languageCode: this.languageCode,
-            parent: this.parent,
-            nRepeatSynonym: this.nRepeatSynonym,
-            branch: this.branch
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GenerateResponsesRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GenerateResponsesRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.languageCode = value.languageCode;
-        this.parent = value.parent;
-        this.nRepeatSynonym = value.nRepeatSynonym;
-        this.branch = value.branch;
-        this.dropUnknownParameters = value.dropUnknownParameters;
-        GenerateResponsesRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GenerateResponsesRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GenerateResponsesRequest();
-        GenerateResponsesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.languageCode = instance.languageCode || '';
-        instance.parent = instance.parent || '';
-        instance.nRepeatSynonym = instance.nRepeatSynonym || 0;
-        instance.branch = instance.branch || '';
-        instance.dropUnknownParameters = instance.dropUnknownParameters || false;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 4:
-                    instance.languageCode = reader.readString();
-                    break;
-                case 5:
-                    instance.parent = reader.readString();
-                    break;
-                case 7:
-                    instance.nRepeatSynonym = reader.readInt32();
-                    break;
-                case 8:
-                    instance.branch = reader.readString();
-                    break;
-                case 9:
-                    instance.dropUnknownParameters = reader.readBool();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GenerateResponsesRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.languageCode) {
-            writer.writeString(4, instance.languageCode);
-        }
-        if (instance.parent) {
-            writer.writeString(5, instance.parent);
-        }
-        if (instance.nRepeatSynonym) {
-            writer.writeInt32(7, instance.nRepeatSynonym);
-        }
-        if (instance.branch) {
-            writer.writeString(8, instance.branch);
-        }
-        if (instance.dropUnknownParameters) {
-            writer.writeBool(9, instance.dropUnknownParameters);
-        }
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get nRepeatSynonym() {
-        return this._nRepeatSynonym;
-    }
-    set nRepeatSynonym(value) {
-        this._nRepeatSynonym = value;
-    }
-    get branch() {
-        return this._branch;
-    }
-    set branch(value) {
-        this._branch = value;
-    }
-    get dropUnknownParameters() {
-        return this._dropUnknownParameters;
-    }
-    set dropUnknownParameters(value) {
-        this._dropUnknownParameters = value;
-    }
-    toObject() {
-        return {
-            languageCode: this.languageCode,
-            parent: this.parent,
-            nRepeatSynonym: this.nRepeatSynonym,
-            branch: this.branch,
-            dropUnknownParameters: this.dropUnknownParameters
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GetAlternativeTrainingPhrasesRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetAlternativeTrainingPhrasesRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.config = value.config
-            ? new DataEnrichmentConfig(value.config)
-            : undefined;
-        this.trainingPhrase = value.trainingPhrase
-            ? new Intent.TrainingPhrase(value.trainingPhrase)
-            : undefined;
-        this.intentName = value.intentName;
-        this.languageCode = value.languageCode;
-        this.parent = value.parent;
-        this.detectEntities = value.detectEntities;
-        this.similarityThreshold = value.similarityThreshold;
-        this.protectedWords = (value.protectedWords || []).slice();
-        this.wordsToChange = (value.wordsToChange || []).slice();
-        this.branch = value.branch;
-        GetAlternativeTrainingPhrasesRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetAlternativeTrainingPhrasesRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetAlternativeTrainingPhrasesRequest();
-        GetAlternativeTrainingPhrasesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.config = instance.config || undefined;
-        instance.trainingPhrase = instance.trainingPhrase || undefined;
-        instance.intentName = instance.intentName || '';
-        instance.languageCode = instance.languageCode || '';
-        instance.parent = instance.parent || '';
-        instance.detectEntities = instance.detectEntities || false;
-        instance.similarityThreshold = instance.similarityThreshold || 0;
-        instance.protectedWords = instance.protectedWords || [];
-        instance.wordsToChange = instance.wordsToChange || [];
-        instance.branch = instance.branch || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.config = new DataEnrichmentConfig();
-                    reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 2:
-                    instance.trainingPhrase = new Intent.TrainingPhrase();
-                    reader.readMessage(instance.trainingPhrase, Intent.TrainingPhrase.fromBinaryReader);
-                    break;
-                case 3:
-                    instance.intentName = reader.readString();
-                    break;
-                case 4:
-                    instance.languageCode = reader.readString();
-                    break;
-                case 5:
-                    instance.parent = reader.readString();
-                    break;
-                case 6:
-                    instance.detectEntities = reader.readBool();
-                    break;
-                case 7:
-                    instance.similarityThreshold = reader.readFloat();
-                    break;
-                case 8:
-                    (instance.protectedWords = instance.protectedWords || []).push(reader.readString());
-                    break;
-                case 9:
-                    (instance.wordsToChange = instance.wordsToChange || []).push(reader.readString());
-                    break;
-                case 10:
-                    instance.branch = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetAlternativeTrainingPhrasesRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.config) {
-            writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.trainingPhrase) {
-            writer.writeMessage(2, instance.trainingPhrase, Intent.TrainingPhrase.toBinaryWriter);
-        }
-        if (instance.intentName) {
-            writer.writeString(3, instance.intentName);
-        }
-        if (instance.languageCode) {
-            writer.writeString(4, instance.languageCode);
-        }
-        if (instance.parent) {
-            writer.writeString(5, instance.parent);
-        }
-        if (instance.detectEntities) {
-            writer.writeBool(6, instance.detectEntities);
-        }
-        if (instance.similarityThreshold) {
-            writer.writeFloat(7, instance.similarityThreshold);
-        }
-        if (instance.protectedWords && instance.protectedWords.length) {
-            writer.writeRepeatedString(8, instance.protectedWords);
-        }
-        if (instance.wordsToChange && instance.wordsToChange.length) {
-            writer.writeRepeatedString(9, instance.wordsToChange);
-        }
-        if (instance.branch) {
-            writer.writeString(10, instance.branch);
-        }
-    }
-    get config() {
-        return this._config;
-    }
-    set config(value) {
-        this._config = value;
-    }
-    get trainingPhrase() {
-        return this._trainingPhrase;
-    }
-    set trainingPhrase(value) {
-        this._trainingPhrase = value;
-    }
-    get intentName() {
-        return this._intentName;
-    }
-    set intentName(value) {
-        this._intentName = value;
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get detectEntities() {
-        return this._detectEntities;
-    }
-    set detectEntities(value) {
-        this._detectEntities = value;
-    }
-    get similarityThreshold() {
-        return this._similarityThreshold;
-    }
-    set similarityThreshold(value) {
-        this._similarityThreshold = value;
-    }
-    get protectedWords() {
-        return this._protectedWords;
-    }
-    set protectedWords(value) {
-        this._protectedWords = value;
-    }
-    get wordsToChange() {
-        return this._wordsToChange;
-    }
-    set wordsToChange(value) {
-        this._wordsToChange = value;
-    }
-    get branch() {
-        return this._branch;
-    }
-    set branch(value) {
-        this._branch = value;
-    }
-    toObject() {
-        return {
-            config: this.config ? this.config.toObject() : undefined,
-            trainingPhrase: this.trainingPhrase
-                ? this.trainingPhrase.toObject()
-                : undefined,
-            intentName: this.intentName,
-            languageCode: this.languageCode,
-            parent: this.parent,
-            detectEntities: this.detectEntities,
-            similarityThreshold: this.similarityThreshold,
-            protectedWords: (this.protectedWords || []).slice(),
-            wordsToChange: (this.wordsToChange || []).slice(),
-            branch: this.branch
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GetSynonymsRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetSynonymsRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.config = value.config
-            ? new DataEnrichmentConfig(value.config)
-            : undefined;
-        this.word = value.word;
-        this.languageCode = value.languageCode;
-        this.parent = value.parent;
-        GetSynonymsRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetSynonymsRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetSynonymsRequest();
-        GetSynonymsRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.config = instance.config || undefined;
-        instance.word = instance.word || '';
-        instance.languageCode = instance.languageCode || '';
-        instance.parent = instance.parent || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.config = new DataEnrichmentConfig();
-                    reader.readMessage(instance.config, DataEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 2:
-                    instance.word = reader.readString();
-                    break;
-                case 4:
-                    instance.languageCode = reader.readString();
-                    break;
-                case 5:
-                    instance.parent = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetSynonymsRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.config) {
-            writer.writeMessage(1, instance.config, DataEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.word) {
-            writer.writeString(2, instance.word);
-        }
-        if (instance.languageCode) {
-            writer.writeString(4, instance.languageCode);
-        }
-        if (instance.parent) {
-            writer.writeString(5, instance.parent);
-        }
-    }
-    get config() {
-        return this._config;
-    }
-    set config(value) {
-        this._config = value;
-    }
-    get word() {
-        return this._word;
-    }
-    set word(value) {
-        this._word = value;
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    toObject() {
-        return {
-            config: this.config ? this.config.toObject() : undefined,
-            word: this.word,
-            languageCode: this.languageCode,
-            parent: this.parent
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GetSynonymsResponse {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetSynonymsResponse value
-     */
-    constructor(value) {
-        value = value || {};
-        this.synonyms = (value.synonyms || []).map(m => new Synonym(m));
-        GetSynonymsResponse.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetSynonymsResponse.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetSynonymsResponse();
-        GetSynonymsResponse.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.synonyms = instance.synonyms || [];
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new Synonym();
-                    reader.readMessage(messageInitializer1, Synonym.fromBinaryReader);
-                    (instance.synonyms = instance.synonyms || []).push(messageInitializer1);
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetSynonymsResponse.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.synonyms && instance.synonyms.length) {
-            writer.writeRepeatedMessage(1, instance.synonyms, Synonym.toBinaryWriter);
-        }
-    }
-    get synonyms() {
-        return this._synonyms;
-    }
-    set synonyms(value) {
-        this._synonyms = value;
-    }
-    toObject() {
-        return {
-            synonyms: (this.synonyms || []).map(m => m.toObject())
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class Synonym {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param Synonym value
-     */
-    constructor(value) {
-        value = value || {};
-        this.synonym = value.synonym;
-        this.score = value.score;
-        Synonym.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        Synonym.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new Synonym();
-        Synonym.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.synonym = instance.synonym || '';
-        instance.score = instance.score || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.synonym = reader.readString();
-                    break;
-                case 2:
-                    instance.score = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        Synonym.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.synonym) {
-            writer.writeString(1, instance.synonym);
-        }
-        if (instance.score) {
-            writer.writeInt32(2, instance.score);
-        }
-    }
-    get synonym() {
-        return this._synonym;
-    }
-    set synonym(value) {
-        this._synonym = value;
-    }
-    get score() {
-        return this._score;
-    }
-    set score(value) {
-        this._score = value;
-    }
-    toObject() {
-        return {
-            synonym: this.synonym,
-            score: this.score
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GetAlternativeSentencesResponse {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetAlternativeSentencesResponse value
-     */
-    constructor(value) {
-        value = value || {};
-        this.alternativeSentences = (value.alternativeSentences || []).map(m => new AltSentence(m));
-        GetAlternativeSentencesResponse.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetAlternativeSentencesResponse.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetAlternativeSentencesResponse();
-        GetAlternativeSentencesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.alternativeSentences = instance.alternativeSentences || [];
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new AltSentence();
-                    reader.readMessage(messageInitializer1, AltSentence.fromBinaryReader);
-                    (instance.alternativeSentences =
-                        instance.alternativeSentences || []).push(messageInitializer1);
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetAlternativeSentencesResponse.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.alternativeSentences && instance.alternativeSentences.length) {
-            writer.writeRepeatedMessage(1, instance.alternativeSentences, AltSentence.toBinaryWriter);
-        }
-    }
-    get alternativeSentences() {
-        return this._alternativeSentences;
-    }
-    set alternativeSentences(value) {
-        this._alternativeSentences = value;
-    }
-    toObject() {
-        return {
-            alternativeSentences: (this.alternativeSentences || []).map(m => m.toObject())
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GenerateResponsesResponse {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GenerateResponsesResponse value
-     */
-    constructor(value) {
-        value = value || {};
-        this.responses = (value.responses || []).slice();
-        GenerateResponsesResponse.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GenerateResponsesResponse.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GenerateResponsesResponse();
-        GenerateResponsesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.responses = instance.responses || [];
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 2:
-                    (instance.responses = instance.responses || []).push(reader.readString());
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GenerateResponsesResponse.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.responses && instance.responses.length) {
-            writer.writeRepeatedString(2, instance.responses);
-        }
-    }
-    get responses() {
-        return this._responses;
-    }
-    set responses(value) {
-        this._responses = value;
-    }
-    toObject() {
-        return {
-            responses: (this.responses || []).slice()
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GenerateUserSaysResponse {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GenerateUserSaysResponse value
-     */
-    constructor(value) {
-        value = value || {};
-        this.userSays = (value.userSays || []).slice();
-        GenerateUserSaysResponse.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GenerateUserSaysResponse.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GenerateUserSaysResponse();
-        GenerateUserSaysResponse.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.userSays = instance.userSays || [];
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 2:
-                    (instance.userSays = instance.userSays || []).push(reader.readString());
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GenerateUserSaysResponse.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.userSays && instance.userSays.length) {
-            writer.writeRepeatedString(2, instance.userSays);
-        }
-    }
-    get userSays() {
-        return this._userSays;
-    }
-    set userSays(value) {
-        this._userSays = value;
-    }
-    toObject() {
-        return {
-            userSays: (this.userSays || []).slice()
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GetAlternativeTrainingPhrasesResponse {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetAlternativeTrainingPhrasesResponse value
-     */
-    constructor(value) {
-        value = value || {};
-        this.alternativeTrainingPhrases = (value.alternativeTrainingPhrases || []).map(m => new AltTrainingPhrase(m));
-        GetAlternativeTrainingPhrasesResponse.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetAlternativeTrainingPhrasesResponse.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetAlternativeTrainingPhrasesResponse();
-        GetAlternativeTrainingPhrasesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.alternativeTrainingPhrases =
-            instance.alternativeTrainingPhrases || [];
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new AltTrainingPhrase();
-                    reader.readMessage(messageInitializer1, AltTrainingPhrase.fromBinaryReader);
-                    (instance.alternativeTrainingPhrases =
-                        instance.alternativeTrainingPhrases || []).push(messageInitializer1);
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetAlternativeTrainingPhrasesResponse.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.alternativeTrainingPhrases &&
-            instance.alternativeTrainingPhrases.length) {
-            writer.writeRepeatedMessage(1, instance.alternativeTrainingPhrases, AltTrainingPhrase.toBinaryWriter);
-        }
-    }
-    get alternativeTrainingPhrases() {
-        return this._alternativeTrainingPhrases;
-    }
-    set alternativeTrainingPhrases(value) {
-        this._alternativeTrainingPhrases = value;
-    }
-    toObject() {
-        return {
-            alternativeTrainingPhrases: (this.alternativeTrainingPhrases || []).map(m => m.toObject())
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class AltSentence {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param AltSentence value
-     */
-    constructor(value) {
-        value = value || {};
-        this.sentence = value.sentence;
-        this.score = value.score;
-        AltSentence.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        AltSentence.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new AltSentence();
-        AltSentence.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.sentence = instance.sentence || '';
-        instance.score = instance.score || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.sentence = reader.readString();
-                    break;
-                case 2:
-                    instance.score = reader.readFloat();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        AltSentence.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.sentence) {
-            writer.writeString(1, instance.sentence);
-        }
-        if (instance.score) {
-            writer.writeFloat(2, instance.score);
-        }
-    }
-    get sentence() {
-        return this._sentence;
-    }
-    set sentence(value) {
-        this._sentence = value;
-    }
-    get score() {
-        return this._score;
-    }
-    set score(value) {
-        this._score = value;
-    }
-    toObject() {
-        return {
-            sentence: this.sentence,
-            score: this.score
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class AltTrainingPhrase {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param AltTrainingPhrase value
-     */
-    constructor(value) {
-        value = value || {};
-        this.trainingPhrase = value.trainingPhrase
-            ? new Intent.TrainingPhrase(value.trainingPhrase)
-            : undefined;
-        this.score = value.score;
-        AltTrainingPhrase.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        AltTrainingPhrase.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new AltTrainingPhrase();
-        AltTrainingPhrase.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.trainingPhrase = instance.trainingPhrase || undefined;
-        instance.score = instance.score || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.trainingPhrase = new Intent.TrainingPhrase();
-                    reader.readMessage(instance.trainingPhrase, Intent.TrainingPhrase.fromBinaryReader);
-                    break;
-                case 2:
-                    instance.score = reader.readFloat();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        AltTrainingPhrase.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.trainingPhrase) {
-            writer.writeMessage(1, instance.trainingPhrase, Intent.TrainingPhrase.toBinaryWriter);
-        }
-        if (instance.score) {
-            writer.writeFloat(2, instance.score);
-        }
-    }
-    get trainingPhrase() {
-        return this._trainingPhrase;
-    }
-    set trainingPhrase(value) {
-        this._trainingPhrase = value;
-    }
-    get score() {
-        return this._score;
-    }
-    set score(value) {
-        this._score = value;
-    }
-    toObject() {
-        return {
-            trainingPhrase: this.trainingPhrase
-                ? this.trainingPhrase.toObject()
-                : undefined,
-            score: this.score
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class DataEnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param DataEnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.entityEnrichment = value.entityEnrichment
-            ? new EntityEnrichmentConfig(value.entityEnrichment)
-            : undefined;
-        this.thesaurusEnrichment = value.thesaurusEnrichment
-            ? new ThesaurusEnrichmentConfig(value.thesaurusEnrichment)
-            : undefined;
-        this.word2vecEnrichment = value.word2vecEnrichment
-            ? new Word2VecEnrichmentConfig(value.word2vecEnrichment)
-            : undefined;
-        this.wordNetEnrichment = value.wordNetEnrichment
-            ? new WordNetAugEnrichmentConfig(value.wordNetEnrichment)
-            : undefined;
-        this.gpt2Enrichment = value.gpt2Enrichment
-            ? new GPT2EnrichmentConfig(value.gpt2Enrichment)
-            : undefined;
-        this.gloveEnrichment = value.gloveEnrichment
-            ? new GloVeEnrichmentConfig(value.gloveEnrichment)
-            : undefined;
-        this.fasttextEnrichment = value.fasttextEnrichment
-            ? new FastTextEnrichmentConfig(value.fasttextEnrichment)
-            : undefined;
-        this.bertEnrichment = value.bertEnrichment
-            ? new BertAugEnrichmentConfig(value.bertEnrichment)
-            : undefined;
-        this.xlnetEnrichment = value.xlnetEnrichment
-            ? new XLNetAugEnrichmentConfig(value.xlnetEnrichment)
-            : undefined;
-        DataEnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        DataEnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new DataEnrichmentConfig();
-        DataEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.entityEnrichment = instance.entityEnrichment || undefined;
-        instance.thesaurusEnrichment = instance.thesaurusEnrichment || undefined;
-        instance.word2vecEnrichment = instance.word2vecEnrichment || undefined;
-        instance.wordNetEnrichment = instance.wordNetEnrichment || undefined;
-        instance.gpt2Enrichment = instance.gpt2Enrichment || undefined;
-        instance.gloveEnrichment = instance.gloveEnrichment || undefined;
-        instance.fasttextEnrichment = instance.fasttextEnrichment || undefined;
-        instance.bertEnrichment = instance.bertEnrichment || undefined;
-        instance.xlnetEnrichment = instance.xlnetEnrichment || undefined;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.entityEnrichment = new EntityEnrichmentConfig();
-                    reader.readMessage(instance.entityEnrichment, EntityEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 2:
-                    instance.thesaurusEnrichment = new ThesaurusEnrichmentConfig();
-                    reader.readMessage(instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 3:
-                    instance.word2vecEnrichment = new Word2VecEnrichmentConfig();
-                    reader.readMessage(instance.word2vecEnrichment, Word2VecEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 4:
-                    instance.wordNetEnrichment = new WordNetAugEnrichmentConfig();
-                    reader.readMessage(instance.wordNetEnrichment, WordNetAugEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 5:
-                    instance.gpt2Enrichment = new GPT2EnrichmentConfig();
-                    reader.readMessage(instance.gpt2Enrichment, GPT2EnrichmentConfig.fromBinaryReader);
-                    break;
-                case 6:
-                    instance.gloveEnrichment = new GloVeEnrichmentConfig();
-                    reader.readMessage(instance.gloveEnrichment, GloVeEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 7:
-                    instance.fasttextEnrichment = new FastTextEnrichmentConfig();
-                    reader.readMessage(instance.fasttextEnrichment, FastTextEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 8:
-                    instance.bertEnrichment = new BertAugEnrichmentConfig();
-                    reader.readMessage(instance.bertEnrichment, BertAugEnrichmentConfig.fromBinaryReader);
-                    break;
-                case 9:
-                    instance.xlnetEnrichment = new XLNetAugEnrichmentConfig();
-                    reader.readMessage(instance.xlnetEnrichment, XLNetAugEnrichmentConfig.fromBinaryReader);
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        DataEnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.entityEnrichment) {
-            writer.writeMessage(1, instance.entityEnrichment, EntityEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.thesaurusEnrichment) {
-            writer.writeMessage(2, instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.word2vecEnrichment) {
-            writer.writeMessage(3, instance.word2vecEnrichment, Word2VecEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.wordNetEnrichment) {
-            writer.writeMessage(4, instance.wordNetEnrichment, WordNetAugEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.gpt2Enrichment) {
-            writer.writeMessage(5, instance.gpt2Enrichment, GPT2EnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.gloveEnrichment) {
-            writer.writeMessage(6, instance.gloveEnrichment, GloVeEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.fasttextEnrichment) {
-            writer.writeMessage(7, instance.fasttextEnrichment, FastTextEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.bertEnrichment) {
-            writer.writeMessage(8, instance.bertEnrichment, BertAugEnrichmentConfig.toBinaryWriter);
-        }
-        if (instance.xlnetEnrichment) {
-            writer.writeMessage(9, instance.xlnetEnrichment, XLNetAugEnrichmentConfig.toBinaryWriter);
-        }
-    }
-    get entityEnrichment() {
-        return this._entityEnrichment;
-    }
-    set entityEnrichment(value) {
-        this._entityEnrichment = value;
-    }
-    get thesaurusEnrichment() {
-        return this._thesaurusEnrichment;
-    }
-    set thesaurusEnrichment(value) {
-        this._thesaurusEnrichment = value;
-    }
-    get word2vecEnrichment() {
-        return this._word2vecEnrichment;
-    }
-    set word2vecEnrichment(value) {
-        this._word2vecEnrichment = value;
-    }
-    get wordNetEnrichment() {
-        return this._wordNetEnrichment;
-    }
-    set wordNetEnrichment(value) {
-        this._wordNetEnrichment = value;
-    }
-    get gpt2Enrichment() {
-        return this._gpt2Enrichment;
-    }
-    set gpt2Enrichment(value) {
-        this._gpt2Enrichment = value;
-    }
-    get gloveEnrichment() {
-        return this._gloveEnrichment;
-    }
-    set gloveEnrichment(value) {
-        this._gloveEnrichment = value;
-    }
-    get fasttextEnrichment() {
-        return this._fasttextEnrichment;
-    }
-    set fasttextEnrichment(value) {
-        this._fasttextEnrichment = value;
-    }
-    get bertEnrichment() {
-        return this._bertEnrichment;
-    }
-    set bertEnrichment(value) {
-        this._bertEnrichment = value;
-    }
-    get xlnetEnrichment() {
-        return this._xlnetEnrichment;
-    }
-    set xlnetEnrichment(value) {
-        this._xlnetEnrichment = value;
-    }
-    toObject() {
-        return {
-            entityEnrichment: this.entityEnrichment
-                ? this.entityEnrichment.toObject()
-                : undefined,
-            thesaurusEnrichment: this.thesaurusEnrichment
-                ? this.thesaurusEnrichment.toObject()
-                : undefined,
-            word2vecEnrichment: this.word2vecEnrichment
-                ? this.word2vecEnrichment.toObject()
-                : undefined,
-            wordNetEnrichment: this.wordNetEnrichment
-                ? this.wordNetEnrichment.toObject()
-                : undefined,
-            gpt2Enrichment: this.gpt2Enrichment
-                ? this.gpt2Enrichment.toObject()
-                : undefined,
-            gloveEnrichment: this.gloveEnrichment
-                ? this.gloveEnrichment.toObject()
-                : undefined,
-            fasttextEnrichment: this.fasttextEnrichment
-                ? this.fasttextEnrichment.toObject()
-                : undefined,
-            bertEnrichment: this.bertEnrichment
-                ? this.bertEnrichment.toObject()
-                : undefined,
-            xlnetEnrichment: this.xlnetEnrichment
-                ? this.xlnetEnrichment.toObject()
-                : undefined
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class EntityEnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param EntityEnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.isActive = value.isActive;
-        this.enrichmentFactor = value.enrichmentFactor;
-        this.executionOrder = value.executionOrder;
-        EntityEnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        EntityEnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new EntityEnrichmentConfig();
-        EntityEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.isActive = instance.isActive || false;
-        instance.enrichmentFactor = instance.enrichmentFactor || 0;
-        instance.executionOrder = instance.executionOrder || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.isActive = reader.readBool();
-                    break;
-                case 2:
-                    instance.enrichmentFactor = reader.readInt32();
-                    break;
-                case 3:
-                    instance.executionOrder = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        EntityEnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.isActive) {
-            writer.writeBool(1, instance.isActive);
-        }
-        if (instance.enrichmentFactor) {
-            writer.writeInt32(2, instance.enrichmentFactor);
-        }
-        if (instance.executionOrder) {
-            writer.writeInt32(3, instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class ThesaurusEnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param ThesaurusEnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.isActive = value.isActive;
-        this.enrichmentFactor = value.enrichmentFactor;
-        this.executionOrder = value.executionOrder;
-        ThesaurusEnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        ThesaurusEnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new ThesaurusEnrichmentConfig();
-        ThesaurusEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.isActive = instance.isActive || false;
-        instance.enrichmentFactor = instance.enrichmentFactor || 0;
-        instance.executionOrder = instance.executionOrder || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.isActive = reader.readBool();
-                    break;
-                case 2:
-                    instance.enrichmentFactor = reader.readInt32();
-                    break;
-                case 3:
-                    instance.executionOrder = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        ThesaurusEnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.isActive) {
-            writer.writeBool(1, instance.isActive);
-        }
-        if (instance.enrichmentFactor) {
-            writer.writeInt32(2, instance.enrichmentFactor);
-        }
-        if (instance.executionOrder) {
-            writer.writeInt32(3, instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class FastTextEnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param FastTextEnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.isActive = value.isActive;
-        this.enrichmentFactor = value.enrichmentFactor;
-        this.executionOrder = value.executionOrder;
-        FastTextEnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        FastTextEnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new FastTextEnrichmentConfig();
-        FastTextEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.isActive = instance.isActive || false;
-        instance.enrichmentFactor = instance.enrichmentFactor || 0;
-        instance.executionOrder = instance.executionOrder || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.isActive = reader.readBool();
-                    break;
-                case 2:
-                    instance.enrichmentFactor = reader.readInt32();
-                    break;
-                case 3:
-                    instance.executionOrder = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        FastTextEnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.isActive) {
-            writer.writeBool(1, instance.isActive);
-        }
-        if (instance.enrichmentFactor) {
-            writer.writeInt32(2, instance.enrichmentFactor);
-        }
-        if (instance.executionOrder) {
-            writer.writeInt32(3, instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class BertAugEnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param BertAugEnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.isActive = value.isActive;
-        this.enrichmentFactor = value.enrichmentFactor;
-        this.executionOrder = value.executionOrder;
-        BertAugEnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        BertAugEnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new BertAugEnrichmentConfig();
-        BertAugEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.isActive = instance.isActive || false;
-        instance.enrichmentFactor = instance.enrichmentFactor || 0;
-        instance.executionOrder = instance.executionOrder || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.isActive = reader.readBool();
-                    break;
-                case 2:
-                    instance.enrichmentFactor = reader.readInt32();
-                    break;
-                case 3:
-                    instance.executionOrder = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        BertAugEnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.isActive) {
-            writer.writeBool(1, instance.isActive);
-        }
-        if (instance.enrichmentFactor) {
-            writer.writeInt32(2, instance.enrichmentFactor);
-        }
-        if (instance.executionOrder) {
-            writer.writeInt32(3, instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GloVeEnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GloVeEnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.isActive = value.isActive;
-        this.enrichmentFactor = value.enrichmentFactor;
-        this.executionOrder = value.executionOrder;
-        GloVeEnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GloVeEnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GloVeEnrichmentConfig();
-        GloVeEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.isActive = instance.isActive || false;
-        instance.enrichmentFactor = instance.enrichmentFactor || 0;
-        instance.executionOrder = instance.executionOrder || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.isActive = reader.readBool();
-                    break;
-                case 2:
-                    instance.enrichmentFactor = reader.readInt32();
-                    break;
-                case 3:
-                    instance.executionOrder = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GloVeEnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.isActive) {
-            writer.writeBool(1, instance.isActive);
-        }
-        if (instance.enrichmentFactor) {
-            writer.writeInt32(2, instance.enrichmentFactor);
-        }
-        if (instance.executionOrder) {
-            writer.writeInt32(3, instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GPT2EnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GPT2EnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.isActive = value.isActive;
-        this.enrichmentFactor = value.enrichmentFactor;
-        this.executionOrder = value.executionOrder;
-        GPT2EnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GPT2EnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GPT2EnrichmentConfig();
-        GPT2EnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.isActive = instance.isActive || false;
-        instance.enrichmentFactor = instance.enrichmentFactor || 0;
-        instance.executionOrder = instance.executionOrder || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.isActive = reader.readBool();
-                    break;
-                case 2:
-                    instance.enrichmentFactor = reader.readInt32();
-                    break;
-                case 3:
-                    instance.executionOrder = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GPT2EnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.isActive) {
-            writer.writeBool(1, instance.isActive);
-        }
-        if (instance.enrichmentFactor) {
-            writer.writeInt32(2, instance.enrichmentFactor);
-        }
-        if (instance.executionOrder) {
-            writer.writeInt32(3, instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class Word2VecEnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param Word2VecEnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.isActive = value.isActive;
-        this.enrichmentFactor = value.enrichmentFactor;
-        this.executionOrder = value.executionOrder;
-        Word2VecEnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        Word2VecEnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new Word2VecEnrichmentConfig();
-        Word2VecEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.isActive = instance.isActive || false;
-        instance.enrichmentFactor = instance.enrichmentFactor || 0;
-        instance.executionOrder = instance.executionOrder || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.isActive = reader.readBool();
-                    break;
-                case 2:
-                    instance.enrichmentFactor = reader.readInt32();
-                    break;
-                case 3:
-                    instance.executionOrder = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        Word2VecEnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.isActive) {
-            writer.writeBool(1, instance.isActive);
-        }
-        if (instance.enrichmentFactor) {
-            writer.writeInt32(2, instance.enrichmentFactor);
-        }
-        if (instance.executionOrder) {
-            writer.writeInt32(3, instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class WordNetAugEnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param WordNetAugEnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.isActive = value.isActive;
-        this.enrichmentFactor = value.enrichmentFactor;
-        this.executionOrder = value.executionOrder;
-        WordNetAugEnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        WordNetAugEnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new WordNetAugEnrichmentConfig();
-        WordNetAugEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.isActive = instance.isActive || false;
-        instance.enrichmentFactor = instance.enrichmentFactor || 0;
-        instance.executionOrder = instance.executionOrder || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.isActive = reader.readBool();
-                    break;
-                case 2:
-                    instance.enrichmentFactor = reader.readInt32();
-                    break;
-                case 3:
-                    instance.executionOrder = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        WordNetAugEnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.isActive) {
-            writer.writeBool(1, instance.isActive);
-        }
-        if (instance.enrichmentFactor) {
-            writer.writeInt32(2, instance.enrichmentFactor);
-        }
-        if (instance.executionOrder) {
-            writer.writeInt32(3, instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class XLNetAugEnrichmentConfig {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param XLNetAugEnrichmentConfig value
-     */
-    constructor(value) {
-        value = value || {};
-        this.isActive = value.isActive;
-        this.enrichmentFactor = value.enrichmentFactor;
-        this.executionOrder = value.executionOrder;
-        XLNetAugEnrichmentConfig.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        XLNetAugEnrichmentConfig.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new XLNetAugEnrichmentConfig();
-        XLNetAugEnrichmentConfig.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.isActive = instance.isActive || false;
-        instance.enrichmentFactor = instance.enrichmentFactor || 0;
-        instance.executionOrder = instance.executionOrder || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.isActive = reader.readBool();
-                    break;
-                case 2:
-                    instance.enrichmentFactor = reader.readInt32();
-                    break;
-                case 3:
-                    instance.executionOrder = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        XLNetAugEnrichmentConfig.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.isActive) {
-            writer.writeBool(1, instance.isActive);
-        }
-        if (instance.enrichmentFactor) {
-            writer.writeInt32(2, instance.enrichmentFactor);
-        }
-        if (instance.executionOrder) {
-            writer.writeInt32(3, instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-
-/* tslint:disable */
-/*
-  To configure the services you need to provide a configuration for each of them.
-
-  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-  const grpcSettings = { host: environment.grpcHost };
-
-  @NgModule({
-    providers: [
-      { provide: GRPC_SESSIONS_CLIENT_SETTINGS, useValue: grpcSettings },
-    ],
-  })
-  export class GrpcConfigModule { }
-*/
-const GRPC_SESSIONS_CLIENT_SETTINGS = new InjectionToken('GRPC_SESSIONS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-class SessionsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        this.client = clientFactory.createClient('ondewo.nlu.Sessions', settings);
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DetectIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.DetectIntentResponse>
-     */
-    detectIntent(requestData, requestMetadata = {}) {
-        return this.detectIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DetectIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.DetectIntentResponse>>
-     */
-    detectIntent$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/DetectIntent',
-            requestData,
-            requestMetadata,
-            requestClass: DetectIntentRequest,
-            responseClass: DetectIntentResponse
-        });
-    }
-    /**
-     * Server streaming RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.StreamingDetectIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.StreamingDetectIntentResponse>
-     */
-    streamingDetectIntent(requestData, requestMetadata = {}) {
-        return this.streamingDetectIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Server streaming RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.StreamingDetectIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.StreamingDetectIntentResponse>>
-     */
-    streamingDetectIntent$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.serverStream,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/StreamingDetectIntent',
-            requestData,
-            requestMetadata,
-            requestClass: StreamingDetectIntentRequest,
-            responseClass: StreamingDetectIntentResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListSessionsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListSessionsResponse>
-     */
-    listSessions(requestData, requestMetadata = {}) {
-        return this.listSessions$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListSessionsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListSessionsResponse>>
-     */
-    listSessions$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/ListSessions',
-            requestData,
-            requestMetadata,
-            requestClass: ListSessionsRequest,
-            responseClass: ListSessionsResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetSessionRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Session>
-     */
-    getSession(requestData, requestMetadata = {}) {
-        return this.getSession$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetSessionRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Session>>
-     */
-    getSession$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/GetSession',
-            requestData,
-            requestMetadata,
-            requestClass: GetSessionRequest,
-            responseClass: Session
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.TrackSessionStepRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Session>
-     */
-    trackSessionStep(requestData, requestMetadata = {}) {
-        return this.trackSessionStep$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.TrackSessionStepRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Session>>
-     */
-    trackSessionStep$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/TrackSessionStep',
-            requestData,
-            requestMetadata,
-            requestClass: TrackSessionStepRequest,
-            responseClass: Session
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteSessionRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf001.Empty>
-     */
-    deleteSession(requestData, requestMetadata = {}) {
-        return this.deleteSession$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteSessionRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
-     */
-    deleteSession$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/DeleteSession',
-            requestData,
-            requestMetadata,
-            requestClass: DeleteSessionRequest,
-            responseClass: Empty
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListSessionLabelsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListSessionLabelsResponse>
-     */
-    listSessionLabels(requestData, requestMetadata = {}) {
-        return this.listSessionLabels$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListSessionLabelsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListSessionLabelsResponse>>
-     */
-    listSessionLabels$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/ListSessionLabels',
-            requestData,
-            requestMetadata,
-            requestClass: ListSessionLabelsRequest,
-            responseClass: ListSessionLabelsResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.AddSessionLabelsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Session>
-     */
-    addSessionLabels(requestData, requestMetadata = {}) {
-        return this.addSessionLabels$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.AddSessionLabelsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Session>>
-     */
-    addSessionLabels$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/AddSessionLabels',
-            requestData,
-            requestMetadata,
-            requestClass: AddSessionLabelsRequest,
-            responseClass: Session
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.RemoveSessionLabelsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Session>
-     */
-    removeSessionLabels(requestData, requestMetadata = {}) {
-        return this.removeSessionLabels$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.RemoveSessionLabelsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Session>>
-     */
-    removeSessionLabels$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/RemoveSessionLabels',
-            requestData,
-            requestMetadata,
-            requestClass: RemoveSessionLabelsRequest,
-            responseClass: Session
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListSessionReviewsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListSessionReviewsResponse>
-     */
-    listSessionReviews(requestData, requestMetadata = {}) {
-        return this.listSessionReviews$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListSessionReviewsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListSessionReviewsResponse>>
-     */
-    listSessionReviews$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/ListSessionReviews',
-            requestData,
-            requestMetadata,
-            requestClass: ListSessionReviewsRequest,
-            responseClass: ListSessionReviewsResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetSessionReviewRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.SessionReview>
-     */
-    getSessionReview(requestData, requestMetadata = {}) {
-        return this.getSessionReview$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetSessionReviewRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.SessionReview>>
-     */
-    getSessionReview$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/GetSessionReview',
-            requestData,
-            requestMetadata,
-            requestClass: GetSessionReviewRequest,
-            responseClass: SessionReview
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetLatestSessionReviewRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.SessionReview>
-     */
-    getLatestSessionReview(requestData, requestMetadata = {}) {
-        return this.getLatestSessionReview$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetLatestSessionReviewRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.SessionReview>>
-     */
-    getLatestSessionReview$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/GetLatestSessionReview',
-            requestData,
-            requestMetadata,
-            requestClass: GetLatestSessionReviewRequest,
-            responseClass: SessionReview
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateSessionReviewRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.SessionReview>
-     */
-    createSessionReview(requestData, requestMetadata = {}) {
-        return this.createSessionReview$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateSessionReviewRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.SessionReview>>
-     */
-    createSessionReview$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Sessions/CreateSessionReview',
-            requestData,
-            requestMetadata,
-            requestClass: CreateSessionReviewRequest,
-            responseClass: SessionReview
-        });
-    }
-}
-SessionsClient.ɵprov = ɵɵdefineInjectable({ factory: function SessionsClient_Factory() { return new SessionsClient(ɵɵinject(GRPC_SESSIONS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: SessionsClient, providedIn: "root" });
-SessionsClient.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-SessionsClient.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_SESSIONS_CLIENT_SETTINGS,] }] },
-    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
-    { type: GrpcHandler }
-];
-
-/* tslint:disable */
-/*
-  To configure the services you need to provide a configuration for each of them.
-
-  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-  const grpcSettings = { host: environment.grpcHost };
-
-  @NgModule({
-    providers: [
-      { provide: GRPC_AI_SERVICES_CLIENT_SETTINGS, useValue: grpcSettings },
-    ],
-  })
-  export class GrpcConfigModule { }
-*/
-const GRPC_AI_SERVICES_CLIENT_SETTINGS = new InjectionToken('GRPC_AI_SERVICES_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/*
-  To configure the services you need to provide a configuration for each of them.
-
-  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-  const grpcSettings = { host: environment.grpcHost };
-
-  @NgModule({
-    providers: [
-      { provide: GRPC_USERS_CLIENT_SETTINGS, useValue: grpcSettings },
-    ],
-  })
-  export class GrpcConfigModule { }
-*/
-const GRPC_USERS_CLIENT_SETTINGS = new InjectionToken('GRPC_USERS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/*
-  To configure the services you need to provide a configuration for each of them.
-
-  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-  const grpcSettings = { host: environment.grpcHost };
-
-  @NgModule({
-    providers: [
-      { provide: GRPC_CONTEXTS_CLIENT_SETTINGS, useValue: grpcSettings },
-    ],
-  })
-  export class GrpcConfigModule { }
-*/
-const GRPC_CONTEXTS_CLIENT_SETTINGS = new InjectionToken('GRPC_CONTEXTS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-class ContextsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        this.client = clientFactory.createClient('ondewo.nlu.Contexts', settings);
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListContextsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListContextsResponse>
-     */
-    listContexts(requestData, requestMetadata = {}) {
-        return this.listContexts$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListContextsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListContextsResponse>>
-     */
-    listContexts$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Contexts/ListContexts',
-            requestData,
-            requestMetadata,
-            requestClass: ListContextsRequest,
-            responseClass: ListContextsResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetContextRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Context>
-     */
-    getContext(requestData, requestMetadata = {}) {
-        return this.getContext$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetContextRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Context>>
-     */
-    getContext$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Contexts/GetContext',
-            requestData,
-            requestMetadata,
-            requestClass: GetContextRequest,
-            responseClass: Context
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateContextRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Context>
-     */
-    createContext(requestData, requestMetadata = {}) {
-        return this.createContext$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateContextRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Context>>
-     */
-    createContext$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Contexts/CreateContext',
-            requestData,
-            requestMetadata,
-            requestClass: CreateContextRequest,
-            responseClass: Context
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.UpdateContextRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Context>
-     */
-    updateContext(requestData, requestMetadata = {}) {
-        return this.updateContext$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.UpdateContextRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Context>>
-     */
-    updateContext$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Contexts/UpdateContext',
-            requestData,
-            requestMetadata,
-            requestClass: UpdateContextRequest,
-            responseClass: Context
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteContextRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf001.Empty>
-     */
-    deleteContext(requestData, requestMetadata = {}) {
-        return this.deleteContext$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteContextRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
-     */
-    deleteContext$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Contexts/DeleteContext',
-            requestData,
-            requestMetadata,
-            requestClass: DeleteContextRequest,
-            responseClass: Empty
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteAllContextsRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf001.Empty>
-     */
-    deleteAllContexts(requestData, requestMetadata = {}) {
-        return this.deleteAllContexts$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteAllContextsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
-     */
-    deleteAllContexts$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Contexts/DeleteAllContexts',
-            requestData,
-            requestMetadata,
-            requestClass: DeleteAllContextsRequest,
-            responseClass: Empty
-        });
-    }
-}
-ContextsClient.ɵprov = ɵɵdefineInjectable({ factory: function ContextsClient_Factory() { return new ContextsClient(ɵɵinject(GRPC_CONTEXTS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: ContextsClient, providedIn: "root" });
-ContextsClient.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-ContextsClient.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_CONTEXTS_CLIENT_SETTINGS,] }] },
-    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
-    { type: GrpcHandler }
-];
-
-/* tslint:disable */
-class AiServicesClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        this.client = clientFactory.createClient('ondewo.nlu.AiServices', settings);
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ExtractEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ExtractEntitiesResponse>
-     */
-    extractEntities(requestData, requestMetadata = {}) {
-        return this.extractEntities$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ExtractEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>
-     */
-    extractEntities$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.AiServices/ExtractEntities',
-            requestData,
-            requestMetadata,
-            requestClass: ExtractEntitiesRequest,
-            responseClass: ExtractEntitiesResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GenerateUserSaysRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.GenerateUserSaysResponse>
-     */
-    generateUserSays(requestData, requestMetadata = {}) {
-        return this.generateUserSays$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GenerateUserSaysRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.GenerateUserSaysResponse>>
-     */
-    generateUserSays$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.AiServices/GenerateUserSays',
-            requestData,
-            requestMetadata,
-            requestClass: GenerateUserSaysRequest,
-            responseClass: GenerateUserSaysResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GenerateResponsesRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.GenerateResponsesResponse>
-     */
-    generateResponses(requestData, requestMetadata = {}) {
-        return this.generateResponses$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GenerateResponsesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.GenerateResponsesResponse>>
-     */
-    generateResponses$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.AiServices/GenerateResponses',
-            requestData,
-            requestMetadata,
-            requestClass: GenerateResponsesRequest,
-            responseClass: GenerateResponsesResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetAlternativeSentencesRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.GetAlternativeSentencesResponse>
-     */
-    getAlternativeSentences(requestData, requestMetadata = {}) {
-        return this.getAlternativeSentences$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetAlternativeSentencesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.GetAlternativeSentencesResponse>>
-     */
-    getAlternativeSentences$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.AiServices/GetAlternativeSentences',
-            requestData,
-            requestMetadata,
-            requestClass: GetAlternativeSentencesRequest,
-            responseClass: GetAlternativeSentencesResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetAlternativeTrainingPhrasesRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.GetAlternativeTrainingPhrasesResponse>
-     */
-    getAlternativeTrainingPhrases(requestData, requestMetadata = {}) {
-        return this.getAlternativeTrainingPhrases$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetAlternativeTrainingPhrasesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.GetAlternativeTrainingPhrasesResponse>>
-     */
-    getAlternativeTrainingPhrases$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases',
-            requestData,
-            requestMetadata,
-            requestClass: GetAlternativeTrainingPhrasesRequest,
-            responseClass: GetAlternativeTrainingPhrasesResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetSynonymsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.GetSynonymsResponse>
-     */
-    getSynonyms(requestData, requestMetadata = {}) {
-        return this.getSynonyms$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetSynonymsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.GetSynonymsResponse>>
-     */
-    getSynonyms$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.AiServices/GetSynonyms',
-            requestData,
-            requestMetadata,
-            requestClass: GetSynonymsRequest,
-            responseClass: GetSynonymsResponse
-        });
-    }
-}
-AiServicesClient.ɵprov = ɵɵdefineInjectable({ factory: function AiServicesClient_Factory() { return new AiServicesClient(ɵɵinject(GRPC_AI_SERVICES_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: AiServicesClient, providedIn: "root" });
-AiServicesClient.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-AiServicesClient.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_AI_SERVICES_CLIENT_SETTINGS,] }] },
-    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
-    { type: GrpcHandler }
-];
-
-class GetUserProjectCountRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetUserProjectCountRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.userId = value.userId;
-        GetUserProjectCountRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetUserProjectCountRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetUserProjectCountRequest();
-        GetUserProjectCountRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.userId = instance.userId || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.userId = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetUserProjectCountRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.userId) {
-            writer.writeString(1, instance.userId);
-        }
-    }
-    get userId() {
-        return this._userId;
-    }
-    set userId(value) {
-        this._userId = value;
-    }
-    toObject() {
-        return {
-            userId: this.userId
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-
-class GetIntentCountRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetIntentCountRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.parent = value.parent;
-        this.filterByCategory = value.filterByCategory;
-        GetIntentCountRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetIntentCountRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetIntentCountRequest();
-        GetIntentCountRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.parent = instance.parent || '';
-        instance.filterByCategory = instance.filterByCategory || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.parent = reader.readString();
-                    break;
-                case 2:
-                    instance.filterByCategory = reader.readEnum();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetIntentCountRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.parent) {
-            writer.writeString(1, instance.parent);
-        }
-        if (instance.filterByCategory) {
-            writer.writeEnum(2, instance.filterByCategory);
-        }
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get filterByCategory() {
-        return this._filterByCategory;
-    }
-    set filterByCategory(value) {
-        this._filterByCategory = value;
-    }
-    toObject() {
-        return {
-            parent: this.parent,
-            filterByCategory: this.filterByCategory
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GetEntityTypeCountRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetEntityTypeCountRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.parent = value.parent;
-        this.filterByCategory = value.filterByCategory;
-        GetEntityTypeCountRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetEntityTypeCountRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetEntityTypeCountRequest();
-        GetEntityTypeCountRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.parent = instance.parent || '';
-        instance.filterByCategory = instance.filterByCategory || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.parent = reader.readString();
-                    break;
-                case 2:
-                    instance.filterByCategory = reader.readEnum();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetEntityTypeCountRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.parent) {
-            writer.writeString(1, instance.parent);
-        }
-        if (instance.filterByCategory) {
-            writer.writeEnum(2, instance.filterByCategory);
-        }
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get filterByCategory() {
-        return this._filterByCategory;
-    }
-    set filterByCategory(value) {
-        this._filterByCategory = value;
-    }
-    toObject() {
-        return {
-            parent: this.parent,
-            filterByCategory: this.filterByCategory
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GetProjectStatRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetProjectStatRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.parent = value.parent;
-        GetProjectStatRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetProjectStatRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetProjectStatRequest();
-        GetProjectStatRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.parent = instance.parent || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.parent = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetProjectStatRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.parent) {
-            writer.writeString(1, instance.parent);
-        }
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    toObject() {
-        return {
-            parent: this.parent
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class GetProjectElementStatRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetProjectElementStatRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.name = value.name;
-        this.languageCode = value.languageCode;
-        GetProjectElementStatRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetProjectElementStatRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetProjectElementStatRequest();
-        GetProjectElementStatRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.name = instance.name || '';
-        instance.languageCode = instance.languageCode || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.name = reader.readString();
-                    break;
-                case 2:
-                    instance.languageCode = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetProjectElementStatRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.name) {
-            writer.writeString(1, instance.name);
-        }
-        if (instance.languageCode) {
-            writer.writeString(2, instance.languageCode);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    toObject() {
-        return {
-            name: this.name,
-            languageCode: this.languageCode
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-
-/* tslint:disable */
-class ProjectStatisticsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        this.client = clientFactory.createClient('ondewo.nlu.ProjectStatistics', settings);
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetIntentCountRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getIntentCount(requestData, requestMetadata = {}) {
-        return this.getIntentCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetIntentCountRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getIntentCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectStatistics/GetIntentCount',
-            requestData,
-            requestMetadata,
-            requestClass: GetIntentCountRequest,
-            responseClass: StatResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetEntityTypeCountRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getEntityTypeCount(requestData, requestMetadata = {}) {
-        return this.getEntityTypeCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetEntityTypeCountRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getEntityTypeCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectStatistics/GetEntityTypeCount',
-            requestData,
-            requestMetadata,
-            requestClass: GetEntityTypeCountRequest,
-            responseClass: StatResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getUserCount(requestData, requestMetadata = {}) {
-        return this.getUserCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getUserCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectStatistics/GetUserCount',
-            requestData,
-            requestMetadata,
-            requestClass: GetProjectStatRequest,
-            responseClass: StatResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getSessionCount(requestData, requestMetadata = {}) {
-        return this.getSessionCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getSessionCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectStatistics/GetSessionCount',
-            requestData,
-            requestMetadata,
-            requestClass: GetProjectStatRequest,
-            responseClass: StatResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getTrainingPhraseCount(requestData, requestMetadata = {}) {
-        return this.getTrainingPhraseCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getTrainingPhraseCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount',
-            requestData,
-            requestMetadata,
-            requestClass: GetProjectElementStatRequest,
-            responseClass: StatResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getResponseCount(requestData, requestMetadata = {}) {
-        return this.getResponseCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getResponseCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectStatistics/GetResponseCount',
-            requestData,
-            requestMetadata,
-            requestClass: GetProjectElementStatRequest,
-            responseClass: StatResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getEntityValueCount(requestData, requestMetadata = {}) {
-        return this.getEntityValueCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getEntityValueCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectStatistics/GetEntityValueCount',
-            requestData,
-            requestMetadata,
-            requestClass: GetProjectElementStatRequest,
-            responseClass: StatResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getEntitySynonymCount(requestData, requestMetadata = {}) {
-        return this.getEntitySynonymCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getEntitySynonymCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount',
-            requestData,
-            requestMetadata,
-            requestClass: GetProjectElementStatRequest,
-            responseClass: StatResponse
-        });
-    }
-}
-ProjectStatisticsClient.ɵprov = ɵɵdefineInjectable({ factory: function ProjectStatisticsClient_Factory() { return new ProjectStatisticsClient(ɵɵinject(GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: ProjectStatisticsClient, providedIn: "root" });
-ProjectStatisticsClient.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-ProjectStatisticsClient.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS,] }] },
-    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
-    { type: GrpcHandler }
-];
-
-/* tslint:disable */
-/*
-  To configure the services you need to provide a configuration for each of them.
-
-  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-  const grpcSettings = { host: environment.grpcHost };
-
-  @NgModule({
-    providers: [
-      { provide: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, useValue: grpcSettings },
-    ],
-  })
-  export class GrpcConfigModule { }
-*/
-const GRPC_SERVER_STATISTICS_CLIENT_SETTINGS = new InjectionToken('GRPC_SERVER_STATISTICS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-class ServerStatisticsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        this.client = clientFactory.createClient('ondewo.nlu.ServerStatistics', settings);
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getProjectCount(requestData, requestMetadata = {}) {
-        return this.getProjectCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getProjectCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ServerStatistics/GetProjectCount',
-            requestData,
-            requestMetadata,
-            requestClass: Empty,
-            responseClass: StatResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetUserProjectCountRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getUserProjectCount(requestData, requestMetadata = {}) {
-        return this.getUserProjectCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetUserProjectCountRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getUserProjectCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ServerStatistics/GetUserProjectCount',
-            requestData,
-            requestMetadata,
-            requestClass: GetUserProjectCountRequest,
-            responseClass: StatResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getUserCount(requestData, requestMetadata = {}) {
-        return this.getUserCount$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getUserCount$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ServerStatistics/GetUserCount',
-            requestData,
-            requestMetadata,
-            requestClass: Empty,
-            responseClass: StatResponse
-        });
-    }
-}
-ServerStatisticsClient.ɵprov = ɵɵdefineInjectable({ factory: function ServerStatisticsClient_Factory() { return new ServerStatisticsClient(ɵɵinject(GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: ServerStatisticsClient, providedIn: "root" });
-ServerStatisticsClient.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-ServerStatisticsClient.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_SERVER_STATISTICS_CLIENT_SETTINGS,] }] },
-    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
-    { type: GrpcHandler }
-];
-
-/* tslint:disable */
-/*
-  To configure the services you need to provide a configuration for each of them.
-
-  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-  const grpcSettings = { host: environment.grpcHost };
-
-  @NgModule({
-    providers: [
-      { provide: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, useValue: grpcSettings },
-    ],
-  })
-  export class GrpcConfigModule { }
-*/
-const GRPC_ENTITY_TYPES_CLIENT_SETTINGS = new InjectionToken('GRPC_ENTITY_TYPES_CLIENT_SETTINGS');
-
-class Operation {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param Operation value
-     */
-    constructor(value) {
-        this._result = Operation.ResultCase.none;
-        value = value || {};
-        this.name = value.name;
-        this.metadata = value.metadata
-            ? new Any(value.metadata)
-            : undefined;
-        this.done = value.done;
-        this.error = value.error ? new Status(value.error) : undefined;
-        this.response = value.response
-            ? new Any(value.response)
-            : undefined;
-        Operation.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        Operation.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new Operation();
-        Operation.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.name = instance.name || '';
-        instance.metadata = instance.metadata || undefined;
-        instance.done = instance.done || false;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.name = reader.readString();
-                    break;
-                case 2:
-                    instance.metadata = new Any();
-                    reader.readMessage(instance.metadata, Any.fromBinaryReader);
-                    break;
-                case 3:
-                    instance.done = reader.readBool();
-                    break;
-                case 4:
-                    instance.error = new Status();
-                    reader.readMessage(instance.error, Status.fromBinaryReader);
-                    break;
-                case 5:
-                    instance.response = new Any();
-                    reader.readMessage(instance.response, Any.fromBinaryReader);
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        Operation.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.name) {
-            writer.writeString(1, instance.name);
-        }
-        if (instance.metadata) {
-            writer.writeMessage(2, instance.metadata, Any.toBinaryWriter);
-        }
-        if (instance.done) {
-            writer.writeBool(3, instance.done);
-        }
-        if (instance.error) {
-            writer.writeMessage(4, instance.error, Status.toBinaryWriter);
-        }
-        if (instance.response) {
-            writer.writeMessage(5, instance.response, Any.toBinaryWriter);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    get metadata() {
-        return this._metadata;
-    }
-    set metadata(value) {
-        this._metadata = value;
-    }
-    get done() {
-        return this._done;
-    }
-    set done(value) {
-        this._done = value;
-    }
-    get error() {
-        return this._error;
-    }
-    set error(value) {
-        if (value !== undefined && value !== null) {
-            this._response = undefined;
-            this._result = Operation.ResultCase.error;
-        }
-        this._error = value;
-    }
-    get response() {
-        return this._response;
-    }
-    set response(value) {
-        if (value !== undefined && value !== null) {
-            this._error = undefined;
-            this._result = Operation.ResultCase.response;
-        }
-        this._response = value;
-    }
-    get result() {
-        return this._result;
-    }
-    toObject() {
-        return {
-            name: this.name,
-            metadata: this.metadata ? this.metadata.toObject() : undefined,
-            done: this.done,
-            error: this.error ? this.error.toObject() : undefined,
-            response: this.response ? this.response.toObject() : undefined
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-(function (Operation) {
-    let ResultCase;
-    (function (ResultCase) {
-        ResultCase[ResultCase["none"] = 0] = "none";
-        ResultCase[ResultCase["error"] = 1] = "error";
-        ResultCase[ResultCase["response"] = 2] = "response";
-    })(ResultCase = Operation.ResultCase || (Operation.ResultCase = {}));
-})(Operation || (Operation = {}));
-class GetOperationRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param GetOperationRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.name = value.name;
-        GetOperationRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        GetOperationRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new GetOperationRequest();
-        GetOperationRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.name = instance.name || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.name = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        GetOperationRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.name) {
-            writer.writeString(1, instance.name);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    toObject() {
-        return {
-            name: this.name
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class ListOperationsRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param ListOperationsRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.name = value.name;
-        this.filter = value.filter;
-        this.pageSize = value.pageSize;
-        this.pageToken = value.pageToken;
-        ListOperationsRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        ListOperationsRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new ListOperationsRequest();
-        ListOperationsRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.name = instance.name || '';
-        instance.filter = instance.filter || '';
-        instance.pageSize = instance.pageSize || 0;
-        instance.pageToken = instance.pageToken || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 4:
-                    instance.name = reader.readString();
-                    break;
-                case 1:
-                    instance.filter = reader.readString();
-                    break;
-                case 2:
-                    instance.pageSize = reader.readInt32();
-                    break;
-                case 3:
-                    instance.pageToken = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        ListOperationsRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.name) {
-            writer.writeString(4, instance.name);
-        }
-        if (instance.filter) {
-            writer.writeString(1, instance.filter);
-        }
-        if (instance.pageSize) {
-            writer.writeInt32(2, instance.pageSize);
-        }
-        if (instance.pageToken) {
-            writer.writeString(3, instance.pageToken);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    get filter() {
-        return this._filter;
-    }
-    set filter(value) {
-        this._filter = value;
-    }
-    get pageSize() {
-        return this._pageSize;
-    }
-    set pageSize(value) {
-        this._pageSize = value;
-    }
-    get pageToken() {
-        return this._pageToken;
-    }
-    set pageToken(value) {
-        this._pageToken = value;
-    }
-    toObject() {
-        return {
-            name: this.name,
-            filter: this.filter,
-            pageSize: this.pageSize,
-            pageToken: this.pageToken
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class ListOperationsResponse {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param ListOperationsResponse value
-     */
-    constructor(value) {
-        value = value || {};
-        this.operations = (value.operations || []).map(m => new Operation(m));
-        this.nextPageToken = value.nextPageToken;
-        ListOperationsResponse.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        ListOperationsResponse.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new ListOperationsResponse();
-        ListOperationsResponse.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.operations = instance.operations || [];
-        instance.nextPageToken = instance.nextPageToken || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new Operation();
-                    reader.readMessage(messageInitializer1, Operation.fromBinaryReader);
-                    (instance.operations = instance.operations || []).push(messageInitializer1);
-                    break;
-                case 2:
-                    instance.nextPageToken = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        ListOperationsResponse.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.operations && instance.operations.length) {
-            writer.writeRepeatedMessage(1, instance.operations, Operation.toBinaryWriter);
-        }
-        if (instance.nextPageToken) {
-            writer.writeString(2, instance.nextPageToken);
-        }
-    }
-    get operations() {
-        return this._operations;
-    }
-    set operations(value) {
-        this._operations = value;
-    }
-    get nextPageToken() {
-        return this._nextPageToken;
-    }
-    set nextPageToken(value) {
-        this._nextPageToken = value;
-    }
-    toObject() {
-        return {
-            operations: (this.operations || []).map(m => m.toObject()),
-            nextPageToken: this.nextPageToken
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class CancelOperationRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param CancelOperationRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.name = value.name;
-        CancelOperationRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        CancelOperationRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new CancelOperationRequest();
-        CancelOperationRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.name = instance.name || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.name = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        CancelOperationRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.name) {
-            writer.writeString(1, instance.name);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    toObject() {
-        return {
-            name: this.name
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-class DeleteOperationRequest {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param DeleteOperationRequest value
-     */
-    constructor(value) {
-        value = value || {};
-        this.name = value.name;
-        DeleteOperationRequest.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        DeleteOperationRequest.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new DeleteOperationRequest();
-        DeleteOperationRequest.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.name = instance.name || '';
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.name = reader.readString();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        DeleteOperationRequest.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.name) {
-            writer.writeString(1, instance.name);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    toObject() {
-        return {
-            name: this.name
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-
-/* tslint:disable */
-/*
-  To configure the services you need to provide a configuration for each of them.
-
-  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-  const grpcSettings = { host: environment.grpcHost };
-
-  @NgModule({
-    providers: [
-      { provide: GRPC_INTENTS_CLIENT_SETTINGS, useValue: grpcSettings },
-    ],
-  })
-  export class GrpcConfigModule { }
-*/
-const GRPC_INTENTS_CLIENT_SETTINGS = new InjectionToken('GRPC_INTENTS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-class IntentsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        this.client = clientFactory.createClient('ondewo.nlu.Intents', settings);
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListIntentsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListIntentsResponse>
-     */
-    listIntents(requestData, requestMetadata = {}) {
-        return this.listIntents$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListIntentsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListIntentsResponse>>
-     */
-    listIntents$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Intents/ListIntents',
-            requestData,
-            requestMetadata,
-            requestClass: ListIntentsRequest,
-            responseClass: ListIntentsResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Intent>
-     */
-    getIntent(requestData, requestMetadata = {}) {
-        return this.getIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Intent>>
-     */
-    getIntent$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Intents/GetIntent',
-            requestData,
-            requestMetadata,
-            requestClass: GetIntentRequest,
-            responseClass: Intent
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Intent>
-     */
-    createIntent(requestData, requestMetadata = {}) {
-        return this.createIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Intent>>
-     */
-    createIntent$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Intents/CreateIntent',
-            requestData,
-            requestMetadata,
-            requestClass: CreateIntentRequest,
-            responseClass: Intent
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.UpdateIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Intent>
-     */
-    updateIntent(requestData, requestMetadata = {}) {
-        return this.updateIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.UpdateIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Intent>>
-     */
-    updateIntent$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Intents/UpdateIntent',
-            requestData,
-            requestMetadata,
-            requestClass: UpdateIntentRequest,
-            responseClass: Intent
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf004.Empty>
-     */
-    deleteIntent(requestData, requestMetadata = {}) {
-        return this.deleteIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteIntentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf004.Empty>>
-     */
-    deleteIntent$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Intents/DeleteIntent',
-            requestData,
-            requestMetadata,
-            requestClass: DeleteIntentRequest,
-            responseClass: Empty
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchUpdateIntentsRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning003.Operation>
-     */
-    batchUpdateIntents(requestData, requestMetadata = {}) {
-        return this.batchUpdateIntents$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchUpdateIntentsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning003.Operation>>
-     */
-    batchUpdateIntents$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Intents/BatchUpdateIntents',
-            requestData,
-            requestMetadata,
-            requestClass: BatchUpdateIntentsRequest,
-            responseClass: Operation
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchDeleteIntentsRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning003.Operation>
-     */
-    batchDeleteIntents(requestData, requestMetadata = {}) {
-        return this.batchDeleteIntents$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchDeleteIntentsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning003.Operation>>
-     */
-    batchDeleteIntents$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Intents/BatchDeleteIntents',
-            requestData,
-            requestMetadata,
-            requestClass: BatchDeleteIntentsRequest,
-            responseClass: Operation
-        });
-    }
-}
-IntentsClient.ɵprov = ɵɵdefineInjectable({ factory: function IntentsClient_Factory() { return new IntentsClient(ɵɵinject(GRPC_INTENTS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: IntentsClient, providedIn: "root" });
-IntentsClient.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-IntentsClient.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_INTENTS_CLIENT_SETTINGS,] }] },
-    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
-    { type: GrpcHandler }
-];
-
-/* tslint:disable */
-class UsersClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        this.client = clientFactory.createClient('ondewo.nlu.Users', settings);
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateUserRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.User>
-     */
-    createUser(requestData, requestMetadata = {}) {
-        return this.createUser$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateUserRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.User>>
-     */
-    createUser$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/CreateUser',
-            requestData,
-            requestMetadata,
-            requestClass: CreateUserRequest,
-            responseClass: User
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetUserRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.User>
-     */
-    getUser(requestData, requestMetadata = {}) {
-        return this.getUser$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetUserRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.User>>
-     */
-    getUser$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/GetUser',
-            requestData,
-            requestMetadata,
-            requestClass: GetUserRequest,
-            responseClass: User
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetUserRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.UserInfo>
-     */
-    getUserInfo(requestData, requestMetadata = {}) {
-        return this.getUserInfo$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetUserRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.UserInfo>>
-     */
-    getUserInfo$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/GetUserInfo',
-            requestData,
-            requestMetadata,
-            requestClass: GetUserRequest,
-            responseClass: UserInfo
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetUserRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf001.Empty>
-     */
-    deleteUser(requestData, requestMetadata = {}) {
-        return this.deleteUser$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetUserRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
-     */
-    deleteUser$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/DeleteUser',
-            requestData,
-            requestMetadata,
-            requestClass: GetUserRequest,
-            responseClass: Empty
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.UpdateUserRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.User>
-     */
-    updateUser(requestData, requestMetadata = {}) {
-        return this.updateUser$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.UpdateUserRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.User>>
-     */
-    updateUser$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/UpdateUser',
-            requestData,
-            requestMetadata,
-            requestClass: UpdateUserRequest,
-            responseClass: User
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListUsersRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListUsersResponse>
-     */
-    listUsers(requestData, requestMetadata = {}) {
-        return this.listUsers$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListUsersRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListUsersResponse>>
-     */
-    listUsers$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/ListUsers',
-            requestData,
-            requestMetadata,
-            requestClass: ListUsersRequest,
-            responseClass: ListUsersResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListUsersRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListUserInfosResponse>
-     */
-    listUserInfos(requestData, requestMetadata = {}) {
-        return this.listUserInfos$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListUsersRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListUserInfosResponse>>
-     */
-    listUserInfos$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/ListUserInfos',
-            requestData,
-            requestMetadata,
-            requestClass: ListUsersRequest,
-            responseClass: ListUserInfosResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateServerRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ServerRole>
-     */
-    createServerRole(requestData, requestMetadata = {}) {
-        return this.createServerRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateServerRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ServerRole>>
-     */
-    createServerRole$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/CreateServerRole',
-            requestData,
-            requestMetadata,
-            requestClass: CreateServerRoleRequest,
-            responseClass: ServerRole
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetServerRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ServerRole>
-     */
-    getServerRole(requestData, requestMetadata = {}) {
-        return this.getServerRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetServerRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ServerRole>>
-     */
-    getServerRole$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/GetServerRole',
-            requestData,
-            requestMetadata,
-            requestClass: GetServerRoleRequest,
-            responseClass: ServerRole
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteServerRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf001.Empty>
-     */
-    deleteServerRole(requestData, requestMetadata = {}) {
-        return this.deleteServerRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteServerRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
-     */
-    deleteServerRole$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/DeleteServerRole',
-            requestData,
-            requestMetadata,
-            requestClass: DeleteServerRoleRequest,
-            responseClass: Empty
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.UpdateServerRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ServerRole>
-     */
-    updateServerRole(requestData, requestMetadata = {}) {
-        return this.updateServerRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.UpdateServerRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ServerRole>>
-     */
-    updateServerRole$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/UpdateServerRole',
-            requestData,
-            requestMetadata,
-            requestClass: UpdateServerRoleRequest,
-            responseClass: ServerRole
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListServerRolesRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListServerRolesResponse>
-     */
-    listServerRoles(requestData, requestMetadata = {}) {
-        return this.listServerRoles$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListServerRolesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListServerRolesResponse>>
-     */
-    listServerRoles$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/ListServerRoles',
-            requestData,
-            requestMetadata,
-            requestClass: ListServerRolesRequest,
-            responseClass: ListServerRolesResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListServerPermissionsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListServerPermissionsResponse>
-     */
-    listServerPermissions(requestData, requestMetadata = {}) {
-        return this.listServerPermissions$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListServerPermissionsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListServerPermissionsResponse>>
-     */
-    listServerPermissions$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/ListServerPermissions',
-            requestData,
-            requestMetadata,
-            requestClass: ListServerPermissionsRequest,
-            responseClass: ListServerPermissionsResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.LoginRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.LoginResponse>
-     */
-    login(requestData, requestMetadata = {}) {
-        return this.login$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.LoginRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.LoginResponse>>
-     */
-    login$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/Login',
-            requestData,
-            requestMetadata,
-            requestClass: LoginRequest,
-            responseClass: LoginResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf001.Empty>
-     */
-    checkLogin(requestData, requestMetadata = {}) {
-        return this.checkLogin$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
-     */
-    checkLogin$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.Users/CheckLogin',
-            requestData,
-            requestMetadata,
-            requestClass: Empty,
-            responseClass: Empty
-        });
-    }
-}
-UsersClient.ɵprov = ɵɵdefineInjectable({ factory: function UsersClient_Factory() { return new UsersClient(ɵɵinject(GRPC_USERS_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: UsersClient, providedIn: "root" });
-UsersClient.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-UsersClient.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_USERS_CLIENT_SETTINGS,] }] },
-    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
-    { type: GrpcHandler }
-];
-
-/* tslint:disable */
-/*
-  To configure the services you need to provide a configuration for each of them.
-
-  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-  const grpcSettings = { host: environment.grpcHost };
-
-  @NgModule({
-    providers: [
-      { provide: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, useValue: grpcSettings },
-    ],
-  })
-  export class GrpcConfigModule { }
-*/
-const GRPC_PROJECT_ROLES_CLIENT_SETTINGS = new InjectionToken('GRPC_PROJECT_ROLES_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/*
-  To configure the services you need to provide a configuration for each of them.
-
-  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-  const grpcSettings = { host: environment.grpcHost };
-
-  @NgModule({
-    providers: [
-      { provide: GRPC_AGENTS_CLIENT_SETTINGS, useValue: grpcSettings },
-    ],
-  })
-  export class GrpcConfigModule { }
-*/
-const GRPC_AGENTS_CLIENT_SETTINGS = new InjectionToken('GRPC_AGENTS_CLIENT_SETTINGS');
 
 /* tslint:disable */
 class AgentsClient {
@@ -22322,830 +23331,6 @@ AgentsClient.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
     { type: GrpcHandler }
 ];
-
-/* tslint:disable */
-class EntityTypesClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        this.client = clientFactory.createClient('ondewo.nlu.EntityTypes', settings);
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListEntityTypesResponse>
-     */
-    listEntityTypes(requestData, requestMetadata = {}) {
-        return this.listEntityTypes$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>
-     */
-    listEntityTypes$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/ListEntityTypes',
-            requestData,
-            requestMetadata,
-            requestClass: ListEntityTypesRequest,
-            responseClass: ListEntityTypesResponse
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.EntityType>
-     */
-    getEntityType(requestData, requestMetadata = {}) {
-        return this.getEntityType$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.EntityType>>
-     */
-    getEntityType$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/GetEntityType',
-            requestData,
-            requestMetadata,
-            requestClass: GetEntityTypeRequest,
-            responseClass: EntityType
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.EntityType>
-     */
-    createEntityType(requestData, requestMetadata = {}) {
-        return this.createEntityType$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.EntityType>>
-     */
-    createEntityType$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/CreateEntityType',
-            requestData,
-            requestMetadata,
-            requestClass: CreateEntityTypeRequest,
-            responseClass: EntityType
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.UpdateEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.EntityType>
-     */
-    updateEntityType(requestData, requestMetadata = {}) {
-        return this.updateEntityType$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.UpdateEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.EntityType>>
-     */
-    updateEntityType$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/UpdateEntityType',
-            requestData,
-            requestMetadata,
-            requestClass: UpdateEntityTypeRequest,
-            responseClass: EntityType
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf002.Empty>
-     */
-    deleteEntityType(requestData, requestMetadata = {}) {
-        return this.deleteEntityType$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
-     */
-    deleteEntityType$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/DeleteEntityType',
-            requestData,
-            requestMetadata,
-            requestClass: DeleteEntityTypeRequest,
-            responseClass: Empty
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchUpdateEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    batchUpdateEntityTypes(requestData, requestMetadata = {}) {
-        return this.batchUpdateEntityTypes$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchUpdateEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchUpdateEntityTypes$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
-            requestData,
-            requestMetadata,
-            requestClass: BatchUpdateEntityTypesRequest,
-            responseClass: Operation
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchDeleteEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    batchDeleteEntityTypes(requestData, requestMetadata = {}) {
-        return this.batchDeleteEntityTypes$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchDeleteEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchDeleteEntityTypes$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
-            requestData,
-            requestMetadata,
-            requestClass: BatchDeleteEntityTypesRequest,
-            responseClass: Operation
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchCreateEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    batchCreateEntities(requestData, requestMetadata = {}) {
-        return this.batchCreateEntities$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchCreateEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchCreateEntities$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/BatchCreateEntities',
-            requestData,
-            requestMetadata,
-            requestClass: BatchCreateEntitiesRequest,
-            responseClass: Operation
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchUpdateEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    batchUpdateEntities(requestData, requestMetadata = {}) {
-        return this.batchUpdateEntities$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchUpdateEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchUpdateEntities$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/BatchUpdateEntities',
-            requestData,
-            requestMetadata,
-            requestClass: BatchUpdateEntitiesRequest,
-            responseClass: Operation
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchDeleteEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    batchDeleteEntities(requestData, requestMetadata = {}) {
-        return this.batchDeleteEntities$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchDeleteEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchDeleteEntities$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.EntityTypes/BatchDeleteEntities',
-            requestData,
-            requestMetadata,
-            requestClass: BatchDeleteEntitiesRequest,
-            responseClass: Operation
-        });
-    }
-}
-EntityTypesClient.ɵprov = ɵɵdefineInjectable({ factory: function EntityTypesClient_Factory() { return new EntityTypesClient(ɵɵinject(GRPC_ENTITY_TYPES_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: EntityTypesClient, providedIn: "root" });
-EntityTypesClient.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-EntityTypesClient.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_ENTITY_TYPES_CLIENT_SETTINGS,] }] },
-    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
-    { type: GrpcHandler }
-];
-
-/* tslint:disable */
-class ProjectRolesClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        this.client = clientFactory.createClient('ondewo.nlu.ProjectRoles', settings);
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateProjectRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ProjectRole>
-     */
-    createProjectRole(requestData, requestMetadata = {}) {
-        return this.createProjectRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateProjectRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ProjectRole>>
-     */
-    createProjectRole$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectRoles/CreateProjectRole',
-            requestData,
-            requestMetadata,
-            requestClass: CreateProjectRoleRequest,
-            responseClass: ProjectRole
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ProjectRole>
-     */
-    getProjectRole(requestData, requestMetadata = {}) {
-        return this.getProjectRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ProjectRole>>
-     */
-    getProjectRole$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectRoles/GetProjectRole',
-            requestData,
-            requestMetadata,
-            requestClass: GetProjectRoleRequest,
-            responseClass: ProjectRole
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteProjectRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf002.Empty>
-     */
-    deleteProjectRole(requestData, requestMetadata = {}) {
-        return this.deleteProjectRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteProjectRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
-     */
-    deleteProjectRole$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectRoles/DeleteProjectRole',
-            requestData,
-            requestMetadata,
-            requestClass: DeleteProjectRoleRequest,
-            responseClass: Empty
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.UpdateProjectRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ProjectRole>
-     */
-    updateProjectRole(requestData, requestMetadata = {}) {
-        return this.updateProjectRole$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.UpdateProjectRoleRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ProjectRole>>
-     */
-    updateProjectRole$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectRoles/UpdateProjectRole',
-            requestData,
-            requestMetadata,
-            requestClass: UpdateProjectRoleRequest,
-            responseClass: ProjectRole
-        });
-    }
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListProjectRolesRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListProjectRolesResponse>
-     */
-    listProjectRoles(requestData, requestMetadata = {}) {
-        return this.listProjectRoles$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListProjectRolesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListProjectRolesResponse>>
-     */
-    listProjectRoles$eventStream(requestData, requestMetadata = {}) {
-        return this.handler.handle({
-            type: GrpcCallType.unary,
-            client: this.client,
-            path: '/ondewo.nlu.ProjectRoles/ListProjectRoles',
-            requestData,
-            requestMetadata,
-            requestClass: ListProjectRolesRequest,
-            responseClass: ListProjectRolesResponse
-        });
-    }
-}
-ProjectRolesClient.ɵprov = ɵɵdefineInjectable({ factory: function ProjectRolesClient_Factory() { return new ProjectRolesClient(ɵɵinject(GRPC_PROJECT_ROLES_CLIENT_SETTINGS, 8), ɵɵinject(GRPC_CLIENT_FACTORY), ɵɵinject(GrpcHandler)); }, token: ProjectRolesClient, providedIn: "root" });
-ProjectRolesClient.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-ProjectRolesClient.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_PROJECT_ROLES_CLIENT_SETTINGS,] }] },
-    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
-    { type: GrpcHandler }
-];
-
-class Timestamp {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param Timestamp value
-     */
-    constructor(value) {
-        value = value || {};
-        this.seconds = value.seconds;
-        this.nanos = value.nanos;
-        Timestamp.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        Timestamp.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new Timestamp();
-        Timestamp.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static fromDate(date) {
-        var timestamp = new Timestamp();
-        timestamp.fromDate(date);
-        return timestamp;
-    }
-    static fromISOString(isoDate) {
-        var timestamp = new Timestamp();
-        timestamp.fromISOString(isoDate);
-        return timestamp;
-    }
-    static refineValues(instance) {
-        instance.seconds = instance.seconds || '0';
-        instance.nanos = instance.nanos || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.seconds = reader.readInt64String();
-                    break;
-                case 2:
-                    instance.nanos = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        Timestamp.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.seconds) {
-            writer.writeInt64String(1, instance.seconds);
-        }
-        if (instance.nanos) {
-            writer.writeInt32(2, instance.nanos);
-        }
-    }
-    get seconds() {
-        return this._seconds;
-    }
-    set seconds(value) {
-        this._seconds = value;
-    }
-    get nanos() {
-        return this._nanos;
-    }
-    set nanos(value) {
-        this._nanos = value;
-    }
-    toObject() {
-        return {
-            seconds: this.seconds,
-            nanos: this.nanos
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-    fromDate(date) {
-        this.seconds = '' + Math.floor(date.getTime() / 1e3);
-        this.nanos = date.getMilliseconds() * 1e6;
-    }
-    toDate() {
-        return new Date(parseInt(this.seconds || '0') * 1e3 + (this.nanos || 0) / 1e6);
-    }
-    fromISOString(isoDate) {
-        this.fromDate(new Date(isoDate));
-    }
-    toISOString() {
-        return this.toDate().toISOString();
-    }
-}
-
-class OperationMetadata {
-    /**
-     * Creates an object and applies default Protobuf values
-     * @param OperationMetadata value
-     */
-    constructor(value) {
-        value = value || {};
-        this.status = value.status;
-        this.parentOperationName = value.parentOperationName;
-        this.subOperationNames = (value.subOperationNames || []).slice();
-        this.createTime = value.createTime
-            ? new Timestamp(value.createTime)
-            : undefined;
-        this.startTime = value.startTime
-            ? new Timestamp(value.startTime)
-            : undefined;
-        this.endTime = value.endTime
-            ? new Timestamp(value.endTime)
-            : undefined;
-        this.isCancellationRequested = value.isCancellationRequested;
-        this.cancelCommand = value.cancelCommand;
-        this.userIdCreated = value.userIdCreated;
-        this.userIdCancelled = value.userIdCancelled;
-        this.projectParent = value.projectParent;
-        this.operationType = value.operationType;
-        this.hostName = value.hostName;
-        this.numReruns = value.numReruns;
-        this.maxNumReruns = value.maxNumReruns;
-        OperationMetadata.refineValues(this);
-    }
-    static toBinary(instance) {
-        const writer = new BinaryWriter();
-        OperationMetadata.toBinaryWriter(instance, writer);
-        return writer.getResultBuffer();
-    }
-    static fromBinary(bytes) {
-        const instance = new OperationMetadata();
-        OperationMetadata.fromBinaryReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    static refineValues(instance) {
-        instance.status = instance.status || 0;
-        instance.parentOperationName = instance.parentOperationName || '';
-        instance.subOperationNames = instance.subOperationNames || [];
-        instance.createTime = instance.createTime || undefined;
-        instance.startTime = instance.startTime || undefined;
-        instance.endTime = instance.endTime || undefined;
-        instance.isCancellationRequested =
-            instance.isCancellationRequested || false;
-        instance.cancelCommand = instance.cancelCommand || '';
-        instance.userIdCreated = instance.userIdCreated || '';
-        instance.userIdCancelled = instance.userIdCancelled || '';
-        instance.projectParent = instance.projectParent || '';
-        instance.operationType = instance.operationType || 0;
-        instance.hostName = instance.hostName || '';
-        instance.numReruns = instance.numReruns || 0;
-        instance.maxNumReruns = instance.maxNumReruns || 0;
-    }
-    static fromBinaryReader(instance, reader) {
-        while (reader.nextField()) {
-            if (reader.isEndGroup())
-                break;
-            switch (reader.getFieldNumber()) {
-                case 1:
-                    instance.status = reader.readEnum();
-                    break;
-                case 2:
-                    instance.parentOperationName = reader.readString();
-                    break;
-                case 3:
-                    (instance.subOperationNames = instance.subOperationNames || []).push(reader.readString());
-                    break;
-                case 4:
-                    instance.createTime = new Timestamp();
-                    reader.readMessage(instance.createTime, Timestamp.fromBinaryReader);
-                    break;
-                case 5:
-                    instance.startTime = new Timestamp();
-                    reader.readMessage(instance.startTime, Timestamp.fromBinaryReader);
-                    break;
-                case 6:
-                    instance.endTime = new Timestamp();
-                    reader.readMessage(instance.endTime, Timestamp.fromBinaryReader);
-                    break;
-                case 7:
-                    instance.isCancellationRequested = reader.readBool();
-                    break;
-                case 8:
-                    instance.cancelCommand = reader.readString();
-                    break;
-                case 9:
-                    instance.userIdCreated = reader.readString();
-                    break;
-                case 10:
-                    instance.userIdCancelled = reader.readString();
-                    break;
-                case 11:
-                    instance.projectParent = reader.readString();
-                    break;
-                case 12:
-                    instance.operationType = reader.readEnum();
-                    break;
-                case 13:
-                    instance.hostName = reader.readString();
-                    break;
-                case 14:
-                    instance.numReruns = reader.readInt32();
-                    break;
-                case 15:
-                    instance.maxNumReruns = reader.readInt32();
-                    break;
-                default:
-                    reader.skipField();
-            }
-        }
-        OperationMetadata.refineValues(instance);
-    }
-    static toBinaryWriter(instance, writer) {
-        if (instance.status) {
-            writer.writeEnum(1, instance.status);
-        }
-        if (instance.parentOperationName) {
-            writer.writeString(2, instance.parentOperationName);
-        }
-        if (instance.subOperationNames && instance.subOperationNames.length) {
-            writer.writeRepeatedString(3, instance.subOperationNames);
-        }
-        if (instance.createTime) {
-            writer.writeMessage(4, instance.createTime, Timestamp.toBinaryWriter);
-        }
-        if (instance.startTime) {
-            writer.writeMessage(5, instance.startTime, Timestamp.toBinaryWriter);
-        }
-        if (instance.endTime) {
-            writer.writeMessage(6, instance.endTime, Timestamp.toBinaryWriter);
-        }
-        if (instance.isCancellationRequested) {
-            writer.writeBool(7, instance.isCancellationRequested);
-        }
-        if (instance.cancelCommand) {
-            writer.writeString(8, instance.cancelCommand);
-        }
-        if (instance.userIdCreated) {
-            writer.writeString(9, instance.userIdCreated);
-        }
-        if (instance.userIdCancelled) {
-            writer.writeString(10, instance.userIdCancelled);
-        }
-        if (instance.projectParent) {
-            writer.writeString(11, instance.projectParent);
-        }
-        if (instance.operationType) {
-            writer.writeEnum(12, instance.operationType);
-        }
-        if (instance.hostName) {
-            writer.writeString(13, instance.hostName);
-        }
-        if (instance.numReruns) {
-            writer.writeInt32(14, instance.numReruns);
-        }
-        if (instance.maxNumReruns) {
-            writer.writeInt32(15, instance.maxNumReruns);
-        }
-    }
-    get status() {
-        return this._status;
-    }
-    set status(value) {
-        this._status = value;
-    }
-    get parentOperationName() {
-        return this._parentOperationName;
-    }
-    set parentOperationName(value) {
-        this._parentOperationName = value;
-    }
-    get subOperationNames() {
-        return this._subOperationNames;
-    }
-    set subOperationNames(value) {
-        this._subOperationNames = value;
-    }
-    get createTime() {
-        return this._createTime;
-    }
-    set createTime(value) {
-        this._createTime = value;
-    }
-    get startTime() {
-        return this._startTime;
-    }
-    set startTime(value) {
-        this._startTime = value;
-    }
-    get endTime() {
-        return this._endTime;
-    }
-    set endTime(value) {
-        this._endTime = value;
-    }
-    get isCancellationRequested() {
-        return this._isCancellationRequested;
-    }
-    set isCancellationRequested(value) {
-        this._isCancellationRequested = value;
-    }
-    get cancelCommand() {
-        return this._cancelCommand;
-    }
-    set cancelCommand(value) {
-        this._cancelCommand = value;
-    }
-    get userIdCreated() {
-        return this._userIdCreated;
-    }
-    set userIdCreated(value) {
-        this._userIdCreated = value;
-    }
-    get userIdCancelled() {
-        return this._userIdCancelled;
-    }
-    set userIdCancelled(value) {
-        this._userIdCancelled = value;
-    }
-    get projectParent() {
-        return this._projectParent;
-    }
-    set projectParent(value) {
-        this._projectParent = value;
-    }
-    get operationType() {
-        return this._operationType;
-    }
-    set operationType(value) {
-        this._operationType = value;
-    }
-    get hostName() {
-        return this._hostName;
-    }
-    set hostName(value) {
-        this._hostName = value;
-    }
-    get numReruns() {
-        return this._numReruns;
-    }
-    set numReruns(value) {
-        this._numReruns = value;
-    }
-    get maxNumReruns() {
-        return this._maxNumReruns;
-    }
-    set maxNumReruns(value) {
-        this._maxNumReruns = value;
-    }
-    toObject() {
-        return {
-            status: this.status,
-            parentOperationName: this.parentOperationName,
-            subOperationNames: (this.subOperationNames || []).slice(),
-            createTime: this.createTime ? this.createTime.toObject() : undefined,
-            startTime: this.startTime ? this.startTime.toObject() : undefined,
-            endTime: this.endTime ? this.endTime.toObject() : undefined,
-            isCancellationRequested: this.isCancellationRequested,
-            cancelCommand: this.cancelCommand,
-            userIdCreated: this.userIdCreated,
-            userIdCancelled: this.userIdCancelled,
-            projectParent: this.projectParent,
-            operationType: this.operationType,
-            hostName: this.hostName,
-            numReruns: this.numReruns,
-            maxNumReruns: this.maxNumReruns
-        };
-    }
-    toJSON() {
-        return this.toObject();
-    }
-}
-(function (OperationMetadata) {
-    let Status;
-    (function (Status) {
-        Status[Status["statusUnspecified"] = 0] = "statusUnspecified";
-        Status[Status["notStarted"] = 1] = "notStarted";
-        Status[Status["inProgress"] = 2] = "inProgress";
-        Status[Status["done"] = 3] = "done";
-        Status[Status["cancelled"] = 4] = "cancelled";
-        Status[Status["failed"] = 5] = "failed";
-    })(Status = OperationMetadata.Status || (OperationMetadata.Status = {}));
-    let OperationType;
-    (function (OperationType) {
-        OperationType[OperationType["operationTypeUnspecified"] = 0] = "operationTypeUnspecified";
-        OperationType[OperationType["createAgent"] = 1] = "createAgent";
-        OperationType[OperationType["importAgent"] = 2] = "importAgent";
-        OperationType[OperationType["exportAgent"] = 3] = "exportAgent";
-        OperationType[OperationType["deleteAgent"] = 4] = "deleteAgent";
-        OperationType[OperationType["restoreAgent"] = 5] = "restoreAgent";
-        OperationType[OperationType["buildAgentCache"] = 6] = "buildAgentCache";
-        OperationType[OperationType["trainAgent"] = 7] = "trainAgent";
-    })(OperationType = OperationMetadata.OperationType || (OperationMetadata.OperationType = {}));
-})(OperationMetadata || (OperationMetadata = {}));
 
 class FileDescriptorSet {
     /**

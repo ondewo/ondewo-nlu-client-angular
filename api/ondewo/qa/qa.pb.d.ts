@@ -12,7 +12,7 @@ export declare class GetAnswerRequest implements GrpcMessage {
     private _maxNumAnswers?;
     private _thresholdReader?;
     private _thresholdRetriever?;
-    private _customScoreFormula?;
+    private _thresholdOverall?;
     private _readerModelName?;
     /**
      * Creates an object and applies default Protobuf values
@@ -29,8 +29,8 @@ export declare class GetAnswerRequest implements GrpcMessage {
     set thresholdReader(value: number | undefined);
     get thresholdRetriever(): number | undefined;
     set thresholdRetriever(value: number | undefined);
-    get customScoreFormula(): string | undefined;
-    set customScoreFormula(value: string | undefined);
+    get thresholdOverall(): number | undefined;
+    set thresholdOverall(value: number | undefined);
     get readerModelName(): string | undefined;
     set readerModelName(value: string | undefined);
     toObject(): {
@@ -42,7 +42,7 @@ export declare class GetAnswerRequest implements GrpcMessage {
         maxNumAnswers: number;
         thresholdReader: number;
         thresholdRetriever: number;
-        customScoreFormula: string;
+        thresholdOverall: number;
         readerModelName: string;
     };
     toJSON(): {
@@ -54,7 +54,7 @@ export declare class GetAnswerRequest implements GrpcMessage {
         maxNumAnswers: number;
         thresholdReader: number;
         thresholdRetriever: number;
-        customScoreFormula: string;
+        thresholdOverall: number;
         readerModelName: string;
     };
 }
@@ -197,9 +197,7 @@ export declare class GetAnswerResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: import("../../../public-api").Value;
-                        };
+                        [x: string]: import("../nlu/context.pb").Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -233,9 +231,7 @@ export declare class GetAnswerResponse implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: import("../../../public-api").Value;
-                            };
+                            [x: string]: import("../nlu/context.pb").Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
@@ -505,9 +501,7 @@ export declare class GetAnswerResponse implements GrpcMessage {
                     name: string;
                     lifespanCount: number;
                     parameters: {
-                        fields: {
-                            [x: string]: import("../../../public-api").Value;
-                        };
+                        [x: string]: import("../nlu/context.pb").Context.Parameter;
                     };
                     lifespanTime: number;
                 }[];
@@ -541,9 +535,7 @@ export declare class GetAnswerResponse implements GrpcMessage {
                         name: string;
                         lifespanCount: number;
                         parameters: {
-                            fields: {
-                                [x: string]: import("../../../public-api").Value;
-                            };
+                            [x: string]: import("../nlu/context.pb").Context.Parameter;
                         };
                         lifespanTime: number;
                     }[];
