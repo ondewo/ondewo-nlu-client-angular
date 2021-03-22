@@ -7,7 +7,7 @@ It was also configured as an Angular npm package so it can be easily added to an
 
 **Run:**
 ```bash
-git+https://github.com/ondewo/ondewo-nlu-client-angular.git
+npm install git+https://github.com/ondewo/ondewo-nlu-client-angular.git
 ```
 inside of your project to install the npm package of this github repository in you angular project.
 
