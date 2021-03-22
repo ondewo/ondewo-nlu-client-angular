@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "mv ondewo-nlu-api/googleapis/google ondewo-nlu-api/google",
-    "build": "git submodule update --init --recursive && docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
+    "build": "docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
     "postbuild": "mv ondewo-nlu-api/google ondewo-nlu-api/googleapis/google",
     "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler"
   },

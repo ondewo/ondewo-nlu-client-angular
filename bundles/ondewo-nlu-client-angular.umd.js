@@ -12842,6 +12842,2837 @@
         { type: i2.GrpcHandler }
     ]; };
 
+    exports.ReannotateEntitiesOptions = void 0;
+    (function (ReannotateEntitiesOptions) {
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateNever"] = 0] = "reannotateNever";
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateAlways"] = 1] = "reannotateAlways";
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateIfEmpty"] = 2] = "reannotateIfEmpty";
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateAfterDeletion"] = 3] = "reannotateAfterDeletion";
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateIfEmptyOrAfterDeletion"] = 4] = "reannotateIfEmptyOrAfterDeletion";
+    })(exports.ReannotateEntitiesOptions || (exports.ReannotateEntitiesOptions = {}));
+    var ValidateRegexRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ValidateRegexRequest value
+         */
+        function ValidateRegexRequest(value) {
+            value = value || {};
+            this.regex = value.regex;
+            ValidateRegexRequest.refineValues(this);
+        }
+        ValidateRegexRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            ValidateRegexRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        ValidateRegexRequest.fromBinary = function (bytes) {
+            var instance = new ValidateRegexRequest();
+            ValidateRegexRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        ValidateRegexRequest.refineValues = function (instance) {
+            instance.regex = instance.regex || '';
+        };
+        ValidateRegexRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.regex = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ValidateRegexRequest.refineValues(instance);
+        };
+        ValidateRegexRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.regex) {
+                writer.writeString(1, instance.regex);
+            }
+        };
+        Object.defineProperty(ValidateRegexRequest.prototype, "regex", {
+            get: function () {
+                return this._regex;
+            },
+            set: function (value) {
+                this._regex = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        ValidateRegexRequest.prototype.toObject = function () {
+            return {
+                regex: this.regex
+            };
+        };
+        ValidateRegexRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return ValidateRegexRequest;
+    }());
+    var ValidateRegexResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ValidateRegexResponse value
+         */
+        function ValidateRegexResponse(value) {
+            value = value || {};
+            this.errorMessages = (value.errorMessages || []).slice();
+            ValidateRegexResponse.refineValues(this);
+        }
+        ValidateRegexResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            ValidateRegexResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        ValidateRegexResponse.fromBinary = function (bytes) {
+            var instance = new ValidateRegexResponse();
+            ValidateRegexResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        ValidateRegexResponse.refineValues = function (instance) {
+            instance.errorMessages = instance.errorMessages || [];
+        };
+        ValidateRegexResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        (instance.errorMessages = instance.errorMessages || []).push(reader.readString());
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ValidateRegexResponse.refineValues(instance);
+        };
+        ValidateRegexResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.errorMessages && instance.errorMessages.length) {
+                writer.writeRepeatedString(1, instance.errorMessages);
+            }
+        };
+        Object.defineProperty(ValidateRegexResponse.prototype, "errorMessages", {
+            get: function () {
+                return this._errorMessages;
+            },
+            set: function (value) {
+                this._errorMessages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        ValidateRegexResponse.prototype.toObject = function () {
+            return {
+                errorMessages: (this.errorMessages || []).slice()
+            };
+        };
+        ValidateRegexResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return ValidateRegexResponse;
+    }());
+    var ValidateEmbeddedRegexRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ValidateEmbeddedRegexRequest value
+         */
+        function ValidateEmbeddedRegexRequest(value) {
+            value = value || {};
+            this.entityType = value.entityType
+                ? new exports.EntityType.Entity(value.entityType)
+                : undefined;
+            ValidateEmbeddedRegexRequest.refineValues(this);
+        }
+        ValidateEmbeddedRegexRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            ValidateEmbeddedRegexRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        ValidateEmbeddedRegexRequest.fromBinary = function (bytes) {
+            var instance = new ValidateEmbeddedRegexRequest();
+            ValidateEmbeddedRegexRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        ValidateEmbeddedRegexRequest.refineValues = function (instance) {
+            instance.entityType = instance.entityType || undefined;
+        };
+        ValidateEmbeddedRegexRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.entityType = new exports.EntityType.Entity();
+                        reader.readMessage(instance.entityType, exports.EntityType.Entity.fromBinaryReader);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ValidateEmbeddedRegexRequest.refineValues(instance);
+        };
+        ValidateEmbeddedRegexRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.entityType) {
+                writer.writeMessage(1, instance.entityType, exports.EntityType.Entity.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(ValidateEmbeddedRegexRequest.prototype, "entityType", {
+            get: function () {
+                return this._entityType;
+            },
+            set: function (value) {
+                this._entityType = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        ValidateEmbeddedRegexRequest.prototype.toObject = function () {
+            return {
+                entityType: this.entityType ? this.entityType.toObject() : undefined
+            };
+        };
+        ValidateEmbeddedRegexRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return ValidateEmbeddedRegexRequest;
+    }());
+    var ValidateEmbeddedRegexResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param ValidateEmbeddedRegexResponse value
+         */
+        function ValidateEmbeddedRegexResponse(value) {
+            value = value || {};
+            this.errorMessages = (value.errorMessages || []).slice();
+            ValidateEmbeddedRegexResponse.refineValues(this);
+        }
+        ValidateEmbeddedRegexResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            ValidateEmbeddedRegexResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        ValidateEmbeddedRegexResponse.fromBinary = function (bytes) {
+            var instance = new ValidateEmbeddedRegexResponse();
+            ValidateEmbeddedRegexResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        ValidateEmbeddedRegexResponse.refineValues = function (instance) {
+            instance.errorMessages = instance.errorMessages || [];
+        };
+        ValidateEmbeddedRegexResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        (instance.errorMessages = instance.errorMessages || []).push(reader.readString());
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            ValidateEmbeddedRegexResponse.refineValues(instance);
+        };
+        ValidateEmbeddedRegexResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.errorMessages && instance.errorMessages.length) {
+                writer.writeRepeatedString(1, instance.errorMessages);
+            }
+        };
+        Object.defineProperty(ValidateEmbeddedRegexResponse.prototype, "errorMessages", {
+            get: function () {
+                return this._errorMessages;
+            },
+            set: function (value) {
+                this._errorMessages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        ValidateEmbeddedRegexResponse.prototype.toObject = function () {
+            return {
+                errorMessages: (this.errorMessages || []).slice()
+            };
+        };
+        ValidateEmbeddedRegexResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return ValidateEmbeddedRegexResponse;
+    }());
+    var CleanAllIntentsRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param CleanAllIntentsRequest value
+         */
+        function CleanAllIntentsRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            this.languageCode = value.languageCode;
+            this.specialCharacters = value.specialCharacters;
+            this.substringWhiteList = (value.substringWhiteList || []).slice();
+            this.dryRun = value.dryRun;
+            this.trainingPhraseCleanerOptions = value.trainingPhraseCleanerOptions
+                ? new TrainingPhraseCleanerOptions(value.trainingPhraseCleanerOptions)
+                : undefined;
+            this.reannotateEntitiesOptions = value.reannotateEntitiesOptions;
+            this.numberOfWorkers = value.numberOfWorkers;
+            CleanAllIntentsRequest.refineValues(this);
+        }
+        CleanAllIntentsRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanAllIntentsRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        CleanAllIntentsRequest.fromBinary = function (bytes) {
+            var instance = new CleanAllIntentsRequest();
+            CleanAllIntentsRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        CleanAllIntentsRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+            instance.languageCode = instance.languageCode || '';
+            instance.specialCharacters = instance.specialCharacters || '';
+            instance.substringWhiteList = instance.substringWhiteList || [];
+            instance.dryRun = instance.dryRun || false;
+            instance.trainingPhraseCleanerOptions =
+                instance.trainingPhraseCleanerOptions || undefined;
+            instance.reannotateEntitiesOptions =
+                instance.reannotateEntitiesOptions || 0;
+            instance.numberOfWorkers = instance.numberOfWorkers || 0;
+        };
+        CleanAllIntentsRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    case 2:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 3:
+                        instance.specialCharacters = reader.readString();
+                        break;
+                    case 4:
+                        (instance.substringWhiteList =
+                            instance.substringWhiteList || []).push(reader.readString());
+                        break;
+                    case 5:
+                        instance.dryRun = reader.readBool();
+                        break;
+                    case 6:
+                        instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                        reader.readMessage(instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.fromBinaryReader);
+                        break;
+                    case 7:
+                        instance.reannotateEntitiesOptions = reader.readEnum();
+                        break;
+                    case 8:
+                        instance.numberOfWorkers = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            CleanAllIntentsRequest.refineValues(instance);
+        };
+        CleanAllIntentsRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+            if (instance.languageCode) {
+                writer.writeString(2, instance.languageCode);
+            }
+            if (instance.specialCharacters) {
+                writer.writeString(3, instance.specialCharacters);
+            }
+            if (instance.substringWhiteList && instance.substringWhiteList.length) {
+                writer.writeRepeatedString(4, instance.substringWhiteList);
+            }
+            if (instance.dryRun) {
+                writer.writeBool(5, instance.dryRun);
+            }
+            if (instance.trainingPhraseCleanerOptions) {
+                writer.writeMessage(6, instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.toBinaryWriter);
+            }
+            if (instance.reannotateEntitiesOptions) {
+                writer.writeEnum(7, instance.reannotateEntitiesOptions);
+            }
+            if (instance.numberOfWorkers) {
+                writer.writeInt32(8, instance.numberOfWorkers);
+            }
+        };
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "substringWhiteList", {
+            get: function () {
+                return this._substringWhiteList;
+            },
+            set: function (value) {
+                this._substringWhiteList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "dryRun", {
+            get: function () {
+                return this._dryRun;
+            },
+            set: function (value) {
+                this._dryRun = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "trainingPhraseCleanerOptions", {
+            get: function () {
+                return this._trainingPhraseCleanerOptions;
+            },
+            set: function (value) {
+                this._trainingPhraseCleanerOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "reannotateEntitiesOptions", {
+            get: function () {
+                return this._reannotateEntitiesOptions;
+            },
+            set: function (value) {
+                this._reannotateEntitiesOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "numberOfWorkers", {
+            get: function () {
+                return this._numberOfWorkers;
+            },
+            set: function (value) {
+                this._numberOfWorkers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CleanAllIntentsRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                dryRun: this.dryRun,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toObject()
+                    : undefined,
+                reannotateEntitiesOptions: this.reannotateEntitiesOptions,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        CleanAllIntentsRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return CleanAllIntentsRequest;
+    }());
+    var CleanAllIntentsResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param CleanAllIntentsResponse value
+         */
+        function CleanAllIntentsResponse(value) {
+            value = value || {};
+            this.cleanedIntents = (value.cleanedIntents || []).map(function (m) { return new exports.Intent(m); });
+            this.intentUpdateList = (value.intentUpdateList || []).map(function (m) { return new exports.IntentUpdate(m); });
+            CleanAllIntentsResponse.refineValues(this);
+        }
+        CleanAllIntentsResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanAllIntentsResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        CleanAllIntentsResponse.fromBinary = function (bytes) {
+            var instance = new CleanAllIntentsResponse();
+            CleanAllIntentsResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        CleanAllIntentsResponse.refineValues = function (instance) {
+            instance.cleanedIntents = instance.cleanedIntents || [];
+            instance.intentUpdateList = instance.intentUpdateList || [];
+        };
+        CleanAllIntentsResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Intent();
+                        reader.readMessage(messageInitializer1, exports.Intent.fromBinaryReader);
+                        (instance.cleanedIntents = instance.cleanedIntents || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        var messageInitializer2 = new exports.IntentUpdate();
+                        reader.readMessage(messageInitializer2, exports.IntentUpdate.fromBinaryReader);
+                        (instance.intentUpdateList = instance.intentUpdateList || []).push(messageInitializer2);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            CleanAllIntentsResponse.refineValues(instance);
+        };
+        CleanAllIntentsResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.cleanedIntents && instance.cleanedIntents.length) {
+                writer.writeRepeatedMessage(1, instance.cleanedIntents, exports.Intent.toBinaryWriter);
+            }
+            if (instance.intentUpdateList && instance.intentUpdateList.length) {
+                writer.writeRepeatedMessage(2, instance.intentUpdateList, exports.IntentUpdate.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(CleanAllIntentsResponse.prototype, "cleanedIntents", {
+            get: function () {
+                return this._cleanedIntents;
+            },
+            set: function (value) {
+                this._cleanedIntents = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsResponse.prototype, "intentUpdateList", {
+            get: function () {
+                return this._intentUpdateList;
+            },
+            set: function (value) {
+                this._intentUpdateList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CleanAllIntentsResponse.prototype.toObject = function () {
+            return {
+                cleanedIntents: (this.cleanedIntents || []).map(function (m) { return m.toObject(); }),
+                intentUpdateList: (this.intentUpdateList || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        CleanAllIntentsResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return CleanAllIntentsResponse;
+    }());
+    var CleanIntentRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param CleanIntentRequest value
+         */
+        function CleanIntentRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            this.intentName = value.intentName;
+            this.languageCode = value.languageCode;
+            this.specialCharacters = value.specialCharacters;
+            this.substringWhiteList = (value.substringWhiteList || []).slice();
+            this.dryRun = value.dryRun;
+            this.trainingPhraseCleanerOptions = value.trainingPhraseCleanerOptions
+                ? new TrainingPhraseCleanerOptions(value.trainingPhraseCleanerOptions)
+                : undefined;
+            this.reannotateEntitiesOptions = value.reannotateEntitiesOptions;
+            CleanIntentRequest.refineValues(this);
+        }
+        CleanIntentRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanIntentRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        CleanIntentRequest.fromBinary = function (bytes) {
+            var instance = new CleanIntentRequest();
+            CleanIntentRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        CleanIntentRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+            instance.intentName = instance.intentName || '';
+            instance.languageCode = instance.languageCode || '';
+            instance.specialCharacters = instance.specialCharacters || '';
+            instance.substringWhiteList = instance.substringWhiteList || [];
+            instance.dryRun = instance.dryRun || false;
+            instance.trainingPhraseCleanerOptions =
+                instance.trainingPhraseCleanerOptions || undefined;
+            instance.reannotateEntitiesOptions =
+                instance.reannotateEntitiesOptions || 0;
+        };
+        CleanIntentRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    case 2:
+                        instance.intentName = reader.readString();
+                        break;
+                    case 3:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 4:
+                        instance.specialCharacters = reader.readString();
+                        break;
+                    case 5:
+                        (instance.substringWhiteList =
+                            instance.substringWhiteList || []).push(reader.readString());
+                        break;
+                    case 6:
+                        instance.dryRun = reader.readBool();
+                        break;
+                    case 7:
+                        instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                        reader.readMessage(instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.fromBinaryReader);
+                        break;
+                    case 8:
+                        instance.reannotateEntitiesOptions = reader.readEnum();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            CleanIntentRequest.refineValues(instance);
+        };
+        CleanIntentRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+            if (instance.intentName) {
+                writer.writeString(2, instance.intentName);
+            }
+            if (instance.languageCode) {
+                writer.writeString(3, instance.languageCode);
+            }
+            if (instance.specialCharacters) {
+                writer.writeString(4, instance.specialCharacters);
+            }
+            if (instance.substringWhiteList && instance.substringWhiteList.length) {
+                writer.writeRepeatedString(5, instance.substringWhiteList);
+            }
+            if (instance.dryRun) {
+                writer.writeBool(6, instance.dryRun);
+            }
+            if (instance.trainingPhraseCleanerOptions) {
+                writer.writeMessage(7, instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.toBinaryWriter);
+            }
+            if (instance.reannotateEntitiesOptions) {
+                writer.writeEnum(8, instance.reannotateEntitiesOptions);
+            }
+        };
+        Object.defineProperty(CleanIntentRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "intentName", {
+            get: function () {
+                return this._intentName;
+            },
+            set: function (value) {
+                this._intentName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "substringWhiteList", {
+            get: function () {
+                return this._substringWhiteList;
+            },
+            set: function (value) {
+                this._substringWhiteList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "dryRun", {
+            get: function () {
+                return this._dryRun;
+            },
+            set: function (value) {
+                this._dryRun = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "trainingPhraseCleanerOptions", {
+            get: function () {
+                return this._trainingPhraseCleanerOptions;
+            },
+            set: function (value) {
+                this._trainingPhraseCleanerOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "reannotateEntitiesOptions", {
+            get: function () {
+                return this._reannotateEntitiesOptions;
+            },
+            set: function (value) {
+                this._reannotateEntitiesOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CleanIntentRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                dryRun: this.dryRun,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toObject()
+                    : undefined,
+                reannotateEntitiesOptions: this.reannotateEntitiesOptions
+            };
+        };
+        CleanIntentRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return CleanIntentRequest;
+    }());
+    var CleanIntentResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param CleanIntentResponse value
+         */
+        function CleanIntentResponse(value) {
+            value = value || {};
+            this.cleanedIntent = value.cleanedIntent
+                ? new exports.Intent(value.cleanedIntent)
+                : undefined;
+            this.intentUpdate = value.intentUpdate
+                ? new exports.IntentUpdate(value.intentUpdate)
+                : undefined;
+            CleanIntentResponse.refineValues(this);
+        }
+        CleanIntentResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanIntentResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        CleanIntentResponse.fromBinary = function (bytes) {
+            var instance = new CleanIntentResponse();
+            CleanIntentResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        CleanIntentResponse.refineValues = function (instance) {
+            instance.cleanedIntent = instance.cleanedIntent || undefined;
+            instance.intentUpdate = instance.intentUpdate || undefined;
+        };
+        CleanIntentResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.cleanedIntent = new exports.Intent();
+                        reader.readMessage(instance.cleanedIntent, exports.Intent.fromBinaryReader);
+                        break;
+                    case 2:
+                        instance.intentUpdate = new exports.IntentUpdate();
+                        reader.readMessage(instance.intentUpdate, exports.IntentUpdate.fromBinaryReader);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            CleanIntentResponse.refineValues(instance);
+        };
+        CleanIntentResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.cleanedIntent) {
+                writer.writeMessage(1, instance.cleanedIntent, exports.Intent.toBinaryWriter);
+            }
+            if (instance.intentUpdate) {
+                writer.writeMessage(2, instance.intentUpdate, exports.IntentUpdate.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(CleanIntentResponse.prototype, "cleanedIntent", {
+            get: function () {
+                return this._cleanedIntent;
+            },
+            set: function (value) {
+                this._cleanedIntent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentResponse.prototype, "intentUpdate", {
+            get: function () {
+                return this._intentUpdate;
+            },
+            set: function (value) {
+                this._intentUpdate = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CleanIntentResponse.prototype.toObject = function () {
+            return {
+                cleanedIntent: this.cleanedIntent
+                    ? this.cleanedIntent.toObject()
+                    : undefined,
+                intentUpdate: this.intentUpdate ? this.intentUpdate.toObject() : undefined
+            };
+        };
+        CleanIntentResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return CleanIntentResponse;
+    }());
+    var TrainingPhraseCleanerOptions = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param TrainingPhraseCleanerOptions value
+         */
+        function TrainingPhraseCleanerOptions(value) {
+            value = value || {};
+            this.deleteRepeatedWhitespaces = value.deleteRepeatedWhitespaces;
+            this.deleteLeadingSpecialCharacters = value.deleteLeadingSpecialCharacters;
+            this.deleteTrailingSpecialCharacters =
+                value.deleteTrailingSpecialCharacters;
+            TrainingPhraseCleanerOptions.refineValues(this);
+        }
+        TrainingPhraseCleanerOptions.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            TrainingPhraseCleanerOptions.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        TrainingPhraseCleanerOptions.fromBinary = function (bytes) {
+            var instance = new TrainingPhraseCleanerOptions();
+            TrainingPhraseCleanerOptions.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        TrainingPhraseCleanerOptions.refineValues = function (instance) {
+            instance.deleteRepeatedWhitespaces =
+                instance.deleteRepeatedWhitespaces || false;
+            instance.deleteLeadingSpecialCharacters =
+                instance.deleteLeadingSpecialCharacters || false;
+            instance.deleteTrailingSpecialCharacters =
+                instance.deleteTrailingSpecialCharacters || false;
+        };
+        TrainingPhraseCleanerOptions.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.deleteRepeatedWhitespaces = reader.readBool();
+                        break;
+                    case 2:
+                        instance.deleteLeadingSpecialCharacters = reader.readBool();
+                        break;
+                    case 3:
+                        instance.deleteTrailingSpecialCharacters = reader.readBool();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            TrainingPhraseCleanerOptions.refineValues(instance);
+        };
+        TrainingPhraseCleanerOptions.toBinaryWriter = function (instance, writer) {
+            if (instance.deleteRepeatedWhitespaces) {
+                writer.writeBool(1, instance.deleteRepeatedWhitespaces);
+            }
+            if (instance.deleteLeadingSpecialCharacters) {
+                writer.writeBool(2, instance.deleteLeadingSpecialCharacters);
+            }
+            if (instance.deleteTrailingSpecialCharacters) {
+                writer.writeBool(3, instance.deleteTrailingSpecialCharacters);
+            }
+        };
+        Object.defineProperty(TrainingPhraseCleanerOptions.prototype, "deleteRepeatedWhitespaces", {
+            get: function () {
+                return this._deleteRepeatedWhitespaces;
+            },
+            set: function (value) {
+                this._deleteRepeatedWhitespaces = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TrainingPhraseCleanerOptions.prototype, "deleteLeadingSpecialCharacters", {
+            get: function () {
+                return this._deleteLeadingSpecialCharacters;
+            },
+            set: function (value) {
+                this._deleteLeadingSpecialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TrainingPhraseCleanerOptions.prototype, "deleteTrailingSpecialCharacters", {
+            get: function () {
+                return this._deleteTrailingSpecialCharacters;
+            },
+            set: function (value) {
+                this._deleteTrailingSpecialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        TrainingPhraseCleanerOptions.prototype.toObject = function () {
+            return {
+                deleteRepeatedWhitespaces: this.deleteRepeatedWhitespaces,
+                deleteLeadingSpecialCharacters: this.deleteLeadingSpecialCharacters,
+                deleteTrailingSpecialCharacters: this.deleteTrailingSpecialCharacters
+            };
+        };
+        TrainingPhraseCleanerOptions.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return TrainingPhraseCleanerOptions;
+    }());
+    var StringUpdate = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param StringUpdate value
+         */
+        function StringUpdate(value) {
+            value = value || {};
+            this.new = value.new;
+            this.old = value.old;
+            StringUpdate.refineValues(this);
+        }
+        StringUpdate.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            StringUpdate.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        StringUpdate.fromBinary = function (bytes) {
+            var instance = new StringUpdate();
+            StringUpdate.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        StringUpdate.refineValues = function (instance) {
+            instance.new = instance.new || '';
+            instance.old = instance.old || '';
+        };
+        StringUpdate.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.new = reader.readString();
+                        break;
+                    case 2:
+                        instance.old = reader.readString();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            StringUpdate.refineValues(instance);
+        };
+        StringUpdate.toBinaryWriter = function (instance, writer) {
+            if (instance.new) {
+                writer.writeString(1, instance.new);
+            }
+            if (instance.old) {
+                writer.writeString(2, instance.old);
+            }
+        };
+        Object.defineProperty(StringUpdate.prototype, "new", {
+            get: function () {
+                return this._new;
+            },
+            set: function (value) {
+                this._new = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(StringUpdate.prototype, "old", {
+            get: function () {
+                return this._old;
+            },
+            set: function (value) {
+                this._old = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        StringUpdate.prototype.toObject = function () {
+            return {
+                new: this.new,
+                old: this.old
+            };
+        };
+        StringUpdate.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return StringUpdate;
+    }());
+    exports.IntentUpdate = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param IntentUpdate value
+         */
+        function IntentUpdate(value) {
+            value = value || {};
+            this.intentDisplayName = value.intentDisplayName;
+            this.trainingPhraseUpdateList = (value.trainingPhraseUpdateList || []).map(function (m) { return new IntentUpdate.TrainingPhraseUpdate(m); });
+            this.deletedParameters = (value.deletedParameters || []).slice();
+            IntentUpdate.refineValues(this);
+        }
+        IntentUpdate.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            IntentUpdate.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        IntentUpdate.fromBinary = function (bytes) {
+            var instance = new IntentUpdate();
+            IntentUpdate.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        IntentUpdate.refineValues = function (instance) {
+            instance.intentDisplayName = instance.intentDisplayName || '';
+            instance.trainingPhraseUpdateList = instance.trainingPhraseUpdateList || [];
+            instance.deletedParameters = instance.deletedParameters || [];
+        };
+        IntentUpdate.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.intentDisplayName = reader.readString();
+                        break;
+                    case 2:
+                        var messageInitializer2 = new IntentUpdate.TrainingPhraseUpdate();
+                        reader.readMessage(messageInitializer2, IntentUpdate.TrainingPhraseUpdate.fromBinaryReader);
+                        (instance.trainingPhraseUpdateList =
+                            instance.trainingPhraseUpdateList || []).push(messageInitializer2);
+                        break;
+                    case 3:
+                        (instance.deletedParameters = instance.deletedParameters || []).push(reader.readString());
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            IntentUpdate.refineValues(instance);
+        };
+        IntentUpdate.toBinaryWriter = function (instance, writer) {
+            if (instance.intentDisplayName) {
+                writer.writeString(1, instance.intentDisplayName);
+            }
+            if (instance.trainingPhraseUpdateList &&
+                instance.trainingPhraseUpdateList.length) {
+                writer.writeRepeatedMessage(2, instance.trainingPhraseUpdateList, IntentUpdate.TrainingPhraseUpdate.toBinaryWriter);
+            }
+            if (instance.deletedParameters && instance.deletedParameters.length) {
+                writer.writeRepeatedString(3, instance.deletedParameters);
+            }
+        };
+        Object.defineProperty(IntentUpdate.prototype, "intentDisplayName", {
+            get: function () {
+                return this._intentDisplayName;
+            },
+            set: function (value) {
+                this._intentDisplayName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(IntentUpdate.prototype, "trainingPhraseUpdateList", {
+            get: function () {
+                return this._trainingPhraseUpdateList;
+            },
+            set: function (value) {
+                this._trainingPhraseUpdateList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(IntentUpdate.prototype, "deletedParameters", {
+            get: function () {
+                return this._deletedParameters;
+            },
+            set: function (value) {
+                this._deletedParameters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        IntentUpdate.prototype.toObject = function () {
+            return {
+                intentDisplayName: this.intentDisplayName,
+                trainingPhraseUpdateList: (this.trainingPhraseUpdateList || []).map(function (m) { return m.toObject(); }),
+                deletedParameters: (this.deletedParameters || []).slice()
+            };
+        };
+        IntentUpdate.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return IntentUpdate;
+    }());
+    (function (IntentUpdate) {
+        var TrainingPhraseUpdate = /** @class */ (function () {
+            /**
+             * Creates an object and applies default Protobuf values
+             * @param TrainingPhraseUpdate value
+             */
+            function TrainingPhraseUpdate(value) {
+                value = value || {};
+                this.trainingPhraseUpdate = value.trainingPhraseUpdate
+                    ? new StringUpdate(value.trainingPhraseUpdate)
+                    : undefined;
+                this.entityUpdates = (value.entityUpdates || []).map(function (m) { return new StringUpdate(m); });
+                this.entitiesReannotated = (value.entitiesReannotated || []).slice();
+                this.containsUpdateVariable = value.containsUpdateVariable;
+                TrainingPhraseUpdate.refineValues(this);
+            }
+            TrainingPhraseUpdate.toBinary = function (instance) {
+                var writer = new googleProtobuf.BinaryWriter();
+                TrainingPhraseUpdate.toBinaryWriter(instance, writer);
+                return writer.getResultBuffer();
+            };
+            TrainingPhraseUpdate.fromBinary = function (bytes) {
+                var instance = new TrainingPhraseUpdate();
+                TrainingPhraseUpdate.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            TrainingPhraseUpdate.refineValues = function (instance) {
+                instance.trainingPhraseUpdate =
+                    instance.trainingPhraseUpdate || undefined;
+                instance.entityUpdates = instance.entityUpdates || [];
+                instance.entitiesReannotated = instance.entitiesReannotated || [];
+                instance.containsUpdateVariable =
+                    instance.containsUpdateVariable || false;
+            };
+            TrainingPhraseUpdate.fromBinaryReader = function (instance, reader) {
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            instance.trainingPhraseUpdate = new StringUpdate();
+                            reader.readMessage(instance.trainingPhraseUpdate, StringUpdate.fromBinaryReader);
+                            break;
+                        case 2:
+                            var messageInitializer2 = new StringUpdate();
+                            reader.readMessage(messageInitializer2, StringUpdate.fromBinaryReader);
+                            (instance.entityUpdates = instance.entityUpdates || []).push(messageInitializer2);
+                            break;
+                        case 3:
+                            (instance.entitiesReannotated =
+                                instance.entitiesReannotated || []).push(reader.readString());
+                            break;
+                        case 4:
+                            instance.containsUpdateVariable = reader.readBool();
+                            break;
+                        default:
+                            reader.skipField();
+                    }
+                }
+                TrainingPhraseUpdate.refineValues(instance);
+            };
+            TrainingPhraseUpdate.toBinaryWriter = function (instance, writer) {
+                if (instance.trainingPhraseUpdate) {
+                    writer.writeMessage(1, instance.trainingPhraseUpdate, StringUpdate.toBinaryWriter);
+                }
+                if (instance.entityUpdates && instance.entityUpdates.length) {
+                    writer.writeRepeatedMessage(2, instance.entityUpdates, StringUpdate.toBinaryWriter);
+                }
+                if (instance.entitiesReannotated && instance.entitiesReannotated.length) {
+                    writer.writeRepeatedString(3, instance.entitiesReannotated);
+                }
+                if (instance.containsUpdateVariable) {
+                    writer.writeBool(4, instance.containsUpdateVariable);
+                }
+            };
+            Object.defineProperty(TrainingPhraseUpdate.prototype, "trainingPhraseUpdate", {
+                get: function () {
+                    return this._trainingPhraseUpdate;
+                },
+                set: function (value) {
+                    this._trainingPhraseUpdate = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseUpdate.prototype, "entityUpdates", {
+                get: function () {
+                    return this._entityUpdates;
+                },
+                set: function (value) {
+                    this._entityUpdates = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseUpdate.prototype, "entitiesReannotated", {
+                get: function () {
+                    return this._entitiesReannotated;
+                },
+                set: function (value) {
+                    this._entitiesReannotated = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseUpdate.prototype, "containsUpdateVariable", {
+                get: function () {
+                    return this._containsUpdateVariable;
+                },
+                set: function (value) {
+                    this._containsUpdateVariable = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            TrainingPhraseUpdate.prototype.toObject = function () {
+                return {
+                    trainingPhraseUpdate: this.trainingPhraseUpdate
+                        ? this.trainingPhraseUpdate.toObject()
+                        : undefined,
+                    entityUpdates: (this.entityUpdates || []).map(function (m) { return m.toObject(); }),
+                    entitiesReannotated: (this.entitiesReannotated || []).slice(),
+                    containsUpdateVariable: this.containsUpdateVariable
+                };
+            };
+            TrainingPhraseUpdate.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            return TrainingPhraseUpdate;
+        }());
+        IntentUpdate.TrainingPhraseUpdate = TrainingPhraseUpdate;
+    })(exports.IntentUpdate || (exports.IntentUpdate = {}));
+    exports.EntityTypeUpdate = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param EntityTypeUpdate value
+         */
+        function EntityTypeUpdate(value) {
+            value = value || {};
+            this.entityTypeName = value.entityTypeName;
+            this.valuesUpdateList = (value.valuesUpdateList || []).map(function (m) { return new EntityTypeUpdate.EntityUpdate(m); });
+            EntityTypeUpdate.refineValues(this);
+        }
+        EntityTypeUpdate.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            EntityTypeUpdate.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        EntityTypeUpdate.fromBinary = function (bytes) {
+            var instance = new EntityTypeUpdate();
+            EntityTypeUpdate.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        EntityTypeUpdate.refineValues = function (instance) {
+            instance.entityTypeName = instance.entityTypeName || '';
+            instance.valuesUpdateList = instance.valuesUpdateList || [];
+        };
+        EntityTypeUpdate.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.entityTypeName = reader.readString();
+                        break;
+                    case 2:
+                        var messageInitializer2 = new EntityTypeUpdate.EntityUpdate();
+                        reader.readMessage(messageInitializer2, EntityTypeUpdate.EntityUpdate.fromBinaryReader);
+                        (instance.valuesUpdateList = instance.valuesUpdateList || []).push(messageInitializer2);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            EntityTypeUpdate.refineValues(instance);
+        };
+        EntityTypeUpdate.toBinaryWriter = function (instance, writer) {
+            if (instance.entityTypeName) {
+                writer.writeString(1, instance.entityTypeName);
+            }
+            if (instance.valuesUpdateList && instance.valuesUpdateList.length) {
+                writer.writeRepeatedMessage(2, instance.valuesUpdateList, EntityTypeUpdate.EntityUpdate.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(EntityTypeUpdate.prototype, "entityTypeName", {
+            get: function () {
+                return this._entityTypeName;
+            },
+            set: function (value) {
+                this._entityTypeName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(EntityTypeUpdate.prototype, "valuesUpdateList", {
+            get: function () {
+                return this._valuesUpdateList;
+            },
+            set: function (value) {
+                this._valuesUpdateList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        EntityTypeUpdate.prototype.toObject = function () {
+            return {
+                entityTypeName: this.entityTypeName,
+                valuesUpdateList: (this.valuesUpdateList || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        EntityTypeUpdate.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return EntityTypeUpdate;
+    }());
+    (function (EntityTypeUpdate) {
+        var EntityUpdate = /** @class */ (function () {
+            /**
+             * Creates an object and applies default Protobuf values
+             * @param EntityUpdate value
+             */
+            function EntityUpdate(value) {
+                value = value || {};
+                this.entityValueUpdate = value.entityValueUpdate
+                    ? new StringUpdate(value.entityValueUpdate)
+                    : undefined;
+                this.entitySynonymUpdates = (value.entitySynonymUpdates || []).map(function (m) { return new StringUpdate(m); });
+                EntityUpdate.refineValues(this);
+            }
+            EntityUpdate.toBinary = function (instance) {
+                var writer = new googleProtobuf.BinaryWriter();
+                EntityUpdate.toBinaryWriter(instance, writer);
+                return writer.getResultBuffer();
+            };
+            EntityUpdate.fromBinary = function (bytes) {
+                var instance = new EntityUpdate();
+                EntityUpdate.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            EntityUpdate.refineValues = function (instance) {
+                instance.entityValueUpdate = instance.entityValueUpdate || undefined;
+                instance.entitySynonymUpdates = instance.entitySynonymUpdates || [];
+            };
+            EntityUpdate.fromBinaryReader = function (instance, reader) {
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            instance.entityValueUpdate = new StringUpdate();
+                            reader.readMessage(instance.entityValueUpdate, StringUpdate.fromBinaryReader);
+                            break;
+                        case 2:
+                            var messageInitializer2 = new StringUpdate();
+                            reader.readMessage(messageInitializer2, StringUpdate.fromBinaryReader);
+                            (instance.entitySynonymUpdates =
+                                instance.entitySynonymUpdates || []).push(messageInitializer2);
+                            break;
+                        default:
+                            reader.skipField();
+                    }
+                }
+                EntityUpdate.refineValues(instance);
+            };
+            EntityUpdate.toBinaryWriter = function (instance, writer) {
+                if (instance.entityValueUpdate) {
+                    writer.writeMessage(1, instance.entityValueUpdate, StringUpdate.toBinaryWriter);
+                }
+                if (instance.entitySynonymUpdates &&
+                    instance.entitySynonymUpdates.length) {
+                    writer.writeRepeatedMessage(2, instance.entitySynonymUpdates, StringUpdate.toBinaryWriter);
+                }
+            };
+            Object.defineProperty(EntityUpdate.prototype, "entityValueUpdate", {
+                get: function () {
+                    return this._entityValueUpdate;
+                },
+                set: function (value) {
+                    this._entityValueUpdate = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(EntityUpdate.prototype, "entitySynonymUpdates", {
+                get: function () {
+                    return this._entitySynonymUpdates;
+                },
+                set: function (value) {
+                    this._entitySynonymUpdates = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            EntityUpdate.prototype.toObject = function () {
+                return {
+                    entityValueUpdate: this.entityValueUpdate
+                        ? this.entityValueUpdate.toObject()
+                        : undefined,
+                    entitySynonymUpdates: (this.entitySynonymUpdates || []).map(function (m) { return m.toObject(); })
+                };
+            };
+            EntityUpdate.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            return EntityUpdate;
+        }());
+        EntityTypeUpdate.EntityUpdate = EntityUpdate;
+    })(exports.EntityTypeUpdate || (exports.EntityTypeUpdate = {}));
+    var CleanAllEntityTypesRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param CleanAllEntityTypesRequest value
+         */
+        function CleanAllEntityTypesRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            this.languageCode = value.languageCode;
+            this.specialCharacters = value.specialCharacters;
+            this.substringWhiteList = (value.substringWhiteList || []).slice();
+            this.maxEntityCountUpdate = value.maxEntityCountUpdate;
+            this.forbiddenEntityTypePatterns = (value.forbiddenEntityTypePatterns || []).slice();
+            this.dryRun = value.dryRun;
+            this.numberOfWorkers = value.numberOfWorkers;
+            CleanAllEntityTypesRequest.refineValues(this);
+        }
+        CleanAllEntityTypesRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanAllEntityTypesRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        CleanAllEntityTypesRequest.fromBinary = function (bytes) {
+            var instance = new CleanAllEntityTypesRequest();
+            CleanAllEntityTypesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        CleanAllEntityTypesRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+            instance.languageCode = instance.languageCode || '';
+            instance.specialCharacters = instance.specialCharacters || '';
+            instance.substringWhiteList = instance.substringWhiteList || [];
+            instance.maxEntityCountUpdate = instance.maxEntityCountUpdate || 0;
+            instance.forbiddenEntityTypePatterns =
+                instance.forbiddenEntityTypePatterns || [];
+            instance.dryRun = instance.dryRun || false;
+            instance.numberOfWorkers = instance.numberOfWorkers || 0;
+        };
+        CleanAllEntityTypesRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    case 2:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 3:
+                        instance.specialCharacters = reader.readString();
+                        break;
+                    case 4:
+                        (instance.substringWhiteList =
+                            instance.substringWhiteList || []).push(reader.readString());
+                        break;
+                    case 5:
+                        instance.maxEntityCountUpdate = reader.readInt32();
+                        break;
+                    case 6:
+                        (instance.forbiddenEntityTypePatterns =
+                            instance.forbiddenEntityTypePatterns || []).push(reader.readString());
+                        break;
+                    case 7:
+                        instance.dryRun = reader.readBool();
+                        break;
+                    case 8:
+                        instance.numberOfWorkers = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            CleanAllEntityTypesRequest.refineValues(instance);
+        };
+        CleanAllEntityTypesRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+            if (instance.languageCode) {
+                writer.writeString(2, instance.languageCode);
+            }
+            if (instance.specialCharacters) {
+                writer.writeString(3, instance.specialCharacters);
+            }
+            if (instance.substringWhiteList && instance.substringWhiteList.length) {
+                writer.writeRepeatedString(4, instance.substringWhiteList);
+            }
+            if (instance.maxEntityCountUpdate) {
+                writer.writeInt32(5, instance.maxEntityCountUpdate);
+            }
+            if (instance.forbiddenEntityTypePatterns &&
+                instance.forbiddenEntityTypePatterns.length) {
+                writer.writeRepeatedString(6, instance.forbiddenEntityTypePatterns);
+            }
+            if (instance.dryRun) {
+                writer.writeBool(7, instance.dryRun);
+            }
+            if (instance.numberOfWorkers) {
+                writer.writeInt32(8, instance.numberOfWorkers);
+            }
+        };
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "substringWhiteList", {
+            get: function () {
+                return this._substringWhiteList;
+            },
+            set: function (value) {
+                this._substringWhiteList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "maxEntityCountUpdate", {
+            get: function () {
+                return this._maxEntityCountUpdate;
+            },
+            set: function (value) {
+                this._maxEntityCountUpdate = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "forbiddenEntityTypePatterns", {
+            get: function () {
+                return this._forbiddenEntityTypePatterns;
+            },
+            set: function (value) {
+                this._forbiddenEntityTypePatterns = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "dryRun", {
+            get: function () {
+                return this._dryRun;
+            },
+            set: function (value) {
+                this._dryRun = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "numberOfWorkers", {
+            get: function () {
+                return this._numberOfWorkers;
+            },
+            set: function (value) {
+                this._numberOfWorkers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CleanAllEntityTypesRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                maxEntityCountUpdate: this.maxEntityCountUpdate,
+                forbiddenEntityTypePatterns: (this.forbiddenEntityTypePatterns || []).slice(),
+                dryRun: this.dryRun,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        CleanAllEntityTypesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return CleanAllEntityTypesRequest;
+    }());
+    var CleanAllEntityTypesResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param CleanAllEntityTypesResponse value
+         */
+        function CleanAllEntityTypesResponse(value) {
+            value = value || {};
+            this.cleanedEntityTypes = (value.cleanedEntityTypes || []).map(function (m) { return new exports.EntityType(m); });
+            this.deletedEntityTypes = (value.deletedEntityTypes || []).map(function (m) { return new exports.EntityType(m); });
+            this.entityTypeUpdates = (value.entityTypeUpdates || []).map(function (m) { return new exports.EntityTypeUpdate(m); });
+            this.entityTypeDeletions = (value.entityTypeDeletions || []).map(function (m) { return new exports.EntityTypeUpdate(m); });
+            CleanAllEntityTypesResponse.refineValues(this);
+        }
+        CleanAllEntityTypesResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanAllEntityTypesResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        CleanAllEntityTypesResponse.fromBinary = function (bytes) {
+            var instance = new CleanAllEntityTypesResponse();
+            CleanAllEntityTypesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        CleanAllEntityTypesResponse.refineValues = function (instance) {
+            instance.cleanedEntityTypes = instance.cleanedEntityTypes || [];
+            instance.deletedEntityTypes = instance.deletedEntityTypes || [];
+            instance.entityTypeUpdates = instance.entityTypeUpdates || [];
+            instance.entityTypeDeletions = instance.entityTypeDeletions || [];
+        };
+        CleanAllEntityTypesResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.EntityType();
+                        reader.readMessage(messageInitializer1, exports.EntityType.fromBinaryReader);
+                        (instance.cleanedEntityTypes =
+                            instance.cleanedEntityTypes || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        var messageInitializer2 = new exports.EntityType();
+                        reader.readMessage(messageInitializer2, exports.EntityType.fromBinaryReader);
+                        (instance.deletedEntityTypes =
+                            instance.deletedEntityTypes || []).push(messageInitializer2);
+                        break;
+                    case 3:
+                        var messageInitializer3 = new exports.EntityTypeUpdate();
+                        reader.readMessage(messageInitializer3, exports.EntityTypeUpdate.fromBinaryReader);
+                        (instance.entityTypeUpdates = instance.entityTypeUpdates || []).push(messageInitializer3);
+                        break;
+                    case 4:
+                        var messageInitializer4 = new exports.EntityTypeUpdate();
+                        reader.readMessage(messageInitializer4, exports.EntityTypeUpdate.fromBinaryReader);
+                        (instance.entityTypeDeletions =
+                            instance.entityTypeDeletions || []).push(messageInitializer4);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            CleanAllEntityTypesResponse.refineValues(instance);
+        };
+        CleanAllEntityTypesResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.cleanedEntityTypes && instance.cleanedEntityTypes.length) {
+                writer.writeRepeatedMessage(1, instance.cleanedEntityTypes, exports.EntityType.toBinaryWriter);
+            }
+            if (instance.deletedEntityTypes && instance.deletedEntityTypes.length) {
+                writer.writeRepeatedMessage(2, instance.deletedEntityTypes, exports.EntityType.toBinaryWriter);
+            }
+            if (instance.entityTypeUpdates && instance.entityTypeUpdates.length) {
+                writer.writeRepeatedMessage(3, instance.entityTypeUpdates, exports.EntityTypeUpdate.toBinaryWriter);
+            }
+            if (instance.entityTypeDeletions && instance.entityTypeDeletions.length) {
+                writer.writeRepeatedMessage(4, instance.entityTypeDeletions, exports.EntityTypeUpdate.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(CleanAllEntityTypesResponse.prototype, "cleanedEntityTypes", {
+            get: function () {
+                return this._cleanedEntityTypes;
+            },
+            set: function (value) {
+                this._cleanedEntityTypes = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesResponse.prototype, "deletedEntityTypes", {
+            get: function () {
+                return this._deletedEntityTypes;
+            },
+            set: function (value) {
+                this._deletedEntityTypes = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesResponse.prototype, "entityTypeUpdates", {
+            get: function () {
+                return this._entityTypeUpdates;
+            },
+            set: function (value) {
+                this._entityTypeUpdates = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesResponse.prototype, "entityTypeDeletions", {
+            get: function () {
+                return this._entityTypeDeletions;
+            },
+            set: function (value) {
+                this._entityTypeDeletions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CleanAllEntityTypesResponse.prototype.toObject = function () {
+            return {
+                cleanedEntityTypes: (this.cleanedEntityTypes || []).map(function (m) { return m.toObject(); }),
+                deletedEntityTypes: (this.deletedEntityTypes || []).map(function (m) { return m.toObject(); }),
+                entityTypeUpdates: (this.entityTypeUpdates || []).map(function (m) { return m.toObject(); }),
+                entityTypeDeletions: (this.entityTypeDeletions || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        CleanAllEntityTypesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return CleanAllEntityTypesResponse;
+    }());
+    var CleanEntityTypeRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param CleanEntityTypeRequest value
+         */
+        function CleanEntityTypeRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            this.entityTypeName = value.entityTypeName;
+            this.languageCode = value.languageCode;
+            this.specialCharacters = value.specialCharacters;
+            this.substringWhiteList = (value.substringWhiteList || []).slice();
+            this.maxEntityCountUpdate = value.maxEntityCountUpdate;
+            this.dryRun = value.dryRun;
+            CleanEntityTypeRequest.refineValues(this);
+        }
+        CleanEntityTypeRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanEntityTypeRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        CleanEntityTypeRequest.fromBinary = function (bytes) {
+            var instance = new CleanEntityTypeRequest();
+            CleanEntityTypeRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        CleanEntityTypeRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+            instance.entityTypeName = instance.entityTypeName || '';
+            instance.languageCode = instance.languageCode || '';
+            instance.specialCharacters = instance.specialCharacters || '';
+            instance.substringWhiteList = instance.substringWhiteList || [];
+            instance.maxEntityCountUpdate = instance.maxEntityCountUpdate || 0;
+            instance.dryRun = instance.dryRun || false;
+        };
+        CleanEntityTypeRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    case 2:
+                        instance.entityTypeName = reader.readString();
+                        break;
+                    case 3:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 4:
+                        instance.specialCharacters = reader.readString();
+                        break;
+                    case 5:
+                        (instance.substringWhiteList =
+                            instance.substringWhiteList || []).push(reader.readString());
+                        break;
+                    case 6:
+                        instance.maxEntityCountUpdate = reader.readInt32();
+                        break;
+                    case 7:
+                        instance.dryRun = reader.readBool();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            CleanEntityTypeRequest.refineValues(instance);
+        };
+        CleanEntityTypeRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+            if (instance.entityTypeName) {
+                writer.writeString(2, instance.entityTypeName);
+            }
+            if (instance.languageCode) {
+                writer.writeString(3, instance.languageCode);
+            }
+            if (instance.specialCharacters) {
+                writer.writeString(4, instance.specialCharacters);
+            }
+            if (instance.substringWhiteList && instance.substringWhiteList.length) {
+                writer.writeRepeatedString(5, instance.substringWhiteList);
+            }
+            if (instance.maxEntityCountUpdate) {
+                writer.writeInt32(6, instance.maxEntityCountUpdate);
+            }
+            if (instance.dryRun) {
+                writer.writeBool(7, instance.dryRun);
+            }
+        };
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "entityTypeName", {
+            get: function () {
+                return this._entityTypeName;
+            },
+            set: function (value) {
+                this._entityTypeName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "substringWhiteList", {
+            get: function () {
+                return this._substringWhiteList;
+            },
+            set: function (value) {
+                this._substringWhiteList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "maxEntityCountUpdate", {
+            get: function () {
+                return this._maxEntityCountUpdate;
+            },
+            set: function (value) {
+                this._maxEntityCountUpdate = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "dryRun", {
+            get: function () {
+                return this._dryRun;
+            },
+            set: function (value) {
+                this._dryRun = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CleanEntityTypeRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                entityTypeName: this.entityTypeName,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                maxEntityCountUpdate: this.maxEntityCountUpdate,
+                dryRun: this.dryRun
+            };
+        };
+        CleanEntityTypeRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return CleanEntityTypeRequest;
+    }());
+    var CleanEntityTypeResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param CleanEntityTypeResponse value
+         */
+        function CleanEntityTypeResponse(value) {
+            value = value || {};
+            this.cleanedEntityType = value.cleanedEntityType
+                ? new exports.EntityType(value.cleanedEntityType)
+                : undefined;
+            this.entityTypeUpdate = value.entityTypeUpdate
+                ? new exports.EntityTypeUpdate(value.entityTypeUpdate)
+                : undefined;
+            CleanEntityTypeResponse.refineValues(this);
+        }
+        CleanEntityTypeResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanEntityTypeResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        CleanEntityTypeResponse.fromBinary = function (bytes) {
+            var instance = new CleanEntityTypeResponse();
+            CleanEntityTypeResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        CleanEntityTypeResponse.refineValues = function (instance) {
+            instance.cleanedEntityType = instance.cleanedEntityType || undefined;
+            instance.entityTypeUpdate = instance.entityTypeUpdate || undefined;
+        };
+        CleanEntityTypeResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.cleanedEntityType = new exports.EntityType();
+                        reader.readMessage(instance.cleanedEntityType, exports.EntityType.fromBinaryReader);
+                        break;
+                    case 2:
+                        instance.entityTypeUpdate = new exports.EntityTypeUpdate();
+                        reader.readMessage(instance.entityTypeUpdate, exports.EntityTypeUpdate.fromBinaryReader);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            CleanEntityTypeResponse.refineValues(instance);
+        };
+        CleanEntityTypeResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.cleanedEntityType) {
+                writer.writeMessage(1, instance.cleanedEntityType, exports.EntityType.toBinaryWriter);
+            }
+            if (instance.entityTypeUpdate) {
+                writer.writeMessage(2, instance.entityTypeUpdate, exports.EntityTypeUpdate.toBinaryWriter);
+            }
+        };
+        Object.defineProperty(CleanEntityTypeResponse.prototype, "cleanedEntityType", {
+            get: function () {
+                return this._cleanedEntityType;
+            },
+            set: function (value) {
+                this._cleanedEntityType = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeResponse.prototype, "entityTypeUpdate", {
+            get: function () {
+                return this._entityTypeUpdate;
+            },
+            set: function (value) {
+                this._entityTypeUpdate = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        CleanEntityTypeResponse.prototype.toObject = function () {
+            return {
+                cleanedEntityType: this.cleanedEntityType
+                    ? this.cleanedEntityType.toObject()
+                    : undefined,
+                entityTypeUpdate: this.entityTypeUpdate
+                    ? this.entityTypeUpdate.toObject()
+                    : undefined
+            };
+        };
+        CleanEntityTypeResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return CleanEntityTypeResponse;
+    }());
+    exports.AddTrainingPhrasesRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param AddTrainingPhrasesRequest value
+         */
+        function AddTrainingPhrasesRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            this.languageCode = value.languageCode;
+            this.trainingPhraseList = (value.trainingPhraseList || []).map(function (m) { return new AddTrainingPhrasesRequest.TrainingPhraseForIntent(m); });
+            this.extractEntities = value.extractEntities;
+            this.specialCharacters = value.specialCharacters;
+            this.trainingPhraseCleanerOptions = value.trainingPhraseCleanerOptions
+                ? new TrainingPhraseCleanerOptions(value.trainingPhraseCleanerOptions)
+                : undefined;
+            this.numberOfWorkers = value.numberOfWorkers;
+            AddTrainingPhrasesRequest.refineValues(this);
+        }
+        AddTrainingPhrasesRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            AddTrainingPhrasesRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        AddTrainingPhrasesRequest.fromBinary = function (bytes) {
+            var instance = new AddTrainingPhrasesRequest();
+            AddTrainingPhrasesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        AddTrainingPhrasesRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+            instance.languageCode = instance.languageCode || '';
+            instance.trainingPhraseList = instance.trainingPhraseList || [];
+            instance.extractEntities = instance.extractEntities || false;
+            instance.specialCharacters = instance.specialCharacters || '';
+            instance.trainingPhraseCleanerOptions =
+                instance.trainingPhraseCleanerOptions || undefined;
+            instance.numberOfWorkers = instance.numberOfWorkers || 0;
+        };
+        AddTrainingPhrasesRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    case 2:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 3:
+                        var messageInitializer3 = new AddTrainingPhrasesRequest.TrainingPhraseForIntent();
+                        reader.readMessage(messageInitializer3, AddTrainingPhrasesRequest.TrainingPhraseForIntent.fromBinaryReader);
+                        (instance.trainingPhraseList =
+                            instance.trainingPhraseList || []).push(messageInitializer3);
+                        break;
+                    case 4:
+                        instance.extractEntities = reader.readBool();
+                        break;
+                    case 5:
+                        instance.specialCharacters = reader.readString();
+                        break;
+                    case 6:
+                        instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                        reader.readMessage(instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.fromBinaryReader);
+                        break;
+                    case 7:
+                        instance.numberOfWorkers = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            AddTrainingPhrasesRequest.refineValues(instance);
+        };
+        AddTrainingPhrasesRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+            if (instance.languageCode) {
+                writer.writeString(2, instance.languageCode);
+            }
+            if (instance.trainingPhraseList && instance.trainingPhraseList.length) {
+                writer.writeRepeatedMessage(3, instance.trainingPhraseList, AddTrainingPhrasesRequest.TrainingPhraseForIntent.toBinaryWriter);
+            }
+            if (instance.extractEntities) {
+                writer.writeBool(4, instance.extractEntities);
+            }
+            if (instance.specialCharacters) {
+                writer.writeString(5, instance.specialCharacters);
+            }
+            if (instance.trainingPhraseCleanerOptions) {
+                writer.writeMessage(6, instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.toBinaryWriter);
+            }
+            if (instance.numberOfWorkers) {
+                writer.writeInt32(7, instance.numberOfWorkers);
+            }
+        };
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "trainingPhraseList", {
+            get: function () {
+                return this._trainingPhraseList;
+            },
+            set: function (value) {
+                this._trainingPhraseList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "extractEntities", {
+            get: function () {
+                return this._extractEntities;
+            },
+            set: function (value) {
+                this._extractEntities = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "trainingPhraseCleanerOptions", {
+            get: function () {
+                return this._trainingPhraseCleanerOptions;
+            },
+            set: function (value) {
+                this._trainingPhraseCleanerOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "numberOfWorkers", {
+            get: function () {
+                return this._numberOfWorkers;
+            },
+            set: function (value) {
+                this._numberOfWorkers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        AddTrainingPhrasesRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                trainingPhraseList: (this.trainingPhraseList || []).map(function (m) { return m.toObject(); }),
+                extractEntities: this.extractEntities,
+                specialCharacters: this.specialCharacters,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toObject()
+                    : undefined,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        AddTrainingPhrasesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return AddTrainingPhrasesRequest;
+    }());
+    (function (AddTrainingPhrasesRequest) {
+        var TrainingPhraseForIntent = /** @class */ (function () {
+            /**
+             * Creates an object and applies default Protobuf values
+             * @param TrainingPhraseForIntent value
+             */
+            function TrainingPhraseForIntent(value) {
+                value = value || {};
+                this.trainingPhrase = value.trainingPhrase;
+                this.intentDisplayName = value.intentDisplayName;
+                this.entities = (value.entities || []).map(function (m) { return new exports.Intent.TrainingPhrase.Entity(m); });
+                TrainingPhraseForIntent.refineValues(this);
+            }
+            TrainingPhraseForIntent.toBinary = function (instance) {
+                var writer = new googleProtobuf.BinaryWriter();
+                TrainingPhraseForIntent.toBinaryWriter(instance, writer);
+                return writer.getResultBuffer();
+            };
+            TrainingPhraseForIntent.fromBinary = function (bytes) {
+                var instance = new TrainingPhraseForIntent();
+                TrainingPhraseForIntent.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            TrainingPhraseForIntent.refineValues = function (instance) {
+                instance.trainingPhrase = instance.trainingPhrase || '';
+                instance.intentDisplayName = instance.intentDisplayName || '';
+                instance.entities = instance.entities || [];
+            };
+            TrainingPhraseForIntent.fromBinaryReader = function (instance, reader) {
+                while (reader.nextField()) {
+                    if (reader.isEndGroup())
+                        break;
+                    switch (reader.getFieldNumber()) {
+                        case 1:
+                            instance.trainingPhrase = reader.readString();
+                            break;
+                        case 2:
+                            instance.intentDisplayName = reader.readString();
+                            break;
+                        case 3:
+                            var messageInitializer3 = new exports.Intent.TrainingPhrase.Entity();
+                            reader.readMessage(messageInitializer3, exports.Intent.TrainingPhrase.Entity.fromBinaryReader);
+                            (instance.entities = instance.entities || []).push(messageInitializer3);
+                            break;
+                        default:
+                            reader.skipField();
+                    }
+                }
+                TrainingPhraseForIntent.refineValues(instance);
+            };
+            TrainingPhraseForIntent.toBinaryWriter = function (instance, writer) {
+                if (instance.trainingPhrase) {
+                    writer.writeString(1, instance.trainingPhrase);
+                }
+                if (instance.intentDisplayName) {
+                    writer.writeString(2, instance.intentDisplayName);
+                }
+                if (instance.entities && instance.entities.length) {
+                    writer.writeRepeatedMessage(3, instance.entities, exports.Intent.TrainingPhrase.Entity.toBinaryWriter);
+                }
+            };
+            Object.defineProperty(TrainingPhraseForIntent.prototype, "trainingPhrase", {
+                get: function () {
+                    return this._trainingPhrase;
+                },
+                set: function (value) {
+                    this._trainingPhrase = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseForIntent.prototype, "intentDisplayName", {
+                get: function () {
+                    return this._intentDisplayName;
+                },
+                set: function (value) {
+                    this._intentDisplayName = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseForIntent.prototype, "entities", {
+                get: function () {
+                    return this._entities;
+                },
+                set: function (value) {
+                    this._entities = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            TrainingPhraseForIntent.prototype.toObject = function () {
+                return {
+                    trainingPhrase: this.trainingPhrase,
+                    intentDisplayName: this.intentDisplayName,
+                    entities: (this.entities || []).map(function (m) { return m.toObject(); })
+                };
+            };
+            TrainingPhraseForIntent.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            return TrainingPhraseForIntent;
+        }());
+        AddTrainingPhrasesRequest.TrainingPhraseForIntent = TrainingPhraseForIntent;
+    })(exports.AddTrainingPhrasesRequest || (exports.AddTrainingPhrasesRequest = {}));
+    var AddTrainingPhrasesResponse = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param AddTrainingPhrasesResponse value
+         */
+        function AddTrainingPhrasesResponse(value) {
+            value = value || {};
+            this.errorMessages = (value.errorMessages || []).slice();
+            AddTrainingPhrasesResponse.refineValues(this);
+        }
+        AddTrainingPhrasesResponse.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            AddTrainingPhrasesResponse.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        AddTrainingPhrasesResponse.fromBinary = function (bytes) {
+            var instance = new AddTrainingPhrasesResponse();
+            AddTrainingPhrasesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        AddTrainingPhrasesResponse.refineValues = function (instance) {
+            instance.errorMessages = instance.errorMessages || [];
+        };
+        AddTrainingPhrasesResponse.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        (instance.errorMessages = instance.errorMessages || []).push(reader.readString());
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            AddTrainingPhrasesResponse.refineValues(instance);
+        };
+        AddTrainingPhrasesResponse.toBinaryWriter = function (instance, writer) {
+            if (instance.errorMessages && instance.errorMessages.length) {
+                writer.writeRepeatedString(1, instance.errorMessages);
+            }
+        };
+        Object.defineProperty(AddTrainingPhrasesResponse.prototype, "errorMessages", {
+            get: function () {
+                return this._errorMessages;
+            },
+            set: function (value) {
+                this._errorMessages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        AddTrainingPhrasesResponse.prototype.toObject = function () {
+            return {
+                errorMessages: (this.errorMessages || []).slice()
+            };
+        };
+        AddTrainingPhrasesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return AddTrainingPhrasesResponse;
+    }());
+    var AddTrainingPhrasesFromCSVRequest = /** @class */ (function () {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param AddTrainingPhrasesFromCSVRequest value
+         */
+        function AddTrainingPhrasesFromCSVRequest(value) {
+            value = value || {};
+            this.parent = value.parent;
+            this.languageCode = value.languageCode;
+            this.csvContents = value.csvContents;
+            this.extractEntities = value.extractEntities;
+            this.specialCharacters = value.specialCharacters;
+            this.trainingPhraseCleanerOptions = value.trainingPhraseCleanerOptions
+                ? new TrainingPhraseCleanerOptions(value.trainingPhraseCleanerOptions)
+                : undefined;
+            this.numberOfWorkers = value.numberOfWorkers;
+            AddTrainingPhrasesFromCSVRequest.refineValues(this);
+        }
+        AddTrainingPhrasesFromCSVRequest.toBinary = function (instance) {
+            var writer = new googleProtobuf.BinaryWriter();
+            AddTrainingPhrasesFromCSVRequest.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        };
+        AddTrainingPhrasesFromCSVRequest.fromBinary = function (bytes) {
+            var instance = new AddTrainingPhrasesFromCSVRequest();
+            AddTrainingPhrasesFromCSVRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        AddTrainingPhrasesFromCSVRequest.refineValues = function (instance) {
+            instance.parent = instance.parent || '';
+            instance.languageCode = instance.languageCode || '';
+            instance.csvContents = instance.csvContents || new Uint8Array();
+            instance.extractEntities = instance.extractEntities || false;
+            instance.specialCharacters = instance.specialCharacters || '';
+            instance.trainingPhraseCleanerOptions =
+                instance.trainingPhraseCleanerOptions || undefined;
+            instance.numberOfWorkers = instance.numberOfWorkers || 0;
+        };
+        AddTrainingPhrasesFromCSVRequest.fromBinaryReader = function (instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.parent = reader.readString();
+                        break;
+                    case 2:
+                        instance.languageCode = reader.readString();
+                        break;
+                    case 3:
+                        instance.csvContents = reader.readBytes();
+                        break;
+                    case 4:
+                        instance.extractEntities = reader.readBool();
+                        break;
+                    case 5:
+                        instance.specialCharacters = reader.readString();
+                        break;
+                    case 6:
+                        instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                        reader.readMessage(instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.fromBinaryReader);
+                        break;
+                    case 7:
+                        instance.numberOfWorkers = reader.readInt32();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            AddTrainingPhrasesFromCSVRequest.refineValues(instance);
+        };
+        AddTrainingPhrasesFromCSVRequest.toBinaryWriter = function (instance, writer) {
+            if (instance.parent) {
+                writer.writeString(1, instance.parent);
+            }
+            if (instance.languageCode) {
+                writer.writeString(2, instance.languageCode);
+            }
+            if (instance.csvContents && instance.csvContents.length) {
+                writer.writeBytes(3, instance.csvContents);
+            }
+            if (instance.extractEntities) {
+                writer.writeBool(4, instance.extractEntities);
+            }
+            if (instance.specialCharacters) {
+                writer.writeString(5, instance.specialCharacters);
+            }
+            if (instance.trainingPhraseCleanerOptions) {
+                writer.writeMessage(6, instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.toBinaryWriter);
+            }
+            if (instance.numberOfWorkers) {
+                writer.writeInt32(7, instance.numberOfWorkers);
+            }
+        };
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "csvContents", {
+            get: function () {
+                return this._csvContents;
+            },
+            set: function (value) {
+                this._csvContents = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "extractEntities", {
+            get: function () {
+                return this._extractEntities;
+            },
+            set: function (value) {
+                this._extractEntities = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "trainingPhraseCleanerOptions", {
+            get: function () {
+                return this._trainingPhraseCleanerOptions;
+            },
+            set: function (value) {
+                this._trainingPhraseCleanerOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "numberOfWorkers", {
+            get: function () {
+                return this._numberOfWorkers;
+            },
+            set: function (value) {
+                this._numberOfWorkers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        AddTrainingPhrasesFromCSVRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                csvContents: this.csvContents
+                    ? this.csvContents.subarray(0)
+                    : new Uint8Array(),
+                extractEntities: this.extractEntities,
+                specialCharacters: this.specialCharacters,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toObject()
+                    : undefined,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        AddTrainingPhrasesFromCSVRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        return AddTrainingPhrasesFromCSVRequest;
+    }());
+
+    /* tslint:disable */
+    /*
+      To configure the services you need to provide a configuration for each of them.
+
+      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+      const grpcSettings = { host: environment.grpcHost };
+
+      @NgModule({
+        providers: [
+          { provide: GRPC_UTILITIES_CLIENT_SETTINGS, useValue: grpcSettings },
+        ],
+      })
+      export class GrpcConfigModule { }
+    */
+    var GRPC_UTILITIES_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_UTILITIES_CLIENT_SETTINGS');
+
+    /* tslint:disable */
+    var UtilitiesClient = /** @class */ (function () {
+        function UtilitiesClient(settings, clientFactory, handler) {
+            this.handler = handler;
+            this.client = clientFactory.createClient('ondewo.nlu.Utilities', settings);
+        }
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.ValidateRegexRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.ValidateRegexResponse>
+         */
+        UtilitiesClient.prototype.validateRegex = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.validateRegex$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.ValidateRegexRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.ValidateRegexResponse>>
+         */
+        UtilitiesClient.prototype.validateRegex$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Utilities/ValidateRegex',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: ValidateRegexRequest,
+                responseClass: ValidateRegexResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.ValidateEmbeddedRegexRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.ValidateEmbeddedRegexResponse>
+         */
+        UtilitiesClient.prototype.validateEmbeddedRegex = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.validateEmbeddedRegex$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.ValidateEmbeddedRegexRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.ValidateEmbeddedRegexResponse>>
+         */
+        UtilitiesClient.prototype.validateEmbeddedRegex$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Utilities/ValidateEmbeddedRegex',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: ValidateEmbeddedRegexRequest,
+                responseClass: ValidateEmbeddedRegexResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.CleanAllIntentsRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.CleanAllIntentsResponse>
+         */
+        UtilitiesClient.prototype.cleanAllIntents = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.cleanAllIntents$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.CleanAllIntentsRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.CleanAllIntentsResponse>>
+         */
+        UtilitiesClient.prototype.cleanAllIntents$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Utilities/CleanAllIntents',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: CleanAllIntentsRequest,
+                responseClass: CleanAllIntentsResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.CleanIntentRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.CleanIntentResponse>
+         */
+        UtilitiesClient.prototype.cleanIntent = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.cleanIntent$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.CleanIntentRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.CleanIntentResponse>>
+         */
+        UtilitiesClient.prototype.cleanIntent$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Utilities/CleanIntent',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: CleanIntentRequest,
+                responseClass: CleanIntentResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.CleanAllEntityTypesRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.CleanAllEntityTypesResponse>
+         */
+        UtilitiesClient.prototype.cleanAllEntityTypes = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.cleanAllEntityTypes$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.CleanAllEntityTypesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.CleanAllEntityTypesResponse>>
+         */
+        UtilitiesClient.prototype.cleanAllEntityTypes$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Utilities/CleanAllEntityTypes',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: CleanAllEntityTypesRequest,
+                responseClass: CleanAllEntityTypesResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.CleanEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.CleanEntityTypeResponse>
+         */
+        UtilitiesClient.prototype.cleanEntityType = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.cleanEntityType$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.CleanEntityTypeRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.CleanEntityTypeResponse>>
+         */
+        UtilitiesClient.prototype.cleanEntityType$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Utilities/CleanEntityType',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: CleanEntityTypeRequest,
+                responseClass: CleanEntityTypeResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.AddTrainingPhrasesRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.AddTrainingPhrasesResponse>
+         */
+        UtilitiesClient.prototype.addTrainingPhrases = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.addTrainingPhrases$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.AddTrainingPhrasesRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.AddTrainingPhrasesResponse>>
+         */
+        UtilitiesClient.prototype.addTrainingPhrases$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Utilities/AddTrainingPhrases',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: exports.AddTrainingPhrasesRequest,
+                responseClass: AddTrainingPhrasesResponse
+            });
+        };
+        /**
+         * Unary RPC. Emits messages and throws errors on non-zero status codes
+         * @param thisProto.AddTrainingPhrasesFromCSVRequest request
+         * @param Metadata metadata
+         * @return Observable<thisProto.AddTrainingPhrasesResponse>
+         */
+        UtilitiesClient.prototype.addTrainingPhrasesFromCSV = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.addTrainingPhrasesFromCSV$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC. Emits data and status events; does not throw errors by design
+         * @param thisProto.AddTrainingPhrasesFromCSVRequest request
+         * @param Metadata metadata
+         * @return Observable<GrpcEvent<thisProto.AddTrainingPhrasesResponse>>
+         */
+        UtilitiesClient.prototype.addTrainingPhrasesFromCSV$eventStream = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = {}; }
+            return this.handler.handle({
+                type: common.GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV',
+                requestData: requestData,
+                requestMetadata: requestMetadata,
+                requestClass: AddTrainingPhrasesFromCSVRequest,
+                responseClass: AddTrainingPhrasesResponse
+            });
+        };
+        return UtilitiesClient;
+    }());
+    UtilitiesClient.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function UtilitiesClient_Factory() { return new UtilitiesClient(i0__namespace.ɵɵinject(GRPC_UTILITIES_CLIENT_SETTINGS, 8), i0__namespace.ɵɵinject(i2__namespace.GRPC_CLIENT_FACTORY), i0__namespace.ɵɵinject(i2__namespace.GrpcHandler)); }, token: UtilitiesClient, providedIn: "root" });
+    UtilitiesClient.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    UtilitiesClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_UTILITIES_CLIENT_SETTINGS,] }] },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
+        { type: i2.GrpcHandler }
+    ]; };
+
     /* tslint:disable */
     /*
       To configure the services you need to provide a configuration for each of them.
@@ -31094,6 +33925,8 @@
      */
 
     exports.AddSessionLabelsRequest = AddSessionLabelsRequest;
+    exports.AddTrainingPhrasesFromCSVRequest = AddTrainingPhrasesFromCSVRequest;
+    exports.AddTrainingPhrasesResponse = AddTrainingPhrasesResponse;
     exports.AddUserToProjectRequest = AddUserToProjectRequest;
     exports.Agent = Agent;
     exports.AgentOfUserWithOwner = AgentOfUserWithOwner;
@@ -31113,6 +33946,14 @@
     exports.BertAugEnrichmentConfig = BertAugEnrichmentConfig;
     exports.BuildCacheRequest = BuildCacheRequest;
     exports.CancelOperationRequest = CancelOperationRequest;
+    exports.CleanAllEntityTypesRequest = CleanAllEntityTypesRequest;
+    exports.CleanAllEntityTypesResponse = CleanAllEntityTypesResponse;
+    exports.CleanAllIntentsRequest = CleanAllIntentsRequest;
+    exports.CleanAllIntentsResponse = CleanAllIntentsResponse;
+    exports.CleanEntityTypeRequest = CleanEntityTypeRequest;
+    exports.CleanEntityTypeResponse = CleanEntityTypeResponse;
+    exports.CleanIntentRequest = CleanIntentRequest;
+    exports.CleanIntentResponse = CleanIntentResponse;
     exports.ContextsClient = ContextsClient;
     exports.CreateAgentRequest = CreateAgentRequest;
     exports.CreateContextRequest = CreateContextRequest;
@@ -31169,6 +34010,7 @@
     exports.GRPC_SERVER_STATISTICS_CLIENT_SETTINGS = GRPC_SERVER_STATISTICS_CLIENT_SETTINGS;
     exports.GRPC_SESSIONS_CLIENT_SETTINGS = GRPC_SESSIONS_CLIENT_SETTINGS;
     exports.GRPC_USERS_CLIENT_SETTINGS = GRPC_USERS_CLIENT_SETTINGS;
+    exports.GRPC_UTILITIES_CLIENT_SETTINGS = GRPC_UTILITIES_CLIENT_SETTINGS;
     exports.GRPC_WEBHOOK_CLIENT_SETTINGS = GRPC_WEBHOOK_CLIENT_SETTINGS;
     exports.GenerateResponsesRequest = GenerateResponsesRequest;
     exports.GenerateResponsesResponse = GenerateResponsesResponse;
@@ -31273,12 +34115,14 @@
     exports.Status = Status;
     exports.StreamingDetectIntentRequest = StreamingDetectIntentRequest;
     exports.StreamingDetectIntentResponse = StreamingDetectIntentResponse;
+    exports.StringUpdate = StringUpdate;
     exports.Synonym = Synonym;
     exports.TextInput = TextInput;
     exports.ThesaurusEnrichmentConfig = ThesaurusEnrichmentConfig;
     exports.Timestamp = Timestamp;
     exports.TrackSessionStepRequest = TrackSessionStepRequest;
     exports.TrainAgentRequest = TrainAgentRequest;
+    exports.TrainingPhraseCleanerOptions = TrainingPhraseCleanerOptions;
     exports.UpdateAgentRequest = UpdateAgentRequest;
     exports.UpdateContextRequest = UpdateContextRequest;
     exports.UpdateEntityTypeRequest = UpdateEntityTypeRequest;
@@ -31289,6 +34133,11 @@
     exports.User = User;
     exports.UserInProject = UserInProject;
     exports.UsersClient = UsersClient;
+    exports.UtilitiesClient = UtilitiesClient;
+    exports.ValidateEmbeddedRegexRequest = ValidateEmbeddedRegexRequest;
+    exports.ValidateEmbeddedRegexResponse = ValidateEmbeddedRegexResponse;
+    exports.ValidateRegexRequest = ValidateRegexRequest;
+    exports.ValidateRegexResponse = ValidateRegexResponse;
     exports.WebhookClient = WebhookClient;
     exports.WebhookRequest = WebhookRequest;
     exports.WebhookResponse = WebhookResponse;

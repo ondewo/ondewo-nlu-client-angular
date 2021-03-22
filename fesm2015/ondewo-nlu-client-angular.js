@@ -10916,6 +10916,2482 @@ QAClient.ctorParameters = () => [
     { type: GrpcHandler }
 ];
 
+var ReannotateEntitiesOptions;
+(function (ReannotateEntitiesOptions) {
+    ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateNever"] = 0] = "reannotateNever";
+    ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateAlways"] = 1] = "reannotateAlways";
+    ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateIfEmpty"] = 2] = "reannotateIfEmpty";
+    ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateAfterDeletion"] = 3] = "reannotateAfterDeletion";
+    ReannotateEntitiesOptions[ReannotateEntitiesOptions["reannotateIfEmptyOrAfterDeletion"] = 4] = "reannotateIfEmptyOrAfterDeletion";
+})(ReannotateEntitiesOptions || (ReannotateEntitiesOptions = {}));
+class ValidateRegexRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param ValidateRegexRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.regex = value.regex;
+        ValidateRegexRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        ValidateRegexRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new ValidateRegexRequest();
+        ValidateRegexRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.regex = instance.regex || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.regex = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        ValidateRegexRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.regex) {
+            writer.writeString(1, instance.regex);
+        }
+    }
+    get regex() {
+        return this._regex;
+    }
+    set regex(value) {
+        this._regex = value;
+    }
+    toObject() {
+        return {
+            regex: this.regex
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class ValidateRegexResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param ValidateRegexResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.errorMessages = (value.errorMessages || []).slice();
+        ValidateRegexResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        ValidateRegexResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new ValidateRegexResponse();
+        ValidateRegexResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.errorMessages = instance.errorMessages || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    (instance.errorMessages = instance.errorMessages || []).push(reader.readString());
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        ValidateRegexResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.errorMessages && instance.errorMessages.length) {
+            writer.writeRepeatedString(1, instance.errorMessages);
+        }
+    }
+    get errorMessages() {
+        return this._errorMessages;
+    }
+    set errorMessages(value) {
+        this._errorMessages = value;
+    }
+    toObject() {
+        return {
+            errorMessages: (this.errorMessages || []).slice()
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class ValidateEmbeddedRegexRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param ValidateEmbeddedRegexRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.entityType = value.entityType
+            ? new EntityType.Entity(value.entityType)
+            : undefined;
+        ValidateEmbeddedRegexRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        ValidateEmbeddedRegexRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new ValidateEmbeddedRegexRequest();
+        ValidateEmbeddedRegexRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.entityType = instance.entityType || undefined;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.entityType = new EntityType.Entity();
+                    reader.readMessage(instance.entityType, EntityType.Entity.fromBinaryReader);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        ValidateEmbeddedRegexRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.entityType) {
+            writer.writeMessage(1, instance.entityType, EntityType.Entity.toBinaryWriter);
+        }
+    }
+    get entityType() {
+        return this._entityType;
+    }
+    set entityType(value) {
+        this._entityType = value;
+    }
+    toObject() {
+        return {
+            entityType: this.entityType ? this.entityType.toObject() : undefined
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class ValidateEmbeddedRegexResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param ValidateEmbeddedRegexResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.errorMessages = (value.errorMessages || []).slice();
+        ValidateEmbeddedRegexResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        ValidateEmbeddedRegexResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new ValidateEmbeddedRegexResponse();
+        ValidateEmbeddedRegexResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.errorMessages = instance.errorMessages || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    (instance.errorMessages = instance.errorMessages || []).push(reader.readString());
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        ValidateEmbeddedRegexResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.errorMessages && instance.errorMessages.length) {
+            writer.writeRepeatedString(1, instance.errorMessages);
+        }
+    }
+    get errorMessages() {
+        return this._errorMessages;
+    }
+    set errorMessages(value) {
+        this._errorMessages = value;
+    }
+    toObject() {
+        return {
+            errorMessages: (this.errorMessages || []).slice()
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class CleanAllIntentsRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param CleanAllIntentsRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        this.languageCode = value.languageCode;
+        this.specialCharacters = value.specialCharacters;
+        this.substringWhiteList = (value.substringWhiteList || []).slice();
+        this.dryRun = value.dryRun;
+        this.trainingPhraseCleanerOptions = value.trainingPhraseCleanerOptions
+            ? new TrainingPhraseCleanerOptions(value.trainingPhraseCleanerOptions)
+            : undefined;
+        this.reannotateEntitiesOptions = value.reannotateEntitiesOptions;
+        this.numberOfWorkers = value.numberOfWorkers;
+        CleanAllIntentsRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        CleanAllIntentsRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new CleanAllIntentsRequest();
+        CleanAllIntentsRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+        instance.languageCode = instance.languageCode || '';
+        instance.specialCharacters = instance.specialCharacters || '';
+        instance.substringWhiteList = instance.substringWhiteList || [];
+        instance.dryRun = instance.dryRun || false;
+        instance.trainingPhraseCleanerOptions =
+            instance.trainingPhraseCleanerOptions || undefined;
+        instance.reannotateEntitiesOptions =
+            instance.reannotateEntitiesOptions || 0;
+        instance.numberOfWorkers = instance.numberOfWorkers || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                case 2:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 3:
+                    instance.specialCharacters = reader.readString();
+                    break;
+                case 4:
+                    (instance.substringWhiteList =
+                        instance.substringWhiteList || []).push(reader.readString());
+                    break;
+                case 5:
+                    instance.dryRun = reader.readBool();
+                    break;
+                case 6:
+                    instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                    reader.readMessage(instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.fromBinaryReader);
+                    break;
+                case 7:
+                    instance.reannotateEntitiesOptions = reader.readEnum();
+                    break;
+                case 8:
+                    instance.numberOfWorkers = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        CleanAllIntentsRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+        if (instance.languageCode) {
+            writer.writeString(2, instance.languageCode);
+        }
+        if (instance.specialCharacters) {
+            writer.writeString(3, instance.specialCharacters);
+        }
+        if (instance.substringWhiteList && instance.substringWhiteList.length) {
+            writer.writeRepeatedString(4, instance.substringWhiteList);
+        }
+        if (instance.dryRun) {
+            writer.writeBool(5, instance.dryRun);
+        }
+        if (instance.trainingPhraseCleanerOptions) {
+            writer.writeMessage(6, instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.toBinaryWriter);
+        }
+        if (instance.reannotateEntitiesOptions) {
+            writer.writeEnum(7, instance.reannotateEntitiesOptions);
+        }
+        if (instance.numberOfWorkers) {
+            writer.writeInt32(8, instance.numberOfWorkers);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get specialCharacters() {
+        return this._specialCharacters;
+    }
+    set specialCharacters(value) {
+        this._specialCharacters = value;
+    }
+    get substringWhiteList() {
+        return this._substringWhiteList;
+    }
+    set substringWhiteList(value) {
+        this._substringWhiteList = value;
+    }
+    get dryRun() {
+        return this._dryRun;
+    }
+    set dryRun(value) {
+        this._dryRun = value;
+    }
+    get trainingPhraseCleanerOptions() {
+        return this._trainingPhraseCleanerOptions;
+    }
+    set trainingPhraseCleanerOptions(value) {
+        this._trainingPhraseCleanerOptions = value;
+    }
+    get reannotateEntitiesOptions() {
+        return this._reannotateEntitiesOptions;
+    }
+    set reannotateEntitiesOptions(value) {
+        this._reannotateEntitiesOptions = value;
+    }
+    get numberOfWorkers() {
+        return this._numberOfWorkers;
+    }
+    set numberOfWorkers(value) {
+        this._numberOfWorkers = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent,
+            languageCode: this.languageCode,
+            specialCharacters: this.specialCharacters,
+            substringWhiteList: (this.substringWhiteList || []).slice(),
+            dryRun: this.dryRun,
+            trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                ? this.trainingPhraseCleanerOptions.toObject()
+                : undefined,
+            reannotateEntitiesOptions: this.reannotateEntitiesOptions,
+            numberOfWorkers: this.numberOfWorkers
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class CleanAllIntentsResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param CleanAllIntentsResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.cleanedIntents = (value.cleanedIntents || []).map(m => new Intent(m));
+        this.intentUpdateList = (value.intentUpdateList || []).map(m => new IntentUpdate(m));
+        CleanAllIntentsResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        CleanAllIntentsResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new CleanAllIntentsResponse();
+        CleanAllIntentsResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.cleanedIntents = instance.cleanedIntents || [];
+        instance.intentUpdateList = instance.intentUpdateList || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new Intent();
+                    reader.readMessage(messageInitializer1, Intent.fromBinaryReader);
+                    (instance.cleanedIntents = instance.cleanedIntents || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    const messageInitializer2 = new IntentUpdate();
+                    reader.readMessage(messageInitializer2, IntentUpdate.fromBinaryReader);
+                    (instance.intentUpdateList = instance.intentUpdateList || []).push(messageInitializer2);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        CleanAllIntentsResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.cleanedIntents && instance.cleanedIntents.length) {
+            writer.writeRepeatedMessage(1, instance.cleanedIntents, Intent.toBinaryWriter);
+        }
+        if (instance.intentUpdateList && instance.intentUpdateList.length) {
+            writer.writeRepeatedMessage(2, instance.intentUpdateList, IntentUpdate.toBinaryWriter);
+        }
+    }
+    get cleanedIntents() {
+        return this._cleanedIntents;
+    }
+    set cleanedIntents(value) {
+        this._cleanedIntents = value;
+    }
+    get intentUpdateList() {
+        return this._intentUpdateList;
+    }
+    set intentUpdateList(value) {
+        this._intentUpdateList = value;
+    }
+    toObject() {
+        return {
+            cleanedIntents: (this.cleanedIntents || []).map(m => m.toObject()),
+            intentUpdateList: (this.intentUpdateList || []).map(m => m.toObject())
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class CleanIntentRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param CleanIntentRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        this.intentName = value.intentName;
+        this.languageCode = value.languageCode;
+        this.specialCharacters = value.specialCharacters;
+        this.substringWhiteList = (value.substringWhiteList || []).slice();
+        this.dryRun = value.dryRun;
+        this.trainingPhraseCleanerOptions = value.trainingPhraseCleanerOptions
+            ? new TrainingPhraseCleanerOptions(value.trainingPhraseCleanerOptions)
+            : undefined;
+        this.reannotateEntitiesOptions = value.reannotateEntitiesOptions;
+        CleanIntentRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        CleanIntentRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new CleanIntentRequest();
+        CleanIntentRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+        instance.intentName = instance.intentName || '';
+        instance.languageCode = instance.languageCode || '';
+        instance.specialCharacters = instance.specialCharacters || '';
+        instance.substringWhiteList = instance.substringWhiteList || [];
+        instance.dryRun = instance.dryRun || false;
+        instance.trainingPhraseCleanerOptions =
+            instance.trainingPhraseCleanerOptions || undefined;
+        instance.reannotateEntitiesOptions =
+            instance.reannotateEntitiesOptions || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                case 2:
+                    instance.intentName = reader.readString();
+                    break;
+                case 3:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 4:
+                    instance.specialCharacters = reader.readString();
+                    break;
+                case 5:
+                    (instance.substringWhiteList =
+                        instance.substringWhiteList || []).push(reader.readString());
+                    break;
+                case 6:
+                    instance.dryRun = reader.readBool();
+                    break;
+                case 7:
+                    instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                    reader.readMessage(instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.fromBinaryReader);
+                    break;
+                case 8:
+                    instance.reannotateEntitiesOptions = reader.readEnum();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        CleanIntentRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+        if (instance.intentName) {
+            writer.writeString(2, instance.intentName);
+        }
+        if (instance.languageCode) {
+            writer.writeString(3, instance.languageCode);
+        }
+        if (instance.specialCharacters) {
+            writer.writeString(4, instance.specialCharacters);
+        }
+        if (instance.substringWhiteList && instance.substringWhiteList.length) {
+            writer.writeRepeatedString(5, instance.substringWhiteList);
+        }
+        if (instance.dryRun) {
+            writer.writeBool(6, instance.dryRun);
+        }
+        if (instance.trainingPhraseCleanerOptions) {
+            writer.writeMessage(7, instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.toBinaryWriter);
+        }
+        if (instance.reannotateEntitiesOptions) {
+            writer.writeEnum(8, instance.reannotateEntitiesOptions);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get intentName() {
+        return this._intentName;
+    }
+    set intentName(value) {
+        this._intentName = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get specialCharacters() {
+        return this._specialCharacters;
+    }
+    set specialCharacters(value) {
+        this._specialCharacters = value;
+    }
+    get substringWhiteList() {
+        return this._substringWhiteList;
+    }
+    set substringWhiteList(value) {
+        this._substringWhiteList = value;
+    }
+    get dryRun() {
+        return this._dryRun;
+    }
+    set dryRun(value) {
+        this._dryRun = value;
+    }
+    get trainingPhraseCleanerOptions() {
+        return this._trainingPhraseCleanerOptions;
+    }
+    set trainingPhraseCleanerOptions(value) {
+        this._trainingPhraseCleanerOptions = value;
+    }
+    get reannotateEntitiesOptions() {
+        return this._reannotateEntitiesOptions;
+    }
+    set reannotateEntitiesOptions(value) {
+        this._reannotateEntitiesOptions = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent,
+            intentName: this.intentName,
+            languageCode: this.languageCode,
+            specialCharacters: this.specialCharacters,
+            substringWhiteList: (this.substringWhiteList || []).slice(),
+            dryRun: this.dryRun,
+            trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                ? this.trainingPhraseCleanerOptions.toObject()
+                : undefined,
+            reannotateEntitiesOptions: this.reannotateEntitiesOptions
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class CleanIntentResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param CleanIntentResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.cleanedIntent = value.cleanedIntent
+            ? new Intent(value.cleanedIntent)
+            : undefined;
+        this.intentUpdate = value.intentUpdate
+            ? new IntentUpdate(value.intentUpdate)
+            : undefined;
+        CleanIntentResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        CleanIntentResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new CleanIntentResponse();
+        CleanIntentResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.cleanedIntent = instance.cleanedIntent || undefined;
+        instance.intentUpdate = instance.intentUpdate || undefined;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.cleanedIntent = new Intent();
+                    reader.readMessage(instance.cleanedIntent, Intent.fromBinaryReader);
+                    break;
+                case 2:
+                    instance.intentUpdate = new IntentUpdate();
+                    reader.readMessage(instance.intentUpdate, IntentUpdate.fromBinaryReader);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        CleanIntentResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.cleanedIntent) {
+            writer.writeMessage(1, instance.cleanedIntent, Intent.toBinaryWriter);
+        }
+        if (instance.intentUpdate) {
+            writer.writeMessage(2, instance.intentUpdate, IntentUpdate.toBinaryWriter);
+        }
+    }
+    get cleanedIntent() {
+        return this._cleanedIntent;
+    }
+    set cleanedIntent(value) {
+        this._cleanedIntent = value;
+    }
+    get intentUpdate() {
+        return this._intentUpdate;
+    }
+    set intentUpdate(value) {
+        this._intentUpdate = value;
+    }
+    toObject() {
+        return {
+            cleanedIntent: this.cleanedIntent
+                ? this.cleanedIntent.toObject()
+                : undefined,
+            intentUpdate: this.intentUpdate ? this.intentUpdate.toObject() : undefined
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class TrainingPhraseCleanerOptions {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param TrainingPhraseCleanerOptions value
+     */
+    constructor(value) {
+        value = value || {};
+        this.deleteRepeatedWhitespaces = value.deleteRepeatedWhitespaces;
+        this.deleteLeadingSpecialCharacters = value.deleteLeadingSpecialCharacters;
+        this.deleteTrailingSpecialCharacters =
+            value.deleteTrailingSpecialCharacters;
+        TrainingPhraseCleanerOptions.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        TrainingPhraseCleanerOptions.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new TrainingPhraseCleanerOptions();
+        TrainingPhraseCleanerOptions.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.deleteRepeatedWhitespaces =
+            instance.deleteRepeatedWhitespaces || false;
+        instance.deleteLeadingSpecialCharacters =
+            instance.deleteLeadingSpecialCharacters || false;
+        instance.deleteTrailingSpecialCharacters =
+            instance.deleteTrailingSpecialCharacters || false;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.deleteRepeatedWhitespaces = reader.readBool();
+                    break;
+                case 2:
+                    instance.deleteLeadingSpecialCharacters = reader.readBool();
+                    break;
+                case 3:
+                    instance.deleteTrailingSpecialCharacters = reader.readBool();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        TrainingPhraseCleanerOptions.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.deleteRepeatedWhitespaces) {
+            writer.writeBool(1, instance.deleteRepeatedWhitespaces);
+        }
+        if (instance.deleteLeadingSpecialCharacters) {
+            writer.writeBool(2, instance.deleteLeadingSpecialCharacters);
+        }
+        if (instance.deleteTrailingSpecialCharacters) {
+            writer.writeBool(3, instance.deleteTrailingSpecialCharacters);
+        }
+    }
+    get deleteRepeatedWhitespaces() {
+        return this._deleteRepeatedWhitespaces;
+    }
+    set deleteRepeatedWhitespaces(value) {
+        this._deleteRepeatedWhitespaces = value;
+    }
+    get deleteLeadingSpecialCharacters() {
+        return this._deleteLeadingSpecialCharacters;
+    }
+    set deleteLeadingSpecialCharacters(value) {
+        this._deleteLeadingSpecialCharacters = value;
+    }
+    get deleteTrailingSpecialCharacters() {
+        return this._deleteTrailingSpecialCharacters;
+    }
+    set deleteTrailingSpecialCharacters(value) {
+        this._deleteTrailingSpecialCharacters = value;
+    }
+    toObject() {
+        return {
+            deleteRepeatedWhitespaces: this.deleteRepeatedWhitespaces,
+            deleteLeadingSpecialCharacters: this.deleteLeadingSpecialCharacters,
+            deleteTrailingSpecialCharacters: this.deleteTrailingSpecialCharacters
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class StringUpdate {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param StringUpdate value
+     */
+    constructor(value) {
+        value = value || {};
+        this.new = value.new;
+        this.old = value.old;
+        StringUpdate.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        StringUpdate.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new StringUpdate();
+        StringUpdate.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.new = instance.new || '';
+        instance.old = instance.old || '';
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.new = reader.readString();
+                    break;
+                case 2:
+                    instance.old = reader.readString();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        StringUpdate.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.new) {
+            writer.writeString(1, instance.new);
+        }
+        if (instance.old) {
+            writer.writeString(2, instance.old);
+        }
+    }
+    get new() {
+        return this._new;
+    }
+    set new(value) {
+        this._new = value;
+    }
+    get old() {
+        return this._old;
+    }
+    set old(value) {
+        this._old = value;
+    }
+    toObject() {
+        return {
+            new: this.new,
+            old: this.old
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class IntentUpdate {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param IntentUpdate value
+     */
+    constructor(value) {
+        value = value || {};
+        this.intentDisplayName = value.intentDisplayName;
+        this.trainingPhraseUpdateList = (value.trainingPhraseUpdateList || []).map(m => new IntentUpdate.TrainingPhraseUpdate(m));
+        this.deletedParameters = (value.deletedParameters || []).slice();
+        IntentUpdate.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        IntentUpdate.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new IntentUpdate();
+        IntentUpdate.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.intentDisplayName = instance.intentDisplayName || '';
+        instance.trainingPhraseUpdateList = instance.trainingPhraseUpdateList || [];
+        instance.deletedParameters = instance.deletedParameters || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.intentDisplayName = reader.readString();
+                    break;
+                case 2:
+                    const messageInitializer2 = new IntentUpdate.TrainingPhraseUpdate();
+                    reader.readMessage(messageInitializer2, IntentUpdate.TrainingPhraseUpdate.fromBinaryReader);
+                    (instance.trainingPhraseUpdateList =
+                        instance.trainingPhraseUpdateList || []).push(messageInitializer2);
+                    break;
+                case 3:
+                    (instance.deletedParameters = instance.deletedParameters || []).push(reader.readString());
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        IntentUpdate.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.intentDisplayName) {
+            writer.writeString(1, instance.intentDisplayName);
+        }
+        if (instance.trainingPhraseUpdateList &&
+            instance.trainingPhraseUpdateList.length) {
+            writer.writeRepeatedMessage(2, instance.trainingPhraseUpdateList, IntentUpdate.TrainingPhraseUpdate.toBinaryWriter);
+        }
+        if (instance.deletedParameters && instance.deletedParameters.length) {
+            writer.writeRepeatedString(3, instance.deletedParameters);
+        }
+    }
+    get intentDisplayName() {
+        return this._intentDisplayName;
+    }
+    set intentDisplayName(value) {
+        this._intentDisplayName = value;
+    }
+    get trainingPhraseUpdateList() {
+        return this._trainingPhraseUpdateList;
+    }
+    set trainingPhraseUpdateList(value) {
+        this._trainingPhraseUpdateList = value;
+    }
+    get deletedParameters() {
+        return this._deletedParameters;
+    }
+    set deletedParameters(value) {
+        this._deletedParameters = value;
+    }
+    toObject() {
+        return {
+            intentDisplayName: this.intentDisplayName,
+            trainingPhraseUpdateList: (this.trainingPhraseUpdateList || []).map(m => m.toObject()),
+            deletedParameters: (this.deletedParameters || []).slice()
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+(function (IntentUpdate) {
+    class TrainingPhraseUpdate {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param TrainingPhraseUpdate value
+         */
+        constructor(value) {
+            value = value || {};
+            this.trainingPhraseUpdate = value.trainingPhraseUpdate
+                ? new StringUpdate(value.trainingPhraseUpdate)
+                : undefined;
+            this.entityUpdates = (value.entityUpdates || []).map(m => new StringUpdate(m));
+            this.entitiesReannotated = (value.entitiesReannotated || []).slice();
+            this.containsUpdateVariable = value.containsUpdateVariable;
+            TrainingPhraseUpdate.refineValues(this);
+        }
+        static toBinary(instance) {
+            const writer = new BinaryWriter();
+            TrainingPhraseUpdate.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        }
+        static fromBinary(bytes) {
+            const instance = new TrainingPhraseUpdate();
+            TrainingPhraseUpdate.fromBinaryReader(instance, new BinaryReader(bytes));
+            return instance;
+        }
+        static refineValues(instance) {
+            instance.trainingPhraseUpdate =
+                instance.trainingPhraseUpdate || undefined;
+            instance.entityUpdates = instance.entityUpdates || [];
+            instance.entitiesReannotated = instance.entitiesReannotated || [];
+            instance.containsUpdateVariable =
+                instance.containsUpdateVariable || false;
+        }
+        static fromBinaryReader(instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.trainingPhraseUpdate = new StringUpdate();
+                        reader.readMessage(instance.trainingPhraseUpdate, StringUpdate.fromBinaryReader);
+                        break;
+                    case 2:
+                        const messageInitializer2 = new StringUpdate();
+                        reader.readMessage(messageInitializer2, StringUpdate.fromBinaryReader);
+                        (instance.entityUpdates = instance.entityUpdates || []).push(messageInitializer2);
+                        break;
+                    case 3:
+                        (instance.entitiesReannotated =
+                            instance.entitiesReannotated || []).push(reader.readString());
+                        break;
+                    case 4:
+                        instance.containsUpdateVariable = reader.readBool();
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            TrainingPhraseUpdate.refineValues(instance);
+        }
+        static toBinaryWriter(instance, writer) {
+            if (instance.trainingPhraseUpdate) {
+                writer.writeMessage(1, instance.trainingPhraseUpdate, StringUpdate.toBinaryWriter);
+            }
+            if (instance.entityUpdates && instance.entityUpdates.length) {
+                writer.writeRepeatedMessage(2, instance.entityUpdates, StringUpdate.toBinaryWriter);
+            }
+            if (instance.entitiesReannotated && instance.entitiesReannotated.length) {
+                writer.writeRepeatedString(3, instance.entitiesReannotated);
+            }
+            if (instance.containsUpdateVariable) {
+                writer.writeBool(4, instance.containsUpdateVariable);
+            }
+        }
+        get trainingPhraseUpdate() {
+            return this._trainingPhraseUpdate;
+        }
+        set trainingPhraseUpdate(value) {
+            this._trainingPhraseUpdate = value;
+        }
+        get entityUpdates() {
+            return this._entityUpdates;
+        }
+        set entityUpdates(value) {
+            this._entityUpdates = value;
+        }
+        get entitiesReannotated() {
+            return this._entitiesReannotated;
+        }
+        set entitiesReannotated(value) {
+            this._entitiesReannotated = value;
+        }
+        get containsUpdateVariable() {
+            return this._containsUpdateVariable;
+        }
+        set containsUpdateVariable(value) {
+            this._containsUpdateVariable = value;
+        }
+        toObject() {
+            return {
+                trainingPhraseUpdate: this.trainingPhraseUpdate
+                    ? this.trainingPhraseUpdate.toObject()
+                    : undefined,
+                entityUpdates: (this.entityUpdates || []).map(m => m.toObject()),
+                entitiesReannotated: (this.entitiesReannotated || []).slice(),
+                containsUpdateVariable: this.containsUpdateVariable
+            };
+        }
+        toJSON() {
+            return this.toObject();
+        }
+    }
+    IntentUpdate.TrainingPhraseUpdate = TrainingPhraseUpdate;
+})(IntentUpdate || (IntentUpdate = {}));
+class EntityTypeUpdate {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param EntityTypeUpdate value
+     */
+    constructor(value) {
+        value = value || {};
+        this.entityTypeName = value.entityTypeName;
+        this.valuesUpdateList = (value.valuesUpdateList || []).map(m => new EntityTypeUpdate.EntityUpdate(m));
+        EntityTypeUpdate.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        EntityTypeUpdate.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new EntityTypeUpdate();
+        EntityTypeUpdate.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.entityTypeName = instance.entityTypeName || '';
+        instance.valuesUpdateList = instance.valuesUpdateList || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.entityTypeName = reader.readString();
+                    break;
+                case 2:
+                    const messageInitializer2 = new EntityTypeUpdate.EntityUpdate();
+                    reader.readMessage(messageInitializer2, EntityTypeUpdate.EntityUpdate.fromBinaryReader);
+                    (instance.valuesUpdateList = instance.valuesUpdateList || []).push(messageInitializer2);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        EntityTypeUpdate.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.entityTypeName) {
+            writer.writeString(1, instance.entityTypeName);
+        }
+        if (instance.valuesUpdateList && instance.valuesUpdateList.length) {
+            writer.writeRepeatedMessage(2, instance.valuesUpdateList, EntityTypeUpdate.EntityUpdate.toBinaryWriter);
+        }
+    }
+    get entityTypeName() {
+        return this._entityTypeName;
+    }
+    set entityTypeName(value) {
+        this._entityTypeName = value;
+    }
+    get valuesUpdateList() {
+        return this._valuesUpdateList;
+    }
+    set valuesUpdateList(value) {
+        this._valuesUpdateList = value;
+    }
+    toObject() {
+        return {
+            entityTypeName: this.entityTypeName,
+            valuesUpdateList: (this.valuesUpdateList || []).map(m => m.toObject())
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+(function (EntityTypeUpdate) {
+    class EntityUpdate {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param EntityUpdate value
+         */
+        constructor(value) {
+            value = value || {};
+            this.entityValueUpdate = value.entityValueUpdate
+                ? new StringUpdate(value.entityValueUpdate)
+                : undefined;
+            this.entitySynonymUpdates = (value.entitySynonymUpdates || []).map(m => new StringUpdate(m));
+            EntityUpdate.refineValues(this);
+        }
+        static toBinary(instance) {
+            const writer = new BinaryWriter();
+            EntityUpdate.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        }
+        static fromBinary(bytes) {
+            const instance = new EntityUpdate();
+            EntityUpdate.fromBinaryReader(instance, new BinaryReader(bytes));
+            return instance;
+        }
+        static refineValues(instance) {
+            instance.entityValueUpdate = instance.entityValueUpdate || undefined;
+            instance.entitySynonymUpdates = instance.entitySynonymUpdates || [];
+        }
+        static fromBinaryReader(instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.entityValueUpdate = new StringUpdate();
+                        reader.readMessage(instance.entityValueUpdate, StringUpdate.fromBinaryReader);
+                        break;
+                    case 2:
+                        const messageInitializer2 = new StringUpdate();
+                        reader.readMessage(messageInitializer2, StringUpdate.fromBinaryReader);
+                        (instance.entitySynonymUpdates =
+                            instance.entitySynonymUpdates || []).push(messageInitializer2);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            EntityUpdate.refineValues(instance);
+        }
+        static toBinaryWriter(instance, writer) {
+            if (instance.entityValueUpdate) {
+                writer.writeMessage(1, instance.entityValueUpdate, StringUpdate.toBinaryWriter);
+            }
+            if (instance.entitySynonymUpdates &&
+                instance.entitySynonymUpdates.length) {
+                writer.writeRepeatedMessage(2, instance.entitySynonymUpdates, StringUpdate.toBinaryWriter);
+            }
+        }
+        get entityValueUpdate() {
+            return this._entityValueUpdate;
+        }
+        set entityValueUpdate(value) {
+            this._entityValueUpdate = value;
+        }
+        get entitySynonymUpdates() {
+            return this._entitySynonymUpdates;
+        }
+        set entitySynonymUpdates(value) {
+            this._entitySynonymUpdates = value;
+        }
+        toObject() {
+            return {
+                entityValueUpdate: this.entityValueUpdate
+                    ? this.entityValueUpdate.toObject()
+                    : undefined,
+                entitySynonymUpdates: (this.entitySynonymUpdates || []).map(m => m.toObject())
+            };
+        }
+        toJSON() {
+            return this.toObject();
+        }
+    }
+    EntityTypeUpdate.EntityUpdate = EntityUpdate;
+})(EntityTypeUpdate || (EntityTypeUpdate = {}));
+class CleanAllEntityTypesRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param CleanAllEntityTypesRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        this.languageCode = value.languageCode;
+        this.specialCharacters = value.specialCharacters;
+        this.substringWhiteList = (value.substringWhiteList || []).slice();
+        this.maxEntityCountUpdate = value.maxEntityCountUpdate;
+        this.forbiddenEntityTypePatterns = (value.forbiddenEntityTypePatterns || []).slice();
+        this.dryRun = value.dryRun;
+        this.numberOfWorkers = value.numberOfWorkers;
+        CleanAllEntityTypesRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        CleanAllEntityTypesRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new CleanAllEntityTypesRequest();
+        CleanAllEntityTypesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+        instance.languageCode = instance.languageCode || '';
+        instance.specialCharacters = instance.specialCharacters || '';
+        instance.substringWhiteList = instance.substringWhiteList || [];
+        instance.maxEntityCountUpdate = instance.maxEntityCountUpdate || 0;
+        instance.forbiddenEntityTypePatterns =
+            instance.forbiddenEntityTypePatterns || [];
+        instance.dryRun = instance.dryRun || false;
+        instance.numberOfWorkers = instance.numberOfWorkers || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                case 2:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 3:
+                    instance.specialCharacters = reader.readString();
+                    break;
+                case 4:
+                    (instance.substringWhiteList =
+                        instance.substringWhiteList || []).push(reader.readString());
+                    break;
+                case 5:
+                    instance.maxEntityCountUpdate = reader.readInt32();
+                    break;
+                case 6:
+                    (instance.forbiddenEntityTypePatterns =
+                        instance.forbiddenEntityTypePatterns || []).push(reader.readString());
+                    break;
+                case 7:
+                    instance.dryRun = reader.readBool();
+                    break;
+                case 8:
+                    instance.numberOfWorkers = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        CleanAllEntityTypesRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+        if (instance.languageCode) {
+            writer.writeString(2, instance.languageCode);
+        }
+        if (instance.specialCharacters) {
+            writer.writeString(3, instance.specialCharacters);
+        }
+        if (instance.substringWhiteList && instance.substringWhiteList.length) {
+            writer.writeRepeatedString(4, instance.substringWhiteList);
+        }
+        if (instance.maxEntityCountUpdate) {
+            writer.writeInt32(5, instance.maxEntityCountUpdate);
+        }
+        if (instance.forbiddenEntityTypePatterns &&
+            instance.forbiddenEntityTypePatterns.length) {
+            writer.writeRepeatedString(6, instance.forbiddenEntityTypePatterns);
+        }
+        if (instance.dryRun) {
+            writer.writeBool(7, instance.dryRun);
+        }
+        if (instance.numberOfWorkers) {
+            writer.writeInt32(8, instance.numberOfWorkers);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get specialCharacters() {
+        return this._specialCharacters;
+    }
+    set specialCharacters(value) {
+        this._specialCharacters = value;
+    }
+    get substringWhiteList() {
+        return this._substringWhiteList;
+    }
+    set substringWhiteList(value) {
+        this._substringWhiteList = value;
+    }
+    get maxEntityCountUpdate() {
+        return this._maxEntityCountUpdate;
+    }
+    set maxEntityCountUpdate(value) {
+        this._maxEntityCountUpdate = value;
+    }
+    get forbiddenEntityTypePatterns() {
+        return this._forbiddenEntityTypePatterns;
+    }
+    set forbiddenEntityTypePatterns(value) {
+        this._forbiddenEntityTypePatterns = value;
+    }
+    get dryRun() {
+        return this._dryRun;
+    }
+    set dryRun(value) {
+        this._dryRun = value;
+    }
+    get numberOfWorkers() {
+        return this._numberOfWorkers;
+    }
+    set numberOfWorkers(value) {
+        this._numberOfWorkers = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent,
+            languageCode: this.languageCode,
+            specialCharacters: this.specialCharacters,
+            substringWhiteList: (this.substringWhiteList || []).slice(),
+            maxEntityCountUpdate: this.maxEntityCountUpdate,
+            forbiddenEntityTypePatterns: (this.forbiddenEntityTypePatterns || []).slice(),
+            dryRun: this.dryRun,
+            numberOfWorkers: this.numberOfWorkers
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class CleanAllEntityTypesResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param CleanAllEntityTypesResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.cleanedEntityTypes = (value.cleanedEntityTypes || []).map(m => new EntityType(m));
+        this.deletedEntityTypes = (value.deletedEntityTypes || []).map(m => new EntityType(m));
+        this.entityTypeUpdates = (value.entityTypeUpdates || []).map(m => new EntityTypeUpdate(m));
+        this.entityTypeDeletions = (value.entityTypeDeletions || []).map(m => new EntityTypeUpdate(m));
+        CleanAllEntityTypesResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        CleanAllEntityTypesResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new CleanAllEntityTypesResponse();
+        CleanAllEntityTypesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.cleanedEntityTypes = instance.cleanedEntityTypes || [];
+        instance.deletedEntityTypes = instance.deletedEntityTypes || [];
+        instance.entityTypeUpdates = instance.entityTypeUpdates || [];
+        instance.entityTypeDeletions = instance.entityTypeDeletions || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new EntityType();
+                    reader.readMessage(messageInitializer1, EntityType.fromBinaryReader);
+                    (instance.cleanedEntityTypes =
+                        instance.cleanedEntityTypes || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    const messageInitializer2 = new EntityType();
+                    reader.readMessage(messageInitializer2, EntityType.fromBinaryReader);
+                    (instance.deletedEntityTypes =
+                        instance.deletedEntityTypes || []).push(messageInitializer2);
+                    break;
+                case 3:
+                    const messageInitializer3 = new EntityTypeUpdate();
+                    reader.readMessage(messageInitializer3, EntityTypeUpdate.fromBinaryReader);
+                    (instance.entityTypeUpdates = instance.entityTypeUpdates || []).push(messageInitializer3);
+                    break;
+                case 4:
+                    const messageInitializer4 = new EntityTypeUpdate();
+                    reader.readMessage(messageInitializer4, EntityTypeUpdate.fromBinaryReader);
+                    (instance.entityTypeDeletions =
+                        instance.entityTypeDeletions || []).push(messageInitializer4);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        CleanAllEntityTypesResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.cleanedEntityTypes && instance.cleanedEntityTypes.length) {
+            writer.writeRepeatedMessage(1, instance.cleanedEntityTypes, EntityType.toBinaryWriter);
+        }
+        if (instance.deletedEntityTypes && instance.deletedEntityTypes.length) {
+            writer.writeRepeatedMessage(2, instance.deletedEntityTypes, EntityType.toBinaryWriter);
+        }
+        if (instance.entityTypeUpdates && instance.entityTypeUpdates.length) {
+            writer.writeRepeatedMessage(3, instance.entityTypeUpdates, EntityTypeUpdate.toBinaryWriter);
+        }
+        if (instance.entityTypeDeletions && instance.entityTypeDeletions.length) {
+            writer.writeRepeatedMessage(4, instance.entityTypeDeletions, EntityTypeUpdate.toBinaryWriter);
+        }
+    }
+    get cleanedEntityTypes() {
+        return this._cleanedEntityTypes;
+    }
+    set cleanedEntityTypes(value) {
+        this._cleanedEntityTypes = value;
+    }
+    get deletedEntityTypes() {
+        return this._deletedEntityTypes;
+    }
+    set deletedEntityTypes(value) {
+        this._deletedEntityTypes = value;
+    }
+    get entityTypeUpdates() {
+        return this._entityTypeUpdates;
+    }
+    set entityTypeUpdates(value) {
+        this._entityTypeUpdates = value;
+    }
+    get entityTypeDeletions() {
+        return this._entityTypeDeletions;
+    }
+    set entityTypeDeletions(value) {
+        this._entityTypeDeletions = value;
+    }
+    toObject() {
+        return {
+            cleanedEntityTypes: (this.cleanedEntityTypes || []).map(m => m.toObject()),
+            deletedEntityTypes: (this.deletedEntityTypes || []).map(m => m.toObject()),
+            entityTypeUpdates: (this.entityTypeUpdates || []).map(m => m.toObject()),
+            entityTypeDeletions: (this.entityTypeDeletions || []).map(m => m.toObject())
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class CleanEntityTypeRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param CleanEntityTypeRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        this.entityTypeName = value.entityTypeName;
+        this.languageCode = value.languageCode;
+        this.specialCharacters = value.specialCharacters;
+        this.substringWhiteList = (value.substringWhiteList || []).slice();
+        this.maxEntityCountUpdate = value.maxEntityCountUpdate;
+        this.dryRun = value.dryRun;
+        CleanEntityTypeRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        CleanEntityTypeRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new CleanEntityTypeRequest();
+        CleanEntityTypeRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+        instance.entityTypeName = instance.entityTypeName || '';
+        instance.languageCode = instance.languageCode || '';
+        instance.specialCharacters = instance.specialCharacters || '';
+        instance.substringWhiteList = instance.substringWhiteList || [];
+        instance.maxEntityCountUpdate = instance.maxEntityCountUpdate || 0;
+        instance.dryRun = instance.dryRun || false;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                case 2:
+                    instance.entityTypeName = reader.readString();
+                    break;
+                case 3:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 4:
+                    instance.specialCharacters = reader.readString();
+                    break;
+                case 5:
+                    (instance.substringWhiteList =
+                        instance.substringWhiteList || []).push(reader.readString());
+                    break;
+                case 6:
+                    instance.maxEntityCountUpdate = reader.readInt32();
+                    break;
+                case 7:
+                    instance.dryRun = reader.readBool();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        CleanEntityTypeRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+        if (instance.entityTypeName) {
+            writer.writeString(2, instance.entityTypeName);
+        }
+        if (instance.languageCode) {
+            writer.writeString(3, instance.languageCode);
+        }
+        if (instance.specialCharacters) {
+            writer.writeString(4, instance.specialCharacters);
+        }
+        if (instance.substringWhiteList && instance.substringWhiteList.length) {
+            writer.writeRepeatedString(5, instance.substringWhiteList);
+        }
+        if (instance.maxEntityCountUpdate) {
+            writer.writeInt32(6, instance.maxEntityCountUpdate);
+        }
+        if (instance.dryRun) {
+            writer.writeBool(7, instance.dryRun);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get entityTypeName() {
+        return this._entityTypeName;
+    }
+    set entityTypeName(value) {
+        this._entityTypeName = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get specialCharacters() {
+        return this._specialCharacters;
+    }
+    set specialCharacters(value) {
+        this._specialCharacters = value;
+    }
+    get substringWhiteList() {
+        return this._substringWhiteList;
+    }
+    set substringWhiteList(value) {
+        this._substringWhiteList = value;
+    }
+    get maxEntityCountUpdate() {
+        return this._maxEntityCountUpdate;
+    }
+    set maxEntityCountUpdate(value) {
+        this._maxEntityCountUpdate = value;
+    }
+    get dryRun() {
+        return this._dryRun;
+    }
+    set dryRun(value) {
+        this._dryRun = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent,
+            entityTypeName: this.entityTypeName,
+            languageCode: this.languageCode,
+            specialCharacters: this.specialCharacters,
+            substringWhiteList: (this.substringWhiteList || []).slice(),
+            maxEntityCountUpdate: this.maxEntityCountUpdate,
+            dryRun: this.dryRun
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class CleanEntityTypeResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param CleanEntityTypeResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.cleanedEntityType = value.cleanedEntityType
+            ? new EntityType(value.cleanedEntityType)
+            : undefined;
+        this.entityTypeUpdate = value.entityTypeUpdate
+            ? new EntityTypeUpdate(value.entityTypeUpdate)
+            : undefined;
+        CleanEntityTypeResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        CleanEntityTypeResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new CleanEntityTypeResponse();
+        CleanEntityTypeResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.cleanedEntityType = instance.cleanedEntityType || undefined;
+        instance.entityTypeUpdate = instance.entityTypeUpdate || undefined;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.cleanedEntityType = new EntityType();
+                    reader.readMessage(instance.cleanedEntityType, EntityType.fromBinaryReader);
+                    break;
+                case 2:
+                    instance.entityTypeUpdate = new EntityTypeUpdate();
+                    reader.readMessage(instance.entityTypeUpdate, EntityTypeUpdate.fromBinaryReader);
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        CleanEntityTypeResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.cleanedEntityType) {
+            writer.writeMessage(1, instance.cleanedEntityType, EntityType.toBinaryWriter);
+        }
+        if (instance.entityTypeUpdate) {
+            writer.writeMessage(2, instance.entityTypeUpdate, EntityTypeUpdate.toBinaryWriter);
+        }
+    }
+    get cleanedEntityType() {
+        return this._cleanedEntityType;
+    }
+    set cleanedEntityType(value) {
+        this._cleanedEntityType = value;
+    }
+    get entityTypeUpdate() {
+        return this._entityTypeUpdate;
+    }
+    set entityTypeUpdate(value) {
+        this._entityTypeUpdate = value;
+    }
+    toObject() {
+        return {
+            cleanedEntityType: this.cleanedEntityType
+                ? this.cleanedEntityType.toObject()
+                : undefined,
+            entityTypeUpdate: this.entityTypeUpdate
+                ? this.entityTypeUpdate.toObject()
+                : undefined
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class AddTrainingPhrasesRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param AddTrainingPhrasesRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        this.languageCode = value.languageCode;
+        this.trainingPhraseList = (value.trainingPhraseList || []).map(m => new AddTrainingPhrasesRequest.TrainingPhraseForIntent(m));
+        this.extractEntities = value.extractEntities;
+        this.specialCharacters = value.specialCharacters;
+        this.trainingPhraseCleanerOptions = value.trainingPhraseCleanerOptions
+            ? new TrainingPhraseCleanerOptions(value.trainingPhraseCleanerOptions)
+            : undefined;
+        this.numberOfWorkers = value.numberOfWorkers;
+        AddTrainingPhrasesRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        AddTrainingPhrasesRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new AddTrainingPhrasesRequest();
+        AddTrainingPhrasesRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+        instance.languageCode = instance.languageCode || '';
+        instance.trainingPhraseList = instance.trainingPhraseList || [];
+        instance.extractEntities = instance.extractEntities || false;
+        instance.specialCharacters = instance.specialCharacters || '';
+        instance.trainingPhraseCleanerOptions =
+            instance.trainingPhraseCleanerOptions || undefined;
+        instance.numberOfWorkers = instance.numberOfWorkers || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                case 2:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 3:
+                    const messageInitializer3 = new AddTrainingPhrasesRequest.TrainingPhraseForIntent();
+                    reader.readMessage(messageInitializer3, AddTrainingPhrasesRequest.TrainingPhraseForIntent.fromBinaryReader);
+                    (instance.trainingPhraseList =
+                        instance.trainingPhraseList || []).push(messageInitializer3);
+                    break;
+                case 4:
+                    instance.extractEntities = reader.readBool();
+                    break;
+                case 5:
+                    instance.specialCharacters = reader.readString();
+                    break;
+                case 6:
+                    instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                    reader.readMessage(instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.fromBinaryReader);
+                    break;
+                case 7:
+                    instance.numberOfWorkers = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        AddTrainingPhrasesRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+        if (instance.languageCode) {
+            writer.writeString(2, instance.languageCode);
+        }
+        if (instance.trainingPhraseList && instance.trainingPhraseList.length) {
+            writer.writeRepeatedMessage(3, instance.trainingPhraseList, AddTrainingPhrasesRequest.TrainingPhraseForIntent.toBinaryWriter);
+        }
+        if (instance.extractEntities) {
+            writer.writeBool(4, instance.extractEntities);
+        }
+        if (instance.specialCharacters) {
+            writer.writeString(5, instance.specialCharacters);
+        }
+        if (instance.trainingPhraseCleanerOptions) {
+            writer.writeMessage(6, instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.toBinaryWriter);
+        }
+        if (instance.numberOfWorkers) {
+            writer.writeInt32(7, instance.numberOfWorkers);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get trainingPhraseList() {
+        return this._trainingPhraseList;
+    }
+    set trainingPhraseList(value) {
+        this._trainingPhraseList = value;
+    }
+    get extractEntities() {
+        return this._extractEntities;
+    }
+    set extractEntities(value) {
+        this._extractEntities = value;
+    }
+    get specialCharacters() {
+        return this._specialCharacters;
+    }
+    set specialCharacters(value) {
+        this._specialCharacters = value;
+    }
+    get trainingPhraseCleanerOptions() {
+        return this._trainingPhraseCleanerOptions;
+    }
+    set trainingPhraseCleanerOptions(value) {
+        this._trainingPhraseCleanerOptions = value;
+    }
+    get numberOfWorkers() {
+        return this._numberOfWorkers;
+    }
+    set numberOfWorkers(value) {
+        this._numberOfWorkers = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent,
+            languageCode: this.languageCode,
+            trainingPhraseList: (this.trainingPhraseList || []).map(m => m.toObject()),
+            extractEntities: this.extractEntities,
+            specialCharacters: this.specialCharacters,
+            trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                ? this.trainingPhraseCleanerOptions.toObject()
+                : undefined,
+            numberOfWorkers: this.numberOfWorkers
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+(function (AddTrainingPhrasesRequest) {
+    class TrainingPhraseForIntent {
+        /**
+         * Creates an object and applies default Protobuf values
+         * @param TrainingPhraseForIntent value
+         */
+        constructor(value) {
+            value = value || {};
+            this.trainingPhrase = value.trainingPhrase;
+            this.intentDisplayName = value.intentDisplayName;
+            this.entities = (value.entities || []).map(m => new Intent.TrainingPhrase.Entity(m));
+            TrainingPhraseForIntent.refineValues(this);
+        }
+        static toBinary(instance) {
+            const writer = new BinaryWriter();
+            TrainingPhraseForIntent.toBinaryWriter(instance, writer);
+            return writer.getResultBuffer();
+        }
+        static fromBinary(bytes) {
+            const instance = new TrainingPhraseForIntent();
+            TrainingPhraseForIntent.fromBinaryReader(instance, new BinaryReader(bytes));
+            return instance;
+        }
+        static refineValues(instance) {
+            instance.trainingPhrase = instance.trainingPhrase || '';
+            instance.intentDisplayName = instance.intentDisplayName || '';
+            instance.entities = instance.entities || [];
+        }
+        static fromBinaryReader(instance, reader) {
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        instance.trainingPhrase = reader.readString();
+                        break;
+                    case 2:
+                        instance.intentDisplayName = reader.readString();
+                        break;
+                    case 3:
+                        const messageInitializer3 = new Intent.TrainingPhrase.Entity();
+                        reader.readMessage(messageInitializer3, Intent.TrainingPhrase.Entity.fromBinaryReader);
+                        (instance.entities = instance.entities || []).push(messageInitializer3);
+                        break;
+                    default:
+                        reader.skipField();
+                }
+            }
+            TrainingPhraseForIntent.refineValues(instance);
+        }
+        static toBinaryWriter(instance, writer) {
+            if (instance.trainingPhrase) {
+                writer.writeString(1, instance.trainingPhrase);
+            }
+            if (instance.intentDisplayName) {
+                writer.writeString(2, instance.intentDisplayName);
+            }
+            if (instance.entities && instance.entities.length) {
+                writer.writeRepeatedMessage(3, instance.entities, Intent.TrainingPhrase.Entity.toBinaryWriter);
+            }
+        }
+        get trainingPhrase() {
+            return this._trainingPhrase;
+        }
+        set trainingPhrase(value) {
+            this._trainingPhrase = value;
+        }
+        get intentDisplayName() {
+            return this._intentDisplayName;
+        }
+        set intentDisplayName(value) {
+            this._intentDisplayName = value;
+        }
+        get entities() {
+            return this._entities;
+        }
+        set entities(value) {
+            this._entities = value;
+        }
+        toObject() {
+            return {
+                trainingPhrase: this.trainingPhrase,
+                intentDisplayName: this.intentDisplayName,
+                entities: (this.entities || []).map(m => m.toObject())
+            };
+        }
+        toJSON() {
+            return this.toObject();
+        }
+    }
+    AddTrainingPhrasesRequest.TrainingPhraseForIntent = TrainingPhraseForIntent;
+})(AddTrainingPhrasesRequest || (AddTrainingPhrasesRequest = {}));
+class AddTrainingPhrasesResponse {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param AddTrainingPhrasesResponse value
+     */
+    constructor(value) {
+        value = value || {};
+        this.errorMessages = (value.errorMessages || []).slice();
+        AddTrainingPhrasesResponse.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        AddTrainingPhrasesResponse.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new AddTrainingPhrasesResponse();
+        AddTrainingPhrasesResponse.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.errorMessages = instance.errorMessages || [];
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    (instance.errorMessages = instance.errorMessages || []).push(reader.readString());
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        AddTrainingPhrasesResponse.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.errorMessages && instance.errorMessages.length) {
+            writer.writeRepeatedString(1, instance.errorMessages);
+        }
+    }
+    get errorMessages() {
+        return this._errorMessages;
+    }
+    set errorMessages(value) {
+        this._errorMessages = value;
+    }
+    toObject() {
+        return {
+            errorMessages: (this.errorMessages || []).slice()
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+class AddTrainingPhrasesFromCSVRequest {
+    /**
+     * Creates an object and applies default Protobuf values
+     * @param AddTrainingPhrasesFromCSVRequest value
+     */
+    constructor(value) {
+        value = value || {};
+        this.parent = value.parent;
+        this.languageCode = value.languageCode;
+        this.csvContents = value.csvContents;
+        this.extractEntities = value.extractEntities;
+        this.specialCharacters = value.specialCharacters;
+        this.trainingPhraseCleanerOptions = value.trainingPhraseCleanerOptions
+            ? new TrainingPhraseCleanerOptions(value.trainingPhraseCleanerOptions)
+            : undefined;
+        this.numberOfWorkers = value.numberOfWorkers;
+        AddTrainingPhrasesFromCSVRequest.refineValues(this);
+    }
+    static toBinary(instance) {
+        const writer = new BinaryWriter();
+        AddTrainingPhrasesFromCSVRequest.toBinaryWriter(instance, writer);
+        return writer.getResultBuffer();
+    }
+    static fromBinary(bytes) {
+        const instance = new AddTrainingPhrasesFromCSVRequest();
+        AddTrainingPhrasesFromCSVRequest.fromBinaryReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    static refineValues(instance) {
+        instance.parent = instance.parent || '';
+        instance.languageCode = instance.languageCode || '';
+        instance.csvContents = instance.csvContents || new Uint8Array();
+        instance.extractEntities = instance.extractEntities || false;
+        instance.specialCharacters = instance.specialCharacters || '';
+        instance.trainingPhraseCleanerOptions =
+            instance.trainingPhraseCleanerOptions || undefined;
+        instance.numberOfWorkers = instance.numberOfWorkers || 0;
+    }
+    static fromBinaryReader(instance, reader) {
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    instance.parent = reader.readString();
+                    break;
+                case 2:
+                    instance.languageCode = reader.readString();
+                    break;
+                case 3:
+                    instance.csvContents = reader.readBytes();
+                    break;
+                case 4:
+                    instance.extractEntities = reader.readBool();
+                    break;
+                case 5:
+                    instance.specialCharacters = reader.readString();
+                    break;
+                case 6:
+                    instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                    reader.readMessage(instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.fromBinaryReader);
+                    break;
+                case 7:
+                    instance.numberOfWorkers = reader.readInt32();
+                    break;
+                default:
+                    reader.skipField();
+            }
+        }
+        AddTrainingPhrasesFromCSVRequest.refineValues(instance);
+    }
+    static toBinaryWriter(instance, writer) {
+        if (instance.parent) {
+            writer.writeString(1, instance.parent);
+        }
+        if (instance.languageCode) {
+            writer.writeString(2, instance.languageCode);
+        }
+        if (instance.csvContents && instance.csvContents.length) {
+            writer.writeBytes(3, instance.csvContents);
+        }
+        if (instance.extractEntities) {
+            writer.writeBool(4, instance.extractEntities);
+        }
+        if (instance.specialCharacters) {
+            writer.writeString(5, instance.specialCharacters);
+        }
+        if (instance.trainingPhraseCleanerOptions) {
+            writer.writeMessage(6, instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.toBinaryWriter);
+        }
+        if (instance.numberOfWorkers) {
+            writer.writeInt32(7, instance.numberOfWorkers);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get csvContents() {
+        return this._csvContents;
+    }
+    set csvContents(value) {
+        this._csvContents = value;
+    }
+    get extractEntities() {
+        return this._extractEntities;
+    }
+    set extractEntities(value) {
+        this._extractEntities = value;
+    }
+    get specialCharacters() {
+        return this._specialCharacters;
+    }
+    set specialCharacters(value) {
+        this._specialCharacters = value;
+    }
+    get trainingPhraseCleanerOptions() {
+        return this._trainingPhraseCleanerOptions;
+    }
+    set trainingPhraseCleanerOptions(value) {
+        this._trainingPhraseCleanerOptions = value;
+    }
+    get numberOfWorkers() {
+        return this._numberOfWorkers;
+    }
+    set numberOfWorkers(value) {
+        this._numberOfWorkers = value;
+    }
+    toObject() {
+        return {
+            parent: this.parent,
+            languageCode: this.languageCode,
+            csvContents: this.csvContents
+                ? this.csvContents.subarray(0)
+                : new Uint8Array(),
+            extractEntities: this.extractEntities,
+            specialCharacters: this.specialCharacters,
+            trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                ? this.trainingPhraseCleanerOptions.toObject()
+                : undefined,
+            numberOfWorkers: this.numberOfWorkers
+        };
+    }
+    toJSON() {
+        return this.toObject();
+    }
+}
+
+/* tslint:disable */
+/*
+  To configure the services you need to provide a configuration for each of them.
+
+  E.g. you can create a module where you configure all of them and then import this module into your AppModule:
+
+  const grpcSettings = { host: environment.grpcHost };
+
+  @NgModule({
+    providers: [
+      { provide: GRPC_UTILITIES_CLIENT_SETTINGS, useValue: grpcSettings },
+    ],
+  })
+  export class GrpcConfigModule { }
+*/
+const GRPC_UTILITIES_CLIENT_SETTINGS = new InjectionToken('GRPC_UTILITIES_CLIENT_SETTINGS');
+
+/* tslint:disable */
+class UtilitiesClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        this.client = clientFactory.createClient('ondewo.nlu.Utilities', settings);
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ValidateRegexRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ValidateRegexResponse>
+     */
+    validateRegex(requestData, requestMetadata = {}) {
+        return this.validateRegex$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ValidateRegexRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ValidateRegexResponse>>
+     */
+    validateRegex$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Utilities/ValidateRegex',
+            requestData,
+            requestMetadata,
+            requestClass: ValidateRegexRequest,
+            responseClass: ValidateRegexResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.ValidateEmbeddedRegexRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.ValidateEmbeddedRegexResponse>
+     */
+    validateEmbeddedRegex(requestData, requestMetadata = {}) {
+        return this.validateEmbeddedRegex$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.ValidateEmbeddedRegexRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.ValidateEmbeddedRegexResponse>>
+     */
+    validateEmbeddedRegex$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Utilities/ValidateEmbeddedRegex',
+            requestData,
+            requestMetadata,
+            requestClass: ValidateEmbeddedRegexRequest,
+            responseClass: ValidateEmbeddedRegexResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CleanAllIntentsRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.CleanAllIntentsResponse>
+     */
+    cleanAllIntents(requestData, requestMetadata = {}) {
+        return this.cleanAllIntents$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CleanAllIntentsRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.CleanAllIntentsResponse>>
+     */
+    cleanAllIntents$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Utilities/CleanAllIntents',
+            requestData,
+            requestMetadata,
+            requestClass: CleanAllIntentsRequest,
+            responseClass: CleanAllIntentsResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CleanIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.CleanIntentResponse>
+     */
+    cleanIntent(requestData, requestMetadata = {}) {
+        return this.cleanIntent$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CleanIntentRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.CleanIntentResponse>>
+     */
+    cleanIntent$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Utilities/CleanIntent',
+            requestData,
+            requestMetadata,
+            requestClass: CleanIntentRequest,
+            responseClass: CleanIntentResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CleanAllEntityTypesRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.CleanAllEntityTypesResponse>
+     */
+    cleanAllEntityTypes(requestData, requestMetadata = {}) {
+        return this.cleanAllEntityTypes$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CleanAllEntityTypesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.CleanAllEntityTypesResponse>>
+     */
+    cleanAllEntityTypes$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Utilities/CleanAllEntityTypes',
+            requestData,
+            requestMetadata,
+            requestClass: CleanAllEntityTypesRequest,
+            responseClass: CleanAllEntityTypesResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.CleanEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.CleanEntityTypeResponse>
+     */
+    cleanEntityType(requestData, requestMetadata = {}) {
+        return this.cleanEntityType$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.CleanEntityTypeRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.CleanEntityTypeResponse>>
+     */
+    cleanEntityType$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Utilities/CleanEntityType',
+            requestData,
+            requestMetadata,
+            requestClass: CleanEntityTypeRequest,
+            responseClass: CleanEntityTypeResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.AddTrainingPhrasesRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.AddTrainingPhrasesResponse>
+     */
+    addTrainingPhrases(requestData, requestMetadata = {}) {
+        return this.addTrainingPhrases$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.AddTrainingPhrasesRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.AddTrainingPhrasesResponse>>
+     */
+    addTrainingPhrases$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Utilities/AddTrainingPhrases',
+            requestData,
+            requestMetadata,
+            requestClass: AddTrainingPhrasesRequest,
+            responseClass: AddTrainingPhrasesResponse
+        });
+    }
+    /**
+     * Unary RPC. Emits messages and throws errors on non-zero status codes
+     * @param thisProto.AddTrainingPhrasesFromCSVRequest request
+     * @param Metadata metadata
+     * @return Observable<thisProto.AddTrainingPhrasesResponse>
+     */
+    addTrainingPhrasesFromCSV(requestData, requestMetadata = {}) {
+        return this.addTrainingPhrasesFromCSV$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC. Emits data and status events; does not throw errors by design
+     * @param thisProto.AddTrainingPhrasesFromCSVRequest request
+     * @param Metadata metadata
+     * @return Observable<GrpcEvent<thisProto.AddTrainingPhrasesResponse>>
+     */
+    addTrainingPhrasesFromCSV$eventStream(requestData, requestMetadata = {}) {
+        return this.handler.handle({
+            type: GrpcCallType.unary,
+            client: this.client,
+            path: '/ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV',
+            requestData,
+            requestMetadata,
+            requestClass: AddTrainingPhrasesFromCSVRequest,
+            responseClass: AddTrainingPhrasesResponse
+        });
+    }
+}
+UtilitiesClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function UtilitiesClient_Factory() { return new UtilitiesClient(i0.ɵɵinject(GRPC_UTILITIES_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: UtilitiesClient, providedIn: "root" });
+UtilitiesClient.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+UtilitiesClient.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [GRPC_UTILITIES_CLIENT_SETTINGS,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [GRPC_CLIENT_FACTORY,] }] },
+    { type: GrpcHandler }
+];
+
 /* tslint:disable */
 /*
   To configure the services you need to provide a configuration for each of them.
@@ -27034,5 +29510,5 @@ class CustomHttpPattern {
  * Generated bundle index. Do not edit.
  */
 
-export { AddSessionLabelsRequest, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, Any, AudioEncoding, BatchCreateEntitiesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, Context, ContextsClient, CreateAgentRequest, CreateContextRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionReviewRequest, CreateUserRequest, CustomHttpPattern, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteContextRequest, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionRequest, DeleteUserRequest, DescriptorProto, DetectIntentRequest, DetectIntentResponse, DetectedIntent, Empty, EntityEnrichmentConfig, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeSorting, EntityTypeView, EntityTypesClient, EnumDescriptorProto, EnumOptions, EnumValueDescriptorProto, EnumValueOptions, EventInput, ExportAgentRequest, ExportAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtensionRangeOptions, ExtractEntitiesRequest, ExtractEntitiesResponse, FastTextEnrichmentConfig, FieldDescriptorProto, FieldMask, FieldOptions, FileDescriptorProto, FileDescriptorSet, FileOptions, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GeneratedCodeInfo, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetContextRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetLatestSessionReviewRequest, GetOperationRequest, GetPlatformInfoResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetSessionRequest, GetSessionReviewRequest, GetSynonymsRequest, GetSynonymsResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImportAgentRequest, InputAudioConfig, Intent, IntentBatch, IntentCategory, IntentSorting, IntentView, IntentsClient, LatLng, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListContextsRequest, ListContextsResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIntentsRequest, ListIntentsResponse, ListOperationsRequest, ListOperationsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListUserInfosResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, ListValue, LoginRequest, LoginResponse, MessageOptions, MethodDescriptorProto, MethodOptions, NullValue, OneofDescriptorProto, OneofOptions, Operation, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RankingMatchOptimizationConfig, RemoveSessionLabelsRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, RestoreAgentRequest, RunScraperResponse, RunTrainingResponse, ServerRole, ServerStatisticsClient, ServiceDescriptorProto, ServiceOptions, Session, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SetAgentStatusRequest, SetResourcesRequest, SortingMode, SourceCodeInfo, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingRecognitionResult, Struct, Synonym, TextInput, ThesaurusEnrichmentConfig, Timestamp, TrackSessionStepRequest, TrainAgentRequest, UninterpretedOption, UpdateAgentRequest, UpdateContextRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateUserRequest, User, UserInProject, UserInfo, UsersClient, Value, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
+export { AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, Any, AudioEncoding, BatchCreateEntitiesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Context, ContextsClient, CreateAgentRequest, CreateContextRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionReviewRequest, CreateUserRequest, CustomHttpPattern, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteContextRequest, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionRequest, DeleteUserRequest, DescriptorProto, DetectIntentRequest, DetectIntentResponse, DetectedIntent, Empty, EntityEnrichmentConfig, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EnumDescriptorProto, EnumOptions, EnumValueDescriptorProto, EnumValueOptions, EventInput, ExportAgentRequest, ExportAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtensionRangeOptions, ExtractEntitiesRequest, ExtractEntitiesResponse, FastTextEnrichmentConfig, FieldDescriptorProto, FieldMask, FieldOptions, FileDescriptorProto, FileDescriptorSet, FileOptions, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GeneratedCodeInfo, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetContextRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetLatestSessionReviewRequest, GetOperationRequest, GetPlatformInfoResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetSessionRequest, GetSessionReviewRequest, GetSynonymsRequest, GetSynonymsResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImportAgentRequest, InputAudioConfig, Intent, IntentBatch, IntentCategory, IntentSorting, IntentUpdate, IntentView, IntentsClient, LatLng, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListContextsRequest, ListContextsResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIntentsRequest, ListIntentsResponse, ListOperationsRequest, ListOperationsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListUserInfosResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, ListValue, LoginRequest, LoginResponse, MessageOptions, MethodDescriptorProto, MethodOptions, NullValue, OneofDescriptorProto, OneofOptions, Operation, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, RemoveSessionLabelsRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, RestoreAgentRequest, RunScraperResponse, RunTrainingResponse, ServerRole, ServerStatisticsClient, ServiceDescriptorProto, ServiceOptions, Session, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SetAgentStatusRequest, SetResourcesRequest, SortingMode, SourceCodeInfo, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingRecognitionResult, StringUpdate, Struct, Synonym, TextInput, ThesaurusEnrichmentConfig, Timestamp, TrackSessionStepRequest, TrainAgentRequest, TrainingPhraseCleanerOptions, UninterpretedOption, UpdateAgentRequest, UpdateContextRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateUserRequest, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, Value, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
 //# sourceMappingURL=ondewo-nlu-client-angular.js.map
