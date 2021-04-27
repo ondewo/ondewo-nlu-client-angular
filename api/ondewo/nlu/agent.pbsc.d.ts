@@ -1,348 +1,405 @@
-import { GrpcClientFactory, GrpcClientSettings, GrpcEvent } from '@ngx-grpc/common';
+import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
-import { Metadata } from 'grpc-web';
 import { Observable } from 'rxjs';
 import * as thisProto from './agent.pb';
-import * as googleLongrunning001 from '../../google/longrunning/operations.pb';
-import * as googleProtobuf003 from '../../google/protobuf/empty.pb';
+import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
+import * as googleLongrunning008 from '../../google/longrunning/operations.pb';
+/**
+ * Service client implementation for ondewo.nlu.Agents
+ */
 export declare class AgentsClient {
     private handler;
     private client;
-    constructor(settings: GrpcClientSettings, clientFactory: GrpcClientFactory, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Agent>
+     * Raw RPC implementation for each service client method.
+     * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+     * Attention: these methods do not throw errors when non-zero status codes are received.
      */
-    createAgent(requestData: thisProto.CreateAgentRequest, requestMetadata?: Metadata): Observable<thisProto.Agent>;
+    $raw: {
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/CreateAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.Agent>>
+         */
+        createAgent: (requestData: thisProto.CreateAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Agent>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/UpdateAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.Agent>>
+         */
+        updateAgent: (requestData: thisProto.UpdateAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Agent>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/GetAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.Agent>>
+         */
+        getAgent: (requestData: thisProto.GetAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Agent>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/DeleteAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        deleteAgent: (requestData: thisProto.DeleteAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/DeleteAllAgents
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        deleteAllAgents: (requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/ListAgents
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListAgentsResponse>>
+         */
+        listAgents: (requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListAgentsResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/ListAgentsOfUser
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListAgentsOfUserResponse>>
+         */
+        listAgentsOfUser: (requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListAgentsOfUserResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/ListAllAgents
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListAgentsResponse>>
+         */
+        listAllAgents: (requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListAgentsResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/AddUserToProject
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        addUserToProject: (requestData: thisProto.AddUserToProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/RemoveUserFromProject
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        removeUserFromProject: (requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/ListUsersInProject
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListUsersInProjectResponse>>
+         */
+        listUsersInProject: (requestData: thisProto.ListUsersInProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListUsersInProjectResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/GetPlatformInfo
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetPlatformInfoResponse>>
+         */
+        getPlatformInfo: (requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetPlatformInfoResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/ListProjectPermissions
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListProjectPermissionsResponse>>
+         */
+        listProjectPermissions: (requestData: thisProto.ListProjectPermissionsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListProjectPermissionsResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/TrainAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         */
+        trainAgent: (requestData: thisProto.TrainAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/BuildCache
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         */
+        buildCache: (requestData: thisProto.BuildCacheRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/ExportAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         */
+        exportAgent: (requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/ImportAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         */
+        importAgent: (requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/OptimizeRankingMatch
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         */
+        optimizeRankingMatch: (requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/RestoreAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         */
+        restoreAgent: (requestData: thisProto.RestoreAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/GetAgentStatistics
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetAgentStatisticsResponse>>
+         */
+        getAgentStatistics: (requestData: thisProto.GetAgentStatisticsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetAgentStatisticsResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/SetAgentStatus
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.Agent>>
+         */
+        setAgentStatus: (requestData: thisProto.SetAgentStatusRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Agent>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/SetResources
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        setResources: (requestData: thisProto.SetResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/DeleteResources
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        deleteResources: (requestData: thisProto.DeleteResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/ExportResources
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ExportResourcesResponse>>
+         */
+        exportResources: (requestData: thisProto.ExportResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ExportResourcesResponse>>;
+    };
+    constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Agent>>
+     * Unary RPC for /ondewo.nlu.Agents/CreateAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Agent>
      */
-    createAgent$eventStream(requestData: thisProto.CreateAgentRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.Agent>>;
+    createAgent(requestData: thisProto.CreateAgentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Agent>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.UpdateAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Agent>
+     * Unary RPC for /ondewo.nlu.Agents/UpdateAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Agent>
      */
-    updateAgent(requestData: thisProto.UpdateAgentRequest, requestMetadata?: Metadata): Observable<thisProto.Agent>;
+    updateAgent(requestData: thisProto.UpdateAgentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Agent>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.UpdateAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Agent>>
+     * Unary RPC for /ondewo.nlu.Agents/GetAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Agent>
      */
-    updateAgent$eventStream(requestData: thisProto.UpdateAgentRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.Agent>>;
+    getAgent(requestData: thisProto.GetAgentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Agent>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Agent>
+     * Unary RPC for /ondewo.nlu.Agents/DeleteAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
      */
-    getAgent(requestData: thisProto.GetAgentRequest, requestMetadata?: Metadata): Observable<thisProto.Agent>;
+    deleteAgent(requestData: thisProto.DeleteAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Agent>>
+     * Unary RPC for /ondewo.nlu.Agents/DeleteAllAgents
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
      */
-    getAgent$eventStream(requestData: thisProto.GetAgentRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.Agent>>;
+    deleteAllAgents(requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf003.Empty>
+     * Unary RPC for /ondewo.nlu.Agents/ListAgents
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListAgentsResponse>
      */
-    deleteAgent(requestData: thisProto.DeleteAgentRequest, requestMetadata?: Metadata): Observable<googleProtobuf003.Empty>;
+    listAgents(requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListAgentsResponse>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf003.Empty>>
+     * Unary RPC for /ondewo.nlu.Agents/ListAgentsOfUser
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListAgentsOfUserResponse>
      */
-    deleteAgent$eventStream(requestData: thisProto.DeleteAgentRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf003.Empty>>;
+    listAgentsOfUser(requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListAgentsOfUserResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param googleProtobuf003.Empty request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf003.Empty>
+     * Unary RPC for /ondewo.nlu.Agents/ListAllAgents
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListAgentsResponse>
      */
-    deleteAllAgents(requestData: googleProtobuf003.Empty, requestMetadata?: Metadata): Observable<googleProtobuf003.Empty>;
+    listAllAgents(requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListAgentsResponse>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param googleProtobuf003.Empty request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf003.Empty>>
+     * Unary RPC for /ondewo.nlu.Agents/AddUserToProject
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
      */
-    deleteAllAgents$eventStream(requestData: googleProtobuf003.Empty, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf003.Empty>>;
+    addUserToProject(requestData: thisProto.AddUserToProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListAgentsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListAgentsResponse>
+     * Unary RPC for /ondewo.nlu.Agents/RemoveUserFromProject
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
      */
-    listAgents(requestData: thisProto.ListAgentsRequest, requestMetadata?: Metadata): Observable<thisProto.ListAgentsResponse>;
+    removeUserFromProject(requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListAgentsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListAgentsResponse>>
+     * Unary RPC for /ondewo.nlu.Agents/ListUsersInProject
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListUsersInProjectResponse>
      */
-    listAgents$eventStream(requestData: thisProto.ListAgentsRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.ListAgentsResponse>>;
+    listUsersInProject(requestData: thisProto.ListUsersInProjectRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListUsersInProjectResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListAgentsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListAgentsOfUserResponse>
+     * Unary RPC for /ondewo.nlu.Agents/GetPlatformInfo
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetPlatformInfoResponse>
      */
-    listAgentsOfUser(requestData: thisProto.ListAgentsRequest, requestMetadata?: Metadata): Observable<thisProto.ListAgentsOfUserResponse>;
+    getPlatformInfo(requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.GetPlatformInfoResponse>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListAgentsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListAgentsOfUserResponse>>
+     * Unary RPC for /ondewo.nlu.Agents/ListProjectPermissions
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListProjectPermissionsResponse>
      */
-    listAgentsOfUser$eventStream(requestData: thisProto.ListAgentsRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.ListAgentsOfUserResponse>>;
+    listProjectPermissions(requestData: thisProto.ListProjectPermissionsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListProjectPermissionsResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListAgentsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListAgentsResponse>
+     * Unary RPC for /ondewo.nlu.Agents/TrainAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning008.Operation>
      */
-    listAllAgents(requestData: thisProto.ListAgentsRequest, requestMetadata?: Metadata): Observable<thisProto.ListAgentsResponse>;
+    trainAgent(requestData: thisProto.TrainAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListAgentsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListAgentsResponse>>
+     * Unary RPC for /ondewo.nlu.Agents/BuildCache
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning008.Operation>
      */
-    listAllAgents$eventStream(requestData: thisProto.ListAgentsRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.ListAgentsResponse>>;
+    buildCache(requestData: thisProto.BuildCacheRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.AddUserToProjectRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf003.Empty>
+     * Unary RPC for /ondewo.nlu.Agents/ExportAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning008.Operation>
      */
-    addUserToProject(requestData: thisProto.AddUserToProjectRequest, requestMetadata?: Metadata): Observable<googleProtobuf003.Empty>;
+    exportAgent(requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.AddUserToProjectRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf003.Empty>>
+     * Unary RPC for /ondewo.nlu.Agents/ImportAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning008.Operation>
      */
-    addUserToProject$eventStream(requestData: thisProto.AddUserToProjectRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf003.Empty>>;
+    importAgent(requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.RemoveUserFromProjectRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf003.Empty>
+     * Unary RPC for /ondewo.nlu.Agents/OptimizeRankingMatch
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning008.Operation>
      */
-    removeUserFromProject(requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: Metadata): Observable<googleProtobuf003.Empty>;
+    optimizeRankingMatch(requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.RemoveUserFromProjectRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf003.Empty>>
+     * Unary RPC for /ondewo.nlu.Agents/RestoreAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning008.Operation>
      */
-    removeUserFromProject$eventStream(requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf003.Empty>>;
+    restoreAgent(requestData: thisProto.RestoreAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListUsersInProjectRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListUsersInProjectResponse>
+     * Unary RPC for /ondewo.nlu.Agents/GetAgentStatistics
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetAgentStatisticsResponse>
      */
-    listUsersInProject(requestData: thisProto.ListUsersInProjectRequest, requestMetadata?: Metadata): Observable<thisProto.ListUsersInProjectResponse>;
+    getAgentStatistics(requestData: thisProto.GetAgentStatisticsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetAgentStatisticsResponse>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListUsersInProjectRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListUsersInProjectResponse>>
+     * Unary RPC for /ondewo.nlu.Agents/SetAgentStatus
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Agent>
      */
-    listUsersInProject$eventStream(requestData: thisProto.ListUsersInProjectRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.ListUsersInProjectResponse>>;
+    setAgentStatus(requestData: thisProto.SetAgentStatusRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Agent>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param googleProtobuf003.Empty request
-     * @param Metadata metadata
-     * @return Observable<thisProto.GetPlatformInfoResponse>
+     * Unary RPC for /ondewo.nlu.Agents/SetResources
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
      */
-    getPlatformInfo(requestData: googleProtobuf003.Empty, requestMetadata?: Metadata): Observable<thisProto.GetPlatformInfoResponse>;
+    setResources(requestData: thisProto.SetResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param googleProtobuf003.Empty request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.GetPlatformInfoResponse>>
+     * Unary RPC for /ondewo.nlu.Agents/DeleteResources
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
      */
-    getPlatformInfo$eventStream(requestData: googleProtobuf003.Empty, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.GetPlatformInfoResponse>>;
+    deleteResources(requestData: thisProto.DeleteResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListProjectPermissionsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListProjectPermissionsResponse>
+     * Unary RPC for /ondewo.nlu.Agents/ExportResources
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ExportResourcesResponse>
      */
-    listProjectPermissions(requestData: thisProto.ListProjectPermissionsRequest, requestMetadata?: Metadata): Observable<thisProto.ListProjectPermissionsResponse>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListProjectPermissionsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListProjectPermissionsResponse>>
-     */
-    listProjectPermissions$eventStream(requestData: thisProto.ListProjectPermissionsRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.ListProjectPermissionsResponse>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.TrainAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    trainAgent(requestData: thisProto.TrainAgentRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.TrainAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    trainAgent$eventStream(requestData: thisProto.TrainAgentRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BuildCacheRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    buildCache(requestData: thisProto.BuildCacheRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BuildCacheRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    buildCache$eventStream(requestData: thisProto.BuildCacheRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ExportAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    exportAgent(requestData: thisProto.ExportAgentRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ExportAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    exportAgent$eventStream(requestData: thisProto.ExportAgentRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ImportAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    importAgent(requestData: thisProto.ImportAgentRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ImportAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    importAgent$eventStream(requestData: thisProto.ImportAgentRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.OptimizeRankingMatchRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    optimizeRankingMatch(requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.OptimizeRankingMatchRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    optimizeRankingMatch$eventStream(requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.RestoreAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    restoreAgent(requestData: thisProto.RestoreAgentRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.RestoreAgentRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    restoreAgent$eventStream(requestData: thisProto.RestoreAgentRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetAgentStatisticsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.GetAgentStatisticsResponse>
-     */
-    getAgentStatistics(requestData: thisProto.GetAgentStatisticsRequest, requestMetadata?: Metadata): Observable<thisProto.GetAgentStatisticsResponse>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetAgentStatisticsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.GetAgentStatisticsResponse>>
-     */
-    getAgentStatistics$eventStream(requestData: thisProto.GetAgentStatisticsRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.GetAgentStatisticsResponse>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.SetAgentStatusRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Agent>
-     */
-    setAgentStatus(requestData: thisProto.SetAgentStatusRequest, requestMetadata?: Metadata): Observable<thisProto.Agent>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.SetAgentStatusRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Agent>>
-     */
-    setAgentStatus$eventStream(requestData: thisProto.SetAgentStatusRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.Agent>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.SetResourcesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf003.Empty>
-     */
-    setResources(requestData: thisProto.SetResourcesRequest, requestMetadata?: Metadata): Observable<googleProtobuf003.Empty>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.SetResourcesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf003.Empty>>
-     */
-    setResources$eventStream(requestData: thisProto.SetResourcesRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf003.Empty>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteResourcesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf003.Empty>
-     */
-    deleteResources(requestData: thisProto.DeleteResourcesRequest, requestMetadata?: Metadata): Observable<googleProtobuf003.Empty>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteResourcesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf003.Empty>>
-     */
-    deleteResources$eventStream(requestData: thisProto.DeleteResourcesRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf003.Empty>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ExportResourcesRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ExportResourcesResponse>
-     */
-    exportResources(requestData: thisProto.ExportResourcesRequest, requestMetadata?: Metadata): Observable<thisProto.ExportResourcesResponse>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ExportResourcesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ExportResourcesResponse>>
-     */
-    exportResources$eventStream(requestData: thisProto.ExportResourcesRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.ExportResourcesResponse>>;
+    exportResources(requestData: thisProto.ExportResourcesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ExportResourcesResponse>;
 }

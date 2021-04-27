@@ -1,107 +1,295 @@
-import { GrpcMessage, RecursivePartial } from '@ngx-grpc/common';
+import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as ondewoNlu001 from '../../ondewo/nlu/intent.pb';
-import * as ondewoNlu003 from '../../ondewo/nlu/entity-type.pb';
+import * as ondewoNlu009 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/entity-type.pb';
+/**
+ * Message implementation for ondewo.nlu.GetIntentCountRequest
+ */
 export declare class GetIntentCountRequest implements GrpcMessage {
-    static toBinary(instance: GetIntentCountRequest): any;
-    static fromBinary(bytes: ByteSource): GetIntentCountRequest;
-    static refineValues(instance: GetIntentCountRequest): void;
-    static fromBinaryReader(instance: GetIntentCountRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetIntentCountRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetIntentCountRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetIntentCountRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetIntentCountRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetIntentCountRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _filterByCategory?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetIntentCountRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentCountRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetIntentCountRequest>);
+    constructor(_value?: RecursivePartial<GetIntentCountRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
-    get filterByCategory(): ondewoNlu001.IntentCategory | undefined;
-    set filterByCategory(value: ondewoNlu001.IntentCategory | undefined);
-    toObject(): {
-        parent: string;
-        filterByCategory: ondewoNlu001.IntentCategory;
-    };
-    toJSON(): {
-        parent: string;
-        filterByCategory: ondewoNlu001.IntentCategory;
-    };
+    get filterByCategory(): ondewoNlu009.IntentCategory | undefined;
+    set filterByCategory(value: ondewoNlu009.IntentCategory | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetIntentCountRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetIntentCountRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetIntentCountRequest.AsProtobufJSON;
 }
-export declare module GetIntentCountRequest { }
+export declare module GetIntentCountRequest {
+    /**
+     * Standard JavaScript object representation for GetIntentCountRequest
+     */
+    interface AsObject {
+        parent?: string;
+        filterByCategory?: ondewoNlu009.IntentCategory;
+    }
+    /**
+     * Protobuf JSON representation for GetIntentCountRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        filterByCategory?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetEntityTypeCountRequest
+ */
 export declare class GetEntityTypeCountRequest implements GrpcMessage {
-    static toBinary(instance: GetEntityTypeCountRequest): any;
-    static fromBinary(bytes: ByteSource): GetEntityTypeCountRequest;
-    static refineValues(instance: GetEntityTypeCountRequest): void;
-    static fromBinaryReader(instance: GetEntityTypeCountRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetEntityTypeCountRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetEntityTypeCountRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetEntityTypeCountRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetEntityTypeCountRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetEntityTypeCountRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _filterByCategory?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetEntityTypeCountRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetEntityTypeCountRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetEntityTypeCountRequest>);
+    constructor(_value?: RecursivePartial<GetEntityTypeCountRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
-    get filterByCategory(): ondewoNlu003.EntityTypeCategory | undefined;
-    set filterByCategory(value: ondewoNlu003.EntityTypeCategory | undefined);
-    toObject(): {
-        parent: string;
-        filterByCategory: ondewoNlu003.EntityTypeCategory;
-    };
-    toJSON(): {
-        parent: string;
-        filterByCategory: ondewoNlu003.EntityTypeCategory;
-    };
+    get filterByCategory(): ondewoNlu010.EntityTypeCategory | undefined;
+    set filterByCategory(value: ondewoNlu010.EntityTypeCategory | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetEntityTypeCountRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetEntityTypeCountRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetEntityTypeCountRequest.AsProtobufJSON;
 }
-export declare module GetEntityTypeCountRequest { }
+export declare module GetEntityTypeCountRequest {
+    /**
+     * Standard JavaScript object representation for GetEntityTypeCountRequest
+     */
+    interface AsObject {
+        parent?: string;
+        filterByCategory?: ondewoNlu010.EntityTypeCategory;
+    }
+    /**
+     * Protobuf JSON representation for GetEntityTypeCountRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        filterByCategory?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetProjectStatRequest
+ */
 export declare class GetProjectStatRequest implements GrpcMessage {
-    static toBinary(instance: GetProjectStatRequest): any;
-    static fromBinary(bytes: ByteSource): GetProjectStatRequest;
-    static refineValues(instance: GetProjectStatRequest): void;
-    static fromBinaryReader(instance: GetProjectStatRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetProjectStatRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetProjectStatRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetProjectStatRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetProjectStatRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetProjectStatRequest, _writer: BinaryWriter): void;
     private _parent?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetProjectStatRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetProjectStatRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetProjectStatRequest>);
+    constructor(_value?: RecursivePartial<GetProjectStatRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
-    toObject(): {
-        parent: string;
-    };
-    toJSON(): {
-        parent: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetProjectStatRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetProjectStatRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetProjectStatRequest.AsProtobufJSON;
 }
-export declare module GetProjectStatRequest { }
+export declare module GetProjectStatRequest {
+    /**
+     * Standard JavaScript object representation for GetProjectStatRequest
+     */
+    interface AsObject {
+        parent?: string;
+    }
+    /**
+     * Protobuf JSON representation for GetProjectStatRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetProjectElementStatRequest
+ */
 export declare class GetProjectElementStatRequest implements GrpcMessage {
-    static toBinary(instance: GetProjectElementStatRequest): any;
-    static fromBinary(bytes: ByteSource): GetProjectElementStatRequest;
-    static refineValues(instance: GetProjectElementStatRequest): void;
-    static fromBinaryReader(instance: GetProjectElementStatRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetProjectElementStatRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetProjectElementStatRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetProjectElementStatRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetProjectElementStatRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetProjectElementStatRequest, _writer: BinaryWriter): void;
     private _name?;
     private _languageCode?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetProjectElementStatRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetProjectElementStatRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetProjectElementStatRequest>);
+    constructor(_value?: RecursivePartial<GetProjectElementStatRequest.AsObject>);
     get name(): string | undefined;
     set name(value: string | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    toObject(): {
-        name: string;
-        languageCode: string;
-    };
-    toJSON(): {
-        name: string;
-        languageCode: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetProjectElementStatRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetProjectElementStatRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetProjectElementStatRequest.AsProtobufJSON;
 }
-export declare module GetProjectElementStatRequest { }
+export declare module GetProjectElementStatRequest {
+    /**
+     * Standard JavaScript object representation for GetProjectElementStatRequest
+     */
+    interface AsObject {
+        name?: string;
+        languageCode?: string;
+    }
+    /**
+     * Protobuf JSON representation for GetProjectElementStatRequest
+     */
+    interface AsProtobufJSON {
+        name?: string;
+        languageCode?: string;
+    }
+}

@@ -1,95 +1,116 @@
-import { GrpcClientFactory, GrpcClientSettings, GrpcEvent } from '@ngx-grpc/common';
+import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
-import { Metadata } from 'grpc-web';
 import { Observable } from 'rxjs';
 import * as thisProto from './context.pb';
-import * as googleProtobuf001 from '../../google/protobuf/empty.pb';
+import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+/**
+ * Service client implementation for ondewo.nlu.Contexts
+ */
 export declare class ContextsClient {
     private handler;
     private client;
-    constructor(settings: GrpcClientSettings, clientFactory: GrpcClientFactory, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListContextsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListContextsResponse>
+     * Raw RPC implementation for each service client method.
+     * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+     * Attention: these methods do not throw errors when non-zero status codes are received.
      */
-    listContexts(requestData: thisProto.ListContextsRequest, requestMetadata?: Metadata): Observable<thisProto.ListContextsResponse>;
+    $raw: {
+        /**
+         * Unary RPC for /ondewo.nlu.Contexts/ListContexts
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListContextsResponse>>
+         */
+        listContexts: (requestData: thisProto.ListContextsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListContextsResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Contexts/GetContext
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.Context>>
+         */
+        getContext: (requestData: thisProto.GetContextRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Context>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Contexts/CreateContext
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.Context>>
+         */
+        createContext: (requestData: thisProto.CreateContextRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Context>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Contexts/UpdateContext
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.Context>>
+         */
+        updateContext: (requestData: thisProto.UpdateContextRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Context>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Contexts/DeleteContext
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+         */
+        deleteContext: (requestData: thisProto.DeleteContextRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Contexts/DeleteAllContexts
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+         */
+        deleteAllContexts: (requestData: thisProto.DeleteAllContextsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
+    };
+    constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListContextsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListContextsResponse>>
+     * Unary RPC for /ondewo.nlu.Contexts/ListContexts
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListContextsResponse>
      */
-    listContexts$eventStream(requestData: thisProto.ListContextsRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.ListContextsResponse>>;
+    listContexts(requestData: thisProto.ListContextsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListContextsResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetContextRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Context>
+     * Unary RPC for /ondewo.nlu.Contexts/GetContext
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Context>
      */
-    getContext(requestData: thisProto.GetContextRequest, requestMetadata?: Metadata): Observable<thisProto.Context>;
+    getContext(requestData: thisProto.GetContextRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Context>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetContextRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Context>>
+     * Unary RPC for /ondewo.nlu.Contexts/CreateContext
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Context>
      */
-    getContext$eventStream(requestData: thisProto.GetContextRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.Context>>;
+    createContext(requestData: thisProto.CreateContextRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Context>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateContextRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Context>
+     * Unary RPC for /ondewo.nlu.Contexts/UpdateContext
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Context>
      */
-    createContext(requestData: thisProto.CreateContextRequest, requestMetadata?: Metadata): Observable<thisProto.Context>;
+    updateContext(requestData: thisProto.UpdateContextRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Context>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateContextRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Context>>
+     * Unary RPC for /ondewo.nlu.Contexts/DeleteContext
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf003.Empty>
      */
-    createContext$eventStream(requestData: thisProto.CreateContextRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.Context>>;
+    deleteContext(requestData: thisProto.DeleteContextRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.UpdateContextRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Context>
+     * Unary RPC for /ondewo.nlu.Contexts/DeleteAllContexts
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf003.Empty>
      */
-    updateContext(requestData: thisProto.UpdateContextRequest, requestMetadata?: Metadata): Observable<thisProto.Context>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.UpdateContextRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Context>>
-     */
-    updateContext$eventStream(requestData: thisProto.UpdateContextRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.Context>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteContextRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf001.Empty>
-     */
-    deleteContext(requestData: thisProto.DeleteContextRequest, requestMetadata?: Metadata): Observable<googleProtobuf001.Empty>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteContextRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
-     */
-    deleteContext$eventStream(requestData: thisProto.DeleteContextRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf001.Empty>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteAllContextsRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf001.Empty>
-     */
-    deleteAllContexts(requestData: thisProto.DeleteAllContextsRequest, requestMetadata?: Metadata): Observable<googleProtobuf001.Empty>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteAllContextsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf001.Empty>>
-     */
-    deleteAllContexts$eventStream(requestData: thisProto.DeleteAllContextsRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf001.Empty>>;
+    deleteAllContexts(requestData: thisProto.DeleteAllContextsRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
 }

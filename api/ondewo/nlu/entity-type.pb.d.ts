@@ -1,24 +1,45 @@
-import { GrpcMessage, RecursivePartial } from '@ngx-grpc/common';
+import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as googleProtobuf003 from '../../google/protobuf/field-mask.pb';
-import * as ondewoNlu004 from '../../ondewo/nlu/common.pb';
+import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu008 from '../../ondewo/nlu/common.pb';
 export declare enum EntityTypeView {
-    entityTypeViewUnspecified = 0,
-    entityTypeViewFull = 1,
-    entityTypeViewPartial = 2,
-    entityTypeViewShallow = 3
+    ENTITY_TYPE_VIEW_UNSPECIFIED = 0,
+    ENTITY_TYPE_VIEW_FULL = 1,
+    ENTITY_TYPE_VIEW_PARTIAL = 2,
+    ENTITY_TYPE_VIEW_SHALLOW = 3
 }
 export declare enum EntityTypeCategory {
-    allEntityTypes = 0,
-    defaultEntityTypes = 1,
-    userDefinedEntityTypes = 2
+    ALL_ENTITY_TYPES = 0,
+    DEFAULT_ENTITY_TYPES = 1,
+    USER_DEFINED_ENTITY_TYPES = 2
 }
+/**
+ * Message implementation for ondewo.nlu.EntityType
+ */
 export declare class EntityType implements GrpcMessage {
-    static toBinary(instance: EntityType): any;
-    static fromBinary(bytes: ByteSource): EntityType;
-    static refineValues(instance: EntityType): void;
-    static fromBinaryReader(instance: EntityType, reader: BinaryReader): void;
-    static toBinaryWriter(instance: EntityType, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): EntityType;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EntityType): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: EntityType, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: EntityType, _writer: BinaryWriter): void;
     private _name?;
     private _displayName?;
     private _kind?;
@@ -29,10 +50,10 @@ export declare class EntityType implements GrpcMessage {
     private _status?;
     private _synonymCount?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param EntityType value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityType to deeply clone from
      */
-    constructor(value?: RecursivePartial<EntityType>);
+    constructor(_value?: RecursivePartial<EntityType.AsObject>);
     get name(): string | undefined;
     set name(value: string | undefined);
     get displayName(): string | undefined;
@@ -51,71 +72,105 @@ export declare class EntityType implements GrpcMessage {
     set status(value: EntityType.EntityTypeStatus | undefined);
     get synonymCount(): number | undefined;
     set synonymCount(value: number | undefined);
-    toObject(): {
-        name: string;
-        displayName: string;
-        kind: EntityType.Kind;
-        autoExpansionMode: EntityType.AutoExpansionMode;
-        entities: {
-            value: string;
-            synonyms: string[];
-            name: string;
-            displayName: string;
-            synonymCount: number;
-        }[];
-        nextPageToken: string;
-        entityCount: number;
-        status: EntityType.EntityTypeStatus;
-        synonymCount: number;
-    };
-    toJSON(): {
-        name: string;
-        displayName: string;
-        kind: EntityType.Kind;
-        autoExpansionMode: EntityType.AutoExpansionMode;
-        entities: {
-            value: string;
-            synonyms: string[];
-            name: string;
-            displayName: string;
-            synonymCount: number;
-        }[];
-        nextPageToken: string;
-        entityCount: number;
-        status: EntityType.EntityTypeStatus;
-        synonymCount: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EntityType.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): EntityType.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): EntityType.AsProtobufJSON;
 }
 export declare module EntityType {
+    /**
+     * Standard JavaScript object representation for EntityType
+     */
+    interface AsObject {
+        name?: string;
+        displayName?: string;
+        kind?: EntityType.Kind;
+        autoExpansionMode?: EntityType.AutoExpansionMode;
+        entities?: EntityType.Entity.AsObject[];
+        nextPageToken?: string;
+        entityCount?: number;
+        status?: EntityType.EntityTypeStatus;
+        synonymCount?: number;
+    }
+    /**
+     * Protobuf JSON representation for EntityType
+     */
+    interface AsProtobufJSON {
+        name?: string;
+        displayName?: string;
+        kind?: string;
+        autoExpansionMode?: string;
+        entities?: EntityType.Entity.AsProtobufJSON[] | null;
+        nextPageToken?: string;
+        entityCount?: number;
+        status?: string;
+        synonymCount?: number;
+    }
     enum Kind {
-        kindUnspecified = 0,
-        kindMap = 1,
-        kindList = 2
+        KIND_UNSPECIFIED = 0,
+        KIND_MAP = 1,
+        KIND_LIST = 2
     }
     enum EntityTypeStatus {
-        active = 0,
-        inactive = 1
+        ACTIVE = 0,
+        INACTIVE = 1
     }
     enum AutoExpansionMode {
-        autoExpansionModeUnspecified = 0,
-        autoExpansionModeDefault = 1
+        AUTO_EXPANSION_MODE_UNSPECIFIED = 0,
+        AUTO_EXPANSION_MODE_DEFAULT = 1
     }
+    /**
+     * Message implementation for ondewo.nlu.Entity
+     */
     class Entity implements GrpcMessage {
-        static toBinary(instance: Entity): any;
-        static fromBinary(bytes: ByteSource): Entity;
-        static refineValues(instance: Entity): void;
-        static fromBinaryReader(instance: Entity, reader: BinaryReader): void;
-        static toBinaryWriter(instance: Entity, writer: BinaryWriter): void;
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): Entity;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: Entity): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: Entity, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: Entity, _writer: BinaryWriter): void;
         private _value?;
         private _synonyms?;
         private _name?;
         private _displayName?;
         private _synonymCount?;
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Entity value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Entity to deeply clone from
          */
-        constructor(value?: RecursivePartial<Entity>);
+        constructor(_value?: RecursivePartial<Entity.AsObject>);
         get value(): string | undefined;
         set value(value: string | undefined);
         get synonyms(): string[] | undefined;
@@ -126,29 +181,76 @@ export declare module EntityType {
         set displayName(value: string | undefined);
         get synonymCount(): number | undefined;
         set synonymCount(value: number | undefined);
-        toObject(): {
-            value: string;
-            synonyms: string[];
-            name: string;
-            displayName: string;
-            synonymCount: number;
-        };
-        toJSON(): {
-            value: string;
-            synonyms: string[];
-            name: string;
-            displayName: string;
-            synonymCount: number;
-        };
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): Entity.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): Entity.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): Entity.AsProtobufJSON;
     }
-    module Entity { }
+    module Entity {
+        /**
+         * Standard JavaScript object representation for Entity
+         */
+        interface AsObject {
+            value?: string;
+            synonyms?: string[];
+            name?: string;
+            displayName?: string;
+            synonymCount?: number;
+        }
+        /**
+         * Protobuf JSON representation for Entity
+         */
+        interface AsProtobufJSON {
+            value?: string;
+            synonyms?: string[];
+            name?: string;
+            displayName?: string;
+            synonymCount?: number;
+        }
+    }
 }
+/**
+ * Message implementation for ondewo.nlu.ListEntityTypesRequest
+ */
 export declare class ListEntityTypesRequest implements GrpcMessage {
-    static toBinary(instance: ListEntityTypesRequest): any;
-    static fromBinary(bytes: ByteSource): ListEntityTypesRequest;
-    static refineValues(instance: ListEntityTypesRequest): void;
-    static fromBinaryReader(instance: ListEntityTypesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ListEntityTypesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListEntityTypesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListEntityTypesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListEntityTypesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListEntityTypesRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _languageCode?;
     private _pageToken?;
@@ -156,10 +258,10 @@ export declare class ListEntityTypesRequest implements GrpcMessage {
     private _filterByCategory?;
     private _sortByField?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ListEntityTypesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListEntityTypesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<ListEntityTypesRequest>);
+    constructor(_value?: RecursivePartial<ListEntityTypesRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
     get languageCode(): string | undefined;
@@ -172,281 +274,457 @@ export declare class ListEntityTypesRequest implements GrpcMessage {
     set filterByCategory(value: EntityTypeCategory | undefined);
     get sortByField(): EntityTypeSorting | undefined;
     set sortByField(value: EntityTypeSorting | undefined);
-    toObject(): {
-        parent: string;
-        languageCode: string;
-        pageToken: string;
-        entityTypeView: EntityTypeView;
-        filterByCategory: EntityTypeCategory;
-        sortByField: {
-            sortingField: EntityTypeSorting.EntityTypeSortingField;
-            sortingMode: ondewoNlu004.SortingMode;
-        };
-    };
-    toJSON(): {
-        parent: string;
-        languageCode: string;
-        pageToken: string;
-        entityTypeView: EntityTypeView;
-        filterByCategory: EntityTypeCategory;
-        sortByField: {
-            sortingField: EntityTypeSorting.EntityTypeSortingField;
-            sortingMode: ondewoNlu004.SortingMode;
-        };
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListEntityTypesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListEntityTypesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListEntityTypesRequest.AsProtobufJSON;
 }
-export declare module ListEntityTypesRequest { }
+export declare module ListEntityTypesRequest {
+    /**
+     * Standard JavaScript object representation for ListEntityTypesRequest
+     */
+    interface AsObject {
+        parent?: string;
+        languageCode?: string;
+        pageToken?: string;
+        entityTypeView?: EntityTypeView;
+        filterByCategory?: EntityTypeCategory;
+        sortByField?: EntityTypeSorting.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for ListEntityTypesRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        languageCode?: string;
+        pageToken?: string;
+        entityTypeView?: string;
+        filterByCategory?: string;
+        sortByField?: EntityTypeSorting.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListEntityTypesResponse
+ */
 export declare class ListEntityTypesResponse implements GrpcMessage {
-    static toBinary(instance: ListEntityTypesResponse): any;
-    static fromBinary(bytes: ByteSource): ListEntityTypesResponse;
-    static refineValues(instance: ListEntityTypesResponse): void;
-    static fromBinaryReader(instance: ListEntityTypesResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ListEntityTypesResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListEntityTypesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListEntityTypesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListEntityTypesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListEntityTypesResponse, _writer: BinaryWriter): void;
     private _entityTypes?;
     private _nextPageToken?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ListEntityTypesResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListEntityTypesResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<ListEntityTypesResponse>);
+    constructor(_value?: RecursivePartial<ListEntityTypesResponse.AsObject>);
     get entityTypes(): EntityType[] | undefined;
     set entityTypes(value: EntityType[] | undefined);
     get nextPageToken(): string | undefined;
     set nextPageToken(value: string | undefined);
-    toObject(): {
-        entityTypes: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-        nextPageToken: string;
-    };
-    toJSON(): {
-        entityTypes: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-        nextPageToken: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListEntityTypesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListEntityTypesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListEntityTypesResponse.AsProtobufJSON;
 }
-export declare module ListEntityTypesResponse { }
+export declare module ListEntityTypesResponse {
+    /**
+     * Standard JavaScript object representation for ListEntityTypesResponse
+     */
+    interface AsObject {
+        entityTypes?: EntityType.AsObject[];
+        nextPageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListEntityTypesResponse
+     */
+    interface AsProtobufJSON {
+        entityTypes?: EntityType.AsProtobufJSON[] | null;
+        nextPageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetEntityTypeRequest
+ */
 export declare class GetEntityTypeRequest implements GrpcMessage {
-    static toBinary(instance: GetEntityTypeRequest): any;
-    static fromBinary(bytes: ByteSource): GetEntityTypeRequest;
-    static refineValues(instance: GetEntityTypeRequest): void;
-    static fromBinaryReader(instance: GetEntityTypeRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetEntityTypeRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetEntityTypeRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetEntityTypeRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetEntityTypeRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetEntityTypeRequest, _writer: BinaryWriter): void;
     private _name?;
     private _languageCode?;
     private _pageToken?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetEntityTypeRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetEntityTypeRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetEntityTypeRequest>);
+    constructor(_value?: RecursivePartial<GetEntityTypeRequest.AsObject>);
     get name(): string | undefined;
     set name(value: string | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
     get pageToken(): string | undefined;
     set pageToken(value: string | undefined);
-    toObject(): {
-        name: string;
-        languageCode: string;
-        pageToken: string;
-    };
-    toJSON(): {
-        name: string;
-        languageCode: string;
-        pageToken: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetEntityTypeRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetEntityTypeRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetEntityTypeRequest.AsProtobufJSON;
 }
-export declare module GetEntityTypeRequest { }
+export declare module GetEntityTypeRequest {
+    /**
+     * Standard JavaScript object representation for GetEntityTypeRequest
+     */
+    interface AsObject {
+        name?: string;
+        languageCode?: string;
+        pageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for GetEntityTypeRequest
+     */
+    interface AsProtobufJSON {
+        name?: string;
+        languageCode?: string;
+        pageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.CreateEntityTypeRequest
+ */
 export declare class CreateEntityTypeRequest implements GrpcMessage {
-    static toBinary(instance: CreateEntityTypeRequest): any;
-    static fromBinary(bytes: ByteSource): CreateEntityTypeRequest;
-    static refineValues(instance: CreateEntityTypeRequest): void;
-    static fromBinaryReader(instance: CreateEntityTypeRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: CreateEntityTypeRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): CreateEntityTypeRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: CreateEntityTypeRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: CreateEntityTypeRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: CreateEntityTypeRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _entityType?;
     private _languageCode?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param CreateEntityTypeRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateEntityTypeRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<CreateEntityTypeRequest>);
+    constructor(_value?: RecursivePartial<CreateEntityTypeRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
     get entityType(): EntityType | undefined;
     set entityType(value: EntityType | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    toObject(): {
-        parent: string;
-        entityType: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        };
-        languageCode: string;
-    };
-    toJSON(): {
-        parent: string;
-        entityType: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        };
-        languageCode: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): CreateEntityTypeRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): CreateEntityTypeRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): CreateEntityTypeRequest.AsProtobufJSON;
 }
-export declare module CreateEntityTypeRequest { }
+export declare module CreateEntityTypeRequest {
+    /**
+     * Standard JavaScript object representation for CreateEntityTypeRequest
+     */
+    interface AsObject {
+        parent?: string;
+        entityType?: EntityType.AsObject;
+        languageCode?: string;
+    }
+    /**
+     * Protobuf JSON representation for CreateEntityTypeRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        entityType?: EntityType.AsProtobufJSON | null;
+        languageCode?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.UpdateEntityTypeRequest
+ */
 export declare class UpdateEntityTypeRequest implements GrpcMessage {
-    static toBinary(instance: UpdateEntityTypeRequest): any;
-    static fromBinary(bytes: ByteSource): UpdateEntityTypeRequest;
-    static refineValues(instance: UpdateEntityTypeRequest): void;
-    static fromBinaryReader(instance: UpdateEntityTypeRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: UpdateEntityTypeRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): UpdateEntityTypeRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: UpdateEntityTypeRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: UpdateEntityTypeRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: UpdateEntityTypeRequest, _writer: BinaryWriter): void;
     private _entityType?;
     private _languageCode?;
     private _updateMask?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param UpdateEntityTypeRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateEntityTypeRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<UpdateEntityTypeRequest>);
+    constructor(_value?: RecursivePartial<UpdateEntityTypeRequest.AsObject>);
     get entityType(): EntityType | undefined;
     set entityType(value: EntityType | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    get updateMask(): googleProtobuf003.FieldMask | undefined;
-    set updateMask(value: googleProtobuf003.FieldMask | undefined);
-    toObject(): {
-        entityType: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        };
-        languageCode: string;
-        updateMask: {
-            paths: string[];
-        };
-    };
-    toJSON(): {
-        entityType: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        };
-        languageCode: string;
-        updateMask: {
-            paths: string[];
-        };
-    };
+    get updateMask(): googleProtobuf007.FieldMask | undefined;
+    set updateMask(value: googleProtobuf007.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): UpdateEntityTypeRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): UpdateEntityTypeRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): UpdateEntityTypeRequest.AsProtobufJSON;
 }
-export declare module UpdateEntityTypeRequest { }
+export declare module UpdateEntityTypeRequest {
+    /**
+     * Standard JavaScript object representation for UpdateEntityTypeRequest
+     */
+    interface AsObject {
+        entityType?: EntityType.AsObject;
+        languageCode?: string;
+        updateMask?: googleProtobuf007.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for UpdateEntityTypeRequest
+     */
+    interface AsProtobufJSON {
+        entityType?: EntityType.AsProtobufJSON | null;
+        languageCode?: string;
+        updateMask?: googleProtobuf007.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DeleteEntityTypeRequest
+ */
 export declare class DeleteEntityTypeRequest implements GrpcMessage {
-    static toBinary(instance: DeleteEntityTypeRequest): any;
-    static fromBinary(bytes: ByteSource): DeleteEntityTypeRequest;
-    static refineValues(instance: DeleteEntityTypeRequest): void;
-    static fromBinaryReader(instance: DeleteEntityTypeRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: DeleteEntityTypeRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DeleteEntityTypeRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DeleteEntityTypeRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DeleteEntityTypeRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DeleteEntityTypeRequest, _writer: BinaryWriter): void;
     private _name?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param DeleteEntityTypeRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteEntityTypeRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<DeleteEntityTypeRequest>);
+    constructor(_value?: RecursivePartial<DeleteEntityTypeRequest.AsObject>);
     get name(): string | undefined;
     set name(value: string | undefined);
-    toObject(): {
-        name: string;
-    };
-    toJSON(): {
-        name: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DeleteEntityTypeRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DeleteEntityTypeRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DeleteEntityTypeRequest.AsProtobufJSON;
 }
-export declare module DeleteEntityTypeRequest { }
+export declare module DeleteEntityTypeRequest {
+    /**
+     * Standard JavaScript object representation for DeleteEntityTypeRequest
+     */
+    interface AsObject {
+        name?: string;
+    }
+    /**
+     * Protobuf JSON representation for DeleteEntityTypeRequest
+     */
+    interface AsProtobufJSON {
+        name?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchUpdateEntityTypesRequest
+ */
 export declare class BatchUpdateEntityTypesRequest implements GrpcMessage {
-    static toBinary(instance: BatchUpdateEntityTypesRequest): any;
-    static fromBinary(bytes: ByteSource): BatchUpdateEntityTypesRequest;
-    static refineValues(instance: BatchUpdateEntityTypesRequest): void;
-    static fromBinaryReader(instance: BatchUpdateEntityTypesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: BatchUpdateEntityTypesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchUpdateEntityTypesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchUpdateEntityTypesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchUpdateEntityTypesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchUpdateEntityTypesRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _entityTypeBatchUri?;
     private _entityTypeBatchInline?;
@@ -454,10 +732,10 @@ export declare class BatchUpdateEntityTypesRequest implements GrpcMessage {
     private _updateMask?;
     private _entityTypeBatch;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param BatchUpdateEntityTypesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateEntityTypesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<BatchUpdateEntityTypesRequest>);
+    constructor(_value?: RecursivePartial<BatchUpdateEntityTypesRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
     get entityTypeBatchUri(): string | undefined;
@@ -466,368 +744,589 @@ export declare class BatchUpdateEntityTypesRequest implements GrpcMessage {
     set entityTypeBatchInline(value: EntityTypeBatch | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    get updateMask(): googleProtobuf003.FieldMask | undefined;
-    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get updateMask(): googleProtobuf007.FieldMask | undefined;
+    set updateMask(value: googleProtobuf007.FieldMask | undefined);
     get entityTypeBatch(): BatchUpdateEntityTypesRequest.EntityTypeBatchCase;
-    toObject(): {
-        parent: string;
-        entityTypeBatchUri: string;
-        entityTypeBatchInline: {
-            entityTypes: {
-                name: string;
-                displayName: string;
-                kind: EntityType.Kind;
-                autoExpansionMode: EntityType.AutoExpansionMode;
-                entities: {
-                    value: string;
-                    synonyms: string[];
-                    name: string;
-                    displayName: string;
-                    synonymCount: number;
-                }[];
-                nextPageToken: string;
-                entityCount: number;
-                status: EntityType.EntityTypeStatus;
-                synonymCount: number;
-            }[];
-        };
-        languageCode: string;
-        updateMask: {
-            paths: string[];
-        };
-    };
-    toJSON(): {
-        parent: string;
-        entityTypeBatchUri: string;
-        entityTypeBatchInline: {
-            entityTypes: {
-                name: string;
-                displayName: string;
-                kind: EntityType.Kind;
-                autoExpansionMode: EntityType.AutoExpansionMode;
-                entities: {
-                    value: string;
-                    synonyms: string[];
-                    name: string;
-                    displayName: string;
-                    synonymCount: number;
-                }[];
-                nextPageToken: string;
-                entityCount: number;
-                status: EntityType.EntityTypeStatus;
-                synonymCount: number;
-            }[];
-        };
-        languageCode: string;
-        updateMask: {
-            paths: string[];
-        };
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchUpdateEntityTypesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchUpdateEntityTypesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateEntityTypesRequest.AsProtobufJSON;
 }
 export declare module BatchUpdateEntityTypesRequest {
+    /**
+     * Standard JavaScript object representation for BatchUpdateEntityTypesRequest
+     */
+    interface AsObject {
+        parent?: string;
+        entityTypeBatchUri?: string;
+        entityTypeBatchInline?: EntityTypeBatch.AsObject;
+        languageCode?: string;
+        updateMask?: googleProtobuf007.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for BatchUpdateEntityTypesRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        entityTypeBatchUri?: string | null;
+        entityTypeBatchInline?: EntityTypeBatch.AsProtobufJSON | null;
+        languageCode?: string;
+        updateMask?: googleProtobuf007.FieldMask.AsProtobufJSON | null;
+    }
     enum EntityTypeBatchCase {
         none = 0,
         entityTypeBatchUri = 1,
         entityTypeBatchInline = 2
     }
 }
+/**
+ * Message implementation for ondewo.nlu.BatchUpdateEntityTypesResponse
+ */
 export declare class BatchUpdateEntityTypesResponse implements GrpcMessage {
-    static toBinary(instance: BatchUpdateEntityTypesResponse): any;
-    static fromBinary(bytes: ByteSource): BatchUpdateEntityTypesResponse;
-    static refineValues(instance: BatchUpdateEntityTypesResponse): void;
-    static fromBinaryReader(instance: BatchUpdateEntityTypesResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: BatchUpdateEntityTypesResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchUpdateEntityTypesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchUpdateEntityTypesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchUpdateEntityTypesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchUpdateEntityTypesResponse, _writer: BinaryWriter): void;
     private _entityTypes?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param BatchUpdateEntityTypesResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateEntityTypesResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<BatchUpdateEntityTypesResponse>);
+    constructor(_value?: RecursivePartial<BatchUpdateEntityTypesResponse.AsObject>);
     get entityTypes(): EntityType[] | undefined;
     set entityTypes(value: EntityType[] | undefined);
-    toObject(): {
-        entityTypes: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-    };
-    toJSON(): {
-        entityTypes: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchUpdateEntityTypesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchUpdateEntityTypesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateEntityTypesResponse.AsProtobufJSON;
 }
-export declare module BatchUpdateEntityTypesResponse { }
+export declare module BatchUpdateEntityTypesResponse {
+    /**
+     * Standard JavaScript object representation for BatchUpdateEntityTypesResponse
+     */
+    interface AsObject {
+        entityTypes?: EntityType.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for BatchUpdateEntityTypesResponse
+     */
+    interface AsProtobufJSON {
+        entityTypes?: EntityType.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchDeleteEntityTypesRequest
+ */
 export declare class BatchDeleteEntityTypesRequest implements GrpcMessage {
-    static toBinary(instance: BatchDeleteEntityTypesRequest): any;
-    static fromBinary(bytes: ByteSource): BatchDeleteEntityTypesRequest;
-    static refineValues(instance: BatchDeleteEntityTypesRequest): void;
-    static fromBinaryReader(instance: BatchDeleteEntityTypesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: BatchDeleteEntityTypesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchDeleteEntityTypesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchDeleteEntityTypesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchDeleteEntityTypesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchDeleteEntityTypesRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _entityTypeNames?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param BatchDeleteEntityTypesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteEntityTypesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<BatchDeleteEntityTypesRequest>);
+    constructor(_value?: RecursivePartial<BatchDeleteEntityTypesRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
     get entityTypeNames(): string[] | undefined;
     set entityTypeNames(value: string[] | undefined);
-    toObject(): {
-        parent: string;
-        entityTypeNames: string[];
-    };
-    toJSON(): {
-        parent: string;
-        entityTypeNames: string[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchDeleteEntityTypesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchDeleteEntityTypesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteEntityTypesRequest.AsProtobufJSON;
 }
-export declare module BatchDeleteEntityTypesRequest { }
+export declare module BatchDeleteEntityTypesRequest {
+    /**
+     * Standard JavaScript object representation for BatchDeleteEntityTypesRequest
+     */
+    interface AsObject {
+        parent?: string;
+        entityTypeNames?: string[];
+    }
+    /**
+     * Protobuf JSON representation for BatchDeleteEntityTypesRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        entityTypeNames?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchCreateEntitiesRequest
+ */
 export declare class BatchCreateEntitiesRequest implements GrpcMessage {
-    static toBinary(instance: BatchCreateEntitiesRequest): any;
-    static fromBinary(bytes: ByteSource): BatchCreateEntitiesRequest;
-    static refineValues(instance: BatchCreateEntitiesRequest): void;
-    static fromBinaryReader(instance: BatchCreateEntitiesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: BatchCreateEntitiesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchCreateEntitiesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchCreateEntitiesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchCreateEntitiesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchCreateEntitiesRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _entities?;
     private _languageCode?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param BatchCreateEntitiesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchCreateEntitiesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<BatchCreateEntitiesRequest>);
+    constructor(_value?: RecursivePartial<BatchCreateEntitiesRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
     get entities(): EntityType.Entity[] | undefined;
     set entities(value: EntityType.Entity[] | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    toObject(): {
-        parent: string;
-        entities: {
-            value: string;
-            synonyms: string[];
-            name: string;
-            displayName: string;
-            synonymCount: number;
-        }[];
-        languageCode: string;
-    };
-    toJSON(): {
-        parent: string;
-        entities: {
-            value: string;
-            synonyms: string[];
-            name: string;
-            displayName: string;
-            synonymCount: number;
-        }[];
-        languageCode: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchCreateEntitiesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchCreateEntitiesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchCreateEntitiesRequest.AsProtobufJSON;
 }
-export declare module BatchCreateEntitiesRequest { }
+export declare module BatchCreateEntitiesRequest {
+    /**
+     * Standard JavaScript object representation for BatchCreateEntitiesRequest
+     */
+    interface AsObject {
+        parent?: string;
+        entities?: EntityType.Entity.AsObject[];
+        languageCode?: string;
+    }
+    /**
+     * Protobuf JSON representation for BatchCreateEntitiesRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        entities?: EntityType.Entity.AsProtobufJSON[] | null;
+        languageCode?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchUpdateEntitiesRequest
+ */
 export declare class BatchUpdateEntitiesRequest implements GrpcMessage {
-    static toBinary(instance: BatchUpdateEntitiesRequest): any;
-    static fromBinary(bytes: ByteSource): BatchUpdateEntitiesRequest;
-    static refineValues(instance: BatchUpdateEntitiesRequest): void;
-    static fromBinaryReader(instance: BatchUpdateEntitiesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: BatchUpdateEntitiesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchUpdateEntitiesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchUpdateEntitiesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchUpdateEntitiesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchUpdateEntitiesRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _entities?;
     private _languageCode?;
     private _updateMask?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param BatchUpdateEntitiesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateEntitiesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<BatchUpdateEntitiesRequest>);
+    constructor(_value?: RecursivePartial<BatchUpdateEntitiesRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
     get entities(): EntityType.Entity[] | undefined;
     set entities(value: EntityType.Entity[] | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    get updateMask(): googleProtobuf003.FieldMask | undefined;
-    set updateMask(value: googleProtobuf003.FieldMask | undefined);
-    toObject(): {
-        parent: string;
-        entities: {
-            value: string;
-            synonyms: string[];
-            name: string;
-            displayName: string;
-            synonymCount: number;
-        }[];
-        languageCode: string;
-        updateMask: {
-            paths: string[];
-        };
-    };
-    toJSON(): {
-        parent: string;
-        entities: {
-            value: string;
-            synonyms: string[];
-            name: string;
-            displayName: string;
-            synonymCount: number;
-        }[];
-        languageCode: string;
-        updateMask: {
-            paths: string[];
-        };
-    };
+    get updateMask(): googleProtobuf007.FieldMask | undefined;
+    set updateMask(value: googleProtobuf007.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchUpdateEntitiesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchUpdateEntitiesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateEntitiesRequest.AsProtobufJSON;
 }
-export declare module BatchUpdateEntitiesRequest { }
+export declare module BatchUpdateEntitiesRequest {
+    /**
+     * Standard JavaScript object representation for BatchUpdateEntitiesRequest
+     */
+    interface AsObject {
+        parent?: string;
+        entities?: EntityType.Entity.AsObject[];
+        languageCode?: string;
+        updateMask?: googleProtobuf007.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for BatchUpdateEntitiesRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        entities?: EntityType.Entity.AsProtobufJSON[] | null;
+        languageCode?: string;
+        updateMask?: googleProtobuf007.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchDeleteEntitiesRequest
+ */
 export declare class BatchDeleteEntitiesRequest implements GrpcMessage {
-    static toBinary(instance: BatchDeleteEntitiesRequest): any;
-    static fromBinary(bytes: ByteSource): BatchDeleteEntitiesRequest;
-    static refineValues(instance: BatchDeleteEntitiesRequest): void;
-    static fromBinaryReader(instance: BatchDeleteEntitiesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: BatchDeleteEntitiesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchDeleteEntitiesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchDeleteEntitiesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchDeleteEntitiesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchDeleteEntitiesRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _entityValues?;
     private _languageCode?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param BatchDeleteEntitiesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteEntitiesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<BatchDeleteEntitiesRequest>);
+    constructor(_value?: RecursivePartial<BatchDeleteEntitiesRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
     get entityValues(): string[] | undefined;
     set entityValues(value: string[] | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    toObject(): {
-        parent: string;
-        entityValues: string[];
-        languageCode: string;
-    };
-    toJSON(): {
-        parent: string;
-        entityValues: string[];
-        languageCode: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchDeleteEntitiesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchDeleteEntitiesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteEntitiesRequest.AsProtobufJSON;
 }
-export declare module BatchDeleteEntitiesRequest { }
+export declare module BatchDeleteEntitiesRequest {
+    /**
+     * Standard JavaScript object representation for BatchDeleteEntitiesRequest
+     */
+    interface AsObject {
+        parent?: string;
+        entityValues?: string[];
+        languageCode?: string;
+    }
+    /**
+     * Protobuf JSON representation for BatchDeleteEntitiesRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        entityValues?: string[];
+        languageCode?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.EntityTypeBatch
+ */
 export declare class EntityTypeBatch implements GrpcMessage {
-    static toBinary(instance: EntityTypeBatch): any;
-    static fromBinary(bytes: ByteSource): EntityTypeBatch;
-    static refineValues(instance: EntityTypeBatch): void;
-    static fromBinaryReader(instance: EntityTypeBatch, reader: BinaryReader): void;
-    static toBinaryWriter(instance: EntityTypeBatch, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): EntityTypeBatch;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EntityTypeBatch): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: EntityTypeBatch, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: EntityTypeBatch, _writer: BinaryWriter): void;
     private _entityTypes?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param EntityTypeBatch value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityTypeBatch to deeply clone from
      */
-    constructor(value?: RecursivePartial<EntityTypeBatch>);
+    constructor(_value?: RecursivePartial<EntityTypeBatch.AsObject>);
     get entityTypes(): EntityType[] | undefined;
     set entityTypes(value: EntityType[] | undefined);
-    toObject(): {
-        entityTypes: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-    };
-    toJSON(): {
-        entityTypes: {
-            name: string;
-            displayName: string;
-            kind: EntityType.Kind;
-            autoExpansionMode: EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EntityTypeBatch.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): EntityTypeBatch.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): EntityTypeBatch.AsProtobufJSON;
 }
-export declare module EntityTypeBatch { }
+export declare module EntityTypeBatch {
+    /**
+     * Standard JavaScript object representation for EntityTypeBatch
+     */
+    interface AsObject {
+        entityTypes?: EntityType.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for EntityTypeBatch
+     */
+    interface AsProtobufJSON {
+        entityTypes?: EntityType.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.EntityTypeSorting
+ */
 export declare class EntityTypeSorting implements GrpcMessage {
-    static toBinary(instance: EntityTypeSorting): any;
-    static fromBinary(bytes: ByteSource): EntityTypeSorting;
-    static refineValues(instance: EntityTypeSorting): void;
-    static fromBinaryReader(instance: EntityTypeSorting, reader: BinaryReader): void;
-    static toBinaryWriter(instance: EntityTypeSorting, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): EntityTypeSorting;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EntityTypeSorting): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: EntityTypeSorting, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: EntityTypeSorting, _writer: BinaryWriter): void;
     private _sortingField?;
     private _sortingMode?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param EntityTypeSorting value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityTypeSorting to deeply clone from
      */
-    constructor(value?: RecursivePartial<EntityTypeSorting>);
+    constructor(_value?: RecursivePartial<EntityTypeSorting.AsObject>);
     get sortingField(): EntityTypeSorting.EntityTypeSortingField | undefined;
     set sortingField(value: EntityTypeSorting.EntityTypeSortingField | undefined);
-    get sortingMode(): ondewoNlu004.SortingMode | undefined;
-    set sortingMode(value: ondewoNlu004.SortingMode | undefined);
-    toObject(): {
-        sortingField: EntityTypeSorting.EntityTypeSortingField;
-        sortingMode: ondewoNlu004.SortingMode;
-    };
-    toJSON(): {
-        sortingField: EntityTypeSorting.EntityTypeSortingField;
-        sortingMode: ondewoNlu004.SortingMode;
-    };
+    get sortingMode(): ondewoNlu008.SortingMode | undefined;
+    set sortingMode(value: ondewoNlu008.SortingMode | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EntityTypeSorting.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): EntityTypeSorting.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): EntityTypeSorting.AsProtobufJSON;
 }
 export declare module EntityTypeSorting {
+    /**
+     * Standard JavaScript object representation for EntityTypeSorting
+     */
+    interface AsObject {
+        sortingField?: EntityTypeSorting.EntityTypeSortingField;
+        sortingMode?: ondewoNlu008.SortingMode;
+    }
+    /**
+     * Protobuf JSON representation for EntityTypeSorting
+     */
+    interface AsProtobufJSON {
+        sortingField?: string;
+        sortingMode?: string;
+    }
     enum EntityTypeSortingField {
-        noEntityTypeSorting = 0,
-        sortEntityTypeByName = 1,
-        sortEntityTypeByCreationDate = 2,
-        sortEntityTypeByLastUpdated = 3,
-        sortEntityTypeByEntityValueCount = 4,
-        sortEntityTypeBySynonymCount = 5
+        NO_ENTITY_TYPE_SORTING = 0,
+        SORT_ENTITY_TYPE_BY_NAME = 1,
+        SORT_ENTITY_TYPE_BY_CREATION_DATE = 2,
+        SORT_ENTITY_TYPE_BY_LAST_UPDATED = 3,
+        SORT_ENTITY_TYPE_BY_ENTITY_VALUE_COUNT = 4,
+        SORT_ENTITY_TYPE_BY_SYNONYM_COUNT = 5
     }
 }

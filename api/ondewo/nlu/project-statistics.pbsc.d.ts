@@ -1,123 +1,148 @@
-import { GrpcClientFactory, GrpcClientSettings, GrpcEvent } from '@ngx-grpc/common';
+import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
-import { Metadata } from 'grpc-web';
 import { Observable } from 'rxjs';
 import * as thisProto from './project-statistics.pb';
-import * as ondewoNlu002 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu004 from '../../ondewo/nlu/common.pb';
+/**
+ * Service client implementation for ondewo.nlu.ProjectStatistics
+ */
 export declare class ProjectStatisticsClient {
     private handler;
     private client;
-    constructor(settings: GrpcClientSettings, clientFactory: GrpcClientFactory, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetIntentCountRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
+     * Raw RPC implementation for each service client method.
+     * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+     * Attention: these methods do not throw errors when non-zero status codes are received.
      */
-    getIntentCount(requestData: thisProto.GetIntentCountRequest, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
+    $raw: {
+        /**
+         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetIntentCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getIntentCount: (requestData: thisProto.GetIntentCountRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getEntityTypeCount: (requestData: thisProto.GetEntityTypeCountRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetUserCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getUserCount: (requestData: thisProto.GetProjectStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetSessionCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getSessionCount: (requestData: thisProto.GetProjectStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getTrainingPhraseCount: (requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetResponseCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getResponseCount: (requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityValueCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getEntityValueCount: (requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getEntitySynonymCount: (requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+    };
+    constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetIntentCountRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetIntentCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getIntentCount$eventStream(requestData: thisProto.GetIntentCountRequest, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
+    getIntentCount(requestData: thisProto.GetIntentCountRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetEntityTypeCountRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
+     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getEntityTypeCount(requestData: thisProto.GetEntityTypeCountRequest, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
+    getEntityTypeCount(requestData: thisProto.GetEntityTypeCountRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetEntityTypeCountRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetUserCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getEntityTypeCount$eventStream(requestData: thisProto.GetEntityTypeCountRequest, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
+    getUserCount(requestData: thisProto.GetProjectStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
+     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetSessionCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getUserCount(requestData: thisProto.GetProjectStatRequest, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
+    getSessionCount(requestData: thisProto.GetProjectStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getUserCount$eventStream(requestData: thisProto.GetProjectStatRequest, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
+    getTrainingPhraseCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
+     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetResponseCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getSessionCount(requestData: thisProto.GetProjectStatRequest, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
+    getResponseCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityValueCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getSessionCount$eventStream(requestData: thisProto.GetProjectStatRequest, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
+    getEntityValueCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
+     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getTrainingPhraseCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getTrainingPhraseCount$eventStream(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getResponseCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getResponseCount$eventStream(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getEntityValueCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getEntityValueCount$eventStream(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getEntitySynonymCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetProjectElementStatRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getEntitySynonymCount$eventStream(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
+    getEntitySynonymCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
 }
