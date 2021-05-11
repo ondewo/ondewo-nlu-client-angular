@@ -1,152 +1,181 @@
-import { GrpcClientFactory, GrpcClientSettings, GrpcEvent } from '@ngx-grpc/common';
+import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
-import { Metadata } from 'grpc-web';
 import { Observable } from 'rxjs';
 import * as thisProto from './entity-type.pb';
-import * as googleLongrunning001 from '../../google/longrunning/operations.pb';
-import * as googleProtobuf002 from '../../google/protobuf/empty.pb';
+import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
+import * as googleLongrunning006 from '../../google/longrunning/operations.pb';
+/**
+ * Service client implementation for ondewo.nlu.EntityTypes
+ */
 export declare class EntityTypesClient {
     private handler;
     private client;
-    constructor(settings: GrpcClientSettings, clientFactory: GrpcClientFactory, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListEntityTypesResponse>
+     * Raw RPC implementation for each service client method.
+     * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+     * Attention: these methods do not throw errors when non-zero status codes are received.
      */
-    listEntityTypes(requestData: thisProto.ListEntityTypesRequest, requestMetadata?: Metadata): Observable<thisProto.ListEntityTypesResponse>;
+    $raw: {
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/ListEntityTypes
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>
+         */
+        listEntityTypes: (requestData: thisProto.ListEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/GetEntityType
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.EntityType>>
+         */
+        getEntityType: (requestData: thisProto.GetEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.EntityType>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/CreateEntityType
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.EntityType>>
+         */
+        createEntityType: (requestData: thisProto.CreateEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.EntityType>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/UpdateEntityType
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.EntityType>>
+         */
+        updateEntityType: (requestData: thisProto.UpdateEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.EntityType>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/DeleteEntityType
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        deleteEntityType: (requestData: thisProto.DeleteEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         */
+        batchUpdateEntityTypes: (requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         */
+        batchDeleteEntityTypes: (requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/BatchCreateEntities
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         */
+        batchCreateEntities: (requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntities
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         */
+        batchUpdateEntities: (requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntities
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         */
+        batchDeleteEntities: (requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+    };
+    constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>
+     * Unary RPC for /ondewo.nlu.EntityTypes/ListEntityTypes
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListEntityTypesResponse>
      */
-    listEntityTypes$eventStream(requestData: thisProto.ListEntityTypesRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>;
+    listEntityTypes(requestData: thisProto.ListEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListEntityTypesResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.EntityType>
+     * Unary RPC for /ondewo.nlu.EntityTypes/GetEntityType
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.EntityType>
      */
-    getEntityType(requestData: thisProto.GetEntityTypeRequest, requestMetadata?: Metadata): Observable<thisProto.EntityType>;
+    getEntityType(requestData: thisProto.GetEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.EntityType>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.EntityType>>
+     * Unary RPC for /ondewo.nlu.EntityTypes/CreateEntityType
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.EntityType>
      */
-    getEntityType$eventStream(requestData: thisProto.GetEntityTypeRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.EntityType>>;
+    createEntityType(requestData: thisProto.CreateEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.EntityType>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CreateEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.EntityType>
+     * Unary RPC for /ondewo.nlu.EntityTypes/UpdateEntityType
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.EntityType>
      */
-    createEntityType(requestData: thisProto.CreateEntityTypeRequest, requestMetadata?: Metadata): Observable<thisProto.EntityType>;
+    updateEntityType(requestData: thisProto.UpdateEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.EntityType>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CreateEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.EntityType>>
+     * Unary RPC for /ondewo.nlu.EntityTypes/DeleteEntityType
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
      */
-    createEntityType$eventStream(requestData: thisProto.CreateEntityTypeRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.EntityType>>;
+    deleteEntityType(requestData: thisProto.DeleteEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.UpdateEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.EntityType>
+     * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning006.Operation>
      */
-    updateEntityType(requestData: thisProto.UpdateEntityTypeRequest, requestMetadata?: Metadata): Observable<thisProto.EntityType>;
+    batchUpdateEntityTypes(requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.UpdateEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.EntityType>>
+     * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning006.Operation>
      */
-    updateEntityType$eventStream(requestData: thisProto.UpdateEntityTypeRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.EntityType>>;
+    batchDeleteEntityTypes(requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf002.Empty>
+     * Unary RPC for /ondewo.nlu.EntityTypes/BatchCreateEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning006.Operation>
      */
-    deleteEntityType(requestData: thisProto.DeleteEntityTypeRequest, requestMetadata?: Metadata): Observable<googleProtobuf002.Empty>;
+    batchCreateEntities(requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteEntityTypeRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
+     * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning006.Operation>
      */
-    deleteEntityType$eventStream(requestData: thisProto.DeleteEntityTypeRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf002.Empty>>;
+    batchUpdateEntities(requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchUpdateEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
+     * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning006.Operation>
      */
-    batchUpdateEntityTypes(requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchUpdateEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchUpdateEntityTypes$eventStream(requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchDeleteEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    batchDeleteEntityTypes(requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchDeleteEntityTypesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchDeleteEntityTypes$eventStream(requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchCreateEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    batchCreateEntities(requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchCreateEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchCreateEntities$eventStream(requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchUpdateEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    batchUpdateEntities(requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchUpdateEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchUpdateEntities$eventStream(requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.BatchDeleteEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<googleLongrunning001.Operation>
-     */
-    batchDeleteEntities(requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: Metadata): Observable<googleLongrunning001.Operation>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.BatchDeleteEntitiesRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleLongrunning001.Operation>>
-     */
-    batchDeleteEntities$eventStream(requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleLongrunning001.Operation>>;
+    batchDeleteEntities(requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
 }

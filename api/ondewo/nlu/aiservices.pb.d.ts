@@ -1,89 +1,186 @@
-import { GrpcMessage, RecursivePartial } from '@ngx-grpc/common';
+import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as ondewoNlu001 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu009 from '../../ondewo/nlu/intent.pb';
+/**
+ * Message implementation for ondewo.nlu.ExtractEntitiesRequest
+ */
 export declare class ExtractEntitiesRequest implements GrpcMessage {
-    static toBinary(instance: ExtractEntitiesRequest): any;
-    static fromBinary(bytes: ByteSource): ExtractEntitiesRequest;
-    static refineValues(instance: ExtractEntitiesRequest): void;
-    static fromBinaryReader(instance: ExtractEntitiesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ExtractEntitiesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ExtractEntitiesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ExtractEntitiesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ExtractEntitiesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ExtractEntitiesRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _text?;
     private _languageCode?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ExtractEntitiesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExtractEntitiesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<ExtractEntitiesRequest>);
+    constructor(_value?: RecursivePartial<ExtractEntitiesRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
     get text(): string | undefined;
     set text(value: string | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    toObject(): {
-        parent: string;
-        text: string;
-        languageCode: string;
-    };
-    toJSON(): {
-        parent: string;
-        text: string;
-        languageCode: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ExtractEntitiesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ExtractEntitiesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ExtractEntitiesRequest.AsProtobufJSON;
 }
-export declare module ExtractEntitiesRequest { }
+export declare module ExtractEntitiesRequest {
+    /**
+     * Standard JavaScript object representation for ExtractEntitiesRequest
+     */
+    interface AsObject {
+        parent?: string;
+        text?: string;
+        languageCode?: string;
+    }
+    /**
+     * Protobuf JSON representation for ExtractEntitiesRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        text?: string;
+        languageCode?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ExtractEntitiesResponse
+ */
 export declare class ExtractEntitiesResponse implements GrpcMessage {
-    static toBinary(instance: ExtractEntitiesResponse): any;
-    static fromBinary(bytes: ByteSource): ExtractEntitiesResponse;
-    static refineValues(instance: ExtractEntitiesResponse): void;
-    static fromBinaryReader(instance: ExtractEntitiesResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ExtractEntitiesResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ExtractEntitiesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ExtractEntitiesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ExtractEntitiesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ExtractEntitiesResponse, _writer: BinaryWriter): void;
     private _entities?;
     private _text?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ExtractEntitiesResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExtractEntitiesResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<ExtractEntitiesResponse>);
-    get entities(): ondewoNlu001.Intent.TrainingPhrase.Entity[] | undefined;
-    set entities(value: ondewoNlu001.Intent.TrainingPhrase.Entity[] | undefined);
+    constructor(_value?: RecursivePartial<ExtractEntitiesResponse.AsObject>);
+    get entities(): ondewoNlu009.Intent.TrainingPhrase.Entity[] | undefined;
+    set entities(value: ondewoNlu009.Intent.TrainingPhrase.Entity[] | undefined);
     get text(): string | undefined;
     set text(value: string | undefined);
-    toObject(): {
-        entities: {
-            entityTypeName: string;
-            entityTypeDisplayName: string;
-            entityValueName: string;
-            entityValueDisplayName: string;
-            start: number;
-            end: number;
-            parameterName: string;
-            parameterDisplayName: string;
-        }[];
-        text: string;
-    };
-    toJSON(): {
-        entities: {
-            entityTypeName: string;
-            entityTypeDisplayName: string;
-            entityValueName: string;
-            entityValueDisplayName: string;
-            start: number;
-            end: number;
-            parameterName: string;
-            parameterDisplayName: string;
-        }[];
-        text: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ExtractEntitiesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ExtractEntitiesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ExtractEntitiesResponse.AsProtobufJSON;
 }
-export declare module ExtractEntitiesResponse { }
+export declare module ExtractEntitiesResponse {
+    /**
+     * Standard JavaScript object representation for ExtractEntitiesResponse
+     */
+    interface AsObject {
+        entities?: ondewoNlu009.Intent.TrainingPhrase.Entity.AsObject[];
+        text?: string;
+    }
+    /**
+     * Protobuf JSON representation for ExtractEntitiesResponse
+     */
+    interface AsProtobufJSON {
+        entities?: ondewoNlu009.Intent.TrainingPhrase.Entity.AsProtobufJSON[] | null;
+        text?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetAlternativeSentencesRequest
+ */
 export declare class GetAlternativeSentencesRequest implements GrpcMessage {
-    static toBinary(instance: GetAlternativeSentencesRequest): any;
-    static fromBinary(bytes: ByteSource): GetAlternativeSentencesRequest;
-    static refineValues(instance: GetAlternativeSentencesRequest): void;
-    static fromBinaryReader(instance: GetAlternativeSentencesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetAlternativeSentencesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetAlternativeSentencesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetAlternativeSentencesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetAlternativeSentencesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetAlternativeSentencesRequest, _writer: BinaryWriter): void;
     private _config?;
     private _sentence?;
     private _languageCode?;
@@ -91,10 +188,10 @@ export declare class GetAlternativeSentencesRequest implements GrpcMessage {
     private _protectedWords?;
     private _wordsToChange?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetAlternativeSentencesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeSentencesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetAlternativeSentencesRequest>);
+    constructor(_value?: RecursivePartial<GetAlternativeSentencesRequest.AsObject>);
     get config(): DataEnrichmentConfig | undefined;
     set config(value: DataEnrichmentConfig | undefined);
     get sentence(): string | undefined;
@@ -107,131 +204,86 @@ export declare class GetAlternativeSentencesRequest implements GrpcMessage {
     set protectedWords(value: string[] | undefined);
     get wordsToChange(): string[] | undefined;
     set wordsToChange(value: string[] | undefined);
-    toObject(): {
-        config: {
-            entityEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            thesaurusEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            word2vecEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            wordNetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gpt2Enrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gloveEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            fasttextEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            bertEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            xlnetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-        };
-        sentence: string;
-        languageCode: string;
-        parent: string;
-        protectedWords: string[];
-        wordsToChange: string[];
-    };
-    toJSON(): {
-        config: {
-            entityEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            thesaurusEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            word2vecEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            wordNetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gpt2Enrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gloveEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            fasttextEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            bertEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            xlnetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-        };
-        sentence: string;
-        languageCode: string;
-        parent: string;
-        protectedWords: string[];
-        wordsToChange: string[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetAlternativeSentencesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetAlternativeSentencesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetAlternativeSentencesRequest.AsProtobufJSON;
 }
-export declare module GetAlternativeSentencesRequest { }
+export declare module GetAlternativeSentencesRequest {
+    /**
+     * Standard JavaScript object representation for GetAlternativeSentencesRequest
+     */
+    interface AsObject {
+        config?: DataEnrichmentConfig.AsObject;
+        sentence?: string;
+        languageCode?: string;
+        parent?: string;
+        protectedWords?: string[];
+        wordsToChange?: string[];
+    }
+    /**
+     * Protobuf JSON representation for GetAlternativeSentencesRequest
+     */
+    interface AsProtobufJSON {
+        config?: DataEnrichmentConfig.AsProtobufJSON | null;
+        sentence?: string;
+        languageCode?: string;
+        parent?: string;
+        protectedWords?: string[];
+        wordsToChange?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GenerateUserSaysRequest
+ */
 export declare class GenerateUserSaysRequest implements GrpcMessage {
-    static toBinary(instance: GenerateUserSaysRequest): any;
-    static fromBinary(bytes: ByteSource): GenerateUserSaysRequest;
-    static refineValues(instance: GenerateUserSaysRequest): void;
-    static fromBinaryReader(instance: GenerateUserSaysRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GenerateUserSaysRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GenerateUserSaysRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GenerateUserSaysRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GenerateUserSaysRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GenerateUserSaysRequest, _writer: BinaryWriter): void;
     private _languageCode?;
     private _parent?;
     private _nRepeatSynonym?;
     private _branch?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GenerateUserSaysRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateUserSaysRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GenerateUserSaysRequest>);
+    constructor(_value?: RecursivePartial<GenerateUserSaysRequest.AsObject>);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
     get parent(): string | undefined;
@@ -240,36 +292,83 @@ export declare class GenerateUserSaysRequest implements GrpcMessage {
     set nRepeatSynonym(value: number | undefined);
     get branch(): string | undefined;
     set branch(value: string | undefined);
-    toObject(): {
-        languageCode: string;
-        parent: string;
-        nRepeatSynonym: number;
-        branch: string;
-    };
-    toJSON(): {
-        languageCode: string;
-        parent: string;
-        nRepeatSynonym: number;
-        branch: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GenerateUserSaysRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GenerateUserSaysRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GenerateUserSaysRequest.AsProtobufJSON;
 }
-export declare module GenerateUserSaysRequest { }
+export declare module GenerateUserSaysRequest {
+    /**
+     * Standard JavaScript object representation for GenerateUserSaysRequest
+     */
+    interface AsObject {
+        languageCode?: string;
+        parent?: string;
+        nRepeatSynonym?: number;
+        branch?: string;
+    }
+    /**
+     * Protobuf JSON representation for GenerateUserSaysRequest
+     */
+    interface AsProtobufJSON {
+        languageCode?: string;
+        parent?: string;
+        nRepeatSynonym?: number;
+        branch?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GenerateResponsesRequest
+ */
 export declare class GenerateResponsesRequest implements GrpcMessage {
-    static toBinary(instance: GenerateResponsesRequest): any;
-    static fromBinary(bytes: ByteSource): GenerateResponsesRequest;
-    static refineValues(instance: GenerateResponsesRequest): void;
-    static fromBinaryReader(instance: GenerateResponsesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GenerateResponsesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GenerateResponsesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GenerateResponsesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GenerateResponsesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GenerateResponsesRequest, _writer: BinaryWriter): void;
     private _languageCode?;
     private _parent?;
     private _nRepeatSynonym?;
     private _branch?;
     private _dropUnknownParameters?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GenerateResponsesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateResponsesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GenerateResponsesRequest>);
+    constructor(_value?: RecursivePartial<GenerateResponsesRequest.AsObject>);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
     get parent(): string | undefined;
@@ -280,28 +379,75 @@ export declare class GenerateResponsesRequest implements GrpcMessage {
     set branch(value: string | undefined);
     get dropUnknownParameters(): boolean | undefined;
     set dropUnknownParameters(value: boolean | undefined);
-    toObject(): {
-        languageCode: string;
-        parent: string;
-        nRepeatSynonym: number;
-        branch: string;
-        dropUnknownParameters: boolean;
-    };
-    toJSON(): {
-        languageCode: string;
-        parent: string;
-        nRepeatSynonym: number;
-        branch: string;
-        dropUnknownParameters: boolean;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GenerateResponsesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GenerateResponsesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GenerateResponsesRequest.AsProtobufJSON;
 }
-export declare module GenerateResponsesRequest { }
+export declare module GenerateResponsesRequest {
+    /**
+     * Standard JavaScript object representation for GenerateResponsesRequest
+     */
+    interface AsObject {
+        languageCode?: string;
+        parent?: string;
+        nRepeatSynonym?: number;
+        branch?: string;
+        dropUnknownParameters?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for GenerateResponsesRequest
+     */
+    interface AsProtobufJSON {
+        languageCode?: string;
+        parent?: string;
+        nRepeatSynonym?: number;
+        branch?: string;
+        dropUnknownParameters?: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetAlternativeTrainingPhrasesRequest
+ */
 export declare class GetAlternativeTrainingPhrasesRequest implements GrpcMessage {
-    static toBinary(instance: GetAlternativeTrainingPhrasesRequest): any;
-    static fromBinary(bytes: ByteSource): GetAlternativeTrainingPhrasesRequest;
-    static refineValues(instance: GetAlternativeTrainingPhrasesRequest): void;
-    static fromBinaryReader(instance: GetAlternativeTrainingPhrasesRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetAlternativeTrainingPhrasesRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetAlternativeTrainingPhrasesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetAlternativeTrainingPhrasesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetAlternativeTrainingPhrasesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetAlternativeTrainingPhrasesRequest, _writer: BinaryWriter): void;
     private _config?;
     private _trainingPhrase?;
     private _intentName?;
@@ -313,14 +459,14 @@ export declare class GetAlternativeTrainingPhrasesRequest implements GrpcMessage
     private _wordsToChange?;
     private _branch?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetAlternativeTrainingPhrasesRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetAlternativeTrainingPhrasesRequest>);
+    constructor(_value?: RecursivePartial<GetAlternativeTrainingPhrasesRequest.AsObject>);
     get config(): DataEnrichmentConfig | undefined;
     set config(value: DataEnrichmentConfig | undefined);
-    get trainingPhrase(): ondewoNlu001.Intent.TrainingPhrase | undefined;
-    set trainingPhrase(value: ondewoNlu001.Intent.TrainingPhrase | undefined);
+    get trainingPhrase(): ondewoNlu009.Intent.TrainingPhrase | undefined;
+    set trainingPhrase(value: ondewoNlu009.Intent.TrainingPhrase | undefined);
     get intentName(): string | undefined;
     set intentName(value: string | undefined);
     get languageCode(): string | undefined;
@@ -337,169 +483,94 @@ export declare class GetAlternativeTrainingPhrasesRequest implements GrpcMessage
     set wordsToChange(value: string[] | undefined);
     get branch(): string | undefined;
     set branch(value: string | undefined);
-    toObject(): {
-        config: {
-            entityEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            thesaurusEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            word2vecEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            wordNetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gpt2Enrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gloveEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            fasttextEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            bertEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            xlnetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-        };
-        trainingPhrase: {
-            name: string;
-            type: ondewoNlu001.Intent.TrainingPhrase.Type;
-            text: string;
-            entities: {
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                entityValueName: string;
-                entityValueDisplayName: string;
-                start: number;
-                end: number;
-                parameterName: string;
-                parameterDisplayName: string;
-            }[];
-            timesAddedCount: number;
-        };
-        intentName: string;
-        languageCode: string;
-        parent: string;
-        detectEntities: boolean;
-        similarityThreshold: number;
-        protectedWords: string[];
-        wordsToChange: string[];
-        branch: string;
-    };
-    toJSON(): {
-        config: {
-            entityEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            thesaurusEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            word2vecEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            wordNetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gpt2Enrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gloveEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            fasttextEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            bertEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            xlnetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-        };
-        trainingPhrase: {
-            name: string;
-            type: ondewoNlu001.Intent.TrainingPhrase.Type;
-            text: string;
-            entities: {
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                entityValueName: string;
-                entityValueDisplayName: string;
-                start: number;
-                end: number;
-                parameterName: string;
-                parameterDisplayName: string;
-            }[];
-            timesAddedCount: number;
-        };
-        intentName: string;
-        languageCode: string;
-        parent: string;
-        detectEntities: boolean;
-        similarityThreshold: number;
-        protectedWords: string[];
-        wordsToChange: string[];
-        branch: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetAlternativeTrainingPhrasesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetAlternativeTrainingPhrasesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetAlternativeTrainingPhrasesRequest.AsProtobufJSON;
 }
-export declare module GetAlternativeTrainingPhrasesRequest { }
+export declare module GetAlternativeTrainingPhrasesRequest {
+    /**
+     * Standard JavaScript object representation for GetAlternativeTrainingPhrasesRequest
+     */
+    interface AsObject {
+        config?: DataEnrichmentConfig.AsObject;
+        trainingPhrase?: ondewoNlu009.Intent.TrainingPhrase.AsObject;
+        intentName?: string;
+        languageCode?: string;
+        parent?: string;
+        detectEntities?: boolean;
+        similarityThreshold?: number;
+        protectedWords?: string[];
+        wordsToChange?: string[];
+        branch?: string;
+    }
+    /**
+     * Protobuf JSON representation for GetAlternativeTrainingPhrasesRequest
+     */
+    interface AsProtobufJSON {
+        config?: DataEnrichmentConfig.AsProtobufJSON | null;
+        trainingPhrase?: ondewoNlu009.Intent.TrainingPhrase.AsProtobufJSON | null;
+        intentName?: string;
+        languageCode?: string;
+        parent?: string;
+        detectEntities?: boolean;
+        similarityThreshold?: number;
+        protectedWords?: string[];
+        wordsToChange?: string[];
+        branch?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetSynonymsRequest
+ */
 export declare class GetSynonymsRequest implements GrpcMessage {
-    static toBinary(instance: GetSynonymsRequest): any;
-    static fromBinary(bytes: ByteSource): GetSynonymsRequest;
-    static refineValues(instance: GetSynonymsRequest): void;
-    static fromBinaryReader(instance: GetSynonymsRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetSynonymsRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetSynonymsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetSynonymsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetSynonymsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetSynonymsRequest, _writer: BinaryWriter): void;
     private _config?;
     private _word?;
     private _languageCode?;
     private _parent?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetSynonymsRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSynonymsRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetSynonymsRequest>);
+    constructor(_value?: RecursivePartial<GetSynonymsRequest.AsObject>);
     get config(): DataEnrichmentConfig | undefined;
     set config(value: DataEnrichmentConfig | undefined);
     get word(): string | undefined;
@@ -508,387 +579,640 @@ export declare class GetSynonymsRequest implements GrpcMessage {
     set languageCode(value: string | undefined);
     get parent(): string | undefined;
     set parent(value: string | undefined);
-    toObject(): {
-        config: {
-            entityEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            thesaurusEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            word2vecEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            wordNetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gpt2Enrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gloveEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            fasttextEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            bertEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            xlnetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-        };
-        word: string;
-        languageCode: string;
-        parent: string;
-    };
-    toJSON(): {
-        config: {
-            entityEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            thesaurusEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            word2vecEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            wordNetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gpt2Enrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            gloveEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            fasttextEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            bertEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-            xlnetEnrichment: {
-                isActive: boolean;
-                enrichmentFactor: number;
-                executionOrder: number;
-            };
-        };
-        word: string;
-        languageCode: string;
-        parent: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetSynonymsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetSynonymsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetSynonymsRequest.AsProtobufJSON;
 }
-export declare module GetSynonymsRequest { }
+export declare module GetSynonymsRequest {
+    /**
+     * Standard JavaScript object representation for GetSynonymsRequest
+     */
+    interface AsObject {
+        config?: DataEnrichmentConfig.AsObject;
+        word?: string;
+        languageCode?: string;
+        parent?: string;
+    }
+    /**
+     * Protobuf JSON representation for GetSynonymsRequest
+     */
+    interface AsProtobufJSON {
+        config?: DataEnrichmentConfig.AsProtobufJSON | null;
+        word?: string;
+        languageCode?: string;
+        parent?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetSynonymsResponse
+ */
 export declare class GetSynonymsResponse implements GrpcMessage {
-    static toBinary(instance: GetSynonymsResponse): any;
-    static fromBinary(bytes: ByteSource): GetSynonymsResponse;
-    static refineValues(instance: GetSynonymsResponse): void;
-    static fromBinaryReader(instance: GetSynonymsResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetSynonymsResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetSynonymsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetSynonymsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetSynonymsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetSynonymsResponse, _writer: BinaryWriter): void;
     private _synonyms?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetSynonymsResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSynonymsResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetSynonymsResponse>);
+    constructor(_value?: RecursivePartial<GetSynonymsResponse.AsObject>);
     get synonyms(): Synonym[] | undefined;
     set synonyms(value: Synonym[] | undefined);
-    toObject(): {
-        synonyms: {
-            synonym: string;
-            score: number;
-        }[];
-    };
-    toJSON(): {
-        synonyms: {
-            synonym: string;
-            score: number;
-        }[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetSynonymsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetSynonymsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetSynonymsResponse.AsProtobufJSON;
 }
-export declare module GetSynonymsResponse { }
+export declare module GetSynonymsResponse {
+    /**
+     * Standard JavaScript object representation for GetSynonymsResponse
+     */
+    interface AsObject {
+        synonyms?: Synonym.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for GetSynonymsResponse
+     */
+    interface AsProtobufJSON {
+        synonyms?: Synonym.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.Synonym
+ */
 export declare class Synonym implements GrpcMessage {
-    static toBinary(instance: Synonym): any;
-    static fromBinary(bytes: ByteSource): Synonym;
-    static refineValues(instance: Synonym): void;
-    static fromBinaryReader(instance: Synonym, reader: BinaryReader): void;
-    static toBinaryWriter(instance: Synonym, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): Synonym;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: Synonym): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: Synonym, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: Synonym, _writer: BinaryWriter): void;
     private _synonym?;
     private _score?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param Synonym value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Synonym to deeply clone from
      */
-    constructor(value?: RecursivePartial<Synonym>);
+    constructor(_value?: RecursivePartial<Synonym.AsObject>);
     get synonym(): string | undefined;
     set synonym(value: string | undefined);
     get score(): number | undefined;
     set score(value: number | undefined);
-    toObject(): {
-        synonym: string;
-        score: number;
-    };
-    toJSON(): {
-        synonym: string;
-        score: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): Synonym.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): Synonym.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): Synonym.AsProtobufJSON;
 }
-export declare module Synonym { }
+export declare module Synonym {
+    /**
+     * Standard JavaScript object representation for Synonym
+     */
+    interface AsObject {
+        synonym?: string;
+        score?: number;
+    }
+    /**
+     * Protobuf JSON representation for Synonym
+     */
+    interface AsProtobufJSON {
+        synonym?: string;
+        score?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetAlternativeSentencesResponse
+ */
 export declare class GetAlternativeSentencesResponse implements GrpcMessage {
-    static toBinary(instance: GetAlternativeSentencesResponse): any;
-    static fromBinary(bytes: ByteSource): GetAlternativeSentencesResponse;
-    static refineValues(instance: GetAlternativeSentencesResponse): void;
-    static fromBinaryReader(instance: GetAlternativeSentencesResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetAlternativeSentencesResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetAlternativeSentencesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetAlternativeSentencesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetAlternativeSentencesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetAlternativeSentencesResponse, _writer: BinaryWriter): void;
     private _alternativeSentences?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetAlternativeSentencesResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeSentencesResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetAlternativeSentencesResponse>);
+    constructor(_value?: RecursivePartial<GetAlternativeSentencesResponse.AsObject>);
     get alternativeSentences(): AltSentence[] | undefined;
     set alternativeSentences(value: AltSentence[] | undefined);
-    toObject(): {
-        alternativeSentences: {
-            sentence: string;
-            score: number;
-        }[];
-    };
-    toJSON(): {
-        alternativeSentences: {
-            sentence: string;
-            score: number;
-        }[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetAlternativeSentencesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetAlternativeSentencesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetAlternativeSentencesResponse.AsProtobufJSON;
 }
-export declare module GetAlternativeSentencesResponse { }
+export declare module GetAlternativeSentencesResponse {
+    /**
+     * Standard JavaScript object representation for GetAlternativeSentencesResponse
+     */
+    interface AsObject {
+        alternativeSentences?: AltSentence.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for GetAlternativeSentencesResponse
+     */
+    interface AsProtobufJSON {
+        alternativeSentences?: AltSentence.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GenerateResponsesResponse
+ */
 export declare class GenerateResponsesResponse implements GrpcMessage {
-    static toBinary(instance: GenerateResponsesResponse): any;
-    static fromBinary(bytes: ByteSource): GenerateResponsesResponse;
-    static refineValues(instance: GenerateResponsesResponse): void;
-    static fromBinaryReader(instance: GenerateResponsesResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GenerateResponsesResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GenerateResponsesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GenerateResponsesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GenerateResponsesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GenerateResponsesResponse, _writer: BinaryWriter): void;
     private _responses?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GenerateResponsesResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateResponsesResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<GenerateResponsesResponse>);
+    constructor(_value?: RecursivePartial<GenerateResponsesResponse.AsObject>);
     get responses(): string[] | undefined;
     set responses(value: string[] | undefined);
-    toObject(): {
-        responses: string[];
-    };
-    toJSON(): {
-        responses: string[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GenerateResponsesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GenerateResponsesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GenerateResponsesResponse.AsProtobufJSON;
 }
-export declare module GenerateResponsesResponse { }
+export declare module GenerateResponsesResponse {
+    /**
+     * Standard JavaScript object representation for GenerateResponsesResponse
+     */
+    interface AsObject {
+        responses?: string[];
+    }
+    /**
+     * Protobuf JSON representation for GenerateResponsesResponse
+     */
+    interface AsProtobufJSON {
+        responses?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GenerateUserSaysResponse
+ */
 export declare class GenerateUserSaysResponse implements GrpcMessage {
-    static toBinary(instance: GenerateUserSaysResponse): any;
-    static fromBinary(bytes: ByteSource): GenerateUserSaysResponse;
-    static refineValues(instance: GenerateUserSaysResponse): void;
-    static fromBinaryReader(instance: GenerateUserSaysResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GenerateUserSaysResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GenerateUserSaysResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GenerateUserSaysResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GenerateUserSaysResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GenerateUserSaysResponse, _writer: BinaryWriter): void;
     private _userSays?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GenerateUserSaysResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateUserSaysResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<GenerateUserSaysResponse>);
+    constructor(_value?: RecursivePartial<GenerateUserSaysResponse.AsObject>);
     get userSays(): string[] | undefined;
     set userSays(value: string[] | undefined);
-    toObject(): {
-        userSays: string[];
-    };
-    toJSON(): {
-        userSays: string[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GenerateUserSaysResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GenerateUserSaysResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GenerateUserSaysResponse.AsProtobufJSON;
 }
-export declare module GenerateUserSaysResponse { }
+export declare module GenerateUserSaysResponse {
+    /**
+     * Standard JavaScript object representation for GenerateUserSaysResponse
+     */
+    interface AsObject {
+        userSays?: string[];
+    }
+    /**
+     * Protobuf JSON representation for GenerateUserSaysResponse
+     */
+    interface AsProtobufJSON {
+        userSays?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetAlternativeTrainingPhrasesResponse
+ */
 export declare class GetAlternativeTrainingPhrasesResponse implements GrpcMessage {
-    static toBinary(instance: GetAlternativeTrainingPhrasesResponse): any;
-    static fromBinary(bytes: ByteSource): GetAlternativeTrainingPhrasesResponse;
-    static refineValues(instance: GetAlternativeTrainingPhrasesResponse): void;
-    static fromBinaryReader(instance: GetAlternativeTrainingPhrasesResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetAlternativeTrainingPhrasesResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetAlternativeTrainingPhrasesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetAlternativeTrainingPhrasesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetAlternativeTrainingPhrasesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetAlternativeTrainingPhrasesResponse, _writer: BinaryWriter): void;
     private _alternativeTrainingPhrases?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetAlternativeTrainingPhrasesResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetAlternativeTrainingPhrasesResponse>);
+    constructor(_value?: RecursivePartial<GetAlternativeTrainingPhrasesResponse.AsObject>);
     get alternativeTrainingPhrases(): AltTrainingPhrase[] | undefined;
     set alternativeTrainingPhrases(value: AltTrainingPhrase[] | undefined);
-    toObject(): {
-        alternativeTrainingPhrases: {
-            trainingPhrase: {
-                name: string;
-                type: ondewoNlu001.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            };
-            score: number;
-        }[];
-    };
-    toJSON(): {
-        alternativeTrainingPhrases: {
-            trainingPhrase: {
-                name: string;
-                type: ondewoNlu001.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            };
-            score: number;
-        }[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetAlternativeTrainingPhrasesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetAlternativeTrainingPhrasesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetAlternativeTrainingPhrasesResponse.AsProtobufJSON;
 }
-export declare module GetAlternativeTrainingPhrasesResponse { }
+export declare module GetAlternativeTrainingPhrasesResponse {
+    /**
+     * Standard JavaScript object representation for GetAlternativeTrainingPhrasesResponse
+     */
+    interface AsObject {
+        alternativeTrainingPhrases?: AltTrainingPhrase.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for GetAlternativeTrainingPhrasesResponse
+     */
+    interface AsProtobufJSON {
+        alternativeTrainingPhrases?: AltTrainingPhrase.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.AltSentence
+ */
 export declare class AltSentence implements GrpcMessage {
-    static toBinary(instance: AltSentence): any;
-    static fromBinary(bytes: ByteSource): AltSentence;
-    static refineValues(instance: AltSentence): void;
-    static fromBinaryReader(instance: AltSentence, reader: BinaryReader): void;
-    static toBinaryWriter(instance: AltSentence, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): AltSentence;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: AltSentence): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: AltSentence, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: AltSentence, _writer: BinaryWriter): void;
     private _sentence?;
     private _score?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param AltSentence value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AltSentence to deeply clone from
      */
-    constructor(value?: RecursivePartial<AltSentence>);
+    constructor(_value?: RecursivePartial<AltSentence.AsObject>);
     get sentence(): string | undefined;
     set sentence(value: string | undefined);
     get score(): number | undefined;
     set score(value: number | undefined);
-    toObject(): {
-        sentence: string;
-        score: number;
-    };
-    toJSON(): {
-        sentence: string;
-        score: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): AltSentence.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): AltSentence.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): AltSentence.AsProtobufJSON;
 }
-export declare module AltSentence { }
+export declare module AltSentence {
+    /**
+     * Standard JavaScript object representation for AltSentence
+     */
+    interface AsObject {
+        sentence?: string;
+        score?: number;
+    }
+    /**
+     * Protobuf JSON representation for AltSentence
+     */
+    interface AsProtobufJSON {
+        sentence?: string;
+        score?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.AltTrainingPhrase
+ */
 export declare class AltTrainingPhrase implements GrpcMessage {
-    static toBinary(instance: AltTrainingPhrase): any;
-    static fromBinary(bytes: ByteSource): AltTrainingPhrase;
-    static refineValues(instance: AltTrainingPhrase): void;
-    static fromBinaryReader(instance: AltTrainingPhrase, reader: BinaryReader): void;
-    static toBinaryWriter(instance: AltTrainingPhrase, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): AltTrainingPhrase;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: AltTrainingPhrase): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: AltTrainingPhrase, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: AltTrainingPhrase, _writer: BinaryWriter): void;
     private _trainingPhrase?;
     private _score?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param AltTrainingPhrase value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AltTrainingPhrase to deeply clone from
      */
-    constructor(value?: RecursivePartial<AltTrainingPhrase>);
-    get trainingPhrase(): ondewoNlu001.Intent.TrainingPhrase | undefined;
-    set trainingPhrase(value: ondewoNlu001.Intent.TrainingPhrase | undefined);
+    constructor(_value?: RecursivePartial<AltTrainingPhrase.AsObject>);
+    get trainingPhrase(): ondewoNlu009.Intent.TrainingPhrase | undefined;
+    set trainingPhrase(value: ondewoNlu009.Intent.TrainingPhrase | undefined);
     get score(): number | undefined;
     set score(value: number | undefined);
-    toObject(): {
-        trainingPhrase: {
-            name: string;
-            type: ondewoNlu001.Intent.TrainingPhrase.Type;
-            text: string;
-            entities: {
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                entityValueName: string;
-                entityValueDisplayName: string;
-                start: number;
-                end: number;
-                parameterName: string;
-                parameterDisplayName: string;
-            }[];
-            timesAddedCount: number;
-        };
-        score: number;
-    };
-    toJSON(): {
-        trainingPhrase: {
-            name: string;
-            type: ondewoNlu001.Intent.TrainingPhrase.Type;
-            text: string;
-            entities: {
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                entityValueName: string;
-                entityValueDisplayName: string;
-                start: number;
-                end: number;
-                parameterName: string;
-                parameterDisplayName: string;
-            }[];
-            timesAddedCount: number;
-        };
-        score: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): AltTrainingPhrase.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): AltTrainingPhrase.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): AltTrainingPhrase.AsProtobufJSON;
 }
-export declare module AltTrainingPhrase { }
+export declare module AltTrainingPhrase {
+    /**
+     * Standard JavaScript object representation for AltTrainingPhrase
+     */
+    interface AsObject {
+        trainingPhrase?: ondewoNlu009.Intent.TrainingPhrase.AsObject;
+        score?: number;
+    }
+    /**
+     * Protobuf JSON representation for AltTrainingPhrase
+     */
+    interface AsProtobufJSON {
+        trainingPhrase?: ondewoNlu009.Intent.TrainingPhrase.AsProtobufJSON | null;
+        score?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DataEnrichmentConfig
+ */
 export declare class DataEnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: DataEnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): DataEnrichmentConfig;
-    static refineValues(instance: DataEnrichmentConfig): void;
-    static fromBinaryReader(instance: DataEnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: DataEnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DataEnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DataEnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DataEnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DataEnrichmentConfig, _writer: BinaryWriter): void;
     private _entityEnrichment?;
     private _thesaurusEnrichment?;
     private _word2vecEnrichment?;
@@ -899,10 +1223,10 @@ export declare class DataEnrichmentConfig implements GrpcMessage {
     private _bertEnrichment?;
     private _xlnetEnrichment?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param DataEnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DataEnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<DataEnrichmentConfig>);
+    constructor(_value?: RecursivePartial<DataEnrichmentConfig.AsObject>);
     get entityEnrichment(): EntityEnrichmentConfig | undefined;
     set entityEnrichment(value: EntityEnrichmentConfig | undefined);
     get thesaurusEnrichment(): ThesaurusEnrichmentConfig | undefined;
@@ -921,387 +1245,764 @@ export declare class DataEnrichmentConfig implements GrpcMessage {
     set bertEnrichment(value: BertAugEnrichmentConfig | undefined);
     get xlnetEnrichment(): XLNetAugEnrichmentConfig | undefined;
     set xlnetEnrichment(value: XLNetAugEnrichmentConfig | undefined);
-    toObject(): {
-        entityEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        thesaurusEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        word2vecEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        wordNetEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        gpt2Enrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        gloveEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        fasttextEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        bertEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        xlnetEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-    };
-    toJSON(): {
-        entityEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        thesaurusEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        word2vecEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        wordNetEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        gpt2Enrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        gloveEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        fasttextEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        bertEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-        xlnetEnrichment: {
-            isActive: boolean;
-            enrichmentFactor: number;
-            executionOrder: number;
-        };
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DataEnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DataEnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DataEnrichmentConfig.AsProtobufJSON;
 }
-export declare module DataEnrichmentConfig { }
+export declare module DataEnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for DataEnrichmentConfig
+     */
+    interface AsObject {
+        entityEnrichment?: EntityEnrichmentConfig.AsObject;
+        thesaurusEnrichment?: ThesaurusEnrichmentConfig.AsObject;
+        word2vecEnrichment?: Word2VecEnrichmentConfig.AsObject;
+        wordNetEnrichment?: WordNetAugEnrichmentConfig.AsObject;
+        gpt2Enrichment?: GPT2EnrichmentConfig.AsObject;
+        gloveEnrichment?: GloVeEnrichmentConfig.AsObject;
+        fasttextEnrichment?: FastTextEnrichmentConfig.AsObject;
+        bertEnrichment?: BertAugEnrichmentConfig.AsObject;
+        xlnetEnrichment?: XLNetAugEnrichmentConfig.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for DataEnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        entityEnrichment?: EntityEnrichmentConfig.AsProtobufJSON | null;
+        thesaurusEnrichment?: ThesaurusEnrichmentConfig.AsProtobufJSON | null;
+        word2vecEnrichment?: Word2VecEnrichmentConfig.AsProtobufJSON | null;
+        wordNetEnrichment?: WordNetAugEnrichmentConfig.AsProtobufJSON | null;
+        gpt2Enrichment?: GPT2EnrichmentConfig.AsProtobufJSON | null;
+        gloveEnrichment?: GloVeEnrichmentConfig.AsProtobufJSON | null;
+        fasttextEnrichment?: FastTextEnrichmentConfig.AsProtobufJSON | null;
+        bertEnrichment?: BertAugEnrichmentConfig.AsProtobufJSON | null;
+        xlnetEnrichment?: XLNetAugEnrichmentConfig.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.EntityEnrichmentConfig
+ */
 export declare class EntityEnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: EntityEnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): EntityEnrichmentConfig;
-    static refineValues(instance: EntityEnrichmentConfig): void;
-    static fromBinaryReader(instance: EntityEnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: EntityEnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): EntityEnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EntityEnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: EntityEnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: EntityEnrichmentConfig, _writer: BinaryWriter): void;
     private _isActive?;
     private _enrichmentFactor?;
     private _executionOrder?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param EntityEnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityEnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<EntityEnrichmentConfig>);
+    constructor(_value?: RecursivePartial<EntityEnrichmentConfig.AsObject>);
     get isActive(): boolean | undefined;
     set isActive(value: boolean | undefined);
     get enrichmentFactor(): number | undefined;
     set enrichmentFactor(value: number | undefined);
     get executionOrder(): number | undefined;
     set executionOrder(value: number | undefined);
-    toObject(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
-    toJSON(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EntityEnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): EntityEnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): EntityEnrichmentConfig.AsProtobufJSON;
 }
-export declare module EntityEnrichmentConfig { }
+export declare module EntityEnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for EntityEnrichmentConfig
+     */
+    interface AsObject {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+    /**
+     * Protobuf JSON representation for EntityEnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ThesaurusEnrichmentConfig
+ */
 export declare class ThesaurusEnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: ThesaurusEnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): ThesaurusEnrichmentConfig;
-    static refineValues(instance: ThesaurusEnrichmentConfig): void;
-    static fromBinaryReader(instance: ThesaurusEnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ThesaurusEnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ThesaurusEnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ThesaurusEnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ThesaurusEnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ThesaurusEnrichmentConfig, _writer: BinaryWriter): void;
     private _isActive?;
     private _enrichmentFactor?;
     private _executionOrder?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ThesaurusEnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ThesaurusEnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<ThesaurusEnrichmentConfig>);
+    constructor(_value?: RecursivePartial<ThesaurusEnrichmentConfig.AsObject>);
     get isActive(): boolean | undefined;
     set isActive(value: boolean | undefined);
     get enrichmentFactor(): number | undefined;
     set enrichmentFactor(value: number | undefined);
     get executionOrder(): number | undefined;
     set executionOrder(value: number | undefined);
-    toObject(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
-    toJSON(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ThesaurusEnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ThesaurusEnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ThesaurusEnrichmentConfig.AsProtobufJSON;
 }
-export declare module ThesaurusEnrichmentConfig { }
+export declare module ThesaurusEnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for ThesaurusEnrichmentConfig
+     */
+    interface AsObject {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+    /**
+     * Protobuf JSON representation for ThesaurusEnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.FastTextEnrichmentConfig
+ */
 export declare class FastTextEnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: FastTextEnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): FastTextEnrichmentConfig;
-    static refineValues(instance: FastTextEnrichmentConfig): void;
-    static fromBinaryReader(instance: FastTextEnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: FastTextEnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): FastTextEnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: FastTextEnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: FastTextEnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: FastTextEnrichmentConfig, _writer: BinaryWriter): void;
     private _isActive?;
     private _enrichmentFactor?;
     private _executionOrder?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param FastTextEnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FastTextEnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<FastTextEnrichmentConfig>);
+    constructor(_value?: RecursivePartial<FastTextEnrichmentConfig.AsObject>);
     get isActive(): boolean | undefined;
     set isActive(value: boolean | undefined);
     get enrichmentFactor(): number | undefined;
     set enrichmentFactor(value: number | undefined);
     get executionOrder(): number | undefined;
     set executionOrder(value: number | undefined);
-    toObject(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
-    toJSON(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): FastTextEnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): FastTextEnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): FastTextEnrichmentConfig.AsProtobufJSON;
 }
-export declare module FastTextEnrichmentConfig { }
+export declare module FastTextEnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for FastTextEnrichmentConfig
+     */
+    interface AsObject {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+    /**
+     * Protobuf JSON representation for FastTextEnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BertAugEnrichmentConfig
+ */
 export declare class BertAugEnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: BertAugEnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): BertAugEnrichmentConfig;
-    static refineValues(instance: BertAugEnrichmentConfig): void;
-    static fromBinaryReader(instance: BertAugEnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: BertAugEnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BertAugEnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BertAugEnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BertAugEnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BertAugEnrichmentConfig, _writer: BinaryWriter): void;
     private _isActive?;
     private _enrichmentFactor?;
     private _executionOrder?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param BertAugEnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BertAugEnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<BertAugEnrichmentConfig>);
+    constructor(_value?: RecursivePartial<BertAugEnrichmentConfig.AsObject>);
     get isActive(): boolean | undefined;
     set isActive(value: boolean | undefined);
     get enrichmentFactor(): number | undefined;
     set enrichmentFactor(value: number | undefined);
     get executionOrder(): number | undefined;
     set executionOrder(value: number | undefined);
-    toObject(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
-    toJSON(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BertAugEnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BertAugEnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BertAugEnrichmentConfig.AsProtobufJSON;
 }
-export declare module BertAugEnrichmentConfig { }
+export declare module BertAugEnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for BertAugEnrichmentConfig
+     */
+    interface AsObject {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+    /**
+     * Protobuf JSON representation for BertAugEnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GloVeEnrichmentConfig
+ */
 export declare class GloVeEnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: GloVeEnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): GloVeEnrichmentConfig;
-    static refineValues(instance: GloVeEnrichmentConfig): void;
-    static fromBinaryReader(instance: GloVeEnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GloVeEnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GloVeEnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GloVeEnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GloVeEnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GloVeEnrichmentConfig, _writer: BinaryWriter): void;
     private _isActive?;
     private _enrichmentFactor?;
     private _executionOrder?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GloVeEnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GloVeEnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<GloVeEnrichmentConfig>);
+    constructor(_value?: RecursivePartial<GloVeEnrichmentConfig.AsObject>);
     get isActive(): boolean | undefined;
     set isActive(value: boolean | undefined);
     get enrichmentFactor(): number | undefined;
     set enrichmentFactor(value: number | undefined);
     get executionOrder(): number | undefined;
     set executionOrder(value: number | undefined);
-    toObject(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
-    toJSON(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GloVeEnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GloVeEnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GloVeEnrichmentConfig.AsProtobufJSON;
 }
-export declare module GloVeEnrichmentConfig { }
+export declare module GloVeEnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for GloVeEnrichmentConfig
+     */
+    interface AsObject {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+    /**
+     * Protobuf JSON representation for GloVeEnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GPT2EnrichmentConfig
+ */
 export declare class GPT2EnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: GPT2EnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): GPT2EnrichmentConfig;
-    static refineValues(instance: GPT2EnrichmentConfig): void;
-    static fromBinaryReader(instance: GPT2EnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GPT2EnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GPT2EnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GPT2EnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GPT2EnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GPT2EnrichmentConfig, _writer: BinaryWriter): void;
     private _isActive?;
     private _enrichmentFactor?;
     private _executionOrder?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GPT2EnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GPT2EnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<GPT2EnrichmentConfig>);
+    constructor(_value?: RecursivePartial<GPT2EnrichmentConfig.AsObject>);
     get isActive(): boolean | undefined;
     set isActive(value: boolean | undefined);
     get enrichmentFactor(): number | undefined;
     set enrichmentFactor(value: number | undefined);
     get executionOrder(): number | undefined;
     set executionOrder(value: number | undefined);
-    toObject(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
-    toJSON(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GPT2EnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GPT2EnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GPT2EnrichmentConfig.AsProtobufJSON;
 }
-export declare module GPT2EnrichmentConfig { }
+export declare module GPT2EnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for GPT2EnrichmentConfig
+     */
+    interface AsObject {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+    /**
+     * Protobuf JSON representation for GPT2EnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.Word2VecEnrichmentConfig
+ */
 export declare class Word2VecEnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: Word2VecEnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): Word2VecEnrichmentConfig;
-    static refineValues(instance: Word2VecEnrichmentConfig): void;
-    static fromBinaryReader(instance: Word2VecEnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: Word2VecEnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): Word2VecEnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: Word2VecEnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: Word2VecEnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: Word2VecEnrichmentConfig, _writer: BinaryWriter): void;
     private _isActive?;
     private _enrichmentFactor?;
     private _executionOrder?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param Word2VecEnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Word2VecEnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<Word2VecEnrichmentConfig>);
+    constructor(_value?: RecursivePartial<Word2VecEnrichmentConfig.AsObject>);
     get isActive(): boolean | undefined;
     set isActive(value: boolean | undefined);
     get enrichmentFactor(): number | undefined;
     set enrichmentFactor(value: number | undefined);
     get executionOrder(): number | undefined;
     set executionOrder(value: number | undefined);
-    toObject(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
-    toJSON(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): Word2VecEnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): Word2VecEnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): Word2VecEnrichmentConfig.AsProtobufJSON;
 }
-export declare module Word2VecEnrichmentConfig { }
+export declare module Word2VecEnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for Word2VecEnrichmentConfig
+     */
+    interface AsObject {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+    /**
+     * Protobuf JSON representation for Word2VecEnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.WordNetAugEnrichmentConfig
+ */
 export declare class WordNetAugEnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: WordNetAugEnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): WordNetAugEnrichmentConfig;
-    static refineValues(instance: WordNetAugEnrichmentConfig): void;
-    static fromBinaryReader(instance: WordNetAugEnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: WordNetAugEnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): WordNetAugEnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: WordNetAugEnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: WordNetAugEnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: WordNetAugEnrichmentConfig, _writer: BinaryWriter): void;
     private _isActive?;
     private _enrichmentFactor?;
     private _executionOrder?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param WordNetAugEnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WordNetAugEnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<WordNetAugEnrichmentConfig>);
+    constructor(_value?: RecursivePartial<WordNetAugEnrichmentConfig.AsObject>);
     get isActive(): boolean | undefined;
     set isActive(value: boolean | undefined);
     get enrichmentFactor(): number | undefined;
     set enrichmentFactor(value: number | undefined);
     get executionOrder(): number | undefined;
     set executionOrder(value: number | undefined);
-    toObject(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
-    toJSON(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): WordNetAugEnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): WordNetAugEnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): WordNetAugEnrichmentConfig.AsProtobufJSON;
 }
-export declare module WordNetAugEnrichmentConfig { }
+export declare module WordNetAugEnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for WordNetAugEnrichmentConfig
+     */
+    interface AsObject {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+    /**
+     * Protobuf JSON representation for WordNetAugEnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.XLNetAugEnrichmentConfig
+ */
 export declare class XLNetAugEnrichmentConfig implements GrpcMessage {
-    static toBinary(instance: XLNetAugEnrichmentConfig): any;
-    static fromBinary(bytes: ByteSource): XLNetAugEnrichmentConfig;
-    static refineValues(instance: XLNetAugEnrichmentConfig): void;
-    static fromBinaryReader(instance: XLNetAugEnrichmentConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: XLNetAugEnrichmentConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): XLNetAugEnrichmentConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: XLNetAugEnrichmentConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: XLNetAugEnrichmentConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: XLNetAugEnrichmentConfig, _writer: BinaryWriter): void;
     private _isActive?;
     private _enrichmentFactor?;
     private _executionOrder?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param XLNetAugEnrichmentConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of XLNetAugEnrichmentConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<XLNetAugEnrichmentConfig>);
+    constructor(_value?: RecursivePartial<XLNetAugEnrichmentConfig.AsObject>);
     get isActive(): boolean | undefined;
     set isActive(value: boolean | undefined);
     get enrichmentFactor(): number | undefined;
     set enrichmentFactor(value: number | undefined);
     get executionOrder(): number | undefined;
     set executionOrder(value: number | undefined);
-    toObject(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
-    toJSON(): {
-        isActive: boolean;
-        enrichmentFactor: number;
-        executionOrder: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): XLNetAugEnrichmentConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): XLNetAugEnrichmentConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): XLNetAugEnrichmentConfig.AsProtobufJSON;
 }
-export declare module XLNetAugEnrichmentConfig { }
+export declare module XLNetAugEnrichmentConfig {
+    /**
+     * Standard JavaScript object representation for XLNetAugEnrichmentConfig
+     */
+    interface AsObject {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+    /**
+     * Protobuf JSON representation for XLNetAugEnrichmentConfig
+     */
+    interface AsProtobufJSON {
+        isActive?: boolean;
+        enrichmentFactor?: number;
+        executionOrder?: number;
+    }
+}

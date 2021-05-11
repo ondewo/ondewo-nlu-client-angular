@@ -1,36 +1,57 @@
-import { GrpcMessage, RecursivePartial } from '@ngx-grpc/common';
+import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as googleProtobuf002 from '../../google/protobuf/struct.pb';
-import * as googleRpc003 from '../../google/rpc/status.pb';
-import * as googleType004 from '../../google/type/latlng.pb';
-import * as ondewoNlu005 from '../../ondewo/nlu/context.pb';
-import * as ondewoNlu006 from '../../ondewo/nlu/intent.pb';
-import * as ondewoNlu007 from '../../ondewo/nlu/entity-type.pb';
+import * as ondewoNlu006 from '../../ondewo/nlu/context.pb';
+import * as googleProtobuf009 from '@ngx-grpc/well-known-types';
+import * as googleRpc010 from '../../google/rpc/status.pb';
+import * as googleType011 from '../../google/type/latlng.pb';
+import * as ondewoNlu012 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/entity-type.pb';
 export declare enum AudioEncoding {
-    audioEncodingUnspecified = 0,
-    audioEncodingLinear16 = 1,
-    audioEncodingFlac = 2,
-    audioEncodingMulaw = 3,
-    audioEncodingAmr = 4,
-    audioEncodingAmrWb = 5,
-    audioEncodingOggOpus = 6,
-    audioEncodingSpeexWithHeaderByte = 7
+    AUDIO_ENCODING_UNSPECIFIED = 0,
+    AUDIO_ENCODING_LINEAR_16 = 1,
+    AUDIO_ENCODING_FLAC = 2,
+    AUDIO_ENCODING_MULAW = 3,
+    AUDIO_ENCODING_AMR = 4,
+    AUDIO_ENCODING_AMR_WB = 5,
+    AUDIO_ENCODING_OGG_OPUS = 6,
+    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
 }
+/**
+ * Message implementation for ondewo.nlu.DetectIntentRequest
+ */
 export declare class DetectIntentRequest implements GrpcMessage {
-    static toBinary(instance: DetectIntentRequest): any;
-    static fromBinary(bytes: ByteSource): DetectIntentRequest;
-    static refineValues(instance: DetectIntentRequest): void;
-    static fromBinaryReader(instance: DetectIntentRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: DetectIntentRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DetectIntentRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DetectIntentRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DetectIntentRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DetectIntentRequest, _writer: BinaryWriter): void;
     private _session?;
     private _queryParams?;
     private _queryInput?;
     private _inputAudio?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param DetectIntentRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DetectIntentRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<DetectIntentRequest>);
+    constructor(_value?: RecursivePartial<DetectIntentRequest.AsObject>);
     get session(): string | undefined;
     set session(value: string | undefined);
     get queryParams(): QueryParameters | undefined;
@@ -39,811 +60,250 @@ export declare class DetectIntentRequest implements GrpcMessage {
     set queryInput(value: QueryInput | undefined);
     get inputAudio(): Uint8Array | undefined;
     set inputAudio(value: Uint8Array | undefined);
-    toObject(): {
-        session: string;
-        queryParams: {
-            timeZone: string;
-            geoLocation: {
-                latitude: number;
-                longitude: number;
-            };
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-        };
-        queryInput: {
-            audioConfig: {
-                audioEncoding: AudioEncoding;
-                sampleRateHertz: number;
-                languageCode: string;
-                phraseHints: string[];
-            };
-            text: {
-                text: string;
-                languageCode: string;
-            };
-            event: {
-                name: string;
-                parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                languageCode: string;
-            };
-        };
-        inputAudio: Uint8Array;
-    };
-    toJSON(): {
-        session: string;
-        queryParams: {
-            timeZone: string;
-            geoLocation: {
-                latitude: number;
-                longitude: number;
-            };
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-        };
-        queryInput: {
-            audioConfig: {
-                audioEncoding: AudioEncoding;
-                sampleRateHertz: number;
-                languageCode: string;
-                phraseHints: string[];
-            };
-            text: {
-                text: string;
-                languageCode: string;
-            };
-            event: {
-                name: string;
-                parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                languageCode: string;
-            };
-        };
-        inputAudio: Uint8Array;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DetectIntentRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DetectIntentRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DetectIntentRequest.AsProtobufJSON;
 }
-export declare module DetectIntentRequest { }
+export declare module DetectIntentRequest {
+    /**
+     * Standard JavaScript object representation for DetectIntentRequest
+     */
+    interface AsObject {
+        session?: string;
+        queryParams?: QueryParameters.AsObject;
+        queryInput?: QueryInput.AsObject;
+        inputAudio?: Uint8Array;
+    }
+    /**
+     * Protobuf JSON representation for DetectIntentRequest
+     */
+    interface AsProtobufJSON {
+        session?: string;
+        queryParams?: QueryParameters.AsProtobufJSON | null;
+        queryInput?: QueryInput.AsProtobufJSON | null;
+        inputAudio?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DetectIntentResponse
+ */
 export declare class DetectIntentResponse implements GrpcMessage {
-    static toBinary(instance: DetectIntentResponse): any;
-    static fromBinary(bytes: ByteSource): DetectIntentResponse;
-    static refineValues(instance: DetectIntentResponse): void;
-    static fromBinaryReader(instance: DetectIntentResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: DetectIntentResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DetectIntentResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DetectIntentResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DetectIntentResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DetectIntentResponse, _writer: BinaryWriter): void;
     private _responseId?;
     private _queryResult?;
     private _webhookStatus?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param DetectIntentResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DetectIntentResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<DetectIntentResponse>);
+    constructor(_value?: RecursivePartial<DetectIntentResponse.AsObject>);
     get responseId(): string | undefined;
     set responseId(value: string | undefined);
     get queryResult(): QueryResult | undefined;
     set queryResult(value: QueryResult | undefined);
-    get webhookStatus(): googleRpc003.Status | undefined;
-    set webhookStatus(value: googleRpc003.Status | undefined);
-    toObject(): {
-        responseId: string;
-        queryResult: {
-            queryText: string;
-            languageCode: string;
-            speechRecognitionConfidence: number;
-            action: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            allRequiredParamsPresent: boolean;
-            fulfillmentText: string;
-            fulfillmentMessages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            webhookSource: string;
-            webhookPayload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            intent: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            };
-            intentDetectionConfidence: number;
-            diagnosticInfo: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-        };
-        webhookStatus: {
-            code: number;
-            message: string;
-            details: {
-                typeUrl: string;
-                value: Uint8Array;
-            }[];
-        };
-    };
-    toJSON(): {
-        responseId: string;
-        queryResult: {
-            queryText: string;
-            languageCode: string;
-            speechRecognitionConfidence: number;
-            action: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            allRequiredParamsPresent: boolean;
-            fulfillmentText: string;
-            fulfillmentMessages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            webhookSource: string;
-            webhookPayload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            intent: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            };
-            intentDetectionConfidence: number;
-            diagnosticInfo: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-        };
-        webhookStatus: {
-            code: number;
-            message: string;
-            details: {
-                typeUrl: string;
-                value: Uint8Array;
-            }[];
-        };
-    };
+    get webhookStatus(): googleRpc010.Status | undefined;
+    set webhookStatus(value: googleRpc010.Status | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DetectIntentResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DetectIntentResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DetectIntentResponse.AsProtobufJSON;
 }
-export declare module DetectIntentResponse { }
+export declare module DetectIntentResponse {
+    /**
+     * Standard JavaScript object representation for DetectIntentResponse
+     */
+    interface AsObject {
+        responseId?: string;
+        queryResult?: QueryResult.AsObject;
+        webhookStatus?: googleRpc010.Status.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for DetectIntentResponse
+     */
+    interface AsProtobufJSON {
+        responseId?: string;
+        queryResult?: QueryResult.AsProtobufJSON | null;
+        webhookStatus?: googleRpc010.Status.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.QueryParameters
+ */
 export declare class QueryParameters implements GrpcMessage {
-    static toBinary(instance: QueryParameters): any;
-    static fromBinary(bytes: ByteSource): QueryParameters;
-    static refineValues(instance: QueryParameters): void;
-    static fromBinaryReader(instance: QueryParameters, reader: BinaryReader): void;
-    static toBinaryWriter(instance: QueryParameters, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): QueryParameters;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: QueryParameters): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: QueryParameters, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: QueryParameters, _writer: BinaryWriter): void;
     private _timeZone?;
     private _geoLocation?;
     private _contexts?;
     private _resetContexts?;
     private _payload?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param QueryParameters value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of QueryParameters to deeply clone from
      */
-    constructor(value?: RecursivePartial<QueryParameters>);
+    constructor(_value?: RecursivePartial<QueryParameters.AsObject>);
     get timeZone(): string | undefined;
     set timeZone(value: string | undefined);
-    get geoLocation(): googleType004.LatLng | undefined;
-    set geoLocation(value: googleType004.LatLng | undefined);
-    get contexts(): ondewoNlu005.Context[] | undefined;
-    set contexts(value: ondewoNlu005.Context[] | undefined);
+    get geoLocation(): googleType011.LatLng | undefined;
+    set geoLocation(value: googleType011.LatLng | undefined);
+    get contexts(): ondewoNlu006.Context[] | undefined;
+    set contexts(value: ondewoNlu006.Context[] | undefined);
     get resetContexts(): boolean | undefined;
     set resetContexts(value: boolean | undefined);
-    get payload(): googleProtobuf002.Struct | undefined;
-    set payload(value: googleProtobuf002.Struct | undefined);
-    toObject(): {
-        timeZone: string;
-        geoLocation: {
-            latitude: number;
-            longitude: number;
-        };
-        contexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu005.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-        resetContexts: boolean;
-        payload: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-    };
-    toJSON(): {
-        timeZone: string;
-        geoLocation: {
-            latitude: number;
-            longitude: number;
-        };
-        contexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu005.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-        resetContexts: boolean;
-        payload: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-    };
+    get payload(): googleProtobuf009.Struct | undefined;
+    set payload(value: googleProtobuf009.Struct | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): QueryParameters.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): QueryParameters.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): QueryParameters.AsProtobufJSON;
 }
-export declare module QueryParameters { }
+export declare module QueryParameters {
+    /**
+     * Standard JavaScript object representation for QueryParameters
+     */
+    interface AsObject {
+        timeZone?: string;
+        geoLocation?: googleType011.LatLng.AsObject;
+        contexts?: ondewoNlu006.Context.AsObject[];
+        resetContexts?: boolean;
+        payload?: googleProtobuf009.Struct.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for QueryParameters
+     */
+    interface AsProtobufJSON {
+        timeZone?: string;
+        geoLocation?: googleType011.LatLng.AsProtobufJSON | null;
+        contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        resetContexts?: boolean;
+        payload?: googleProtobuf009.Struct.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.QueryInput
+ */
 export declare class QueryInput implements GrpcMessage {
-    static toBinary(instance: QueryInput): any;
-    static fromBinary(bytes: ByteSource): QueryInput;
-    static refineValues(instance: QueryInput): void;
-    static fromBinaryReader(instance: QueryInput, reader: BinaryReader): void;
-    static toBinaryWriter(instance: QueryInput, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): QueryInput;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: QueryInput): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: QueryInput, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: QueryInput, _writer: BinaryWriter): void;
     private _audioConfig?;
     private _text?;
     private _event?;
     private _input;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param QueryInput value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of QueryInput to deeply clone from
      */
-    constructor(value?: RecursivePartial<QueryInput>);
+    constructor(_value?: RecursivePartial<QueryInput.AsObject>);
     get audioConfig(): InputAudioConfig | undefined;
     set audioConfig(value: InputAudioConfig | undefined);
     get text(): TextInput | undefined;
@@ -851,50 +311,43 @@ export declare class QueryInput implements GrpcMessage {
     get event(): EventInput | undefined;
     set event(value: EventInput | undefined);
     get input(): QueryInput.InputCase;
-    toObject(): {
-        audioConfig: {
-            audioEncoding: AudioEncoding;
-            sampleRateHertz: number;
-            languageCode: string;
-            phraseHints: string[];
-        };
-        text: {
-            text: string;
-            languageCode: string;
-        };
-        event: {
-            name: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            languageCode: string;
-        };
-    };
-    toJSON(): {
-        audioConfig: {
-            audioEncoding: AudioEncoding;
-            sampleRateHertz: number;
-            languageCode: string;
-            phraseHints: string[];
-        };
-        text: {
-            text: string;
-            languageCode: string;
-        };
-        event: {
-            name: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            languageCode: string;
-        };
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): QueryInput.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): QueryInput.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): QueryInput.AsProtobufJSON;
 }
 export declare module QueryInput {
+    /**
+     * Standard JavaScript object representation for QueryInput
+     */
+    interface AsObject {
+        audioConfig?: InputAudioConfig.AsObject;
+        text?: TextInput.AsObject;
+        event?: EventInput.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for QueryInput
+     */
+    interface AsProtobufJSON {
+        audioConfig?: InputAudioConfig.AsProtobufJSON | null;
+        text?: TextInput.AsProtobufJSON | null;
+        event?: EventInput.AsProtobufJSON | null;
+    }
     enum InputCase {
         none = 0,
         audioConfig = 1,
@@ -902,12 +355,33 @@ export declare module QueryInput {
         event = 3
     }
 }
+/**
+ * Message implementation for ondewo.nlu.QueryResult
+ */
 export declare class QueryResult implements GrpcMessage {
-    static toBinary(instance: QueryResult): any;
-    static fromBinary(bytes: ByteSource): QueryResult;
-    static refineValues(instance: QueryResult): void;
-    static fromBinaryReader(instance: QueryResult, reader: BinaryReader): void;
-    static toBinaryWriter(instance: QueryResult, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): QueryResult;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: QueryResult): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: QueryResult, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: QueryResult, _writer: BinaryWriter): void;
     private _queryText?;
     private _languageCode?;
     private _speechRecognitionConfidence?;
@@ -923,10 +397,10 @@ export declare class QueryResult implements GrpcMessage {
     private _intentDetectionConfidence?;
     private _diagnosticInfo?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param QueryResult value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of QueryResult to deeply clone from
      */
-    constructor(value?: RecursivePartial<QueryResult>);
+    constructor(_value?: RecursivePartial<QueryResult.AsObject>);
     get queryText(): string | undefined;
     set queryText(value: string | undefined);
     get languageCode(): string | undefined;
@@ -935,626 +409,123 @@ export declare class QueryResult implements GrpcMessage {
     set speechRecognitionConfidence(value: number | undefined);
     get action(): string | undefined;
     set action(value: string | undefined);
-    get parameters(): googleProtobuf002.Struct | undefined;
-    set parameters(value: googleProtobuf002.Struct | undefined);
+    get parameters(): googleProtobuf009.Struct | undefined;
+    set parameters(value: googleProtobuf009.Struct | undefined);
     get allRequiredParamsPresent(): boolean | undefined;
     set allRequiredParamsPresent(value: boolean | undefined);
     get fulfillmentText(): string | undefined;
     set fulfillmentText(value: string | undefined);
-    get fulfillmentMessages(): ondewoNlu006.Intent.Message[] | undefined;
-    set fulfillmentMessages(value: ondewoNlu006.Intent.Message[] | undefined);
+    get fulfillmentMessages(): ondewoNlu012.Intent.Message[] | undefined;
+    set fulfillmentMessages(value: ondewoNlu012.Intent.Message[] | undefined);
     get webhookSource(): string | undefined;
     set webhookSource(value: string | undefined);
-    get webhookPayload(): googleProtobuf002.Struct | undefined;
-    set webhookPayload(value: googleProtobuf002.Struct | undefined);
-    get outputContexts(): ondewoNlu005.Context[] | undefined;
-    set outputContexts(value: ondewoNlu005.Context[] | undefined);
-    get intent(): ondewoNlu006.Intent | undefined;
-    set intent(value: ondewoNlu006.Intent | undefined);
+    get webhookPayload(): googleProtobuf009.Struct | undefined;
+    set webhookPayload(value: googleProtobuf009.Struct | undefined);
+    get outputContexts(): ondewoNlu006.Context[] | undefined;
+    set outputContexts(value: ondewoNlu006.Context[] | undefined);
+    get intent(): ondewoNlu012.Intent | undefined;
+    set intent(value: ondewoNlu012.Intent | undefined);
     get intentDetectionConfidence(): number | undefined;
     set intentDetectionConfidence(value: number | undefined);
-    get diagnosticInfo(): googleProtobuf002.Struct | undefined;
-    set diagnosticInfo(value: googleProtobuf002.Struct | undefined);
-    toObject(): {
-        queryText: string;
-        languageCode: string;
-        speechRecognitionConfidence: number;
-        action: string;
-        parameters: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-        allRequiredParamsPresent: boolean;
-        fulfillmentText: string;
-        fulfillmentMessages: {
-            text: {
-                text: string[];
-            };
-            image: {
-                imageUri: string;
-                accessibilityText: string;
-            };
-            quickReplies: {
-                title: string;
-                quickReplies: string[];
-            };
-            card: {
-                title: string;
-                subtitle: string;
-                imageUri: string;
-                buttons: {
-                    text: string;
-                    postback: string;
-                }[];
-            };
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            simpleResponses: {
-                simpleResponses: {
-                    textToSpeech: string;
-                    ssml: string;
-                    displayText: string;
-                }[];
-            };
-            basicCard: {
-                title: string;
-                subtitle: string;
-                formattedText: string;
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                buttons: {
-                    title: string;
-                    openUriAction: {
-                        uri: string;
-                    };
-                }[];
-            };
-            suggestions: {
-                suggestions: {
-                    title: string;
-                }[];
-            };
-            linkOutSuggestion: {
-                destinationName: string;
-                uri: string;
-            };
-            listSelect: {
-                title: string;
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            carouselSelect: {
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            htmlText: {
-                text: string[];
-            };
-            video: {
-                uri: string;
-                accessibilityText: string;
-            };
-            audio: {
-                uri: string;
-                accessibilityText: string;
-            };
-            platform: ondewoNlu006.Intent.Message.Platform;
-        }[];
-        webhookSource: string;
-        webhookPayload: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-        outputContexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu005.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-        intent: {
-            name: string;
-            displayName: string;
-            webhookState: ondewoNlu006.Intent.WebhookState;
-            priority: number;
-            isFallback: boolean;
-            mlDisabled: boolean;
-            inputContextNames: string[];
-            events: string[];
-            trainingPhrases: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            }[];
-            action: string;
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            parameters: {
-                name: string;
-                displayName: string;
-                value: string;
-                defaultValue: string;
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                mandatory: boolean;
-                prompts: string[];
-                isList: boolean;
-            }[];
-            messages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-            rootFollowupIntentName: string;
-            parentFollowupIntentName: string;
-            followupIntentInfo: {
-                followupIntentName: string;
-                parentFollowupIntentName: string;
-            }[];
-            nextPageToken: string;
-            domainName: string;
-            isStartOfDeviation: boolean;
-            isEndOfDeviation: boolean;
-            trainingPhraseCount: number;
-            status: ondewoNlu006.Intent.IntentStatus;
-        };
-        intentDetectionConfidence: number;
-        diagnosticInfo: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-    };
-    toJSON(): {
-        queryText: string;
-        languageCode: string;
-        speechRecognitionConfidence: number;
-        action: string;
-        parameters: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-        allRequiredParamsPresent: boolean;
-        fulfillmentText: string;
-        fulfillmentMessages: {
-            text: {
-                text: string[];
-            };
-            image: {
-                imageUri: string;
-                accessibilityText: string;
-            };
-            quickReplies: {
-                title: string;
-                quickReplies: string[];
-            };
-            card: {
-                title: string;
-                subtitle: string;
-                imageUri: string;
-                buttons: {
-                    text: string;
-                    postback: string;
-                }[];
-            };
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            simpleResponses: {
-                simpleResponses: {
-                    textToSpeech: string;
-                    ssml: string;
-                    displayText: string;
-                }[];
-            };
-            basicCard: {
-                title: string;
-                subtitle: string;
-                formattedText: string;
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                buttons: {
-                    title: string;
-                    openUriAction: {
-                        uri: string;
-                    };
-                }[];
-            };
-            suggestions: {
-                suggestions: {
-                    title: string;
-                }[];
-            };
-            linkOutSuggestion: {
-                destinationName: string;
-                uri: string;
-            };
-            listSelect: {
-                title: string;
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            carouselSelect: {
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            htmlText: {
-                text: string[];
-            };
-            video: {
-                uri: string;
-                accessibilityText: string;
-            };
-            audio: {
-                uri: string;
-                accessibilityText: string;
-            };
-            platform: ondewoNlu006.Intent.Message.Platform;
-        }[];
-        webhookSource: string;
-        webhookPayload: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-        outputContexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu005.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-        intent: {
-            name: string;
-            displayName: string;
-            webhookState: ondewoNlu006.Intent.WebhookState;
-            priority: number;
-            isFallback: boolean;
-            mlDisabled: boolean;
-            inputContextNames: string[];
-            events: string[];
-            trainingPhrases: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            }[];
-            action: string;
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            parameters: {
-                name: string;
-                displayName: string;
-                value: string;
-                defaultValue: string;
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                mandatory: boolean;
-                prompts: string[];
-                isList: boolean;
-            }[];
-            messages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-            rootFollowupIntentName: string;
-            parentFollowupIntentName: string;
-            followupIntentInfo: {
-                followupIntentName: string;
-                parentFollowupIntentName: string;
-            }[];
-            nextPageToken: string;
-            domainName: string;
-            isStartOfDeviation: boolean;
-            isEndOfDeviation: boolean;
-            trainingPhraseCount: number;
-            status: ondewoNlu006.Intent.IntentStatus;
-        };
-        intentDetectionConfidence: number;
-        diagnosticInfo: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-    };
+    get diagnosticInfo(): googleProtobuf009.Struct | undefined;
+    set diagnosticInfo(value: googleProtobuf009.Struct | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): QueryResult.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): QueryResult.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): QueryResult.AsProtobufJSON;
 }
-export declare module QueryResult { }
+export declare module QueryResult {
+    /**
+     * Standard JavaScript object representation for QueryResult
+     */
+    interface AsObject {
+        queryText?: string;
+        languageCode?: string;
+        speechRecognitionConfidence?: number;
+        action?: string;
+        parameters?: googleProtobuf009.Struct.AsObject;
+        allRequiredParamsPresent?: boolean;
+        fulfillmentText?: string;
+        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsObject[];
+        webhookSource?: string;
+        webhookPayload?: googleProtobuf009.Struct.AsObject;
+        outputContexts?: ondewoNlu006.Context.AsObject[];
+        intent?: ondewoNlu012.Intent.AsObject;
+        intentDetectionConfidence?: number;
+        diagnosticInfo?: googleProtobuf009.Struct.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for QueryResult
+     */
+    interface AsProtobufJSON {
+        queryText?: string;
+        languageCode?: string;
+        speechRecognitionConfidence?: number;
+        action?: string;
+        parameters?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        allRequiredParamsPresent?: boolean;
+        fulfillmentText?: string;
+        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsProtobufJSON[] | null;
+        webhookSource?: string;
+        webhookPayload?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        outputContexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        intent?: ondewoNlu012.Intent.AsProtobufJSON | null;
+        intentDetectionConfidence?: number;
+        diagnosticInfo?: googleProtobuf009.Struct.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.StreamingDetectIntentRequest
+ */
 export declare class StreamingDetectIntentRequest implements GrpcMessage {
-    static toBinary(instance: StreamingDetectIntentRequest): any;
-    static fromBinary(bytes: ByteSource): StreamingDetectIntentRequest;
-    static refineValues(instance: StreamingDetectIntentRequest): void;
-    static fromBinaryReader(instance: StreamingDetectIntentRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: StreamingDetectIntentRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): StreamingDetectIntentRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: StreamingDetectIntentRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: StreamingDetectIntentRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: StreamingDetectIntentRequest, _writer: BinaryWriter): void;
     private _session?;
     private _queryParams?;
     private _queryInput?;
     private _singleUtterance?;
     private _inputAudio?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param StreamingDetectIntentRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamingDetectIntentRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<StreamingDetectIntentRequest>);
+    constructor(_value?: RecursivePartial<StreamingDetectIntentRequest.AsObject>);
     get session(): string | undefined;
     set session(value: string | undefined);
     get queryParams(): QueryParameters | undefined;
@@ -1565,758 +536,168 @@ export declare class StreamingDetectIntentRequest implements GrpcMessage {
     set singleUtterance(value: boolean | undefined);
     get inputAudio(): Uint8Array | undefined;
     set inputAudio(value: Uint8Array | undefined);
-    toObject(): {
-        session: string;
-        queryParams: {
-            timeZone: string;
-            geoLocation: {
-                latitude: number;
-                longitude: number;
-            };
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-        };
-        queryInput: {
-            audioConfig: {
-                audioEncoding: AudioEncoding;
-                sampleRateHertz: number;
-                languageCode: string;
-                phraseHints: string[];
-            };
-            text: {
-                text: string;
-                languageCode: string;
-            };
-            event: {
-                name: string;
-                parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                languageCode: string;
-            };
-        };
-        singleUtterance: boolean;
-        inputAudio: Uint8Array;
-    };
-    toJSON(): {
-        session: string;
-        queryParams: {
-            timeZone: string;
-            geoLocation: {
-                latitude: number;
-                longitude: number;
-            };
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-        };
-        queryInput: {
-            audioConfig: {
-                audioEncoding: AudioEncoding;
-                sampleRateHertz: number;
-                languageCode: string;
-                phraseHints: string[];
-            };
-            text: {
-                text: string;
-                languageCode: string;
-            };
-            event: {
-                name: string;
-                parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                languageCode: string;
-            };
-        };
-        singleUtterance: boolean;
-        inputAudio: Uint8Array;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): StreamingDetectIntentRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): StreamingDetectIntentRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): StreamingDetectIntentRequest.AsProtobufJSON;
 }
-export declare module StreamingDetectIntentRequest { }
+export declare module StreamingDetectIntentRequest {
+    /**
+     * Standard JavaScript object representation for StreamingDetectIntentRequest
+     */
+    interface AsObject {
+        session?: string;
+        queryParams?: QueryParameters.AsObject;
+        queryInput?: QueryInput.AsObject;
+        singleUtterance?: boolean;
+        inputAudio?: Uint8Array;
+    }
+    /**
+     * Protobuf JSON representation for StreamingDetectIntentRequest
+     */
+    interface AsProtobufJSON {
+        session?: string;
+        queryParams?: QueryParameters.AsProtobufJSON | null;
+        queryInput?: QueryInput.AsProtobufJSON | null;
+        singleUtterance?: boolean;
+        inputAudio?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.StreamingDetectIntentResponse
+ */
 export declare class StreamingDetectIntentResponse implements GrpcMessage {
-    static toBinary(instance: StreamingDetectIntentResponse): any;
-    static fromBinary(bytes: ByteSource): StreamingDetectIntentResponse;
-    static refineValues(instance: StreamingDetectIntentResponse): void;
-    static fromBinaryReader(instance: StreamingDetectIntentResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: StreamingDetectIntentResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): StreamingDetectIntentResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: StreamingDetectIntentResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: StreamingDetectIntentResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: StreamingDetectIntentResponse, _writer: BinaryWriter): void;
     private _responseId?;
     private _recognitionResult?;
     private _queryResult?;
     private _webhookStatus?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param StreamingDetectIntentResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamingDetectIntentResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<StreamingDetectIntentResponse>);
+    constructor(_value?: RecursivePartial<StreamingDetectIntentResponse.AsObject>);
     get responseId(): string | undefined;
     set responseId(value: string | undefined);
     get recognitionResult(): StreamingRecognitionResult | undefined;
     set recognitionResult(value: StreamingRecognitionResult | undefined);
     get queryResult(): QueryResult | undefined;
     set queryResult(value: QueryResult | undefined);
-    get webhookStatus(): googleRpc003.Status | undefined;
-    set webhookStatus(value: googleRpc003.Status | undefined);
-    toObject(): {
-        responseId: string;
-        recognitionResult: {
-            messageType: StreamingRecognitionResult.MessageType;
-            transcript: string;
-            isFinal: boolean;
-            confidence: number;
-        };
-        queryResult: {
-            queryText: string;
-            languageCode: string;
-            speechRecognitionConfidence: number;
-            action: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            allRequiredParamsPresent: boolean;
-            fulfillmentText: string;
-            fulfillmentMessages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            webhookSource: string;
-            webhookPayload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            intent: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            };
-            intentDetectionConfidence: number;
-            diagnosticInfo: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-        };
-        webhookStatus: {
-            code: number;
-            message: string;
-            details: {
-                typeUrl: string;
-                value: Uint8Array;
-            }[];
-        };
-    };
-    toJSON(): {
-        responseId: string;
-        recognitionResult: {
-            messageType: StreamingRecognitionResult.MessageType;
-            transcript: string;
-            isFinal: boolean;
-            confidence: number;
-        };
-        queryResult: {
-            queryText: string;
-            languageCode: string;
-            speechRecognitionConfidence: number;
-            action: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            allRequiredParamsPresent: boolean;
-            fulfillmentText: string;
-            fulfillmentMessages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            webhookSource: string;
-            webhookPayload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            intent: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            };
-            intentDetectionConfidence: number;
-            diagnosticInfo: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-        };
-        webhookStatus: {
-            code: number;
-            message: string;
-            details: {
-                typeUrl: string;
-                value: Uint8Array;
-            }[];
-        };
-    };
+    get webhookStatus(): googleRpc010.Status | undefined;
+    set webhookStatus(value: googleRpc010.Status | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): StreamingDetectIntentResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): StreamingDetectIntentResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): StreamingDetectIntentResponse.AsProtobufJSON;
 }
-export declare module StreamingDetectIntentResponse { }
+export declare module StreamingDetectIntentResponse {
+    /**
+     * Standard JavaScript object representation for StreamingDetectIntentResponse
+     */
+    interface AsObject {
+        responseId?: string;
+        recognitionResult?: StreamingRecognitionResult.AsObject;
+        queryResult?: QueryResult.AsObject;
+        webhookStatus?: googleRpc010.Status.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for StreamingDetectIntentResponse
+     */
+    interface AsProtobufJSON {
+        responseId?: string;
+        recognitionResult?: StreamingRecognitionResult.AsProtobufJSON | null;
+        queryResult?: QueryResult.AsProtobufJSON | null;
+        webhookStatus?: googleRpc010.Status.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.StreamingRecognitionResult
+ */
 export declare class StreamingRecognitionResult implements GrpcMessage {
-    static toBinary(instance: StreamingRecognitionResult): any;
-    static fromBinary(bytes: ByteSource): StreamingRecognitionResult;
-    static refineValues(instance: StreamingRecognitionResult): void;
-    static fromBinaryReader(instance: StreamingRecognitionResult, reader: BinaryReader): void;
-    static toBinaryWriter(instance: StreamingRecognitionResult, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): StreamingRecognitionResult;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: StreamingRecognitionResult): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: StreamingRecognitionResult, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: StreamingRecognitionResult, _writer: BinaryWriter): void;
     private _messageType?;
     private _transcript?;
     private _isFinal?;
     private _confidence?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param StreamingRecognitionResult value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamingRecognitionResult to deeply clone from
      */
-    constructor(value?: RecursivePartial<StreamingRecognitionResult>);
+    constructor(_value?: RecursivePartial<StreamingRecognitionResult.AsObject>);
     get messageType(): StreamingRecognitionResult.MessageType | undefined;
     set messageType(value: StreamingRecognitionResult.MessageType | undefined);
     get transcript(): string | undefined;
@@ -2325,41 +706,87 @@ export declare class StreamingRecognitionResult implements GrpcMessage {
     set isFinal(value: boolean | undefined);
     get confidence(): number | undefined;
     set confidence(value: number | undefined);
-    toObject(): {
-        messageType: StreamingRecognitionResult.MessageType;
-        transcript: string;
-        isFinal: boolean;
-        confidence: number;
-    };
-    toJSON(): {
-        messageType: StreamingRecognitionResult.MessageType;
-        transcript: string;
-        isFinal: boolean;
-        confidence: number;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): StreamingRecognitionResult.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): StreamingRecognitionResult.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): StreamingRecognitionResult.AsProtobufJSON;
 }
 export declare module StreamingRecognitionResult {
+    /**
+     * Standard JavaScript object representation for StreamingRecognitionResult
+     */
+    interface AsObject {
+        messageType?: StreamingRecognitionResult.MessageType;
+        transcript?: string;
+        isFinal?: boolean;
+        confidence?: number;
+    }
+    /**
+     * Protobuf JSON representation for StreamingRecognitionResult
+     */
+    interface AsProtobufJSON {
+        messageType?: string;
+        transcript?: string;
+        isFinal?: boolean;
+        confidence?: number;
+    }
     enum MessageType {
-        messageTypeUnspecified = 0,
-        transcript = 1,
-        endOfSingleUtterance = 2
+        MESSAGE_TYPE_UNSPECIFIED = 0,
+        TRANSCRIPT = 1,
+        END_OF_SINGLE_UTTERANCE = 2
     }
 }
+/**
+ * Message implementation for ondewo.nlu.InputAudioConfig
+ */
 export declare class InputAudioConfig implements GrpcMessage {
-    static toBinary(instance: InputAudioConfig): any;
-    static fromBinary(bytes: ByteSource): InputAudioConfig;
-    static refineValues(instance: InputAudioConfig): void;
-    static fromBinaryReader(instance: InputAudioConfig, reader: BinaryReader): void;
-    static toBinaryWriter(instance: InputAudioConfig, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): InputAudioConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: InputAudioConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: InputAudioConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: InputAudioConfig, _writer: BinaryWriter): void;
     private _audioEncoding?;
     private _sampleRateHertz?;
     private _languageCode?;
     private _phraseHints?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param InputAudioConfig value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of InputAudioConfig to deeply clone from
      */
-    constructor(value?: RecursivePartial<InputAudioConfig>);
+    constructor(_value?: RecursivePartial<InputAudioConfig.AsObject>);
     get audioEncoding(): AudioEncoding | undefined;
     set audioEncoding(value: AudioEncoding | undefined);
     get sampleRateHertz(): number | undefined;
@@ -2368,2708 +795,477 @@ export declare class InputAudioConfig implements GrpcMessage {
     set languageCode(value: string | undefined);
     get phraseHints(): string[] | undefined;
     set phraseHints(value: string[] | undefined);
-    toObject(): {
-        audioEncoding: AudioEncoding;
-        sampleRateHertz: number;
-        languageCode: string;
-        phraseHints: string[];
-    };
-    toJSON(): {
-        audioEncoding: AudioEncoding;
-        sampleRateHertz: number;
-        languageCode: string;
-        phraseHints: string[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): InputAudioConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): InputAudioConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): InputAudioConfig.AsProtobufJSON;
 }
-export declare module InputAudioConfig { }
+export declare module InputAudioConfig {
+    /**
+     * Standard JavaScript object representation for InputAudioConfig
+     */
+    interface AsObject {
+        audioEncoding?: AudioEncoding;
+        sampleRateHertz?: number;
+        languageCode?: string;
+        phraseHints?: string[];
+    }
+    /**
+     * Protobuf JSON representation for InputAudioConfig
+     */
+    interface AsProtobufJSON {
+        audioEncoding?: string;
+        sampleRateHertz?: number;
+        languageCode?: string;
+        phraseHints?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.TextInput
+ */
 export declare class TextInput implements GrpcMessage {
-    static toBinary(instance: TextInput): any;
-    static fromBinary(bytes: ByteSource): TextInput;
-    static refineValues(instance: TextInput): void;
-    static fromBinaryReader(instance: TextInput, reader: BinaryReader): void;
-    static toBinaryWriter(instance: TextInput, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): TextInput;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: TextInput): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: TextInput, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: TextInput, _writer: BinaryWriter): void;
     private _text?;
     private _languageCode?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param TextInput value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TextInput to deeply clone from
      */
-    constructor(value?: RecursivePartial<TextInput>);
+    constructor(_value?: RecursivePartial<TextInput.AsObject>);
     get text(): string | undefined;
     set text(value: string | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    toObject(): {
-        text: string;
-        languageCode: string;
-    };
-    toJSON(): {
-        text: string;
-        languageCode: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): TextInput.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): TextInput.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): TextInput.AsProtobufJSON;
 }
-export declare module TextInput { }
+export declare module TextInput {
+    /**
+     * Standard JavaScript object representation for TextInput
+     */
+    interface AsObject {
+        text?: string;
+        languageCode?: string;
+    }
+    /**
+     * Protobuf JSON representation for TextInput
+     */
+    interface AsProtobufJSON {
+        text?: string;
+        languageCode?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.EventInput
+ */
 export declare class EventInput implements GrpcMessage {
-    static toBinary(instance: EventInput): any;
-    static fromBinary(bytes: ByteSource): EventInput;
-    static refineValues(instance: EventInput): void;
-    static fromBinaryReader(instance: EventInput, reader: BinaryReader): void;
-    static toBinaryWriter(instance: EventInput, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): EventInput;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EventInput): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: EventInput, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: EventInput, _writer: BinaryWriter): void;
     private _name?;
     private _parameters?;
     private _languageCode?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param EventInput value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EventInput to deeply clone from
      */
-    constructor(value?: RecursivePartial<EventInput>);
+    constructor(_value?: RecursivePartial<EventInput.AsObject>);
     get name(): string | undefined;
     set name(value: string | undefined);
-    get parameters(): googleProtobuf002.Struct | undefined;
-    set parameters(value: googleProtobuf002.Struct | undefined);
+    get parameters(): googleProtobuf009.Struct | undefined;
+    set parameters(value: googleProtobuf009.Struct | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    toObject(): {
-        name: string;
-        parameters: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-        languageCode: string;
-    };
-    toJSON(): {
-        name: string;
-        parameters: {
-            fields: {
-                [x: string]: googleProtobuf002.Value;
-            };
-        };
-        languageCode: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EventInput.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): EventInput.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): EventInput.AsProtobufJSON;
 }
-export declare module EventInput { }
+export declare module EventInput {
+    /**
+     * Standard JavaScript object representation for EventInput
+     */
+    interface AsObject {
+        name?: string;
+        parameters?: googleProtobuf009.Struct.AsObject;
+        languageCode?: string;
+    }
+    /**
+     * Protobuf JSON representation for EventInput
+     */
+    interface AsProtobufJSON {
+        name?: string;
+        parameters?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        languageCode?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.Session
+ */
 export declare class Session implements GrpcMessage {
-    static toBinary(instance: Session): any;
-    static fromBinary(bytes: ByteSource): Session;
-    static refineValues(instance: Session): void;
-    static fromBinaryReader(instance: Session, reader: BinaryReader): void;
-    static toBinaryWriter(instance: Session, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): Session;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: Session): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: Session, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: Session, _writer: BinaryWriter): void;
     private _sessionId?;
     private _sessionSteps?;
     private _sessionInfo?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param Session value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Session to deeply clone from
      */
-    constructor(value?: RecursivePartial<Session>);
+    constructor(_value?: RecursivePartial<Session.AsObject>);
     get sessionId(): string | undefined;
     set sessionId(value: string | undefined);
     get sessionSteps(): SessionStep[] | undefined;
     set sessionSteps(value: SessionStep[] | undefined);
     get sessionInfo(): SessionInfo | undefined;
     set sessionInfo(value: SessionInfo | undefined);
-    toObject(): {
-        sessionId: string;
-        sessionSteps: {
-            detectIntentRequest: {
-                session: string;
-                queryParams: {
-                    timeZone: string;
-                    geoLocation: {
-                        latitude: number;
-                        longitude: number;
-                    };
-                    contexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                };
-                queryInput: {
-                    audioConfig: {
-                        audioEncoding: AudioEncoding;
-                        sampleRateHertz: number;
-                        languageCode: string;
-                        phraseHints: string[];
-                    };
-                    text: {
-                        text: string;
-                        languageCode: string;
-                    };
-                    event: {
-                        name: string;
-                        parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        languageCode: string;
-                    };
-                };
-                inputAudio: Uint8Array;
-            };
-            detectIntentResponse: {
-                responseId: string;
-                queryResult: {
-                    queryText: string;
-                    languageCode: string;
-                    speechRecognitionConfidence: number;
-                    action: string;
-                    parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    allRequiredParamsPresent: boolean;
-                    fulfillmentText: string;
-                    fulfillmentMessages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    webhookSource: string;
-                    webhookPayload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    intent: {
-                        name: string;
-                        displayName: string;
-                        webhookState: ondewoNlu006.Intent.WebhookState;
-                        priority: number;
-                        isFallback: boolean;
-                        mlDisabled: boolean;
-                        inputContextNames: string[];
-                        events: string[];
-                        trainingPhrases: {
-                            name: string;
-                            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                            text: string;
-                            entities: {
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                entityValueName: string;
-                                entityValueDisplayName: string;
-                                start: number;
-                                end: number;
-                                parameterName: string;
-                                parameterDisplayName: string;
-                            }[];
-                            timesAddedCount: number;
-                        }[];
-                        action: string;
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        parameters: {
-                            name: string;
-                            displayName: string;
-                            value: string;
-                            defaultValue: string;
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            mandatory: boolean;
-                            prompts: string[];
-                            isList: boolean;
-                        }[];
-                        messages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                        rootFollowupIntentName: string;
-                        parentFollowupIntentName: string;
-                        followupIntentInfo: {
-                            followupIntentName: string;
-                            parentFollowupIntentName: string;
-                        }[];
-                        nextPageToken: string;
-                        domainName: string;
-                        isStartOfDeviation: boolean;
-                        isEndOfDeviation: boolean;
-                        trainingPhraseCount: number;
-                        status: ondewoNlu006.Intent.IntentStatus;
-                    };
-                    intentDetectionConfidence: number;
-                    diagnosticInfo: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                };
-                webhookStatus: {
-                    code: number;
-                    message: string;
-                    details: {
-                        typeUrl: string;
-                        value: Uint8Array;
-                    }[];
-                };
-            };
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-        }[];
-        sessionInfo: {
-            languageCodes: string[];
-            matchedIntents: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            }[];
-            matchedEntityTypes: {
-                name: string;
-                displayName: string;
-                kind: ondewoNlu007.EntityType.Kind;
-                autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-                entities: {
-                    value: string;
-                    synonyms: string[];
-                    name: string;
-                    displayName: string;
-                    synonymCount: number;
-                }[];
-                nextPageToken: string;
-                entityCount: number;
-                status: ondewoNlu007.EntityType.EntityTypeStatus;
-                synonymCount: number;
-            }[];
-            minIntentsConfidence: number;
-            minEntityTypesConfidence: number;
-            earliest: number;
-            latest: number;
-            numberTurns: number;
-            labels: string[];
-            userIds: string[];
-        };
-    };
-    toJSON(): {
-        sessionId: string;
-        sessionSteps: {
-            detectIntentRequest: {
-                session: string;
-                queryParams: {
-                    timeZone: string;
-                    geoLocation: {
-                        latitude: number;
-                        longitude: number;
-                    };
-                    contexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                };
-                queryInput: {
-                    audioConfig: {
-                        audioEncoding: AudioEncoding;
-                        sampleRateHertz: number;
-                        languageCode: string;
-                        phraseHints: string[];
-                    };
-                    text: {
-                        text: string;
-                        languageCode: string;
-                    };
-                    event: {
-                        name: string;
-                        parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        languageCode: string;
-                    };
-                };
-                inputAudio: Uint8Array;
-            };
-            detectIntentResponse: {
-                responseId: string;
-                queryResult: {
-                    queryText: string;
-                    languageCode: string;
-                    speechRecognitionConfidence: number;
-                    action: string;
-                    parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    allRequiredParamsPresent: boolean;
-                    fulfillmentText: string;
-                    fulfillmentMessages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    webhookSource: string;
-                    webhookPayload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    intent: {
-                        name: string;
-                        displayName: string;
-                        webhookState: ondewoNlu006.Intent.WebhookState;
-                        priority: number;
-                        isFallback: boolean;
-                        mlDisabled: boolean;
-                        inputContextNames: string[];
-                        events: string[];
-                        trainingPhrases: {
-                            name: string;
-                            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                            text: string;
-                            entities: {
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                entityValueName: string;
-                                entityValueDisplayName: string;
-                                start: number;
-                                end: number;
-                                parameterName: string;
-                                parameterDisplayName: string;
-                            }[];
-                            timesAddedCount: number;
-                        }[];
-                        action: string;
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        parameters: {
-                            name: string;
-                            displayName: string;
-                            value: string;
-                            defaultValue: string;
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            mandatory: boolean;
-                            prompts: string[];
-                            isList: boolean;
-                        }[];
-                        messages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                        rootFollowupIntentName: string;
-                        parentFollowupIntentName: string;
-                        followupIntentInfo: {
-                            followupIntentName: string;
-                            parentFollowupIntentName: string;
-                        }[];
-                        nextPageToken: string;
-                        domainName: string;
-                        isStartOfDeviation: boolean;
-                        isEndOfDeviation: boolean;
-                        trainingPhraseCount: number;
-                        status: ondewoNlu006.Intent.IntentStatus;
-                    };
-                    intentDetectionConfidence: number;
-                    diagnosticInfo: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                };
-                webhookStatus: {
-                    code: number;
-                    message: string;
-                    details: {
-                        typeUrl: string;
-                        value: Uint8Array;
-                    }[];
-                };
-            };
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-        }[];
-        sessionInfo: {
-            languageCodes: string[];
-            matchedIntents: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            }[];
-            matchedEntityTypes: {
-                name: string;
-                displayName: string;
-                kind: ondewoNlu007.EntityType.Kind;
-                autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-                entities: {
-                    value: string;
-                    synonyms: string[];
-                    name: string;
-                    displayName: string;
-                    synonymCount: number;
-                }[];
-                nextPageToken: string;
-                entityCount: number;
-                status: ondewoNlu007.EntityType.EntityTypeStatus;
-                synonymCount: number;
-            }[];
-            minIntentsConfidence: number;
-            minEntityTypesConfidence: number;
-            earliest: number;
-            latest: number;
-            numberTurns: number;
-            labels: string[];
-            userIds: string[];
-        };
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): Session.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): Session.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): Session.AsProtobufJSON;
 }
 export declare module Session {
+    /**
+     * Standard JavaScript object representation for Session
+     */
+    interface AsObject {
+        sessionId?: string;
+        sessionSteps?: SessionStep.AsObject[];
+        sessionInfo?: SessionInfo.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for Session
+     */
+    interface AsProtobufJSON {
+        sessionId?: string;
+        sessionSteps?: SessionStep.AsProtobufJSON[] | null;
+        sessionInfo?: SessionInfo.AsProtobufJSON | null;
+    }
     enum View {
-        viewUnspecified = 0,
-        viewFull = 1,
-        viewSparse = 2
+        VIEW_UNSPECIFIED = 0,
+        VIEW_FULL = 1,
+        VIEW_SPARSE = 2
     }
 }
+/**
+ * Message implementation for ondewo.nlu.SessionStep
+ */
 export declare class SessionStep implements GrpcMessage {
-    static toBinary(instance: SessionStep): any;
-    static fromBinary(bytes: ByteSource): SessionStep;
-    static refineValues(instance: SessionStep): void;
-    static fromBinaryReader(instance: SessionStep, reader: BinaryReader): void;
-    static toBinaryWriter(instance: SessionStep, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): SessionStep;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: SessionStep): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: SessionStep, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: SessionStep, _writer: BinaryWriter): void;
     private _detectIntentRequest?;
     private _detectIntentResponse?;
     private _contexts?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param SessionStep value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionStep to deeply clone from
      */
-    constructor(value?: RecursivePartial<SessionStep>);
+    constructor(_value?: RecursivePartial<SessionStep.AsObject>);
     get detectIntentRequest(): DetectIntentRequest | undefined;
     set detectIntentRequest(value: DetectIntentRequest | undefined);
     get detectIntentResponse(): DetectIntentResponse | undefined;
     set detectIntentResponse(value: DetectIntentResponse | undefined);
-    get contexts(): ondewoNlu005.Context[] | undefined;
-    set contexts(value: ondewoNlu005.Context[] | undefined);
-    toObject(): {
-        detectIntentRequest: {
-            session: string;
-            queryParams: {
-                timeZone: string;
-                geoLocation: {
-                    latitude: number;
-                    longitude: number;
-                };
-                contexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-            };
-            queryInput: {
-                audioConfig: {
-                    audioEncoding: AudioEncoding;
-                    sampleRateHertz: number;
-                    languageCode: string;
-                    phraseHints: string[];
-                };
-                text: {
-                    text: string;
-                    languageCode: string;
-                };
-                event: {
-                    name: string;
-                    parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    languageCode: string;
-                };
-            };
-            inputAudio: Uint8Array;
-        };
-        detectIntentResponse: {
-            responseId: string;
-            queryResult: {
-                queryText: string;
-                languageCode: string;
-                speechRecognitionConfidence: number;
-                action: string;
-                parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                allRequiredParamsPresent: boolean;
-                fulfillmentText: string;
-                fulfillmentMessages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                webhookSource: string;
-                webhookPayload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                intent: {
-                    name: string;
-                    displayName: string;
-                    webhookState: ondewoNlu006.Intent.WebhookState;
-                    priority: number;
-                    isFallback: boolean;
-                    mlDisabled: boolean;
-                    inputContextNames: string[];
-                    events: string[];
-                    trainingPhrases: {
-                        name: string;
-                        type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                        text: string;
-                        entities: {
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            entityValueName: string;
-                            entityValueDisplayName: string;
-                            start: number;
-                            end: number;
-                            parameterName: string;
-                            parameterDisplayName: string;
-                        }[];
-                        timesAddedCount: number;
-                    }[];
-                    action: string;
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    parameters: {
-                        name: string;
-                        displayName: string;
-                        value: string;
-                        defaultValue: string;
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        mandatory: boolean;
-                        prompts: string[];
-                        isList: boolean;
-                    }[];
-                    messages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                    rootFollowupIntentName: string;
-                    parentFollowupIntentName: string;
-                    followupIntentInfo: {
-                        followupIntentName: string;
-                        parentFollowupIntentName: string;
-                    }[];
-                    nextPageToken: string;
-                    domainName: string;
-                    isStartOfDeviation: boolean;
-                    isEndOfDeviation: boolean;
-                    trainingPhraseCount: number;
-                    status: ondewoNlu006.Intent.IntentStatus;
-                };
-                intentDetectionConfidence: number;
-                diagnosticInfo: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-            };
-            webhookStatus: {
-                code: number;
-                message: string;
-                details: {
-                    typeUrl: string;
-                    value: Uint8Array;
-                }[];
-            };
-        };
-        contexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu005.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-    };
-    toJSON(): {
-        detectIntentRequest: {
-            session: string;
-            queryParams: {
-                timeZone: string;
-                geoLocation: {
-                    latitude: number;
-                    longitude: number;
-                };
-                contexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-            };
-            queryInput: {
-                audioConfig: {
-                    audioEncoding: AudioEncoding;
-                    sampleRateHertz: number;
-                    languageCode: string;
-                    phraseHints: string[];
-                };
-                text: {
-                    text: string;
-                    languageCode: string;
-                };
-                event: {
-                    name: string;
-                    parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    languageCode: string;
-                };
-            };
-            inputAudio: Uint8Array;
-        };
-        detectIntentResponse: {
-            responseId: string;
-            queryResult: {
-                queryText: string;
-                languageCode: string;
-                speechRecognitionConfidence: number;
-                action: string;
-                parameters: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                allRequiredParamsPresent: boolean;
-                fulfillmentText: string;
-                fulfillmentMessages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                webhookSource: string;
-                webhookPayload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                intent: {
-                    name: string;
-                    displayName: string;
-                    webhookState: ondewoNlu006.Intent.WebhookState;
-                    priority: number;
-                    isFallback: boolean;
-                    mlDisabled: boolean;
-                    inputContextNames: string[];
-                    events: string[];
-                    trainingPhrases: {
-                        name: string;
-                        type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                        text: string;
-                        entities: {
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            entityValueName: string;
-                            entityValueDisplayName: string;
-                            start: number;
-                            end: number;
-                            parameterName: string;
-                            parameterDisplayName: string;
-                        }[];
-                        timesAddedCount: number;
-                    }[];
-                    action: string;
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    parameters: {
-                        name: string;
-                        displayName: string;
-                        value: string;
-                        defaultValue: string;
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        mandatory: boolean;
-                        prompts: string[];
-                        isList: boolean;
-                    }[];
-                    messages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                    rootFollowupIntentName: string;
-                    parentFollowupIntentName: string;
-                    followupIntentInfo: {
-                        followupIntentName: string;
-                        parentFollowupIntentName: string;
-                    }[];
-                    nextPageToken: string;
-                    domainName: string;
-                    isStartOfDeviation: boolean;
-                    isEndOfDeviation: boolean;
-                    trainingPhraseCount: number;
-                    status: ondewoNlu006.Intent.IntentStatus;
-                };
-                intentDetectionConfidence: number;
-                diagnosticInfo: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-            };
-            webhookStatus: {
-                code: number;
-                message: string;
-                details: {
-                    typeUrl: string;
-                    value: Uint8Array;
-                }[];
-            };
-        };
-        contexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu005.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-    };
+    get contexts(): ondewoNlu006.Context[] | undefined;
+    set contexts(value: ondewoNlu006.Context[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): SessionStep.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): SessionStep.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): SessionStep.AsProtobufJSON;
 }
-export declare module SessionStep { }
+export declare module SessionStep {
+    /**
+     * Standard JavaScript object representation for SessionStep
+     */
+    interface AsObject {
+        detectIntentRequest?: DetectIntentRequest.AsObject;
+        detectIntentResponse?: DetectIntentResponse.AsObject;
+        contexts?: ondewoNlu006.Context.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for SessionStep
+     */
+    interface AsProtobufJSON {
+        detectIntentRequest?: DetectIntentRequest.AsProtobufJSON | null;
+        detectIntentResponse?: DetectIntentResponse.AsProtobufJSON | null;
+        contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.TrackSessionStepRequest
+ */
 export declare class TrackSessionStepRequest implements GrpcMessage {
-    static toBinary(instance: TrackSessionStepRequest): any;
-    static fromBinary(bytes: ByteSource): TrackSessionStepRequest;
-    static refineValues(instance: TrackSessionStepRequest): void;
-    static fromBinaryReader(instance: TrackSessionStepRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: TrackSessionStepRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): TrackSessionStepRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: TrackSessionStepRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: TrackSessionStepRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: TrackSessionStepRequest, _writer: BinaryWriter): void;
     private _sessionId?;
     private _sessionStep?;
     private _sessionView?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param TrackSessionStepRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TrackSessionStepRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<TrackSessionStepRequest>);
+    constructor(_value?: RecursivePartial<TrackSessionStepRequest.AsObject>);
     get sessionId(): string | undefined;
     set sessionId(value: string | undefined);
     get sessionStep(): SessionStep | undefined;
     set sessionStep(value: SessionStep | undefined);
     get sessionView(): Session.View | undefined;
     set sessionView(value: Session.View | undefined);
-    toObject(): {
-        sessionId: string;
-        sessionStep: {
-            detectIntentRequest: {
-                session: string;
-                queryParams: {
-                    timeZone: string;
-                    geoLocation: {
-                        latitude: number;
-                        longitude: number;
-                    };
-                    contexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                };
-                queryInput: {
-                    audioConfig: {
-                        audioEncoding: AudioEncoding;
-                        sampleRateHertz: number;
-                        languageCode: string;
-                        phraseHints: string[];
-                    };
-                    text: {
-                        text: string;
-                        languageCode: string;
-                    };
-                    event: {
-                        name: string;
-                        parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        languageCode: string;
-                    };
-                };
-                inputAudio: Uint8Array;
-            };
-            detectIntentResponse: {
-                responseId: string;
-                queryResult: {
-                    queryText: string;
-                    languageCode: string;
-                    speechRecognitionConfidence: number;
-                    action: string;
-                    parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    allRequiredParamsPresent: boolean;
-                    fulfillmentText: string;
-                    fulfillmentMessages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    webhookSource: string;
-                    webhookPayload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    intent: {
-                        name: string;
-                        displayName: string;
-                        webhookState: ondewoNlu006.Intent.WebhookState;
-                        priority: number;
-                        isFallback: boolean;
-                        mlDisabled: boolean;
-                        inputContextNames: string[];
-                        events: string[];
-                        trainingPhrases: {
-                            name: string;
-                            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                            text: string;
-                            entities: {
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                entityValueName: string;
-                                entityValueDisplayName: string;
-                                start: number;
-                                end: number;
-                                parameterName: string;
-                                parameterDisplayName: string;
-                            }[];
-                            timesAddedCount: number;
-                        }[];
-                        action: string;
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        parameters: {
-                            name: string;
-                            displayName: string;
-                            value: string;
-                            defaultValue: string;
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            mandatory: boolean;
-                            prompts: string[];
-                            isList: boolean;
-                        }[];
-                        messages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                        rootFollowupIntentName: string;
-                        parentFollowupIntentName: string;
-                        followupIntentInfo: {
-                            followupIntentName: string;
-                            parentFollowupIntentName: string;
-                        }[];
-                        nextPageToken: string;
-                        domainName: string;
-                        isStartOfDeviation: boolean;
-                        isEndOfDeviation: boolean;
-                        trainingPhraseCount: number;
-                        status: ondewoNlu006.Intent.IntentStatus;
-                    };
-                    intentDetectionConfidence: number;
-                    diagnosticInfo: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                };
-                webhookStatus: {
-                    code: number;
-                    message: string;
-                    details: {
-                        typeUrl: string;
-                        value: Uint8Array;
-                    }[];
-                };
-            };
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-        };
-        sessionView: Session.View;
-    };
-    toJSON(): {
-        sessionId: string;
-        sessionStep: {
-            detectIntentRequest: {
-                session: string;
-                queryParams: {
-                    timeZone: string;
-                    geoLocation: {
-                        latitude: number;
-                        longitude: number;
-                    };
-                    contexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                };
-                queryInput: {
-                    audioConfig: {
-                        audioEncoding: AudioEncoding;
-                        sampleRateHertz: number;
-                        languageCode: string;
-                        phraseHints: string[];
-                    };
-                    text: {
-                        text: string;
-                        languageCode: string;
-                    };
-                    event: {
-                        name: string;
-                        parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        languageCode: string;
-                    };
-                };
-                inputAudio: Uint8Array;
-            };
-            detectIntentResponse: {
-                responseId: string;
-                queryResult: {
-                    queryText: string;
-                    languageCode: string;
-                    speechRecognitionConfidence: number;
-                    action: string;
-                    parameters: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    allRequiredParamsPresent: boolean;
-                    fulfillmentText: string;
-                    fulfillmentMessages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    webhookSource: string;
-                    webhookPayload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    intent: {
-                        name: string;
-                        displayName: string;
-                        webhookState: ondewoNlu006.Intent.WebhookState;
-                        priority: number;
-                        isFallback: boolean;
-                        mlDisabled: boolean;
-                        inputContextNames: string[];
-                        events: string[];
-                        trainingPhrases: {
-                            name: string;
-                            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                            text: string;
-                            entities: {
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                entityValueName: string;
-                                entityValueDisplayName: string;
-                                start: number;
-                                end: number;
-                                parameterName: string;
-                                parameterDisplayName: string;
-                            }[];
-                            timesAddedCount: number;
-                        }[];
-                        action: string;
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        parameters: {
-                            name: string;
-                            displayName: string;
-                            value: string;
-                            defaultValue: string;
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            mandatory: boolean;
-                            prompts: string[];
-                            isList: boolean;
-                        }[];
-                        messages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                        rootFollowupIntentName: string;
-                        parentFollowupIntentName: string;
-                        followupIntentInfo: {
-                            followupIntentName: string;
-                            parentFollowupIntentName: string;
-                        }[];
-                        nextPageToken: string;
-                        domainName: string;
-                        isStartOfDeviation: boolean;
-                        isEndOfDeviation: boolean;
-                        trainingPhraseCount: number;
-                        status: ondewoNlu006.Intent.IntentStatus;
-                    };
-                    intentDetectionConfidence: number;
-                    diagnosticInfo: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                };
-                webhookStatus: {
-                    code: number;
-                    message: string;
-                    details: {
-                        typeUrl: string;
-                        value: Uint8Array;
-                    }[];
-                };
-            };
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-        };
-        sessionView: Session.View;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): TrackSessionStepRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): TrackSessionStepRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): TrackSessionStepRequest.AsProtobufJSON;
 }
-export declare module TrackSessionStepRequest { }
+export declare module TrackSessionStepRequest {
+    /**
+     * Standard JavaScript object representation for TrackSessionStepRequest
+     */
+    interface AsObject {
+        sessionId?: string;
+        sessionStep?: SessionStep.AsObject;
+        sessionView?: Session.View;
+    }
+    /**
+     * Protobuf JSON representation for TrackSessionStepRequest
+     */
+    interface AsProtobufJSON {
+        sessionId?: string;
+        sessionStep?: SessionStep.AsProtobufJSON | null;
+        sessionView?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionsRequest
+ */
 export declare class ListSessionsRequest implements GrpcMessage {
-    static toBinary(instance: ListSessionsRequest): any;
-    static fromBinary(bytes: ByteSource): ListSessionsRequest;
-    static refineValues(instance: ListSessionsRequest): void;
-    static fromBinaryReader(instance: ListSessionsRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ListSessionsRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionsRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _sessionView?;
     private _pageToken?;
     private _sessionFilter?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ListSessionsRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionsRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<ListSessionsRequest>);
+    constructor(_value?: RecursivePartial<ListSessionsRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
     get sessionView(): Session.View | undefined;
@@ -5078,402 +1274,73 @@ export declare class ListSessionsRequest implements GrpcMessage {
     set pageToken(value: string | undefined);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    toObject(): {
-        parent: string;
-        sessionView: Session.View;
-        pageToken: string;
-        sessionFilter: {
-            languageCodes: string[];
-            matchedIntents: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            }[];
-            matchedEntityTypes: {
-                name: string;
-                displayName: string;
-                kind: ondewoNlu007.EntityType.Kind;
-                autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-                entities: {
-                    value: string;
-                    synonyms: string[];
-                    name: string;
-                    displayName: string;
-                    synonymCount: number;
-                }[];
-                nextPageToken: string;
-                entityCount: number;
-                status: ondewoNlu007.EntityType.EntityTypeStatus;
-                synonymCount: number;
-            }[];
-            minIntentsConfidenceMin: number;
-            minIntentsConfidenceMax: number;
-            minEntityTypesConfidenceMin: number;
-            minEntityTypesConfidenceMax: number;
-            earliest: number;
-            latest: number;
-            minNumberTurns: number;
-            maxNumberTurns: number;
-            labels: string[];
-            userIds: string[];
-        };
-    };
-    toJSON(): {
-        parent: string;
-        sessionView: Session.View;
-        pageToken: string;
-        sessionFilter: {
-            languageCodes: string[];
-            matchedIntents: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            }[];
-            matchedEntityTypes: {
-                name: string;
-                displayName: string;
-                kind: ondewoNlu007.EntityType.Kind;
-                autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-                entities: {
-                    value: string;
-                    synonyms: string[];
-                    name: string;
-                    displayName: string;
-                    synonymCount: number;
-                }[];
-                nextPageToken: string;
-                entityCount: number;
-                status: ondewoNlu007.EntityType.EntityTypeStatus;
-                synonymCount: number;
-            }[];
-            minIntentsConfidenceMin: number;
-            minIntentsConfidenceMax: number;
-            minEntityTypesConfidenceMin: number;
-            minEntityTypesConfidenceMax: number;
-            earliest: number;
-            latest: number;
-            minNumberTurns: number;
-            maxNumberTurns: number;
-            labels: string[];
-            userIds: string[];
-        };
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionsRequest.AsProtobufJSON;
 }
-export declare module ListSessionsRequest { }
+export declare module ListSessionsRequest {
+    /**
+     * Standard JavaScript object representation for ListSessionsRequest
+     */
+    interface AsObject {
+        parent?: string;
+        sessionView?: Session.View;
+        pageToken?: string;
+        sessionFilter?: SessionFilter.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for ListSessionsRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        sessionView?: string;
+        pageToken?: string;
+        sessionFilter?: SessionFilter.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.SessionFilter
+ */
 export declare class SessionFilter implements GrpcMessage {
-    static toBinary(instance: SessionFilter): any;
-    static fromBinary(bytes: ByteSource): SessionFilter;
-    static refineValues(instance: SessionFilter): void;
-    static fromBinaryReader(instance: SessionFilter, reader: BinaryReader): void;
-    static toBinaryWriter(instance: SessionFilter, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): SessionFilter;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: SessionFilter): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: SessionFilter, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: SessionFilter, _writer: BinaryWriter): void;
     private _languageCodes?;
     private _matchedIntents?;
     private _matchedEntityTypes?;
@@ -5488,16 +1355,16 @@ export declare class SessionFilter implements GrpcMessage {
     private _labels?;
     private _userIds?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param SessionFilter value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionFilter to deeply clone from
      */
-    constructor(value?: RecursivePartial<SessionFilter>);
+    constructor(_value?: RecursivePartial<SessionFilter.AsObject>);
     get languageCodes(): string[] | undefined;
     set languageCodes(value: string[] | undefined);
-    get matchedIntents(): ondewoNlu006.Intent[] | undefined;
-    set matchedIntents(value: ondewoNlu006.Intent[] | undefined);
-    get matchedEntityTypes(): ondewoNlu007.EntityType[] | undefined;
-    set matchedEntityTypes(value: ondewoNlu007.EntityType[] | undefined);
+    get matchedIntents(): ondewoNlu012.Intent[] | undefined;
+    set matchedIntents(value: ondewoNlu012.Intent[] | undefined);
+    get matchedEntityTypes(): ondewoNlu013.EntityType[] | undefined;
+    set matchedEntityTypes(value: ondewoNlu013.EntityType[] | undefined);
     get minIntentsConfidenceMin(): number | undefined;
     set minIntentsConfidenceMin(value: number | undefined);
     get minIntentsConfidenceMax(): number | undefined;
@@ -5518,392 +1385,91 @@ export declare class SessionFilter implements GrpcMessage {
     set labels(value: string[] | undefined);
     get userIds(): string[] | undefined;
     set userIds(value: string[] | undefined);
-    toObject(): {
-        languageCodes: string[];
-        matchedIntents: {
-            name: string;
-            displayName: string;
-            webhookState: ondewoNlu006.Intent.WebhookState;
-            priority: number;
-            isFallback: boolean;
-            mlDisabled: boolean;
-            inputContextNames: string[];
-            events: string[];
-            trainingPhrases: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            }[];
-            action: string;
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            parameters: {
-                name: string;
-                displayName: string;
-                value: string;
-                defaultValue: string;
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                mandatory: boolean;
-                prompts: string[];
-                isList: boolean;
-            }[];
-            messages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-            rootFollowupIntentName: string;
-            parentFollowupIntentName: string;
-            followupIntentInfo: {
-                followupIntentName: string;
-                parentFollowupIntentName: string;
-            }[];
-            nextPageToken: string;
-            domainName: string;
-            isStartOfDeviation: boolean;
-            isEndOfDeviation: boolean;
-            trainingPhraseCount: number;
-            status: ondewoNlu006.Intent.IntentStatus;
-        }[];
-        matchedEntityTypes: {
-            name: string;
-            displayName: string;
-            kind: ondewoNlu007.EntityType.Kind;
-            autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: ondewoNlu007.EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-        minIntentsConfidenceMin: number;
-        minIntentsConfidenceMax: number;
-        minEntityTypesConfidenceMin: number;
-        minEntityTypesConfidenceMax: number;
-        earliest: number;
-        latest: number;
-        minNumberTurns: number;
-        maxNumberTurns: number;
-        labels: string[];
-        userIds: string[];
-    };
-    toJSON(): {
-        languageCodes: string[];
-        matchedIntents: {
-            name: string;
-            displayName: string;
-            webhookState: ondewoNlu006.Intent.WebhookState;
-            priority: number;
-            isFallback: boolean;
-            mlDisabled: boolean;
-            inputContextNames: string[];
-            events: string[];
-            trainingPhrases: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            }[];
-            action: string;
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            parameters: {
-                name: string;
-                displayName: string;
-                value: string;
-                defaultValue: string;
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                mandatory: boolean;
-                prompts: string[];
-                isList: boolean;
-            }[];
-            messages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-            rootFollowupIntentName: string;
-            parentFollowupIntentName: string;
-            followupIntentInfo: {
-                followupIntentName: string;
-                parentFollowupIntentName: string;
-            }[];
-            nextPageToken: string;
-            domainName: string;
-            isStartOfDeviation: boolean;
-            isEndOfDeviation: boolean;
-            trainingPhraseCount: number;
-            status: ondewoNlu006.Intent.IntentStatus;
-        }[];
-        matchedEntityTypes: {
-            name: string;
-            displayName: string;
-            kind: ondewoNlu007.EntityType.Kind;
-            autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: ondewoNlu007.EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-        minIntentsConfidenceMin: number;
-        minIntentsConfidenceMax: number;
-        minEntityTypesConfidenceMin: number;
-        minEntityTypesConfidenceMax: number;
-        earliest: number;
-        latest: number;
-        minNumberTurns: number;
-        maxNumberTurns: number;
-        labels: string[];
-        userIds: string[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): SessionFilter.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): SessionFilter.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): SessionFilter.AsProtobufJSON;
 }
-export declare module SessionFilter { }
+export declare module SessionFilter {
+    /**
+     * Standard JavaScript object representation for SessionFilter
+     */
+    interface AsObject {
+        languageCodes?: string[];
+        matchedIntents?: ondewoNlu012.Intent.AsObject[];
+        matchedEntityTypes?: ondewoNlu013.EntityType.AsObject[];
+        minIntentsConfidenceMin?: number;
+        minIntentsConfidenceMax?: number;
+        minEntityTypesConfidenceMin?: number;
+        minEntityTypesConfidenceMax?: number;
+        earliest?: number;
+        latest?: number;
+        minNumberTurns?: number;
+        maxNumberTurns?: number;
+        labels?: string[];
+        userIds?: string[];
+    }
+    /**
+     * Protobuf JSON representation for SessionFilter
+     */
+    interface AsProtobufJSON {
+        languageCodes?: string[];
+        matchedIntents?: ondewoNlu012.Intent.AsProtobufJSON[] | null;
+        matchedEntityTypes?: ondewoNlu013.EntityType.AsProtobufJSON[] | null;
+        minIntentsConfidenceMin?: number;
+        minIntentsConfidenceMax?: number;
+        minEntityTypesConfidenceMin?: number;
+        minEntityTypesConfidenceMax?: number;
+        earliest?: number;
+        latest?: number;
+        minNumberTurns?: number;
+        maxNumberTurns?: number;
+        labels?: string[];
+        userIds?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.SessionInfo
+ */
 export declare class SessionInfo implements GrpcMessage {
-    static toBinary(instance: SessionInfo): any;
-    static fromBinary(bytes: ByteSource): SessionInfo;
-    static refineValues(instance: SessionInfo): void;
-    static fromBinaryReader(instance: SessionInfo, reader: BinaryReader): void;
-    static toBinaryWriter(instance: SessionInfo, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): SessionInfo;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: SessionInfo): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: SessionInfo, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: SessionInfo, _writer: BinaryWriter): void;
     private _languageCodes?;
     private _matchedIntents?;
     private _matchedEntityTypes?;
@@ -5915,16 +1481,16 @@ export declare class SessionInfo implements GrpcMessage {
     private _labels?;
     private _userIds?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param SessionInfo value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionInfo to deeply clone from
      */
-    constructor(value?: RecursivePartial<SessionInfo>);
+    constructor(_value?: RecursivePartial<SessionInfo.AsObject>);
     get languageCodes(): string[] | undefined;
     set languageCodes(value: string[] | undefined);
-    get matchedIntents(): ondewoNlu006.Intent[] | undefined;
-    set matchedIntents(value: ondewoNlu006.Intent[] | undefined);
-    get matchedEntityTypes(): ondewoNlu007.EntityType[] | undefined;
-    set matchedEntityTypes(value: ondewoNlu007.EntityType[] | undefined);
+    get matchedIntents(): ondewoNlu012.Intent[] | undefined;
+    set matchedIntents(value: ondewoNlu012.Intent[] | undefined);
+    get matchedEntityTypes(): ondewoNlu013.EntityType[] | undefined;
+    set matchedEntityTypes(value: ondewoNlu013.EntityType[] | undefined);
     get minIntentsConfidence(): number | undefined;
     set minIntentsConfidence(value: number | undefined);
     get minEntityTypesConfidence(): number | undefined;
@@ -5939,1563 +1505,311 @@ export declare class SessionInfo implements GrpcMessage {
     set labels(value: string[] | undefined);
     get userIds(): string[] | undefined;
     set userIds(value: string[] | undefined);
-    toObject(): {
-        languageCodes: string[];
-        matchedIntents: {
-            name: string;
-            displayName: string;
-            webhookState: ondewoNlu006.Intent.WebhookState;
-            priority: number;
-            isFallback: boolean;
-            mlDisabled: boolean;
-            inputContextNames: string[];
-            events: string[];
-            trainingPhrases: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            }[];
-            action: string;
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            parameters: {
-                name: string;
-                displayName: string;
-                value: string;
-                defaultValue: string;
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                mandatory: boolean;
-                prompts: string[];
-                isList: boolean;
-            }[];
-            messages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-            rootFollowupIntentName: string;
-            parentFollowupIntentName: string;
-            followupIntentInfo: {
-                followupIntentName: string;
-                parentFollowupIntentName: string;
-            }[];
-            nextPageToken: string;
-            domainName: string;
-            isStartOfDeviation: boolean;
-            isEndOfDeviation: boolean;
-            trainingPhraseCount: number;
-            status: ondewoNlu006.Intent.IntentStatus;
-        }[];
-        matchedEntityTypes: {
-            name: string;
-            displayName: string;
-            kind: ondewoNlu007.EntityType.Kind;
-            autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: ondewoNlu007.EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-        minIntentsConfidence: number;
-        minEntityTypesConfidence: number;
-        earliest: number;
-        latest: number;
-        numberTurns: number;
-        labels: string[];
-        userIds: string[];
-    };
-    toJSON(): {
-        languageCodes: string[];
-        matchedIntents: {
-            name: string;
-            displayName: string;
-            webhookState: ondewoNlu006.Intent.WebhookState;
-            priority: number;
-            isFallback: boolean;
-            mlDisabled: boolean;
-            inputContextNames: string[];
-            events: string[];
-            trainingPhrases: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            }[];
-            action: string;
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            parameters: {
-                name: string;
-                displayName: string;
-                value: string;
-                defaultValue: string;
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                mandatory: boolean;
-                prompts: string[];
-                isList: boolean;
-            }[];
-            messages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-            rootFollowupIntentName: string;
-            parentFollowupIntentName: string;
-            followupIntentInfo: {
-                followupIntentName: string;
-                parentFollowupIntentName: string;
-            }[];
-            nextPageToken: string;
-            domainName: string;
-            isStartOfDeviation: boolean;
-            isEndOfDeviation: boolean;
-            trainingPhraseCount: number;
-            status: ondewoNlu006.Intent.IntentStatus;
-        }[];
-        matchedEntityTypes: {
-            name: string;
-            displayName: string;
-            kind: ondewoNlu007.EntityType.Kind;
-            autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-            entities: {
-                value: string;
-                synonyms: string[];
-                name: string;
-                displayName: string;
-                synonymCount: number;
-            }[];
-            nextPageToken: string;
-            entityCount: number;
-            status: ondewoNlu007.EntityType.EntityTypeStatus;
-            synonymCount: number;
-        }[];
-        minIntentsConfidence: number;
-        minEntityTypesConfidence: number;
-        earliest: number;
-        latest: number;
-        numberTurns: number;
-        labels: string[];
-        userIds: string[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): SessionInfo.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): SessionInfo.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): SessionInfo.AsProtobufJSON;
 }
-export declare module SessionInfo { }
+export declare module SessionInfo {
+    /**
+     * Standard JavaScript object representation for SessionInfo
+     */
+    interface AsObject {
+        languageCodes?: string[];
+        matchedIntents?: ondewoNlu012.Intent.AsObject[];
+        matchedEntityTypes?: ondewoNlu013.EntityType.AsObject[];
+        minIntentsConfidence?: number;
+        minEntityTypesConfidence?: number;
+        earliest?: number;
+        latest?: number;
+        numberTurns?: number;
+        labels?: string[];
+        userIds?: string[];
+    }
+    /**
+     * Protobuf JSON representation for SessionInfo
+     */
+    interface AsProtobufJSON {
+        languageCodes?: string[];
+        matchedIntents?: ondewoNlu012.Intent.AsProtobufJSON[] | null;
+        matchedEntityTypes?: ondewoNlu013.EntityType.AsProtobufJSON[] | null;
+        minIntentsConfidence?: number;
+        minEntityTypesConfidence?: number;
+        earliest?: number;
+        latest?: number;
+        numberTurns?: number;
+        labels?: string[];
+        userIds?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionsResponse
+ */
 export declare class ListSessionsResponse implements GrpcMessage {
-    static toBinary(instance: ListSessionsResponse): any;
-    static fromBinary(bytes: ByteSource): ListSessionsResponse;
-    static refineValues(instance: ListSessionsResponse): void;
-    static fromBinaryReader(instance: ListSessionsResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ListSessionsResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionsResponse, _writer: BinaryWriter): void;
     private _sessions?;
     private _nextPageToken?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ListSessionsResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionsResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<ListSessionsResponse>);
+    constructor(_value?: RecursivePartial<ListSessionsResponse.AsObject>);
     get sessions(): Session[] | undefined;
     set sessions(value: Session[] | undefined);
     get nextPageToken(): string | undefined;
     set nextPageToken(value: string | undefined);
-    toObject(): {
-        sessions: {
-            sessionId: string;
-            sessionSteps: {
-                detectIntentRequest: {
-                    session: string;
-                    queryParams: {
-                        timeZone: string;
-                        geoLocation: {
-                            latitude: number;
-                            longitude: number;
-                        };
-                        contexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                    };
-                    queryInput: {
-                        audioConfig: {
-                            audioEncoding: AudioEncoding;
-                            sampleRateHertz: number;
-                            languageCode: string;
-                            phraseHints: string[];
-                        };
-                        text: {
-                            text: string;
-                            languageCode: string;
-                        };
-                        event: {
-                            name: string;
-                            parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            languageCode: string;
-                        };
-                    };
-                    inputAudio: Uint8Array;
-                };
-                detectIntentResponse: {
-                    responseId: string;
-                    queryResult: {
-                        queryText: string;
-                        languageCode: string;
-                        speechRecognitionConfidence: number;
-                        action: string;
-                        parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        allRequiredParamsPresent: boolean;
-                        fulfillmentText: string;
-                        fulfillmentMessages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        webhookSource: string;
-                        webhookPayload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        intent: {
-                            name: string;
-                            displayName: string;
-                            webhookState: ondewoNlu006.Intent.WebhookState;
-                            priority: number;
-                            isFallback: boolean;
-                            mlDisabled: boolean;
-                            inputContextNames: string[];
-                            events: string[];
-                            trainingPhrases: {
-                                name: string;
-                                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                                text: string;
-                                entities: {
-                                    entityTypeName: string;
-                                    entityTypeDisplayName: string;
-                                    entityValueName: string;
-                                    entityValueDisplayName: string;
-                                    start: number;
-                                    end: number;
-                                    parameterName: string;
-                                    parameterDisplayName: string;
-                                }[];
-                                timesAddedCount: number;
-                            }[];
-                            action: string;
-                            outputContexts: {
-                                name: string;
-                                lifespanCount: number;
-                                parameters: {
-                                    [x: string]: ondewoNlu005.Context.Parameter;
-                                };
-                                lifespanTime: number;
-                            }[];
-                            resetContexts: boolean;
-                            parameters: {
-                                name: string;
-                                displayName: string;
-                                value: string;
-                                defaultValue: string;
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                mandatory: boolean;
-                                prompts: string[];
-                                isList: boolean;
-                            }[];
-                            messages: {
-                                text: {
-                                    text: string[];
-                                };
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                quickReplies: {
-                                    title: string;
-                                    quickReplies: string[];
-                                };
-                                card: {
-                                    title: string;
-                                    subtitle: string;
-                                    imageUri: string;
-                                    buttons: {
-                                        text: string;
-                                        postback: string;
-                                    }[];
-                                };
-                                payload: {
-                                    fields: {
-                                        [x: string]: googleProtobuf002.Value;
-                                    };
-                                };
-                                simpleResponses: {
-                                    simpleResponses: {
-                                        textToSpeech: string;
-                                        ssml: string;
-                                        displayText: string;
-                                    }[];
-                                };
-                                basicCard: {
-                                    title: string;
-                                    subtitle: string;
-                                    formattedText: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                    buttons: {
-                                        title: string;
-                                        openUriAction: {
-                                            uri: string;
-                                        };
-                                    }[];
-                                };
-                                suggestions: {
-                                    suggestions: {
-                                        title: string;
-                                    }[];
-                                };
-                                linkOutSuggestion: {
-                                    destinationName: string;
-                                    uri: string;
-                                };
-                                listSelect: {
-                                    title: string;
-                                    items: {
-                                        info: {
-                                            key: string;
-                                            synonyms: string[];
-                                        };
-                                        title: string;
-                                        description: string;
-                                        image: {
-                                            imageUri: string;
-                                            accessibilityText: string;
-                                        };
-                                    }[];
-                                };
-                                carouselSelect: {
-                                    items: {
-                                        info: {
-                                            key: string;
-                                            synonyms: string[];
-                                        };
-                                        title: string;
-                                        description: string;
-                                        image: {
-                                            imageUri: string;
-                                            accessibilityText: string;
-                                        };
-                                    }[];
-                                };
-                                htmlText: {
-                                    text: string[];
-                                };
-                                video: {
-                                    uri: string;
-                                    accessibilityText: string;
-                                };
-                                audio: {
-                                    uri: string;
-                                    accessibilityText: string;
-                                };
-                                platform: ondewoNlu006.Intent.Message.Platform;
-                            }[];
-                            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                            rootFollowupIntentName: string;
-                            parentFollowupIntentName: string;
-                            followupIntentInfo: {
-                                followupIntentName: string;
-                                parentFollowupIntentName: string;
-                            }[];
-                            nextPageToken: string;
-                            domainName: string;
-                            isStartOfDeviation: boolean;
-                            isEndOfDeviation: boolean;
-                            trainingPhraseCount: number;
-                            status: ondewoNlu006.Intent.IntentStatus;
-                        };
-                        intentDetectionConfidence: number;
-                        diagnosticInfo: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                    };
-                    webhookStatus: {
-                        code: number;
-                        message: string;
-                        details: {
-                            typeUrl: string;
-                            value: Uint8Array;
-                        }[];
-                    };
-                };
-                contexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-            }[];
-            sessionInfo: {
-                languageCodes: string[];
-                matchedIntents: {
-                    name: string;
-                    displayName: string;
-                    webhookState: ondewoNlu006.Intent.WebhookState;
-                    priority: number;
-                    isFallback: boolean;
-                    mlDisabled: boolean;
-                    inputContextNames: string[];
-                    events: string[];
-                    trainingPhrases: {
-                        name: string;
-                        type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                        text: string;
-                        entities: {
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            entityValueName: string;
-                            entityValueDisplayName: string;
-                            start: number;
-                            end: number;
-                            parameterName: string;
-                            parameterDisplayName: string;
-                        }[];
-                        timesAddedCount: number;
-                    }[];
-                    action: string;
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    parameters: {
-                        name: string;
-                        displayName: string;
-                        value: string;
-                        defaultValue: string;
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        mandatory: boolean;
-                        prompts: string[];
-                        isList: boolean;
-                    }[];
-                    messages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                    rootFollowupIntentName: string;
-                    parentFollowupIntentName: string;
-                    followupIntentInfo: {
-                        followupIntentName: string;
-                        parentFollowupIntentName: string;
-                    }[];
-                    nextPageToken: string;
-                    domainName: string;
-                    isStartOfDeviation: boolean;
-                    isEndOfDeviation: boolean;
-                    trainingPhraseCount: number;
-                    status: ondewoNlu006.Intent.IntentStatus;
-                }[];
-                matchedEntityTypes: {
-                    name: string;
-                    displayName: string;
-                    kind: ondewoNlu007.EntityType.Kind;
-                    autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-                    entities: {
-                        value: string;
-                        synonyms: string[];
-                        name: string;
-                        displayName: string;
-                        synonymCount: number;
-                    }[];
-                    nextPageToken: string;
-                    entityCount: number;
-                    status: ondewoNlu007.EntityType.EntityTypeStatus;
-                    synonymCount: number;
-                }[];
-                minIntentsConfidence: number;
-                minEntityTypesConfidence: number;
-                earliest: number;
-                latest: number;
-                numberTurns: number;
-                labels: string[];
-                userIds: string[];
-            };
-        }[];
-        nextPageToken: string;
-    };
-    toJSON(): {
-        sessions: {
-            sessionId: string;
-            sessionSteps: {
-                detectIntentRequest: {
-                    session: string;
-                    queryParams: {
-                        timeZone: string;
-                        geoLocation: {
-                            latitude: number;
-                            longitude: number;
-                        };
-                        contexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                    };
-                    queryInput: {
-                        audioConfig: {
-                            audioEncoding: AudioEncoding;
-                            sampleRateHertz: number;
-                            languageCode: string;
-                            phraseHints: string[];
-                        };
-                        text: {
-                            text: string;
-                            languageCode: string;
-                        };
-                        event: {
-                            name: string;
-                            parameters: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            languageCode: string;
-                        };
-                    };
-                    inputAudio: Uint8Array;
-                };
-                detectIntentResponse: {
-                    responseId: string;
-                    queryResult: {
-                        queryText: string;
-                        languageCode: string;
-                        speechRecognitionConfidence: number;
-                        action: string;
-                        parameters: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        allRequiredParamsPresent: boolean;
-                        fulfillmentText: string;
-                        fulfillmentMessages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        webhookSource: string;
-                        webhookPayload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        intent: {
-                            name: string;
-                            displayName: string;
-                            webhookState: ondewoNlu006.Intent.WebhookState;
-                            priority: number;
-                            isFallback: boolean;
-                            mlDisabled: boolean;
-                            inputContextNames: string[];
-                            events: string[];
-                            trainingPhrases: {
-                                name: string;
-                                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                                text: string;
-                                entities: {
-                                    entityTypeName: string;
-                                    entityTypeDisplayName: string;
-                                    entityValueName: string;
-                                    entityValueDisplayName: string;
-                                    start: number;
-                                    end: number;
-                                    parameterName: string;
-                                    parameterDisplayName: string;
-                                }[];
-                                timesAddedCount: number;
-                            }[];
-                            action: string;
-                            outputContexts: {
-                                name: string;
-                                lifespanCount: number;
-                                parameters: {
-                                    [x: string]: ondewoNlu005.Context.Parameter;
-                                };
-                                lifespanTime: number;
-                            }[];
-                            resetContexts: boolean;
-                            parameters: {
-                                name: string;
-                                displayName: string;
-                                value: string;
-                                defaultValue: string;
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                mandatory: boolean;
-                                prompts: string[];
-                                isList: boolean;
-                            }[];
-                            messages: {
-                                text: {
-                                    text: string[];
-                                };
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                quickReplies: {
-                                    title: string;
-                                    quickReplies: string[];
-                                };
-                                card: {
-                                    title: string;
-                                    subtitle: string;
-                                    imageUri: string;
-                                    buttons: {
-                                        text: string;
-                                        postback: string;
-                                    }[];
-                                };
-                                payload: {
-                                    fields: {
-                                        [x: string]: googleProtobuf002.Value;
-                                    };
-                                };
-                                simpleResponses: {
-                                    simpleResponses: {
-                                        textToSpeech: string;
-                                        ssml: string;
-                                        displayText: string;
-                                    }[];
-                                };
-                                basicCard: {
-                                    title: string;
-                                    subtitle: string;
-                                    formattedText: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                    buttons: {
-                                        title: string;
-                                        openUriAction: {
-                                            uri: string;
-                                        };
-                                    }[];
-                                };
-                                suggestions: {
-                                    suggestions: {
-                                        title: string;
-                                    }[];
-                                };
-                                linkOutSuggestion: {
-                                    destinationName: string;
-                                    uri: string;
-                                };
-                                listSelect: {
-                                    title: string;
-                                    items: {
-                                        info: {
-                                            key: string;
-                                            synonyms: string[];
-                                        };
-                                        title: string;
-                                        description: string;
-                                        image: {
-                                            imageUri: string;
-                                            accessibilityText: string;
-                                        };
-                                    }[];
-                                };
-                                carouselSelect: {
-                                    items: {
-                                        info: {
-                                            key: string;
-                                            synonyms: string[];
-                                        };
-                                        title: string;
-                                        description: string;
-                                        image: {
-                                            imageUri: string;
-                                            accessibilityText: string;
-                                        };
-                                    }[];
-                                };
-                                htmlText: {
-                                    text: string[];
-                                };
-                                video: {
-                                    uri: string;
-                                    accessibilityText: string;
-                                };
-                                audio: {
-                                    uri: string;
-                                    accessibilityText: string;
-                                };
-                                platform: ondewoNlu006.Intent.Message.Platform;
-                            }[];
-                            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                            rootFollowupIntentName: string;
-                            parentFollowupIntentName: string;
-                            followupIntentInfo: {
-                                followupIntentName: string;
-                                parentFollowupIntentName: string;
-                            }[];
-                            nextPageToken: string;
-                            domainName: string;
-                            isStartOfDeviation: boolean;
-                            isEndOfDeviation: boolean;
-                            trainingPhraseCount: number;
-                            status: ondewoNlu006.Intent.IntentStatus;
-                        };
-                        intentDetectionConfidence: number;
-                        diagnosticInfo: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                    };
-                    webhookStatus: {
-                        code: number;
-                        message: string;
-                        details: {
-                            typeUrl: string;
-                            value: Uint8Array;
-                        }[];
-                    };
-                };
-                contexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-            }[];
-            sessionInfo: {
-                languageCodes: string[];
-                matchedIntents: {
-                    name: string;
-                    displayName: string;
-                    webhookState: ondewoNlu006.Intent.WebhookState;
-                    priority: number;
-                    isFallback: boolean;
-                    mlDisabled: boolean;
-                    inputContextNames: string[];
-                    events: string[];
-                    trainingPhrases: {
-                        name: string;
-                        type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                        text: string;
-                        entities: {
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            entityValueName: string;
-                            entityValueDisplayName: string;
-                            start: number;
-                            end: number;
-                            parameterName: string;
-                            parameterDisplayName: string;
-                        }[];
-                        timesAddedCount: number;
-                    }[];
-                    action: string;
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    parameters: {
-                        name: string;
-                        displayName: string;
-                        value: string;
-                        defaultValue: string;
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        mandatory: boolean;
-                        prompts: string[];
-                        isList: boolean;
-                    }[];
-                    messages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                    rootFollowupIntentName: string;
-                    parentFollowupIntentName: string;
-                    followupIntentInfo: {
-                        followupIntentName: string;
-                        parentFollowupIntentName: string;
-                    }[];
-                    nextPageToken: string;
-                    domainName: string;
-                    isStartOfDeviation: boolean;
-                    isEndOfDeviation: boolean;
-                    trainingPhraseCount: number;
-                    status: ondewoNlu006.Intent.IntentStatus;
-                }[];
-                matchedEntityTypes: {
-                    name: string;
-                    displayName: string;
-                    kind: ondewoNlu007.EntityType.Kind;
-                    autoExpansionMode: ondewoNlu007.EntityType.AutoExpansionMode;
-                    entities: {
-                        value: string;
-                        synonyms: string[];
-                        name: string;
-                        displayName: string;
-                        synonymCount: number;
-                    }[];
-                    nextPageToken: string;
-                    entityCount: number;
-                    status: ondewoNlu007.EntityType.EntityTypeStatus;
-                    synonymCount: number;
-                }[];
-                minIntentsConfidence: number;
-                minEntityTypesConfidence: number;
-                earliest: number;
-                latest: number;
-                numberTurns: number;
-                labels: string[];
-                userIds: string[];
-            };
-        }[];
-        nextPageToken: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionsResponse.AsProtobufJSON;
 }
-export declare module ListSessionsResponse { }
+export declare module ListSessionsResponse {
+    /**
+     * Standard JavaScript object representation for ListSessionsResponse
+     */
+    interface AsObject {
+        sessions?: Session.AsObject[];
+        nextPageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListSessionsResponse
+     */
+    interface AsProtobufJSON {
+        sessions?: Session.AsProtobufJSON[] | null;
+        nextPageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetSessionRequest
+ */
 export declare class GetSessionRequest implements GrpcMessage {
-    static toBinary(instance: GetSessionRequest): any;
-    static fromBinary(bytes: ByteSource): GetSessionRequest;
-    static refineValues(instance: GetSessionRequest): void;
-    static fromBinaryReader(instance: GetSessionRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetSessionRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetSessionRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetSessionRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetSessionRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetSessionRequest, _writer: BinaryWriter): void;
     private _sessionId?;
     private _sessionView?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetSessionRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSessionRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetSessionRequest>);
+    constructor(_value?: RecursivePartial<GetSessionRequest.AsObject>);
     get sessionId(): string | undefined;
     set sessionId(value: string | undefined);
     get sessionView(): Session.View | undefined;
     set sessionView(value: Session.View | undefined);
-    toObject(): {
-        sessionId: string;
-        sessionView: Session.View;
-    };
-    toJSON(): {
-        sessionId: string;
-        sessionView: Session.View;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetSessionRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetSessionRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetSessionRequest.AsProtobufJSON;
 }
-export declare module GetSessionRequest { }
+export declare module GetSessionRequest {
+    /**
+     * Standard JavaScript object representation for GetSessionRequest
+     */
+    interface AsObject {
+        sessionId?: string;
+        sessionView?: Session.View;
+    }
+    /**
+     * Protobuf JSON representation for GetSessionRequest
+     */
+    interface AsProtobufJSON {
+        sessionId?: string;
+        sessionView?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DeleteSessionRequest
+ */
 export declare class DeleteSessionRequest implements GrpcMessage {
-    static toBinary(instance: DeleteSessionRequest): any;
-    static fromBinary(bytes: ByteSource): DeleteSessionRequest;
-    static refineValues(instance: DeleteSessionRequest): void;
-    static fromBinaryReader(instance: DeleteSessionRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: DeleteSessionRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DeleteSessionRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DeleteSessionRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DeleteSessionRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DeleteSessionRequest, _writer: BinaryWriter): void;
     private _sessionId?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param DeleteSessionRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteSessionRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<DeleteSessionRequest>);
+    constructor(_value?: RecursivePartial<DeleteSessionRequest.AsObject>);
     get sessionId(): string | undefined;
     set sessionId(value: string | undefined);
-    toObject(): {
-        sessionId: string;
-    };
-    toJSON(): {
-        sessionId: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DeleteSessionRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DeleteSessionRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DeleteSessionRequest.AsProtobufJSON;
 }
-export declare module DeleteSessionRequest { }
+export declare module DeleteSessionRequest {
+    /**
+     * Standard JavaScript object representation for DeleteSessionRequest
+     */
+    interface AsObject {
+        sessionId?: string;
+    }
+    /**
+     * Protobuf JSON representation for DeleteSessionRequest
+     */
+    interface AsProtobufJSON {
+        sessionId?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.CreateSessionReviewRequest
+ */
 export declare class CreateSessionReviewRequest implements GrpcMessage {
-    static toBinary(instance: CreateSessionReviewRequest): any;
-    static fromBinary(bytes: ByteSource): CreateSessionReviewRequest;
-    static refineValues(instance: CreateSessionReviewRequest): void;
-    static fromBinaryReader(instance: CreateSessionReviewRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: CreateSessionReviewRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): CreateSessionReviewRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: CreateSessionReviewRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: CreateSessionReviewRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: CreateSessionReviewRequest, _writer: BinaryWriter): void;
     private _sessionId?;
     private _parentReviewId?;
     private _sessionReview?;
     private _sessionReviewView?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param CreateSessionReviewRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateSessionReviewRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<CreateSessionReviewRequest>);
+    constructor(_value?: RecursivePartial<CreateSessionReviewRequest.AsObject>);
     get sessionId(): string | undefined;
     set sessionId(value: string | undefined);
     get parentReviewId(): string | undefined;
@@ -7504,3176 +1818,892 @@ export declare class CreateSessionReviewRequest implements GrpcMessage {
     set sessionReview(value: SessionReview | undefined);
     get sessionReviewView(): SessionReview.View | undefined;
     set sessionReviewView(value: SessionReview.View | undefined);
-    toObject(): {
-        sessionId: string;
-        parentReviewId: string;
-        sessionReview: {
-            sessionReviewId: string;
-            sessionReviewSteps: {
-                annotatedUsersays: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                };
-                languageCode: string;
-                detectedIntents: {
-                    intent: {
-                        name: string;
-                        displayName: string;
-                        webhookState: ondewoNlu006.Intent.WebhookState;
-                        priority: number;
-                        isFallback: boolean;
-                        mlDisabled: boolean;
-                        inputContextNames: string[];
-                        events: string[];
-                        trainingPhrases: {
-                            name: string;
-                            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                            text: string;
-                            entities: {
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                entityValueName: string;
-                                entityValueDisplayName: string;
-                                start: number;
-                                end: number;
-                                parameterName: string;
-                                parameterDisplayName: string;
-                            }[];
-                            timesAddedCount: number;
-                        }[];
-                        action: string;
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        parameters: {
-                            name: string;
-                            displayName: string;
-                            value: string;
-                            defaultValue: string;
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            mandatory: boolean;
-                            prompts: string[];
-                            isList: boolean;
-                        }[];
-                        messages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                        rootFollowupIntentName: string;
-                        parentFollowupIntentName: string;
-                        followupIntentInfo: {
-                            followupIntentName: string;
-                            parentFollowupIntentName: string;
-                        }[];
-                        nextPageToken: string;
-                        domainName: string;
-                        isStartOfDeviation: boolean;
-                        isEndOfDeviation: boolean;
-                        trainingPhraseCount: number;
-                        status: ondewoNlu006.Intent.IntentStatus;
-                    };
-                    score: number;
-                    algorithm: string;
-                    fulfillmentMessages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    requiredParamMissing: boolean;
-                }[];
-                contexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-            }[];
-        };
-        sessionReviewView: SessionReview.View;
-    };
-    toJSON(): {
-        sessionId: string;
-        parentReviewId: string;
-        sessionReview: {
-            sessionReviewId: string;
-            sessionReviewSteps: {
-                annotatedUsersays: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                };
-                languageCode: string;
-                detectedIntents: {
-                    intent: {
-                        name: string;
-                        displayName: string;
-                        webhookState: ondewoNlu006.Intent.WebhookState;
-                        priority: number;
-                        isFallback: boolean;
-                        mlDisabled: boolean;
-                        inputContextNames: string[];
-                        events: string[];
-                        trainingPhrases: {
-                            name: string;
-                            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                            text: string;
-                            entities: {
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                entityValueName: string;
-                                entityValueDisplayName: string;
-                                start: number;
-                                end: number;
-                                parameterName: string;
-                                parameterDisplayName: string;
-                            }[];
-                            timesAddedCount: number;
-                        }[];
-                        action: string;
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        parameters: {
-                            name: string;
-                            displayName: string;
-                            value: string;
-                            defaultValue: string;
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            mandatory: boolean;
-                            prompts: string[];
-                            isList: boolean;
-                        }[];
-                        messages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                        rootFollowupIntentName: string;
-                        parentFollowupIntentName: string;
-                        followupIntentInfo: {
-                            followupIntentName: string;
-                            parentFollowupIntentName: string;
-                        }[];
-                        nextPageToken: string;
-                        domainName: string;
-                        isStartOfDeviation: boolean;
-                        isEndOfDeviation: boolean;
-                        trainingPhraseCount: number;
-                        status: ondewoNlu006.Intent.IntentStatus;
-                    };
-                    score: number;
-                    algorithm: string;
-                    fulfillmentMessages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    requiredParamMissing: boolean;
-                }[];
-                contexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-            }[];
-        };
-        sessionReviewView: SessionReview.View;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): CreateSessionReviewRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): CreateSessionReviewRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): CreateSessionReviewRequest.AsProtobufJSON;
 }
-export declare module CreateSessionReviewRequest { }
+export declare module CreateSessionReviewRequest {
+    /**
+     * Standard JavaScript object representation for CreateSessionReviewRequest
+     */
+    interface AsObject {
+        sessionId?: string;
+        parentReviewId?: string;
+        sessionReview?: SessionReview.AsObject;
+        sessionReviewView?: SessionReview.View;
+    }
+    /**
+     * Protobuf JSON representation for CreateSessionReviewRequest
+     */
+    interface AsProtobufJSON {
+        sessionId?: string;
+        parentReviewId?: string;
+        sessionReview?: SessionReview.AsProtobufJSON | null;
+        sessionReviewView?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.SessionReview
+ */
 export declare class SessionReview implements GrpcMessage {
-    static toBinary(instance: SessionReview): any;
-    static fromBinary(bytes: ByteSource): SessionReview;
-    static refineValues(instance: SessionReview): void;
-    static fromBinaryReader(instance: SessionReview, reader: BinaryReader): void;
-    static toBinaryWriter(instance: SessionReview, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): SessionReview;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: SessionReview): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: SessionReview, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: SessionReview, _writer: BinaryWriter): void;
     private _sessionReviewId?;
     private _sessionReviewSteps?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param SessionReview value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionReview to deeply clone from
      */
-    constructor(value?: RecursivePartial<SessionReview>);
+    constructor(_value?: RecursivePartial<SessionReview.AsObject>);
     get sessionReviewId(): string | undefined;
     set sessionReviewId(value: string | undefined);
     get sessionReviewSteps(): SessionReviewStep[] | undefined;
     set sessionReviewSteps(value: SessionReviewStep[] | undefined);
-    toObject(): {
-        sessionReviewId: string;
-        sessionReviewSteps: {
-            annotatedUsersays: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            };
-            languageCode: string;
-            detectedIntents: {
-                intent: {
-                    name: string;
-                    displayName: string;
-                    webhookState: ondewoNlu006.Intent.WebhookState;
-                    priority: number;
-                    isFallback: boolean;
-                    mlDisabled: boolean;
-                    inputContextNames: string[];
-                    events: string[];
-                    trainingPhrases: {
-                        name: string;
-                        type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                        text: string;
-                        entities: {
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            entityValueName: string;
-                            entityValueDisplayName: string;
-                            start: number;
-                            end: number;
-                            parameterName: string;
-                            parameterDisplayName: string;
-                        }[];
-                        timesAddedCount: number;
-                    }[];
-                    action: string;
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    parameters: {
-                        name: string;
-                        displayName: string;
-                        value: string;
-                        defaultValue: string;
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        mandatory: boolean;
-                        prompts: string[];
-                        isList: boolean;
-                    }[];
-                    messages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                    rootFollowupIntentName: string;
-                    parentFollowupIntentName: string;
-                    followupIntentInfo: {
-                        followupIntentName: string;
-                        parentFollowupIntentName: string;
-                    }[];
-                    nextPageToken: string;
-                    domainName: string;
-                    isStartOfDeviation: boolean;
-                    isEndOfDeviation: boolean;
-                    trainingPhraseCount: number;
-                    status: ondewoNlu006.Intent.IntentStatus;
-                };
-                score: number;
-                algorithm: string;
-                fulfillmentMessages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                requiredParamMissing: boolean;
-            }[];
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-        }[];
-    };
-    toJSON(): {
-        sessionReviewId: string;
-        sessionReviewSteps: {
-            annotatedUsersays: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            };
-            languageCode: string;
-            detectedIntents: {
-                intent: {
-                    name: string;
-                    displayName: string;
-                    webhookState: ondewoNlu006.Intent.WebhookState;
-                    priority: number;
-                    isFallback: boolean;
-                    mlDisabled: boolean;
-                    inputContextNames: string[];
-                    events: string[];
-                    trainingPhrases: {
-                        name: string;
-                        type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                        text: string;
-                        entities: {
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            entityValueName: string;
-                            entityValueDisplayName: string;
-                            start: number;
-                            end: number;
-                            parameterName: string;
-                            parameterDisplayName: string;
-                        }[];
-                        timesAddedCount: number;
-                    }[];
-                    action: string;
-                    outputContexts: {
-                        name: string;
-                        lifespanCount: number;
-                        parameters: {
-                            [x: string]: ondewoNlu005.Context.Parameter;
-                        };
-                        lifespanTime: number;
-                    }[];
-                    resetContexts: boolean;
-                    parameters: {
-                        name: string;
-                        displayName: string;
-                        value: string;
-                        defaultValue: string;
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        mandatory: boolean;
-                        prompts: string[];
-                        isList: boolean;
-                    }[];
-                    messages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                    rootFollowupIntentName: string;
-                    parentFollowupIntentName: string;
-                    followupIntentInfo: {
-                        followupIntentName: string;
-                        parentFollowupIntentName: string;
-                    }[];
-                    nextPageToken: string;
-                    domainName: string;
-                    isStartOfDeviation: boolean;
-                    isEndOfDeviation: boolean;
-                    trainingPhraseCount: number;
-                    status: ondewoNlu006.Intent.IntentStatus;
-                };
-                score: number;
-                algorithm: string;
-                fulfillmentMessages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                requiredParamMissing: boolean;
-            }[];
-            contexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-        }[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): SessionReview.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): SessionReview.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): SessionReview.AsProtobufJSON;
 }
 export declare module SessionReview {
+    /**
+     * Standard JavaScript object representation for SessionReview
+     */
+    interface AsObject {
+        sessionReviewId?: string;
+        sessionReviewSteps?: SessionReviewStep.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for SessionReview
+     */
+    interface AsProtobufJSON {
+        sessionReviewId?: string;
+        sessionReviewSteps?: SessionReviewStep.AsProtobufJSON[] | null;
+    }
     enum View {
-        viewUnspecified = 0,
-        viewFull = 1,
-        viewSparse = 2
+        VIEW_UNSPECIFIED = 0,
+        VIEW_FULL = 1,
+        VIEW_SPARSE = 2
     }
 }
+/**
+ * Message implementation for ondewo.nlu.SessionReviewStep
+ */
 export declare class SessionReviewStep implements GrpcMessage {
-    static toBinary(instance: SessionReviewStep): any;
-    static fromBinary(bytes: ByteSource): SessionReviewStep;
-    static refineValues(instance: SessionReviewStep): void;
-    static fromBinaryReader(instance: SessionReviewStep, reader: BinaryReader): void;
-    static toBinaryWriter(instance: SessionReviewStep, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): SessionReviewStep;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: SessionReviewStep): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: SessionReviewStep, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: SessionReviewStep, _writer: BinaryWriter): void;
     private _annotatedUsersays?;
     private _languageCode?;
     private _detectedIntents?;
     private _contexts?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param SessionReviewStep value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionReviewStep to deeply clone from
      */
-    constructor(value?: RecursivePartial<SessionReviewStep>);
-    get annotatedUsersays(): ondewoNlu006.Intent.TrainingPhrase | undefined;
-    set annotatedUsersays(value: ondewoNlu006.Intent.TrainingPhrase | undefined);
+    constructor(_value?: RecursivePartial<SessionReviewStep.AsObject>);
+    get annotatedUsersays(): ondewoNlu012.Intent.TrainingPhrase | undefined;
+    set annotatedUsersays(value: ondewoNlu012.Intent.TrainingPhrase | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
     get detectedIntents(): DetectedIntent[] | undefined;
     set detectedIntents(value: DetectedIntent[] | undefined);
-    get contexts(): ondewoNlu005.Context[] | undefined;
-    set contexts(value: ondewoNlu005.Context[] | undefined);
-    toObject(): {
-        annotatedUsersays: {
-            name: string;
-            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-            text: string;
-            entities: {
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                entityValueName: string;
-                entityValueDisplayName: string;
-                start: number;
-                end: number;
-                parameterName: string;
-                parameterDisplayName: string;
-            }[];
-            timesAddedCount: number;
-        };
-        languageCode: string;
-        detectedIntents: {
-            intent: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            };
-            score: number;
-            algorithm: string;
-            fulfillmentMessages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            requiredParamMissing: boolean;
-        }[];
-        contexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu005.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-    };
-    toJSON(): {
-        annotatedUsersays: {
-            name: string;
-            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-            text: string;
-            entities: {
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                entityValueName: string;
-                entityValueDisplayName: string;
-                start: number;
-                end: number;
-                parameterName: string;
-                parameterDisplayName: string;
-            }[];
-            timesAddedCount: number;
-        };
-        languageCode: string;
-        detectedIntents: {
-            intent: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu006.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf002.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu006.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu006.Intent.IntentStatus;
-            };
-            score: number;
-            algorithm: string;
-            fulfillmentMessages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            requiredParamMissing: boolean;
-        }[];
-        contexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu005.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-    };
+    get contexts(): ondewoNlu006.Context[] | undefined;
+    set contexts(value: ondewoNlu006.Context[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): SessionReviewStep.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): SessionReviewStep.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): SessionReviewStep.AsProtobufJSON;
 }
-export declare module SessionReviewStep { }
+export declare module SessionReviewStep {
+    /**
+     * Standard JavaScript object representation for SessionReviewStep
+     */
+    interface AsObject {
+        annotatedUsersays?: ondewoNlu012.Intent.TrainingPhrase.AsObject;
+        languageCode?: string;
+        detectedIntents?: DetectedIntent.AsObject[];
+        contexts?: ondewoNlu006.Context.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for SessionReviewStep
+     */
+    interface AsProtobufJSON {
+        annotatedUsersays?: ondewoNlu012.Intent.TrainingPhrase.AsProtobufJSON | null;
+        languageCode?: string;
+        detectedIntents?: DetectedIntent.AsProtobufJSON[] | null;
+        contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DetectedIntent
+ */
 export declare class DetectedIntent implements GrpcMessage {
-    static toBinary(instance: DetectedIntent): any;
-    static fromBinary(bytes: ByteSource): DetectedIntent;
-    static refineValues(instance: DetectedIntent): void;
-    static fromBinaryReader(instance: DetectedIntent, reader: BinaryReader): void;
-    static toBinaryWriter(instance: DetectedIntent, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DetectedIntent;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DetectedIntent): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DetectedIntent, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DetectedIntent, _writer: BinaryWriter): void;
     private _intent?;
     private _score?;
     private _algorithm?;
     private _fulfillmentMessages?;
     private _requiredParamMissing?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param DetectedIntent value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DetectedIntent to deeply clone from
      */
-    constructor(value?: RecursivePartial<DetectedIntent>);
-    get intent(): ondewoNlu006.Intent | undefined;
-    set intent(value: ondewoNlu006.Intent | undefined);
+    constructor(_value?: RecursivePartial<DetectedIntent.AsObject>);
+    get intent(): ondewoNlu012.Intent | undefined;
+    set intent(value: ondewoNlu012.Intent | undefined);
     get score(): number | undefined;
     set score(value: number | undefined);
     get algorithm(): string | undefined;
     set algorithm(value: string | undefined);
-    get fulfillmentMessages(): ondewoNlu006.Intent.Message[] | undefined;
-    set fulfillmentMessages(value: ondewoNlu006.Intent.Message[] | undefined);
+    get fulfillmentMessages(): ondewoNlu012.Intent.Message[] | undefined;
+    set fulfillmentMessages(value: ondewoNlu012.Intent.Message[] | undefined);
     get requiredParamMissing(): boolean | undefined;
     set requiredParamMissing(value: boolean | undefined);
-    toObject(): {
-        intent: {
-            name: string;
-            displayName: string;
-            webhookState: ondewoNlu006.Intent.WebhookState;
-            priority: number;
-            isFallback: boolean;
-            mlDisabled: boolean;
-            inputContextNames: string[];
-            events: string[];
-            trainingPhrases: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            }[];
-            action: string;
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            parameters: {
-                name: string;
-                displayName: string;
-                value: string;
-                defaultValue: string;
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                mandatory: boolean;
-                prompts: string[];
-                isList: boolean;
-            }[];
-            messages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-            rootFollowupIntentName: string;
-            parentFollowupIntentName: string;
-            followupIntentInfo: {
-                followupIntentName: string;
-                parentFollowupIntentName: string;
-            }[];
-            nextPageToken: string;
-            domainName: string;
-            isStartOfDeviation: boolean;
-            isEndOfDeviation: boolean;
-            trainingPhraseCount: number;
-            status: ondewoNlu006.Intent.IntentStatus;
-        };
-        score: number;
-        algorithm: string;
-        fulfillmentMessages: {
-            text: {
-                text: string[];
-            };
-            image: {
-                imageUri: string;
-                accessibilityText: string;
-            };
-            quickReplies: {
-                title: string;
-                quickReplies: string[];
-            };
-            card: {
-                title: string;
-                subtitle: string;
-                imageUri: string;
-                buttons: {
-                    text: string;
-                    postback: string;
-                }[];
-            };
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            simpleResponses: {
-                simpleResponses: {
-                    textToSpeech: string;
-                    ssml: string;
-                    displayText: string;
-                }[];
-            };
-            basicCard: {
-                title: string;
-                subtitle: string;
-                formattedText: string;
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                buttons: {
-                    title: string;
-                    openUriAction: {
-                        uri: string;
-                    };
-                }[];
-            };
-            suggestions: {
-                suggestions: {
-                    title: string;
-                }[];
-            };
-            linkOutSuggestion: {
-                destinationName: string;
-                uri: string;
-            };
-            listSelect: {
-                title: string;
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            carouselSelect: {
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            htmlText: {
-                text: string[];
-            };
-            video: {
-                uri: string;
-                accessibilityText: string;
-            };
-            audio: {
-                uri: string;
-                accessibilityText: string;
-            };
-            platform: ondewoNlu006.Intent.Message.Platform;
-        }[];
-        requiredParamMissing: boolean;
-    };
-    toJSON(): {
-        intent: {
-            name: string;
-            displayName: string;
-            webhookState: ondewoNlu006.Intent.WebhookState;
-            priority: number;
-            isFallback: boolean;
-            mlDisabled: boolean;
-            inputContextNames: string[];
-            events: string[];
-            trainingPhrases: {
-                name: string;
-                type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                text: string;
-                entities: {
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    entityValueName: string;
-                    entityValueDisplayName: string;
-                    start: number;
-                    end: number;
-                    parameterName: string;
-                    parameterDisplayName: string;
-                }[];
-                timesAddedCount: number;
-            }[];
-            action: string;
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu005.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            resetContexts: boolean;
-            parameters: {
-                name: string;
-                displayName: string;
-                value: string;
-                defaultValue: string;
-                entityTypeName: string;
-                entityTypeDisplayName: string;
-                mandatory: boolean;
-                prompts: string[];
-                isList: boolean;
-            }[];
-            messages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf002.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu006.Intent.Message.Platform;
-            }[];
-            defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-            rootFollowupIntentName: string;
-            parentFollowupIntentName: string;
-            followupIntentInfo: {
-                followupIntentName: string;
-                parentFollowupIntentName: string;
-            }[];
-            nextPageToken: string;
-            domainName: string;
-            isStartOfDeviation: boolean;
-            isEndOfDeviation: boolean;
-            trainingPhraseCount: number;
-            status: ondewoNlu006.Intent.IntentStatus;
-        };
-        score: number;
-        algorithm: string;
-        fulfillmentMessages: {
-            text: {
-                text: string[];
-            };
-            image: {
-                imageUri: string;
-                accessibilityText: string;
-            };
-            quickReplies: {
-                title: string;
-                quickReplies: string[];
-            };
-            card: {
-                title: string;
-                subtitle: string;
-                imageUri: string;
-                buttons: {
-                    text: string;
-                    postback: string;
-                }[];
-            };
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf002.Value;
-                };
-            };
-            simpleResponses: {
-                simpleResponses: {
-                    textToSpeech: string;
-                    ssml: string;
-                    displayText: string;
-                }[];
-            };
-            basicCard: {
-                title: string;
-                subtitle: string;
-                formattedText: string;
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                buttons: {
-                    title: string;
-                    openUriAction: {
-                        uri: string;
-                    };
-                }[];
-            };
-            suggestions: {
-                suggestions: {
-                    title: string;
-                }[];
-            };
-            linkOutSuggestion: {
-                destinationName: string;
-                uri: string;
-            };
-            listSelect: {
-                title: string;
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            carouselSelect: {
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            htmlText: {
-                text: string[];
-            };
-            video: {
-                uri: string;
-                accessibilityText: string;
-            };
-            audio: {
-                uri: string;
-                accessibilityText: string;
-            };
-            platform: ondewoNlu006.Intent.Message.Platform;
-        }[];
-        requiredParamMissing: boolean;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DetectedIntent.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DetectedIntent.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DetectedIntent.AsProtobufJSON;
 }
-export declare module DetectedIntent { }
+export declare module DetectedIntent {
+    /**
+     * Standard JavaScript object representation for DetectedIntent
+     */
+    interface AsObject {
+        intent?: ondewoNlu012.Intent.AsObject;
+        score?: number;
+        algorithm?: string;
+        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsObject[];
+        requiredParamMissing?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for DetectedIntent
+     */
+    interface AsProtobufJSON {
+        intent?: ondewoNlu012.Intent.AsProtobufJSON | null;
+        score?: number;
+        algorithm?: string;
+        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsProtobufJSON[] | null;
+        requiredParamMissing?: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionLabelsRequest
+ */
 export declare class ListSessionLabelsRequest implements GrpcMessage {
-    static toBinary(instance: ListSessionLabelsRequest): any;
-    static fromBinary(bytes: ByteSource): ListSessionLabelsRequest;
-    static refineValues(instance: ListSessionLabelsRequest): void;
-    static fromBinaryReader(instance: ListSessionLabelsRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ListSessionLabelsRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionLabelsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionLabelsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionLabelsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionLabelsRequest, _writer: BinaryWriter): void;
     private _parent?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ListSessionLabelsRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionLabelsRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<ListSessionLabelsRequest>);
+    constructor(_value?: RecursivePartial<ListSessionLabelsRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
-    toObject(): {
-        parent: string;
-    };
-    toJSON(): {
-        parent: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionLabelsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionLabelsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionLabelsRequest.AsProtobufJSON;
 }
-export declare module ListSessionLabelsRequest { }
+export declare module ListSessionLabelsRequest {
+    /**
+     * Standard JavaScript object representation for ListSessionLabelsRequest
+     */
+    interface AsObject {
+        parent?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListSessionLabelsRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionLabelsResponse
+ */
 export declare class ListSessionLabelsResponse implements GrpcMessage {
-    static toBinary(instance: ListSessionLabelsResponse): any;
-    static fromBinary(bytes: ByteSource): ListSessionLabelsResponse;
-    static refineValues(instance: ListSessionLabelsResponse): void;
-    static fromBinaryReader(instance: ListSessionLabelsResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ListSessionLabelsResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionLabelsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionLabelsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionLabelsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionLabelsResponse, _writer: BinaryWriter): void;
     private _labels?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ListSessionLabelsResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionLabelsResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<ListSessionLabelsResponse>);
+    constructor(_value?: RecursivePartial<ListSessionLabelsResponse.AsObject>);
     get labels(): string[] | undefined;
     set labels(value: string[] | undefined);
-    toObject(): {
-        labels: string[];
-    };
-    toJSON(): {
-        labels: string[];
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionLabelsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionLabelsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionLabelsResponse.AsProtobufJSON;
 }
-export declare module ListSessionLabelsResponse { }
+export declare module ListSessionLabelsResponse {
+    /**
+     * Standard JavaScript object representation for ListSessionLabelsResponse
+     */
+    interface AsObject {
+        labels?: string[];
+    }
+    /**
+     * Protobuf JSON representation for ListSessionLabelsResponse
+     */
+    interface AsProtobufJSON {
+        labels?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.AddSessionLabelsRequest
+ */
 export declare class AddSessionLabelsRequest implements GrpcMessage {
-    static toBinary(instance: AddSessionLabelsRequest): any;
-    static fromBinary(bytes: ByteSource): AddSessionLabelsRequest;
-    static refineValues(instance: AddSessionLabelsRequest): void;
-    static fromBinaryReader(instance: AddSessionLabelsRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: AddSessionLabelsRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): AddSessionLabelsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: AddSessionLabelsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: AddSessionLabelsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: AddSessionLabelsRequest, _writer: BinaryWriter): void;
     private _sessionId?;
     private _labels?;
     private _sessionView?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param AddSessionLabelsRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AddSessionLabelsRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<AddSessionLabelsRequest>);
+    constructor(_value?: RecursivePartial<AddSessionLabelsRequest.AsObject>);
     get sessionId(): string | undefined;
     set sessionId(value: string | undefined);
     get labels(): string[] | undefined;
     set labels(value: string[] | undefined);
     get sessionView(): Session.View | undefined;
     set sessionView(value: Session.View | undefined);
-    toObject(): {
-        sessionId: string;
-        labels: string[];
-        sessionView: Session.View;
-    };
-    toJSON(): {
-        sessionId: string;
-        labels: string[];
-        sessionView: Session.View;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): AddSessionLabelsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): AddSessionLabelsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): AddSessionLabelsRequest.AsProtobufJSON;
 }
-export declare module AddSessionLabelsRequest { }
+export declare module AddSessionLabelsRequest {
+    /**
+     * Standard JavaScript object representation for AddSessionLabelsRequest
+     */
+    interface AsObject {
+        sessionId?: string;
+        labels?: string[];
+        sessionView?: Session.View;
+    }
+    /**
+     * Protobuf JSON representation for AddSessionLabelsRequest
+     */
+    interface AsProtobufJSON {
+        sessionId?: string;
+        labels?: string[];
+        sessionView?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.RemoveSessionLabelsRequest
+ */
 export declare class RemoveSessionLabelsRequest implements GrpcMessage {
-    static toBinary(instance: RemoveSessionLabelsRequest): any;
-    static fromBinary(bytes: ByteSource): RemoveSessionLabelsRequest;
-    static refineValues(instance: RemoveSessionLabelsRequest): void;
-    static fromBinaryReader(instance: RemoveSessionLabelsRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: RemoveSessionLabelsRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): RemoveSessionLabelsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: RemoveSessionLabelsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: RemoveSessionLabelsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: RemoveSessionLabelsRequest, _writer: BinaryWriter): void;
     private _sessionId?;
     private _labels?;
     private _sessionView?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param RemoveSessionLabelsRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RemoveSessionLabelsRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<RemoveSessionLabelsRequest>);
+    constructor(_value?: RecursivePartial<RemoveSessionLabelsRequest.AsObject>);
     get sessionId(): string | undefined;
     set sessionId(value: string | undefined);
     get labels(): string[] | undefined;
     set labels(value: string[] | undefined);
     get sessionView(): Session.View | undefined;
     set sessionView(value: Session.View | undefined);
-    toObject(): {
-        sessionId: string;
-        labels: string[];
-        sessionView: Session.View;
-    };
-    toJSON(): {
-        sessionId: string;
-        labels: string[];
-        sessionView: Session.View;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): RemoveSessionLabelsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): RemoveSessionLabelsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): RemoveSessionLabelsRequest.AsProtobufJSON;
 }
-export declare module RemoveSessionLabelsRequest { }
+export declare module RemoveSessionLabelsRequest {
+    /**
+     * Standard JavaScript object representation for RemoveSessionLabelsRequest
+     */
+    interface AsObject {
+        sessionId?: string;
+        labels?: string[];
+        sessionView?: Session.View;
+    }
+    /**
+     * Protobuf JSON representation for RemoveSessionLabelsRequest
+     */
+    interface AsProtobufJSON {
+        sessionId?: string;
+        labels?: string[];
+        sessionView?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionReviewsRequest
+ */
 export declare class ListSessionReviewsRequest implements GrpcMessage {
-    static toBinary(instance: ListSessionReviewsRequest): any;
-    static fromBinary(bytes: ByteSource): ListSessionReviewsRequest;
-    static refineValues(instance: ListSessionReviewsRequest): void;
-    static fromBinaryReader(instance: ListSessionReviewsRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ListSessionReviewsRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionReviewsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionReviewsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionReviewsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionReviewsRequest, _writer: BinaryWriter): void;
     private _sessionId?;
     private _sessionReviewView?;
     private _pageToken?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ListSessionReviewsRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionReviewsRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<ListSessionReviewsRequest>);
+    constructor(_value?: RecursivePartial<ListSessionReviewsRequest.AsObject>);
     get sessionId(): string | undefined;
     set sessionId(value: string | undefined);
     get sessionReviewView(): SessionReview.View | undefined;
     set sessionReviewView(value: SessionReview.View | undefined);
     get pageToken(): string | undefined;
     set pageToken(value: string | undefined);
-    toObject(): {
-        sessionId: string;
-        sessionReviewView: SessionReview.View;
-        pageToken: string;
-    };
-    toJSON(): {
-        sessionId: string;
-        sessionReviewView: SessionReview.View;
-        pageToken: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionReviewsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionReviewsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionReviewsRequest.AsProtobufJSON;
 }
-export declare module ListSessionReviewsRequest { }
+export declare module ListSessionReviewsRequest {
+    /**
+     * Standard JavaScript object representation for ListSessionReviewsRequest
+     */
+    interface AsObject {
+        sessionId?: string;
+        sessionReviewView?: SessionReview.View;
+        pageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListSessionReviewsRequest
+     */
+    interface AsProtobufJSON {
+        sessionId?: string;
+        sessionReviewView?: string;
+        pageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionReviewsResponse
+ */
 export declare class ListSessionReviewsResponse implements GrpcMessage {
-    static toBinary(instance: ListSessionReviewsResponse): any;
-    static fromBinary(bytes: ByteSource): ListSessionReviewsResponse;
-    static refineValues(instance: ListSessionReviewsResponse): void;
-    static fromBinaryReader(instance: ListSessionReviewsResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: ListSessionReviewsResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionReviewsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionReviewsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionReviewsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionReviewsResponse, _writer: BinaryWriter): void;
     private _sessionReviews?;
     private _nextPageToken?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param ListSessionReviewsResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionReviewsResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<ListSessionReviewsResponse>);
+    constructor(_value?: RecursivePartial<ListSessionReviewsResponse.AsObject>);
     get sessionReviews(): SessionReview[] | undefined;
     set sessionReviews(value: SessionReview[] | undefined);
     get nextPageToken(): string | undefined;
     set nextPageToken(value: string | undefined);
-    toObject(): {
-        sessionReviews: {
-            sessionReviewId: string;
-            sessionReviewSteps: {
-                annotatedUsersays: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                };
-                languageCode: string;
-                detectedIntents: {
-                    intent: {
-                        name: string;
-                        displayName: string;
-                        webhookState: ondewoNlu006.Intent.WebhookState;
-                        priority: number;
-                        isFallback: boolean;
-                        mlDisabled: boolean;
-                        inputContextNames: string[];
-                        events: string[];
-                        trainingPhrases: {
-                            name: string;
-                            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                            text: string;
-                            entities: {
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                entityValueName: string;
-                                entityValueDisplayName: string;
-                                start: number;
-                                end: number;
-                                parameterName: string;
-                                parameterDisplayName: string;
-                            }[];
-                            timesAddedCount: number;
-                        }[];
-                        action: string;
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        parameters: {
-                            name: string;
-                            displayName: string;
-                            value: string;
-                            defaultValue: string;
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            mandatory: boolean;
-                            prompts: string[];
-                            isList: boolean;
-                        }[];
-                        messages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                        rootFollowupIntentName: string;
-                        parentFollowupIntentName: string;
-                        followupIntentInfo: {
-                            followupIntentName: string;
-                            parentFollowupIntentName: string;
-                        }[];
-                        nextPageToken: string;
-                        domainName: string;
-                        isStartOfDeviation: boolean;
-                        isEndOfDeviation: boolean;
-                        trainingPhraseCount: number;
-                        status: ondewoNlu006.Intent.IntentStatus;
-                    };
-                    score: number;
-                    algorithm: string;
-                    fulfillmentMessages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    requiredParamMissing: boolean;
-                }[];
-                contexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-            }[];
-        }[];
-        nextPageToken: string;
-    };
-    toJSON(): {
-        sessionReviews: {
-            sessionReviewId: string;
-            sessionReviewSteps: {
-                annotatedUsersays: {
-                    name: string;
-                    type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                };
-                languageCode: string;
-                detectedIntents: {
-                    intent: {
-                        name: string;
-                        displayName: string;
-                        webhookState: ondewoNlu006.Intent.WebhookState;
-                        priority: number;
-                        isFallback: boolean;
-                        mlDisabled: boolean;
-                        inputContextNames: string[];
-                        events: string[];
-                        trainingPhrases: {
-                            name: string;
-                            type: ondewoNlu006.Intent.TrainingPhrase.Type;
-                            text: string;
-                            entities: {
-                                entityTypeName: string;
-                                entityTypeDisplayName: string;
-                                entityValueName: string;
-                                entityValueDisplayName: string;
-                                start: number;
-                                end: number;
-                                parameterName: string;
-                                parameterDisplayName: string;
-                            }[];
-                            timesAddedCount: number;
-                        }[];
-                        action: string;
-                        outputContexts: {
-                            name: string;
-                            lifespanCount: number;
-                            parameters: {
-                                [x: string]: ondewoNlu005.Context.Parameter;
-                            };
-                            lifespanTime: number;
-                        }[];
-                        resetContexts: boolean;
-                        parameters: {
-                            name: string;
-                            displayName: string;
-                            value: string;
-                            defaultValue: string;
-                            entityTypeName: string;
-                            entityTypeDisplayName: string;
-                            mandatory: boolean;
-                            prompts: string[];
-                            isList: boolean;
-                        }[];
-                        messages: {
-                            text: {
-                                text: string[];
-                            };
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            quickReplies: {
-                                title: string;
-                                quickReplies: string[];
-                            };
-                            card: {
-                                title: string;
-                                subtitle: string;
-                                imageUri: string;
-                                buttons: {
-                                    text: string;
-                                    postback: string;
-                                }[];
-                            };
-                            payload: {
-                                fields: {
-                                    [x: string]: googleProtobuf002.Value;
-                                };
-                            };
-                            simpleResponses: {
-                                simpleResponses: {
-                                    textToSpeech: string;
-                                    ssml: string;
-                                    displayText: string;
-                                }[];
-                            };
-                            basicCard: {
-                                title: string;
-                                subtitle: string;
-                                formattedText: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                                buttons: {
-                                    title: string;
-                                    openUriAction: {
-                                        uri: string;
-                                    };
-                                }[];
-                            };
-                            suggestions: {
-                                suggestions: {
-                                    title: string;
-                                }[];
-                            };
-                            linkOutSuggestion: {
-                                destinationName: string;
-                                uri: string;
-                            };
-                            listSelect: {
-                                title: string;
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            carouselSelect: {
-                                items: {
-                                    info: {
-                                        key: string;
-                                        synonyms: string[];
-                                    };
-                                    title: string;
-                                    description: string;
-                                    image: {
-                                        imageUri: string;
-                                        accessibilityText: string;
-                                    };
-                                }[];
-                            };
-                            htmlText: {
-                                text: string[];
-                            };
-                            video: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            audio: {
-                                uri: string;
-                                accessibilityText: string;
-                            };
-                            platform: ondewoNlu006.Intent.Message.Platform;
-                        }[];
-                        defaultResponsePlatforms: ondewoNlu006.Intent.Message.Platform[];
-                        rootFollowupIntentName: string;
-                        parentFollowupIntentName: string;
-                        followupIntentInfo: {
-                            followupIntentName: string;
-                            parentFollowupIntentName: string;
-                        }[];
-                        nextPageToken: string;
-                        domainName: string;
-                        isStartOfDeviation: boolean;
-                        isEndOfDeviation: boolean;
-                        trainingPhraseCount: number;
-                        status: ondewoNlu006.Intent.IntentStatus;
-                    };
-                    score: number;
-                    algorithm: string;
-                    fulfillmentMessages: {
-                        text: {
-                            text: string[];
-                        };
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        quickReplies: {
-                            title: string;
-                            quickReplies: string[];
-                        };
-                        card: {
-                            title: string;
-                            subtitle: string;
-                            imageUri: string;
-                            buttons: {
-                                text: string;
-                                postback: string;
-                            }[];
-                        };
-                        payload: {
-                            fields: {
-                                [x: string]: googleProtobuf002.Value;
-                            };
-                        };
-                        simpleResponses: {
-                            simpleResponses: {
-                                textToSpeech: string;
-                                ssml: string;
-                                displayText: string;
-                            }[];
-                        };
-                        basicCard: {
-                            title: string;
-                            subtitle: string;
-                            formattedText: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                            buttons: {
-                                title: string;
-                                openUriAction: {
-                                    uri: string;
-                                };
-                            }[];
-                        };
-                        suggestions: {
-                            suggestions: {
-                                title: string;
-                            }[];
-                        };
-                        linkOutSuggestion: {
-                            destinationName: string;
-                            uri: string;
-                        };
-                        listSelect: {
-                            title: string;
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        carouselSelect: {
-                            items: {
-                                info: {
-                                    key: string;
-                                    synonyms: string[];
-                                };
-                                title: string;
-                                description: string;
-                                image: {
-                                    imageUri: string;
-                                    accessibilityText: string;
-                                };
-                            }[];
-                        };
-                        htmlText: {
-                            text: string[];
-                        };
-                        video: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        audio: {
-                            uri: string;
-                            accessibilityText: string;
-                        };
-                        platform: ondewoNlu006.Intent.Message.Platform;
-                    }[];
-                    requiredParamMissing: boolean;
-                }[];
-                contexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu005.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-            }[];
-        }[];
-        nextPageToken: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionReviewsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionReviewsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionReviewsResponse.AsProtobufJSON;
 }
-export declare module ListSessionReviewsResponse { }
+export declare module ListSessionReviewsResponse {
+    /**
+     * Standard JavaScript object representation for ListSessionReviewsResponse
+     */
+    interface AsObject {
+        sessionReviews?: SessionReview.AsObject[];
+        nextPageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListSessionReviewsResponse
+     */
+    interface AsProtobufJSON {
+        sessionReviews?: SessionReview.AsProtobufJSON[] | null;
+        nextPageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetSessionReviewRequest
+ */
 export declare class GetSessionReviewRequest implements GrpcMessage {
-    static toBinary(instance: GetSessionReviewRequest): any;
-    static fromBinary(bytes: ByteSource): GetSessionReviewRequest;
-    static refineValues(instance: GetSessionReviewRequest): void;
-    static fromBinaryReader(instance: GetSessionReviewRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetSessionReviewRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetSessionReviewRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetSessionReviewRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetSessionReviewRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetSessionReviewRequest, _writer: BinaryWriter): void;
     private _sessionReviewId?;
     private _sessionReviewView?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetSessionReviewRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSessionReviewRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetSessionReviewRequest>);
+    constructor(_value?: RecursivePartial<GetSessionReviewRequest.AsObject>);
     get sessionReviewId(): string | undefined;
     set sessionReviewId(value: string | undefined);
     get sessionReviewView(): SessionReview.View | undefined;
     set sessionReviewView(value: SessionReview.View | undefined);
-    toObject(): {
-        sessionReviewId: string;
-        sessionReviewView: SessionReview.View;
-    };
-    toJSON(): {
-        sessionReviewId: string;
-        sessionReviewView: SessionReview.View;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetSessionReviewRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetSessionReviewRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetSessionReviewRequest.AsProtobufJSON;
 }
-export declare module GetSessionReviewRequest { }
+export declare module GetSessionReviewRequest {
+    /**
+     * Standard JavaScript object representation for GetSessionReviewRequest
+     */
+    interface AsObject {
+        sessionReviewId?: string;
+        sessionReviewView?: SessionReview.View;
+    }
+    /**
+     * Protobuf JSON representation for GetSessionReviewRequest
+     */
+    interface AsProtobufJSON {
+        sessionReviewId?: string;
+        sessionReviewView?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetLatestSessionReviewRequest
+ */
 export declare class GetLatestSessionReviewRequest implements GrpcMessage {
-    static toBinary(instance: GetLatestSessionReviewRequest): any;
-    static fromBinary(bytes: ByteSource): GetLatestSessionReviewRequest;
-    static refineValues(instance: GetLatestSessionReviewRequest): void;
-    static fromBinaryReader(instance: GetLatestSessionReviewRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: GetLatestSessionReviewRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetLatestSessionReviewRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetLatestSessionReviewRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetLatestSessionReviewRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetLatestSessionReviewRequest, _writer: BinaryWriter): void;
     private _sessionId?;
     private _sessionReviewView?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param GetLatestSessionReviewRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetLatestSessionReviewRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<GetLatestSessionReviewRequest>);
+    constructor(_value?: RecursivePartial<GetLatestSessionReviewRequest.AsObject>);
     get sessionId(): string | undefined;
     set sessionId(value: string | undefined);
     get sessionReviewView(): SessionReview.View | undefined;
     set sessionReviewView(value: SessionReview.View | undefined);
-    toObject(): {
-        sessionId: string;
-        sessionReviewView: SessionReview.View;
-    };
-    toJSON(): {
-        sessionId: string;
-        sessionReviewView: SessionReview.View;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetLatestSessionReviewRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetLatestSessionReviewRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetLatestSessionReviewRequest.AsProtobufJSON;
 }
-export declare module GetLatestSessionReviewRequest { }
+export declare module GetLatestSessionReviewRequest {
+    /**
+     * Standard JavaScript object representation for GetLatestSessionReviewRequest
+     */
+    interface AsObject {
+        sessionId?: string;
+        sessionReviewView?: SessionReview.View;
+    }
+    /**
+     * Protobuf JSON representation for GetLatestSessionReviewRequest
+     */
+    interface AsProtobufJSON {
+        sessionId?: string;
+        sessionReviewView?: string;
+    }
+}
