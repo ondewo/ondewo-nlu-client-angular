@@ -8,7 +8,8 @@
     "prebuild": "mv ondewo-nlu-api/googleapis/google ondewo-nlu-api/google",
     "build": "git submodule update --init --recursive --remote && docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
     "postbuild": "mv ondewo-nlu-api/google ondewo-nlu-api/googleapis/google",
-    "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler"
+    "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
+    "publish-npm": "npm publish ../npm --access public"
   },
   "author": "ONDEWO GmbH",
   "homepage": "https://ondewo.com/",
