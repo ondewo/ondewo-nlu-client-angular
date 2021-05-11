@@ -1,6 +1,6 @@
 {
   "name": "@ondewo/nlu-client-angular",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Ondewo natural language understanding client library for angular",
   "keywords": [
     "ondewo",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "directory": "https://github.com/ondewo/ondewo-nlu-client-angular"
+    "directory": "https://github.com/ondewo/ondewo-nlu-client-angular.git"
   },
   "main": "bundles/ondewo-nlu-client-angular.umd.js",
   "module": "fesm2015/ondewo-nlu-client-angular.js",
