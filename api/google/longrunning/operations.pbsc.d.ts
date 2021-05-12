@@ -1,67 +1,84 @@
-import { GrpcClientFactory, GrpcClientSettings, GrpcEvent } from '@ngx-grpc/common';
+import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
-import { Metadata } from 'grpc-web';
 import { Observable } from 'rxjs';
 import * as thisProto from './operations.pb';
-import * as googleProtobuf002 from '../../google/protobuf/empty.pb';
+import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
+/**
+ * Service client implementation for google.longrunning.Operations
+ */
 export declare class OperationsClient {
     private handler;
     private client;
-    constructor(settings: GrpcClientSettings, clientFactory: GrpcClientFactory, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.ListOperationsRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.ListOperationsResponse>
+     * Raw RPC implementation for each service client method.
+     * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+     * Attention: these methods do not throw errors when non-zero status codes are received.
      */
-    listOperations(requestData: thisProto.ListOperationsRequest, requestMetadata?: Metadata): Observable<thisProto.ListOperationsResponse>;
+    $raw: {
+        /**
+         * Unary RPC for /google.longrunning.Operations/ListOperations
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListOperationsResponse>>
+         */
+        listOperations: (requestData: thisProto.ListOperationsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListOperationsResponse>>;
+        /**
+         * Unary RPC for /google.longrunning.Operations/GetOperation
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.Operation>>
+         */
+        getOperation: (requestData: thisProto.GetOperationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Operation>>;
+        /**
+         * Unary RPC for /google.longrunning.Operations/DeleteOperation
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        deleteOperation: (requestData: thisProto.DeleteOperationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        /**
+         * Unary RPC for /google.longrunning.Operations/CancelOperation
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         */
+        cancelOperation: (requestData: thisProto.CancelOperationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+    };
+    constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.ListOperationsRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.ListOperationsResponse>>
+     * Unary RPC for /google.longrunning.Operations/ListOperations
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListOperationsResponse>
      */
-    listOperations$eventStream(requestData: thisProto.ListOperationsRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.ListOperationsResponse>>;
+    listOperations(requestData: thisProto.ListOperationsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListOperationsResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetOperationRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.Operation>
+     * Unary RPC for /google.longrunning.Operations/GetOperation
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Operation>
      */
-    getOperation(requestData: thisProto.GetOperationRequest, requestMetadata?: Metadata): Observable<thisProto.Operation>;
+    getOperation(requestData: thisProto.GetOperationRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Operation>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetOperationRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.Operation>>
+     * Unary RPC for /google.longrunning.Operations/DeleteOperation
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
      */
-    getOperation$eventStream(requestData: thisProto.GetOperationRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.Operation>>;
+    deleteOperation(requestData: thisProto.DeleteOperationRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.DeleteOperationRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf002.Empty>
+     * Unary RPC for /google.longrunning.Operations/CancelOperation
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
      */
-    deleteOperation(requestData: thisProto.DeleteOperationRequest, requestMetadata?: Metadata): Observable<googleProtobuf002.Empty>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.DeleteOperationRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
-     */
-    deleteOperation$eventStream(requestData: thisProto.DeleteOperationRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf002.Empty>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.CancelOperationRequest request
-     * @param Metadata metadata
-     * @return Observable<googleProtobuf002.Empty>
-     */
-    cancelOperation(requestData: thisProto.CancelOperationRequest, requestMetadata?: Metadata): Observable<googleProtobuf002.Empty>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.CancelOperationRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<googleProtobuf002.Empty>>
-     */
-    cancelOperation$eventStream(requestData: thisProto.CancelOperationRequest, requestMetadata?: Metadata): Observable<GrpcEvent<googleProtobuf002.Empty>>;
+    cancelOperation(requestData: thisProto.CancelOperationRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
 }

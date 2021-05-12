@@ -1,54 +1,69 @@
-import { GrpcClientFactory, GrpcClientSettings, GrpcEvent } from '@ngx-grpc/common';
+import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
-import { Metadata } from 'grpc-web';
 import { Observable } from 'rxjs';
 import * as thisProto from './server-statistics.pb';
-import * as googleProtobuf001 from '../../google/protobuf/empty.pb';
-import * as ondewoNlu002 from '../../ondewo/nlu/common.pb';
+import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu004 from '../../ondewo/nlu/common.pb';
+/**
+ * Service client implementation for ondewo.nlu.ServerStatistics
+ */
 export declare class ServerStatisticsClient {
     private handler;
     private client;
-    constructor(settings: GrpcClientSettings, clientFactory: GrpcClientFactory, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
+     * Raw RPC implementation for each service client method.
+     * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+     * Attention: these methods do not throw errors when non-zero status codes are received.
      */
-    getProjectCount(requestData: googleProtobuf001.Empty, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
+    $raw: {
+        /**
+         * Unary RPC for /ondewo.nlu.ServerStatistics/GetProjectCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getProjectCount: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserProjectCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getUserProjectCount: (requestData: thisProto.GetUserProjectCountRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserCount
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+         */
+        getUserCount: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
+    };
+    constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     * Unary RPC for /ondewo.nlu.ServerStatistics/GetProjectCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getProjectCount$eventStream(requestData: googleProtobuf001.Empty, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
+    getProjectCount(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.GetUserProjectCountRequest request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
+     * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserProjectCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getUserProjectCount(requestData: thisProto.GetUserProjectCountRequest, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
+    getUserProjectCount(requestData: thisProto.GetUserProjectCountRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.GetUserProjectCountRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
+     * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
      */
-    getUserProjectCount$eventStream(requestData: thisProto.GetUserProjectCountRequest, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<ondewoNlu002.StatResponse>
-     */
-    getUserCount(requestData: googleProtobuf001.Empty, requestMetadata?: Metadata): Observable<ondewoNlu002.StatResponse>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param googleProtobuf001.Empty request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<ondewoNlu002.StatResponse>>
-     */
-    getUserCount$eventStream(requestData: googleProtobuf001.Empty, requestMetadata?: Metadata): Observable<GrpcEvent<ondewoNlu002.StatResponse>>;
+    getUserCount(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
 }

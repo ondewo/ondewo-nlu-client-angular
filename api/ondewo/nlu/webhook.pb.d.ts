@@ -1,681 +1,194 @@
-import { GrpcMessage, RecursivePartial } from '@ngx-grpc/common';
+import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as ondewoNlu001 from '../../ondewo/nlu/context.pb';
-import * as ondewoNlu002 from '../../ondewo/nlu/intent.pb';
-import * as ondewoNlu003 from '../../ondewo/nlu/session.pb';
-import * as googleProtobuf004 from '../../google/protobuf/struct.pb';
+import * as ondewoNlu005 from '../../ondewo/nlu/context.pb';
+import * as googleProtobuf008 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu011 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/session.pb';
+/**
+ * Message implementation for ondewo.nlu.PingRequest
+ */
 export declare class PingRequest implements GrpcMessage {
-    static toBinary(instance: PingRequest): any;
-    static fromBinary(bytes: ByteSource): PingRequest;
-    static refineValues(instance: PingRequest): void;
-    static fromBinaryReader(instance: PingRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: PingRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): PingRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: PingRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: PingRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: PingRequest, _writer: BinaryWriter): void;
     private _session?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param PingRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PingRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<PingRequest>);
+    constructor(_value?: RecursivePartial<PingRequest.AsObject>);
     get session(): string | undefined;
     set session(value: string | undefined);
-    toObject(): {
-        session: string;
-    };
-    toJSON(): {
-        session: string;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): PingRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): PingRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): PingRequest.AsProtobufJSON;
 }
-export declare module PingRequest { }
+export declare module PingRequest {
+    /**
+     * Standard JavaScript object representation for PingRequest
+     */
+    interface AsObject {
+        session?: string;
+    }
+    /**
+     * Protobuf JSON representation for PingRequest
+     */
+    interface AsProtobufJSON {
+        session?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.WebhookRequest
+ */
 export declare class WebhookRequest implements GrpcMessage {
-    static toBinary(instance: WebhookRequest): any;
-    static fromBinary(bytes: ByteSource): WebhookRequest;
-    static refineValues(instance: WebhookRequest): void;
-    static fromBinaryReader(instance: WebhookRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: WebhookRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): WebhookRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: WebhookRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: WebhookRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: WebhookRequest, _writer: BinaryWriter): void;
     private _session?;
     private _responseId?;
     private _queryResult?;
     private _originalDetectIntentRequest?;
     private _headers?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param WebhookRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WebhookRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<WebhookRequest>);
+    constructor(_value?: RecursivePartial<WebhookRequest.AsObject>);
     get session(): string | undefined;
     set session(value: string | undefined);
     get responseId(): string | undefined;
     set responseId(value: string | undefined);
-    get queryResult(): ondewoNlu003.QueryResult | undefined;
-    set queryResult(value: ondewoNlu003.QueryResult | undefined);
+    get queryResult(): ondewoNlu013.QueryResult | undefined;
+    set queryResult(value: ondewoNlu013.QueryResult | undefined);
     get originalDetectIntentRequest(): OriginalDetectIntentRequest | undefined;
     set originalDetectIntentRequest(value: OriginalDetectIntentRequest | undefined);
-    get headers(): googleProtobuf004.Struct | undefined;
-    set headers(value: googleProtobuf004.Struct | undefined);
-    toObject(): {
-        session: string;
-        responseId: string;
-        queryResult: {
-            queryText: string;
-            languageCode: string;
-            speechRecognitionConfidence: number;
-            action: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-            allRequiredParamsPresent: boolean;
-            fulfillmentText: string;
-            fulfillmentMessages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf004.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu002.Intent.Message.Platform;
-            }[];
-            webhookSource: string;
-            webhookPayload: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu001.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            intent: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu002.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu002.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu001.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf004.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu002.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu002.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu002.Intent.IntentStatus;
-            };
-            intentDetectionConfidence: number;
-            diagnosticInfo: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-        };
-        originalDetectIntentRequest: {
-            source: string;
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-        };
-        headers: {
-            fields: {
-                [x: string]: googleProtobuf004.Value;
-            };
-        };
-    };
-    toJSON(): {
-        session: string;
-        responseId: string;
-        queryResult: {
-            queryText: string;
-            languageCode: string;
-            speechRecognitionConfidence: number;
-            action: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-            allRequiredParamsPresent: boolean;
-            fulfillmentText: string;
-            fulfillmentMessages: {
-                text: {
-                    text: string[];
-                };
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                quickReplies: {
-                    title: string;
-                    quickReplies: string[];
-                };
-                card: {
-                    title: string;
-                    subtitle: string;
-                    imageUri: string;
-                    buttons: {
-                        text: string;
-                        postback: string;
-                    }[];
-                };
-                payload: {
-                    fields: {
-                        [x: string]: googleProtobuf004.Value;
-                    };
-                };
-                simpleResponses: {
-                    simpleResponses: {
-                        textToSpeech: string;
-                        ssml: string;
-                        displayText: string;
-                    }[];
-                };
-                basicCard: {
-                    title: string;
-                    subtitle: string;
-                    formattedText: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    buttons: {
-                        title: string;
-                        openUriAction: {
-                            uri: string;
-                        };
-                    }[];
-                };
-                suggestions: {
-                    suggestions: {
-                        title: string;
-                    }[];
-                };
-                linkOutSuggestion: {
-                    destinationName: string;
-                    uri: string;
-                };
-                listSelect: {
-                    title: string;
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                carouselSelect: {
-                    items: {
-                        info: {
-                            key: string;
-                            synonyms: string[];
-                        };
-                        title: string;
-                        description: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                    }[];
-                };
-                htmlText: {
-                    text: string[];
-                };
-                video: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                audio: {
-                    uri: string;
-                    accessibilityText: string;
-                };
-                platform: ondewoNlu002.Intent.Message.Platform;
-            }[];
-            webhookSource: string;
-            webhookPayload: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-            outputContexts: {
-                name: string;
-                lifespanCount: number;
-                parameters: {
-                    [x: string]: ondewoNlu001.Context.Parameter;
-                };
-                lifespanTime: number;
-            }[];
-            intent: {
-                name: string;
-                displayName: string;
-                webhookState: ondewoNlu002.Intent.WebhookState;
-                priority: number;
-                isFallback: boolean;
-                mlDisabled: boolean;
-                inputContextNames: string[];
-                events: string[];
-                trainingPhrases: {
-                    name: string;
-                    type: ondewoNlu002.Intent.TrainingPhrase.Type;
-                    text: string;
-                    entities: {
-                        entityTypeName: string;
-                        entityTypeDisplayName: string;
-                        entityValueName: string;
-                        entityValueDisplayName: string;
-                        start: number;
-                        end: number;
-                        parameterName: string;
-                        parameterDisplayName: string;
-                    }[];
-                    timesAddedCount: number;
-                }[];
-                action: string;
-                outputContexts: {
-                    name: string;
-                    lifespanCount: number;
-                    parameters: {
-                        [x: string]: ondewoNlu001.Context.Parameter;
-                    };
-                    lifespanTime: number;
-                }[];
-                resetContexts: boolean;
-                parameters: {
-                    name: string;
-                    displayName: string;
-                    value: string;
-                    defaultValue: string;
-                    entityTypeName: string;
-                    entityTypeDisplayName: string;
-                    mandatory: boolean;
-                    prompts: string[];
-                    isList: boolean;
-                }[];
-                messages: {
-                    text: {
-                        text: string[];
-                    };
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                    quickReplies: {
-                        title: string;
-                        quickReplies: string[];
-                    };
-                    card: {
-                        title: string;
-                        subtitle: string;
-                        imageUri: string;
-                        buttons: {
-                            text: string;
-                            postback: string;
-                        }[];
-                    };
-                    payload: {
-                        fields: {
-                            [x: string]: googleProtobuf004.Value;
-                        };
-                    };
-                    simpleResponses: {
-                        simpleResponses: {
-                            textToSpeech: string;
-                            ssml: string;
-                            displayText: string;
-                        }[];
-                    };
-                    basicCard: {
-                        title: string;
-                        subtitle: string;
-                        formattedText: string;
-                        image: {
-                            imageUri: string;
-                            accessibilityText: string;
-                        };
-                        buttons: {
-                            title: string;
-                            openUriAction: {
-                                uri: string;
-                            };
-                        }[];
-                    };
-                    suggestions: {
-                        suggestions: {
-                            title: string;
-                        }[];
-                    };
-                    linkOutSuggestion: {
-                        destinationName: string;
-                        uri: string;
-                    };
-                    listSelect: {
-                        title: string;
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    carouselSelect: {
-                        items: {
-                            info: {
-                                key: string;
-                                synonyms: string[];
-                            };
-                            title: string;
-                            description: string;
-                            image: {
-                                imageUri: string;
-                                accessibilityText: string;
-                            };
-                        }[];
-                    };
-                    htmlText: {
-                        text: string[];
-                    };
-                    video: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    audio: {
-                        uri: string;
-                        accessibilityText: string;
-                    };
-                    platform: ondewoNlu002.Intent.Message.Platform;
-                }[];
-                defaultResponsePlatforms: ondewoNlu002.Intent.Message.Platform[];
-                rootFollowupIntentName: string;
-                parentFollowupIntentName: string;
-                followupIntentInfo: {
-                    followupIntentName: string;
-                    parentFollowupIntentName: string;
-                }[];
-                nextPageToken: string;
-                domainName: string;
-                isStartOfDeviation: boolean;
-                isEndOfDeviation: boolean;
-                trainingPhraseCount: number;
-                status: ondewoNlu002.Intent.IntentStatus;
-            };
-            intentDetectionConfidence: number;
-            diagnosticInfo: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-        };
-        originalDetectIntentRequest: {
-            source: string;
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-        };
-        headers: {
-            fields: {
-                [x: string]: googleProtobuf004.Value;
-            };
-        };
-    };
+    get headers(): googleProtobuf008.Struct | undefined;
+    set headers(value: googleProtobuf008.Struct | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): WebhookRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): WebhookRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): WebhookRequest.AsProtobufJSON;
 }
-export declare module WebhookRequest { }
+export declare module WebhookRequest {
+    /**
+     * Standard JavaScript object representation for WebhookRequest
+     */
+    interface AsObject {
+        session?: string;
+        responseId?: string;
+        queryResult?: ondewoNlu013.QueryResult.AsObject;
+        originalDetectIntentRequest?: OriginalDetectIntentRequest.AsObject;
+        headers?: googleProtobuf008.Struct.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for WebhookRequest
+     */
+    interface AsProtobufJSON {
+        session?: string;
+        responseId?: string;
+        queryResult?: ondewoNlu013.QueryResult.AsProtobufJSON | null;
+        originalDetectIntentRequest?: OriginalDetectIntentRequest.AsProtobufJSON | null;
+        headers?: googleProtobuf008.Struct.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.WebhookResponse
+ */
 export declare class WebhookResponse implements GrpcMessage {
-    static toBinary(instance: WebhookResponse): any;
-    static fromBinary(bytes: ByteSource): WebhookResponse;
-    static refineValues(instance: WebhookResponse): void;
-    static fromBinaryReader(instance: WebhookResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: WebhookResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): WebhookResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: WebhookResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: WebhookResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: WebhookResponse, _writer: BinaryWriter): void;
     private _fulfillmentText?;
     private _fulfillmentMessages?;
     private _source?;
@@ -683,328 +196,206 @@ export declare class WebhookResponse implements GrpcMessage {
     private _outputContexts?;
     private _followupEventInput?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param WebhookResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WebhookResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<WebhookResponse>);
+    constructor(_value?: RecursivePartial<WebhookResponse.AsObject>);
     get fulfillmentText(): string | undefined;
     set fulfillmentText(value: string | undefined);
-    get fulfillmentMessages(): ondewoNlu002.Intent.Message[] | undefined;
-    set fulfillmentMessages(value: ondewoNlu002.Intent.Message[] | undefined);
+    get fulfillmentMessages(): ondewoNlu011.Intent.Message[] | undefined;
+    set fulfillmentMessages(value: ondewoNlu011.Intent.Message[] | undefined);
     get source(): string | undefined;
     set source(value: string | undefined);
-    get payload(): googleProtobuf004.Struct | undefined;
-    set payload(value: googleProtobuf004.Struct | undefined);
-    get outputContexts(): ondewoNlu001.Context[] | undefined;
-    set outputContexts(value: ondewoNlu001.Context[] | undefined);
-    get followupEventInput(): ondewoNlu003.EventInput | undefined;
-    set followupEventInput(value: ondewoNlu003.EventInput | undefined);
-    toObject(): {
-        fulfillmentText: string;
-        fulfillmentMessages: {
-            text: {
-                text: string[];
-            };
-            image: {
-                imageUri: string;
-                accessibilityText: string;
-            };
-            quickReplies: {
-                title: string;
-                quickReplies: string[];
-            };
-            card: {
-                title: string;
-                subtitle: string;
-                imageUri: string;
-                buttons: {
-                    text: string;
-                    postback: string;
-                }[];
-            };
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-            simpleResponses: {
-                simpleResponses: {
-                    textToSpeech: string;
-                    ssml: string;
-                    displayText: string;
-                }[];
-            };
-            basicCard: {
-                title: string;
-                subtitle: string;
-                formattedText: string;
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                buttons: {
-                    title: string;
-                    openUriAction: {
-                        uri: string;
-                    };
-                }[];
-            };
-            suggestions: {
-                suggestions: {
-                    title: string;
-                }[];
-            };
-            linkOutSuggestion: {
-                destinationName: string;
-                uri: string;
-            };
-            listSelect: {
-                title: string;
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            carouselSelect: {
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            htmlText: {
-                text: string[];
-            };
-            video: {
-                uri: string;
-                accessibilityText: string;
-            };
-            audio: {
-                uri: string;
-                accessibilityText: string;
-            };
-            platform: ondewoNlu002.Intent.Message.Platform;
-        }[];
-        source: string;
-        payload: {
-            fields: {
-                [x: string]: googleProtobuf004.Value;
-            };
-        };
-        outputContexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu001.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-        followupEventInput: {
-            name: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-            languageCode: string;
-        };
-    };
-    toJSON(): {
-        fulfillmentText: string;
-        fulfillmentMessages: {
-            text: {
-                text: string[];
-            };
-            image: {
-                imageUri: string;
-                accessibilityText: string;
-            };
-            quickReplies: {
-                title: string;
-                quickReplies: string[];
-            };
-            card: {
-                title: string;
-                subtitle: string;
-                imageUri: string;
-                buttons: {
-                    text: string;
-                    postback: string;
-                }[];
-            };
-            payload: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-            simpleResponses: {
-                simpleResponses: {
-                    textToSpeech: string;
-                    ssml: string;
-                    displayText: string;
-                }[];
-            };
-            basicCard: {
-                title: string;
-                subtitle: string;
-                formattedText: string;
-                image: {
-                    imageUri: string;
-                    accessibilityText: string;
-                };
-                buttons: {
-                    title: string;
-                    openUriAction: {
-                        uri: string;
-                    };
-                }[];
-            };
-            suggestions: {
-                suggestions: {
-                    title: string;
-                }[];
-            };
-            linkOutSuggestion: {
-                destinationName: string;
-                uri: string;
-            };
-            listSelect: {
-                title: string;
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            carouselSelect: {
-                items: {
-                    info: {
-                        key: string;
-                        synonyms: string[];
-                    };
-                    title: string;
-                    description: string;
-                    image: {
-                        imageUri: string;
-                        accessibilityText: string;
-                    };
-                }[];
-            };
-            htmlText: {
-                text: string[];
-            };
-            video: {
-                uri: string;
-                accessibilityText: string;
-            };
-            audio: {
-                uri: string;
-                accessibilityText: string;
-            };
-            platform: ondewoNlu002.Intent.Message.Platform;
-        }[];
-        source: string;
-        payload: {
-            fields: {
-                [x: string]: googleProtobuf004.Value;
-            };
-        };
-        outputContexts: {
-            name: string;
-            lifespanCount: number;
-            parameters: {
-                [x: string]: ondewoNlu001.Context.Parameter;
-            };
-            lifespanTime: number;
-        }[];
-        followupEventInput: {
-            name: string;
-            parameters: {
-                fields: {
-                    [x: string]: googleProtobuf004.Value;
-                };
-            };
-            languageCode: string;
-        };
-    };
+    get payload(): googleProtobuf008.Struct | undefined;
+    set payload(value: googleProtobuf008.Struct | undefined);
+    get outputContexts(): ondewoNlu005.Context[] | undefined;
+    set outputContexts(value: ondewoNlu005.Context[] | undefined);
+    get followupEventInput(): ondewoNlu013.EventInput | undefined;
+    set followupEventInput(value: ondewoNlu013.EventInput | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): WebhookResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): WebhookResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): WebhookResponse.AsProtobufJSON;
 }
-export declare module WebhookResponse { }
+export declare module WebhookResponse {
+    /**
+     * Standard JavaScript object representation for WebhookResponse
+     */
+    interface AsObject {
+        fulfillmentText?: string;
+        fulfillmentMessages?: ondewoNlu011.Intent.Message.AsObject[];
+        source?: string;
+        payload?: googleProtobuf008.Struct.AsObject;
+        outputContexts?: ondewoNlu005.Context.AsObject[];
+        followupEventInput?: ondewoNlu013.EventInput.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for WebhookResponse
+     */
+    interface AsProtobufJSON {
+        fulfillmentText?: string;
+        fulfillmentMessages?: ondewoNlu011.Intent.Message.AsProtobufJSON[] | null;
+        source?: string;
+        payload?: googleProtobuf008.Struct.AsProtobufJSON | null;
+        outputContexts?: ondewoNlu005.Context.AsProtobufJSON[] | null;
+        followupEventInput?: ondewoNlu013.EventInput.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.OriginalDetectIntentRequest
+ */
 export declare class OriginalDetectIntentRequest implements GrpcMessage {
-    static toBinary(instance: OriginalDetectIntentRequest): any;
-    static fromBinary(bytes: ByteSource): OriginalDetectIntentRequest;
-    static refineValues(instance: OriginalDetectIntentRequest): void;
-    static fromBinaryReader(instance: OriginalDetectIntentRequest, reader: BinaryReader): void;
-    static toBinaryWriter(instance: OriginalDetectIntentRequest, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): OriginalDetectIntentRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: OriginalDetectIntentRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: OriginalDetectIntentRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: OriginalDetectIntentRequest, _writer: BinaryWriter): void;
     private _source?;
     private _payload?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param OriginalDetectIntentRequest value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of OriginalDetectIntentRequest to deeply clone from
      */
-    constructor(value?: RecursivePartial<OriginalDetectIntentRequest>);
+    constructor(_value?: RecursivePartial<OriginalDetectIntentRequest.AsObject>);
     get source(): string | undefined;
     set source(value: string | undefined);
-    get payload(): googleProtobuf004.Struct | undefined;
-    set payload(value: googleProtobuf004.Struct | undefined);
-    toObject(): {
-        source: string;
-        payload: {
-            fields: {
-                [x: string]: googleProtobuf004.Value;
-            };
-        };
-    };
-    toJSON(): {
-        source: string;
-        payload: {
-            fields: {
-                [x: string]: googleProtobuf004.Value;
-            };
-        };
-    };
+    get payload(): googleProtobuf008.Struct | undefined;
+    set payload(value: googleProtobuf008.Struct | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): OriginalDetectIntentRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): OriginalDetectIntentRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): OriginalDetectIntentRequest.AsProtobufJSON;
 }
-export declare module OriginalDetectIntentRequest { }
+export declare module OriginalDetectIntentRequest {
+    /**
+     * Standard JavaScript object representation for OriginalDetectIntentRequest
+     */
+    interface AsObject {
+        source?: string;
+        payload?: googleProtobuf008.Struct.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for OriginalDetectIntentRequest
+     */
+    interface AsProtobufJSON {
+        source?: string;
+        payload?: googleProtobuf008.Struct.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.PingResponse
+ */
 export declare class PingResponse implements GrpcMessage {
-    static toBinary(instance: PingResponse): any;
-    static fromBinary(bytes: ByteSource): PingResponse;
-    static refineValues(instance: PingResponse): void;
-    static fromBinaryReader(instance: PingResponse, reader: BinaryReader): void;
-    static toBinaryWriter(instance: PingResponse, writer: BinaryWriter): void;
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): PingResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: PingResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: PingResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: PingResponse, _writer: BinaryWriter): void;
     private _isReachable?;
     /**
-     * Creates an object and applies default Protobuf values
-     * @param PingResponse value
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PingResponse to deeply clone from
      */
-    constructor(value?: RecursivePartial<PingResponse>);
+    constructor(_value?: RecursivePartial<PingResponse.AsObject>);
     get isReachable(): boolean | undefined;
     set isReachable(value: boolean | undefined);
-    toObject(): {
-        isReachable: boolean;
-    };
-    toJSON(): {
-        isReachable: boolean;
-    };
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): PingResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): PingResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): PingResponse.AsProtobufJSON;
 }
-export declare module PingResponse { }
+export declare module PingResponse {
+    /**
+     * Standard JavaScript object representation for PingResponse
+     */
+    interface AsObject {
+        isReachable?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for PingResponse
+     */
+    interface AsProtobufJSON {
+        isReachable?: boolean;
+    }
+}

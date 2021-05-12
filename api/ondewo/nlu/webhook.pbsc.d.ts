@@ -1,52 +1,67 @@
-import { GrpcClientFactory, GrpcClientSettings, GrpcEvent } from '@ngx-grpc/common';
+import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
-import { Metadata } from 'grpc-web';
 import { Observable } from 'rxjs';
 import * as thisProto from './webhook.pb';
+/**
+ * Service client implementation for ondewo.nlu.Webhook
+ */
 export declare class WebhookClient {
     private handler;
     private client;
-    constructor(settings: GrpcClientSettings, clientFactory: GrpcClientFactory, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.WebhookRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.WebhookResponse>
+     * Raw RPC implementation for each service client method.
+     * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+     * Attention: these methods do not throw errors when non-zero status codes are received.
      */
-    responseRefinement(requestData: thisProto.WebhookRequest, requestMetadata?: Metadata): Observable<thisProto.WebhookResponse>;
+    $raw: {
+        /**
+         * Unary RPC for /ondewo.nlu.Webhook/ResponseRefinement
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.WebhookResponse>>
+         */
+        responseRefinement: (requestData: thisProto.WebhookRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.WebhookResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Webhook/SlotFilling
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.WebhookResponse>>
+         */
+        slotFilling: (requestData: thisProto.WebhookRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.WebhookResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Webhook/Ping
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.PingResponse>>
+         */
+        ping: (requestData: thisProto.PingRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.PingResponse>>;
+    };
+    constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.WebhookRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.WebhookResponse>>
+     * Unary RPC for /ondewo.nlu.Webhook/ResponseRefinement
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.WebhookResponse>
      */
-    responseRefinement$eventStream(requestData: thisProto.WebhookRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.WebhookResponse>>;
+    responseRefinement(requestData: thisProto.WebhookRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.WebhookResponse>;
     /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.WebhookRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.WebhookResponse>
+     * Unary RPC for /ondewo.nlu.Webhook/SlotFilling
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.WebhookResponse>
      */
-    slotFilling(requestData: thisProto.WebhookRequest, requestMetadata?: Metadata): Observable<thisProto.WebhookResponse>;
+    slotFilling(requestData: thisProto.WebhookRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.WebhookResponse>;
     /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.WebhookRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.WebhookResponse>>
+     * Unary RPC for /ondewo.nlu.Webhook/Ping
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.PingResponse>
      */
-    slotFilling$eventStream(requestData: thisProto.WebhookRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.WebhookResponse>>;
-    /**
-     * Unary RPC. Emits messages and throws errors on non-zero status codes
-     * @param thisProto.PingRequest request
-     * @param Metadata metadata
-     * @return Observable<thisProto.PingResponse>
-     */
-    ping(requestData: thisProto.PingRequest, requestMetadata?: Metadata): Observable<thisProto.PingResponse>;
-    /**
-     * Unary RPC. Emits data and status events; does not throw errors by design
-     * @param thisProto.PingRequest request
-     * @param Metadata metadata
-     * @return Observable<GrpcEvent<thisProto.PingResponse>>
-     */
-    ping$eventStream(requestData: thisProto.PingRequest, requestMetadata?: Metadata): Observable<GrpcEvent<thisProto.PingResponse>>;
+    ping(requestData: thisProto.PingRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.PingResponse>;
 }
