@@ -5,10 +5,16 @@ import * as ondewoNlu007 from '../../ondewo/nlu/project-role.pb';
 import * as googleProtobuf009 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
 import * as ondewoNlu011 from '../../ondewo/nlu/user.pb';
+import * as googleProtobuf012 from '@ngx-grpc/well-known-types';
 export declare enum AgentView {
     AGENT_VIEW_UNSPECIFIED = 0,
     AGENT_VIEW_FULL = 1,
     AGENT_VIEW_SHALLOW = 2
+}
+export declare enum InitiationProtocol {
+    AS_SOON_AS_POSSIBLE = 0,
+    WHEN_TRAINED = 1,
+    NEVER = 2
 }
 export declare enum ReportType {
     ALL = 0,
@@ -840,6 +846,7 @@ export declare class TrainAgentRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: TrainAgentRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _branch?;
+    private _initiationProtocol?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of TrainAgentRequest to deeply clone from
@@ -849,6 +856,8 @@ export declare class TrainAgentRequest implements GrpcMessage {
     set parent(value: string | undefined);
     get branch(): string | undefined;
     set branch(value: string | undefined);
+    get initiationProtocol(): InitiationProtocol | undefined;
+    set initiationProtocol(value: InitiationProtocol | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -876,6 +885,7 @@ export declare module TrainAgentRequest {
     interface AsObject {
         parent?: string;
         branch?: string;
+        initiationProtocol?: InitiationProtocol;
     }
     /**
      * Protobuf JSON representation for TrainAgentRequest
@@ -883,6 +893,7 @@ export declare module TrainAgentRequest {
     interface AsProtobufJSON {
         parent?: string;
         branch?: string;
+        initiationProtocol?: string;
     }
 }
 /**
@@ -988,6 +999,7 @@ export declare class ExportAgentRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ExportAgentRequest, _writer: BinaryWriter): void;
     private _parent?;
     private _agentUri?;
+    private _compressionLevel?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ExportAgentRequest to deeply clone from
@@ -997,6 +1009,8 @@ export declare class ExportAgentRequest implements GrpcMessage {
     set parent(value: string | undefined);
     get agentUri(): string | undefined;
     set agentUri(value: string | undefined);
+    get compressionLevel(): number | undefined;
+    set compressionLevel(value: number | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1024,6 +1038,7 @@ export declare module ExportAgentRequest {
     interface AsObject {
         parent?: string;
         agentUri?: string;
+        compressionLevel?: number;
     }
     /**
      * Protobuf JSON representation for ExportAgentRequest
@@ -1031,6 +1046,7 @@ export declare module ExportAgentRequest {
     interface AsProtobufJSON {
         parent?: string;
         agentUri?: string;
+        compressionLevel?: number;
     }
 }
 /**
@@ -2792,5 +2808,261 @@ export declare module ExportResourcesResponse {
         type?: string;
         languageCode?: string;
         resourceFile?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetModelStatusesRequest
+ */
+export declare class GetModelStatusesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetModelStatusesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetModelStatusesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetModelStatusesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetModelStatusesRequest, _writer: BinaryWriter): void;
+    private _parent?;
+    private _cacheVersion?;
+    private _languageCode?;
+    private _modelName?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetModelStatusesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetModelStatusesRequest.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    get cacheVersion(): number | undefined;
+    set cacheVersion(value: number | undefined);
+    get languageCode(): string | undefined;
+    set languageCode(value: string | undefined);
+    get modelName(): string | undefined;
+    set modelName(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetModelStatusesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetModelStatusesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetModelStatusesRequest.AsProtobufJSON;
+}
+export declare module GetModelStatusesRequest {
+    /**
+     * Standard JavaScript object representation for GetModelStatusesRequest
+     */
+    interface AsObject {
+        parent?: string;
+        cacheVersion?: number;
+        languageCode?: string;
+        modelName?: string;
+    }
+    /**
+     * Protobuf JSON representation for GetModelStatusesRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        cacheVersion?: number;
+        languageCode?: string;
+        modelName?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ModelStatus
+ */
+export declare class ModelStatus implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ModelStatus;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ModelStatus): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ModelStatus, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ModelStatus, _writer: BinaryWriter): void;
+    private _cacheVersion?;
+    private _languageCode?;
+    private _modelName?;
+    private _statusSetTime?;
+    private _config?;
+    private _status?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ModelStatus to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ModelStatus.AsObject>);
+    get cacheVersion(): number | undefined;
+    set cacheVersion(value: number | undefined);
+    get languageCode(): string | undefined;
+    set languageCode(value: string | undefined);
+    get modelName(): string | undefined;
+    set modelName(value: string | undefined);
+    get statusSetTime(): googleProtobuf012.Timestamp | undefined;
+    set statusSetTime(value: googleProtobuf012.Timestamp | undefined);
+    get config(): string | undefined;
+    set config(value: string | undefined);
+    get status(): ModelStatus.StatusName | undefined;
+    set status(value: ModelStatus.StatusName | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ModelStatus.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ModelStatus.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ModelStatus.AsProtobufJSON;
+}
+export declare module ModelStatus {
+    /**
+     * Standard JavaScript object representation for ModelStatus
+     */
+    interface AsObject {
+        cacheVersion?: number;
+        languageCode?: string;
+        modelName?: string;
+        statusSetTime?: googleProtobuf012.Timestamp.AsObject;
+        config?: string;
+        status?: ModelStatus.StatusName;
+    }
+    /**
+     * Protobuf JSON representation for ModelStatus
+     */
+    interface AsProtobufJSON {
+        cacheVersion?: number;
+        languageCode?: string;
+        modelName?: string;
+        statusSetTime?: googleProtobuf012.Timestamp.AsProtobufJSON | null;
+        config?: string;
+        status?: string;
+    }
+    enum StatusName {
+        UNKNOWN = 0,
+        INITIALIZING = 1,
+        INITIALIZED = 2,
+        LOADING_DATA = 3,
+        TRAINING = 4,
+        TESTING = 5,
+        TRAINED = 6
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetModelStatusesResponse
+ */
+export declare class GetModelStatusesResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetModelStatusesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetModelStatusesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetModelStatusesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetModelStatusesResponse, _writer: BinaryWriter): void;
+    private _modelStatuses?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetModelStatusesResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetModelStatusesResponse.AsObject>);
+    get modelStatuses(): ModelStatus[] | undefined;
+    set modelStatuses(value: ModelStatus[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetModelStatusesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetModelStatusesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetModelStatusesResponse.AsProtobufJSON;
+}
+export declare module GetModelStatusesResponse {
+    /**
+     * Standard JavaScript object representation for GetModelStatusesResponse
+     */
+    interface AsObject {
+        modelStatuses?: ModelStatus.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for GetModelStatusesResponse
+     */
+    interface AsProtobufJSON {
+        modelStatuses?: ModelStatus.AsProtobufJSON[] | null;
     }
 }

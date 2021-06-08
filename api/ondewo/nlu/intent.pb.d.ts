@@ -1,5 +1,6 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
+import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu007 from '../../ondewo/nlu/context.pb';
 import * as ondewoNlu008 from '../../ondewo/nlu/common.pb';
@@ -239,6 +240,7 @@ export declare module Intent {
         private _text?;
         private _entities?;
         private _timesAddedCount?;
+        private _languageCode?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of TrainingPhrase to deeply clone from
@@ -254,6 +256,8 @@ export declare module Intent {
         set entities(value: Intent.TrainingPhrase.Entity[] | undefined);
         get timesAddedCount(): number | undefined;
         set timesAddedCount(value: number | undefined);
+        get languageCode(): string | undefined;
+        set languageCode(value: string | undefined);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -284,6 +288,7 @@ export declare module Intent {
             text?: string;
             entities?: Intent.TrainingPhrase.Entity.AsObject[];
             timesAddedCount?: number;
+            languageCode?: string;
         }
         /**
          * Protobuf JSON representation for TrainingPhrase
@@ -294,6 +299,7 @@ export declare module Intent {
             text?: string;
             entities?: Intent.TrainingPhrase.Entity.AsProtobufJSON[] | null;
             timesAddedCount?: number;
+            languageCode?: string;
         }
         enum Type {
             TYPE_UNSPECIFIED = 0,
@@ -460,8 +466,8 @@ export declare module Intent {
         set entityTypeDisplayName(value: string | undefined);
         get mandatory(): boolean | undefined;
         set mandatory(value: boolean | undefined);
-        get prompts(): string[] | undefined;
-        set prompts(value: string[] | undefined);
+        get prompts(): Intent.Parameter.Prompt[] | undefined;
+        set prompts(value: Intent.Parameter.Prompt[] | undefined);
         get isList(): boolean | undefined;
         set isList(value: boolean | undefined);
         /**
@@ -496,7 +502,7 @@ export declare module Intent {
             entityTypeName?: string;
             entityTypeDisplayName?: string;
             mandatory?: boolean;
-            prompts?: string[];
+            prompts?: Intent.Parameter.Prompt.AsObject[];
             isList?: boolean;
         }
         /**
@@ -510,8 +516,87 @@ export declare module Intent {
             entityTypeName?: string;
             entityTypeDisplayName?: string;
             mandatory?: boolean;
-            prompts?: string[];
+            prompts?: Intent.Parameter.Prompt.AsProtobufJSON[] | null;
             isList?: boolean;
+        }
+        /**
+         * Message implementation for ondewo.nlu.Prompt
+         */
+        class Prompt implements GrpcMessage {
+            static id: string;
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            static deserializeBinary(bytes: ByteSource): Prompt;
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            static refineValues(_instance: Prompt): void;
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            static deserializeBinaryFromReader(_instance: Prompt, _reader: BinaryReader): void;
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            static serializeBinaryToWriter(_instance: Prompt, _writer: BinaryWriter): void;
+            private _name?;
+            private _text?;
+            private _languageCode?;
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Prompt to deeply clone from
+             */
+            constructor(_value?: RecursivePartial<Prompt.AsObject>);
+            get name(): string | undefined;
+            set name(value: string | undefined);
+            get text(): string | undefined;
+            set text(value: string | undefined);
+            get languageCode(): string | undefined;
+            set languageCode(value: string | undefined);
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            serializeBinary(): any;
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            toObject(): Prompt.AsObject;
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            toJSON(): Prompt.AsObject;
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            toProtobufJSON(options?: ToProtobufJSONOptions): Prompt.AsProtobufJSON;
+        }
+        module Prompt {
+            /**
+             * Standard JavaScript object representation for Prompt
+             */
+            interface AsObject {
+                name?: string;
+                text?: string;
+                languageCode?: string;
+            }
+            /**
+             * Protobuf JSON representation for Prompt
+             */
+            interface AsProtobufJSON {
+                name?: string;
+                text?: string;
+                languageCode?: string;
+            }
         }
     }
     /**
@@ -541,6 +626,8 @@ export declare module Intent {
          * @param _writer binary writer instance
          */
         static serializeBinaryToWriter(_instance: Message, _writer: BinaryWriter): void;
+        private _name?;
+        private _languageCode?;
         private _text?;
         private _image?;
         private _quickReplies?;
@@ -562,6 +649,10 @@ export declare module Intent {
          * @param _value initial values object or instance of Message to deeply clone from
          */
         constructor(_value?: RecursivePartial<Message.AsObject>);
+        get name(): string | undefined;
+        set name(value: string | undefined);
+        get languageCode(): string | undefined;
+        set languageCode(value: string | undefined);
         get text(): Intent.Message.Text | undefined;
         set text(value: Intent.Message.Text | undefined);
         get image(): Intent.Message.Image | undefined;
@@ -618,6 +709,8 @@ export declare module Intent {
          * Standard JavaScript object representation for Message
          */
         interface AsObject {
+            name?: string;
+            languageCode?: string;
             text?: Intent.Message.Text.AsObject;
             image?: Intent.Message.Image.AsObject;
             quickReplies?: Intent.Message.QuickReplies.AsObject;
@@ -638,6 +731,8 @@ export declare module Intent {
          * Protobuf JSON representation for Message
          */
         interface AsProtobufJSON {
+            name?: string;
+            languageCode?: string;
             text?: Intent.Message.Text.AsProtobufJSON | null;
             image?: Intent.Message.Image.AsProtobufJSON | null;
             quickReplies?: Intent.Message.QuickReplies.AsProtobufJSON | null;
@@ -3208,5 +3303,2444 @@ export declare module IntentSorting {
         SORT_INTENT_BY_CREATION_DATE = 2,
         SORT_INTENT_BY_LAST_UPDATED = 3,
         SORT_INTENT_BY_USERSAYS_COUNT = 4
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchUpdateTrainingPhrasesRequest
+ */
+export declare class BatchUpdateTrainingPhrasesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchUpdateTrainingPhrasesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchUpdateTrainingPhrasesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchUpdateTrainingPhrasesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchUpdateTrainingPhrasesRequest, _writer: BinaryWriter): void;
+    private _trainingPhrases?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchUpdateTrainingPhrasesRequest.AsObject>);
+    get trainingPhrases(): Intent.TrainingPhrase[] | undefined;
+    set trainingPhrases(value: Intent.TrainingPhrase[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchUpdateTrainingPhrasesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchUpdateTrainingPhrasesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateTrainingPhrasesRequest.AsProtobufJSON;
+}
+export declare module BatchUpdateTrainingPhrasesRequest {
+    /**
+     * Standard JavaScript object representation for BatchUpdateTrainingPhrasesRequest
+     */
+    interface AsObject {
+        trainingPhrases?: Intent.TrainingPhrase.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for BatchUpdateTrainingPhrasesRequest
+     */
+    interface AsProtobufJSON {
+        trainingPhrases?: Intent.TrainingPhrase.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.TrainingPhraseStatus
+ */
+export declare class TrainingPhraseStatus implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): TrainingPhraseStatus;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: TrainingPhraseStatus): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: TrainingPhraseStatus, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: TrainingPhraseStatus, _writer: BinaryWriter): void;
+    private _trainingPhrase?;
+    private _errorMessage?;
+    private _phraseOrStatus;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TrainingPhraseStatus to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<TrainingPhraseStatus.AsObject>);
+    get trainingPhrase(): Intent.TrainingPhrase | undefined;
+    set trainingPhrase(value: Intent.TrainingPhrase | undefined);
+    get errorMessage(): string | undefined;
+    set errorMessage(value: string | undefined);
+    get phraseOrStatus(): TrainingPhraseStatus.PhraseOrStatusCase;
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): TrainingPhraseStatus.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): TrainingPhraseStatus.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): TrainingPhraseStatus.AsProtobufJSON;
+}
+export declare module TrainingPhraseStatus {
+    /**
+     * Standard JavaScript object representation for TrainingPhraseStatus
+     */
+    interface AsObject {
+        trainingPhrase?: Intent.TrainingPhrase.AsObject;
+        errorMessage?: string;
+    }
+    /**
+     * Protobuf JSON representation for TrainingPhraseStatus
+     */
+    interface AsProtobufJSON {
+        trainingPhrase?: Intent.TrainingPhrase.AsProtobufJSON | null;
+        errorMessage?: string | null;
+    }
+    enum PhraseOrStatusCase {
+        none = 0,
+        trainingPhrase = 1,
+        errorMessage = 2
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchTrainingPhrasesStatusResponse
+ */
+export declare class BatchTrainingPhrasesStatusResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchTrainingPhrasesStatusResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchTrainingPhrasesStatusResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchTrainingPhrasesStatusResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchTrainingPhrasesStatusResponse, _writer: BinaryWriter): void;
+    private _trainingPhraseStatuses?;
+    private _hasErrors?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchTrainingPhrasesStatusResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchTrainingPhrasesStatusResponse.AsObject>);
+    get trainingPhraseStatuses(): TrainingPhraseStatus[] | undefined;
+    set trainingPhraseStatuses(value: TrainingPhraseStatus[] | undefined);
+    get hasErrors(): boolean | undefined;
+    set hasErrors(value: boolean | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchTrainingPhrasesStatusResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchTrainingPhrasesStatusResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchTrainingPhrasesStatusResponse.AsProtobufJSON;
+}
+export declare module BatchTrainingPhrasesStatusResponse {
+    /**
+     * Standard JavaScript object representation for BatchTrainingPhrasesStatusResponse
+     */
+    interface AsObject {
+        trainingPhraseStatuses?: TrainingPhraseStatus.AsObject[];
+        hasErrors?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for BatchTrainingPhrasesStatusResponse
+     */
+    interface AsProtobufJSON {
+        trainingPhraseStatuses?: TrainingPhraseStatus.AsProtobufJSON[] | null;
+        hasErrors?: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchCreateTrainingPhrasesRequest
+ */
+export declare class BatchCreateTrainingPhrasesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchCreateTrainingPhrasesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchCreateTrainingPhrasesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchCreateTrainingPhrasesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchCreateTrainingPhrasesRequest, _writer: BinaryWriter): void;
+    private _trainingPhraseRequests?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchCreateTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchCreateTrainingPhrasesRequest.AsObject>);
+    get trainingPhraseRequests(): BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest[] | undefined;
+    set trainingPhraseRequests(value: BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchCreateTrainingPhrasesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchCreateTrainingPhrasesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchCreateTrainingPhrasesRequest.AsProtobufJSON;
+}
+export declare module BatchCreateTrainingPhrasesRequest {
+    /**
+     * Standard JavaScript object representation for BatchCreateTrainingPhrasesRequest
+     */
+    interface AsObject {
+        trainingPhraseRequests?: BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for BatchCreateTrainingPhrasesRequest
+     */
+    interface AsProtobufJSON {
+        trainingPhraseRequests?: BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest.AsProtobufJSON[] | null;
+    }
+    /**
+     * Message implementation for ondewo.nlu.CreateTrainingPhraseRequest
+     */
+    class CreateTrainingPhraseRequest implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): CreateTrainingPhraseRequest;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: CreateTrainingPhraseRequest): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: CreateTrainingPhraseRequest, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: CreateTrainingPhraseRequest, _writer: BinaryWriter): void;
+        private _intentName?;
+        private _trainingPhrase?;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CreateTrainingPhraseRequest to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<CreateTrainingPhraseRequest.AsObject>);
+        get intentName(): string | undefined;
+        set intentName(value: string | undefined);
+        get trainingPhrase(): Intent.TrainingPhrase | undefined;
+        set trainingPhrase(value: Intent.TrainingPhrase | undefined);
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): CreateTrainingPhraseRequest.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): CreateTrainingPhraseRequest.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): CreateTrainingPhraseRequest.AsProtobufJSON;
+    }
+    module CreateTrainingPhraseRequest {
+        /**
+         * Standard JavaScript object representation for CreateTrainingPhraseRequest
+         */
+        interface AsObject {
+            intentName?: string;
+            trainingPhrase?: Intent.TrainingPhrase.AsObject;
+        }
+        /**
+         * Protobuf JSON representation for CreateTrainingPhraseRequest
+         */
+        interface AsProtobufJSON {
+            intentName?: string;
+            trainingPhrase?: Intent.TrainingPhrase.AsProtobufJSON | null;
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchGetTrainingPhrasesRequest
+ */
+export declare class BatchGetTrainingPhrasesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchGetTrainingPhrasesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchGetTrainingPhrasesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchGetTrainingPhrasesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchGetTrainingPhrasesRequest, _writer: BinaryWriter): void;
+    private _names?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchGetTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchGetTrainingPhrasesRequest.AsObject>);
+    get names(): string[] | undefined;
+    set names(value: string[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchGetTrainingPhrasesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchGetTrainingPhrasesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchGetTrainingPhrasesRequest.AsProtobufJSON;
+}
+export declare module BatchGetTrainingPhrasesRequest {
+    /**
+     * Standard JavaScript object representation for BatchGetTrainingPhrasesRequest
+     */
+    interface AsObject {
+        names?: string[];
+    }
+    /**
+     * Protobuf JSON representation for BatchGetTrainingPhrasesRequest
+     */
+    interface AsProtobufJSON {
+        names?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchDeleteTrainingPhrasesRequest
+ */
+export declare class BatchDeleteTrainingPhrasesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchDeleteTrainingPhrasesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchDeleteTrainingPhrasesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchDeleteTrainingPhrasesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchDeleteTrainingPhrasesRequest, _writer: BinaryWriter): void;
+    private _names?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchDeleteTrainingPhrasesRequest.AsObject>);
+    get names(): string[] | undefined;
+    set names(value: string[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchDeleteTrainingPhrasesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchDeleteTrainingPhrasesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteTrainingPhrasesRequest.AsProtobufJSON;
+}
+export declare module BatchDeleteTrainingPhrasesRequest {
+    /**
+     * Standard JavaScript object representation for BatchDeleteTrainingPhrasesRequest
+     */
+    interface AsObject {
+        names?: string[];
+    }
+    /**
+     * Protobuf JSON representation for BatchDeleteTrainingPhrasesRequest
+     */
+    interface AsProtobufJSON {
+        names?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchDeleteTrainingPhrasesResponse
+ */
+export declare class BatchDeleteTrainingPhrasesResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchDeleteTrainingPhrasesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchDeleteTrainingPhrasesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchDeleteTrainingPhrasesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchDeleteTrainingPhrasesResponse, _writer: BinaryWriter): void;
+    private _deleteStatuses?;
+    private _hasErrors?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteTrainingPhrasesResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchDeleteTrainingPhrasesResponse.AsObject>);
+    get deleteStatuses(): BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus[] | undefined;
+    set deleteStatuses(value: BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus[] | undefined);
+    get hasErrors(): boolean | undefined;
+    set hasErrors(value: boolean | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchDeleteTrainingPhrasesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchDeleteTrainingPhrasesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteTrainingPhrasesResponse.AsProtobufJSON;
+}
+export declare module BatchDeleteTrainingPhrasesResponse {
+    /**
+     * Standard JavaScript object representation for BatchDeleteTrainingPhrasesResponse
+     */
+    interface AsObject {
+        deleteStatuses?: BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus.AsObject[];
+        hasErrors?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for BatchDeleteTrainingPhrasesResponse
+     */
+    interface AsProtobufJSON {
+        deleteStatuses?: BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus.AsProtobufJSON[] | null;
+        hasErrors?: boolean;
+    }
+    /**
+     * Message implementation for ondewo.nlu.DeleteTrainingPhraseStatus
+     */
+    class DeleteTrainingPhraseStatus implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): DeleteTrainingPhraseStatus;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: DeleteTrainingPhraseStatus): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: DeleteTrainingPhraseStatus, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: DeleteTrainingPhraseStatus, _writer: BinaryWriter): void;
+        private _successfullyDeleted?;
+        private _errorMessage?;
+        private _deleteStatus;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of DeleteTrainingPhraseStatus to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<DeleteTrainingPhraseStatus.AsObject>);
+        get successfullyDeleted(): googleProtobuf003.Empty | undefined;
+        set successfullyDeleted(value: googleProtobuf003.Empty | undefined);
+        get errorMessage(): string | undefined;
+        set errorMessage(value: string | undefined);
+        get deleteStatus(): DeleteTrainingPhraseStatus.DeleteStatusCase;
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): DeleteTrainingPhraseStatus.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): DeleteTrainingPhraseStatus.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): DeleteTrainingPhraseStatus.AsProtobufJSON;
+    }
+    module DeleteTrainingPhraseStatus {
+        /**
+         * Standard JavaScript object representation for DeleteTrainingPhraseStatus
+         */
+        interface AsObject {
+            successfullyDeleted?: googleProtobuf003.Empty.AsObject;
+            errorMessage?: string;
+        }
+        /**
+         * Protobuf JSON representation for DeleteTrainingPhraseStatus
+         */
+        interface AsProtobufJSON {
+            successfullyDeleted?: googleProtobuf003.Empty.AsProtobufJSON | null;
+            errorMessage?: string | null;
+        }
+        enum DeleteStatusCase {
+            none = 0,
+            successfullyDeleted = 1,
+            errorMessage = 2
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListTrainingPhrasesRequest
+ */
+export declare class ListTrainingPhrasesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListTrainingPhrasesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListTrainingPhrasesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListTrainingPhrasesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListTrainingPhrasesRequest, _writer: BinaryWriter): void;
+    private _intentName?;
+    private _languageCode?;
+    private _pageToken?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListTrainingPhrasesRequest.AsObject>);
+    get intentName(): string | undefined;
+    set intentName(value: string | undefined);
+    get languageCode(): string | undefined;
+    set languageCode(value: string | undefined);
+    get pageToken(): string | undefined;
+    set pageToken(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListTrainingPhrasesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListTrainingPhrasesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListTrainingPhrasesRequest.AsProtobufJSON;
+}
+export declare module ListTrainingPhrasesRequest {
+    /**
+     * Standard JavaScript object representation for ListTrainingPhrasesRequest
+     */
+    interface AsObject {
+        intentName?: string;
+        languageCode?: string;
+        pageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListTrainingPhrasesRequest
+     */
+    interface AsProtobufJSON {
+        intentName?: string;
+        languageCode?: string;
+        pageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListTrainingPhrasesResponse
+ */
+export declare class ListTrainingPhrasesResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListTrainingPhrasesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListTrainingPhrasesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListTrainingPhrasesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListTrainingPhrasesResponse, _writer: BinaryWriter): void;
+    private _trainingPhrases?;
+    private _nextPageToken?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTrainingPhrasesResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListTrainingPhrasesResponse.AsObject>);
+    get trainingPhrases(): Intent.TrainingPhrase[] | undefined;
+    set trainingPhrases(value: Intent.TrainingPhrase[] | undefined);
+    get nextPageToken(): string | undefined;
+    set nextPageToken(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListTrainingPhrasesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListTrainingPhrasesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListTrainingPhrasesResponse.AsProtobufJSON;
+}
+export declare module ListTrainingPhrasesResponse {
+    /**
+     * Standard JavaScript object representation for ListTrainingPhrasesResponse
+     */
+    interface AsObject {
+        trainingPhrases?: Intent.TrainingPhrase.AsObject[];
+        nextPageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListTrainingPhrasesResponse
+     */
+    interface AsProtobufJSON {
+        trainingPhrases?: Intent.TrainingPhrase.AsProtobufJSON[] | null;
+        nextPageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchResponseMessagesStatusResponse
+ */
+export declare class BatchResponseMessagesStatusResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchResponseMessagesStatusResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchResponseMessagesStatusResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchResponseMessagesStatusResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchResponseMessagesStatusResponse, _writer: BinaryWriter): void;
+    private _responseMessageStatuses?;
+    private _hasErrors?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchResponseMessagesStatusResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchResponseMessagesStatusResponse.AsObject>);
+    get responseMessageStatuses(): BatchResponseMessagesStatusResponse.ResponseMessageStatus[] | undefined;
+    set responseMessageStatuses(value: BatchResponseMessagesStatusResponse.ResponseMessageStatus[] | undefined);
+    get hasErrors(): boolean | undefined;
+    set hasErrors(value: boolean | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchResponseMessagesStatusResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchResponseMessagesStatusResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchResponseMessagesStatusResponse.AsProtobufJSON;
+}
+export declare module BatchResponseMessagesStatusResponse {
+    /**
+     * Standard JavaScript object representation for BatchResponseMessagesStatusResponse
+     */
+    interface AsObject {
+        responseMessageStatuses?: BatchResponseMessagesStatusResponse.ResponseMessageStatus.AsObject[];
+        hasErrors?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for BatchResponseMessagesStatusResponse
+     */
+    interface AsProtobufJSON {
+        responseMessageStatuses?: BatchResponseMessagesStatusResponse.ResponseMessageStatus.AsProtobufJSON[] | null;
+        hasErrors?: boolean;
+    }
+    /**
+     * Message implementation for ondewo.nlu.ResponseMessageStatus
+     */
+    class ResponseMessageStatus implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): ResponseMessageStatus;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: ResponseMessageStatus): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: ResponseMessageStatus, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: ResponseMessageStatus, _writer: BinaryWriter): void;
+        private _responseMessage?;
+        private _errorMessage?;
+        private _phraseOrStatus;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ResponseMessageStatus to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<ResponseMessageStatus.AsObject>);
+        get responseMessage(): Intent.Message | undefined;
+        set responseMessage(value: Intent.Message | undefined);
+        get errorMessage(): string | undefined;
+        set errorMessage(value: string | undefined);
+        get phraseOrStatus(): ResponseMessageStatus.PhraseOrStatusCase;
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): ResponseMessageStatus.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): ResponseMessageStatus.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): ResponseMessageStatus.AsProtobufJSON;
+    }
+    module ResponseMessageStatus {
+        /**
+         * Standard JavaScript object representation for ResponseMessageStatus
+         */
+        interface AsObject {
+            responseMessage?: Intent.Message.AsObject;
+            errorMessage?: string;
+        }
+        /**
+         * Protobuf JSON representation for ResponseMessageStatus
+         */
+        interface AsProtobufJSON {
+            responseMessage?: Intent.Message.AsProtobufJSON | null;
+            errorMessage?: string | null;
+        }
+        enum PhraseOrStatusCase {
+            none = 0,
+            responseMessage = 1,
+            errorMessage = 2
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchCreateResponseMessagesRequest
+ */
+export declare class BatchCreateResponseMessagesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchCreateResponseMessagesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchCreateResponseMessagesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchCreateResponseMessagesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchCreateResponseMessagesRequest, _writer: BinaryWriter): void;
+    private _responseMessageRequests?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchCreateResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchCreateResponseMessagesRequest.AsObject>);
+    get responseMessageRequests(): BatchCreateResponseMessagesRequest.CreateResponseMessageRequest[] | undefined;
+    set responseMessageRequests(value: BatchCreateResponseMessagesRequest.CreateResponseMessageRequest[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchCreateResponseMessagesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchCreateResponseMessagesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchCreateResponseMessagesRequest.AsProtobufJSON;
+}
+export declare module BatchCreateResponseMessagesRequest {
+    /**
+     * Standard JavaScript object representation for BatchCreateResponseMessagesRequest
+     */
+    interface AsObject {
+        responseMessageRequests?: BatchCreateResponseMessagesRequest.CreateResponseMessageRequest.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for BatchCreateResponseMessagesRequest
+     */
+    interface AsProtobufJSON {
+        responseMessageRequests?: BatchCreateResponseMessagesRequest.CreateResponseMessageRequest.AsProtobufJSON[] | null;
+    }
+    /**
+     * Message implementation for ondewo.nlu.CreateResponseMessageRequest
+     */
+    class CreateResponseMessageRequest implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): CreateResponseMessageRequest;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: CreateResponseMessageRequest): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: CreateResponseMessageRequest, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: CreateResponseMessageRequest, _writer: BinaryWriter): void;
+        private _intentName?;
+        private _responseMessage?;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CreateResponseMessageRequest to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<CreateResponseMessageRequest.AsObject>);
+        get intentName(): string | undefined;
+        set intentName(value: string | undefined);
+        get responseMessage(): Intent.Message | undefined;
+        set responseMessage(value: Intent.Message | undefined);
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): CreateResponseMessageRequest.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): CreateResponseMessageRequest.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): CreateResponseMessageRequest.AsProtobufJSON;
+    }
+    module CreateResponseMessageRequest {
+        /**
+         * Standard JavaScript object representation for CreateResponseMessageRequest
+         */
+        interface AsObject {
+            intentName?: string;
+            responseMessage?: Intent.Message.AsObject;
+        }
+        /**
+         * Protobuf JSON representation for CreateResponseMessageRequest
+         */
+        interface AsProtobufJSON {
+            intentName?: string;
+            responseMessage?: Intent.Message.AsProtobufJSON | null;
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchUpdateResponseMessagesRequest
+ */
+export declare class BatchUpdateResponseMessagesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchUpdateResponseMessagesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchUpdateResponseMessagesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchUpdateResponseMessagesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchUpdateResponseMessagesRequest, _writer: BinaryWriter): void;
+    private _responseMessages?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchUpdateResponseMessagesRequest.AsObject>);
+    get responseMessages(): Intent.Message[] | undefined;
+    set responseMessages(value: Intent.Message[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchUpdateResponseMessagesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchUpdateResponseMessagesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateResponseMessagesRequest.AsProtobufJSON;
+}
+export declare module BatchUpdateResponseMessagesRequest {
+    /**
+     * Standard JavaScript object representation for BatchUpdateResponseMessagesRequest
+     */
+    interface AsObject {
+        responseMessages?: Intent.Message.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for BatchUpdateResponseMessagesRequest
+     */
+    interface AsProtobufJSON {
+        responseMessages?: Intent.Message.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchGetResponseMessagesRequest
+ */
+export declare class BatchGetResponseMessagesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchGetResponseMessagesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchGetResponseMessagesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchGetResponseMessagesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchGetResponseMessagesRequest, _writer: BinaryWriter): void;
+    private _names?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchGetResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchGetResponseMessagesRequest.AsObject>);
+    get names(): string[] | undefined;
+    set names(value: string[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchGetResponseMessagesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchGetResponseMessagesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchGetResponseMessagesRequest.AsProtobufJSON;
+}
+export declare module BatchGetResponseMessagesRequest {
+    /**
+     * Standard JavaScript object representation for BatchGetResponseMessagesRequest
+     */
+    interface AsObject {
+        names?: string[];
+    }
+    /**
+     * Protobuf JSON representation for BatchGetResponseMessagesRequest
+     */
+    interface AsProtobufJSON {
+        names?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchDeleteResponseMessagesRequest
+ */
+export declare class BatchDeleteResponseMessagesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchDeleteResponseMessagesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchDeleteResponseMessagesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchDeleteResponseMessagesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchDeleteResponseMessagesRequest, _writer: BinaryWriter): void;
+    private _names?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchDeleteResponseMessagesRequest.AsObject>);
+    get names(): string[] | undefined;
+    set names(value: string[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchDeleteResponseMessagesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchDeleteResponseMessagesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteResponseMessagesRequest.AsProtobufJSON;
+}
+export declare module BatchDeleteResponseMessagesRequest {
+    /**
+     * Standard JavaScript object representation for BatchDeleteResponseMessagesRequest
+     */
+    interface AsObject {
+        names?: string[];
+    }
+    /**
+     * Protobuf JSON representation for BatchDeleteResponseMessagesRequest
+     */
+    interface AsProtobufJSON {
+        names?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchDeleteResponseMessagesResponse
+ */
+export declare class BatchDeleteResponseMessagesResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchDeleteResponseMessagesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchDeleteResponseMessagesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchDeleteResponseMessagesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchDeleteResponseMessagesResponse, _writer: BinaryWriter): void;
+    private _deleteStatuses?;
+    private _hasErrors?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteResponseMessagesResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchDeleteResponseMessagesResponse.AsObject>);
+    get deleteStatuses(): BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus[] | undefined;
+    set deleteStatuses(value: BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus[] | undefined);
+    get hasErrors(): boolean | undefined;
+    set hasErrors(value: boolean | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchDeleteResponseMessagesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchDeleteResponseMessagesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteResponseMessagesResponse.AsProtobufJSON;
+}
+export declare module BatchDeleteResponseMessagesResponse {
+    /**
+     * Standard JavaScript object representation for BatchDeleteResponseMessagesResponse
+     */
+    interface AsObject {
+        deleteStatuses?: BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus.AsObject[];
+        hasErrors?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for BatchDeleteResponseMessagesResponse
+     */
+    interface AsProtobufJSON {
+        deleteStatuses?: BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus.AsProtobufJSON[] | null;
+        hasErrors?: boolean;
+    }
+    /**
+     * Message implementation for ondewo.nlu.DeleteResponseMessageStatus
+     */
+    class DeleteResponseMessageStatus implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): DeleteResponseMessageStatus;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: DeleteResponseMessageStatus): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: DeleteResponseMessageStatus, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: DeleteResponseMessageStatus, _writer: BinaryWriter): void;
+        private _successfullyDeleted?;
+        private _errorMessage?;
+        private _deleteStatus;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of DeleteResponseMessageStatus to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<DeleteResponseMessageStatus.AsObject>);
+        get successfullyDeleted(): googleProtobuf003.Empty | undefined;
+        set successfullyDeleted(value: googleProtobuf003.Empty | undefined);
+        get errorMessage(): string | undefined;
+        set errorMessage(value: string | undefined);
+        get deleteStatus(): DeleteResponseMessageStatus.DeleteStatusCase;
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): DeleteResponseMessageStatus.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): DeleteResponseMessageStatus.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): DeleteResponseMessageStatus.AsProtobufJSON;
+    }
+    module DeleteResponseMessageStatus {
+        /**
+         * Standard JavaScript object representation for DeleteResponseMessageStatus
+         */
+        interface AsObject {
+            successfullyDeleted?: googleProtobuf003.Empty.AsObject;
+            errorMessage?: string;
+        }
+        /**
+         * Protobuf JSON representation for DeleteResponseMessageStatus
+         */
+        interface AsProtobufJSON {
+            successfullyDeleted?: googleProtobuf003.Empty.AsProtobufJSON | null;
+            errorMessage?: string | null;
+        }
+        enum DeleteStatusCase {
+            none = 0,
+            successfullyDeleted = 1,
+            errorMessage = 2
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListResponseMessagesRequest
+ */
+export declare class ListResponseMessagesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListResponseMessagesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListResponseMessagesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListResponseMessagesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListResponseMessagesRequest, _writer: BinaryWriter): void;
+    private _intentName?;
+    private _languageCode?;
+    private _pageToken?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListResponseMessagesRequest.AsObject>);
+    get intentName(): string | undefined;
+    set intentName(value: string | undefined);
+    get languageCode(): string | undefined;
+    set languageCode(value: string | undefined);
+    get pageToken(): string | undefined;
+    set pageToken(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListResponseMessagesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListResponseMessagesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListResponseMessagesRequest.AsProtobufJSON;
+}
+export declare module ListResponseMessagesRequest {
+    /**
+     * Standard JavaScript object representation for ListResponseMessagesRequest
+     */
+    interface AsObject {
+        intentName?: string;
+        languageCode?: string;
+        pageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListResponseMessagesRequest
+     */
+    interface AsProtobufJSON {
+        intentName?: string;
+        languageCode?: string;
+        pageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListResponseMessagesResponse
+ */
+export declare class ListResponseMessagesResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListResponseMessagesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListResponseMessagesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListResponseMessagesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListResponseMessagesResponse, _writer: BinaryWriter): void;
+    private _responseMessages?;
+    private _nextPageToken?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListResponseMessagesResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListResponseMessagesResponse.AsObject>);
+    get responseMessages(): Intent.Message[] | undefined;
+    set responseMessages(value: Intent.Message[] | undefined);
+    get nextPageToken(): string | undefined;
+    set nextPageToken(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListResponseMessagesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListResponseMessagesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListResponseMessagesResponse.AsProtobufJSON;
+}
+export declare module ListResponseMessagesResponse {
+    /**
+     * Standard JavaScript object representation for ListResponseMessagesResponse
+     */
+    interface AsObject {
+        responseMessages?: Intent.Message.AsObject[];
+        nextPageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListResponseMessagesResponse
+     */
+    interface AsProtobufJSON {
+        responseMessages?: Intent.Message.AsProtobufJSON[] | null;
+        nextPageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchParametersStatusResponse
+ */
+export declare class BatchParametersStatusResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchParametersStatusResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchParametersStatusResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchParametersStatusResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchParametersStatusResponse, _writer: BinaryWriter): void;
+    private _parameterStatuses?;
+    private _hasErrors?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchParametersStatusResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchParametersStatusResponse.AsObject>);
+    get parameterStatuses(): BatchParametersStatusResponse.ParameterStatus[] | undefined;
+    set parameterStatuses(value: BatchParametersStatusResponse.ParameterStatus[] | undefined);
+    get hasErrors(): boolean | undefined;
+    set hasErrors(value: boolean | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchParametersStatusResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchParametersStatusResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchParametersStatusResponse.AsProtobufJSON;
+}
+export declare module BatchParametersStatusResponse {
+    /**
+     * Standard JavaScript object representation for BatchParametersStatusResponse
+     */
+    interface AsObject {
+        parameterStatuses?: BatchParametersStatusResponse.ParameterStatus.AsObject[];
+        hasErrors?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for BatchParametersStatusResponse
+     */
+    interface AsProtobufJSON {
+        parameterStatuses?: BatchParametersStatusResponse.ParameterStatus.AsProtobufJSON[] | null;
+        hasErrors?: boolean;
+    }
+    /**
+     * Message implementation for ondewo.nlu.ParameterStatus
+     */
+    class ParameterStatus implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): ParameterStatus;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: ParameterStatus): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: ParameterStatus, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: ParameterStatus, _writer: BinaryWriter): void;
+        private _parameter?;
+        private _errorMessage?;
+        private _phraseOrStatus;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ParameterStatus to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<ParameterStatus.AsObject>);
+        get parameter(): Intent.Parameter | undefined;
+        set parameter(value: Intent.Parameter | undefined);
+        get errorMessage(): string | undefined;
+        set errorMessage(value: string | undefined);
+        get phraseOrStatus(): ParameterStatus.PhraseOrStatusCase;
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): ParameterStatus.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): ParameterStatus.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): ParameterStatus.AsProtobufJSON;
+    }
+    module ParameterStatus {
+        /**
+         * Standard JavaScript object representation for ParameterStatus
+         */
+        interface AsObject {
+            parameter?: Intent.Parameter.AsObject;
+            errorMessage?: string;
+        }
+        /**
+         * Protobuf JSON representation for ParameterStatus
+         */
+        interface AsProtobufJSON {
+            parameter?: Intent.Parameter.AsProtobufJSON | null;
+            errorMessage?: string | null;
+        }
+        enum PhraseOrStatusCase {
+            none = 0,
+            parameter = 1,
+            errorMessage = 2
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchCreateParametersRequest
+ */
+export declare class BatchCreateParametersRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchCreateParametersRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchCreateParametersRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchCreateParametersRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchCreateParametersRequest, _writer: BinaryWriter): void;
+    private _parameterRequests?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchCreateParametersRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchCreateParametersRequest.AsObject>);
+    get parameterRequests(): BatchCreateParametersRequest.CreateParameterRequest[] | undefined;
+    set parameterRequests(value: BatchCreateParametersRequest.CreateParameterRequest[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchCreateParametersRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchCreateParametersRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchCreateParametersRequest.AsProtobufJSON;
+}
+export declare module BatchCreateParametersRequest {
+    /**
+     * Standard JavaScript object representation for BatchCreateParametersRequest
+     */
+    interface AsObject {
+        parameterRequests?: BatchCreateParametersRequest.CreateParameterRequest.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for BatchCreateParametersRequest
+     */
+    interface AsProtobufJSON {
+        parameterRequests?: BatchCreateParametersRequest.CreateParameterRequest.AsProtobufJSON[] | null;
+    }
+    /**
+     * Message implementation for ondewo.nlu.CreateParameterRequest
+     */
+    class CreateParameterRequest implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): CreateParameterRequest;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: CreateParameterRequest): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: CreateParameterRequest, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: CreateParameterRequest, _writer: BinaryWriter): void;
+        private _intentName?;
+        private _parameter?;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CreateParameterRequest to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<CreateParameterRequest.AsObject>);
+        get intentName(): string | undefined;
+        set intentName(value: string | undefined);
+        get parameter(): Intent.Parameter | undefined;
+        set parameter(value: Intent.Parameter | undefined);
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): CreateParameterRequest.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): CreateParameterRequest.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): CreateParameterRequest.AsProtobufJSON;
+    }
+    module CreateParameterRequest {
+        /**
+         * Standard JavaScript object representation for CreateParameterRequest
+         */
+        interface AsObject {
+            intentName?: string;
+            parameter?: Intent.Parameter.AsObject;
+        }
+        /**
+         * Protobuf JSON representation for CreateParameterRequest
+         */
+        interface AsProtobufJSON {
+            intentName?: string;
+            parameter?: Intent.Parameter.AsProtobufJSON | null;
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchUpdateParametersRequest
+ */
+export declare class BatchUpdateParametersRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchUpdateParametersRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchUpdateParametersRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchUpdateParametersRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchUpdateParametersRequest, _writer: BinaryWriter): void;
+    private _parameters?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateParametersRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchUpdateParametersRequest.AsObject>);
+    get parameters(): Intent.Parameter[] | undefined;
+    set parameters(value: Intent.Parameter[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchUpdateParametersRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchUpdateParametersRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateParametersRequest.AsProtobufJSON;
+}
+export declare module BatchUpdateParametersRequest {
+    /**
+     * Standard JavaScript object representation for BatchUpdateParametersRequest
+     */
+    interface AsObject {
+        parameters?: Intent.Parameter.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for BatchUpdateParametersRequest
+     */
+    interface AsProtobufJSON {
+        parameters?: Intent.Parameter.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchGetParametersRequest
+ */
+export declare class BatchGetParametersRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchGetParametersRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchGetParametersRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchGetParametersRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchGetParametersRequest, _writer: BinaryWriter): void;
+    private _names?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchGetParametersRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchGetParametersRequest.AsObject>);
+    get names(): string[] | undefined;
+    set names(value: string[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchGetParametersRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchGetParametersRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchGetParametersRequest.AsProtobufJSON;
+}
+export declare module BatchGetParametersRequest {
+    /**
+     * Standard JavaScript object representation for BatchGetParametersRequest
+     */
+    interface AsObject {
+        names?: string[];
+    }
+    /**
+     * Protobuf JSON representation for BatchGetParametersRequest
+     */
+    interface AsProtobufJSON {
+        names?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchDeleteParametersRequest
+ */
+export declare class BatchDeleteParametersRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchDeleteParametersRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchDeleteParametersRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchDeleteParametersRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchDeleteParametersRequest, _writer: BinaryWriter): void;
+    private _names?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteParametersRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchDeleteParametersRequest.AsObject>);
+    get names(): string[] | undefined;
+    set names(value: string[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchDeleteParametersRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchDeleteParametersRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteParametersRequest.AsProtobufJSON;
+}
+export declare module BatchDeleteParametersRequest {
+    /**
+     * Standard JavaScript object representation for BatchDeleteParametersRequest
+     */
+    interface AsObject {
+        names?: string[];
+    }
+    /**
+     * Protobuf JSON representation for BatchDeleteParametersRequest
+     */
+    interface AsProtobufJSON {
+        names?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.BatchDeleteParametersResponse
+ */
+export declare class BatchDeleteParametersResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): BatchDeleteParametersResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: BatchDeleteParametersResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: BatchDeleteParametersResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: BatchDeleteParametersResponse, _writer: BinaryWriter): void;
+    private _deleteStatuses?;
+    private _hasErrors?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteParametersResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<BatchDeleteParametersResponse.AsObject>);
+    get deleteStatuses(): BatchDeleteParametersResponse.DeleteParameterStatus[] | undefined;
+    set deleteStatuses(value: BatchDeleteParametersResponse.DeleteParameterStatus[] | undefined);
+    get hasErrors(): boolean | undefined;
+    set hasErrors(value: boolean | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): BatchDeleteParametersResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): BatchDeleteParametersResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteParametersResponse.AsProtobufJSON;
+}
+export declare module BatchDeleteParametersResponse {
+    /**
+     * Standard JavaScript object representation for BatchDeleteParametersResponse
+     */
+    interface AsObject {
+        deleteStatuses?: BatchDeleteParametersResponse.DeleteParameterStatus.AsObject[];
+        hasErrors?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for BatchDeleteParametersResponse
+     */
+    interface AsProtobufJSON {
+        deleteStatuses?: BatchDeleteParametersResponse.DeleteParameterStatus.AsProtobufJSON[] | null;
+        hasErrors?: boolean;
+    }
+    /**
+     * Message implementation for ondewo.nlu.DeleteParameterStatus
+     */
+    class DeleteParameterStatus implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): DeleteParameterStatus;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: DeleteParameterStatus): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: DeleteParameterStatus, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: DeleteParameterStatus, _writer: BinaryWriter): void;
+        private _successfullyDeleted?;
+        private _errorMessage?;
+        private _deleteStatus;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of DeleteParameterStatus to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<DeleteParameterStatus.AsObject>);
+        get successfullyDeleted(): googleProtobuf003.Empty | undefined;
+        set successfullyDeleted(value: googleProtobuf003.Empty | undefined);
+        get errorMessage(): string | undefined;
+        set errorMessage(value: string | undefined);
+        get deleteStatus(): DeleteParameterStatus.DeleteStatusCase;
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): DeleteParameterStatus.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): DeleteParameterStatus.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): DeleteParameterStatus.AsProtobufJSON;
+    }
+    module DeleteParameterStatus {
+        /**
+         * Standard JavaScript object representation for DeleteParameterStatus
+         */
+        interface AsObject {
+            successfullyDeleted?: googleProtobuf003.Empty.AsObject;
+            errorMessage?: string;
+        }
+        /**
+         * Protobuf JSON representation for DeleteParameterStatus
+         */
+        interface AsProtobufJSON {
+            successfullyDeleted?: googleProtobuf003.Empty.AsProtobufJSON | null;
+            errorMessage?: string | null;
+        }
+        enum DeleteStatusCase {
+            none = 0,
+            successfullyDeleted = 1,
+            errorMessage = 2
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListParametersRequest
+ */
+export declare class ListParametersRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListParametersRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListParametersRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListParametersRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListParametersRequest, _writer: BinaryWriter): void;
+    private _intentName?;
+    private _languageCode?;
+    private _pageToken?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListParametersRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListParametersRequest.AsObject>);
+    get intentName(): string | undefined;
+    set intentName(value: string | undefined);
+    get languageCode(): string | undefined;
+    set languageCode(value: string | undefined);
+    get pageToken(): string | undefined;
+    set pageToken(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListParametersRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListParametersRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListParametersRequest.AsProtobufJSON;
+}
+export declare module ListParametersRequest {
+    /**
+     * Standard JavaScript object representation for ListParametersRequest
+     */
+    interface AsObject {
+        intentName?: string;
+        languageCode?: string;
+        pageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListParametersRequest
+     */
+    interface AsProtobufJSON {
+        intentName?: string;
+        languageCode?: string;
+        pageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListParametersResponse
+ */
+export declare class ListParametersResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListParametersResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListParametersResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListParametersResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListParametersResponse, _writer: BinaryWriter): void;
+    private _parameters?;
+    private _nextPageToken?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListParametersResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListParametersResponse.AsObject>);
+    get parameters(): Intent.Parameter[] | undefined;
+    set parameters(value: Intent.Parameter[] | undefined);
+    get nextPageToken(): string | undefined;
+    set nextPageToken(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListParametersResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListParametersResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListParametersResponse.AsProtobufJSON;
+}
+export declare module ListParametersResponse {
+    /**
+     * Standard JavaScript object representation for ListParametersResponse
+     */
+    interface AsObject {
+        parameters?: Intent.Parameter.AsObject[];
+        nextPageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListParametersResponse
+     */
+    interface AsProtobufJSON {
+        parameters?: Intent.Parameter.AsProtobufJSON[] | null;
+        nextPageToken?: string;
     }
 }
