@@ -1,6 +1,6 @@
 {
   "name": "@ondewo/nlu-client-angular",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Ondewo natural language understanding client library for angular",
   "keywords": ["ondewo", "nlu", "api", "client", "ngx-grpc", "grpc"],
   "scripts": {
