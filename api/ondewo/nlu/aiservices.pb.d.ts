@@ -31,6 +31,7 @@ export declare class ExtractEntitiesRequest implements GrpcMessage {
     private _parent?;
     private _text?;
     private _languageCode?;
+    private _intentName?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ExtractEntitiesRequest to deeply clone from
@@ -42,6 +43,8 @@ export declare class ExtractEntitiesRequest implements GrpcMessage {
     set text(value: string | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
+    get intentName(): string | undefined;
+    set intentName(value: string | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -70,6 +73,7 @@ export declare module ExtractEntitiesRequest {
         parent?: string;
         text?: string;
         languageCode?: string;
+        intentName?: string;
     }
     /**
      * Protobuf JSON representation for ExtractEntitiesRequest
@@ -78,6 +82,86 @@ export declare module ExtractEntitiesRequest {
         parent?: string;
         text?: string;
         languageCode?: string;
+        intentName?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.EntityDetected
+ */
+export declare class EntityDetected implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): EntityDetected;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EntityDetected): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: EntityDetected, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: EntityDetected, _writer: BinaryWriter): void;
+    private _entity?;
+    private _extractionMethod?;
+    private _score?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityDetected to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<EntityDetected.AsObject>);
+    get entity(): ondewoNlu009.Intent.TrainingPhrase.Entity | undefined;
+    set entity(value: ondewoNlu009.Intent.TrainingPhrase.Entity | undefined);
+    get extractionMethod(): string | undefined;
+    set extractionMethod(value: string | undefined);
+    get score(): number | undefined;
+    set score(value: number | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EntityDetected.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): EntityDetected.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): EntityDetected.AsProtobufJSON;
+}
+export declare module EntityDetected {
+    /**
+     * Standard JavaScript object representation for EntityDetected
+     */
+    interface AsObject {
+        entity?: ondewoNlu009.Intent.TrainingPhrase.Entity.AsObject;
+        extractionMethod?: string;
+        score?: number;
+    }
+    /**
+     * Protobuf JSON representation for EntityDetected
+     */
+    interface AsProtobufJSON {
+        entity?: ondewoNlu009.Intent.TrainingPhrase.Entity.AsProtobufJSON | null;
+        extractionMethod?: string;
+        score?: number;
     }
 }
 /**
@@ -107,15 +191,15 @@ export declare class ExtractEntitiesResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ExtractEntitiesResponse, _writer: BinaryWriter): void;
-    private _entities?;
+    private _entitiesDetected?;
     private _text?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ExtractEntitiesResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<ExtractEntitiesResponse.AsObject>);
-    get entities(): ondewoNlu009.Intent.TrainingPhrase.Entity[] | undefined;
-    set entities(value: ondewoNlu009.Intent.TrainingPhrase.Entity[] | undefined);
+    get entitiesDetected(): EntityDetected[] | undefined;
+    set entitiesDetected(value: EntityDetected[] | undefined);
     get text(): string | undefined;
     set text(value: string | undefined);
     /**
@@ -143,14 +227,14 @@ export declare module ExtractEntitiesResponse {
      * Standard JavaScript object representation for ExtractEntitiesResponse
      */
     interface AsObject {
-        entities?: ondewoNlu009.Intent.TrainingPhrase.Entity.AsObject[];
+        entitiesDetected?: EntityDetected.AsObject[];
         text?: string;
     }
     /**
      * Protobuf JSON representation for ExtractEntitiesResponse
      */
     interface AsProtobufJSON {
-        entities?: ondewoNlu009.Intent.TrainingPhrase.Entity.AsProtobufJSON[] | null;
+        entitiesDetected?: EntityDetected.AsProtobufJSON[] | null;
         text?: string;
     }
 }

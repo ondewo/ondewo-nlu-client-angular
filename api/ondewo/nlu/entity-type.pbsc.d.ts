@@ -77,25 +77,41 @@ export declare class EntityTypesClient {
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
          */
-        batchCreateEntities: (requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+        batchCreateEntities: (requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>;
         /**
          * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntities
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
          */
-        batchUpdateEntities: (requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+        batchUpdateEntities: (requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/BatchGetEntities
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
+         */
+        batchGetEntities: (requestData: thisProto.BatchGetEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>;
         /**
          * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntities
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         * @returns Observable<GrpcEvent<thisProto.BatchDeleteEntitiesResponse>>
          */
-        batchDeleteEntities: (requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+        batchDeleteEntities: (requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchDeleteEntitiesResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/ListEntities
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListEntitiesResponse>>
+         */
+        listEntities: (requestData: thisProto.ListEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListEntitiesResponse>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -159,23 +175,39 @@ export declare class EntityTypesClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning006.Operation>
+     * @returns Observable<thisProto.BatchEntitiesResponse>
      */
-    batchCreateEntities(requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
+    batchCreateEntities(requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchEntitiesResponse>;
     /**
      * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning006.Operation>
+     * @returns Observable<thisProto.BatchEntitiesResponse>
      */
-    batchUpdateEntities(requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
+    batchUpdateEntities(requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchEntitiesResponse>;
+    /**
+     * Unary RPC for /ondewo.nlu.EntityTypes/BatchGetEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchEntitiesResponse>
+     */
+    batchGetEntities(requestData: thisProto.BatchGetEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchEntitiesResponse>;
     /**
      * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning006.Operation>
+     * @returns Observable<thisProto.BatchDeleteEntitiesResponse>
      */
-    batchDeleteEntities(requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
+    batchDeleteEntities(requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchDeleteEntitiesResponse>;
+    /**
+     * Unary RPC for /ondewo.nlu.EntityTypes/ListEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListEntitiesResponse>
+     */
+    listEntities(requestData: thisProto.ListEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListEntitiesResponse>;
 }

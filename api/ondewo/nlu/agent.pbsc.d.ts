@@ -208,6 +208,14 @@ export declare class AgentsClient {
          * @returns Observable<GrpcEvent<thisProto.ExportResourcesResponse>>
          */
         exportResources: (requestData: thisProto.ExportResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ExportResourcesResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/GetModelStatuses
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetModelStatusesResponse>>
+         */
+        getModelStatuses: (requestData: thisProto.GetModelStatusesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetModelStatusesResponse>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -402,4 +410,12 @@ export declare class AgentsClient {
      * @returns Observable<thisProto.ExportResourcesResponse>
      */
     exportResources(requestData: thisProto.ExportResourcesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ExportResourcesResponse>;
+    /**
+     * Unary RPC for /ondewo.nlu.Agents/GetModelStatuses
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetModelStatusesResponse>
+     */
+    getModelStatuses(requestData: thisProto.GetModelStatusesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetModelStatusesResponse>;
 }

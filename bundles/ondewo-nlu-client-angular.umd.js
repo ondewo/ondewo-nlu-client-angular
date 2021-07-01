@@ -2659,6 +2659,7 @@
                 this.text = _value.text;
                 this.entities = (_value.entities || []).map(function (m) { return new Intent.TrainingPhrase.Entity(m); });
                 this.timesAddedCount = _value.timesAddedCount;
+                this.languageCode = _value.languageCode;
                 TrainingPhrase.refineValues(this);
             }
             /**
@@ -2680,6 +2681,7 @@
                 _instance.text = _instance.text || '';
                 _instance.entities = _instance.entities || [];
                 _instance.timesAddedCount = _instance.timesAddedCount || 0;
+                _instance.languageCode = _instance.languageCode || '';
             };
             /**
              * Deserializes / reads binary message into message instance using provided binary reader
@@ -2708,6 +2710,9 @@
                         case 5:
                             _instance.timesAddedCount = _reader.readInt32();
                             break;
+                        case 6:
+                            _instance.languageCode = _reader.readString();
+                            break;
                         default:
                             _reader.skipField();
                     }
@@ -2734,6 +2739,9 @@
                 }
                 if (_instance.timesAddedCount) {
                     _writer.writeInt32(5, _instance.timesAddedCount);
+                }
+                if (_instance.languageCode) {
+                    _writer.writeString(6, _instance.languageCode);
                 }
             };
             Object.defineProperty(TrainingPhrase.prototype, "name", {
@@ -2786,6 +2794,16 @@
                 enumerable: false,
                 configurable: true
             });
+            Object.defineProperty(TrainingPhrase.prototype, "languageCode", {
+                get: function () {
+                    return this._languageCode;
+                },
+                set: function (value) {
+                    this._languageCode = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
             /**
              * Serialize message to binary data
              * @param instance message instance
@@ -2804,7 +2822,8 @@
                     type: this.type,
                     text: this.text,
                     entities: (this.entities || []).map(function (m) { return m.toObject(); }),
-                    timesAddedCount: this.timesAddedCount
+                    timesAddedCount: this.timesAddedCount,
+                    languageCode: this.languageCode
                 };
             };
             /**
@@ -2827,7 +2846,8 @@
                     type: Intent.TrainingPhrase.Type[(_a = this.type) !== null && _a !== void 0 ? _a : 0],
                     text: this.text,
                     entities: (this.entities || []).map(function (m) { return m.toProtobufJSON(options); }),
-                    timesAddedCount: this.timesAddedCount
+                    timesAddedCount: this.timesAddedCount,
+                    languageCode: this.languageCode
                 };
             };
             return TrainingPhrase;
@@ -3107,7 +3127,7 @@
                 this.entityTypeName = _value.entityTypeName;
                 this.entityTypeDisplayName = _value.entityTypeDisplayName;
                 this.mandatory = _value.mandatory;
-                this.prompts = (_value.prompts || []).slice();
+                this.prompts = (_value.prompts || []).map(function (m) { return new Intent.Parameter.Prompt(m); });
                 this.isList = _value.isList;
                 Parameter.refineValues(this);
             }
@@ -3167,7 +3187,9 @@
                             _instance.mandatory = _reader.readBool();
                             break;
                         case 8:
-                            (_instance.prompts = _instance.prompts || []).push(_reader.readString());
+                            var messageInitializer8 = new Intent.Parameter.Prompt();
+                            _reader.readMessage(messageInitializer8, Intent.Parameter.Prompt.deserializeBinaryFromReader);
+                            (_instance.prompts = _instance.prompts || []).push(messageInitializer8);
                             break;
                         case 9:
                             _instance.isList = _reader.readBool();
@@ -3206,7 +3228,7 @@
                     _writer.writeBool(7, _instance.mandatory);
                 }
                 if (_instance.prompts && _instance.prompts.length) {
-                    _writer.writeRepeatedString(8, _instance.prompts);
+                    _writer.writeRepeatedMessage(8, _instance.prompts, Intent.Parameter.Prompt.serializeBinaryToWriter);
                 }
                 if (_instance.isList) {
                     _writer.writeBool(9, _instance.isList);
@@ -3323,7 +3345,7 @@
                     entityTypeName: this.entityTypeName,
                     entityTypeDisplayName: this.entityTypeDisplayName,
                     mandatory: this.mandatory,
-                    prompts: (this.prompts || []).slice(),
+                    prompts: (this.prompts || []).map(function (m) { return m.toObject(); }),
                     isList: this.isList
                 };
             };
@@ -3349,7 +3371,7 @@
                     entityTypeName: this.entityTypeName,
                     entityTypeDisplayName: this.entityTypeDisplayName,
                     mandatory: this.mandatory,
-                    prompts: (this.prompts || []).slice(),
+                    prompts: (this.prompts || []).map(function (m) { return m.toProtobufJSON(options); }),
                     isList: this.isList
                 };
             };
@@ -3357,6 +3379,155 @@
         }());
         Parameter.id = 'ondewo.nlu.Parameter';
         Intent.Parameter = Parameter;
+        (function (Parameter) {
+            /**
+             * Message implementation for ondewo.nlu.Prompt
+             */
+            var Prompt = /** @class */ (function () {
+                /**
+                 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+                 * @param _value initial values object or instance of Prompt to deeply clone from
+                 */
+                function Prompt(_value) {
+                    _value = _value || {};
+                    this.name = _value.name;
+                    this.text = _value.text;
+                    this.languageCode = _value.languageCode;
+                    Prompt.refineValues(this);
+                }
+                /**
+                 * Deserialize binary data to message
+                 * @param instance message instance
+                 */
+                Prompt.deserializeBinary = function (bytes) {
+                    var instance = new Prompt();
+                    Prompt.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                    return instance;
+                };
+                /**
+                 * Check all the properties and set default protobuf values if necessary
+                 * @param _instance message instance
+                 */
+                Prompt.refineValues = function (_instance) {
+                    _instance.name = _instance.name || '';
+                    _instance.text = _instance.text || '';
+                    _instance.languageCode = _instance.languageCode || '';
+                };
+                /**
+                 * Deserializes / reads binary message into message instance using provided binary reader
+                 * @param _instance message instance
+                 * @param _reader binary reader instance
+                 */
+                Prompt.deserializeBinaryFromReader = function (_instance, _reader) {
+                    while (_reader.nextField()) {
+                        if (_reader.isEndGroup())
+                            break;
+                        switch (_reader.getFieldNumber()) {
+                            case 1:
+                                _instance.name = _reader.readString();
+                                break;
+                            case 2:
+                                _instance.text = _reader.readString();
+                                break;
+                            case 3:
+                                _instance.languageCode = _reader.readString();
+                                break;
+                            default:
+                                _reader.skipField();
+                        }
+                    }
+                    Prompt.refineValues(_instance);
+                };
+                /**
+                 * Serializes a message to binary format using provided binary reader
+                 * @param _instance message instance
+                 * @param _writer binary writer instance
+                 */
+                Prompt.serializeBinaryToWriter = function (_instance, _writer) {
+                    if (_instance.name) {
+                        _writer.writeString(1, _instance.name);
+                    }
+                    if (_instance.text) {
+                        _writer.writeString(2, _instance.text);
+                    }
+                    if (_instance.languageCode) {
+                        _writer.writeString(3, _instance.languageCode);
+                    }
+                };
+                Object.defineProperty(Prompt.prototype, "name", {
+                    get: function () {
+                        return this._name;
+                    },
+                    set: function (value) {
+                        this._name = value;
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
+                Object.defineProperty(Prompt.prototype, "text", {
+                    get: function () {
+                        return this._text;
+                    },
+                    set: function (value) {
+                        this._text = value;
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
+                Object.defineProperty(Prompt.prototype, "languageCode", {
+                    get: function () {
+                        return this._languageCode;
+                    },
+                    set: function (value) {
+                        this._languageCode = value;
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
+                /**
+                 * Serialize message to binary data
+                 * @param instance message instance
+                 */
+                Prompt.prototype.serializeBinary = function () {
+                    var writer = new googleProtobuf.BinaryWriter();
+                    Prompt.serializeBinaryToWriter(this, writer);
+                    return writer.getResultBuffer();
+                };
+                /**
+                 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+                 */
+                Prompt.prototype.toObject = function () {
+                    return {
+                        name: this.name,
+                        text: this.text,
+                        languageCode: this.languageCode
+                    };
+                };
+                /**
+                 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+                 */
+                Prompt.prototype.toJSON = function () {
+                    return this.toObject();
+                };
+                /**
+                 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+                 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+                 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+                 */
+                Prompt.prototype.toProtobufJSON = function (
+                // @ts-ignore
+                options) {
+                    return {
+                        name: this.name,
+                        text: this.text,
+                        languageCode: this.languageCode
+                    };
+                };
+                return Prompt;
+            }());
+            Prompt.id = 'ondewo.nlu.Prompt';
+            Parameter.Prompt = Prompt;
+        })(Parameter = Intent.Parameter || (Intent.Parameter = {}));
         /**
          * Message implementation for ondewo.nlu.Message
          */
@@ -3368,6 +3539,8 @@
             function Message(_value) {
                 this._message = Message.MessageCase.none;
                 _value = _value || {};
+                this.name = _value.name;
+                this.languageCode = _value.languageCode;
                 this.text = _value.text
                     ? new Intent.Message.Text(_value.text)
                     : undefined;
@@ -3427,6 +3600,8 @@
              * @param _instance message instance
              */
             Message.refineValues = function (_instance) {
+                _instance.name = _instance.name || '';
+                _instance.languageCode = _instance.languageCode || '';
                 _instance.platform = _instance.platform || 0;
             };
             /**
@@ -3439,6 +3614,12 @@
                     if (_reader.isEndGroup())
                         break;
                     switch (_reader.getFieldNumber()) {
+                        case 16:
+                            _instance.name = _reader.readString();
+                            break;
+                        case 17:
+                            _instance.languageCode = _reader.readString();
+                            break;
                         case 1:
                             _instance.text = new Intent.Message.Text();
                             _reader.readMessage(_instance.text, Intent.Message.Text.deserializeBinaryFromReader);
@@ -3510,6 +3691,12 @@
              * @param _writer binary writer instance
              */
             Message.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.name) {
+                    _writer.writeString(16, _instance.name);
+                }
+                if (_instance.languageCode) {
+                    _writer.writeString(17, _instance.languageCode);
+                }
                 if (_instance.text) {
                     _writer.writeMessage(1, _instance.text, Intent.Message.Text.serializeBinaryToWriter);
                 }
@@ -3556,6 +3743,26 @@
                     _writer.writeEnum(6, _instance.platform);
                 }
             };
+            Object.defineProperty(Message.prototype, "name", {
+                get: function () {
+                    return this._name;
+                },
+                set: function (value) {
+                    this._name = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(Message.prototype, "languageCode", {
+                get: function () {
+                    return this._languageCode;
+                },
+                set: function (value) {
+                    this._languageCode = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
             Object.defineProperty(Message.prototype, "text", {
                 get: function () {
                     return this._text;
@@ -3783,6 +3990,8 @@
              */
             Message.prototype.toObject = function () {
                 return {
+                    name: this.name,
+                    languageCode: this.languageCode,
                     text: this.text ? this.text.toObject() : undefined,
                     image: this.image ? this.image.toObject() : undefined,
                     quickReplies: this.quickReplies
@@ -3824,6 +4033,8 @@
             options) {
                 var _a;
                 return {
+                    name: this.name,
+                    languageCode: this.languageCode,
                     text: this.text ? this.text.toProtobufJSON(options) : null,
                     image: this.image ? this.image.toProtobufJSON(options) : null,
                     quickReplies: this.quickReplies
@@ -8472,6 +8683,4264 @@
             IntentSortingField[IntentSortingField["SORT_INTENT_BY_USERSAYS_COUNT"] = 4] = "SORT_INTENT_BY_USERSAYS_COUNT";
         })(IntentSortingField = IntentSorting.IntentSortingField || (IntentSorting.IntentSortingField = {}));
     })(exports.IntentSorting || (exports.IntentSorting = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchUpdateTrainingPhrasesRequest
+     */
+    var BatchUpdateTrainingPhrasesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchUpdateTrainingPhrasesRequest to deeply clone from
+         */
+        function BatchUpdateTrainingPhrasesRequest(_value) {
+            _value = _value || {};
+            this.trainingPhrases = (_value.trainingPhrases || []).map(function (m) { return new exports.Intent.TrainingPhrase(m); });
+            BatchUpdateTrainingPhrasesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchUpdateTrainingPhrasesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchUpdateTrainingPhrasesRequest();
+            BatchUpdateTrainingPhrasesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchUpdateTrainingPhrasesRequest.refineValues = function (_instance) {
+            _instance.trainingPhrases = _instance.trainingPhrases || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchUpdateTrainingPhrasesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Intent.TrainingPhrase();
+                        _reader.readMessage(messageInitializer1, exports.Intent.TrainingPhrase.deserializeBinaryFromReader);
+                        (_instance.trainingPhrases = _instance.trainingPhrases || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchUpdateTrainingPhrasesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchUpdateTrainingPhrasesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.trainingPhrases && _instance.trainingPhrases.length) {
+                _writer.writeRepeatedMessage(1, _instance.trainingPhrases, exports.Intent.TrainingPhrase.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchUpdateTrainingPhrasesRequest.prototype, "trainingPhrases", {
+            get: function () {
+                return this._trainingPhrases;
+            },
+            set: function (value) {
+                this._trainingPhrases = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchUpdateTrainingPhrasesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchUpdateTrainingPhrasesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchUpdateTrainingPhrasesRequest.prototype.toObject = function () {
+            return {
+                trainingPhrases: (this.trainingPhrases || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchUpdateTrainingPhrasesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchUpdateTrainingPhrasesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                trainingPhrases: (this.trainingPhrases || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchUpdateTrainingPhrasesRequest;
+    }());
+    BatchUpdateTrainingPhrasesRequest.id = 'ondewo.nlu.BatchUpdateTrainingPhrasesRequest';
+    /**
+     * Message implementation for ondewo.nlu.TrainingPhraseStatus
+     */
+    exports.TrainingPhraseStatus = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of TrainingPhraseStatus to deeply clone from
+         */
+        function TrainingPhraseStatus(_value) {
+            this._phraseOrStatus = TrainingPhraseStatus.PhraseOrStatusCase.none;
+            _value = _value || {};
+            this.trainingPhrase = _value.trainingPhrase
+                ? new exports.Intent.TrainingPhrase(_value.trainingPhrase)
+                : undefined;
+            this.errorMessage = _value.errorMessage;
+            TrainingPhraseStatus.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        TrainingPhraseStatus.deserializeBinary = function (bytes) {
+            var instance = new TrainingPhraseStatus();
+            TrainingPhraseStatus.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        TrainingPhraseStatus.refineValues = function (_instance) { };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        TrainingPhraseStatus.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.trainingPhrase = new exports.Intent.TrainingPhrase();
+                        _reader.readMessage(_instance.trainingPhrase, exports.Intent.TrainingPhrase.deserializeBinaryFromReader);
+                        break;
+                    case 2:
+                        _instance.errorMessage = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            TrainingPhraseStatus.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        TrainingPhraseStatus.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.trainingPhrase) {
+                _writer.writeMessage(1, _instance.trainingPhrase, exports.Intent.TrainingPhrase.serializeBinaryToWriter);
+            }
+            if (_instance.errorMessage || _instance.errorMessage === '') {
+                _writer.writeString(2, _instance.errorMessage);
+            }
+        };
+        Object.defineProperty(TrainingPhraseStatus.prototype, "trainingPhrase", {
+            get: function () {
+                return this._trainingPhrase;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._errorMessage = undefined;
+                    this._phraseOrStatus =
+                        TrainingPhraseStatus.PhraseOrStatusCase.trainingPhrase;
+                }
+                this._trainingPhrase = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TrainingPhraseStatus.prototype, "errorMessage", {
+            get: function () {
+                return this._errorMessage;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._trainingPhrase = undefined;
+                    this._phraseOrStatus =
+                        TrainingPhraseStatus.PhraseOrStatusCase.errorMessage;
+                }
+                this._errorMessage = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TrainingPhraseStatus.prototype, "phraseOrStatus", {
+            get: function () {
+                return this._phraseOrStatus;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        TrainingPhraseStatus.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            TrainingPhraseStatus.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        TrainingPhraseStatus.prototype.toObject = function () {
+            return {
+                trainingPhrase: this.trainingPhrase
+                    ? this.trainingPhrase.toObject()
+                    : undefined,
+                errorMessage: this.errorMessage
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        TrainingPhraseStatus.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        TrainingPhraseStatus.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a;
+            return {
+                trainingPhrase: this.trainingPhrase
+                    ? this.trainingPhrase.toProtobufJSON(options)
+                    : null,
+                errorMessage: (_a = this.errorMessage) !== null && _a !== void 0 ? _a : null
+            };
+        };
+        return TrainingPhraseStatus;
+    }());
+    exports.TrainingPhraseStatus.id = 'ondewo.nlu.TrainingPhraseStatus';
+    (function (TrainingPhraseStatus) {
+        var PhraseOrStatusCase;
+        (function (PhraseOrStatusCase) {
+            PhraseOrStatusCase[PhraseOrStatusCase["none"] = 0] = "none";
+            PhraseOrStatusCase[PhraseOrStatusCase["trainingPhrase"] = 1] = "trainingPhrase";
+            PhraseOrStatusCase[PhraseOrStatusCase["errorMessage"] = 2] = "errorMessage";
+        })(PhraseOrStatusCase = TrainingPhraseStatus.PhraseOrStatusCase || (TrainingPhraseStatus.PhraseOrStatusCase = {}));
+    })(exports.TrainingPhraseStatus || (exports.TrainingPhraseStatus = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchTrainingPhrasesStatusResponse
+     */
+    var BatchTrainingPhrasesStatusResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchTrainingPhrasesStatusResponse to deeply clone from
+         */
+        function BatchTrainingPhrasesStatusResponse(_value) {
+            _value = _value || {};
+            this.trainingPhraseStatuses = (_value.trainingPhraseStatuses || []).map(function (m) { return new exports.TrainingPhraseStatus(m); });
+            this.hasErrors = _value.hasErrors;
+            BatchTrainingPhrasesStatusResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchTrainingPhrasesStatusResponse.deserializeBinary = function (bytes) {
+            var instance = new BatchTrainingPhrasesStatusResponse();
+            BatchTrainingPhrasesStatusResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchTrainingPhrasesStatusResponse.refineValues = function (_instance) {
+            _instance.trainingPhraseStatuses = _instance.trainingPhraseStatuses || [];
+            _instance.hasErrors = _instance.hasErrors || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchTrainingPhrasesStatusResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.TrainingPhraseStatus();
+                        _reader.readMessage(messageInitializer1, exports.TrainingPhraseStatus.deserializeBinaryFromReader);
+                        (_instance.trainingPhraseStatuses =
+                            _instance.trainingPhraseStatuses || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.hasErrors = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchTrainingPhrasesStatusResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchTrainingPhrasesStatusResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.trainingPhraseStatuses &&
+                _instance.trainingPhraseStatuses.length) {
+                _writer.writeRepeatedMessage(1, _instance.trainingPhraseStatuses, exports.TrainingPhraseStatus.serializeBinaryToWriter);
+            }
+            if (_instance.hasErrors) {
+                _writer.writeBool(2, _instance.hasErrors);
+            }
+        };
+        Object.defineProperty(BatchTrainingPhrasesStatusResponse.prototype, "trainingPhraseStatuses", {
+            get: function () {
+                return this._trainingPhraseStatuses;
+            },
+            set: function (value) {
+                this._trainingPhraseStatuses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BatchTrainingPhrasesStatusResponse.prototype, "hasErrors", {
+            get: function () {
+                return this._hasErrors;
+            },
+            set: function (value) {
+                this._hasErrors = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchTrainingPhrasesStatusResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchTrainingPhrasesStatusResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchTrainingPhrasesStatusResponse.prototype.toObject = function () {
+            return {
+                trainingPhraseStatuses: (this.trainingPhraseStatuses || []).map(function (m) { return m.toObject(); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchTrainingPhrasesStatusResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchTrainingPhrasesStatusResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                trainingPhraseStatuses: (this.trainingPhraseStatuses || []).map(function (m) { return m.toProtobufJSON(options); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        return BatchTrainingPhrasesStatusResponse;
+    }());
+    BatchTrainingPhrasesStatusResponse.id = 'ondewo.nlu.BatchTrainingPhrasesStatusResponse';
+    /**
+     * Message implementation for ondewo.nlu.BatchCreateTrainingPhrasesRequest
+     */
+    exports.BatchCreateTrainingPhrasesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchCreateTrainingPhrasesRequest to deeply clone from
+         */
+        function BatchCreateTrainingPhrasesRequest(_value) {
+            _value = _value || {};
+            this.trainingPhraseRequests = (_value.trainingPhraseRequests || []).map(function (m) { return new BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest(m); });
+            BatchCreateTrainingPhrasesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchCreateTrainingPhrasesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchCreateTrainingPhrasesRequest();
+            BatchCreateTrainingPhrasesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchCreateTrainingPhrasesRequest.refineValues = function (_instance) {
+            _instance.trainingPhraseRequests = _instance.trainingPhraseRequests || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchCreateTrainingPhrasesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest();
+                        _reader.readMessage(messageInitializer1, BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest
+                            .deserializeBinaryFromReader);
+                        (_instance.trainingPhraseRequests =
+                            _instance.trainingPhraseRequests || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchCreateTrainingPhrasesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchCreateTrainingPhrasesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.trainingPhraseRequests &&
+                _instance.trainingPhraseRequests.length) {
+                _writer.writeRepeatedMessage(1, _instance.trainingPhraseRequests, BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest
+                    .serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchCreateTrainingPhrasesRequest.prototype, "trainingPhraseRequests", {
+            get: function () {
+                return this._trainingPhraseRequests;
+            },
+            set: function (value) {
+                this._trainingPhraseRequests = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchCreateTrainingPhrasesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchCreateTrainingPhrasesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchCreateTrainingPhrasesRequest.prototype.toObject = function () {
+            return {
+                trainingPhraseRequests: (this.trainingPhraseRequests || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchCreateTrainingPhrasesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchCreateTrainingPhrasesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                trainingPhraseRequests: (this.trainingPhraseRequests || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchCreateTrainingPhrasesRequest;
+    }());
+    exports.BatchCreateTrainingPhrasesRequest.id = 'ondewo.nlu.BatchCreateTrainingPhrasesRequest';
+    (function (BatchCreateTrainingPhrasesRequest) {
+        /**
+         * Message implementation for ondewo.nlu.CreateTrainingPhraseRequest
+         */
+        var CreateTrainingPhraseRequest = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of CreateTrainingPhraseRequest to deeply clone from
+             */
+            function CreateTrainingPhraseRequest(_value) {
+                _value = _value || {};
+                this.intentName = _value.intentName;
+                this.trainingPhrase = _value.trainingPhrase
+                    ? new exports.Intent.TrainingPhrase(_value.trainingPhrase)
+                    : undefined;
+                CreateTrainingPhraseRequest.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            CreateTrainingPhraseRequest.deserializeBinary = function (bytes) {
+                var instance = new CreateTrainingPhraseRequest();
+                CreateTrainingPhraseRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            CreateTrainingPhraseRequest.refineValues = function (_instance) {
+                _instance.intentName = _instance.intentName || '';
+                _instance.trainingPhrase = _instance.trainingPhrase || undefined;
+            };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            CreateTrainingPhraseRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.intentName = _reader.readString();
+                            break;
+                        case 2:
+                            _instance.trainingPhrase = new exports.Intent.TrainingPhrase();
+                            _reader.readMessage(_instance.trainingPhrase, exports.Intent.TrainingPhrase.deserializeBinaryFromReader);
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                CreateTrainingPhraseRequest.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            CreateTrainingPhraseRequest.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.intentName) {
+                    _writer.writeString(1, _instance.intentName);
+                }
+                if (_instance.trainingPhrase) {
+                    _writer.writeMessage(2, _instance.trainingPhrase, exports.Intent.TrainingPhrase.serializeBinaryToWriter);
+                }
+            };
+            Object.defineProperty(CreateTrainingPhraseRequest.prototype, "intentName", {
+                get: function () {
+                    return this._intentName;
+                },
+                set: function (value) {
+                    this._intentName = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(CreateTrainingPhraseRequest.prototype, "trainingPhrase", {
+                get: function () {
+                    return this._trainingPhrase;
+                },
+                set: function (value) {
+                    this._trainingPhrase = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            CreateTrainingPhraseRequest.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                CreateTrainingPhraseRequest.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            CreateTrainingPhraseRequest.prototype.toObject = function () {
+                return {
+                    intentName: this.intentName,
+                    trainingPhrase: this.trainingPhrase
+                        ? this.trainingPhrase.toObject()
+                        : undefined
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            CreateTrainingPhraseRequest.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            CreateTrainingPhraseRequest.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                return {
+                    intentName: this.intentName,
+                    trainingPhrase: this.trainingPhrase
+                        ? this.trainingPhrase.toProtobufJSON(options)
+                        : null
+                };
+            };
+            return CreateTrainingPhraseRequest;
+        }());
+        CreateTrainingPhraseRequest.id = 'ondewo.nlu.CreateTrainingPhraseRequest';
+        BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest = CreateTrainingPhraseRequest;
+    })(exports.BatchCreateTrainingPhrasesRequest || (exports.BatchCreateTrainingPhrasesRequest = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchGetTrainingPhrasesRequest
+     */
+    var BatchGetTrainingPhrasesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchGetTrainingPhrasesRequest to deeply clone from
+         */
+        function BatchGetTrainingPhrasesRequest(_value) {
+            _value = _value || {};
+            this.names = (_value.names || []).slice();
+            BatchGetTrainingPhrasesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchGetTrainingPhrasesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchGetTrainingPhrasesRequest();
+            BatchGetTrainingPhrasesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchGetTrainingPhrasesRequest.refineValues = function (_instance) {
+            _instance.names = _instance.names || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchGetTrainingPhrasesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.names = _instance.names || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchGetTrainingPhrasesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchGetTrainingPhrasesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.names && _instance.names.length) {
+                _writer.writeRepeatedString(1, _instance.names);
+            }
+        };
+        Object.defineProperty(BatchGetTrainingPhrasesRequest.prototype, "names", {
+            get: function () {
+                return this._names;
+            },
+            set: function (value) {
+                this._names = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchGetTrainingPhrasesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchGetTrainingPhrasesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchGetTrainingPhrasesRequest.prototype.toObject = function () {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchGetTrainingPhrasesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchGetTrainingPhrasesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        return BatchGetTrainingPhrasesRequest;
+    }());
+    BatchGetTrainingPhrasesRequest.id = 'ondewo.nlu.BatchGetTrainingPhrasesRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchDeleteTrainingPhrasesRequest
+     */
+    var BatchDeleteTrainingPhrasesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchDeleteTrainingPhrasesRequest to deeply clone from
+         */
+        function BatchDeleteTrainingPhrasesRequest(_value) {
+            _value = _value || {};
+            this.names = (_value.names || []).slice();
+            BatchDeleteTrainingPhrasesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchDeleteTrainingPhrasesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchDeleteTrainingPhrasesRequest();
+            BatchDeleteTrainingPhrasesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchDeleteTrainingPhrasesRequest.refineValues = function (_instance) {
+            _instance.names = _instance.names || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchDeleteTrainingPhrasesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.names = _instance.names || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchDeleteTrainingPhrasesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchDeleteTrainingPhrasesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.names && _instance.names.length) {
+                _writer.writeRepeatedString(1, _instance.names);
+            }
+        };
+        Object.defineProperty(BatchDeleteTrainingPhrasesRequest.prototype, "names", {
+            get: function () {
+                return this._names;
+            },
+            set: function (value) {
+                this._names = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchDeleteTrainingPhrasesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchDeleteTrainingPhrasesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchDeleteTrainingPhrasesRequest.prototype.toObject = function () {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchDeleteTrainingPhrasesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchDeleteTrainingPhrasesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        return BatchDeleteTrainingPhrasesRequest;
+    }());
+    BatchDeleteTrainingPhrasesRequest.id = 'ondewo.nlu.BatchDeleteTrainingPhrasesRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchDeleteTrainingPhrasesResponse
+     */
+    exports.BatchDeleteTrainingPhrasesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchDeleteTrainingPhrasesResponse to deeply clone from
+         */
+        function BatchDeleteTrainingPhrasesResponse(_value) {
+            _value = _value || {};
+            this.deleteStatuses = (_value.deleteStatuses || []).map(function (m) { return new BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus(m); });
+            this.hasErrors = _value.hasErrors;
+            BatchDeleteTrainingPhrasesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchDeleteTrainingPhrasesResponse.deserializeBinary = function (bytes) {
+            var instance = new BatchDeleteTrainingPhrasesResponse();
+            BatchDeleteTrainingPhrasesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchDeleteTrainingPhrasesResponse.refineValues = function (_instance) {
+            _instance.deleteStatuses = _instance.deleteStatuses || [];
+            _instance.hasErrors = _instance.hasErrors || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchDeleteTrainingPhrasesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus();
+                        _reader.readMessage(messageInitializer1, BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus
+                            .deserializeBinaryFromReader);
+                        (_instance.deleteStatuses = _instance.deleteStatuses || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.hasErrors = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchDeleteTrainingPhrasesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchDeleteTrainingPhrasesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.deleteStatuses && _instance.deleteStatuses.length) {
+                _writer.writeRepeatedMessage(1, _instance.deleteStatuses, BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus
+                    .serializeBinaryToWriter);
+            }
+            if (_instance.hasErrors) {
+                _writer.writeBool(2, _instance.hasErrors);
+            }
+        };
+        Object.defineProperty(BatchDeleteTrainingPhrasesResponse.prototype, "deleteStatuses", {
+            get: function () {
+                return this._deleteStatuses;
+            },
+            set: function (value) {
+                this._deleteStatuses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BatchDeleteTrainingPhrasesResponse.prototype, "hasErrors", {
+            get: function () {
+                return this._hasErrors;
+            },
+            set: function (value) {
+                this._hasErrors = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchDeleteTrainingPhrasesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchDeleteTrainingPhrasesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchDeleteTrainingPhrasesResponse.prototype.toObject = function () {
+            return {
+                deleteStatuses: (this.deleteStatuses || []).map(function (m) { return m.toObject(); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchDeleteTrainingPhrasesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchDeleteTrainingPhrasesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                deleteStatuses: (this.deleteStatuses || []).map(function (m) { return m.toProtobufJSON(options); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        return BatchDeleteTrainingPhrasesResponse;
+    }());
+    exports.BatchDeleteTrainingPhrasesResponse.id = 'ondewo.nlu.BatchDeleteTrainingPhrasesResponse';
+    (function (BatchDeleteTrainingPhrasesResponse) {
+        /**
+         * Message implementation for ondewo.nlu.DeleteTrainingPhraseStatus
+         */
+        var DeleteTrainingPhraseStatus = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of DeleteTrainingPhraseStatus to deeply clone from
+             */
+            function DeleteTrainingPhraseStatus(_value) {
+                this._deleteStatus = DeleteTrainingPhraseStatus.DeleteStatusCase.none;
+                _value = _value || {};
+                this.successfullyDeleted = _value.successfullyDeleted
+                    ? new googleProtobuf009.Empty(_value.successfullyDeleted)
+                    : undefined;
+                this.errorMessage = _value.errorMessage;
+                DeleteTrainingPhraseStatus.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            DeleteTrainingPhraseStatus.deserializeBinary = function (bytes) {
+                var instance = new DeleteTrainingPhraseStatus();
+                DeleteTrainingPhraseStatus.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            DeleteTrainingPhraseStatus.refineValues = function (_instance) { };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            DeleteTrainingPhraseStatus.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.successfullyDeleted = new googleProtobuf009.Empty();
+                            _reader.readMessage(_instance.successfullyDeleted, googleProtobuf009.Empty.deserializeBinaryFromReader);
+                            break;
+                        case 2:
+                            _instance.errorMessage = _reader.readString();
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                DeleteTrainingPhraseStatus.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            DeleteTrainingPhraseStatus.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.successfullyDeleted) {
+                    _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf009.Empty.serializeBinaryToWriter);
+                }
+                if (_instance.errorMessage || _instance.errorMessage === '') {
+                    _writer.writeString(2, _instance.errorMessage);
+                }
+            };
+            Object.defineProperty(DeleteTrainingPhraseStatus.prototype, "successfullyDeleted", {
+                get: function () {
+                    return this._successfullyDeleted;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._errorMessage = undefined;
+                        this._deleteStatus =
+                            DeleteTrainingPhraseStatus.DeleteStatusCase.successfullyDeleted;
+                    }
+                    this._successfullyDeleted = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(DeleteTrainingPhraseStatus.prototype, "errorMessage", {
+                get: function () {
+                    return this._errorMessage;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._successfullyDeleted = undefined;
+                        this._deleteStatus =
+                            DeleteTrainingPhraseStatus.DeleteStatusCase.errorMessage;
+                    }
+                    this._errorMessage = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(DeleteTrainingPhraseStatus.prototype, "deleteStatus", {
+                get: function () {
+                    return this._deleteStatus;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            DeleteTrainingPhraseStatus.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                DeleteTrainingPhraseStatus.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            DeleteTrainingPhraseStatus.prototype.toObject = function () {
+                return {
+                    successfullyDeleted: this.successfullyDeleted
+                        ? this.successfullyDeleted.toObject()
+                        : undefined,
+                    errorMessage: this.errorMessage
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            DeleteTrainingPhraseStatus.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            DeleteTrainingPhraseStatus.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                var _a;
+                return {
+                    successfullyDeleted: this.successfullyDeleted
+                        ? this.successfullyDeleted.toProtobufJSON(options)
+                        : null,
+                    errorMessage: (_a = this.errorMessage) !== null && _a !== void 0 ? _a : null
+                };
+            };
+            return DeleteTrainingPhraseStatus;
+        }());
+        DeleteTrainingPhraseStatus.id = 'ondewo.nlu.DeleteTrainingPhraseStatus';
+        BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus = DeleteTrainingPhraseStatus;
+        (function (DeleteTrainingPhraseStatus) {
+            var DeleteStatusCase;
+            (function (DeleteStatusCase) {
+                DeleteStatusCase[DeleteStatusCase["none"] = 0] = "none";
+                DeleteStatusCase[DeleteStatusCase["successfullyDeleted"] = 1] = "successfullyDeleted";
+                DeleteStatusCase[DeleteStatusCase["errorMessage"] = 2] = "errorMessage";
+            })(DeleteStatusCase = DeleteTrainingPhraseStatus.DeleteStatusCase || (DeleteTrainingPhraseStatus.DeleteStatusCase = {}));
+        })(DeleteTrainingPhraseStatus = BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus || (BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus = {}));
+    })(exports.BatchDeleteTrainingPhrasesResponse || (exports.BatchDeleteTrainingPhrasesResponse = {}));
+    /**
+     * Message implementation for ondewo.nlu.ListTrainingPhrasesRequest
+     */
+    var ListTrainingPhrasesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListTrainingPhrasesRequest to deeply clone from
+         */
+        function ListTrainingPhrasesRequest(_value) {
+            _value = _value || {};
+            this.intentName = _value.intentName;
+            this.languageCode = _value.languageCode;
+            this.pageToken = _value.pageToken;
+            ListTrainingPhrasesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListTrainingPhrasesRequest.deserializeBinary = function (bytes) {
+            var instance = new ListTrainingPhrasesRequest();
+            ListTrainingPhrasesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListTrainingPhrasesRequest.refineValues = function (_instance) {
+            _instance.intentName = _instance.intentName || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.pageToken = _instance.pageToken || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListTrainingPhrasesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.intentName = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.pageToken = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListTrainingPhrasesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListTrainingPhrasesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.intentName) {
+                _writer.writeString(1, _instance.intentName);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(2, _instance.languageCode);
+            }
+            if (_instance.pageToken) {
+                _writer.writeString(3, _instance.pageToken);
+            }
+        };
+        Object.defineProperty(ListTrainingPhrasesRequest.prototype, "intentName", {
+            get: function () {
+                return this._intentName;
+            },
+            set: function (value) {
+                this._intentName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListTrainingPhrasesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListTrainingPhrasesRequest.prototype, "pageToken", {
+            get: function () {
+                return this._pageToken;
+            },
+            set: function (value) {
+                this._pageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListTrainingPhrasesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListTrainingPhrasesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListTrainingPhrasesRequest.prototype.toObject = function () {
+            return {
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                pageToken: this.pageToken
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListTrainingPhrasesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListTrainingPhrasesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                pageToken: this.pageToken
+            };
+        };
+        return ListTrainingPhrasesRequest;
+    }());
+    ListTrainingPhrasesRequest.id = 'ondewo.nlu.ListTrainingPhrasesRequest';
+    /**
+     * Message implementation for ondewo.nlu.ListTrainingPhrasesResponse
+     */
+    var ListTrainingPhrasesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListTrainingPhrasesResponse to deeply clone from
+         */
+        function ListTrainingPhrasesResponse(_value) {
+            _value = _value || {};
+            this.trainingPhrases = (_value.trainingPhrases || []).map(function (m) { return new exports.Intent.TrainingPhrase(m); });
+            this.nextPageToken = _value.nextPageToken;
+            ListTrainingPhrasesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListTrainingPhrasesResponse.deserializeBinary = function (bytes) {
+            var instance = new ListTrainingPhrasesResponse();
+            ListTrainingPhrasesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListTrainingPhrasesResponse.refineValues = function (_instance) {
+            _instance.trainingPhrases = _instance.trainingPhrases || [];
+            _instance.nextPageToken = _instance.nextPageToken || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListTrainingPhrasesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Intent.TrainingPhrase();
+                        _reader.readMessage(messageInitializer1, exports.Intent.TrainingPhrase.deserializeBinaryFromReader);
+                        (_instance.trainingPhrases = _instance.trainingPhrases || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.nextPageToken = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListTrainingPhrasesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListTrainingPhrasesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.trainingPhrases && _instance.trainingPhrases.length) {
+                _writer.writeRepeatedMessage(1, _instance.trainingPhrases, exports.Intent.TrainingPhrase.serializeBinaryToWriter);
+            }
+            if (_instance.nextPageToken) {
+                _writer.writeString(2, _instance.nextPageToken);
+            }
+        };
+        Object.defineProperty(ListTrainingPhrasesResponse.prototype, "trainingPhrases", {
+            get: function () {
+                return this._trainingPhrases;
+            },
+            set: function (value) {
+                this._trainingPhrases = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListTrainingPhrasesResponse.prototype, "nextPageToken", {
+            get: function () {
+                return this._nextPageToken;
+            },
+            set: function (value) {
+                this._nextPageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListTrainingPhrasesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListTrainingPhrasesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListTrainingPhrasesResponse.prototype.toObject = function () {
+            return {
+                trainingPhrases: (this.trainingPhrases || []).map(function (m) { return m.toObject(); }),
+                nextPageToken: this.nextPageToken
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListTrainingPhrasesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListTrainingPhrasesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                trainingPhrases: (this.trainingPhrases || []).map(function (m) { return m.toProtobufJSON(options); }),
+                nextPageToken: this.nextPageToken
+            };
+        };
+        return ListTrainingPhrasesResponse;
+    }());
+    ListTrainingPhrasesResponse.id = 'ondewo.nlu.ListTrainingPhrasesResponse';
+    /**
+     * Message implementation for ondewo.nlu.BatchResponseMessagesStatusResponse
+     */
+    exports.BatchResponseMessagesStatusResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchResponseMessagesStatusResponse to deeply clone from
+         */
+        function BatchResponseMessagesStatusResponse(_value) {
+            _value = _value || {};
+            this.responseMessageStatuses = (_value.responseMessageStatuses || []).map(function (m) { return new BatchResponseMessagesStatusResponse.ResponseMessageStatus(m); });
+            this.hasErrors = _value.hasErrors;
+            BatchResponseMessagesStatusResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchResponseMessagesStatusResponse.deserializeBinary = function (bytes) {
+            var instance = new BatchResponseMessagesStatusResponse();
+            BatchResponseMessagesStatusResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchResponseMessagesStatusResponse.refineValues = function (_instance) {
+            _instance.responseMessageStatuses = _instance.responseMessageStatuses || [];
+            _instance.hasErrors = _instance.hasErrors || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchResponseMessagesStatusResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchResponseMessagesStatusResponse.ResponseMessageStatus();
+                        _reader.readMessage(messageInitializer1, BatchResponseMessagesStatusResponse.ResponseMessageStatus
+                            .deserializeBinaryFromReader);
+                        (_instance.responseMessageStatuses =
+                            _instance.responseMessageStatuses || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.hasErrors = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchResponseMessagesStatusResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchResponseMessagesStatusResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.responseMessageStatuses &&
+                _instance.responseMessageStatuses.length) {
+                _writer.writeRepeatedMessage(1, _instance.responseMessageStatuses, BatchResponseMessagesStatusResponse.ResponseMessageStatus
+                    .serializeBinaryToWriter);
+            }
+            if (_instance.hasErrors) {
+                _writer.writeBool(2, _instance.hasErrors);
+            }
+        };
+        Object.defineProperty(BatchResponseMessagesStatusResponse.prototype, "responseMessageStatuses", {
+            get: function () {
+                return this._responseMessageStatuses;
+            },
+            set: function (value) {
+                this._responseMessageStatuses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BatchResponseMessagesStatusResponse.prototype, "hasErrors", {
+            get: function () {
+                return this._hasErrors;
+            },
+            set: function (value) {
+                this._hasErrors = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchResponseMessagesStatusResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchResponseMessagesStatusResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchResponseMessagesStatusResponse.prototype.toObject = function () {
+            return {
+                responseMessageStatuses: (this.responseMessageStatuses || []).map(function (m) { return m.toObject(); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchResponseMessagesStatusResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchResponseMessagesStatusResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                responseMessageStatuses: (this.responseMessageStatuses || []).map(function (m) { return m.toProtobufJSON(options); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        return BatchResponseMessagesStatusResponse;
+    }());
+    exports.BatchResponseMessagesStatusResponse.id = 'ondewo.nlu.BatchResponseMessagesStatusResponse';
+    (function (BatchResponseMessagesStatusResponse) {
+        /**
+         * Message implementation for ondewo.nlu.ResponseMessageStatus
+         */
+        var ResponseMessageStatus = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of ResponseMessageStatus to deeply clone from
+             */
+            function ResponseMessageStatus(_value) {
+                this._phraseOrStatus = ResponseMessageStatus.PhraseOrStatusCase.none;
+                _value = _value || {};
+                this.responseMessage = _value.responseMessage
+                    ? new exports.Intent.Message(_value.responseMessage)
+                    : undefined;
+                this.errorMessage = _value.errorMessage;
+                ResponseMessageStatus.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            ResponseMessageStatus.deserializeBinary = function (bytes) {
+                var instance = new ResponseMessageStatus();
+                ResponseMessageStatus.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            ResponseMessageStatus.refineValues = function (_instance) { };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            ResponseMessageStatus.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.responseMessage = new exports.Intent.Message();
+                            _reader.readMessage(_instance.responseMessage, exports.Intent.Message.deserializeBinaryFromReader);
+                            break;
+                        case 2:
+                            _instance.errorMessage = _reader.readString();
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                ResponseMessageStatus.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            ResponseMessageStatus.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.responseMessage) {
+                    _writer.writeMessage(1, _instance.responseMessage, exports.Intent.Message.serializeBinaryToWriter);
+                }
+                if (_instance.errorMessage || _instance.errorMessage === '') {
+                    _writer.writeString(2, _instance.errorMessage);
+                }
+            };
+            Object.defineProperty(ResponseMessageStatus.prototype, "responseMessage", {
+                get: function () {
+                    return this._responseMessage;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._errorMessage = undefined;
+                        this._phraseOrStatus =
+                            ResponseMessageStatus.PhraseOrStatusCase.responseMessage;
+                    }
+                    this._responseMessage = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(ResponseMessageStatus.prototype, "errorMessage", {
+                get: function () {
+                    return this._errorMessage;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._responseMessage = undefined;
+                        this._phraseOrStatus =
+                            ResponseMessageStatus.PhraseOrStatusCase.errorMessage;
+                    }
+                    this._errorMessage = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(ResponseMessageStatus.prototype, "phraseOrStatus", {
+                get: function () {
+                    return this._phraseOrStatus;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            ResponseMessageStatus.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                ResponseMessageStatus.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            ResponseMessageStatus.prototype.toObject = function () {
+                return {
+                    responseMessage: this.responseMessage
+                        ? this.responseMessage.toObject()
+                        : undefined,
+                    errorMessage: this.errorMessage
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            ResponseMessageStatus.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            ResponseMessageStatus.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                var _a;
+                return {
+                    responseMessage: this.responseMessage
+                        ? this.responseMessage.toProtobufJSON(options)
+                        : null,
+                    errorMessage: (_a = this.errorMessage) !== null && _a !== void 0 ? _a : null
+                };
+            };
+            return ResponseMessageStatus;
+        }());
+        ResponseMessageStatus.id = 'ondewo.nlu.ResponseMessageStatus';
+        BatchResponseMessagesStatusResponse.ResponseMessageStatus = ResponseMessageStatus;
+        (function (ResponseMessageStatus) {
+            var PhraseOrStatusCase;
+            (function (PhraseOrStatusCase) {
+                PhraseOrStatusCase[PhraseOrStatusCase["none"] = 0] = "none";
+                PhraseOrStatusCase[PhraseOrStatusCase["responseMessage"] = 1] = "responseMessage";
+                PhraseOrStatusCase[PhraseOrStatusCase["errorMessage"] = 2] = "errorMessage";
+            })(PhraseOrStatusCase = ResponseMessageStatus.PhraseOrStatusCase || (ResponseMessageStatus.PhraseOrStatusCase = {}));
+        })(ResponseMessageStatus = BatchResponseMessagesStatusResponse.ResponseMessageStatus || (BatchResponseMessagesStatusResponse.ResponseMessageStatus = {}));
+    })(exports.BatchResponseMessagesStatusResponse || (exports.BatchResponseMessagesStatusResponse = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchCreateResponseMessagesRequest
+     */
+    exports.BatchCreateResponseMessagesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchCreateResponseMessagesRequest to deeply clone from
+         */
+        function BatchCreateResponseMessagesRequest(_value) {
+            _value = _value || {};
+            this.responseMessageRequests = (_value.responseMessageRequests || []).map(function (m) { return new BatchCreateResponseMessagesRequest.CreateResponseMessageRequest(m); });
+            BatchCreateResponseMessagesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchCreateResponseMessagesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchCreateResponseMessagesRequest();
+            BatchCreateResponseMessagesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchCreateResponseMessagesRequest.refineValues = function (_instance) {
+            _instance.responseMessageRequests = _instance.responseMessageRequests || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchCreateResponseMessagesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchCreateResponseMessagesRequest.CreateResponseMessageRequest();
+                        _reader.readMessage(messageInitializer1, BatchCreateResponseMessagesRequest.CreateResponseMessageRequest
+                            .deserializeBinaryFromReader);
+                        (_instance.responseMessageRequests =
+                            _instance.responseMessageRequests || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchCreateResponseMessagesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchCreateResponseMessagesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.responseMessageRequests &&
+                _instance.responseMessageRequests.length) {
+                _writer.writeRepeatedMessage(1, _instance.responseMessageRequests, BatchCreateResponseMessagesRequest.CreateResponseMessageRequest
+                    .serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchCreateResponseMessagesRequest.prototype, "responseMessageRequests", {
+            get: function () {
+                return this._responseMessageRequests;
+            },
+            set: function (value) {
+                this._responseMessageRequests = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchCreateResponseMessagesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchCreateResponseMessagesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchCreateResponseMessagesRequest.prototype.toObject = function () {
+            return {
+                responseMessageRequests: (this.responseMessageRequests || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchCreateResponseMessagesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchCreateResponseMessagesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                responseMessageRequests: (this.responseMessageRequests || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchCreateResponseMessagesRequest;
+    }());
+    exports.BatchCreateResponseMessagesRequest.id = 'ondewo.nlu.BatchCreateResponseMessagesRequest';
+    (function (BatchCreateResponseMessagesRequest) {
+        /**
+         * Message implementation for ondewo.nlu.CreateResponseMessageRequest
+         */
+        var CreateResponseMessageRequest = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of CreateResponseMessageRequest to deeply clone from
+             */
+            function CreateResponseMessageRequest(_value) {
+                _value = _value || {};
+                this.intentName = _value.intentName;
+                this.responseMessage = _value.responseMessage
+                    ? new exports.Intent.Message(_value.responseMessage)
+                    : undefined;
+                CreateResponseMessageRequest.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            CreateResponseMessageRequest.deserializeBinary = function (bytes) {
+                var instance = new CreateResponseMessageRequest();
+                CreateResponseMessageRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            CreateResponseMessageRequest.refineValues = function (_instance) {
+                _instance.intentName = _instance.intentName || '';
+                _instance.responseMessage = _instance.responseMessage || undefined;
+            };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            CreateResponseMessageRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.intentName = _reader.readString();
+                            break;
+                        case 2:
+                            _instance.responseMessage = new exports.Intent.Message();
+                            _reader.readMessage(_instance.responseMessage, exports.Intent.Message.deserializeBinaryFromReader);
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                CreateResponseMessageRequest.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            CreateResponseMessageRequest.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.intentName) {
+                    _writer.writeString(1, _instance.intentName);
+                }
+                if (_instance.responseMessage) {
+                    _writer.writeMessage(2, _instance.responseMessage, exports.Intent.Message.serializeBinaryToWriter);
+                }
+            };
+            Object.defineProperty(CreateResponseMessageRequest.prototype, "intentName", {
+                get: function () {
+                    return this._intentName;
+                },
+                set: function (value) {
+                    this._intentName = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(CreateResponseMessageRequest.prototype, "responseMessage", {
+                get: function () {
+                    return this._responseMessage;
+                },
+                set: function (value) {
+                    this._responseMessage = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            CreateResponseMessageRequest.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                CreateResponseMessageRequest.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            CreateResponseMessageRequest.prototype.toObject = function () {
+                return {
+                    intentName: this.intentName,
+                    responseMessage: this.responseMessage
+                        ? this.responseMessage.toObject()
+                        : undefined
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            CreateResponseMessageRequest.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            CreateResponseMessageRequest.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                return {
+                    intentName: this.intentName,
+                    responseMessage: this.responseMessage
+                        ? this.responseMessage.toProtobufJSON(options)
+                        : null
+                };
+            };
+            return CreateResponseMessageRequest;
+        }());
+        CreateResponseMessageRequest.id = 'ondewo.nlu.CreateResponseMessageRequest';
+        BatchCreateResponseMessagesRequest.CreateResponseMessageRequest = CreateResponseMessageRequest;
+    })(exports.BatchCreateResponseMessagesRequest || (exports.BatchCreateResponseMessagesRequest = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchUpdateResponseMessagesRequest
+     */
+    var BatchUpdateResponseMessagesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchUpdateResponseMessagesRequest to deeply clone from
+         */
+        function BatchUpdateResponseMessagesRequest(_value) {
+            _value = _value || {};
+            this.responseMessages = (_value.responseMessages || []).map(function (m) { return new exports.Intent.Message(m); });
+            BatchUpdateResponseMessagesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchUpdateResponseMessagesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchUpdateResponseMessagesRequest();
+            BatchUpdateResponseMessagesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchUpdateResponseMessagesRequest.refineValues = function (_instance) {
+            _instance.responseMessages = _instance.responseMessages || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchUpdateResponseMessagesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Intent.Message();
+                        _reader.readMessage(messageInitializer1, exports.Intent.Message.deserializeBinaryFromReader);
+                        (_instance.responseMessages = _instance.responseMessages || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchUpdateResponseMessagesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchUpdateResponseMessagesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.responseMessages && _instance.responseMessages.length) {
+                _writer.writeRepeatedMessage(1, _instance.responseMessages, exports.Intent.Message.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchUpdateResponseMessagesRequest.prototype, "responseMessages", {
+            get: function () {
+                return this._responseMessages;
+            },
+            set: function (value) {
+                this._responseMessages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchUpdateResponseMessagesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchUpdateResponseMessagesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchUpdateResponseMessagesRequest.prototype.toObject = function () {
+            return {
+                responseMessages: (this.responseMessages || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchUpdateResponseMessagesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchUpdateResponseMessagesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                responseMessages: (this.responseMessages || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchUpdateResponseMessagesRequest;
+    }());
+    BatchUpdateResponseMessagesRequest.id = 'ondewo.nlu.BatchUpdateResponseMessagesRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchGetResponseMessagesRequest
+     */
+    var BatchGetResponseMessagesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchGetResponseMessagesRequest to deeply clone from
+         */
+        function BatchGetResponseMessagesRequest(_value) {
+            _value = _value || {};
+            this.names = (_value.names || []).slice();
+            BatchGetResponseMessagesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchGetResponseMessagesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchGetResponseMessagesRequest();
+            BatchGetResponseMessagesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchGetResponseMessagesRequest.refineValues = function (_instance) {
+            _instance.names = _instance.names || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchGetResponseMessagesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.names = _instance.names || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchGetResponseMessagesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchGetResponseMessagesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.names && _instance.names.length) {
+                _writer.writeRepeatedString(1, _instance.names);
+            }
+        };
+        Object.defineProperty(BatchGetResponseMessagesRequest.prototype, "names", {
+            get: function () {
+                return this._names;
+            },
+            set: function (value) {
+                this._names = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchGetResponseMessagesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchGetResponseMessagesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchGetResponseMessagesRequest.prototype.toObject = function () {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchGetResponseMessagesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchGetResponseMessagesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        return BatchGetResponseMessagesRequest;
+    }());
+    BatchGetResponseMessagesRequest.id = 'ondewo.nlu.BatchGetResponseMessagesRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchDeleteResponseMessagesRequest
+     */
+    var BatchDeleteResponseMessagesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchDeleteResponseMessagesRequest to deeply clone from
+         */
+        function BatchDeleteResponseMessagesRequest(_value) {
+            _value = _value || {};
+            this.names = (_value.names || []).slice();
+            BatchDeleteResponseMessagesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchDeleteResponseMessagesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchDeleteResponseMessagesRequest();
+            BatchDeleteResponseMessagesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchDeleteResponseMessagesRequest.refineValues = function (_instance) {
+            _instance.names = _instance.names || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchDeleteResponseMessagesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.names = _instance.names || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchDeleteResponseMessagesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchDeleteResponseMessagesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.names && _instance.names.length) {
+                _writer.writeRepeatedString(1, _instance.names);
+            }
+        };
+        Object.defineProperty(BatchDeleteResponseMessagesRequest.prototype, "names", {
+            get: function () {
+                return this._names;
+            },
+            set: function (value) {
+                this._names = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchDeleteResponseMessagesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchDeleteResponseMessagesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchDeleteResponseMessagesRequest.prototype.toObject = function () {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchDeleteResponseMessagesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchDeleteResponseMessagesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        return BatchDeleteResponseMessagesRequest;
+    }());
+    BatchDeleteResponseMessagesRequest.id = 'ondewo.nlu.BatchDeleteResponseMessagesRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchDeleteResponseMessagesResponse
+     */
+    exports.BatchDeleteResponseMessagesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchDeleteResponseMessagesResponse to deeply clone from
+         */
+        function BatchDeleteResponseMessagesResponse(_value) {
+            _value = _value || {};
+            this.deleteStatuses = (_value.deleteStatuses || []).map(function (m) { return new BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus(m); });
+            this.hasErrors = _value.hasErrors;
+            BatchDeleteResponseMessagesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchDeleteResponseMessagesResponse.deserializeBinary = function (bytes) {
+            var instance = new BatchDeleteResponseMessagesResponse();
+            BatchDeleteResponseMessagesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchDeleteResponseMessagesResponse.refineValues = function (_instance) {
+            _instance.deleteStatuses = _instance.deleteStatuses || [];
+            _instance.hasErrors = _instance.hasErrors || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchDeleteResponseMessagesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus();
+                        _reader.readMessage(messageInitializer1, BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus
+                            .deserializeBinaryFromReader);
+                        (_instance.deleteStatuses = _instance.deleteStatuses || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.hasErrors = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchDeleteResponseMessagesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchDeleteResponseMessagesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.deleteStatuses && _instance.deleteStatuses.length) {
+                _writer.writeRepeatedMessage(1, _instance.deleteStatuses, BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus
+                    .serializeBinaryToWriter);
+            }
+            if (_instance.hasErrors) {
+                _writer.writeBool(2, _instance.hasErrors);
+            }
+        };
+        Object.defineProperty(BatchDeleteResponseMessagesResponse.prototype, "deleteStatuses", {
+            get: function () {
+                return this._deleteStatuses;
+            },
+            set: function (value) {
+                this._deleteStatuses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BatchDeleteResponseMessagesResponse.prototype, "hasErrors", {
+            get: function () {
+                return this._hasErrors;
+            },
+            set: function (value) {
+                this._hasErrors = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchDeleteResponseMessagesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchDeleteResponseMessagesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchDeleteResponseMessagesResponse.prototype.toObject = function () {
+            return {
+                deleteStatuses: (this.deleteStatuses || []).map(function (m) { return m.toObject(); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchDeleteResponseMessagesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchDeleteResponseMessagesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                deleteStatuses: (this.deleteStatuses || []).map(function (m) { return m.toProtobufJSON(options); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        return BatchDeleteResponseMessagesResponse;
+    }());
+    exports.BatchDeleteResponseMessagesResponse.id = 'ondewo.nlu.BatchDeleteResponseMessagesResponse';
+    (function (BatchDeleteResponseMessagesResponse) {
+        /**
+         * Message implementation for ondewo.nlu.DeleteResponseMessageStatus
+         */
+        var DeleteResponseMessageStatus = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of DeleteResponseMessageStatus to deeply clone from
+             */
+            function DeleteResponseMessageStatus(_value) {
+                this._deleteStatus = DeleteResponseMessageStatus.DeleteStatusCase.none;
+                _value = _value || {};
+                this.successfullyDeleted = _value.successfullyDeleted
+                    ? new googleProtobuf009.Empty(_value.successfullyDeleted)
+                    : undefined;
+                this.errorMessage = _value.errorMessage;
+                DeleteResponseMessageStatus.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            DeleteResponseMessageStatus.deserializeBinary = function (bytes) {
+                var instance = new DeleteResponseMessageStatus();
+                DeleteResponseMessageStatus.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            DeleteResponseMessageStatus.refineValues = function (_instance) { };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            DeleteResponseMessageStatus.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.successfullyDeleted = new googleProtobuf009.Empty();
+                            _reader.readMessage(_instance.successfullyDeleted, googleProtobuf009.Empty.deserializeBinaryFromReader);
+                            break;
+                        case 2:
+                            _instance.errorMessage = _reader.readString();
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                DeleteResponseMessageStatus.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            DeleteResponseMessageStatus.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.successfullyDeleted) {
+                    _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf009.Empty.serializeBinaryToWriter);
+                }
+                if (_instance.errorMessage || _instance.errorMessage === '') {
+                    _writer.writeString(2, _instance.errorMessage);
+                }
+            };
+            Object.defineProperty(DeleteResponseMessageStatus.prototype, "successfullyDeleted", {
+                get: function () {
+                    return this._successfullyDeleted;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._errorMessage = undefined;
+                        this._deleteStatus =
+                            DeleteResponseMessageStatus.DeleteStatusCase.successfullyDeleted;
+                    }
+                    this._successfullyDeleted = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(DeleteResponseMessageStatus.prototype, "errorMessage", {
+                get: function () {
+                    return this._errorMessage;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._successfullyDeleted = undefined;
+                        this._deleteStatus =
+                            DeleteResponseMessageStatus.DeleteStatusCase.errorMessage;
+                    }
+                    this._errorMessage = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(DeleteResponseMessageStatus.prototype, "deleteStatus", {
+                get: function () {
+                    return this._deleteStatus;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            DeleteResponseMessageStatus.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                DeleteResponseMessageStatus.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            DeleteResponseMessageStatus.prototype.toObject = function () {
+                return {
+                    successfullyDeleted: this.successfullyDeleted
+                        ? this.successfullyDeleted.toObject()
+                        : undefined,
+                    errorMessage: this.errorMessage
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            DeleteResponseMessageStatus.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            DeleteResponseMessageStatus.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                var _a;
+                return {
+                    successfullyDeleted: this.successfullyDeleted
+                        ? this.successfullyDeleted.toProtobufJSON(options)
+                        : null,
+                    errorMessage: (_a = this.errorMessage) !== null && _a !== void 0 ? _a : null
+                };
+            };
+            return DeleteResponseMessageStatus;
+        }());
+        DeleteResponseMessageStatus.id = 'ondewo.nlu.DeleteResponseMessageStatus';
+        BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus = DeleteResponseMessageStatus;
+        (function (DeleteResponseMessageStatus) {
+            var DeleteStatusCase;
+            (function (DeleteStatusCase) {
+                DeleteStatusCase[DeleteStatusCase["none"] = 0] = "none";
+                DeleteStatusCase[DeleteStatusCase["successfullyDeleted"] = 1] = "successfullyDeleted";
+                DeleteStatusCase[DeleteStatusCase["errorMessage"] = 2] = "errorMessage";
+            })(DeleteStatusCase = DeleteResponseMessageStatus.DeleteStatusCase || (DeleteResponseMessageStatus.DeleteStatusCase = {}));
+        })(DeleteResponseMessageStatus = BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus || (BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus = {}));
+    })(exports.BatchDeleteResponseMessagesResponse || (exports.BatchDeleteResponseMessagesResponse = {}));
+    /**
+     * Message implementation for ondewo.nlu.ListResponseMessagesRequest
+     */
+    var ListResponseMessagesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListResponseMessagesRequest to deeply clone from
+         */
+        function ListResponseMessagesRequest(_value) {
+            _value = _value || {};
+            this.intentName = _value.intentName;
+            this.languageCode = _value.languageCode;
+            this.pageToken = _value.pageToken;
+            ListResponseMessagesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListResponseMessagesRequest.deserializeBinary = function (bytes) {
+            var instance = new ListResponseMessagesRequest();
+            ListResponseMessagesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListResponseMessagesRequest.refineValues = function (_instance) {
+            _instance.intentName = _instance.intentName || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.pageToken = _instance.pageToken || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListResponseMessagesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.intentName = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.pageToken = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListResponseMessagesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListResponseMessagesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.intentName) {
+                _writer.writeString(1, _instance.intentName);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(2, _instance.languageCode);
+            }
+            if (_instance.pageToken) {
+                _writer.writeString(3, _instance.pageToken);
+            }
+        };
+        Object.defineProperty(ListResponseMessagesRequest.prototype, "intentName", {
+            get: function () {
+                return this._intentName;
+            },
+            set: function (value) {
+                this._intentName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListResponseMessagesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListResponseMessagesRequest.prototype, "pageToken", {
+            get: function () {
+                return this._pageToken;
+            },
+            set: function (value) {
+                this._pageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListResponseMessagesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListResponseMessagesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListResponseMessagesRequest.prototype.toObject = function () {
+            return {
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                pageToken: this.pageToken
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListResponseMessagesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListResponseMessagesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                pageToken: this.pageToken
+            };
+        };
+        return ListResponseMessagesRequest;
+    }());
+    ListResponseMessagesRequest.id = 'ondewo.nlu.ListResponseMessagesRequest';
+    /**
+     * Message implementation for ondewo.nlu.ListResponseMessagesResponse
+     */
+    var ListResponseMessagesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListResponseMessagesResponse to deeply clone from
+         */
+        function ListResponseMessagesResponse(_value) {
+            _value = _value || {};
+            this.responseMessages = (_value.responseMessages || []).map(function (m) { return new exports.Intent.Message(m); });
+            this.nextPageToken = _value.nextPageToken;
+            ListResponseMessagesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListResponseMessagesResponse.deserializeBinary = function (bytes) {
+            var instance = new ListResponseMessagesResponse();
+            ListResponseMessagesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListResponseMessagesResponse.refineValues = function (_instance) {
+            _instance.responseMessages = _instance.responseMessages || [];
+            _instance.nextPageToken = _instance.nextPageToken || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListResponseMessagesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Intent.Message();
+                        _reader.readMessage(messageInitializer1, exports.Intent.Message.deserializeBinaryFromReader);
+                        (_instance.responseMessages = _instance.responseMessages || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.nextPageToken = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListResponseMessagesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListResponseMessagesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.responseMessages && _instance.responseMessages.length) {
+                _writer.writeRepeatedMessage(1, _instance.responseMessages, exports.Intent.Message.serializeBinaryToWriter);
+            }
+            if (_instance.nextPageToken) {
+                _writer.writeString(2, _instance.nextPageToken);
+            }
+        };
+        Object.defineProperty(ListResponseMessagesResponse.prototype, "responseMessages", {
+            get: function () {
+                return this._responseMessages;
+            },
+            set: function (value) {
+                this._responseMessages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListResponseMessagesResponse.prototype, "nextPageToken", {
+            get: function () {
+                return this._nextPageToken;
+            },
+            set: function (value) {
+                this._nextPageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListResponseMessagesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListResponseMessagesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListResponseMessagesResponse.prototype.toObject = function () {
+            return {
+                responseMessages: (this.responseMessages || []).map(function (m) { return m.toObject(); }),
+                nextPageToken: this.nextPageToken
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListResponseMessagesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListResponseMessagesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                responseMessages: (this.responseMessages || []).map(function (m) { return m.toProtobufJSON(options); }),
+                nextPageToken: this.nextPageToken
+            };
+        };
+        return ListResponseMessagesResponse;
+    }());
+    ListResponseMessagesResponse.id = 'ondewo.nlu.ListResponseMessagesResponse';
+    /**
+     * Message implementation for ondewo.nlu.BatchParametersStatusResponse
+     */
+    exports.BatchParametersStatusResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchParametersStatusResponse to deeply clone from
+         */
+        function BatchParametersStatusResponse(_value) {
+            _value = _value || {};
+            this.parameterStatuses = (_value.parameterStatuses || []).map(function (m) { return new BatchParametersStatusResponse.ParameterStatus(m); });
+            this.hasErrors = _value.hasErrors;
+            BatchParametersStatusResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchParametersStatusResponse.deserializeBinary = function (bytes) {
+            var instance = new BatchParametersStatusResponse();
+            BatchParametersStatusResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchParametersStatusResponse.refineValues = function (_instance) {
+            _instance.parameterStatuses = _instance.parameterStatuses || [];
+            _instance.hasErrors = _instance.hasErrors || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchParametersStatusResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchParametersStatusResponse.ParameterStatus();
+                        _reader.readMessage(messageInitializer1, BatchParametersStatusResponse.ParameterStatus
+                            .deserializeBinaryFromReader);
+                        (_instance.parameterStatuses =
+                            _instance.parameterStatuses || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.hasErrors = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchParametersStatusResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchParametersStatusResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parameterStatuses && _instance.parameterStatuses.length) {
+                _writer.writeRepeatedMessage(1, _instance.parameterStatuses, BatchParametersStatusResponse.ParameterStatus.serializeBinaryToWriter);
+            }
+            if (_instance.hasErrors) {
+                _writer.writeBool(2, _instance.hasErrors);
+            }
+        };
+        Object.defineProperty(BatchParametersStatusResponse.prototype, "parameterStatuses", {
+            get: function () {
+                return this._parameterStatuses;
+            },
+            set: function (value) {
+                this._parameterStatuses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BatchParametersStatusResponse.prototype, "hasErrors", {
+            get: function () {
+                return this._hasErrors;
+            },
+            set: function (value) {
+                this._hasErrors = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchParametersStatusResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchParametersStatusResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchParametersStatusResponse.prototype.toObject = function () {
+            return {
+                parameterStatuses: (this.parameterStatuses || []).map(function (m) { return m.toObject(); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchParametersStatusResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchParametersStatusResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parameterStatuses: (this.parameterStatuses || []).map(function (m) { return m.toProtobufJSON(options); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        return BatchParametersStatusResponse;
+    }());
+    exports.BatchParametersStatusResponse.id = 'ondewo.nlu.BatchParametersStatusResponse';
+    (function (BatchParametersStatusResponse) {
+        /**
+         * Message implementation for ondewo.nlu.ParameterStatus
+         */
+        var ParameterStatus = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of ParameterStatus to deeply clone from
+             */
+            function ParameterStatus(_value) {
+                this._phraseOrStatus = ParameterStatus.PhraseOrStatusCase.none;
+                _value = _value || {};
+                this.parameter = _value.parameter
+                    ? new exports.Intent.Parameter(_value.parameter)
+                    : undefined;
+                this.errorMessage = _value.errorMessage;
+                ParameterStatus.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            ParameterStatus.deserializeBinary = function (bytes) {
+                var instance = new ParameterStatus();
+                ParameterStatus.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            ParameterStatus.refineValues = function (_instance) { };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            ParameterStatus.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.parameter = new exports.Intent.Parameter();
+                            _reader.readMessage(_instance.parameter, exports.Intent.Parameter.deserializeBinaryFromReader);
+                            break;
+                        case 2:
+                            _instance.errorMessage = _reader.readString();
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                ParameterStatus.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            ParameterStatus.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.parameter) {
+                    _writer.writeMessage(1, _instance.parameter, exports.Intent.Parameter.serializeBinaryToWriter);
+                }
+                if (_instance.errorMessage || _instance.errorMessage === '') {
+                    _writer.writeString(2, _instance.errorMessage);
+                }
+            };
+            Object.defineProperty(ParameterStatus.prototype, "parameter", {
+                get: function () {
+                    return this._parameter;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._errorMessage = undefined;
+                        this._phraseOrStatus = ParameterStatus.PhraseOrStatusCase.parameter;
+                    }
+                    this._parameter = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(ParameterStatus.prototype, "errorMessage", {
+                get: function () {
+                    return this._errorMessage;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._parameter = undefined;
+                        this._phraseOrStatus = ParameterStatus.PhraseOrStatusCase.errorMessage;
+                    }
+                    this._errorMessage = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(ParameterStatus.prototype, "phraseOrStatus", {
+                get: function () {
+                    return this._phraseOrStatus;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            ParameterStatus.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                ParameterStatus.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            ParameterStatus.prototype.toObject = function () {
+                return {
+                    parameter: this.parameter ? this.parameter.toObject() : undefined,
+                    errorMessage: this.errorMessage
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            ParameterStatus.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            ParameterStatus.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                var _a;
+                return {
+                    parameter: this.parameter
+                        ? this.parameter.toProtobufJSON(options)
+                        : null,
+                    errorMessage: (_a = this.errorMessage) !== null && _a !== void 0 ? _a : null
+                };
+            };
+            return ParameterStatus;
+        }());
+        ParameterStatus.id = 'ondewo.nlu.ParameterStatus';
+        BatchParametersStatusResponse.ParameterStatus = ParameterStatus;
+        (function (ParameterStatus) {
+            var PhraseOrStatusCase;
+            (function (PhraseOrStatusCase) {
+                PhraseOrStatusCase[PhraseOrStatusCase["none"] = 0] = "none";
+                PhraseOrStatusCase[PhraseOrStatusCase["parameter"] = 1] = "parameter";
+                PhraseOrStatusCase[PhraseOrStatusCase["errorMessage"] = 2] = "errorMessage";
+            })(PhraseOrStatusCase = ParameterStatus.PhraseOrStatusCase || (ParameterStatus.PhraseOrStatusCase = {}));
+        })(ParameterStatus = BatchParametersStatusResponse.ParameterStatus || (BatchParametersStatusResponse.ParameterStatus = {}));
+    })(exports.BatchParametersStatusResponse || (exports.BatchParametersStatusResponse = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchCreateParametersRequest
+     */
+    exports.BatchCreateParametersRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchCreateParametersRequest to deeply clone from
+         */
+        function BatchCreateParametersRequest(_value) {
+            _value = _value || {};
+            this.parameterRequests = (_value.parameterRequests || []).map(function (m) { return new BatchCreateParametersRequest.CreateParameterRequest(m); });
+            BatchCreateParametersRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchCreateParametersRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchCreateParametersRequest();
+            BatchCreateParametersRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchCreateParametersRequest.refineValues = function (_instance) {
+            _instance.parameterRequests = _instance.parameterRequests || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchCreateParametersRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchCreateParametersRequest.CreateParameterRequest();
+                        _reader.readMessage(messageInitializer1, BatchCreateParametersRequest.CreateParameterRequest
+                            .deserializeBinaryFromReader);
+                        (_instance.parameterRequests =
+                            _instance.parameterRequests || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchCreateParametersRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchCreateParametersRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parameterRequests && _instance.parameterRequests.length) {
+                _writer.writeRepeatedMessage(1, _instance.parameterRequests, BatchCreateParametersRequest.CreateParameterRequest
+                    .serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchCreateParametersRequest.prototype, "parameterRequests", {
+            get: function () {
+                return this._parameterRequests;
+            },
+            set: function (value) {
+                this._parameterRequests = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchCreateParametersRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchCreateParametersRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchCreateParametersRequest.prototype.toObject = function () {
+            return {
+                parameterRequests: (this.parameterRequests || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchCreateParametersRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchCreateParametersRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parameterRequests: (this.parameterRequests || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchCreateParametersRequest;
+    }());
+    exports.BatchCreateParametersRequest.id = 'ondewo.nlu.BatchCreateParametersRequest';
+    (function (BatchCreateParametersRequest) {
+        /**
+         * Message implementation for ondewo.nlu.CreateParameterRequest
+         */
+        var CreateParameterRequest = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of CreateParameterRequest to deeply clone from
+             */
+            function CreateParameterRequest(_value) {
+                _value = _value || {};
+                this.intentName = _value.intentName;
+                this.parameter = _value.parameter
+                    ? new exports.Intent.Parameter(_value.parameter)
+                    : undefined;
+                CreateParameterRequest.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            CreateParameterRequest.deserializeBinary = function (bytes) {
+                var instance = new CreateParameterRequest();
+                CreateParameterRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            CreateParameterRequest.refineValues = function (_instance) {
+                _instance.intentName = _instance.intentName || '';
+                _instance.parameter = _instance.parameter || undefined;
+            };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            CreateParameterRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.intentName = _reader.readString();
+                            break;
+                        case 2:
+                            _instance.parameter = new exports.Intent.Parameter();
+                            _reader.readMessage(_instance.parameter, exports.Intent.Parameter.deserializeBinaryFromReader);
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                CreateParameterRequest.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            CreateParameterRequest.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.intentName) {
+                    _writer.writeString(1, _instance.intentName);
+                }
+                if (_instance.parameter) {
+                    _writer.writeMessage(2, _instance.parameter, exports.Intent.Parameter.serializeBinaryToWriter);
+                }
+            };
+            Object.defineProperty(CreateParameterRequest.prototype, "intentName", {
+                get: function () {
+                    return this._intentName;
+                },
+                set: function (value) {
+                    this._intentName = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(CreateParameterRequest.prototype, "parameter", {
+                get: function () {
+                    return this._parameter;
+                },
+                set: function (value) {
+                    this._parameter = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            CreateParameterRequest.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                CreateParameterRequest.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            CreateParameterRequest.prototype.toObject = function () {
+                return {
+                    intentName: this.intentName,
+                    parameter: this.parameter ? this.parameter.toObject() : undefined
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            CreateParameterRequest.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            CreateParameterRequest.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                return {
+                    intentName: this.intentName,
+                    parameter: this.parameter
+                        ? this.parameter.toProtobufJSON(options)
+                        : null
+                };
+            };
+            return CreateParameterRequest;
+        }());
+        CreateParameterRequest.id = 'ondewo.nlu.CreateParameterRequest';
+        BatchCreateParametersRequest.CreateParameterRequest = CreateParameterRequest;
+    })(exports.BatchCreateParametersRequest || (exports.BatchCreateParametersRequest = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchUpdateParametersRequest
+     */
+    var BatchUpdateParametersRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchUpdateParametersRequest to deeply clone from
+         */
+        function BatchUpdateParametersRequest(_value) {
+            _value = _value || {};
+            this.parameters = (_value.parameters || []).map(function (m) { return new exports.Intent.Parameter(m); });
+            BatchUpdateParametersRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchUpdateParametersRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchUpdateParametersRequest();
+            BatchUpdateParametersRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchUpdateParametersRequest.refineValues = function (_instance) {
+            _instance.parameters = _instance.parameters || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchUpdateParametersRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Intent.Parameter();
+                        _reader.readMessage(messageInitializer1, exports.Intent.Parameter.deserializeBinaryFromReader);
+                        (_instance.parameters = _instance.parameters || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchUpdateParametersRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchUpdateParametersRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parameters && _instance.parameters.length) {
+                _writer.writeRepeatedMessage(1, _instance.parameters, exports.Intent.Parameter.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchUpdateParametersRequest.prototype, "parameters", {
+            get: function () {
+                return this._parameters;
+            },
+            set: function (value) {
+                this._parameters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchUpdateParametersRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchUpdateParametersRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchUpdateParametersRequest.prototype.toObject = function () {
+            return {
+                parameters: (this.parameters || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchUpdateParametersRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchUpdateParametersRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parameters: (this.parameters || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchUpdateParametersRequest;
+    }());
+    BatchUpdateParametersRequest.id = 'ondewo.nlu.BatchUpdateParametersRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchGetParametersRequest
+     */
+    var BatchGetParametersRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchGetParametersRequest to deeply clone from
+         */
+        function BatchGetParametersRequest(_value) {
+            _value = _value || {};
+            this.names = (_value.names || []).slice();
+            BatchGetParametersRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchGetParametersRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchGetParametersRequest();
+            BatchGetParametersRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchGetParametersRequest.refineValues = function (_instance) {
+            _instance.names = _instance.names || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchGetParametersRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.names = _instance.names || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchGetParametersRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchGetParametersRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.names && _instance.names.length) {
+                _writer.writeRepeatedString(1, _instance.names);
+            }
+        };
+        Object.defineProperty(BatchGetParametersRequest.prototype, "names", {
+            get: function () {
+                return this._names;
+            },
+            set: function (value) {
+                this._names = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchGetParametersRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchGetParametersRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchGetParametersRequest.prototype.toObject = function () {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchGetParametersRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchGetParametersRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        return BatchGetParametersRequest;
+    }());
+    BatchGetParametersRequest.id = 'ondewo.nlu.BatchGetParametersRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchDeleteParametersRequest
+     */
+    var BatchDeleteParametersRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchDeleteParametersRequest to deeply clone from
+         */
+        function BatchDeleteParametersRequest(_value) {
+            _value = _value || {};
+            this.names = (_value.names || []).slice();
+            BatchDeleteParametersRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchDeleteParametersRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchDeleteParametersRequest();
+            BatchDeleteParametersRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchDeleteParametersRequest.refineValues = function (_instance) {
+            _instance.names = _instance.names || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchDeleteParametersRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.names = _instance.names || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchDeleteParametersRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchDeleteParametersRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.names && _instance.names.length) {
+                _writer.writeRepeatedString(1, _instance.names);
+            }
+        };
+        Object.defineProperty(BatchDeleteParametersRequest.prototype, "names", {
+            get: function () {
+                return this._names;
+            },
+            set: function (value) {
+                this._names = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchDeleteParametersRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchDeleteParametersRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchDeleteParametersRequest.prototype.toObject = function () {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchDeleteParametersRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchDeleteParametersRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        return BatchDeleteParametersRequest;
+    }());
+    BatchDeleteParametersRequest.id = 'ondewo.nlu.BatchDeleteParametersRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchDeleteParametersResponse
+     */
+    exports.BatchDeleteParametersResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchDeleteParametersResponse to deeply clone from
+         */
+        function BatchDeleteParametersResponse(_value) {
+            _value = _value || {};
+            this.deleteStatuses = (_value.deleteStatuses || []).map(function (m) { return new BatchDeleteParametersResponse.DeleteParameterStatus(m); });
+            this.hasErrors = _value.hasErrors;
+            BatchDeleteParametersResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchDeleteParametersResponse.deserializeBinary = function (bytes) {
+            var instance = new BatchDeleteParametersResponse();
+            BatchDeleteParametersResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchDeleteParametersResponse.refineValues = function (_instance) {
+            _instance.deleteStatuses = _instance.deleteStatuses || [];
+            _instance.hasErrors = _instance.hasErrors || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchDeleteParametersResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchDeleteParametersResponse.DeleteParameterStatus();
+                        _reader.readMessage(messageInitializer1, BatchDeleteParametersResponse.DeleteParameterStatus
+                            .deserializeBinaryFromReader);
+                        (_instance.deleteStatuses = _instance.deleteStatuses || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.hasErrors = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchDeleteParametersResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchDeleteParametersResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.deleteStatuses && _instance.deleteStatuses.length) {
+                _writer.writeRepeatedMessage(1, _instance.deleteStatuses, BatchDeleteParametersResponse.DeleteParameterStatus
+                    .serializeBinaryToWriter);
+            }
+            if (_instance.hasErrors) {
+                _writer.writeBool(2, _instance.hasErrors);
+            }
+        };
+        Object.defineProperty(BatchDeleteParametersResponse.prototype, "deleteStatuses", {
+            get: function () {
+                return this._deleteStatuses;
+            },
+            set: function (value) {
+                this._deleteStatuses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BatchDeleteParametersResponse.prototype, "hasErrors", {
+            get: function () {
+                return this._hasErrors;
+            },
+            set: function (value) {
+                this._hasErrors = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchDeleteParametersResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchDeleteParametersResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchDeleteParametersResponse.prototype.toObject = function () {
+            return {
+                deleteStatuses: (this.deleteStatuses || []).map(function (m) { return m.toObject(); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchDeleteParametersResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchDeleteParametersResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                deleteStatuses: (this.deleteStatuses || []).map(function (m) { return m.toProtobufJSON(options); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        return BatchDeleteParametersResponse;
+    }());
+    exports.BatchDeleteParametersResponse.id = 'ondewo.nlu.BatchDeleteParametersResponse';
+    (function (BatchDeleteParametersResponse) {
+        /**
+         * Message implementation for ondewo.nlu.DeleteParameterStatus
+         */
+        var DeleteParameterStatus = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of DeleteParameterStatus to deeply clone from
+             */
+            function DeleteParameterStatus(_value) {
+                this._deleteStatus = DeleteParameterStatus.DeleteStatusCase.none;
+                _value = _value || {};
+                this.successfullyDeleted = _value.successfullyDeleted
+                    ? new googleProtobuf009.Empty(_value.successfullyDeleted)
+                    : undefined;
+                this.errorMessage = _value.errorMessage;
+                DeleteParameterStatus.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            DeleteParameterStatus.deserializeBinary = function (bytes) {
+                var instance = new DeleteParameterStatus();
+                DeleteParameterStatus.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            DeleteParameterStatus.refineValues = function (_instance) { };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            DeleteParameterStatus.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.successfullyDeleted = new googleProtobuf009.Empty();
+                            _reader.readMessage(_instance.successfullyDeleted, googleProtobuf009.Empty.deserializeBinaryFromReader);
+                            break;
+                        case 2:
+                            _instance.errorMessage = _reader.readString();
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                DeleteParameterStatus.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            DeleteParameterStatus.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.successfullyDeleted) {
+                    _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf009.Empty.serializeBinaryToWriter);
+                }
+                if (_instance.errorMessage || _instance.errorMessage === '') {
+                    _writer.writeString(2, _instance.errorMessage);
+                }
+            };
+            Object.defineProperty(DeleteParameterStatus.prototype, "successfullyDeleted", {
+                get: function () {
+                    return this._successfullyDeleted;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._errorMessage = undefined;
+                        this._deleteStatus =
+                            DeleteParameterStatus.DeleteStatusCase.successfullyDeleted;
+                    }
+                    this._successfullyDeleted = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(DeleteParameterStatus.prototype, "errorMessage", {
+                get: function () {
+                    return this._errorMessage;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._successfullyDeleted = undefined;
+                        this._deleteStatus =
+                            DeleteParameterStatus.DeleteStatusCase.errorMessage;
+                    }
+                    this._errorMessage = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(DeleteParameterStatus.prototype, "deleteStatus", {
+                get: function () {
+                    return this._deleteStatus;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            DeleteParameterStatus.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                DeleteParameterStatus.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            DeleteParameterStatus.prototype.toObject = function () {
+                return {
+                    successfullyDeleted: this.successfullyDeleted
+                        ? this.successfullyDeleted.toObject()
+                        : undefined,
+                    errorMessage: this.errorMessage
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            DeleteParameterStatus.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            DeleteParameterStatus.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                var _a;
+                return {
+                    successfullyDeleted: this.successfullyDeleted
+                        ? this.successfullyDeleted.toProtobufJSON(options)
+                        : null,
+                    errorMessage: (_a = this.errorMessage) !== null && _a !== void 0 ? _a : null
+                };
+            };
+            return DeleteParameterStatus;
+        }());
+        DeleteParameterStatus.id = 'ondewo.nlu.DeleteParameterStatus';
+        BatchDeleteParametersResponse.DeleteParameterStatus = DeleteParameterStatus;
+        (function (DeleteParameterStatus) {
+            var DeleteStatusCase;
+            (function (DeleteStatusCase) {
+                DeleteStatusCase[DeleteStatusCase["none"] = 0] = "none";
+                DeleteStatusCase[DeleteStatusCase["successfullyDeleted"] = 1] = "successfullyDeleted";
+                DeleteStatusCase[DeleteStatusCase["errorMessage"] = 2] = "errorMessage";
+            })(DeleteStatusCase = DeleteParameterStatus.DeleteStatusCase || (DeleteParameterStatus.DeleteStatusCase = {}));
+        })(DeleteParameterStatus = BatchDeleteParametersResponse.DeleteParameterStatus || (BatchDeleteParametersResponse.DeleteParameterStatus = {}));
+    })(exports.BatchDeleteParametersResponse || (exports.BatchDeleteParametersResponse = {}));
+    /**
+     * Message implementation for ondewo.nlu.ListParametersRequest
+     */
+    var ListParametersRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListParametersRequest to deeply clone from
+         */
+        function ListParametersRequest(_value) {
+            _value = _value || {};
+            this.intentName = _value.intentName;
+            this.languageCode = _value.languageCode;
+            this.pageToken = _value.pageToken;
+            ListParametersRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListParametersRequest.deserializeBinary = function (bytes) {
+            var instance = new ListParametersRequest();
+            ListParametersRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListParametersRequest.refineValues = function (_instance) {
+            _instance.intentName = _instance.intentName || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.pageToken = _instance.pageToken || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListParametersRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.intentName = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.pageToken = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListParametersRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListParametersRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.intentName) {
+                _writer.writeString(1, _instance.intentName);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(2, _instance.languageCode);
+            }
+            if (_instance.pageToken) {
+                _writer.writeString(3, _instance.pageToken);
+            }
+        };
+        Object.defineProperty(ListParametersRequest.prototype, "intentName", {
+            get: function () {
+                return this._intentName;
+            },
+            set: function (value) {
+                this._intentName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListParametersRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListParametersRequest.prototype, "pageToken", {
+            get: function () {
+                return this._pageToken;
+            },
+            set: function (value) {
+                this._pageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListParametersRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListParametersRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListParametersRequest.prototype.toObject = function () {
+            return {
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                pageToken: this.pageToken
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListParametersRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListParametersRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                pageToken: this.pageToken
+            };
+        };
+        return ListParametersRequest;
+    }());
+    ListParametersRequest.id = 'ondewo.nlu.ListParametersRequest';
+    /**
+     * Message implementation for ondewo.nlu.ListParametersResponse
+     */
+    var ListParametersResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListParametersResponse to deeply clone from
+         */
+        function ListParametersResponse(_value) {
+            _value = _value || {};
+            this.parameters = (_value.parameters || []).map(function (m) { return new exports.Intent.Parameter(m); });
+            this.nextPageToken = _value.nextPageToken;
+            ListParametersResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListParametersResponse.deserializeBinary = function (bytes) {
+            var instance = new ListParametersResponse();
+            ListParametersResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListParametersResponse.refineValues = function (_instance) {
+            _instance.parameters = _instance.parameters || [];
+            _instance.nextPageToken = _instance.nextPageToken || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListParametersResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Intent.Parameter();
+                        _reader.readMessage(messageInitializer1, exports.Intent.Parameter.deserializeBinaryFromReader);
+                        (_instance.parameters = _instance.parameters || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.nextPageToken = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListParametersResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListParametersResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parameters && _instance.parameters.length) {
+                _writer.writeRepeatedMessage(1, _instance.parameters, exports.Intent.Parameter.serializeBinaryToWriter);
+            }
+            if (_instance.nextPageToken) {
+                _writer.writeString(2, _instance.nextPageToken);
+            }
+        };
+        Object.defineProperty(ListParametersResponse.prototype, "parameters", {
+            get: function () {
+                return this._parameters;
+            },
+            set: function (value) {
+                this._parameters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListParametersResponse.prototype, "nextPageToken", {
+            get: function () {
+                return this._nextPageToken;
+            },
+            set: function (value) {
+                this._nextPageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListParametersResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListParametersResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListParametersResponse.prototype.toObject = function () {
+            return {
+                parameters: (this.parameters || []).map(function (m) { return m.toObject(); }),
+                nextPageToken: this.nextPageToken
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListParametersResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListParametersResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parameters: (this.parameters || []).map(function (m) { return m.toProtobufJSON(options); }),
+                nextPageToken: this.nextPageToken
+            };
+        };
+        return ListParametersResponse;
+    }());
+    ListParametersResponse.id = 'ondewo.nlu.ListParametersResponse';
 
     (function (EntityTypeView) {
         EntityTypeView[EntityTypeView["ENTITY_TYPE_VIEW_UNSPECIFIED"] = 0] = "ENTITY_TYPE_VIEW_UNSPECIFIED";
@@ -8785,6 +13254,7 @@
                 this.name = _value.name;
                 this.displayName = _value.displayName;
                 this.synonymCount = _value.synonymCount;
+                this.languageCode = _value.languageCode;
                 Entity.refineValues(this);
             }
             /**
@@ -8806,6 +13276,7 @@
                 _instance.name = _instance.name || '';
                 _instance.displayName = _instance.displayName || '';
                 _instance.synonymCount = _instance.synonymCount || 0;
+                _instance.languageCode = _instance.languageCode || '';
             };
             /**
              * Deserializes / reads binary message into message instance using provided binary reader
@@ -8831,6 +13302,9 @@
                             break;
                         case 5:
                             _instance.synonymCount = _reader.readInt32();
+                            break;
+                        case 6:
+                            _instance.languageCode = _reader.readString();
                             break;
                         default:
                             _reader.skipField();
@@ -8858,6 +13332,9 @@
                 }
                 if (_instance.synonymCount) {
                     _writer.writeInt32(5, _instance.synonymCount);
+                }
+                if (_instance.languageCode) {
+                    _writer.writeString(6, _instance.languageCode);
                 }
             };
             Object.defineProperty(Entity.prototype, "value", {
@@ -8910,6 +13387,16 @@
                 enumerable: false,
                 configurable: true
             });
+            Object.defineProperty(Entity.prototype, "languageCode", {
+                get: function () {
+                    return this._languageCode;
+                },
+                set: function (value) {
+                    this._languageCode = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
             /**
              * Serialize message to binary data
              * @param instance message instance
@@ -8928,7 +13415,8 @@
                     synonyms: (this.synonyms || []).slice(),
                     name: this.name,
                     displayName: this.displayName,
-                    synonymCount: this.synonymCount
+                    synonymCount: this.synonymCount,
+                    languageCode: this.languageCode
                 };
             };
             /**
@@ -8950,7 +13438,8 @@
                     synonyms: (this.synonyms || []).slice(),
                     name: this.name,
                     displayName: this.displayName,
-                    synonymCount: this.synonymCount
+                    synonymCount: this.synonymCount,
+                    languageCode: this.languageCode
                 };
             };
             return Entity;
@@ -10315,473 +14804,6 @@
     }());
     BatchDeleteEntityTypesRequest.id = 'ondewo.nlu.BatchDeleteEntityTypesRequest';
     /**
-     * Message implementation for ondewo.nlu.BatchCreateEntitiesRequest
-     */
-    var BatchCreateEntitiesRequest = /** @class */ (function () {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of BatchCreateEntitiesRequest to deeply clone from
-         */
-        function BatchCreateEntitiesRequest(_value) {
-            _value = _value || {};
-            this.parent = _value.parent;
-            this.entities = (_value.entities || []).map(function (m) { return new exports.EntityType.Entity(m); });
-            this.languageCode = _value.languageCode;
-            BatchCreateEntitiesRequest.refineValues(this);
-        }
-        /**
-         * Deserialize binary data to message
-         * @param instance message instance
-         */
-        BatchCreateEntitiesRequest.deserializeBinary = function (bytes) {
-            var instance = new BatchCreateEntitiesRequest();
-            BatchCreateEntitiesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        /**
-         * Check all the properties and set default protobuf values if necessary
-         * @param _instance message instance
-         */
-        BatchCreateEntitiesRequest.refineValues = function (_instance) {
-            _instance.parent = _instance.parent || '';
-            _instance.entities = _instance.entities || [];
-            _instance.languageCode = _instance.languageCode || '';
-        };
-        /**
-         * Deserializes / reads binary message into message instance using provided binary reader
-         * @param _instance message instance
-         * @param _reader binary reader instance
-         */
-        BatchCreateEntitiesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
-            while (_reader.nextField()) {
-                if (_reader.isEndGroup())
-                    break;
-                switch (_reader.getFieldNumber()) {
-                    case 1:
-                        _instance.parent = _reader.readString();
-                        break;
-                    case 2:
-                        var messageInitializer2 = new exports.EntityType.Entity();
-                        _reader.readMessage(messageInitializer2, exports.EntityType.Entity.deserializeBinaryFromReader);
-                        (_instance.entities = _instance.entities || []).push(messageInitializer2);
-                        break;
-                    case 3:
-                        _instance.languageCode = _reader.readString();
-                        break;
-                    default:
-                        _reader.skipField();
-                }
-            }
-            BatchCreateEntitiesRequest.refineValues(_instance);
-        };
-        /**
-         * Serializes a message to binary format using provided binary reader
-         * @param _instance message instance
-         * @param _writer binary writer instance
-         */
-        BatchCreateEntitiesRequest.serializeBinaryToWriter = function (_instance, _writer) {
-            if (_instance.parent) {
-                _writer.writeString(1, _instance.parent);
-            }
-            if (_instance.entities && _instance.entities.length) {
-                _writer.writeRepeatedMessage(2, _instance.entities, exports.EntityType.Entity.serializeBinaryToWriter);
-            }
-            if (_instance.languageCode) {
-                _writer.writeString(3, _instance.languageCode);
-            }
-        };
-        Object.defineProperty(BatchCreateEntitiesRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BatchCreateEntitiesRequest.prototype, "entities", {
-            get: function () {
-                return this._entities;
-            },
-            set: function (value) {
-                this._entities = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BatchCreateEntitiesRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        /**
-         * Serialize message to binary data
-         * @param instance message instance
-         */
-        BatchCreateEntitiesRequest.prototype.serializeBinary = function () {
-            var writer = new googleProtobuf.BinaryWriter();
-            BatchCreateEntitiesRequest.serializeBinaryToWriter(this, writer);
-            return writer.getResultBuffer();
-        };
-        /**
-         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-         */
-        BatchCreateEntitiesRequest.prototype.toObject = function () {
-            return {
-                parent: this.parent,
-                entities: (this.entities || []).map(function (m) { return m.toObject(); }),
-                languageCode: this.languageCode
-            };
-        };
-        /**
-         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-         */
-        BatchCreateEntitiesRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        /**
-         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-         */
-        BatchCreateEntitiesRequest.prototype.toProtobufJSON = function (
-        // @ts-ignore
-        options) {
-            return {
-                parent: this.parent,
-                entities: (this.entities || []).map(function (m) { return m.toProtobufJSON(options); }),
-                languageCode: this.languageCode
-            };
-        };
-        return BatchCreateEntitiesRequest;
-    }());
-    BatchCreateEntitiesRequest.id = 'ondewo.nlu.BatchCreateEntitiesRequest';
-    /**
-     * Message implementation for ondewo.nlu.BatchUpdateEntitiesRequest
-     */
-    var BatchUpdateEntitiesRequest = /** @class */ (function () {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of BatchUpdateEntitiesRequest to deeply clone from
-         */
-        function BatchUpdateEntitiesRequest(_value) {
-            _value = _value || {};
-            this.parent = _value.parent;
-            this.entities = (_value.entities || []).map(function (m) { return new exports.EntityType.Entity(m); });
-            this.languageCode = _value.languageCode;
-            this.updateMask = _value.updateMask
-                ? new googleProtobuf009.FieldMask(_value.updateMask)
-                : undefined;
-            BatchUpdateEntitiesRequest.refineValues(this);
-        }
-        /**
-         * Deserialize binary data to message
-         * @param instance message instance
-         */
-        BatchUpdateEntitiesRequest.deserializeBinary = function (bytes) {
-            var instance = new BatchUpdateEntitiesRequest();
-            BatchUpdateEntitiesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        /**
-         * Check all the properties and set default protobuf values if necessary
-         * @param _instance message instance
-         */
-        BatchUpdateEntitiesRequest.refineValues = function (_instance) {
-            _instance.parent = _instance.parent || '';
-            _instance.entities = _instance.entities || [];
-            _instance.languageCode = _instance.languageCode || '';
-            _instance.updateMask = _instance.updateMask || undefined;
-        };
-        /**
-         * Deserializes / reads binary message into message instance using provided binary reader
-         * @param _instance message instance
-         * @param _reader binary reader instance
-         */
-        BatchUpdateEntitiesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
-            while (_reader.nextField()) {
-                if (_reader.isEndGroup())
-                    break;
-                switch (_reader.getFieldNumber()) {
-                    case 1:
-                        _instance.parent = _reader.readString();
-                        break;
-                    case 2:
-                        var messageInitializer2 = new exports.EntityType.Entity();
-                        _reader.readMessage(messageInitializer2, exports.EntityType.Entity.deserializeBinaryFromReader);
-                        (_instance.entities = _instance.entities || []).push(messageInitializer2);
-                        break;
-                    case 3:
-                        _instance.languageCode = _reader.readString();
-                        break;
-                    case 4:
-                        _instance.updateMask = new googleProtobuf009.FieldMask();
-                        _reader.readMessage(_instance.updateMask, googleProtobuf009.FieldMask.deserializeBinaryFromReader);
-                        break;
-                    default:
-                        _reader.skipField();
-                }
-            }
-            BatchUpdateEntitiesRequest.refineValues(_instance);
-        };
-        /**
-         * Serializes a message to binary format using provided binary reader
-         * @param _instance message instance
-         * @param _writer binary writer instance
-         */
-        BatchUpdateEntitiesRequest.serializeBinaryToWriter = function (_instance, _writer) {
-            if (_instance.parent) {
-                _writer.writeString(1, _instance.parent);
-            }
-            if (_instance.entities && _instance.entities.length) {
-                _writer.writeRepeatedMessage(2, _instance.entities, exports.EntityType.Entity.serializeBinaryToWriter);
-            }
-            if (_instance.languageCode) {
-                _writer.writeString(3, _instance.languageCode);
-            }
-            if (_instance.updateMask) {
-                _writer.writeMessage(4, _instance.updateMask, googleProtobuf009.FieldMask.serializeBinaryToWriter);
-            }
-        };
-        Object.defineProperty(BatchUpdateEntitiesRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BatchUpdateEntitiesRequest.prototype, "entities", {
-            get: function () {
-                return this._entities;
-            },
-            set: function (value) {
-                this._entities = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BatchUpdateEntitiesRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BatchUpdateEntitiesRequest.prototype, "updateMask", {
-            get: function () {
-                return this._updateMask;
-            },
-            set: function (value) {
-                this._updateMask = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        /**
-         * Serialize message to binary data
-         * @param instance message instance
-         */
-        BatchUpdateEntitiesRequest.prototype.serializeBinary = function () {
-            var writer = new googleProtobuf.BinaryWriter();
-            BatchUpdateEntitiesRequest.serializeBinaryToWriter(this, writer);
-            return writer.getResultBuffer();
-        };
-        /**
-         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-         */
-        BatchUpdateEntitiesRequest.prototype.toObject = function () {
-            return {
-                parent: this.parent,
-                entities: (this.entities || []).map(function (m) { return m.toObject(); }),
-                languageCode: this.languageCode,
-                updateMask: this.updateMask ? this.updateMask.toObject() : undefined
-            };
-        };
-        /**
-         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-         */
-        BatchUpdateEntitiesRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        /**
-         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-         */
-        BatchUpdateEntitiesRequest.prototype.toProtobufJSON = function (
-        // @ts-ignore
-        options) {
-            return {
-                parent: this.parent,
-                entities: (this.entities || []).map(function (m) { return m.toProtobufJSON(options); }),
-                languageCode: this.languageCode,
-                updateMask: this.updateMask
-                    ? this.updateMask.toProtobufJSON(options)
-                    : null
-            };
-        };
-        return BatchUpdateEntitiesRequest;
-    }());
-    BatchUpdateEntitiesRequest.id = 'ondewo.nlu.BatchUpdateEntitiesRequest';
-    /**
-     * Message implementation for ondewo.nlu.BatchDeleteEntitiesRequest
-     */
-    var BatchDeleteEntitiesRequest = /** @class */ (function () {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of BatchDeleteEntitiesRequest to deeply clone from
-         */
-        function BatchDeleteEntitiesRequest(_value) {
-            _value = _value || {};
-            this.parent = _value.parent;
-            this.entityValues = (_value.entityValues || []).slice();
-            this.languageCode = _value.languageCode;
-            BatchDeleteEntitiesRequest.refineValues(this);
-        }
-        /**
-         * Deserialize binary data to message
-         * @param instance message instance
-         */
-        BatchDeleteEntitiesRequest.deserializeBinary = function (bytes) {
-            var instance = new BatchDeleteEntitiesRequest();
-            BatchDeleteEntitiesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
-            return instance;
-        };
-        /**
-         * Check all the properties and set default protobuf values if necessary
-         * @param _instance message instance
-         */
-        BatchDeleteEntitiesRequest.refineValues = function (_instance) {
-            _instance.parent = _instance.parent || '';
-            _instance.entityValues = _instance.entityValues || [];
-            _instance.languageCode = _instance.languageCode || '';
-        };
-        /**
-         * Deserializes / reads binary message into message instance using provided binary reader
-         * @param _instance message instance
-         * @param _reader binary reader instance
-         */
-        BatchDeleteEntitiesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
-            while (_reader.nextField()) {
-                if (_reader.isEndGroup())
-                    break;
-                switch (_reader.getFieldNumber()) {
-                    case 1:
-                        _instance.parent = _reader.readString();
-                        break;
-                    case 2:
-                        (_instance.entityValues = _instance.entityValues || []).push(_reader.readString());
-                        break;
-                    case 3:
-                        _instance.languageCode = _reader.readString();
-                        break;
-                    default:
-                        _reader.skipField();
-                }
-            }
-            BatchDeleteEntitiesRequest.refineValues(_instance);
-        };
-        /**
-         * Serializes a message to binary format using provided binary reader
-         * @param _instance message instance
-         * @param _writer binary writer instance
-         */
-        BatchDeleteEntitiesRequest.serializeBinaryToWriter = function (_instance, _writer) {
-            if (_instance.parent) {
-                _writer.writeString(1, _instance.parent);
-            }
-            if (_instance.entityValues && _instance.entityValues.length) {
-                _writer.writeRepeatedString(2, _instance.entityValues);
-            }
-            if (_instance.languageCode) {
-                _writer.writeString(3, _instance.languageCode);
-            }
-        };
-        Object.defineProperty(BatchDeleteEntitiesRequest.prototype, "parent", {
-            get: function () {
-                return this._parent;
-            },
-            set: function (value) {
-                this._parent = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BatchDeleteEntitiesRequest.prototype, "entityValues", {
-            get: function () {
-                return this._entityValues;
-            },
-            set: function (value) {
-                this._entityValues = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(BatchDeleteEntitiesRequest.prototype, "languageCode", {
-            get: function () {
-                return this._languageCode;
-            },
-            set: function (value) {
-                this._languageCode = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        /**
-         * Serialize message to binary data
-         * @param instance message instance
-         */
-        BatchDeleteEntitiesRequest.prototype.serializeBinary = function () {
-            var writer = new googleProtobuf.BinaryWriter();
-            BatchDeleteEntitiesRequest.serializeBinaryToWriter(this, writer);
-            return writer.getResultBuffer();
-        };
-        /**
-         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-         */
-        BatchDeleteEntitiesRequest.prototype.toObject = function () {
-            return {
-                parent: this.parent,
-                entityValues: (this.entityValues || []).slice(),
-                languageCode: this.languageCode
-            };
-        };
-        /**
-         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-         */
-        BatchDeleteEntitiesRequest.prototype.toJSON = function () {
-            return this.toObject();
-        };
-        /**
-         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-         */
-        BatchDeleteEntitiesRequest.prototype.toProtobufJSON = function (
-        // @ts-ignore
-        options) {
-            return {
-                parent: this.parent,
-                entityValues: (this.entityValues || []).slice(),
-                languageCode: this.languageCode
-            };
-        };
-        return BatchDeleteEntitiesRequest;
-    }());
-    BatchDeleteEntitiesRequest.id = 'ondewo.nlu.BatchDeleteEntitiesRequest';
-    /**
      * Message implementation for ondewo.nlu.EntityTypeBatch
      */
     var EntityTypeBatch = /** @class */ (function () {
@@ -11027,6 +15049,1434 @@
             EntityTypeSortingField[EntityTypeSortingField["SORT_ENTITY_TYPE_BY_SYNONYM_COUNT"] = 5] = "SORT_ENTITY_TYPE_BY_SYNONYM_COUNT";
         })(EntityTypeSortingField = EntityTypeSorting.EntityTypeSortingField || (EntityTypeSorting.EntityTypeSortingField = {}));
     })(exports.EntityTypeSorting || (exports.EntityTypeSorting = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchEntitiesResponse
+     */
+    exports.BatchEntitiesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchEntitiesResponse to deeply clone from
+         */
+        function BatchEntitiesResponse(_value) {
+            _value = _value || {};
+            this.entityStatuses = (_value.entityStatuses || []).map(function (m) { return new BatchEntitiesResponse.EntityStatus(m); });
+            this.hasErrors = _value.hasErrors;
+            BatchEntitiesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchEntitiesResponse.deserializeBinary = function (bytes) {
+            var instance = new BatchEntitiesResponse();
+            BatchEntitiesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchEntitiesResponse.refineValues = function (_instance) {
+            _instance.entityStatuses = _instance.entityStatuses || [];
+            _instance.hasErrors = _instance.hasErrors || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchEntitiesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchEntitiesResponse.EntityStatus();
+                        _reader.readMessage(messageInitializer1, BatchEntitiesResponse.EntityStatus.deserializeBinaryFromReader);
+                        (_instance.entityStatuses = _instance.entityStatuses || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.hasErrors = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchEntitiesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchEntitiesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.entityStatuses && _instance.entityStatuses.length) {
+                _writer.writeRepeatedMessage(1, _instance.entityStatuses, BatchEntitiesResponse.EntityStatus.serializeBinaryToWriter);
+            }
+            if (_instance.hasErrors) {
+                _writer.writeBool(2, _instance.hasErrors);
+            }
+        };
+        Object.defineProperty(BatchEntitiesResponse.prototype, "entityStatuses", {
+            get: function () {
+                return this._entityStatuses;
+            },
+            set: function (value) {
+                this._entityStatuses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BatchEntitiesResponse.prototype, "hasErrors", {
+            get: function () {
+                return this._hasErrors;
+            },
+            set: function (value) {
+                this._hasErrors = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchEntitiesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchEntitiesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchEntitiesResponse.prototype.toObject = function () {
+            return {
+                entityStatuses: (this.entityStatuses || []).map(function (m) { return m.toObject(); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchEntitiesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchEntitiesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                entityStatuses: (this.entityStatuses || []).map(function (m) { return m.toProtobufJSON(options); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        return BatchEntitiesResponse;
+    }());
+    exports.BatchEntitiesResponse.id = 'ondewo.nlu.BatchEntitiesResponse';
+    (function (BatchEntitiesResponse) {
+        /**
+         * Message implementation for ondewo.nlu.EntityStatus
+         */
+        var EntityStatus = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of EntityStatus to deeply clone from
+             */
+            function EntityStatus(_value) {
+                this._entityOrStatus = EntityStatus.EntityOrStatusCase.none;
+                _value = _value || {};
+                this.entity = _value.entity
+                    ? new exports.EntityType.Entity(_value.entity)
+                    : undefined;
+                this.errorMessage = _value.errorMessage;
+                EntityStatus.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            EntityStatus.deserializeBinary = function (bytes) {
+                var instance = new EntityStatus();
+                EntityStatus.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            EntityStatus.refineValues = function (_instance) { };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            EntityStatus.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.entity = new exports.EntityType.Entity();
+                            _reader.readMessage(_instance.entity, exports.EntityType.Entity.deserializeBinaryFromReader);
+                            break;
+                        case 2:
+                            _instance.errorMessage = _reader.readString();
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                EntityStatus.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            EntityStatus.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.entity) {
+                    _writer.writeMessage(1, _instance.entity, exports.EntityType.Entity.serializeBinaryToWriter);
+                }
+                if (_instance.errorMessage || _instance.errorMessage === '') {
+                    _writer.writeString(2, _instance.errorMessage);
+                }
+            };
+            Object.defineProperty(EntityStatus.prototype, "entity", {
+                get: function () {
+                    return this._entity;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._errorMessage = undefined;
+                        this._entityOrStatus = EntityStatus.EntityOrStatusCase.entity;
+                    }
+                    this._entity = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(EntityStatus.prototype, "errorMessage", {
+                get: function () {
+                    return this._errorMessage;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._entity = undefined;
+                        this._entityOrStatus = EntityStatus.EntityOrStatusCase.errorMessage;
+                    }
+                    this._errorMessage = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(EntityStatus.prototype, "entityOrStatus", {
+                get: function () {
+                    return this._entityOrStatus;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            EntityStatus.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                EntityStatus.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            EntityStatus.prototype.toObject = function () {
+                return {
+                    entity: this.entity ? this.entity.toObject() : undefined,
+                    errorMessage: this.errorMessage
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            EntityStatus.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            EntityStatus.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                var _a;
+                return {
+                    entity: this.entity ? this.entity.toProtobufJSON(options) : null,
+                    errorMessage: (_a = this.errorMessage) !== null && _a !== void 0 ? _a : null
+                };
+            };
+            return EntityStatus;
+        }());
+        EntityStatus.id = 'ondewo.nlu.EntityStatus';
+        BatchEntitiesResponse.EntityStatus = EntityStatus;
+        (function (EntityStatus) {
+            var EntityOrStatusCase;
+            (function (EntityOrStatusCase) {
+                EntityOrStatusCase[EntityOrStatusCase["none"] = 0] = "none";
+                EntityOrStatusCase[EntityOrStatusCase["entity"] = 1] = "entity";
+                EntityOrStatusCase[EntityOrStatusCase["errorMessage"] = 2] = "errorMessage";
+            })(EntityOrStatusCase = EntityStatus.EntityOrStatusCase || (EntityStatus.EntityOrStatusCase = {}));
+        })(EntityStatus = BatchEntitiesResponse.EntityStatus || (BatchEntitiesResponse.EntityStatus = {}));
+    })(exports.BatchEntitiesResponse || (exports.BatchEntitiesResponse = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchCreateEntitiesRequest
+     */
+    exports.BatchCreateEntitiesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchCreateEntitiesRequest to deeply clone from
+         */
+        function BatchCreateEntitiesRequest(_value) {
+            _value = _value || {};
+            this.createEntityRequests = (_value.createEntityRequests || []).map(function (m) { return new BatchCreateEntitiesRequest.CreateEntityRequest(m); });
+            BatchCreateEntitiesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchCreateEntitiesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchCreateEntitiesRequest();
+            BatchCreateEntitiesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchCreateEntitiesRequest.refineValues = function (_instance) {
+            _instance.createEntityRequests = _instance.createEntityRequests || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchCreateEntitiesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchCreateEntitiesRequest.CreateEntityRequest();
+                        _reader.readMessage(messageInitializer1, BatchCreateEntitiesRequest.CreateEntityRequest
+                            .deserializeBinaryFromReader);
+                        (_instance.createEntityRequests =
+                            _instance.createEntityRequests || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchCreateEntitiesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchCreateEntitiesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.createEntityRequests &&
+                _instance.createEntityRequests.length) {
+                _writer.writeRepeatedMessage(1, _instance.createEntityRequests, BatchCreateEntitiesRequest.CreateEntityRequest.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchCreateEntitiesRequest.prototype, "createEntityRequests", {
+            get: function () {
+                return this._createEntityRequests;
+            },
+            set: function (value) {
+                this._createEntityRequests = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchCreateEntitiesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchCreateEntitiesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchCreateEntitiesRequest.prototype.toObject = function () {
+            return {
+                createEntityRequests: (this.createEntityRequests || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchCreateEntitiesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchCreateEntitiesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                createEntityRequests: (this.createEntityRequests || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchCreateEntitiesRequest;
+    }());
+    exports.BatchCreateEntitiesRequest.id = 'ondewo.nlu.BatchCreateEntitiesRequest';
+    (function (BatchCreateEntitiesRequest) {
+        /**
+         * Message implementation for ondewo.nlu.CreateEntityRequest
+         */
+        var CreateEntityRequest = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of CreateEntityRequest to deeply clone from
+             */
+            function CreateEntityRequest(_value) {
+                _value = _value || {};
+                this.entityTypeName = _value.entityTypeName;
+                this.entity = _value.entity
+                    ? new exports.EntityType.Entity(_value.entity)
+                    : undefined;
+                CreateEntityRequest.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            CreateEntityRequest.deserializeBinary = function (bytes) {
+                var instance = new CreateEntityRequest();
+                CreateEntityRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            CreateEntityRequest.refineValues = function (_instance) {
+                _instance.entityTypeName = _instance.entityTypeName || '';
+                _instance.entity = _instance.entity || undefined;
+            };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            CreateEntityRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.entityTypeName = _reader.readString();
+                            break;
+                        case 2:
+                            _instance.entity = new exports.EntityType.Entity();
+                            _reader.readMessage(_instance.entity, exports.EntityType.Entity.deserializeBinaryFromReader);
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                CreateEntityRequest.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            CreateEntityRequest.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.entityTypeName) {
+                    _writer.writeString(1, _instance.entityTypeName);
+                }
+                if (_instance.entity) {
+                    _writer.writeMessage(2, _instance.entity, exports.EntityType.Entity.serializeBinaryToWriter);
+                }
+            };
+            Object.defineProperty(CreateEntityRequest.prototype, "entityTypeName", {
+                get: function () {
+                    return this._entityTypeName;
+                },
+                set: function (value) {
+                    this._entityTypeName = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(CreateEntityRequest.prototype, "entity", {
+                get: function () {
+                    return this._entity;
+                },
+                set: function (value) {
+                    this._entity = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            CreateEntityRequest.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                CreateEntityRequest.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            CreateEntityRequest.prototype.toObject = function () {
+                return {
+                    entityTypeName: this.entityTypeName,
+                    entity: this.entity ? this.entity.toObject() : undefined
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            CreateEntityRequest.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            CreateEntityRequest.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                return {
+                    entityTypeName: this.entityTypeName,
+                    entity: this.entity ? this.entity.toProtobufJSON(options) : null
+                };
+            };
+            return CreateEntityRequest;
+        }());
+        CreateEntityRequest.id = 'ondewo.nlu.CreateEntityRequest';
+        BatchCreateEntitiesRequest.CreateEntityRequest = CreateEntityRequest;
+    })(exports.BatchCreateEntitiesRequest || (exports.BatchCreateEntitiesRequest = {}));
+    /**
+     * Message implementation for ondewo.nlu.BatchUpdateEntitiesRequest
+     */
+    var BatchUpdateEntitiesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchUpdateEntitiesRequest to deeply clone from
+         */
+        function BatchUpdateEntitiesRequest(_value) {
+            _value = _value || {};
+            this.entities = (_value.entities || []).map(function (m) { return new exports.EntityType.Entity(m); });
+            BatchUpdateEntitiesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchUpdateEntitiesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchUpdateEntitiesRequest();
+            BatchUpdateEntitiesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchUpdateEntitiesRequest.refineValues = function (_instance) {
+            _instance.entities = _instance.entities || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchUpdateEntitiesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.EntityType.Entity();
+                        _reader.readMessage(messageInitializer1, exports.EntityType.Entity.deserializeBinaryFromReader);
+                        (_instance.entities = _instance.entities || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchUpdateEntitiesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchUpdateEntitiesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.entities && _instance.entities.length) {
+                _writer.writeRepeatedMessage(1, _instance.entities, exports.EntityType.Entity.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchUpdateEntitiesRequest.prototype, "entities", {
+            get: function () {
+                return this._entities;
+            },
+            set: function (value) {
+                this._entities = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchUpdateEntitiesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchUpdateEntitiesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchUpdateEntitiesRequest.prototype.toObject = function () {
+            return {
+                entities: (this.entities || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchUpdateEntitiesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchUpdateEntitiesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                entities: (this.entities || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchUpdateEntitiesRequest;
+    }());
+    BatchUpdateEntitiesRequest.id = 'ondewo.nlu.BatchUpdateEntitiesRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchGetEntitiesRequest
+     */
+    var BatchGetEntitiesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchGetEntitiesRequest to deeply clone from
+         */
+        function BatchGetEntitiesRequest(_value) {
+            _value = _value || {};
+            this.names = (_value.names || []).slice();
+            BatchGetEntitiesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchGetEntitiesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchGetEntitiesRequest();
+            BatchGetEntitiesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchGetEntitiesRequest.refineValues = function (_instance) {
+            _instance.names = _instance.names || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchGetEntitiesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.names = _instance.names || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchGetEntitiesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchGetEntitiesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.names && _instance.names.length) {
+                _writer.writeRepeatedString(1, _instance.names);
+            }
+        };
+        Object.defineProperty(BatchGetEntitiesRequest.prototype, "names", {
+            get: function () {
+                return this._names;
+            },
+            set: function (value) {
+                this._names = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchGetEntitiesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchGetEntitiesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchGetEntitiesRequest.prototype.toObject = function () {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchGetEntitiesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchGetEntitiesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        return BatchGetEntitiesRequest;
+    }());
+    BatchGetEntitiesRequest.id = 'ondewo.nlu.BatchGetEntitiesRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchDeleteEntitiesRequest
+     */
+    var BatchDeleteEntitiesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchDeleteEntitiesRequest to deeply clone from
+         */
+        function BatchDeleteEntitiesRequest(_value) {
+            _value = _value || {};
+            this.names = (_value.names || []).slice();
+            BatchDeleteEntitiesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchDeleteEntitiesRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchDeleteEntitiesRequest();
+            BatchDeleteEntitiesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchDeleteEntitiesRequest.refineValues = function (_instance) {
+            _instance.names = _instance.names || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchDeleteEntitiesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.names = _instance.names || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchDeleteEntitiesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchDeleteEntitiesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.names && _instance.names.length) {
+                _writer.writeRepeatedString(1, _instance.names);
+            }
+        };
+        Object.defineProperty(BatchDeleteEntitiesRequest.prototype, "names", {
+            get: function () {
+                return this._names;
+            },
+            set: function (value) {
+                this._names = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchDeleteEntitiesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchDeleteEntitiesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchDeleteEntitiesRequest.prototype.toObject = function () {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchDeleteEntitiesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchDeleteEntitiesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                names: (this.names || []).slice()
+            };
+        };
+        return BatchDeleteEntitiesRequest;
+    }());
+    BatchDeleteEntitiesRequest.id = 'ondewo.nlu.BatchDeleteEntitiesRequest';
+    /**
+     * Message implementation for ondewo.nlu.BatchDeleteEntitiesResponse
+     */
+    exports.BatchDeleteEntitiesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchDeleteEntitiesResponse to deeply clone from
+         */
+        function BatchDeleteEntitiesResponse(_value) {
+            _value = _value || {};
+            this.deleteStatuses = (_value.deleteStatuses || []).map(function (m) { return new BatchDeleteEntitiesResponse.DeleteEntityStatus(m); });
+            this.hasErrors = _value.hasErrors;
+            BatchDeleteEntitiesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchDeleteEntitiesResponse.deserializeBinary = function (bytes) {
+            var instance = new BatchDeleteEntitiesResponse();
+            BatchDeleteEntitiesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchDeleteEntitiesResponse.refineValues = function (_instance) {
+            _instance.deleteStatuses = _instance.deleteStatuses || [];
+            _instance.hasErrors = _instance.hasErrors || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchDeleteEntitiesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new BatchDeleteEntitiesResponse.DeleteEntityStatus();
+                        _reader.readMessage(messageInitializer1, BatchDeleteEntitiesResponse.DeleteEntityStatus
+                            .deserializeBinaryFromReader);
+                        (_instance.deleteStatuses = _instance.deleteStatuses || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.hasErrors = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchDeleteEntitiesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchDeleteEntitiesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.deleteStatuses && _instance.deleteStatuses.length) {
+                _writer.writeRepeatedMessage(1, _instance.deleteStatuses, BatchDeleteEntitiesResponse.DeleteEntityStatus.serializeBinaryToWriter);
+            }
+            if (_instance.hasErrors) {
+                _writer.writeBool(2, _instance.hasErrors);
+            }
+        };
+        Object.defineProperty(BatchDeleteEntitiesResponse.prototype, "deleteStatuses", {
+            get: function () {
+                return this._deleteStatuses;
+            },
+            set: function (value) {
+                this._deleteStatuses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(BatchDeleteEntitiesResponse.prototype, "hasErrors", {
+            get: function () {
+                return this._hasErrors;
+            },
+            set: function (value) {
+                this._hasErrors = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchDeleteEntitiesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchDeleteEntitiesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchDeleteEntitiesResponse.prototype.toObject = function () {
+            return {
+                deleteStatuses: (this.deleteStatuses || []).map(function (m) { return m.toObject(); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchDeleteEntitiesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchDeleteEntitiesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                deleteStatuses: (this.deleteStatuses || []).map(function (m) { return m.toProtobufJSON(options); }),
+                hasErrors: this.hasErrors
+            };
+        };
+        return BatchDeleteEntitiesResponse;
+    }());
+    exports.BatchDeleteEntitiesResponse.id = 'ondewo.nlu.BatchDeleteEntitiesResponse';
+    (function (BatchDeleteEntitiesResponse) {
+        /**
+         * Message implementation for ondewo.nlu.DeleteEntityStatus
+         */
+        var DeleteEntityStatus = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of DeleteEntityStatus to deeply clone from
+             */
+            function DeleteEntityStatus(_value) {
+                this._deleteStatus = DeleteEntityStatus.DeleteStatusCase.none;
+                _value = _value || {};
+                this.successfullyDeleted = _value.successfullyDeleted
+                    ? new googleProtobuf009.Empty(_value.successfullyDeleted)
+                    : undefined;
+                this.errorMessage = _value.errorMessage;
+                DeleteEntityStatus.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            DeleteEntityStatus.deserializeBinary = function (bytes) {
+                var instance = new DeleteEntityStatus();
+                DeleteEntityStatus.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            DeleteEntityStatus.refineValues = function (_instance) { };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            DeleteEntityStatus.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.successfullyDeleted = new googleProtobuf009.Empty();
+                            _reader.readMessage(_instance.successfullyDeleted, googleProtobuf009.Empty.deserializeBinaryFromReader);
+                            break;
+                        case 2:
+                            _instance.errorMessage = _reader.readString();
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                DeleteEntityStatus.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            DeleteEntityStatus.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.successfullyDeleted) {
+                    _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf009.Empty.serializeBinaryToWriter);
+                }
+                if (_instance.errorMessage || _instance.errorMessage === '') {
+                    _writer.writeString(2, _instance.errorMessage);
+                }
+            };
+            Object.defineProperty(DeleteEntityStatus.prototype, "successfullyDeleted", {
+                get: function () {
+                    return this._successfullyDeleted;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._errorMessage = undefined;
+                        this._deleteStatus =
+                            DeleteEntityStatus.DeleteStatusCase.successfullyDeleted;
+                    }
+                    this._successfullyDeleted = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(DeleteEntityStatus.prototype, "errorMessage", {
+                get: function () {
+                    return this._errorMessage;
+                },
+                set: function (value) {
+                    if (value !== undefined && value !== null) {
+                        this._successfullyDeleted = undefined;
+                        this._deleteStatus = DeleteEntityStatus.DeleteStatusCase.errorMessage;
+                    }
+                    this._errorMessage = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(DeleteEntityStatus.prototype, "deleteStatus", {
+                get: function () {
+                    return this._deleteStatus;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            DeleteEntityStatus.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                DeleteEntityStatus.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            DeleteEntityStatus.prototype.toObject = function () {
+                return {
+                    successfullyDeleted: this.successfullyDeleted
+                        ? this.successfullyDeleted.toObject()
+                        : undefined,
+                    errorMessage: this.errorMessage
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            DeleteEntityStatus.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            DeleteEntityStatus.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                var _a;
+                return {
+                    successfullyDeleted: this.successfullyDeleted
+                        ? this.successfullyDeleted.toProtobufJSON(options)
+                        : null,
+                    errorMessage: (_a = this.errorMessage) !== null && _a !== void 0 ? _a : null
+                };
+            };
+            return DeleteEntityStatus;
+        }());
+        DeleteEntityStatus.id = 'ondewo.nlu.DeleteEntityStatus';
+        BatchDeleteEntitiesResponse.DeleteEntityStatus = DeleteEntityStatus;
+        (function (DeleteEntityStatus) {
+            var DeleteStatusCase;
+            (function (DeleteStatusCase) {
+                DeleteStatusCase[DeleteStatusCase["none"] = 0] = "none";
+                DeleteStatusCase[DeleteStatusCase["successfullyDeleted"] = 1] = "successfullyDeleted";
+                DeleteStatusCase[DeleteStatusCase["errorMessage"] = 2] = "errorMessage";
+            })(DeleteStatusCase = DeleteEntityStatus.DeleteStatusCase || (DeleteEntityStatus.DeleteStatusCase = {}));
+        })(DeleteEntityStatus = BatchDeleteEntitiesResponse.DeleteEntityStatus || (BatchDeleteEntitiesResponse.DeleteEntityStatus = {}));
+    })(exports.BatchDeleteEntitiesResponse || (exports.BatchDeleteEntitiesResponse = {}));
+    /**
+     * Message implementation for ondewo.nlu.ListEntitiesRequest
+     */
+    var ListEntitiesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListEntitiesRequest to deeply clone from
+         */
+        function ListEntitiesRequest(_value) {
+            _value = _value || {};
+            this.entityTypeName = _value.entityTypeName;
+            this.languageCode = _value.languageCode;
+            this.pageToken = _value.pageToken;
+            this.entityTypeView = _value.entityTypeView;
+            ListEntitiesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListEntitiesRequest.deserializeBinary = function (bytes) {
+            var instance = new ListEntitiesRequest();
+            ListEntitiesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListEntitiesRequest.refineValues = function (_instance) {
+            _instance.entityTypeName = _instance.entityTypeName || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.pageToken = _instance.pageToken || '';
+            _instance.entityTypeView = _instance.entityTypeView || 0;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListEntitiesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.entityTypeName = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.pageToken = _reader.readString();
+                        break;
+                    case 4:
+                        _instance.entityTypeView = _reader.readEnum();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListEntitiesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListEntitiesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.entityTypeName) {
+                _writer.writeString(1, _instance.entityTypeName);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(2, _instance.languageCode);
+            }
+            if (_instance.pageToken) {
+                _writer.writeString(3, _instance.pageToken);
+            }
+            if (_instance.entityTypeView) {
+                _writer.writeEnum(4, _instance.entityTypeView);
+            }
+        };
+        Object.defineProperty(ListEntitiesRequest.prototype, "entityTypeName", {
+            get: function () {
+                return this._entityTypeName;
+            },
+            set: function (value) {
+                this._entityTypeName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListEntitiesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListEntitiesRequest.prototype, "pageToken", {
+            get: function () {
+                return this._pageToken;
+            },
+            set: function (value) {
+                this._pageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListEntitiesRequest.prototype, "entityTypeView", {
+            get: function () {
+                return this._entityTypeView;
+            },
+            set: function (value) {
+                this._entityTypeView = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListEntitiesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListEntitiesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListEntitiesRequest.prototype.toObject = function () {
+            return {
+                entityTypeName: this.entityTypeName,
+                languageCode: this.languageCode,
+                pageToken: this.pageToken,
+                entityTypeView: this.entityTypeView
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListEntitiesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListEntitiesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a;
+            return {
+                entityTypeName: this.entityTypeName,
+                languageCode: this.languageCode,
+                pageToken: this.pageToken,
+                entityTypeView: exports.EntityTypeView[(_a = this.entityTypeView) !== null && _a !== void 0 ? _a : 0]
+            };
+        };
+        return ListEntitiesRequest;
+    }());
+    ListEntitiesRequest.id = 'ondewo.nlu.ListEntitiesRequest';
+    /**
+     * Message implementation for ondewo.nlu.ListEntitiesResponse
+     */
+    var ListEntitiesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListEntitiesResponse to deeply clone from
+         */
+        function ListEntitiesResponse(_value) {
+            _value = _value || {};
+            this.entities = (_value.entities || []).map(function (m) { return new exports.EntityType.Entity(m); });
+            this.nextPageToken = _value.nextPageToken;
+            ListEntitiesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListEntitiesResponse.deserializeBinary = function (bytes) {
+            var instance = new ListEntitiesResponse();
+            ListEntitiesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListEntitiesResponse.refineValues = function (_instance) {
+            _instance.entities = _instance.entities || [];
+            _instance.nextPageToken = _instance.nextPageToken || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListEntitiesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.EntityType.Entity();
+                        _reader.readMessage(messageInitializer1, exports.EntityType.Entity.deserializeBinaryFromReader);
+                        (_instance.entities = _instance.entities || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        _instance.nextPageToken = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListEntitiesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListEntitiesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.entities && _instance.entities.length) {
+                _writer.writeRepeatedMessage(1, _instance.entities, exports.EntityType.Entity.serializeBinaryToWriter);
+            }
+            if (_instance.nextPageToken) {
+                _writer.writeString(2, _instance.nextPageToken);
+            }
+        };
+        Object.defineProperty(ListEntitiesResponse.prototype, "entities", {
+            get: function () {
+                return this._entities;
+            },
+            set: function (value) {
+                this._entities = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListEntitiesResponse.prototype, "nextPageToken", {
+            get: function () {
+                return this._nextPageToken;
+            },
+            set: function (value) {
+                this._nextPageToken = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListEntitiesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListEntitiesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListEntitiesResponse.prototype.toObject = function () {
+            return {
+                entities: (this.entities || []).map(function (m) { return m.toObject(); }),
+                nextPageToken: this.nextPageToken
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListEntitiesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListEntitiesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                entities: (this.entities || []).map(function (m) { return m.toProtobufJSON(options); }),
+                nextPageToken: this.nextPageToken
+            };
+        };
+        return ListEntitiesResponse;
+    }());
+    ListEntitiesResponse.id = 'ondewo.nlu.ListEntitiesResponse';
 
     /* tslint:disable */
     (function (AudioEncoding) {
@@ -21745,6 +27195,13 @@
 
     /* tslint:disable */
     /**
+     * Specific GrpcClientSettings for Utilities.
+     * Use it only if your default settings are not set or the service requires other settings.
+     */
+    var GRPC_UTILITIES_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_UTILITIES_CLIENT_SETTINGS');
+
+    /* tslint:disable */
+    /**
      * Specific GrpcClientSettings for EntityTypes.
      * Use it only if your default settings are not set or the service requires other settings.
      */
@@ -24751,6 +30208,291 @@
                         requestClass: BatchDeleteIntentsRequest,
                         responseClass: exports.Operation
                     });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>
+                 */
+                batchCreateTrainingPhrases: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchCreateTrainingPhrases',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: exports.BatchCreateTrainingPhrasesRequest,
+                        responseClass: BatchTrainingPhrasesStatusResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchGetTrainingPhrases
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>
+                 */
+                batchGetTrainingPhrases: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchGetTrainingPhrases',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchGetTrainingPhrasesRequest,
+                        responseClass: BatchTrainingPhrasesStatusResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>
+                 */
+                batchUpdateTrainingPhrases: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchUpdateTrainingPhrases',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchUpdateTrainingPhrasesRequest,
+                        responseClass: BatchTrainingPhrasesStatusResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchDeleteTrainingPhrasesResponse>>
+                 */
+                batchDeleteTrainingPhrases: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchDeleteTrainingPhrases',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchDeleteTrainingPhrasesRequest,
+                        responseClass: exports.BatchDeleteTrainingPhrasesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/ListTrainingPhrases
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ListTrainingPhrasesResponse>>
+                 */
+                listTrainingPhrases: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/ListTrainingPhrases',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ListTrainingPhrasesRequest,
+                        responseClass: ListTrainingPhrasesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchCreateResponseMessages
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>
+                 */
+                batchCreateResponseMessages: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchCreateResponseMessages',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: exports.BatchCreateResponseMessagesRequest,
+                        responseClass: exports.BatchResponseMessagesStatusResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchGetResponseMessages
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>
+                 */
+                batchGetResponseMessages: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchGetResponseMessages',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchGetResponseMessagesRequest,
+                        responseClass: exports.BatchResponseMessagesStatusResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchUpdateResponseMessages
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>
+                 */
+                batchUpdateResponseMessages: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchUpdateResponseMessages',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchUpdateResponseMessagesRequest,
+                        responseClass: exports.BatchResponseMessagesStatusResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchDeleteResponseMessages
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchDeleteResponseMessagesResponse>>
+                 */
+                batchDeleteResponseMessages: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchDeleteResponseMessages',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchDeleteResponseMessagesRequest,
+                        responseClass: exports.BatchDeleteResponseMessagesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/ListResponseMessages
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ListResponseMessagesResponse>>
+                 */
+                listResponseMessages: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/ListResponseMessages',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ListResponseMessagesRequest,
+                        responseClass: ListResponseMessagesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchCreateParameters
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>
+                 */
+                batchCreateParameters: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchCreateParameters',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: exports.BatchCreateParametersRequest,
+                        responseClass: exports.BatchParametersStatusResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchGetParameters
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>
+                 */
+                batchGetParameters: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchGetParameters',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchGetParametersRequest,
+                        responseClass: exports.BatchParametersStatusResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchUpdateParameters
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>
+                 */
+                batchUpdateParameters: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchUpdateParameters',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchUpdateParametersRequest,
+                        responseClass: exports.BatchParametersStatusResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/BatchDeleteParameters
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchDeleteParametersResponse>>
+                 */
+                batchDeleteParameters: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/BatchDeleteParameters',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchDeleteParametersRequest,
+                        responseClass: exports.BatchDeleteParametersResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Intents/ListParameters
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ListParametersResponse>>
+                 */
+                listParameters: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Intents/ListParameters',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ListParametersRequest,
+                        responseClass: ListParametersResponse
+                    });
                 }
             };
             this.client = clientFactory.createClient('ondewo.nlu.Intents', settings);
@@ -24846,6 +30588,201 @@
                 .batchDeleteIntents(requestData, requestMetadata)
                 .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchTrainingPhrasesStatusResponse>
+         */
+        IntentsClient.prototype.batchCreateTrainingPhrases = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchCreateTrainingPhrases(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchGetTrainingPhrases
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchTrainingPhrasesStatusResponse>
+         */
+        IntentsClient.prototype.batchGetTrainingPhrases = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchGetTrainingPhrases(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchTrainingPhrasesStatusResponse>
+         */
+        IntentsClient.prototype.batchUpdateTrainingPhrases = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchUpdateTrainingPhrases(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchDeleteTrainingPhrasesResponse>
+         */
+        IntentsClient.prototype.batchDeleteTrainingPhrases = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchDeleteTrainingPhrases(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/ListTrainingPhrases
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ListTrainingPhrasesResponse>
+         */
+        IntentsClient.prototype.listTrainingPhrases = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .listTrainingPhrases(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchCreateResponseMessages
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchResponseMessagesStatusResponse>
+         */
+        IntentsClient.prototype.batchCreateResponseMessages = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchCreateResponseMessages(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchGetResponseMessages
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchResponseMessagesStatusResponse>
+         */
+        IntentsClient.prototype.batchGetResponseMessages = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchGetResponseMessages(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchUpdateResponseMessages
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchResponseMessagesStatusResponse>
+         */
+        IntentsClient.prototype.batchUpdateResponseMessages = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchUpdateResponseMessages(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchDeleteResponseMessages
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchDeleteResponseMessagesResponse>
+         */
+        IntentsClient.prototype.batchDeleteResponseMessages = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchDeleteResponseMessages(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/ListResponseMessages
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ListResponseMessagesResponse>
+         */
+        IntentsClient.prototype.listResponseMessages = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .listResponseMessages(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchCreateParameters
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchParametersStatusResponse>
+         */
+        IntentsClient.prototype.batchCreateParameters = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchCreateParameters(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchGetParameters
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchParametersStatusResponse>
+         */
+        IntentsClient.prototype.batchGetParameters = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchGetParameters(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchUpdateParameters
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchParametersStatusResponse>
+         */
+        IntentsClient.prototype.batchUpdateParameters = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchUpdateParameters(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/BatchDeleteParameters
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchDeleteParametersResponse>
+         */
+        IntentsClient.prototype.batchDeleteParameters = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchDeleteParameters(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/ListParameters
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ListParametersResponse>
+         */
+        IntentsClient.prototype.listParameters = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .listParameters(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
         return IntentsClient;
     }());
     IntentsClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function IntentsClient_Factory() { return new IntentsClient(i0.ɵɵinject(GRPC_INTENTS_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: IntentsClient, providedIn: "any" });
@@ -24903,6 +30840,7 @@
             this.hostName = _value.hostName;
             this.numReruns = _value.numReruns;
             this.maxNumReruns = _value.maxNumReruns;
+            this.description = _value.description;
             OperationMetadata.refineValues(this);
         }
         /**
@@ -24935,6 +30873,7 @@
             _instance.hostName = _instance.hostName || '';
             _instance.numReruns = _instance.numReruns || 0;
             _instance.maxNumReruns = _instance.maxNumReruns || 0;
+            _instance.description = _instance.description || '';
         };
         /**
          * Deserializes / reads binary message into message instance using provided binary reader
@@ -24995,6 +30934,9 @@
                     case 15:
                         _instance.maxNumReruns = _reader.readInt32();
                         break;
+                    case 16:
+                        _instance.description = _reader.readString();
+                        break;
                     default:
                         _reader.skipField();
                 }
@@ -25051,6 +30993,9 @@
             }
             if (_instance.maxNumReruns) {
                 _writer.writeInt32(15, _instance.maxNumReruns);
+            }
+            if (_instance.description) {
+                _writer.writeString(16, _instance.description);
             }
         };
         Object.defineProperty(OperationMetadata.prototype, "status", {
@@ -25203,6 +31148,16 @@
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(OperationMetadata.prototype, "description", {
+            get: function () {
+                return this._description;
+            },
+            set: function (value) {
+                this._description = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -25231,7 +31186,8 @@
                 operationType: this.operationType,
                 hostName: this.hostName,
                 numReruns: this.numReruns,
-                maxNumReruns: this.maxNumReruns
+                maxNumReruns: this.maxNumReruns,
+                description: this.description
             };
         };
         /**
@@ -25266,7 +31222,8 @@
                 operationType: OperationMetadata.OperationType[(_b = this.operationType) !== null && _b !== void 0 ? _b : 0],
                 hostName: this.hostName,
                 numReruns: this.numReruns,
-                maxNumReruns: this.maxNumReruns
+                maxNumReruns: this.maxNumReruns,
+                description: this.description
             };
         };
         return OperationMetadata;
@@ -25308,6 +31265,7 @@
             this.parent = _value.parent;
             this.text = _value.text;
             this.languageCode = _value.languageCode;
+            this.intentName = _value.intentName;
             ExtractEntitiesRequest.refineValues(this);
         }
         /**
@@ -25327,6 +31285,7 @@
             _instance.parent = _instance.parent || '';
             _instance.text = _instance.text || '';
             _instance.languageCode = _instance.languageCode || '';
+            _instance.intentName = _instance.intentName || '';
         };
         /**
          * Deserializes / reads binary message into message instance using provided binary reader
@@ -25346,6 +31305,9 @@
                         break;
                     case 3:
                         _instance.languageCode = _reader.readString();
+                        break;
+                    case 4:
+                        _instance.intentName = _reader.readString();
                         break;
                     default:
                         _reader.skipField();
@@ -25367,6 +31329,9 @@
             }
             if (_instance.languageCode) {
                 _writer.writeString(3, _instance.languageCode);
+            }
+            if (_instance.intentName) {
+                _writer.writeString(4, _instance.intentName);
             }
         };
         Object.defineProperty(ExtractEntitiesRequest.prototype, "parent", {
@@ -25399,6 +31364,16 @@
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(ExtractEntitiesRequest.prototype, "intentName", {
+            get: function () {
+                return this._intentName;
+            },
+            set: function (value) {
+                this._intentName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -25415,7 +31390,8 @@
             return {
                 parent: this.parent,
                 text: this.text,
-                languageCode: this.languageCode
+                languageCode: this.languageCode,
+                intentName: this.intentName
             };
         };
         /**
@@ -25435,12 +31411,163 @@
             return {
                 parent: this.parent,
                 text: this.text,
-                languageCode: this.languageCode
+                languageCode: this.languageCode,
+                intentName: this.intentName
             };
         };
         return ExtractEntitiesRequest;
     }());
     ExtractEntitiesRequest.id = 'ondewo.nlu.ExtractEntitiesRequest';
+    /**
+     * Message implementation for ondewo.nlu.EntityDetected
+     */
+    var EntityDetected = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of EntityDetected to deeply clone from
+         */
+        function EntityDetected(_value) {
+            _value = _value || {};
+            this.entity = _value.entity
+                ? new exports.Intent.TrainingPhrase.Entity(_value.entity)
+                : undefined;
+            this.extractionMethod = _value.extractionMethod;
+            this.score = _value.score;
+            EntityDetected.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        EntityDetected.deserializeBinary = function (bytes) {
+            var instance = new EntityDetected();
+            EntityDetected.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        EntityDetected.refineValues = function (_instance) {
+            _instance.entity = _instance.entity || undefined;
+            _instance.extractionMethod = _instance.extractionMethod || '';
+            _instance.score = _instance.score || 0;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        EntityDetected.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.entity = new exports.Intent.TrainingPhrase.Entity();
+                        _reader.readMessage(_instance.entity, exports.Intent.TrainingPhrase.Entity
+                            .deserializeBinaryFromReader);
+                        break;
+                    case 2:
+                        _instance.extractionMethod = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.score = _reader.readFloat();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            EntityDetected.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        EntityDetected.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.entity) {
+                _writer.writeMessage(1, _instance.entity, exports.Intent.TrainingPhrase.Entity.serializeBinaryToWriter);
+            }
+            if (_instance.extractionMethod) {
+                _writer.writeString(2, _instance.extractionMethod);
+            }
+            if (_instance.score) {
+                _writer.writeFloat(3, _instance.score);
+            }
+        };
+        Object.defineProperty(EntityDetected.prototype, "entity", {
+            get: function () {
+                return this._entity;
+            },
+            set: function (value) {
+                this._entity = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(EntityDetected.prototype, "extractionMethod", {
+            get: function () {
+                return this._extractionMethod;
+            },
+            set: function (value) {
+                this._extractionMethod = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(EntityDetected.prototype, "score", {
+            get: function () {
+                return this._score;
+            },
+            set: function (value) {
+                this._score = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        EntityDetected.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            EntityDetected.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        EntityDetected.prototype.toObject = function () {
+            return {
+                entity: this.entity ? this.entity.toObject() : undefined,
+                extractionMethod: this.extractionMethod,
+                score: this.score
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        EntityDetected.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        EntityDetected.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                entity: this.entity ? this.entity.toProtobufJSON(options) : null,
+                extractionMethod: this.extractionMethod,
+                score: this.score
+            };
+        };
+        return EntityDetected;
+    }());
+    EntityDetected.id = 'ondewo.nlu.EntityDetected';
     /**
      * Message implementation for ondewo.nlu.ExtractEntitiesResponse
      */
@@ -25451,7 +31578,7 @@
          */
         function ExtractEntitiesResponse(_value) {
             _value = _value || {};
-            this.entities = (_value.entities || []).map(function (m) { return new exports.Intent.TrainingPhrase.Entity(m); });
+            this.entitiesDetected = (_value.entitiesDetected || []).map(function (m) { return new EntityDetected(m); });
             this.text = _value.text;
             ExtractEntitiesResponse.refineValues(this);
         }
@@ -25469,7 +31596,7 @@
          * @param _instance message instance
          */
         ExtractEntitiesResponse.refineValues = function (_instance) {
-            _instance.entities = _instance.entities || [];
+            _instance.entitiesDetected = _instance.entitiesDetected || [];
             _instance.text = _instance.text || '';
         };
         /**
@@ -25483,10 +31610,9 @@
                     break;
                 switch (_reader.getFieldNumber()) {
                     case 1:
-                        var messageInitializer1 = new exports.Intent.TrainingPhrase.Entity();
-                        _reader.readMessage(messageInitializer1, exports.Intent.TrainingPhrase.Entity
-                            .deserializeBinaryFromReader);
-                        (_instance.entities = _instance.entities || []).push(messageInitializer1);
+                        var messageInitializer1 = new EntityDetected();
+                        _reader.readMessage(messageInitializer1, EntityDetected.deserializeBinaryFromReader);
+                        (_instance.entitiesDetected = _instance.entitiesDetected || []).push(messageInitializer1);
                         break;
                     case 2:
                         _instance.text = _reader.readString();
@@ -25503,19 +31629,19 @@
          * @param _writer binary writer instance
          */
         ExtractEntitiesResponse.serializeBinaryToWriter = function (_instance, _writer) {
-            if (_instance.entities && _instance.entities.length) {
-                _writer.writeRepeatedMessage(1, _instance.entities, exports.Intent.TrainingPhrase.Entity.serializeBinaryToWriter);
+            if (_instance.entitiesDetected && _instance.entitiesDetected.length) {
+                _writer.writeRepeatedMessage(1, _instance.entitiesDetected, EntityDetected.serializeBinaryToWriter);
             }
             if (_instance.text) {
                 _writer.writeString(2, _instance.text);
             }
         };
-        Object.defineProperty(ExtractEntitiesResponse.prototype, "entities", {
+        Object.defineProperty(ExtractEntitiesResponse.prototype, "entitiesDetected", {
             get: function () {
-                return this._entities;
+                return this._entitiesDetected;
             },
             set: function (value) {
-                this._entities = value;
+                this._entitiesDetected = value;
             },
             enumerable: false,
             configurable: true
@@ -25544,7 +31670,7 @@
          */
         ExtractEntitiesResponse.prototype.toObject = function () {
             return {
-                entities: (this.entities || []).map(function (m) { return m.toObject(); }),
+                entitiesDetected: (this.entitiesDetected || []).map(function (m) { return m.toObject(); }),
                 text: this.text
             };
         };
@@ -25563,7 +31689,7 @@
         // @ts-ignore
         options) {
             return {
-                entities: (this.entities || []).map(function (m) { return m.toProtobufJSON(options); }),
+                entitiesDetected: (this.entitiesDetected || []).map(function (m) { return m.toProtobufJSON(options); }),
                 text: this.text
             };
         };
@@ -29539,7 +35665,7 @@
                  *
                  * @param requestMessage Request message
                  * @param requestMetadata Request metadata
-                 * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+                 * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
                  */
                 batchCreateEntities: function (requestData, requestMetadata) {
                     if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
@@ -29549,8 +35675,8 @@
                         path: '/ondewo.nlu.EntityTypes/BatchCreateEntities',
                         requestData: requestData,
                         requestMetadata: requestMetadata,
-                        requestClass: BatchCreateEntitiesRequest,
-                        responseClass: exports.Operation
+                        requestClass: exports.BatchCreateEntitiesRequest,
+                        responseClass: exports.BatchEntitiesResponse
                     });
                 },
                 /**
@@ -29558,7 +35684,7 @@
                  *
                  * @param requestMessage Request message
                  * @param requestMetadata Request metadata
-                 * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+                 * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
                  */
                 batchUpdateEntities: function (requestData, requestMetadata) {
                     if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
@@ -29569,7 +35695,26 @@
                         requestData: requestData,
                         requestMetadata: requestMetadata,
                         requestClass: BatchUpdateEntitiesRequest,
-                        responseClass: exports.Operation
+                        responseClass: exports.BatchEntitiesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.EntityTypes/BatchGetEntities
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
+                 */
+                batchGetEntities: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.EntityTypes/BatchGetEntities',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchGetEntitiesRequest,
+                        responseClass: exports.BatchEntitiesResponse
                     });
                 },
                 /**
@@ -29577,7 +35722,7 @@
                  *
                  * @param requestMessage Request message
                  * @param requestMetadata Request metadata
-                 * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+                 * @returns Observable<GrpcEvent<thisProto.BatchDeleteEntitiesResponse>>
                  */
                 batchDeleteEntities: function (requestData, requestMetadata) {
                     if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
@@ -29588,7 +35733,26 @@
                         requestData: requestData,
                         requestMetadata: requestMetadata,
                         requestClass: BatchDeleteEntitiesRequest,
-                        responseClass: exports.Operation
+                        responseClass: exports.BatchDeleteEntitiesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.EntityTypes/ListEntities
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ListEntitiesResponse>>
+                 */
+                listEntities: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.EntityTypes/ListEntities',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ListEntitiesRequest,
+                        responseClass: ListEntitiesResponse
                     });
                 }
             };
@@ -29690,7 +35854,7 @@
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<googleLongrunning006.Operation>
+         * @returns Observable<thisProto.BatchEntitiesResponse>
          */
         EntityTypesClient.prototype.batchCreateEntities = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
@@ -29703,7 +35867,7 @@
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<googleLongrunning006.Operation>
+         * @returns Observable<thisProto.BatchEntitiesResponse>
          */
         EntityTypesClient.prototype.batchUpdateEntities = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
@@ -29712,16 +35876,42 @@
                 .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/BatchGetEntities
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchEntitiesResponse>
+         */
+        EntityTypesClient.prototype.batchGetEntities = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchGetEntities(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
          * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntities
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<googleLongrunning006.Operation>
+         * @returns Observable<thisProto.BatchDeleteEntitiesResponse>
          */
         EntityTypesClient.prototype.batchDeleteEntities = function (requestData, requestMetadata) {
             if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
             return this.$raw
                 .batchDeleteEntities(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.EntityTypes/ListEntities
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ListEntitiesResponse>
+         */
+        EntityTypesClient.prototype.listEntities = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .listEntities(requestData, requestMetadata)
                 .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         return EntityTypesClient;
@@ -29735,6 +35925,3632 @@
         { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
         { type: i2.GrpcHandler }
     ]; };
+
+    /* tslint:disable */
+    (function (ReannotateEntitiesOptions) {
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["REANNOTATE_NEVER"] = 0] = "REANNOTATE_NEVER";
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["REANNOTATE_ALWAYS"] = 1] = "REANNOTATE_ALWAYS";
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["REANNOTATE_IF_EMPTY"] = 2] = "REANNOTATE_IF_EMPTY";
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["REANNOTATE_AFTER_DELETION"] = 3] = "REANNOTATE_AFTER_DELETION";
+        ReannotateEntitiesOptions[ReannotateEntitiesOptions["REANNOTATE_IF_EMPTY_OR_AFTER_DELETION"] = 4] = "REANNOTATE_IF_EMPTY_OR_AFTER_DELETION";
+    })(exports.ReannotateEntitiesOptions || (exports.ReannotateEntitiesOptions = {}));
+    /**
+     * Message implementation for ondewo.nlu.ValidateRegexRequest
+     */
+    var ValidateRegexRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ValidateRegexRequest to deeply clone from
+         */
+        function ValidateRegexRequest(_value) {
+            _value = _value || {};
+            this.regex = _value.regex;
+            ValidateRegexRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ValidateRegexRequest.deserializeBinary = function (bytes) {
+            var instance = new ValidateRegexRequest();
+            ValidateRegexRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ValidateRegexRequest.refineValues = function (_instance) {
+            _instance.regex = _instance.regex || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ValidateRegexRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.regex = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ValidateRegexRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ValidateRegexRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.regex) {
+                _writer.writeString(1, _instance.regex);
+            }
+        };
+        Object.defineProperty(ValidateRegexRequest.prototype, "regex", {
+            get: function () {
+                return this._regex;
+            },
+            set: function (value) {
+                this._regex = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ValidateRegexRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ValidateRegexRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ValidateRegexRequest.prototype.toObject = function () {
+            return {
+                regex: this.regex
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ValidateRegexRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ValidateRegexRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                regex: this.regex
+            };
+        };
+        return ValidateRegexRequest;
+    }());
+    ValidateRegexRequest.id = 'ondewo.nlu.ValidateRegexRequest';
+    /**
+     * Message implementation for ondewo.nlu.ValidateRegexResponse
+     */
+    var ValidateRegexResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ValidateRegexResponse to deeply clone from
+         */
+        function ValidateRegexResponse(_value) {
+            _value = _value || {};
+            this.errorMessages = (_value.errorMessages || []).slice();
+            ValidateRegexResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ValidateRegexResponse.deserializeBinary = function (bytes) {
+            var instance = new ValidateRegexResponse();
+            ValidateRegexResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ValidateRegexResponse.refineValues = function (_instance) {
+            _instance.errorMessages = _instance.errorMessages || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ValidateRegexResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.errorMessages = _instance.errorMessages || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ValidateRegexResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ValidateRegexResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.errorMessages && _instance.errorMessages.length) {
+                _writer.writeRepeatedString(1, _instance.errorMessages);
+            }
+        };
+        Object.defineProperty(ValidateRegexResponse.prototype, "errorMessages", {
+            get: function () {
+                return this._errorMessages;
+            },
+            set: function (value) {
+                this._errorMessages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ValidateRegexResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ValidateRegexResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ValidateRegexResponse.prototype.toObject = function () {
+            return {
+                errorMessages: (this.errorMessages || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ValidateRegexResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ValidateRegexResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                errorMessages: (this.errorMessages || []).slice()
+            };
+        };
+        return ValidateRegexResponse;
+    }());
+    ValidateRegexResponse.id = 'ondewo.nlu.ValidateRegexResponse';
+    /**
+     * Message implementation for ondewo.nlu.ValidateEmbeddedRegexRequest
+     */
+    var ValidateEmbeddedRegexRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ValidateEmbeddedRegexRequest to deeply clone from
+         */
+        function ValidateEmbeddedRegexRequest(_value) {
+            _value = _value || {};
+            this.entityType = _value.entityType
+                ? new exports.EntityType.Entity(_value.entityType)
+                : undefined;
+            ValidateEmbeddedRegexRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ValidateEmbeddedRegexRequest.deserializeBinary = function (bytes) {
+            var instance = new ValidateEmbeddedRegexRequest();
+            ValidateEmbeddedRegexRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ValidateEmbeddedRegexRequest.refineValues = function (_instance) {
+            _instance.entityType = _instance.entityType || undefined;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ValidateEmbeddedRegexRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.entityType = new exports.EntityType.Entity();
+                        _reader.readMessage(_instance.entityType, exports.EntityType.Entity.deserializeBinaryFromReader);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ValidateEmbeddedRegexRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ValidateEmbeddedRegexRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.entityType) {
+                _writer.writeMessage(1, _instance.entityType, exports.EntityType.Entity.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(ValidateEmbeddedRegexRequest.prototype, "entityType", {
+            get: function () {
+                return this._entityType;
+            },
+            set: function (value) {
+                this._entityType = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ValidateEmbeddedRegexRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ValidateEmbeddedRegexRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ValidateEmbeddedRegexRequest.prototype.toObject = function () {
+            return {
+                entityType: this.entityType ? this.entityType.toObject() : undefined
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ValidateEmbeddedRegexRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ValidateEmbeddedRegexRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                entityType: this.entityType
+                    ? this.entityType.toProtobufJSON(options)
+                    : null
+            };
+        };
+        return ValidateEmbeddedRegexRequest;
+    }());
+    ValidateEmbeddedRegexRequest.id = 'ondewo.nlu.ValidateEmbeddedRegexRequest';
+    /**
+     * Message implementation for ondewo.nlu.ValidateEmbeddedRegexResponse
+     */
+    var ValidateEmbeddedRegexResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ValidateEmbeddedRegexResponse to deeply clone from
+         */
+        function ValidateEmbeddedRegexResponse(_value) {
+            _value = _value || {};
+            this.errorMessages = (_value.errorMessages || []).slice();
+            ValidateEmbeddedRegexResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ValidateEmbeddedRegexResponse.deserializeBinary = function (bytes) {
+            var instance = new ValidateEmbeddedRegexResponse();
+            ValidateEmbeddedRegexResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ValidateEmbeddedRegexResponse.refineValues = function (_instance) {
+            _instance.errorMessages = _instance.errorMessages || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ValidateEmbeddedRegexResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.errorMessages = _instance.errorMessages || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ValidateEmbeddedRegexResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ValidateEmbeddedRegexResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.errorMessages && _instance.errorMessages.length) {
+                _writer.writeRepeatedString(1, _instance.errorMessages);
+            }
+        };
+        Object.defineProperty(ValidateEmbeddedRegexResponse.prototype, "errorMessages", {
+            get: function () {
+                return this._errorMessages;
+            },
+            set: function (value) {
+                this._errorMessages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ValidateEmbeddedRegexResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ValidateEmbeddedRegexResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ValidateEmbeddedRegexResponse.prototype.toObject = function () {
+            return {
+                errorMessages: (this.errorMessages || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ValidateEmbeddedRegexResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ValidateEmbeddedRegexResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                errorMessages: (this.errorMessages || []).slice()
+            };
+        };
+        return ValidateEmbeddedRegexResponse;
+    }());
+    ValidateEmbeddedRegexResponse.id = 'ondewo.nlu.ValidateEmbeddedRegexResponse';
+    /**
+     * Message implementation for ondewo.nlu.CleanAllIntentsRequest
+     */
+    var CleanAllIntentsRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CleanAllIntentsRequest to deeply clone from
+         */
+        function CleanAllIntentsRequest(_value) {
+            _value = _value || {};
+            this.parent = _value.parent;
+            this.languageCode = _value.languageCode;
+            this.specialCharacters = _value.specialCharacters;
+            this.substringWhiteList = (_value.substringWhiteList || []).slice();
+            this.dryRun = _value.dryRun;
+            this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
+                ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
+                : undefined;
+            this.reannotateEntitiesOptions = _value.reannotateEntitiesOptions;
+            this.numberOfWorkers = _value.numberOfWorkers;
+            CleanAllIntentsRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CleanAllIntentsRequest.deserializeBinary = function (bytes) {
+            var instance = new CleanAllIntentsRequest();
+            CleanAllIntentsRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CleanAllIntentsRequest.refineValues = function (_instance) {
+            _instance.parent = _instance.parent || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.specialCharacters = _instance.specialCharacters || '';
+            _instance.substringWhiteList = _instance.substringWhiteList || [];
+            _instance.dryRun = _instance.dryRun || false;
+            _instance.trainingPhraseCleanerOptions =
+                _instance.trainingPhraseCleanerOptions || undefined;
+            _instance.reannotateEntitiesOptions =
+                _instance.reannotateEntitiesOptions || 0;
+            _instance.numberOfWorkers = _instance.numberOfWorkers || 0;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CleanAllIntentsRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.parent = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.specialCharacters = _reader.readString();
+                        break;
+                    case 4:
+                        (_instance.substringWhiteList =
+                            _instance.substringWhiteList || []).push(_reader.readString());
+                        break;
+                    case 5:
+                        _instance.dryRun = _reader.readBool();
+                        break;
+                    case 6:
+                        _instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                        _reader.readMessage(_instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.deserializeBinaryFromReader);
+                        break;
+                    case 7:
+                        _instance.reannotateEntitiesOptions = _reader.readEnum();
+                        break;
+                    case 8:
+                        _instance.numberOfWorkers = _reader.readInt32();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CleanAllIntentsRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CleanAllIntentsRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parent) {
+                _writer.writeString(1, _instance.parent);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(2, _instance.languageCode);
+            }
+            if (_instance.specialCharacters) {
+                _writer.writeString(3, _instance.specialCharacters);
+            }
+            if (_instance.substringWhiteList && _instance.substringWhiteList.length) {
+                _writer.writeRepeatedString(4, _instance.substringWhiteList);
+            }
+            if (_instance.dryRun) {
+                _writer.writeBool(5, _instance.dryRun);
+            }
+            if (_instance.trainingPhraseCleanerOptions) {
+                _writer.writeMessage(6, _instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.serializeBinaryToWriter);
+            }
+            if (_instance.reannotateEntitiesOptions) {
+                _writer.writeEnum(7, _instance.reannotateEntitiesOptions);
+            }
+            if (_instance.numberOfWorkers) {
+                _writer.writeInt32(8, _instance.numberOfWorkers);
+            }
+        };
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "substringWhiteList", {
+            get: function () {
+                return this._substringWhiteList;
+            },
+            set: function (value) {
+                this._substringWhiteList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "dryRun", {
+            get: function () {
+                return this._dryRun;
+            },
+            set: function (value) {
+                this._dryRun = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "trainingPhraseCleanerOptions", {
+            get: function () {
+                return this._trainingPhraseCleanerOptions;
+            },
+            set: function (value) {
+                this._trainingPhraseCleanerOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "reannotateEntitiesOptions", {
+            get: function () {
+                return this._reannotateEntitiesOptions;
+            },
+            set: function (value) {
+                this._reannotateEntitiesOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsRequest.prototype, "numberOfWorkers", {
+            get: function () {
+                return this._numberOfWorkers;
+            },
+            set: function (value) {
+                this._numberOfWorkers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CleanAllIntentsRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanAllIntentsRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CleanAllIntentsRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                dryRun: this.dryRun,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toObject()
+                    : undefined,
+                reannotateEntitiesOptions: this.reannotateEntitiesOptions,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CleanAllIntentsRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CleanAllIntentsRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a;
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                dryRun: this.dryRun,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toProtobufJSON(options)
+                    : null,
+                reannotateEntitiesOptions: exports.ReannotateEntitiesOptions[(_a = this.reannotateEntitiesOptions) !== null && _a !== void 0 ? _a : 0],
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        return CleanAllIntentsRequest;
+    }());
+    CleanAllIntentsRequest.id = 'ondewo.nlu.CleanAllIntentsRequest';
+    /**
+     * Message implementation for ondewo.nlu.CleanAllIntentsResponse
+     */
+    var CleanAllIntentsResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CleanAllIntentsResponse to deeply clone from
+         */
+        function CleanAllIntentsResponse(_value) {
+            _value = _value || {};
+            this.cleanedIntents = (_value.cleanedIntents || []).map(function (m) { return new exports.Intent(m); });
+            this.intentUpdateList = (_value.intentUpdateList || []).map(function (m) { return new exports.IntentUpdate(m); });
+            CleanAllIntentsResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CleanAllIntentsResponse.deserializeBinary = function (bytes) {
+            var instance = new CleanAllIntentsResponse();
+            CleanAllIntentsResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CleanAllIntentsResponse.refineValues = function (_instance) {
+            _instance.cleanedIntents = _instance.cleanedIntents || [];
+            _instance.intentUpdateList = _instance.intentUpdateList || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CleanAllIntentsResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.Intent();
+                        _reader.readMessage(messageInitializer1, exports.Intent.deserializeBinaryFromReader);
+                        (_instance.cleanedIntents = _instance.cleanedIntents || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        var messageInitializer2 = new exports.IntentUpdate();
+                        _reader.readMessage(messageInitializer2, exports.IntentUpdate.deserializeBinaryFromReader);
+                        (_instance.intentUpdateList = _instance.intentUpdateList || []).push(messageInitializer2);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CleanAllIntentsResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CleanAllIntentsResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.cleanedIntents && _instance.cleanedIntents.length) {
+                _writer.writeRepeatedMessage(1, _instance.cleanedIntents, exports.Intent.serializeBinaryToWriter);
+            }
+            if (_instance.intentUpdateList && _instance.intentUpdateList.length) {
+                _writer.writeRepeatedMessage(2, _instance.intentUpdateList, exports.IntentUpdate.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(CleanAllIntentsResponse.prototype, "cleanedIntents", {
+            get: function () {
+                return this._cleanedIntents;
+            },
+            set: function (value) {
+                this._cleanedIntents = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllIntentsResponse.prototype, "intentUpdateList", {
+            get: function () {
+                return this._intentUpdateList;
+            },
+            set: function (value) {
+                this._intentUpdateList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CleanAllIntentsResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanAllIntentsResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CleanAllIntentsResponse.prototype.toObject = function () {
+            return {
+                cleanedIntents: (this.cleanedIntents || []).map(function (m) { return m.toObject(); }),
+                intentUpdateList: (this.intentUpdateList || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CleanAllIntentsResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CleanAllIntentsResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                cleanedIntents: (this.cleanedIntents || []).map(function (m) { return m.toProtobufJSON(options); }),
+                intentUpdateList: (this.intentUpdateList || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return CleanAllIntentsResponse;
+    }());
+    CleanAllIntentsResponse.id = 'ondewo.nlu.CleanAllIntentsResponse';
+    /**
+     * Message implementation for ondewo.nlu.CleanIntentRequest
+     */
+    var CleanIntentRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CleanIntentRequest to deeply clone from
+         */
+        function CleanIntentRequest(_value) {
+            _value = _value || {};
+            this.parent = _value.parent;
+            this.intentName = _value.intentName;
+            this.languageCode = _value.languageCode;
+            this.specialCharacters = _value.specialCharacters;
+            this.substringWhiteList = (_value.substringWhiteList || []).slice();
+            this.dryRun = _value.dryRun;
+            this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
+                ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
+                : undefined;
+            this.reannotateEntitiesOptions = _value.reannotateEntitiesOptions;
+            CleanIntentRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CleanIntentRequest.deserializeBinary = function (bytes) {
+            var instance = new CleanIntentRequest();
+            CleanIntentRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CleanIntentRequest.refineValues = function (_instance) {
+            _instance.parent = _instance.parent || '';
+            _instance.intentName = _instance.intentName || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.specialCharacters = _instance.specialCharacters || '';
+            _instance.substringWhiteList = _instance.substringWhiteList || [];
+            _instance.dryRun = _instance.dryRun || false;
+            _instance.trainingPhraseCleanerOptions =
+                _instance.trainingPhraseCleanerOptions || undefined;
+            _instance.reannotateEntitiesOptions =
+                _instance.reannotateEntitiesOptions || 0;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CleanIntentRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.parent = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.intentName = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 4:
+                        _instance.specialCharacters = _reader.readString();
+                        break;
+                    case 5:
+                        (_instance.substringWhiteList =
+                            _instance.substringWhiteList || []).push(_reader.readString());
+                        break;
+                    case 6:
+                        _instance.dryRun = _reader.readBool();
+                        break;
+                    case 7:
+                        _instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                        _reader.readMessage(_instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.deserializeBinaryFromReader);
+                        break;
+                    case 8:
+                        _instance.reannotateEntitiesOptions = _reader.readEnum();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CleanIntentRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CleanIntentRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parent) {
+                _writer.writeString(1, _instance.parent);
+            }
+            if (_instance.intentName) {
+                _writer.writeString(2, _instance.intentName);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(3, _instance.languageCode);
+            }
+            if (_instance.specialCharacters) {
+                _writer.writeString(4, _instance.specialCharacters);
+            }
+            if (_instance.substringWhiteList && _instance.substringWhiteList.length) {
+                _writer.writeRepeatedString(5, _instance.substringWhiteList);
+            }
+            if (_instance.dryRun) {
+                _writer.writeBool(6, _instance.dryRun);
+            }
+            if (_instance.trainingPhraseCleanerOptions) {
+                _writer.writeMessage(7, _instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.serializeBinaryToWriter);
+            }
+            if (_instance.reannotateEntitiesOptions) {
+                _writer.writeEnum(8, _instance.reannotateEntitiesOptions);
+            }
+        };
+        Object.defineProperty(CleanIntentRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "intentName", {
+            get: function () {
+                return this._intentName;
+            },
+            set: function (value) {
+                this._intentName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "substringWhiteList", {
+            get: function () {
+                return this._substringWhiteList;
+            },
+            set: function (value) {
+                this._substringWhiteList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "dryRun", {
+            get: function () {
+                return this._dryRun;
+            },
+            set: function (value) {
+                this._dryRun = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "trainingPhraseCleanerOptions", {
+            get: function () {
+                return this._trainingPhraseCleanerOptions;
+            },
+            set: function (value) {
+                this._trainingPhraseCleanerOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentRequest.prototype, "reannotateEntitiesOptions", {
+            get: function () {
+                return this._reannotateEntitiesOptions;
+            },
+            set: function (value) {
+                this._reannotateEntitiesOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CleanIntentRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanIntentRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CleanIntentRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                dryRun: this.dryRun,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toObject()
+                    : undefined,
+                reannotateEntitiesOptions: this.reannotateEntitiesOptions
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CleanIntentRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CleanIntentRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a;
+            return {
+                parent: this.parent,
+                intentName: this.intentName,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                dryRun: this.dryRun,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toProtobufJSON(options)
+                    : null,
+                reannotateEntitiesOptions: exports.ReannotateEntitiesOptions[(_a = this.reannotateEntitiesOptions) !== null && _a !== void 0 ? _a : 0]
+            };
+        };
+        return CleanIntentRequest;
+    }());
+    CleanIntentRequest.id = 'ondewo.nlu.CleanIntentRequest';
+    /**
+     * Message implementation for ondewo.nlu.CleanIntentResponse
+     */
+    var CleanIntentResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CleanIntentResponse to deeply clone from
+         */
+        function CleanIntentResponse(_value) {
+            _value = _value || {};
+            this.cleanedIntent = _value.cleanedIntent
+                ? new exports.Intent(_value.cleanedIntent)
+                : undefined;
+            this.intentUpdate = _value.intentUpdate
+                ? new exports.IntentUpdate(_value.intentUpdate)
+                : undefined;
+            CleanIntentResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CleanIntentResponse.deserializeBinary = function (bytes) {
+            var instance = new CleanIntentResponse();
+            CleanIntentResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CleanIntentResponse.refineValues = function (_instance) {
+            _instance.cleanedIntent = _instance.cleanedIntent || undefined;
+            _instance.intentUpdate = _instance.intentUpdate || undefined;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CleanIntentResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.cleanedIntent = new exports.Intent();
+                        _reader.readMessage(_instance.cleanedIntent, exports.Intent.deserializeBinaryFromReader);
+                        break;
+                    case 2:
+                        _instance.intentUpdate = new exports.IntentUpdate();
+                        _reader.readMessage(_instance.intentUpdate, exports.IntentUpdate.deserializeBinaryFromReader);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CleanIntentResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CleanIntentResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.cleanedIntent) {
+                _writer.writeMessage(1, _instance.cleanedIntent, exports.Intent.serializeBinaryToWriter);
+            }
+            if (_instance.intentUpdate) {
+                _writer.writeMessage(2, _instance.intentUpdate, exports.IntentUpdate.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(CleanIntentResponse.prototype, "cleanedIntent", {
+            get: function () {
+                return this._cleanedIntent;
+            },
+            set: function (value) {
+                this._cleanedIntent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanIntentResponse.prototype, "intentUpdate", {
+            get: function () {
+                return this._intentUpdate;
+            },
+            set: function (value) {
+                this._intentUpdate = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CleanIntentResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanIntentResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CleanIntentResponse.prototype.toObject = function () {
+            return {
+                cleanedIntent: this.cleanedIntent
+                    ? this.cleanedIntent.toObject()
+                    : undefined,
+                intentUpdate: this.intentUpdate ? this.intentUpdate.toObject() : undefined
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CleanIntentResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CleanIntentResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                cleanedIntent: this.cleanedIntent
+                    ? this.cleanedIntent.toProtobufJSON(options)
+                    : null,
+                intentUpdate: this.intentUpdate
+                    ? this.intentUpdate.toProtobufJSON(options)
+                    : null
+            };
+        };
+        return CleanIntentResponse;
+    }());
+    CleanIntentResponse.id = 'ondewo.nlu.CleanIntentResponse';
+    /**
+     * Message implementation for ondewo.nlu.TrainingPhraseCleanerOptions
+     */
+    var TrainingPhraseCleanerOptions = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of TrainingPhraseCleanerOptions to deeply clone from
+         */
+        function TrainingPhraseCleanerOptions(_value) {
+            _value = _value || {};
+            this.deleteRepeatedWhitespaces = _value.deleteRepeatedWhitespaces;
+            this.deleteLeadingSpecialCharacters = _value.deleteLeadingSpecialCharacters;
+            this.deleteTrailingSpecialCharacters =
+                _value.deleteTrailingSpecialCharacters;
+            TrainingPhraseCleanerOptions.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        TrainingPhraseCleanerOptions.deserializeBinary = function (bytes) {
+            var instance = new TrainingPhraseCleanerOptions();
+            TrainingPhraseCleanerOptions.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        TrainingPhraseCleanerOptions.refineValues = function (_instance) {
+            _instance.deleteRepeatedWhitespaces =
+                _instance.deleteRepeatedWhitespaces || false;
+            _instance.deleteLeadingSpecialCharacters =
+                _instance.deleteLeadingSpecialCharacters || false;
+            _instance.deleteTrailingSpecialCharacters =
+                _instance.deleteTrailingSpecialCharacters || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        TrainingPhraseCleanerOptions.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.deleteRepeatedWhitespaces = _reader.readBool();
+                        break;
+                    case 2:
+                        _instance.deleteLeadingSpecialCharacters = _reader.readBool();
+                        break;
+                    case 3:
+                        _instance.deleteTrailingSpecialCharacters = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            TrainingPhraseCleanerOptions.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        TrainingPhraseCleanerOptions.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.deleteRepeatedWhitespaces) {
+                _writer.writeBool(1, _instance.deleteRepeatedWhitespaces);
+            }
+            if (_instance.deleteLeadingSpecialCharacters) {
+                _writer.writeBool(2, _instance.deleteLeadingSpecialCharacters);
+            }
+            if (_instance.deleteTrailingSpecialCharacters) {
+                _writer.writeBool(3, _instance.deleteTrailingSpecialCharacters);
+            }
+        };
+        Object.defineProperty(TrainingPhraseCleanerOptions.prototype, "deleteRepeatedWhitespaces", {
+            get: function () {
+                return this._deleteRepeatedWhitespaces;
+            },
+            set: function (value) {
+                this._deleteRepeatedWhitespaces = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TrainingPhraseCleanerOptions.prototype, "deleteLeadingSpecialCharacters", {
+            get: function () {
+                return this._deleteLeadingSpecialCharacters;
+            },
+            set: function (value) {
+                this._deleteLeadingSpecialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TrainingPhraseCleanerOptions.prototype, "deleteTrailingSpecialCharacters", {
+            get: function () {
+                return this._deleteTrailingSpecialCharacters;
+            },
+            set: function (value) {
+                this._deleteTrailingSpecialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        TrainingPhraseCleanerOptions.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            TrainingPhraseCleanerOptions.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        TrainingPhraseCleanerOptions.prototype.toObject = function () {
+            return {
+                deleteRepeatedWhitespaces: this.deleteRepeatedWhitespaces,
+                deleteLeadingSpecialCharacters: this.deleteLeadingSpecialCharacters,
+                deleteTrailingSpecialCharacters: this.deleteTrailingSpecialCharacters
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        TrainingPhraseCleanerOptions.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        TrainingPhraseCleanerOptions.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                deleteRepeatedWhitespaces: this.deleteRepeatedWhitespaces,
+                deleteLeadingSpecialCharacters: this.deleteLeadingSpecialCharacters,
+                deleteTrailingSpecialCharacters: this.deleteTrailingSpecialCharacters
+            };
+        };
+        return TrainingPhraseCleanerOptions;
+    }());
+    TrainingPhraseCleanerOptions.id = 'ondewo.nlu.TrainingPhraseCleanerOptions';
+    /**
+     * Message implementation for ondewo.nlu.StringUpdate
+     */
+    var StringUpdate = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of StringUpdate to deeply clone from
+         */
+        function StringUpdate(_value) {
+            _value = _value || {};
+            this.new = _value.new;
+            this.old = _value.old;
+            StringUpdate.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        StringUpdate.deserializeBinary = function (bytes) {
+            var instance = new StringUpdate();
+            StringUpdate.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        StringUpdate.refineValues = function (_instance) {
+            _instance.new = _instance.new || '';
+            _instance.old = _instance.old || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        StringUpdate.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.new = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.old = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            StringUpdate.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        StringUpdate.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.new) {
+                _writer.writeString(1, _instance.new);
+            }
+            if (_instance.old) {
+                _writer.writeString(2, _instance.old);
+            }
+        };
+        Object.defineProperty(StringUpdate.prototype, "new", {
+            get: function () {
+                return this._new;
+            },
+            set: function (value) {
+                this._new = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(StringUpdate.prototype, "old", {
+            get: function () {
+                return this._old;
+            },
+            set: function (value) {
+                this._old = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        StringUpdate.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            StringUpdate.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        StringUpdate.prototype.toObject = function () {
+            return {
+                new: this.new,
+                old: this.old
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        StringUpdate.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        StringUpdate.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                new: this.new,
+                old: this.old
+            };
+        };
+        return StringUpdate;
+    }());
+    StringUpdate.id = 'ondewo.nlu.StringUpdate';
+    /**
+     * Message implementation for ondewo.nlu.IntentUpdate
+     */
+    exports.IntentUpdate = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of IntentUpdate to deeply clone from
+         */
+        function IntentUpdate(_value) {
+            _value = _value || {};
+            this.intentDisplayName = _value.intentDisplayName;
+            this.trainingPhraseUpdateList = (_value.trainingPhraseUpdateList || []).map(function (m) { return new IntentUpdate.TrainingPhraseUpdate(m); });
+            this.deletedParameters = (_value.deletedParameters || []).slice();
+            IntentUpdate.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        IntentUpdate.deserializeBinary = function (bytes) {
+            var instance = new IntentUpdate();
+            IntentUpdate.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        IntentUpdate.refineValues = function (_instance) {
+            _instance.intentDisplayName = _instance.intentDisplayName || '';
+            _instance.trainingPhraseUpdateList =
+                _instance.trainingPhraseUpdateList || [];
+            _instance.deletedParameters = _instance.deletedParameters || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        IntentUpdate.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.intentDisplayName = _reader.readString();
+                        break;
+                    case 2:
+                        var messageInitializer2 = new IntentUpdate.TrainingPhraseUpdate();
+                        _reader.readMessage(messageInitializer2, IntentUpdate.TrainingPhraseUpdate.deserializeBinaryFromReader);
+                        (_instance.trainingPhraseUpdateList =
+                            _instance.trainingPhraseUpdateList || []).push(messageInitializer2);
+                        break;
+                    case 3:
+                        (_instance.deletedParameters =
+                            _instance.deletedParameters || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            IntentUpdate.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        IntentUpdate.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.intentDisplayName) {
+                _writer.writeString(1, _instance.intentDisplayName);
+            }
+            if (_instance.trainingPhraseUpdateList &&
+                _instance.trainingPhraseUpdateList.length) {
+                _writer.writeRepeatedMessage(2, _instance.trainingPhraseUpdateList, IntentUpdate.TrainingPhraseUpdate.serializeBinaryToWriter);
+            }
+            if (_instance.deletedParameters && _instance.deletedParameters.length) {
+                _writer.writeRepeatedString(3, _instance.deletedParameters);
+            }
+        };
+        Object.defineProperty(IntentUpdate.prototype, "intentDisplayName", {
+            get: function () {
+                return this._intentDisplayName;
+            },
+            set: function (value) {
+                this._intentDisplayName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(IntentUpdate.prototype, "trainingPhraseUpdateList", {
+            get: function () {
+                return this._trainingPhraseUpdateList;
+            },
+            set: function (value) {
+                this._trainingPhraseUpdateList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(IntentUpdate.prototype, "deletedParameters", {
+            get: function () {
+                return this._deletedParameters;
+            },
+            set: function (value) {
+                this._deletedParameters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        IntentUpdate.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            IntentUpdate.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        IntentUpdate.prototype.toObject = function () {
+            return {
+                intentDisplayName: this.intentDisplayName,
+                trainingPhraseUpdateList: (this.trainingPhraseUpdateList || []).map(function (m) { return m.toObject(); }),
+                deletedParameters: (this.deletedParameters || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        IntentUpdate.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        IntentUpdate.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                intentDisplayName: this.intentDisplayName,
+                trainingPhraseUpdateList: (this.trainingPhraseUpdateList || []).map(function (m) { return m.toProtobufJSON(options); }),
+                deletedParameters: (this.deletedParameters || []).slice()
+            };
+        };
+        return IntentUpdate;
+    }());
+    exports.IntentUpdate.id = 'ondewo.nlu.IntentUpdate';
+    (function (IntentUpdate) {
+        /**
+         * Message implementation for ondewo.nlu.TrainingPhraseUpdate
+         */
+        var TrainingPhraseUpdate = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of TrainingPhraseUpdate to deeply clone from
+             */
+            function TrainingPhraseUpdate(_value) {
+                _value = _value || {};
+                this.trainingPhraseUpdate = _value.trainingPhraseUpdate
+                    ? new StringUpdate(_value.trainingPhraseUpdate)
+                    : undefined;
+                this.entityUpdates = (_value.entityUpdates || []).map(function (m) { return new StringUpdate(m); });
+                this.entitiesReannotated = (_value.entitiesReannotated || []).slice();
+                this.containsUpdateVariable = _value.containsUpdateVariable;
+                TrainingPhraseUpdate.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            TrainingPhraseUpdate.deserializeBinary = function (bytes) {
+                var instance = new TrainingPhraseUpdate();
+                TrainingPhraseUpdate.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            TrainingPhraseUpdate.refineValues = function (_instance) {
+                _instance.trainingPhraseUpdate =
+                    _instance.trainingPhraseUpdate || undefined;
+                _instance.entityUpdates = _instance.entityUpdates || [];
+                _instance.entitiesReannotated = _instance.entitiesReannotated || [];
+                _instance.containsUpdateVariable =
+                    _instance.containsUpdateVariable || false;
+            };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            TrainingPhraseUpdate.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.trainingPhraseUpdate = new StringUpdate();
+                            _reader.readMessage(_instance.trainingPhraseUpdate, StringUpdate.deserializeBinaryFromReader);
+                            break;
+                        case 2:
+                            var messageInitializer2 = new StringUpdate();
+                            _reader.readMessage(messageInitializer2, StringUpdate.deserializeBinaryFromReader);
+                            (_instance.entityUpdates = _instance.entityUpdates || []).push(messageInitializer2);
+                            break;
+                        case 3:
+                            (_instance.entitiesReannotated =
+                                _instance.entitiesReannotated || []).push(_reader.readString());
+                            break;
+                        case 4:
+                            _instance.containsUpdateVariable = _reader.readBool();
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                TrainingPhraseUpdate.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            TrainingPhraseUpdate.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.trainingPhraseUpdate) {
+                    _writer.writeMessage(1, _instance.trainingPhraseUpdate, StringUpdate.serializeBinaryToWriter);
+                }
+                if (_instance.entityUpdates && _instance.entityUpdates.length) {
+                    _writer.writeRepeatedMessage(2, _instance.entityUpdates, StringUpdate.serializeBinaryToWriter);
+                }
+                if (_instance.entitiesReannotated &&
+                    _instance.entitiesReannotated.length) {
+                    _writer.writeRepeatedString(3, _instance.entitiesReannotated);
+                }
+                if (_instance.containsUpdateVariable) {
+                    _writer.writeBool(4, _instance.containsUpdateVariable);
+                }
+            };
+            Object.defineProperty(TrainingPhraseUpdate.prototype, "trainingPhraseUpdate", {
+                get: function () {
+                    return this._trainingPhraseUpdate;
+                },
+                set: function (value) {
+                    this._trainingPhraseUpdate = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseUpdate.prototype, "entityUpdates", {
+                get: function () {
+                    return this._entityUpdates;
+                },
+                set: function (value) {
+                    this._entityUpdates = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseUpdate.prototype, "entitiesReannotated", {
+                get: function () {
+                    return this._entitiesReannotated;
+                },
+                set: function (value) {
+                    this._entitiesReannotated = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseUpdate.prototype, "containsUpdateVariable", {
+                get: function () {
+                    return this._containsUpdateVariable;
+                },
+                set: function (value) {
+                    this._containsUpdateVariable = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            TrainingPhraseUpdate.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                TrainingPhraseUpdate.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            TrainingPhraseUpdate.prototype.toObject = function () {
+                return {
+                    trainingPhraseUpdate: this.trainingPhraseUpdate
+                        ? this.trainingPhraseUpdate.toObject()
+                        : undefined,
+                    entityUpdates: (this.entityUpdates || []).map(function (m) { return m.toObject(); }),
+                    entitiesReannotated: (this.entitiesReannotated || []).slice(),
+                    containsUpdateVariable: this.containsUpdateVariable
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            TrainingPhraseUpdate.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            TrainingPhraseUpdate.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                return {
+                    trainingPhraseUpdate: this.trainingPhraseUpdate
+                        ? this.trainingPhraseUpdate.toProtobufJSON(options)
+                        : null,
+                    entityUpdates: (this.entityUpdates || []).map(function (m) { return m.toProtobufJSON(options); }),
+                    entitiesReannotated: (this.entitiesReannotated || []).slice(),
+                    containsUpdateVariable: this.containsUpdateVariable
+                };
+            };
+            return TrainingPhraseUpdate;
+        }());
+        TrainingPhraseUpdate.id = 'ondewo.nlu.TrainingPhraseUpdate';
+        IntentUpdate.TrainingPhraseUpdate = TrainingPhraseUpdate;
+    })(exports.IntentUpdate || (exports.IntentUpdate = {}));
+    /**
+     * Message implementation for ondewo.nlu.EntityTypeUpdate
+     */
+    exports.EntityTypeUpdate = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of EntityTypeUpdate to deeply clone from
+         */
+        function EntityTypeUpdate(_value) {
+            _value = _value || {};
+            this.entityTypeName = _value.entityTypeName;
+            this.valuesUpdateList = (_value.valuesUpdateList || []).map(function (m) { return new EntityTypeUpdate.EntityUpdate(m); });
+            EntityTypeUpdate.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        EntityTypeUpdate.deserializeBinary = function (bytes) {
+            var instance = new EntityTypeUpdate();
+            EntityTypeUpdate.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        EntityTypeUpdate.refineValues = function (_instance) {
+            _instance.entityTypeName = _instance.entityTypeName || '';
+            _instance.valuesUpdateList = _instance.valuesUpdateList || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        EntityTypeUpdate.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.entityTypeName = _reader.readString();
+                        break;
+                    case 2:
+                        var messageInitializer2 = new EntityTypeUpdate.EntityUpdate();
+                        _reader.readMessage(messageInitializer2, EntityTypeUpdate.EntityUpdate.deserializeBinaryFromReader);
+                        (_instance.valuesUpdateList = _instance.valuesUpdateList || []).push(messageInitializer2);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            EntityTypeUpdate.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        EntityTypeUpdate.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.entityTypeName) {
+                _writer.writeString(1, _instance.entityTypeName);
+            }
+            if (_instance.valuesUpdateList && _instance.valuesUpdateList.length) {
+                _writer.writeRepeatedMessage(2, _instance.valuesUpdateList, EntityTypeUpdate.EntityUpdate.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(EntityTypeUpdate.prototype, "entityTypeName", {
+            get: function () {
+                return this._entityTypeName;
+            },
+            set: function (value) {
+                this._entityTypeName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(EntityTypeUpdate.prototype, "valuesUpdateList", {
+            get: function () {
+                return this._valuesUpdateList;
+            },
+            set: function (value) {
+                this._valuesUpdateList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        EntityTypeUpdate.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            EntityTypeUpdate.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        EntityTypeUpdate.prototype.toObject = function () {
+            return {
+                entityTypeName: this.entityTypeName,
+                valuesUpdateList: (this.valuesUpdateList || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        EntityTypeUpdate.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        EntityTypeUpdate.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                entityTypeName: this.entityTypeName,
+                valuesUpdateList: (this.valuesUpdateList || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return EntityTypeUpdate;
+    }());
+    exports.EntityTypeUpdate.id = 'ondewo.nlu.EntityTypeUpdate';
+    (function (EntityTypeUpdate) {
+        /**
+         * Message implementation for ondewo.nlu.EntityUpdate
+         */
+        var EntityUpdate = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of EntityUpdate to deeply clone from
+             */
+            function EntityUpdate(_value) {
+                _value = _value || {};
+                this.entityValueUpdate = _value.entityValueUpdate
+                    ? new StringUpdate(_value.entityValueUpdate)
+                    : undefined;
+                this.entitySynonymUpdates = (_value.entitySynonymUpdates || []).map(function (m) { return new StringUpdate(m); });
+                EntityUpdate.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            EntityUpdate.deserializeBinary = function (bytes) {
+                var instance = new EntityUpdate();
+                EntityUpdate.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            EntityUpdate.refineValues = function (_instance) {
+                _instance.entityValueUpdate = _instance.entityValueUpdate || undefined;
+                _instance.entitySynonymUpdates = _instance.entitySynonymUpdates || [];
+            };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            EntityUpdate.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.entityValueUpdate = new StringUpdate();
+                            _reader.readMessage(_instance.entityValueUpdate, StringUpdate.deserializeBinaryFromReader);
+                            break;
+                        case 2:
+                            var messageInitializer2 = new StringUpdate();
+                            _reader.readMessage(messageInitializer2, StringUpdate.deserializeBinaryFromReader);
+                            (_instance.entitySynonymUpdates =
+                                _instance.entitySynonymUpdates || []).push(messageInitializer2);
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                EntityUpdate.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            EntityUpdate.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.entityValueUpdate) {
+                    _writer.writeMessage(1, _instance.entityValueUpdate, StringUpdate.serializeBinaryToWriter);
+                }
+                if (_instance.entitySynonymUpdates &&
+                    _instance.entitySynonymUpdates.length) {
+                    _writer.writeRepeatedMessage(2, _instance.entitySynonymUpdates, StringUpdate.serializeBinaryToWriter);
+                }
+            };
+            Object.defineProperty(EntityUpdate.prototype, "entityValueUpdate", {
+                get: function () {
+                    return this._entityValueUpdate;
+                },
+                set: function (value) {
+                    this._entityValueUpdate = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(EntityUpdate.prototype, "entitySynonymUpdates", {
+                get: function () {
+                    return this._entitySynonymUpdates;
+                },
+                set: function (value) {
+                    this._entitySynonymUpdates = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            EntityUpdate.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                EntityUpdate.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            EntityUpdate.prototype.toObject = function () {
+                return {
+                    entityValueUpdate: this.entityValueUpdate
+                        ? this.entityValueUpdate.toObject()
+                        : undefined,
+                    entitySynonymUpdates: (this.entitySynonymUpdates || []).map(function (m) { return m.toObject(); })
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            EntityUpdate.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            EntityUpdate.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                return {
+                    entityValueUpdate: this.entityValueUpdate
+                        ? this.entityValueUpdate.toProtobufJSON(options)
+                        : null,
+                    entitySynonymUpdates: (this.entitySynonymUpdates || []).map(function (m) { return m.toProtobufJSON(options); })
+                };
+            };
+            return EntityUpdate;
+        }());
+        EntityUpdate.id = 'ondewo.nlu.EntityUpdate';
+        EntityTypeUpdate.EntityUpdate = EntityUpdate;
+    })(exports.EntityTypeUpdate || (exports.EntityTypeUpdate = {}));
+    /**
+     * Message implementation for ondewo.nlu.CleanAllEntityTypesRequest
+     */
+    var CleanAllEntityTypesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CleanAllEntityTypesRequest to deeply clone from
+         */
+        function CleanAllEntityTypesRequest(_value) {
+            _value = _value || {};
+            this.parent = _value.parent;
+            this.languageCode = _value.languageCode;
+            this.specialCharacters = _value.specialCharacters;
+            this.substringWhiteList = (_value.substringWhiteList || []).slice();
+            this.maxEntityCountUpdate = _value.maxEntityCountUpdate;
+            this.forbiddenEntityTypePatterns = (_value.forbiddenEntityTypePatterns || []).slice();
+            this.dryRun = _value.dryRun;
+            this.numberOfWorkers = _value.numberOfWorkers;
+            CleanAllEntityTypesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CleanAllEntityTypesRequest.deserializeBinary = function (bytes) {
+            var instance = new CleanAllEntityTypesRequest();
+            CleanAllEntityTypesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CleanAllEntityTypesRequest.refineValues = function (_instance) {
+            _instance.parent = _instance.parent || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.specialCharacters = _instance.specialCharacters || '';
+            _instance.substringWhiteList = _instance.substringWhiteList || [];
+            _instance.maxEntityCountUpdate = _instance.maxEntityCountUpdate || 0;
+            _instance.forbiddenEntityTypePatterns =
+                _instance.forbiddenEntityTypePatterns || [];
+            _instance.dryRun = _instance.dryRun || false;
+            _instance.numberOfWorkers = _instance.numberOfWorkers || 0;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CleanAllEntityTypesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.parent = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.specialCharacters = _reader.readString();
+                        break;
+                    case 4:
+                        (_instance.substringWhiteList =
+                            _instance.substringWhiteList || []).push(_reader.readString());
+                        break;
+                    case 5:
+                        _instance.maxEntityCountUpdate = _reader.readInt32();
+                        break;
+                    case 6:
+                        (_instance.forbiddenEntityTypePatterns =
+                            _instance.forbiddenEntityTypePatterns || []).push(_reader.readString());
+                        break;
+                    case 7:
+                        _instance.dryRun = _reader.readBool();
+                        break;
+                    case 8:
+                        _instance.numberOfWorkers = _reader.readInt32();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CleanAllEntityTypesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CleanAllEntityTypesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parent) {
+                _writer.writeString(1, _instance.parent);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(2, _instance.languageCode);
+            }
+            if (_instance.specialCharacters) {
+                _writer.writeString(3, _instance.specialCharacters);
+            }
+            if (_instance.substringWhiteList && _instance.substringWhiteList.length) {
+                _writer.writeRepeatedString(4, _instance.substringWhiteList);
+            }
+            if (_instance.maxEntityCountUpdate) {
+                _writer.writeInt32(5, _instance.maxEntityCountUpdate);
+            }
+            if (_instance.forbiddenEntityTypePatterns &&
+                _instance.forbiddenEntityTypePatterns.length) {
+                _writer.writeRepeatedString(6, _instance.forbiddenEntityTypePatterns);
+            }
+            if (_instance.dryRun) {
+                _writer.writeBool(7, _instance.dryRun);
+            }
+            if (_instance.numberOfWorkers) {
+                _writer.writeInt32(8, _instance.numberOfWorkers);
+            }
+        };
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "substringWhiteList", {
+            get: function () {
+                return this._substringWhiteList;
+            },
+            set: function (value) {
+                this._substringWhiteList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "maxEntityCountUpdate", {
+            get: function () {
+                return this._maxEntityCountUpdate;
+            },
+            set: function (value) {
+                this._maxEntityCountUpdate = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "forbiddenEntityTypePatterns", {
+            get: function () {
+                return this._forbiddenEntityTypePatterns;
+            },
+            set: function (value) {
+                this._forbiddenEntityTypePatterns = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "dryRun", {
+            get: function () {
+                return this._dryRun;
+            },
+            set: function (value) {
+                this._dryRun = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesRequest.prototype, "numberOfWorkers", {
+            get: function () {
+                return this._numberOfWorkers;
+            },
+            set: function (value) {
+                this._numberOfWorkers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CleanAllEntityTypesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanAllEntityTypesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CleanAllEntityTypesRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                maxEntityCountUpdate: this.maxEntityCountUpdate,
+                forbiddenEntityTypePatterns: (this.forbiddenEntityTypePatterns || []).slice(),
+                dryRun: this.dryRun,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CleanAllEntityTypesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CleanAllEntityTypesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                maxEntityCountUpdate: this.maxEntityCountUpdate,
+                forbiddenEntityTypePatterns: (this.forbiddenEntityTypePatterns || []).slice(),
+                dryRun: this.dryRun,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        return CleanAllEntityTypesRequest;
+    }());
+    CleanAllEntityTypesRequest.id = 'ondewo.nlu.CleanAllEntityTypesRequest';
+    /**
+     * Message implementation for ondewo.nlu.CleanAllEntityTypesResponse
+     */
+    var CleanAllEntityTypesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CleanAllEntityTypesResponse to deeply clone from
+         */
+        function CleanAllEntityTypesResponse(_value) {
+            _value = _value || {};
+            this.cleanedEntityTypes = (_value.cleanedEntityTypes || []).map(function (m) { return new exports.EntityType(m); });
+            this.deletedEntityTypes = (_value.deletedEntityTypes || []).map(function (m) { return new exports.EntityType(m); });
+            this.entityTypeUpdates = (_value.entityTypeUpdates || []).map(function (m) { return new exports.EntityTypeUpdate(m); });
+            this.entityTypeDeletions = (_value.entityTypeDeletions || []).map(function (m) { return new exports.EntityTypeUpdate(m); });
+            CleanAllEntityTypesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CleanAllEntityTypesResponse.deserializeBinary = function (bytes) {
+            var instance = new CleanAllEntityTypesResponse();
+            CleanAllEntityTypesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CleanAllEntityTypesResponse.refineValues = function (_instance) {
+            _instance.cleanedEntityTypes = _instance.cleanedEntityTypes || [];
+            _instance.deletedEntityTypes = _instance.deletedEntityTypes || [];
+            _instance.entityTypeUpdates = _instance.entityTypeUpdates || [];
+            _instance.entityTypeDeletions = _instance.entityTypeDeletions || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CleanAllEntityTypesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.EntityType();
+                        _reader.readMessage(messageInitializer1, exports.EntityType.deserializeBinaryFromReader);
+                        (_instance.cleanedEntityTypes =
+                            _instance.cleanedEntityTypes || []).push(messageInitializer1);
+                        break;
+                    case 2:
+                        var messageInitializer2 = new exports.EntityType();
+                        _reader.readMessage(messageInitializer2, exports.EntityType.deserializeBinaryFromReader);
+                        (_instance.deletedEntityTypes =
+                            _instance.deletedEntityTypes || []).push(messageInitializer2);
+                        break;
+                    case 3:
+                        var messageInitializer3 = new exports.EntityTypeUpdate();
+                        _reader.readMessage(messageInitializer3, exports.EntityTypeUpdate.deserializeBinaryFromReader);
+                        (_instance.entityTypeUpdates =
+                            _instance.entityTypeUpdates || []).push(messageInitializer3);
+                        break;
+                    case 4:
+                        var messageInitializer4 = new exports.EntityTypeUpdate();
+                        _reader.readMessage(messageInitializer4, exports.EntityTypeUpdate.deserializeBinaryFromReader);
+                        (_instance.entityTypeDeletions =
+                            _instance.entityTypeDeletions || []).push(messageInitializer4);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CleanAllEntityTypesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CleanAllEntityTypesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.cleanedEntityTypes && _instance.cleanedEntityTypes.length) {
+                _writer.writeRepeatedMessage(1, _instance.cleanedEntityTypes, exports.EntityType.serializeBinaryToWriter);
+            }
+            if (_instance.deletedEntityTypes && _instance.deletedEntityTypes.length) {
+                _writer.writeRepeatedMessage(2, _instance.deletedEntityTypes, exports.EntityType.serializeBinaryToWriter);
+            }
+            if (_instance.entityTypeUpdates && _instance.entityTypeUpdates.length) {
+                _writer.writeRepeatedMessage(3, _instance.entityTypeUpdates, exports.EntityTypeUpdate.serializeBinaryToWriter);
+            }
+            if (_instance.entityTypeDeletions && _instance.entityTypeDeletions.length) {
+                _writer.writeRepeatedMessage(4, _instance.entityTypeDeletions, exports.EntityTypeUpdate.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(CleanAllEntityTypesResponse.prototype, "cleanedEntityTypes", {
+            get: function () {
+                return this._cleanedEntityTypes;
+            },
+            set: function (value) {
+                this._cleanedEntityTypes = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesResponse.prototype, "deletedEntityTypes", {
+            get: function () {
+                return this._deletedEntityTypes;
+            },
+            set: function (value) {
+                this._deletedEntityTypes = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesResponse.prototype, "entityTypeUpdates", {
+            get: function () {
+                return this._entityTypeUpdates;
+            },
+            set: function (value) {
+                this._entityTypeUpdates = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanAllEntityTypesResponse.prototype, "entityTypeDeletions", {
+            get: function () {
+                return this._entityTypeDeletions;
+            },
+            set: function (value) {
+                this._entityTypeDeletions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CleanAllEntityTypesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanAllEntityTypesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CleanAllEntityTypesResponse.prototype.toObject = function () {
+            return {
+                cleanedEntityTypes: (this.cleanedEntityTypes || []).map(function (m) { return m.toObject(); }),
+                deletedEntityTypes: (this.deletedEntityTypes || []).map(function (m) { return m.toObject(); }),
+                entityTypeUpdates: (this.entityTypeUpdates || []).map(function (m) { return m.toObject(); }),
+                entityTypeDeletions: (this.entityTypeDeletions || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CleanAllEntityTypesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CleanAllEntityTypesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                cleanedEntityTypes: (this.cleanedEntityTypes || []).map(function (m) { return m.toProtobufJSON(options); }),
+                deletedEntityTypes: (this.deletedEntityTypes || []).map(function (m) { return m.toProtobufJSON(options); }),
+                entityTypeUpdates: (this.entityTypeUpdates || []).map(function (m) { return m.toProtobufJSON(options); }),
+                entityTypeDeletions: (this.entityTypeDeletions || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return CleanAllEntityTypesResponse;
+    }());
+    CleanAllEntityTypesResponse.id = 'ondewo.nlu.CleanAllEntityTypesResponse';
+    /**
+     * Message implementation for ondewo.nlu.CleanEntityTypeRequest
+     */
+    var CleanEntityTypeRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CleanEntityTypeRequest to deeply clone from
+         */
+        function CleanEntityTypeRequest(_value) {
+            _value = _value || {};
+            this.parent = _value.parent;
+            this.entityTypeName = _value.entityTypeName;
+            this.languageCode = _value.languageCode;
+            this.specialCharacters = _value.specialCharacters;
+            this.substringWhiteList = (_value.substringWhiteList || []).slice();
+            this.maxEntityCountUpdate = _value.maxEntityCountUpdate;
+            this.dryRun = _value.dryRun;
+            CleanEntityTypeRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CleanEntityTypeRequest.deserializeBinary = function (bytes) {
+            var instance = new CleanEntityTypeRequest();
+            CleanEntityTypeRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CleanEntityTypeRequest.refineValues = function (_instance) {
+            _instance.parent = _instance.parent || '';
+            _instance.entityTypeName = _instance.entityTypeName || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.specialCharacters = _instance.specialCharacters || '';
+            _instance.substringWhiteList = _instance.substringWhiteList || [];
+            _instance.maxEntityCountUpdate = _instance.maxEntityCountUpdate || 0;
+            _instance.dryRun = _instance.dryRun || false;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CleanEntityTypeRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.parent = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.entityTypeName = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 4:
+                        _instance.specialCharacters = _reader.readString();
+                        break;
+                    case 5:
+                        (_instance.substringWhiteList =
+                            _instance.substringWhiteList || []).push(_reader.readString());
+                        break;
+                    case 6:
+                        _instance.maxEntityCountUpdate = _reader.readInt32();
+                        break;
+                    case 7:
+                        _instance.dryRun = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CleanEntityTypeRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CleanEntityTypeRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parent) {
+                _writer.writeString(1, _instance.parent);
+            }
+            if (_instance.entityTypeName) {
+                _writer.writeString(2, _instance.entityTypeName);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(3, _instance.languageCode);
+            }
+            if (_instance.specialCharacters) {
+                _writer.writeString(4, _instance.specialCharacters);
+            }
+            if (_instance.substringWhiteList && _instance.substringWhiteList.length) {
+                _writer.writeRepeatedString(5, _instance.substringWhiteList);
+            }
+            if (_instance.maxEntityCountUpdate) {
+                _writer.writeInt32(6, _instance.maxEntityCountUpdate);
+            }
+            if (_instance.dryRun) {
+                _writer.writeBool(7, _instance.dryRun);
+            }
+        };
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "entityTypeName", {
+            get: function () {
+                return this._entityTypeName;
+            },
+            set: function (value) {
+                this._entityTypeName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "substringWhiteList", {
+            get: function () {
+                return this._substringWhiteList;
+            },
+            set: function (value) {
+                this._substringWhiteList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "maxEntityCountUpdate", {
+            get: function () {
+                return this._maxEntityCountUpdate;
+            },
+            set: function (value) {
+                this._maxEntityCountUpdate = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeRequest.prototype, "dryRun", {
+            get: function () {
+                return this._dryRun;
+            },
+            set: function (value) {
+                this._dryRun = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CleanEntityTypeRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanEntityTypeRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CleanEntityTypeRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                entityTypeName: this.entityTypeName,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                maxEntityCountUpdate: this.maxEntityCountUpdate,
+                dryRun: this.dryRun
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CleanEntityTypeRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CleanEntityTypeRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parent: this.parent,
+                entityTypeName: this.entityTypeName,
+                languageCode: this.languageCode,
+                specialCharacters: this.specialCharacters,
+                substringWhiteList: (this.substringWhiteList || []).slice(),
+                maxEntityCountUpdate: this.maxEntityCountUpdate,
+                dryRun: this.dryRun
+            };
+        };
+        return CleanEntityTypeRequest;
+    }());
+    CleanEntityTypeRequest.id = 'ondewo.nlu.CleanEntityTypeRequest';
+    /**
+     * Message implementation for ondewo.nlu.CleanEntityTypeResponse
+     */
+    var CleanEntityTypeResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CleanEntityTypeResponse to deeply clone from
+         */
+        function CleanEntityTypeResponse(_value) {
+            _value = _value || {};
+            this.cleanedEntityType = _value.cleanedEntityType
+                ? new exports.EntityType(_value.cleanedEntityType)
+                : undefined;
+            this.entityTypeUpdate = _value.entityTypeUpdate
+                ? new exports.EntityTypeUpdate(_value.entityTypeUpdate)
+                : undefined;
+            CleanEntityTypeResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CleanEntityTypeResponse.deserializeBinary = function (bytes) {
+            var instance = new CleanEntityTypeResponse();
+            CleanEntityTypeResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CleanEntityTypeResponse.refineValues = function (_instance) {
+            _instance.cleanedEntityType = _instance.cleanedEntityType || undefined;
+            _instance.entityTypeUpdate = _instance.entityTypeUpdate || undefined;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CleanEntityTypeResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.cleanedEntityType = new exports.EntityType();
+                        _reader.readMessage(_instance.cleanedEntityType, exports.EntityType.deserializeBinaryFromReader);
+                        break;
+                    case 2:
+                        _instance.entityTypeUpdate = new exports.EntityTypeUpdate();
+                        _reader.readMessage(_instance.entityTypeUpdate, exports.EntityTypeUpdate.deserializeBinaryFromReader);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CleanEntityTypeResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CleanEntityTypeResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.cleanedEntityType) {
+                _writer.writeMessage(1, _instance.cleanedEntityType, exports.EntityType.serializeBinaryToWriter);
+            }
+            if (_instance.entityTypeUpdate) {
+                _writer.writeMessage(2, _instance.entityTypeUpdate, exports.EntityTypeUpdate.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(CleanEntityTypeResponse.prototype, "cleanedEntityType", {
+            get: function () {
+                return this._cleanedEntityType;
+            },
+            set: function (value) {
+                this._cleanedEntityType = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CleanEntityTypeResponse.prototype, "entityTypeUpdate", {
+            get: function () {
+                return this._entityTypeUpdate;
+            },
+            set: function (value) {
+                this._entityTypeUpdate = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CleanEntityTypeResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CleanEntityTypeResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CleanEntityTypeResponse.prototype.toObject = function () {
+            return {
+                cleanedEntityType: this.cleanedEntityType
+                    ? this.cleanedEntityType.toObject()
+                    : undefined,
+                entityTypeUpdate: this.entityTypeUpdate
+                    ? this.entityTypeUpdate.toObject()
+                    : undefined
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CleanEntityTypeResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CleanEntityTypeResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                cleanedEntityType: this.cleanedEntityType
+                    ? this.cleanedEntityType.toProtobufJSON(options)
+                    : null,
+                entityTypeUpdate: this.entityTypeUpdate
+                    ? this.entityTypeUpdate.toProtobufJSON(options)
+                    : null
+            };
+        };
+        return CleanEntityTypeResponse;
+    }());
+    CleanEntityTypeResponse.id = 'ondewo.nlu.CleanEntityTypeResponse';
+    /**
+     * Message implementation for ondewo.nlu.AddTrainingPhrasesRequest
+     */
+    exports.AddTrainingPhrasesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of AddTrainingPhrasesRequest to deeply clone from
+         */
+        function AddTrainingPhrasesRequest(_value) {
+            _value = _value || {};
+            this.parent = _value.parent;
+            this.languageCode = _value.languageCode;
+            this.trainingPhraseList = (_value.trainingPhraseList || []).map(function (m) { return new AddTrainingPhrasesRequest.TrainingPhraseForIntent(m); });
+            this.extractEntities = _value.extractEntities;
+            this.specialCharacters = _value.specialCharacters;
+            this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
+                ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
+                : undefined;
+            this.numberOfWorkers = _value.numberOfWorkers;
+            AddTrainingPhrasesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        AddTrainingPhrasesRequest.deserializeBinary = function (bytes) {
+            var instance = new AddTrainingPhrasesRequest();
+            AddTrainingPhrasesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        AddTrainingPhrasesRequest.refineValues = function (_instance) {
+            _instance.parent = _instance.parent || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.trainingPhraseList = _instance.trainingPhraseList || [];
+            _instance.extractEntities = _instance.extractEntities || false;
+            _instance.specialCharacters = _instance.specialCharacters || '';
+            _instance.trainingPhraseCleanerOptions =
+                _instance.trainingPhraseCleanerOptions || undefined;
+            _instance.numberOfWorkers = _instance.numberOfWorkers || 0;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        AddTrainingPhrasesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.parent = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 3:
+                        var messageInitializer3 = new AddTrainingPhrasesRequest.TrainingPhraseForIntent();
+                        _reader.readMessage(messageInitializer3, AddTrainingPhrasesRequest.TrainingPhraseForIntent
+                            .deserializeBinaryFromReader);
+                        (_instance.trainingPhraseList =
+                            _instance.trainingPhraseList || []).push(messageInitializer3);
+                        break;
+                    case 4:
+                        _instance.extractEntities = _reader.readBool();
+                        break;
+                    case 5:
+                        _instance.specialCharacters = _reader.readString();
+                        break;
+                    case 6:
+                        _instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                        _reader.readMessage(_instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.deserializeBinaryFromReader);
+                        break;
+                    case 7:
+                        _instance.numberOfWorkers = _reader.readInt32();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            AddTrainingPhrasesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        AddTrainingPhrasesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parent) {
+                _writer.writeString(1, _instance.parent);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(2, _instance.languageCode);
+            }
+            if (_instance.trainingPhraseList && _instance.trainingPhraseList.length) {
+                _writer.writeRepeatedMessage(3, _instance.trainingPhraseList, AddTrainingPhrasesRequest.TrainingPhraseForIntent
+                    .serializeBinaryToWriter);
+            }
+            if (_instance.extractEntities) {
+                _writer.writeBool(4, _instance.extractEntities);
+            }
+            if (_instance.specialCharacters) {
+                _writer.writeString(5, _instance.specialCharacters);
+            }
+            if (_instance.trainingPhraseCleanerOptions) {
+                _writer.writeMessage(6, _instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.serializeBinaryToWriter);
+            }
+            if (_instance.numberOfWorkers) {
+                _writer.writeInt32(7, _instance.numberOfWorkers);
+            }
+        };
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "trainingPhraseList", {
+            get: function () {
+                return this._trainingPhraseList;
+            },
+            set: function (value) {
+                this._trainingPhraseList = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "extractEntities", {
+            get: function () {
+                return this._extractEntities;
+            },
+            set: function (value) {
+                this._extractEntities = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "trainingPhraseCleanerOptions", {
+            get: function () {
+                return this._trainingPhraseCleanerOptions;
+            },
+            set: function (value) {
+                this._trainingPhraseCleanerOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesRequest.prototype, "numberOfWorkers", {
+            get: function () {
+                return this._numberOfWorkers;
+            },
+            set: function (value) {
+                this._numberOfWorkers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        AddTrainingPhrasesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            AddTrainingPhrasesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        AddTrainingPhrasesRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                trainingPhraseList: (this.trainingPhraseList || []).map(function (m) { return m.toObject(); }),
+                extractEntities: this.extractEntities,
+                specialCharacters: this.specialCharacters,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toObject()
+                    : undefined,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        AddTrainingPhrasesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        AddTrainingPhrasesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                trainingPhraseList: (this.trainingPhraseList || []).map(function (m) { return m.toProtobufJSON(options); }),
+                extractEntities: this.extractEntities,
+                specialCharacters: this.specialCharacters,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toProtobufJSON(options)
+                    : null,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        return AddTrainingPhrasesRequest;
+    }());
+    exports.AddTrainingPhrasesRequest.id = 'ondewo.nlu.AddTrainingPhrasesRequest';
+    (function (AddTrainingPhrasesRequest) {
+        /**
+         * Message implementation for ondewo.nlu.TrainingPhraseForIntent
+         */
+        var TrainingPhraseForIntent = /** @class */ (function () {
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of TrainingPhraseForIntent to deeply clone from
+             */
+            function TrainingPhraseForIntent(_value) {
+                _value = _value || {};
+                this.trainingPhrase = _value.trainingPhrase;
+                this.intentDisplayName = _value.intentDisplayName;
+                this.entities = (_value.entities || []).map(function (m) { return new exports.Intent.TrainingPhrase.Entity(m); });
+                TrainingPhraseForIntent.refineValues(this);
+            }
+            /**
+             * Deserialize binary data to message
+             * @param instance message instance
+             */
+            TrainingPhraseForIntent.deserializeBinary = function (bytes) {
+                var instance = new TrainingPhraseForIntent();
+                TrainingPhraseForIntent.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+                return instance;
+            };
+            /**
+             * Check all the properties and set default protobuf values if necessary
+             * @param _instance message instance
+             */
+            TrainingPhraseForIntent.refineValues = function (_instance) {
+                _instance.trainingPhrase = _instance.trainingPhrase || '';
+                _instance.intentDisplayName = _instance.intentDisplayName || '';
+                _instance.entities = _instance.entities || [];
+            };
+            /**
+             * Deserializes / reads binary message into message instance using provided binary reader
+             * @param _instance message instance
+             * @param _reader binary reader instance
+             */
+            TrainingPhraseForIntent.deserializeBinaryFromReader = function (_instance, _reader) {
+                while (_reader.nextField()) {
+                    if (_reader.isEndGroup())
+                        break;
+                    switch (_reader.getFieldNumber()) {
+                        case 1:
+                            _instance.trainingPhrase = _reader.readString();
+                            break;
+                        case 2:
+                            _instance.intentDisplayName = _reader.readString();
+                            break;
+                        case 3:
+                            var messageInitializer3 = new exports.Intent.TrainingPhrase.Entity();
+                            _reader.readMessage(messageInitializer3, exports.Intent.TrainingPhrase.Entity
+                                .deserializeBinaryFromReader);
+                            (_instance.entities = _instance.entities || []).push(messageInitializer3);
+                            break;
+                        default:
+                            _reader.skipField();
+                    }
+                }
+                TrainingPhraseForIntent.refineValues(_instance);
+            };
+            /**
+             * Serializes a message to binary format using provided binary reader
+             * @param _instance message instance
+             * @param _writer binary writer instance
+             */
+            TrainingPhraseForIntent.serializeBinaryToWriter = function (_instance, _writer) {
+                if (_instance.trainingPhrase) {
+                    _writer.writeString(1, _instance.trainingPhrase);
+                }
+                if (_instance.intentDisplayName) {
+                    _writer.writeString(2, _instance.intentDisplayName);
+                }
+                if (_instance.entities && _instance.entities.length) {
+                    _writer.writeRepeatedMessage(3, _instance.entities, exports.Intent.TrainingPhrase.Entity.serializeBinaryToWriter);
+                }
+            };
+            Object.defineProperty(TrainingPhraseForIntent.prototype, "trainingPhrase", {
+                get: function () {
+                    return this._trainingPhrase;
+                },
+                set: function (value) {
+                    this._trainingPhrase = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseForIntent.prototype, "intentDisplayName", {
+                get: function () {
+                    return this._intentDisplayName;
+                },
+                set: function (value) {
+                    this._intentDisplayName = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Object.defineProperty(TrainingPhraseForIntent.prototype, "entities", {
+                get: function () {
+                    return this._entities;
+                },
+                set: function (value) {
+                    this._entities = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            /**
+             * Serialize message to binary data
+             * @param instance message instance
+             */
+            TrainingPhraseForIntent.prototype.serializeBinary = function () {
+                var writer = new googleProtobuf.BinaryWriter();
+                TrainingPhraseForIntent.serializeBinaryToWriter(this, writer);
+                return writer.getResultBuffer();
+            };
+            /**
+             * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+             */
+            TrainingPhraseForIntent.prototype.toObject = function () {
+                return {
+                    trainingPhrase: this.trainingPhrase,
+                    intentDisplayName: this.intentDisplayName,
+                    entities: (this.entities || []).map(function (m) { return m.toObject(); })
+                };
+            };
+            /**
+             * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+             */
+            TrainingPhraseForIntent.prototype.toJSON = function () {
+                return this.toObject();
+            };
+            /**
+             * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+             * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+             * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+             */
+            TrainingPhraseForIntent.prototype.toProtobufJSON = function (
+            // @ts-ignore
+            options) {
+                return {
+                    trainingPhrase: this.trainingPhrase,
+                    intentDisplayName: this.intentDisplayName,
+                    entities: (this.entities || []).map(function (m) { return m.toProtobufJSON(options); })
+                };
+            };
+            return TrainingPhraseForIntent;
+        }());
+        TrainingPhraseForIntent.id = 'ondewo.nlu.TrainingPhraseForIntent';
+        AddTrainingPhrasesRequest.TrainingPhraseForIntent = TrainingPhraseForIntent;
+    })(exports.AddTrainingPhrasesRequest || (exports.AddTrainingPhrasesRequest = {}));
+    /**
+     * Message implementation for ondewo.nlu.AddTrainingPhrasesResponse
+     */
+    var AddTrainingPhrasesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of AddTrainingPhrasesResponse to deeply clone from
+         */
+        function AddTrainingPhrasesResponse(_value) {
+            _value = _value || {};
+            this.errorMessages = (_value.errorMessages || []).slice();
+            AddTrainingPhrasesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        AddTrainingPhrasesResponse.deserializeBinary = function (bytes) {
+            var instance = new AddTrainingPhrasesResponse();
+            AddTrainingPhrasesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        AddTrainingPhrasesResponse.refineValues = function (_instance) {
+            _instance.errorMessages = _instance.errorMessages || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        AddTrainingPhrasesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.errorMessages = _instance.errorMessages || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            AddTrainingPhrasesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        AddTrainingPhrasesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.errorMessages && _instance.errorMessages.length) {
+                _writer.writeRepeatedString(1, _instance.errorMessages);
+            }
+        };
+        Object.defineProperty(AddTrainingPhrasesResponse.prototype, "errorMessages", {
+            get: function () {
+                return this._errorMessages;
+            },
+            set: function (value) {
+                this._errorMessages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        AddTrainingPhrasesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            AddTrainingPhrasesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        AddTrainingPhrasesResponse.prototype.toObject = function () {
+            return {
+                errorMessages: (this.errorMessages || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        AddTrainingPhrasesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        AddTrainingPhrasesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                errorMessages: (this.errorMessages || []).slice()
+            };
+        };
+        return AddTrainingPhrasesResponse;
+    }());
+    AddTrainingPhrasesResponse.id = 'ondewo.nlu.AddTrainingPhrasesResponse';
+    /**
+     * Message implementation for ondewo.nlu.AddTrainingPhrasesFromCSVRequest
+     */
+    var AddTrainingPhrasesFromCSVRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of AddTrainingPhrasesFromCSVRequest to deeply clone from
+         */
+        function AddTrainingPhrasesFromCSVRequest(_value) {
+            _value = _value || {};
+            this.parent = _value.parent;
+            this.languageCode = _value.languageCode;
+            this.csvContents = _value.csvContents;
+            this.extractEntities = _value.extractEntities;
+            this.specialCharacters = _value.specialCharacters;
+            this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
+                ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
+                : undefined;
+            this.numberOfWorkers = _value.numberOfWorkers;
+            AddTrainingPhrasesFromCSVRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        AddTrainingPhrasesFromCSVRequest.deserializeBinary = function (bytes) {
+            var instance = new AddTrainingPhrasesFromCSVRequest();
+            AddTrainingPhrasesFromCSVRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        AddTrainingPhrasesFromCSVRequest.refineValues = function (_instance) {
+            _instance.parent = _instance.parent || '';
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.csvContents = _instance.csvContents || new Uint8Array();
+            _instance.extractEntities = _instance.extractEntities || false;
+            _instance.specialCharacters = _instance.specialCharacters || '';
+            _instance.trainingPhraseCleanerOptions =
+                _instance.trainingPhraseCleanerOptions || undefined;
+            _instance.numberOfWorkers = _instance.numberOfWorkers || 0;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        AddTrainingPhrasesFromCSVRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.parent = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.csvContents = _reader.readBytes();
+                        break;
+                    case 4:
+                        _instance.extractEntities = _reader.readBool();
+                        break;
+                    case 5:
+                        _instance.specialCharacters = _reader.readString();
+                        break;
+                    case 6:
+                        _instance.trainingPhraseCleanerOptions = new TrainingPhraseCleanerOptions();
+                        _reader.readMessage(_instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.deserializeBinaryFromReader);
+                        break;
+                    case 7:
+                        _instance.numberOfWorkers = _reader.readInt32();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            AddTrainingPhrasesFromCSVRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        AddTrainingPhrasesFromCSVRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parent) {
+                _writer.writeString(1, _instance.parent);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(2, _instance.languageCode);
+            }
+            if (_instance.csvContents && _instance.csvContents.length) {
+                _writer.writeBytes(3, _instance.csvContents);
+            }
+            if (_instance.extractEntities) {
+                _writer.writeBool(4, _instance.extractEntities);
+            }
+            if (_instance.specialCharacters) {
+                _writer.writeString(5, _instance.specialCharacters);
+            }
+            if (_instance.trainingPhraseCleanerOptions) {
+                _writer.writeMessage(6, _instance.trainingPhraseCleanerOptions, TrainingPhraseCleanerOptions.serializeBinaryToWriter);
+            }
+            if (_instance.numberOfWorkers) {
+                _writer.writeInt32(7, _instance.numberOfWorkers);
+            }
+        };
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "csvContents", {
+            get: function () {
+                return this._csvContents;
+            },
+            set: function (value) {
+                this._csvContents = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "extractEntities", {
+            get: function () {
+                return this._extractEntities;
+            },
+            set: function (value) {
+                this._extractEntities = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "specialCharacters", {
+            get: function () {
+                return this._specialCharacters;
+            },
+            set: function (value) {
+                this._specialCharacters = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "trainingPhraseCleanerOptions", {
+            get: function () {
+                return this._trainingPhraseCleanerOptions;
+            },
+            set: function (value) {
+                this._trainingPhraseCleanerOptions = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(AddTrainingPhrasesFromCSVRequest.prototype, "numberOfWorkers", {
+            get: function () {
+                return this._numberOfWorkers;
+            },
+            set: function (value) {
+                this._numberOfWorkers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        AddTrainingPhrasesFromCSVRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            AddTrainingPhrasesFromCSVRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        AddTrainingPhrasesFromCSVRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                csvContents: this.csvContents
+                    ? this.csvContents.subarray(0)
+                    : new Uint8Array(),
+                extractEntities: this.extractEntities,
+                specialCharacters: this.specialCharacters,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toObject()
+                    : undefined,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        AddTrainingPhrasesFromCSVRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        AddTrainingPhrasesFromCSVRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parent: this.parent,
+                languageCode: this.languageCode,
+                csvContents: this.csvContents ? common.uint8ArrayToBase64(this.csvContents) : '',
+                extractEntities: this.extractEntities,
+                specialCharacters: this.specialCharacters,
+                trainingPhraseCleanerOptions: this.trainingPhraseCleanerOptions
+                    ? this.trainingPhraseCleanerOptions.toProtobufJSON(options)
+                    : null,
+                numberOfWorkers: this.numberOfWorkers
+            };
+        };
+        return AddTrainingPhrasesFromCSVRequest;
+    }());
+    AddTrainingPhrasesFromCSVRequest.id = 'ondewo.nlu.AddTrainingPhrasesFromCSVRequest';
 
     /* tslint:disable */
     /**
@@ -29867,6 +39683,11 @@
         AgentView[AgentView["AGENT_VIEW_FULL"] = 1] = "AGENT_VIEW_FULL";
         AgentView[AgentView["AGENT_VIEW_SHALLOW"] = 2] = "AGENT_VIEW_SHALLOW";
     })(exports.AgentView || (exports.AgentView = {}));
+    (function (InitiationProtocol) {
+        InitiationProtocol[InitiationProtocol["AS_SOON_AS_POSSIBLE"] = 0] = "AS_SOON_AS_POSSIBLE";
+        InitiationProtocol[InitiationProtocol["WHEN_TRAINED"] = 1] = "WHEN_TRAINED";
+        InitiationProtocol[InitiationProtocol["NEVER"] = 2] = "NEVER";
+    })(exports.InitiationProtocol || (exports.InitiationProtocol = {}));
     (function (ReportType) {
         ReportType[ReportType["ALL"] = 0] = "ALL";
         ReportType[ReportType["INTENT_PER_LANGUAGE"] = 1] = "INTENT_PER_LANGUAGE";
@@ -31377,6 +41198,7 @@
             _value = _value || {};
             this.parent = _value.parent;
             this.branch = _value.branch;
+            this.initiationProtocol = _value.initiationProtocol;
             TrainAgentRequest.refineValues(this);
         }
         /**
@@ -31395,6 +41217,7 @@
         TrainAgentRequest.refineValues = function (_instance) {
             _instance.parent = _instance.parent || '';
             _instance.branch = _instance.branch || '';
+            _instance.initiationProtocol = _instance.initiationProtocol || 0;
         };
         /**
          * Deserializes / reads binary message into message instance using provided binary reader
@@ -31411,6 +41234,9 @@
                         break;
                     case 2:
                         _instance.branch = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.initiationProtocol = _reader.readEnum();
                         break;
                     default:
                         _reader.skipField();
@@ -31429,6 +41255,9 @@
             }
             if (_instance.branch) {
                 _writer.writeString(2, _instance.branch);
+            }
+            if (_instance.initiationProtocol) {
+                _writer.writeEnum(3, _instance.initiationProtocol);
             }
         };
         Object.defineProperty(TrainAgentRequest.prototype, "parent", {
@@ -31451,6 +41280,16 @@
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(TrainAgentRequest.prototype, "initiationProtocol", {
+            get: function () {
+                return this._initiationProtocol;
+            },
+            set: function (value) {
+                this._initiationProtocol = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -31466,7 +41305,8 @@
         TrainAgentRequest.prototype.toObject = function () {
             return {
                 parent: this.parent,
-                branch: this.branch
+                branch: this.branch,
+                initiationProtocol: this.initiationProtocol
             };
         };
         /**
@@ -31483,9 +41323,11 @@
         TrainAgentRequest.prototype.toProtobufJSON = function (
         // @ts-ignore
         options) {
+            var _a;
             return {
                 parent: this.parent,
-                branch: this.branch
+                branch: this.branch,
+                initiationProtocol: exports.InitiationProtocol[(_a = this.initiationProtocol) !== null && _a !== void 0 ? _a : 0]
             };
         };
         return TrainAgentRequest;
@@ -31629,6 +41471,7 @@
             _value = _value || {};
             this.parent = _value.parent;
             this.agentUri = _value.agentUri;
+            this.compressionLevel = _value.compressionLevel;
             ExportAgentRequest.refineValues(this);
         }
         /**
@@ -31647,6 +41490,7 @@
         ExportAgentRequest.refineValues = function (_instance) {
             _instance.parent = _instance.parent || '';
             _instance.agentUri = _instance.agentUri || '';
+            _instance.compressionLevel = _instance.compressionLevel || 0;
         };
         /**
          * Deserializes / reads binary message into message instance using provided binary reader
@@ -31663,6 +41507,9 @@
                         break;
                     case 2:
                         _instance.agentUri = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.compressionLevel = _reader.readInt32();
                         break;
                     default:
                         _reader.skipField();
@@ -31681,6 +41528,9 @@
             }
             if (_instance.agentUri) {
                 _writer.writeString(2, _instance.agentUri);
+            }
+            if (_instance.compressionLevel) {
+                _writer.writeInt32(3, _instance.compressionLevel);
             }
         };
         Object.defineProperty(ExportAgentRequest.prototype, "parent", {
@@ -31703,6 +41553,16 @@
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(ExportAgentRequest.prototype, "compressionLevel", {
+            get: function () {
+                return this._compressionLevel;
+            },
+            set: function (value) {
+                this._compressionLevel = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -31718,7 +41578,8 @@
         ExportAgentRequest.prototype.toObject = function () {
             return {
                 parent: this.parent,
-                agentUri: this.agentUri
+                agentUri: this.agentUri,
+                compressionLevel: this.compressionLevel
             };
         };
         /**
@@ -31737,7 +41598,8 @@
         options) {
             return {
                 parent: this.parent,
-                agentUri: this.agentUri
+                agentUri: this.agentUri,
+                compressionLevel: this.compressionLevel
             };
         };
         return ExportAgentRequest;
@@ -35065,6 +44927,506 @@
         return ExportResourcesResponse;
     }());
     ExportResourcesResponse.id = 'ondewo.nlu.ExportResourcesResponse';
+    /**
+     * Message implementation for ondewo.nlu.GetModelStatusesRequest
+     */
+    var GetModelStatusesRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of GetModelStatusesRequest to deeply clone from
+         */
+        function GetModelStatusesRequest(_value) {
+            _value = _value || {};
+            this.parent = _value.parent;
+            this.cacheVersion = _value.cacheVersion;
+            this.languageCode = _value.languageCode;
+            this.modelName = _value.modelName;
+            GetModelStatusesRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        GetModelStatusesRequest.deserializeBinary = function (bytes) {
+            var instance = new GetModelStatusesRequest();
+            GetModelStatusesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        GetModelStatusesRequest.refineValues = function (_instance) {
+            _instance.parent = _instance.parent || '';
+            _instance.cacheVersion = _instance.cacheVersion || 0;
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.modelName = _instance.modelName || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        GetModelStatusesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.parent = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.cacheVersion = _reader.readInt32();
+                        break;
+                    case 3:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 4:
+                        _instance.modelName = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            GetModelStatusesRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        GetModelStatusesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parent) {
+                _writer.writeString(1, _instance.parent);
+            }
+            if (_instance.cacheVersion) {
+                _writer.writeInt32(2, _instance.cacheVersion);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(3, _instance.languageCode);
+            }
+            if (_instance.modelName) {
+                _writer.writeString(4, _instance.modelName);
+            }
+        };
+        Object.defineProperty(GetModelStatusesRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetModelStatusesRequest.prototype, "cacheVersion", {
+            get: function () {
+                return this._cacheVersion;
+            },
+            set: function (value) {
+                this._cacheVersion = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetModelStatusesRequest.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(GetModelStatusesRequest.prototype, "modelName", {
+            get: function () {
+                return this._modelName;
+            },
+            set: function (value) {
+                this._modelName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        GetModelStatusesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetModelStatusesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        GetModelStatusesRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                cacheVersion: this.cacheVersion,
+                languageCode: this.languageCode,
+                modelName: this.modelName
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        GetModelStatusesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        GetModelStatusesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parent: this.parent,
+                cacheVersion: this.cacheVersion,
+                languageCode: this.languageCode,
+                modelName: this.modelName
+            };
+        };
+        return GetModelStatusesRequest;
+    }());
+    GetModelStatusesRequest.id = 'ondewo.nlu.GetModelStatusesRequest';
+    /**
+     * Message implementation for ondewo.nlu.ModelStatus
+     */
+    exports.ModelStatus = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ModelStatus to deeply clone from
+         */
+        function ModelStatus(_value) {
+            _value = _value || {};
+            this.cacheVersion = _value.cacheVersion;
+            this.languageCode = _value.languageCode;
+            this.modelName = _value.modelName;
+            this.statusSetTime = _value.statusSetTime
+                ? new googleProtobuf009.Timestamp(_value.statusSetTime)
+                : undefined;
+            this.config = _value.config;
+            this.status = _value.status;
+            ModelStatus.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ModelStatus.deserializeBinary = function (bytes) {
+            var instance = new ModelStatus();
+            ModelStatus.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ModelStatus.refineValues = function (_instance) {
+            _instance.cacheVersion = _instance.cacheVersion || 0;
+            _instance.languageCode = _instance.languageCode || '';
+            _instance.modelName = _instance.modelName || '';
+            _instance.statusSetTime = _instance.statusSetTime || undefined;
+            _instance.config = _instance.config || '';
+            _instance.status = _instance.status || 0;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ModelStatus.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.cacheVersion = _reader.readInt32();
+                        break;
+                    case 2:
+                        _instance.languageCode = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.modelName = _reader.readString();
+                        break;
+                    case 4:
+                        _instance.statusSetTime = new googleProtobuf009.Timestamp();
+                        _reader.readMessage(_instance.statusSetTime, googleProtobuf009.Timestamp.deserializeBinaryFromReader);
+                        break;
+                    case 5:
+                        _instance.config = _reader.readString();
+                        break;
+                    case 6:
+                        _instance.status = _reader.readEnum();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ModelStatus.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ModelStatus.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.cacheVersion) {
+                _writer.writeInt32(1, _instance.cacheVersion);
+            }
+            if (_instance.languageCode) {
+                _writer.writeString(2, _instance.languageCode);
+            }
+            if (_instance.modelName) {
+                _writer.writeString(3, _instance.modelName);
+            }
+            if (_instance.statusSetTime) {
+                _writer.writeMessage(4, _instance.statusSetTime, googleProtobuf009.Timestamp.serializeBinaryToWriter);
+            }
+            if (_instance.config) {
+                _writer.writeString(5, _instance.config);
+            }
+            if (_instance.status) {
+                _writer.writeEnum(6, _instance.status);
+            }
+        };
+        Object.defineProperty(ModelStatus.prototype, "cacheVersion", {
+            get: function () {
+                return this._cacheVersion;
+            },
+            set: function (value) {
+                this._cacheVersion = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ModelStatus.prototype, "languageCode", {
+            get: function () {
+                return this._languageCode;
+            },
+            set: function (value) {
+                this._languageCode = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ModelStatus.prototype, "modelName", {
+            get: function () {
+                return this._modelName;
+            },
+            set: function (value) {
+                this._modelName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ModelStatus.prototype, "statusSetTime", {
+            get: function () {
+                return this._statusSetTime;
+            },
+            set: function (value) {
+                this._statusSetTime = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ModelStatus.prototype, "config", {
+            get: function () {
+                return this._config;
+            },
+            set: function (value) {
+                this._config = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ModelStatus.prototype, "status", {
+            get: function () {
+                return this._status;
+            },
+            set: function (value) {
+                this._status = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ModelStatus.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ModelStatus.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ModelStatus.prototype.toObject = function () {
+            return {
+                cacheVersion: this.cacheVersion,
+                languageCode: this.languageCode,
+                modelName: this.modelName,
+                statusSetTime: this.statusSetTime
+                    ? this.statusSetTime.toObject()
+                    : undefined,
+                config: this.config,
+                status: this.status
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ModelStatus.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ModelStatus.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a;
+            return {
+                cacheVersion: this.cacheVersion,
+                languageCode: this.languageCode,
+                modelName: this.modelName,
+                statusSetTime: this.statusSetTime
+                    ? this.statusSetTime.toProtobufJSON(options)
+                    : null,
+                config: this.config,
+                status: ModelStatus.StatusName[(_a = this.status) !== null && _a !== void 0 ? _a : 0]
+            };
+        };
+        return ModelStatus;
+    }());
+    exports.ModelStatus.id = 'ondewo.nlu.ModelStatus';
+    (function (ModelStatus) {
+        var StatusName;
+        (function (StatusName) {
+            StatusName[StatusName["UNKNOWN"] = 0] = "UNKNOWN";
+            StatusName[StatusName["INITIALIZING"] = 1] = "INITIALIZING";
+            StatusName[StatusName["INITIALIZED"] = 2] = "INITIALIZED";
+            StatusName[StatusName["LOADING_DATA"] = 3] = "LOADING_DATA";
+            StatusName[StatusName["TRAINING"] = 4] = "TRAINING";
+            StatusName[StatusName["TESTING"] = 5] = "TESTING";
+            StatusName[StatusName["TRAINED"] = 6] = "TRAINED";
+        })(StatusName = ModelStatus.StatusName || (ModelStatus.StatusName = {}));
+    })(exports.ModelStatus || (exports.ModelStatus = {}));
+    /**
+     * Message implementation for ondewo.nlu.GetModelStatusesResponse
+     */
+    var GetModelStatusesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of GetModelStatusesResponse to deeply clone from
+         */
+        function GetModelStatusesResponse(_value) {
+            _value = _value || {};
+            this.modelStatuses = (_value.modelStatuses || []).map(function (m) { return new exports.ModelStatus(m); });
+            GetModelStatusesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        GetModelStatusesResponse.deserializeBinary = function (bytes) {
+            var instance = new GetModelStatusesResponse();
+            GetModelStatusesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        GetModelStatusesResponse.refineValues = function (_instance) {
+            _instance.modelStatuses = _instance.modelStatuses || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        GetModelStatusesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new exports.ModelStatus();
+                        _reader.readMessage(messageInitializer1, exports.ModelStatus.deserializeBinaryFromReader);
+                        (_instance.modelStatuses = _instance.modelStatuses || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            GetModelStatusesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        GetModelStatusesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.modelStatuses && _instance.modelStatuses.length) {
+                _writer.writeRepeatedMessage(1, _instance.modelStatuses, exports.ModelStatus.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(GetModelStatusesResponse.prototype, "modelStatuses", {
+            get: function () {
+                return this._modelStatuses;
+            },
+            set: function (value) {
+                this._modelStatuses = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        GetModelStatusesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetModelStatusesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        GetModelStatusesResponse.prototype.toObject = function () {
+            return {
+                modelStatuses: (this.modelStatuses || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        GetModelStatusesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        GetModelStatusesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                modelStatuses: (this.modelStatuses || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return GetModelStatusesResponse;
+    }());
+    GetModelStatusesResponse.id = 'ondewo.nlu.GetModelStatusesResponse';
 
     /* tslint:disable */
     /**
@@ -35542,6 +45904,25 @@
                         requestClass: ExportResourcesRequest,
                         responseClass: ExportResourcesResponse
                     });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Agents/GetModelStatuses
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.GetModelStatusesResponse>>
+                 */
+                getModelStatuses: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Agents/GetModelStatuses',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: GetModelStatusesRequest,
+                        responseClass: GetModelStatusesResponse
+                    });
                 }
             };
             this.client = clientFactory.createClient('ondewo.nlu.Agents', settings);
@@ -35856,6 +46237,19 @@
             if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
             return this.$raw
                 .exportResources(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/GetModelStatuses
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.GetModelStatusesResponse>
+         */
+        AgentsClient.prototype.getModelStatuses = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .getModelStatuses(requestData, requestMetadata)
                 .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         return AgentsClient;
@@ -36311,6 +46705,291 @@
     ];
     SessionsClient.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_SESSIONS_CLIENT_SETTINGS,] }] },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
+        { type: i2.GrpcHandler }
+    ]; };
+
+    /* tslint:disable */
+    /**
+     * Service client implementation for ondewo.nlu.Utilities
+     */
+    var UtilitiesClient = /** @class */ (function () {
+        function UtilitiesClient(settings, clientFactory, handler) {
+            var _this = this;
+            this.handler = handler;
+            /**
+             * Raw RPC implementation for each service client method.
+             * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+             * Attention: these methods do not throw errors when non-zero status codes are received.
+             */
+            this.$raw = {
+                /**
+                 * Unary RPC for /ondewo.nlu.Utilities/ValidateRegex
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ValidateRegexResponse>>
+                 */
+                validateRegex: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Utilities/ValidateRegex',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ValidateRegexRequest,
+                        responseClass: ValidateRegexResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Utilities/ValidateEmbeddedRegex
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ValidateEmbeddedRegexResponse>>
+                 */
+                validateEmbeddedRegex: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Utilities/ValidateEmbeddedRegex',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ValidateEmbeddedRegexRequest,
+                        responseClass: ValidateEmbeddedRegexResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Utilities/CleanAllIntents
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.CleanAllIntentsResponse>>
+                 */
+                cleanAllIntents: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Utilities/CleanAllIntents',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: CleanAllIntentsRequest,
+                        responseClass: CleanAllIntentsResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Utilities/CleanIntent
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.CleanIntentResponse>>
+                 */
+                cleanIntent: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Utilities/CleanIntent',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: CleanIntentRequest,
+                        responseClass: CleanIntentResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Utilities/CleanAllEntityTypes
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.CleanAllEntityTypesResponse>>
+                 */
+                cleanAllEntityTypes: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Utilities/CleanAllEntityTypes',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: CleanAllEntityTypesRequest,
+                        responseClass: CleanAllEntityTypesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Utilities/CleanEntityType
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.CleanEntityTypeResponse>>
+                 */
+                cleanEntityType: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Utilities/CleanEntityType',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: CleanEntityTypeRequest,
+                        responseClass: CleanEntityTypeResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrases
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.AddTrainingPhrasesResponse>>
+                 */
+                addTrainingPhrases: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Utilities/AddTrainingPhrases',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: exports.AddTrainingPhrasesRequest,
+                        responseClass: AddTrainingPhrasesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.AddTrainingPhrasesResponse>>
+                 */
+                addTrainingPhrasesFromCSV: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: AddTrainingPhrasesFromCSVRequest,
+                        responseClass: AddTrainingPhrasesResponse
+                    });
+                }
+            };
+            this.client = clientFactory.createClient('ondewo.nlu.Utilities', settings);
+        }
+        /**
+         * Unary RPC for /ondewo.nlu.Utilities/ValidateRegex
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ValidateRegexResponse>
+         */
+        UtilitiesClient.prototype.validateRegex = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .validateRegex(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Utilities/ValidateEmbeddedRegex
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ValidateEmbeddedRegexResponse>
+         */
+        UtilitiesClient.prototype.validateEmbeddedRegex = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .validateEmbeddedRegex(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Utilities/CleanAllIntents
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.CleanAllIntentsResponse>
+         */
+        UtilitiesClient.prototype.cleanAllIntents = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .cleanAllIntents(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Utilities/CleanIntent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.CleanIntentResponse>
+         */
+        UtilitiesClient.prototype.cleanIntent = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .cleanIntent(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Utilities/CleanAllEntityTypes
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.CleanAllEntityTypesResponse>
+         */
+        UtilitiesClient.prototype.cleanAllEntityTypes = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .cleanAllEntityTypes(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Utilities/CleanEntityType
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.CleanEntityTypeResponse>
+         */
+        UtilitiesClient.prototype.cleanEntityType = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .cleanEntityType(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrases
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.AddTrainingPhrasesResponse>
+         */
+        UtilitiesClient.prototype.addTrainingPhrases = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .addTrainingPhrases(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.AddTrainingPhrasesResponse>
+         */
+        UtilitiesClient.prototype.addTrainingPhrasesFromCSV = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .addTrainingPhrasesFromCSV(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        return UtilitiesClient;
+    }());
+    UtilitiesClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function UtilitiesClient_Factory() { return new UtilitiesClient(i0.ɵɵinject(GRPC_UTILITIES_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: UtilitiesClient, providedIn: "any" });
+    UtilitiesClient.decorators = [
+        { type: i0.Injectable, args: [{ providedIn: 'any' },] }
+    ];
+    UtilitiesClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_UTILITIES_CLIENT_SETTINGS,] }] },
         { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
         { type: i2.GrpcHandler }
     ]; };
@@ -37071,6 +47750,8 @@
      */
 
     exports.AddSessionLabelsRequest = AddSessionLabelsRequest;
+    exports.AddTrainingPhrasesFromCSVRequest = AddTrainingPhrasesFromCSVRequest;
+    exports.AddTrainingPhrasesResponse = AddTrainingPhrasesResponse;
     exports.AddUserToProjectRequest = AddUserToProjectRequest;
     exports.Agent = Agent;
     exports.AgentOfUserWithOwner = AgentOfUserWithOwner;
@@ -37079,16 +47760,34 @@
     exports.AiServicesClient = AiServicesClient;
     exports.AltSentence = AltSentence;
     exports.AltTrainingPhrase = AltTrainingPhrase;
-    exports.BatchCreateEntitiesRequest = BatchCreateEntitiesRequest;
     exports.BatchDeleteEntitiesRequest = BatchDeleteEntitiesRequest;
     exports.BatchDeleteEntityTypesRequest = BatchDeleteEntityTypesRequest;
     exports.BatchDeleteIntentsRequest = BatchDeleteIntentsRequest;
+    exports.BatchDeleteParametersRequest = BatchDeleteParametersRequest;
+    exports.BatchDeleteResponseMessagesRequest = BatchDeleteResponseMessagesRequest;
+    exports.BatchDeleteTrainingPhrasesRequest = BatchDeleteTrainingPhrasesRequest;
+    exports.BatchGetEntitiesRequest = BatchGetEntitiesRequest;
+    exports.BatchGetParametersRequest = BatchGetParametersRequest;
+    exports.BatchGetResponseMessagesRequest = BatchGetResponseMessagesRequest;
+    exports.BatchGetTrainingPhrasesRequest = BatchGetTrainingPhrasesRequest;
+    exports.BatchTrainingPhrasesStatusResponse = BatchTrainingPhrasesStatusResponse;
     exports.BatchUpdateEntitiesRequest = BatchUpdateEntitiesRequest;
     exports.BatchUpdateEntityTypesResponse = BatchUpdateEntityTypesResponse;
     exports.BatchUpdateIntentsResponse = BatchUpdateIntentsResponse;
+    exports.BatchUpdateParametersRequest = BatchUpdateParametersRequest;
+    exports.BatchUpdateResponseMessagesRequest = BatchUpdateResponseMessagesRequest;
+    exports.BatchUpdateTrainingPhrasesRequest = BatchUpdateTrainingPhrasesRequest;
     exports.BertAugEnrichmentConfig = BertAugEnrichmentConfig;
     exports.BuildCacheRequest = BuildCacheRequest;
     exports.CancelOperationRequest = CancelOperationRequest;
+    exports.CleanAllEntityTypesRequest = CleanAllEntityTypesRequest;
+    exports.CleanAllEntityTypesResponse = CleanAllEntityTypesResponse;
+    exports.CleanAllIntentsRequest = CleanAllIntentsRequest;
+    exports.CleanAllIntentsResponse = CleanAllIntentsResponse;
+    exports.CleanEntityTypeRequest = CleanEntityTypeRequest;
+    exports.CleanEntityTypeResponse = CleanEntityTypeResponse;
+    exports.CleanIntentRequest = CleanIntentRequest;
+    exports.CleanIntentResponse = CleanIntentResponse;
     exports.ContextsClient = ContextsClient;
     exports.CreateAgentRequest = CreateAgentRequest;
     exports.CreateContextRequest = CreateContextRequest;
@@ -37114,6 +47813,7 @@
     exports.DetectIntentRequest = DetectIntentRequest;
     exports.DetectIntentResponse = DetectIntentResponse;
     exports.DetectedIntent = DetectedIntent;
+    exports.EntityDetected = EntityDetected;
     exports.EntityEnrichmentConfig = EntityEnrichmentConfig;
     exports.EntityTypeBatch = EntityTypeBatch;
     exports.EntityTypesClient = EntityTypesClient;
@@ -37137,6 +47837,7 @@
     exports.GRPC_SERVER_STATISTICS_CLIENT_SETTINGS = GRPC_SERVER_STATISTICS_CLIENT_SETTINGS;
     exports.GRPC_SESSIONS_CLIENT_SETTINGS = GRPC_SESSIONS_CLIENT_SETTINGS;
     exports.GRPC_USERS_CLIENT_SETTINGS = GRPC_USERS_CLIENT_SETTINGS;
+    exports.GRPC_UTILITIES_CLIENT_SETTINGS = GRPC_UTILITIES_CLIENT_SETTINGS;
     exports.GRPC_WEBHOOK_CLIENT_SETTINGS = GRPC_WEBHOOK_CLIENT_SETTINGS;
     exports.GenerateResponsesRequest = GenerateResponsesRequest;
     exports.GenerateResponsesResponse = GenerateResponsesResponse;
@@ -37157,6 +47858,8 @@
     exports.GetIntentCountRequest = GetIntentCountRequest;
     exports.GetIntentRequest = GetIntentRequest;
     exports.GetLatestSessionReviewRequest = GetLatestSessionReviewRequest;
+    exports.GetModelStatusesRequest = GetModelStatusesRequest;
+    exports.GetModelStatusesResponse = GetModelStatusesResponse;
     exports.GetOperationRequest = GetOperationRequest;
     exports.GetPlatformInfoResponse = GetPlatformInfoResponse;
     exports.GetProjectElementStatRequest = GetProjectElementStatRequest;
@@ -37177,16 +47880,22 @@
     exports.ListAgentsResponse = ListAgentsResponse;
     exports.ListContextsRequest = ListContextsRequest;
     exports.ListContextsResponse = ListContextsResponse;
+    exports.ListEntitiesRequest = ListEntitiesRequest;
+    exports.ListEntitiesResponse = ListEntitiesResponse;
     exports.ListEntityTypesRequest = ListEntityTypesRequest;
     exports.ListEntityTypesResponse = ListEntityTypesResponse;
     exports.ListIntentsRequest = ListIntentsRequest;
     exports.ListIntentsResponse = ListIntentsResponse;
     exports.ListOperationsRequest = ListOperationsRequest;
     exports.ListOperationsResponse = ListOperationsResponse;
+    exports.ListParametersRequest = ListParametersRequest;
+    exports.ListParametersResponse = ListParametersResponse;
     exports.ListProjectPermissionsRequest = ListProjectPermissionsRequest;
     exports.ListProjectPermissionsResponse = ListProjectPermissionsResponse;
     exports.ListProjectRolesRequest = ListProjectRolesRequest;
     exports.ListProjectRolesResponse = ListProjectRolesResponse;
+    exports.ListResponseMessagesRequest = ListResponseMessagesRequest;
+    exports.ListResponseMessagesResponse = ListResponseMessagesResponse;
     exports.ListServerPermissionsRequest = ListServerPermissionsRequest;
     exports.ListServerPermissionsResponse = ListServerPermissionsResponse;
     exports.ListServerRolesRequest = ListServerRolesRequest;
@@ -37197,6 +47906,8 @@
     exports.ListSessionReviewsResponse = ListSessionReviewsResponse;
     exports.ListSessionsRequest = ListSessionsRequest;
     exports.ListSessionsResponse = ListSessionsResponse;
+    exports.ListTrainingPhrasesRequest = ListTrainingPhrasesRequest;
+    exports.ListTrainingPhrasesResponse = ListTrainingPhrasesResponse;
     exports.ListUserInfosResponse = ListUserInfosResponse;
     exports.ListUsersInProjectRequest = ListUsersInProjectRequest;
     exports.ListUsersInProjectResponse = ListUsersInProjectResponse;
@@ -37234,11 +47945,13 @@
     exports.Status = Status;
     exports.StreamingDetectIntentRequest = StreamingDetectIntentRequest;
     exports.StreamingDetectIntentResponse = StreamingDetectIntentResponse;
+    exports.StringUpdate = StringUpdate;
     exports.Synonym = Synonym;
     exports.TextInput = TextInput;
     exports.ThesaurusEnrichmentConfig = ThesaurusEnrichmentConfig;
     exports.TrackSessionStepRequest = TrackSessionStepRequest;
     exports.TrainAgentRequest = TrainAgentRequest;
+    exports.TrainingPhraseCleanerOptions = TrainingPhraseCleanerOptions;
     exports.UpdateAgentRequest = UpdateAgentRequest;
     exports.UpdateContextRequest = UpdateContextRequest;
     exports.UpdateEntityTypeRequest = UpdateEntityTypeRequest;
@@ -37249,6 +47962,11 @@
     exports.User = User;
     exports.UserInProject = UserInProject;
     exports.UsersClient = UsersClient;
+    exports.UtilitiesClient = UtilitiesClient;
+    exports.ValidateEmbeddedRegexRequest = ValidateEmbeddedRegexRequest;
+    exports.ValidateEmbeddedRegexResponse = ValidateEmbeddedRegexResponse;
+    exports.ValidateRegexRequest = ValidateRegexRequest;
+    exports.ValidateRegexResponse = ValidateRegexResponse;
     exports.WebhookClient = WebhookClient;
     exports.WebhookRequest = WebhookRequest;
     exports.WebhookResponse = WebhookResponse;
