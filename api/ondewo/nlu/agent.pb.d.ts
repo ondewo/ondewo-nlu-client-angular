@@ -1,11 +1,12 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu007 from '../../ondewo/nlu/project-role.pb';
+import * as ondewoNlu007 from '../../ondewo/nlu/common.pb';
 import * as googleProtobuf009 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
-import * as ondewoNlu011 from '../../ondewo/nlu/user.pb';
-import * as googleProtobuf012 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf010 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf011 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu012 from '../../ondewo/nlu/project-role.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu014 from '../../ondewo/nlu/user.pb';
 export declare enum AgentView {
     AGENT_VIEW_UNSPECIFIED = 0,
     AGENT_VIEW_FULL = 1,
@@ -86,8 +87,8 @@ export declare class Agent implements GrpcMessage {
     set timeZone(value: string | undefined);
     get nluPlatform(): string | undefined;
     set nluPlatform(value: string | undefined);
-    get configs(): googleProtobuf009.Struct | undefined;
-    set configs(value: googleProtobuf009.Struct | undefined);
+    get configs(): googleProtobuf011.Struct | undefined;
+    set configs(value: googleProtobuf011.Struct | undefined);
     get ownerId(): string | undefined;
     set ownerId(value: string | undefined);
     get status(): AgentStatus | undefined;
@@ -125,7 +126,7 @@ export declare module Agent {
         supportedLanguageCodes?: string[];
         timeZone?: string;
         nluPlatform?: string;
-        configs?: googleProtobuf009.Struct.AsObject;
+        configs?: googleProtobuf011.Struct.AsObject;
         ownerId?: string;
         status?: AgentStatus;
         description?: string;
@@ -140,7 +141,7 @@ export declare module Agent {
         supportedLanguageCodes?: string[];
         timeZone?: string;
         nluPlatform?: string;
-        configs?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        configs?: googleProtobuf011.Struct.AsProtobufJSON | null;
         ownerId?: string;
         status?: string;
         description?: string;
@@ -182,8 +183,8 @@ export declare class AgentWithOwner implements GrpcMessage {
     constructor(_value?: RecursivePartial<AgentWithOwner.AsObject>);
     get agent(): Agent | undefined;
     set agent(value: Agent | undefined);
-    get owner(): ondewoNlu011.User | undefined;
-    set owner(value: ondewoNlu011.User | undefined);
+    get owner(): ondewoNlu014.User | undefined;
+    set owner(value: ondewoNlu014.User | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -210,14 +211,14 @@ export declare module AgentWithOwner {
      */
     interface AsObject {
         agent?: Agent.AsObject;
-        owner?: ondewoNlu011.User.AsObject;
+        owner?: ondewoNlu014.User.AsObject;
     }
     /**
      * Protobuf JSON representation for AgentWithOwner
      */
     interface AsProtobufJSON {
         agent?: Agent.AsProtobufJSON | null;
-        owner?: ondewoNlu011.User.AsProtobufJSON | null;
+        owner?: ondewoNlu014.User.AsProtobufJSON | null;
     }
 }
 /**
@@ -256,8 +257,8 @@ export declare class AgentOfUserWithOwner implements GrpcMessage {
     constructor(_value?: RecursivePartial<AgentOfUserWithOwner.AsObject>);
     get agentWithOwner(): AgentWithOwner | undefined;
     set agentWithOwner(value: AgentWithOwner | undefined);
-    get projectRole(): ondewoNlu007.ProjectRole | undefined;
-    set projectRole(value: ondewoNlu007.ProjectRole | undefined);
+    get projectRole(): ondewoNlu012.ProjectRole | undefined;
+    set projectRole(value: ondewoNlu012.ProjectRole | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -284,14 +285,14 @@ export declare module AgentOfUserWithOwner {
      */
     interface AsObject {
         agentWithOwner?: AgentWithOwner.AsObject;
-        projectRole?: ondewoNlu007.ProjectRole.AsObject;
+        projectRole?: ondewoNlu012.ProjectRole.AsObject;
     }
     /**
      * Protobuf JSON representation for AgentOfUserWithOwner
      */
     interface AsProtobufJSON {
         agentWithOwner?: AgentWithOwner.AsProtobufJSON | null;
-        projectRole?: ondewoNlu007.ProjectRole.AsProtobufJSON | null;
+        projectRole?: ondewoNlu012.ProjectRole.AsProtobufJSON | null;
     }
 }
 /**
@@ -407,8 +408,8 @@ export declare class UpdateAgentRequest implements GrpcMessage {
     set agent(value: Agent | undefined);
     get agentView(): AgentView | undefined;
     set agentView(value: AgentView | undefined);
-    get updateMask(): googleProtobuf006.FieldMask | undefined;
-    set updateMask(value: googleProtobuf006.FieldMask | undefined);
+    get updateMask(): googleProtobuf010.FieldMask | undefined;
+    set updateMask(value: googleProtobuf010.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -436,7 +437,7 @@ export declare module UpdateAgentRequest {
     interface AsObject {
         agent?: Agent.AsObject;
         agentView?: AgentView;
-        updateMask?: googleProtobuf006.FieldMask.AsObject;
+        updateMask?: googleProtobuf010.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateAgentRequest
@@ -444,7 +445,7 @@ export declare module UpdateAgentRequest {
     interface AsProtobufJSON {
         agent?: Agent.AsProtobufJSON | null;
         agentView?: string;
-        updateMask?: googleProtobuf006.FieldMask.AsProtobufJSON | null;
+        updateMask?: googleProtobuf010.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1131,6 +1132,251 @@ export declare module ExportAgentResponse {
     }
 }
 /**
+ * Message implementation for ondewo.nlu.ExportBenchmarkAgentRequest
+ */
+export declare class ExportBenchmarkAgentRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ExportBenchmarkAgentRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ExportBenchmarkAgentRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ExportBenchmarkAgentRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ExportBenchmarkAgentRequest, _writer: BinaryWriter): void;
+    private _parent?;
+    private _compressionLevel?;
+    private _testSize?;
+    private _trainSize?;
+    private _randomState?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportBenchmarkAgentRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ExportBenchmarkAgentRequest.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    get compressionLevel(): number | undefined;
+    set compressionLevel(value: number | undefined);
+    get testSize(): number | undefined;
+    set testSize(value: number | undefined);
+    get trainSize(): number | undefined;
+    set trainSize(value: number | undefined);
+    get randomState(): number | undefined;
+    set randomState(value: number | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ExportBenchmarkAgentRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ExportBenchmarkAgentRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ExportBenchmarkAgentRequest.AsProtobufJSON;
+}
+export declare module ExportBenchmarkAgentRequest {
+    /**
+     * Standard JavaScript object representation for ExportBenchmarkAgentRequest
+     */
+    interface AsObject {
+        parent?: string;
+        compressionLevel?: number;
+        testSize?: number;
+        trainSize?: number;
+        randomState?: number;
+    }
+    /**
+     * Protobuf JSON representation for ExportBenchmarkAgentRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        compressionLevel?: number;
+        testSize?: number;
+        trainSize?: number;
+        randomState?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ExportBenchmarkAgentResponse
+ */
+export declare class ExportBenchmarkAgentResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ExportBenchmarkAgentResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ExportBenchmarkAgentResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ExportBenchmarkAgentResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ExportBenchmarkAgentResponse, _writer: BinaryWriter): void;
+    private _agentContent?;
+    private _trainingPhrases?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportBenchmarkAgentResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ExportBenchmarkAgentResponse.AsObject>);
+    get agentContent(): Uint8Array | undefined;
+    set agentContent(value: Uint8Array | undefined);
+    get trainingPhrases(): {
+        [prop: string]: ondewoNlu013.ListTrainingPhrasesResponse;
+    } | undefined;
+    set trainingPhrases(value: {
+        [prop: string]: ondewoNlu013.ListTrainingPhrasesResponse;
+    } | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ExportBenchmarkAgentResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ExportBenchmarkAgentResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ExportBenchmarkAgentResponse.AsProtobufJSON;
+}
+export declare module ExportBenchmarkAgentResponse {
+    /**
+     * Standard JavaScript object representation for ExportBenchmarkAgentResponse
+     */
+    interface AsObject {
+        agentContent?: Uint8Array;
+        trainingPhrases?: {
+            [prop: string]: ondewoNlu013.ListTrainingPhrasesResponse;
+        };
+    }
+    /**
+     * Protobuf JSON representation for ExportBenchmarkAgentResponse
+     */
+    interface AsProtobufJSON {
+        agentContent?: string;
+        trainingPhrases?: {
+            [prop: string]: ondewoNlu013.ListTrainingPhrasesResponse;
+        };
+    }
+    /**
+     * Message implementation for ondewo.nlu.TrainingPhrasesEntry
+     */
+    class TrainingPhrasesEntry implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): TrainingPhrasesEntry;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: TrainingPhrasesEntry): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: TrainingPhrasesEntry, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: TrainingPhrasesEntry, _writer: BinaryWriter): void;
+        private _key?;
+        private _value?;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of TrainingPhrasesEntry to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<TrainingPhrasesEntry.AsObject>);
+        get key(): string | undefined;
+        set key(value: string | undefined);
+        get value(): ondewoNlu013.ListTrainingPhrasesResponse | undefined;
+        set value(value: ondewoNlu013.ListTrainingPhrasesResponse | undefined);
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): TrainingPhrasesEntry.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): TrainingPhrasesEntry.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): TrainingPhrasesEntry.AsProtobufJSON;
+    }
+    module TrainingPhrasesEntry {
+        /**
+         * Standard JavaScript object representation for TrainingPhrasesEntry
+         */
+        interface AsObject {
+            key?: string;
+            value?: ondewoNlu013.ListTrainingPhrasesResponse.AsObject;
+        }
+        /**
+         * Protobuf JSON representation for TrainingPhrasesEntry
+         */
+        interface AsProtobufJSON {
+            key?: string;
+            value?: ondewoNlu013.ListTrainingPhrasesResponse.AsProtobufJSON | null;
+        }
+    }
+}
+/**
  * Message implementation for ondewo.nlu.OptimizeRankingMatchRequest
  */
 export declare class OptimizeRankingMatchRequest implements GrpcMessage {
@@ -1256,8 +1502,8 @@ export declare class RankingMatchOptimizationConfig implements GrpcMessage {
     set nSplits(value: number | undefined);
     get randomSeed(): number | undefined;
     set randomSeed(value: number | undefined);
-    get initialThresholds(): googleProtobuf009.Struct | undefined;
-    set initialThresholds(value: googleProtobuf009.Struct | undefined);
+    get initialThresholds(): googleProtobuf011.Struct | undefined;
+    set initialThresholds(value: googleProtobuf011.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1286,7 +1532,7 @@ export declare module RankingMatchOptimizationConfig {
         languageCode?: string;
         nSplits?: number;
         randomSeed?: number;
-        initialThresholds?: googleProtobuf009.Struct.AsObject;
+        initialThresholds?: googleProtobuf011.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for RankingMatchOptimizationConfig
@@ -1295,7 +1541,7 @@ export declare module RankingMatchOptimizationConfig {
         languageCode?: string;
         nSplits?: number;
         randomSeed?: number;
-        initialThresholds?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        initialThresholds?: googleProtobuf011.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -1332,10 +1578,10 @@ export declare class OptimizeRankingMatchResponse implements GrpcMessage {
      * @param _value initial values object or instance of OptimizeRankingMatchResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<OptimizeRankingMatchResponse.AsObject>);
-    get optimizationInfo(): googleProtobuf009.Struct | undefined;
-    set optimizationInfo(value: googleProtobuf009.Struct | undefined);
-    get optimizedOndewoConfig(): googleProtobuf009.Struct | undefined;
-    set optimizedOndewoConfig(value: googleProtobuf009.Struct | undefined);
+    get optimizationInfo(): googleProtobuf011.Struct | undefined;
+    set optimizationInfo(value: googleProtobuf011.Struct | undefined);
+    get optimizedOndewoConfig(): googleProtobuf011.Struct | undefined;
+    set optimizedOndewoConfig(value: googleProtobuf011.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1361,15 +1607,15 @@ export declare module OptimizeRankingMatchResponse {
      * Standard JavaScript object representation for OptimizeRankingMatchResponse
      */
     interface AsObject {
-        optimizationInfo?: googleProtobuf009.Struct.AsObject;
-        optimizedOndewoConfig?: googleProtobuf009.Struct.AsObject;
+        optimizationInfo?: googleProtobuf011.Struct.AsObject;
+        optimizedOndewoConfig?: googleProtobuf011.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for OptimizeRankingMatchResponse
      */
     interface AsProtobufJSON {
-        optimizationInfo?: googleProtobuf009.Struct.AsProtobufJSON | null;
-        optimizedOndewoConfig?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        optimizationInfo?: googleProtobuf011.Struct.AsProtobufJSON | null;
+        optimizedOndewoConfig?: googleProtobuf011.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -1971,8 +2217,8 @@ export declare class UserInProject implements GrpcMessage {
     constructor(_value?: RecursivePartial<UserInProject.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
-    get user(): ondewoNlu011.User | undefined;
-    set user(value: ondewoNlu011.User | undefined);
+    get user(): ondewoNlu014.User | undefined;
+    set user(value: ondewoNlu014.User | undefined);
     get roleId(): number | undefined;
     set roleId(value: number | undefined);
     /**
@@ -2001,7 +2247,7 @@ export declare module UserInProject {
      */
     interface AsObject {
         parent?: string;
-        user?: ondewoNlu011.User.AsObject;
+        user?: ondewoNlu014.User.AsObject;
         roleId?: number;
     }
     /**
@@ -2009,7 +2255,7 @@ export declare module UserInProject {
      */
     interface AsProtobufJSON {
         parent?: string;
-        user?: ondewoNlu011.User.AsProtobufJSON | null;
+        user?: ondewoNlu014.User.AsProtobufJSON | null;
         roleId?: number;
     }
 }
@@ -2419,8 +2665,8 @@ export declare class AgentSorting implements GrpcMessage {
     constructor(_value?: RecursivePartial<AgentSorting.AsObject>);
     get sortingField(): AgentSorting.AgentSortingField | undefined;
     set sortingField(value: AgentSorting.AgentSortingField | undefined);
-    get sortingMode(): ondewoNlu010.SortingMode | undefined;
-    set sortingMode(value: ondewoNlu010.SortingMode | undefined);
+    get sortingMode(): ondewoNlu007.SortingMode | undefined;
+    set sortingMode(value: ondewoNlu007.SortingMode | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2447,7 +2693,7 @@ export declare module AgentSorting {
      */
     interface AsObject {
         sortingField?: AgentSorting.AgentSortingField;
-        sortingMode?: ondewoNlu010.SortingMode;
+        sortingMode?: ondewoNlu007.SortingMode;
     }
     /**
      * Protobuf JSON representation for AgentSorting
@@ -2938,8 +3184,8 @@ export declare class ModelStatus implements GrpcMessage {
     set languageCode(value: string | undefined);
     get modelName(): string | undefined;
     set modelName(value: string | undefined);
-    get statusSetTime(): googleProtobuf012.Timestamp | undefined;
-    set statusSetTime(value: googleProtobuf012.Timestamp | undefined);
+    get statusSetTime(): googleProtobuf009.Timestamp | undefined;
+    set statusSetTime(value: googleProtobuf009.Timestamp | undefined);
     get config(): string | undefined;
     set config(value: string | undefined);
     get status(): ModelStatus.StatusName | undefined;
@@ -2972,7 +3218,7 @@ export declare module ModelStatus {
         cacheVersion?: number;
         languageCode?: string;
         modelName?: string;
-        statusSetTime?: googleProtobuf012.Timestamp.AsObject;
+        statusSetTime?: googleProtobuf009.Timestamp.AsObject;
         config?: string;
         status?: ModelStatus.StatusName;
     }
@@ -2983,7 +3229,7 @@ export declare module ModelStatus {
         cacheVersion?: number;
         languageCode?: string;
         modelName?: string;
-        statusSetTime?: googleProtobuf012.Timestamp.AsProtobufJSON | null;
+        statusSetTime?: googleProtobuf009.Timestamp.AsProtobufJSON | null;
         config?: string;
         status?: string;
     }

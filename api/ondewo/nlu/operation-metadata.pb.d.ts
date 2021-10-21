@@ -160,6 +160,7 @@ export declare module OperationMetadata {
         DELETE_AGENT = 4,
         RESTORE_AGENT = 5,
         BUILD_AGENT_CACHE = 6,
-        TRAIN_AGENT = 7
+        TRAIN_AGENT = 7,
+        EXPORT_BENCHMARK_AGENT = 8
     }
 }

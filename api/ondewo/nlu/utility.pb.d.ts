@@ -1,7 +1,7 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as ondewoNlu007 from '../../ondewo/nlu/intent.pb';
-import * as ondewoNlu008 from '../../ondewo/nlu/entity-type.pb';
+import * as ondewoNlu008 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu009 from '../../ondewo/nlu/entity-type.pb';
 export declare enum ReannotateEntitiesOptions {
     REANNOTATE_NEVER = 0,
     REANNOTATE_ALWAYS = 1,
@@ -180,8 +180,8 @@ export declare class ValidateEmbeddedRegexRequest implements GrpcMessage {
      * @param _value initial values object or instance of ValidateEmbeddedRegexRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<ValidateEmbeddedRegexRequest.AsObject>);
-    get entityType(): ondewoNlu008.EntityType.Entity | undefined;
-    set entityType(value: ondewoNlu008.EntityType.Entity | undefined);
+    get entityType(): ondewoNlu009.EntityType.Entity | undefined;
+    set entityType(value: ondewoNlu009.EntityType.Entity | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -207,13 +207,13 @@ export declare module ValidateEmbeddedRegexRequest {
      * Standard JavaScript object representation for ValidateEmbeddedRegexRequest
      */
     interface AsObject {
-        entityType?: ondewoNlu008.EntityType.Entity.AsObject;
+        entityType?: ondewoNlu009.EntityType.Entity.AsObject;
     }
     /**
      * Protobuf JSON representation for ValidateEmbeddedRegexRequest
      */
     interface AsProtobufJSON {
-        entityType?: ondewoNlu008.EntityType.Entity.AsProtobufJSON | null;
+        entityType?: ondewoNlu009.EntityType.Entity.AsProtobufJSON | null;
     }
 }
 /**
@@ -423,8 +423,8 @@ export declare class CleanAllIntentsResponse implements GrpcMessage {
      * @param _value initial values object or instance of CleanAllIntentsResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<CleanAllIntentsResponse.AsObject>);
-    get cleanedIntents(): ondewoNlu007.Intent[] | undefined;
-    set cleanedIntents(value: ondewoNlu007.Intent[] | undefined);
+    get cleanedIntents(): ondewoNlu008.Intent[] | undefined;
+    set cleanedIntents(value: ondewoNlu008.Intent[] | undefined);
     get intentUpdateList(): IntentUpdate[] | undefined;
     set intentUpdateList(value: IntentUpdate[] | undefined);
     /**
@@ -452,14 +452,14 @@ export declare module CleanAllIntentsResponse {
      * Standard JavaScript object representation for CleanAllIntentsResponse
      */
     interface AsObject {
-        cleanedIntents?: ondewoNlu007.Intent.AsObject[];
+        cleanedIntents?: ondewoNlu008.Intent.AsObject[];
         intentUpdateList?: IntentUpdate.AsObject[];
     }
     /**
      * Protobuf JSON representation for CleanAllIntentsResponse
      */
     interface AsProtobufJSON {
-        cleanedIntents?: ondewoNlu007.Intent.AsProtobufJSON[] | null;
+        cleanedIntents?: ondewoNlu008.Intent.AsProtobufJSON[] | null;
         intentUpdateList?: IntentUpdate.AsProtobufJSON[] | null;
     }
 }
@@ -601,8 +601,8 @@ export declare class CleanIntentResponse implements GrpcMessage {
      * @param _value initial values object or instance of CleanIntentResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<CleanIntentResponse.AsObject>);
-    get cleanedIntent(): ondewoNlu007.Intent | undefined;
-    set cleanedIntent(value: ondewoNlu007.Intent | undefined);
+    get cleanedIntent(): ondewoNlu008.Intent | undefined;
+    set cleanedIntent(value: ondewoNlu008.Intent | undefined);
     get intentUpdate(): IntentUpdate | undefined;
     set intentUpdate(value: IntentUpdate | undefined);
     /**
@@ -630,14 +630,14 @@ export declare module CleanIntentResponse {
      * Standard JavaScript object representation for CleanIntentResponse
      */
     interface AsObject {
-        cleanedIntent?: ondewoNlu007.Intent.AsObject;
+        cleanedIntent?: ondewoNlu008.Intent.AsObject;
         intentUpdate?: IntentUpdate.AsObject;
     }
     /**
      * Protobuf JSON representation for CleanIntentResponse
      */
     interface AsProtobufJSON {
-        cleanedIntent?: ondewoNlu007.Intent.AsProtobufJSON | null;
+        cleanedIntent?: ondewoNlu008.Intent.AsProtobufJSON | null;
         intentUpdate?: IntentUpdate.AsProtobufJSON | null;
     }
 }
@@ -1245,10 +1245,10 @@ export declare class CleanAllEntityTypesResponse implements GrpcMessage {
      * @param _value initial values object or instance of CleanAllEntityTypesResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<CleanAllEntityTypesResponse.AsObject>);
-    get cleanedEntityTypes(): ondewoNlu008.EntityType[] | undefined;
-    set cleanedEntityTypes(value: ondewoNlu008.EntityType[] | undefined);
-    get deletedEntityTypes(): ondewoNlu008.EntityType[] | undefined;
-    set deletedEntityTypes(value: ondewoNlu008.EntityType[] | undefined);
+    get cleanedEntityTypes(): ondewoNlu009.EntityType[] | undefined;
+    set cleanedEntityTypes(value: ondewoNlu009.EntityType[] | undefined);
+    get deletedEntityTypes(): ondewoNlu009.EntityType[] | undefined;
+    set deletedEntityTypes(value: ondewoNlu009.EntityType[] | undefined);
     get entityTypeUpdates(): EntityTypeUpdate[] | undefined;
     set entityTypeUpdates(value: EntityTypeUpdate[] | undefined);
     get entityTypeDeletions(): EntityTypeUpdate[] | undefined;
@@ -1278,8 +1278,8 @@ export declare module CleanAllEntityTypesResponse {
      * Standard JavaScript object representation for CleanAllEntityTypesResponse
      */
     interface AsObject {
-        cleanedEntityTypes?: ondewoNlu008.EntityType.AsObject[];
-        deletedEntityTypes?: ondewoNlu008.EntityType.AsObject[];
+        cleanedEntityTypes?: ondewoNlu009.EntityType.AsObject[];
+        deletedEntityTypes?: ondewoNlu009.EntityType.AsObject[];
         entityTypeUpdates?: EntityTypeUpdate.AsObject[];
         entityTypeDeletions?: EntityTypeUpdate.AsObject[];
     }
@@ -1287,8 +1287,8 @@ export declare module CleanAllEntityTypesResponse {
      * Protobuf JSON representation for CleanAllEntityTypesResponse
      */
     interface AsProtobufJSON {
-        cleanedEntityTypes?: ondewoNlu008.EntityType.AsProtobufJSON[] | null;
-        deletedEntityTypes?: ondewoNlu008.EntityType.AsProtobufJSON[] | null;
+        cleanedEntityTypes?: ondewoNlu009.EntityType.AsProtobufJSON[] | null;
+        deletedEntityTypes?: ondewoNlu009.EntityType.AsProtobufJSON[] | null;
         entityTypeUpdates?: EntityTypeUpdate.AsProtobufJSON[] | null;
         entityTypeDeletions?: EntityTypeUpdate.AsProtobufJSON[] | null;
     }
@@ -1426,8 +1426,8 @@ export declare class CleanEntityTypeResponse implements GrpcMessage {
      * @param _value initial values object or instance of CleanEntityTypeResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<CleanEntityTypeResponse.AsObject>);
-    get cleanedEntityType(): ondewoNlu008.EntityType | undefined;
-    set cleanedEntityType(value: ondewoNlu008.EntityType | undefined);
+    get cleanedEntityType(): ondewoNlu009.EntityType | undefined;
+    set cleanedEntityType(value: ondewoNlu009.EntityType | undefined);
     get entityTypeUpdate(): EntityTypeUpdate | undefined;
     set entityTypeUpdate(value: EntityTypeUpdate | undefined);
     /**
@@ -1455,14 +1455,14 @@ export declare module CleanEntityTypeResponse {
      * Standard JavaScript object representation for CleanEntityTypeResponse
      */
     interface AsObject {
-        cleanedEntityType?: ondewoNlu008.EntityType.AsObject;
+        cleanedEntityType?: ondewoNlu009.EntityType.AsObject;
         entityTypeUpdate?: EntityTypeUpdate.AsObject;
     }
     /**
      * Protobuf JSON representation for CleanEntityTypeResponse
      */
     interface AsProtobufJSON {
-        cleanedEntityType?: ondewoNlu008.EntityType.AsProtobufJSON | null;
+        cleanedEntityType?: ondewoNlu009.EntityType.AsProtobufJSON | null;
         entityTypeUpdate?: EntityTypeUpdate.AsProtobufJSON | null;
     }
 }
@@ -1603,8 +1603,8 @@ export declare module AddTrainingPhrasesRequest {
         set trainingPhrase(value: string | undefined);
         get intentDisplayName(): string | undefined;
         set intentDisplayName(value: string | undefined);
-        get entities(): ondewoNlu007.Intent.TrainingPhrase.Entity[] | undefined;
-        set entities(value: ondewoNlu007.Intent.TrainingPhrase.Entity[] | undefined);
+        get entities(): ondewoNlu008.Intent.TrainingPhrase.Entity[] | undefined;
+        set entities(value: ondewoNlu008.Intent.TrainingPhrase.Entity[] | undefined);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -1632,7 +1632,7 @@ export declare module AddTrainingPhrasesRequest {
         interface AsObject {
             trainingPhrase?: string;
             intentDisplayName?: string;
-            entities?: ondewoNlu007.Intent.TrainingPhrase.Entity.AsObject[];
+            entities?: ondewoNlu008.Intent.TrainingPhrase.Entity.AsObject[];
         }
         /**
          * Protobuf JSON representation for TrainingPhraseForIntent
@@ -1640,7 +1640,7 @@ export declare module AddTrainingPhrasesRequest {
         interface AsProtobufJSON {
             trainingPhrase?: string;
             intentDisplayName?: string;
-            entities?: ondewoNlu007.Intent.TrainingPhrase.Entity.AsProtobufJSON[] | null;
+            entities?: ondewoNlu008.Intent.TrainingPhrase.Entity.AsProtobufJSON[] | null;
         }
     }
 }

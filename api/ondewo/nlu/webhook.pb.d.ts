@@ -1,9 +1,9 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as ondewoNlu005 from '../../ondewo/nlu/context.pb';
-import * as googleProtobuf008 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu011 from '../../ondewo/nlu/intent.pb';
-import * as ondewoNlu013 from '../../ondewo/nlu/session.pb';
+import * as googleProtobuf009 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu012 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu014 from '../../ondewo/nlu/session.pb';
 /**
  * Message implementation for ondewo.nlu.PingRequest
  */
@@ -114,12 +114,12 @@ export declare class WebhookRequest implements GrpcMessage {
     set session(value: string | undefined);
     get responseId(): string | undefined;
     set responseId(value: string | undefined);
-    get queryResult(): ondewoNlu013.QueryResult | undefined;
-    set queryResult(value: ondewoNlu013.QueryResult | undefined);
+    get queryResult(): ondewoNlu014.QueryResult | undefined;
+    set queryResult(value: ondewoNlu014.QueryResult | undefined);
     get originalDetectIntentRequest(): OriginalDetectIntentRequest | undefined;
     set originalDetectIntentRequest(value: OriginalDetectIntentRequest | undefined);
-    get headers(): googleProtobuf008.Struct | undefined;
-    set headers(value: googleProtobuf008.Struct | undefined);
+    get headers(): googleProtobuf009.Struct | undefined;
+    set headers(value: googleProtobuf009.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -147,9 +147,9 @@ export declare module WebhookRequest {
     interface AsObject {
         session?: string;
         responseId?: string;
-        queryResult?: ondewoNlu013.QueryResult.AsObject;
+        queryResult?: ondewoNlu014.QueryResult.AsObject;
         originalDetectIntentRequest?: OriginalDetectIntentRequest.AsObject;
-        headers?: googleProtobuf008.Struct.AsObject;
+        headers?: googleProtobuf009.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for WebhookRequest
@@ -157,9 +157,9 @@ export declare module WebhookRequest {
     interface AsProtobufJSON {
         session?: string;
         responseId?: string;
-        queryResult?: ondewoNlu013.QueryResult.AsProtobufJSON | null;
+        queryResult?: ondewoNlu014.QueryResult.AsProtobufJSON | null;
         originalDetectIntentRequest?: OriginalDetectIntentRequest.AsProtobufJSON | null;
-        headers?: googleProtobuf008.Struct.AsProtobufJSON | null;
+        headers?: googleProtobuf009.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -202,16 +202,16 @@ export declare class WebhookResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<WebhookResponse.AsObject>);
     get fulfillmentText(): string | undefined;
     set fulfillmentText(value: string | undefined);
-    get fulfillmentMessages(): ondewoNlu011.Intent.Message[] | undefined;
-    set fulfillmentMessages(value: ondewoNlu011.Intent.Message[] | undefined);
+    get fulfillmentMessages(): ondewoNlu012.Intent.Message[] | undefined;
+    set fulfillmentMessages(value: ondewoNlu012.Intent.Message[] | undefined);
     get source(): string | undefined;
     set source(value: string | undefined);
-    get payload(): googleProtobuf008.Struct | undefined;
-    set payload(value: googleProtobuf008.Struct | undefined);
+    get payload(): googleProtobuf009.Struct | undefined;
+    set payload(value: googleProtobuf009.Struct | undefined);
     get outputContexts(): ondewoNlu005.Context[] | undefined;
     set outputContexts(value: ondewoNlu005.Context[] | undefined);
-    get followupEventInput(): ondewoNlu013.EventInput | undefined;
-    set followupEventInput(value: ondewoNlu013.EventInput | undefined);
+    get followupEventInput(): ondewoNlu014.EventInput | undefined;
+    set followupEventInput(value: ondewoNlu014.EventInput | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -238,22 +238,22 @@ export declare module WebhookResponse {
      */
     interface AsObject {
         fulfillmentText?: string;
-        fulfillmentMessages?: ondewoNlu011.Intent.Message.AsObject[];
+        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsObject[];
         source?: string;
-        payload?: googleProtobuf008.Struct.AsObject;
+        payload?: googleProtobuf009.Struct.AsObject;
         outputContexts?: ondewoNlu005.Context.AsObject[];
-        followupEventInput?: ondewoNlu013.EventInput.AsObject;
+        followupEventInput?: ondewoNlu014.EventInput.AsObject;
     }
     /**
      * Protobuf JSON representation for WebhookResponse
      */
     interface AsProtobufJSON {
         fulfillmentText?: string;
-        fulfillmentMessages?: ondewoNlu011.Intent.Message.AsProtobufJSON[] | null;
+        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsProtobufJSON[] | null;
         source?: string;
-        payload?: googleProtobuf008.Struct.AsProtobufJSON | null;
+        payload?: googleProtobuf009.Struct.AsProtobufJSON | null;
         outputContexts?: ondewoNlu005.Context.AsProtobufJSON[] | null;
-        followupEventInput?: ondewoNlu013.EventInput.AsProtobufJSON | null;
+        followupEventInput?: ondewoNlu014.EventInput.AsProtobufJSON | null;
     }
 }
 /**
@@ -292,8 +292,8 @@ export declare class OriginalDetectIntentRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<OriginalDetectIntentRequest.AsObject>);
     get source(): string | undefined;
     set source(value: string | undefined);
-    get payload(): googleProtobuf008.Struct | undefined;
-    set payload(value: googleProtobuf008.Struct | undefined);
+    get payload(): googleProtobuf009.Struct | undefined;
+    set payload(value: googleProtobuf009.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -320,14 +320,14 @@ export declare module OriginalDetectIntentRequest {
      */
     interface AsObject {
         source?: string;
-        payload?: googleProtobuf008.Struct.AsObject;
+        payload?: googleProtobuf009.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for OriginalDetectIntentRequest
      */
     interface AsProtobufJSON {
         source?: string;
-        payload?: googleProtobuf008.Struct.AsProtobufJSON | null;
+        payload?: googleProtobuf009.Struct.AsProtobufJSON | null;
     }
 }
 /**

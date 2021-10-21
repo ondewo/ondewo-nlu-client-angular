@@ -1,6 +1,7 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as ondewoNlu009 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu011 from '../../ondewo/nlu/entity-type.pb';
 /**
  * Message implementation for ondewo.nlu.ExtractEntitiesRequest
  */
@@ -86,6 +87,183 @@ export declare module ExtractEntitiesRequest {
     }
 }
 /**
+ * Message implementation for ondewo.nlu.ExtractEntitiesFuzzyRequest
+ */
+export declare class ExtractEntitiesFuzzyRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ExtractEntitiesFuzzyRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ExtractEntitiesFuzzyRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ExtractEntitiesFuzzyRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ExtractEntitiesFuzzyRequest, _writer: BinaryWriter): void;
+    private _parent?;
+    private _text?;
+    private _potentialEntities?;
+    private _minimalScore?;
+    private _allowOverlaps?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExtractEntitiesFuzzyRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ExtractEntitiesFuzzyRequest.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    get text(): string | undefined;
+    set text(value: string | undefined);
+    get potentialEntities(): EntityTypeFuzzyNerConfig[] | undefined;
+    set potentialEntities(value: EntityTypeFuzzyNerConfig[] | undefined);
+    get minimalScore(): number | undefined;
+    set minimalScore(value: number | undefined);
+    get allowOverlaps(): boolean | undefined;
+    set allowOverlaps(value: boolean | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ExtractEntitiesFuzzyRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ExtractEntitiesFuzzyRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ExtractEntitiesFuzzyRequest.AsProtobufJSON;
+}
+export declare module ExtractEntitiesFuzzyRequest {
+    /**
+     * Standard JavaScript object representation for ExtractEntitiesFuzzyRequest
+     */
+    interface AsObject {
+        parent?: string;
+        text?: string;
+        potentialEntities?: EntityTypeFuzzyNerConfig.AsObject[];
+        minimalScore?: number;
+        allowOverlaps?: boolean;
+    }
+    /**
+     * Protobuf JSON representation for ExtractEntitiesFuzzyRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        text?: string;
+        potentialEntities?: EntityTypeFuzzyNerConfig.AsProtobufJSON[] | null;
+        minimalScore?: number;
+        allowOverlaps?: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.EntityTypeFuzzyNerConfig
+ */
+export declare class EntityTypeFuzzyNerConfig implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): EntityTypeFuzzyNerConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EntityTypeFuzzyNerConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: EntityTypeFuzzyNerConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: EntityTypeFuzzyNerConfig, _writer: BinaryWriter): void;
+    private _entityType?;
+    private _minimalScore?;
+    private _entityValues?;
+    private _algorithm?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityTypeFuzzyNerConfig to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<EntityTypeFuzzyNerConfig.AsObject>);
+    get entityType(): ondewoNlu011.EntityType | undefined;
+    set entityType(value: ondewoNlu011.EntityType | undefined);
+    get minimalScore(): number | undefined;
+    set minimalScore(value: number | undefined);
+    get entityValues(): string[] | undefined;
+    set entityValues(value: string[] | undefined);
+    get algorithm(): EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm | undefined;
+    set algorithm(value: EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EntityTypeFuzzyNerConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): EntityTypeFuzzyNerConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): EntityTypeFuzzyNerConfig.AsProtobufJSON;
+}
+export declare module EntityTypeFuzzyNerConfig {
+    /**
+     * Standard JavaScript object representation for EntityTypeFuzzyNerConfig
+     */
+    interface AsObject {
+        entityType?: ondewoNlu011.EntityType.AsObject;
+        minimalScore?: number;
+        entityValues?: string[];
+        algorithm?: EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm;
+    }
+    /**
+     * Protobuf JSON representation for EntityTypeFuzzyNerConfig
+     */
+    interface AsProtobufJSON {
+        entityType?: ondewoNlu011.EntityType.AsProtobufJSON | null;
+        minimalScore?: number;
+        entityValues?: string[];
+        algorithm?: string;
+    }
+    enum FuzzyNerAlgorithm {
+        PREFILTER_LEVENSHTEIN = 0,
+        LOCAL_MAXIMUM = 1
+    }
+}
+/**
  * Message implementation for ondewo.nlu.EntityDetected
  */
 export declare class EntityDetected implements GrpcMessage {
@@ -120,8 +298,8 @@ export declare class EntityDetected implements GrpcMessage {
      * @param _value initial values object or instance of EntityDetected to deeply clone from
      */
     constructor(_value?: RecursivePartial<EntityDetected.AsObject>);
-    get entity(): ondewoNlu009.Intent.TrainingPhrase.Entity | undefined;
-    set entity(value: ondewoNlu009.Intent.TrainingPhrase.Entity | undefined);
+    get entity(): ondewoNlu010.Intent.TrainingPhrase.Entity | undefined;
+    set entity(value: ondewoNlu010.Intent.TrainingPhrase.Entity | undefined);
     get extractionMethod(): string | undefined;
     set extractionMethod(value: string | undefined);
     get score(): number | undefined;
@@ -151,7 +329,7 @@ export declare module EntityDetected {
      * Standard JavaScript object representation for EntityDetected
      */
     interface AsObject {
-        entity?: ondewoNlu009.Intent.TrainingPhrase.Entity.AsObject;
+        entity?: ondewoNlu010.Intent.TrainingPhrase.Entity.AsObject;
         extractionMethod?: string;
         score?: number;
     }
@@ -159,7 +337,7 @@ export declare module EntityDetected {
      * Protobuf JSON representation for EntityDetected
      */
     interface AsProtobufJSON {
-        entity?: ondewoNlu009.Intent.TrainingPhrase.Entity.AsProtobufJSON | null;
+        entity?: ondewoNlu010.Intent.TrainingPhrase.Entity.AsProtobufJSON | null;
         extractionMethod?: string;
         score?: number;
     }
@@ -549,8 +727,8 @@ export declare class GetAlternativeTrainingPhrasesRequest implements GrpcMessage
     constructor(_value?: RecursivePartial<GetAlternativeTrainingPhrasesRequest.AsObject>);
     get config(): DataEnrichmentConfig | undefined;
     set config(value: DataEnrichmentConfig | undefined);
-    get trainingPhrase(): ondewoNlu009.Intent.TrainingPhrase | undefined;
-    set trainingPhrase(value: ondewoNlu009.Intent.TrainingPhrase | undefined);
+    get trainingPhrase(): ondewoNlu010.Intent.TrainingPhrase | undefined;
+    set trainingPhrase(value: ondewoNlu010.Intent.TrainingPhrase | undefined);
     get intentName(): string | undefined;
     set intentName(value: string | undefined);
     get languageCode(): string | undefined;
@@ -593,7 +771,7 @@ export declare module GetAlternativeTrainingPhrasesRequest {
      */
     interface AsObject {
         config?: DataEnrichmentConfig.AsObject;
-        trainingPhrase?: ondewoNlu009.Intent.TrainingPhrase.AsObject;
+        trainingPhrase?: ondewoNlu010.Intent.TrainingPhrase.AsObject;
         intentName?: string;
         languageCode?: string;
         parent?: string;
@@ -608,7 +786,7 @@ export declare module GetAlternativeTrainingPhrasesRequest {
      */
     interface AsProtobufJSON {
         config?: DataEnrichmentConfig.AsProtobufJSON | null;
-        trainingPhrase?: ondewoNlu009.Intent.TrainingPhrase.AsProtobufJSON | null;
+        trainingPhrase?: ondewoNlu010.Intent.TrainingPhrase.AsProtobufJSON | null;
         intentName?: string;
         languageCode?: string;
         parent?: string;
@@ -1230,8 +1408,8 @@ export declare class AltTrainingPhrase implements GrpcMessage {
      * @param _value initial values object or instance of AltTrainingPhrase to deeply clone from
      */
     constructor(_value?: RecursivePartial<AltTrainingPhrase.AsObject>);
-    get trainingPhrase(): ondewoNlu009.Intent.TrainingPhrase | undefined;
-    set trainingPhrase(value: ondewoNlu009.Intent.TrainingPhrase | undefined);
+    get trainingPhrase(): ondewoNlu010.Intent.TrainingPhrase | undefined;
+    set trainingPhrase(value: ondewoNlu010.Intent.TrainingPhrase | undefined);
     get score(): number | undefined;
     set score(value: number | undefined);
     /**
@@ -1259,14 +1437,14 @@ export declare module AltTrainingPhrase {
      * Standard JavaScript object representation for AltTrainingPhrase
      */
     interface AsObject {
-        trainingPhrase?: ondewoNlu009.Intent.TrainingPhrase.AsObject;
+        trainingPhrase?: ondewoNlu010.Intent.TrainingPhrase.AsObject;
         score?: number;
     }
     /**
      * Protobuf JSON representation for AltTrainingPhrase
      */
     interface AsProtobufJSON {
-        trainingPhrase?: ondewoNlu009.Intent.TrainingPhrase.AsProtobufJSON | null;
+        trainingPhrase?: ondewoNlu010.Intent.TrainingPhrase.AsProtobufJSON | null;
         score?: number;
     }
 }

@@ -48,6 +48,14 @@ export declare class SessionsClient {
          */
         getSession: (requestData: thisProto.GetSessionRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
         /**
+         * Unary RPC for /ondewo.nlu.Sessions/CreateSession
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.Session>>
+         */
+        createSession: (requestData: thisProto.CreateSessionRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
+        /**
          * Unary RPC for /ondewo.nlu.Sessions/TrackSessionStep
          *
          * @param requestMessage Request message
@@ -153,6 +161,14 @@ export declare class SessionsClient {
      * @returns Observable<thisProto.Session>
      */
     getSession(requestData: thisProto.GetSessionRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
+    /**
+     * Unary RPC for /ondewo.nlu.Sessions/CreateSession
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Session>
+     */
+    createSession(requestData: thisProto.CreateSessionRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
     /**
      * Unary RPC for /ondewo.nlu.Sessions/TrackSessionStep
      *

@@ -62,6 +62,14 @@ export declare class AiServicesClient {
          * @returns Observable<GrpcEvent<thisProto.GetSynonymsResponse>>
          */
         getSynonyms: (requestData: thisProto.GetSynonymsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetSynonymsResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>
+         */
+        extractEntitiesFuzzy: (requestData: thisProto.ExtractEntitiesFuzzyRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -112,4 +120,12 @@ export declare class AiServicesClient {
      * @returns Observable<thisProto.GetSynonymsResponse>
      */
     getSynonyms(requestData: thisProto.GetSynonymsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetSynonymsResponse>;
+    /**
+     * Unary RPC for /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ExtractEntitiesResponse>
+     */
+    extractEntitiesFuzzy(requestData: thisProto.ExtractEntitiesFuzzyRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ExtractEntitiesResponse>;
 }

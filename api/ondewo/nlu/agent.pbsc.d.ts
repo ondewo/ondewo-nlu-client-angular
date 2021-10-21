@@ -145,6 +145,14 @@ export declare class AgentsClient {
          */
         exportAgent: (requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
         /**
+         * Unary RPC for /ondewo.nlu.Agents/ExportBenchmarkAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         */
+        exportBenchmarkAgent: (requestData: thisProto.ExportBenchmarkAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        /**
          * Unary RPC for /ondewo.nlu.Agents/ImportAgent
          *
          * @param requestMessage Request message
@@ -346,6 +354,14 @@ export declare class AgentsClient {
      * @returns Observable<googleLongrunning008.Operation>
      */
     exportAgent(requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
+    /**
+     * Unary RPC for /ondewo.nlu.Agents/ExportBenchmarkAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleLongrunning008.Operation>
+     */
+    exportBenchmarkAgent(requestData: thisProto.ExportBenchmarkAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
      * Unary RPC for /ondewo.nlu.Agents/ImportAgent
      *

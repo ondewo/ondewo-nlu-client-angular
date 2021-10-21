@@ -30,7 +30,15 @@ export declare class QAClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<thisProto.RunScraperResponse>>
          */
-        runScraper: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.RunScraperResponse>>;
+        runScraper: (requestData: thisProto.RunScraperRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.RunScraperResponse>>;
+        /**
+         * Unary RPC for /ondewo.qa.QA/UpdateDatabase
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.UpdateDatabaseResponse>>
+         */
+        updateDatabase: (requestData: thisProto.UpdateDatabaseRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.UpdateDatabaseResponse>>;
         /**
          * Unary RPC for /ondewo.qa.QA/RunTraining
          *
@@ -39,6 +47,30 @@ export declare class QAClient {
          * @returns Observable<GrpcEvent<thisProto.RunTrainingResponse>>
          */
         runTraining: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.RunTrainingResponse>>;
+        /**
+         * Unary RPC for /ondewo.qa.QA/GetServerState
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetServerStateResponse>>
+         */
+        getServerState: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetServerStateResponse>>;
+        /**
+         * Unary RPC for /ondewo.qa.QA/ListProjectIds
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListProjectIdsResponse>>
+         */
+        listProjectIds: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListProjectIdsResponse>>;
+        /**
+         * Unary RPC for /ondewo.qa.QA/GetProjectConfig
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetProjectConfigResponse>>
+         */
+        getProjectConfig: (requestData: thisProto.GetProjectConfigRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetProjectConfigResponse>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -56,7 +88,15 @@ export declare class QAClient {
      * @param requestMetadata Request metadata
      * @returns Observable<thisProto.RunScraperResponse>
      */
-    runScraper(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.RunScraperResponse>;
+    runScraper(requestData: thisProto.RunScraperRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.RunScraperResponse>;
+    /**
+     * Unary RPC for /ondewo.qa.QA/UpdateDatabase
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.UpdateDatabaseResponse>
+     */
+    updateDatabase(requestData: thisProto.UpdateDatabaseRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.UpdateDatabaseResponse>;
     /**
      * Unary RPC for /ondewo.qa.QA/RunTraining
      *
@@ -65,4 +105,28 @@ export declare class QAClient {
      * @returns Observable<thisProto.RunTrainingResponse>
      */
     runTraining(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.RunTrainingResponse>;
+    /**
+     * Unary RPC for /ondewo.qa.QA/GetServerState
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetServerStateResponse>
+     */
+    getServerState(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.GetServerStateResponse>;
+    /**
+     * Unary RPC for /ondewo.qa.QA/ListProjectIds
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListProjectIdsResponse>
+     */
+    listProjectIds(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.ListProjectIdsResponse>;
+    /**
+     * Unary RPC for /ondewo.qa.QA/GetProjectConfig
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetProjectConfigResponse>
+     */
+    getProjectConfig(requestData: thisProto.GetProjectConfigRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetProjectConfigResponse>;
 }
