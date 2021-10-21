@@ -5,6 +5,7 @@ import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu007 from '../../ondewo/nlu/context.pb';
 import * as ondewoNlu008 from '../../ondewo/nlu/common.pb';
 import * as googleProtobuf010 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf011 from '@ngx-grpc/well-known-types';
 export declare enum IntentView {
     INTENT_VIEW_UNSPECIFIED = 0,
     INTENT_VIEW_FULL = 1,
@@ -14,7 +15,10 @@ export declare enum IntentView {
 export declare enum IntentCategory {
     ALL_INTENTS = 0,
     DEFAULT_INTENTS = 1,
-    USER_DEFINED_INTENTS = 2
+    USER_DEFINED_INTENTS = 2,
+    DATE_EXPIRED_INTENTS = 3,
+    DATE_ACTIVE_INTENTS = 4,
+    DATE_UPCOMING_INTENTS = 5
 }
 /**
  * Message implementation for ondewo.nlu.Intent
@@ -67,6 +71,8 @@ export declare class Intent implements GrpcMessage {
     private _isEndOfDeviation?;
     private _trainingPhraseCount?;
     private _status?;
+    private _startDate?;
+    private _endDate?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of Intent to deeply clone from
@@ -120,6 +126,10 @@ export declare class Intent implements GrpcMessage {
     set trainingPhraseCount(value: number | undefined);
     get status(): Intent.IntentStatus | undefined;
     set status(value: Intent.IntentStatus | undefined);
+    get startDate(): googleProtobuf010.Timestamp | undefined;
+    set startDate(value: googleProtobuf010.Timestamp | undefined);
+    get endDate(): googleProtobuf010.Timestamp | undefined;
+    set endDate(value: googleProtobuf010.Timestamp | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -169,6 +179,8 @@ export declare module Intent {
         isEndOfDeviation?: boolean;
         trainingPhraseCount?: number;
         status?: Intent.IntentStatus;
+        startDate?: googleProtobuf010.Timestamp.AsObject;
+        endDate?: googleProtobuf010.Timestamp.AsObject;
     }
     /**
      * Protobuf JSON representation for Intent
@@ -198,6 +210,8 @@ export declare module Intent {
         isEndOfDeviation?: boolean;
         trainingPhraseCount?: number;
         status?: string;
+        startDate?: googleProtobuf010.Timestamp.AsProtobufJSON | null;
+        endDate?: googleProtobuf010.Timestamp.AsProtobufJSON | null;
     }
     enum IntentStatus {
         ACTIVE = 0,
@@ -661,8 +675,8 @@ export declare module Intent {
         set quickReplies(value: Intent.Message.QuickReplies | undefined);
         get card(): Intent.Message.Card | undefined;
         set card(value: Intent.Message.Card | undefined);
-        get payload(): googleProtobuf010.Struct | undefined;
-        set payload(value: googleProtobuf010.Struct | undefined);
+        get payload(): googleProtobuf011.Struct | undefined;
+        set payload(value: googleProtobuf011.Struct | undefined);
         get simpleResponses(): Intent.Message.SimpleResponses | undefined;
         set simpleResponses(value: Intent.Message.SimpleResponses | undefined);
         get basicCard(): Intent.Message.BasicCard | undefined;
@@ -715,7 +729,7 @@ export declare module Intent {
             image?: Intent.Message.Image.AsObject;
             quickReplies?: Intent.Message.QuickReplies.AsObject;
             card?: Intent.Message.Card.AsObject;
-            payload?: googleProtobuf010.Struct.AsObject;
+            payload?: googleProtobuf011.Struct.AsObject;
             simpleResponses?: Intent.Message.SimpleResponses.AsObject;
             basicCard?: Intent.Message.BasicCard.AsObject;
             suggestions?: Intent.Message.Suggestions.AsObject;
@@ -737,7 +751,7 @@ export declare module Intent {
             image?: Intent.Message.Image.AsProtobufJSON | null;
             quickReplies?: Intent.Message.QuickReplies.AsProtobufJSON | null;
             card?: Intent.Message.Card.AsProtobufJSON | null;
-            payload?: googleProtobuf010.Struct.AsProtobufJSON | null;
+            payload?: googleProtobuf011.Struct.AsProtobufJSON | null;
             simpleResponses?: Intent.Message.SimpleResponses.AsProtobufJSON | null;
             basicCard?: Intent.Message.BasicCard.AsProtobufJSON | null;
             suggestions?: Intent.Message.Suggestions.AsProtobufJSON | null;
@@ -3302,7 +3316,9 @@ export declare module IntentSorting {
         SORT_INTENT_BY_NAME = 1,
         SORT_INTENT_BY_CREATION_DATE = 2,
         SORT_INTENT_BY_LAST_UPDATED = 3,
-        SORT_INTENT_BY_USERSAYS_COUNT = 4
+        SORT_INTENT_BY_USERSAYS_COUNT = 4,
+        SORT_INTENT_BY_START_DATE = 5,
+        SORT_INTENT_BY_END_DATE = 6
     }
 }
 /**

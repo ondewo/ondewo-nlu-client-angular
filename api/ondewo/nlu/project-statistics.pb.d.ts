@@ -1,7 +1,7 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as ondewoNlu009 from '../../ondewo/nlu/intent.pb';
-import * as ondewoNlu010 from '../../ondewo/nlu/entity-type.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu011 from '../../ondewo/nlu/entity-type.pb';
 /**
  * Message implementation for ondewo.nlu.GetIntentCountRequest
  */
@@ -38,8 +38,8 @@ export declare class GetIntentCountRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetIntentCountRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
-    get filterByCategory(): ondewoNlu009.IntentCategory | undefined;
-    set filterByCategory(value: ondewoNlu009.IntentCategory | undefined);
+    get filterByCategory(): ondewoNlu010.IntentCategory | undefined;
+    set filterByCategory(value: ondewoNlu010.IntentCategory | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -66,7 +66,7 @@ export declare module GetIntentCountRequest {
      */
     interface AsObject {
         parent?: string;
-        filterByCategory?: ondewoNlu009.IntentCategory;
+        filterByCategory?: ondewoNlu010.IntentCategory;
     }
     /**
      * Protobuf JSON representation for GetIntentCountRequest
@@ -112,8 +112,8 @@ export declare class GetEntityTypeCountRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetEntityTypeCountRequest.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
-    get filterByCategory(): ondewoNlu010.EntityTypeCategory | undefined;
-    set filterByCategory(value: ondewoNlu010.EntityTypeCategory | undefined);
+    get filterByCategory(): ondewoNlu011.EntityTypeCategory | undefined;
+    set filterByCategory(value: ondewoNlu011.EntityTypeCategory | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -140,7 +140,7 @@ export declare module GetEntityTypeCountRequest {
      */
     interface AsObject {
         parent?: string;
-        filterByCategory?: ondewoNlu010.EntityTypeCategory;
+        filterByCategory?: ondewoNlu011.EntityTypeCategory;
     }
     /**
      * Protobuf JSON representation for GetEntityTypeCountRequest

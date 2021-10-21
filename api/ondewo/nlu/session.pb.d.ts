@@ -1,11 +1,11 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as ondewoNlu006 from '../../ondewo/nlu/context.pb';
-import * as googleProtobuf009 from '@ngx-grpc/well-known-types';
-import * as googleRpc010 from '../../google/rpc/status.pb';
-import * as googleType011 from '../../google/type/latlng.pb';
-import * as ondewoNlu012 from '../../ondewo/nlu/intent.pb';
-import * as ondewoNlu013 from '../../ondewo/nlu/entity-type.pb';
+import * as googleProtobuf010 from '@ngx-grpc/well-known-types';
+import * as googleRpc011 from '../../google/rpc/status.pb';
+import * as googleType012 from '../../google/type/latlng.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu014 from '../../ondewo/nlu/entity-type.pb';
 export declare enum AudioEncoding {
     AUDIO_ENCODING_UNSPECIFIED = 0,
     AUDIO_ENCODING_LINEAR_16 = 1,
@@ -139,8 +139,8 @@ export declare class DetectIntentResponse implements GrpcMessage {
     set responseId(value: string | undefined);
     get queryResult(): QueryResult | undefined;
     set queryResult(value: QueryResult | undefined);
-    get webhookStatus(): googleRpc010.Status | undefined;
-    set webhookStatus(value: googleRpc010.Status | undefined);
+    get webhookStatus(): googleRpc011.Status | undefined;
+    set webhookStatus(value: googleRpc011.Status | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -168,7 +168,7 @@ export declare module DetectIntentResponse {
     interface AsObject {
         responseId?: string;
         queryResult?: QueryResult.AsObject;
-        webhookStatus?: googleRpc010.Status.AsObject;
+        webhookStatus?: googleRpc011.Status.AsObject;
     }
     /**
      * Protobuf JSON representation for DetectIntentResponse
@@ -176,7 +176,7 @@ export declare module DetectIntentResponse {
     interface AsProtobufJSON {
         responseId?: string;
         queryResult?: QueryResult.AsProtobufJSON | null;
-        webhookStatus?: googleRpc010.Status.AsProtobufJSON | null;
+        webhookStatus?: googleRpc011.Status.AsProtobufJSON | null;
     }
 }
 /**
@@ -218,14 +218,14 @@ export declare class QueryParameters implements GrpcMessage {
     constructor(_value?: RecursivePartial<QueryParameters.AsObject>);
     get timeZone(): string | undefined;
     set timeZone(value: string | undefined);
-    get geoLocation(): googleType011.LatLng | undefined;
-    set geoLocation(value: googleType011.LatLng | undefined);
+    get geoLocation(): googleType012.LatLng | undefined;
+    set geoLocation(value: googleType012.LatLng | undefined);
     get contexts(): ondewoNlu006.Context[] | undefined;
     set contexts(value: ondewoNlu006.Context[] | undefined);
     get resetContexts(): boolean | undefined;
     set resetContexts(value: boolean | undefined);
-    get payload(): googleProtobuf009.Struct | undefined;
-    set payload(value: googleProtobuf009.Struct | undefined);
+    get payload(): googleProtobuf010.Struct | undefined;
+    set payload(value: googleProtobuf010.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -252,20 +252,20 @@ export declare module QueryParameters {
      */
     interface AsObject {
         timeZone?: string;
-        geoLocation?: googleType011.LatLng.AsObject;
+        geoLocation?: googleType012.LatLng.AsObject;
         contexts?: ondewoNlu006.Context.AsObject[];
         resetContexts?: boolean;
-        payload?: googleProtobuf009.Struct.AsObject;
+        payload?: googleProtobuf010.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for QueryParameters
      */
     interface AsProtobufJSON {
         timeZone?: string;
-        geoLocation?: googleType011.LatLng.AsProtobufJSON | null;
+        geoLocation?: googleType012.LatLng.AsProtobufJSON | null;
         contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
         resetContexts?: boolean;
-        payload?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        payload?: googleProtobuf010.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -409,26 +409,26 @@ export declare class QueryResult implements GrpcMessage {
     set speechRecognitionConfidence(value: number | undefined);
     get action(): string | undefined;
     set action(value: string | undefined);
-    get parameters(): googleProtobuf009.Struct | undefined;
-    set parameters(value: googleProtobuf009.Struct | undefined);
+    get parameters(): googleProtobuf010.Struct | undefined;
+    set parameters(value: googleProtobuf010.Struct | undefined);
     get allRequiredParamsPresent(): boolean | undefined;
     set allRequiredParamsPresent(value: boolean | undefined);
     get fulfillmentText(): string | undefined;
     set fulfillmentText(value: string | undefined);
-    get fulfillmentMessages(): ondewoNlu012.Intent.Message[] | undefined;
-    set fulfillmentMessages(value: ondewoNlu012.Intent.Message[] | undefined);
+    get fulfillmentMessages(): ondewoNlu013.Intent.Message[] | undefined;
+    set fulfillmentMessages(value: ondewoNlu013.Intent.Message[] | undefined);
     get webhookSource(): string | undefined;
     set webhookSource(value: string | undefined);
-    get webhookPayload(): googleProtobuf009.Struct | undefined;
-    set webhookPayload(value: googleProtobuf009.Struct | undefined);
+    get webhookPayload(): googleProtobuf010.Struct | undefined;
+    set webhookPayload(value: googleProtobuf010.Struct | undefined);
     get outputContexts(): ondewoNlu006.Context[] | undefined;
     set outputContexts(value: ondewoNlu006.Context[] | undefined);
-    get intent(): ondewoNlu012.Intent | undefined;
-    set intent(value: ondewoNlu012.Intent | undefined);
+    get intent(): ondewoNlu013.Intent | undefined;
+    set intent(value: ondewoNlu013.Intent | undefined);
     get intentDetectionConfidence(): number | undefined;
     set intentDetectionConfidence(value: number | undefined);
-    get diagnosticInfo(): googleProtobuf009.Struct | undefined;
-    set diagnosticInfo(value: googleProtobuf009.Struct | undefined);
+    get diagnosticInfo(): googleProtobuf010.Struct | undefined;
+    set diagnosticInfo(value: googleProtobuf010.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -458,16 +458,16 @@ export declare module QueryResult {
         languageCode?: string;
         speechRecognitionConfidence?: number;
         action?: string;
-        parameters?: googleProtobuf009.Struct.AsObject;
+        parameters?: googleProtobuf010.Struct.AsObject;
         allRequiredParamsPresent?: boolean;
         fulfillmentText?: string;
-        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsObject[];
+        fulfillmentMessages?: ondewoNlu013.Intent.Message.AsObject[];
         webhookSource?: string;
-        webhookPayload?: googleProtobuf009.Struct.AsObject;
+        webhookPayload?: googleProtobuf010.Struct.AsObject;
         outputContexts?: ondewoNlu006.Context.AsObject[];
-        intent?: ondewoNlu012.Intent.AsObject;
+        intent?: ondewoNlu013.Intent.AsObject;
         intentDetectionConfidence?: number;
-        diagnosticInfo?: googleProtobuf009.Struct.AsObject;
+        diagnosticInfo?: googleProtobuf010.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for QueryResult
@@ -477,16 +477,16 @@ export declare module QueryResult {
         languageCode?: string;
         speechRecognitionConfidence?: number;
         action?: string;
-        parameters?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        parameters?: googleProtobuf010.Struct.AsProtobufJSON | null;
         allRequiredParamsPresent?: boolean;
         fulfillmentText?: string;
-        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsProtobufJSON[] | null;
+        fulfillmentMessages?: ondewoNlu013.Intent.Message.AsProtobufJSON[] | null;
         webhookSource?: string;
-        webhookPayload?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        webhookPayload?: googleProtobuf010.Struct.AsProtobufJSON | null;
         outputContexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
-        intent?: ondewoNlu012.Intent.AsProtobufJSON | null;
+        intent?: ondewoNlu013.Intent.AsProtobufJSON | null;
         intentDetectionConfidence?: number;
-        diagnosticInfo?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        diagnosticInfo?: googleProtobuf010.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -620,8 +620,8 @@ export declare class StreamingDetectIntentResponse implements GrpcMessage {
     set recognitionResult(value: StreamingRecognitionResult | undefined);
     get queryResult(): QueryResult | undefined;
     set queryResult(value: QueryResult | undefined);
-    get webhookStatus(): googleRpc010.Status | undefined;
-    set webhookStatus(value: googleRpc010.Status | undefined);
+    get webhookStatus(): googleRpc011.Status | undefined;
+    set webhookStatus(value: googleRpc011.Status | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -650,7 +650,7 @@ export declare module StreamingDetectIntentResponse {
         responseId?: string;
         recognitionResult?: StreamingRecognitionResult.AsObject;
         queryResult?: QueryResult.AsObject;
-        webhookStatus?: googleRpc010.Status.AsObject;
+        webhookStatus?: googleRpc011.Status.AsObject;
     }
     /**
      * Protobuf JSON representation for StreamingDetectIntentResponse
@@ -659,7 +659,7 @@ export declare module StreamingDetectIntentResponse {
         responseId?: string;
         recognitionResult?: StreamingRecognitionResult.AsProtobufJSON | null;
         queryResult?: QueryResult.AsProtobufJSON | null;
-        webhookStatus?: googleRpc010.Status.AsProtobufJSON | null;
+        webhookStatus?: googleRpc011.Status.AsProtobufJSON | null;
     }
 }
 /**
@@ -946,8 +946,8 @@ export declare class EventInput implements GrpcMessage {
     constructor(_value?: RecursivePartial<EventInput.AsObject>);
     get name(): string | undefined;
     set name(value: string | undefined);
-    get parameters(): googleProtobuf009.Struct | undefined;
-    set parameters(value: googleProtobuf009.Struct | undefined);
+    get parameters(): googleProtobuf010.Struct | undefined;
+    set parameters(value: googleProtobuf010.Struct | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
     /**
@@ -976,7 +976,7 @@ export declare module EventInput {
      */
     interface AsObject {
         name?: string;
-        parameters?: googleProtobuf009.Struct.AsObject;
+        parameters?: googleProtobuf010.Struct.AsObject;
         languageCode?: string;
     }
     /**
@@ -984,7 +984,7 @@ export declare module EventInput {
      */
     interface AsProtobufJSON {
         name?: string;
-        parameters?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        parameters?: googleProtobuf010.Struct.AsProtobufJSON | null;
         languageCode?: string;
     }
 }
@@ -1361,10 +1361,10 @@ export declare class SessionFilter implements GrpcMessage {
     constructor(_value?: RecursivePartial<SessionFilter.AsObject>);
     get languageCodes(): string[] | undefined;
     set languageCodes(value: string[] | undefined);
-    get matchedIntents(): ondewoNlu012.Intent[] | undefined;
-    set matchedIntents(value: ondewoNlu012.Intent[] | undefined);
-    get matchedEntityTypes(): ondewoNlu013.EntityType[] | undefined;
-    set matchedEntityTypes(value: ondewoNlu013.EntityType[] | undefined);
+    get matchedIntents(): ondewoNlu013.Intent[] | undefined;
+    set matchedIntents(value: ondewoNlu013.Intent[] | undefined);
+    get matchedEntityTypes(): ondewoNlu014.EntityType[] | undefined;
+    set matchedEntityTypes(value: ondewoNlu014.EntityType[] | undefined);
     get minIntentsConfidenceMin(): number | undefined;
     set minIntentsConfidenceMin(value: number | undefined);
     get minIntentsConfidenceMax(): number | undefined;
@@ -1411,8 +1411,8 @@ export declare module SessionFilter {
      */
     interface AsObject {
         languageCodes?: string[];
-        matchedIntents?: ondewoNlu012.Intent.AsObject[];
-        matchedEntityTypes?: ondewoNlu013.EntityType.AsObject[];
+        matchedIntents?: ondewoNlu013.Intent.AsObject[];
+        matchedEntityTypes?: ondewoNlu014.EntityType.AsObject[];
         minIntentsConfidenceMin?: number;
         minIntentsConfidenceMax?: number;
         minEntityTypesConfidenceMin?: number;
@@ -1429,8 +1429,8 @@ export declare module SessionFilter {
      */
     interface AsProtobufJSON {
         languageCodes?: string[];
-        matchedIntents?: ondewoNlu012.Intent.AsProtobufJSON[] | null;
-        matchedEntityTypes?: ondewoNlu013.EntityType.AsProtobufJSON[] | null;
+        matchedIntents?: ondewoNlu013.Intent.AsProtobufJSON[] | null;
+        matchedEntityTypes?: ondewoNlu014.EntityType.AsProtobufJSON[] | null;
         minIntentsConfidenceMin?: number;
         minIntentsConfidenceMax?: number;
         minEntityTypesConfidenceMin?: number;
@@ -1487,10 +1487,10 @@ export declare class SessionInfo implements GrpcMessage {
     constructor(_value?: RecursivePartial<SessionInfo.AsObject>);
     get languageCodes(): string[] | undefined;
     set languageCodes(value: string[] | undefined);
-    get matchedIntents(): ondewoNlu012.Intent[] | undefined;
-    set matchedIntents(value: ondewoNlu012.Intent[] | undefined);
-    get matchedEntityTypes(): ondewoNlu013.EntityType[] | undefined;
-    set matchedEntityTypes(value: ondewoNlu013.EntityType[] | undefined);
+    get matchedIntents(): ondewoNlu013.Intent[] | undefined;
+    set matchedIntents(value: ondewoNlu013.Intent[] | undefined);
+    get matchedEntityTypes(): ondewoNlu014.EntityType[] | undefined;
+    set matchedEntityTypes(value: ondewoNlu014.EntityType[] | undefined);
     get minIntentsConfidence(): number | undefined;
     set minIntentsConfidence(value: number | undefined);
     get minEntityTypesConfidence(): number | undefined;
@@ -1531,8 +1531,8 @@ export declare module SessionInfo {
      */
     interface AsObject {
         languageCodes?: string[];
-        matchedIntents?: ondewoNlu012.Intent.AsObject[];
-        matchedEntityTypes?: ondewoNlu013.EntityType.AsObject[];
+        matchedIntents?: ondewoNlu013.Intent.AsObject[];
+        matchedEntityTypes?: ondewoNlu014.EntityType.AsObject[];
         minIntentsConfidence?: number;
         minEntityTypesConfidence?: number;
         earliest?: number;
@@ -1546,8 +1546,8 @@ export declare module SessionInfo {
      */
     interface AsProtobufJSON {
         languageCodes?: string[];
-        matchedIntents?: ondewoNlu012.Intent.AsProtobufJSON[] | null;
-        matchedEntityTypes?: ondewoNlu013.EntityType.AsProtobufJSON[] | null;
+        matchedIntents?: ondewoNlu013.Intent.AsProtobufJSON[] | null;
+        matchedEntityTypes?: ondewoNlu014.EntityType.AsProtobufJSON[] | null;
         minIntentsConfidence?: number;
         minEntityTypesConfidence?: number;
         earliest?: number;
@@ -1703,6 +1703,80 @@ export declare module GetSessionRequest {
     interface AsProtobufJSON {
         sessionId?: string;
         sessionView?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.CreateSessionRequest
+ */
+export declare class CreateSessionRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): CreateSessionRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: CreateSessionRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: CreateSessionRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: CreateSessionRequest, _writer: BinaryWriter): void;
+    private _parent?;
+    private _sessionUuid?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateSessionRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<CreateSessionRequest.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    get sessionUuid(): string | undefined;
+    set sessionUuid(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): CreateSessionRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): CreateSessionRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): CreateSessionRequest.AsProtobufJSON;
+}
+export declare module CreateSessionRequest {
+    /**
+     * Standard JavaScript object representation for CreateSessionRequest
+     */
+    interface AsObject {
+        parent?: string;
+        sessionUuid?: string;
+    }
+    /**
+     * Protobuf JSON representation for CreateSessionRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        sessionUuid?: string;
     }
 }
 /**
@@ -1973,8 +2047,8 @@ export declare class SessionReviewStep implements GrpcMessage {
      * @param _value initial values object or instance of SessionReviewStep to deeply clone from
      */
     constructor(_value?: RecursivePartial<SessionReviewStep.AsObject>);
-    get annotatedUsersays(): ondewoNlu012.Intent.TrainingPhrase | undefined;
-    set annotatedUsersays(value: ondewoNlu012.Intent.TrainingPhrase | undefined);
+    get annotatedUsersays(): ondewoNlu013.Intent.TrainingPhrase | undefined;
+    set annotatedUsersays(value: ondewoNlu013.Intent.TrainingPhrase | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
     get detectedIntents(): DetectedIntent[] | undefined;
@@ -2006,7 +2080,7 @@ export declare module SessionReviewStep {
      * Standard JavaScript object representation for SessionReviewStep
      */
     interface AsObject {
-        annotatedUsersays?: ondewoNlu012.Intent.TrainingPhrase.AsObject;
+        annotatedUsersays?: ondewoNlu013.Intent.TrainingPhrase.AsObject;
         languageCode?: string;
         detectedIntents?: DetectedIntent.AsObject[];
         contexts?: ondewoNlu006.Context.AsObject[];
@@ -2015,7 +2089,7 @@ export declare module SessionReviewStep {
      * Protobuf JSON representation for SessionReviewStep
      */
     interface AsProtobufJSON {
-        annotatedUsersays?: ondewoNlu012.Intent.TrainingPhrase.AsProtobufJSON | null;
+        annotatedUsersays?: ondewoNlu013.Intent.TrainingPhrase.AsProtobufJSON | null;
         languageCode?: string;
         detectedIntents?: DetectedIntent.AsProtobufJSON[] | null;
         contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
@@ -2058,14 +2132,14 @@ export declare class DetectedIntent implements GrpcMessage {
      * @param _value initial values object or instance of DetectedIntent to deeply clone from
      */
     constructor(_value?: RecursivePartial<DetectedIntent.AsObject>);
-    get intent(): ondewoNlu012.Intent | undefined;
-    set intent(value: ondewoNlu012.Intent | undefined);
+    get intent(): ondewoNlu013.Intent | undefined;
+    set intent(value: ondewoNlu013.Intent | undefined);
     get score(): number | undefined;
     set score(value: number | undefined);
     get algorithm(): string | undefined;
     set algorithm(value: string | undefined);
-    get fulfillmentMessages(): ondewoNlu012.Intent.Message[] | undefined;
-    set fulfillmentMessages(value: ondewoNlu012.Intent.Message[] | undefined);
+    get fulfillmentMessages(): ondewoNlu013.Intent.Message[] | undefined;
+    set fulfillmentMessages(value: ondewoNlu013.Intent.Message[] | undefined);
     get requiredParamMissing(): boolean | undefined;
     set requiredParamMissing(value: boolean | undefined);
     /**
@@ -2093,20 +2167,20 @@ export declare module DetectedIntent {
      * Standard JavaScript object representation for DetectedIntent
      */
     interface AsObject {
-        intent?: ondewoNlu012.Intent.AsObject;
+        intent?: ondewoNlu013.Intent.AsObject;
         score?: number;
         algorithm?: string;
-        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsObject[];
+        fulfillmentMessages?: ondewoNlu013.Intent.Message.AsObject[];
         requiredParamMissing?: boolean;
     }
     /**
      * Protobuf JSON representation for DetectedIntent
      */
     interface AsProtobufJSON {
-        intent?: ondewoNlu012.Intent.AsProtobufJSON | null;
+        intent?: ondewoNlu013.Intent.AsProtobufJSON | null;
         score?: number;
         algorithm?: string;
-        fulfillmentMessages?: ondewoNlu012.Intent.Message.AsProtobufJSON[] | null;
+        fulfillmentMessages?: ondewoNlu013.Intent.Message.AsProtobufJSON[] | null;
         requiredParamMissing?: boolean;
     }
 }
