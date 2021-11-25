@@ -3312,3 +3312,225 @@ export declare module GetModelStatusesResponse {
         modelStatuses?: ModelStatus.AsProtobufJSON[] | null;
     }
 }
+/**
+ * Message implementation for ondewo.nlu.CustomPlatformInfo
+ */
+export declare class CustomPlatformInfo implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): CustomPlatformInfo;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: CustomPlatformInfo): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: CustomPlatformInfo, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: CustomPlatformInfo, _writer: BinaryWriter): void;
+    private _platform?;
+    private _displayName?;
+    private _position?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CustomPlatformInfo to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<CustomPlatformInfo.AsObject>);
+    get platform(): ondewoNlu013.Intent.Message.Platform | undefined;
+    set platform(value: ondewoNlu013.Intent.Message.Platform | undefined);
+    get displayName(): string | undefined;
+    set displayName(value: string | undefined);
+    get position(): number | undefined;
+    set position(value: number | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): CustomPlatformInfo.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): CustomPlatformInfo.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): CustomPlatformInfo.AsProtobufJSON;
+}
+export declare module CustomPlatformInfo {
+    /**
+     * Standard JavaScript object representation for CustomPlatformInfo
+     */
+    interface AsObject {
+        platform?: ondewoNlu013.Intent.Message.Platform;
+        displayName?: string;
+        position?: number;
+    }
+    /**
+     * Protobuf JSON representation for CustomPlatformInfo
+     */
+    interface AsProtobufJSON {
+        platform?: string;
+        displayName?: string;
+        position?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetPlatformMappingRequest
+ */
+export declare class GetPlatformMappingRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetPlatformMappingRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetPlatformMappingRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetPlatformMappingRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetPlatformMappingRequest, _writer: BinaryWriter): void;
+    private _parent?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetPlatformMappingRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetPlatformMappingRequest.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetPlatformMappingRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetPlatformMappingRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetPlatformMappingRequest.AsProtobufJSON;
+}
+export declare module GetPlatformMappingRequest {
+    /**
+     * Standard JavaScript object representation for GetPlatformMappingRequest
+     */
+    interface AsObject {
+        parent?: string;
+    }
+    /**
+     * Protobuf JSON representation for GetPlatformMappingRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.PlatformMapping
+ */
+export declare class PlatformMapping implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): PlatformMapping;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: PlatformMapping): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: PlatformMapping, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: PlatformMapping, _writer: BinaryWriter): void;
+    private _parent?;
+    private _platformInfo?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PlatformMapping to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<PlatformMapping.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    get platformInfo(): CustomPlatformInfo[] | undefined;
+    set platformInfo(value: CustomPlatformInfo[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): PlatformMapping.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): PlatformMapping.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): PlatformMapping.AsProtobufJSON;
+}
+export declare module PlatformMapping {
+    /**
+     * Standard JavaScript object representation for PlatformMapping
+     */
+    interface AsObject {
+        parent?: string;
+        platformInfo?: CustomPlatformInfo.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for PlatformMapping
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        platformInfo?: CustomPlatformInfo.AsProtobufJSON[] | null;
+    }
+}

@@ -224,6 +224,22 @@ export declare class AgentsClient {
          * @returns Observable<GrpcEvent<thisProto.GetModelStatusesResponse>>
          */
         getModelStatuses: (requestData: thisProto.GetModelStatusesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetModelStatusesResponse>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/GetPlatformMapping
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.PlatformMapping>>
+         */
+        getPlatformMapping: (requestData: thisProto.GetPlatformMappingRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.PlatformMapping>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/SetPlatformMapping
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.PlatformMapping>>
+         */
+        setPlatformMapping: (requestData: thisProto.PlatformMapping, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.PlatformMapping>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -434,4 +450,20 @@ export declare class AgentsClient {
      * @returns Observable<thisProto.GetModelStatusesResponse>
      */
     getModelStatuses(requestData: thisProto.GetModelStatusesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetModelStatusesResponse>;
+    /**
+     * Unary RPC for /ondewo.nlu.Agents/GetPlatformMapping
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.PlatformMapping>
+     */
+    getPlatformMapping(requestData: thisProto.GetPlatformMappingRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.PlatformMapping>;
+    /**
+     * Unary RPC for /ondewo.nlu.Agents/SetPlatformMapping
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.PlatformMapping>
+     */
+    setPlatformMapping(requestData: thisProto.PlatformMapping, requestMetadata?: GrpcMetadata): Observable<thisProto.PlatformMapping>;
 }
