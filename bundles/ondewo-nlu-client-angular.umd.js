@@ -4149,6 +4149,26 @@
                 Platform[Platform["LINE"] = 6] = "LINE";
                 Platform[Platform["VIBER"] = 7] = "VIBER";
                 Platform[Platform["ACTIONS_ON_GOOGLE"] = 8] = "ACTIONS_ON_GOOGLE";
+                Platform[Platform["PLACEHOLDER_1"] = 9] = "PLACEHOLDER_1";
+                Platform[Platform["PLACEHOLDER_2"] = 10] = "PLACEHOLDER_2";
+                Platform[Platform["PLACEHOLDER_3"] = 11] = "PLACEHOLDER_3";
+                Platform[Platform["PLACEHOLDER_4"] = 12] = "PLACEHOLDER_4";
+                Platform[Platform["PLACEHOLDER_5"] = 13] = "PLACEHOLDER_5";
+                Platform[Platform["PLACEHOLDER_6"] = 14] = "PLACEHOLDER_6";
+                Platform[Platform["PLACEHOLDER_7"] = 15] = "PLACEHOLDER_7";
+                Platform[Platform["PLACEHOLDER_8"] = 16] = "PLACEHOLDER_8";
+                Platform[Platform["PLACEHOLDER_9"] = 17] = "PLACEHOLDER_9";
+                Platform[Platform["PLACEHOLDER_10"] = 18] = "PLACEHOLDER_10";
+                Platform[Platform["PLACEHOLDER_11"] = 19] = "PLACEHOLDER_11";
+                Platform[Platform["PLACEHOLDER_12"] = 20] = "PLACEHOLDER_12";
+                Platform[Platform["PLACEHOLDER_13"] = 21] = "PLACEHOLDER_13";
+                Platform[Platform["PLACEHOLDER_14"] = 22] = "PLACEHOLDER_14";
+                Platform[Platform["PLACEHOLDER_15"] = 23] = "PLACEHOLDER_15";
+                Platform[Platform["PLACEHOLDER_16"] = 24] = "PLACEHOLDER_16";
+                Platform[Platform["PLACEHOLDER_17"] = 25] = "PLACEHOLDER_17";
+                Platform[Platform["PLACEHOLDER_18"] = 26] = "PLACEHOLDER_18";
+                Platform[Platform["PLACEHOLDER_19"] = 27] = "PLACEHOLDER_19";
+                Platform[Platform["PLACEHOLDER_20"] = 28] = "PLACEHOLDER_20";
             })(Platform = Message.Platform || (Message.Platform = {}));
             /**
              * Message implementation for ondewo.nlu.Text
@@ -47641,6 +47661,387 @@
         return GetModelStatusesResponse;
     }());
     GetModelStatusesResponse.id = 'ondewo.nlu.GetModelStatusesResponse';
+    /**
+     * Message implementation for ondewo.nlu.CustomPlatformInfo
+     */
+    var CustomPlatformInfo = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CustomPlatformInfo to deeply clone from
+         */
+        function CustomPlatformInfo(_value) {
+            _value = _value || {};
+            this.platform = _value.platform;
+            this.displayName = _value.displayName;
+            this.position = _value.position;
+            CustomPlatformInfo.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CustomPlatformInfo.deserializeBinary = function (bytes) {
+            var instance = new CustomPlatformInfo();
+            CustomPlatformInfo.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CustomPlatformInfo.refineValues = function (_instance) {
+            _instance.platform = _instance.platform || 0;
+            _instance.displayName = _instance.displayName || '';
+            _instance.position = _instance.position || 0;
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CustomPlatformInfo.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.platform = _reader.readEnum();
+                        break;
+                    case 2:
+                        _instance.displayName = _reader.readString();
+                        break;
+                    case 3:
+                        _instance.position = _reader.readUint32();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CustomPlatformInfo.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CustomPlatformInfo.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.platform) {
+                _writer.writeEnum(1, _instance.platform);
+            }
+            if (_instance.displayName) {
+                _writer.writeString(2, _instance.displayName);
+            }
+            if (_instance.position) {
+                _writer.writeUint32(3, _instance.position);
+            }
+        };
+        Object.defineProperty(CustomPlatformInfo.prototype, "platform", {
+            get: function () {
+                return this._platform;
+            },
+            set: function (value) {
+                this._platform = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CustomPlatformInfo.prototype, "displayName", {
+            get: function () {
+                return this._displayName;
+            },
+            set: function (value) {
+                this._displayName = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CustomPlatformInfo.prototype, "position", {
+            get: function () {
+                return this._position;
+            },
+            set: function (value) {
+                this._position = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CustomPlatformInfo.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CustomPlatformInfo.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CustomPlatformInfo.prototype.toObject = function () {
+            return {
+                platform: this.platform,
+                displayName: this.displayName,
+                position: this.position
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CustomPlatformInfo.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CustomPlatformInfo.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a;
+            return {
+                platform: exports.Intent.Message.Platform[(_a = this.platform) !== null && _a !== void 0 ? _a : 0],
+                displayName: this.displayName,
+                position: this.position
+            };
+        };
+        return CustomPlatformInfo;
+    }());
+    CustomPlatformInfo.id = 'ondewo.nlu.CustomPlatformInfo';
+    /**
+     * Message implementation for ondewo.nlu.GetPlatformMappingRequest
+     */
+    var GetPlatformMappingRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of GetPlatformMappingRequest to deeply clone from
+         */
+        function GetPlatformMappingRequest(_value) {
+            _value = _value || {};
+            this.parent = _value.parent;
+            GetPlatformMappingRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        GetPlatformMappingRequest.deserializeBinary = function (bytes) {
+            var instance = new GetPlatformMappingRequest();
+            GetPlatformMappingRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        GetPlatformMappingRequest.refineValues = function (_instance) {
+            _instance.parent = _instance.parent || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        GetPlatformMappingRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.parent = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            GetPlatformMappingRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        GetPlatformMappingRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parent) {
+                _writer.writeString(1, _instance.parent);
+            }
+        };
+        Object.defineProperty(GetPlatformMappingRequest.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        GetPlatformMappingRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetPlatformMappingRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        GetPlatformMappingRequest.prototype.toObject = function () {
+            return {
+                parent: this.parent
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        GetPlatformMappingRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        GetPlatformMappingRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parent: this.parent
+            };
+        };
+        return GetPlatformMappingRequest;
+    }());
+    GetPlatformMappingRequest.id = 'ondewo.nlu.GetPlatformMappingRequest';
+    /**
+     * Message implementation for ondewo.nlu.PlatformMapping
+     */
+    var PlatformMapping = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of PlatformMapping to deeply clone from
+         */
+        function PlatformMapping(_value) {
+            _value = _value || {};
+            this.parent = _value.parent;
+            this.platformInfo = (_value.platformInfo || []).map(function (m) { return new CustomPlatformInfo(m); });
+            PlatformMapping.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        PlatformMapping.deserializeBinary = function (bytes) {
+            var instance = new PlatformMapping();
+            PlatformMapping.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        PlatformMapping.refineValues = function (_instance) {
+            _instance.parent = _instance.parent || '';
+            _instance.platformInfo = _instance.platformInfo || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        PlatformMapping.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.parent = _reader.readString();
+                        break;
+                    case 2:
+                        var messageInitializer2 = new CustomPlatformInfo();
+                        _reader.readMessage(messageInitializer2, CustomPlatformInfo.deserializeBinaryFromReader);
+                        (_instance.platformInfo = _instance.platformInfo || []).push(messageInitializer2);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            PlatformMapping.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        PlatformMapping.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.parent) {
+                _writer.writeString(1, _instance.parent);
+            }
+            if (_instance.platformInfo && _instance.platformInfo.length) {
+                _writer.writeRepeatedMessage(2, _instance.platformInfo, CustomPlatformInfo.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(PlatformMapping.prototype, "parent", {
+            get: function () {
+                return this._parent;
+            },
+            set: function (value) {
+                this._parent = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(PlatformMapping.prototype, "platformInfo", {
+            get: function () {
+                return this._platformInfo;
+            },
+            set: function (value) {
+                this._platformInfo = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        PlatformMapping.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            PlatformMapping.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        PlatformMapping.prototype.toObject = function () {
+            return {
+                parent: this.parent,
+                platformInfo: (this.platformInfo || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        PlatformMapping.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        PlatformMapping.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                parent: this.parent,
+                platformInfo: (this.platformInfo || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return PlatformMapping;
+    }());
+    PlatformMapping.id = 'ondewo.nlu.PlatformMapping';
 
     /* tslint:disable */
     /**
@@ -48156,6 +48557,44 @@
                         requestClass: GetModelStatusesRequest,
                         responseClass: GetModelStatusesResponse
                     });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Agents/GetPlatformMapping
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.PlatformMapping>>
+                 */
+                getPlatformMapping: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Agents/GetPlatformMapping',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: GetPlatformMappingRequest,
+                        responseClass: PlatformMapping
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.nlu.Agents/SetPlatformMapping
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.PlatformMapping>>
+                 */
+                setPlatformMapping: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.nlu.Agents/SetPlatformMapping',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: PlatformMapping,
+                        responseClass: PlatformMapping
+                    });
                 }
             };
             this.client = clientFactory.createClient('ondewo.nlu.Agents', settings);
@@ -48496,6 +48935,32 @@
             if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
             return this.$raw
                 .getModelStatuses(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/GetPlatformMapping
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.PlatformMapping>
+         */
+        AgentsClient.prototype.getPlatformMapping = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .getPlatformMapping(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.nlu.Agents/SetPlatformMapping
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.PlatformMapping>
+         */
+        AgentsClient.prototype.setPlatformMapping = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .setPlatformMapping(requestData, requestMetadata)
                 .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         return AgentsClient;
@@ -50077,6 +50542,7 @@
     exports.CreateSessionReviewRequest = CreateSessionReviewRequest;
     exports.CreateUserRequest = CreateUserRequest;
     exports.CustomHttpPattern = CustomHttpPattern;
+    exports.CustomPlatformInfo = CustomPlatformInfo;
     exports.DataEnrichmentConfig = DataEnrichmentConfig;
     exports.DeleteAgentRequest = DeleteAgentRequest;
     exports.DeleteAllContextsRequest = DeleteAllContextsRequest;
@@ -50143,6 +50609,7 @@
     exports.GetModelStatusesResponse = GetModelStatusesResponse;
     exports.GetOperationRequest = GetOperationRequest;
     exports.GetPlatformInfoResponse = GetPlatformInfoResponse;
+    exports.GetPlatformMappingRequest = GetPlatformMappingRequest;
     exports.GetProjectConfigRequest = GetProjectConfigRequest;
     exports.GetProjectConfigResponse = GetProjectConfigResponse;
     exports.GetProjectElementStatRequest = GetProjectElementStatRequest;
@@ -50206,6 +50673,7 @@
     exports.OriginalDetectIntentRequest = OriginalDetectIntentRequest;
     exports.PingRequest = PingRequest;
     exports.PingResponse = PingResponse;
+    exports.PlatformMapping = PlatformMapping;
     exports.ProjectRole = ProjectRole;
     exports.ProjectRolesClient = ProjectRolesClient;
     exports.ProjectStatisticsClient = ProjectStatisticsClient;
