@@ -18691,6 +18691,7 @@ class SessionReviewStep {
         this.languageCode = _value.languageCode;
         this.detectedIntents = (_value.detectedIntents || []).map(m => new DetectedIntent(m));
         this.contexts = (_value.contexts || []).map(m => new Context(m));
+        this.contextsOut = (_value.contextsOut || []).map(m => new Context(m));
         SessionReviewStep.refineValues(this);
     }
     /**
@@ -18711,6 +18712,7 @@ class SessionReviewStep {
         _instance.languageCode = _instance.languageCode || '';
         _instance.detectedIntents = _instance.detectedIntents || [];
         _instance.contexts = _instance.contexts || [];
+        _instance.contextsOut = _instance.contextsOut || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -18739,6 +18741,11 @@ class SessionReviewStep {
                     _reader.readMessage(messageInitializer4, Context.deserializeBinaryFromReader);
                     (_instance.contexts = _instance.contexts || []).push(messageInitializer4);
                     break;
+                case 5:
+                    const messageInitializer5 = new Context();
+                    _reader.readMessage(messageInitializer5, Context.deserializeBinaryFromReader);
+                    (_instance.contextsOut = _instance.contextsOut || []).push(messageInitializer5);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -18762,6 +18769,9 @@ class SessionReviewStep {
         }
         if (_instance.contexts && _instance.contexts.length) {
             _writer.writeRepeatedMessage(4, _instance.contexts, Context.serializeBinaryToWriter);
+        }
+        if (_instance.contextsOut && _instance.contextsOut.length) {
+            _writer.writeRepeatedMessage(5, _instance.contextsOut, Context.serializeBinaryToWriter);
         }
     }
     get annotatedUsersays() {
@@ -18788,6 +18798,12 @@ class SessionReviewStep {
     set contexts(value) {
         this._contexts = value;
     }
+    get contextsOut() {
+        return this._contextsOut;
+    }
+    set contextsOut(value) {
+        this._contextsOut = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -18807,7 +18823,8 @@ class SessionReviewStep {
                 : undefined,
             languageCode: this.languageCode,
             detectedIntents: (this.detectedIntents || []).map(m => m.toObject()),
-            contexts: (this.contexts || []).map(m => m.toObject())
+            contexts: (this.contexts || []).map(m => m.toObject()),
+            contextsOut: (this.contextsOut || []).map(m => m.toObject())
         };
     }
     /**
@@ -18830,7 +18847,8 @@ class SessionReviewStep {
                 : null,
             languageCode: this.languageCode,
             detectedIntents: (this.detectedIntents || []).map(m => m.toProtobufJSON(options)),
-            contexts: (this.contexts || []).map(m => m.toProtobufJSON(options))
+            contexts: (this.contexts || []).map(m => m.toProtobufJSON(options)),
+            contextsOut: (this.contextsOut || []).map(m => m.toProtobufJSON(options))
         };
     }
 }

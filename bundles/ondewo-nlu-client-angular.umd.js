@@ -20777,6 +20777,7 @@
             this.languageCode = _value.languageCode;
             this.detectedIntents = (_value.detectedIntents || []).map(function (m) { return new DetectedIntent(m); });
             this.contexts = (_value.contexts || []).map(function (m) { return new exports.Context(m); });
+            this.contextsOut = (_value.contextsOut || []).map(function (m) { return new exports.Context(m); });
             SessionReviewStep.refineValues(this);
         }
         /**
@@ -20797,6 +20798,7 @@
             _instance.languageCode = _instance.languageCode || '';
             _instance.detectedIntents = _instance.detectedIntents || [];
             _instance.contexts = _instance.contexts || [];
+            _instance.contextsOut = _instance.contextsOut || [];
         };
         /**
          * Deserializes / reads binary message into message instance using provided binary reader
@@ -20825,6 +20827,11 @@
                         _reader.readMessage(messageInitializer4, exports.Context.deserializeBinaryFromReader);
                         (_instance.contexts = _instance.contexts || []).push(messageInitializer4);
                         break;
+                    case 5:
+                        var messageInitializer5 = new exports.Context();
+                        _reader.readMessage(messageInitializer5, exports.Context.deserializeBinaryFromReader);
+                        (_instance.contextsOut = _instance.contextsOut || []).push(messageInitializer5);
+                        break;
                     default:
                         _reader.skipField();
                 }
@@ -20848,6 +20855,9 @@
             }
             if (_instance.contexts && _instance.contexts.length) {
                 _writer.writeRepeatedMessage(4, _instance.contexts, exports.Context.serializeBinaryToWriter);
+            }
+            if (_instance.contextsOut && _instance.contextsOut.length) {
+                _writer.writeRepeatedMessage(5, _instance.contextsOut, exports.Context.serializeBinaryToWriter);
             }
         };
         Object.defineProperty(SessionReviewStep.prototype, "annotatedUsersays", {
@@ -20890,6 +20900,16 @@
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(SessionReviewStep.prototype, "contextsOut", {
+            get: function () {
+                return this._contextsOut;
+            },
+            set: function (value) {
+                this._contextsOut = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -20909,7 +20929,8 @@
                     : undefined,
                 languageCode: this.languageCode,
                 detectedIntents: (this.detectedIntents || []).map(function (m) { return m.toObject(); }),
-                contexts: (this.contexts || []).map(function (m) { return m.toObject(); })
+                contexts: (this.contexts || []).map(function (m) { return m.toObject(); }),
+                contextsOut: (this.contextsOut || []).map(function (m) { return m.toObject(); })
             };
         };
         /**
@@ -20932,7 +20953,8 @@
                     : null,
                 languageCode: this.languageCode,
                 detectedIntents: (this.detectedIntents || []).map(function (m) { return m.toProtobufJSON(options); }),
-                contexts: (this.contexts || []).map(function (m) { return m.toProtobufJSON(options); })
+                contexts: (this.contexts || []).map(function (m) { return m.toProtobufJSON(options); }),
+                contextsOut: (this.contextsOut || []).map(function (m) { return m.toProtobufJSON(options); })
             };
         };
         return SessionReviewStep;
