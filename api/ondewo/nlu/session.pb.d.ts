@@ -2042,6 +2042,7 @@ export declare class SessionReviewStep implements GrpcMessage {
     private _languageCode?;
     private _detectedIntents?;
     private _contexts?;
+    private _contextsOut?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionReviewStep to deeply clone from
@@ -2055,6 +2056,8 @@ export declare class SessionReviewStep implements GrpcMessage {
     set detectedIntents(value: DetectedIntent[] | undefined);
     get contexts(): ondewoNlu006.Context[] | undefined;
     set contexts(value: ondewoNlu006.Context[] | undefined);
+    get contextsOut(): ondewoNlu006.Context[] | undefined;
+    set contextsOut(value: ondewoNlu006.Context[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2084,6 +2087,7 @@ export declare module SessionReviewStep {
         languageCode?: string;
         detectedIntents?: DetectedIntent.AsObject[];
         contexts?: ondewoNlu006.Context.AsObject[];
+        contextsOut?: ondewoNlu006.Context.AsObject[];
     }
     /**
      * Protobuf JSON representation for SessionReviewStep
@@ -2093,6 +2097,7 @@ export declare module SessionReviewStep {
         languageCode?: string;
         detectedIntents?: DetectedIntent.AsProtobufJSON[] | null;
         contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        contextsOut?: ondewoNlu006.Context.AsProtobufJSON[] | null;
     }
 }
 /**
