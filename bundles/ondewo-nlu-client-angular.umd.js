@@ -3633,6 +3633,7 @@
                     ? new Intent.Message.Audio(_value.audio)
                     : undefined;
                 this.platform = _value.platform;
+                this.isPrompt = _value.isPrompt;
                 Message.refineValues(this);
             }
             /**
@@ -3652,6 +3653,7 @@
                 _instance.name = _instance.name || '';
                 _instance.languageCode = _instance.languageCode || '';
                 _instance.platform = _instance.platform || 0;
+                _instance.isPrompt = _instance.isPrompt || false;
             };
             /**
              * Deserializes / reads binary message into message instance using provided binary reader
@@ -3728,6 +3730,9 @@
                         case 6:
                             _instance.platform = _reader.readEnum();
                             break;
+                        case 18:
+                            _instance.isPrompt = _reader.readBool();
+                            break;
                         default:
                             _reader.skipField();
                     }
@@ -3790,6 +3795,9 @@
                 }
                 if (_instance.platform) {
                     _writer.writeEnum(6, _instance.platform);
+                }
+                if (_instance.isPrompt) {
+                    _writer.writeBool(18, _instance.isPrompt);
                 }
             };
             Object.defineProperty(Message.prototype, "name", {
@@ -4018,6 +4026,16 @@
                 enumerable: false,
                 configurable: true
             });
+            Object.defineProperty(Message.prototype, "isPrompt", {
+                get: function () {
+                    return this._isPrompt;
+                },
+                set: function (value) {
+                    this._isPrompt = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
             Object.defineProperty(Message.prototype, "message", {
                 get: function () {
                     return this._message;
@@ -4063,7 +4081,8 @@
                     htmlText: this.htmlText ? this.htmlText.toObject() : undefined,
                     video: this.video ? this.video.toObject() : undefined,
                     audio: this.audio ? this.audio.toObject() : undefined,
-                    platform: this.platform
+                    platform: this.platform,
+                    isPrompt: this.isPrompt
                 };
             };
             /**
@@ -4112,7 +4131,8 @@
                     htmlText: this.htmlText ? this.htmlText.toProtobufJSON(options) : null,
                     video: this.video ? this.video.toProtobufJSON(options) : null,
                     audio: this.audio ? this.audio.toProtobufJSON(options) : null,
-                    platform: Intent.Message.Platform[(_a = this.platform) !== null && _a !== void 0 ? _a : 0]
+                    platform: Intent.Message.Platform[(_a = this.platform) !== null && _a !== void 0 ? _a : 0],
+                    isPrompt: this.isPrompt
                 };
             };
             return Message;

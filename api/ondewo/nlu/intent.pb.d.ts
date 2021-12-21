@@ -657,6 +657,7 @@ export declare module Intent {
         private _video?;
         private _audio?;
         private _platform?;
+        private _isPrompt?;
         private _message;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -697,6 +698,8 @@ export declare module Intent {
         set audio(value: Intent.Message.Audio | undefined);
         get platform(): Intent.Message.Platform | undefined;
         set platform(value: Intent.Message.Platform | undefined);
+        get isPrompt(): boolean | undefined;
+        set isPrompt(value: boolean | undefined);
         get message(): Message.MessageCase;
         /**
          * Serialize message to binary data
@@ -740,6 +743,7 @@ export declare module Intent {
             video?: Intent.Message.Video.AsObject;
             audio?: Intent.Message.Audio.AsObject;
             platform?: Intent.Message.Platform;
+            isPrompt?: boolean;
         }
         /**
          * Protobuf JSON representation for Message
@@ -762,6 +766,7 @@ export declare module Intent {
             video?: Intent.Message.Video.AsProtobufJSON | null;
             audio?: Intent.Message.Audio.AsProtobufJSON | null;
             platform?: string;
+            isPrompt?: boolean;
         }
         enum MessageCase {
             none = 0,

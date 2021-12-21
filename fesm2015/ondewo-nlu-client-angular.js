@@ -2978,6 +2978,7 @@ Intent.id = 'ondewo.nlu.Intent';
                 ? new Intent.Message.Audio(_value.audio)
                 : undefined;
             this.platform = _value.platform;
+            this.isPrompt = _value.isPrompt;
             Message.refineValues(this);
         }
         /**
@@ -2997,6 +2998,7 @@ Intent.id = 'ondewo.nlu.Intent';
             _instance.name = _instance.name || '';
             _instance.languageCode = _instance.languageCode || '';
             _instance.platform = _instance.platform || 0;
+            _instance.isPrompt = _instance.isPrompt || false;
         }
         /**
          * Deserializes / reads binary message into message instance using provided binary reader
@@ -3073,6 +3075,9 @@ Intent.id = 'ondewo.nlu.Intent';
                     case 6:
                         _instance.platform = _reader.readEnum();
                         break;
+                    case 18:
+                        _instance.isPrompt = _reader.readBool();
+                        break;
                     default:
                         _reader.skipField();
                 }
@@ -3135,6 +3140,9 @@ Intent.id = 'ondewo.nlu.Intent';
             }
             if (_instance.platform) {
                 _writer.writeEnum(6, _instance.platform);
+            }
+            if (_instance.isPrompt) {
+                _writer.writeBool(18, _instance.isPrompt);
             }
         }
         get name() {
@@ -3295,6 +3303,12 @@ Intent.id = 'ondewo.nlu.Intent';
         set platform(value) {
             this._platform = value;
         }
+        get isPrompt() {
+            return this._isPrompt;
+        }
+        set isPrompt(value) {
+            this._isPrompt = value;
+        }
         get message() {
             return this._message;
         }
@@ -3336,7 +3350,8 @@ Intent.id = 'ondewo.nlu.Intent';
                 htmlText: this.htmlText ? this.htmlText.toObject() : undefined,
                 video: this.video ? this.video.toObject() : undefined,
                 audio: this.audio ? this.audio.toObject() : undefined,
-                platform: this.platform
+                platform: this.platform,
+                isPrompt: this.isPrompt
             };
         }
         /**
@@ -3385,7 +3400,8 @@ Intent.id = 'ondewo.nlu.Intent';
                 htmlText: this.htmlText ? this.htmlText.toProtobufJSON(options) : null,
                 video: this.video ? this.video.toProtobufJSON(options) : null,
                 audio: this.audio ? this.audio.toProtobufJSON(options) : null,
-                platform: Intent.Message.Platform[(_a = this.platform) !== null && _a !== void 0 ? _a : 0]
+                platform: Intent.Message.Platform[(_a = this.platform) !== null && _a !== void 0 ? _a : 0],
+                isPrompt: this.isPrompt
             };
         }
     }
