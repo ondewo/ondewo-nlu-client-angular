@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "initialize": "git submodule update --init --recursive --remote",
     "prebuild": "npm run initialize && mv ondewo-nlu-api/googleapis/google ondewo-nlu-api/google",
-    "build": "docker run -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
+    "build": "docker run -u \$(id -u):\$(id -g) -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
     "postbuild": "mv ondewo-nlu-api/google ondewo-nlu-api/googleapis/google",
-    "debug": "docker run --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
+    "debug": "docker run -u \$(id -u):\$(id -g) --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
     "publish-npm": "npm publish ../npm --access public"
   },
   "author": "ONDEWO GmbH",
