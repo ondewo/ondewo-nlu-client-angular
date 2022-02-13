@@ -3,6 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './operations.pb';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for google.longrunning.Operations
  */
@@ -81,4 +82,7 @@ export declare class OperationsClient {
      * @returns Observable<googleProtobuf004.Empty>
      */
     cancelOperation(requestData: thisProto.CancelOperationRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<OperationsClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<OperationsClient>;
 }
+//# sourceMappingURL=operations.pbsc.d.ts.map

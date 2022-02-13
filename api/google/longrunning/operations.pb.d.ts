@@ -463,3 +463,4 @@ export declare module DeleteOperationRequest {
         name?: string;
     }
 }
+//# sourceMappingURL=operations.pb.d.ts.map

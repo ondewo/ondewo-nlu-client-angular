@@ -3,6 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './qa.pb';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.qa.QA
  */
@@ -129,4 +130,7 @@ export declare class QAClient {
      * @returns Observable<thisProto.GetProjectConfigResponse>
      */
     getProjectConfig(requestData: thisProto.GetProjectConfigRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetProjectConfigResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<QAClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<QAClient>;
 }
+//# sourceMappingURL=qa.pbsc.d.ts.map

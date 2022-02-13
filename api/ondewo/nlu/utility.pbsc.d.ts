@@ -2,6 +2,7 @@ import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './utility.pb';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.Utilities
  */
@@ -144,4 +145,7 @@ export declare class UtilitiesClient {
      * @returns Observable<thisProto.AddTrainingPhrasesResponse>
      */
     addTrainingPhrasesFromCSV(requestData: thisProto.AddTrainingPhrasesFromCSVRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.AddTrainingPhrasesResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<UtilitiesClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<UtilitiesClient>;
 }
+//# sourceMappingURL=utility.pbsc.d.ts.map

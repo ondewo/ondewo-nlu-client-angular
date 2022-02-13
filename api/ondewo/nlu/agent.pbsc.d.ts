@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as thisProto from './agent.pb';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as googleLongrunning008 from '../../google/longrunning/operations.pb';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.Agents
  */
@@ -466,4 +467,7 @@ export declare class AgentsClient {
      * @returns Observable<thisProto.PlatformMapping>
      */
     setPlatformMapping(requestData: thisProto.PlatformMapping, requestMetadata?: GrpcMetadata): Observable<thisProto.PlatformMapping>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AgentsClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<AgentsClient>;
 }
+//# sourceMappingURL=agent.pbsc.d.ts.map

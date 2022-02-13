@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as thisProto from './intent.pb';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as googleLongrunning009 from '../../google/longrunning/operations.pb';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.Intents
  */
@@ -72,6 +73,22 @@ export declare class IntentsClient {
          * @returns Observable<GrpcEvent<googleLongrunning009.Operation>>
          */
         batchDeleteIntents: (requestData: thisProto.BatchDeleteIntentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning009.Operation>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/TagIntent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+         */
+        tagIntent: (requestData: thisProto.IntentTagMessage, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
+        /**
+         * Unary RPC for /ondewo.nlu.Intents/DeleteIntentTag
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+         */
+        deleteIntentTag: (requestData: thisProto.IntentTagMessage, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
          *
@@ -251,6 +268,22 @@ export declare class IntentsClient {
      */
     batchDeleteIntents(requestData: thisProto.BatchDeleteIntentsRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning009.Operation>;
     /**
+     * Unary RPC for /ondewo.nlu.Intents/TagIntent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf003.Empty>
+     */
+    tagIntent(requestData: thisProto.IntentTagMessage, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
+    /**
+     * Unary RPC for /ondewo.nlu.Intents/DeleteIntentTag
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf003.Empty>
+     */
+    deleteIntentTag(requestData: thisProto.IntentTagMessage, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
+    /**
      * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
      *
      * @param requestMessage Request message
@@ -370,4 +403,7 @@ export declare class IntentsClient {
      * @returns Observable<thisProto.ListParametersResponse>
      */
     listParameters(requestData: thisProto.ListParametersRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListParametersResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<IntentsClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<IntentsClient>;
 }
+//# sourceMappingURL=intent.pbsc.d.ts.map

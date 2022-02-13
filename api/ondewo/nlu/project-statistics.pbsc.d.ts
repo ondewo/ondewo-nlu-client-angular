@@ -3,6 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './project-statistics.pb';
 import * as ondewoNlu004 from '../../ondewo/nlu/common.pb';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.ProjectStatistics
  */
@@ -145,4 +146,7 @@ export declare class ProjectStatisticsClient {
      * @returns Observable<ondewoNlu004.StatResponse>
      */
     getEntitySynonymCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ProjectStatisticsClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<ProjectStatisticsClient>;
 }
+//# sourceMappingURL=project-statistics.pbsc.d.ts.map

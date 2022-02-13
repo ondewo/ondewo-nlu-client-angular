@@ -754,3 +754,4 @@ export declare module DeleteAllContextsRequest {
         parent?: string;
     }
 }
+//# sourceMappingURL=context.pb.d.ts.map
