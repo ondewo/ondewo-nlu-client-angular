@@ -74,3 +74,4 @@ export declare module LatLng {
         longitude?: number;
     }
 }
+//# sourceMappingURL=latlng.pb.d.ts.map

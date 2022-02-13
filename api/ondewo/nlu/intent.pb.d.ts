@@ -73,6 +73,7 @@ export declare class Intent implements GrpcMessage {
     private _status?;
     private _startDate?;
     private _endDate?;
+    private _tags?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of Intent to deeply clone from
@@ -130,6 +131,8 @@ export declare class Intent implements GrpcMessage {
     set startDate(value: googleProtobuf010.Timestamp | undefined);
     get endDate(): googleProtobuf010.Timestamp | undefined;
     set endDate(value: googleProtobuf010.Timestamp | undefined);
+    get tags(): string[] | undefined;
+    set tags(value: string[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -181,6 +184,7 @@ export declare module Intent {
         status?: Intent.IntentStatus;
         startDate?: googleProtobuf010.Timestamp.AsObject;
         endDate?: googleProtobuf010.Timestamp.AsObject;
+        tags?: string[];
     }
     /**
      * Protobuf JSON representation for Intent
@@ -212,6 +216,7 @@ export declare module Intent {
         status?: string;
         startDate?: googleProtobuf010.Timestamp.AsProtobufJSON | null;
         endDate?: googleProtobuf010.Timestamp.AsProtobufJSON | null;
+        tags?: string[];
     }
     enum IntentStatus {
         ACTIVE = 0,
@@ -2494,6 +2499,7 @@ export declare class ListIntentsRequest implements GrpcMessage {
     private _pageToken?;
     private _filterByCategory?;
     private _sortByField?;
+    private _filterByTags?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListIntentsRequest to deeply clone from
@@ -2511,6 +2517,8 @@ export declare class ListIntentsRequest implements GrpcMessage {
     set filterByCategory(value: IntentCategory | undefined);
     get sortByField(): IntentSorting | undefined;
     set sortByField(value: IntentSorting | undefined);
+    get filterByTags(): string[] | undefined;
+    set filterByTags(value: string[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2542,6 +2550,7 @@ export declare module ListIntentsRequest {
         pageToken?: string;
         filterByCategory?: IntentCategory;
         sortByField?: IntentSorting.AsObject;
+        filterByTags?: string[];
     }
     /**
      * Protobuf JSON representation for ListIntentsRequest
@@ -2553,6 +2562,7 @@ export declare module ListIntentsRequest {
         pageToken?: string;
         filterByCategory?: string;
         sortByField?: IntentSorting.AsProtobufJSON | null;
+        filterByTags?: string[];
     }
 }
 /**
@@ -3344,6 +3354,80 @@ export declare module IntentSorting {
         SORT_INTENT_BY_USERSAYS_COUNT = 4,
         SORT_INTENT_BY_START_DATE = 5,
         SORT_INTENT_BY_END_DATE = 6
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.IntentTagMessage
+ */
+export declare class IntentTagMessage implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): IntentTagMessage;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: IntentTagMessage): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: IntentTagMessage, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: IntentTagMessage, _writer: BinaryWriter): void;
+    private _intentName?;
+    private _value?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of IntentTagMessage to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<IntentTagMessage.AsObject>);
+    get intentName(): string | undefined;
+    set intentName(value: string | undefined);
+    get value(): string | undefined;
+    set value(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): IntentTagMessage.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): IntentTagMessage.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): IntentTagMessage.AsProtobufJSON;
+}
+export declare module IntentTagMessage {
+    /**
+     * Standard JavaScript object representation for IntentTagMessage
+     */
+    interface AsObject {
+        intentName?: string;
+        value?: string;
+    }
+    /**
+     * Protobuf JSON representation for IntentTagMessage
+     */
+    interface AsProtobufJSON {
+        intentName?: string;
+        value?: string;
     }
 }
 /**
@@ -5785,3 +5869,4 @@ export declare module ListParametersResponse {
         nextPageToken?: string;
     }
 }
+//# sourceMappingURL=intent.pb.d.ts.map

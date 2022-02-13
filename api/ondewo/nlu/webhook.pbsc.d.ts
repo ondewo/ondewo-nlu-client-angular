@@ -2,6 +2,7 @@ import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './webhook.pb';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.Webhook
  */
@@ -64,4 +65,7 @@ export declare class WebhookClient {
      * @returns Observable<thisProto.PingResponse>
      */
     ping(requestData: thisProto.PingRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.PingResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<WebhookClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<WebhookClient>;
 }
+//# sourceMappingURL=webhook.pbsc.d.ts.map

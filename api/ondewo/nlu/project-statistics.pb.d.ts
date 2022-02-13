@@ -293,3 +293,4 @@ export declare module GetProjectElementStatRequest {
         languageCode?: string;
     }
 }
+//# sourceMappingURL=project-statistics.pb.d.ts.map

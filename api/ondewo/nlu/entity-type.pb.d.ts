@@ -428,6 +428,7 @@ export declare class GetEntityTypeRequest implements GrpcMessage {
     private _name?;
     private _languageCode?;
     private _pageToken?;
+    private _entityTypeView?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetEntityTypeRequest to deeply clone from
@@ -439,6 +440,8 @@ export declare class GetEntityTypeRequest implements GrpcMessage {
     set languageCode(value: string | undefined);
     get pageToken(): string | undefined;
     set pageToken(value: string | undefined);
+    get entityTypeView(): EntityTypeView | undefined;
+    set entityTypeView(value: EntityTypeView | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -467,6 +470,7 @@ export declare module GetEntityTypeRequest {
         name?: string;
         languageCode?: string;
         pageToken?: string;
+        entityTypeView?: EntityTypeView;
     }
     /**
      * Protobuf JSON representation for GetEntityTypeRequest
@@ -475,6 +479,7 @@ export declare module GetEntityTypeRequest {
         name?: string;
         languageCode?: string;
         pageToken?: string;
+        entityTypeView?: string;
     }
 }
 /**
@@ -507,6 +512,7 @@ export declare class CreateEntityTypeRequest implements GrpcMessage {
     private _parent?;
     private _entityType?;
     private _languageCode?;
+    private _entityTypeView?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of CreateEntityTypeRequest to deeply clone from
@@ -518,6 +524,8 @@ export declare class CreateEntityTypeRequest implements GrpcMessage {
     set entityType(value: EntityType | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
+    get entityTypeView(): EntityTypeView | undefined;
+    set entityTypeView(value: EntityTypeView | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -546,6 +554,7 @@ export declare module CreateEntityTypeRequest {
         parent?: string;
         entityType?: EntityType.AsObject;
         languageCode?: string;
+        entityTypeView?: EntityTypeView;
     }
     /**
      * Protobuf JSON representation for CreateEntityTypeRequest
@@ -554,6 +563,7 @@ export declare module CreateEntityTypeRequest {
         parent?: string;
         entityType?: EntityType.AsProtobufJSON | null;
         languageCode?: string;
+        entityTypeView?: string;
     }
 }
 /**
@@ -586,6 +596,7 @@ export declare class UpdateEntityTypeRequest implements GrpcMessage {
     private _entityType?;
     private _languageCode?;
     private _updateMask?;
+    private _entityTypeView?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of UpdateEntityTypeRequest to deeply clone from
@@ -597,6 +608,8 @@ export declare class UpdateEntityTypeRequest implements GrpcMessage {
     set languageCode(value: string | undefined);
     get updateMask(): googleProtobuf007.FieldMask | undefined;
     set updateMask(value: googleProtobuf007.FieldMask | undefined);
+    get entityTypeView(): EntityTypeView | undefined;
+    set entityTypeView(value: EntityTypeView | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -625,6 +638,7 @@ export declare module UpdateEntityTypeRequest {
         entityType?: EntityType.AsObject;
         languageCode?: string;
         updateMask?: googleProtobuf007.FieldMask.AsObject;
+        entityTypeView?: EntityTypeView;
     }
     /**
      * Protobuf JSON representation for UpdateEntityTypeRequest
@@ -633,6 +647,7 @@ export declare module UpdateEntityTypeRequest {
         entityType?: EntityType.AsProtobufJSON | null;
         languageCode?: string;
         updateMask?: googleProtobuf007.FieldMask.AsProtobufJSON | null;
+        entityTypeView?: string;
     }
 }
 /**
@@ -1784,7 +1799,8 @@ export declare class ListEntitiesRequest implements GrpcMessage {
     private _entityTypeName?;
     private _languageCode?;
     private _pageToken?;
-    private _entityTypeView?;
+    private _sortByField?;
+    private _searchByPattern?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListEntitiesRequest to deeply clone from
@@ -1796,8 +1812,10 @@ export declare class ListEntitiesRequest implements GrpcMessage {
     set languageCode(value: string | undefined);
     get pageToken(): string | undefined;
     set pageToken(value: string | undefined);
-    get entityTypeView(): EntityTypeView | undefined;
-    set entityTypeView(value: EntityTypeView | undefined);
+    get sortByField(): EntityValueSorting | undefined;
+    set sortByField(value: EntityValueSorting | undefined);
+    get searchByPattern(): string | undefined;
+    set searchByPattern(value: string | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1826,7 +1844,8 @@ export declare module ListEntitiesRequest {
         entityTypeName?: string;
         languageCode?: string;
         pageToken?: string;
-        entityTypeView?: EntityTypeView;
+        sortByField?: EntityValueSorting.AsObject;
+        searchByPattern?: string;
     }
     /**
      * Protobuf JSON representation for ListEntitiesRequest
@@ -1835,7 +1854,8 @@ export declare module ListEntitiesRequest {
         entityTypeName?: string;
         languageCode?: string;
         pageToken?: string;
-        entityTypeView?: string;
+        sortByField?: EntityValueSorting.AsProtobufJSON | null;
+        searchByPattern?: string;
     }
 }
 /**
@@ -1912,3 +1932,84 @@ export declare module ListEntitiesResponse {
         nextPageToken?: string;
     }
 }
+/**
+ * Message implementation for ondewo.nlu.EntityValueSorting
+ */
+export declare class EntityValueSorting implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): EntityValueSorting;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EntityValueSorting): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: EntityValueSorting, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: EntityValueSorting, _writer: BinaryWriter): void;
+    private _sortingField?;
+    private _sortingMode?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityValueSorting to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<EntityValueSorting.AsObject>);
+    get sortingField(): EntityValueSorting.EntityValueSortingField | undefined;
+    set sortingField(value: EntityValueSorting.EntityValueSortingField | undefined);
+    get sortingMode(): ondewoNlu008.SortingMode | undefined;
+    set sortingMode(value: ondewoNlu008.SortingMode | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EntityValueSorting.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): EntityValueSorting.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): EntityValueSorting.AsProtobufJSON;
+}
+export declare module EntityValueSorting {
+    /**
+     * Standard JavaScript object representation for EntityValueSorting
+     */
+    interface AsObject {
+        sortingField?: EntityValueSorting.EntityValueSortingField;
+        sortingMode?: ondewoNlu008.SortingMode;
+    }
+    /**
+     * Protobuf JSON representation for EntityValueSorting
+     */
+    interface AsProtobufJSON {
+        sortingField?: string;
+        sortingMode?: string;
+    }
+    enum EntityValueSortingField {
+        NO_ENTITY_VALUE_SORTING = 0,
+        SORT_ENTITY_VALUE_BY_DISPLAY_NAME = 1,
+        SORT_ENTITY_VALUE_BY_VALUE = 2,
+        SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = 3
+    }
+}
+//# sourceMappingURL=entity-type.pb.d.ts.map

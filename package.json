@@ -1,7 +1,7 @@
 {
   "name": "@ondewo/nlu-client-angular",
-  "version": "2.3.1",
-  "description": "Ondewo natural language understanding client library for angular",
+  "version": "2.4.0",
+  "description": "ONDEWO Natural Language Understanding (NLU) Platfrom client library for Angular",
   "keywords": [
     "ondewo",
     "nlu",
@@ -11,7 +11,7 @@
     "grpc"
   ],
   "author": "ONDEWO GmbH",
-  "homepage": "https://ondewo.com/",
+  "homepage": "https://ondewo.com",
   "license": "Apache-2.0",
   "peerDependencies": {
     "@angular/common": ">=8.0.0",
@@ -21,17 +21,29 @@
   },
   "repository": {
     "type": "git",
-    "directory": "https://github.com/ondewo/ondewo-nlu-client-angular.git"
+    "directory": "https://github.com/ondewo/ondewo-nlu-client-angular"
   },
-  "main": "bundles/ondewo-nlu-client-angular.umd.js",
-  "module": "fesm2015/ondewo-nlu-client-angular.js",
-  "es2015": "fesm2015/ondewo-nlu-client-angular.js",
-  "esm2015": "esm2015/ondewo-nlu-client-angular.js",
-  "fesm2015": "fesm2015/ondewo-nlu-client-angular.js",
+  "module": "fesm2015/ondewo-nlu-client-angular.mjs",
+  "es2020": "fesm2020/ondewo-nlu-client-angular.mjs",
+  "esm2020": "esm2020/ondewo-nlu-client-angular.mjs",
+  "fesm2020": "fesm2020/ondewo-nlu-client-angular.mjs",
+  "fesm2015": "fesm2015/ondewo-nlu-client-angular.mjs",
   "typings": "ondewo-nlu-client-angular.d.ts",
-  "metadata": "ondewo-nlu-client-angular.metadata.json",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./ondewo-nlu-client-angular.d.ts",
+      "esm2020": "./esm2020/ondewo-nlu-client-angular.mjs",
+      "es2020": "./fesm2020/ondewo-nlu-client-angular.mjs",
+      "es2015": "./fesm2015/ondewo-nlu-client-angular.mjs",
+      "node": "./fesm2015/ondewo-nlu-client-angular.mjs",
+      "default": "./fesm2020/ondewo-nlu-client-angular.mjs"
+    }
+  },
   "sideEffects": false,
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.3.0"
   }
 }

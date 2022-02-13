@@ -1575,3 +1575,4 @@ export declare module LoginResponse {
         authToken?: string;
     }
 }
+//# sourceMappingURL=user.pb.d.ts.map

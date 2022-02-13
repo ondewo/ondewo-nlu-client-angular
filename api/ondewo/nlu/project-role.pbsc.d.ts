@@ -3,6 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './project-role.pb';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.ProjectRoles
  */
@@ -97,4 +98,7 @@ export declare class ProjectRolesClient {
      * @returns Observable<thisProto.ListProjectRolesResponse>
      */
     listProjectRoles(requestData: thisProto.ListProjectRolesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListProjectRolesResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ProjectRolesClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<ProjectRolesClient>;
 }
+//# sourceMappingURL=project-role.pbsc.d.ts.map

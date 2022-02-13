@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as thisProto from './server-statistics.pb';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu004 from '../../ondewo/nlu/common.pb';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.ServerStatistics
  */
@@ -66,4 +67,7 @@ export declare class ServerStatisticsClient {
      * @returns Observable<ondewoNlu004.StatResponse>
      */
     getUserCount(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ServerStatisticsClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<ServerStatisticsClient>;
 }
+//# sourceMappingURL=server-statistics.pbsc.d.ts.map

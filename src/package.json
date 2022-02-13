@@ -1,19 +1,21 @@
 {
   "name": "@ondewo/nlu-client-angular",
-  "version": "2.3.1",
-  "description": "Ondewo natural language understanding client library for angular",
+  "version": "2.4.0",
+  "description": "ONDEWO Natural Language Understanding (NLU) Platfrom client library for Angular",
   "keywords": ["ondewo", "nlu", "api", "client", "ngx-grpc", "grpc"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "initialize": "git submodule update --init --recursive --remote",
-    "prebuild": "npm run initialize && mv ondewo-nlu-api/googleapis/google ondewo-nlu-api/google",
-    "build": "docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
-    "postbuild": "mv ondewo-nlu-api/google ondewo-nlu-api/googleapis/google",
+    "build": "npm run prebuild && npm run generate && npm run postbuild",
+    "prebuild": "npm run submodule_update && cp ondewo-nlu-api/googleapis/google ondewo-nlu-api/ -R",
+    "postbuild": "rm -rf ondewo-nlu-api/google && cp README.md ../. && cp RELEASE.md ../.",
+    "submodule_update": "git submodule update --init --recursive",
+    "generate": "docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
     "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
-    "publish-npm": "npm publish ../npm --access public"
+    "publish-npm": "npm publish ../npm --access public",
+    "test-in-ondewo-aim": "npm run build && rm -rf ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/* && cp ../npm/* ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/. -R"
   },
   "author": "ONDEWO GmbH",
-  "homepage": "https://ondewo.com/",
+  "homepage": "https://ondewo.com",
   "license": "Apache-2.0",
   "peerDependencies": {
     "@angular/common": ">=8.0.0",
@@ -23,6 +25,6 @@
   },
   "repository": {
     "type": "git",
-    "directory": "https://github.com/ondewo/ondewo-nlu-client-angular.git"
+    "directory": "https://github.com/ondewo/ondewo-nlu-client-angular"
   }
 }

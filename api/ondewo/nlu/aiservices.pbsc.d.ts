@@ -2,6 +2,7 @@ import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './aiservices.pb';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.AiServices
  */
@@ -128,4 +129,7 @@ export declare class AiServicesClient {
      * @returns Observable<thisProto.ExtractEntitiesResponse>
      */
     extractEntitiesFuzzy(requestData: thisProto.ExtractEntitiesFuzzyRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ExtractEntitiesResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AiServicesClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<AiServicesClient>;
 }
+//# sourceMappingURL=aiservices.pbsc.d.ts.map
