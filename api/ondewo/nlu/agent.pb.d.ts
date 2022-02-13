@@ -3534,3 +3534,4 @@ export declare module PlatformMapping {
         platformInfo?: CustomPlatformInfo.AsProtobufJSON[] | null;
     }
 }
+//# sourceMappingURL=agent.pb.d.ts.map

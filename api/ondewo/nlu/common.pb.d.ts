@@ -73,3 +73,4 @@ export declare module StatResponse {
         value?: number;
     }
 }
+//# sourceMappingURL=common.pb.d.ts.map

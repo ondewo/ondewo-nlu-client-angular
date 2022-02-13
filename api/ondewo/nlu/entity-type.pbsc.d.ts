@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as thisProto from './entity-type.pb';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as googleLongrunning006 from '../../google/longrunning/operations.pb';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.EntityTypes
  */
@@ -210,4 +211,7 @@ export declare class EntityTypesClient {
      * @returns Observable<thisProto.ListEntitiesResponse>
      */
     listEntities(requestData: thisProto.ListEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListEntitiesResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<EntityTypesClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<EntityTypesClient>;
 }
+//# sourceMappingURL=entity-type.pbsc.d.ts.map

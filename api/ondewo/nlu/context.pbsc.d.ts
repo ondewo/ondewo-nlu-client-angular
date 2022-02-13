@@ -3,6 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './context.pb';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.Contexts
  */
@@ -113,4 +114,7 @@ export declare class ContextsClient {
      * @returns Observable<googleProtobuf003.Empty>
      */
     deleteAllContexts(requestData: thisProto.DeleteAllContextsRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ContextsClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<ContextsClient>;
 }
+//# sourceMappingURL=context.pbsc.d.ts.map

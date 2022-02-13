@@ -3,6 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './session.pb';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.Sessions
  */
@@ -241,4 +242,7 @@ export declare class SessionsClient {
      * @returns Observable<thisProto.SessionReview>
      */
     createSessionReview(requestData: thisProto.CreateSessionReviewRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.SessionReview>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SessionsClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<SessionsClient>;
 }
+//# sourceMappingURL=session.pbsc.d.ts.map

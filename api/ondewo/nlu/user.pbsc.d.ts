@@ -3,6 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './user.pb';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.Users
  */
@@ -257,4 +258,7 @@ export declare class UsersClient {
      * @returns Observable<googleProtobuf004.Empty>
      */
     checkLogin(requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<UsersClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<UsersClient>;
 }
+//# sourceMappingURL=user.pbsc.d.ts.map
