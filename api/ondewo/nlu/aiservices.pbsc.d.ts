@@ -64,6 +64,14 @@ export declare class AiServicesClient {
          */
         getSynonyms: (requestData: thisProto.GetSynonymsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetSynonymsResponse>>;
         /**
+         * Unary RPC for /ondewo.nlu.AiServices/ClassifyIntents
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ClassifyIntentsResponse>>
+         */
+        classifyIntents: (requestData: thisProto.ClassifyIntentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ClassifyIntentsResponse>>;
+        /**
          * Unary RPC for /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
          *
          * @param requestMessage Request message
@@ -121,6 +129,14 @@ export declare class AiServicesClient {
      * @returns Observable<thisProto.GetSynonymsResponse>
      */
     getSynonyms(requestData: thisProto.GetSynonymsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetSynonymsResponse>;
+    /**
+     * Unary RPC for /ondewo.nlu.AiServices/ClassifyIntents
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ClassifyIntentsResponse>
+     */
+    classifyIntents(requestData: thisProto.ClassifyIntentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ClassifyIntentsResponse>;
     /**
      * Unary RPC for /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
      *

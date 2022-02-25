@@ -1354,6 +1354,7 @@ export declare class SessionFilter implements GrpcMessage {
     private _maxNumberTurns?;
     private _labels?;
     private _userIds?;
+    private _intentTags?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionFilter to deeply clone from
@@ -1385,6 +1386,8 @@ export declare class SessionFilter implements GrpcMessage {
     set labels(value: string[] | undefined);
     get userIds(): string[] | undefined;
     set userIds(value: string[] | undefined);
+    get intentTags(): string[] | undefined;
+    set intentTags(value: string[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1423,6 +1426,7 @@ export declare module SessionFilter {
         maxNumberTurns?: number;
         labels?: string[];
         userIds?: string[];
+        intentTags?: string[];
     }
     /**
      * Protobuf JSON representation for SessionFilter
@@ -1441,6 +1445,7 @@ export declare module SessionFilter {
         maxNumberTurns?: number;
         labels?: string[];
         userIds?: string[];
+        intentTags?: string[];
     }
 }
 /**
@@ -1480,6 +1485,7 @@ export declare class SessionInfo implements GrpcMessage {
     private _numberTurns?;
     private _labels?;
     private _userIds?;
+    private _intentTags?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionInfo to deeply clone from
@@ -1505,6 +1511,8 @@ export declare class SessionInfo implements GrpcMessage {
     set labels(value: string[] | undefined);
     get userIds(): string[] | undefined;
     set userIds(value: string[] | undefined);
+    get intentTags(): string[] | undefined;
+    set intentTags(value: string[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1540,6 +1548,7 @@ export declare module SessionInfo {
         numberTurns?: number;
         labels?: string[];
         userIds?: string[];
+        intentTags?: string[];
     }
     /**
      * Protobuf JSON representation for SessionInfo
@@ -1555,6 +1564,7 @@ export declare module SessionInfo {
         numberTurns?: number;
         labels?: string[];
         userIds?: string[];
+        intentTags?: string[];
     }
 }
 /**

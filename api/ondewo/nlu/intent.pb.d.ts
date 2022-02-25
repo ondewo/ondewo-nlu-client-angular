@@ -3357,43 +3357,43 @@ export declare module IntentSorting {
     }
 }
 /**
- * Message implementation for ondewo.nlu.IntentTagMessage
+ * Message implementation for ondewo.nlu.IntentTagRequest
  */
-export declare class IntentTagMessage implements GrpcMessage {
+export declare class IntentTagRequest implements GrpcMessage {
     static id: string;
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
-    static deserializeBinary(bytes: ByteSource): IntentTagMessage;
+    static deserializeBinary(bytes: ByteSource): IntentTagRequest;
     /**
      * Check all the properties and set default protobuf values if necessary
      * @param _instance message instance
      */
-    static refineValues(_instance: IntentTagMessage): void;
+    static refineValues(_instance: IntentTagRequest): void;
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
      * @param _instance message instance
      * @param _reader binary reader instance
      */
-    static deserializeBinaryFromReader(_instance: IntentTagMessage, _reader: BinaryReader): void;
+    static deserializeBinaryFromReader(_instance: IntentTagRequest, _reader: BinaryReader): void;
     /**
      * Serializes a message to binary format using provided binary reader
      * @param _instance message instance
      * @param _writer binary writer instance
      */
-    static serializeBinaryToWriter(_instance: IntentTagMessage, _writer: BinaryWriter): void;
+    static serializeBinaryToWriter(_instance: IntentTagRequest, _writer: BinaryWriter): void;
     private _intentName?;
-    private _value?;
+    private _tags?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of IntentTagMessage to deeply clone from
+     * @param _value initial values object or instance of IntentTagRequest to deeply clone from
      */
-    constructor(_value?: RecursivePartial<IntentTagMessage.AsObject>);
+    constructor(_value?: RecursivePartial<IntentTagRequest.AsObject>);
     get intentName(): string | undefined;
     set intentName(value: string | undefined);
-    get value(): string | undefined;
-    set value(value: string | undefined);
+    get tags(): string[] | undefined;
+    set tags(value: string[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3402,32 +3402,32 @@ export declare class IntentTagMessage implements GrpcMessage {
     /**
      * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
      */
-    toObject(): IntentTagMessage.AsObject;
+    toObject(): IntentTagRequest.AsObject;
     /**
      * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
      */
-    toJSON(): IntentTagMessage.AsObject;
+    toJSON(): IntentTagRequest.AsObject;
     /**
      * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
      * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
      * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
      */
-    toProtobufJSON(options?: ToProtobufJSONOptions): IntentTagMessage.AsProtobufJSON;
+    toProtobufJSON(options?: ToProtobufJSONOptions): IntentTagRequest.AsProtobufJSON;
 }
-export declare module IntentTagMessage {
+export declare module IntentTagRequest {
     /**
-     * Standard JavaScript object representation for IntentTagMessage
+     * Standard JavaScript object representation for IntentTagRequest
      */
     interface AsObject {
         intentName?: string;
-        value?: string;
+        tags?: string[];
     }
     /**
-     * Protobuf JSON representation for IntentTagMessage
+     * Protobuf JSON representation for IntentTagRequest
      */
     interface AsProtobufJSON {
         intentName?: string;
-        value?: string;
+        tags?: string[];
     }
 }
 /**
