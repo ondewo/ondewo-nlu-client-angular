@@ -13037,26 +13037,26 @@ IntentSorting.id = 'ondewo.nlu.IntentSorting';
     })(IntentSortingField = IntentSorting.IntentSortingField || (IntentSorting.IntentSortingField = {}));
 })(IntentSorting || (IntentSorting = {}));
 /**
- * Message implementation for ondewo.nlu.IntentTagMessage
+ * Message implementation for ondewo.nlu.IntentTagRequest
  */
-class IntentTagMessage {
+class IntentTagRequest {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of IntentTagMessage to deeply clone from
+     * @param _value initial values object or instance of IntentTagRequest to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
         this.intentName = _value.intentName;
-        this.value = _value.value;
-        IntentTagMessage.refineValues(this);
+        this.tags = (_value.tags || []).slice();
+        IntentTagRequest.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new IntentTagMessage();
-        IntentTagMessage.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new IntentTagRequest();
+        IntentTagRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -13065,7 +13065,7 @@ class IntentTagMessage {
      */
     static refineValues(_instance) {
         _instance.intentName = _instance.intentName || '';
-        _instance.value = _instance.value || '';
+        _instance.tags = _instance.tags || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -13081,13 +13081,13 @@ class IntentTagMessage {
                     _instance.intentName = _reader.readString();
                     break;
                 case 2:
-                    _instance.value = _reader.readString();
+                    (_instance.tags = _instance.tags || []).push(_reader.readString());
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        IntentTagMessage.refineValues(_instance);
+        IntentTagRequest.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -13098,8 +13098,8 @@ class IntentTagMessage {
         if (_instance.intentName) {
             _writer.writeString(1, _instance.intentName);
         }
-        if (_instance.value) {
-            _writer.writeString(2, _instance.value);
+        if (_instance.tags && _instance.tags.length) {
+            _writer.writeRepeatedString(2, _instance.tags);
         }
     }
     get intentName() {
@@ -13108,11 +13108,11 @@ class IntentTagMessage {
     set intentName(value) {
         this._intentName = value;
     }
-    get value() {
-        return this._value;
+    get tags() {
+        return this._tags;
     }
-    set value(value) {
-        this._value = value;
+    set tags(value) {
+        this._tags = value;
     }
     /**
      * Serialize message to binary data
@@ -13120,7 +13120,7 @@ class IntentTagMessage {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        IntentTagMessage.serializeBinaryToWriter(this, writer);
+        IntentTagRequest.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -13129,7 +13129,7 @@ class IntentTagMessage {
     toObject() {
         return {
             intentName: this.intentName,
-            value: this.value
+            tags: (this.tags || []).slice()
         };
     }
     /**
@@ -13148,11 +13148,11 @@ class IntentTagMessage {
     options) {
         return {
             intentName: this.intentName,
-            value: this.value
+            tags: (this.tags || []).slice()
         };
     }
 }
-IntentTagMessage.id = 'ondewo.nlu.IntentTagMessage';
+IntentTagRequest.id = 'ondewo.nlu.IntentTagRequest';
 /**
  * Message implementation for ondewo.nlu.BatchUpdateTrainingPhrasesRequest
  */
@@ -19655,6 +19655,7 @@ class SessionFilter {
         this.maxNumberTurns = _value.maxNumberTurns;
         this.labels = (_value.labels || []).slice();
         this.userIds = (_value.userIds || []).slice();
+        this.intentTags = (_value.intentTags || []).slice();
         SessionFilter.refineValues(this);
     }
     /**
@@ -19686,6 +19687,7 @@ class SessionFilter {
         _instance.maxNumberTurns = _instance.maxNumberTurns || 0;
         _instance.labels = _instance.labels || [];
         _instance.userIds = _instance.userIds || [];
+        _instance.intentTags = _instance.intentTags || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -19741,6 +19743,9 @@ class SessionFilter {
                 case 13:
                     (_instance.userIds = _instance.userIds || []).push(_reader.readString());
                     break;
+                case 14:
+                    (_instance.intentTags = _instance.intentTags || []).push(_reader.readString());
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -19791,6 +19796,9 @@ class SessionFilter {
         }
         if (_instance.userIds && _instance.userIds.length) {
             _writer.writeRepeatedString(13, _instance.userIds);
+        }
+        if (_instance.intentTags && _instance.intentTags.length) {
+            _writer.writeRepeatedString(14, _instance.intentTags);
         }
     }
     get languageCodes() {
@@ -19871,6 +19879,12 @@ class SessionFilter {
     set userIds(value) {
         this._userIds = value;
     }
+    get intentTags() {
+        return this._intentTags;
+    }
+    set intentTags(value) {
+        this._intentTags = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -19897,7 +19911,8 @@ class SessionFilter {
             minNumberTurns: this.minNumberTurns,
             maxNumberTurns: this.maxNumberTurns,
             labels: (this.labels || []).slice(),
-            userIds: (this.userIds || []).slice()
+            userIds: (this.userIds || []).slice(),
+            intentTags: (this.intentTags || []).slice()
         };
     }
     /**
@@ -19927,7 +19942,8 @@ class SessionFilter {
             minNumberTurns: this.minNumberTurns,
             maxNumberTurns: this.maxNumberTurns,
             labels: (this.labels || []).slice(),
-            userIds: (this.userIds || []).slice()
+            userIds: (this.userIds || []).slice(),
+            intentTags: (this.intentTags || []).slice()
         };
     }
 }
@@ -19952,6 +19968,7 @@ class SessionInfo {
         this.numberTurns = _value.numberTurns;
         this.labels = (_value.labels || []).slice();
         this.userIds = (_value.userIds || []).slice();
+        this.intentTags = (_value.intentTags || []).slice();
         SessionInfo.refineValues(this);
     }
     /**
@@ -19979,6 +19996,7 @@ class SessionInfo {
         _instance.numberTurns = _instance.numberTurns || 0;
         _instance.labels = _instance.labels || [];
         _instance.userIds = _instance.userIds || [];
+        _instance.intentTags = _instance.intentTags || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -20025,6 +20043,9 @@ class SessionInfo {
                 case 10:
                     (_instance.userIds = _instance.userIds || []).push(_reader.readString());
                     break;
+                case 11:
+                    (_instance.intentTags = _instance.intentTags || []).push(_reader.readString());
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -20066,6 +20087,9 @@ class SessionInfo {
         }
         if (_instance.userIds && _instance.userIds.length) {
             _writer.writeRepeatedString(10, _instance.userIds);
+        }
+        if (_instance.intentTags && _instance.intentTags.length) {
+            _writer.writeRepeatedString(11, _instance.intentTags);
         }
     }
     get languageCodes() {
@@ -20128,6 +20152,12 @@ class SessionInfo {
     set userIds(value) {
         this._userIds = value;
     }
+    get intentTags() {
+        return this._intentTags;
+    }
+    set intentTags(value) {
+        this._intentTags = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -20151,7 +20181,8 @@ class SessionInfo {
             latest: this.latest,
             numberTurns: this.numberTurns,
             labels: (this.labels || []).slice(),
-            userIds: (this.userIds || []).slice()
+            userIds: (this.userIds || []).slice(),
+            intentTags: (this.intentTags || []).slice()
         };
     }
     /**
@@ -20178,7 +20209,8 @@ class SessionInfo {
             latest: this.latest,
             numberTurns: this.numberTurns,
             labels: (this.labels || []).slice(),
-            userIds: (this.userIds || []).slice()
+            userIds: (this.userIds || []).slice(),
+            intentTags: (this.intentTags || []).slice()
         };
     }
 }
@@ -38652,6 +38684,31 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImpor
                     }] }, { type: i1.GrpcHandler }];
     } });
 
+var Mode;
+(function (Mode) {
+    Mode[Mode["UNSPECIFIED"] = 0] = "UNSPECIFIED";
+    Mode[Mode["EXCLUSIVE"] = 1] = "EXCLUSIVE";
+    Mode[Mode["INCLUSIVE"] = 2] = "INCLUSIVE";
+})(Mode || (Mode = {}));
+var IntentAlgorithms;
+(function (IntentAlgorithms) {
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentExactContextDetector"] = 0] = "OndewoIntentExactContextDetector";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentExactMatch"] = 1] = "OndewoIntentExactMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentNamedExactMatch"] = 2] = "OndewoIntentNamedExactMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentSimilarityMatch"] = 3] = "OndewoIntentSimilarityMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentNamedSimilarityMatch"] = 4] = "OndewoIntentNamedSimilarityMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentFastTextClassifier"] = 5] = "OndewoIntentFastTextClassifier";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentMachineLearningMatch"] = 6] = "OndewoIntentMachineLearningMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentBertClassifier"] = 7] = "OndewoIntentBertClassifier";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentMetaClassifier"] = 8] = "OndewoIntentMetaClassifier";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentSnipsClassifier"] = 9] = "OndewoIntentSnipsClassifier";
+    IntentAlgorithms[IntentAlgorithms["IntentExitDetector"] = 10] = "IntentExitDetector";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentRankingMatch"] = 11] = "OndewoIntentRankingMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentRasaClassifier"] = 12] = "OndewoIntentRasaClassifier";
+    IntentAlgorithms[IntentAlgorithms["OndewoWeightedEnsemble"] = 13] = "OndewoWeightedEnsemble";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentExitDetector"] = 14] = "OndewoIntentExitDetector";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentParameterMatch"] = 15] = "OndewoIntentParameterMatch";
+})(IntentAlgorithms || (IntentAlgorithms = {}));
 /**
  * Message implementation for ondewo.nlu.ExtractEntitiesRequest
  */
@@ -42656,6 +42713,504 @@ class XLNetAugEnrichmentConfig {
     }
 }
 XLNetAugEnrichmentConfig.id = 'ondewo.nlu.XLNetAugEnrichmentConfig';
+/**
+ * Message implementation for ondewo.nlu.ClassifyIntentsRequest
+ */
+class ClassifyIntentsRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ClassifyIntentsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.text = _value.text;
+        this.languageCode = _value.languageCode;
+        this.activeContexts = _value.activeContexts;
+        this.contextNames = (_value.contextNames || []).slice();
+        this.mode = _value.mode;
+        this.algorithms = (_value.algorithms || []).slice();
+        ClassifyIntentsRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ClassifyIntentsRequest();
+        ClassifyIntentsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.parent = _instance.parent || '';
+        _instance.text = _instance.text || '';
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.activeContexts = _instance.activeContexts || false;
+        _instance.contextNames = _instance.contextNames || [];
+        _instance.mode = _instance.mode || 0;
+        _instance.algorithms = _instance.algorithms || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.parent = _reader.readString();
+                    break;
+                case 2:
+                    _instance.text = _reader.readString();
+                    break;
+                case 3:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                case 4:
+                    _instance.activeContexts = _reader.readBool();
+                    break;
+                case 5:
+                    (_instance.contextNames = _instance.contextNames || []).push(_reader.readString());
+                    break;
+                case 6:
+                    _instance.mode = _reader.readEnum();
+                    break;
+                case 7:
+                    (_instance.algorithms = _instance.algorithms || []).push(...(_reader.readPackedEnum() || []));
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ClassifyIntentsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
+        }
+        if (_instance.text) {
+            _writer.writeString(2, _instance.text);
+        }
+        if (_instance.languageCode) {
+            _writer.writeString(3, _instance.languageCode);
+        }
+        if (_instance.activeContexts) {
+            _writer.writeBool(4, _instance.activeContexts);
+        }
+        if (_instance.contextNames && _instance.contextNames.length) {
+            _writer.writeRepeatedString(5, _instance.contextNames);
+        }
+        if (_instance.mode) {
+            _writer.writeEnum(6, _instance.mode);
+        }
+        if (_instance.algorithms && _instance.algorithms.length) {
+            _writer.writePackedEnum(7, _instance.algorithms);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get activeContexts() {
+        return this._activeContexts;
+    }
+    set activeContexts(value) {
+        this._activeContexts = value;
+    }
+    get contextNames() {
+        return this._contextNames;
+    }
+    set contextNames(value) {
+        this._contextNames = value;
+    }
+    get mode() {
+        return this._mode;
+    }
+    set mode(value) {
+        this._mode = value;
+    }
+    get algorithms() {
+        return this._algorithms;
+    }
+    set algorithms(value) {
+        this._algorithms = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ClassifyIntentsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            parent: this.parent,
+            text: this.text,
+            languageCode: this.languageCode,
+            activeContexts: this.activeContexts,
+            contextNames: (this.contextNames || []).slice(),
+            mode: this.mode,
+            algorithms: (this.algorithms || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            parent: this.parent,
+            text: this.text,
+            languageCode: this.languageCode,
+            activeContexts: this.activeContexts,
+            contextNames: (this.contextNames || []).slice(),
+            mode: Mode[this.mode === null || this.mode === undefined ? 0 : this.mode],
+            algorithms: (this.algorithms || []).map(v => IntentAlgorithms[v])
+        };
+    }
+}
+ClassifyIntentsRequest.id = 'ondewo.nlu.ClassifyIntentsRequest';
+/**
+ * Message implementation for ondewo.nlu.IntentClassified
+ */
+class IntentClassified {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of IntentClassified to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentName = _value.intentName;
+        this.intentDisplayName = _value.intentDisplayName;
+        this.classifier = _value.classifier;
+        this.score = _value.score;
+        IntentClassified.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new IntentClassified();
+        IntentClassified.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.intentName = _instance.intentName || '';
+        _instance.intentDisplayName = _instance.intentDisplayName || '';
+        _instance.classifier = _instance.classifier || '';
+        _instance.score = _instance.score || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.intentName = _reader.readString();
+                    break;
+                case 2:
+                    _instance.intentDisplayName = _reader.readString();
+                    break;
+                case 3:
+                    _instance.classifier = _reader.readString();
+                    break;
+                case 4:
+                    _instance.score = _reader.readFloat();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        IntentClassified.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.intentName) {
+            _writer.writeString(1, _instance.intentName);
+        }
+        if (_instance.intentDisplayName) {
+            _writer.writeString(2, _instance.intentDisplayName);
+        }
+        if (_instance.classifier) {
+            _writer.writeString(3, _instance.classifier);
+        }
+        if (_instance.score) {
+            _writer.writeFloat(4, _instance.score);
+        }
+    }
+    get intentName() {
+        return this._intentName;
+    }
+    set intentName(value) {
+        this._intentName = value;
+    }
+    get intentDisplayName() {
+        return this._intentDisplayName;
+    }
+    set intentDisplayName(value) {
+        this._intentDisplayName = value;
+    }
+    get classifier() {
+        return this._classifier;
+    }
+    set classifier(value) {
+        this._classifier = value;
+    }
+    get score() {
+        return this._score;
+    }
+    set score(value) {
+        this._score = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        IntentClassified.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            intentName: this.intentName,
+            intentDisplayName: this.intentDisplayName,
+            classifier: this.classifier,
+            score: this.score
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            intentName: this.intentName,
+            intentDisplayName: this.intentDisplayName,
+            classifier: this.classifier,
+            score: this.score
+        };
+    }
+}
+IntentClassified.id = 'ondewo.nlu.IntentClassified';
+/**
+ * Message implementation for ondewo.nlu.ClassifyIntentsResponse
+ */
+class ClassifyIntentsResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ClassifyIntentsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentsClassified = (_value.intentsClassified || []).map(m => new IntentClassified(m));
+        this.text = _value.text;
+        this.activeContexts = _value.activeContexts;
+        this.contextNames = (_value.contextNames || []).slice();
+        ClassifyIntentsResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ClassifyIntentsResponse();
+        ClassifyIntentsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.intentsClassified = _instance.intentsClassified || [];
+        _instance.text = _instance.text || '';
+        _instance.activeContexts = _instance.activeContexts || false;
+        _instance.contextNames = _instance.contextNames || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new IntentClassified();
+                    _reader.readMessage(messageInitializer1, IntentClassified.deserializeBinaryFromReader);
+                    (_instance.intentsClassified =
+                        _instance.intentsClassified || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    _instance.text = _reader.readString();
+                    break;
+                case 3:
+                    _instance.activeContexts = _reader.readBool();
+                    break;
+                case 4:
+                    (_instance.contextNames = _instance.contextNames || []).push(_reader.readString());
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ClassifyIntentsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.intentsClassified && _instance.intentsClassified.length) {
+            _writer.writeRepeatedMessage(1, _instance.intentsClassified, IntentClassified.serializeBinaryToWriter);
+        }
+        if (_instance.text) {
+            _writer.writeString(2, _instance.text);
+        }
+        if (_instance.activeContexts) {
+            _writer.writeBool(3, _instance.activeContexts);
+        }
+        if (_instance.contextNames && _instance.contextNames.length) {
+            _writer.writeRepeatedString(4, _instance.contextNames);
+        }
+    }
+    get intentsClassified() {
+        return this._intentsClassified;
+    }
+    set intentsClassified(value) {
+        this._intentsClassified = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    get activeContexts() {
+        return this._activeContexts;
+    }
+    set activeContexts(value) {
+        this._activeContexts = value;
+    }
+    get contextNames() {
+        return this._contextNames;
+    }
+    set contextNames(value) {
+        this._contextNames = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ClassifyIntentsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            intentsClassified: (this.intentsClassified || []).map(m => m.toObject()),
+            text: this.text,
+            activeContexts: this.activeContexts,
+            contextNames: (this.contextNames || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            intentsClassified: (this.intentsClassified || []).map(m => m.toProtobufJSON(options)),
+            text: this.text,
+            activeContexts: this.activeContexts,
+            contextNames: (this.contextNames || []).slice()
+        };
+    }
+}
+ClassifyIntentsResponse.id = 'ondewo.nlu.ClassifyIntentsResponse';
 
 /* tslint:disable */
 /**
@@ -43001,7 +43556,7 @@ class IntentsClient {
                     path: '/ondewo.nlu.Intents/TagIntent',
                     requestData,
                     requestMetadata,
-                    requestClass: IntentTagMessage,
+                    requestClass: IntentTagRequest,
                     responseClass: googleProtobuf003.Empty
                 });
             },
@@ -43019,7 +43574,7 @@ class IntentsClient {
                     path: '/ondewo.nlu.Intents/DeleteIntentTag',
                     requestData,
                     requestMetadata,
-                    requestClass: IntentTagMessage,
+                    requestClass: IntentTagRequest,
                     responseClass: googleProtobuf003.Empty
                 });
             },
@@ -44703,6 +45258,24 @@ class AiServicesClient {
                 });
             },
             /**
+             * Unary RPC for /ondewo.nlu.AiServices/ClassifyIntents
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ClassifyIntentsResponse>>
+             */
+            classifyIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.AiServices/ClassifyIntents',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ClassifyIntentsRequest,
+                    responseClass: ClassifyIntentsResponse
+                });
+            },
+            /**
              * Unary RPC for /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
              *
              * @param requestMessage Request message
@@ -44793,6 +45366,18 @@ class AiServicesClient {
     getSynonyms(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
             .getSynonyms(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary RPC for /ondewo.nlu.AiServices/ClassifyIntents
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ClassifyIntentsResponse>
+     */
+    classifyIntents(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .classifyIntents(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
@@ -46587,5 +47172,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Context, ContextsClient, CreateAgentRequest, CreateContextRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteContextRequest, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionRequest, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, EntityDetected, EntityEnrichmentConfig, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FastTextEnrichmentConfig, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetContextRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetLatestSessionReviewRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionRequest, GetSessionReviewRequest, GetSynonymsRequest, GetSynonymsResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentBatch, IntentCategory, IntentSorting, IntentTagMessage, IntentUpdate, IntentView, IntentsClient, LatLng, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListContextsRequest, ListContextsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIntentsRequest, ListIntentsResponse, ListOperationsRequest, ListOperationsResponse, ListParametersRequest, ListParametersResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListUserInfosResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LoginRequest, LoginResponse, ModelStatus, Operation, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, RemoveSessionLabelsRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, RestoreAgentRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, ServerRole, ServerStatisticsClient, Session, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SetAgentStatusRequest, SetResourcesRequest, SortingMode, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingRecognitionResult, StringUpdate, Synonym, TextInput, ThesaurusEnrichmentConfig, TrackSessionStepRequest, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, UpdateAgentRequest, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
+export { AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Context, ContextsClient, CreateAgentRequest, CreateContextRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteContextRequest, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionRequest, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, EntityDetected, EntityEnrichmentConfig, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FastTextEnrichmentConfig, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetContextRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetLatestSessionReviewRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionRequest, GetSessionReviewRequest, GetSynonymsRequest, GetSynonymsResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, LatLng, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListContextsRequest, ListContextsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIntentsRequest, ListIntentsResponse, ListOperationsRequest, ListOperationsResponse, ListParametersRequest, ListParametersResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListUserInfosResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LoginRequest, LoginResponse, Mode, ModelStatus, Operation, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, RemoveSessionLabelsRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, RestoreAgentRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, ServerRole, ServerStatisticsClient, Session, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SetAgentStatusRequest, SetResourcesRequest, SortingMode, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingRecognitionResult, StringUpdate, Synonym, TextInput, ThesaurusEnrichmentConfig, TrackSessionStepRequest, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, UpdateAgentRequest, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
 //# sourceMappingURL=ondewo-nlu-client-angular.mjs.map
