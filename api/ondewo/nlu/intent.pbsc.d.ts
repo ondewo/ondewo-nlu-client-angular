@@ -80,7 +80,7 @@ export declare class IntentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        tagIntent: (requestData: thisProto.IntentTagMessage, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
+        tagIntent: (requestData: thisProto.IntentTagRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary RPC for /ondewo.nlu.Intents/DeleteIntentTag
          *
@@ -88,7 +88,7 @@ export declare class IntentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteIntentTag: (requestData: thisProto.IntentTagMessage, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
+        deleteIntentTag: (requestData: thisProto.IntentTagRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
          *
@@ -274,7 +274,7 @@ export declare class IntentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    tagIntent(requestData: thisProto.IntentTagMessage, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
+    tagIntent(requestData: thisProto.IntentTagRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary RPC for /ondewo.nlu.Intents/DeleteIntentTag
      *
@@ -282,7 +282,7 @@ export declare class IntentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteIntentTag(requestData: thisProto.IntentTagMessage, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
+    deleteIntentTag(requestData: thisProto.IntentTagRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
      *

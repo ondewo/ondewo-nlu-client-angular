@@ -2,6 +2,29 @@ import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as ondewoNlu010 from '../../ondewo/nlu/intent.pb';
 import * as ondewoNlu011 from '../../ondewo/nlu/entity-type.pb';
+export declare enum Mode {
+    UNSPECIFIED = 0,
+    EXCLUSIVE = 1,
+    INCLUSIVE = 2
+}
+export declare enum IntentAlgorithms {
+    OndewoIntentExactContextDetector = 0,
+    OndewoIntentExactMatch = 1,
+    OndewoIntentNamedExactMatch = 2,
+    OndewoIntentSimilarityMatch = 3,
+    OndewoIntentNamedSimilarityMatch = 4,
+    OndewoIntentFastTextClassifier = 5,
+    OndewoIntentMachineLearningMatch = 6,
+    OndewoIntentBertClassifier = 7,
+    OndewoIntentMetaClassifier = 8,
+    OndewoIntentSnipsClassifier = 9,
+    IntentExitDetector = 10,
+    OndewoIntentRankingMatch = 11,
+    OndewoIntentRasaClassifier = 12,
+    OndewoWeightedEnsemble = 13,
+    OndewoIntentExitDetector = 14,
+    OndewoIntentParameterMatch = 15
+}
 /**
  * Message implementation for ondewo.nlu.ExtractEntitiesRequest
  */
@@ -2266,6 +2289,273 @@ export declare module XLNetAugEnrichmentConfig {
         isActive?: boolean;
         enrichmentFactor?: number;
         executionOrder?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ClassifyIntentsRequest
+ */
+export declare class ClassifyIntentsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ClassifyIntentsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ClassifyIntentsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ClassifyIntentsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ClassifyIntentsRequest, _writer: BinaryWriter): void;
+    private _parent?;
+    private _text?;
+    private _languageCode?;
+    private _activeContexts?;
+    private _contextNames?;
+    private _mode?;
+    private _algorithms?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ClassifyIntentsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ClassifyIntentsRequest.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    get text(): string | undefined;
+    set text(value: string | undefined);
+    get languageCode(): string | undefined;
+    set languageCode(value: string | undefined);
+    get activeContexts(): boolean | undefined;
+    set activeContexts(value: boolean | undefined);
+    get contextNames(): string[] | undefined;
+    set contextNames(value: string[] | undefined);
+    get mode(): Mode | undefined;
+    set mode(value: Mode | undefined);
+    get algorithms(): IntentAlgorithms[] | undefined;
+    set algorithms(value: IntentAlgorithms[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ClassifyIntentsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ClassifyIntentsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ClassifyIntentsRequest.AsProtobufJSON;
+}
+export declare module ClassifyIntentsRequest {
+    /**
+     * Standard JavaScript object representation for ClassifyIntentsRequest
+     */
+    interface AsObject {
+        parent?: string;
+        text?: string;
+        languageCode?: string;
+        activeContexts?: boolean;
+        contextNames?: string[];
+        mode?: Mode;
+        algorithms?: IntentAlgorithms[];
+    }
+    /**
+     * Protobuf JSON representation for ClassifyIntentsRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        text?: string;
+        languageCode?: string;
+        activeContexts?: boolean;
+        contextNames?: string[];
+        mode?: string;
+        algorithms?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.IntentClassified
+ */
+export declare class IntentClassified implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): IntentClassified;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: IntentClassified): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: IntentClassified, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: IntentClassified, _writer: BinaryWriter): void;
+    private _intentName?;
+    private _intentDisplayName?;
+    private _classifier?;
+    private _score?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of IntentClassified to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<IntentClassified.AsObject>);
+    get intentName(): string | undefined;
+    set intentName(value: string | undefined);
+    get intentDisplayName(): string | undefined;
+    set intentDisplayName(value: string | undefined);
+    get classifier(): string | undefined;
+    set classifier(value: string | undefined);
+    get score(): number | undefined;
+    set score(value: number | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): IntentClassified.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): IntentClassified.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): IntentClassified.AsProtobufJSON;
+}
+export declare module IntentClassified {
+    /**
+     * Standard JavaScript object representation for IntentClassified
+     */
+    interface AsObject {
+        intentName?: string;
+        intentDisplayName?: string;
+        classifier?: string;
+        score?: number;
+    }
+    /**
+     * Protobuf JSON representation for IntentClassified
+     */
+    interface AsProtobufJSON {
+        intentName?: string;
+        intentDisplayName?: string;
+        classifier?: string;
+        score?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ClassifyIntentsResponse
+ */
+export declare class ClassifyIntentsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ClassifyIntentsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ClassifyIntentsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ClassifyIntentsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ClassifyIntentsResponse, _writer: BinaryWriter): void;
+    private _intentsClassified?;
+    private _text?;
+    private _activeContexts?;
+    private _contextNames?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ClassifyIntentsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ClassifyIntentsResponse.AsObject>);
+    get intentsClassified(): IntentClassified[] | undefined;
+    set intentsClassified(value: IntentClassified[] | undefined);
+    get text(): string | undefined;
+    set text(value: string | undefined);
+    get activeContexts(): boolean | undefined;
+    set activeContexts(value: boolean | undefined);
+    get contextNames(): string[] | undefined;
+    set contextNames(value: string[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ClassifyIntentsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ClassifyIntentsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ClassifyIntentsResponse.AsProtobufJSON;
+}
+export declare module ClassifyIntentsResponse {
+    /**
+     * Standard JavaScript object representation for ClassifyIntentsResponse
+     */
+    interface AsObject {
+        intentsClassified?: IntentClassified.AsObject[];
+        text?: string;
+        activeContexts?: boolean;
+        contextNames?: string[];
+    }
+    /**
+     * Protobuf JSON representation for ClassifyIntentsResponse
+     */
+    interface AsProtobufJSON {
+        intentsClassified?: IntentClassified.AsProtobufJSON[] | null;
+        text?: string;
+        activeContexts?: boolean;
+        contextNames?: string[];
     }
 }
 //# sourceMappingURL=aiservices.pb.d.ts.map
