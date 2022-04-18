@@ -4,4 +4,3 @@ import { InjectionToken } from '@angular/core';
  * Use it only if your default settings are not set or the service requires other settings.
  */
 export declare const GRPC_ENTITY_TYPES_CLIENT_SETTINGS: InjectionToken<any>;
-//# sourceMappingURL=entity-type.pbconf.d.ts.map

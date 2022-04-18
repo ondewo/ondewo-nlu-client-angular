@@ -18,7 +18,7 @@ export declare class EntityTypesClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/ListEntityTypes
+         * Unary call: /ondewo.nlu.EntityTypes/ListEntityTypes
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -26,7 +26,7 @@ export declare class EntityTypesClient {
          */
         listEntityTypes: (requestData: thisProto.ListEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/GetEntityType
+         * Unary call: /ondewo.nlu.EntityTypes/GetEntityType
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -34,7 +34,7 @@ export declare class EntityTypesClient {
          */
         getEntityType: (requestData: thisProto.GetEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.EntityType>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/CreateEntityType
+         * Unary call: /ondewo.nlu.EntityTypes/CreateEntityType
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -42,7 +42,7 @@ export declare class EntityTypesClient {
          */
         createEntityType: (requestData: thisProto.CreateEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.EntityType>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/UpdateEntityType
+         * Unary call: /ondewo.nlu.EntityTypes/UpdateEntityType
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -50,7 +50,7 @@ export declare class EntityTypesClient {
          */
         updateEntityType: (requestData: thisProto.UpdateEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.EntityType>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/DeleteEntityType
+         * Unary call: /ondewo.nlu.EntityTypes/DeleteEntityType
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -58,7 +58,7 @@ export declare class EntityTypesClient {
          */
         deleteEntityType: (requestData: thisProto.DeleteEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
+         * Unary call: /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -66,7 +66,7 @@ export declare class EntityTypesClient {
          */
         batchUpdateEntityTypes: (requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
+         * Unary call: /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -74,7 +74,7 @@ export declare class EntityTypesClient {
          */
         batchDeleteEntityTypes: (requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/BatchCreateEntities
+         * Unary call: /ondewo.nlu.EntityTypes/BatchCreateEntities
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -82,7 +82,7 @@ export declare class EntityTypesClient {
          */
         batchCreateEntities: (requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntities
+         * Unary call: /ondewo.nlu.EntityTypes/BatchUpdateEntities
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -90,7 +90,7 @@ export declare class EntityTypesClient {
          */
         batchUpdateEntities: (requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/BatchGetEntities
+         * Unary call: /ondewo.nlu.EntityTypes/BatchGetEntities
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -98,7 +98,7 @@ export declare class EntityTypesClient {
          */
         batchGetEntities: (requestData: thisProto.BatchGetEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntities
+         * Unary call: /ondewo.nlu.EntityTypes/BatchDeleteEntities
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -106,7 +106,7 @@ export declare class EntityTypesClient {
          */
         batchDeleteEntities: (requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchDeleteEntitiesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.EntityTypes/ListEntities
+         * Unary call: /ondewo.nlu.EntityTypes/ListEntities
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -116,7 +116,7 @@ export declare class EntityTypesClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/ListEntityTypes
+     * Unary call @/ondewo.nlu.EntityTypes/ListEntityTypes
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -124,7 +124,7 @@ export declare class EntityTypesClient {
      */
     listEntityTypes(requestData: thisProto.ListEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListEntityTypesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/GetEntityType
+     * Unary call @/ondewo.nlu.EntityTypes/GetEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -132,7 +132,7 @@ export declare class EntityTypesClient {
      */
     getEntityType(requestData: thisProto.GetEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.EntityType>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/CreateEntityType
+     * Unary call @/ondewo.nlu.EntityTypes/CreateEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -140,7 +140,7 @@ export declare class EntityTypesClient {
      */
     createEntityType(requestData: thisProto.CreateEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.EntityType>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/UpdateEntityType
+     * Unary call @/ondewo.nlu.EntityTypes/UpdateEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -148,7 +148,7 @@ export declare class EntityTypesClient {
      */
     updateEntityType(requestData: thisProto.UpdateEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.EntityType>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/DeleteEntityType
+     * Unary call @/ondewo.nlu.EntityTypes/DeleteEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -156,7 +156,7 @@ export declare class EntityTypesClient {
      */
     deleteEntityType(requestData: thisProto.DeleteEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
+     * Unary call @/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -164,7 +164,7 @@ export declare class EntityTypesClient {
      */
     batchUpdateEntityTypes(requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
+     * Unary call @/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -172,7 +172,7 @@ export declare class EntityTypesClient {
      */
     batchDeleteEntityTypes(requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchCreateEntities
+     * Unary call @/ondewo.nlu.EntityTypes/BatchCreateEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -180,7 +180,7 @@ export declare class EntityTypesClient {
      */
     batchCreateEntities(requestData: thisProto.BatchCreateEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchEntitiesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntities
+     * Unary call @/ondewo.nlu.EntityTypes/BatchUpdateEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -188,7 +188,7 @@ export declare class EntityTypesClient {
      */
     batchUpdateEntities(requestData: thisProto.BatchUpdateEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchEntitiesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchGetEntities
+     * Unary call @/ondewo.nlu.EntityTypes/BatchGetEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -196,7 +196,7 @@ export declare class EntityTypesClient {
      */
     batchGetEntities(requestData: thisProto.BatchGetEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchEntitiesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntities
+     * Unary call @/ondewo.nlu.EntityTypes/BatchDeleteEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -204,7 +204,7 @@ export declare class EntityTypesClient {
      */
     batchDeleteEntities(requestData: thisProto.BatchDeleteEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchDeleteEntitiesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/ListEntities
+     * Unary call @/ondewo.nlu.EntityTypes/ListEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -214,4 +214,3 @@ export declare class EntityTypesClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<EntityTypesClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<EntityTypesClient>;
 }
-//# sourceMappingURL=entity-type.pbsc.d.ts.map

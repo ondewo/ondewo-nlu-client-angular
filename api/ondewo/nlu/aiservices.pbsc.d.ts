@@ -16,7 +16,7 @@ export declare class AiServicesClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.AiServices/ExtractEntities
+         * Unary call: /ondewo.nlu.AiServices/ExtractEntities
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -24,7 +24,7 @@ export declare class AiServicesClient {
          */
         extractEntities: (requestData: thisProto.ExtractEntitiesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.AiServices/GenerateUserSays
+         * Unary call: /ondewo.nlu.AiServices/GenerateUserSays
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -32,7 +32,7 @@ export declare class AiServicesClient {
          */
         generateUserSays: (requestData: thisProto.GenerateUserSaysRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GenerateUserSaysResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.AiServices/GenerateResponses
+         * Unary call: /ondewo.nlu.AiServices/GenerateResponses
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -40,7 +40,7 @@ export declare class AiServicesClient {
          */
         generateResponses: (requestData: thisProto.GenerateResponsesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GenerateResponsesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.AiServices/GetAlternativeSentences
+         * Unary call: /ondewo.nlu.AiServices/GetAlternativeSentences
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -48,7 +48,7 @@ export declare class AiServicesClient {
          */
         getAlternativeSentences: (requestData: thisProto.GetAlternativeSentencesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetAlternativeSentencesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
+         * Unary call: /ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -56,7 +56,7 @@ export declare class AiServicesClient {
          */
         getAlternativeTrainingPhrases: (requestData: thisProto.GetAlternativeTrainingPhrasesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetAlternativeTrainingPhrasesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.AiServices/GetSynonyms
+         * Unary call: /ondewo.nlu.AiServices/GetSynonyms
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -64,7 +64,7 @@ export declare class AiServicesClient {
          */
         getSynonyms: (requestData: thisProto.GetSynonymsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetSynonymsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.AiServices/ClassifyIntents
+         * Unary call: /ondewo.nlu.AiServices/ClassifyIntents
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -72,7 +72,7 @@ export declare class AiServicesClient {
          */
         classifyIntents: (requestData: thisProto.ClassifyIntentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ClassifyIntentsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
+         * Unary call: /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -82,7 +82,7 @@ export declare class AiServicesClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/ExtractEntities
+     * Unary call @/ondewo.nlu.AiServices/ExtractEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -90,7 +90,7 @@ export declare class AiServicesClient {
      */
     extractEntities(requestData: thisProto.ExtractEntitiesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ExtractEntitiesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GenerateUserSays
+     * Unary call @/ondewo.nlu.AiServices/GenerateUserSays
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -98,7 +98,7 @@ export declare class AiServicesClient {
      */
     generateUserSays(requestData: thisProto.GenerateUserSaysRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GenerateUserSaysResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GenerateResponses
+     * Unary call @/ondewo.nlu.AiServices/GenerateResponses
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -106,7 +106,7 @@ export declare class AiServicesClient {
      */
     generateResponses(requestData: thisProto.GenerateResponsesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GenerateResponsesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GetAlternativeSentences
+     * Unary call @/ondewo.nlu.AiServices/GetAlternativeSentences
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -114,7 +114,7 @@ export declare class AiServicesClient {
      */
     getAlternativeSentences(requestData: thisProto.GetAlternativeSentencesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetAlternativeSentencesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
+     * Unary call @/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -122,7 +122,7 @@ export declare class AiServicesClient {
      */
     getAlternativeTrainingPhrases(requestData: thisProto.GetAlternativeTrainingPhrasesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetAlternativeTrainingPhrasesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GetSynonyms
+     * Unary call @/ondewo.nlu.AiServices/GetSynonyms
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -130,7 +130,7 @@ export declare class AiServicesClient {
      */
     getSynonyms(requestData: thisProto.GetSynonymsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetSynonymsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/ClassifyIntents
+     * Unary call @/ondewo.nlu.AiServices/ClassifyIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -138,7 +138,7 @@ export declare class AiServicesClient {
      */
     classifyIntents(requestData: thisProto.ClassifyIntentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ClassifyIntentsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
+     * Unary call @/ondewo.nlu.AiServices/ExtractEntitiesFuzzy
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -148,4 +148,3 @@ export declare class AiServicesClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<AiServicesClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<AiServicesClient>;
 }
-//# sourceMappingURL=aiservices.pbsc.d.ts.map

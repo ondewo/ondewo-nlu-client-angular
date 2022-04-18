@@ -17,7 +17,7 @@ export declare class QAClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.qa.QA/GetAnswer
+         * Unary call: /ondewo.qa.QA/GetAnswer
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -25,7 +25,7 @@ export declare class QAClient {
          */
         getAnswer: (requestData: thisProto.GetAnswerRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetAnswerResponse>>;
         /**
-         * Unary RPC for /ondewo.qa.QA/RunScraper
+         * Unary call: /ondewo.qa.QA/RunScraper
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -33,7 +33,7 @@ export declare class QAClient {
          */
         runScraper: (requestData: thisProto.RunScraperRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.RunScraperResponse>>;
         /**
-         * Unary RPC for /ondewo.qa.QA/UpdateDatabase
+         * Unary call: /ondewo.qa.QA/UpdateDatabase
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -41,7 +41,7 @@ export declare class QAClient {
          */
         updateDatabase: (requestData: thisProto.UpdateDatabaseRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.UpdateDatabaseResponse>>;
         /**
-         * Unary RPC for /ondewo.qa.QA/RunTraining
+         * Unary call: /ondewo.qa.QA/RunTraining
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -49,7 +49,7 @@ export declare class QAClient {
          */
         runTraining: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.RunTrainingResponse>>;
         /**
-         * Unary RPC for /ondewo.qa.QA/GetServerState
+         * Unary call: /ondewo.qa.QA/GetServerState
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -57,7 +57,7 @@ export declare class QAClient {
          */
         getServerState: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetServerStateResponse>>;
         /**
-         * Unary RPC for /ondewo.qa.QA/ListProjectIds
+         * Unary call: /ondewo.qa.QA/ListProjectIds
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -65,7 +65,7 @@ export declare class QAClient {
          */
         listProjectIds: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListProjectIdsResponse>>;
         /**
-         * Unary RPC for /ondewo.qa.QA/GetProjectConfig
+         * Unary call: /ondewo.qa.QA/GetProjectConfig
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -75,7 +75,7 @@ export declare class QAClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.qa.QA/GetAnswer
+     * Unary call @/ondewo.qa.QA/GetAnswer
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -83,7 +83,7 @@ export declare class QAClient {
      */
     getAnswer(requestData: thisProto.GetAnswerRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetAnswerResponse>;
     /**
-     * Unary RPC for /ondewo.qa.QA/RunScraper
+     * Unary call @/ondewo.qa.QA/RunScraper
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -91,7 +91,7 @@ export declare class QAClient {
      */
     runScraper(requestData: thisProto.RunScraperRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.RunScraperResponse>;
     /**
-     * Unary RPC for /ondewo.qa.QA/UpdateDatabase
+     * Unary call @/ondewo.qa.QA/UpdateDatabase
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -99,7 +99,7 @@ export declare class QAClient {
      */
     updateDatabase(requestData: thisProto.UpdateDatabaseRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.UpdateDatabaseResponse>;
     /**
-     * Unary RPC for /ondewo.qa.QA/RunTraining
+     * Unary call @/ondewo.qa.QA/RunTraining
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -107,7 +107,7 @@ export declare class QAClient {
      */
     runTraining(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.RunTrainingResponse>;
     /**
-     * Unary RPC for /ondewo.qa.QA/GetServerState
+     * Unary call @/ondewo.qa.QA/GetServerState
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -115,7 +115,7 @@ export declare class QAClient {
      */
     getServerState(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.GetServerStateResponse>;
     /**
-     * Unary RPC for /ondewo.qa.QA/ListProjectIds
+     * Unary call @/ondewo.qa.QA/ListProjectIds
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -123,7 +123,7 @@ export declare class QAClient {
      */
     listProjectIds(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.ListProjectIdsResponse>;
     /**
-     * Unary RPC for /ondewo.qa.QA/GetProjectConfig
+     * Unary call @/ondewo.qa.QA/GetProjectConfig
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -133,4 +133,3 @@ export declare class QAClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<QAClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<QAClient>;
 }
-//# sourceMappingURL=qa.pbsc.d.ts.map

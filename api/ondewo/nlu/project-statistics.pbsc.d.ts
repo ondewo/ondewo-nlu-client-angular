@@ -17,7 +17,7 @@ export declare class ProjectStatisticsClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetIntentCount
+         * Unary call: /ondewo.nlu.ProjectStatistics/GetIntentCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -25,7 +25,7 @@ export declare class ProjectStatisticsClient {
          */
         getIntentCount: (requestData: thisProto.GetIntentCountRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
+         * Unary call: /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -33,7 +33,7 @@ export declare class ProjectStatisticsClient {
          */
         getEntityTypeCount: (requestData: thisProto.GetEntityTypeCountRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetUserCount
+         * Unary call: /ondewo.nlu.ProjectStatistics/GetUserCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -41,7 +41,7 @@ export declare class ProjectStatisticsClient {
          */
         getUserCount: (requestData: thisProto.GetProjectStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetSessionCount
+         * Unary call: /ondewo.nlu.ProjectStatistics/GetSessionCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -49,7 +49,7 @@ export declare class ProjectStatisticsClient {
          */
         getSessionCount: (requestData: thisProto.GetProjectStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
+         * Unary call: /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -57,7 +57,7 @@ export declare class ProjectStatisticsClient {
          */
         getTrainingPhraseCount: (requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetResponseCount
+         * Unary call: /ondewo.nlu.ProjectStatistics/GetResponseCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -65,7 +65,7 @@ export declare class ProjectStatisticsClient {
          */
         getResponseCount: (requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityValueCount
+         * Unary call: /ondewo.nlu.ProjectStatistics/GetEntityValueCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -73,7 +73,7 @@ export declare class ProjectStatisticsClient {
          */
         getEntityValueCount: (requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
+         * Unary call: /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -83,7 +83,7 @@ export declare class ProjectStatisticsClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetIntentCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetIntentCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -91,7 +91,7 @@ export declare class ProjectStatisticsClient {
      */
     getIntentCount(requestData: thisProto.GetIntentCountRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntityTypeCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -99,7 +99,7 @@ export declare class ProjectStatisticsClient {
      */
     getEntityTypeCount(requestData: thisProto.GetEntityTypeCountRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetUserCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetUserCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -107,7 +107,7 @@ export declare class ProjectStatisticsClient {
      */
     getUserCount(requestData: thisProto.GetProjectStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetSessionCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetSessionCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -115,7 +115,7 @@ export declare class ProjectStatisticsClient {
      */
     getSessionCount(requestData: thisProto.GetProjectStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -123,7 +123,7 @@ export declare class ProjectStatisticsClient {
      */
     getTrainingPhraseCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetResponseCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetResponseCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -131,7 +131,7 @@ export declare class ProjectStatisticsClient {
      */
     getResponseCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityValueCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntityValueCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -139,7 +139,7 @@ export declare class ProjectStatisticsClient {
      */
     getEntityValueCount(requestData: thisProto.GetProjectElementStatRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -149,4 +149,3 @@ export declare class ProjectStatisticsClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<ProjectStatisticsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<ProjectStatisticsClient>;
 }
-//# sourceMappingURL=project-statistics.pbsc.d.ts.map

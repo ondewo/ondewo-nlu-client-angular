@@ -80,4 +80,3 @@ export declare module Status {
         details?: googleProtobuf000.Any.AsProtobufJSON[] | null;
     }
 }
-//# sourceMappingURL=status.pb.d.ts.map

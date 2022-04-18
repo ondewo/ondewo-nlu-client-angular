@@ -18,7 +18,7 @@ export declare class AgentsClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.Agents/CreateAgent
+         * Unary call: /ondewo.nlu.Agents/CreateAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -26,7 +26,7 @@ export declare class AgentsClient {
          */
         createAgent: (requestData: thisProto.CreateAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Agent>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/UpdateAgent
+         * Unary call: /ondewo.nlu.Agents/UpdateAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -34,7 +34,7 @@ export declare class AgentsClient {
          */
         updateAgent: (requestData: thisProto.UpdateAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Agent>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/GetAgent
+         * Unary call: /ondewo.nlu.Agents/GetAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -42,7 +42,7 @@ export declare class AgentsClient {
          */
         getAgent: (requestData: thisProto.GetAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Agent>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/DeleteAgent
+         * Unary call: /ondewo.nlu.Agents/DeleteAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -50,7 +50,7 @@ export declare class AgentsClient {
          */
         deleteAgent: (requestData: thisProto.DeleteAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/DeleteAllAgents
+         * Unary call: /ondewo.nlu.Agents/DeleteAllAgents
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -58,7 +58,7 @@ export declare class AgentsClient {
          */
         deleteAllAgents: (requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/ListAgents
+         * Unary call: /ondewo.nlu.Agents/ListAgents
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -66,7 +66,7 @@ export declare class AgentsClient {
          */
         listAgents: (requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListAgentsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/ListAgentsOfUser
+         * Unary call: /ondewo.nlu.Agents/ListAgentsOfUser
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -74,7 +74,7 @@ export declare class AgentsClient {
          */
         listAgentsOfUser: (requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListAgentsOfUserResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/ListAllAgents
+         * Unary call: /ondewo.nlu.Agents/ListAllAgents
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -82,7 +82,7 @@ export declare class AgentsClient {
          */
         listAllAgents: (requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListAgentsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/AddUserToProject
+         * Unary call: /ondewo.nlu.Agents/AddUserToProject
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -90,7 +90,7 @@ export declare class AgentsClient {
          */
         addUserToProject: (requestData: thisProto.AddUserToProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/RemoveUserFromProject
+         * Unary call: /ondewo.nlu.Agents/RemoveUserFromProject
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -98,7 +98,7 @@ export declare class AgentsClient {
          */
         removeUserFromProject: (requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/ListUsersInProject
+         * Unary call: /ondewo.nlu.Agents/ListUsersInProject
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -106,7 +106,7 @@ export declare class AgentsClient {
          */
         listUsersInProject: (requestData: thisProto.ListUsersInProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListUsersInProjectResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/GetPlatformInfo
+         * Unary call: /ondewo.nlu.Agents/GetPlatformInfo
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -114,7 +114,7 @@ export declare class AgentsClient {
          */
         getPlatformInfo: (requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetPlatformInfoResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/ListProjectPermissions
+         * Unary call: /ondewo.nlu.Agents/ListProjectPermissions
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -122,7 +122,7 @@ export declare class AgentsClient {
          */
         listProjectPermissions: (requestData: thisProto.ListProjectPermissionsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListProjectPermissionsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/TrainAgent
+         * Unary call: /ondewo.nlu.Agents/TrainAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -130,7 +130,7 @@ export declare class AgentsClient {
          */
         trainAgent: (requestData: thisProto.TrainAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/BuildCache
+         * Unary call: /ondewo.nlu.Agents/BuildCache
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -138,7 +138,7 @@ export declare class AgentsClient {
          */
         buildCache: (requestData: thisProto.BuildCacheRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/ExportAgent
+         * Unary call: /ondewo.nlu.Agents/ExportAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -146,7 +146,7 @@ export declare class AgentsClient {
          */
         exportAgent: (requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/ExportBenchmarkAgent
+         * Unary call: /ondewo.nlu.Agents/ExportBenchmarkAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -154,7 +154,7 @@ export declare class AgentsClient {
          */
         exportBenchmarkAgent: (requestData: thisProto.ExportBenchmarkAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/ImportAgent
+         * Unary call: /ondewo.nlu.Agents/ImportAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -162,7 +162,7 @@ export declare class AgentsClient {
          */
         importAgent: (requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/OptimizeRankingMatch
+         * Unary call: /ondewo.nlu.Agents/OptimizeRankingMatch
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -170,7 +170,7 @@ export declare class AgentsClient {
          */
         optimizeRankingMatch: (requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/RestoreAgent
+         * Unary call: /ondewo.nlu.Agents/RestoreAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -178,7 +178,7 @@ export declare class AgentsClient {
          */
         restoreAgent: (requestData: thisProto.RestoreAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/GetAgentStatistics
+         * Unary call: /ondewo.nlu.Agents/GetAgentStatistics
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -186,7 +186,7 @@ export declare class AgentsClient {
          */
         getAgentStatistics: (requestData: thisProto.GetAgentStatisticsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetAgentStatisticsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/SetAgentStatus
+         * Unary call: /ondewo.nlu.Agents/SetAgentStatus
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -194,7 +194,7 @@ export declare class AgentsClient {
          */
         setAgentStatus: (requestData: thisProto.SetAgentStatusRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Agent>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/SetResources
+         * Unary call: /ondewo.nlu.Agents/SetResources
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -202,7 +202,7 @@ export declare class AgentsClient {
          */
         setResources: (requestData: thisProto.SetResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/DeleteResources
+         * Unary call: /ondewo.nlu.Agents/DeleteResources
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -210,7 +210,7 @@ export declare class AgentsClient {
          */
         deleteResources: (requestData: thisProto.DeleteResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/ExportResources
+         * Unary call: /ondewo.nlu.Agents/ExportResources
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -218,7 +218,7 @@ export declare class AgentsClient {
          */
         exportResources: (requestData: thisProto.ExportResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ExportResourcesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/GetModelStatuses
+         * Unary call: /ondewo.nlu.Agents/GetModelStatuses
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -226,7 +226,7 @@ export declare class AgentsClient {
          */
         getModelStatuses: (requestData: thisProto.GetModelStatusesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetModelStatusesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/GetPlatformMapping
+         * Unary call: /ondewo.nlu.Agents/GetPlatformMapping
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -234,7 +234,7 @@ export declare class AgentsClient {
          */
         getPlatformMapping: (requestData: thisProto.GetPlatformMappingRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.PlatformMapping>>;
         /**
-         * Unary RPC for /ondewo.nlu.Agents/SetPlatformMapping
+         * Unary call: /ondewo.nlu.Agents/SetPlatformMapping
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -244,7 +244,7 @@ export declare class AgentsClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.Agents/CreateAgent
+     * Unary call @/ondewo.nlu.Agents/CreateAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -252,7 +252,7 @@ export declare class AgentsClient {
      */
     createAgent(requestData: thisProto.CreateAgentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Agent>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/UpdateAgent
+     * Unary call @/ondewo.nlu.Agents/UpdateAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -260,7 +260,7 @@ export declare class AgentsClient {
      */
     updateAgent(requestData: thisProto.UpdateAgentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Agent>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetAgent
+     * Unary call @/ondewo.nlu.Agents/GetAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -268,7 +268,7 @@ export declare class AgentsClient {
      */
     getAgent(requestData: thisProto.GetAgentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Agent>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/DeleteAgent
+     * Unary call @/ondewo.nlu.Agents/DeleteAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -276,7 +276,7 @@ export declare class AgentsClient {
      */
     deleteAgent(requestData: thisProto.DeleteAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/DeleteAllAgents
+     * Unary call @/ondewo.nlu.Agents/DeleteAllAgents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -284,7 +284,7 @@ export declare class AgentsClient {
      */
     deleteAllAgents(requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListAgents
+     * Unary call @/ondewo.nlu.Agents/ListAgents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -292,7 +292,7 @@ export declare class AgentsClient {
      */
     listAgents(requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListAgentsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListAgentsOfUser
+     * Unary call @/ondewo.nlu.Agents/ListAgentsOfUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -300,7 +300,7 @@ export declare class AgentsClient {
      */
     listAgentsOfUser(requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListAgentsOfUserResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListAllAgents
+     * Unary call @/ondewo.nlu.Agents/ListAllAgents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -308,7 +308,7 @@ export declare class AgentsClient {
      */
     listAllAgents(requestData: thisProto.ListAgentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListAgentsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/AddUserToProject
+     * Unary call @/ondewo.nlu.Agents/AddUserToProject
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -316,7 +316,7 @@ export declare class AgentsClient {
      */
     addUserToProject(requestData: thisProto.AddUserToProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/RemoveUserFromProject
+     * Unary call @/ondewo.nlu.Agents/RemoveUserFromProject
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -324,7 +324,7 @@ export declare class AgentsClient {
      */
     removeUserFromProject(requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListUsersInProject
+     * Unary call @/ondewo.nlu.Agents/ListUsersInProject
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -332,7 +332,7 @@ export declare class AgentsClient {
      */
     listUsersInProject(requestData: thisProto.ListUsersInProjectRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListUsersInProjectResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetPlatformInfo
+     * Unary call @/ondewo.nlu.Agents/GetPlatformInfo
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -340,7 +340,7 @@ export declare class AgentsClient {
      */
     getPlatformInfo(requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.GetPlatformInfoResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListProjectPermissions
+     * Unary call @/ondewo.nlu.Agents/ListProjectPermissions
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -348,7 +348,7 @@ export declare class AgentsClient {
      */
     listProjectPermissions(requestData: thisProto.ListProjectPermissionsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListProjectPermissionsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/TrainAgent
+     * Unary call @/ondewo.nlu.Agents/TrainAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -356,7 +356,7 @@ export declare class AgentsClient {
      */
     trainAgent(requestData: thisProto.TrainAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/BuildCache
+     * Unary call @/ondewo.nlu.Agents/BuildCache
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -364,7 +364,7 @@ export declare class AgentsClient {
      */
     buildCache(requestData: thisProto.BuildCacheRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ExportAgent
+     * Unary call @/ondewo.nlu.Agents/ExportAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -372,7 +372,7 @@ export declare class AgentsClient {
      */
     exportAgent(requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ExportBenchmarkAgent
+     * Unary call @/ondewo.nlu.Agents/ExportBenchmarkAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -380,7 +380,7 @@ export declare class AgentsClient {
      */
     exportBenchmarkAgent(requestData: thisProto.ExportBenchmarkAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ImportAgent
+     * Unary call @/ondewo.nlu.Agents/ImportAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -388,7 +388,7 @@ export declare class AgentsClient {
      */
     importAgent(requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/OptimizeRankingMatch
+     * Unary call @/ondewo.nlu.Agents/OptimizeRankingMatch
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -396,7 +396,7 @@ export declare class AgentsClient {
      */
     optimizeRankingMatch(requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/RestoreAgent
+     * Unary call @/ondewo.nlu.Agents/RestoreAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -404,7 +404,7 @@ export declare class AgentsClient {
      */
     restoreAgent(requestData: thisProto.RestoreAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetAgentStatistics
+     * Unary call @/ondewo.nlu.Agents/GetAgentStatistics
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -412,7 +412,7 @@ export declare class AgentsClient {
      */
     getAgentStatistics(requestData: thisProto.GetAgentStatisticsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetAgentStatisticsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/SetAgentStatus
+     * Unary call @/ondewo.nlu.Agents/SetAgentStatus
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -420,7 +420,7 @@ export declare class AgentsClient {
      */
     setAgentStatus(requestData: thisProto.SetAgentStatusRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Agent>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/SetResources
+     * Unary call @/ondewo.nlu.Agents/SetResources
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -428,7 +428,7 @@ export declare class AgentsClient {
      */
     setResources(requestData: thisProto.SetResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/DeleteResources
+     * Unary call @/ondewo.nlu.Agents/DeleteResources
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -436,7 +436,7 @@ export declare class AgentsClient {
      */
     deleteResources(requestData: thisProto.DeleteResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ExportResources
+     * Unary call @/ondewo.nlu.Agents/ExportResources
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -444,7 +444,7 @@ export declare class AgentsClient {
      */
     exportResources(requestData: thisProto.ExportResourcesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ExportResourcesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetModelStatuses
+     * Unary call @/ondewo.nlu.Agents/GetModelStatuses
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -452,7 +452,7 @@ export declare class AgentsClient {
      */
     getModelStatuses(requestData: thisProto.GetModelStatusesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetModelStatusesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetPlatformMapping
+     * Unary call @/ondewo.nlu.Agents/GetPlatformMapping
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -460,7 +460,7 @@ export declare class AgentsClient {
      */
     getPlatformMapping(requestData: thisProto.GetPlatformMappingRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.PlatformMapping>;
     /**
-     * Unary RPC for /ondewo.nlu.Agents/SetPlatformMapping
+     * Unary call @/ondewo.nlu.Agents/SetPlatformMapping
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -470,4 +470,3 @@ export declare class AgentsClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<AgentsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<AgentsClient>;
 }
-//# sourceMappingURL=agent.pbsc.d.ts.map

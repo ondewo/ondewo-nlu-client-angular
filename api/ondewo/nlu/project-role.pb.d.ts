@@ -574,4 +574,3 @@ export declare module ListProjectRolesResponse {
         nextPageToken?: string;
     }
 }
-//# sourceMappingURL=project-role.pb.d.ts.map

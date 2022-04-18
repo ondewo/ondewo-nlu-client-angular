@@ -16,7 +16,7 @@ export declare class UtilitiesClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.Utilities/ValidateRegex
+         * Unary call: /ondewo.nlu.Utilities/ValidateRegex
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -24,7 +24,7 @@ export declare class UtilitiesClient {
          */
         validateRegex: (requestData: thisProto.ValidateRegexRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ValidateRegexResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Utilities/ValidateEmbeddedRegex
+         * Unary call: /ondewo.nlu.Utilities/ValidateEmbeddedRegex
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -32,7 +32,7 @@ export declare class UtilitiesClient {
          */
         validateEmbeddedRegex: (requestData: thisProto.ValidateEmbeddedRegexRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ValidateEmbeddedRegexResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Utilities/CleanAllIntents
+         * Unary call: /ondewo.nlu.Utilities/CleanAllIntents
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -40,7 +40,7 @@ export declare class UtilitiesClient {
          */
         cleanAllIntents: (requestData: thisProto.CleanAllIntentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.CleanAllIntentsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Utilities/CleanIntent
+         * Unary call: /ondewo.nlu.Utilities/CleanIntent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -48,7 +48,7 @@ export declare class UtilitiesClient {
          */
         cleanIntent: (requestData: thisProto.CleanIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.CleanIntentResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Utilities/CleanAllEntityTypes
+         * Unary call: /ondewo.nlu.Utilities/CleanAllEntityTypes
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -56,7 +56,7 @@ export declare class UtilitiesClient {
          */
         cleanAllEntityTypes: (requestData: thisProto.CleanAllEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.CleanAllEntityTypesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Utilities/CleanEntityType
+         * Unary call: /ondewo.nlu.Utilities/CleanEntityType
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -64,7 +64,7 @@ export declare class UtilitiesClient {
          */
         cleanEntityType: (requestData: thisProto.CleanEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.CleanEntityTypeResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrases
+         * Unary call: /ondewo.nlu.Utilities/AddTrainingPhrases
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -72,7 +72,7 @@ export declare class UtilitiesClient {
          */
         addTrainingPhrases: (requestData: thisProto.AddTrainingPhrasesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.AddTrainingPhrasesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
+         * Unary call: /ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -82,7 +82,7 @@ export declare class UtilitiesClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/ValidateRegex
+     * Unary call @/ondewo.nlu.Utilities/ValidateRegex
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -90,7 +90,7 @@ export declare class UtilitiesClient {
      */
     validateRegex(requestData: thisProto.ValidateRegexRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ValidateRegexResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/ValidateEmbeddedRegex
+     * Unary call @/ondewo.nlu.Utilities/ValidateEmbeddedRegex
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -98,7 +98,7 @@ export declare class UtilitiesClient {
      */
     validateEmbeddedRegex(requestData: thisProto.ValidateEmbeddedRegexRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ValidateEmbeddedRegexResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/CleanAllIntents
+     * Unary call @/ondewo.nlu.Utilities/CleanAllIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -106,7 +106,7 @@ export declare class UtilitiesClient {
      */
     cleanAllIntents(requestData: thisProto.CleanAllIntentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.CleanAllIntentsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/CleanIntent
+     * Unary call @/ondewo.nlu.Utilities/CleanIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -114,7 +114,7 @@ export declare class UtilitiesClient {
      */
     cleanIntent(requestData: thisProto.CleanIntentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.CleanIntentResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/CleanAllEntityTypes
+     * Unary call @/ondewo.nlu.Utilities/CleanAllEntityTypes
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -122,7 +122,7 @@ export declare class UtilitiesClient {
      */
     cleanAllEntityTypes(requestData: thisProto.CleanAllEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.CleanAllEntityTypesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/CleanEntityType
+     * Unary call @/ondewo.nlu.Utilities/CleanEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -130,7 +130,7 @@ export declare class UtilitiesClient {
      */
     cleanEntityType(requestData: thisProto.CleanEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.CleanEntityTypeResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrases
+     * Unary call @/ondewo.nlu.Utilities/AddTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -138,7 +138,7 @@ export declare class UtilitiesClient {
      */
     addTrainingPhrases(requestData: thisProto.AddTrainingPhrasesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.AddTrainingPhrasesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
+     * Unary call @/ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -148,4 +148,3 @@ export declare class UtilitiesClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<UtilitiesClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<UtilitiesClient>;
 }
-//# sourceMappingURL=utility.pbsc.d.ts.map

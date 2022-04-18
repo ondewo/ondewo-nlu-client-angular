@@ -16,7 +16,7 @@ export declare class WebhookClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.Webhook/ResponseRefinement
+         * Unary call: /ondewo.nlu.Webhook/ResponseRefinement
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -24,7 +24,7 @@ export declare class WebhookClient {
          */
         responseRefinement: (requestData: thisProto.WebhookRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.WebhookResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Webhook/SlotFilling
+         * Unary call: /ondewo.nlu.Webhook/SlotFilling
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -32,7 +32,7 @@ export declare class WebhookClient {
          */
         slotFilling: (requestData: thisProto.WebhookRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.WebhookResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Webhook/Ping
+         * Unary call: /ondewo.nlu.Webhook/Ping
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -42,7 +42,7 @@ export declare class WebhookClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.Webhook/ResponseRefinement
+     * Unary call @/ondewo.nlu.Webhook/ResponseRefinement
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -50,7 +50,7 @@ export declare class WebhookClient {
      */
     responseRefinement(requestData: thisProto.WebhookRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.WebhookResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Webhook/SlotFilling
+     * Unary call @/ondewo.nlu.Webhook/SlotFilling
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -58,7 +58,7 @@ export declare class WebhookClient {
      */
     slotFilling(requestData: thisProto.WebhookRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.WebhookResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Webhook/Ping
+     * Unary call @/ondewo.nlu.Webhook/Ping
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -68,4 +68,3 @@ export declare class WebhookClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<WebhookClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<WebhookClient>;
 }
-//# sourceMappingURL=webhook.pbsc.d.ts.map

@@ -3431,6 +3431,213 @@ export declare module IntentTagRequest {
     }
 }
 /**
+ * Message implementation for ondewo.nlu.GetIntentTagsRequest
+ */
+export declare class GetIntentTagsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetIntentTagsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetIntentTagsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetIntentTagsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetIntentTagsRequest, _writer: BinaryWriter): void;
+    private _intentName?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentTagsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetIntentTagsRequest.AsObject>);
+    get intentName(): string | undefined;
+    set intentName(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetIntentTagsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetIntentTagsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetIntentTagsRequest.AsProtobufJSON;
+}
+export declare module GetIntentTagsRequest {
+    /**
+     * Standard JavaScript object representation for GetIntentTagsRequest
+     */
+    interface AsObject {
+        intentName?: string;
+    }
+    /**
+     * Protobuf JSON representation for GetIntentTagsRequest
+     */
+    interface AsProtobufJSON {
+        intentName?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetIntentTagsResponse
+ */
+export declare class GetIntentTagsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetIntentTagsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetIntentTagsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetIntentTagsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetIntentTagsResponse, _writer: BinaryWriter): void;
+    private _intentTags?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentTagsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetIntentTagsResponse.AsObject>);
+    get intentTags(): string[] | undefined;
+    set intentTags(value: string[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetIntentTagsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetIntentTagsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetIntentTagsResponse.AsProtobufJSON;
+}
+export declare module GetIntentTagsResponse {
+    /**
+     * Standard JavaScript object representation for GetIntentTagsResponse
+     */
+    interface AsObject {
+        intentTags?: string[];
+    }
+    /**
+     * Protobuf JSON representation for GetIntentTagsResponse
+     */
+    interface AsProtobufJSON {
+        intentTags?: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetAllIntentTagsRequest
+ */
+export declare class GetAllIntentTagsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetAllIntentTagsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetAllIntentTagsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetAllIntentTagsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetAllIntentTagsRequest, _writer: BinaryWriter): void;
+    private _parent?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAllIntentTagsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetAllIntentTagsRequest.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetAllIntentTagsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetAllIntentTagsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetAllIntentTagsRequest.AsProtobufJSON;
+}
+export declare module GetAllIntentTagsRequest {
+    /**
+     * Standard JavaScript object representation for GetAllIntentTagsRequest
+     */
+    interface AsObject {
+        parent?: string;
+    }
+    /**
+     * Protobuf JSON representation for GetAllIntentTagsRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+    }
+}
+/**
  * Message implementation for ondewo.nlu.BatchUpdateTrainingPhrasesRequest
  */
 export declare class BatchUpdateTrainingPhrasesRequest implements GrpcMessage {
@@ -5869,4 +6076,3 @@ export declare module ListParametersResponse {
         nextPageToken?: string;
     }
 }
-//# sourceMappingURL=intent.pb.d.ts.map

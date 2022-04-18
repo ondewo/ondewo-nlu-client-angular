@@ -2012,4 +2012,3 @@ export declare module EntityValueSorting {
         SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = 3
     }
 }
-//# sourceMappingURL=entity-type.pb.d.ts.map
