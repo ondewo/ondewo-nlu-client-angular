@@ -1050,13 +1050,12 @@ class OperationsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-OperationsClient.ɵfac = function OperationsClient_Factory(t) { return new (t || OperationsClient)(i0.ɵɵinject(GRPC_OPERATIONS_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-OperationsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: OperationsClient, factory: OperationsClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(OperationsClient, [{
+OperationsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: OperationsClient, deps: [{ token: GRPC_OPERATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+OperationsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: OperationsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: OperationsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -1066,8 +1065,7 @@ OperationsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: Operati
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /**
  * Message implementation for google.type.LatLng
@@ -5663,13 +5661,12 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-EntityTypesClient.ɵfac = function EntityTypesClient_Factory(t) { return new (t || EntityTypesClient)(i0.ɵɵinject(GRPC_ENTITY_TYPES_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-EntityTypesClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: EntityTypesClient, factory: EntityTypesClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(EntityTypesClient, [{
+EntityTypesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: EntityTypesClient, deps: [{ token: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+EntityTypesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: EntityTypesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: EntityTypesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -5679,8 +5676,7 @@ EntityTypesClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: Entity
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /**
  * Message implementation for ondewo.nlu.Context
@@ -24183,13 +24179,12 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-SessionsClient.ɵfac = function SessionsClient_Factory(t) { return new (t || SessionsClient)(i0.ɵɵinject(GRPC_SESSIONS_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-SessionsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: SessionsClient, factory: SessionsClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(SessionsClient, [{
+SessionsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: SessionsClient, deps: [{ token: GRPC_SESSIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+SessionsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: SessionsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: SessionsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -24199,8 +24194,7 @@ SessionsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: SessionsC
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /* tslint:disable */
 /**
@@ -24323,13 +24317,12 @@ class WebhookClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-WebhookClient.ɵfac = function WebhookClient_Factory(t) { return new (t || WebhookClient)(i0.ɵɵinject(GRPC_WEBHOOK_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-WebhookClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: WebhookClient, factory: WebhookClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(WebhookClient, [{
+WebhookClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: WebhookClient, deps: [{ token: GRPC_WEBHOOK_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+WebhookClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: WebhookClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: WebhookClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -24339,8 +24332,7 @@ WebhookClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: WebhookCli
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /* tslint:disable */
 /**
@@ -24606,13 +24598,12 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ProjectStatisticsClient.ɵfac = function ProjectStatisticsClient_Factory(t) { return new (t || ProjectStatisticsClient)(i0.ɵɵinject(GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-ProjectStatisticsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: ProjectStatisticsClient, factory: ProjectStatisticsClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(ProjectStatisticsClient, [{
+ProjectStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectStatisticsClient, deps: [{ token: GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ProjectStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectStatisticsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectStatisticsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -24622,8 +24613,7 @@ ProjectStatisticsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: 
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /* tslint:disable */
 /**
@@ -35440,13 +35430,12 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-AgentsClient.ɵfac = function AgentsClient_Factory(t) { return new (t || AgentsClient)(i0.ɵɵinject(GRPC_AGENTS_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-AgentsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: AgentsClient, factory: AgentsClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AgentsClient, [{
+AgentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AgentsClient, deps: [{ token: GRPC_AGENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+AgentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AgentsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AgentsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -35456,8 +35445,7 @@ AgentsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: AgentsClien
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /* tslint:disable */
 /**
@@ -38982,13 +38970,12 @@ class ServerStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ServerStatisticsClient.ɵfac = function ServerStatisticsClient_Factory(t) { return new (t || ServerStatisticsClient)(i0.ɵɵinject(GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-ServerStatisticsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: ServerStatisticsClient, factory: ServerStatisticsClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(ServerStatisticsClient, [{
+ServerStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ServerStatisticsClient, deps: [{ token: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ServerStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ServerStatisticsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ServerStatisticsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -38998,8 +38985,7 @@ ServerStatisticsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: S
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 var Mode;
 (function (Mode) {
@@ -43536,13 +43522,12 @@ class ProjectRolesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ProjectRolesClient.ɵfac = function ProjectRolesClient_Factory(t) { return new (t || ProjectRolesClient)(i0.ɵɵinject(GRPC_PROJECT_ROLES_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-ProjectRolesClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: ProjectRolesClient, factory: ProjectRolesClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(ProjectRolesClient, [{
+ProjectRolesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectRolesClient, deps: [{ token: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ProjectRolesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectRolesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectRolesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -43552,8 +43537,7 @@ ProjectRolesClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: Proje
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /* tslint:disable */
 /**
@@ -44359,13 +44343,12 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-IntentsClient.ɵfac = function IntentsClient_Factory(t) { return new (t || IntentsClient)(i0.ɵɵinject(GRPC_INTENTS_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-IntentsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: IntentsClient, factory: IntentsClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(IntentsClient, [{
+IntentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: IntentsClient, deps: [{ token: GRPC_INTENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+IntentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: IntentsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: IntentsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -44375,8 +44358,7 @@ IntentsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: IntentsCli
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /* tslint:disable */
 /**
@@ -44845,13 +44827,12 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-UsersClient.ɵfac = function UsersClient_Factory(t) { return new (t || UsersClient)(i0.ɵɵinject(GRPC_USERS_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-UsersClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: UsersClient, factory: UsersClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(UsersClient, [{
+UsersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UsersClient, deps: [{ token: GRPC_USERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+UsersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UsersClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UsersClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -44861,8 +44842,7 @@ UsersClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: UsersClient,
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /* tslint:disable */
 /**
@@ -45128,13 +45108,12 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-UtilitiesClient.ɵfac = function UtilitiesClient_Factory(t) { return new (t || UtilitiesClient)(i0.ɵɵinject(GRPC_UTILITIES_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-UtilitiesClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: UtilitiesClient, factory: UtilitiesClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(UtilitiesClient, [{
+UtilitiesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UtilitiesClient, deps: [{ token: GRPC_UTILITIES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+UtilitiesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UtilitiesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UtilitiesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -45144,8 +45123,7 @@ UtilitiesClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: Utilitie
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /* tslint:disable */
 /**
@@ -45344,13 +45322,12 @@ class ContextsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ContextsClient.ɵfac = function ContextsClient_Factory(t) { return new (t || ContextsClient)(i0.ɵɵinject(GRPC_CONTEXTS_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-ContextsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: ContextsClient, factory: ContextsClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(ContextsClient, [{
+ContextsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ContextsClient, deps: [{ token: GRPC_CONTEXTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ContextsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ContextsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ContextsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -45360,8 +45337,7 @@ ContextsClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: ContextsC
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /* tslint:disable */
 /**
@@ -45620,13 +45596,12 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-AiServicesClient.ɵfac = function AiServicesClient_Factory(t) { return new (t || AiServicesClient)(i0.ɵɵinject(GRPC_AI_SERVICES_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-AiServicesClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: AiServicesClient, factory: AiServicesClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(AiServicesClient, [{
+AiServicesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AiServicesClient, deps: [{ token: GRPC_AI_SERVICES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+AiServicesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AiServicesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AiServicesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -45636,8 +45611,7 @@ AiServicesClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: AiServi
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /**
  * Message implementation for ondewo.qa.GetAnswerRequest
@@ -47380,13 +47354,12 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-QAClient.ɵfac = function QAClient_Factory(t) { return new (t || QAClient)(i0.ɵɵinject(GRPC_QA_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
-QAClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: QAClient, factory: QAClient.ɵfac, providedIn: 'any' });
-(function () {
-    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(QAClient, [{
+QAClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: QAClient, deps: [{ token: GRPC_QA_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+QAClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: QAClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: QAClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], function () {
+        }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -47396,8 +47369,7 @@ QAClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: QAClient, facto
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    }, null);
-})();
+    } });
 
 /**
  * Generated bundle index. Do not edit.
