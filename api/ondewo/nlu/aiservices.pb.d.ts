@@ -13,14 +13,10 @@ export declare enum IntentAlgorithms {
     OndewoIntentNamedExactMatch = 2,
     OndewoIntentSimilarityMatch = 3,
     OndewoIntentNamedSimilarityMatch = 4,
-    OndewoIntentFastTextClassifier = 5,
-    OndewoIntentMachineLearningMatch = 6,
     OndewoIntentBertClassifier = 7,
     OndewoIntentMetaClassifier = 8,
-    OndewoIntentSnipsClassifier = 9,
     IntentExitDetector = 10,
     OndewoIntentRankingMatch = 11,
-    OndewoIntentRasaClassifier = 12,
     OndewoWeightedEnsemble = 13,
     OndewoIntentExitDetector = 14,
     OndewoIntentParameterMatch = 15
@@ -1504,7 +1500,6 @@ export declare class DataEnrichmentConfig implements GrpcMessage {
     private _wordNetEnrichment?;
     private _gpt2Enrichment?;
     private _gloveEnrichment?;
-    private _fasttextEnrichment?;
     private _bertEnrichment?;
     private _xlnetEnrichment?;
     /**
@@ -1524,8 +1519,6 @@ export declare class DataEnrichmentConfig implements GrpcMessage {
     set gpt2Enrichment(value: GPT2EnrichmentConfig | undefined);
     get gloveEnrichment(): GloVeEnrichmentConfig | undefined;
     set gloveEnrichment(value: GloVeEnrichmentConfig | undefined);
-    get fasttextEnrichment(): FastTextEnrichmentConfig | undefined;
-    set fasttextEnrichment(value: FastTextEnrichmentConfig | undefined);
     get bertEnrichment(): BertAugEnrichmentConfig | undefined;
     set bertEnrichment(value: BertAugEnrichmentConfig | undefined);
     get xlnetEnrichment(): XLNetAugEnrichmentConfig | undefined;
@@ -1561,7 +1554,6 @@ export declare module DataEnrichmentConfig {
         wordNetEnrichment?: WordNetAugEnrichmentConfig.AsObject;
         gpt2Enrichment?: GPT2EnrichmentConfig.AsObject;
         gloveEnrichment?: GloVeEnrichmentConfig.AsObject;
-        fasttextEnrichment?: FastTextEnrichmentConfig.AsObject;
         bertEnrichment?: BertAugEnrichmentConfig.AsObject;
         xlnetEnrichment?: XLNetAugEnrichmentConfig.AsObject;
     }
@@ -1575,7 +1567,6 @@ export declare module DataEnrichmentConfig {
         wordNetEnrichment?: WordNetAugEnrichmentConfig.AsProtobufJSON | null;
         gpt2Enrichment?: GPT2EnrichmentConfig.AsProtobufJSON | null;
         gloveEnrichment?: GloVeEnrichmentConfig.AsProtobufJSON | null;
-        fasttextEnrichment?: FastTextEnrichmentConfig.AsProtobufJSON | null;
         bertEnrichment?: BertAugEnrichmentConfig.AsProtobufJSON | null;
         xlnetEnrichment?: XLNetAugEnrichmentConfig.AsProtobufJSON | null;
     }
@@ -1731,85 +1722,6 @@ export declare module ThesaurusEnrichmentConfig {
     }
     /**
      * Protobuf JSON representation for ThesaurusEnrichmentConfig
-     */
-    interface AsProtobufJSON {
-        isActive?: boolean;
-        enrichmentFactor?: number;
-        executionOrder?: number;
-    }
-}
-/**
- * Message implementation for ondewo.nlu.FastTextEnrichmentConfig
- */
-export declare class FastTextEnrichmentConfig implements GrpcMessage {
-    static id: string;
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes: ByteSource): FastTextEnrichmentConfig;
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance: FastTextEnrichmentConfig): void;
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance: FastTextEnrichmentConfig, _reader: BinaryReader): void;
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance: FastTextEnrichmentConfig, _writer: BinaryWriter): void;
-    private _isActive?;
-    private _enrichmentFactor?;
-    private _executionOrder?;
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FastTextEnrichmentConfig to deeply clone from
-     */
-    constructor(_value?: RecursivePartial<FastTextEnrichmentConfig.AsObject>);
-    get isActive(): boolean | undefined;
-    set isActive(value: boolean | undefined);
-    get enrichmentFactor(): number | undefined;
-    set enrichmentFactor(value: number | undefined);
-    get executionOrder(): number | undefined;
-    set executionOrder(value: number | undefined);
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary(): any;
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject(): FastTextEnrichmentConfig.AsObject;
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON(): FastTextEnrichmentConfig.AsObject;
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(options?: ToProtobufJSONOptions): FastTextEnrichmentConfig.AsProtobufJSON;
-}
-export declare module FastTextEnrichmentConfig {
-    /**
-     * Standard JavaScript object representation for FastTextEnrichmentConfig
-     */
-    interface AsObject {
-        isActive?: boolean;
-        enrichmentFactor?: number;
-        executionOrder?: number;
-    }
-    /**
-     * Protobuf JSON representation for FastTextEnrichmentConfig
      */
     interface AsProtobufJSON {
         isActive?: boolean;
@@ -2558,4 +2470,3 @@ export declare module ClassifyIntentsResponse {
         contextNames?: string[];
     }
 }
-//# sourceMappingURL=aiservices.pb.d.ts.map

@@ -18,7 +18,7 @@ export declare class IntentsClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.Intents/ListIntents
+         * Unary call: /ondewo.nlu.Intents/ListIntents
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -26,7 +26,7 @@ export declare class IntentsClient {
          */
         listIntents: (requestData: thisProto.ListIntentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListIntentsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/GetIntent
+         * Unary call: /ondewo.nlu.Intents/GetIntent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -34,7 +34,7 @@ export declare class IntentsClient {
          */
         getIntent: (requestData: thisProto.GetIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Intent>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/CreateIntent
+         * Unary call: /ondewo.nlu.Intents/CreateIntent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -42,7 +42,7 @@ export declare class IntentsClient {
          */
         createIntent: (requestData: thisProto.CreateIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Intent>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/UpdateIntent
+         * Unary call: /ondewo.nlu.Intents/UpdateIntent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -50,7 +50,7 @@ export declare class IntentsClient {
          */
         updateIntent: (requestData: thisProto.UpdateIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Intent>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/DeleteIntent
+         * Unary call: /ondewo.nlu.Intents/DeleteIntent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -58,7 +58,7 @@ export declare class IntentsClient {
          */
         deleteIntent: (requestData: thisProto.DeleteIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchUpdateIntents
+         * Unary call: /ondewo.nlu.Intents/BatchUpdateIntents
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -66,7 +66,7 @@ export declare class IntentsClient {
          */
         batchUpdateIntents: (requestData: thisProto.BatchUpdateIntentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning009.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchDeleteIntents
+         * Unary call: /ondewo.nlu.Intents/BatchDeleteIntents
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -74,7 +74,7 @@ export declare class IntentsClient {
          */
         batchDeleteIntents: (requestData: thisProto.BatchDeleteIntentsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning009.Operation>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/TagIntent
+         * Unary call: /ondewo.nlu.Intents/TagIntent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -82,7 +82,7 @@ export declare class IntentsClient {
          */
         tagIntent: (requestData: thisProto.IntentTagRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/DeleteIntentTag
+         * Unary call: /ondewo.nlu.Intents/DeleteIntentTag
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -90,7 +90,23 @@ export declare class IntentsClient {
          */
         deleteIntentTag: (requestData: thisProto.IntentTagRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
+         * Unary call: /ondewo.nlu.Intents/GetIntentTags
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>
+         */
+        getIntentTags: (requestData: thisProto.GetIntentTagsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Intents/GetAllIntentTags
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>
+         */
+        getAllIntentTags: (requestData: thisProto.GetAllIntentTagsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Intents/BatchCreateTrainingPhrases
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -98,7 +114,7 @@ export declare class IntentsClient {
          */
         batchCreateTrainingPhrases: (requestData: thisProto.BatchCreateTrainingPhrasesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchGetTrainingPhrases
+         * Unary call: /ondewo.nlu.Intents/BatchGetTrainingPhrases
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -106,7 +122,7 @@ export declare class IntentsClient {
          */
         batchGetTrainingPhrases: (requestData: thisProto.BatchGetTrainingPhrasesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
+         * Unary call: /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -114,7 +130,7 @@ export declare class IntentsClient {
          */
         batchUpdateTrainingPhrases: (requestData: thisProto.BatchUpdateTrainingPhrasesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
+         * Unary call: /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -122,7 +138,7 @@ export declare class IntentsClient {
          */
         batchDeleteTrainingPhrases: (requestData: thisProto.BatchDeleteTrainingPhrasesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchDeleteTrainingPhrasesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/ListTrainingPhrases
+         * Unary call: /ondewo.nlu.Intents/ListTrainingPhrases
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -130,7 +146,7 @@ export declare class IntentsClient {
          */
         listTrainingPhrases: (requestData: thisProto.ListTrainingPhrasesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListTrainingPhrasesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchCreateResponseMessages
+         * Unary call: /ondewo.nlu.Intents/BatchCreateResponseMessages
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -138,7 +154,7 @@ export declare class IntentsClient {
          */
         batchCreateResponseMessages: (requestData: thisProto.BatchCreateResponseMessagesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchGetResponseMessages
+         * Unary call: /ondewo.nlu.Intents/BatchGetResponseMessages
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -146,7 +162,7 @@ export declare class IntentsClient {
          */
         batchGetResponseMessages: (requestData: thisProto.BatchGetResponseMessagesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchUpdateResponseMessages
+         * Unary call: /ondewo.nlu.Intents/BatchUpdateResponseMessages
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -154,7 +170,7 @@ export declare class IntentsClient {
          */
         batchUpdateResponseMessages: (requestData: thisProto.BatchUpdateResponseMessagesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchDeleteResponseMessages
+         * Unary call: /ondewo.nlu.Intents/BatchDeleteResponseMessages
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -162,7 +178,7 @@ export declare class IntentsClient {
          */
         batchDeleteResponseMessages: (requestData: thisProto.BatchDeleteResponseMessagesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchDeleteResponseMessagesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/ListResponseMessages
+         * Unary call: /ondewo.nlu.Intents/ListResponseMessages
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -170,7 +186,7 @@ export declare class IntentsClient {
          */
         listResponseMessages: (requestData: thisProto.ListResponseMessagesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListResponseMessagesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchCreateParameters
+         * Unary call: /ondewo.nlu.Intents/BatchCreateParameters
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -178,7 +194,7 @@ export declare class IntentsClient {
          */
         batchCreateParameters: (requestData: thisProto.BatchCreateParametersRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchGetParameters
+         * Unary call: /ondewo.nlu.Intents/BatchGetParameters
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -186,7 +202,7 @@ export declare class IntentsClient {
          */
         batchGetParameters: (requestData: thisProto.BatchGetParametersRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchUpdateParameters
+         * Unary call: /ondewo.nlu.Intents/BatchUpdateParameters
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -194,7 +210,7 @@ export declare class IntentsClient {
          */
         batchUpdateParameters: (requestData: thisProto.BatchUpdateParametersRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/BatchDeleteParameters
+         * Unary call: /ondewo.nlu.Intents/BatchDeleteParameters
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -202,7 +218,7 @@ export declare class IntentsClient {
          */
         batchDeleteParameters: (requestData: thisProto.BatchDeleteParametersRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchDeleteParametersResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Intents/ListParameters
+         * Unary call: /ondewo.nlu.Intents/ListParameters
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -212,7 +228,7 @@ export declare class IntentsClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.Intents/ListIntents
+     * Unary call @/ondewo.nlu.Intents/ListIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -220,7 +236,7 @@ export declare class IntentsClient {
      */
     listIntents(requestData: thisProto.ListIntentsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListIntentsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/GetIntent
+     * Unary call @/ondewo.nlu.Intents/GetIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -228,7 +244,7 @@ export declare class IntentsClient {
      */
     getIntent(requestData: thisProto.GetIntentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Intent>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/CreateIntent
+     * Unary call @/ondewo.nlu.Intents/CreateIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -236,7 +252,7 @@ export declare class IntentsClient {
      */
     createIntent(requestData: thisProto.CreateIntentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Intent>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/UpdateIntent
+     * Unary call @/ondewo.nlu.Intents/UpdateIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -244,7 +260,7 @@ export declare class IntentsClient {
      */
     updateIntent(requestData: thisProto.UpdateIntentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Intent>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/DeleteIntent
+     * Unary call @/ondewo.nlu.Intents/DeleteIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -252,7 +268,7 @@ export declare class IntentsClient {
      */
     deleteIntent(requestData: thisProto.DeleteIntentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchUpdateIntents
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -260,7 +276,7 @@ export declare class IntentsClient {
      */
     batchUpdateIntents(requestData: thisProto.BatchUpdateIntentsRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning009.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchDeleteIntents
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -268,7 +284,7 @@ export declare class IntentsClient {
      */
     batchDeleteIntents(requestData: thisProto.BatchDeleteIntentsRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning009.Operation>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/TagIntent
+     * Unary call @/ondewo.nlu.Intents/TagIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -276,7 +292,7 @@ export declare class IntentsClient {
      */
     tagIntent(requestData: thisProto.IntentTagRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/DeleteIntentTag
+     * Unary call @/ondewo.nlu.Intents/DeleteIntentTag
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -284,7 +300,23 @@ export declare class IntentsClient {
      */
     deleteIntentTag(requestData: thisProto.IntentTagRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/GetIntentTags
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetIntentTagsResponse>
+     */
+    getIntentTags(requestData: thisProto.GetIntentTagsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetIntentTagsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Intents/GetAllIntentTags
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetIntentTagsResponse>
+     */
+    getAllIntentTags(requestData: thisProto.GetAllIntentTagsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetIntentTagsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchCreateTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -292,7 +324,7 @@ export declare class IntentsClient {
      */
     batchCreateTrainingPhrases(requestData: thisProto.BatchCreateTrainingPhrasesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchTrainingPhrasesStatusResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchGetTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/BatchGetTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -300,7 +332,7 @@ export declare class IntentsClient {
      */
     batchGetTrainingPhrases(requestData: thisProto.BatchGetTrainingPhrasesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchTrainingPhrasesStatusResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -308,7 +340,7 @@ export declare class IntentsClient {
      */
     batchUpdateTrainingPhrases(requestData: thisProto.BatchUpdateTrainingPhrasesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchTrainingPhrasesStatusResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -316,7 +348,7 @@ export declare class IntentsClient {
      */
     batchDeleteTrainingPhrases(requestData: thisProto.BatchDeleteTrainingPhrasesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchDeleteTrainingPhrasesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/ListTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/ListTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -324,7 +356,7 @@ export declare class IntentsClient {
      */
     listTrainingPhrases(requestData: thisProto.ListTrainingPhrasesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListTrainingPhrasesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchCreateResponseMessages
+     * Unary call @/ondewo.nlu.Intents/BatchCreateResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -332,7 +364,7 @@ export declare class IntentsClient {
      */
     batchCreateResponseMessages(requestData: thisProto.BatchCreateResponseMessagesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchResponseMessagesStatusResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchGetResponseMessages
+     * Unary call @/ondewo.nlu.Intents/BatchGetResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -340,7 +372,7 @@ export declare class IntentsClient {
      */
     batchGetResponseMessages(requestData: thisProto.BatchGetResponseMessagesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchResponseMessagesStatusResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchUpdateResponseMessages
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -348,7 +380,7 @@ export declare class IntentsClient {
      */
     batchUpdateResponseMessages(requestData: thisProto.BatchUpdateResponseMessagesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchResponseMessagesStatusResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchDeleteResponseMessages
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -356,7 +388,7 @@ export declare class IntentsClient {
      */
     batchDeleteResponseMessages(requestData: thisProto.BatchDeleteResponseMessagesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchDeleteResponseMessagesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/ListResponseMessages
+     * Unary call @/ondewo.nlu.Intents/ListResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -364,7 +396,7 @@ export declare class IntentsClient {
      */
     listResponseMessages(requestData: thisProto.ListResponseMessagesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListResponseMessagesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchCreateParameters
+     * Unary call @/ondewo.nlu.Intents/BatchCreateParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -372,7 +404,7 @@ export declare class IntentsClient {
      */
     batchCreateParameters(requestData: thisProto.BatchCreateParametersRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchParametersStatusResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchGetParameters
+     * Unary call @/ondewo.nlu.Intents/BatchGetParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -380,7 +412,7 @@ export declare class IntentsClient {
      */
     batchGetParameters(requestData: thisProto.BatchGetParametersRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchParametersStatusResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchUpdateParameters
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -388,7 +420,7 @@ export declare class IntentsClient {
      */
     batchUpdateParameters(requestData: thisProto.BatchUpdateParametersRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchParametersStatusResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchDeleteParameters
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -396,7 +428,7 @@ export declare class IntentsClient {
      */
     batchDeleteParameters(requestData: thisProto.BatchDeleteParametersRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchDeleteParametersResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Intents/ListParameters
+     * Unary call @/ondewo.nlu.Intents/ListParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -406,4 +438,3 @@ export declare class IntentsClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<IntentsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<IntentsClient>;
 }
-//# sourceMappingURL=intent.pbsc.d.ts.map

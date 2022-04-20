@@ -17,7 +17,7 @@ export declare class UsersClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.Users/CreateUser
+         * Unary call: /ondewo.nlu.Users/CreateUser
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -25,7 +25,7 @@ export declare class UsersClient {
          */
         createUser: (requestData: thisProto.CreateUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.User>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/GetUser
+         * Unary call: /ondewo.nlu.Users/GetUser
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -33,7 +33,7 @@ export declare class UsersClient {
          */
         getUser: (requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.User>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/GetUserInfo
+         * Unary call: /ondewo.nlu.Users/GetUserInfo
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -41,7 +41,7 @@ export declare class UsersClient {
          */
         getUserInfo: (requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.UserInfo>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/DeleteUser
+         * Unary call: /ondewo.nlu.Users/DeleteUser
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -49,7 +49,7 @@ export declare class UsersClient {
          */
         deleteUser: (requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/UpdateUser
+         * Unary call: /ondewo.nlu.Users/UpdateUser
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -57,7 +57,7 @@ export declare class UsersClient {
          */
         updateUser: (requestData: thisProto.UpdateUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.User>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/ListUsers
+         * Unary call: /ondewo.nlu.Users/ListUsers
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -65,7 +65,7 @@ export declare class UsersClient {
          */
         listUsers: (requestData: thisProto.ListUsersRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListUsersResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/ListUserInfos
+         * Unary call: /ondewo.nlu.Users/ListUserInfos
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -73,7 +73,7 @@ export declare class UsersClient {
          */
         listUserInfos: (requestData: thisProto.ListUsersRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListUserInfosResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/CreateServerRole
+         * Unary call: /ondewo.nlu.Users/CreateServerRole
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -81,7 +81,7 @@ export declare class UsersClient {
          */
         createServerRole: (requestData: thisProto.CreateServerRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ServerRole>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/GetServerRole
+         * Unary call: /ondewo.nlu.Users/GetServerRole
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -89,7 +89,7 @@ export declare class UsersClient {
          */
         getServerRole: (requestData: thisProto.GetServerRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ServerRole>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/DeleteServerRole
+         * Unary call: /ondewo.nlu.Users/DeleteServerRole
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -97,7 +97,7 @@ export declare class UsersClient {
          */
         deleteServerRole: (requestData: thisProto.DeleteServerRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/UpdateServerRole
+         * Unary call: /ondewo.nlu.Users/UpdateServerRole
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -105,7 +105,7 @@ export declare class UsersClient {
          */
         updateServerRole: (requestData: thisProto.UpdateServerRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ServerRole>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/ListServerRoles
+         * Unary call: /ondewo.nlu.Users/ListServerRoles
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -113,7 +113,7 @@ export declare class UsersClient {
          */
         listServerRoles: (requestData: thisProto.ListServerRolesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListServerRolesResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/ListServerPermissions
+         * Unary call: /ondewo.nlu.Users/ListServerPermissions
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -121,7 +121,7 @@ export declare class UsersClient {
          */
         listServerPermissions: (requestData: thisProto.ListServerPermissionsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListServerPermissionsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/Login
+         * Unary call: /ondewo.nlu.Users/Login
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -129,7 +129,7 @@ export declare class UsersClient {
          */
         login: (requestData: thisProto.LoginRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.LoginResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Users/CheckLogin
+         * Unary call: /ondewo.nlu.Users/CheckLogin
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -139,7 +139,7 @@ export declare class UsersClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.Users/CreateUser
+     * Unary call @/ondewo.nlu.Users/CreateUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -147,7 +147,7 @@ export declare class UsersClient {
      */
     createUser(requestData: thisProto.CreateUserRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.User>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/GetUser
+     * Unary call @/ondewo.nlu.Users/GetUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -155,7 +155,7 @@ export declare class UsersClient {
      */
     getUser(requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.User>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/GetUserInfo
+     * Unary call @/ondewo.nlu.Users/GetUserInfo
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -163,7 +163,7 @@ export declare class UsersClient {
      */
     getUserInfo(requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.UserInfo>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/DeleteUser
+     * Unary call @/ondewo.nlu.Users/DeleteUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -171,7 +171,7 @@ export declare class UsersClient {
      */
     deleteUser(requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/UpdateUser
+     * Unary call @/ondewo.nlu.Users/UpdateUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -179,7 +179,7 @@ export declare class UsersClient {
      */
     updateUser(requestData: thisProto.UpdateUserRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.User>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/ListUsers
+     * Unary call @/ondewo.nlu.Users/ListUsers
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -187,7 +187,7 @@ export declare class UsersClient {
      */
     listUsers(requestData: thisProto.ListUsersRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListUsersResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/ListUserInfos
+     * Unary call @/ondewo.nlu.Users/ListUserInfos
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -195,7 +195,7 @@ export declare class UsersClient {
      */
     listUserInfos(requestData: thisProto.ListUsersRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListUserInfosResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/CreateServerRole
+     * Unary call @/ondewo.nlu.Users/CreateServerRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -203,7 +203,7 @@ export declare class UsersClient {
      */
     createServerRole(requestData: thisProto.CreateServerRoleRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ServerRole>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/GetServerRole
+     * Unary call @/ondewo.nlu.Users/GetServerRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -211,7 +211,7 @@ export declare class UsersClient {
      */
     getServerRole(requestData: thisProto.GetServerRoleRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ServerRole>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/DeleteServerRole
+     * Unary call @/ondewo.nlu.Users/DeleteServerRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -219,7 +219,7 @@ export declare class UsersClient {
      */
     deleteServerRole(requestData: thisProto.DeleteServerRoleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/UpdateServerRole
+     * Unary call @/ondewo.nlu.Users/UpdateServerRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -227,7 +227,7 @@ export declare class UsersClient {
      */
     updateServerRole(requestData: thisProto.UpdateServerRoleRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ServerRole>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/ListServerRoles
+     * Unary call @/ondewo.nlu.Users/ListServerRoles
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -235,7 +235,7 @@ export declare class UsersClient {
      */
     listServerRoles(requestData: thisProto.ListServerRolesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListServerRolesResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/ListServerPermissions
+     * Unary call @/ondewo.nlu.Users/ListServerPermissions
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -243,7 +243,7 @@ export declare class UsersClient {
      */
     listServerPermissions(requestData: thisProto.ListServerPermissionsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListServerPermissionsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/Login
+     * Unary call @/ondewo.nlu.Users/Login
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -251,7 +251,7 @@ export declare class UsersClient {
      */
     login(requestData: thisProto.LoginRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.LoginResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Users/CheckLogin
+     * Unary call @/ondewo.nlu.Users/CheckLogin
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -261,4 +261,3 @@ export declare class UsersClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<UsersClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<UsersClient>;
 }
-//# sourceMappingURL=user.pbsc.d.ts.map

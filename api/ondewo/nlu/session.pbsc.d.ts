@@ -17,7 +17,7 @@ export declare class SessionsClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/DetectIntent
+         * Unary call: /ondewo.nlu.Sessions/DetectIntent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -25,15 +25,15 @@ export declare class SessionsClient {
          */
         detectIntent: (requestData: thisProto.DetectIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.DetectIntentResponse>>;
         /**
-         * Server streaming RPC for /ondewo.nlu.Sessions/StreamingDetectIntent
+         * Bidirectional streaming: /ondewo.nlu.Sessions/StreamingDetectIntent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<thisProto.StreamingDetectIntentResponse>>
          */
-        streamingDetectIntent: (requestData: thisProto.StreamingDetectIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.StreamingDetectIntentResponse>>;
+        streamingDetectIntent: (requestData: Observable<thisProto.StreamingDetectIntentRequest>, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.StreamingDetectIntentResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/ListSessions
+         * Unary call: /ondewo.nlu.Sessions/ListSessions
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -41,7 +41,7 @@ export declare class SessionsClient {
          */
         listSessions: (requestData: thisProto.ListSessionsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListSessionsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/GetSession
+         * Unary call: /ondewo.nlu.Sessions/GetSession
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -49,7 +49,7 @@ export declare class SessionsClient {
          */
         getSession: (requestData: thisProto.GetSessionRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/CreateSession
+         * Unary call: /ondewo.nlu.Sessions/CreateSession
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -57,7 +57,7 @@ export declare class SessionsClient {
          */
         createSession: (requestData: thisProto.CreateSessionRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/TrackSessionStep
+         * Unary call: /ondewo.nlu.Sessions/TrackSessionStep
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -65,7 +65,7 @@ export declare class SessionsClient {
          */
         trackSessionStep: (requestData: thisProto.TrackSessionStepRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/DeleteSession
+         * Unary call: /ondewo.nlu.Sessions/DeleteSession
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -73,7 +73,7 @@ export declare class SessionsClient {
          */
         deleteSession: (requestData: thisProto.DeleteSessionRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/ListSessionLabels
+         * Unary call: /ondewo.nlu.Sessions/ListSessionLabels
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -81,7 +81,7 @@ export declare class SessionsClient {
          */
         listSessionLabels: (requestData: thisProto.ListSessionLabelsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListSessionLabelsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/AddSessionLabels
+         * Unary call: /ondewo.nlu.Sessions/AddSessionLabels
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -89,7 +89,7 @@ export declare class SessionsClient {
          */
         addSessionLabels: (requestData: thisProto.AddSessionLabelsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/RemoveSessionLabels
+         * Unary call: /ondewo.nlu.Sessions/RemoveSessionLabels
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -97,7 +97,7 @@ export declare class SessionsClient {
          */
         removeSessionLabels: (requestData: thisProto.RemoveSessionLabelsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/ListSessionReviews
+         * Unary call: /ondewo.nlu.Sessions/ListSessionReviews
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -105,7 +105,7 @@ export declare class SessionsClient {
          */
         listSessionReviews: (requestData: thisProto.ListSessionReviewsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListSessionReviewsResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/GetSessionReview
+         * Unary call: /ondewo.nlu.Sessions/GetSessionReview
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -113,7 +113,7 @@ export declare class SessionsClient {
          */
         getSessionReview: (requestData: thisProto.GetSessionReviewRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.SessionReview>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/GetLatestSessionReview
+         * Unary call: /ondewo.nlu.Sessions/GetLatestSessionReview
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -121,7 +121,7 @@ export declare class SessionsClient {
          */
         getLatestSessionReview: (requestData: thisProto.GetLatestSessionReviewRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.SessionReview>>;
         /**
-         * Unary RPC for /ondewo.nlu.Sessions/CreateSessionReview
+         * Unary call: /ondewo.nlu.Sessions/CreateSessionReview
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -131,7 +131,7 @@ export declare class SessionsClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/DetectIntent
+     * Unary call @/ondewo.nlu.Sessions/DetectIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -139,15 +139,15 @@ export declare class SessionsClient {
      */
     detectIntent(requestData: thisProto.DetectIntentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.DetectIntentResponse>;
     /**
-     * Server streaming RPC for /ondewo.nlu.Sessions/StreamingDetectIntent
+     * Bidirectional streaming @/ondewo.nlu.Sessions/StreamingDetectIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
      * @returns Observable<thisProto.StreamingDetectIntentResponse>
      */
-    streamingDetectIntent(requestData: thisProto.StreamingDetectIntentRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.StreamingDetectIntentResponse>;
+    streamingDetectIntent(requestData: Observable<thisProto.StreamingDetectIntentRequest>, requestMetadata?: GrpcMetadata): Observable<thisProto.StreamingDetectIntentResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/ListSessions
+     * Unary call @/ondewo.nlu.Sessions/ListSessions
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -155,7 +155,7 @@ export declare class SessionsClient {
      */
     listSessions(requestData: thisProto.ListSessionsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListSessionsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/GetSession
+     * Unary call @/ondewo.nlu.Sessions/GetSession
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -163,7 +163,7 @@ export declare class SessionsClient {
      */
     getSession(requestData: thisProto.GetSessionRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/CreateSession
+     * Unary call @/ondewo.nlu.Sessions/CreateSession
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -171,7 +171,7 @@ export declare class SessionsClient {
      */
     createSession(requestData: thisProto.CreateSessionRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/TrackSessionStep
+     * Unary call @/ondewo.nlu.Sessions/TrackSessionStep
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -179,7 +179,7 @@ export declare class SessionsClient {
      */
     trackSessionStep(requestData: thisProto.TrackSessionStepRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/DeleteSession
+     * Unary call @/ondewo.nlu.Sessions/DeleteSession
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -187,7 +187,7 @@ export declare class SessionsClient {
      */
     deleteSession(requestData: thisProto.DeleteSessionRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/ListSessionLabels
+     * Unary call @/ondewo.nlu.Sessions/ListSessionLabels
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -195,7 +195,7 @@ export declare class SessionsClient {
      */
     listSessionLabels(requestData: thisProto.ListSessionLabelsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListSessionLabelsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/AddSessionLabels
+     * Unary call @/ondewo.nlu.Sessions/AddSessionLabels
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -203,7 +203,7 @@ export declare class SessionsClient {
      */
     addSessionLabels(requestData: thisProto.AddSessionLabelsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/RemoveSessionLabels
+     * Unary call @/ondewo.nlu.Sessions/RemoveSessionLabels
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -211,7 +211,7 @@ export declare class SessionsClient {
      */
     removeSessionLabels(requestData: thisProto.RemoveSessionLabelsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/ListSessionReviews
+     * Unary call @/ondewo.nlu.Sessions/ListSessionReviews
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -219,7 +219,7 @@ export declare class SessionsClient {
      */
     listSessionReviews(requestData: thisProto.ListSessionReviewsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListSessionReviewsResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/GetSessionReview
+     * Unary call @/ondewo.nlu.Sessions/GetSessionReview
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -227,7 +227,7 @@ export declare class SessionsClient {
      */
     getSessionReview(requestData: thisProto.GetSessionReviewRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.SessionReview>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/GetLatestSessionReview
+     * Unary call @/ondewo.nlu.Sessions/GetLatestSessionReview
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -235,7 +235,7 @@ export declare class SessionsClient {
      */
     getLatestSessionReview(requestData: thisProto.GetLatestSessionReviewRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.SessionReview>;
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/CreateSessionReview
+     * Unary call @/ondewo.nlu.Sessions/CreateSessionReview
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -245,4 +245,3 @@ export declare class SessionsClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<SessionsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<SessionsClient>;
 }
-//# sourceMappingURL=session.pbsc.d.ts.map

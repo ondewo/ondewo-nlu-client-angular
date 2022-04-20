@@ -17,7 +17,7 @@ export declare class OperationsClient {
      */
     $raw: {
         /**
-         * Unary RPC for /google.longrunning.Operations/ListOperations
+         * Unary call: /google.longrunning.Operations/ListOperations
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -25,7 +25,7 @@ export declare class OperationsClient {
          */
         listOperations: (requestData: thisProto.ListOperationsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListOperationsResponse>>;
         /**
-         * Unary RPC for /google.longrunning.Operations/GetOperation
+         * Unary call: /google.longrunning.Operations/GetOperation
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -33,7 +33,7 @@ export declare class OperationsClient {
          */
         getOperation: (requestData: thisProto.GetOperationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Operation>>;
         /**
-         * Unary RPC for /google.longrunning.Operations/DeleteOperation
+         * Unary call: /google.longrunning.Operations/DeleteOperation
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -41,7 +41,7 @@ export declare class OperationsClient {
          */
         deleteOperation: (requestData: thisProto.DeleteOperationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /google.longrunning.Operations/CancelOperation
+         * Unary call: /google.longrunning.Operations/CancelOperation
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -51,7 +51,7 @@ export declare class OperationsClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /google.longrunning.Operations/ListOperations
+     * Unary call @/google.longrunning.Operations/ListOperations
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -59,7 +59,7 @@ export declare class OperationsClient {
      */
     listOperations(requestData: thisProto.ListOperationsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListOperationsResponse>;
     /**
-     * Unary RPC for /google.longrunning.Operations/GetOperation
+     * Unary call @/google.longrunning.Operations/GetOperation
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -67,7 +67,7 @@ export declare class OperationsClient {
      */
     getOperation(requestData: thisProto.GetOperationRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Operation>;
     /**
-     * Unary RPC for /google.longrunning.Operations/DeleteOperation
+     * Unary call @/google.longrunning.Operations/DeleteOperation
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -75,7 +75,7 @@ export declare class OperationsClient {
      */
     deleteOperation(requestData: thisProto.DeleteOperationRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /google.longrunning.Operations/CancelOperation
+     * Unary call @/google.longrunning.Operations/CancelOperation
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -85,4 +85,3 @@ export declare class OperationsClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<OperationsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<OperationsClient>;
 }
-//# sourceMappingURL=operations.pbsc.d.ts.map

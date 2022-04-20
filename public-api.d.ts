@@ -46,4 +46,3 @@ export * from './api/ondewo/nlu/aiservices.pbsc';
 export * from './api/ondewo/qa/qa.pb';
 export * from './api/ondewo/qa/qa.pbconf';
 export * from './api/ondewo/qa/qa.pbsc';
-//# sourceMappingURL=public-api.d.ts.map

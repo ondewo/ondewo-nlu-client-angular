@@ -18,7 +18,7 @@ export declare class ServerStatisticsClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.ServerStatistics/GetProjectCount
+         * Unary call: /ondewo.nlu.ServerStatistics/GetProjectCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -26,7 +26,7 @@ export declare class ServerStatisticsClient {
          */
         getProjectCount: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserProjectCount
+         * Unary call: /ondewo.nlu.ServerStatistics/GetUserProjectCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -34,7 +34,7 @@ export declare class ServerStatisticsClient {
          */
         getUserProjectCount: (requestData: thisProto.GetUserProjectCountRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu004.StatResponse>>;
         /**
-         * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserCount
+         * Unary call: /ondewo.nlu.ServerStatistics/GetUserCount
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -44,7 +44,7 @@ export declare class ServerStatisticsClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.ServerStatistics/GetProjectCount
+     * Unary call @/ondewo.nlu.ServerStatistics/GetProjectCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -52,7 +52,7 @@ export declare class ServerStatisticsClient {
      */
     getProjectCount(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserProjectCount
+     * Unary call @/ondewo.nlu.ServerStatistics/GetUserProjectCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -60,7 +60,7 @@ export declare class ServerStatisticsClient {
      */
     getUserProjectCount(requestData: thisProto.GetUserProjectCountRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu004.StatResponse>;
     /**
-     * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserCount
+     * Unary call @/ondewo.nlu.ServerStatistics/GetUserCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -70,4 +70,3 @@ export declare class ServerStatisticsClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<ServerStatisticsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<ServerStatisticsClient>;
 }
-//# sourceMappingURL=server-statistics.pbsc.d.ts.map

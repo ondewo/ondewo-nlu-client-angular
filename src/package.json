@@ -1,8 +1,18 @@
 {
   "name": "@ondewo/nlu-client-angular",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "ONDEWO Natural Language Understanding (NLU) Platfrom client library for Angular",
-  "keywords": ["ondewo", "nlu", "api", "client", "ngx-grpc", "grpc"],
+  "author": "ONDEWO GmbH <office@ondewo.com>",
+  "homepage": "https://ondewo.com/",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ondewo",
+    "nlu",
+    "api",
+    "client",
+    "ngx-grpc",
+    "grpc"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run prebuild && npm run generate && npm run postbuild",
@@ -14,14 +24,11 @@
     "publish-npm": "npm publish ../npm --access public",
     "test-in-ondewo-aim": "npm run build && rm -rf ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/* && cp ../npm/* ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/. -R"
   },
-  "author": "ONDEWO GmbH",
-  "homepage": "https://ondewo.com",
-  "license": "Apache-2.0",
   "peerDependencies": {
-    "@angular/common": ">=8.0.0",
-    "@angular/core": ">=8.0.0",
-    "@ngx-grpc/common": "^2.1.0",
-    "@ngx-grpc/core": "^2.1.0"
+    "@angular/common": ">=13.0.0",
+    "@angular/core": ">=13.0.0",
+    "@ngx-grpc/common": ">=3.0.0",
+    "@ngx-grpc/core": ">=3.0.0"
   },
   "repository": {
     "type": "git",

@@ -927,7 +927,7 @@ class OperationsClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /google.longrunning.Operations/ListOperations
+             * Unary call: /google.longrunning.Operations/ListOperations
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -945,7 +945,7 @@ class OperationsClient {
                 });
             },
             /**
-             * Unary RPC for /google.longrunning.Operations/GetOperation
+             * Unary call: /google.longrunning.Operations/GetOperation
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -963,7 +963,7 @@ class OperationsClient {
                 });
             },
             /**
-             * Unary RPC for /google.longrunning.Operations/DeleteOperation
+             * Unary call: /google.longrunning.Operations/DeleteOperation
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -981,7 +981,7 @@ class OperationsClient {
                 });
             },
             /**
-             * Unary RPC for /google.longrunning.Operations/CancelOperation
+             * Unary call: /google.longrunning.Operations/CancelOperation
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -1002,7 +1002,7 @@ class OperationsClient {
         this.client = clientFactory.createClient('google.longrunning.Operations', settings);
     }
     /**
-     * Unary RPC for /google.longrunning.Operations/ListOperations
+     * Unary call @/google.longrunning.Operations/ListOperations
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -1014,7 +1014,7 @@ class OperationsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /google.longrunning.Operations/GetOperation
+     * Unary call @/google.longrunning.Operations/GetOperation
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -1026,7 +1026,7 @@ class OperationsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /google.longrunning.Operations/DeleteOperation
+     * Unary call @/google.longrunning.Operations/DeleteOperation
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -1038,7 +1038,7 @@ class OperationsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /google.longrunning.Operations/CancelOperation
+     * Unary call @/google.longrunning.Operations/CancelOperation
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -1050,9 +1050,9 @@ class OperationsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-OperationsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: OperationsClient, deps: [{ token: GRPC_OPERATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-OperationsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: OperationsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: OperationsClient, decorators: [{
+OperationsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: OperationsClient, deps: [{ token: GRPC_OPERATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+OperationsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: OperationsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: OperationsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -5298,7 +5298,7 @@ class EntityTypesClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/ListEntityTypes
+             * Unary call: /ondewo.nlu.EntityTypes/ListEntityTypes
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5316,7 +5316,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/GetEntityType
+             * Unary call: /ondewo.nlu.EntityTypes/GetEntityType
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5334,7 +5334,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/CreateEntityType
+             * Unary call: /ondewo.nlu.EntityTypes/CreateEntityType
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5352,7 +5352,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/UpdateEntityType
+             * Unary call: /ondewo.nlu.EntityTypes/UpdateEntityType
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5370,7 +5370,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/DeleteEntityType
+             * Unary call: /ondewo.nlu.EntityTypes/DeleteEntityType
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5388,7 +5388,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
+             * Unary call: /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5406,7 +5406,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
+             * Unary call: /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5424,7 +5424,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/BatchCreateEntities
+             * Unary call: /ondewo.nlu.EntityTypes/BatchCreateEntities
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5442,7 +5442,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntities
+             * Unary call: /ondewo.nlu.EntityTypes/BatchUpdateEntities
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5460,7 +5460,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/BatchGetEntities
+             * Unary call: /ondewo.nlu.EntityTypes/BatchGetEntities
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5478,7 +5478,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntities
+             * Unary call: /ondewo.nlu.EntityTypes/BatchDeleteEntities
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5496,7 +5496,7 @@ class EntityTypesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.EntityTypes/ListEntities
+             * Unary call: /ondewo.nlu.EntityTypes/ListEntities
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5517,7 +5517,7 @@ class EntityTypesClient {
         this.client = clientFactory.createClient('ondewo.nlu.EntityTypes', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/ListEntityTypes
+     * Unary call @/ondewo.nlu.EntityTypes/ListEntityTypes
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5529,7 +5529,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/GetEntityType
+     * Unary call @/ondewo.nlu.EntityTypes/GetEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5541,7 +5541,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/CreateEntityType
+     * Unary call @/ondewo.nlu.EntityTypes/CreateEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5553,7 +5553,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/UpdateEntityType
+     * Unary call @/ondewo.nlu.EntityTypes/UpdateEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5565,7 +5565,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/DeleteEntityType
+     * Unary call @/ondewo.nlu.EntityTypes/DeleteEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5577,7 +5577,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
+     * Unary call @/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5589,7 +5589,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
+     * Unary call @/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5601,7 +5601,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchCreateEntities
+     * Unary call @/ondewo.nlu.EntityTypes/BatchCreateEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5613,7 +5613,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchUpdateEntities
+     * Unary call @/ondewo.nlu.EntityTypes/BatchUpdateEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5625,7 +5625,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchGetEntities
+     * Unary call @/ondewo.nlu.EntityTypes/BatchGetEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5637,7 +5637,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/BatchDeleteEntities
+     * Unary call @/ondewo.nlu.EntityTypes/BatchDeleteEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5649,7 +5649,7 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.EntityTypes/ListEntities
+     * Unary call @/ondewo.nlu.EntityTypes/ListEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5661,9 +5661,9 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-EntityTypesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: EntityTypesClient, deps: [{ token: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-EntityTypesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: EntityTypesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: EntityTypesClient, decorators: [{
+EntityTypesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: EntityTypesClient, deps: [{ token: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+EntityTypesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: EntityTypesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: EntityTypesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -13153,6 +13153,309 @@ class IntentTagRequest {
     }
 }
 IntentTagRequest.id = 'ondewo.nlu.IntentTagRequest';
+/**
+ * Message implementation for ondewo.nlu.GetIntentTagsRequest
+ */
+class GetIntentTagsRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentTagsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentName = _value.intentName;
+        GetIntentTagsRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetIntentTagsRequest();
+        GetIntentTagsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.intentName = _instance.intentName || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.intentName = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetIntentTagsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.intentName) {
+            _writer.writeString(1, _instance.intentName);
+        }
+    }
+    get intentName() {
+        return this._intentName;
+    }
+    set intentName(value) {
+        this._intentName = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetIntentTagsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            intentName: this.intentName
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            intentName: this.intentName
+        };
+    }
+}
+GetIntentTagsRequest.id = 'ondewo.nlu.GetIntentTagsRequest';
+/**
+ * Message implementation for ondewo.nlu.GetIntentTagsResponse
+ */
+class GetIntentTagsResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentTagsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentTags = (_value.intentTags || []).slice();
+        GetIntentTagsResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetIntentTagsResponse();
+        GetIntentTagsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.intentTags = _instance.intentTags || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    (_instance.intentTags = _instance.intentTags || []).push(_reader.readString());
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetIntentTagsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.intentTags && _instance.intentTags.length) {
+            _writer.writeRepeatedString(1, _instance.intentTags);
+        }
+    }
+    get intentTags() {
+        return this._intentTags;
+    }
+    set intentTags(value) {
+        this._intentTags = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetIntentTagsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            intentTags: (this.intentTags || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            intentTags: (this.intentTags || []).slice()
+        };
+    }
+}
+GetIntentTagsResponse.id = 'ondewo.nlu.GetIntentTagsResponse';
+/**
+ * Message implementation for ondewo.nlu.GetAllIntentTagsRequest
+ */
+class GetAllIntentTagsRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAllIntentTagsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        GetAllIntentTagsRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetAllIntentTagsRequest();
+        GetAllIntentTagsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.parent = _instance.parent || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.parent = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetAllIntentTagsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetAllIntentTagsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            parent: this.parent
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            parent: this.parent
+        };
+    }
+}
+GetAllIntentTagsRequest.id = 'ondewo.nlu.GetAllIntentTagsRequest';
 /**
  * Message implementation for ondewo.nlu.BatchUpdateTrainingPhrasesRequest
  */
@@ -23453,7 +23756,7 @@ class SessionsClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/DetectIntent
+             * Unary call: /ondewo.nlu.Sessions/DetectIntent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23471,7 +23774,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Server streaming RPC for /ondewo.nlu.Sessions/StreamingDetectIntent
+             * Bidirectional streaming: /ondewo.nlu.Sessions/StreamingDetectIntent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23479,7 +23782,7 @@ class SessionsClient {
              */
             streamingDetectIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
-                    type: GrpcCallType.serverStream,
+                    type: GrpcCallType.bidiStream,
                     client: this.client,
                     path: '/ondewo.nlu.Sessions/StreamingDetectIntent',
                     requestData,
@@ -23489,7 +23792,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/ListSessions
+             * Unary call: /ondewo.nlu.Sessions/ListSessions
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23507,7 +23810,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/GetSession
+             * Unary call: /ondewo.nlu.Sessions/GetSession
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23525,7 +23828,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/CreateSession
+             * Unary call: /ondewo.nlu.Sessions/CreateSession
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23543,7 +23846,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/TrackSessionStep
+             * Unary call: /ondewo.nlu.Sessions/TrackSessionStep
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23561,7 +23864,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/DeleteSession
+             * Unary call: /ondewo.nlu.Sessions/DeleteSession
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23579,7 +23882,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/ListSessionLabels
+             * Unary call: /ondewo.nlu.Sessions/ListSessionLabels
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23597,7 +23900,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/AddSessionLabels
+             * Unary call: /ondewo.nlu.Sessions/AddSessionLabels
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23615,7 +23918,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/RemoveSessionLabels
+             * Unary call: /ondewo.nlu.Sessions/RemoveSessionLabels
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23633,7 +23936,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/ListSessionReviews
+             * Unary call: /ondewo.nlu.Sessions/ListSessionReviews
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23651,7 +23954,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/GetSessionReview
+             * Unary call: /ondewo.nlu.Sessions/GetSessionReview
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23669,7 +23972,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/GetLatestSessionReview
+             * Unary call: /ondewo.nlu.Sessions/GetLatestSessionReview
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23687,7 +23990,7 @@ class SessionsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Sessions/CreateSessionReview
+             * Unary call: /ondewo.nlu.Sessions/CreateSessionReview
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23708,7 +24011,7 @@ class SessionsClient {
         this.client = clientFactory.createClient('ondewo.nlu.Sessions', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/DetectIntent
+     * Unary call @/ondewo.nlu.Sessions/DetectIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23720,7 +24023,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Server streaming RPC for /ondewo.nlu.Sessions/StreamingDetectIntent
+     * Bidirectional streaming @/ondewo.nlu.Sessions/StreamingDetectIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23732,7 +24035,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/ListSessions
+     * Unary call @/ondewo.nlu.Sessions/ListSessions
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23744,7 +24047,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/GetSession
+     * Unary call @/ondewo.nlu.Sessions/GetSession
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23756,7 +24059,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/CreateSession
+     * Unary call @/ondewo.nlu.Sessions/CreateSession
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23768,7 +24071,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/TrackSessionStep
+     * Unary call @/ondewo.nlu.Sessions/TrackSessionStep
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23780,7 +24083,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/DeleteSession
+     * Unary call @/ondewo.nlu.Sessions/DeleteSession
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23792,7 +24095,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/ListSessionLabels
+     * Unary call @/ondewo.nlu.Sessions/ListSessionLabels
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23804,7 +24107,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/AddSessionLabels
+     * Unary call @/ondewo.nlu.Sessions/AddSessionLabels
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23816,7 +24119,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/RemoveSessionLabels
+     * Unary call @/ondewo.nlu.Sessions/RemoveSessionLabels
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23828,7 +24131,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/ListSessionReviews
+     * Unary call @/ondewo.nlu.Sessions/ListSessionReviews
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23840,7 +24143,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/GetSessionReview
+     * Unary call @/ondewo.nlu.Sessions/GetSessionReview
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23852,7 +24155,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/GetLatestSessionReview
+     * Unary call @/ondewo.nlu.Sessions/GetLatestSessionReview
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23864,7 +24167,7 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Sessions/CreateSessionReview
+     * Unary call @/ondewo.nlu.Sessions/CreateSessionReview
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23876,9 +24179,9 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-SessionsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: SessionsClient, deps: [{ token: GRPC_SESSIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-SessionsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: SessionsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: SessionsClient, decorators: [{
+SessionsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: SessionsClient, deps: [{ token: GRPC_SESSIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+SessionsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: SessionsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: SessionsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -23921,7 +24224,7 @@ class WebhookClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.Webhook/ResponseRefinement
+             * Unary call: /ondewo.nlu.Webhook/ResponseRefinement
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23939,7 +24242,7 @@ class WebhookClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Webhook/SlotFilling
+             * Unary call: /ondewo.nlu.Webhook/SlotFilling
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23957,7 +24260,7 @@ class WebhookClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Webhook/Ping
+             * Unary call: /ondewo.nlu.Webhook/Ping
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -23978,7 +24281,7 @@ class WebhookClient {
         this.client = clientFactory.createClient('ondewo.nlu.Webhook', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.Webhook/ResponseRefinement
+     * Unary call @/ondewo.nlu.Webhook/ResponseRefinement
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -23990,7 +24293,7 @@ class WebhookClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Webhook/SlotFilling
+     * Unary call @/ondewo.nlu.Webhook/SlotFilling
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24002,7 +24305,7 @@ class WebhookClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Webhook/Ping
+     * Unary call @/ondewo.nlu.Webhook/Ping
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24014,9 +24317,9 @@ class WebhookClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-WebhookClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: WebhookClient, deps: [{ token: GRPC_WEBHOOK_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-WebhookClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: WebhookClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: WebhookClient, decorators: [{
+WebhookClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: WebhookClient, deps: [{ token: GRPC_WEBHOOK_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+WebhookClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: WebhookClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: WebhookClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -24052,7 +24355,7 @@ class ProjectStatisticsClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.ProjectStatistics/GetIntentCount
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetIntentCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -24070,7 +24373,7 @@ class ProjectStatisticsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -24088,7 +24391,7 @@ class ProjectStatisticsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectStatistics/GetUserCount
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetUserCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -24106,7 +24409,7 @@ class ProjectStatisticsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectStatistics/GetSessionCount
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetSessionCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -24124,7 +24427,7 @@ class ProjectStatisticsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -24142,7 +24445,7 @@ class ProjectStatisticsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectStatistics/GetResponseCount
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetResponseCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -24160,7 +24463,7 @@ class ProjectStatisticsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityValueCount
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetEntityValueCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -24178,7 +24481,7 @@ class ProjectStatisticsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -24199,7 +24502,7 @@ class ProjectStatisticsClient {
         this.client = clientFactory.createClient('ondewo.nlu.ProjectStatistics', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetIntentCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetIntentCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24211,7 +24514,7 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntityTypeCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24223,7 +24526,7 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetUserCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetUserCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24235,7 +24538,7 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetSessionCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetSessionCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24247,7 +24550,7 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24259,7 +24562,7 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetResponseCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetResponseCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24271,7 +24574,7 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntityValueCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntityValueCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24283,7 +24586,7 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -24295,9 +24598,9 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ProjectStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ProjectStatisticsClient, deps: [{ token: GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ProjectStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ProjectStatisticsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ProjectStatisticsClient, decorators: [{
+ProjectStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectStatisticsClient, deps: [{ token: GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ProjectStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectStatisticsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectStatisticsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -34284,7 +34587,7 @@ class AgentsClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.Agents/CreateAgent
+             * Unary call: /ondewo.nlu.Agents/CreateAgent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34302,7 +34605,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/UpdateAgent
+             * Unary call: /ondewo.nlu.Agents/UpdateAgent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34320,7 +34623,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/GetAgent
+             * Unary call: /ondewo.nlu.Agents/GetAgent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34338,7 +34641,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/DeleteAgent
+             * Unary call: /ondewo.nlu.Agents/DeleteAgent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34356,7 +34659,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/DeleteAllAgents
+             * Unary call: /ondewo.nlu.Agents/DeleteAllAgents
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34374,7 +34677,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/ListAgents
+             * Unary call: /ondewo.nlu.Agents/ListAgents
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34392,7 +34695,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/ListAgentsOfUser
+             * Unary call: /ondewo.nlu.Agents/ListAgentsOfUser
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34410,7 +34713,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/ListAllAgents
+             * Unary call: /ondewo.nlu.Agents/ListAllAgents
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34428,7 +34731,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/AddUserToProject
+             * Unary call: /ondewo.nlu.Agents/AddUserToProject
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34446,7 +34749,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/RemoveUserFromProject
+             * Unary call: /ondewo.nlu.Agents/RemoveUserFromProject
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34464,7 +34767,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/ListUsersInProject
+             * Unary call: /ondewo.nlu.Agents/ListUsersInProject
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34482,7 +34785,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/GetPlatformInfo
+             * Unary call: /ondewo.nlu.Agents/GetPlatformInfo
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34500,7 +34803,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/ListProjectPermissions
+             * Unary call: /ondewo.nlu.Agents/ListProjectPermissions
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34518,7 +34821,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/TrainAgent
+             * Unary call: /ondewo.nlu.Agents/TrainAgent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34536,7 +34839,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/BuildCache
+             * Unary call: /ondewo.nlu.Agents/BuildCache
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34554,7 +34857,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/ExportAgent
+             * Unary call: /ondewo.nlu.Agents/ExportAgent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34572,7 +34875,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/ExportBenchmarkAgent
+             * Unary call: /ondewo.nlu.Agents/ExportBenchmarkAgent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34590,7 +34893,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/ImportAgent
+             * Unary call: /ondewo.nlu.Agents/ImportAgent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34608,7 +34911,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/OptimizeRankingMatch
+             * Unary call: /ondewo.nlu.Agents/OptimizeRankingMatch
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34626,7 +34929,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/RestoreAgent
+             * Unary call: /ondewo.nlu.Agents/RestoreAgent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34644,7 +34947,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/GetAgentStatistics
+             * Unary call: /ondewo.nlu.Agents/GetAgentStatistics
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34662,7 +34965,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/SetAgentStatus
+             * Unary call: /ondewo.nlu.Agents/SetAgentStatus
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34680,7 +34983,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/SetResources
+             * Unary call: /ondewo.nlu.Agents/SetResources
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34698,7 +35001,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/DeleteResources
+             * Unary call: /ondewo.nlu.Agents/DeleteResources
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34716,7 +35019,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/ExportResources
+             * Unary call: /ondewo.nlu.Agents/ExportResources
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34734,7 +35037,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/GetModelStatuses
+             * Unary call: /ondewo.nlu.Agents/GetModelStatuses
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34752,7 +35055,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/GetPlatformMapping
+             * Unary call: /ondewo.nlu.Agents/GetPlatformMapping
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34770,7 +35073,7 @@ class AgentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Agents/SetPlatformMapping
+             * Unary call: /ondewo.nlu.Agents/SetPlatformMapping
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -34791,7 +35094,7 @@ class AgentsClient {
         this.client = clientFactory.createClient('ondewo.nlu.Agents', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/CreateAgent
+     * Unary call @/ondewo.nlu.Agents/CreateAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34803,7 +35106,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/UpdateAgent
+     * Unary call @/ondewo.nlu.Agents/UpdateAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34815,7 +35118,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetAgent
+     * Unary call @/ondewo.nlu.Agents/GetAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34827,7 +35130,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/DeleteAgent
+     * Unary call @/ondewo.nlu.Agents/DeleteAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34839,7 +35142,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/DeleteAllAgents
+     * Unary call @/ondewo.nlu.Agents/DeleteAllAgents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34851,7 +35154,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListAgents
+     * Unary call @/ondewo.nlu.Agents/ListAgents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34863,7 +35166,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListAgentsOfUser
+     * Unary call @/ondewo.nlu.Agents/ListAgentsOfUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34875,7 +35178,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListAllAgents
+     * Unary call @/ondewo.nlu.Agents/ListAllAgents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34887,7 +35190,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/AddUserToProject
+     * Unary call @/ondewo.nlu.Agents/AddUserToProject
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34899,7 +35202,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/RemoveUserFromProject
+     * Unary call @/ondewo.nlu.Agents/RemoveUserFromProject
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34911,7 +35214,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListUsersInProject
+     * Unary call @/ondewo.nlu.Agents/ListUsersInProject
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34923,7 +35226,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetPlatformInfo
+     * Unary call @/ondewo.nlu.Agents/GetPlatformInfo
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34935,7 +35238,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ListProjectPermissions
+     * Unary call @/ondewo.nlu.Agents/ListProjectPermissions
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34947,7 +35250,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/TrainAgent
+     * Unary call @/ondewo.nlu.Agents/TrainAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34959,7 +35262,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/BuildCache
+     * Unary call @/ondewo.nlu.Agents/BuildCache
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34971,7 +35274,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ExportAgent
+     * Unary call @/ondewo.nlu.Agents/ExportAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34983,7 +35286,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ExportBenchmarkAgent
+     * Unary call @/ondewo.nlu.Agents/ExportBenchmarkAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -34995,7 +35298,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ImportAgent
+     * Unary call @/ondewo.nlu.Agents/ImportAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35007,7 +35310,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/OptimizeRankingMatch
+     * Unary call @/ondewo.nlu.Agents/OptimizeRankingMatch
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35019,7 +35322,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/RestoreAgent
+     * Unary call @/ondewo.nlu.Agents/RestoreAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35031,7 +35334,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetAgentStatistics
+     * Unary call @/ondewo.nlu.Agents/GetAgentStatistics
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35043,7 +35346,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/SetAgentStatus
+     * Unary call @/ondewo.nlu.Agents/SetAgentStatus
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35055,7 +35358,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/SetResources
+     * Unary call @/ondewo.nlu.Agents/SetResources
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35067,7 +35370,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/DeleteResources
+     * Unary call @/ondewo.nlu.Agents/DeleteResources
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35079,7 +35382,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/ExportResources
+     * Unary call @/ondewo.nlu.Agents/ExportResources
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35091,7 +35394,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetModelStatuses
+     * Unary call @/ondewo.nlu.Agents/GetModelStatuses
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35103,7 +35406,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/GetPlatformMapping
+     * Unary call @/ondewo.nlu.Agents/GetPlatformMapping
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35115,7 +35418,7 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Agents/SetPlatformMapping
+     * Unary call @/ondewo.nlu.Agents/SetPlatformMapping
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -35127,9 +35430,9 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-AgentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: AgentsClient, deps: [{ token: GRPC_AGENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-AgentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: AgentsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: AgentsClient, decorators: [{
+AgentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AgentsClient, deps: [{ token: GRPC_AGENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+AgentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AgentsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AgentsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -38574,7 +38877,7 @@ class ServerStatisticsClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.ServerStatistics/GetProjectCount
+             * Unary call: /ondewo.nlu.ServerStatistics/GetProjectCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -38592,7 +38895,7 @@ class ServerStatisticsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserProjectCount
+             * Unary call: /ondewo.nlu.ServerStatistics/GetUserProjectCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -38610,7 +38913,7 @@ class ServerStatisticsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserCount
+             * Unary call: /ondewo.nlu.ServerStatistics/GetUserCount
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -38631,7 +38934,7 @@ class ServerStatisticsClient {
         this.client = clientFactory.createClient('ondewo.nlu.ServerStatistics', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.ServerStatistics/GetProjectCount
+     * Unary call @/ondewo.nlu.ServerStatistics/GetProjectCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -38643,7 +38946,7 @@ class ServerStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserProjectCount
+     * Unary call @/ondewo.nlu.ServerStatistics/GetUserProjectCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -38655,7 +38958,7 @@ class ServerStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ServerStatistics/GetUserCount
+     * Unary call @/ondewo.nlu.ServerStatistics/GetUserCount
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -38667,9 +38970,9 @@ class ServerStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ServerStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ServerStatisticsClient, deps: [{ token: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ServerStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ServerStatisticsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ServerStatisticsClient, decorators: [{
+ServerStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ServerStatisticsClient, deps: [{ token: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ServerStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ServerStatisticsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ServerStatisticsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -38697,14 +39000,10 @@ var IntentAlgorithms;
     IntentAlgorithms[IntentAlgorithms["OndewoIntentNamedExactMatch"] = 2] = "OndewoIntentNamedExactMatch";
     IntentAlgorithms[IntentAlgorithms["OndewoIntentSimilarityMatch"] = 3] = "OndewoIntentSimilarityMatch";
     IntentAlgorithms[IntentAlgorithms["OndewoIntentNamedSimilarityMatch"] = 4] = "OndewoIntentNamedSimilarityMatch";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentFastTextClassifier"] = 5] = "OndewoIntentFastTextClassifier";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentMachineLearningMatch"] = 6] = "OndewoIntentMachineLearningMatch";
     IntentAlgorithms[IntentAlgorithms["OndewoIntentBertClassifier"] = 7] = "OndewoIntentBertClassifier";
     IntentAlgorithms[IntentAlgorithms["OndewoIntentMetaClassifier"] = 8] = "OndewoIntentMetaClassifier";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentSnipsClassifier"] = 9] = "OndewoIntentSnipsClassifier";
     IntentAlgorithms[IntentAlgorithms["IntentExitDetector"] = 10] = "IntentExitDetector";
     IntentAlgorithms[IntentAlgorithms["OndewoIntentRankingMatch"] = 11] = "OndewoIntentRankingMatch";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentRasaClassifier"] = 12] = "OndewoIntentRasaClassifier";
     IntentAlgorithms[IntentAlgorithms["OndewoWeightedEnsemble"] = 13] = "OndewoWeightedEnsemble";
     IntentAlgorithms[IntentAlgorithms["OndewoIntentExitDetector"] = 14] = "OndewoIntentExitDetector";
     IntentAlgorithms[IntentAlgorithms["OndewoIntentParameterMatch"] = 15] = "OndewoIntentParameterMatch";
@@ -41252,9 +41551,6 @@ class DataEnrichmentConfig {
         this.gloveEnrichment = _value.gloveEnrichment
             ? new GloVeEnrichmentConfig(_value.gloveEnrichment)
             : undefined;
-        this.fasttextEnrichment = _value.fasttextEnrichment
-            ? new FastTextEnrichmentConfig(_value.fasttextEnrichment)
-            : undefined;
         this.bertEnrichment = _value.bertEnrichment
             ? new BertAugEnrichmentConfig(_value.bertEnrichment)
             : undefined;
@@ -41283,7 +41579,6 @@ class DataEnrichmentConfig {
         _instance.wordNetEnrichment = _instance.wordNetEnrichment || undefined;
         _instance.gpt2Enrichment = _instance.gpt2Enrichment || undefined;
         _instance.gloveEnrichment = _instance.gloveEnrichment || undefined;
-        _instance.fasttextEnrichment = _instance.fasttextEnrichment || undefined;
         _instance.bertEnrichment = _instance.bertEnrichment || undefined;
         _instance.xlnetEnrichment = _instance.xlnetEnrichment || undefined;
     }
@@ -41320,10 +41615,6 @@ class DataEnrichmentConfig {
                 case 6:
                     _instance.gloveEnrichment = new GloVeEnrichmentConfig();
                     _reader.readMessage(_instance.gloveEnrichment, GloVeEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 7:
-                    _instance.fasttextEnrichment = new FastTextEnrichmentConfig();
-                    _reader.readMessage(_instance.fasttextEnrichment, FastTextEnrichmentConfig.deserializeBinaryFromReader);
                     break;
                 case 8:
                     _instance.bertEnrichment = new BertAugEnrichmentConfig();
@@ -41362,9 +41653,6 @@ class DataEnrichmentConfig {
         }
         if (_instance.gloveEnrichment) {
             _writer.writeMessage(6, _instance.gloveEnrichment, GloVeEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.fasttextEnrichment) {
-            _writer.writeMessage(7, _instance.fasttextEnrichment, FastTextEnrichmentConfig.serializeBinaryToWriter);
         }
         if (_instance.bertEnrichment) {
             _writer.writeMessage(8, _instance.bertEnrichment, BertAugEnrichmentConfig.serializeBinaryToWriter);
@@ -41408,12 +41696,6 @@ class DataEnrichmentConfig {
     }
     set gloveEnrichment(value) {
         this._gloveEnrichment = value;
-    }
-    get fasttextEnrichment() {
-        return this._fasttextEnrichment;
-    }
-    set fasttextEnrichment(value) {
-        this._fasttextEnrichment = value;
     }
     get bertEnrichment() {
         return this._bertEnrichment;
@@ -41459,9 +41741,6 @@ class DataEnrichmentConfig {
             gloveEnrichment: this.gloveEnrichment
                 ? this.gloveEnrichment.toObject()
                 : undefined,
-            fasttextEnrichment: this.fasttextEnrichment
-                ? this.fasttextEnrichment.toObject()
-                : undefined,
             bertEnrichment: this.bertEnrichment
                 ? this.bertEnrichment.toObject()
                 : undefined,
@@ -41502,9 +41781,6 @@ class DataEnrichmentConfig {
                 : null,
             gloveEnrichment: this.gloveEnrichment
                 ? this.gloveEnrichment.toProtobufJSON(options)
-                : null,
-            fasttextEnrichment: this.fasttextEnrichment
-                ? this.fasttextEnrichment.toProtobufJSON(options)
                 : null,
             bertEnrichment: this.bertEnrichment
                 ? this.bertEnrichment.toProtobufJSON(options)
@@ -41782,139 +42058,6 @@ class ThesaurusEnrichmentConfig {
     }
 }
 ThesaurusEnrichmentConfig.id = 'ondewo.nlu.ThesaurusEnrichmentConfig';
-/**
- * Message implementation for ondewo.nlu.FastTextEnrichmentConfig
- */
-class FastTextEnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FastTextEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        FastTextEnrichmentConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new FastTextEnrichmentConfig();
-        FastTextEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
-        _instance.executionOrder = _instance.executionOrder || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.isActive = _reader.readBool();
-                    break;
-                case 2:
-                    _instance.enrichmentFactor = _reader.readInt32();
-                    break;
-                case 3:
-                    _instance.executionOrder = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        FastTextEnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
-            _writer.writeBool(1, _instance.isActive);
-        }
-        if (_instance.enrichmentFactor) {
-            _writer.writeInt32(2, _instance.enrichmentFactor);
-        }
-        if (_instance.executionOrder) {
-            _writer.writeInt32(3, _instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        FastTextEnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-}
-FastTextEnrichmentConfig.id = 'ondewo.nlu.FastTextEnrichmentConfig';
 /**
  * Message implementation for ondewo.nlu.BertAugEnrichmentConfig
  */
@@ -43226,7 +43369,7 @@ class ProjectRolesClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.ProjectRoles/CreateProjectRole
+             * Unary call: /ondewo.nlu.ProjectRoles/CreateProjectRole
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43244,7 +43387,7 @@ class ProjectRolesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectRoles/GetProjectRole
+             * Unary call: /ondewo.nlu.ProjectRoles/GetProjectRole
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43262,7 +43405,7 @@ class ProjectRolesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectRoles/DeleteProjectRole
+             * Unary call: /ondewo.nlu.ProjectRoles/DeleteProjectRole
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43280,7 +43423,7 @@ class ProjectRolesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectRoles/UpdateProjectRole
+             * Unary call: /ondewo.nlu.ProjectRoles/UpdateProjectRole
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43298,7 +43441,7 @@ class ProjectRolesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.ProjectRoles/ListProjectRoles
+             * Unary call: /ondewo.nlu.ProjectRoles/ListProjectRoles
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43319,7 +43462,7 @@ class ProjectRolesClient {
         this.client = clientFactory.createClient('ondewo.nlu.ProjectRoles', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/CreateProjectRole
+     * Unary call @/ondewo.nlu.ProjectRoles/CreateProjectRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43331,7 +43474,7 @@ class ProjectRolesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/GetProjectRole
+     * Unary call @/ondewo.nlu.ProjectRoles/GetProjectRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43343,7 +43486,7 @@ class ProjectRolesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/DeleteProjectRole
+     * Unary call @/ondewo.nlu.ProjectRoles/DeleteProjectRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43355,7 +43498,7 @@ class ProjectRolesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/UpdateProjectRole
+     * Unary call @/ondewo.nlu.ProjectRoles/UpdateProjectRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43367,7 +43510,7 @@ class ProjectRolesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/ListProjectRoles
+     * Unary call @/ondewo.nlu.ProjectRoles/ListProjectRoles
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43379,9 +43522,9 @@ class ProjectRolesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ProjectRolesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ProjectRolesClient, deps: [{ token: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ProjectRolesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ProjectRolesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ProjectRolesClient, decorators: [{
+ProjectRolesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectRolesClient, deps: [{ token: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ProjectRolesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectRolesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ProjectRolesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -43417,7 +43560,7 @@ class IntentsClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.Intents/ListIntents
+             * Unary call: /ondewo.nlu.Intents/ListIntents
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43435,7 +43578,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/GetIntent
+             * Unary call: /ondewo.nlu.Intents/GetIntent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43453,7 +43596,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/CreateIntent
+             * Unary call: /ondewo.nlu.Intents/CreateIntent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43471,7 +43614,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/UpdateIntent
+             * Unary call: /ondewo.nlu.Intents/UpdateIntent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43489,7 +43632,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/DeleteIntent
+             * Unary call: /ondewo.nlu.Intents/DeleteIntent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43507,7 +43650,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchUpdateIntents
+             * Unary call: /ondewo.nlu.Intents/BatchUpdateIntents
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43525,7 +43668,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchDeleteIntents
+             * Unary call: /ondewo.nlu.Intents/BatchDeleteIntents
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43543,7 +43686,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/TagIntent
+             * Unary call: /ondewo.nlu.Intents/TagIntent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43561,7 +43704,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/DeleteIntentTag
+             * Unary call: /ondewo.nlu.Intents/DeleteIntentTag
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43579,7 +43722,43 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
+             * Unary call: /ondewo.nlu.Intents/GetIntentTags
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>
+             */
+            getIntentTags: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/GetIntentTags',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetIntentTagsRequest,
+                    responseClass: GetIntentTagsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/GetAllIntentTags
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>
+             */
+            getAllIntentTags: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/GetAllIntentTags',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetAllIntentTagsRequest,
+                    responseClass: GetIntentTagsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchCreateTrainingPhrases
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43597,7 +43776,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchGetTrainingPhrases
+             * Unary call: /ondewo.nlu.Intents/BatchGetTrainingPhrases
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43615,7 +43794,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
+             * Unary call: /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43633,7 +43812,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
+             * Unary call: /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43651,7 +43830,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/ListTrainingPhrases
+             * Unary call: /ondewo.nlu.Intents/ListTrainingPhrases
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43669,7 +43848,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchCreateResponseMessages
+             * Unary call: /ondewo.nlu.Intents/BatchCreateResponseMessages
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43687,7 +43866,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchGetResponseMessages
+             * Unary call: /ondewo.nlu.Intents/BatchGetResponseMessages
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43705,7 +43884,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchUpdateResponseMessages
+             * Unary call: /ondewo.nlu.Intents/BatchUpdateResponseMessages
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43723,7 +43902,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchDeleteResponseMessages
+             * Unary call: /ondewo.nlu.Intents/BatchDeleteResponseMessages
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43741,7 +43920,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/ListResponseMessages
+             * Unary call: /ondewo.nlu.Intents/ListResponseMessages
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43759,7 +43938,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchCreateParameters
+             * Unary call: /ondewo.nlu.Intents/BatchCreateParameters
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43777,7 +43956,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchGetParameters
+             * Unary call: /ondewo.nlu.Intents/BatchGetParameters
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43795,7 +43974,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchUpdateParameters
+             * Unary call: /ondewo.nlu.Intents/BatchUpdateParameters
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43813,7 +43992,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/BatchDeleteParameters
+             * Unary call: /ondewo.nlu.Intents/BatchDeleteParameters
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43831,7 +44010,7 @@ class IntentsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Intents/ListParameters
+             * Unary call: /ondewo.nlu.Intents/ListParameters
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -43852,7 +44031,7 @@ class IntentsClient {
         this.client = clientFactory.createClient('ondewo.nlu.Intents', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/ListIntents
+     * Unary call @/ondewo.nlu.Intents/ListIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43864,7 +44043,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/GetIntent
+     * Unary call @/ondewo.nlu.Intents/GetIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43876,7 +44055,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/CreateIntent
+     * Unary call @/ondewo.nlu.Intents/CreateIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43888,7 +44067,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/UpdateIntent
+     * Unary call @/ondewo.nlu.Intents/UpdateIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43900,7 +44079,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/DeleteIntent
+     * Unary call @/ondewo.nlu.Intents/DeleteIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43912,7 +44091,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchUpdateIntents
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43924,7 +44103,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchDeleteIntents
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43936,7 +44115,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/TagIntent
+     * Unary call @/ondewo.nlu.Intents/TagIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43948,7 +44127,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/DeleteIntentTag
+     * Unary call @/ondewo.nlu.Intents/DeleteIntentTag
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43960,7 +44139,31 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchCreateTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/GetIntentTags
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetIntentTagsResponse>
+     */
+    getIntentTags(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getIntentTags(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/GetAllIntentTags
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetIntentTagsResponse>
+     */
+    getAllIntentTags(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getAllIntentTags(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchCreateTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43972,7 +44175,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchGetTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/BatchGetTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43984,7 +44187,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -43996,7 +44199,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44008,7 +44211,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/ListTrainingPhrases
+     * Unary call @/ondewo.nlu.Intents/ListTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44020,7 +44223,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchCreateResponseMessages
+     * Unary call @/ondewo.nlu.Intents/BatchCreateResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44032,7 +44235,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchGetResponseMessages
+     * Unary call @/ondewo.nlu.Intents/BatchGetResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44044,7 +44247,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchUpdateResponseMessages
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44056,7 +44259,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchDeleteResponseMessages
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44068,7 +44271,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/ListResponseMessages
+     * Unary call @/ondewo.nlu.Intents/ListResponseMessages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44080,7 +44283,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchCreateParameters
+     * Unary call @/ondewo.nlu.Intents/BatchCreateParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44092,7 +44295,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchGetParameters
+     * Unary call @/ondewo.nlu.Intents/BatchGetParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44104,7 +44307,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchUpdateParameters
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44116,7 +44319,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/BatchDeleteParameters
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44128,7 +44331,7 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Intents/ListParameters
+     * Unary call @/ondewo.nlu.Intents/ListParameters
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44140,9 +44343,9 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-IntentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: IntentsClient, deps: [{ token: GRPC_INTENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-IntentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: IntentsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: IntentsClient, decorators: [{
+IntentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: IntentsClient, deps: [{ token: GRPC_INTENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+IntentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: IntentsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: IntentsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -44171,7 +44374,7 @@ class UsersClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.Users/CreateUser
+             * Unary call: /ondewo.nlu.Users/CreateUser
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44189,7 +44392,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/GetUser
+             * Unary call: /ondewo.nlu.Users/GetUser
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44207,7 +44410,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/GetUserInfo
+             * Unary call: /ondewo.nlu.Users/GetUserInfo
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44225,7 +44428,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/DeleteUser
+             * Unary call: /ondewo.nlu.Users/DeleteUser
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44243,7 +44446,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/UpdateUser
+             * Unary call: /ondewo.nlu.Users/UpdateUser
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44261,7 +44464,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/ListUsers
+             * Unary call: /ondewo.nlu.Users/ListUsers
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44279,7 +44482,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/ListUserInfos
+             * Unary call: /ondewo.nlu.Users/ListUserInfos
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44297,7 +44500,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/CreateServerRole
+             * Unary call: /ondewo.nlu.Users/CreateServerRole
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44315,7 +44518,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/GetServerRole
+             * Unary call: /ondewo.nlu.Users/GetServerRole
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44333,7 +44536,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/DeleteServerRole
+             * Unary call: /ondewo.nlu.Users/DeleteServerRole
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44351,7 +44554,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/UpdateServerRole
+             * Unary call: /ondewo.nlu.Users/UpdateServerRole
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44369,7 +44572,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/ListServerRoles
+             * Unary call: /ondewo.nlu.Users/ListServerRoles
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44387,7 +44590,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/ListServerPermissions
+             * Unary call: /ondewo.nlu.Users/ListServerPermissions
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44405,7 +44608,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/Login
+             * Unary call: /ondewo.nlu.Users/Login
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44423,7 +44626,7 @@ class UsersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Users/CheckLogin
+             * Unary call: /ondewo.nlu.Users/CheckLogin
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44444,7 +44647,7 @@ class UsersClient {
         this.client = clientFactory.createClient('ondewo.nlu.Users', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/CreateUser
+     * Unary call @/ondewo.nlu.Users/CreateUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44456,7 +44659,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/GetUser
+     * Unary call @/ondewo.nlu.Users/GetUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44468,7 +44671,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/GetUserInfo
+     * Unary call @/ondewo.nlu.Users/GetUserInfo
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44480,7 +44683,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/DeleteUser
+     * Unary call @/ondewo.nlu.Users/DeleteUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44492,7 +44695,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/UpdateUser
+     * Unary call @/ondewo.nlu.Users/UpdateUser
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44504,7 +44707,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/ListUsers
+     * Unary call @/ondewo.nlu.Users/ListUsers
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44516,7 +44719,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/ListUserInfos
+     * Unary call @/ondewo.nlu.Users/ListUserInfos
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44528,7 +44731,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/CreateServerRole
+     * Unary call @/ondewo.nlu.Users/CreateServerRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44540,7 +44743,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/GetServerRole
+     * Unary call @/ondewo.nlu.Users/GetServerRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44552,7 +44755,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/DeleteServerRole
+     * Unary call @/ondewo.nlu.Users/DeleteServerRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44564,7 +44767,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/UpdateServerRole
+     * Unary call @/ondewo.nlu.Users/UpdateServerRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44576,7 +44779,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/ListServerRoles
+     * Unary call @/ondewo.nlu.Users/ListServerRoles
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44588,7 +44791,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/ListServerPermissions
+     * Unary call @/ondewo.nlu.Users/ListServerPermissions
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44600,7 +44803,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/Login
+     * Unary call @/ondewo.nlu.Users/Login
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44612,7 +44815,7 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Users/CheckLogin
+     * Unary call @/ondewo.nlu.Users/CheckLogin
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44624,9 +44827,9 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-UsersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: UsersClient, deps: [{ token: GRPC_USERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-UsersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: UsersClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: UsersClient, decorators: [{
+UsersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UsersClient, deps: [{ token: GRPC_USERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+UsersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UsersClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UsersClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -44662,7 +44865,7 @@ class UtilitiesClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.Utilities/ValidateRegex
+             * Unary call: /ondewo.nlu.Utilities/ValidateRegex
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44680,7 +44883,7 @@ class UtilitiesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Utilities/ValidateEmbeddedRegex
+             * Unary call: /ondewo.nlu.Utilities/ValidateEmbeddedRegex
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44698,7 +44901,7 @@ class UtilitiesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Utilities/CleanAllIntents
+             * Unary call: /ondewo.nlu.Utilities/CleanAllIntents
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44716,7 +44919,7 @@ class UtilitiesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Utilities/CleanIntent
+             * Unary call: /ondewo.nlu.Utilities/CleanIntent
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44734,7 +44937,7 @@ class UtilitiesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Utilities/CleanAllEntityTypes
+             * Unary call: /ondewo.nlu.Utilities/CleanAllEntityTypes
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44752,7 +44955,7 @@ class UtilitiesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Utilities/CleanEntityType
+             * Unary call: /ondewo.nlu.Utilities/CleanEntityType
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44770,7 +44973,7 @@ class UtilitiesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrases
+             * Unary call: /ondewo.nlu.Utilities/AddTrainingPhrases
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44788,7 +44991,7 @@ class UtilitiesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
+             * Unary call: /ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44809,7 +45012,7 @@ class UtilitiesClient {
         this.client = clientFactory.createClient('ondewo.nlu.Utilities', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/ValidateRegex
+     * Unary call @/ondewo.nlu.Utilities/ValidateRegex
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44821,7 +45024,7 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/ValidateEmbeddedRegex
+     * Unary call @/ondewo.nlu.Utilities/ValidateEmbeddedRegex
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44833,7 +45036,7 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/CleanAllIntents
+     * Unary call @/ondewo.nlu.Utilities/CleanAllIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44845,7 +45048,7 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/CleanIntent
+     * Unary call @/ondewo.nlu.Utilities/CleanIntent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44857,7 +45060,7 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/CleanAllEntityTypes
+     * Unary call @/ondewo.nlu.Utilities/CleanAllEntityTypes
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44869,7 +45072,7 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/CleanEntityType
+     * Unary call @/ondewo.nlu.Utilities/CleanEntityType
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44881,7 +45084,7 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrases
+     * Unary call @/ondewo.nlu.Utilities/AddTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44893,7 +45096,7 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
+     * Unary call @/ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -44905,9 +45108,9 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-UtilitiesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: UtilitiesClient, deps: [{ token: GRPC_UTILITIES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-UtilitiesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: UtilitiesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: UtilitiesClient, decorators: [{
+UtilitiesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UtilitiesClient, deps: [{ token: GRPC_UTILITIES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+UtilitiesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UtilitiesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: UtilitiesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -44936,7 +45139,7 @@ class ContextsClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.Contexts/ListContexts
+             * Unary call: /ondewo.nlu.Contexts/ListContexts
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44954,7 +45157,7 @@ class ContextsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Contexts/GetContext
+             * Unary call: /ondewo.nlu.Contexts/GetContext
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44972,7 +45175,7 @@ class ContextsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Contexts/CreateContext
+             * Unary call: /ondewo.nlu.Contexts/CreateContext
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -44990,7 +45193,7 @@ class ContextsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Contexts/UpdateContext
+             * Unary call: /ondewo.nlu.Contexts/UpdateContext
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45008,7 +45211,7 @@ class ContextsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Contexts/DeleteContext
+             * Unary call: /ondewo.nlu.Contexts/DeleteContext
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45026,7 +45229,7 @@ class ContextsClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.Contexts/DeleteAllContexts
+             * Unary call: /ondewo.nlu.Contexts/DeleteAllContexts
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45047,7 +45250,7 @@ class ContextsClient {
         this.client = clientFactory.createClient('ondewo.nlu.Contexts', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.Contexts/ListContexts
+     * Unary call @/ondewo.nlu.Contexts/ListContexts
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45059,7 +45262,7 @@ class ContextsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Contexts/GetContext
+     * Unary call @/ondewo.nlu.Contexts/GetContext
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45071,7 +45274,7 @@ class ContextsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Contexts/CreateContext
+     * Unary call @/ondewo.nlu.Contexts/CreateContext
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45083,7 +45286,7 @@ class ContextsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Contexts/UpdateContext
+     * Unary call @/ondewo.nlu.Contexts/UpdateContext
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45095,7 +45298,7 @@ class ContextsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Contexts/DeleteContext
+     * Unary call @/ondewo.nlu.Contexts/DeleteContext
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45107,7 +45310,7 @@ class ContextsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.Contexts/DeleteAllContexts
+     * Unary call @/ondewo.nlu.Contexts/DeleteAllContexts
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45119,9 +45322,9 @@ class ContextsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ContextsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ContextsClient, deps: [{ token: GRPC_CONTEXTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ContextsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ContextsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: ContextsClient, decorators: [{
+ContextsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ContextsClient, deps: [{ token: GRPC_CONTEXTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ContextsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ContextsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: ContextsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -45150,7 +45353,7 @@ class AiServicesClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.nlu.AiServices/ExtractEntities
+             * Unary call: /ondewo.nlu.AiServices/ExtractEntities
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45168,7 +45371,7 @@ class AiServicesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.AiServices/GenerateUserSays
+             * Unary call: /ondewo.nlu.AiServices/GenerateUserSays
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45186,7 +45389,7 @@ class AiServicesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.AiServices/GenerateResponses
+             * Unary call: /ondewo.nlu.AiServices/GenerateResponses
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45204,7 +45407,7 @@ class AiServicesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.AiServices/GetAlternativeSentences
+             * Unary call: /ondewo.nlu.AiServices/GetAlternativeSentences
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45222,7 +45425,7 @@ class AiServicesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
+             * Unary call: /ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45240,7 +45443,7 @@ class AiServicesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.AiServices/GetSynonyms
+             * Unary call: /ondewo.nlu.AiServices/GetSynonyms
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45258,7 +45461,7 @@ class AiServicesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.AiServices/ClassifyIntents
+             * Unary call: /ondewo.nlu.AiServices/ClassifyIntents
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45276,7 +45479,7 @@ class AiServicesClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
+             * Unary call: /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -45297,7 +45500,7 @@ class AiServicesClient {
         this.client = clientFactory.createClient('ondewo.nlu.AiServices', settings);
     }
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/ExtractEntities
+     * Unary call @/ondewo.nlu.AiServices/ExtractEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45309,7 +45512,7 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GenerateUserSays
+     * Unary call @/ondewo.nlu.AiServices/GenerateUserSays
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45321,7 +45524,7 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GenerateResponses
+     * Unary call @/ondewo.nlu.AiServices/GenerateResponses
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45333,7 +45536,7 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GetAlternativeSentences
+     * Unary call @/ondewo.nlu.AiServices/GetAlternativeSentences
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45345,7 +45548,7 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
+     * Unary call @/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45357,7 +45560,7 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/GetSynonyms
+     * Unary call @/ondewo.nlu.AiServices/GetSynonyms
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45369,7 +45572,7 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/ClassifyIntents
+     * Unary call @/ondewo.nlu.AiServices/ClassifyIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45381,7 +45584,7 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
+     * Unary call @/ondewo.nlu.AiServices/ExtractEntitiesFuzzy
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -45393,9 +45596,9 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-AiServicesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: AiServicesClient, deps: [{ token: GRPC_AI_SERVICES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-AiServicesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: AiServicesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: AiServicesClient, decorators: [{
+AiServicesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AiServicesClient, deps: [{ token: GRPC_AI_SERVICES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+AiServicesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AiServicesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: AiServicesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -46938,7 +47141,7 @@ class QAClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.qa.QA/GetAnswer
+             * Unary call: /ondewo.qa.QA/GetAnswer
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -46956,7 +47159,7 @@ class QAClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.qa.QA/RunScraper
+             * Unary call: /ondewo.qa.QA/RunScraper
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -46974,7 +47177,7 @@ class QAClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.qa.QA/UpdateDatabase
+             * Unary call: /ondewo.qa.QA/UpdateDatabase
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -46992,7 +47195,7 @@ class QAClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.qa.QA/RunTraining
+             * Unary call: /ondewo.qa.QA/RunTraining
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -47010,7 +47213,7 @@ class QAClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.qa.QA/GetServerState
+             * Unary call: /ondewo.qa.QA/GetServerState
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -47028,7 +47231,7 @@ class QAClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.qa.QA/ListProjectIds
+             * Unary call: /ondewo.qa.QA/ListProjectIds
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -47046,7 +47249,7 @@ class QAClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.qa.QA/GetProjectConfig
+             * Unary call: /ondewo.qa.QA/GetProjectConfig
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -47067,7 +47270,7 @@ class QAClient {
         this.client = clientFactory.createClient('ondewo.qa.QA', settings);
     }
     /**
-     * Unary RPC for /ondewo.qa.QA/GetAnswer
+     * Unary call @/ondewo.qa.QA/GetAnswer
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -47079,7 +47282,7 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.qa.QA/RunScraper
+     * Unary call @/ondewo.qa.QA/RunScraper
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -47091,7 +47294,7 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.qa.QA/UpdateDatabase
+     * Unary call @/ondewo.qa.QA/UpdateDatabase
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -47103,7 +47306,7 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.qa.QA/RunTraining
+     * Unary call @/ondewo.qa.QA/RunTraining
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -47115,7 +47318,7 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.qa.QA/GetServerState
+     * Unary call @/ondewo.qa.QA/GetServerState
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -47127,7 +47330,7 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.qa.QA/ListProjectIds
+     * Unary call @/ondewo.qa.QA/ListProjectIds
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -47139,7 +47342,7 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.qa.QA/GetProjectConfig
+     * Unary call @/ondewo.qa.QA/GetProjectConfig
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -47151,9 +47354,9 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-QAClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: QAClient, deps: [{ token: GRPC_QA_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-QAClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: QAClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: QAClient, decorators: [{
+QAClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: QAClient, deps: [{ token: GRPC_QA_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+QAClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: QAClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: QAClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -47172,5 +47375,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Context, ContextsClient, CreateAgentRequest, CreateContextRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteContextRequest, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionRequest, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, EntityDetected, EntityEnrichmentConfig, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FastTextEnrichmentConfig, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetContextRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetLatestSessionReviewRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionRequest, GetSessionReviewRequest, GetSynonymsRequest, GetSynonymsResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, LatLng, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListContextsRequest, ListContextsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIntentsRequest, ListIntentsResponse, ListOperationsRequest, ListOperationsResponse, ListParametersRequest, ListParametersResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListUserInfosResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LoginRequest, LoginResponse, Mode, ModelStatus, Operation, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, RemoveSessionLabelsRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, RestoreAgentRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, ServerRole, ServerStatisticsClient, Session, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SetAgentStatusRequest, SetResourcesRequest, SortingMode, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingRecognitionResult, StringUpdate, Synonym, TextInput, ThesaurusEnrichmentConfig, TrackSessionStepRequest, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, UpdateAgentRequest, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
+export { AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Context, ContextsClient, CreateAgentRequest, CreateContextRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteContextRequest, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionRequest, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, EntityDetected, EntityEnrichmentConfig, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetContextRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionRequest, GetSessionReviewRequest, GetSynonymsRequest, GetSynonymsResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, LatLng, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListContextsRequest, ListContextsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIntentsRequest, ListIntentsResponse, ListOperationsRequest, ListOperationsResponse, ListParametersRequest, ListParametersResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListUserInfosResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LoginRequest, LoginResponse, Mode, ModelStatus, Operation, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, RemoveSessionLabelsRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, RestoreAgentRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, ServerRole, ServerStatisticsClient, Session, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SetAgentStatusRequest, SetResourcesRequest, SortingMode, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingRecognitionResult, StringUpdate, Synonym, TextInput, ThesaurusEnrichmentConfig, TrackSessionStepRequest, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, UpdateAgentRequest, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
 //# sourceMappingURL=ondewo-nlu-client-angular.mjs.map

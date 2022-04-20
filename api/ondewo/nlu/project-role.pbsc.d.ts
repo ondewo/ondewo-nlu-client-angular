@@ -17,7 +17,7 @@ export declare class ProjectRolesClient {
      */
     $raw: {
         /**
-         * Unary RPC for /ondewo.nlu.ProjectRoles/CreateProjectRole
+         * Unary call: /ondewo.nlu.ProjectRoles/CreateProjectRole
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -25,7 +25,7 @@ export declare class ProjectRolesClient {
          */
         createProjectRole: (requestData: thisProto.CreateProjectRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ProjectRole>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectRoles/GetProjectRole
+         * Unary call: /ondewo.nlu.ProjectRoles/GetProjectRole
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -33,7 +33,7 @@ export declare class ProjectRolesClient {
          */
         getProjectRole: (requestData: thisProto.GetProjectRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ProjectRole>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectRoles/DeleteProjectRole
+         * Unary call: /ondewo.nlu.ProjectRoles/DeleteProjectRole
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -41,7 +41,7 @@ export declare class ProjectRolesClient {
          */
         deleteProjectRole: (requestData: thisProto.DeleteProjectRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectRoles/UpdateProjectRole
+         * Unary call: /ondewo.nlu.ProjectRoles/UpdateProjectRole
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -49,7 +49,7 @@ export declare class ProjectRolesClient {
          */
         updateProjectRole: (requestData: thisProto.UpdateProjectRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ProjectRole>>;
         /**
-         * Unary RPC for /ondewo.nlu.ProjectRoles/ListProjectRoles
+         * Unary call: /ondewo.nlu.ProjectRoles/ListProjectRoles
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
@@ -59,7 +59,7 @@ export declare class ProjectRolesClient {
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/CreateProjectRole
+     * Unary call @/ondewo.nlu.ProjectRoles/CreateProjectRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -67,7 +67,7 @@ export declare class ProjectRolesClient {
      */
     createProjectRole(requestData: thisProto.CreateProjectRoleRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ProjectRole>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/GetProjectRole
+     * Unary call @/ondewo.nlu.ProjectRoles/GetProjectRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -75,7 +75,7 @@ export declare class ProjectRolesClient {
      */
     getProjectRole(requestData: thisProto.GetProjectRoleRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ProjectRole>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/DeleteProjectRole
+     * Unary call @/ondewo.nlu.ProjectRoles/DeleteProjectRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -83,7 +83,7 @@ export declare class ProjectRolesClient {
      */
     deleteProjectRole(requestData: thisProto.DeleteProjectRoleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/UpdateProjectRole
+     * Unary call @/ondewo.nlu.ProjectRoles/UpdateProjectRole
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -91,7 +91,7 @@ export declare class ProjectRolesClient {
      */
     updateProjectRole(requestData: thisProto.UpdateProjectRoleRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ProjectRole>;
     /**
-     * Unary RPC for /ondewo.nlu.ProjectRoles/ListProjectRoles
+     * Unary call @/ondewo.nlu.ProjectRoles/ListProjectRoles
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -101,4 +101,3 @@ export declare class ProjectRolesClient {
     static ɵfac: i0.ɵɵFactoryDeclaration<ProjectRolesClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<ProjectRolesClient>;
 }
-//# sourceMappingURL=project-role.pbsc.d.ts.map
