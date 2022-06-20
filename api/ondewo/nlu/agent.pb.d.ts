@@ -1,12 +1,12 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as ondewoNlu007 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu004 from '../../ondewo/nlu/common.pb';
+import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf008 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf009 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf010 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf011 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu012 from '../../ondewo/nlu/project-role.pb';
-import * as ondewoNlu013 from '../../ondewo/nlu/intent.pb';
-import * as ondewoNlu014 from '../../ondewo/nlu/user.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/project-role.pb';
+import * as ondewoNlu014 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu015 from '../../ondewo/nlu/user.pb';
 export declare enum AgentView {
     AGENT_VIEW_UNSPECIFIED = 0,
     AGENT_VIEW_FULL = 1,
@@ -87,8 +87,8 @@ export declare class Agent implements GrpcMessage {
     set timeZone(value: string | undefined);
     get nluPlatform(): string | undefined;
     set nluPlatform(value: string | undefined);
-    get configs(): googleProtobuf011.Struct | undefined;
-    set configs(value: googleProtobuf011.Struct | undefined);
+    get configs(): googleProtobuf009.Struct | undefined;
+    set configs(value: googleProtobuf009.Struct | undefined);
     get ownerId(): string | undefined;
     set ownerId(value: string | undefined);
     get status(): AgentStatus | undefined;
@@ -126,7 +126,7 @@ export declare module Agent {
         supportedLanguageCodes?: string[];
         timeZone?: string;
         nluPlatform?: string;
-        configs?: googleProtobuf011.Struct.AsObject;
+        configs?: googleProtobuf009.Struct.AsObject;
         ownerId?: string;
         status?: AgentStatus;
         description?: string;
@@ -141,7 +141,7 @@ export declare module Agent {
         supportedLanguageCodes?: string[];
         timeZone?: string;
         nluPlatform?: string;
-        configs?: googleProtobuf011.Struct.AsProtobufJSON | null;
+        configs?: googleProtobuf009.Struct.AsProtobufJSON | null;
         ownerId?: string;
         status?: string;
         description?: string;
@@ -183,8 +183,8 @@ export declare class AgentWithOwner implements GrpcMessage {
     constructor(_value?: RecursivePartial<AgentWithOwner.AsObject>);
     get agent(): Agent | undefined;
     set agent(value: Agent | undefined);
-    get owner(): ondewoNlu014.User | undefined;
-    set owner(value: ondewoNlu014.User | undefined);
+    get owner(): ondewoNlu015.User | undefined;
+    set owner(value: ondewoNlu015.User | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -211,14 +211,14 @@ export declare module AgentWithOwner {
      */
     interface AsObject {
         agent?: Agent.AsObject;
-        owner?: ondewoNlu014.User.AsObject;
+        owner?: ondewoNlu015.User.AsObject;
     }
     /**
      * Protobuf JSON representation for AgentWithOwner
      */
     interface AsProtobufJSON {
         agent?: Agent.AsProtobufJSON | null;
-        owner?: ondewoNlu014.User.AsProtobufJSON | null;
+        owner?: ondewoNlu015.User.AsProtobufJSON | null;
     }
 }
 /**
@@ -257,8 +257,8 @@ export declare class AgentOfUserWithOwner implements GrpcMessage {
     constructor(_value?: RecursivePartial<AgentOfUserWithOwner.AsObject>);
     get agentWithOwner(): AgentWithOwner | undefined;
     set agentWithOwner(value: AgentWithOwner | undefined);
-    get projectRole(): ondewoNlu012.ProjectRole | undefined;
-    set projectRole(value: ondewoNlu012.ProjectRole | undefined);
+    get projectRole(): ondewoNlu010.ProjectRole | undefined;
+    set projectRole(value: ondewoNlu010.ProjectRole | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -285,14 +285,14 @@ export declare module AgentOfUserWithOwner {
      */
     interface AsObject {
         agentWithOwner?: AgentWithOwner.AsObject;
-        projectRole?: ondewoNlu012.ProjectRole.AsObject;
+        projectRole?: ondewoNlu010.ProjectRole.AsObject;
     }
     /**
      * Protobuf JSON representation for AgentOfUserWithOwner
      */
     interface AsProtobufJSON {
         agentWithOwner?: AgentWithOwner.AsProtobufJSON | null;
-        projectRole?: ondewoNlu012.ProjectRole.AsProtobufJSON | null;
+        projectRole?: ondewoNlu010.ProjectRole.AsProtobufJSON | null;
     }
 }
 /**
@@ -408,8 +408,8 @@ export declare class UpdateAgentRequest implements GrpcMessage {
     set agent(value: Agent | undefined);
     get agentView(): AgentView | undefined;
     set agentView(value: AgentView | undefined);
-    get updateMask(): googleProtobuf010.FieldMask | undefined;
-    set updateMask(value: googleProtobuf010.FieldMask | undefined);
+    get updateMask(): googleProtobuf008.FieldMask | undefined;
+    set updateMask(value: googleProtobuf008.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -437,7 +437,7 @@ export declare module UpdateAgentRequest {
     interface AsObject {
         agent?: Agent.AsObject;
         agentView?: AgentView;
-        updateMask?: googleProtobuf010.FieldMask.AsObject;
+        updateMask?: googleProtobuf008.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateAgentRequest
@@ -445,7 +445,7 @@ export declare module UpdateAgentRequest {
     interface AsProtobufJSON {
         agent?: Agent.AsProtobufJSON | null;
         agentView?: string;
-        updateMask?: googleProtobuf010.FieldMask.AsProtobufJSON | null;
+        updateMask?: googleProtobuf008.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1257,10 +1257,10 @@ export declare class ExportBenchmarkAgentResponse implements GrpcMessage {
     get agentContent(): Uint8Array | undefined;
     set agentContent(value: Uint8Array | undefined);
     get trainingPhrases(): {
-        [prop: string]: ondewoNlu013.ListTrainingPhrasesResponse;
+        [prop: string]: ondewoNlu014.ListTrainingPhrasesResponse;
     } | undefined;
     set trainingPhrases(value: {
-        [prop: string]: ondewoNlu013.ListTrainingPhrasesResponse;
+        [prop: string]: ondewoNlu014.ListTrainingPhrasesResponse;
     } | undefined);
     /**
      * Serialize message to binary data
@@ -1289,7 +1289,7 @@ export declare module ExportBenchmarkAgentResponse {
     interface AsObject {
         agentContent?: Uint8Array;
         trainingPhrases?: {
-            [prop: string]: ondewoNlu013.ListTrainingPhrasesResponse;
+            [prop: string]: ondewoNlu014.ListTrainingPhrasesResponse;
         };
     }
     /**
@@ -1298,7 +1298,7 @@ export declare module ExportBenchmarkAgentResponse {
     interface AsProtobufJSON {
         agentContent?: string;
         trainingPhrases?: {
-            [prop: string]: ondewoNlu013.ListTrainingPhrasesResponse;
+            [prop: string]: ondewoNlu014.ListTrainingPhrasesResponse;
         };
     }
     /**
@@ -1337,8 +1337,8 @@ export declare module ExportBenchmarkAgentResponse {
         constructor(_value?: RecursivePartial<TrainingPhrasesEntry.AsObject>);
         get key(): string | undefined;
         set key(value: string | undefined);
-        get value(): ondewoNlu013.ListTrainingPhrasesResponse | undefined;
-        set value(value: ondewoNlu013.ListTrainingPhrasesResponse | undefined);
+        get value(): ondewoNlu014.ListTrainingPhrasesResponse | undefined;
+        set value(value: ondewoNlu014.ListTrainingPhrasesResponse | undefined);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -1365,14 +1365,14 @@ export declare module ExportBenchmarkAgentResponse {
          */
         interface AsObject {
             key?: string;
-            value?: ondewoNlu013.ListTrainingPhrasesResponse.AsObject;
+            value?: ondewoNlu014.ListTrainingPhrasesResponse.AsObject;
         }
         /**
          * Protobuf JSON representation for TrainingPhrasesEntry
          */
         interface AsProtobufJSON {
             key?: string;
-            value?: ondewoNlu013.ListTrainingPhrasesResponse.AsProtobufJSON | null;
+            value?: ondewoNlu014.ListTrainingPhrasesResponse.AsProtobufJSON | null;
         }
     }
 }
@@ -1502,8 +1502,8 @@ export declare class RankingMatchOptimizationConfig implements GrpcMessage {
     set nSplits(value: number | undefined);
     get randomSeed(): number | undefined;
     set randomSeed(value: number | undefined);
-    get initialThresholds(): googleProtobuf011.Struct | undefined;
-    set initialThresholds(value: googleProtobuf011.Struct | undefined);
+    get initialThresholds(): googleProtobuf009.Struct | undefined;
+    set initialThresholds(value: googleProtobuf009.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1532,7 +1532,7 @@ export declare module RankingMatchOptimizationConfig {
         languageCode?: string;
         nSplits?: number;
         randomSeed?: number;
-        initialThresholds?: googleProtobuf011.Struct.AsObject;
+        initialThresholds?: googleProtobuf009.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for RankingMatchOptimizationConfig
@@ -1541,7 +1541,7 @@ export declare module RankingMatchOptimizationConfig {
         languageCode?: string;
         nSplits?: number;
         randomSeed?: number;
-        initialThresholds?: googleProtobuf011.Struct.AsProtobufJSON | null;
+        initialThresholds?: googleProtobuf009.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -1578,10 +1578,10 @@ export declare class OptimizeRankingMatchResponse implements GrpcMessage {
      * @param _value initial values object or instance of OptimizeRankingMatchResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<OptimizeRankingMatchResponse.AsObject>);
-    get optimizationInfo(): googleProtobuf011.Struct | undefined;
-    set optimizationInfo(value: googleProtobuf011.Struct | undefined);
-    get optimizedOndewoConfig(): googleProtobuf011.Struct | undefined;
-    set optimizedOndewoConfig(value: googleProtobuf011.Struct | undefined);
+    get optimizationInfo(): googleProtobuf009.Struct | undefined;
+    set optimizationInfo(value: googleProtobuf009.Struct | undefined);
+    get optimizedOndewoConfig(): googleProtobuf009.Struct | undefined;
+    set optimizedOndewoConfig(value: googleProtobuf009.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1607,15 +1607,15 @@ export declare module OptimizeRankingMatchResponse {
      * Standard JavaScript object representation for OptimizeRankingMatchResponse
      */
     interface AsObject {
-        optimizationInfo?: googleProtobuf011.Struct.AsObject;
-        optimizedOndewoConfig?: googleProtobuf011.Struct.AsObject;
+        optimizationInfo?: googleProtobuf009.Struct.AsObject;
+        optimizedOndewoConfig?: googleProtobuf009.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for OptimizeRankingMatchResponse
      */
     interface AsProtobufJSON {
-        optimizationInfo?: googleProtobuf011.Struct.AsProtobufJSON | null;
-        optimizedOndewoConfig?: googleProtobuf011.Struct.AsProtobufJSON | null;
+        optimizationInfo?: googleProtobuf009.Struct.AsProtobufJSON | null;
+        optimizedOndewoConfig?: googleProtobuf009.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -2217,8 +2217,8 @@ export declare class UserInProject implements GrpcMessage {
     constructor(_value?: RecursivePartial<UserInProject.AsObject>);
     get parent(): string | undefined;
     set parent(value: string | undefined);
-    get user(): ondewoNlu014.User | undefined;
-    set user(value: ondewoNlu014.User | undefined);
+    get user(): ondewoNlu015.User | undefined;
+    set user(value: ondewoNlu015.User | undefined);
     get roleId(): number | undefined;
     set roleId(value: number | undefined);
     /**
@@ -2247,7 +2247,7 @@ export declare module UserInProject {
      */
     interface AsObject {
         parent?: string;
-        user?: ondewoNlu014.User.AsObject;
+        user?: ondewoNlu015.User.AsObject;
         roleId?: number;
     }
     /**
@@ -2255,7 +2255,7 @@ export declare module UserInProject {
      */
     interface AsProtobufJSON {
         parent?: string;
-        user?: ondewoNlu014.User.AsProtobufJSON | null;
+        user?: ondewoNlu015.User.AsProtobufJSON | null;
         roleId?: number;
     }
 }
@@ -2665,8 +2665,8 @@ export declare class AgentSorting implements GrpcMessage {
     constructor(_value?: RecursivePartial<AgentSorting.AsObject>);
     get sortingField(): AgentSorting.AgentSortingField | undefined;
     set sortingField(value: AgentSorting.AgentSortingField | undefined);
-    get sortingMode(): ondewoNlu007.SortingMode | undefined;
-    set sortingMode(value: ondewoNlu007.SortingMode | undefined);
+    get sortingMode(): ondewoNlu004.SortingMode | undefined;
+    set sortingMode(value: ondewoNlu004.SortingMode | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2693,7 +2693,7 @@ export declare module AgentSorting {
      */
     interface AsObject {
         sortingField?: AgentSorting.AgentSortingField;
-        sortingMode?: ondewoNlu007.SortingMode;
+        sortingMode?: ondewoNlu004.SortingMode;
     }
     /**
      * Protobuf JSON representation for AgentSorting
@@ -3184,8 +3184,8 @@ export declare class ModelStatus implements GrpcMessage {
     set languageCode(value: string | undefined);
     get modelName(): string | undefined;
     set modelName(value: string | undefined);
-    get statusSetTime(): googleProtobuf009.Timestamp | undefined;
-    set statusSetTime(value: googleProtobuf009.Timestamp | undefined);
+    get statusSetTime(): googleProtobuf007.Timestamp | undefined;
+    set statusSetTime(value: googleProtobuf007.Timestamp | undefined);
     get config(): string | undefined;
     set config(value: string | undefined);
     get status(): ModelStatus.StatusName | undefined;
@@ -3218,7 +3218,7 @@ export declare module ModelStatus {
         cacheVersion?: number;
         languageCode?: string;
         modelName?: string;
-        statusSetTime?: googleProtobuf009.Timestamp.AsObject;
+        statusSetTime?: googleProtobuf007.Timestamp.AsObject;
         config?: string;
         status?: ModelStatus.StatusName;
     }
@@ -3229,7 +3229,7 @@ export declare module ModelStatus {
         cacheVersion?: number;
         languageCode?: string;
         modelName?: string;
-        statusSetTime?: googleProtobuf009.Timestamp.AsProtobufJSON | null;
+        statusSetTime?: googleProtobuf007.Timestamp.AsProtobufJSON | null;
         config?: string;
         status?: string;
     }
@@ -3347,8 +3347,8 @@ export declare class CustomPlatformInfo implements GrpcMessage {
      * @param _value initial values object or instance of CustomPlatformInfo to deeply clone from
      */
     constructor(_value?: RecursivePartial<CustomPlatformInfo.AsObject>);
-    get platform(): ondewoNlu013.Intent.Message.Platform | undefined;
-    set platform(value: ondewoNlu013.Intent.Message.Platform | undefined);
+    get platform(): ondewoNlu014.Intent.Message.Platform | undefined;
+    set platform(value: ondewoNlu014.Intent.Message.Platform | undefined);
     get displayName(): string | undefined;
     set displayName(value: string | undefined);
     get position(): number | undefined;
@@ -3378,7 +3378,7 @@ export declare module CustomPlatformInfo {
      * Standard JavaScript object representation for CustomPlatformInfo
      */
     interface AsObject {
-        platform?: ondewoNlu013.Intent.Message.Platform;
+        platform?: ondewoNlu014.Intent.Message.Platform;
         displayName?: string;
         position?: number;
     }

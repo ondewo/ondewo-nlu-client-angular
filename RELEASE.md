@@ -2,6 +2,12 @@
 
 *****************
 
+## Release ONDEWO NLU Angular Client 2.8.0
+
+* Track version 2.8.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.8.0)
+
+*****************
+
 ## Release ONDEWO NLU Angular Client 2.6.0
 
 * Track version 2.6.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.6.0)

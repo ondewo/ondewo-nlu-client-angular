@@ -2,10 +2,10 @@ import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu007 from '../../ondewo/nlu/context.pb';
-import * as ondewoNlu008 from '../../ondewo/nlu/common.pb';
-import * as googleProtobuf010 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf011 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu009 from '../../ondewo/nlu/context.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
+import * as googleProtobuf012 from '@ngx-grpc/well-known-types';
 export declare enum IntentView {
     INTENT_VIEW_UNSPECIFIED = 0,
     INTENT_VIEW_FULL = 1,
@@ -99,8 +99,8 @@ export declare class Intent implements GrpcMessage {
     set trainingPhrases(value: Intent.TrainingPhrase[] | undefined);
     get action(): string | undefined;
     set action(value: string | undefined);
-    get outputContexts(): ondewoNlu007.Context[] | undefined;
-    set outputContexts(value: ondewoNlu007.Context[] | undefined);
+    get outputContexts(): ondewoNlu009.Context[] | undefined;
+    set outputContexts(value: ondewoNlu009.Context[] | undefined);
     get resetContexts(): boolean | undefined;
     set resetContexts(value: boolean | undefined);
     get parameters(): Intent.Parameter[] | undefined;
@@ -127,10 +127,10 @@ export declare class Intent implements GrpcMessage {
     set trainingPhraseCount(value: number | undefined);
     get status(): Intent.IntentStatus | undefined;
     set status(value: Intent.IntentStatus | undefined);
-    get startDate(): googleProtobuf010.Timestamp | undefined;
-    set startDate(value: googleProtobuf010.Timestamp | undefined);
-    get endDate(): googleProtobuf010.Timestamp | undefined;
-    set endDate(value: googleProtobuf010.Timestamp | undefined);
+    get startDate(): googleProtobuf007.Timestamp | undefined;
+    set startDate(value: googleProtobuf007.Timestamp | undefined);
+    get endDate(): googleProtobuf007.Timestamp | undefined;
+    set endDate(value: googleProtobuf007.Timestamp | undefined);
     get tags(): string[] | undefined;
     set tags(value: string[] | undefined);
     /**
@@ -168,7 +168,7 @@ export declare module Intent {
         events?: string[];
         trainingPhrases?: Intent.TrainingPhrase.AsObject[];
         action?: string;
-        outputContexts?: ondewoNlu007.Context.AsObject[];
+        outputContexts?: ondewoNlu009.Context.AsObject[];
         resetContexts?: boolean;
         parameters?: Intent.Parameter.AsObject[];
         messages?: Intent.Message.AsObject[];
@@ -182,8 +182,8 @@ export declare module Intent {
         isEndOfDeviation?: boolean;
         trainingPhraseCount?: number;
         status?: Intent.IntentStatus;
-        startDate?: googleProtobuf010.Timestamp.AsObject;
-        endDate?: googleProtobuf010.Timestamp.AsObject;
+        startDate?: googleProtobuf007.Timestamp.AsObject;
+        endDate?: googleProtobuf007.Timestamp.AsObject;
         tags?: string[];
     }
     /**
@@ -200,7 +200,7 @@ export declare module Intent {
         events?: string[];
         trainingPhrases?: Intent.TrainingPhrase.AsProtobufJSON[] | null;
         action?: string;
-        outputContexts?: ondewoNlu007.Context.AsProtobufJSON[] | null;
+        outputContexts?: ondewoNlu009.Context.AsProtobufJSON[] | null;
         resetContexts?: boolean;
         parameters?: Intent.Parameter.AsProtobufJSON[] | null;
         messages?: Intent.Message.AsProtobufJSON[] | null;
@@ -214,8 +214,8 @@ export declare module Intent {
         isEndOfDeviation?: boolean;
         trainingPhraseCount?: number;
         status?: string;
-        startDate?: googleProtobuf010.Timestamp.AsProtobufJSON | null;
-        endDate?: googleProtobuf010.Timestamp.AsProtobufJSON | null;
+        startDate?: googleProtobuf007.Timestamp.AsProtobufJSON | null;
+        endDate?: googleProtobuf007.Timestamp.AsProtobufJSON | null;
         tags?: string[];
     }
     enum IntentStatus {
@@ -681,8 +681,8 @@ export declare module Intent {
         set quickReplies(value: Intent.Message.QuickReplies | undefined);
         get card(): Intent.Message.Card | undefined;
         set card(value: Intent.Message.Card | undefined);
-        get payload(): googleProtobuf011.Struct | undefined;
-        set payload(value: googleProtobuf011.Struct | undefined);
+        get payload(): googleProtobuf012.Struct | undefined;
+        set payload(value: googleProtobuf012.Struct | undefined);
         get simpleResponses(): Intent.Message.SimpleResponses | undefined;
         set simpleResponses(value: Intent.Message.SimpleResponses | undefined);
         get basicCard(): Intent.Message.BasicCard | undefined;
@@ -737,7 +737,7 @@ export declare module Intent {
             image?: Intent.Message.Image.AsObject;
             quickReplies?: Intent.Message.QuickReplies.AsObject;
             card?: Intent.Message.Card.AsObject;
-            payload?: googleProtobuf011.Struct.AsObject;
+            payload?: googleProtobuf012.Struct.AsObject;
             simpleResponses?: Intent.Message.SimpleResponses.AsObject;
             basicCard?: Intent.Message.BasicCard.AsObject;
             suggestions?: Intent.Message.Suggestions.AsObject;
@@ -760,7 +760,7 @@ export declare module Intent {
             image?: Intent.Message.Image.AsProtobufJSON | null;
             quickReplies?: Intent.Message.QuickReplies.AsProtobufJSON | null;
             card?: Intent.Message.Card.AsProtobufJSON | null;
-            payload?: googleProtobuf011.Struct.AsProtobufJSON | null;
+            payload?: googleProtobuf012.Struct.AsProtobufJSON | null;
             simpleResponses?: Intent.Message.SimpleResponses.AsProtobufJSON | null;
             basicCard?: Intent.Message.BasicCard.AsProtobufJSON | null;
             suggestions?: Intent.Message.Suggestions.AsProtobufJSON | null;
@@ -3309,8 +3309,8 @@ export declare class IntentSorting implements GrpcMessage {
     constructor(_value?: RecursivePartial<IntentSorting.AsObject>);
     get sortingField(): IntentSorting.IntentSortingField | undefined;
     set sortingField(value: IntentSorting.IntentSortingField | undefined);
-    get sortingMode(): ondewoNlu008.SortingMode | undefined;
-    set sortingMode(value: ondewoNlu008.SortingMode | undefined);
+    get sortingMode(): ondewoNlu010.SortingMode | undefined;
+    set sortingMode(value: ondewoNlu010.SortingMode | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3337,7 +3337,7 @@ export declare module IntentSorting {
      */
     interface AsObject {
         sortingField?: IntentSorting.IntentSortingField;
-        sortingMode?: ondewoNlu008.SortingMode;
+        sortingMode?: ondewoNlu010.SortingMode;
     }
     /**
      * Protobuf JSON representation for IntentSorting
@@ -6073,6 +6073,164 @@ export declare module ListParametersResponse {
      */
     interface AsProtobufJSON {
         parameters?: Intent.Parameter.AsProtobufJSON[] | null;
+        nextPageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListTrainingPhrasesofIntentsWithEnrichmentRequest
+ */
+export declare class ListTrainingPhrasesofIntentsWithEnrichmentRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListTrainingPhrasesofIntentsWithEnrichmentRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListTrainingPhrasesofIntentsWithEnrichmentRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListTrainingPhrasesofIntentsWithEnrichmentRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListTrainingPhrasesofIntentsWithEnrichmentRequest, _writer: BinaryWriter): void;
+    private _parent?;
+    private _languageCode?;
+    private _intentIds?;
+    private _pageToken?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTrainingPhrasesofIntentsWithEnrichmentRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListTrainingPhrasesofIntentsWithEnrichmentRequest.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    get languageCode(): string | undefined;
+    set languageCode(value: string | undefined);
+    get intentIds(): string[] | undefined;
+    set intentIds(value: string[] | undefined);
+    get pageToken(): string | undefined;
+    set pageToken(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListTrainingPhrasesofIntentsWithEnrichmentRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListTrainingPhrasesofIntentsWithEnrichmentRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListTrainingPhrasesofIntentsWithEnrichmentRequest.AsProtobufJSON;
+}
+export declare module ListTrainingPhrasesofIntentsWithEnrichmentRequest {
+    /**
+     * Standard JavaScript object representation for ListTrainingPhrasesofIntentsWithEnrichmentRequest
+     */
+    interface AsObject {
+        parent?: string;
+        languageCode?: string;
+        intentIds?: string[];
+        pageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListTrainingPhrasesofIntentsWithEnrichmentRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        languageCode?: string;
+        intentIds?: string[];
+        pageToken?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListTrainingPhrasesofIntentsWithEnrichmentResponse
+ */
+export declare class ListTrainingPhrasesofIntentsWithEnrichmentResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListTrainingPhrasesofIntentsWithEnrichmentResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListTrainingPhrasesofIntentsWithEnrichmentResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListTrainingPhrasesofIntentsWithEnrichmentResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListTrainingPhrasesofIntentsWithEnrichmentResponse, _writer: BinaryWriter): void;
+    private _trainingPhrases?;
+    private _nextPageToken?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTrainingPhrasesofIntentsWithEnrichmentResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListTrainingPhrasesofIntentsWithEnrichmentResponse.AsObject>);
+    get trainingPhrases(): string[] | undefined;
+    set trainingPhrases(value: string[] | undefined);
+    get nextPageToken(): string | undefined;
+    set nextPageToken(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListTrainingPhrasesofIntentsWithEnrichmentResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListTrainingPhrasesofIntentsWithEnrichmentResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListTrainingPhrasesofIntentsWithEnrichmentResponse.AsProtobufJSON;
+}
+export declare module ListTrainingPhrasesofIntentsWithEnrichmentResponse {
+    /**
+     * Standard JavaScript object representation for ListTrainingPhrasesofIntentsWithEnrichmentResponse
+     */
+    interface AsObject {
+        trainingPhrases?: string[];
+        nextPageToken?: string;
+    }
+    /**
+     * Protobuf JSON representation for ListTrainingPhrasesofIntentsWithEnrichmentResponse
+     */
+    interface AsProtobufJSON {
+        trainingPhrases?: string[];
         nextPageToken?: string;
     }
 }

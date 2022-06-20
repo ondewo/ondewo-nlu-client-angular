@@ -2,8 +2,8 @@ import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './agent.pb';
-import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
-import * as googleLongrunning008 from '../../google/longrunning/operations.pb';
+import * as ondewoNlu005 from '../../ondewo/nlu/operations.pb';
+import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
 import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.Agents
@@ -46,17 +46,17 @@ export declare class AgentsClient {
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         * @returns Observable<GrpcEvent<googleProtobuf006.Empty>>
          */
-        deleteAgent: (requestData: thisProto.DeleteAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        deleteAgent: (requestData: thisProto.DeleteAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf006.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/DeleteAllAgents
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         * @returns Observable<GrpcEvent<googleProtobuf006.Empty>>
          */
-        deleteAllAgents: (requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        deleteAllAgents: (requestData: googleProtobuf006.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf006.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ListAgents
          *
@@ -86,17 +86,17 @@ export declare class AgentsClient {
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         * @returns Observable<GrpcEvent<googleProtobuf006.Empty>>
          */
-        addUserToProject: (requestData: thisProto.AddUserToProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        addUserToProject: (requestData: thisProto.AddUserToProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf006.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/RemoveUserFromProject
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         * @returns Observable<GrpcEvent<googleProtobuf006.Empty>>
          */
-        removeUserFromProject: (requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        removeUserFromProject: (requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf006.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ListUsersInProject
          *
@@ -112,7 +112,7 @@ export declare class AgentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<thisProto.GetPlatformInfoResponse>>
          */
-        getPlatformInfo: (requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetPlatformInfoResponse>>;
+        getPlatformInfo: (requestData: googleProtobuf006.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetPlatformInfoResponse>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ListProjectPermissions
          *
@@ -126,57 +126,57 @@ export declare class AgentsClient {
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         * @returns Observable<GrpcEvent<ondewoNlu005.Operation>>
          */
-        trainAgent: (requestData: thisProto.TrainAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        trainAgent: (requestData: thisProto.TrainAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu005.Operation>>;
         /**
          * Unary call: /ondewo.nlu.Agents/BuildCache
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         * @returns Observable<GrpcEvent<ondewoNlu005.Operation>>
          */
-        buildCache: (requestData: thisProto.BuildCacheRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        buildCache: (requestData: thisProto.BuildCacheRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu005.Operation>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ExportAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         * @returns Observable<GrpcEvent<ondewoNlu005.Operation>>
          */
-        exportAgent: (requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        exportAgent: (requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu005.Operation>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ExportBenchmarkAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         * @returns Observable<GrpcEvent<ondewoNlu005.Operation>>
          */
-        exportBenchmarkAgent: (requestData: thisProto.ExportBenchmarkAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        exportBenchmarkAgent: (requestData: thisProto.ExportBenchmarkAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu005.Operation>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ImportAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         * @returns Observable<GrpcEvent<ondewoNlu005.Operation>>
          */
-        importAgent: (requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        importAgent: (requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu005.Operation>>;
         /**
          * Unary call: /ondewo.nlu.Agents/OptimizeRankingMatch
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         * @returns Observable<GrpcEvent<ondewoNlu005.Operation>>
          */
-        optimizeRankingMatch: (requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        optimizeRankingMatch: (requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu005.Operation>>;
         /**
          * Unary call: /ondewo.nlu.Agents/RestoreAgent
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning008.Operation>>
+         * @returns Observable<GrpcEvent<ondewoNlu005.Operation>>
          */
-        restoreAgent: (requestData: thisProto.RestoreAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning008.Operation>>;
+        restoreAgent: (requestData: thisProto.RestoreAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu005.Operation>>;
         /**
          * Unary call: /ondewo.nlu.Agents/GetAgentStatistics
          *
@@ -198,17 +198,17 @@ export declare class AgentsClient {
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         * @returns Observable<GrpcEvent<googleProtobuf006.Empty>>
          */
-        setResources: (requestData: thisProto.SetResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        setResources: (requestData: thisProto.SetResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf006.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/DeleteResources
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         * @returns Observable<GrpcEvent<googleProtobuf006.Empty>>
          */
-        deleteResources: (requestData: thisProto.DeleteResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        deleteResources: (requestData: thisProto.DeleteResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf006.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ExportResources
          *
@@ -272,17 +272,17 @@ export declare class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
+     * @returns Observable<googleProtobuf006.Empty>
      */
-    deleteAgent(requestData: thisProto.DeleteAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    deleteAgent(requestData: thisProto.DeleteAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf006.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/DeleteAllAgents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
+     * @returns Observable<googleProtobuf006.Empty>
      */
-    deleteAllAgents(requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    deleteAllAgents(requestData: googleProtobuf006.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf006.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/ListAgents
      *
@@ -312,17 +312,17 @@ export declare class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
+     * @returns Observable<googleProtobuf006.Empty>
      */
-    addUserToProject(requestData: thisProto.AddUserToProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    addUserToProject(requestData: thisProto.AddUserToProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf006.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/RemoveUserFromProject
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
+     * @returns Observable<googleProtobuf006.Empty>
      */
-    removeUserFromProject(requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    removeUserFromProject(requestData: thisProto.RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf006.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/ListUsersInProject
      *
@@ -338,7 +338,7 @@ export declare class AgentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<thisProto.GetPlatformInfoResponse>
      */
-    getPlatformInfo(requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.GetPlatformInfoResponse>;
+    getPlatformInfo(requestData: googleProtobuf006.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.GetPlatformInfoResponse>;
     /**
      * Unary call @/ondewo.nlu.Agents/ListProjectPermissions
      *
@@ -352,57 +352,57 @@ export declare class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning008.Operation>
+     * @returns Observable<ondewoNlu005.Operation>
      */
-    trainAgent(requestData: thisProto.TrainAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
+    trainAgent(requestData: thisProto.TrainAgentRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu005.Operation>;
     /**
      * Unary call @/ondewo.nlu.Agents/BuildCache
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning008.Operation>
+     * @returns Observable<ondewoNlu005.Operation>
      */
-    buildCache(requestData: thisProto.BuildCacheRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
+    buildCache(requestData: thisProto.BuildCacheRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu005.Operation>;
     /**
      * Unary call @/ondewo.nlu.Agents/ExportAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning008.Operation>
+     * @returns Observable<ondewoNlu005.Operation>
      */
-    exportAgent(requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
+    exportAgent(requestData: thisProto.ExportAgentRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu005.Operation>;
     /**
      * Unary call @/ondewo.nlu.Agents/ExportBenchmarkAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning008.Operation>
+     * @returns Observable<ondewoNlu005.Operation>
      */
-    exportBenchmarkAgent(requestData: thisProto.ExportBenchmarkAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
+    exportBenchmarkAgent(requestData: thisProto.ExportBenchmarkAgentRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu005.Operation>;
     /**
      * Unary call @/ondewo.nlu.Agents/ImportAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning008.Operation>
+     * @returns Observable<ondewoNlu005.Operation>
      */
-    importAgent(requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
+    importAgent(requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu005.Operation>;
     /**
      * Unary call @/ondewo.nlu.Agents/OptimizeRankingMatch
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning008.Operation>
+     * @returns Observable<ondewoNlu005.Operation>
      */
-    optimizeRankingMatch(requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
+    optimizeRankingMatch(requestData: thisProto.OptimizeRankingMatchRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu005.Operation>;
     /**
      * Unary call @/ondewo.nlu.Agents/RestoreAgent
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning008.Operation>
+     * @returns Observable<ondewoNlu005.Operation>
      */
-    restoreAgent(requestData: thisProto.RestoreAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning008.Operation>;
+    restoreAgent(requestData: thisProto.RestoreAgentRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu005.Operation>;
     /**
      * Unary call @/ondewo.nlu.Agents/GetAgentStatistics
      *
@@ -424,17 +424,17 @@ export declare class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
+     * @returns Observable<googleProtobuf006.Empty>
      */
-    setResources(requestData: thisProto.SetResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    setResources(requestData: thisProto.SetResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf006.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/DeleteResources
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
+     * @returns Observable<googleProtobuf006.Empty>
      */
-    deleteResources(requestData: thisProto.DeleteResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    deleteResources(requestData: thisProto.DeleteResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf006.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/ExportResources
      *

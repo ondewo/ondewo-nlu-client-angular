@@ -3,7 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './entity-type.pb';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
-import * as googleLongrunning006 from '../../google/longrunning/operations.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/operations.pb';
 import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.EntityTypes
@@ -62,17 +62,17 @@ export declare class EntityTypesClient {
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         * @returns Observable<GrpcEvent<ondewoNlu010.Operation>>
          */
-        batchUpdateEntityTypes: (requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+        batchUpdateEntityTypes: (requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu010.Operation>>;
         /**
          * Unary call: /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleLongrunning006.Operation>>
+         * @returns Observable<GrpcEvent<ondewoNlu010.Operation>>
          */
-        batchDeleteEntityTypes: (requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleLongrunning006.Operation>>;
+        batchDeleteEntityTypes: (requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu010.Operation>>;
         /**
          * Unary call: /ondewo.nlu.EntityTypes/BatchCreateEntities
          *
@@ -160,17 +160,17 @@ export declare class EntityTypesClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning006.Operation>
+     * @returns Observable<ondewoNlu010.Operation>
      */
-    batchUpdateEntityTypes(requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
+    batchUpdateEntityTypes(requestData: thisProto.BatchUpdateEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu010.Operation>;
     /**
      * Unary call @/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleLongrunning006.Operation>
+     * @returns Observable<ondewoNlu010.Operation>
      */
-    batchDeleteEntityTypes(requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<googleLongrunning006.Operation>;
+    batchDeleteEntityTypes(requestData: thisProto.BatchDeleteEntityTypesRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu010.Operation>;
     /**
      * Unary call @/ondewo.nlu.EntityTypes/BatchCreateEntities
      *

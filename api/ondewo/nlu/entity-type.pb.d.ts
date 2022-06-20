@@ -1,8 +1,8 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu008 from '../../ondewo/nlu/common.pb';
+import * as googleProtobuf008 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu009 from '../../ondewo/nlu/common.pb';
 export declare enum EntityTypeView {
     ENTITY_TYPE_VIEW_UNSPECIFIED = 0,
     ENTITY_TYPE_VIEW_FULL = 1,
@@ -606,8 +606,8 @@ export declare class UpdateEntityTypeRequest implements GrpcMessage {
     set entityType(value: EntityType | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    get updateMask(): googleProtobuf007.FieldMask | undefined;
-    set updateMask(value: googleProtobuf007.FieldMask | undefined);
+    get updateMask(): googleProtobuf008.FieldMask | undefined;
+    set updateMask(value: googleProtobuf008.FieldMask | undefined);
     get entityTypeView(): EntityTypeView | undefined;
     set entityTypeView(value: EntityTypeView | undefined);
     /**
@@ -637,7 +637,7 @@ export declare module UpdateEntityTypeRequest {
     interface AsObject {
         entityType?: EntityType.AsObject;
         languageCode?: string;
-        updateMask?: googleProtobuf007.FieldMask.AsObject;
+        updateMask?: googleProtobuf008.FieldMask.AsObject;
         entityTypeView?: EntityTypeView;
     }
     /**
@@ -646,7 +646,7 @@ export declare module UpdateEntityTypeRequest {
     interface AsProtobufJSON {
         entityType?: EntityType.AsProtobufJSON | null;
         languageCode?: string;
-        updateMask?: googleProtobuf007.FieldMask.AsProtobufJSON | null;
+        updateMask?: googleProtobuf008.FieldMask.AsProtobufJSON | null;
         entityTypeView?: string;
     }
 }
@@ -765,8 +765,8 @@ export declare class BatchUpdateEntityTypesRequest implements GrpcMessage {
     set entityTypeBatchInline(value: EntityTypeBatch | undefined);
     get languageCode(): string | undefined;
     set languageCode(value: string | undefined);
-    get updateMask(): googleProtobuf007.FieldMask | undefined;
-    set updateMask(value: googleProtobuf007.FieldMask | undefined);
+    get updateMask(): googleProtobuf008.FieldMask | undefined;
+    set updateMask(value: googleProtobuf008.FieldMask | undefined);
     get entityTypeBatch(): BatchUpdateEntityTypesRequest.EntityTypeBatchCase;
     /**
      * Serialize message to binary data
@@ -797,7 +797,7 @@ export declare module BatchUpdateEntityTypesRequest {
         entityTypeBatchUri?: string;
         entityTypeBatchInline?: EntityTypeBatch.AsObject;
         languageCode?: string;
-        updateMask?: googleProtobuf007.FieldMask.AsObject;
+        updateMask?: googleProtobuf008.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for BatchUpdateEntityTypesRequest
@@ -807,7 +807,7 @@ export declare module BatchUpdateEntityTypesRequest {
         entityTypeBatchUri?: string | null;
         entityTypeBatchInline?: EntityTypeBatch.AsProtobufJSON | null;
         languageCode?: string;
-        updateMask?: googleProtobuf007.FieldMask.AsProtobufJSON | null;
+        updateMask?: googleProtobuf008.FieldMask.AsProtobufJSON | null;
     }
     enum EntityTypeBatchCase {
         none = 0,
@@ -1063,8 +1063,8 @@ export declare class EntityTypeSorting implements GrpcMessage {
     constructor(_value?: RecursivePartial<EntityTypeSorting.AsObject>);
     get sortingField(): EntityTypeSorting.EntityTypeSortingField | undefined;
     set sortingField(value: EntityTypeSorting.EntityTypeSortingField | undefined);
-    get sortingMode(): ondewoNlu008.SortingMode | undefined;
-    set sortingMode(value: ondewoNlu008.SortingMode | undefined);
+    get sortingMode(): ondewoNlu009.SortingMode | undefined;
+    set sortingMode(value: ondewoNlu009.SortingMode | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1091,7 +1091,7 @@ export declare module EntityTypeSorting {
      */
     interface AsObject {
         sortingField?: EntityTypeSorting.EntityTypeSortingField;
-        sortingMode?: ondewoNlu008.SortingMode;
+        sortingMode?: ondewoNlu009.SortingMode;
     }
     /**
      * Protobuf JSON representation for EntityTypeSorting
@@ -1968,8 +1968,8 @@ export declare class EntityValueSorting implements GrpcMessage {
     constructor(_value?: RecursivePartial<EntityValueSorting.AsObject>);
     get sortingField(): EntityValueSorting.EntityValueSortingField | undefined;
     set sortingField(value: EntityValueSorting.EntityValueSortingField | undefined);
-    get sortingMode(): ondewoNlu008.SortingMode | undefined;
-    set sortingMode(value: ondewoNlu008.SortingMode | undefined);
+    get sortingMode(): ondewoNlu009.SortingMode | undefined;
+    set sortingMode(value: ondewoNlu009.SortingMode | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1996,7 +1996,7 @@ export declare module EntityValueSorting {
      */
     interface AsObject {
         sortingField?: EntityValueSorting.EntityValueSortingField;
-        sortingMode?: ondewoNlu008.SortingMode;
+        sortingMode?: ondewoNlu009.SortingMode;
     }
     /**
      * Protobuf JSON representation for EntityValueSorting
