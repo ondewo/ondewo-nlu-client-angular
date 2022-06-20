@@ -1,3 +1,5 @@
 .idea
 npm
 ondewo-nlu-api/*
+.idea/
+.vscode/
