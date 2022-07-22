@@ -1,5 +1,5 @@
 # which branches to use for the build of the client sdk
-NLU_API_GIT_BRANCH=tags/2.8.0
+NLU_API_GIT_BRANCH=tags/2.9.0
 
 NLU_APIS_DIR=src/ondewo-nlu-api
 NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
