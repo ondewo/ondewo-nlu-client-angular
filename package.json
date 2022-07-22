@@ -1,6 +1,6 @@
 {
   "name": "@ondewo/nlu-client-angular",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "description": "ONDEWO Natural Language Understanding (NLU) Platfrom client library for Angular",
   "author": "ONDEWO GmbH <office@ondewo.com>",
   "homepage": "https://ondewo.com/",
@@ -28,13 +28,13 @@
   "esm2020": "esm2020/ondewo-nlu-client-angular.mjs",
   "fesm2020": "fesm2020/ondewo-nlu-client-angular.mjs",
   "fesm2015": "fesm2015/ondewo-nlu-client-angular.mjs",
-  "typings": "ondewo-nlu-client-angular.d.ts",
+  "typings": "index.d.ts",
   "exports": {
     "./package.json": {
       "default": "./package.json"
     },
     ".": {
-      "types": "./ondewo-nlu-client-angular.d.ts",
+      "types": "./index.d.ts",
       "esm2020": "./esm2020/ondewo-nlu-client-angular.mjs",
       "es2020": "./fesm2020/ondewo-nlu-client-angular.mjs",
       "es2015": "./fesm2015/ondewo-nlu-client-angular.mjs",
