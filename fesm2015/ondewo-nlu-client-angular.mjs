@@ -1,17 +1,10 @@
-import * as i0 from '@angular/core';
-import { InjectionToken, Injectable, Optional, Inject } from '@angular/core';
 import { BinaryReader, BinaryWriter } from 'google-protobuf';
 import { uint8ArrayToBase64, GrpcCallType, GrpcMetadata } from '@ngx-grpc/common';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+import * as i0 from '@angular/core';
+import { InjectionToken, Injectable, Optional, Inject } from '@angular/core';
 import * as i1 from '@ngx-grpc/core';
 import { throwStatusErrors, takeMessages, GRPC_CLIENT_FACTORY } from '@ngx-grpc/core';
-
-/* tslint:disable */
-/**
- * Specific GrpcClientSettings for Qa.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_QA_CLIENT_SETTINGS = new InjectionToken('GRPC_QA_CLIENT_SETTINGS');
 
 /**
  * Message implementation for ondewo.nlu.Context
@@ -22511,6 +22504,13 @@ UpdateDatabaseResponse.id = 'ondewo.qa.UpdateDatabaseResponse';
 
 /* tslint:disable */
 /**
+ * Specific GrpcClientSettings for Qa.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_QA_CLIENT_SETTINGS = new InjectionToken('GRPC_QA_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/**
  * Service client implementation for ondewo.qa.QA
  */
 class QAClient {
@@ -22736,9 +22736,9 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-QAClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: QAClient, deps: [{ token: GRPC_QA_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-QAClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: QAClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: QAClient, decorators: [{
+QAClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: QAClient, deps: [{ token: GRPC_QA_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+QAClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: QAClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: QAClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -22755,32 +22755,38 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImpor
 
 /* tslint:disable */
 /**
+ * Specific GrpcClientSettings for AiServices.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_AI_SERVICES_CLIENT_SETTINGS = new InjectionToken('GRPC_AI_SERVICES_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/**
  * Specific GrpcClientSettings for Intents.
  * Use it only if your default settings are not set or the service requires other settings.
  */
 const GRPC_INTENTS_CLIENT_SETTINGS = new InjectionToken('GRPC_INTENTS_CLIENT_SETTINGS');
 
 /**
- * Message implementation for ondewo.nlu.GetIntentCountRequest
+ * Message implementation for ondewo.nlu.GetUserProjectCountRequest
  */
-class GetIntentCountRequest {
+class GetUserProjectCountRequest {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetIntentCountRequest to deeply clone from
+     * @param _value initial values object or instance of GetUserProjectCountRequest to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
-        this.parent = _value.parent;
-        this.filterByCategory = _value.filterByCategory;
-        GetIntentCountRequest.refineValues(this);
+        this.userId = _value.userId;
+        GetUserProjectCountRequest.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new GetIntentCountRequest();
-        GetIntentCountRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new GetUserProjectCountRequest();
+        GetUserProjectCountRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -22788,8 +22794,7 @@ class GetIntentCountRequest {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.parent = _instance.parent || '';
-        _instance.filterByCategory = _instance.filterByCategory || 0;
+        _instance.userId = _instance.userId || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -22802,16 +22807,201 @@ class GetIntentCountRequest {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.parent = _reader.readString();
+                    _instance.userId = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetUserProjectCountRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.userId) {
+            _writer.writeString(1, _instance.userId);
+        }
+    }
+    get userId() {
+        return this._userId;
+    }
+    set userId(value) {
+        this._userId = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetUserProjectCountRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            userId: this.userId
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            userId: this.userId
+        };
+    }
+}
+GetUserProjectCountRequest.id = 'ondewo.nlu.GetUserProjectCountRequest';
+
+/**
+ * Message implementation for ondewo.nlu.OperationMetadata
+ */
+class OperationMetadata {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of OperationMetadata to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.status = _value.status;
+        this.parentOperationName = _value.parentOperationName;
+        this.subOperationNames = (_value.subOperationNames || []).slice();
+        this.createTime = _value.createTime
+            ? new googleProtobuf003.Timestamp(_value.createTime)
+            : undefined;
+        this.startTime = _value.startTime
+            ? new googleProtobuf003.Timestamp(_value.startTime)
+            : undefined;
+        this.endTime = _value.endTime
+            ? new googleProtobuf003.Timestamp(_value.endTime)
+            : undefined;
+        this.isCancellationRequested = _value.isCancellationRequested;
+        this.cancelCommand = _value.cancelCommand;
+        this.userIdCreated = _value.userIdCreated;
+        this.userIdCancelled = _value.userIdCancelled;
+        this.projectParent = _value.projectParent;
+        this.operationType = _value.operationType;
+        this.hostName = _value.hostName;
+        this.numReruns = _value.numReruns;
+        this.maxNumReruns = _value.maxNumReruns;
+        this.description = _value.description;
+        OperationMetadata.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new OperationMetadata();
+        OperationMetadata.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.status = _instance.status || 0;
+        _instance.parentOperationName = _instance.parentOperationName || '';
+        _instance.subOperationNames = _instance.subOperationNames || [];
+        _instance.createTime = _instance.createTime || undefined;
+        _instance.startTime = _instance.startTime || undefined;
+        _instance.endTime = _instance.endTime || undefined;
+        _instance.isCancellationRequested =
+            _instance.isCancellationRequested || false;
+        _instance.cancelCommand = _instance.cancelCommand || '';
+        _instance.userIdCreated = _instance.userIdCreated || '';
+        _instance.userIdCancelled = _instance.userIdCancelled || '';
+        _instance.projectParent = _instance.projectParent || '';
+        _instance.operationType = _instance.operationType || 0;
+        _instance.hostName = _instance.hostName || '';
+        _instance.numReruns = _instance.numReruns || 0;
+        _instance.maxNumReruns = _instance.maxNumReruns || 0;
+        _instance.description = _instance.description || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.status = _reader.readEnum();
                     break;
                 case 2:
-                    _instance.filterByCategory = _reader.readEnum();
+                    _instance.parentOperationName = _reader.readString();
+                    break;
+                case 3:
+                    (_instance.subOperationNames =
+                        _instance.subOperationNames || []).push(_reader.readString());
+                    break;
+                case 4:
+                    _instance.createTime = new googleProtobuf003.Timestamp();
+                    _reader.readMessage(_instance.createTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 5:
+                    _instance.startTime = new googleProtobuf003.Timestamp();
+                    _reader.readMessage(_instance.startTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 6:
+                    _instance.endTime = new googleProtobuf003.Timestamp();
+                    _reader.readMessage(_instance.endTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 7:
+                    _instance.isCancellationRequested = _reader.readBool();
+                    break;
+                case 8:
+                    _instance.cancelCommand = _reader.readString();
+                    break;
+                case 9:
+                    _instance.userIdCreated = _reader.readString();
+                    break;
+                case 10:
+                    _instance.userIdCancelled = _reader.readString();
+                    break;
+                case 11:
+                    _instance.projectParent = _reader.readString();
+                    break;
+                case 12:
+                    _instance.operationType = _reader.readEnum();
+                    break;
+                case 13:
+                    _instance.hostName = _reader.readString();
+                    break;
+                case 14:
+                    _instance.numReruns = _reader.readInt32();
+                    break;
+                case 15:
+                    _instance.maxNumReruns = _reader.readInt32();
+                    break;
+                case 16:
+                    _instance.description = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        GetIntentCountRequest.refineValues(_instance);
+        OperationMetadata.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -22819,24 +23009,150 @@ class GetIntentCountRequest {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.parent) {
-            _writer.writeString(1, _instance.parent);
+        if (_instance.status) {
+            _writer.writeEnum(1, _instance.status);
         }
-        if (_instance.filterByCategory) {
-            _writer.writeEnum(2, _instance.filterByCategory);
+        if (_instance.parentOperationName) {
+            _writer.writeString(2, _instance.parentOperationName);
+        }
+        if (_instance.subOperationNames && _instance.subOperationNames.length) {
+            _writer.writeRepeatedString(3, _instance.subOperationNames);
+        }
+        if (_instance.createTime) {
+            _writer.writeMessage(4, _instance.createTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.startTime) {
+            _writer.writeMessage(5, _instance.startTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.endTime) {
+            _writer.writeMessage(6, _instance.endTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.isCancellationRequested) {
+            _writer.writeBool(7, _instance.isCancellationRequested);
+        }
+        if (_instance.cancelCommand) {
+            _writer.writeString(8, _instance.cancelCommand);
+        }
+        if (_instance.userIdCreated) {
+            _writer.writeString(9, _instance.userIdCreated);
+        }
+        if (_instance.userIdCancelled) {
+            _writer.writeString(10, _instance.userIdCancelled);
+        }
+        if (_instance.projectParent) {
+            _writer.writeString(11, _instance.projectParent);
+        }
+        if (_instance.operationType) {
+            _writer.writeEnum(12, _instance.operationType);
+        }
+        if (_instance.hostName) {
+            _writer.writeString(13, _instance.hostName);
+        }
+        if (_instance.numReruns) {
+            _writer.writeInt32(14, _instance.numReruns);
+        }
+        if (_instance.maxNumReruns) {
+            _writer.writeInt32(15, _instance.maxNumReruns);
+        }
+        if (_instance.description) {
+            _writer.writeString(16, _instance.description);
         }
     }
-    get parent() {
-        return this._parent;
+    get status() {
+        return this._status;
     }
-    set parent(value) {
-        this._parent = value;
+    set status(value) {
+        this._status = value;
     }
-    get filterByCategory() {
-        return this._filterByCategory;
+    get parentOperationName() {
+        return this._parentOperationName;
     }
-    set filterByCategory(value) {
-        this._filterByCategory = value;
+    set parentOperationName(value) {
+        this._parentOperationName = value;
+    }
+    get subOperationNames() {
+        return this._subOperationNames;
+    }
+    set subOperationNames(value) {
+        this._subOperationNames = value;
+    }
+    get createTime() {
+        return this._createTime;
+    }
+    set createTime(value) {
+        this._createTime = value;
+    }
+    get startTime() {
+        return this._startTime;
+    }
+    set startTime(value) {
+        this._startTime = value;
+    }
+    get endTime() {
+        return this._endTime;
+    }
+    set endTime(value) {
+        this._endTime = value;
+    }
+    get isCancellationRequested() {
+        return this._isCancellationRequested;
+    }
+    set isCancellationRequested(value) {
+        this._isCancellationRequested = value;
+    }
+    get cancelCommand() {
+        return this._cancelCommand;
+    }
+    set cancelCommand(value) {
+        this._cancelCommand = value;
+    }
+    get userIdCreated() {
+        return this._userIdCreated;
+    }
+    set userIdCreated(value) {
+        this._userIdCreated = value;
+    }
+    get userIdCancelled() {
+        return this._userIdCancelled;
+    }
+    set userIdCancelled(value) {
+        this._userIdCancelled = value;
+    }
+    get projectParent() {
+        return this._projectParent;
+    }
+    set projectParent(value) {
+        this._projectParent = value;
+    }
+    get operationType() {
+        return this._operationType;
+    }
+    set operationType(value) {
+        this._operationType = value;
+    }
+    get hostName() {
+        return this._hostName;
+    }
+    set hostName(value) {
+        this._hostName = value;
+    }
+    get numReruns() {
+        return this._numReruns;
+    }
+    set numReruns(value) {
+        this._numReruns = value;
+    }
+    get maxNumReruns() {
+        return this._maxNumReruns;
+    }
+    set maxNumReruns(value) {
+        this._maxNumReruns = value;
+    }
+    get description() {
+        return this._description;
+    }
+    set description(value) {
+        this._description = value;
     }
     /**
      * Serialize message to binary data
@@ -22844,7 +23160,7 @@ class GetIntentCountRequest {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        GetIntentCountRequest.serializeBinaryToWriter(this, writer);
+        OperationMetadata.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -22852,8 +23168,22 @@ class GetIntentCountRequest {
      */
     toObject() {
         return {
-            parent: this.parent,
-            filterByCategory: this.filterByCategory
+            status: this.status,
+            parentOperationName: this.parentOperationName,
+            subOperationNames: (this.subOperationNames || []).slice(),
+            createTime: this.createTime ? this.createTime.toObject() : undefined,
+            startTime: this.startTime ? this.startTime.toObject() : undefined,
+            endTime: this.endTime ? this.endTime.toObject() : undefined,
+            isCancellationRequested: this.isCancellationRequested,
+            cancelCommand: this.cancelCommand,
+            userIdCreated: this.userIdCreated,
+            userIdCancelled: this.userIdCancelled,
+            projectParent: this.projectParent,
+            operationType: this.operationType,
+            hostName: this.hostName,
+            numReruns: this.numReruns,
+            maxNumReruns: this.maxNumReruns,
+            description: this.description
         };
     }
     /**
@@ -22871,255 +23201,85 @@ class GetIntentCountRequest {
     // @ts-ignore
     options) {
         return {
-            parent: this.parent,
-            filterByCategory: IntentCategory[this.filterByCategory === null || this.filterByCategory === undefined
+            status: OperationMetadata.Status[this.status === null || this.status === undefined ? 0 : this.status],
+            parentOperationName: this.parentOperationName,
+            subOperationNames: (this.subOperationNames || []).slice(),
+            createTime: this.createTime
+                ? this.createTime.toProtobufJSON(options)
+                : null,
+            startTime: this.startTime ? this.startTime.toProtobufJSON(options) : null,
+            endTime: this.endTime ? this.endTime.toProtobufJSON(options) : null,
+            isCancellationRequested: this.isCancellationRequested,
+            cancelCommand: this.cancelCommand,
+            userIdCreated: this.userIdCreated,
+            userIdCancelled: this.userIdCancelled,
+            projectParent: this.projectParent,
+            operationType: OperationMetadata.OperationType[this.operationType === null || this.operationType === undefined
                 ? 0
-                : this.filterByCategory]
+                : this.operationType],
+            hostName: this.hostName,
+            numReruns: this.numReruns,
+            maxNumReruns: this.maxNumReruns,
+            description: this.description
         };
     }
 }
-GetIntentCountRequest.id = 'ondewo.nlu.GetIntentCountRequest';
+OperationMetadata.id = 'ondewo.nlu.OperationMetadata';
+(function (OperationMetadata) {
+    let Status;
+    (function (Status) {
+        Status[Status["STATUS_UNSPECIFIED"] = 0] = "STATUS_UNSPECIFIED";
+        Status[Status["NOT_STARTED"] = 1] = "NOT_STARTED";
+        Status[Status["IN_PROGRESS"] = 2] = "IN_PROGRESS";
+        Status[Status["DONE"] = 3] = "DONE";
+        Status[Status["CANCELLED"] = 4] = "CANCELLED";
+        Status[Status["FAILED"] = 5] = "FAILED";
+    })(Status = OperationMetadata.Status || (OperationMetadata.Status = {}));
+    let OperationType;
+    (function (OperationType) {
+        OperationType[OperationType["OPERATION_TYPE_UNSPECIFIED"] = 0] = "OPERATION_TYPE_UNSPECIFIED";
+        OperationType[OperationType["CREATE_AGENT"] = 1] = "CREATE_AGENT";
+        OperationType[OperationType["IMPORT_AGENT"] = 2] = "IMPORT_AGENT";
+        OperationType[OperationType["EXPORT_AGENT"] = 3] = "EXPORT_AGENT";
+        OperationType[OperationType["DELETE_AGENT"] = 4] = "DELETE_AGENT";
+        OperationType[OperationType["RESTORE_AGENT"] = 5] = "RESTORE_AGENT";
+        OperationType[OperationType["BUILD_AGENT_CACHE"] = 6] = "BUILD_AGENT_CACHE";
+        OperationType[OperationType["TRAIN_AGENT"] = 7] = "TRAIN_AGENT";
+        OperationType[OperationType["EXPORT_BENCHMARK_AGENT"] = 8] = "EXPORT_BENCHMARK_AGENT";
+    })(OperationType = OperationMetadata.OperationType || (OperationMetadata.OperationType = {}));
+})(OperationMetadata || (OperationMetadata = {}));
+
 /**
- * Message implementation for ondewo.nlu.GetEntityTypeCountRequest
+ * Message implementation for ondewo.nlu.Operation
  */
-class GetEntityTypeCountRequest {
+class Operation {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetEntityTypeCountRequest to deeply clone from
+     * @param _value initial values object or instance of Operation to deeply clone from
      */
     constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.filterByCategory = _value.filterByCategory;
-        GetEntityTypeCountRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetEntityTypeCountRequest();
-        GetEntityTypeCountRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.parent = _instance.parent || '';
-        _instance.filterByCategory = _instance.filterByCategory || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.parent = _reader.readString();
-                    break;
-                case 2:
-                    _instance.filterByCategory = _reader.readEnum();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetEntityTypeCountRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.parent) {
-            _writer.writeString(1, _instance.parent);
-        }
-        if (_instance.filterByCategory) {
-            _writer.writeEnum(2, _instance.filterByCategory);
-        }
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get filterByCategory() {
-        return this._filterByCategory;
-    }
-    set filterByCategory(value) {
-        this._filterByCategory = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetEntityTypeCountRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            parent: this.parent,
-            filterByCategory: this.filterByCategory
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            parent: this.parent,
-            filterByCategory: EntityTypeCategory[this.filterByCategory === null || this.filterByCategory === undefined
-                ? 0
-                : this.filterByCategory]
-        };
-    }
-}
-GetEntityTypeCountRequest.id = 'ondewo.nlu.GetEntityTypeCountRequest';
-/**
- * Message implementation for ondewo.nlu.GetProjectStatRequest
- */
-class GetProjectStatRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetProjectStatRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        GetProjectStatRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetProjectStatRequest();
-        GetProjectStatRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.parent = _instance.parent || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.parent = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetProjectStatRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.parent) {
-            _writer.writeString(1, _instance.parent);
-        }
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetProjectStatRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            parent: this.parent
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            parent: this.parent
-        };
-    }
-}
-GetProjectStatRequest.id = 'ondewo.nlu.GetProjectStatRequest';
-/**
- * Message implementation for ondewo.nlu.GetProjectElementStatRequest
- */
-class GetProjectElementStatRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetProjectElementStatRequest to deeply clone from
-     */
-    constructor(_value) {
+        this._result = Operation.ResultCase.none;
         _value = _value || {};
         this.name = _value.name;
-        this.languageCode = _value.languageCode;
-        GetProjectElementStatRequest.refineValues(this);
+        this.metadata = _value.metadata
+            ? new googleProtobuf003.Any(_value.metadata)
+            : undefined;
+        this.done = _value.done;
+        this.error = _value.error
+            ? new Status(_value.error)
+            : undefined;
+        this.response = _value.response
+            ? new googleProtobuf003.Any(_value.response)
+            : undefined;
+        Operation.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new GetProjectElementStatRequest();
-        GetProjectElementStatRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new Operation();
+        Operation.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -23128,7 +23288,8 @@ class GetProjectElementStatRequest {
      */
     static refineValues(_instance) {
         _instance.name = _instance.name || '';
-        _instance.languageCode = _instance.languageCode || '';
+        _instance.metadata = _instance.metadata || undefined;
+        _instance.done = _instance.done || false;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -23144,13 +23305,25 @@ class GetProjectElementStatRequest {
                     _instance.name = _reader.readString();
                     break;
                 case 2:
-                    _instance.languageCode = _reader.readString();
+                    _instance.metadata = new googleProtobuf003.Any();
+                    _reader.readMessage(_instance.metadata, googleProtobuf003.Any.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.done = _reader.readBool();
+                    break;
+                case 4:
+                    _instance.error = new Status();
+                    _reader.readMessage(_instance.error, Status.deserializeBinaryFromReader);
+                    break;
+                case 5:
+                    _instance.response = new googleProtobuf003.Any();
+                    _reader.readMessage(_instance.response, googleProtobuf003.Any.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        GetProjectElementStatRequest.refineValues(_instance);
+        Operation.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -23161,8 +23334,17 @@ class GetProjectElementStatRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
-        if (_instance.languageCode) {
-            _writer.writeString(2, _instance.languageCode);
+        if (_instance.metadata) {
+            _writer.writeMessage(2, _instance.metadata, googleProtobuf003.Any.serializeBinaryToWriter);
+        }
+        if (_instance.done) {
+            _writer.writeBool(3, _instance.done);
+        }
+        if (_instance.error) {
+            _writer.writeMessage(4, _instance.error, Status.serializeBinaryToWriter);
+        }
+        if (_instance.response) {
+            _writer.writeMessage(5, _instance.response, googleProtobuf003.Any.serializeBinaryToWriter);
         }
     }
     get name() {
@@ -23171,11 +23353,40 @@ class GetProjectElementStatRequest {
     set name(value) {
         this._name = value;
     }
-    get languageCode() {
-        return this._languageCode;
+    get metadata() {
+        return this._metadata;
     }
-    set languageCode(value) {
-        this._languageCode = value;
+    set metadata(value) {
+        this._metadata = value;
+    }
+    get done() {
+        return this._done;
+    }
+    set done(value) {
+        this._done = value;
+    }
+    get error() {
+        return this._error;
+    }
+    set error(value) {
+        if (value !== undefined && value !== null) {
+            this._response = undefined;
+            this._result = Operation.ResultCase.error;
+        }
+        this._error = value;
+    }
+    get response() {
+        return this._response;
+    }
+    set response(value) {
+        if (value !== undefined && value !== null) {
+            this._error = undefined;
+            this._result = Operation.ResultCase.response;
+        }
+        this._response = value;
+    }
+    get result() {
+        return this._result;
     }
     /**
      * Serialize message to binary data
@@ -23183,7 +23394,7 @@ class GetProjectElementStatRequest {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        GetProjectElementStatRequest.serializeBinaryToWriter(this, writer);
+        Operation.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -23192,7 +23403,10 @@ class GetProjectElementStatRequest {
     toObject() {
         return {
             name: this.name,
-            languageCode: this.languageCode
+            metadata: this.metadata ? this.metadata.toObject() : undefined,
+            done: this.done,
+            error: this.error ? this.error.toObject() : undefined,
+            response: this.response ? this.response.toObject() : undefined
         };
     }
     /**
@@ -23211,826 +23425,42 @@ class GetProjectElementStatRequest {
     options) {
         return {
             name: this.name,
-            languageCode: this.languageCode
+            metadata: this.metadata ? this.metadata.toProtobufJSON(options) : null,
+            done: this.done,
+            error: this.error ? this.error.toProtobufJSON(options) : null,
+            response: this.response ? this.response.toProtobufJSON(options) : null
         };
     }
 }
-GetProjectElementStatRequest.id = 'ondewo.nlu.GetProjectElementStatRequest';
-
-/* tslint:disable */
+Operation.id = 'ondewo.nlu.Operation';
+(function (Operation) {
+    let ResultCase;
+    (function (ResultCase) {
+        ResultCase[ResultCase["none"] = 0] = "none";
+        ResultCase[ResultCase["error"] = 1] = "error";
+        ResultCase[ResultCase["response"] = 2] = "response";
+    })(ResultCase = Operation.ResultCase || (Operation.ResultCase = {}));
+})(Operation || (Operation = {}));
 /**
- * Specific GrpcClientSettings for ProjectStatistics.
- * Use it only if your default settings are not set or the service requires other settings.
+ * Message implementation for ondewo.nlu.GetOperationRequest
  */
-const GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS = new InjectionToken('GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/**
- * Service client implementation for ondewo.nlu.ProjectStatistics
- */
-class ProjectStatisticsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        /**
-         * Raw RPC implementation for each service client method.
-         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-         * Attention: these methods do not throw errors when non-zero status codes are received.
-         */
-        this.$raw = {
-            /**
-             * Unary call: /ondewo.nlu.ProjectStatistics/GetIntentCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getIntentCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ProjectStatistics/GetIntentCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetIntentCountRequest,
-                    responseClass: StatResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getEntityTypeCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ProjectStatistics/GetEntityTypeCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetEntityTypeCountRequest,
-                    responseClass: StatResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.ProjectStatistics/GetUserCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getUserCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ProjectStatistics/GetUserCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetProjectStatRequest,
-                    responseClass: StatResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.ProjectStatistics/GetSessionCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getSessionCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ProjectStatistics/GetSessionCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetProjectStatRequest,
-                    responseClass: StatResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getTrainingPhraseCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetProjectElementStatRequest,
-                    responseClass: StatResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.ProjectStatistics/GetResponseCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getResponseCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ProjectStatistics/GetResponseCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetProjectElementStatRequest,
-                    responseClass: StatResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.ProjectStatistics/GetEntityValueCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getEntityValueCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ProjectStatistics/GetEntityValueCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetProjectElementStatRequest,
-                    responseClass: StatResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getEntitySynonymCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetProjectElementStatRequest,
-                    responseClass: StatResponse
-                });
-            }
-        };
-        this.client = clientFactory.createClient('ondewo.nlu.ProjectStatistics', settings);
-    }
-    /**
-     * Unary call @/ondewo.nlu.ProjectStatistics/GetIntentCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getIntentCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getIntentCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntityTypeCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getEntityTypeCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getEntityTypeCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.ProjectStatistics/GetUserCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getUserCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getUserCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.ProjectStatistics/GetSessionCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getSessionCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getSessionCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getTrainingPhraseCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getTrainingPhraseCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.ProjectStatistics/GetResponseCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getResponseCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getResponseCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntityValueCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getEntityValueCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getEntityValueCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getEntitySynonymCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getEntitySynonymCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-}
-ProjectStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ProjectStatisticsClient, deps: [{ token: GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ProjectStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ProjectStatisticsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ProjectStatisticsClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
-        return [{ type: undefined, decorators: [{
-                        type: Optional
-                    }, {
-                        type: Inject,
-                        args: [GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS]
-                    }] }, { type: undefined, decorators: [{
-                        type: Inject,
-                        args: [GRPC_CLIENT_FACTORY]
-                    }] }, { type: i1.GrpcHandler }];
-    } });
-
-/* tslint:disable */
-/**
- * Specific GrpcClientSettings for Agents.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_AGENTS_CLIENT_SETTINGS = new InjectionToken('GRPC_AGENTS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/**
- * Specific GrpcClientSettings for Sessions.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_SESSIONS_CLIENT_SETTINGS = new InjectionToken('GRPC_SESSIONS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/**
- * Service client implementation for ondewo.nlu.Sessions
- */
-class SessionsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        /**
-         * Raw RPC implementation for each service client method.
-         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-         * Attention: these methods do not throw errors when non-zero status codes are received.
-         */
-        this.$raw = {
-            /**
-             * Unary call: /ondewo.nlu.Sessions/DetectIntent
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.DetectIntentResponse>>
-             */
-            detectIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/DetectIntent',
-                    requestData,
-                    requestMetadata,
-                    requestClass: DetectIntentRequest,
-                    responseClass: DetectIntentResponse
-                });
-            },
-            /**
-             * Bidirectional streaming: /ondewo.nlu.Sessions/StreamingDetectIntent
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.StreamingDetectIntentResponse>>
-             */
-            streamingDetectIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.bidiStream,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/StreamingDetectIntent',
-                    requestData,
-                    requestMetadata,
-                    requestClass: StreamingDetectIntentRequest,
-                    responseClass: StreamingDetectIntentResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/ListSessions
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListSessionsResponse>>
-             */
-            listSessions: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/ListSessions',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListSessionsRequest,
-                    responseClass: ListSessionsResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/GetSession
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Session>>
-             */
-            getSession: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/GetSession',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetSessionRequest,
-                    responseClass: Session
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/CreateSession
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Session>>
-             */
-            createSession: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/CreateSession',
-                    requestData,
-                    requestMetadata,
-                    requestClass: CreateSessionRequest,
-                    responseClass: Session
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/TrackSessionStep
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Session>>
-             */
-            trackSessionStep: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/TrackSessionStep',
-                    requestData,
-                    requestMetadata,
-                    requestClass: TrackSessionStepRequest,
-                    responseClass: Session
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/DeleteSession
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
-             */
-            deleteSession: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/DeleteSession',
-                    requestData,
-                    requestMetadata,
-                    requestClass: DeleteSessionRequest,
-                    responseClass: googleProtobuf003.Empty
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/ListSessionLabels
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListSessionLabelsResponse>>
-             */
-            listSessionLabels: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/ListSessionLabels',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListSessionLabelsRequest,
-                    responseClass: ListSessionLabelsResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/AddSessionLabels
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Session>>
-             */
-            addSessionLabels: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/AddSessionLabels',
-                    requestData,
-                    requestMetadata,
-                    requestClass: AddSessionLabelsRequest,
-                    responseClass: Session
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/RemoveSessionLabels
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Session>>
-             */
-            removeSessionLabels: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/RemoveSessionLabels',
-                    requestData,
-                    requestMetadata,
-                    requestClass: RemoveSessionLabelsRequest,
-                    responseClass: Session
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/ListSessionReviews
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListSessionReviewsResponse>>
-             */
-            listSessionReviews: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/ListSessionReviews',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListSessionReviewsRequest,
-                    responseClass: ListSessionReviewsResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/GetSessionReview
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.SessionReview>>
-             */
-            getSessionReview: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/GetSessionReview',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetSessionReviewRequest,
-                    responseClass: SessionReview
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/GetLatestSessionReview
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.SessionReview>>
-             */
-            getLatestSessionReview: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/GetLatestSessionReview',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetLatestSessionReviewRequest,
-                    responseClass: SessionReview
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Sessions/CreateSessionReview
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.SessionReview>>
-             */
-            createSessionReview: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Sessions/CreateSessionReview',
-                    requestData,
-                    requestMetadata,
-                    requestClass: CreateSessionReviewRequest,
-                    responseClass: SessionReview
-                });
-            }
-        };
-        this.client = clientFactory.createClient('ondewo.nlu.Sessions', settings);
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/DetectIntent
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.DetectIntentResponse>
-     */
-    detectIntent(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .detectIntent(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Bidirectional streaming @/ondewo.nlu.Sessions/StreamingDetectIntent
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.StreamingDetectIntentResponse>
-     */
-    streamingDetectIntent(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .streamingDetectIntent(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/ListSessions
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListSessionsResponse>
-     */
-    listSessions(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listSessions(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/GetSession
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Session>
-     */
-    getSession(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getSession(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/CreateSession
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Session>
-     */
-    createSession(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .createSession(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/TrackSessionStep
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Session>
-     */
-    trackSessionStep(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .trackSessionStep(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/DeleteSession
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
-     */
-    deleteSession(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .deleteSession(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/ListSessionLabels
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListSessionLabelsResponse>
-     */
-    listSessionLabels(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listSessionLabels(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/AddSessionLabels
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Session>
-     */
-    addSessionLabels(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .addSessionLabels(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/RemoveSessionLabels
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Session>
-     */
-    removeSessionLabels(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .removeSessionLabels(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/ListSessionReviews
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListSessionReviewsResponse>
-     */
-    listSessionReviews(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listSessionReviews(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/GetSessionReview
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.SessionReview>
-     */
-    getSessionReview(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getSessionReview(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/GetLatestSessionReview
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.SessionReview>
-     */
-    getLatestSessionReview(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getLatestSessionReview(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Sessions/CreateSessionReview
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.SessionReview>
-     */
-    createSessionReview(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .createSessionReview(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-}
-SessionsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: SessionsClient, deps: [{ token: GRPC_SESSIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-SessionsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: SessionsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: SessionsClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
-        return [{ type: undefined, decorators: [{
-                        type: Optional
-                    }, {
-                        type: Inject,
-                        args: [GRPC_SESSIONS_CLIENT_SETTINGS]
-                    }] }, { type: undefined, decorators: [{
-                        type: Inject,
-                        args: [GRPC_CLIENT_FACTORY]
-                    }] }, { type: i1.GrpcHandler }];
-    } });
-
-/* tslint:disable */
-/**
- * Specific GrpcClientSettings for ServerStatistics.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_SERVER_STATISTICS_CLIENT_SETTINGS = new InjectionToken('GRPC_SERVER_STATISTICS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/**
- * Specific GrpcClientSettings for Users.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_USERS_CLIENT_SETTINGS = new InjectionToken('GRPC_USERS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/**
- * Specific GrpcClientSettings for EntityTypes.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_ENTITY_TYPES_CLIENT_SETTINGS = new InjectionToken('GRPC_ENTITY_TYPES_CLIENT_SETTINGS');
-
-var Mode;
-(function (Mode) {
-    Mode[Mode["UNSPECIFIED"] = 0] = "UNSPECIFIED";
-    Mode[Mode["EXCLUSIVE"] = 1] = "EXCLUSIVE";
-    Mode[Mode["INCLUSIVE"] = 2] = "INCLUSIVE";
-})(Mode || (Mode = {}));
-var IntentAlgorithms;
-(function (IntentAlgorithms) {
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentExactContextDetector"] = 0] = "OndewoIntentExactContextDetector";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentExactMatch"] = 1] = "OndewoIntentExactMatch";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentNamedExactMatch"] = 2] = "OndewoIntentNamedExactMatch";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentSimilarityMatch"] = 3] = "OndewoIntentSimilarityMatch";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentNamedSimilarityMatch"] = 4] = "OndewoIntentNamedSimilarityMatch";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentBertClassifier"] = 7] = "OndewoIntentBertClassifier";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentMetaClassifier"] = 8] = "OndewoIntentMetaClassifier";
-    IntentAlgorithms[IntentAlgorithms["IntentExitDetector"] = 10] = "IntentExitDetector";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentRankingMatch"] = 11] = "OndewoIntentRankingMatch";
-    IntentAlgorithms[IntentAlgorithms["OndewoWeightedEnsemble"] = 13] = "OndewoWeightedEnsemble";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentExitDetector"] = 14] = "OndewoIntentExitDetector";
-    IntentAlgorithms[IntentAlgorithms["OndewoIntentParameterMatch"] = 15] = "OndewoIntentParameterMatch";
-})(IntentAlgorithms || (IntentAlgorithms = {}));
-/**
- * Message implementation for ondewo.nlu.ExtractEntitiesRequest
- */
-class ExtractEntitiesRequest {
+class GetOperationRequest {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExtractEntitiesRequest to deeply clone from
+     * @param _value initial values object or instance of GetOperationRequest to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
-        this.parent = _value.parent;
-        this.text = _value.text;
-        this.languageCode = _value.languageCode;
-        this.intentName = _value.intentName;
-        ExtractEntitiesRequest.refineValues(this);
+        this.name = _value.name;
+        GetOperationRequest.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new ExtractEntitiesRequest();
-        ExtractEntitiesRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new GetOperationRequest();
+        GetOperationRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -24038,10 +23468,7 @@ class ExtractEntitiesRequest {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.parent = _instance.parent || '';
-        _instance.text = _instance.text || '';
-        _instance.languageCode = _instance.languageCode || '';
-        _instance.intentName = _instance.intentName || '';
+        _instance.name = _instance.name || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -24054,179 +23481,137 @@ class ExtractEntitiesRequest {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.parent = _reader.readString();
+                    _instance.name = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetOperationRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.name) {
+            _writer.writeString(1, _instance.name);
+        }
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetOperationRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            name: this.name
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            name: this.name
+        };
+    }
+}
+GetOperationRequest.id = 'ondewo.nlu.GetOperationRequest';
+/**
+ * Message implementation for ondewo.nlu.ListOperationsRequest
+ */
+class ListOperationsRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListOperationsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.filter = _value.filter;
+        this.pageSize = _value.pageSize;
+        this.pageToken = _value.pageToken;
+        this.operationFilter = _value.operationFilter
+            ? new OperationFilter(_value.operationFilter)
+            : undefined;
+        ListOperationsRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ListOperationsRequest();
+        ListOperationsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.name = _instance.name || '';
+        _instance.filter = _instance.filter || '';
+        _instance.pageSize = _instance.pageSize || 0;
+        _instance.pageToken = _instance.pageToken || '';
+        _instance.operationFilter = _instance.operationFilter || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 4:
+                    _instance.name = _reader.readString();
+                    break;
+                case 1:
+                    _instance.filter = _reader.readString();
                     break;
                 case 2:
-                    _instance.text = _reader.readString();
+                    _instance.pageSize = _reader.readInt32();
                     break;
                 case 3:
-                    _instance.languageCode = _reader.readString();
-                    break;
-                case 4:
-                    _instance.intentName = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        ExtractEntitiesRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.parent) {
-            _writer.writeString(1, _instance.parent);
-        }
-        if (_instance.text) {
-            _writer.writeString(2, _instance.text);
-        }
-        if (_instance.languageCode) {
-            _writer.writeString(3, _instance.languageCode);
-        }
-        if (_instance.intentName) {
-            _writer.writeString(4, _instance.intentName);
-        }
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get text() {
-        return this._text;
-    }
-    set text(value) {
-        this._text = value;
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get intentName() {
-        return this._intentName;
-    }
-    set intentName(value) {
-        this._intentName = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        ExtractEntitiesRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            parent: this.parent,
-            text: this.text,
-            languageCode: this.languageCode,
-            intentName: this.intentName
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            parent: this.parent,
-            text: this.text,
-            languageCode: this.languageCode,
-            intentName: this.intentName
-        };
-    }
-}
-ExtractEntitiesRequest.id = 'ondewo.nlu.ExtractEntitiesRequest';
-/**
- * Message implementation for ondewo.nlu.ExtractEntitiesFuzzyRequest
- */
-class ExtractEntitiesFuzzyRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExtractEntitiesFuzzyRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.text = _value.text;
-        this.potentialEntities = (_value.potentialEntities || []).map(m => new EntityTypeFuzzyNerConfig(m));
-        this.minimalScore = _value.minimalScore;
-        this.allowOverlaps = _value.allowOverlaps;
-        ExtractEntitiesFuzzyRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new ExtractEntitiesFuzzyRequest();
-        ExtractEntitiesFuzzyRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.parent = _instance.parent || '';
-        _instance.text = _instance.text || '';
-        _instance.potentialEntities = _instance.potentialEntities || [];
-        _instance.minimalScore = _instance.minimalScore || 0;
-        _instance.allowOverlaps = _instance.allowOverlaps || false;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.parent = _reader.readString();
-                    break;
-                case 2:
-                    _instance.text = _reader.readString();
-                    break;
-                case 3:
-                    const messageInitializer3 = new EntityTypeFuzzyNerConfig();
-                    _reader.readMessage(messageInitializer3, EntityTypeFuzzyNerConfig.deserializeBinaryFromReader);
-                    (_instance.potentialEntities =
-                        _instance.potentialEntities || []).push(messageInitializer3);
-                    break;
-                case 4:
-                    _instance.minimalScore = _reader.readFloat();
+                    _instance.pageToken = _reader.readString();
                     break;
                 case 5:
-                    _instance.allowOverlaps = _reader.readBool();
+                    _instance.operationFilter = new OperationFilter();
+                    _reader.readMessage(_instance.operationFilter, OperationFilter.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        ExtractEntitiesFuzzyRequest.refineValues(_instance);
+        ListOperationsRequest.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -24234,205 +23619,51 @@ class ExtractEntitiesFuzzyRequest {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.parent) {
-            _writer.writeString(1, _instance.parent);
+        if (_instance.name) {
+            _writer.writeString(4, _instance.name);
         }
-        if (_instance.text) {
-            _writer.writeString(2, _instance.text);
+        if (_instance.filter) {
+            _writer.writeString(1, _instance.filter);
         }
-        if (_instance.potentialEntities && _instance.potentialEntities.length) {
-            _writer.writeRepeatedMessage(3, _instance.potentialEntities, EntityTypeFuzzyNerConfig.serializeBinaryToWriter);
+        if (_instance.pageSize) {
+            _writer.writeInt32(2, _instance.pageSize);
         }
-        if (_instance.minimalScore) {
-            _writer.writeFloat(4, _instance.minimalScore);
+        if (_instance.pageToken) {
+            _writer.writeString(3, _instance.pageToken);
         }
-        if (_instance.allowOverlaps) {
-            _writer.writeBool(5, _instance.allowOverlaps);
-        }
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get text() {
-        return this._text;
-    }
-    set text(value) {
-        this._text = value;
-    }
-    get potentialEntities() {
-        return this._potentialEntities;
-    }
-    set potentialEntities(value) {
-        this._potentialEntities = value;
-    }
-    get minimalScore() {
-        return this._minimalScore;
-    }
-    set minimalScore(value) {
-        this._minimalScore = value;
-    }
-    get allowOverlaps() {
-        return this._allowOverlaps;
-    }
-    set allowOverlaps(value) {
-        this._allowOverlaps = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        ExtractEntitiesFuzzyRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            parent: this.parent,
-            text: this.text,
-            potentialEntities: (this.potentialEntities || []).map(m => m.toObject()),
-            minimalScore: this.minimalScore,
-            allowOverlaps: this.allowOverlaps
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            parent: this.parent,
-            text: this.text,
-            potentialEntities: (this.potentialEntities || []).map(m => m.toProtobufJSON(options)),
-            minimalScore: this.minimalScore,
-            allowOverlaps: this.allowOverlaps
-        };
-    }
-}
-ExtractEntitiesFuzzyRequest.id = 'ondewo.nlu.ExtractEntitiesFuzzyRequest';
-/**
- * Message implementation for ondewo.nlu.EntityTypeFuzzyNerConfig
- */
-class EntityTypeFuzzyNerConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityTypeFuzzyNerConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityType = _value.entityType
-            ? new EntityType(_value.entityType)
-            : undefined;
-        this.minimalScore = _value.minimalScore;
-        this.entityValues = (_value.entityValues || []).slice();
-        this.algorithm = _value.algorithm;
-        EntityTypeFuzzyNerConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new EntityTypeFuzzyNerConfig();
-        EntityTypeFuzzyNerConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.entityType = _instance.entityType || undefined;
-        _instance.minimalScore = _instance.minimalScore || 0;
-        _instance.entityValues = _instance.entityValues || [];
-        _instance.algorithm = _instance.algorithm || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.entityType = new EntityType();
-                    _reader.readMessage(_instance.entityType, EntityType.deserializeBinaryFromReader);
-                    break;
-                case 2:
-                    _instance.minimalScore = _reader.readFloat();
-                    break;
-                case 3:
-                    (_instance.entityValues = _instance.entityValues || []).push(_reader.readString());
-                    break;
-                case 4:
-                    _instance.algorithm = _reader.readEnum();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        EntityTypeFuzzyNerConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.entityType) {
-            _writer.writeMessage(1, _instance.entityType, EntityType.serializeBinaryToWriter);
-        }
-        if (_instance.minimalScore) {
-            _writer.writeFloat(2, _instance.minimalScore);
-        }
-        if (_instance.entityValues && _instance.entityValues.length) {
-            _writer.writeRepeatedString(3, _instance.entityValues);
-        }
-        if (_instance.algorithm) {
-            _writer.writeEnum(4, _instance.algorithm);
+        if (_instance.operationFilter) {
+            _writer.writeMessage(5, _instance.operationFilter, OperationFilter.serializeBinaryToWriter);
         }
     }
-    get entityType() {
-        return this._entityType;
+    get name() {
+        return this._name;
     }
-    set entityType(value) {
-        this._entityType = value;
+    set name(value) {
+        this._name = value;
     }
-    get minimalScore() {
-        return this._minimalScore;
+    get filter() {
+        return this._filter;
     }
-    set minimalScore(value) {
-        this._minimalScore = value;
+    set filter(value) {
+        this._filter = value;
     }
-    get entityValues() {
-        return this._entityValues;
+    get pageSize() {
+        return this._pageSize;
     }
-    set entityValues(value) {
-        this._entityValues = value;
+    set pageSize(value) {
+        this._pageSize = value;
     }
-    get algorithm() {
-        return this._algorithm;
+    get pageToken() {
+        return this._pageToken;
     }
-    set algorithm(value) {
-        this._algorithm = value;
+    set pageToken(value) {
+        this._pageToken = value;
+    }
+    get operationFilter() {
+        return this._operationFilter;
+    }
+    set operationFilter(value) {
+        this._operationFilter = value;
     }
     /**
      * Serialize message to binary data
@@ -24440,7 +23671,7 @@ class EntityTypeFuzzyNerConfig {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        EntityTypeFuzzyNerConfig.serializeBinaryToWriter(this, writer);
+        ListOperationsRequest.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -24448,2304 +23679,12 @@ class EntityTypeFuzzyNerConfig {
      */
     toObject() {
         return {
-            entityType: this.entityType ? this.entityType.toObject() : undefined,
-            minimalScore: this.minimalScore,
-            entityValues: (this.entityValues || []).slice(),
-            algorithm: this.algorithm
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            entityType: this.entityType
-                ? this.entityType.toProtobufJSON(options)
-                : null,
-            minimalScore: this.minimalScore,
-            entityValues: (this.entityValues || []).slice(),
-            algorithm: EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm[this.algorithm === null || this.algorithm === undefined
-                ? 0
-                : this.algorithm]
-        };
-    }
-}
-EntityTypeFuzzyNerConfig.id = 'ondewo.nlu.EntityTypeFuzzyNerConfig';
-(function (EntityTypeFuzzyNerConfig) {
-    let FuzzyNerAlgorithm;
-    (function (FuzzyNerAlgorithm) {
-        FuzzyNerAlgorithm[FuzzyNerAlgorithm["PREFILTER_LEVENSHTEIN"] = 0] = "PREFILTER_LEVENSHTEIN";
-        FuzzyNerAlgorithm[FuzzyNerAlgorithm["LOCAL_MAXIMUM"] = 1] = "LOCAL_MAXIMUM";
-    })(FuzzyNerAlgorithm = EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm || (EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm = {}));
-})(EntityTypeFuzzyNerConfig || (EntityTypeFuzzyNerConfig = {}));
-/**
- * Message implementation for ondewo.nlu.EntityDetected
- */
-class EntityDetected {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityDetected to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entity = _value.entity
-            ? new Intent.TrainingPhrase.Entity(_value.entity)
-            : undefined;
-        this.extractionMethod = _value.extractionMethod;
-        this.score = _value.score;
-        EntityDetected.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new EntityDetected();
-        EntityDetected.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.entity = _instance.entity || undefined;
-        _instance.extractionMethod = _instance.extractionMethod || '';
-        _instance.score = _instance.score || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.entity = new Intent.TrainingPhrase.Entity();
-                    _reader.readMessage(_instance.entity, Intent.TrainingPhrase.Entity
-                        .deserializeBinaryFromReader);
-                    break;
-                case 2:
-                    _instance.extractionMethod = _reader.readString();
-                    break;
-                case 3:
-                    _instance.score = _reader.readFloat();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        EntityDetected.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.entity) {
-            _writer.writeMessage(1, _instance.entity, Intent.TrainingPhrase.Entity.serializeBinaryToWriter);
-        }
-        if (_instance.extractionMethod) {
-            _writer.writeString(2, _instance.extractionMethod);
-        }
-        if (_instance.score) {
-            _writer.writeFloat(3, _instance.score);
-        }
-    }
-    get entity() {
-        return this._entity;
-    }
-    set entity(value) {
-        this._entity = value;
-    }
-    get extractionMethod() {
-        return this._extractionMethod;
-    }
-    set extractionMethod(value) {
-        this._extractionMethod = value;
-    }
-    get score() {
-        return this._score;
-    }
-    set score(value) {
-        this._score = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        EntityDetected.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            entity: this.entity ? this.entity.toObject() : undefined,
-            extractionMethod: this.extractionMethod,
-            score: this.score
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            entity: this.entity ? this.entity.toProtobufJSON(options) : null,
-            extractionMethod: this.extractionMethod,
-            score: this.score
-        };
-    }
-}
-EntityDetected.id = 'ondewo.nlu.EntityDetected';
-/**
- * Message implementation for ondewo.nlu.ExtractEntitiesResponse
- */
-class ExtractEntitiesResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExtractEntitiesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entitiesDetected = (_value.entitiesDetected || []).map(m => new EntityDetected(m));
-        this.text = _value.text;
-        ExtractEntitiesResponse.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new ExtractEntitiesResponse();
-        ExtractEntitiesResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.entitiesDetected = _instance.entitiesDetected || [];
-        _instance.text = _instance.text || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new EntityDetected();
-                    _reader.readMessage(messageInitializer1, EntityDetected.deserializeBinaryFromReader);
-                    (_instance.entitiesDetected = _instance.entitiesDetected || []).push(messageInitializer1);
-                    break;
-                case 2:
-                    _instance.text = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        ExtractEntitiesResponse.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.entitiesDetected && _instance.entitiesDetected.length) {
-            _writer.writeRepeatedMessage(1, _instance.entitiesDetected, EntityDetected.serializeBinaryToWriter);
-        }
-        if (_instance.text) {
-            _writer.writeString(2, _instance.text);
-        }
-    }
-    get entitiesDetected() {
-        return this._entitiesDetected;
-    }
-    set entitiesDetected(value) {
-        this._entitiesDetected = value;
-    }
-    get text() {
-        return this._text;
-    }
-    set text(value) {
-        this._text = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        ExtractEntitiesResponse.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            entitiesDetected: (this.entitiesDetected || []).map(m => m.toObject()),
-            text: this.text
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            entitiesDetected: (this.entitiesDetected || []).map(m => m.toProtobufJSON(options)),
-            text: this.text
-        };
-    }
-}
-ExtractEntitiesResponse.id = 'ondewo.nlu.ExtractEntitiesResponse';
-/**
- * Message implementation for ondewo.nlu.GetAlternativeSentencesRequest
- */
-class GetAlternativeSentencesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAlternativeSentencesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.config = _value.config
-            ? new DataEnrichmentConfig(_value.config)
-            : undefined;
-        this.sentence = _value.sentence;
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        this.protectedWords = (_value.protectedWords || []).slice();
-        this.wordsToChange = (_value.wordsToChange || []).slice();
-        GetAlternativeSentencesRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetAlternativeSentencesRequest();
-        GetAlternativeSentencesRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.config = _instance.config || undefined;
-        _instance.sentence = _instance.sentence || '';
-        _instance.languageCode = _instance.languageCode || '';
-        _instance.parent = _instance.parent || '';
-        _instance.protectedWords = _instance.protectedWords || [];
-        _instance.wordsToChange = _instance.wordsToChange || [];
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.config = new DataEnrichmentConfig();
-                    _reader.readMessage(_instance.config, DataEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 2:
-                    _instance.sentence = _reader.readString();
-                    break;
-                case 4:
-                    _instance.languageCode = _reader.readString();
-                    break;
-                case 5:
-                    _instance.parent = _reader.readString();
-                    break;
-                case 6:
-                    (_instance.protectedWords = _instance.protectedWords || []).push(_reader.readString());
-                    break;
-                case 7:
-                    (_instance.wordsToChange = _instance.wordsToChange || []).push(_reader.readString());
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetAlternativeSentencesRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.config) {
-            _writer.writeMessage(1, _instance.config, DataEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.sentence) {
-            _writer.writeString(2, _instance.sentence);
-        }
-        if (_instance.languageCode) {
-            _writer.writeString(4, _instance.languageCode);
-        }
-        if (_instance.parent) {
-            _writer.writeString(5, _instance.parent);
-        }
-        if (_instance.protectedWords && _instance.protectedWords.length) {
-            _writer.writeRepeatedString(6, _instance.protectedWords);
-        }
-        if (_instance.wordsToChange && _instance.wordsToChange.length) {
-            _writer.writeRepeatedString(7, _instance.wordsToChange);
-        }
-    }
-    get config() {
-        return this._config;
-    }
-    set config(value) {
-        this._config = value;
-    }
-    get sentence() {
-        return this._sentence;
-    }
-    set sentence(value) {
-        this._sentence = value;
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get protectedWords() {
-        return this._protectedWords;
-    }
-    set protectedWords(value) {
-        this._protectedWords = value;
-    }
-    get wordsToChange() {
-        return this._wordsToChange;
-    }
-    set wordsToChange(value) {
-        this._wordsToChange = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetAlternativeSentencesRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            config: this.config ? this.config.toObject() : undefined,
-            sentence: this.sentence,
-            languageCode: this.languageCode,
-            parent: this.parent,
-            protectedWords: (this.protectedWords || []).slice(),
-            wordsToChange: (this.wordsToChange || []).slice()
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            config: this.config ? this.config.toProtobufJSON(options) : null,
-            sentence: this.sentence,
-            languageCode: this.languageCode,
-            parent: this.parent,
-            protectedWords: (this.protectedWords || []).slice(),
-            wordsToChange: (this.wordsToChange || []).slice()
-        };
-    }
-}
-GetAlternativeSentencesRequest.id = 'ondewo.nlu.GetAlternativeSentencesRequest';
-/**
- * Message implementation for ondewo.nlu.GenerateUserSaysRequest
- */
-class GenerateUserSaysRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GenerateUserSaysRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        this.nRepeatSynonym = _value.nRepeatSynonym;
-        this.branch = _value.branch;
-        GenerateUserSaysRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GenerateUserSaysRequest();
-        GenerateUserSaysRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.languageCode = _instance.languageCode || '';
-        _instance.parent = _instance.parent || '';
-        _instance.nRepeatSynonym = _instance.nRepeatSynonym || 0;
-        _instance.branch = _instance.branch || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 4:
-                    _instance.languageCode = _reader.readString();
-                    break;
-                case 5:
-                    _instance.parent = _reader.readString();
-                    break;
-                case 6:
-                    _instance.nRepeatSynonym = _reader.readInt32();
-                    break;
-                case 8:
-                    _instance.branch = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GenerateUserSaysRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.languageCode) {
-            _writer.writeString(4, _instance.languageCode);
-        }
-        if (_instance.parent) {
-            _writer.writeString(5, _instance.parent);
-        }
-        if (_instance.nRepeatSynonym) {
-            _writer.writeInt32(6, _instance.nRepeatSynonym);
-        }
-        if (_instance.branch) {
-            _writer.writeString(8, _instance.branch);
-        }
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get nRepeatSynonym() {
-        return this._nRepeatSynonym;
-    }
-    set nRepeatSynonym(value) {
-        this._nRepeatSynonym = value;
-    }
-    get branch() {
-        return this._branch;
-    }
-    set branch(value) {
-        this._branch = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GenerateUserSaysRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            languageCode: this.languageCode,
-            parent: this.parent,
-            nRepeatSynonym: this.nRepeatSynonym,
-            branch: this.branch
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            languageCode: this.languageCode,
-            parent: this.parent,
-            nRepeatSynonym: this.nRepeatSynonym,
-            branch: this.branch
-        };
-    }
-}
-GenerateUserSaysRequest.id = 'ondewo.nlu.GenerateUserSaysRequest';
-/**
- * Message implementation for ondewo.nlu.GenerateResponsesRequest
- */
-class GenerateResponsesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GenerateResponsesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        this.nRepeatSynonym = _value.nRepeatSynonym;
-        this.branch = _value.branch;
-        this.dropUnknownParameters = _value.dropUnknownParameters;
-        GenerateResponsesRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GenerateResponsesRequest();
-        GenerateResponsesRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.languageCode = _instance.languageCode || '';
-        _instance.parent = _instance.parent || '';
-        _instance.nRepeatSynonym = _instance.nRepeatSynonym || 0;
-        _instance.branch = _instance.branch || '';
-        _instance.dropUnknownParameters = _instance.dropUnknownParameters || false;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 4:
-                    _instance.languageCode = _reader.readString();
-                    break;
-                case 5:
-                    _instance.parent = _reader.readString();
-                    break;
-                case 7:
-                    _instance.nRepeatSynonym = _reader.readInt32();
-                    break;
-                case 8:
-                    _instance.branch = _reader.readString();
-                    break;
-                case 9:
-                    _instance.dropUnknownParameters = _reader.readBool();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GenerateResponsesRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.languageCode) {
-            _writer.writeString(4, _instance.languageCode);
-        }
-        if (_instance.parent) {
-            _writer.writeString(5, _instance.parent);
-        }
-        if (_instance.nRepeatSynonym) {
-            _writer.writeInt32(7, _instance.nRepeatSynonym);
-        }
-        if (_instance.branch) {
-            _writer.writeString(8, _instance.branch);
-        }
-        if (_instance.dropUnknownParameters) {
-            _writer.writeBool(9, _instance.dropUnknownParameters);
-        }
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get nRepeatSynonym() {
-        return this._nRepeatSynonym;
-    }
-    set nRepeatSynonym(value) {
-        this._nRepeatSynonym = value;
-    }
-    get branch() {
-        return this._branch;
-    }
-    set branch(value) {
-        this._branch = value;
-    }
-    get dropUnknownParameters() {
-        return this._dropUnknownParameters;
-    }
-    set dropUnknownParameters(value) {
-        this._dropUnknownParameters = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GenerateResponsesRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            languageCode: this.languageCode,
-            parent: this.parent,
-            nRepeatSynonym: this.nRepeatSynonym,
-            branch: this.branch,
-            dropUnknownParameters: this.dropUnknownParameters
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            languageCode: this.languageCode,
-            parent: this.parent,
-            nRepeatSynonym: this.nRepeatSynonym,
-            branch: this.branch,
-            dropUnknownParameters: this.dropUnknownParameters
-        };
-    }
-}
-GenerateResponsesRequest.id = 'ondewo.nlu.GenerateResponsesRequest';
-/**
- * Message implementation for ondewo.nlu.GetAlternativeTrainingPhrasesRequest
- */
-class GetAlternativeTrainingPhrasesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.config = _value.config
-            ? new DataEnrichmentConfig(_value.config)
-            : undefined;
-        this.trainingPhrase = _value.trainingPhrase
-            ? new Intent.TrainingPhrase(_value.trainingPhrase)
-            : undefined;
-        this.intentName = _value.intentName;
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        this.detectEntities = _value.detectEntities;
-        this.similarityThreshold = _value.similarityThreshold;
-        this.protectedWords = (_value.protectedWords || []).slice();
-        this.wordsToChange = (_value.wordsToChange || []).slice();
-        this.branch = _value.branch;
-        GetAlternativeTrainingPhrasesRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetAlternativeTrainingPhrasesRequest();
-        GetAlternativeTrainingPhrasesRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.config = _instance.config || undefined;
-        _instance.trainingPhrase = _instance.trainingPhrase || undefined;
-        _instance.intentName = _instance.intentName || '';
-        _instance.languageCode = _instance.languageCode || '';
-        _instance.parent = _instance.parent || '';
-        _instance.detectEntities = _instance.detectEntities || false;
-        _instance.similarityThreshold = _instance.similarityThreshold || 0;
-        _instance.protectedWords = _instance.protectedWords || [];
-        _instance.wordsToChange = _instance.wordsToChange || [];
-        _instance.branch = _instance.branch || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.config = new DataEnrichmentConfig();
-                    _reader.readMessage(_instance.config, DataEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 2:
-                    _instance.trainingPhrase = new Intent.TrainingPhrase();
-                    _reader.readMessage(_instance.trainingPhrase, Intent.TrainingPhrase.deserializeBinaryFromReader);
-                    break;
-                case 3:
-                    _instance.intentName = _reader.readString();
-                    break;
-                case 4:
-                    _instance.languageCode = _reader.readString();
-                    break;
-                case 5:
-                    _instance.parent = _reader.readString();
-                    break;
-                case 6:
-                    _instance.detectEntities = _reader.readBool();
-                    break;
-                case 7:
-                    _instance.similarityThreshold = _reader.readFloat();
-                    break;
-                case 8:
-                    (_instance.protectedWords = _instance.protectedWords || []).push(_reader.readString());
-                    break;
-                case 9:
-                    (_instance.wordsToChange = _instance.wordsToChange || []).push(_reader.readString());
-                    break;
-                case 10:
-                    _instance.branch = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetAlternativeTrainingPhrasesRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.config) {
-            _writer.writeMessage(1, _instance.config, DataEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.trainingPhrase) {
-            _writer.writeMessage(2, _instance.trainingPhrase, Intent.TrainingPhrase.serializeBinaryToWriter);
-        }
-        if (_instance.intentName) {
-            _writer.writeString(3, _instance.intentName);
-        }
-        if (_instance.languageCode) {
-            _writer.writeString(4, _instance.languageCode);
-        }
-        if (_instance.parent) {
-            _writer.writeString(5, _instance.parent);
-        }
-        if (_instance.detectEntities) {
-            _writer.writeBool(6, _instance.detectEntities);
-        }
-        if (_instance.similarityThreshold) {
-            _writer.writeFloat(7, _instance.similarityThreshold);
-        }
-        if (_instance.protectedWords && _instance.protectedWords.length) {
-            _writer.writeRepeatedString(8, _instance.protectedWords);
-        }
-        if (_instance.wordsToChange && _instance.wordsToChange.length) {
-            _writer.writeRepeatedString(9, _instance.wordsToChange);
-        }
-        if (_instance.branch) {
-            _writer.writeString(10, _instance.branch);
-        }
-    }
-    get config() {
-        return this._config;
-    }
-    set config(value) {
-        this._config = value;
-    }
-    get trainingPhrase() {
-        return this._trainingPhrase;
-    }
-    set trainingPhrase(value) {
-        this._trainingPhrase = value;
-    }
-    get intentName() {
-        return this._intentName;
-    }
-    set intentName(value) {
-        this._intentName = value;
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    get detectEntities() {
-        return this._detectEntities;
-    }
-    set detectEntities(value) {
-        this._detectEntities = value;
-    }
-    get similarityThreshold() {
-        return this._similarityThreshold;
-    }
-    set similarityThreshold(value) {
-        this._similarityThreshold = value;
-    }
-    get protectedWords() {
-        return this._protectedWords;
-    }
-    set protectedWords(value) {
-        this._protectedWords = value;
-    }
-    get wordsToChange() {
-        return this._wordsToChange;
-    }
-    set wordsToChange(value) {
-        this._wordsToChange = value;
-    }
-    get branch() {
-        return this._branch;
-    }
-    set branch(value) {
-        this._branch = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetAlternativeTrainingPhrasesRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            config: this.config ? this.config.toObject() : undefined,
-            trainingPhrase: this.trainingPhrase
-                ? this.trainingPhrase.toObject()
-                : undefined,
-            intentName: this.intentName,
-            languageCode: this.languageCode,
-            parent: this.parent,
-            detectEntities: this.detectEntities,
-            similarityThreshold: this.similarityThreshold,
-            protectedWords: (this.protectedWords || []).slice(),
-            wordsToChange: (this.wordsToChange || []).slice(),
-            branch: this.branch
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            config: this.config ? this.config.toProtobufJSON(options) : null,
-            trainingPhrase: this.trainingPhrase
-                ? this.trainingPhrase.toProtobufJSON(options)
-                : null,
-            intentName: this.intentName,
-            languageCode: this.languageCode,
-            parent: this.parent,
-            detectEntities: this.detectEntities,
-            similarityThreshold: this.similarityThreshold,
-            protectedWords: (this.protectedWords || []).slice(),
-            wordsToChange: (this.wordsToChange || []).slice(),
-            branch: this.branch
-        };
-    }
-}
-GetAlternativeTrainingPhrasesRequest.id = 'ondewo.nlu.GetAlternativeTrainingPhrasesRequest';
-/**
- * Message implementation for ondewo.nlu.GetSynonymsRequest
- */
-class GetSynonymsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetSynonymsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.config = _value.config
-            ? new DataEnrichmentConfig(_value.config)
-            : undefined;
-        this.word = _value.word;
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        GetSynonymsRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetSynonymsRequest();
-        GetSynonymsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.config = _instance.config || undefined;
-        _instance.word = _instance.word || '';
-        _instance.languageCode = _instance.languageCode || '';
-        _instance.parent = _instance.parent || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.config = new DataEnrichmentConfig();
-                    _reader.readMessage(_instance.config, DataEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 2:
-                    _instance.word = _reader.readString();
-                    break;
-                case 4:
-                    _instance.languageCode = _reader.readString();
-                    break;
-                case 5:
-                    _instance.parent = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetSynonymsRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.config) {
-            _writer.writeMessage(1, _instance.config, DataEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.word) {
-            _writer.writeString(2, _instance.word);
-        }
-        if (_instance.languageCode) {
-            _writer.writeString(4, _instance.languageCode);
-        }
-        if (_instance.parent) {
-            _writer.writeString(5, _instance.parent);
-        }
-    }
-    get config() {
-        return this._config;
-    }
-    set config(value) {
-        this._config = value;
-    }
-    get word() {
-        return this._word;
-    }
-    set word(value) {
-        this._word = value;
-    }
-    get languageCode() {
-        return this._languageCode;
-    }
-    set languageCode(value) {
-        this._languageCode = value;
-    }
-    get parent() {
-        return this._parent;
-    }
-    set parent(value) {
-        this._parent = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetSynonymsRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            config: this.config ? this.config.toObject() : undefined,
-            word: this.word,
-            languageCode: this.languageCode,
-            parent: this.parent
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            config: this.config ? this.config.toProtobufJSON(options) : null,
-            word: this.word,
-            languageCode: this.languageCode,
-            parent: this.parent
-        };
-    }
-}
-GetSynonymsRequest.id = 'ondewo.nlu.GetSynonymsRequest';
-/**
- * Message implementation for ondewo.nlu.GetSynonymsResponse
- */
-class GetSynonymsResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetSynonymsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.synonyms = (_value.synonyms || []).map(m => new Synonym(m));
-        GetSynonymsResponse.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetSynonymsResponse();
-        GetSynonymsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.synonyms = _instance.synonyms || [];
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new Synonym();
-                    _reader.readMessage(messageInitializer1, Synonym.deserializeBinaryFromReader);
-                    (_instance.synonyms = _instance.synonyms || []).push(messageInitializer1);
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetSynonymsResponse.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.synonyms && _instance.synonyms.length) {
-            _writer.writeRepeatedMessage(1, _instance.synonyms, Synonym.serializeBinaryToWriter);
-        }
-    }
-    get synonyms() {
-        return this._synonyms;
-    }
-    set synonyms(value) {
-        this._synonyms = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetSynonymsResponse.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            synonyms: (this.synonyms || []).map(m => m.toObject())
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            synonyms: (this.synonyms || []).map(m => m.toProtobufJSON(options))
-        };
-    }
-}
-GetSynonymsResponse.id = 'ondewo.nlu.GetSynonymsResponse';
-/**
- * Message implementation for ondewo.nlu.Synonym
- */
-class Synonym {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Synonym to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.synonym = _value.synonym;
-        this.score = _value.score;
-        Synonym.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new Synonym();
-        Synonym.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.synonym = _instance.synonym || '';
-        _instance.score = _instance.score || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.synonym = _reader.readString();
-                    break;
-                case 2:
-                    _instance.score = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        Synonym.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.synonym) {
-            _writer.writeString(1, _instance.synonym);
-        }
-        if (_instance.score) {
-            _writer.writeInt32(2, _instance.score);
-        }
-    }
-    get synonym() {
-        return this._synonym;
-    }
-    set synonym(value) {
-        this._synonym = value;
-    }
-    get score() {
-        return this._score;
-    }
-    set score(value) {
-        this._score = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        Synonym.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            synonym: this.synonym,
-            score: this.score
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            synonym: this.synonym,
-            score: this.score
-        };
-    }
-}
-Synonym.id = 'ondewo.nlu.Synonym';
-/**
- * Message implementation for ondewo.nlu.GetAlternativeSentencesResponse
- */
-class GetAlternativeSentencesResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAlternativeSentencesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.alternativeSentences = (_value.alternativeSentences || []).map(m => new AltSentence(m));
-        GetAlternativeSentencesResponse.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetAlternativeSentencesResponse();
-        GetAlternativeSentencesResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.alternativeSentences = _instance.alternativeSentences || [];
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new AltSentence();
-                    _reader.readMessage(messageInitializer1, AltSentence.deserializeBinaryFromReader);
-                    (_instance.alternativeSentences =
-                        _instance.alternativeSentences || []).push(messageInitializer1);
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetAlternativeSentencesResponse.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.alternativeSentences &&
-            _instance.alternativeSentences.length) {
-            _writer.writeRepeatedMessage(1, _instance.alternativeSentences, AltSentence.serializeBinaryToWriter);
-        }
-    }
-    get alternativeSentences() {
-        return this._alternativeSentences;
-    }
-    set alternativeSentences(value) {
-        this._alternativeSentences = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetAlternativeSentencesResponse.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            alternativeSentences: (this.alternativeSentences || []).map(m => m.toObject())
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            alternativeSentences: (this.alternativeSentences || []).map(m => m.toProtobufJSON(options))
-        };
-    }
-}
-GetAlternativeSentencesResponse.id = 'ondewo.nlu.GetAlternativeSentencesResponse';
-/**
- * Message implementation for ondewo.nlu.GenerateResponsesResponse
- */
-class GenerateResponsesResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GenerateResponsesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.responses = (_value.responses || []).slice();
-        GenerateResponsesResponse.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GenerateResponsesResponse();
-        GenerateResponsesResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.responses = _instance.responses || [];
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 2:
-                    (_instance.responses = _instance.responses || []).push(_reader.readString());
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GenerateResponsesResponse.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.responses && _instance.responses.length) {
-            _writer.writeRepeatedString(2, _instance.responses);
-        }
-    }
-    get responses() {
-        return this._responses;
-    }
-    set responses(value) {
-        this._responses = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GenerateResponsesResponse.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            responses: (this.responses || []).slice()
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            responses: (this.responses || []).slice()
-        };
-    }
-}
-GenerateResponsesResponse.id = 'ondewo.nlu.GenerateResponsesResponse';
-/**
- * Message implementation for ondewo.nlu.GenerateUserSaysResponse
- */
-class GenerateUserSaysResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GenerateUserSaysResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.userSays = (_value.userSays || []).slice();
-        GenerateUserSaysResponse.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GenerateUserSaysResponse();
-        GenerateUserSaysResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.userSays = _instance.userSays || [];
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 2:
-                    (_instance.userSays = _instance.userSays || []).push(_reader.readString());
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GenerateUserSaysResponse.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.userSays && _instance.userSays.length) {
-            _writer.writeRepeatedString(2, _instance.userSays);
-        }
-    }
-    get userSays() {
-        return this._userSays;
-    }
-    set userSays(value) {
-        this._userSays = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GenerateUserSaysResponse.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            userSays: (this.userSays || []).slice()
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            userSays: (this.userSays || []).slice()
-        };
-    }
-}
-GenerateUserSaysResponse.id = 'ondewo.nlu.GenerateUserSaysResponse';
-/**
- * Message implementation for ondewo.nlu.GetAlternativeTrainingPhrasesResponse
- */
-class GetAlternativeTrainingPhrasesResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.alternativeTrainingPhrases = (_value.alternativeTrainingPhrases || []).map(m => new AltTrainingPhrase(m));
-        GetAlternativeTrainingPhrasesResponse.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetAlternativeTrainingPhrasesResponse();
-        GetAlternativeTrainingPhrasesResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.alternativeTrainingPhrases =
-            _instance.alternativeTrainingPhrases || [];
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new AltTrainingPhrase();
-                    _reader.readMessage(messageInitializer1, AltTrainingPhrase.deserializeBinaryFromReader);
-                    (_instance.alternativeTrainingPhrases =
-                        _instance.alternativeTrainingPhrases || []).push(messageInitializer1);
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetAlternativeTrainingPhrasesResponse.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.alternativeTrainingPhrases &&
-            _instance.alternativeTrainingPhrases.length) {
-            _writer.writeRepeatedMessage(1, _instance.alternativeTrainingPhrases, AltTrainingPhrase.serializeBinaryToWriter);
-        }
-    }
-    get alternativeTrainingPhrases() {
-        return this._alternativeTrainingPhrases;
-    }
-    set alternativeTrainingPhrases(value) {
-        this._alternativeTrainingPhrases = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetAlternativeTrainingPhrasesResponse.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            alternativeTrainingPhrases: (this.alternativeTrainingPhrases || []).map(m => m.toObject())
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            alternativeTrainingPhrases: (this.alternativeTrainingPhrases || []).map(m => m.toProtobufJSON(options))
-        };
-    }
-}
-GetAlternativeTrainingPhrasesResponse.id = 'ondewo.nlu.GetAlternativeTrainingPhrasesResponse';
-/**
- * Message implementation for ondewo.nlu.AltSentence
- */
-class AltSentence {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AltSentence to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sentence = _value.sentence;
-        this.score = _value.score;
-        AltSentence.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new AltSentence();
-        AltSentence.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.sentence = _instance.sentence || '';
-        _instance.score = _instance.score || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.sentence = _reader.readString();
-                    break;
-                case 2:
-                    _instance.score = _reader.readFloat();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        AltSentence.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.sentence) {
-            _writer.writeString(1, _instance.sentence);
-        }
-        if (_instance.score) {
-            _writer.writeFloat(2, _instance.score);
-        }
-    }
-    get sentence() {
-        return this._sentence;
-    }
-    set sentence(value) {
-        this._sentence = value;
-    }
-    get score() {
-        return this._score;
-    }
-    set score(value) {
-        this._score = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        AltSentence.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            sentence: this.sentence,
-            score: this.score
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            sentence: this.sentence,
-            score: this.score
-        };
-    }
-}
-AltSentence.id = 'ondewo.nlu.AltSentence';
-/**
- * Message implementation for ondewo.nlu.AltTrainingPhrase
- */
-class AltTrainingPhrase {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AltTrainingPhrase to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.trainingPhrase = _value.trainingPhrase
-            ? new Intent.TrainingPhrase(_value.trainingPhrase)
-            : undefined;
-        this.score = _value.score;
-        AltTrainingPhrase.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new AltTrainingPhrase();
-        AltTrainingPhrase.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.trainingPhrase = _instance.trainingPhrase || undefined;
-        _instance.score = _instance.score || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.trainingPhrase = new Intent.TrainingPhrase();
-                    _reader.readMessage(_instance.trainingPhrase, Intent.TrainingPhrase.deserializeBinaryFromReader);
-                    break;
-                case 2:
-                    _instance.score = _reader.readFloat();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        AltTrainingPhrase.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.trainingPhrase) {
-            _writer.writeMessage(1, _instance.trainingPhrase, Intent.TrainingPhrase.serializeBinaryToWriter);
-        }
-        if (_instance.score) {
-            _writer.writeFloat(2, _instance.score);
-        }
-    }
-    get trainingPhrase() {
-        return this._trainingPhrase;
-    }
-    set trainingPhrase(value) {
-        this._trainingPhrase = value;
-    }
-    get score() {
-        return this._score;
-    }
-    set score(value) {
-        this._score = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        AltTrainingPhrase.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            trainingPhrase: this.trainingPhrase
-                ? this.trainingPhrase.toObject()
-                : undefined,
-            score: this.score
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            trainingPhrase: this.trainingPhrase
-                ? this.trainingPhrase.toProtobufJSON(options)
-                : null,
-            score: this.score
-        };
-    }
-}
-AltTrainingPhrase.id = 'ondewo.nlu.AltTrainingPhrase';
-/**
- * Message implementation for ondewo.nlu.DataEnrichmentConfig
- */
-class DataEnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DataEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityEnrichment = _value.entityEnrichment
-            ? new EntityEnrichmentConfig(_value.entityEnrichment)
-            : undefined;
-        this.thesaurusEnrichment = _value.thesaurusEnrichment
-            ? new ThesaurusEnrichmentConfig(_value.thesaurusEnrichment)
-            : undefined;
-        this.word2vecEnrichment = _value.word2vecEnrichment
-            ? new Word2VecEnrichmentConfig(_value.word2vecEnrichment)
-            : undefined;
-        this.wordNetEnrichment = _value.wordNetEnrichment
-            ? new WordNetAugEnrichmentConfig(_value.wordNetEnrichment)
-            : undefined;
-        this.gpt2Enrichment = _value.gpt2Enrichment
-            ? new GPT2EnrichmentConfig(_value.gpt2Enrichment)
-            : undefined;
-        this.gloveEnrichment = _value.gloveEnrichment
-            ? new GloVeEnrichmentConfig(_value.gloveEnrichment)
-            : undefined;
-        this.bertEnrichment = _value.bertEnrichment
-            ? new BertAugEnrichmentConfig(_value.bertEnrichment)
-            : undefined;
-        this.xlnetEnrichment = _value.xlnetEnrichment
-            ? new XLNetAugEnrichmentConfig(_value.xlnetEnrichment)
-            : undefined;
-        DataEnrichmentConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new DataEnrichmentConfig();
-        DataEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.entityEnrichment = _instance.entityEnrichment || undefined;
-        _instance.thesaurusEnrichment = _instance.thesaurusEnrichment || undefined;
-        _instance.word2vecEnrichment = _instance.word2vecEnrichment || undefined;
-        _instance.wordNetEnrichment = _instance.wordNetEnrichment || undefined;
-        _instance.gpt2Enrichment = _instance.gpt2Enrichment || undefined;
-        _instance.gloveEnrichment = _instance.gloveEnrichment || undefined;
-        _instance.bertEnrichment = _instance.bertEnrichment || undefined;
-        _instance.xlnetEnrichment = _instance.xlnetEnrichment || undefined;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.entityEnrichment = new EntityEnrichmentConfig();
-                    _reader.readMessage(_instance.entityEnrichment, EntityEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 2:
-                    _instance.thesaurusEnrichment = new ThesaurusEnrichmentConfig();
-                    _reader.readMessage(_instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 3:
-                    _instance.word2vecEnrichment = new Word2VecEnrichmentConfig();
-                    _reader.readMessage(_instance.word2vecEnrichment, Word2VecEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 4:
-                    _instance.wordNetEnrichment = new WordNetAugEnrichmentConfig();
-                    _reader.readMessage(_instance.wordNetEnrichment, WordNetAugEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 5:
-                    _instance.gpt2Enrichment = new GPT2EnrichmentConfig();
-                    _reader.readMessage(_instance.gpt2Enrichment, GPT2EnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 6:
-                    _instance.gloveEnrichment = new GloVeEnrichmentConfig();
-                    _reader.readMessage(_instance.gloveEnrichment, GloVeEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 8:
-                    _instance.bertEnrichment = new BertAugEnrichmentConfig();
-                    _reader.readMessage(_instance.bertEnrichment, BertAugEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                case 9:
-                    _instance.xlnetEnrichment = new XLNetAugEnrichmentConfig();
-                    _reader.readMessage(_instance.xlnetEnrichment, XLNetAugEnrichmentConfig.deserializeBinaryFromReader);
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        DataEnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.entityEnrichment) {
-            _writer.writeMessage(1, _instance.entityEnrichment, EntityEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.thesaurusEnrichment) {
-            _writer.writeMessage(2, _instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.word2vecEnrichment) {
-            _writer.writeMessage(3, _instance.word2vecEnrichment, Word2VecEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.wordNetEnrichment) {
-            _writer.writeMessage(4, _instance.wordNetEnrichment, WordNetAugEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.gpt2Enrichment) {
-            _writer.writeMessage(5, _instance.gpt2Enrichment, GPT2EnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.gloveEnrichment) {
-            _writer.writeMessage(6, _instance.gloveEnrichment, GloVeEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.bertEnrichment) {
-            _writer.writeMessage(8, _instance.bertEnrichment, BertAugEnrichmentConfig.serializeBinaryToWriter);
-        }
-        if (_instance.xlnetEnrichment) {
-            _writer.writeMessage(9, _instance.xlnetEnrichment, XLNetAugEnrichmentConfig.serializeBinaryToWriter);
-        }
-    }
-    get entityEnrichment() {
-        return this._entityEnrichment;
-    }
-    set entityEnrichment(value) {
-        this._entityEnrichment = value;
-    }
-    get thesaurusEnrichment() {
-        return this._thesaurusEnrichment;
-    }
-    set thesaurusEnrichment(value) {
-        this._thesaurusEnrichment = value;
-    }
-    get word2vecEnrichment() {
-        return this._word2vecEnrichment;
-    }
-    set word2vecEnrichment(value) {
-        this._word2vecEnrichment = value;
-    }
-    get wordNetEnrichment() {
-        return this._wordNetEnrichment;
-    }
-    set wordNetEnrichment(value) {
-        this._wordNetEnrichment = value;
-    }
-    get gpt2Enrichment() {
-        return this._gpt2Enrichment;
-    }
-    set gpt2Enrichment(value) {
-        this._gpt2Enrichment = value;
-    }
-    get gloveEnrichment() {
-        return this._gloveEnrichment;
-    }
-    set gloveEnrichment(value) {
-        this._gloveEnrichment = value;
-    }
-    get bertEnrichment() {
-        return this._bertEnrichment;
-    }
-    set bertEnrichment(value) {
-        this._bertEnrichment = value;
-    }
-    get xlnetEnrichment() {
-        return this._xlnetEnrichment;
-    }
-    set xlnetEnrichment(value) {
-        this._xlnetEnrichment = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        DataEnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            entityEnrichment: this.entityEnrichment
-                ? this.entityEnrichment.toObject()
-                : undefined,
-            thesaurusEnrichment: this.thesaurusEnrichment
-                ? this.thesaurusEnrichment.toObject()
-                : undefined,
-            word2vecEnrichment: this.word2vecEnrichment
-                ? this.word2vecEnrichment.toObject()
-                : undefined,
-            wordNetEnrichment: this.wordNetEnrichment
-                ? this.wordNetEnrichment.toObject()
-                : undefined,
-            gpt2Enrichment: this.gpt2Enrichment
-                ? this.gpt2Enrichment.toObject()
-                : undefined,
-            gloveEnrichment: this.gloveEnrichment
-                ? this.gloveEnrichment.toObject()
-                : undefined,
-            bertEnrichment: this.bertEnrichment
-                ? this.bertEnrichment.toObject()
-                : undefined,
-            xlnetEnrichment: this.xlnetEnrichment
-                ? this.xlnetEnrichment.toObject()
+            name: this.name,
+            filter: this.filter,
+            pageSize: this.pageSize,
+            pageToken: this.pageToken,
+            operationFilter: this.operationFilter
+                ? this.operationFilter.toObject()
                 : undefined
         };
     }
@@ -26764,56 +23703,48 @@ class DataEnrichmentConfig {
     // @ts-ignore
     options) {
         return {
-            entityEnrichment: this.entityEnrichment
-                ? this.entityEnrichment.toProtobufJSON(options)
-                : null,
-            thesaurusEnrichment: this.thesaurusEnrichment
-                ? this.thesaurusEnrichment.toProtobufJSON(options)
-                : null,
-            word2vecEnrichment: this.word2vecEnrichment
-                ? this.word2vecEnrichment.toProtobufJSON(options)
-                : null,
-            wordNetEnrichment: this.wordNetEnrichment
-                ? this.wordNetEnrichment.toProtobufJSON(options)
-                : null,
-            gpt2Enrichment: this.gpt2Enrichment
-                ? this.gpt2Enrichment.toProtobufJSON(options)
-                : null,
-            gloveEnrichment: this.gloveEnrichment
-                ? this.gloveEnrichment.toProtobufJSON(options)
-                : null,
-            bertEnrichment: this.bertEnrichment
-                ? this.bertEnrichment.toProtobufJSON(options)
-                : null,
-            xlnetEnrichment: this.xlnetEnrichment
-                ? this.xlnetEnrichment.toProtobufJSON(options)
+            name: this.name,
+            filter: this.filter,
+            pageSize: this.pageSize,
+            pageToken: this.pageToken,
+            operationFilter: this.operationFilter
+                ? this.operationFilter.toProtobufJSON(options)
                 : null
         };
     }
 }
-DataEnrichmentConfig.id = 'ondewo.nlu.DataEnrichmentConfig';
+ListOperationsRequest.id = 'ondewo.nlu.ListOperationsRequest';
 /**
- * Message implementation for ondewo.nlu.EntityEnrichmentConfig
+ * Message implementation for ondewo.nlu.OperationFilter
  */
-class EntityEnrichmentConfig {
+class OperationFilter {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityEnrichmentConfig to deeply clone from
+     * @param _value initial values object or instance of OperationFilter to deeply clone from
      */
     constructor(_value) {
+        this._startTimeOneof = OperationFilter.StartTimeOneofCase.none;
+        this._endTimeOneof = OperationFilter.EndTimeOneofCase.none;
         _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        EntityEnrichmentConfig.refineValues(this);
+        this.projectParents = (_value.projectParents || []).slice();
+        this.statuses = (_value.statuses || []).slice();
+        this.types = (_value.types || []).slice();
+        this.startTime = _value.startTime
+            ? new googleProtobuf003.Timestamp(_value.startTime)
+            : undefined;
+        this.endTime = _value.endTime
+            ? new googleProtobuf003.Timestamp(_value.endTime)
+            : undefined;
+        this.userIds = (_value.userIds || []).slice();
+        OperationFilter.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new EntityEnrichmentConfig();
-        EntityEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new OperationFilter();
+        OperationFilter.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -26821,9 +23752,10 @@ class EntityEnrichmentConfig {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
-        _instance.executionOrder = _instance.executionOrder || 0;
+        _instance.projectParents = _instance.projectParents || [];
+        _instance.statuses = _instance.statuses || [];
+        _instance.types = _instance.types || [];
+        _instance.userIds = _instance.userIds || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -26836,1103 +23768,30 @@ class EntityEnrichmentConfig {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.isActive = _reader.readBool();
+                    (_instance.projectParents = _instance.projectParents || []).push(_reader.readString());
                     break;
                 case 2:
-                    _instance.enrichmentFactor = _reader.readInt32();
+                    (_instance.statuses = _instance.statuses || []).push(...(_reader.readPackedEnum() || []));
                     break;
                 case 3:
-                    _instance.executionOrder = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        EntityEnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
-            _writer.writeBool(1, _instance.isActive);
-        }
-        if (_instance.enrichmentFactor) {
-            _writer.writeInt32(2, _instance.enrichmentFactor);
-        }
-        if (_instance.executionOrder) {
-            _writer.writeInt32(3, _instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        EntityEnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-}
-EntityEnrichmentConfig.id = 'ondewo.nlu.EntityEnrichmentConfig';
-/**
- * Message implementation for ondewo.nlu.ThesaurusEnrichmentConfig
- */
-class ThesaurusEnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ThesaurusEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        ThesaurusEnrichmentConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new ThesaurusEnrichmentConfig();
-        ThesaurusEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
-        _instance.executionOrder = _instance.executionOrder || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.isActive = _reader.readBool();
-                    break;
-                case 2:
-                    _instance.enrichmentFactor = _reader.readInt32();
-                    break;
-                case 3:
-                    _instance.executionOrder = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        ThesaurusEnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
-            _writer.writeBool(1, _instance.isActive);
-        }
-        if (_instance.enrichmentFactor) {
-            _writer.writeInt32(2, _instance.enrichmentFactor);
-        }
-        if (_instance.executionOrder) {
-            _writer.writeInt32(3, _instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        ThesaurusEnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-}
-ThesaurusEnrichmentConfig.id = 'ondewo.nlu.ThesaurusEnrichmentConfig';
-/**
- * Message implementation for ondewo.nlu.BertAugEnrichmentConfig
- */
-class BertAugEnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BertAugEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        BertAugEnrichmentConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new BertAugEnrichmentConfig();
-        BertAugEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
-        _instance.executionOrder = _instance.executionOrder || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.isActive = _reader.readBool();
-                    break;
-                case 2:
-                    _instance.enrichmentFactor = _reader.readInt32();
-                    break;
-                case 3:
-                    _instance.executionOrder = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        BertAugEnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
-            _writer.writeBool(1, _instance.isActive);
-        }
-        if (_instance.enrichmentFactor) {
-            _writer.writeInt32(2, _instance.enrichmentFactor);
-        }
-        if (_instance.executionOrder) {
-            _writer.writeInt32(3, _instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        BertAugEnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-}
-BertAugEnrichmentConfig.id = 'ondewo.nlu.BertAugEnrichmentConfig';
-/**
- * Message implementation for ondewo.nlu.GloVeEnrichmentConfig
- */
-class GloVeEnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GloVeEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        GloVeEnrichmentConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GloVeEnrichmentConfig();
-        GloVeEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
-        _instance.executionOrder = _instance.executionOrder || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.isActive = _reader.readBool();
-                    break;
-                case 2:
-                    _instance.enrichmentFactor = _reader.readInt32();
-                    break;
-                case 3:
-                    _instance.executionOrder = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GloVeEnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
-            _writer.writeBool(1, _instance.isActive);
-        }
-        if (_instance.enrichmentFactor) {
-            _writer.writeInt32(2, _instance.enrichmentFactor);
-        }
-        if (_instance.executionOrder) {
-            _writer.writeInt32(3, _instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GloVeEnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-}
-GloVeEnrichmentConfig.id = 'ondewo.nlu.GloVeEnrichmentConfig';
-/**
- * Message implementation for ondewo.nlu.GPT2EnrichmentConfig
- */
-class GPT2EnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GPT2EnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        GPT2EnrichmentConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GPT2EnrichmentConfig();
-        GPT2EnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
-        _instance.executionOrder = _instance.executionOrder || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.isActive = _reader.readBool();
-                    break;
-                case 2:
-                    _instance.enrichmentFactor = _reader.readInt32();
-                    break;
-                case 3:
-                    _instance.executionOrder = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GPT2EnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
-            _writer.writeBool(1, _instance.isActive);
-        }
-        if (_instance.enrichmentFactor) {
-            _writer.writeInt32(2, _instance.enrichmentFactor);
-        }
-        if (_instance.executionOrder) {
-            _writer.writeInt32(3, _instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GPT2EnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-}
-GPT2EnrichmentConfig.id = 'ondewo.nlu.GPT2EnrichmentConfig';
-/**
- * Message implementation for ondewo.nlu.Word2VecEnrichmentConfig
- */
-class Word2VecEnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Word2VecEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        Word2VecEnrichmentConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new Word2VecEnrichmentConfig();
-        Word2VecEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
-        _instance.executionOrder = _instance.executionOrder || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.isActive = _reader.readBool();
-                    break;
-                case 2:
-                    _instance.enrichmentFactor = _reader.readInt32();
-                    break;
-                case 3:
-                    _instance.executionOrder = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        Word2VecEnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
-            _writer.writeBool(1, _instance.isActive);
-        }
-        if (_instance.enrichmentFactor) {
-            _writer.writeInt32(2, _instance.enrichmentFactor);
-        }
-        if (_instance.executionOrder) {
-            _writer.writeInt32(3, _instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        Word2VecEnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-}
-Word2VecEnrichmentConfig.id = 'ondewo.nlu.Word2VecEnrichmentConfig';
-/**
- * Message implementation for ondewo.nlu.WordNetAugEnrichmentConfig
- */
-class WordNetAugEnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of WordNetAugEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        WordNetAugEnrichmentConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new WordNetAugEnrichmentConfig();
-        WordNetAugEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
-        _instance.executionOrder = _instance.executionOrder || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.isActive = _reader.readBool();
-                    break;
-                case 2:
-                    _instance.enrichmentFactor = _reader.readInt32();
-                    break;
-                case 3:
-                    _instance.executionOrder = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        WordNetAugEnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
-            _writer.writeBool(1, _instance.isActive);
-        }
-        if (_instance.enrichmentFactor) {
-            _writer.writeInt32(2, _instance.enrichmentFactor);
-        }
-        if (_instance.executionOrder) {
-            _writer.writeInt32(3, _instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        WordNetAugEnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-}
-WordNetAugEnrichmentConfig.id = 'ondewo.nlu.WordNetAugEnrichmentConfig';
-/**
- * Message implementation for ondewo.nlu.XLNetAugEnrichmentConfig
- */
-class XLNetAugEnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of XLNetAugEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        XLNetAugEnrichmentConfig.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new XLNetAugEnrichmentConfig();
-        XLNetAugEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
-        _instance.executionOrder = _instance.executionOrder || 0;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.isActive = _reader.readBool();
-                    break;
-                case 2:
-                    _instance.enrichmentFactor = _reader.readInt32();
-                    break;
-                case 3:
-                    _instance.executionOrder = _reader.readInt32();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        XLNetAugEnrichmentConfig.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
-            _writer.writeBool(1, _instance.isActive);
-        }
-        if (_instance.enrichmentFactor) {
-            _writer.writeInt32(2, _instance.enrichmentFactor);
-        }
-        if (_instance.executionOrder) {
-            _writer.writeInt32(3, _instance.executionOrder);
-        }
-    }
-    get isActive() {
-        return this._isActive;
-    }
-    set isActive(value) {
-        this._isActive = value;
-    }
-    get enrichmentFactor() {
-        return this._enrichmentFactor;
-    }
-    set enrichmentFactor(value) {
-        this._enrichmentFactor = value;
-    }
-    get executionOrder() {
-        return this._executionOrder;
-    }
-    set executionOrder(value) {
-        this._executionOrder = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        XLNetAugEnrichmentConfig.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            isActive: this.isActive,
-            enrichmentFactor: this.enrichmentFactor,
-            executionOrder: this.executionOrder
-        };
-    }
-}
-XLNetAugEnrichmentConfig.id = 'ondewo.nlu.XLNetAugEnrichmentConfig';
-/**
- * Message implementation for ondewo.nlu.ClassifyIntentsRequest
- */
-class ClassifyIntentsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ClassifyIntentsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.text = _value.text;
-        this.languageCode = _value.languageCode;
-        this.activeContexts = _value.activeContexts;
-        this.contextNames = (_value.contextNames || []).slice();
-        this.mode = _value.mode;
-        this.algorithms = (_value.algorithms || []).slice();
-        ClassifyIntentsRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new ClassifyIntentsRequest();
-        ClassifyIntentsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.parent = _instance.parent || '';
-        _instance.text = _instance.text || '';
-        _instance.languageCode = _instance.languageCode || '';
-        _instance.activeContexts = _instance.activeContexts || false;
-        _instance.contextNames = _instance.contextNames || [];
-        _instance.mode = _instance.mode || 0;
-        _instance.algorithms = _instance.algorithms || [];
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.parent = _reader.readString();
-                    break;
-                case 2:
-                    _instance.text = _reader.readString();
-                    break;
-                case 3:
-                    _instance.languageCode = _reader.readString();
+                    (_instance.types = _instance.types || []).push(...(_reader.readPackedEnum() || []));
                     break;
                 case 4:
-                    _instance.activeContexts = _reader.readBool();
+                    _instance.startTime = new googleProtobuf003.Timestamp();
+                    _reader.readMessage(_instance.startTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    (_instance.contextNames = _instance.contextNames || []).push(_reader.readString());
+                    _instance.endTime = new googleProtobuf003.Timestamp();
+                    _reader.readMessage(_instance.endTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
-                    _instance.mode = _reader.readEnum();
-                    break;
-                case 7:
-                    (_instance.algorithms = _instance.algorithms || []).push(...(_reader.readPackedEnum() || []));
+                    (_instance.userIds = _instance.userIds || []).push(_reader.readString());
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        ClassifyIntentsRequest.refineValues(_instance);
+        OperationFilter.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -27940,69 +23799,72 @@ class ClassifyIntentsRequest {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.parent) {
-            _writer.writeString(1, _instance.parent);
+        if (_instance.projectParents && _instance.projectParents.length) {
+            _writer.writeRepeatedString(1, _instance.projectParents);
         }
-        if (_instance.text) {
-            _writer.writeString(2, _instance.text);
+        if (_instance.statuses && _instance.statuses.length) {
+            _writer.writePackedEnum(2, _instance.statuses);
         }
-        if (_instance.languageCode) {
-            _writer.writeString(3, _instance.languageCode);
+        if (_instance.types && _instance.types.length) {
+            _writer.writePackedEnum(3, _instance.types);
         }
-        if (_instance.activeContexts) {
-            _writer.writeBool(4, _instance.activeContexts);
+        if (_instance.startTime) {
+            _writer.writeMessage(4, _instance.startTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
         }
-        if (_instance.contextNames && _instance.contextNames.length) {
-            _writer.writeRepeatedString(5, _instance.contextNames);
+        if (_instance.endTime) {
+            _writer.writeMessage(5, _instance.endTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
         }
-        if (_instance.mode) {
-            _writer.writeEnum(6, _instance.mode);
-        }
-        if (_instance.algorithms && _instance.algorithms.length) {
-            _writer.writePackedEnum(7, _instance.algorithms);
+        if (_instance.userIds && _instance.userIds.length) {
+            _writer.writeRepeatedString(6, _instance.userIds);
         }
     }
-    get parent() {
-        return this._parent;
+    get projectParents() {
+        return this._projectParents;
     }
-    set parent(value) {
-        this._parent = value;
+    set projectParents(value) {
+        this._projectParents = value;
     }
-    get text() {
-        return this._text;
+    get statuses() {
+        return this._statuses;
     }
-    set text(value) {
-        this._text = value;
+    set statuses(value) {
+        this._statuses = value;
     }
-    get languageCode() {
-        return this._languageCode;
+    get types() {
+        return this._types;
     }
-    set languageCode(value) {
-        this._languageCode = value;
+    set types(value) {
+        this._types = value;
     }
-    get activeContexts() {
-        return this._activeContexts;
+    get startTime() {
+        return this._startTime;
     }
-    set activeContexts(value) {
-        this._activeContexts = value;
+    set startTime(value) {
+        if (value !== undefined && value !== null) {
+            this._startTimeOneof = OperationFilter.StartTimeOneofCase.startTime;
+        }
+        this._startTime = value;
     }
-    get contextNames() {
-        return this._contextNames;
+    get endTime() {
+        return this._endTime;
     }
-    set contextNames(value) {
-        this._contextNames = value;
+    set endTime(value) {
+        if (value !== undefined && value !== null) {
+            this._endTimeOneof = OperationFilter.EndTimeOneofCase.endTime;
+        }
+        this._endTime = value;
     }
-    get mode() {
-        return this._mode;
+    get userIds() {
+        return this._userIds;
     }
-    set mode(value) {
-        this._mode = value;
+    set userIds(value) {
+        this._userIds = value;
     }
-    get algorithms() {
-        return this._algorithms;
+    get startTimeOneof() {
+        return this._startTimeOneof;
     }
-    set algorithms(value) {
-        this._algorithms = value;
+    get endTimeOneof() {
+        return this._endTimeOneof;
     }
     /**
      * Serialize message to binary data
@@ -28010,7 +23872,7 @@ class ClassifyIntentsRequest {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        ClassifyIntentsRequest.serializeBinaryToWriter(this, writer);
+        OperationFilter.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -28018,13 +23880,12 @@ class ClassifyIntentsRequest {
      */
     toObject() {
         return {
-            parent: this.parent,
-            text: this.text,
-            languageCode: this.languageCode,
-            activeContexts: this.activeContexts,
-            contextNames: (this.contextNames || []).slice(),
-            mode: this.mode,
-            algorithms: (this.algorithms || []).slice()
+            projectParents: (this.projectParents || []).slice(),
+            statuses: (this.statuses || []).slice(),
+            types: (this.types || []).slice(),
+            startTime: this.startTime ? this.startTime.toObject() : undefined,
+            endTime: this.endTime ? this.endTime.toObject() : undefined,
+            userIds: (this.userIds || []).slice()
         };
     }
     /**
@@ -28042,40 +23903,49 @@ class ClassifyIntentsRequest {
     // @ts-ignore
     options) {
         return {
-            parent: this.parent,
-            text: this.text,
-            languageCode: this.languageCode,
-            activeContexts: this.activeContexts,
-            contextNames: (this.contextNames || []).slice(),
-            mode: Mode[this.mode === null || this.mode === undefined ? 0 : this.mode],
-            algorithms: (this.algorithms || []).map(v => IntentAlgorithms[v])
+            projectParents: (this.projectParents || []).slice(),
+            statuses: (this.statuses || []).map(v => OperationMetadata.Status[v]),
+            types: (this.types || []).map(v => OperationMetadata.OperationType[v]),
+            startTime: this.startTime ? this.startTime.toProtobufJSON(options) : null,
+            endTime: this.endTime ? this.endTime.toProtobufJSON(options) : null,
+            userIds: (this.userIds || []).slice()
         };
     }
 }
-ClassifyIntentsRequest.id = 'ondewo.nlu.ClassifyIntentsRequest';
+OperationFilter.id = 'ondewo.nlu.OperationFilter';
+(function (OperationFilter) {
+    let StartTimeOneofCase;
+    (function (StartTimeOneofCase) {
+        StartTimeOneofCase[StartTimeOneofCase["none"] = 0] = "none";
+        StartTimeOneofCase[StartTimeOneofCase["startTime"] = 1] = "startTime";
+    })(StartTimeOneofCase = OperationFilter.StartTimeOneofCase || (OperationFilter.StartTimeOneofCase = {}));
+    let EndTimeOneofCase;
+    (function (EndTimeOneofCase) {
+        EndTimeOneofCase[EndTimeOneofCase["none"] = 0] = "none";
+        EndTimeOneofCase[EndTimeOneofCase["endTime"] = 1] = "endTime";
+    })(EndTimeOneofCase = OperationFilter.EndTimeOneofCase || (OperationFilter.EndTimeOneofCase = {}));
+})(OperationFilter || (OperationFilter = {}));
 /**
- * Message implementation for ondewo.nlu.IntentClassified
+ * Message implementation for ondewo.nlu.ListOperationsResponse
  */
-class IntentClassified {
+class ListOperationsResponse {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of IntentClassified to deeply clone from
+     * @param _value initial values object or instance of ListOperationsResponse to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
-        this.intentName = _value.intentName;
-        this.intentDisplayName = _value.intentDisplayName;
-        this.classifier = _value.classifier;
-        this.score = _value.score;
-        IntentClassified.refineValues(this);
+        this.operations = (_value.operations || []).map(m => new Operation(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListOperationsResponse.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new IntentClassified();
-        IntentClassified.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new ListOperationsResponse();
+        ListOperationsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -28083,10 +23953,8 @@ class IntentClassified {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.intentName = _instance.intentName || '';
-        _instance.intentDisplayName = _instance.intentDisplayName || '';
-        _instance.classifier = _instance.classifier || '';
-        _instance.score = _instance.score || 0;
+        _instance.operations = _instance.operations || [];
+        _instance.nextPageToken = _instance.nextPageToken || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -28099,22 +23967,18 @@ class IntentClassified {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.intentName = _reader.readString();
+                    const messageInitializer1 = new Operation();
+                    _reader.readMessage(messageInitializer1, Operation.deserializeBinaryFromReader);
+                    (_instance.operations = _instance.operations || []).push(messageInitializer1);
                     break;
                 case 2:
-                    _instance.intentDisplayName = _reader.readString();
-                    break;
-                case 3:
-                    _instance.classifier = _reader.readString();
-                    break;
-                case 4:
-                    _instance.score = _reader.readFloat();
+                    _instance.nextPageToken = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        IntentClassified.refineValues(_instance);
+        ListOperationsResponse.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -28122,42 +23986,24 @@ class IntentClassified {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.intentName) {
-            _writer.writeString(1, _instance.intentName);
+        if (_instance.operations && _instance.operations.length) {
+            _writer.writeRepeatedMessage(1, _instance.operations, Operation.serializeBinaryToWriter);
         }
-        if (_instance.intentDisplayName) {
-            _writer.writeString(2, _instance.intentDisplayName);
-        }
-        if (_instance.classifier) {
-            _writer.writeString(3, _instance.classifier);
-        }
-        if (_instance.score) {
-            _writer.writeFloat(4, _instance.score);
+        if (_instance.nextPageToken) {
+            _writer.writeString(2, _instance.nextPageToken);
         }
     }
-    get intentName() {
-        return this._intentName;
+    get operations() {
+        return this._operations;
     }
-    set intentName(value) {
-        this._intentName = value;
+    set operations(value) {
+        this._operations = value;
     }
-    get intentDisplayName() {
-        return this._intentDisplayName;
+    get nextPageToken() {
+        return this._nextPageToken;
     }
-    set intentDisplayName(value) {
-        this._intentDisplayName = value;
-    }
-    get classifier() {
-        return this._classifier;
-    }
-    set classifier(value) {
-        this._classifier = value;
-    }
-    get score() {
-        return this._score;
-    }
-    set score(value) {
-        this._score = value;
+    set nextPageToken(value) {
+        this._nextPageToken = value;
     }
     /**
      * Serialize message to binary data
@@ -28165,7 +24011,7 @@ class IntentClassified {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        IntentClassified.serializeBinaryToWriter(this, writer);
+        ListOperationsResponse.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -28173,10 +24019,8 @@ class IntentClassified {
      */
     toObject() {
         return {
-            intentName: this.intentName,
-            intentDisplayName: this.intentDisplayName,
-            classifier: this.classifier,
-            score: this.score
+            operations: (this.operations || []).map(m => m.toObject()),
+            nextPageToken: this.nextPageToken
         };
     }
     /**
@@ -28194,37 +24038,32 @@ class IntentClassified {
     // @ts-ignore
     options) {
         return {
-            intentName: this.intentName,
-            intentDisplayName: this.intentDisplayName,
-            classifier: this.classifier,
-            score: this.score
+            operations: (this.operations || []).map(m => m.toProtobufJSON(options)),
+            nextPageToken: this.nextPageToken
         };
     }
 }
-IntentClassified.id = 'ondewo.nlu.IntentClassified';
+ListOperationsResponse.id = 'ondewo.nlu.ListOperationsResponse';
 /**
- * Message implementation for ondewo.nlu.ClassifyIntentsResponse
+ * Message implementation for ondewo.nlu.CancelOperationRequest
  */
-class ClassifyIntentsResponse {
+class CancelOperationRequest {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ClassifyIntentsResponse to deeply clone from
+     * @param _value initial values object or instance of CancelOperationRequest to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
-        this.intentsClassified = (_value.intentsClassified || []).map(m => new IntentClassified(m));
-        this.text = _value.text;
-        this.activeContexts = _value.activeContexts;
-        this.contextNames = (_value.contextNames || []).slice();
-        ClassifyIntentsResponse.refineValues(this);
+        this.name = _value.name;
+        CancelOperationRequest.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new ClassifyIntentsResponse();
-        ClassifyIntentsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new CancelOperationRequest();
+        CancelOperationRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -28232,10 +24071,7 @@ class ClassifyIntentsResponse {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.intentsClassified = _instance.intentsClassified || [];
-        _instance.text = _instance.text || '';
-        _instance.activeContexts = _instance.activeContexts || false;
-        _instance.contextNames = _instance.contextNames || [];
+        _instance.name = _instance.name || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -28248,25 +24084,13 @@ class ClassifyIntentsResponse {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    const messageInitializer1 = new IntentClassified();
-                    _reader.readMessage(messageInitializer1, IntentClassified.deserializeBinaryFromReader);
-                    (_instance.intentsClassified =
-                        _instance.intentsClassified || []).push(messageInitializer1);
-                    break;
-                case 2:
-                    _instance.text = _reader.readString();
-                    break;
-                case 3:
-                    _instance.activeContexts = _reader.readBool();
-                    break;
-                case 4:
-                    (_instance.contextNames = _instance.contextNames || []).push(_reader.readString());
+                    _instance.name = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        ClassifyIntentsResponse.refineValues(_instance);
+        CancelOperationRequest.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -28274,42 +24098,15 @@ class ClassifyIntentsResponse {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.intentsClassified && _instance.intentsClassified.length) {
-            _writer.writeRepeatedMessage(1, _instance.intentsClassified, IntentClassified.serializeBinaryToWriter);
-        }
-        if (_instance.text) {
-            _writer.writeString(2, _instance.text);
-        }
-        if (_instance.activeContexts) {
-            _writer.writeBool(3, _instance.activeContexts);
-        }
-        if (_instance.contextNames && _instance.contextNames.length) {
-            _writer.writeRepeatedString(4, _instance.contextNames);
+        if (_instance.name) {
+            _writer.writeString(1, _instance.name);
         }
     }
-    get intentsClassified() {
-        return this._intentsClassified;
+    get name() {
+        return this._name;
     }
-    set intentsClassified(value) {
-        this._intentsClassified = value;
-    }
-    get text() {
-        return this._text;
-    }
-    set text(value) {
-        this._text = value;
-    }
-    get activeContexts() {
-        return this._activeContexts;
-    }
-    set activeContexts(value) {
-        this._activeContexts = value;
-    }
-    get contextNames() {
-        return this._contextNames;
-    }
-    set contextNames(value) {
-        this._contextNames = value;
+    set name(value) {
+        this._name = value;
     }
     /**
      * Serialize message to binary data
@@ -28317,7 +24114,7 @@ class ClassifyIntentsResponse {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        ClassifyIntentsResponse.serializeBinaryToWriter(this, writer);
+        CancelOperationRequest.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -28325,10 +24122,7 @@ class ClassifyIntentsResponse {
      */
     toObject() {
         return {
-            intentsClassified: (this.intentsClassified || []).map(m => m.toObject()),
-            text: this.text,
-            activeContexts: this.activeContexts,
-            contextNames: (this.contextNames || []).slice()
+            name: this.name
         };
     }
     /**
@@ -28346,14 +24140,956 @@ class ClassifyIntentsResponse {
     // @ts-ignore
     options) {
         return {
-            intentsClassified: (this.intentsClassified || []).map(m => m.toProtobufJSON(options)),
-            text: this.text,
-            activeContexts: this.activeContexts,
-            contextNames: (this.contextNames || []).slice()
+            name: this.name
         };
     }
 }
-ClassifyIntentsResponse.id = 'ondewo.nlu.ClassifyIntentsResponse';
+CancelOperationRequest.id = 'ondewo.nlu.CancelOperationRequest';
+/**
+ * Message implementation for ondewo.nlu.DeleteOperationRequest
+ */
+class DeleteOperationRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteOperationRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        DeleteOperationRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new DeleteOperationRequest();
+        DeleteOperationRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.name = _instance.name || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.name = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        DeleteOperationRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.name) {
+            _writer.writeString(1, _instance.name);
+        }
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        DeleteOperationRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            name: this.name
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            name: this.name
+        };
+    }
+}
+DeleteOperationRequest.id = 'ondewo.nlu.DeleteOperationRequest';
+
+/* tslint:disable */
+/**
+ * Service client implementation for ondewo.nlu.Intents
+ */
+class IntentsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Unary call: /ondewo.nlu.Intents/ListIntents
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListIntentsResponse>>
+             */
+            listIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/ListIntents',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListIntentsRequest,
+                    responseClass: ListIntentsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/GetIntent
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Intent>>
+             */
+            getIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/GetIntent',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetIntentRequest,
+                    responseClass: Intent
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/CreateIntent
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Intent>>
+             */
+            createIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/CreateIntent',
+                    requestData,
+                    requestMetadata,
+                    requestClass: CreateIntentRequest,
+                    responseClass: Intent
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/UpdateIntent
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Intent>>
+             */
+            updateIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/UpdateIntent',
+                    requestData,
+                    requestMetadata,
+                    requestClass: UpdateIntentRequest,
+                    responseClass: Intent
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/DeleteIntent
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+             */
+            deleteIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/DeleteIntent',
+                    requestData,
+                    requestMetadata,
+                    requestClass: DeleteIntentRequest,
+                    responseClass: googleProtobuf003.Empty
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchUpdateIntents
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu011.Operation>>
+             */
+            batchUpdateIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchUpdateIntents',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchUpdateIntentsRequest,
+                    responseClass: Operation
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchDeleteIntents
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu011.Operation>>
+             */
+            batchDeleteIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchDeleteIntents',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchDeleteIntentsRequest,
+                    responseClass: Operation
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/TagIntent
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+             */
+            tagIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/TagIntent',
+                    requestData,
+                    requestMetadata,
+                    requestClass: IntentTagRequest,
+                    responseClass: googleProtobuf003.Empty
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/DeleteIntentTag
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+             */
+            deleteIntentTag: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/DeleteIntentTag',
+                    requestData,
+                    requestMetadata,
+                    requestClass: IntentTagRequest,
+                    responseClass: googleProtobuf003.Empty
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/GetIntentTags
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>
+             */
+            getIntentTags: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/GetIntentTags',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetIntentTagsRequest,
+                    responseClass: GetIntentTagsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/GetAllIntentTags
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>
+             */
+            getAllIntentTags: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/GetAllIntentTags',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetAllIntentTagsRequest,
+                    responseClass: GetIntentTagsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchCreateTrainingPhrases
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>
+             */
+            batchCreateTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchCreateTrainingPhrases',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchCreateTrainingPhrasesRequest,
+                    responseClass: BatchTrainingPhrasesStatusResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchGetTrainingPhrases
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>
+             */
+            batchGetTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchGetTrainingPhrases',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchGetTrainingPhrasesRequest,
+                    responseClass: BatchTrainingPhrasesStatusResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>
+             */
+            batchUpdateTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchUpdateTrainingPhrases',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchUpdateTrainingPhrasesRequest,
+                    responseClass: BatchTrainingPhrasesStatusResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchDeleteTrainingPhrasesResponse>>
+             */
+            batchDeleteTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchDeleteTrainingPhrases',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchDeleteTrainingPhrasesRequest,
+                    responseClass: BatchDeleteTrainingPhrasesResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/ListTrainingPhrases
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListTrainingPhrasesResponse>>
+             */
+            listTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/ListTrainingPhrases',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListTrainingPhrasesRequest,
+                    responseClass: ListTrainingPhrasesResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchCreateResponseMessages
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>
+             */
+            batchCreateResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchCreateResponseMessages',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchCreateResponseMessagesRequest,
+                    responseClass: BatchResponseMessagesStatusResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchGetResponseMessages
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>
+             */
+            batchGetResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchGetResponseMessages',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchGetResponseMessagesRequest,
+                    responseClass: BatchResponseMessagesStatusResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchUpdateResponseMessages
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>
+             */
+            batchUpdateResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchUpdateResponseMessages',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchUpdateResponseMessagesRequest,
+                    responseClass: BatchResponseMessagesStatusResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchDeleteResponseMessages
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchDeleteResponseMessagesResponse>>
+             */
+            batchDeleteResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchDeleteResponseMessages',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchDeleteResponseMessagesRequest,
+                    responseClass: BatchDeleteResponseMessagesResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/ListResponseMessages
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListResponseMessagesResponse>>
+             */
+            listResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/ListResponseMessages',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListResponseMessagesRequest,
+                    responseClass: ListResponseMessagesResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchCreateParameters
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>
+             */
+            batchCreateParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchCreateParameters',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchCreateParametersRequest,
+                    responseClass: BatchParametersStatusResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchGetParameters
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>
+             */
+            batchGetParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchGetParameters',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchGetParametersRequest,
+                    responseClass: BatchParametersStatusResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchUpdateParameters
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>
+             */
+            batchUpdateParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchUpdateParameters',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchUpdateParametersRequest,
+                    responseClass: BatchParametersStatusResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/BatchDeleteParameters
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchDeleteParametersResponse>>
+             */
+            batchDeleteParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/BatchDeleteParameters',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchDeleteParametersRequest,
+                    responseClass: BatchDeleteParametersResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/ListParameters
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListParametersResponse>>
+             */
+            listParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/ListParameters',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListParametersRequest,
+                    responseClass: ListParametersResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListTrainingPhrasesofIntentsWithEnrichmentResponse>>
+             */
+            listTrainingPhrasesofIntentsWithEnrichment: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListTrainingPhrasesofIntentsWithEnrichmentRequest,
+                    responseClass: ListTrainingPhrasesofIntentsWithEnrichmentResponse
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.nlu.Intents', settings);
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/ListIntents
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListIntentsResponse>
+     */
+    listIntents(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listIntents(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/GetIntent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Intent>
+     */
+    getIntent(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getIntent(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/CreateIntent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Intent>
+     */
+    createIntent(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .createIntent(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/UpdateIntent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Intent>
+     */
+    updateIntent(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .updateIntent(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/DeleteIntent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf003.Empty>
+     */
+    deleteIntent(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .deleteIntent(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateIntents
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu011.Operation>
+     */
+    batchUpdateIntents(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchUpdateIntents(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteIntents
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu011.Operation>
+     */
+    batchDeleteIntents(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchDeleteIntents(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/TagIntent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf003.Empty>
+     */
+    tagIntent(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .tagIntent(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/DeleteIntentTag
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf003.Empty>
+     */
+    deleteIntentTag(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .deleteIntentTag(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/GetIntentTags
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetIntentTagsResponse>
+     */
+    getIntentTags(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getIntentTags(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/GetAllIntentTags
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetIntentTagsResponse>
+     */
+    getAllIntentTags(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getAllIntentTags(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchCreateTrainingPhrases
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchTrainingPhrasesStatusResponse>
+     */
+    batchCreateTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchCreateTrainingPhrases(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchGetTrainingPhrases
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchTrainingPhrasesStatusResponse>
+     */
+    batchGetTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchGetTrainingPhrases(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateTrainingPhrases
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchTrainingPhrasesStatusResponse>
+     */
+    batchUpdateTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchUpdateTrainingPhrases(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteTrainingPhrases
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchDeleteTrainingPhrasesResponse>
+     */
+    batchDeleteTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchDeleteTrainingPhrases(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/ListTrainingPhrases
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListTrainingPhrasesResponse>
+     */
+    listTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listTrainingPhrases(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchCreateResponseMessages
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchResponseMessagesStatusResponse>
+     */
+    batchCreateResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchCreateResponseMessages(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchGetResponseMessages
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchResponseMessagesStatusResponse>
+     */
+    batchGetResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchGetResponseMessages(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateResponseMessages
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchResponseMessagesStatusResponse>
+     */
+    batchUpdateResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchUpdateResponseMessages(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteResponseMessages
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchDeleteResponseMessagesResponse>
+     */
+    batchDeleteResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchDeleteResponseMessages(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/ListResponseMessages
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListResponseMessagesResponse>
+     */
+    listResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listResponseMessages(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchCreateParameters
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchParametersStatusResponse>
+     */
+    batchCreateParameters(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchCreateParameters(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchGetParameters
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchParametersStatusResponse>
+     */
+    batchGetParameters(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchGetParameters(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchUpdateParameters
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchParametersStatusResponse>
+     */
+    batchUpdateParameters(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchUpdateParameters(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/BatchDeleteParameters
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchDeleteParametersResponse>
+     */
+    batchDeleteParameters(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchDeleteParameters(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/ListParameters
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListParametersResponse>
+     */
+    listParameters(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listParameters(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListTrainingPhrasesofIntentsWithEnrichmentResponse>
+     */
+    listTrainingPhrasesofIntentsWithEnrichment(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listTrainingPhrasesofIntentsWithEnrichment(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+}
+IntentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: IntentsClient, deps: [{ token: GRPC_INTENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+IntentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: IntentsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: IntentsClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: function () {
+        return [{ type: undefined, decorators: [{
+                        type: Optional
+                    }, {
+                        type: Inject,
+                        args: [GRPC_INTENTS_CLIENT_SETTINGS]
+                    }] }, { type: undefined, decorators: [{
+                        type: Inject,
+                        args: [GRPC_CLIENT_FACTORY]
+                    }] }, { type: i1.GrpcHandler }];
+    } });
 
 var DefaultProjectRole;
 (function (DefaultProjectRole) {
@@ -31864,1545 +28600,6 @@ class LoginResponse {
     }
 }
 LoginResponse.id = 'ondewo.nlu.LoginResponse';
-
-/**
- * Message implementation for ondewo.nlu.OperationMetadata
- */
-class OperationMetadata {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of OperationMetadata to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.status = _value.status;
-        this.parentOperationName = _value.parentOperationName;
-        this.subOperationNames = (_value.subOperationNames || []).slice();
-        this.createTime = _value.createTime
-            ? new googleProtobuf003.Timestamp(_value.createTime)
-            : undefined;
-        this.startTime = _value.startTime
-            ? new googleProtobuf003.Timestamp(_value.startTime)
-            : undefined;
-        this.endTime = _value.endTime
-            ? new googleProtobuf003.Timestamp(_value.endTime)
-            : undefined;
-        this.isCancellationRequested = _value.isCancellationRequested;
-        this.cancelCommand = _value.cancelCommand;
-        this.userIdCreated = _value.userIdCreated;
-        this.userIdCancelled = _value.userIdCancelled;
-        this.projectParent = _value.projectParent;
-        this.operationType = _value.operationType;
-        this.hostName = _value.hostName;
-        this.numReruns = _value.numReruns;
-        this.maxNumReruns = _value.maxNumReruns;
-        this.description = _value.description;
-        OperationMetadata.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new OperationMetadata();
-        OperationMetadata.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.status = _instance.status || 0;
-        _instance.parentOperationName = _instance.parentOperationName || '';
-        _instance.subOperationNames = _instance.subOperationNames || [];
-        _instance.createTime = _instance.createTime || undefined;
-        _instance.startTime = _instance.startTime || undefined;
-        _instance.endTime = _instance.endTime || undefined;
-        _instance.isCancellationRequested =
-            _instance.isCancellationRequested || false;
-        _instance.cancelCommand = _instance.cancelCommand || '';
-        _instance.userIdCreated = _instance.userIdCreated || '';
-        _instance.userIdCancelled = _instance.userIdCancelled || '';
-        _instance.projectParent = _instance.projectParent || '';
-        _instance.operationType = _instance.operationType || 0;
-        _instance.hostName = _instance.hostName || '';
-        _instance.numReruns = _instance.numReruns || 0;
-        _instance.maxNumReruns = _instance.maxNumReruns || 0;
-        _instance.description = _instance.description || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.status = _reader.readEnum();
-                    break;
-                case 2:
-                    _instance.parentOperationName = _reader.readString();
-                    break;
-                case 3:
-                    (_instance.subOperationNames =
-                        _instance.subOperationNames || []).push(_reader.readString());
-                    break;
-                case 4:
-                    _instance.createTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
-                    break;
-                case 5:
-                    _instance.startTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.startTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
-                    break;
-                case 6:
-                    _instance.endTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.endTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
-                    break;
-                case 7:
-                    _instance.isCancellationRequested = _reader.readBool();
-                    break;
-                case 8:
-                    _instance.cancelCommand = _reader.readString();
-                    break;
-                case 9:
-                    _instance.userIdCreated = _reader.readString();
-                    break;
-                case 10:
-                    _instance.userIdCancelled = _reader.readString();
-                    break;
-                case 11:
-                    _instance.projectParent = _reader.readString();
-                    break;
-                case 12:
-                    _instance.operationType = _reader.readEnum();
-                    break;
-                case 13:
-                    _instance.hostName = _reader.readString();
-                    break;
-                case 14:
-                    _instance.numReruns = _reader.readInt32();
-                    break;
-                case 15:
-                    _instance.maxNumReruns = _reader.readInt32();
-                    break;
-                case 16:
-                    _instance.description = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        OperationMetadata.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.status) {
-            _writer.writeEnum(1, _instance.status);
-        }
-        if (_instance.parentOperationName) {
-            _writer.writeString(2, _instance.parentOperationName);
-        }
-        if (_instance.subOperationNames && _instance.subOperationNames.length) {
-            _writer.writeRepeatedString(3, _instance.subOperationNames);
-        }
-        if (_instance.createTime) {
-            _writer.writeMessage(4, _instance.createTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
-        }
-        if (_instance.startTime) {
-            _writer.writeMessage(5, _instance.startTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
-        }
-        if (_instance.endTime) {
-            _writer.writeMessage(6, _instance.endTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
-        }
-        if (_instance.isCancellationRequested) {
-            _writer.writeBool(7, _instance.isCancellationRequested);
-        }
-        if (_instance.cancelCommand) {
-            _writer.writeString(8, _instance.cancelCommand);
-        }
-        if (_instance.userIdCreated) {
-            _writer.writeString(9, _instance.userIdCreated);
-        }
-        if (_instance.userIdCancelled) {
-            _writer.writeString(10, _instance.userIdCancelled);
-        }
-        if (_instance.projectParent) {
-            _writer.writeString(11, _instance.projectParent);
-        }
-        if (_instance.operationType) {
-            _writer.writeEnum(12, _instance.operationType);
-        }
-        if (_instance.hostName) {
-            _writer.writeString(13, _instance.hostName);
-        }
-        if (_instance.numReruns) {
-            _writer.writeInt32(14, _instance.numReruns);
-        }
-        if (_instance.maxNumReruns) {
-            _writer.writeInt32(15, _instance.maxNumReruns);
-        }
-        if (_instance.description) {
-            _writer.writeString(16, _instance.description);
-        }
-    }
-    get status() {
-        return this._status;
-    }
-    set status(value) {
-        this._status = value;
-    }
-    get parentOperationName() {
-        return this._parentOperationName;
-    }
-    set parentOperationName(value) {
-        this._parentOperationName = value;
-    }
-    get subOperationNames() {
-        return this._subOperationNames;
-    }
-    set subOperationNames(value) {
-        this._subOperationNames = value;
-    }
-    get createTime() {
-        return this._createTime;
-    }
-    set createTime(value) {
-        this._createTime = value;
-    }
-    get startTime() {
-        return this._startTime;
-    }
-    set startTime(value) {
-        this._startTime = value;
-    }
-    get endTime() {
-        return this._endTime;
-    }
-    set endTime(value) {
-        this._endTime = value;
-    }
-    get isCancellationRequested() {
-        return this._isCancellationRequested;
-    }
-    set isCancellationRequested(value) {
-        this._isCancellationRequested = value;
-    }
-    get cancelCommand() {
-        return this._cancelCommand;
-    }
-    set cancelCommand(value) {
-        this._cancelCommand = value;
-    }
-    get userIdCreated() {
-        return this._userIdCreated;
-    }
-    set userIdCreated(value) {
-        this._userIdCreated = value;
-    }
-    get userIdCancelled() {
-        return this._userIdCancelled;
-    }
-    set userIdCancelled(value) {
-        this._userIdCancelled = value;
-    }
-    get projectParent() {
-        return this._projectParent;
-    }
-    set projectParent(value) {
-        this._projectParent = value;
-    }
-    get operationType() {
-        return this._operationType;
-    }
-    set operationType(value) {
-        this._operationType = value;
-    }
-    get hostName() {
-        return this._hostName;
-    }
-    set hostName(value) {
-        this._hostName = value;
-    }
-    get numReruns() {
-        return this._numReruns;
-    }
-    set numReruns(value) {
-        this._numReruns = value;
-    }
-    get maxNumReruns() {
-        return this._maxNumReruns;
-    }
-    set maxNumReruns(value) {
-        this._maxNumReruns = value;
-    }
-    get description() {
-        return this._description;
-    }
-    set description(value) {
-        this._description = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        OperationMetadata.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            status: this.status,
-            parentOperationName: this.parentOperationName,
-            subOperationNames: (this.subOperationNames || []).slice(),
-            createTime: this.createTime ? this.createTime.toObject() : undefined,
-            startTime: this.startTime ? this.startTime.toObject() : undefined,
-            endTime: this.endTime ? this.endTime.toObject() : undefined,
-            isCancellationRequested: this.isCancellationRequested,
-            cancelCommand: this.cancelCommand,
-            userIdCreated: this.userIdCreated,
-            userIdCancelled: this.userIdCancelled,
-            projectParent: this.projectParent,
-            operationType: this.operationType,
-            hostName: this.hostName,
-            numReruns: this.numReruns,
-            maxNumReruns: this.maxNumReruns,
-            description: this.description
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            status: OperationMetadata.Status[this.status === null || this.status === undefined ? 0 : this.status],
-            parentOperationName: this.parentOperationName,
-            subOperationNames: (this.subOperationNames || []).slice(),
-            createTime: this.createTime
-                ? this.createTime.toProtobufJSON(options)
-                : null,
-            startTime: this.startTime ? this.startTime.toProtobufJSON(options) : null,
-            endTime: this.endTime ? this.endTime.toProtobufJSON(options) : null,
-            isCancellationRequested: this.isCancellationRequested,
-            cancelCommand: this.cancelCommand,
-            userIdCreated: this.userIdCreated,
-            userIdCancelled: this.userIdCancelled,
-            projectParent: this.projectParent,
-            operationType: OperationMetadata.OperationType[this.operationType === null || this.operationType === undefined
-                ? 0
-                : this.operationType],
-            hostName: this.hostName,
-            numReruns: this.numReruns,
-            maxNumReruns: this.maxNumReruns,
-            description: this.description
-        };
-    }
-}
-OperationMetadata.id = 'ondewo.nlu.OperationMetadata';
-(function (OperationMetadata) {
-    let Status;
-    (function (Status) {
-        Status[Status["STATUS_UNSPECIFIED"] = 0] = "STATUS_UNSPECIFIED";
-        Status[Status["NOT_STARTED"] = 1] = "NOT_STARTED";
-        Status[Status["IN_PROGRESS"] = 2] = "IN_PROGRESS";
-        Status[Status["DONE"] = 3] = "DONE";
-        Status[Status["CANCELLED"] = 4] = "CANCELLED";
-        Status[Status["FAILED"] = 5] = "FAILED";
-    })(Status = OperationMetadata.Status || (OperationMetadata.Status = {}));
-    let OperationType;
-    (function (OperationType) {
-        OperationType[OperationType["OPERATION_TYPE_UNSPECIFIED"] = 0] = "OPERATION_TYPE_UNSPECIFIED";
-        OperationType[OperationType["CREATE_AGENT"] = 1] = "CREATE_AGENT";
-        OperationType[OperationType["IMPORT_AGENT"] = 2] = "IMPORT_AGENT";
-        OperationType[OperationType["EXPORT_AGENT"] = 3] = "EXPORT_AGENT";
-        OperationType[OperationType["DELETE_AGENT"] = 4] = "DELETE_AGENT";
-        OperationType[OperationType["RESTORE_AGENT"] = 5] = "RESTORE_AGENT";
-        OperationType[OperationType["BUILD_AGENT_CACHE"] = 6] = "BUILD_AGENT_CACHE";
-        OperationType[OperationType["TRAIN_AGENT"] = 7] = "TRAIN_AGENT";
-        OperationType[OperationType["EXPORT_BENCHMARK_AGENT"] = 8] = "EXPORT_BENCHMARK_AGENT";
-    })(OperationType = OperationMetadata.OperationType || (OperationMetadata.OperationType = {}));
-})(OperationMetadata || (OperationMetadata = {}));
-
-/**
- * Message implementation for ondewo.nlu.Operation
- */
-class Operation {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Operation to deeply clone from
-     */
-    constructor(_value) {
-        this._result = Operation.ResultCase.none;
-        _value = _value || {};
-        this.name = _value.name;
-        this.metadata = _value.metadata
-            ? new googleProtobuf003.Any(_value.metadata)
-            : undefined;
-        this.done = _value.done;
-        this.error = _value.error
-            ? new Status(_value.error)
-            : undefined;
-        this.response = _value.response
-            ? new googleProtobuf003.Any(_value.response)
-            : undefined;
-        Operation.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new Operation();
-        Operation.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.name = _instance.name || '';
-        _instance.metadata = _instance.metadata || undefined;
-        _instance.done = _instance.done || false;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.name = _reader.readString();
-                    break;
-                case 2:
-                    _instance.metadata = new googleProtobuf003.Any();
-                    _reader.readMessage(_instance.metadata, googleProtobuf003.Any.deserializeBinaryFromReader);
-                    break;
-                case 3:
-                    _instance.done = _reader.readBool();
-                    break;
-                case 4:
-                    _instance.error = new Status();
-                    _reader.readMessage(_instance.error, Status.deserializeBinaryFromReader);
-                    break;
-                case 5:
-                    _instance.response = new googleProtobuf003.Any();
-                    _reader.readMessage(_instance.response, googleProtobuf003.Any.deserializeBinaryFromReader);
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        Operation.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.name) {
-            _writer.writeString(1, _instance.name);
-        }
-        if (_instance.metadata) {
-            _writer.writeMessage(2, _instance.metadata, googleProtobuf003.Any.serializeBinaryToWriter);
-        }
-        if (_instance.done) {
-            _writer.writeBool(3, _instance.done);
-        }
-        if (_instance.error) {
-            _writer.writeMessage(4, _instance.error, Status.serializeBinaryToWriter);
-        }
-        if (_instance.response) {
-            _writer.writeMessage(5, _instance.response, googleProtobuf003.Any.serializeBinaryToWriter);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    get metadata() {
-        return this._metadata;
-    }
-    set metadata(value) {
-        this._metadata = value;
-    }
-    get done() {
-        return this._done;
-    }
-    set done(value) {
-        this._done = value;
-    }
-    get error() {
-        return this._error;
-    }
-    set error(value) {
-        if (value !== undefined && value !== null) {
-            this._response = undefined;
-            this._result = Operation.ResultCase.error;
-        }
-        this._error = value;
-    }
-    get response() {
-        return this._response;
-    }
-    set response(value) {
-        if (value !== undefined && value !== null) {
-            this._error = undefined;
-            this._result = Operation.ResultCase.response;
-        }
-        this._response = value;
-    }
-    get result() {
-        return this._result;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        Operation.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            name: this.name,
-            metadata: this.metadata ? this.metadata.toObject() : undefined,
-            done: this.done,
-            error: this.error ? this.error.toObject() : undefined,
-            response: this.response ? this.response.toObject() : undefined
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            name: this.name,
-            metadata: this.metadata ? this.metadata.toProtobufJSON(options) : null,
-            done: this.done,
-            error: this.error ? this.error.toProtobufJSON(options) : null,
-            response: this.response ? this.response.toProtobufJSON(options) : null
-        };
-    }
-}
-Operation.id = 'ondewo.nlu.Operation';
-(function (Operation) {
-    let ResultCase;
-    (function (ResultCase) {
-        ResultCase[ResultCase["none"] = 0] = "none";
-        ResultCase[ResultCase["error"] = 1] = "error";
-        ResultCase[ResultCase["response"] = 2] = "response";
-    })(ResultCase = Operation.ResultCase || (Operation.ResultCase = {}));
-})(Operation || (Operation = {}));
-/**
- * Message implementation for ondewo.nlu.GetOperationRequest
- */
-class GetOperationRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetOperationRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        GetOperationRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetOperationRequest();
-        GetOperationRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.name = _instance.name || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.name = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetOperationRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.name) {
-            _writer.writeString(1, _instance.name);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetOperationRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            name: this.name
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            name: this.name
-        };
-    }
-}
-GetOperationRequest.id = 'ondewo.nlu.GetOperationRequest';
-/**
- * Message implementation for ondewo.nlu.ListOperationsRequest
- */
-class ListOperationsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListOperationsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.filter = _value.filter;
-        this.pageSize = _value.pageSize;
-        this.pageToken = _value.pageToken;
-        this.operationFilter = _value.operationFilter
-            ? new OperationFilter(_value.operationFilter)
-            : undefined;
-        ListOperationsRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new ListOperationsRequest();
-        ListOperationsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.name = _instance.name || '';
-        _instance.filter = _instance.filter || '';
-        _instance.pageSize = _instance.pageSize || 0;
-        _instance.pageToken = _instance.pageToken || '';
-        _instance.operationFilter = _instance.operationFilter || undefined;
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 4:
-                    _instance.name = _reader.readString();
-                    break;
-                case 1:
-                    _instance.filter = _reader.readString();
-                    break;
-                case 2:
-                    _instance.pageSize = _reader.readInt32();
-                    break;
-                case 3:
-                    _instance.pageToken = _reader.readString();
-                    break;
-                case 5:
-                    _instance.operationFilter = new OperationFilter();
-                    _reader.readMessage(_instance.operationFilter, OperationFilter.deserializeBinaryFromReader);
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        ListOperationsRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.name) {
-            _writer.writeString(4, _instance.name);
-        }
-        if (_instance.filter) {
-            _writer.writeString(1, _instance.filter);
-        }
-        if (_instance.pageSize) {
-            _writer.writeInt32(2, _instance.pageSize);
-        }
-        if (_instance.pageToken) {
-            _writer.writeString(3, _instance.pageToken);
-        }
-        if (_instance.operationFilter) {
-            _writer.writeMessage(5, _instance.operationFilter, OperationFilter.serializeBinaryToWriter);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    get filter() {
-        return this._filter;
-    }
-    set filter(value) {
-        this._filter = value;
-    }
-    get pageSize() {
-        return this._pageSize;
-    }
-    set pageSize(value) {
-        this._pageSize = value;
-    }
-    get pageToken() {
-        return this._pageToken;
-    }
-    set pageToken(value) {
-        this._pageToken = value;
-    }
-    get operationFilter() {
-        return this._operationFilter;
-    }
-    set operationFilter(value) {
-        this._operationFilter = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        ListOperationsRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            name: this.name,
-            filter: this.filter,
-            pageSize: this.pageSize,
-            pageToken: this.pageToken,
-            operationFilter: this.operationFilter
-                ? this.operationFilter.toObject()
-                : undefined
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            name: this.name,
-            filter: this.filter,
-            pageSize: this.pageSize,
-            pageToken: this.pageToken,
-            operationFilter: this.operationFilter
-                ? this.operationFilter.toProtobufJSON(options)
-                : null
-        };
-    }
-}
-ListOperationsRequest.id = 'ondewo.nlu.ListOperationsRequest';
-/**
- * Message implementation for ondewo.nlu.OperationFilter
- */
-class OperationFilter {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of OperationFilter to deeply clone from
-     */
-    constructor(_value) {
-        this._startTimeOneof = OperationFilter.StartTimeOneofCase.none;
-        this._endTimeOneof = OperationFilter.EndTimeOneofCase.none;
-        _value = _value || {};
-        this.projectParents = (_value.projectParents || []).slice();
-        this.statuses = (_value.statuses || []).slice();
-        this.types = (_value.types || []).slice();
-        this.startTime = _value.startTime
-            ? new googleProtobuf003.Timestamp(_value.startTime)
-            : undefined;
-        this.endTime = _value.endTime
-            ? new googleProtobuf003.Timestamp(_value.endTime)
-            : undefined;
-        this.userIds = (_value.userIds || []).slice();
-        OperationFilter.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new OperationFilter();
-        OperationFilter.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.projectParents = _instance.projectParents || [];
-        _instance.statuses = _instance.statuses || [];
-        _instance.types = _instance.types || [];
-        _instance.userIds = _instance.userIds || [];
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    (_instance.projectParents = _instance.projectParents || []).push(_reader.readString());
-                    break;
-                case 2:
-                    (_instance.statuses = _instance.statuses || []).push(...(_reader.readPackedEnum() || []));
-                    break;
-                case 3:
-                    (_instance.types = _instance.types || []).push(...(_reader.readPackedEnum() || []));
-                    break;
-                case 4:
-                    _instance.startTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.startTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
-                    break;
-                case 5:
-                    _instance.endTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.endTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
-                    break;
-                case 6:
-                    (_instance.userIds = _instance.userIds || []).push(_reader.readString());
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        OperationFilter.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.projectParents && _instance.projectParents.length) {
-            _writer.writeRepeatedString(1, _instance.projectParents);
-        }
-        if (_instance.statuses && _instance.statuses.length) {
-            _writer.writePackedEnum(2, _instance.statuses);
-        }
-        if (_instance.types && _instance.types.length) {
-            _writer.writePackedEnum(3, _instance.types);
-        }
-        if (_instance.startTime) {
-            _writer.writeMessage(4, _instance.startTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
-        }
-        if (_instance.endTime) {
-            _writer.writeMessage(5, _instance.endTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
-        }
-        if (_instance.userIds && _instance.userIds.length) {
-            _writer.writeRepeatedString(6, _instance.userIds);
-        }
-    }
-    get projectParents() {
-        return this._projectParents;
-    }
-    set projectParents(value) {
-        this._projectParents = value;
-    }
-    get statuses() {
-        return this._statuses;
-    }
-    set statuses(value) {
-        this._statuses = value;
-    }
-    get types() {
-        return this._types;
-    }
-    set types(value) {
-        this._types = value;
-    }
-    get startTime() {
-        return this._startTime;
-    }
-    set startTime(value) {
-        if (value !== undefined && value !== null) {
-            this._startTimeOneof = OperationFilter.StartTimeOneofCase.startTime;
-        }
-        this._startTime = value;
-    }
-    get endTime() {
-        return this._endTime;
-    }
-    set endTime(value) {
-        if (value !== undefined && value !== null) {
-            this._endTimeOneof = OperationFilter.EndTimeOneofCase.endTime;
-        }
-        this._endTime = value;
-    }
-    get userIds() {
-        return this._userIds;
-    }
-    set userIds(value) {
-        this._userIds = value;
-    }
-    get startTimeOneof() {
-        return this._startTimeOneof;
-    }
-    get endTimeOneof() {
-        return this._endTimeOneof;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        OperationFilter.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            projectParents: (this.projectParents || []).slice(),
-            statuses: (this.statuses || []).slice(),
-            types: (this.types || []).slice(),
-            startTime: this.startTime ? this.startTime.toObject() : undefined,
-            endTime: this.endTime ? this.endTime.toObject() : undefined,
-            userIds: (this.userIds || []).slice()
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            projectParents: (this.projectParents || []).slice(),
-            statuses: (this.statuses || []).map(v => OperationMetadata.Status[v]),
-            types: (this.types || []).map(v => OperationMetadata.OperationType[v]),
-            startTime: this.startTime ? this.startTime.toProtobufJSON(options) : null,
-            endTime: this.endTime ? this.endTime.toProtobufJSON(options) : null,
-            userIds: (this.userIds || []).slice()
-        };
-    }
-}
-OperationFilter.id = 'ondewo.nlu.OperationFilter';
-(function (OperationFilter) {
-    let StartTimeOneofCase;
-    (function (StartTimeOneofCase) {
-        StartTimeOneofCase[StartTimeOneofCase["none"] = 0] = "none";
-        StartTimeOneofCase[StartTimeOneofCase["startTime"] = 1] = "startTime";
-    })(StartTimeOneofCase = OperationFilter.StartTimeOneofCase || (OperationFilter.StartTimeOneofCase = {}));
-    let EndTimeOneofCase;
-    (function (EndTimeOneofCase) {
-        EndTimeOneofCase[EndTimeOneofCase["none"] = 0] = "none";
-        EndTimeOneofCase[EndTimeOneofCase["endTime"] = 1] = "endTime";
-    })(EndTimeOneofCase = OperationFilter.EndTimeOneofCase || (OperationFilter.EndTimeOneofCase = {}));
-})(OperationFilter || (OperationFilter = {}));
-/**
- * Message implementation for ondewo.nlu.ListOperationsResponse
- */
-class ListOperationsResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListOperationsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.operations = (_value.operations || []).map(m => new Operation(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListOperationsResponse.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new ListOperationsResponse();
-        ListOperationsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.operations = _instance.operations || [];
-        _instance.nextPageToken = _instance.nextPageToken || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    const messageInitializer1 = new Operation();
-                    _reader.readMessage(messageInitializer1, Operation.deserializeBinaryFromReader);
-                    (_instance.operations = _instance.operations || []).push(messageInitializer1);
-                    break;
-                case 2:
-                    _instance.nextPageToken = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        ListOperationsResponse.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.operations && _instance.operations.length) {
-            _writer.writeRepeatedMessage(1, _instance.operations, Operation.serializeBinaryToWriter);
-        }
-        if (_instance.nextPageToken) {
-            _writer.writeString(2, _instance.nextPageToken);
-        }
-    }
-    get operations() {
-        return this._operations;
-    }
-    set operations(value) {
-        this._operations = value;
-    }
-    get nextPageToken() {
-        return this._nextPageToken;
-    }
-    set nextPageToken(value) {
-        this._nextPageToken = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        ListOperationsResponse.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            operations: (this.operations || []).map(m => m.toObject()),
-            nextPageToken: this.nextPageToken
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            operations: (this.operations || []).map(m => m.toProtobufJSON(options)),
-            nextPageToken: this.nextPageToken
-        };
-    }
-}
-ListOperationsResponse.id = 'ondewo.nlu.ListOperationsResponse';
-/**
- * Message implementation for ondewo.nlu.CancelOperationRequest
- */
-class CancelOperationRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CancelOperationRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        CancelOperationRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new CancelOperationRequest();
-        CancelOperationRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.name = _instance.name || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.name = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        CancelOperationRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.name) {
-            _writer.writeString(1, _instance.name);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        CancelOperationRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            name: this.name
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            name: this.name
-        };
-    }
-}
-CancelOperationRequest.id = 'ondewo.nlu.CancelOperationRequest';
-/**
- * Message implementation for ondewo.nlu.DeleteOperationRequest
- */
-class DeleteOperationRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteOperationRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        DeleteOperationRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new DeleteOperationRequest();
-        DeleteOperationRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.name = _instance.name || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.name = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        DeleteOperationRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.name) {
-            _writer.writeString(1, _instance.name);
-        }
-    }
-    get name() {
-        return this._name;
-    }
-    set name(value) {
-        this._name = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        DeleteOperationRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            name: this.name
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            name: this.name
-        };
-    }
-}
-DeleteOperationRequest.id = 'ondewo.nlu.DeleteOperationRequest';
-
-/* tslint:disable */
-/**
- * Specific GrpcClientSettings for Operations.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_OPERATIONS_CLIENT_SETTINGS = new InjectionToken('GRPC_OPERATIONS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/**
- * Service client implementation for ondewo.nlu.Operations
- */
-class OperationsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        /**
-         * Raw RPC implementation for each service client method.
-         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-         * Attention: these methods do not throw errors when non-zero status codes are received.
-         */
-        this.$raw = {
-            /**
-             * Unary call: /ondewo.nlu.Operations/ListOperations
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListOperationsResponse>>
-             */
-            listOperations: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Operations/ListOperations',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListOperationsRequest,
-                    responseClass: ListOperationsResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Operations/GetOperation
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Operation>>
-             */
-            getOperation: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Operations/GetOperation',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetOperationRequest,
-                    responseClass: Operation
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Operations/DeleteOperation
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf005.Empty>>
-             */
-            deleteOperation: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Operations/DeleteOperation',
-                    requestData,
-                    requestMetadata,
-                    requestClass: DeleteOperationRequest,
-                    responseClass: googleProtobuf003.Empty
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Operations/CancelOperation
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf005.Empty>>
-             */
-            cancelOperation: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Operations/CancelOperation',
-                    requestData,
-                    requestMetadata,
-                    requestClass: CancelOperationRequest,
-                    responseClass: googleProtobuf003.Empty
-                });
-            }
-        };
-        this.client = clientFactory.createClient('ondewo.nlu.Operations', settings);
-    }
-    /**
-     * Unary call @/ondewo.nlu.Operations/ListOperations
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListOperationsResponse>
-     */
-    listOperations(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listOperations(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Operations/GetOperation
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Operation>
-     */
-    getOperation(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getOperation(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Operations/DeleteOperation
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf005.Empty>
-     */
-    deleteOperation(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .deleteOperation(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Operations/CancelOperation
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf005.Empty>
-     */
-    cancelOperation(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .cancelOperation(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-}
-OperationsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: OperationsClient, deps: [{ token: GRPC_OPERATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-OperationsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: OperationsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: OperationsClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
-        return [{ type: undefined, decorators: [{
-                        type: Optional
-                    }, {
-                        type: Inject,
-                        args: [GRPC_OPERATIONS_CLIENT_SETTINGS]
-                    }] }, { type: undefined, decorators: [{
-                        type: Inject,
-                        args: [GRPC_CLIENT_FACTORY]
-                    }] }, { type: i1.GrpcHandler }];
-    } });
 
 /* tslint:disable */
 var AgentView;
@@ -39460,404 +34657,10 @@ PlatformMapping.id = 'ondewo.nlu.PlatformMapping';
 
 /* tslint:disable */
 /**
- * Service client implementation for ondewo.nlu.EntityTypes
- */
-class EntityTypesClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        /**
-         * Raw RPC implementation for each service client method.
-         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-         * Attention: these methods do not throw errors when non-zero status codes are received.
-         */
-        this.$raw = {
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/ListEntityTypes
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>
-             */
-            listEntityTypes: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/ListEntityTypes',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListEntityTypesRequest,
-                    responseClass: ListEntityTypesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/GetEntityType
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.EntityType>>
-             */
-            getEntityType: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/GetEntityType',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetEntityTypeRequest,
-                    responseClass: EntityType
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/CreateEntityType
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.EntityType>>
-             */
-            createEntityType: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/CreateEntityType',
-                    requestData,
-                    requestMetadata,
-                    requestClass: CreateEntityTypeRequest,
-                    responseClass: EntityType
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/UpdateEntityType
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.EntityType>>
-             */
-            updateEntityType: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/UpdateEntityType',
-                    requestData,
-                    requestMetadata,
-                    requestClass: UpdateEntityTypeRequest,
-                    responseClass: EntityType
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/DeleteEntityType
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
-             */
-            deleteEntityType: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/DeleteEntityType',
-                    requestData,
-                    requestMetadata,
-                    requestClass: DeleteEntityTypeRequest,
-                    responseClass: googleProtobuf003.Empty
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu010.Operation>>
-             */
-            batchUpdateEntityTypes: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchUpdateEntityTypesRequest,
-                    responseClass: Operation
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu010.Operation>>
-             */
-            batchDeleteEntityTypes: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchDeleteEntityTypesRequest,
-                    responseClass: Operation
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/BatchCreateEntities
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
-             */
-            batchCreateEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/BatchCreateEntities',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchCreateEntitiesRequest,
-                    responseClass: BatchEntitiesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/BatchUpdateEntities
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
-             */
-            batchUpdateEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/BatchUpdateEntities',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchUpdateEntitiesRequest,
-                    responseClass: BatchEntitiesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/BatchGetEntities
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
-             */
-            batchGetEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/BatchGetEntities',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchGetEntitiesRequest,
-                    responseClass: BatchEntitiesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/BatchDeleteEntities
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchDeleteEntitiesResponse>>
-             */
-            batchDeleteEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/BatchDeleteEntities',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchDeleteEntitiesRequest,
-                    responseClass: BatchDeleteEntitiesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.EntityTypes/ListEntities
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListEntitiesResponse>>
-             */
-            listEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.EntityTypes/ListEntities',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListEntitiesRequest,
-                    responseClass: ListEntitiesResponse
-                });
-            }
-        };
-        this.client = clientFactory.createClient('ondewo.nlu.EntityTypes', settings);
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/ListEntityTypes
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListEntityTypesResponse>
-     */
-    listEntityTypes(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listEntityTypes(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/GetEntityType
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.EntityType>
-     */
-    getEntityType(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getEntityType(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/CreateEntityType
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.EntityType>
-     */
-    createEntityType(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .createEntityType(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/UpdateEntityType
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.EntityType>
-     */
-    updateEntityType(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .updateEntityType(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/DeleteEntityType
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
-     */
-    deleteEntityType(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .deleteEntityType(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu010.Operation>
-     */
-    batchUpdateEntityTypes(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchUpdateEntityTypes(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu010.Operation>
-     */
-    batchDeleteEntityTypes(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchDeleteEntityTypes(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/BatchCreateEntities
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchEntitiesResponse>
-     */
-    batchCreateEntities(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchCreateEntities(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/BatchUpdateEntities
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchEntitiesResponse>
-     */
-    batchUpdateEntities(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchUpdateEntities(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/BatchGetEntities
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchEntitiesResponse>
-     */
-    batchGetEntities(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchGetEntities(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/BatchDeleteEntities
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchDeleteEntitiesResponse>
-     */
-    batchDeleteEntities(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchDeleteEntities(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.EntityTypes/ListEntities
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListEntitiesResponse>
-     */
-    listEntities(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listEntities(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-}
-EntityTypesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: EntityTypesClient, deps: [{ token: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-EntityTypesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: EntityTypesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: EntityTypesClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
-        return [{ type: undefined, decorators: [{
-                        type: Optional
-                    }, {
-                        type: Inject,
-                        args: [GRPC_ENTITY_TYPES_CLIENT_SETTINGS]
-                    }] }, { type: undefined, decorators: [{
-                        type: Inject,
-                        args: [GRPC_CLIENT_FACTORY]
-                    }] }, { type: i1.GrpcHandler }];
-    } });
-
-/* tslint:disable */
-/**
- * Specific GrpcClientSettings for Contexts.
+ * Specific GrpcClientSettings for Agents.
  * Use it only if your default settings are not set or the service requires other settings.
  */
-const GRPC_CONTEXTS_CLIENT_SETTINGS = new InjectionToken('GRPC_CONTEXTS_CLIENT_SETTINGS');
+const GRPC_AGENTS_CLIENT_SETTINGS = new InjectionToken('GRPC_AGENTS_CLIENT_SETTINGS');
 
 /* tslint:disable */
 /**
@@ -40716,9 +35519,9 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-AgentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: AgentsClient, deps: [{ token: GRPC_AGENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-AgentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: AgentsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: AgentsClient, decorators: [{
+AgentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: AgentsClient, deps: [{ token: GRPC_AGENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+AgentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: AgentsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: AgentsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -40735,31 +35538,516 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImpor
 
 /* tslint:disable */
 /**
- * Specific GrpcClientSettings for ProjectRoles.
+ * Specific GrpcClientSettings for Operations.
  * Use it only if your default settings are not set or the service requires other settings.
  */
-const GRPC_PROJECT_ROLES_CLIENT_SETTINGS = new InjectionToken('GRPC_PROJECT_ROLES_CLIENT_SETTINGS');
+const GRPC_OPERATIONS_CLIENT_SETTINGS = new InjectionToken('GRPC_OPERATIONS_CLIENT_SETTINGS');
 
+/* tslint:disable */
 /**
- * Message implementation for ondewo.nlu.PingRequest
+ * Specific GrpcClientSettings for Sessions.
+ * Use it only if your default settings are not set or the service requires other settings.
  */
-class PingRequest {
+const GRPC_SESSIONS_CLIENT_SETTINGS = new InjectionToken('GRPC_SESSIONS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/**
+ * Service client implementation for ondewo.nlu.Sessions
+ */
+class SessionsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Unary call: /ondewo.nlu.Sessions/DetectIntent
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.DetectIntentResponse>>
+             */
+            detectIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/DetectIntent',
+                    requestData,
+                    requestMetadata,
+                    requestClass: DetectIntentRequest,
+                    responseClass: DetectIntentResponse
+                });
+            },
+            /**
+             * Bidirectional streaming: /ondewo.nlu.Sessions/StreamingDetectIntent
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.StreamingDetectIntentResponse>>
+             */
+            streamingDetectIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.bidiStream,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/StreamingDetectIntent',
+                    requestData,
+                    requestMetadata,
+                    requestClass: StreamingDetectIntentRequest,
+                    responseClass: StreamingDetectIntentResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/ListSessions
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListSessionsResponse>>
+             */
+            listSessions: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/ListSessions',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListSessionsRequest,
+                    responseClass: ListSessionsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/GetSession
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Session>>
+             */
+            getSession: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/GetSession',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetSessionRequest,
+                    responseClass: Session
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/CreateSession
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Session>>
+             */
+            createSession: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/CreateSession',
+                    requestData,
+                    requestMetadata,
+                    requestClass: CreateSessionRequest,
+                    responseClass: Session
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/TrackSessionStep
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Session>>
+             */
+            trackSessionStep: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/TrackSessionStep',
+                    requestData,
+                    requestMetadata,
+                    requestClass: TrackSessionStepRequest,
+                    responseClass: Session
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/DeleteSession
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+             */
+            deleteSession: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/DeleteSession',
+                    requestData,
+                    requestMetadata,
+                    requestClass: DeleteSessionRequest,
+                    responseClass: googleProtobuf003.Empty
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/ListSessionLabels
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListSessionLabelsResponse>>
+             */
+            listSessionLabels: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/ListSessionLabels',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListSessionLabelsRequest,
+                    responseClass: ListSessionLabelsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/AddSessionLabels
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Session>>
+             */
+            addSessionLabels: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/AddSessionLabels',
+                    requestData,
+                    requestMetadata,
+                    requestClass: AddSessionLabelsRequest,
+                    responseClass: Session
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/RemoveSessionLabels
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Session>>
+             */
+            removeSessionLabels: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/RemoveSessionLabels',
+                    requestData,
+                    requestMetadata,
+                    requestClass: RemoveSessionLabelsRequest,
+                    responseClass: Session
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/ListSessionReviews
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListSessionReviewsResponse>>
+             */
+            listSessionReviews: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/ListSessionReviews',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListSessionReviewsRequest,
+                    responseClass: ListSessionReviewsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/GetSessionReview
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.SessionReview>>
+             */
+            getSessionReview: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/GetSessionReview',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetSessionReviewRequest,
+                    responseClass: SessionReview
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/GetLatestSessionReview
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.SessionReview>>
+             */
+            getLatestSessionReview: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/GetLatestSessionReview',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetLatestSessionReviewRequest,
+                    responseClass: SessionReview
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/CreateSessionReview
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.SessionReview>>
+             */
+            createSessionReview: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/CreateSessionReview',
+                    requestData,
+                    requestMetadata,
+                    requestClass: CreateSessionReviewRequest,
+                    responseClass: SessionReview
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.nlu.Sessions', settings);
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/DetectIntent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.DetectIntentResponse>
+     */
+    detectIntent(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .detectIntent(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Bidirectional streaming @/ondewo.nlu.Sessions/StreamingDetectIntent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.StreamingDetectIntentResponse>
+     */
+    streamingDetectIntent(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .streamingDetectIntent(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/ListSessions
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListSessionsResponse>
+     */
+    listSessions(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listSessions(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/GetSession
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Session>
+     */
+    getSession(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getSession(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/CreateSession
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Session>
+     */
+    createSession(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .createSession(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/TrackSessionStep
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Session>
+     */
+    trackSessionStep(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .trackSessionStep(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/DeleteSession
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
+     */
+    deleteSession(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .deleteSession(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/ListSessionLabels
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListSessionLabelsResponse>
+     */
+    listSessionLabels(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listSessionLabels(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/AddSessionLabels
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Session>
+     */
+    addSessionLabels(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .addSessionLabels(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/RemoveSessionLabels
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Session>
+     */
+    removeSessionLabels(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .removeSessionLabels(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/ListSessionReviews
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListSessionReviewsResponse>
+     */
+    listSessionReviews(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listSessionReviews(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/GetSessionReview
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.SessionReview>
+     */
+    getSessionReview(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getSessionReview(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/GetLatestSessionReview
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.SessionReview>
+     */
+    getLatestSessionReview(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getLatestSessionReview(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/CreateSessionReview
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.SessionReview>
+     */
+    createSessionReview(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .createSessionReview(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+}
+SessionsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: SessionsClient, deps: [{ token: GRPC_SESSIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+SessionsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: SessionsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: SessionsClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: function () {
+        return [{ type: undefined, decorators: [{
+                        type: Optional
+                    }, {
+                        type: Inject,
+                        args: [GRPC_SESSIONS_CLIENT_SETTINGS]
+                    }] }, { type: undefined, decorators: [{
+                        type: Inject,
+                        args: [GRPC_CLIENT_FACTORY]
+                    }] }, { type: i1.GrpcHandler }];
+    } });
+
+var Mode;
+(function (Mode) {
+    Mode[Mode["UNSPECIFIED"] = 0] = "UNSPECIFIED";
+    Mode[Mode["EXCLUSIVE"] = 1] = "EXCLUSIVE";
+    Mode[Mode["INCLUSIVE"] = 2] = "INCLUSIVE";
+})(Mode || (Mode = {}));
+var IntentAlgorithms;
+(function (IntentAlgorithms) {
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentExactContextDetector"] = 0] = "OndewoIntentExactContextDetector";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentExactMatch"] = 1] = "OndewoIntentExactMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentNamedExactMatch"] = 2] = "OndewoIntentNamedExactMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentSimilarityMatch"] = 3] = "OndewoIntentSimilarityMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentNamedSimilarityMatch"] = 4] = "OndewoIntentNamedSimilarityMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentBertClassifier"] = 7] = "OndewoIntentBertClassifier";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentMetaClassifier"] = 8] = "OndewoIntentMetaClassifier";
+    IntentAlgorithms[IntentAlgorithms["IntentExitDetector"] = 10] = "IntentExitDetector";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentRankingMatch"] = 11] = "OndewoIntentRankingMatch";
+    IntentAlgorithms[IntentAlgorithms["OndewoWeightedEnsemble"] = 13] = "OndewoWeightedEnsemble";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentExitDetector"] = 14] = "OndewoIntentExitDetector";
+    IntentAlgorithms[IntentAlgorithms["OndewoIntentParameterMatch"] = 15] = "OndewoIntentParameterMatch";
+})(IntentAlgorithms || (IntentAlgorithms = {}));
+/**
+ * Message implementation for ondewo.nlu.ExtractEntitiesRequest
+ */
+class ExtractEntitiesRequest {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of PingRequest to deeply clone from
+     * @param _value initial values object or instance of ExtractEntitiesRequest to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
-        this.session = _value.session;
-        PingRequest.refineValues(this);
+        this.parent = _value.parent;
+        this.text = _value.text;
+        this.languageCode = _value.languageCode;
+        this.intentName = _value.intentName;
+        ExtractEntitiesRequest.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new PingRequest();
-        PingRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new ExtractEntitiesRequest();
+        ExtractEntitiesRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -40767,7 +36055,10 @@ class PingRequest {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.session = _instance.session || '';
+        _instance.parent = _instance.parent || '';
+        _instance.text = _instance.text || '';
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.intentName = _instance.intentName || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -40780,13 +36071,22 @@ class PingRequest {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.session = _reader.readString();
+                    _instance.parent = _reader.readString();
+                    break;
+                case 2:
+                    _instance.text = _reader.readString();
+                    break;
+                case 3:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                case 4:
+                    _instance.intentName = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        PingRequest.refineValues(_instance);
+        ExtractEntitiesRequest.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -40794,15 +36094,42 @@ class PingRequest {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.session) {
-            _writer.writeString(1, _instance.session);
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
+        }
+        if (_instance.text) {
+            _writer.writeString(2, _instance.text);
+        }
+        if (_instance.languageCode) {
+            _writer.writeString(3, _instance.languageCode);
+        }
+        if (_instance.intentName) {
+            _writer.writeString(4, _instance.intentName);
         }
     }
-    get session() {
-        return this._session;
+    get parent() {
+        return this._parent;
     }
-    set session(value) {
-        this._session = value;
+    set parent(value) {
+        this._parent = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get intentName() {
+        return this._intentName;
+    }
+    set intentName(value) {
+        this._intentName = value;
     }
     /**
      * Serialize message to binary data
@@ -40810,7 +36137,7 @@ class PingRequest {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        PingRequest.serializeBinaryToWriter(this, writer);
+        ExtractEntitiesRequest.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -40818,7 +36145,10 @@ class PingRequest {
      */
     toObject() {
         return {
-            session: this.session
+            parent: this.parent,
+            text: this.text,
+            languageCode: this.languageCode,
+            intentName: this.intentName
         };
     }
     /**
@@ -40836,41 +36166,38 @@ class PingRequest {
     // @ts-ignore
     options) {
         return {
-            session: this.session
+            parent: this.parent,
+            text: this.text,
+            languageCode: this.languageCode,
+            intentName: this.intentName
         };
     }
 }
-PingRequest.id = 'ondewo.nlu.PingRequest';
+ExtractEntitiesRequest.id = 'ondewo.nlu.ExtractEntitiesRequest';
 /**
- * Message implementation for ondewo.nlu.WebhookRequest
+ * Message implementation for ondewo.nlu.ExtractEntitiesFuzzyRequest
  */
-class WebhookRequest {
+class ExtractEntitiesFuzzyRequest {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of WebhookRequest to deeply clone from
+     * @param _value initial values object or instance of ExtractEntitiesFuzzyRequest to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
-        this.session = _value.session;
-        this.responseId = _value.responseId;
-        this.queryResult = _value.queryResult
-            ? new QueryResult(_value.queryResult)
-            : undefined;
-        this.originalDetectIntentRequest = _value.originalDetectIntentRequest
-            ? new OriginalDetectIntentRequest(_value.originalDetectIntentRequest)
-            : undefined;
-        this.headers = _value.headers
-            ? new googleProtobuf003.Struct(_value.headers)
-            : undefined;
-        WebhookRequest.refineValues(this);
+        this.parent = _value.parent;
+        this.text = _value.text;
+        this.potentialEntities = (_value.potentialEntities || []).map(m => new EntityTypeFuzzyNerConfig(m));
+        this.minimalScore = _value.minimalScore;
+        this.allowOverlaps = _value.allowOverlaps;
+        ExtractEntitiesFuzzyRequest.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new WebhookRequest();
-        WebhookRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new ExtractEntitiesFuzzyRequest();
+        ExtractEntitiesFuzzyRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -40878,12 +36205,11 @@ class WebhookRequest {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.session = _instance.session || '';
-        _instance.responseId = _instance.responseId || '';
-        _instance.queryResult = _instance.queryResult || undefined;
-        _instance.originalDetectIntentRequest =
-            _instance.originalDetectIntentRequest || undefined;
-        _instance.headers = _instance.headers || undefined;
+        _instance.parent = _instance.parent || '';
+        _instance.text = _instance.text || '';
+        _instance.potentialEntities = _instance.potentialEntities || [];
+        _instance.minimalScore = _instance.minimalScore || 0;
+        _instance.allowOverlaps = _instance.allowOverlaps || false;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -40895,29 +36221,29 @@ class WebhookRequest {
             if (_reader.isEndGroup())
                 break;
             switch (_reader.getFieldNumber()) {
-                case 4:
-                    _instance.session = _reader.readString();
-                    break;
                 case 1:
-                    _instance.responseId = _reader.readString();
+                    _instance.parent = _reader.readString();
                     break;
                 case 2:
-                    _instance.queryResult = new QueryResult();
-                    _reader.readMessage(_instance.queryResult, QueryResult.deserializeBinaryFromReader);
+                    _instance.text = _reader.readString();
                     break;
                 case 3:
-                    _instance.originalDetectIntentRequest = new OriginalDetectIntentRequest();
-                    _reader.readMessage(_instance.originalDetectIntentRequest, OriginalDetectIntentRequest.deserializeBinaryFromReader);
+                    const messageInitializer3 = new EntityTypeFuzzyNerConfig();
+                    _reader.readMessage(messageInitializer3, EntityTypeFuzzyNerConfig.deserializeBinaryFromReader);
+                    (_instance.potentialEntities =
+                        _instance.potentialEntities || []).push(messageInitializer3);
+                    break;
+                case 4:
+                    _instance.minimalScore = _reader.readFloat();
                     break;
                 case 5:
-                    _instance.headers = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.headers, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.allowOverlaps = _reader.readBool();
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        WebhookRequest.refineValues(_instance);
+        ExtractEntitiesFuzzyRequest.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -40925,51 +36251,51 @@ class WebhookRequest {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.session) {
-            _writer.writeString(4, _instance.session);
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
         }
-        if (_instance.responseId) {
-            _writer.writeString(1, _instance.responseId);
+        if (_instance.text) {
+            _writer.writeString(2, _instance.text);
         }
-        if (_instance.queryResult) {
-            _writer.writeMessage(2, _instance.queryResult, QueryResult.serializeBinaryToWriter);
+        if (_instance.potentialEntities && _instance.potentialEntities.length) {
+            _writer.writeRepeatedMessage(3, _instance.potentialEntities, EntityTypeFuzzyNerConfig.serializeBinaryToWriter);
         }
-        if (_instance.originalDetectIntentRequest) {
-            _writer.writeMessage(3, _instance.originalDetectIntentRequest, OriginalDetectIntentRequest.serializeBinaryToWriter);
+        if (_instance.minimalScore) {
+            _writer.writeFloat(4, _instance.minimalScore);
         }
-        if (_instance.headers) {
-            _writer.writeMessage(5, _instance.headers, googleProtobuf003.Struct.serializeBinaryToWriter);
+        if (_instance.allowOverlaps) {
+            _writer.writeBool(5, _instance.allowOverlaps);
         }
     }
-    get session() {
-        return this._session;
+    get parent() {
+        return this._parent;
     }
-    set session(value) {
-        this._session = value;
+    set parent(value) {
+        this._parent = value;
     }
-    get responseId() {
-        return this._responseId;
+    get text() {
+        return this._text;
     }
-    set responseId(value) {
-        this._responseId = value;
+    set text(value) {
+        this._text = value;
     }
-    get queryResult() {
-        return this._queryResult;
+    get potentialEntities() {
+        return this._potentialEntities;
     }
-    set queryResult(value) {
-        this._queryResult = value;
+    set potentialEntities(value) {
+        this._potentialEntities = value;
     }
-    get originalDetectIntentRequest() {
-        return this._originalDetectIntentRequest;
+    get minimalScore() {
+        return this._minimalScore;
     }
-    set originalDetectIntentRequest(value) {
-        this._originalDetectIntentRequest = value;
+    set minimalScore(value) {
+        this._minimalScore = value;
     }
-    get headers() {
-        return this._headers;
+    get allowOverlaps() {
+        return this._allowOverlaps;
     }
-    set headers(value) {
-        this._headers = value;
+    set allowOverlaps(value) {
+        this._allowOverlaps = value;
     }
     /**
      * Serialize message to binary data
@@ -40977,7 +36303,7 @@ class WebhookRequest {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        WebhookRequest.serializeBinaryToWriter(this, writer);
+        ExtractEntitiesFuzzyRequest.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -40985,13 +36311,11 @@ class WebhookRequest {
      */
     toObject() {
         return {
-            session: this.session,
-            responseId: this.responseId,
-            queryResult: this.queryResult ? this.queryResult.toObject() : undefined,
-            originalDetectIntentRequest: this.originalDetectIntentRequest
-                ? this.originalDetectIntentRequest.toObject()
-                : undefined,
-            headers: this.headers ? this.headers.toObject() : undefined
+            parent: this.parent,
+            text: this.text,
+            potentialEntities: (this.potentialEntities || []).map(m => m.toObject()),
+            minimalScore: this.minimalScore,
+            allowOverlaps: this.allowOverlaps
         };
     }
     /**
@@ -41009,48 +36333,40 @@ class WebhookRequest {
     // @ts-ignore
     options) {
         return {
-            session: this.session,
-            responseId: this.responseId,
-            queryResult: this.queryResult
-                ? this.queryResult.toProtobufJSON(options)
-                : null,
-            originalDetectIntentRequest: this.originalDetectIntentRequest
-                ? this.originalDetectIntentRequest.toProtobufJSON(options)
-                : null,
-            headers: this.headers ? this.headers.toProtobufJSON(options) : null
+            parent: this.parent,
+            text: this.text,
+            potentialEntities: (this.potentialEntities || []).map(m => m.toProtobufJSON(options)),
+            minimalScore: this.minimalScore,
+            allowOverlaps: this.allowOverlaps
         };
     }
 }
-WebhookRequest.id = 'ondewo.nlu.WebhookRequest';
+ExtractEntitiesFuzzyRequest.id = 'ondewo.nlu.ExtractEntitiesFuzzyRequest';
 /**
- * Message implementation for ondewo.nlu.WebhookResponse
+ * Message implementation for ondewo.nlu.EntityTypeFuzzyNerConfig
  */
-class WebhookResponse {
+class EntityTypeFuzzyNerConfig {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of WebhookResponse to deeply clone from
+     * @param _value initial values object or instance of EntityTypeFuzzyNerConfig to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
-        this.fulfillmentText = _value.fulfillmentText;
-        this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
-        this.source = _value.source;
-        this.payload = _value.payload
-            ? new googleProtobuf003.Struct(_value.payload)
+        this.entityType = _value.entityType
+            ? new EntityType(_value.entityType)
             : undefined;
-        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
-        this.followupEventInput = _value.followupEventInput
-            ? new EventInput(_value.followupEventInput)
-            : undefined;
-        WebhookResponse.refineValues(this);
+        this.minimalScore = _value.minimalScore;
+        this.entityValues = (_value.entityValues || []).slice();
+        this.algorithm = _value.algorithm;
+        EntityTypeFuzzyNerConfig.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new WebhookResponse();
-        WebhookResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new EntityTypeFuzzyNerConfig();
+        EntityTypeFuzzyNerConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -41058,12 +36374,10 @@ class WebhookResponse {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.fulfillmentText = _instance.fulfillmentText || '';
-        _instance.fulfillmentMessages = _instance.fulfillmentMessages || [];
-        _instance.source = _instance.source || '';
-        _instance.payload = _instance.payload || undefined;
-        _instance.outputContexts = _instance.outputContexts || [];
-        _instance.followupEventInput = _instance.followupEventInput || undefined;
+        _instance.entityType = _instance.entityType || undefined;
+        _instance.minimalScore = _instance.minimalScore || 0;
+        _instance.entityValues = _instance.entityValues || [];
+        _instance.algorithm = _instance.algorithm || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -41076,35 +36390,452 @@ class WebhookResponse {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.fulfillmentText = _reader.readString();
+                    _instance.entityType = new EntityType();
+                    _reader.readMessage(_instance.entityType, EntityType.deserializeBinaryFromReader);
                     break;
                 case 2:
-                    const messageInitializer2 = new Intent.Message();
-                    _reader.readMessage(messageInitializer2, Intent.Message.deserializeBinaryFromReader);
-                    (_instance.fulfillmentMessages =
-                        _instance.fulfillmentMessages || []).push(messageInitializer2);
+                    _instance.minimalScore = _reader.readFloat();
                     break;
                 case 3:
-                    _instance.source = _reader.readString();
+                    (_instance.entityValues = _instance.entityValues || []).push(_reader.readString());
                     break;
                 case 4:
-                    _instance.payload = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.payload, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.algorithm = _reader.readEnum();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        EntityTypeFuzzyNerConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.entityType) {
+            _writer.writeMessage(1, _instance.entityType, EntityType.serializeBinaryToWriter);
+        }
+        if (_instance.minimalScore) {
+            _writer.writeFloat(2, _instance.minimalScore);
+        }
+        if (_instance.entityValues && _instance.entityValues.length) {
+            _writer.writeRepeatedString(3, _instance.entityValues);
+        }
+        if (_instance.algorithm) {
+            _writer.writeEnum(4, _instance.algorithm);
+        }
+    }
+    get entityType() {
+        return this._entityType;
+    }
+    set entityType(value) {
+        this._entityType = value;
+    }
+    get minimalScore() {
+        return this._minimalScore;
+    }
+    set minimalScore(value) {
+        this._minimalScore = value;
+    }
+    get entityValues() {
+        return this._entityValues;
+    }
+    set entityValues(value) {
+        this._entityValues = value;
+    }
+    get algorithm() {
+        return this._algorithm;
+    }
+    set algorithm(value) {
+        this._algorithm = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        EntityTypeFuzzyNerConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            entityType: this.entityType ? this.entityType.toObject() : undefined,
+            minimalScore: this.minimalScore,
+            entityValues: (this.entityValues || []).slice(),
+            algorithm: this.algorithm
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            entityType: this.entityType
+                ? this.entityType.toProtobufJSON(options)
+                : null,
+            minimalScore: this.minimalScore,
+            entityValues: (this.entityValues || []).slice(),
+            algorithm: EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm[this.algorithm === null || this.algorithm === undefined
+                ? 0
+                : this.algorithm]
+        };
+    }
+}
+EntityTypeFuzzyNerConfig.id = 'ondewo.nlu.EntityTypeFuzzyNerConfig';
+(function (EntityTypeFuzzyNerConfig) {
+    let FuzzyNerAlgorithm;
+    (function (FuzzyNerAlgorithm) {
+        FuzzyNerAlgorithm[FuzzyNerAlgorithm["PREFILTER_LEVENSHTEIN"] = 0] = "PREFILTER_LEVENSHTEIN";
+        FuzzyNerAlgorithm[FuzzyNerAlgorithm["LOCAL_MAXIMUM"] = 1] = "LOCAL_MAXIMUM";
+    })(FuzzyNerAlgorithm = EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm || (EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm = {}));
+})(EntityTypeFuzzyNerConfig || (EntityTypeFuzzyNerConfig = {}));
+/**
+ * Message implementation for ondewo.nlu.EntityDetected
+ */
+class EntityDetected {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityDetected to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entity = _value.entity
+            ? new Intent.TrainingPhrase.Entity(_value.entity)
+            : undefined;
+        this.extractionMethod = _value.extractionMethod;
+        this.score = _value.score;
+        EntityDetected.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new EntityDetected();
+        EntityDetected.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.entity = _instance.entity || undefined;
+        _instance.extractionMethod = _instance.extractionMethod || '';
+        _instance.score = _instance.score || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.entity = new Intent.TrainingPhrase.Entity();
+                    _reader.readMessage(_instance.entity, Intent.TrainingPhrase.Entity
+                        .deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.extractionMethod = _reader.readString();
+                    break;
+                case 3:
+                    _instance.score = _reader.readFloat();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        EntityDetected.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.entity) {
+            _writer.writeMessage(1, _instance.entity, Intent.TrainingPhrase.Entity.serializeBinaryToWriter);
+        }
+        if (_instance.extractionMethod) {
+            _writer.writeString(2, _instance.extractionMethod);
+        }
+        if (_instance.score) {
+            _writer.writeFloat(3, _instance.score);
+        }
+    }
+    get entity() {
+        return this._entity;
+    }
+    set entity(value) {
+        this._entity = value;
+    }
+    get extractionMethod() {
+        return this._extractionMethod;
+    }
+    set extractionMethod(value) {
+        this._extractionMethod = value;
+    }
+    get score() {
+        return this._score;
+    }
+    set score(value) {
+        this._score = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        EntityDetected.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            entity: this.entity ? this.entity.toObject() : undefined,
+            extractionMethod: this.extractionMethod,
+            score: this.score
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            entity: this.entity ? this.entity.toProtobufJSON(options) : null,
+            extractionMethod: this.extractionMethod,
+            score: this.score
+        };
+    }
+}
+EntityDetected.id = 'ondewo.nlu.EntityDetected';
+/**
+ * Message implementation for ondewo.nlu.ExtractEntitiesResponse
+ */
+class ExtractEntitiesResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExtractEntitiesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entitiesDetected = (_value.entitiesDetected || []).map(m => new EntityDetected(m));
+        this.text = _value.text;
+        ExtractEntitiesResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ExtractEntitiesResponse();
+        ExtractEntitiesResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.entitiesDetected = _instance.entitiesDetected || [];
+        _instance.text = _instance.text || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new EntityDetected();
+                    _reader.readMessage(messageInitializer1, EntityDetected.deserializeBinaryFromReader);
+                    (_instance.entitiesDetected = _instance.entitiesDetected || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    _instance.text = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ExtractEntitiesResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.entitiesDetected && _instance.entitiesDetected.length) {
+            _writer.writeRepeatedMessage(1, _instance.entitiesDetected, EntityDetected.serializeBinaryToWriter);
+        }
+        if (_instance.text) {
+            _writer.writeString(2, _instance.text);
+        }
+    }
+    get entitiesDetected() {
+        return this._entitiesDetected;
+    }
+    set entitiesDetected(value) {
+        this._entitiesDetected = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ExtractEntitiesResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            entitiesDetected: (this.entitiesDetected || []).map(m => m.toObject()),
+            text: this.text
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            entitiesDetected: (this.entitiesDetected || []).map(m => m.toProtobufJSON(options)),
+            text: this.text
+        };
+    }
+}
+ExtractEntitiesResponse.id = 'ondewo.nlu.ExtractEntitiesResponse';
+/**
+ * Message implementation for ondewo.nlu.GetAlternativeSentencesRequest
+ */
+class GetAlternativeSentencesRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeSentencesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.config = _value.config
+            ? new DataEnrichmentConfig(_value.config)
+            : undefined;
+        this.sentence = _value.sentence;
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        this.protectedWords = (_value.protectedWords || []).slice();
+        this.wordsToChange = (_value.wordsToChange || []).slice();
+        GetAlternativeSentencesRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetAlternativeSentencesRequest();
+        GetAlternativeSentencesRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.config = _instance.config || undefined;
+        _instance.sentence = _instance.sentence || '';
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.parent = _instance.parent || '';
+        _instance.protectedWords = _instance.protectedWords || [];
+        _instance.wordsToChange = _instance.wordsToChange || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.config = new DataEnrichmentConfig();
+                    _reader.readMessage(_instance.config, DataEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.sentence = _reader.readString();
+                    break;
+                case 4:
+                    _instance.languageCode = _reader.readString();
                     break;
                 case 5:
-                    const messageInitializer5 = new Context();
-                    _reader.readMessage(messageInitializer5, Context.deserializeBinaryFromReader);
-                    (_instance.outputContexts = _instance.outputContexts || []).push(messageInitializer5);
+                    _instance.parent = _reader.readString();
                     break;
                 case 6:
-                    _instance.followupEventInput = new EventInput();
-                    _reader.readMessage(_instance.followupEventInput, EventInput.deserializeBinaryFromReader);
+                    (_instance.protectedWords = _instance.protectedWords || []).push(_reader.readString());
+                    break;
+                case 7:
+                    (_instance.wordsToChange = _instance.wordsToChange || []).push(_reader.readString());
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        WebhookResponse.refineValues(_instance);
+        GetAlternativeSentencesRequest.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -41112,60 +36843,60 @@ class WebhookResponse {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.fulfillmentText) {
-            _writer.writeString(1, _instance.fulfillmentText);
+        if (_instance.config) {
+            _writer.writeMessage(1, _instance.config, DataEnrichmentConfig.serializeBinaryToWriter);
         }
-        if (_instance.fulfillmentMessages && _instance.fulfillmentMessages.length) {
-            _writer.writeRepeatedMessage(2, _instance.fulfillmentMessages, Intent.Message.serializeBinaryToWriter);
+        if (_instance.sentence) {
+            _writer.writeString(2, _instance.sentence);
         }
-        if (_instance.source) {
-            _writer.writeString(3, _instance.source);
+        if (_instance.languageCode) {
+            _writer.writeString(4, _instance.languageCode);
         }
-        if (_instance.payload) {
-            _writer.writeMessage(4, _instance.payload, googleProtobuf003.Struct.serializeBinaryToWriter);
+        if (_instance.parent) {
+            _writer.writeString(5, _instance.parent);
         }
-        if (_instance.outputContexts && _instance.outputContexts.length) {
-            _writer.writeRepeatedMessage(5, _instance.outputContexts, Context.serializeBinaryToWriter);
+        if (_instance.protectedWords && _instance.protectedWords.length) {
+            _writer.writeRepeatedString(6, _instance.protectedWords);
         }
-        if (_instance.followupEventInput) {
-            _writer.writeMessage(6, _instance.followupEventInput, EventInput.serializeBinaryToWriter);
+        if (_instance.wordsToChange && _instance.wordsToChange.length) {
+            _writer.writeRepeatedString(7, _instance.wordsToChange);
         }
     }
-    get fulfillmentText() {
-        return this._fulfillmentText;
+    get config() {
+        return this._config;
     }
-    set fulfillmentText(value) {
-        this._fulfillmentText = value;
+    set config(value) {
+        this._config = value;
     }
-    get fulfillmentMessages() {
-        return this._fulfillmentMessages;
+    get sentence() {
+        return this._sentence;
     }
-    set fulfillmentMessages(value) {
-        this._fulfillmentMessages = value;
+    set sentence(value) {
+        this._sentence = value;
     }
-    get source() {
-        return this._source;
+    get languageCode() {
+        return this._languageCode;
     }
-    set source(value) {
-        this._source = value;
+    set languageCode(value) {
+        this._languageCode = value;
     }
-    get payload() {
-        return this._payload;
+    get parent() {
+        return this._parent;
     }
-    set payload(value) {
-        this._payload = value;
+    set parent(value) {
+        this._parent = value;
     }
-    get outputContexts() {
-        return this._outputContexts;
+    get protectedWords() {
+        return this._protectedWords;
     }
-    set outputContexts(value) {
-        this._outputContexts = value;
+    set protectedWords(value) {
+        this._protectedWords = value;
     }
-    get followupEventInput() {
-        return this._followupEventInput;
+    get wordsToChange() {
+        return this._wordsToChange;
     }
-    set followupEventInput(value) {
-        this._followupEventInput = value;
+    set wordsToChange(value) {
+        this._wordsToChange = value;
     }
     /**
      * Serialize message to binary data
@@ -41173,7 +36904,7 @@ class WebhookResponse {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        WebhookResponse.serializeBinaryToWriter(this, writer);
+        GetAlternativeSentencesRequest.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -41181,13 +36912,1857 @@ class WebhookResponse {
      */
     toObject() {
         return {
-            fulfillmentText: this.fulfillmentText,
-            fulfillmentMessages: (this.fulfillmentMessages || []).map(m => m.toObject()),
-            source: this.source,
-            payload: this.payload ? this.payload.toObject() : undefined,
-            outputContexts: (this.outputContexts || []).map(m => m.toObject()),
-            followupEventInput: this.followupEventInput
-                ? this.followupEventInput.toObject()
+            config: this.config ? this.config.toObject() : undefined,
+            sentence: this.sentence,
+            languageCode: this.languageCode,
+            parent: this.parent,
+            protectedWords: (this.protectedWords || []).slice(),
+            wordsToChange: (this.wordsToChange || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            config: this.config ? this.config.toProtobufJSON(options) : null,
+            sentence: this.sentence,
+            languageCode: this.languageCode,
+            parent: this.parent,
+            protectedWords: (this.protectedWords || []).slice(),
+            wordsToChange: (this.wordsToChange || []).slice()
+        };
+    }
+}
+GetAlternativeSentencesRequest.id = 'ondewo.nlu.GetAlternativeSentencesRequest';
+/**
+ * Message implementation for ondewo.nlu.GenerateUserSaysRequest
+ */
+class GenerateUserSaysRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateUserSaysRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        this.nRepeatSynonym = _value.nRepeatSynonym;
+        this.branch = _value.branch;
+        GenerateUserSaysRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GenerateUserSaysRequest();
+        GenerateUserSaysRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.parent = _instance.parent || '';
+        _instance.nRepeatSynonym = _instance.nRepeatSynonym || 0;
+        _instance.branch = _instance.branch || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 4:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                case 5:
+                    _instance.parent = _reader.readString();
+                    break;
+                case 6:
+                    _instance.nRepeatSynonym = _reader.readInt32();
+                    break;
+                case 8:
+                    _instance.branch = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GenerateUserSaysRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.languageCode) {
+            _writer.writeString(4, _instance.languageCode);
+        }
+        if (_instance.parent) {
+            _writer.writeString(5, _instance.parent);
+        }
+        if (_instance.nRepeatSynonym) {
+            _writer.writeInt32(6, _instance.nRepeatSynonym);
+        }
+        if (_instance.branch) {
+            _writer.writeString(8, _instance.branch);
+        }
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get nRepeatSynonym() {
+        return this._nRepeatSynonym;
+    }
+    set nRepeatSynonym(value) {
+        this._nRepeatSynonym = value;
+    }
+    get branch() {
+        return this._branch;
+    }
+    set branch(value) {
+        this._branch = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GenerateUserSaysRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            languageCode: this.languageCode,
+            parent: this.parent,
+            nRepeatSynonym: this.nRepeatSynonym,
+            branch: this.branch
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            languageCode: this.languageCode,
+            parent: this.parent,
+            nRepeatSynonym: this.nRepeatSynonym,
+            branch: this.branch
+        };
+    }
+}
+GenerateUserSaysRequest.id = 'ondewo.nlu.GenerateUserSaysRequest';
+/**
+ * Message implementation for ondewo.nlu.GenerateResponsesRequest
+ */
+class GenerateResponsesRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateResponsesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        this.nRepeatSynonym = _value.nRepeatSynonym;
+        this.branch = _value.branch;
+        this.dropUnknownParameters = _value.dropUnknownParameters;
+        GenerateResponsesRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GenerateResponsesRequest();
+        GenerateResponsesRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.parent = _instance.parent || '';
+        _instance.nRepeatSynonym = _instance.nRepeatSynonym || 0;
+        _instance.branch = _instance.branch || '';
+        _instance.dropUnknownParameters = _instance.dropUnknownParameters || false;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 4:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                case 5:
+                    _instance.parent = _reader.readString();
+                    break;
+                case 7:
+                    _instance.nRepeatSynonym = _reader.readInt32();
+                    break;
+                case 8:
+                    _instance.branch = _reader.readString();
+                    break;
+                case 9:
+                    _instance.dropUnknownParameters = _reader.readBool();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GenerateResponsesRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.languageCode) {
+            _writer.writeString(4, _instance.languageCode);
+        }
+        if (_instance.parent) {
+            _writer.writeString(5, _instance.parent);
+        }
+        if (_instance.nRepeatSynonym) {
+            _writer.writeInt32(7, _instance.nRepeatSynonym);
+        }
+        if (_instance.branch) {
+            _writer.writeString(8, _instance.branch);
+        }
+        if (_instance.dropUnknownParameters) {
+            _writer.writeBool(9, _instance.dropUnknownParameters);
+        }
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get nRepeatSynonym() {
+        return this._nRepeatSynonym;
+    }
+    set nRepeatSynonym(value) {
+        this._nRepeatSynonym = value;
+    }
+    get branch() {
+        return this._branch;
+    }
+    set branch(value) {
+        this._branch = value;
+    }
+    get dropUnknownParameters() {
+        return this._dropUnknownParameters;
+    }
+    set dropUnknownParameters(value) {
+        this._dropUnknownParameters = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GenerateResponsesRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            languageCode: this.languageCode,
+            parent: this.parent,
+            nRepeatSynonym: this.nRepeatSynonym,
+            branch: this.branch,
+            dropUnknownParameters: this.dropUnknownParameters
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            languageCode: this.languageCode,
+            parent: this.parent,
+            nRepeatSynonym: this.nRepeatSynonym,
+            branch: this.branch,
+            dropUnknownParameters: this.dropUnknownParameters
+        };
+    }
+}
+GenerateResponsesRequest.id = 'ondewo.nlu.GenerateResponsesRequest';
+/**
+ * Message implementation for ondewo.nlu.GetAlternativeTrainingPhrasesRequest
+ */
+class GetAlternativeTrainingPhrasesRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.config = _value.config
+            ? new DataEnrichmentConfig(_value.config)
+            : undefined;
+        this.trainingPhrase = _value.trainingPhrase
+            ? new Intent.TrainingPhrase(_value.trainingPhrase)
+            : undefined;
+        this.intentName = _value.intentName;
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        this.detectEntities = _value.detectEntities;
+        this.similarityThreshold = _value.similarityThreshold;
+        this.protectedWords = (_value.protectedWords || []).slice();
+        this.wordsToChange = (_value.wordsToChange || []).slice();
+        this.branch = _value.branch;
+        GetAlternativeTrainingPhrasesRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetAlternativeTrainingPhrasesRequest();
+        GetAlternativeTrainingPhrasesRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.config = _instance.config || undefined;
+        _instance.trainingPhrase = _instance.trainingPhrase || undefined;
+        _instance.intentName = _instance.intentName || '';
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.parent = _instance.parent || '';
+        _instance.detectEntities = _instance.detectEntities || false;
+        _instance.similarityThreshold = _instance.similarityThreshold || 0;
+        _instance.protectedWords = _instance.protectedWords || [];
+        _instance.wordsToChange = _instance.wordsToChange || [];
+        _instance.branch = _instance.branch || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.config = new DataEnrichmentConfig();
+                    _reader.readMessage(_instance.config, DataEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.trainingPhrase = new Intent.TrainingPhrase();
+                    _reader.readMessage(_instance.trainingPhrase, Intent.TrainingPhrase.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.intentName = _reader.readString();
+                    break;
+                case 4:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                case 5:
+                    _instance.parent = _reader.readString();
+                    break;
+                case 6:
+                    _instance.detectEntities = _reader.readBool();
+                    break;
+                case 7:
+                    _instance.similarityThreshold = _reader.readFloat();
+                    break;
+                case 8:
+                    (_instance.protectedWords = _instance.protectedWords || []).push(_reader.readString());
+                    break;
+                case 9:
+                    (_instance.wordsToChange = _instance.wordsToChange || []).push(_reader.readString());
+                    break;
+                case 10:
+                    _instance.branch = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetAlternativeTrainingPhrasesRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.config) {
+            _writer.writeMessage(1, _instance.config, DataEnrichmentConfig.serializeBinaryToWriter);
+        }
+        if (_instance.trainingPhrase) {
+            _writer.writeMessage(2, _instance.trainingPhrase, Intent.TrainingPhrase.serializeBinaryToWriter);
+        }
+        if (_instance.intentName) {
+            _writer.writeString(3, _instance.intentName);
+        }
+        if (_instance.languageCode) {
+            _writer.writeString(4, _instance.languageCode);
+        }
+        if (_instance.parent) {
+            _writer.writeString(5, _instance.parent);
+        }
+        if (_instance.detectEntities) {
+            _writer.writeBool(6, _instance.detectEntities);
+        }
+        if (_instance.similarityThreshold) {
+            _writer.writeFloat(7, _instance.similarityThreshold);
+        }
+        if (_instance.protectedWords && _instance.protectedWords.length) {
+            _writer.writeRepeatedString(8, _instance.protectedWords);
+        }
+        if (_instance.wordsToChange && _instance.wordsToChange.length) {
+            _writer.writeRepeatedString(9, _instance.wordsToChange);
+        }
+        if (_instance.branch) {
+            _writer.writeString(10, _instance.branch);
+        }
+    }
+    get config() {
+        return this._config;
+    }
+    set config(value) {
+        this._config = value;
+    }
+    get trainingPhrase() {
+        return this._trainingPhrase;
+    }
+    set trainingPhrase(value) {
+        this._trainingPhrase = value;
+    }
+    get intentName() {
+        return this._intentName;
+    }
+    set intentName(value) {
+        this._intentName = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get detectEntities() {
+        return this._detectEntities;
+    }
+    set detectEntities(value) {
+        this._detectEntities = value;
+    }
+    get similarityThreshold() {
+        return this._similarityThreshold;
+    }
+    set similarityThreshold(value) {
+        this._similarityThreshold = value;
+    }
+    get protectedWords() {
+        return this._protectedWords;
+    }
+    set protectedWords(value) {
+        this._protectedWords = value;
+    }
+    get wordsToChange() {
+        return this._wordsToChange;
+    }
+    set wordsToChange(value) {
+        this._wordsToChange = value;
+    }
+    get branch() {
+        return this._branch;
+    }
+    set branch(value) {
+        this._branch = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetAlternativeTrainingPhrasesRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            config: this.config ? this.config.toObject() : undefined,
+            trainingPhrase: this.trainingPhrase
+                ? this.trainingPhrase.toObject()
+                : undefined,
+            intentName: this.intentName,
+            languageCode: this.languageCode,
+            parent: this.parent,
+            detectEntities: this.detectEntities,
+            similarityThreshold: this.similarityThreshold,
+            protectedWords: (this.protectedWords || []).slice(),
+            wordsToChange: (this.wordsToChange || []).slice(),
+            branch: this.branch
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            config: this.config ? this.config.toProtobufJSON(options) : null,
+            trainingPhrase: this.trainingPhrase
+                ? this.trainingPhrase.toProtobufJSON(options)
+                : null,
+            intentName: this.intentName,
+            languageCode: this.languageCode,
+            parent: this.parent,
+            detectEntities: this.detectEntities,
+            similarityThreshold: this.similarityThreshold,
+            protectedWords: (this.protectedWords || []).slice(),
+            wordsToChange: (this.wordsToChange || []).slice(),
+            branch: this.branch
+        };
+    }
+}
+GetAlternativeTrainingPhrasesRequest.id = 'ondewo.nlu.GetAlternativeTrainingPhrasesRequest';
+/**
+ * Message implementation for ondewo.nlu.GetSynonymsRequest
+ */
+class GetSynonymsRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSynonymsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.config = _value.config
+            ? new DataEnrichmentConfig(_value.config)
+            : undefined;
+        this.word = _value.word;
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        GetSynonymsRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetSynonymsRequest();
+        GetSynonymsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.config = _instance.config || undefined;
+        _instance.word = _instance.word || '';
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.parent = _instance.parent || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.config = new DataEnrichmentConfig();
+                    _reader.readMessage(_instance.config, DataEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.word = _reader.readString();
+                    break;
+                case 4:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                case 5:
+                    _instance.parent = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetSynonymsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.config) {
+            _writer.writeMessage(1, _instance.config, DataEnrichmentConfig.serializeBinaryToWriter);
+        }
+        if (_instance.word) {
+            _writer.writeString(2, _instance.word);
+        }
+        if (_instance.languageCode) {
+            _writer.writeString(4, _instance.languageCode);
+        }
+        if (_instance.parent) {
+            _writer.writeString(5, _instance.parent);
+        }
+    }
+    get config() {
+        return this._config;
+    }
+    set config(value) {
+        this._config = value;
+    }
+    get word() {
+        return this._word;
+    }
+    set word(value) {
+        this._word = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetSynonymsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            config: this.config ? this.config.toObject() : undefined,
+            word: this.word,
+            languageCode: this.languageCode,
+            parent: this.parent
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            config: this.config ? this.config.toProtobufJSON(options) : null,
+            word: this.word,
+            languageCode: this.languageCode,
+            parent: this.parent
+        };
+    }
+}
+GetSynonymsRequest.id = 'ondewo.nlu.GetSynonymsRequest';
+/**
+ * Message implementation for ondewo.nlu.GetSynonymsResponse
+ */
+class GetSynonymsResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSynonymsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.synonyms = (_value.synonyms || []).map(m => new Synonym(m));
+        GetSynonymsResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetSynonymsResponse();
+        GetSynonymsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.synonyms = _instance.synonyms || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new Synonym();
+                    _reader.readMessage(messageInitializer1, Synonym.deserializeBinaryFromReader);
+                    (_instance.synonyms = _instance.synonyms || []).push(messageInitializer1);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetSynonymsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.synonyms && _instance.synonyms.length) {
+            _writer.writeRepeatedMessage(1, _instance.synonyms, Synonym.serializeBinaryToWriter);
+        }
+    }
+    get synonyms() {
+        return this._synonyms;
+    }
+    set synonyms(value) {
+        this._synonyms = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetSynonymsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            synonyms: (this.synonyms || []).map(m => m.toObject())
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            synonyms: (this.synonyms || []).map(m => m.toProtobufJSON(options))
+        };
+    }
+}
+GetSynonymsResponse.id = 'ondewo.nlu.GetSynonymsResponse';
+/**
+ * Message implementation for ondewo.nlu.Synonym
+ */
+class Synonym {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Synonym to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.synonym = _value.synonym;
+        this.score = _value.score;
+        Synonym.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new Synonym();
+        Synonym.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.synonym = _instance.synonym || '';
+        _instance.score = _instance.score || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.synonym = _reader.readString();
+                    break;
+                case 2:
+                    _instance.score = _reader.readInt32();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        Synonym.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.synonym) {
+            _writer.writeString(1, _instance.synonym);
+        }
+        if (_instance.score) {
+            _writer.writeInt32(2, _instance.score);
+        }
+    }
+    get synonym() {
+        return this._synonym;
+    }
+    set synonym(value) {
+        this._synonym = value;
+    }
+    get score() {
+        return this._score;
+    }
+    set score(value) {
+        this._score = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        Synonym.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            synonym: this.synonym,
+            score: this.score
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            synonym: this.synonym,
+            score: this.score
+        };
+    }
+}
+Synonym.id = 'ondewo.nlu.Synonym';
+/**
+ * Message implementation for ondewo.nlu.GetAlternativeSentencesResponse
+ */
+class GetAlternativeSentencesResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeSentencesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.alternativeSentences = (_value.alternativeSentences || []).map(m => new AltSentence(m));
+        GetAlternativeSentencesResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetAlternativeSentencesResponse();
+        GetAlternativeSentencesResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.alternativeSentences = _instance.alternativeSentences || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new AltSentence();
+                    _reader.readMessage(messageInitializer1, AltSentence.deserializeBinaryFromReader);
+                    (_instance.alternativeSentences =
+                        _instance.alternativeSentences || []).push(messageInitializer1);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetAlternativeSentencesResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.alternativeSentences &&
+            _instance.alternativeSentences.length) {
+            _writer.writeRepeatedMessage(1, _instance.alternativeSentences, AltSentence.serializeBinaryToWriter);
+        }
+    }
+    get alternativeSentences() {
+        return this._alternativeSentences;
+    }
+    set alternativeSentences(value) {
+        this._alternativeSentences = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetAlternativeSentencesResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            alternativeSentences: (this.alternativeSentences || []).map(m => m.toObject())
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            alternativeSentences: (this.alternativeSentences || []).map(m => m.toProtobufJSON(options))
+        };
+    }
+}
+GetAlternativeSentencesResponse.id = 'ondewo.nlu.GetAlternativeSentencesResponse';
+/**
+ * Message implementation for ondewo.nlu.GenerateResponsesResponse
+ */
+class GenerateResponsesResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateResponsesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responses = (_value.responses || []).slice();
+        GenerateResponsesResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GenerateResponsesResponse();
+        GenerateResponsesResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.responses = _instance.responses || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 2:
+                    (_instance.responses = _instance.responses || []).push(_reader.readString());
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GenerateResponsesResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.responses && _instance.responses.length) {
+            _writer.writeRepeatedString(2, _instance.responses);
+        }
+    }
+    get responses() {
+        return this._responses;
+    }
+    set responses(value) {
+        this._responses = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GenerateResponsesResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            responses: (this.responses || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            responses: (this.responses || []).slice()
+        };
+    }
+}
+GenerateResponsesResponse.id = 'ondewo.nlu.GenerateResponsesResponse';
+/**
+ * Message implementation for ondewo.nlu.GenerateUserSaysResponse
+ */
+class GenerateUserSaysResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateUserSaysResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.userSays = (_value.userSays || []).slice();
+        GenerateUserSaysResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GenerateUserSaysResponse();
+        GenerateUserSaysResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.userSays = _instance.userSays || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 2:
+                    (_instance.userSays = _instance.userSays || []).push(_reader.readString());
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GenerateUserSaysResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.userSays && _instance.userSays.length) {
+            _writer.writeRepeatedString(2, _instance.userSays);
+        }
+    }
+    get userSays() {
+        return this._userSays;
+    }
+    set userSays(value) {
+        this._userSays = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GenerateUserSaysResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            userSays: (this.userSays || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            userSays: (this.userSays || []).slice()
+        };
+    }
+}
+GenerateUserSaysResponse.id = 'ondewo.nlu.GenerateUserSaysResponse';
+/**
+ * Message implementation for ondewo.nlu.GetAlternativeTrainingPhrasesResponse
+ */
+class GetAlternativeTrainingPhrasesResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.alternativeTrainingPhrases = (_value.alternativeTrainingPhrases || []).map(m => new AltTrainingPhrase(m));
+        GetAlternativeTrainingPhrasesResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetAlternativeTrainingPhrasesResponse();
+        GetAlternativeTrainingPhrasesResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.alternativeTrainingPhrases =
+            _instance.alternativeTrainingPhrases || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new AltTrainingPhrase();
+                    _reader.readMessage(messageInitializer1, AltTrainingPhrase.deserializeBinaryFromReader);
+                    (_instance.alternativeTrainingPhrases =
+                        _instance.alternativeTrainingPhrases || []).push(messageInitializer1);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetAlternativeTrainingPhrasesResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.alternativeTrainingPhrases &&
+            _instance.alternativeTrainingPhrases.length) {
+            _writer.writeRepeatedMessage(1, _instance.alternativeTrainingPhrases, AltTrainingPhrase.serializeBinaryToWriter);
+        }
+    }
+    get alternativeTrainingPhrases() {
+        return this._alternativeTrainingPhrases;
+    }
+    set alternativeTrainingPhrases(value) {
+        this._alternativeTrainingPhrases = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetAlternativeTrainingPhrasesResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            alternativeTrainingPhrases: (this.alternativeTrainingPhrases || []).map(m => m.toObject())
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            alternativeTrainingPhrases: (this.alternativeTrainingPhrases || []).map(m => m.toProtobufJSON(options))
+        };
+    }
+}
+GetAlternativeTrainingPhrasesResponse.id = 'ondewo.nlu.GetAlternativeTrainingPhrasesResponse';
+/**
+ * Message implementation for ondewo.nlu.AltSentence
+ */
+class AltSentence {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AltSentence to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sentence = _value.sentence;
+        this.score = _value.score;
+        AltSentence.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new AltSentence();
+        AltSentence.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.sentence = _instance.sentence || '';
+        _instance.score = _instance.score || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.sentence = _reader.readString();
+                    break;
+                case 2:
+                    _instance.score = _reader.readFloat();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        AltSentence.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.sentence) {
+            _writer.writeString(1, _instance.sentence);
+        }
+        if (_instance.score) {
+            _writer.writeFloat(2, _instance.score);
+        }
+    }
+    get sentence() {
+        return this._sentence;
+    }
+    set sentence(value) {
+        this._sentence = value;
+    }
+    get score() {
+        return this._score;
+    }
+    set score(value) {
+        this._score = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        AltSentence.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            sentence: this.sentence,
+            score: this.score
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            sentence: this.sentence,
+            score: this.score
+        };
+    }
+}
+AltSentence.id = 'ondewo.nlu.AltSentence';
+/**
+ * Message implementation for ondewo.nlu.AltTrainingPhrase
+ */
+class AltTrainingPhrase {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AltTrainingPhrase to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.trainingPhrase = _value.trainingPhrase
+            ? new Intent.TrainingPhrase(_value.trainingPhrase)
+            : undefined;
+        this.score = _value.score;
+        AltTrainingPhrase.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new AltTrainingPhrase();
+        AltTrainingPhrase.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.trainingPhrase = _instance.trainingPhrase || undefined;
+        _instance.score = _instance.score || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.trainingPhrase = new Intent.TrainingPhrase();
+                    _reader.readMessage(_instance.trainingPhrase, Intent.TrainingPhrase.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.score = _reader.readFloat();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        AltTrainingPhrase.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.trainingPhrase) {
+            _writer.writeMessage(1, _instance.trainingPhrase, Intent.TrainingPhrase.serializeBinaryToWriter);
+        }
+        if (_instance.score) {
+            _writer.writeFloat(2, _instance.score);
+        }
+    }
+    get trainingPhrase() {
+        return this._trainingPhrase;
+    }
+    set trainingPhrase(value) {
+        this._trainingPhrase = value;
+    }
+    get score() {
+        return this._score;
+    }
+    set score(value) {
+        this._score = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        AltTrainingPhrase.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            trainingPhrase: this.trainingPhrase
+                ? this.trainingPhrase.toObject()
+                : undefined,
+            score: this.score
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            trainingPhrase: this.trainingPhrase
+                ? this.trainingPhrase.toProtobufJSON(options)
+                : null,
+            score: this.score
+        };
+    }
+}
+AltTrainingPhrase.id = 'ondewo.nlu.AltTrainingPhrase';
+/**
+ * Message implementation for ondewo.nlu.DataEnrichmentConfig
+ */
+class DataEnrichmentConfig {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DataEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityEnrichment = _value.entityEnrichment
+            ? new EntityEnrichmentConfig(_value.entityEnrichment)
+            : undefined;
+        this.thesaurusEnrichment = _value.thesaurusEnrichment
+            ? new ThesaurusEnrichmentConfig(_value.thesaurusEnrichment)
+            : undefined;
+        this.word2vecEnrichment = _value.word2vecEnrichment
+            ? new Word2VecEnrichmentConfig(_value.word2vecEnrichment)
+            : undefined;
+        this.wordNetEnrichment = _value.wordNetEnrichment
+            ? new WordNetAugEnrichmentConfig(_value.wordNetEnrichment)
+            : undefined;
+        this.gpt2Enrichment = _value.gpt2Enrichment
+            ? new GPT2EnrichmentConfig(_value.gpt2Enrichment)
+            : undefined;
+        this.gloveEnrichment = _value.gloveEnrichment
+            ? new GloVeEnrichmentConfig(_value.gloveEnrichment)
+            : undefined;
+        this.bertEnrichment = _value.bertEnrichment
+            ? new BertAugEnrichmentConfig(_value.bertEnrichment)
+            : undefined;
+        this.xlnetEnrichment = _value.xlnetEnrichment
+            ? new XLNetAugEnrichmentConfig(_value.xlnetEnrichment)
+            : undefined;
+        DataEnrichmentConfig.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new DataEnrichmentConfig();
+        DataEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.entityEnrichment = _instance.entityEnrichment || undefined;
+        _instance.thesaurusEnrichment = _instance.thesaurusEnrichment || undefined;
+        _instance.word2vecEnrichment = _instance.word2vecEnrichment || undefined;
+        _instance.wordNetEnrichment = _instance.wordNetEnrichment || undefined;
+        _instance.gpt2Enrichment = _instance.gpt2Enrichment || undefined;
+        _instance.gloveEnrichment = _instance.gloveEnrichment || undefined;
+        _instance.bertEnrichment = _instance.bertEnrichment || undefined;
+        _instance.xlnetEnrichment = _instance.xlnetEnrichment || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.entityEnrichment = new EntityEnrichmentConfig();
+                    _reader.readMessage(_instance.entityEnrichment, EntityEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.thesaurusEnrichment = new ThesaurusEnrichmentConfig();
+                    _reader.readMessage(_instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.word2vecEnrichment = new Word2VecEnrichmentConfig();
+                    _reader.readMessage(_instance.word2vecEnrichment, Word2VecEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 4:
+                    _instance.wordNetEnrichment = new WordNetAugEnrichmentConfig();
+                    _reader.readMessage(_instance.wordNetEnrichment, WordNetAugEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 5:
+                    _instance.gpt2Enrichment = new GPT2EnrichmentConfig();
+                    _reader.readMessage(_instance.gpt2Enrichment, GPT2EnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 6:
+                    _instance.gloveEnrichment = new GloVeEnrichmentConfig();
+                    _reader.readMessage(_instance.gloveEnrichment, GloVeEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 8:
+                    _instance.bertEnrichment = new BertAugEnrichmentConfig();
+                    _reader.readMessage(_instance.bertEnrichment, BertAugEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                case 9:
+                    _instance.xlnetEnrichment = new XLNetAugEnrichmentConfig();
+                    _reader.readMessage(_instance.xlnetEnrichment, XLNetAugEnrichmentConfig.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        DataEnrichmentConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.entityEnrichment) {
+            _writer.writeMessage(1, _instance.entityEnrichment, EntityEnrichmentConfig.serializeBinaryToWriter);
+        }
+        if (_instance.thesaurusEnrichment) {
+            _writer.writeMessage(2, _instance.thesaurusEnrichment, ThesaurusEnrichmentConfig.serializeBinaryToWriter);
+        }
+        if (_instance.word2vecEnrichment) {
+            _writer.writeMessage(3, _instance.word2vecEnrichment, Word2VecEnrichmentConfig.serializeBinaryToWriter);
+        }
+        if (_instance.wordNetEnrichment) {
+            _writer.writeMessage(4, _instance.wordNetEnrichment, WordNetAugEnrichmentConfig.serializeBinaryToWriter);
+        }
+        if (_instance.gpt2Enrichment) {
+            _writer.writeMessage(5, _instance.gpt2Enrichment, GPT2EnrichmentConfig.serializeBinaryToWriter);
+        }
+        if (_instance.gloveEnrichment) {
+            _writer.writeMessage(6, _instance.gloveEnrichment, GloVeEnrichmentConfig.serializeBinaryToWriter);
+        }
+        if (_instance.bertEnrichment) {
+            _writer.writeMessage(8, _instance.bertEnrichment, BertAugEnrichmentConfig.serializeBinaryToWriter);
+        }
+        if (_instance.xlnetEnrichment) {
+            _writer.writeMessage(9, _instance.xlnetEnrichment, XLNetAugEnrichmentConfig.serializeBinaryToWriter);
+        }
+    }
+    get entityEnrichment() {
+        return this._entityEnrichment;
+    }
+    set entityEnrichment(value) {
+        this._entityEnrichment = value;
+    }
+    get thesaurusEnrichment() {
+        return this._thesaurusEnrichment;
+    }
+    set thesaurusEnrichment(value) {
+        this._thesaurusEnrichment = value;
+    }
+    get word2vecEnrichment() {
+        return this._word2vecEnrichment;
+    }
+    set word2vecEnrichment(value) {
+        this._word2vecEnrichment = value;
+    }
+    get wordNetEnrichment() {
+        return this._wordNetEnrichment;
+    }
+    set wordNetEnrichment(value) {
+        this._wordNetEnrichment = value;
+    }
+    get gpt2Enrichment() {
+        return this._gpt2Enrichment;
+    }
+    set gpt2Enrichment(value) {
+        this._gpt2Enrichment = value;
+    }
+    get gloveEnrichment() {
+        return this._gloveEnrichment;
+    }
+    set gloveEnrichment(value) {
+        this._gloveEnrichment = value;
+    }
+    get bertEnrichment() {
+        return this._bertEnrichment;
+    }
+    set bertEnrichment(value) {
+        this._bertEnrichment = value;
+    }
+    get xlnetEnrichment() {
+        return this._xlnetEnrichment;
+    }
+    set xlnetEnrichment(value) {
+        this._xlnetEnrichment = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        DataEnrichmentConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            entityEnrichment: this.entityEnrichment
+                ? this.entityEnrichment.toObject()
+                : undefined,
+            thesaurusEnrichment: this.thesaurusEnrichment
+                ? this.thesaurusEnrichment.toObject()
+                : undefined,
+            word2vecEnrichment: this.word2vecEnrichment
+                ? this.word2vecEnrichment.toObject()
+                : undefined,
+            wordNetEnrichment: this.wordNetEnrichment
+                ? this.wordNetEnrichment.toObject()
+                : undefined,
+            gpt2Enrichment: this.gpt2Enrichment
+                ? this.gpt2Enrichment.toObject()
+                : undefined,
+            gloveEnrichment: this.gloveEnrichment
+                ? this.gloveEnrichment.toObject()
+                : undefined,
+            bertEnrichment: this.bertEnrichment
+                ? this.bertEnrichment.toObject()
+                : undefined,
+            xlnetEnrichment: this.xlnetEnrichment
+                ? this.xlnetEnrichment.toObject()
                 : undefined
         };
     }
@@ -41206,41 +38781,56 @@ class WebhookResponse {
     // @ts-ignore
     options) {
         return {
-            fulfillmentText: this.fulfillmentText,
-            fulfillmentMessages: (this.fulfillmentMessages || []).map(m => m.toProtobufJSON(options)),
-            source: this.source,
-            payload: this.payload ? this.payload.toProtobufJSON(options) : null,
-            outputContexts: (this.outputContexts || []).map(m => m.toProtobufJSON(options)),
-            followupEventInput: this.followupEventInput
-                ? this.followupEventInput.toProtobufJSON(options)
+            entityEnrichment: this.entityEnrichment
+                ? this.entityEnrichment.toProtobufJSON(options)
+                : null,
+            thesaurusEnrichment: this.thesaurusEnrichment
+                ? this.thesaurusEnrichment.toProtobufJSON(options)
+                : null,
+            word2vecEnrichment: this.word2vecEnrichment
+                ? this.word2vecEnrichment.toProtobufJSON(options)
+                : null,
+            wordNetEnrichment: this.wordNetEnrichment
+                ? this.wordNetEnrichment.toProtobufJSON(options)
+                : null,
+            gpt2Enrichment: this.gpt2Enrichment
+                ? this.gpt2Enrichment.toProtobufJSON(options)
+                : null,
+            gloveEnrichment: this.gloveEnrichment
+                ? this.gloveEnrichment.toProtobufJSON(options)
+                : null,
+            bertEnrichment: this.bertEnrichment
+                ? this.bertEnrichment.toProtobufJSON(options)
+                : null,
+            xlnetEnrichment: this.xlnetEnrichment
+                ? this.xlnetEnrichment.toProtobufJSON(options)
                 : null
         };
     }
 }
-WebhookResponse.id = 'ondewo.nlu.WebhookResponse';
+DataEnrichmentConfig.id = 'ondewo.nlu.DataEnrichmentConfig';
 /**
- * Message implementation for ondewo.nlu.OriginalDetectIntentRequest
+ * Message implementation for ondewo.nlu.EntityEnrichmentConfig
  */
-class OriginalDetectIntentRequest {
+class EntityEnrichmentConfig {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of OriginalDetectIntentRequest to deeply clone from
+     * @param _value initial values object or instance of EntityEnrichmentConfig to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
-        this.source = _value.source;
-        this.payload = _value.payload
-            ? new googleProtobuf003.Struct(_value.payload)
-            : undefined;
-        OriginalDetectIntentRequest.refineValues(this);
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        EntityEnrichmentConfig.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new OriginalDetectIntentRequest();
-        OriginalDetectIntentRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new EntityEnrichmentConfig();
+        EntityEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -41248,8 +38838,9 @@ class OriginalDetectIntentRequest {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.source = _instance.source || '';
-        _instance.payload = _instance.payload || undefined;
+        _instance.isActive = _instance.isActive || false;
+        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
+        _instance.executionOrder = _instance.executionOrder || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -41262,17 +38853,19 @@ class OriginalDetectIntentRequest {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.source = _reader.readString();
+                    _instance.isActive = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.enrichmentFactor = _reader.readInt32();
                     break;
                 case 3:
-                    _instance.payload = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.payload, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.executionOrder = _reader.readInt32();
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        OriginalDetectIntentRequest.refineValues(_instance);
+        EntityEnrichmentConfig.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -41280,24 +38873,33 @@ class OriginalDetectIntentRequest {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.source) {
-            _writer.writeString(1, _instance.source);
+        if (_instance.isActive) {
+            _writer.writeBool(1, _instance.isActive);
         }
-        if (_instance.payload) {
-            _writer.writeMessage(3, _instance.payload, googleProtobuf003.Struct.serializeBinaryToWriter);
+        if (_instance.enrichmentFactor) {
+            _writer.writeInt32(2, _instance.enrichmentFactor);
+        }
+        if (_instance.executionOrder) {
+            _writer.writeInt32(3, _instance.executionOrder);
         }
     }
-    get source() {
-        return this._source;
+    get isActive() {
+        return this._isActive;
     }
-    set source(value) {
-        this._source = value;
+    set isActive(value) {
+        this._isActive = value;
     }
-    get payload() {
-        return this._payload;
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
     }
-    set payload(value) {
-        this._payload = value;
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
     }
     /**
      * Serialize message to binary data
@@ -41305,7 +38907,7 @@ class OriginalDetectIntentRequest {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        OriginalDetectIntentRequest.serializeBinaryToWriter(this, writer);
+        EntityEnrichmentConfig.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -41313,8 +38915,9 @@ class OriginalDetectIntentRequest {
      */
     toObject() {
         return {
-            source: this.source,
-            payload: this.payload ? this.payload.toObject() : undefined
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
         };
     }
     /**
@@ -41332,32 +38935,35 @@ class OriginalDetectIntentRequest {
     // @ts-ignore
     options) {
         return {
-            source: this.source,
-            payload: this.payload ? this.payload.toProtobufJSON(options) : null
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
         };
     }
 }
-OriginalDetectIntentRequest.id = 'ondewo.nlu.OriginalDetectIntentRequest';
+EntityEnrichmentConfig.id = 'ondewo.nlu.EntityEnrichmentConfig';
 /**
- * Message implementation for ondewo.nlu.PingResponse
+ * Message implementation for ondewo.nlu.ThesaurusEnrichmentConfig
  */
-class PingResponse {
+class ThesaurusEnrichmentConfig {
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of PingResponse to deeply clone from
+     * @param _value initial values object or instance of ThesaurusEnrichmentConfig to deeply clone from
      */
     constructor(_value) {
         _value = _value || {};
-        this.isReachable = _value.isReachable;
-        PingResponse.refineValues(this);
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        ThesaurusEnrichmentConfig.refineValues(this);
     }
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
     static deserializeBinary(bytes) {
-        const instance = new PingResponse();
-        PingResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        const instance = new ThesaurusEnrichmentConfig();
+        ThesaurusEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
         return instance;
     }
     /**
@@ -41365,7 +38971,9 @@ class PingResponse {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.isReachable = _instance.isReachable || false;
+        _instance.isActive = _instance.isActive || false;
+        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
+        _instance.executionOrder = _instance.executionOrder || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -41378,13 +38986,19 @@ class PingResponse {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.isReachable = _reader.readBool();
+                    _instance.isActive = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.enrichmentFactor = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.executionOrder = _reader.readInt32();
                     break;
                 default:
                     _reader.skipField();
             }
         }
-        PingResponse.refineValues(_instance);
+        ThesaurusEnrichmentConfig.refineValues(_instance);
     }
     /**
      * Serializes a message to binary format using provided binary reader
@@ -41392,15 +39006,33 @@ class PingResponse {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isReachable) {
-            _writer.writeBool(1, _instance.isReachable);
+        if (_instance.isActive) {
+            _writer.writeBool(1, _instance.isActive);
+        }
+        if (_instance.enrichmentFactor) {
+            _writer.writeInt32(2, _instance.enrichmentFactor);
+        }
+        if (_instance.executionOrder) {
+            _writer.writeInt32(3, _instance.executionOrder);
         }
     }
-    get isReachable() {
-        return this._isReachable;
+    get isActive() {
+        return this._isActive;
     }
-    set isReachable(value) {
-        this._isReachable = value;
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
     }
     /**
      * Serialize message to binary data
@@ -41408,7 +39040,7 @@ class PingResponse {
      */
     serializeBinary() {
         const writer = new BinaryWriter();
-        PingResponse.serializeBinaryToWriter(this, writer);
+        ThesaurusEnrichmentConfig.serializeBinaryToWriter(this, writer);
         return writer.getResultBuffer();
     }
     /**
@@ -41416,7 +39048,9 @@ class PingResponse {
      */
     toObject() {
         return {
-            isReachable: this.isReachable
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
         };
     }
     /**
@@ -41434,24 +39068,1315 @@ class PingResponse {
     // @ts-ignore
     options) {
         return {
-            isReachable: this.isReachable
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
         };
     }
 }
-PingResponse.id = 'ondewo.nlu.PingResponse';
+ThesaurusEnrichmentConfig.id = 'ondewo.nlu.ThesaurusEnrichmentConfig';
+/**
+ * Message implementation for ondewo.nlu.BertAugEnrichmentConfig
+ */
+class BertAugEnrichmentConfig {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BertAugEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        BertAugEnrichmentConfig.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new BertAugEnrichmentConfig();
+        BertAugEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.isActive = _instance.isActive || false;
+        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
+        _instance.executionOrder = _instance.executionOrder || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.isActive = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.enrichmentFactor = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.executionOrder = _reader.readInt32();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        BertAugEnrichmentConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.isActive) {
+            _writer.writeBool(1, _instance.isActive);
+        }
+        if (_instance.enrichmentFactor) {
+            _writer.writeInt32(2, _instance.enrichmentFactor);
+        }
+        if (_instance.executionOrder) {
+            _writer.writeInt32(3, _instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        BertAugEnrichmentConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+}
+BertAugEnrichmentConfig.id = 'ondewo.nlu.BertAugEnrichmentConfig';
+/**
+ * Message implementation for ondewo.nlu.GloVeEnrichmentConfig
+ */
+class GloVeEnrichmentConfig {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GloVeEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        GloVeEnrichmentConfig.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GloVeEnrichmentConfig();
+        GloVeEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.isActive = _instance.isActive || false;
+        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
+        _instance.executionOrder = _instance.executionOrder || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.isActive = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.enrichmentFactor = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.executionOrder = _reader.readInt32();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GloVeEnrichmentConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.isActive) {
+            _writer.writeBool(1, _instance.isActive);
+        }
+        if (_instance.enrichmentFactor) {
+            _writer.writeInt32(2, _instance.enrichmentFactor);
+        }
+        if (_instance.executionOrder) {
+            _writer.writeInt32(3, _instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GloVeEnrichmentConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+}
+GloVeEnrichmentConfig.id = 'ondewo.nlu.GloVeEnrichmentConfig';
+/**
+ * Message implementation for ondewo.nlu.GPT2EnrichmentConfig
+ */
+class GPT2EnrichmentConfig {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GPT2EnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        GPT2EnrichmentConfig.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GPT2EnrichmentConfig();
+        GPT2EnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.isActive = _instance.isActive || false;
+        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
+        _instance.executionOrder = _instance.executionOrder || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.isActive = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.enrichmentFactor = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.executionOrder = _reader.readInt32();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GPT2EnrichmentConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.isActive) {
+            _writer.writeBool(1, _instance.isActive);
+        }
+        if (_instance.enrichmentFactor) {
+            _writer.writeInt32(2, _instance.enrichmentFactor);
+        }
+        if (_instance.executionOrder) {
+            _writer.writeInt32(3, _instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GPT2EnrichmentConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+}
+GPT2EnrichmentConfig.id = 'ondewo.nlu.GPT2EnrichmentConfig';
+/**
+ * Message implementation for ondewo.nlu.Word2VecEnrichmentConfig
+ */
+class Word2VecEnrichmentConfig {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Word2VecEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        Word2VecEnrichmentConfig.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new Word2VecEnrichmentConfig();
+        Word2VecEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.isActive = _instance.isActive || false;
+        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
+        _instance.executionOrder = _instance.executionOrder || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.isActive = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.enrichmentFactor = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.executionOrder = _reader.readInt32();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        Word2VecEnrichmentConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.isActive) {
+            _writer.writeBool(1, _instance.isActive);
+        }
+        if (_instance.enrichmentFactor) {
+            _writer.writeInt32(2, _instance.enrichmentFactor);
+        }
+        if (_instance.executionOrder) {
+            _writer.writeInt32(3, _instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        Word2VecEnrichmentConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+}
+Word2VecEnrichmentConfig.id = 'ondewo.nlu.Word2VecEnrichmentConfig';
+/**
+ * Message implementation for ondewo.nlu.WordNetAugEnrichmentConfig
+ */
+class WordNetAugEnrichmentConfig {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WordNetAugEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        WordNetAugEnrichmentConfig.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new WordNetAugEnrichmentConfig();
+        WordNetAugEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.isActive = _instance.isActive || false;
+        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
+        _instance.executionOrder = _instance.executionOrder || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.isActive = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.enrichmentFactor = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.executionOrder = _reader.readInt32();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        WordNetAugEnrichmentConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.isActive) {
+            _writer.writeBool(1, _instance.isActive);
+        }
+        if (_instance.enrichmentFactor) {
+            _writer.writeInt32(2, _instance.enrichmentFactor);
+        }
+        if (_instance.executionOrder) {
+            _writer.writeInt32(3, _instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        WordNetAugEnrichmentConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+}
+WordNetAugEnrichmentConfig.id = 'ondewo.nlu.WordNetAugEnrichmentConfig';
+/**
+ * Message implementation for ondewo.nlu.XLNetAugEnrichmentConfig
+ */
+class XLNetAugEnrichmentConfig {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of XLNetAugEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        XLNetAugEnrichmentConfig.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new XLNetAugEnrichmentConfig();
+        XLNetAugEnrichmentConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.isActive = _instance.isActive || false;
+        _instance.enrichmentFactor = _instance.enrichmentFactor || 0;
+        _instance.executionOrder = _instance.executionOrder || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.isActive = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.enrichmentFactor = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.executionOrder = _reader.readInt32();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        XLNetAugEnrichmentConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.isActive) {
+            _writer.writeBool(1, _instance.isActive);
+        }
+        if (_instance.enrichmentFactor) {
+            _writer.writeInt32(2, _instance.enrichmentFactor);
+        }
+        if (_instance.executionOrder) {
+            _writer.writeInt32(3, _instance.executionOrder);
+        }
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get enrichmentFactor() {
+        return this._enrichmentFactor;
+    }
+    set enrichmentFactor(value) {
+        this._enrichmentFactor = value;
+    }
+    get executionOrder() {
+        return this._executionOrder;
+    }
+    set executionOrder(value) {
+        this._executionOrder = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        XLNetAugEnrichmentConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            isActive: this.isActive,
+            enrichmentFactor: this.enrichmentFactor,
+            executionOrder: this.executionOrder
+        };
+    }
+}
+XLNetAugEnrichmentConfig.id = 'ondewo.nlu.XLNetAugEnrichmentConfig';
+/**
+ * Message implementation for ondewo.nlu.ClassifyIntentsRequest
+ */
+class ClassifyIntentsRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ClassifyIntentsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.text = _value.text;
+        this.languageCode = _value.languageCode;
+        this.activeContexts = _value.activeContexts;
+        this.contextNames = (_value.contextNames || []).slice();
+        this.mode = _value.mode;
+        this.algorithms = (_value.algorithms || []).slice();
+        ClassifyIntentsRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ClassifyIntentsRequest();
+        ClassifyIntentsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.parent = _instance.parent || '';
+        _instance.text = _instance.text || '';
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.activeContexts = _instance.activeContexts || false;
+        _instance.contextNames = _instance.contextNames || [];
+        _instance.mode = _instance.mode || 0;
+        _instance.algorithms = _instance.algorithms || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.parent = _reader.readString();
+                    break;
+                case 2:
+                    _instance.text = _reader.readString();
+                    break;
+                case 3:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                case 4:
+                    _instance.activeContexts = _reader.readBool();
+                    break;
+                case 5:
+                    (_instance.contextNames = _instance.contextNames || []).push(_reader.readString());
+                    break;
+                case 6:
+                    _instance.mode = _reader.readEnum();
+                    break;
+                case 7:
+                    (_instance.algorithms = _instance.algorithms || []).push(...(_reader.readPackedEnum() || []));
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ClassifyIntentsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
+        }
+        if (_instance.text) {
+            _writer.writeString(2, _instance.text);
+        }
+        if (_instance.languageCode) {
+            _writer.writeString(3, _instance.languageCode);
+        }
+        if (_instance.activeContexts) {
+            _writer.writeBool(4, _instance.activeContexts);
+        }
+        if (_instance.contextNames && _instance.contextNames.length) {
+            _writer.writeRepeatedString(5, _instance.contextNames);
+        }
+        if (_instance.mode) {
+            _writer.writeEnum(6, _instance.mode);
+        }
+        if (_instance.algorithms && _instance.algorithms.length) {
+            _writer.writePackedEnum(7, _instance.algorithms);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get activeContexts() {
+        return this._activeContexts;
+    }
+    set activeContexts(value) {
+        this._activeContexts = value;
+    }
+    get contextNames() {
+        return this._contextNames;
+    }
+    set contextNames(value) {
+        this._contextNames = value;
+    }
+    get mode() {
+        return this._mode;
+    }
+    set mode(value) {
+        this._mode = value;
+    }
+    get algorithms() {
+        return this._algorithms;
+    }
+    set algorithms(value) {
+        this._algorithms = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ClassifyIntentsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            parent: this.parent,
+            text: this.text,
+            languageCode: this.languageCode,
+            activeContexts: this.activeContexts,
+            contextNames: (this.contextNames || []).slice(),
+            mode: this.mode,
+            algorithms: (this.algorithms || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            parent: this.parent,
+            text: this.text,
+            languageCode: this.languageCode,
+            activeContexts: this.activeContexts,
+            contextNames: (this.contextNames || []).slice(),
+            mode: Mode[this.mode === null || this.mode === undefined ? 0 : this.mode],
+            algorithms: (this.algorithms || []).map(v => IntentAlgorithms[v])
+        };
+    }
+}
+ClassifyIntentsRequest.id = 'ondewo.nlu.ClassifyIntentsRequest';
+/**
+ * Message implementation for ondewo.nlu.IntentClassified
+ */
+class IntentClassified {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of IntentClassified to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentName = _value.intentName;
+        this.intentDisplayName = _value.intentDisplayName;
+        this.classifier = _value.classifier;
+        this.score = _value.score;
+        IntentClassified.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new IntentClassified();
+        IntentClassified.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.intentName = _instance.intentName || '';
+        _instance.intentDisplayName = _instance.intentDisplayName || '';
+        _instance.classifier = _instance.classifier || '';
+        _instance.score = _instance.score || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.intentName = _reader.readString();
+                    break;
+                case 2:
+                    _instance.intentDisplayName = _reader.readString();
+                    break;
+                case 3:
+                    _instance.classifier = _reader.readString();
+                    break;
+                case 4:
+                    _instance.score = _reader.readFloat();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        IntentClassified.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.intentName) {
+            _writer.writeString(1, _instance.intentName);
+        }
+        if (_instance.intentDisplayName) {
+            _writer.writeString(2, _instance.intentDisplayName);
+        }
+        if (_instance.classifier) {
+            _writer.writeString(3, _instance.classifier);
+        }
+        if (_instance.score) {
+            _writer.writeFloat(4, _instance.score);
+        }
+    }
+    get intentName() {
+        return this._intentName;
+    }
+    set intentName(value) {
+        this._intentName = value;
+    }
+    get intentDisplayName() {
+        return this._intentDisplayName;
+    }
+    set intentDisplayName(value) {
+        this._intentDisplayName = value;
+    }
+    get classifier() {
+        return this._classifier;
+    }
+    set classifier(value) {
+        this._classifier = value;
+    }
+    get score() {
+        return this._score;
+    }
+    set score(value) {
+        this._score = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        IntentClassified.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            intentName: this.intentName,
+            intentDisplayName: this.intentDisplayName,
+            classifier: this.classifier,
+            score: this.score
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            intentName: this.intentName,
+            intentDisplayName: this.intentDisplayName,
+            classifier: this.classifier,
+            score: this.score
+        };
+    }
+}
+IntentClassified.id = 'ondewo.nlu.IntentClassified';
+/**
+ * Message implementation for ondewo.nlu.ClassifyIntentsResponse
+ */
+class ClassifyIntentsResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ClassifyIntentsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentsClassified = (_value.intentsClassified || []).map(m => new IntentClassified(m));
+        this.text = _value.text;
+        this.activeContexts = _value.activeContexts;
+        this.contextNames = (_value.contextNames || []).slice();
+        ClassifyIntentsResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ClassifyIntentsResponse();
+        ClassifyIntentsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.intentsClassified = _instance.intentsClassified || [];
+        _instance.text = _instance.text || '';
+        _instance.activeContexts = _instance.activeContexts || false;
+        _instance.contextNames = _instance.contextNames || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new IntentClassified();
+                    _reader.readMessage(messageInitializer1, IntentClassified.deserializeBinaryFromReader);
+                    (_instance.intentsClassified =
+                        _instance.intentsClassified || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    _instance.text = _reader.readString();
+                    break;
+                case 3:
+                    _instance.activeContexts = _reader.readBool();
+                    break;
+                case 4:
+                    (_instance.contextNames = _instance.contextNames || []).push(_reader.readString());
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ClassifyIntentsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.intentsClassified && _instance.intentsClassified.length) {
+            _writer.writeRepeatedMessage(1, _instance.intentsClassified, IntentClassified.serializeBinaryToWriter);
+        }
+        if (_instance.text) {
+            _writer.writeString(2, _instance.text);
+        }
+        if (_instance.activeContexts) {
+            _writer.writeBool(3, _instance.activeContexts);
+        }
+        if (_instance.contextNames && _instance.contextNames.length) {
+            _writer.writeRepeatedString(4, _instance.contextNames);
+        }
+    }
+    get intentsClassified() {
+        return this._intentsClassified;
+    }
+    set intentsClassified(value) {
+        this._intentsClassified = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    get activeContexts() {
+        return this._activeContexts;
+    }
+    set activeContexts(value) {
+        this._activeContexts = value;
+    }
+    get contextNames() {
+        return this._contextNames;
+    }
+    set contextNames(value) {
+        this._contextNames = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ClassifyIntentsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            intentsClassified: (this.intentsClassified || []).map(m => m.toObject()),
+            text: this.text,
+            activeContexts: this.activeContexts,
+            contextNames: (this.contextNames || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            intentsClassified: (this.intentsClassified || []).map(m => m.toProtobufJSON(options)),
+            text: this.text,
+            activeContexts: this.activeContexts,
+            contextNames: (this.contextNames || []).slice()
+        };
+    }
+}
+ClassifyIntentsResponse.id = 'ondewo.nlu.ClassifyIntentsResponse';
 
 /* tslint:disable */
 /**
- * Specific GrpcClientSettings for AiServices.
- * Use it only if your default settings are not set or the service requires other settings.
+ * Service client implementation for ondewo.nlu.AiServices
  */
-const GRPC_AI_SERVICES_CLIENT_SETTINGS = new InjectionToken('GRPC_AI_SERVICES_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/**
- * Service client implementation for ondewo.nlu.Intents
- */
-class IntentsClient {
+class AiServicesClient {
     constructor(settings, clientFactory, handler) {
         this.handler = handler;
         /**
@@ -41461,822 +40386,252 @@ class IntentsClient {
          */
         this.$raw = {
             /**
-             * Unary call: /ondewo.nlu.Intents/ListIntents
+             * Unary call: /ondewo.nlu.AiServices/ExtractEntities
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListIntentsResponse>>
+             * @returns Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>
              */
-            listIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
+            extractEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
                     type: GrpcCallType.unary,
                     client: this.client,
-                    path: '/ondewo.nlu.Intents/ListIntents',
+                    path: '/ondewo.nlu.AiServices/ExtractEntities',
                     requestData,
                     requestMetadata,
-                    requestClass: ListIntentsRequest,
-                    responseClass: ListIntentsResponse
+                    requestClass: ExtractEntitiesRequest,
+                    responseClass: ExtractEntitiesResponse
                 });
             },
             /**
-             * Unary call: /ondewo.nlu.Intents/GetIntent
+             * Unary call: /ondewo.nlu.AiServices/GenerateUserSays
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Intent>>
+             * @returns Observable<GrpcEvent<thisProto.GenerateUserSaysResponse>>
              */
-            getIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+            generateUserSays: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
                     type: GrpcCallType.unary,
                     client: this.client,
-                    path: '/ondewo.nlu.Intents/GetIntent',
+                    path: '/ondewo.nlu.AiServices/GenerateUserSays',
                     requestData,
                     requestMetadata,
-                    requestClass: GetIntentRequest,
-                    responseClass: Intent
+                    requestClass: GenerateUserSaysRequest,
+                    responseClass: GenerateUserSaysResponse
                 });
             },
             /**
-             * Unary call: /ondewo.nlu.Intents/CreateIntent
+             * Unary call: /ondewo.nlu.AiServices/GenerateResponses
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Intent>>
+             * @returns Observable<GrpcEvent<thisProto.GenerateResponsesResponse>>
              */
-            createIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+            generateResponses: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
                     type: GrpcCallType.unary,
                     client: this.client,
-                    path: '/ondewo.nlu.Intents/CreateIntent',
+                    path: '/ondewo.nlu.AiServices/GenerateResponses',
                     requestData,
                     requestMetadata,
-                    requestClass: CreateIntentRequest,
-                    responseClass: Intent
+                    requestClass: GenerateResponsesRequest,
+                    responseClass: GenerateResponsesResponse
                 });
             },
             /**
-             * Unary call: /ondewo.nlu.Intents/UpdateIntent
+             * Unary call: /ondewo.nlu.AiServices/GetAlternativeSentences
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Intent>>
+             * @returns Observable<GrpcEvent<thisProto.GetAlternativeSentencesResponse>>
              */
-            updateIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+            getAlternativeSentences: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
                     type: GrpcCallType.unary,
                     client: this.client,
-                    path: '/ondewo.nlu.Intents/UpdateIntent',
+                    path: '/ondewo.nlu.AiServices/GetAlternativeSentences',
                     requestData,
                     requestMetadata,
-                    requestClass: UpdateIntentRequest,
-                    responseClass: Intent
+                    requestClass: GetAlternativeSentencesRequest,
+                    responseClass: GetAlternativeSentencesResponse
                 });
             },
             /**
-             * Unary call: /ondewo.nlu.Intents/DeleteIntent
+             * Unary call: /ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+             * @returns Observable<GrpcEvent<thisProto.GetAlternativeTrainingPhrasesResponse>>
              */
-            deleteIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+            getAlternativeTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
                     type: GrpcCallType.unary,
                     client: this.client,
-                    path: '/ondewo.nlu.Intents/DeleteIntent',
+                    path: '/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases',
                     requestData,
                     requestMetadata,
-                    requestClass: DeleteIntentRequest,
-                    responseClass: googleProtobuf003.Empty
+                    requestClass: GetAlternativeTrainingPhrasesRequest,
+                    responseClass: GetAlternativeTrainingPhrasesResponse
                 });
             },
             /**
-             * Unary call: /ondewo.nlu.Intents/BatchUpdateIntents
+             * Unary call: /ondewo.nlu.AiServices/GetSynonyms
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu011.Operation>>
+             * @returns Observable<GrpcEvent<thisProto.GetSynonymsResponse>>
              */
-            batchUpdateIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
+            getSynonyms: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
                     type: GrpcCallType.unary,
                     client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchUpdateIntents',
+                    path: '/ondewo.nlu.AiServices/GetSynonyms',
                     requestData,
                     requestMetadata,
-                    requestClass: BatchUpdateIntentsRequest,
-                    responseClass: Operation
+                    requestClass: GetSynonymsRequest,
+                    responseClass: GetSynonymsResponse
                 });
             },
             /**
-             * Unary call: /ondewo.nlu.Intents/BatchDeleteIntents
+             * Unary call: /ondewo.nlu.AiServices/ClassifyIntents
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu011.Operation>>
+             * @returns Observable<GrpcEvent<thisProto.ClassifyIntentsResponse>>
              */
-            batchDeleteIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
+            classifyIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
                     type: GrpcCallType.unary,
                     client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchDeleteIntents',
+                    path: '/ondewo.nlu.AiServices/ClassifyIntents',
                     requestData,
                     requestMetadata,
-                    requestClass: BatchDeleteIntentsRequest,
-                    responseClass: Operation
+                    requestClass: ClassifyIntentsRequest,
+                    responseClass: ClassifyIntentsResponse
                 });
             },
             /**
-             * Unary call: /ondewo.nlu.Intents/TagIntent
+             * Unary call: /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+             * @returns Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>
              */
-            tagIntent: (requestData, requestMetadata = new GrpcMetadata()) => {
+            extractEntitiesFuzzy: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
                     type: GrpcCallType.unary,
                     client: this.client,
-                    path: '/ondewo.nlu.Intents/TagIntent',
+                    path: '/ondewo.nlu.AiServices/ExtractEntitiesFuzzy',
                     requestData,
                     requestMetadata,
-                    requestClass: IntentTagRequest,
-                    responseClass: googleProtobuf003.Empty
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/DeleteIntentTag
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
-             */
-            deleteIntentTag: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/DeleteIntentTag',
-                    requestData,
-                    requestMetadata,
-                    requestClass: IntentTagRequest,
-                    responseClass: googleProtobuf003.Empty
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/GetIntentTags
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>
-             */
-            getIntentTags: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/GetIntentTags',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetIntentTagsRequest,
-                    responseClass: GetIntentTagsResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/GetAllIntentTags
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.GetIntentTagsResponse>>
-             */
-            getAllIntentTags: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/GetAllIntentTags',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetAllIntentTagsRequest,
-                    responseClass: GetIntentTagsResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchCreateTrainingPhrases
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>
-             */
-            batchCreateTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchCreateTrainingPhrases',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchCreateTrainingPhrasesRequest,
-                    responseClass: BatchTrainingPhrasesStatusResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchGetTrainingPhrases
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>
-             */
-            batchGetTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchGetTrainingPhrases',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchGetTrainingPhrasesRequest,
-                    responseClass: BatchTrainingPhrasesStatusResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchUpdateTrainingPhrases
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchTrainingPhrasesStatusResponse>>
-             */
-            batchUpdateTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchUpdateTrainingPhrases',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchUpdateTrainingPhrasesRequest,
-                    responseClass: BatchTrainingPhrasesStatusResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchDeleteTrainingPhrases
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchDeleteTrainingPhrasesResponse>>
-             */
-            batchDeleteTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchDeleteTrainingPhrases',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchDeleteTrainingPhrasesRequest,
-                    responseClass: BatchDeleteTrainingPhrasesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/ListTrainingPhrases
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListTrainingPhrasesResponse>>
-             */
-            listTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/ListTrainingPhrases',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListTrainingPhrasesRequest,
-                    responseClass: ListTrainingPhrasesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchCreateResponseMessages
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>
-             */
-            batchCreateResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchCreateResponseMessages',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchCreateResponseMessagesRequest,
-                    responseClass: BatchResponseMessagesStatusResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchGetResponseMessages
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>
-             */
-            batchGetResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchGetResponseMessages',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchGetResponseMessagesRequest,
-                    responseClass: BatchResponseMessagesStatusResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchUpdateResponseMessages
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchResponseMessagesStatusResponse>>
-             */
-            batchUpdateResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchUpdateResponseMessages',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchUpdateResponseMessagesRequest,
-                    responseClass: BatchResponseMessagesStatusResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchDeleteResponseMessages
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchDeleteResponseMessagesResponse>>
-             */
-            batchDeleteResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchDeleteResponseMessages',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchDeleteResponseMessagesRequest,
-                    responseClass: BatchDeleteResponseMessagesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/ListResponseMessages
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListResponseMessagesResponse>>
-             */
-            listResponseMessages: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/ListResponseMessages',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListResponseMessagesRequest,
-                    responseClass: ListResponseMessagesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchCreateParameters
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>
-             */
-            batchCreateParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchCreateParameters',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchCreateParametersRequest,
-                    responseClass: BatchParametersStatusResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchGetParameters
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>
-             */
-            batchGetParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchGetParameters',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchGetParametersRequest,
-                    responseClass: BatchParametersStatusResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchUpdateParameters
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchParametersStatusResponse>>
-             */
-            batchUpdateParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchUpdateParameters',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchUpdateParametersRequest,
-                    responseClass: BatchParametersStatusResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/BatchDeleteParameters
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.BatchDeleteParametersResponse>>
-             */
-            batchDeleteParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/BatchDeleteParameters',
-                    requestData,
-                    requestMetadata,
-                    requestClass: BatchDeleteParametersRequest,
-                    responseClass: BatchDeleteParametersResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/ListParameters
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListParametersResponse>>
-             */
-            listParameters: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/ListParameters',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListParametersRequest,
-                    responseClass: ListParametersResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListTrainingPhrasesofIntentsWithEnrichmentResponse>>
-             */
-            listTrainingPhrasesofIntentsWithEnrichment: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListTrainingPhrasesofIntentsWithEnrichmentRequest,
-                    responseClass: ListTrainingPhrasesofIntentsWithEnrichmentResponse
+                    requestClass: ExtractEntitiesFuzzyRequest,
+                    responseClass: ExtractEntitiesResponse
                 });
             }
         };
-        this.client = clientFactory.createClient('ondewo.nlu.Intents', settings);
+        this.client = clientFactory.createClient('ondewo.nlu.AiServices', settings);
     }
     /**
-     * Unary call @/ondewo.nlu.Intents/ListIntents
+     * Unary call @/ondewo.nlu.AiServices/ExtractEntities
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListIntentsResponse>
+     * @returns Observable<thisProto.ExtractEntitiesResponse>
      */
-    listIntents(requestData, requestMetadata = new GrpcMetadata()) {
+    extractEntities(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
-            .listIntents(requestData, requestMetadata)
+            .extractEntities(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary call @/ondewo.nlu.Intents/GetIntent
+     * Unary call @/ondewo.nlu.AiServices/GenerateUserSays
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Intent>
+     * @returns Observable<thisProto.GenerateUserSaysResponse>
      */
-    getIntent(requestData, requestMetadata = new GrpcMetadata()) {
+    generateUserSays(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
-            .getIntent(requestData, requestMetadata)
+            .generateUserSays(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary call @/ondewo.nlu.Intents/CreateIntent
+     * Unary call @/ondewo.nlu.AiServices/GenerateResponses
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Intent>
+     * @returns Observable<thisProto.GenerateResponsesResponse>
      */
-    createIntent(requestData, requestMetadata = new GrpcMetadata()) {
+    generateResponses(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
-            .createIntent(requestData, requestMetadata)
+            .generateResponses(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary call @/ondewo.nlu.Intents/UpdateIntent
+     * Unary call @/ondewo.nlu.AiServices/GetAlternativeSentences
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Intent>
+     * @returns Observable<thisProto.GetAlternativeSentencesResponse>
      */
-    updateIntent(requestData, requestMetadata = new GrpcMetadata()) {
+    getAlternativeSentences(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
-            .updateIntent(requestData, requestMetadata)
+            .getAlternativeSentences(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary call @/ondewo.nlu.Intents/DeleteIntent
+     * Unary call @/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf003.Empty>
+     * @returns Observable<thisProto.GetAlternativeTrainingPhrasesResponse>
      */
-    deleteIntent(requestData, requestMetadata = new GrpcMetadata()) {
+    getAlternativeTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
-            .deleteIntent(requestData, requestMetadata)
+            .getAlternativeTrainingPhrases(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary call @/ondewo.nlu.Intents/BatchUpdateIntents
+     * Unary call @/ondewo.nlu.AiServices/GetSynonyms
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu011.Operation>
+     * @returns Observable<thisProto.GetSynonymsResponse>
      */
-    batchUpdateIntents(requestData, requestMetadata = new GrpcMetadata()) {
+    getSynonyms(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
-            .batchUpdateIntents(requestData, requestMetadata)
+            .getSynonyms(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary call @/ondewo.nlu.Intents/BatchDeleteIntents
+     * Unary call @/ondewo.nlu.AiServices/ClassifyIntents
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu011.Operation>
+     * @returns Observable<thisProto.ClassifyIntentsResponse>
      */
-    batchDeleteIntents(requestData, requestMetadata = new GrpcMetadata()) {
+    classifyIntents(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
-            .batchDeleteIntents(requestData, requestMetadata)
+            .classifyIntents(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary call @/ondewo.nlu.Intents/TagIntent
+     * Unary call @/ondewo.nlu.AiServices/ExtractEntitiesFuzzy
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf003.Empty>
+     * @returns Observable<thisProto.ExtractEntitiesResponse>
      */
-    tagIntent(requestData, requestMetadata = new GrpcMetadata()) {
+    extractEntitiesFuzzy(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
-            .tagIntent(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/DeleteIntentTag
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf003.Empty>
-     */
-    deleteIntentTag(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .deleteIntentTag(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/GetIntentTags
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.GetIntentTagsResponse>
-     */
-    getIntentTags(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getIntentTags(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/GetAllIntentTags
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.GetIntentTagsResponse>
-     */
-    getAllIntentTags(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getAllIntentTags(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchCreateTrainingPhrases
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchTrainingPhrasesStatusResponse>
-     */
-    batchCreateTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchCreateTrainingPhrases(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchGetTrainingPhrases
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchTrainingPhrasesStatusResponse>
-     */
-    batchGetTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchGetTrainingPhrases(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchUpdateTrainingPhrases
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchTrainingPhrasesStatusResponse>
-     */
-    batchUpdateTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchUpdateTrainingPhrases(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchDeleteTrainingPhrases
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchDeleteTrainingPhrasesResponse>
-     */
-    batchDeleteTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchDeleteTrainingPhrases(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/ListTrainingPhrases
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListTrainingPhrasesResponse>
-     */
-    listTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listTrainingPhrases(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchCreateResponseMessages
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchResponseMessagesStatusResponse>
-     */
-    batchCreateResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchCreateResponseMessages(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchGetResponseMessages
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchResponseMessagesStatusResponse>
-     */
-    batchGetResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchGetResponseMessages(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchUpdateResponseMessages
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchResponseMessagesStatusResponse>
-     */
-    batchUpdateResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchUpdateResponseMessages(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchDeleteResponseMessages
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchDeleteResponseMessagesResponse>
-     */
-    batchDeleteResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchDeleteResponseMessages(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/ListResponseMessages
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListResponseMessagesResponse>
-     */
-    listResponseMessages(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listResponseMessages(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchCreateParameters
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchParametersStatusResponse>
-     */
-    batchCreateParameters(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchCreateParameters(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchGetParameters
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchParametersStatusResponse>
-     */
-    batchGetParameters(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchGetParameters(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchUpdateParameters
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchParametersStatusResponse>
-     */
-    batchUpdateParameters(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchUpdateParameters(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/BatchDeleteParameters
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.BatchDeleteParametersResponse>
-     */
-    batchDeleteParameters(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .batchDeleteParameters(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/ListParameters
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListParametersResponse>
-     */
-    listParameters(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listParameters(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListTrainingPhrasesofIntentsWithEnrichmentResponse>
-     */
-    listTrainingPhrasesofIntentsWithEnrichment(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listTrainingPhrasesofIntentsWithEnrichment(requestData, requestMetadata)
+            .extractEntitiesFuzzy(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-IntentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: IntentsClient, deps: [{ token: GRPC_INTENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-IntentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: IntentsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: IntentsClient, decorators: [{
+AiServicesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: AiServicesClient, deps: [{ token: GRPC_AI_SERVICES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+AiServicesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: AiServicesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: AiServicesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -42284,12 +40639,19 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImpor
                         type: Optional
                     }, {
                         type: Inject,
-                        args: [GRPC_INTENTS_CLIENT_SETTINGS]
+                        args: [GRPC_AI_SERVICES_CLIENT_SETTINGS]
                     }] }, { type: undefined, decorators: [{
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
     } });
+
+/* tslint:disable */
+/**
+ * Specific GrpcClientSettings for Users.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_USERS_CLIENT_SETTINGS = new InjectionToken('GRPC_USERS_CLIENT_SETTINGS');
 
 /* tslint:disable */
 /**
@@ -42758,9 +41120,9 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-UsersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: UsersClient, deps: [{ token: GRPC_USERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-UsersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: UsersClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: UsersClient, decorators: [{
+UsersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: UsersClient, deps: [{ token: GRPC_USERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+UsersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: UsersClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: UsersClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -42777,10 +41139,681 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImpor
 
 /* tslint:disable */
 /**
- * Specific GrpcClientSettings for Utilities.
+ * Specific GrpcClientSettings for Contexts.
  * Use it only if your default settings are not set or the service requires other settings.
  */
-const GRPC_UTILITIES_CLIENT_SETTINGS = new InjectionToken('GRPC_UTILITIES_CLIENT_SETTINGS');
+const GRPC_CONTEXTS_CLIENT_SETTINGS = new InjectionToken('GRPC_CONTEXTS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/**
+ * Service client implementation for ondewo.nlu.Contexts
+ */
+class ContextsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Unary call: /ondewo.nlu.Contexts/ListContexts
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListContextsResponse>>
+             */
+            listContexts: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Contexts/ListContexts',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListContextsRequest,
+                    responseClass: ListContextsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Contexts/GetContext
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Context>>
+             */
+            getContext: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Contexts/GetContext',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetContextRequest,
+                    responseClass: Context
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Contexts/CreateContext
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Context>>
+             */
+            createContext: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Contexts/CreateContext',
+                    requestData,
+                    requestMetadata,
+                    requestClass: CreateContextRequest,
+                    responseClass: Context
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Contexts/UpdateContext
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Context>>
+             */
+            updateContext: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Contexts/UpdateContext',
+                    requestData,
+                    requestMetadata,
+                    requestClass: UpdateContextRequest,
+                    responseClass: Context
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Contexts/DeleteContext
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+             */
+            deleteContext: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Contexts/DeleteContext',
+                    requestData,
+                    requestMetadata,
+                    requestClass: DeleteContextRequest,
+                    responseClass: googleProtobuf003.Empty
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Contexts/DeleteAllContexts
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+             */
+            deleteAllContexts: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Contexts/DeleteAllContexts',
+                    requestData,
+                    requestMetadata,
+                    requestClass: DeleteAllContextsRequest,
+                    responseClass: googleProtobuf003.Empty
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.nlu.Contexts', settings);
+    }
+    /**
+     * Unary call @/ondewo.nlu.Contexts/ListContexts
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListContextsResponse>
+     */
+    listContexts(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listContexts(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Contexts/GetContext
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Context>
+     */
+    getContext(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getContext(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Contexts/CreateContext
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Context>
+     */
+    createContext(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .createContext(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Contexts/UpdateContext
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Context>
+     */
+    updateContext(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .updateContext(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Contexts/DeleteContext
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf003.Empty>
+     */
+    deleteContext(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .deleteContext(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Contexts/DeleteAllContexts
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf003.Empty>
+     */
+    deleteAllContexts(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .deleteAllContexts(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+}
+ContextsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ContextsClient, deps: [{ token: GRPC_CONTEXTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ContextsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ContextsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ContextsClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: function () {
+        return [{ type: undefined, decorators: [{
+                        type: Optional
+                    }, {
+                        type: Inject,
+                        args: [GRPC_CONTEXTS_CLIENT_SETTINGS]
+                    }] }, { type: undefined, decorators: [{
+                        type: Inject,
+                        args: [GRPC_CLIENT_FACTORY]
+                    }] }, { type: i1.GrpcHandler }];
+    } });
+
+/**
+ * Message implementation for ondewo.nlu.GetIntentCountRequest
+ */
+class GetIntentCountRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentCountRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.filterByCategory = _value.filterByCategory;
+        GetIntentCountRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetIntentCountRequest();
+        GetIntentCountRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.parent = _instance.parent || '';
+        _instance.filterByCategory = _instance.filterByCategory || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.parent = _reader.readString();
+                    break;
+                case 2:
+                    _instance.filterByCategory = _reader.readEnum();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetIntentCountRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
+        }
+        if (_instance.filterByCategory) {
+            _writer.writeEnum(2, _instance.filterByCategory);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get filterByCategory() {
+        return this._filterByCategory;
+    }
+    set filterByCategory(value) {
+        this._filterByCategory = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetIntentCountRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            parent: this.parent,
+            filterByCategory: this.filterByCategory
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            parent: this.parent,
+            filterByCategory: IntentCategory[this.filterByCategory === null || this.filterByCategory === undefined
+                ? 0
+                : this.filterByCategory]
+        };
+    }
+}
+GetIntentCountRequest.id = 'ondewo.nlu.GetIntentCountRequest';
+/**
+ * Message implementation for ondewo.nlu.GetEntityTypeCountRequest
+ */
+class GetEntityTypeCountRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetEntityTypeCountRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.filterByCategory = _value.filterByCategory;
+        GetEntityTypeCountRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetEntityTypeCountRequest();
+        GetEntityTypeCountRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.parent = _instance.parent || '';
+        _instance.filterByCategory = _instance.filterByCategory || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.parent = _reader.readString();
+                    break;
+                case 2:
+                    _instance.filterByCategory = _reader.readEnum();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetEntityTypeCountRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
+        }
+        if (_instance.filterByCategory) {
+            _writer.writeEnum(2, _instance.filterByCategory);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get filterByCategory() {
+        return this._filterByCategory;
+    }
+    set filterByCategory(value) {
+        this._filterByCategory = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetEntityTypeCountRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            parent: this.parent,
+            filterByCategory: this.filterByCategory
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            parent: this.parent,
+            filterByCategory: EntityTypeCategory[this.filterByCategory === null || this.filterByCategory === undefined
+                ? 0
+                : this.filterByCategory]
+        };
+    }
+}
+GetEntityTypeCountRequest.id = 'ondewo.nlu.GetEntityTypeCountRequest';
+/**
+ * Message implementation for ondewo.nlu.GetProjectStatRequest
+ */
+class GetProjectStatRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetProjectStatRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        GetProjectStatRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetProjectStatRequest();
+        GetProjectStatRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.parent = _instance.parent || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.parent = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetProjectStatRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetProjectStatRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            parent: this.parent
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            parent: this.parent
+        };
+    }
+}
+GetProjectStatRequest.id = 'ondewo.nlu.GetProjectStatRequest';
+/**
+ * Message implementation for ondewo.nlu.GetProjectElementStatRequest
+ */
+class GetProjectElementStatRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetProjectElementStatRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.languageCode = _value.languageCode;
+        GetProjectElementStatRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetProjectElementStatRequest();
+        GetProjectElementStatRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.name = _instance.name || '';
+        _instance.languageCode = _instance.languageCode || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.name = _reader.readString();
+                    break;
+                case 2:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetProjectElementStatRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.name) {
+            _writer.writeString(1, _instance.name);
+        }
+        if (_instance.languageCode) {
+            _writer.writeString(2, _instance.languageCode);
+        }
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetProjectElementStatRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            name: this.name,
+            languageCode: this.languageCode
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            name: this.name,
+            languageCode: this.languageCode
+        };
+    }
+}
+GetProjectElementStatRequest.id = 'ondewo.nlu.GetProjectElementStatRequest';
 
 /* tslint:disable */
 var ReannotateEntitiesOptions;
@@ -46075,576 +45108,19 @@ class AddTrainingPhrasesFromCSVRequest {
 }
 AddTrainingPhrasesFromCSVRequest.id = 'ondewo.nlu.AddTrainingPhrasesFromCSVRequest';
 
-/**
- * Message implementation for ondewo.nlu.GetUserProjectCountRequest
- */
-class GetUserProjectCountRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetUserProjectCountRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.userId = _value.userId;
-        GetUserProjectCountRequest.refineValues(this);
-    }
-    /**
-     * Deserialize binary data to message
-     * @param instance message instance
-     */
-    static deserializeBinary(bytes) {
-        const instance = new GetUserProjectCountRequest();
-        GetUserProjectCountRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
-        return instance;
-    }
-    /**
-     * Check all the properties and set default protobuf values if necessary
-     * @param _instance message instance
-     */
-    static refineValues(_instance) {
-        _instance.userId = _instance.userId || '';
-    }
-    /**
-     * Deserializes / reads binary message into message instance using provided binary reader
-     * @param _instance message instance
-     * @param _reader binary reader instance
-     */
-    static deserializeBinaryFromReader(_instance, _reader) {
-        while (_reader.nextField()) {
-            if (_reader.isEndGroup())
-                break;
-            switch (_reader.getFieldNumber()) {
-                case 1:
-                    _instance.userId = _reader.readString();
-                    break;
-                default:
-                    _reader.skipField();
-            }
-        }
-        GetUserProjectCountRequest.refineValues(_instance);
-    }
-    /**
-     * Serializes a message to binary format using provided binary reader
-     * @param _instance message instance
-     * @param _writer binary writer instance
-     */
-    static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.userId) {
-            _writer.writeString(1, _instance.userId);
-        }
-    }
-    get userId() {
-        return this._userId;
-    }
-    set userId(value) {
-        this._userId = value;
-    }
-    /**
-     * Serialize message to binary data
-     * @param instance message instance
-     */
-    serializeBinary() {
-        const writer = new BinaryWriter();
-        GetUserProjectCountRequest.serializeBinaryToWriter(this, writer);
-        return writer.getResultBuffer();
-    }
-    /**
-     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-     */
-    toObject() {
-        return {
-            userId: this.userId
-        };
-    }
-    /**
-     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-     */
-    toJSON() {
-        return this.toObject();
-    }
-    /**
-     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-     */
-    toProtobufJSON(
-    // @ts-ignore
-    options) {
-        return {
-            userId: this.userId
-        };
-    }
-}
-GetUserProjectCountRequest.id = 'ondewo.nlu.GetUserProjectCountRequest';
-
 /* tslint:disable */
 /**
- * Service client implementation for ondewo.nlu.ServerStatistics
- */
-class ServerStatisticsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        /**
-         * Raw RPC implementation for each service client method.
-         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-         * Attention: these methods do not throw errors when non-zero status codes are received.
-         */
-        this.$raw = {
-            /**
-             * Unary call: /ondewo.nlu.ServerStatistics/GetProjectCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getProjectCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ServerStatistics/GetProjectCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
-                    responseClass: StatResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.ServerStatistics/GetUserProjectCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getUserProjectCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ServerStatistics/GetUserProjectCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetUserProjectCountRequest,
-                    responseClass: StatResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.ServerStatistics/GetUserCount
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
-             */
-            getUserCount: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.ServerStatistics/GetUserCount',
-                    requestData,
-                    requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
-                    responseClass: StatResponse
-                });
-            }
-        };
-        this.client = clientFactory.createClient('ondewo.nlu.ServerStatistics', settings);
-    }
-    /**
-     * Unary call @/ondewo.nlu.ServerStatistics/GetProjectCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getProjectCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getProjectCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.ServerStatistics/GetUserProjectCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getUserProjectCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getUserProjectCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.ServerStatistics/GetUserCount
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu004.StatResponse>
-     */
-    getUserCount(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getUserCount(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-}
-ServerStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ServerStatisticsClient, deps: [{ token: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ServerStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ServerStatisticsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ServerStatisticsClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
-        return [{ type: undefined, decorators: [{
-                        type: Optional
-                    }, {
-                        type: Inject,
-                        args: [GRPC_SERVER_STATISTICS_CLIENT_SETTINGS]
-                    }] }, { type: undefined, decorators: [{
-                        type: Inject,
-                        args: [GRPC_CLIENT_FACTORY]
-                    }] }, { type: i1.GrpcHandler }];
-    } });
-
-/* tslint:disable */
-/**
- * Specific GrpcClientSettings for Webhook.
+ * Specific GrpcClientSettings for ProjectRoles.
  * Use it only if your default settings are not set or the service requires other settings.
  */
-const GRPC_WEBHOOK_CLIENT_SETTINGS = new InjectionToken('GRPC_WEBHOOK_CLIENT_SETTINGS');
+const GRPC_PROJECT_ROLES_CLIENT_SETTINGS = new InjectionToken('GRPC_PROJECT_ROLES_CLIENT_SETTINGS');
 
 /* tslint:disable */
 /**
- * Service client implementation for ondewo.nlu.Contexts
+ * Specific GrpcClientSettings for Utilities.
+ * Use it only if your default settings are not set or the service requires other settings.
  */
-class ContextsClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        /**
-         * Raw RPC implementation for each service client method.
-         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-         * Attention: these methods do not throw errors when non-zero status codes are received.
-         */
-        this.$raw = {
-            /**
-             * Unary call: /ondewo.nlu.Contexts/ListContexts
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListContextsResponse>>
-             */
-            listContexts: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Contexts/ListContexts',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListContextsRequest,
-                    responseClass: ListContextsResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Contexts/GetContext
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Context>>
-             */
-            getContext: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Contexts/GetContext',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetContextRequest,
-                    responseClass: Context
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Contexts/CreateContext
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Context>>
-             */
-            createContext: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Contexts/CreateContext',
-                    requestData,
-                    requestMetadata,
-                    requestClass: CreateContextRequest,
-                    responseClass: Context
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Contexts/UpdateContext
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.Context>>
-             */
-            updateContext: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Contexts/UpdateContext',
-                    requestData,
-                    requestMetadata,
-                    requestClass: UpdateContextRequest,
-                    responseClass: Context
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Contexts/DeleteContext
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
-             */
-            deleteContext: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Contexts/DeleteContext',
-                    requestData,
-                    requestMetadata,
-                    requestClass: DeleteContextRequest,
-                    responseClass: googleProtobuf003.Empty
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Contexts/DeleteAllContexts
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
-             */
-            deleteAllContexts: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Contexts/DeleteAllContexts',
-                    requestData,
-                    requestMetadata,
-                    requestClass: DeleteAllContextsRequest,
-                    responseClass: googleProtobuf003.Empty
-                });
-            }
-        };
-        this.client = clientFactory.createClient('ondewo.nlu.Contexts', settings);
-    }
-    /**
-     * Unary call @/ondewo.nlu.Contexts/ListContexts
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListContextsResponse>
-     */
-    listContexts(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listContexts(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Contexts/GetContext
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Context>
-     */
-    getContext(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getContext(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Contexts/CreateContext
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Context>
-     */
-    createContext(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .createContext(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Contexts/UpdateContext
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.Context>
-     */
-    updateContext(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .updateContext(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Contexts/DeleteContext
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf003.Empty>
-     */
-    deleteContext(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .deleteContext(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Contexts/DeleteAllContexts
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf003.Empty>
-     */
-    deleteAllContexts(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .deleteAllContexts(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-}
-ContextsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ContextsClient, deps: [{ token: GRPC_CONTEXTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ContextsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ContextsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ContextsClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
-        return [{ type: undefined, decorators: [{
-                        type: Optional
-                    }, {
-                        type: Inject,
-                        args: [GRPC_CONTEXTS_CLIENT_SETTINGS]
-                    }] }, { type: undefined, decorators: [{
-                        type: Inject,
-                        args: [GRPC_CLIENT_FACTORY]
-                    }] }, { type: i1.GrpcHandler }];
-    } });
-
-/* tslint:disable */
-/**
- * Service client implementation for ondewo.nlu.Webhook
- */
-class WebhookClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        /**
-         * Raw RPC implementation for each service client method.
-         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-         * Attention: these methods do not throw errors when non-zero status codes are received.
-         */
-        this.$raw = {
-            /**
-             * Unary call: /ondewo.nlu.Webhook/ResponseRefinement
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.WebhookResponse>>
-             */
-            responseRefinement: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Webhook/ResponseRefinement',
-                    requestData,
-                    requestMetadata,
-                    requestClass: WebhookRequest,
-                    responseClass: WebhookResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Webhook/SlotFilling
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.WebhookResponse>>
-             */
-            slotFilling: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Webhook/SlotFilling',
-                    requestData,
-                    requestMetadata,
-                    requestClass: WebhookRequest,
-                    responseClass: WebhookResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.Webhook/Ping
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.PingResponse>>
-             */
-            ping: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.Webhook/Ping',
-                    requestData,
-                    requestMetadata,
-                    requestClass: PingRequest,
-                    responseClass: PingResponse
-                });
-            }
-        };
-        this.client = clientFactory.createClient('ondewo.nlu.Webhook', settings);
-    }
-    /**
-     * Unary call @/ondewo.nlu.Webhook/ResponseRefinement
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.WebhookResponse>
-     */
-    responseRefinement(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .responseRefinement(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Webhook/SlotFilling
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.WebhookResponse>
-     */
-    slotFilling(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .slotFilling(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.Webhook/Ping
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.PingResponse>
-     */
-    ping(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .ping(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-}
-WebhookClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: WebhookClient, deps: [{ token: GRPC_WEBHOOK_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-WebhookClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: WebhookClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: WebhookClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
-        return [{ type: undefined, decorators: [{
-                        type: Optional
-                    }, {
-                        type: Inject,
-                        args: [GRPC_WEBHOOK_CLIENT_SETTINGS]
-                    }] }, { type: undefined, decorators: [{
-                        type: Inject,
-                        args: [GRPC_CLIENT_FACTORY]
-                    }] }, { type: i1.GrpcHandler }];
-    } });
+const GRPC_UTILITIES_CLIENT_SETTINGS = new InjectionToken('GRPC_UTILITIES_CLIENT_SETTINGS');
 
 /* tslint:disable */
 /**
@@ -46903,9 +45379,9 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-UtilitiesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: UtilitiesClient, deps: [{ token: GRPC_UTILITIES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-UtilitiesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: UtilitiesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: UtilitiesClient, decorators: [{
+UtilitiesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: UtilitiesClient, deps: [{ token: GRPC_UTILITIES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+UtilitiesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: UtilitiesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: UtilitiesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -46920,279 +45396,712 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImpor
                     }] }, { type: i1.GrpcHandler }];
     } });
 
-/* tslint:disable */
 /**
- * Service client implementation for ondewo.nlu.AiServices
+ * Message implementation for ondewo.nlu.PingRequest
  */
-class AiServicesClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        /**
-         * Raw RPC implementation for each service client method.
-         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-         * Attention: these methods do not throw errors when non-zero status codes are received.
-         */
-        this.$raw = {
-            /**
-             * Unary call: /ondewo.nlu.AiServices/ExtractEntities
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>
-             */
-            extractEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.AiServices/ExtractEntities',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ExtractEntitiesRequest,
-                    responseClass: ExtractEntitiesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.AiServices/GenerateUserSays
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.GenerateUserSaysResponse>>
-             */
-            generateUserSays: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.AiServices/GenerateUserSays',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GenerateUserSaysRequest,
-                    responseClass: GenerateUserSaysResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.AiServices/GenerateResponses
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.GenerateResponsesResponse>>
-             */
-            generateResponses: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.AiServices/GenerateResponses',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GenerateResponsesRequest,
-                    responseClass: GenerateResponsesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.AiServices/GetAlternativeSentences
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.GetAlternativeSentencesResponse>>
-             */
-            getAlternativeSentences: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.AiServices/GetAlternativeSentences',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetAlternativeSentencesRequest,
-                    responseClass: GetAlternativeSentencesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.GetAlternativeTrainingPhrasesResponse>>
-             */
-            getAlternativeTrainingPhrases: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetAlternativeTrainingPhrasesRequest,
-                    responseClass: GetAlternativeTrainingPhrasesResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.AiServices/GetSynonyms
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.GetSynonymsResponse>>
-             */
-            getSynonyms: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.AiServices/GetSynonyms',
-                    requestData,
-                    requestMetadata,
-                    requestClass: GetSynonymsRequest,
-                    responseClass: GetSynonymsResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.AiServices/ClassifyIntents
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ClassifyIntentsResponse>>
-             */
-            classifyIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.AiServices/ClassifyIntents',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ClassifyIntentsRequest,
-                    responseClass: ClassifyIntentsResponse
-                });
-            },
-            /**
-             * Unary call: /ondewo.nlu.AiServices/ExtractEntitiesFuzzy
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ExtractEntitiesResponse>>
-             */
-            extractEntitiesFuzzy: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.nlu.AiServices/ExtractEntitiesFuzzy',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ExtractEntitiesFuzzyRequest,
-                    responseClass: ExtractEntitiesResponse
-                });
+class PingRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PingRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.session = _value.session;
+        PingRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new PingRequest();
+        PingRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.session = _instance.session || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.session = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
             }
+        }
+        PingRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.session) {
+            _writer.writeString(1, _instance.session);
+        }
+    }
+    get session() {
+        return this._session;
+    }
+    set session(value) {
+        this._session = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        PingRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            session: this.session
         };
-        this.client = clientFactory.createClient('ondewo.nlu.AiServices', settings);
     }
     /**
-     * Unary call @/ondewo.nlu.AiServices/ExtractEntities
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ExtractEntitiesResponse>
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
      */
-    extractEntities(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .extractEntities(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
+    toJSON() {
+        return this.toObject();
     }
     /**
-     * Unary call @/ondewo.nlu.AiServices/GenerateUserSays
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.GenerateUserSaysResponse>
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
      */
-    generateUserSays(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .generateUserSays(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.AiServices/GenerateResponses
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.GenerateResponsesResponse>
-     */
-    generateResponses(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .generateResponses(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.AiServices/GetAlternativeSentences
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.GetAlternativeSentencesResponse>
-     */
-    getAlternativeSentences(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getAlternativeSentences(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.AiServices/GetAlternativeTrainingPhrases
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.GetAlternativeTrainingPhrasesResponse>
-     */
-    getAlternativeTrainingPhrases(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getAlternativeTrainingPhrases(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.AiServices/GetSynonyms
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.GetSynonymsResponse>
-     */
-    getSynonyms(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getSynonyms(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.AiServices/ClassifyIntents
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ClassifyIntentsResponse>
-     */
-    classifyIntents(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .classifyIntents(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.nlu.AiServices/ExtractEntitiesFuzzy
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ExtractEntitiesResponse>
-     */
-    extractEntitiesFuzzy(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .extractEntitiesFuzzy(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            session: this.session
+        };
     }
 }
-AiServicesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: AiServicesClient, deps: [{ token: GRPC_AI_SERVICES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-AiServicesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: AiServicesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: AiServicesClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
-        return [{ type: undefined, decorators: [{
-                        type: Optional
-                    }, {
-                        type: Inject,
-                        args: [GRPC_AI_SERVICES_CLIENT_SETTINGS]
-                    }] }, { type: undefined, decorators: [{
-                        type: Inject,
-                        args: [GRPC_CLIENT_FACTORY]
-                    }] }, { type: i1.GrpcHandler }];
-    } });
+PingRequest.id = 'ondewo.nlu.PingRequest';
+/**
+ * Message implementation for ondewo.nlu.WebhookRequest
+ */
+class WebhookRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WebhookRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.session = _value.session;
+        this.responseId = _value.responseId;
+        this.queryResult = _value.queryResult
+            ? new QueryResult(_value.queryResult)
+            : undefined;
+        this.originalDetectIntentRequest = _value.originalDetectIntentRequest
+            ? new OriginalDetectIntentRequest(_value.originalDetectIntentRequest)
+            : undefined;
+        this.headers = _value.headers
+            ? new googleProtobuf003.Struct(_value.headers)
+            : undefined;
+        WebhookRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new WebhookRequest();
+        WebhookRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.session = _instance.session || '';
+        _instance.responseId = _instance.responseId || '';
+        _instance.queryResult = _instance.queryResult || undefined;
+        _instance.originalDetectIntentRequest =
+            _instance.originalDetectIntentRequest || undefined;
+        _instance.headers = _instance.headers || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 4:
+                    _instance.session = _reader.readString();
+                    break;
+                case 1:
+                    _instance.responseId = _reader.readString();
+                    break;
+                case 2:
+                    _instance.queryResult = new QueryResult();
+                    _reader.readMessage(_instance.queryResult, QueryResult.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.originalDetectIntentRequest = new OriginalDetectIntentRequest();
+                    _reader.readMessage(_instance.originalDetectIntentRequest, OriginalDetectIntentRequest.deserializeBinaryFromReader);
+                    break;
+                case 5:
+                    _instance.headers = new googleProtobuf003.Struct();
+                    _reader.readMessage(_instance.headers, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        WebhookRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.session) {
+            _writer.writeString(4, _instance.session);
+        }
+        if (_instance.responseId) {
+            _writer.writeString(1, _instance.responseId);
+        }
+        if (_instance.queryResult) {
+            _writer.writeMessage(2, _instance.queryResult, QueryResult.serializeBinaryToWriter);
+        }
+        if (_instance.originalDetectIntentRequest) {
+            _writer.writeMessage(3, _instance.originalDetectIntentRequest, OriginalDetectIntentRequest.serializeBinaryToWriter);
+        }
+        if (_instance.headers) {
+            _writer.writeMessage(5, _instance.headers, googleProtobuf003.Struct.serializeBinaryToWriter);
+        }
+    }
+    get session() {
+        return this._session;
+    }
+    set session(value) {
+        this._session = value;
+    }
+    get responseId() {
+        return this._responseId;
+    }
+    set responseId(value) {
+        this._responseId = value;
+    }
+    get queryResult() {
+        return this._queryResult;
+    }
+    set queryResult(value) {
+        this._queryResult = value;
+    }
+    get originalDetectIntentRequest() {
+        return this._originalDetectIntentRequest;
+    }
+    set originalDetectIntentRequest(value) {
+        this._originalDetectIntentRequest = value;
+    }
+    get headers() {
+        return this._headers;
+    }
+    set headers(value) {
+        this._headers = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        WebhookRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            session: this.session,
+            responseId: this.responseId,
+            queryResult: this.queryResult ? this.queryResult.toObject() : undefined,
+            originalDetectIntentRequest: this.originalDetectIntentRequest
+                ? this.originalDetectIntentRequest.toObject()
+                : undefined,
+            headers: this.headers ? this.headers.toObject() : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            session: this.session,
+            responseId: this.responseId,
+            queryResult: this.queryResult
+                ? this.queryResult.toProtobufJSON(options)
+                : null,
+            originalDetectIntentRequest: this.originalDetectIntentRequest
+                ? this.originalDetectIntentRequest.toProtobufJSON(options)
+                : null,
+            headers: this.headers ? this.headers.toProtobufJSON(options) : null
+        };
+    }
+}
+WebhookRequest.id = 'ondewo.nlu.WebhookRequest';
+/**
+ * Message implementation for ondewo.nlu.WebhookResponse
+ */
+class WebhookResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WebhookResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.fulfillmentText = _value.fulfillmentText;
+        this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
+        this.source = _value.source;
+        this.payload = _value.payload
+            ? new googleProtobuf003.Struct(_value.payload)
+            : undefined;
+        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
+        this.followupEventInput = _value.followupEventInput
+            ? new EventInput(_value.followupEventInput)
+            : undefined;
+        WebhookResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new WebhookResponse();
+        WebhookResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.fulfillmentText = _instance.fulfillmentText || '';
+        _instance.fulfillmentMessages = _instance.fulfillmentMessages || [];
+        _instance.source = _instance.source || '';
+        _instance.payload = _instance.payload || undefined;
+        _instance.outputContexts = _instance.outputContexts || [];
+        _instance.followupEventInput = _instance.followupEventInput || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.fulfillmentText = _reader.readString();
+                    break;
+                case 2:
+                    const messageInitializer2 = new Intent.Message();
+                    _reader.readMessage(messageInitializer2, Intent.Message.deserializeBinaryFromReader);
+                    (_instance.fulfillmentMessages =
+                        _instance.fulfillmentMessages || []).push(messageInitializer2);
+                    break;
+                case 3:
+                    _instance.source = _reader.readString();
+                    break;
+                case 4:
+                    _instance.payload = new googleProtobuf003.Struct();
+                    _reader.readMessage(_instance.payload, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    break;
+                case 5:
+                    const messageInitializer5 = new Context();
+                    _reader.readMessage(messageInitializer5, Context.deserializeBinaryFromReader);
+                    (_instance.outputContexts = _instance.outputContexts || []).push(messageInitializer5);
+                    break;
+                case 6:
+                    _instance.followupEventInput = new EventInput();
+                    _reader.readMessage(_instance.followupEventInput, EventInput.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        WebhookResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.fulfillmentText) {
+            _writer.writeString(1, _instance.fulfillmentText);
+        }
+        if (_instance.fulfillmentMessages && _instance.fulfillmentMessages.length) {
+            _writer.writeRepeatedMessage(2, _instance.fulfillmentMessages, Intent.Message.serializeBinaryToWriter);
+        }
+        if (_instance.source) {
+            _writer.writeString(3, _instance.source);
+        }
+        if (_instance.payload) {
+            _writer.writeMessage(4, _instance.payload, googleProtobuf003.Struct.serializeBinaryToWriter);
+        }
+        if (_instance.outputContexts && _instance.outputContexts.length) {
+            _writer.writeRepeatedMessage(5, _instance.outputContexts, Context.serializeBinaryToWriter);
+        }
+        if (_instance.followupEventInput) {
+            _writer.writeMessage(6, _instance.followupEventInput, EventInput.serializeBinaryToWriter);
+        }
+    }
+    get fulfillmentText() {
+        return this._fulfillmentText;
+    }
+    set fulfillmentText(value) {
+        this._fulfillmentText = value;
+    }
+    get fulfillmentMessages() {
+        return this._fulfillmentMessages;
+    }
+    set fulfillmentMessages(value) {
+        this._fulfillmentMessages = value;
+    }
+    get source() {
+        return this._source;
+    }
+    set source(value) {
+        this._source = value;
+    }
+    get payload() {
+        return this._payload;
+    }
+    set payload(value) {
+        this._payload = value;
+    }
+    get outputContexts() {
+        return this._outputContexts;
+    }
+    set outputContexts(value) {
+        this._outputContexts = value;
+    }
+    get followupEventInput() {
+        return this._followupEventInput;
+    }
+    set followupEventInput(value) {
+        this._followupEventInput = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        WebhookResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            fulfillmentText: this.fulfillmentText,
+            fulfillmentMessages: (this.fulfillmentMessages || []).map(m => m.toObject()),
+            source: this.source,
+            payload: this.payload ? this.payload.toObject() : undefined,
+            outputContexts: (this.outputContexts || []).map(m => m.toObject()),
+            followupEventInput: this.followupEventInput
+                ? this.followupEventInput.toObject()
+                : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            fulfillmentText: this.fulfillmentText,
+            fulfillmentMessages: (this.fulfillmentMessages || []).map(m => m.toProtobufJSON(options)),
+            source: this.source,
+            payload: this.payload ? this.payload.toProtobufJSON(options) : null,
+            outputContexts: (this.outputContexts || []).map(m => m.toProtobufJSON(options)),
+            followupEventInput: this.followupEventInput
+                ? this.followupEventInput.toProtobufJSON(options)
+                : null
+        };
+    }
+}
+WebhookResponse.id = 'ondewo.nlu.WebhookResponse';
+/**
+ * Message implementation for ondewo.nlu.OriginalDetectIntentRequest
+ */
+class OriginalDetectIntentRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of OriginalDetectIntentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.source = _value.source;
+        this.payload = _value.payload
+            ? new googleProtobuf003.Struct(_value.payload)
+            : undefined;
+        OriginalDetectIntentRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new OriginalDetectIntentRequest();
+        OriginalDetectIntentRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.source = _instance.source || '';
+        _instance.payload = _instance.payload || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.source = _reader.readString();
+                    break;
+                case 3:
+                    _instance.payload = new googleProtobuf003.Struct();
+                    _reader.readMessage(_instance.payload, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        OriginalDetectIntentRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.source) {
+            _writer.writeString(1, _instance.source);
+        }
+        if (_instance.payload) {
+            _writer.writeMessage(3, _instance.payload, googleProtobuf003.Struct.serializeBinaryToWriter);
+        }
+    }
+    get source() {
+        return this._source;
+    }
+    set source(value) {
+        this._source = value;
+    }
+    get payload() {
+        return this._payload;
+    }
+    set payload(value) {
+        this._payload = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        OriginalDetectIntentRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            source: this.source,
+            payload: this.payload ? this.payload.toObject() : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            source: this.source,
+            payload: this.payload ? this.payload.toProtobufJSON(options) : null
+        };
+    }
+}
+OriginalDetectIntentRequest.id = 'ondewo.nlu.OriginalDetectIntentRequest';
+/**
+ * Message implementation for ondewo.nlu.PingResponse
+ */
+class PingResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PingResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isReachable = _value.isReachable;
+        PingResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new PingResponse();
+        PingResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.isReachable = _instance.isReachable || false;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.isReachable = _reader.readBool();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        PingResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.isReachable) {
+            _writer.writeBool(1, _instance.isReachable);
+        }
+    }
+    get isReachable() {
+        return this._isReachable;
+    }
+    set isReachable(value) {
+        this._isReachable = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        PingResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            isReachable: this.isReachable
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            isReachable: this.isReachable
+        };
+    }
+}
+PingResponse.id = 'ondewo.nlu.PingResponse';
+
+/* tslint:disable */
+/**
+ * Specific GrpcClientSettings for Webhook.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_WEBHOOK_CLIENT_SETTINGS = new InjectionToken('GRPC_WEBHOOK_CLIENT_SETTINGS');
 
 /* tslint:disable */
 /**
@@ -47361,9 +46270,9 @@ class ProjectRolesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ProjectRolesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ProjectRolesClient, deps: [{ token: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ProjectRolesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ProjectRolesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImport: i0, type: ProjectRolesClient, decorators: [{
+ProjectRolesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ProjectRolesClient, deps: [{ token: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ProjectRolesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ProjectRolesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ProjectRolesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -47372,6 +46281,1097 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.0", ngImpor
                     }, {
                         type: Inject,
                         args: [GRPC_PROJECT_ROLES_CLIENT_SETTINGS]
+                    }] }, { type: undefined, decorators: [{
+                        type: Inject,
+                        args: [GRPC_CLIENT_FACTORY]
+                    }] }, { type: i1.GrpcHandler }];
+    } });
+
+/* tslint:disable */
+/**
+ * Specific GrpcClientSettings for ServerStatistics.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_SERVER_STATISTICS_CLIENT_SETTINGS = new InjectionToken('GRPC_SERVER_STATISTICS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/**
+ * Service client implementation for ondewo.nlu.ServerStatistics
+ */
+class ServerStatisticsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Unary call: /ondewo.nlu.ServerStatistics/GetProjectCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getProjectCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ServerStatistics/GetProjectCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: googleProtobuf003.Empty,
+                    responseClass: StatResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.ServerStatistics/GetUserProjectCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getUserProjectCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ServerStatistics/GetUserProjectCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetUserProjectCountRequest,
+                    responseClass: StatResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.ServerStatistics/GetUserCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getUserCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ServerStatistics/GetUserCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: googleProtobuf003.Empty,
+                    responseClass: StatResponse
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.nlu.ServerStatistics', settings);
+    }
+    /**
+     * Unary call @/ondewo.nlu.ServerStatistics/GetProjectCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getProjectCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getProjectCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.ServerStatistics/GetUserProjectCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getUserProjectCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getUserProjectCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.ServerStatistics/GetUserCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getUserCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getUserCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+}
+ServerStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ServerStatisticsClient, deps: [{ token: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ServerStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ServerStatisticsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ServerStatisticsClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: function () {
+        return [{ type: undefined, decorators: [{
+                        type: Optional
+                    }, {
+                        type: Inject,
+                        args: [GRPC_SERVER_STATISTICS_CLIENT_SETTINGS]
+                    }] }, { type: undefined, decorators: [{
+                        type: Inject,
+                        args: [GRPC_CLIENT_FACTORY]
+                    }] }, { type: i1.GrpcHandler }];
+    } });
+
+/* tslint:disable */
+/**
+ * Specific GrpcClientSettings for ProjectStatistics.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS = new InjectionToken('GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/**
+ * Service client implementation for ondewo.nlu.ProjectStatistics
+ */
+class ProjectStatisticsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetIntentCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getIntentCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ProjectStatistics/GetIntentCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetIntentCountRequest,
+                    responseClass: StatResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetEntityTypeCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getEntityTypeCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ProjectStatistics/GetEntityTypeCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetEntityTypeCountRequest,
+                    responseClass: StatResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetUserCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getUserCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ProjectStatistics/GetUserCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetProjectStatRequest,
+                    responseClass: StatResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetSessionCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getSessionCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ProjectStatistics/GetSessionCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetProjectStatRequest,
+                    responseClass: StatResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getTrainingPhraseCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetProjectElementStatRequest,
+                    responseClass: StatResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetResponseCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getResponseCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ProjectStatistics/GetResponseCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetProjectElementStatRequest,
+                    responseClass: StatResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetEntityValueCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getEntityValueCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ProjectStatistics/GetEntityValueCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetProjectElementStatRequest,
+                    responseClass: StatResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu004.StatResponse>>
+             */
+            getEntitySynonymCount: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetProjectElementStatRequest,
+                    responseClass: StatResponse
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.nlu.ProjectStatistics', settings);
+    }
+    /**
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetIntentCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getIntentCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getIntentCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntityTypeCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getEntityTypeCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getEntityTypeCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetUserCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getUserCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getUserCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetSessionCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getSessionCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getSessionCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetTrainingPhraseCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getTrainingPhraseCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getTrainingPhraseCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetResponseCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getResponseCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getResponseCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntityValueCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getEntityValueCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getEntityValueCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.ProjectStatistics/GetEntitySynonymCount
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu004.StatResponse>
+     */
+    getEntitySynonymCount(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getEntitySynonymCount(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+}
+ProjectStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ProjectStatisticsClient, deps: [{ token: GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ProjectStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ProjectStatisticsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: ProjectStatisticsClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: function () {
+        return [{ type: undefined, decorators: [{
+                        type: Optional
+                    }, {
+                        type: Inject,
+                        args: [GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS]
+                    }] }, { type: undefined, decorators: [{
+                        type: Inject,
+                        args: [GRPC_CLIENT_FACTORY]
+                    }] }, { type: i1.GrpcHandler }];
+    } });
+
+/* tslint:disable */
+/**
+ * Service client implementation for ondewo.nlu.Operations
+ */
+class OperationsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Unary call: /ondewo.nlu.Operations/ListOperations
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListOperationsResponse>>
+             */
+            listOperations: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Operations/ListOperations',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListOperationsRequest,
+                    responseClass: ListOperationsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Operations/GetOperation
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.Operation>>
+             */
+            getOperation: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Operations/GetOperation',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetOperationRequest,
+                    responseClass: Operation
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Operations/DeleteOperation
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf005.Empty>>
+             */
+            deleteOperation: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Operations/DeleteOperation',
+                    requestData,
+                    requestMetadata,
+                    requestClass: DeleteOperationRequest,
+                    responseClass: googleProtobuf003.Empty
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Operations/CancelOperation
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf005.Empty>>
+             */
+            cancelOperation: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Operations/CancelOperation',
+                    requestData,
+                    requestMetadata,
+                    requestClass: CancelOperationRequest,
+                    responseClass: googleProtobuf003.Empty
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.nlu.Operations', settings);
+    }
+    /**
+     * Unary call @/ondewo.nlu.Operations/ListOperations
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListOperationsResponse>
+     */
+    listOperations(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listOperations(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Operations/GetOperation
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.Operation>
+     */
+    getOperation(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getOperation(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Operations/DeleteOperation
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf005.Empty>
+     */
+    deleteOperation(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .deleteOperation(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Operations/CancelOperation
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf005.Empty>
+     */
+    cancelOperation(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .cancelOperation(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+}
+OperationsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: OperationsClient, deps: [{ token: GRPC_OPERATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+OperationsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: OperationsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: OperationsClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: function () {
+        return [{ type: undefined, decorators: [{
+                        type: Optional
+                    }, {
+                        type: Inject,
+                        args: [GRPC_OPERATIONS_CLIENT_SETTINGS]
+                    }] }, { type: undefined, decorators: [{
+                        type: Inject,
+                        args: [GRPC_CLIENT_FACTORY]
+                    }] }, { type: i1.GrpcHandler }];
+    } });
+
+/* tslint:disable */
+/**
+ * Specific GrpcClientSettings for EntityTypes.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_ENTITY_TYPES_CLIENT_SETTINGS = new InjectionToken('GRPC_ENTITY_TYPES_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/**
+ * Service client implementation for ondewo.nlu.EntityTypes
+ */
+class EntityTypesClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/ListEntityTypes
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListEntityTypesResponse>>
+             */
+            listEntityTypes: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/ListEntityTypes',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListEntityTypesRequest,
+                    responseClass: ListEntityTypesResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/GetEntityType
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.EntityType>>
+             */
+            getEntityType: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/GetEntityType',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetEntityTypeRequest,
+                    responseClass: EntityType
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/CreateEntityType
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.EntityType>>
+             */
+            createEntityType: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/CreateEntityType',
+                    requestData,
+                    requestMetadata,
+                    requestClass: CreateEntityTypeRequest,
+                    responseClass: EntityType
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/UpdateEntityType
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.EntityType>>
+             */
+            updateEntityType: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/UpdateEntityType',
+                    requestData,
+                    requestMetadata,
+                    requestClass: UpdateEntityTypeRequest,
+                    responseClass: EntityType
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/DeleteEntityType
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+             */
+            deleteEntityType: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/DeleteEntityType',
+                    requestData,
+                    requestMetadata,
+                    requestClass: DeleteEntityTypeRequest,
+                    responseClass: googleProtobuf003.Empty
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu010.Operation>>
+             */
+            batchUpdateEntityTypes: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchUpdateEntityTypesRequest,
+                    responseClass: Operation
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu010.Operation>>
+             */
+            batchDeleteEntityTypes: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchDeleteEntityTypesRequest,
+                    responseClass: Operation
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/BatchCreateEntities
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
+             */
+            batchCreateEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/BatchCreateEntities',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchCreateEntitiesRequest,
+                    responseClass: BatchEntitiesResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/BatchUpdateEntities
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
+             */
+            batchUpdateEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/BatchUpdateEntities',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchUpdateEntitiesRequest,
+                    responseClass: BatchEntitiesResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/BatchGetEntities
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchEntitiesResponse>>
+             */
+            batchGetEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/BatchGetEntities',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchGetEntitiesRequest,
+                    responseClass: BatchEntitiesResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/BatchDeleteEntities
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.BatchDeleteEntitiesResponse>>
+             */
+            batchDeleteEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/BatchDeleteEntities',
+                    requestData,
+                    requestMetadata,
+                    requestClass: BatchDeleteEntitiesRequest,
+                    responseClass: BatchDeleteEntitiesResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.EntityTypes/ListEntities
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListEntitiesResponse>>
+             */
+            listEntities: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.EntityTypes/ListEntities',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListEntitiesRequest,
+                    responseClass: ListEntitiesResponse
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.nlu.EntityTypes', settings);
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/ListEntityTypes
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListEntityTypesResponse>
+     */
+    listEntityTypes(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listEntityTypes(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/GetEntityType
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.EntityType>
+     */
+    getEntityType(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getEntityType(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/CreateEntityType
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.EntityType>
+     */
+    createEntityType(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .createEntityType(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/UpdateEntityType
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.EntityType>
+     */
+    updateEntityType(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .updateEntityType(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/DeleteEntityType
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf004.Empty>
+     */
+    deleteEntityType(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .deleteEntityType(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu010.Operation>
+     */
+    batchUpdateEntityTypes(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchUpdateEntityTypes(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu010.Operation>
+     */
+    batchDeleteEntityTypes(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchDeleteEntityTypes(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/BatchCreateEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchEntitiesResponse>
+     */
+    batchCreateEntities(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchCreateEntities(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/BatchUpdateEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchEntitiesResponse>
+     */
+    batchUpdateEntities(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchUpdateEntities(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/BatchGetEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchEntitiesResponse>
+     */
+    batchGetEntities(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchGetEntities(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/BatchDeleteEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchDeleteEntitiesResponse>
+     */
+    batchDeleteEntities(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .batchDeleteEntities(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.EntityTypes/ListEntities
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListEntitiesResponse>
+     */
+    listEntities(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listEntities(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+}
+EntityTypesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: EntityTypesClient, deps: [{ token: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+EntityTypesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: EntityTypesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: EntityTypesClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: function () {
+        return [{ type: undefined, decorators: [{
+                        type: Optional
+                    }, {
+                        type: Inject,
+                        args: [GRPC_ENTITY_TYPES_CLIENT_SETTINGS]
+                    }] }, { type: undefined, decorators: [{
+                        type: Inject,
+                        args: [GRPC_CLIENT_FACTORY]
+                    }] }, { type: i1.GrpcHandler }];
+    } });
+
+/* tslint:disable */
+/**
+ * Service client implementation for ondewo.nlu.Webhook
+ */
+class WebhookClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Unary call: /ondewo.nlu.Webhook/ResponseRefinement
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.WebhookResponse>>
+             */
+            responseRefinement: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Webhook/ResponseRefinement',
+                    requestData,
+                    requestMetadata,
+                    requestClass: WebhookRequest,
+                    responseClass: WebhookResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Webhook/SlotFilling
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.WebhookResponse>>
+             */
+            slotFilling: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Webhook/SlotFilling',
+                    requestData,
+                    requestMetadata,
+                    requestClass: WebhookRequest,
+                    responseClass: WebhookResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Webhook/Ping
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.PingResponse>>
+             */
+            ping: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Webhook/Ping',
+                    requestData,
+                    requestMetadata,
+                    requestClass: PingRequest,
+                    responseClass: PingResponse
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.nlu.Webhook', settings);
+    }
+    /**
+     * Unary call @/ondewo.nlu.Webhook/ResponseRefinement
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.WebhookResponse>
+     */
+    responseRefinement(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .responseRefinement(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Webhook/SlotFilling
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.WebhookResponse>
+     */
+    slotFilling(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .slotFilling(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Webhook/Ping
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.PingResponse>
+     */
+    ping(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .ping(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+}
+WebhookClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: WebhookClient, deps: [{ token: GRPC_WEBHOOK_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+WebhookClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: WebhookClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.0.2", ngImport: i0, type: WebhookClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: function () {
+        return [{ type: undefined, decorators: [{
+                        type: Optional
+                    }, {
+                        type: Inject,
+                        args: [GRPC_WEBHOOK_CLIENT_SETTINGS]
                     }] }, { type: undefined, decorators: [{
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
