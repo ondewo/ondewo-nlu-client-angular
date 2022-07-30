@@ -1355,6 +1355,9 @@ export declare class SessionFilter implements GrpcMessage {
     private _labels?;
     private _userIds?;
     private _intentTags?;
+    private _sessionIds?;
+    private _inputContexts?;
+    private _outputContexts?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionFilter to deeply clone from
@@ -1388,6 +1391,12 @@ export declare class SessionFilter implements GrpcMessage {
     set userIds(value: string[] | undefined);
     get intentTags(): string[] | undefined;
     set intentTags(value: string[] | undefined);
+    get sessionIds(): string[] | undefined;
+    set sessionIds(value: string[] | undefined);
+    get inputContexts(): ondewoNlu006.Context[] | undefined;
+    set inputContexts(value: ondewoNlu006.Context[] | undefined);
+    get outputContexts(): ondewoNlu006.Context[] | undefined;
+    set outputContexts(value: ondewoNlu006.Context[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1427,6 +1436,9 @@ export declare module SessionFilter {
         labels?: string[];
         userIds?: string[];
         intentTags?: string[];
+        sessionIds?: string[];
+        inputContexts?: ondewoNlu006.Context.AsObject[];
+        outputContexts?: ondewoNlu006.Context.AsObject[];
     }
     /**
      * Protobuf JSON representation for SessionFilter
@@ -1446,6 +1458,9 @@ export declare module SessionFilter {
         labels?: string[];
         userIds?: string[];
         intentTags?: string[];
+        sessionIds?: string[];
+        inputContexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        outputContexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
     }
 }
 /**
@@ -1486,6 +1501,8 @@ export declare class SessionInfo implements GrpcMessage {
     private _labels?;
     private _userIds?;
     private _intentTags?;
+    private _inputContextSteps?;
+    private _outputContextSteps?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionInfo to deeply clone from
@@ -1513,6 +1530,10 @@ export declare class SessionInfo implements GrpcMessage {
     set userIds(value: string[] | undefined);
     get intentTags(): string[] | undefined;
     set intentTags(value: string[] | undefined);
+    get inputContextSteps(): SessionInfo.ContextSteps[] | undefined;
+    set inputContextSteps(value: SessionInfo.ContextSteps[] | undefined);
+    get outputContextSteps(): SessionInfo.ContextSteps[] | undefined;
+    set outputContextSteps(value: SessionInfo.ContextSteps[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1549,6 +1570,8 @@ export declare module SessionInfo {
         labels?: string[];
         userIds?: string[];
         intentTags?: string[];
+        inputContextSteps?: SessionInfo.ContextSteps.AsObject[];
+        outputContextSteps?: SessionInfo.ContextSteps.AsObject[];
     }
     /**
      * Protobuf JSON representation for SessionInfo
@@ -1565,6 +1588,77 @@ export declare module SessionInfo {
         labels?: string[];
         userIds?: string[];
         intentTags?: string[];
+        inputContextSteps?: SessionInfo.ContextSteps.AsProtobufJSON[] | null;
+        outputContextSteps?: SessionInfo.ContextSteps.AsProtobufJSON[] | null;
+    }
+    /**
+     * Message implementation for ondewo.nlu.ContextSteps
+     */
+    class ContextSteps implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): ContextSteps;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: ContextSteps): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: ContextSteps, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: ContextSteps, _writer: BinaryWriter): void;
+        private _contexts?;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ContextSteps to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<ContextSteps.AsObject>);
+        get contexts(): ondewoNlu006.Context[] | undefined;
+        set contexts(value: ondewoNlu006.Context[] | undefined);
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): ContextSteps.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): ContextSteps.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): ContextSteps.AsProtobufJSON;
+    }
+    module ContextSteps {
+        /**
+         * Standard JavaScript object representation for ContextSteps
+         */
+        interface AsObject {
+            contexts?: ondewoNlu006.Context.AsObject[];
+        }
+        /**
+         * Protobuf JSON representation for ContextSteps
+         */
+        interface AsProtobufJSON {
+            contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        }
     }
 }
 /**

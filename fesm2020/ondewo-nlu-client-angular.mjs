@@ -18385,6 +18385,9 @@ class SessionFilter {
         this.labels = (_value.labels || []).slice();
         this.userIds = (_value.userIds || []).slice();
         this.intentTags = (_value.intentTags || []).slice();
+        this.sessionIds = (_value.sessionIds || []).slice();
+        this.inputContexts = (_value.inputContexts || []).map(m => new Context(m));
+        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
         SessionFilter.refineValues(this);
     }
     /**
@@ -18417,6 +18420,9 @@ class SessionFilter {
         _instance.labels = _instance.labels || [];
         _instance.userIds = _instance.userIds || [];
         _instance.intentTags = _instance.intentTags || [];
+        _instance.sessionIds = _instance.sessionIds || [];
+        _instance.inputContexts = _instance.inputContexts || [];
+        _instance.outputContexts = _instance.outputContexts || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -18475,6 +18481,19 @@ class SessionFilter {
                 case 14:
                     (_instance.intentTags = _instance.intentTags || []).push(_reader.readString());
                     break;
+                case 15:
+                    (_instance.sessionIds = _instance.sessionIds || []).push(_reader.readString());
+                    break;
+                case 16:
+                    const messageInitializer16 = new Context();
+                    _reader.readMessage(messageInitializer16, Context.deserializeBinaryFromReader);
+                    (_instance.inputContexts = _instance.inputContexts || []).push(messageInitializer16);
+                    break;
+                case 17:
+                    const messageInitializer17 = new Context();
+                    _reader.readMessage(messageInitializer17, Context.deserializeBinaryFromReader);
+                    (_instance.outputContexts = _instance.outputContexts || []).push(messageInitializer17);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -18528,6 +18547,15 @@ class SessionFilter {
         }
         if (_instance.intentTags && _instance.intentTags.length) {
             _writer.writeRepeatedString(14, _instance.intentTags);
+        }
+        if (_instance.sessionIds && _instance.sessionIds.length) {
+            _writer.writeRepeatedString(15, _instance.sessionIds);
+        }
+        if (_instance.inputContexts && _instance.inputContexts.length) {
+            _writer.writeRepeatedMessage(16, _instance.inputContexts, Context.serializeBinaryToWriter);
+        }
+        if (_instance.outputContexts && _instance.outputContexts.length) {
+            _writer.writeRepeatedMessage(17, _instance.outputContexts, Context.serializeBinaryToWriter);
         }
     }
     get languageCodes() {
@@ -18614,6 +18642,24 @@ class SessionFilter {
     set intentTags(value) {
         this._intentTags = value;
     }
+    get sessionIds() {
+        return this._sessionIds;
+    }
+    set sessionIds(value) {
+        this._sessionIds = value;
+    }
+    get inputContexts() {
+        return this._inputContexts;
+    }
+    set inputContexts(value) {
+        this._inputContexts = value;
+    }
+    get outputContexts() {
+        return this._outputContexts;
+    }
+    set outputContexts(value) {
+        this._outputContexts = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -18641,7 +18687,10 @@ class SessionFilter {
             maxNumberTurns: this.maxNumberTurns,
             labels: (this.labels || []).slice(),
             userIds: (this.userIds || []).slice(),
-            intentTags: (this.intentTags || []).slice()
+            intentTags: (this.intentTags || []).slice(),
+            sessionIds: (this.sessionIds || []).slice(),
+            inputContexts: (this.inputContexts || []).map(m => m.toObject()),
+            outputContexts: (this.outputContexts || []).map(m => m.toObject())
         };
     }
     /**
@@ -18672,7 +18721,10 @@ class SessionFilter {
             maxNumberTurns: this.maxNumberTurns,
             labels: (this.labels || []).slice(),
             userIds: (this.userIds || []).slice(),
-            intentTags: (this.intentTags || []).slice()
+            intentTags: (this.intentTags || []).slice(),
+            sessionIds: (this.sessionIds || []).slice(),
+            inputContexts: (this.inputContexts || []).map(m => m.toProtobufJSON(options)),
+            outputContexts: (this.outputContexts || []).map(m => m.toProtobufJSON(options))
         };
     }
 }
@@ -18698,6 +18750,8 @@ class SessionInfo {
         this.labels = (_value.labels || []).slice();
         this.userIds = (_value.userIds || []).slice();
         this.intentTags = (_value.intentTags || []).slice();
+        this.inputContextSteps = (_value.inputContextSteps || []).map(m => new SessionInfo.ContextSteps(m));
+        this.outputContextSteps = (_value.outputContextSteps || []).map(m => new SessionInfo.ContextSteps(m));
         SessionInfo.refineValues(this);
     }
     /**
@@ -18726,6 +18780,8 @@ class SessionInfo {
         _instance.labels = _instance.labels || [];
         _instance.userIds = _instance.userIds || [];
         _instance.intentTags = _instance.intentTags || [];
+        _instance.inputContextSteps = _instance.inputContextSteps || [];
+        _instance.outputContextSteps = _instance.outputContextSteps || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -18775,6 +18831,18 @@ class SessionInfo {
                 case 11:
                     (_instance.intentTags = _instance.intentTags || []).push(_reader.readString());
                     break;
+                case 12:
+                    const messageInitializer12 = new SessionInfo.ContextSteps();
+                    _reader.readMessage(messageInitializer12, SessionInfo.ContextSteps.deserializeBinaryFromReader);
+                    (_instance.inputContextSteps =
+                        _instance.inputContextSteps || []).push(messageInitializer12);
+                    break;
+                case 13:
+                    const messageInitializer13 = new SessionInfo.ContextSteps();
+                    _reader.readMessage(messageInitializer13, SessionInfo.ContextSteps.deserializeBinaryFromReader);
+                    (_instance.outputContextSteps =
+                        _instance.outputContextSteps || []).push(messageInitializer13);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -18819,6 +18887,12 @@ class SessionInfo {
         }
         if (_instance.intentTags && _instance.intentTags.length) {
             _writer.writeRepeatedString(11, _instance.intentTags);
+        }
+        if (_instance.inputContextSteps && _instance.inputContextSteps.length) {
+            _writer.writeRepeatedMessage(12, _instance.inputContextSteps, SessionInfo.ContextSteps.serializeBinaryToWriter);
+        }
+        if (_instance.outputContextSteps && _instance.outputContextSteps.length) {
+            _writer.writeRepeatedMessage(13, _instance.outputContextSteps, SessionInfo.ContextSteps.serializeBinaryToWriter);
         }
     }
     get languageCodes() {
@@ -18887,6 +18961,18 @@ class SessionInfo {
     set intentTags(value) {
         this._intentTags = value;
     }
+    get inputContextSteps() {
+        return this._inputContextSteps;
+    }
+    set inputContextSteps(value) {
+        this._inputContextSteps = value;
+    }
+    get outputContextSteps() {
+        return this._outputContextSteps;
+    }
+    set outputContextSteps(value) {
+        this._outputContextSteps = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -18911,7 +18997,9 @@ class SessionInfo {
             numberTurns: this.numberTurns,
             labels: (this.labels || []).slice(),
             userIds: (this.userIds || []).slice(),
-            intentTags: (this.intentTags || []).slice()
+            intentTags: (this.intentTags || []).slice(),
+            inputContextSteps: (this.inputContextSteps || []).map(m => m.toObject()),
+            outputContextSteps: (this.outputContextSteps || []).map(m => m.toObject())
         };
     }
     /**
@@ -18939,11 +19027,119 @@ class SessionInfo {
             numberTurns: this.numberTurns,
             labels: (this.labels || []).slice(),
             userIds: (this.userIds || []).slice(),
-            intentTags: (this.intentTags || []).slice()
+            intentTags: (this.intentTags || []).slice(),
+            inputContextSteps: (this.inputContextSteps || []).map(m => m.toProtobufJSON(options)),
+            outputContextSteps: (this.outputContextSteps || []).map(m => m.toProtobufJSON(options))
         };
     }
 }
 SessionInfo.id = 'ondewo.nlu.SessionInfo';
+(function (SessionInfo) {
+    /**
+     * Message implementation for ondewo.nlu.ContextSteps
+     */
+    class ContextSteps {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ContextSteps to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.contexts = (_value.contexts || []).map(m => new Context(m));
+            ContextSteps.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes) {
+            const instance = new ContextSteps();
+            ContextSteps.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+            return instance;
+        }
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance) {
+            _instance.contexts = _instance.contexts || [];
+        }
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        const messageInitializer1 = new Context();
+                        _reader.readMessage(messageInitializer1, Context.deserializeBinaryFromReader);
+                        (_instance.contexts = _instance.contexts || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ContextSteps.refineValues(_instance);
+        }
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance, _writer) {
+            if (_instance.contexts && _instance.contexts.length) {
+                _writer.writeRepeatedMessage(1, _instance.contexts, Context.serializeBinaryToWriter);
+            }
+        }
+        get contexts() {
+            return this._contexts;
+        }
+        set contexts(value) {
+            this._contexts = value;
+        }
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary() {
+            const writer = new BinaryWriter();
+            ContextSteps.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        }
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject() {
+            return {
+                contexts: (this.contexts || []).map(m => m.toObject())
+            };
+        }
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON() {
+            return this.toObject();
+        }
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(
+        // @ts-ignore
+        options) {
+            return {
+                contexts: (this.contexts || []).map(m => m.toProtobufJSON(options))
+            };
+        }
+    }
+    ContextSteps.id = 'ondewo.nlu.ContextSteps';
+    SessionInfo.ContextSteps = ContextSteps;
+})(SessionInfo || (SessionInfo = {}));
 /**
  * Message implementation for ondewo.nlu.ListSessionsResponse
  */
