@@ -1,6 +1,10 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Angular Client 2.10.0
+
+* Track version 2.10.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.10.0)
+* 
 ## Release ONDEWO NLU Angular Client 2.9.1
 
 * Track version 2.9.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.9.0)

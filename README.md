@@ -12,7 +12,7 @@
 
 # @ondewo/nlu-client-angular
 
-`@ondewo/nlu-client-angular` is a compiled version of the [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api).
+`@ondewo/nlu-client-angular` is a compiled version of the [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api). Here you can find the NLU API [documentation](https://ondewo.github.io/ondewo-nlu-api/).
 
 ## Installation
 

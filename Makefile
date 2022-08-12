@@ -1,11 +1,12 @@
 # which branches to use for the build of the client sdk
-NLU_API_GIT_BRANCH=tags/2.9.0
+NLU_API_GIT_BRANCH=tags/2.10.0
 
 NLU_APIS_DIR=src/ondewo-nlu-api
 NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
 
 GOOGLE_APIS_DIR=${NLU_APIS_DIR}/googleapis
 GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google
+NG_CLI_ANALYTICS=ci
 
 build: check_out_correct_submodule_versions copy_proto_files_all_submodules npm_run_build
 
