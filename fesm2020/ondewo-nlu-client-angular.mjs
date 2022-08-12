@@ -23465,7 +23465,7 @@ class Operation {
         _value = _value || {};
         this.name = _value.name;
         this.metadata = _value.metadata
-            ? new googleProtobuf003.Any(_value.metadata)
+            ? new OperationMetadata(_value.metadata)
             : undefined;
         this.done = _value.done;
         this.error = _value.error
@@ -23508,8 +23508,8 @@ class Operation {
                     _instance.name = _reader.readString();
                     break;
                 case 2:
-                    _instance.metadata = new googleProtobuf003.Any();
-                    _reader.readMessage(_instance.metadata, googleProtobuf003.Any.deserializeBinaryFromReader);
+                    _instance.metadata = new OperationMetadata();
+                    _reader.readMessage(_instance.metadata, OperationMetadata.deserializeBinaryFromReader);
                     break;
                 case 3:
                     _instance.done = _reader.readBool();
@@ -23538,7 +23538,7 @@ class Operation {
             _writer.writeString(1, _instance.name);
         }
         if (_instance.metadata) {
-            _writer.writeMessage(2, _instance.metadata, googleProtobuf003.Any.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.metadata, OperationMetadata.serializeBinaryToWriter);
         }
         if (_instance.done) {
             _writer.writeBool(3, _instance.done);
