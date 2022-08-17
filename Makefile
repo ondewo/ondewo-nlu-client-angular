@@ -3,7 +3,7 @@ export
 # ---------------- BEFORE RELEASE ----------------
 # 1 - Update Version Number
 # 2 - Update RELEASE.md
-# 3 - make update_setup
+# 3 - make build
 # -------------- Release Process Steps --------------
 # 1 - Get Credentials from devops-accounts repo
 # 2 - Create Release Branch and push
@@ -14,6 +14,7 @@ export
 ########################################################
 # 		Variables
 ########################################################
+
 ONDEWO_NLU_VERSION = 2.12.0
 
 NLU_API_GIT_BRANCH=tags/2.12.0
@@ -28,12 +29,13 @@ NPM_PASSWORD?=ENTER_HERE_YOUR_NPM_PASSWORD
 GITHUB_GH_TOKEN?=
 NPM_AUTOMATION_TOKEN?=
 IMAGE_UTILS_NAME=ondewo-nlu-client-utils-angular:${ONDEWO_NLU_VERSION}
+PRETTIER_WRITE?=
 
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
 	| sed -n '/Release ONDEWO NLU Angular Client ${ONDEWO_NLU_VERSION}/,/\*\*/p'`
 
 
-GH_REPO="https://github.com/ahasanovicc/ondewo-nlu-client-angular"
+GH_REPO="https://github.com/ondewo/ondewo-nlu-client-angular"
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
 DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}"
 .DEFAULT_GOAL := help
@@ -43,16 +45,16 @@ DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}"
 
 setup_developer_environment_locally: install_packages install_precommit_hooks
 
-install_packages:
+install_packages: ## Install npm packages
 	npm i
 
-install_precommit_hooks:
+install_precommit_hooks: ## Install precommit hooks
 	npx husky install
 
-prettier:
-	node_modules/.bin/prettier --config .prettierrc --check --ignore-path .prettierignore ./
+prettier: ## Checks formatting with Prettier - Use PRETTIER_WRITE=-w to also automatically apply corrections where needed
+	node_modules/.bin/prettier --config .prettierrc --check --ignore-path .prettierignore $(PRETTIER_WRITE) ./
 
-eslint:
+eslint: ## Checks Code Logic and Typing
 	./node_modules/.bin/eslint .
 
 TEST:	## Prints some important variables
@@ -72,6 +74,9 @@ makefile_chapters: ## Shows all sections of Makefile
 #       Repo Specific Make Targets
 ########################################################
 
+########################################################
+#		Release
+
 release:
 	@echo "Start Release"
 	make build_and_publish_npm_via_docker
@@ -86,9 +91,6 @@ npm_release:
 	npm publish ./npm --access public --dry-run
 	@echo "Finished NPM Release"
 
-update_package:
-	@sed -i "s/\"version\": \"[0-9]*.[0-9]*.[0-9]\"/\"version\": \"${ONDEWO_NLU_VERSION}\"/g" package.json
-
 create_release_branch: ## Create Release Branch and push it to origin
 	git checkout -b "release/${ONDEWO_NLU_VERSION}"
 	git push -u origin "release/${ONDEWO_NLU_VERSION}"
@@ -102,6 +104,9 @@ login_to_gh: ## Login to Github CLI with Access Token
 
 build_gh_release: ## Generate Github Release with CLI
 	gh release create --repo $(GH_REPO) "$(ONDEWO_NLU_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_VERSION}"
+
+########################################################
+#		Docker
 
 push_to_gh: login_to_gh build_gh_release
 	@echo 'Released to Github'
@@ -122,7 +127,7 @@ build_and_publish_npm_via_docker: ##build build_utils_docker_image
 		-e NPM_AUTOMATION_TOKEN=${NPM_AUTOMATION_TOKEN} \
 		${IMAGE_UTILS_NAME} make docker_npm_release
 
-docker_npm_release:
+docker_npm_release: ## Release to npm with docker image
 	@npm config set //registry.npmjs.org/:_authToken=${NPM_AUTOMATION_TOKEN}
 	npm whoami
 	make npm_release
@@ -137,8 +142,8 @@ clone_devops_accounts: ## Clones devops-accounts repo
 	if [ -d $(DEVOPS_ACCOUNT_GIT) ]; then rm -Rf $(DEVOPS_ACCOUNT_GIT); fi
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
 
-run_release_with_devops: #cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH
-	$(eval info:= $(shell echo GITHUB_GH_TOKEN=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 & cat ${DEVOPS_ACCOUNT_DIR}/account_npm.env | grep NPM_AUTOMATION_TOKEN ))
+run_release_with_devops: ## Runs the make release target with credentials from devops-accounts
+	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH & cat ${DEVOPS_ACCOUNT_DIR}/account_npm.env | grep NPM_AUTOMATION_TOKEN ))
 	make release $(info)
 
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist
@@ -149,7 +154,10 @@ spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 
 
 ########################################################
-# Angular Build - Old Code
+# Build
+
+update_package:
+	@sed -i "s/\"version\": \"[0-9]*.[0-9]*.[0-9]\"/\"version\": \"${ONDEWO_NLU_VERSION}\"/g" package.json
 
 build: check_out_correct_submodule_versions build_compiler copy_proto_files_all_submodules npm_run_build
 	@echo "################### PROMT FOR CHANGING FILE OWNERSHIP FROM ROOT TO YOU ##########################"
@@ -184,33 +192,10 @@ copy_proto_files_for_google_api:
 	# cp ${GOOGLE_PROTOS_DIR}/protobuf/field_mask.proto ${NLU_APIS_DIR}/google/protobuf/
 	@echo "DONE copying googleapis protos from submodules to build folder."
 
-generate_protos:
-	@echo "START generate protos ..."
-	cp -r ${GOOGLE_PROTOS_DIR} ${NLU_APIS_DIR}
-	#
-	docker run -it \
-		-v ${PWD}/src:/input-volume \
-		-v ${PWD}/.:/output-volume \
-		ondewo-angular-proto-compiler \
-		ondewo-nlu-api ondewo
-	#
-	rm -rf ${NLU_APIS_DIR}/google
-	@echo "DONE generate protos."
-
 npm_run_build:
 	@echo "START npm run build ..."
 	cd src/ && npm run build && cd ..
 	@echo "DONE npm run build."
-
-publish-npm:
-	@echo "START pushing release to npm ..."
-	cd src/ && npm run publish-npm && cd ..
-	@echo "DONE pushing release to npm."
-
-submodule_update:
-	@echo "START updating submodule ..."
-	cd src/ && npm run submodule_update && cd ..
-	@echo "DONE updating submodule."
 
 test-in-ondewo-aim:
 	@echo "START copying files to local AIM for testing ..."
