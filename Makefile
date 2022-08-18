@@ -128,6 +128,8 @@ build_and_publish_npm_via_docker: build build_utils_docker_image ## Builds Code,
 		${IMAGE_UTILS_NAME} make docker_npm_release
 
 docker_npm_release: ## Release to npm with docker image
+	node --version
+	npm --version
 	@npm config set //registry.npmjs.org/:_authToken=${NPM_AUTOMATION_TOKEN}
 	npm whoami
 	make npm_release
