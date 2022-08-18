@@ -15,10 +15,10 @@ export
 # 		Variables
 ########################################################
 
-ONDEWO_NLU_VERSION = 2.12.0
+ONDEWO_NLU_VERSION = 2.13.0
 
-NLU_API_GIT_BRANCH=tags/2.12.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/2.0.0
+NLU_API_GIT_BRANCH=tags/2.13.0
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/2.1.0
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 NLU_APIS_DIR=src/ondewo-nlu-api
 NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
