@@ -43,7 +43,7 @@ DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}"
 #       ONDEWO Standard Make Targets
 ########################################################
 
-setup_developer_environment_locally: install_packages install_precommit_hooks
+setup_developer_environment_locally: install_packages install_precommit_hooks ## Installs all needed packages and precommit hooks
 
 install_packages: ## Install npm packages
 	npm i
@@ -77,18 +77,18 @@ makefile_chapters: ## Shows all sections of Makefile
 ########################################################
 #		Release
 
-release:
+release: ## Create Github and NPM Release
 	@echo "Start Release"
 	make build_and_publish_npm_via_docker
 	make create_release_branch
 	make create_release_tag
 	make release_to_github_via_docker_image
 
-gh_release: build_utils_docker_image release_to_github_via_docker_image
+gh_release: build_utils_docker_image release_to_github_via_docker_image ## Builds Utils Image and Releases to Github
 
-npm_release:
+npm_release: ## Releases to NPM
 	@echo "Start NPM Release"
-	npm publish ./npm --access public --dry-run
+	npm publish ./npm --access public
 	@echo "Finished NPM Release"
 
 create_release_branch: ## Create Release Branch and push it to origin
@@ -108,10 +108,10 @@ build_gh_release: ## Generate Github Release with CLI
 ########################################################
 #		Docker
 
-push_to_gh: login_to_gh build_gh_release
+push_to_gh: login_to_gh build_gh_release ##Logs into Github CLI and Releases
 	@echo 'Released to Github'
 
-build_compiler:
+build_compiler: ## Builds Ondewo-Proto-Compiler
 	cd ondewo-proto-compiler/angular && sh build.sh
 
 release_to_github_via_docker_image:  ## Release to Github via docker
@@ -122,7 +122,7 @@ release_to_github_via_docker_image:  ## Release to Github via docker
 build_utils_docker_image:  ## Build utils docker image
 	docker build -f Dockerfile.utils -t ${IMAGE_UTILS_NAME} .
 
-build_and_publish_npm_via_docker: ##build build_utils_docker_image
+build_and_publish_npm_via_docker: build build_utils_docker_image ## Builds Code, Docker-Image and Releases to NPM
 	docker run --rm --user ${USER} \
 		-e NPM_AUTOMATION_TOKEN=${NPM_AUTOMATION_TOKEN} \
 		${IMAGE_UTILS_NAME} make docker_npm_release
@@ -156,10 +156,10 @@ spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 ########################################################
 # Build
 
-update_package:
-	@sed -i "s/\"version\": \"[0-9]*.[0-9]*.[0-9]\"/\"version\": \"${ONDEWO_NLU_VERSION}\"/g" package.json
+update_package: ## Updates Package Version in src/package.json
+	@sed -i "s/\"version\": \"[0-9]*.[0-9]*.[0-9]\"/\"version\": \"${ONDEWO_NLU_VERSION}\"/g" src/package.json
 
-build: check_out_correct_submodule_versions build_compiler copy_proto_files_all_submodules npm_run_build
+build: check_out_correct_submodule_versions build_compiler copy_proto_files_all_submodules update_package npm_run_build ## Build Code with Proto-Compiler
 	@echo "################### PROMT FOR CHANGING FILE OWNERSHIP FROM ROOT TO YOU ##########################"
 	@for f in `ls -la | grep root | cut -c 57-200`; \
 	do \
@@ -170,7 +170,7 @@ build: check_out_correct_submodule_versions build_compiler copy_proto_files_all_
 	npm i @typescript-eslint/eslint-plugin --save-dev
 	npm i husky --save-dev
 
-check_out_correct_submodule_versions:
+check_out_correct_submodule_versions: ## Fetches all Submodules and checksout specified branch
 	@echo "START checking out correct submodule versions ..."
 	git submodule update --init --recursive
 	git -C ${NLU_APIS_DIR} fetch --all
@@ -179,9 +179,9 @@ check_out_correct_submodule_versions:
 	git -C ${ONDEWO_PROTO_COMPILER_DIR} checkout ${ONDEWO_PROTO_COMPILER_GIT_BRANCH}
 	@echo "DONE checking out correct submodule versions."
 
-copy_proto_files_all_submodules: copy_proto_files_for_google_api
+copy_proto_files_all_submodules: copy_proto_files_for_google_api ## Runs all "copy_proto_files_..." make targets
 
-copy_proto_files_for_google_api:
+copy_proto_files_for_google_api: ## Copys googeapi protos to build folder
 	@echo "START copying googleapis protos from submodules to build folder ..."
 	# TODO optimize to only generate the google protos used in nlu
 	# -mkdir -p ${NLU_APIS_DIR}/google/api
@@ -192,12 +192,12 @@ copy_proto_files_for_google_api:
 	# cp ${GOOGLE_PROTOS_DIR}/protobuf/field_mask.proto ${NLU_APIS_DIR}/google/protobuf/
 	@echo "DONE copying googleapis protos from submodules to build folder."
 
-npm_run_build:
+npm_run_build: ## Runs the build command in package.json
 	@echo "START npm run build ..."
 	cd src/ && npm run build && cd ..
 	@echo "DONE npm run build."
 
-test-in-ondewo-aim:
+test-in-ondewo-aim: ## Runs test
 	@echo "START copying files to local AIM for testing ..."
 	cd src/ && npm run test-in-ondewo-aim && cd ..
 	@echo "DONE copying files to local AIM for testing."

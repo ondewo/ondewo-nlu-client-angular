@@ -5,7 +5,7 @@
 	"singleQuote": true,
 	"useTabs": true,
 	"endOfLine": "lf",
-	"printWidth": 200,
+	"printWidth": 120,
 	"bracketSpacing": true,
 	"arrowParens": "always",
 	"htmlWhitespaceSensitivity": "strict"
