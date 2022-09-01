@@ -165,7 +165,7 @@ build: check_out_correct_submodule_versions build_compiler copy_proto_files_all_
 	@echo "################### PROMT FOR CHANGING FILE OWNERSHIP FROM ROOT TO YOU ##########################"
 	@for f in `ls -la | grep root | cut -c 57-200`; \
 	do \
-		sudo chown `whoami`:`whoami` $$f && echo $$f; \
+		sudo chown -R `whoami`:`whoami` $$f && echo $$f; \
 	done
 	npm i eslint --save-dev
 	npm i prettier --save-dev
