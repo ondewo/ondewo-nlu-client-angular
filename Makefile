@@ -124,6 +124,8 @@ release: ## Create Github and NPM Release
 	git add ondewo-nlu-client-angular.metadata.json
 	git add package-lock.json
 	git add package.json
+	git add Makefile
+	git add ondewo-proto-compiler
 	git status
 # git commit -m "Preparing for Release ${ONDEWO_NLU_VERSION}"
 # git push
