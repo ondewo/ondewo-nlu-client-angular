@@ -1,6 +1,6 @@
 {
 	"name": "@ondewo/nlu-client-angular",
-	"version": "2.14.0",
+	"version": "2.15.0",
 	"description": "ONDEWO Natural Language Understanding (NLU) Platfrom client library for Angular",
 	"author": "ONDEWO GmbH <office@ondewo.com>",
 	"homepage": "https://ondewo.com/",
@@ -48,7 +48,7 @@
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^5.36.2",
-		"eslint": "^8.23.0",
+		"eslint": "^8.23.1",
 		"husky": "^8.0.1",
 		"prettier": "^2.7.1"
 	}

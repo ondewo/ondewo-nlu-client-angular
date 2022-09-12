@@ -46146,7 +46146,7 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
          */
         static refineValues(_instance) {
             _instance.text = _instance.text || '';
-            _instance.platform = _instance.platform || 0;
+            _instance.platform = _instance.platform || '';
             _instance.responseType = _instance.responseType || '';
             _instance.intentName = _instance.intentName || '';
             _instance.language = _instance.language || '';
@@ -46165,7 +46165,7 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
                         _instance.text = _reader.readString();
                         break;
                     case 2:
-                        _instance.platform = _reader.readInt32();
+                        _instance.platform = _reader.readString();
                         break;
                     case 3:
                         _instance.responseType = _reader.readString();
@@ -46192,7 +46192,7 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
                 _writer.writeString(1, _instance.text);
             }
             if (_instance.platform) {
-                _writer.writeInt32(2, _instance.platform);
+                _writer.writeString(2, _instance.platform);
             }
             if (_instance.responseType) {
                 _writer.writeString(3, _instance.responseType);

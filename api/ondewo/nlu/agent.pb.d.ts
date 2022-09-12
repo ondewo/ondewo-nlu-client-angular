@@ -5237,8 +5237,8 @@ export declare module FullTextSearchResponseIntentResponse {
         constructor(_value?: RecursivePartial<IntentResponseSearchResult.AsObject>);
         get text(): string | undefined;
         set text(value: string | undefined);
-        get platform(): number | undefined;
-        set platform(value: number | undefined);
+        get platform(): string | undefined;
+        set platform(value: string | undefined);
         get responseType(): string | undefined;
         set responseType(value: string | undefined);
         get intentName(): string | undefined;
@@ -5271,7 +5271,7 @@ export declare module FullTextSearchResponseIntentResponse {
          */
         interface AsObject {
             text?: string;
-            platform?: number;
+            platform?: string;
             responseType?: string;
             intentName?: string;
             language?: string;
@@ -5281,7 +5281,7 @@ export declare module FullTextSearchResponseIntentResponse {
          */
         interface AsProtobufJSON {
             text?: string;
-            platform?: number;
+            platform?: string;
             responseType?: string;
             intentName?: string;
             language?: string;
