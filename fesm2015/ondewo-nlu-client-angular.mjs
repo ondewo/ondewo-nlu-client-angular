@@ -46621,6 +46621,139 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
     IntentParametersSearchResult.id = 'ondewo.nlu.IntentParametersSearchResult';
     FullTextSearchResponseIntentParameters.IntentParametersSearchResult = IntentParametersSearchResult;
 })(FullTextSearchResponseIntentParameters || (FullTextSearchResponseIntentParameters = {}));
+/**
+ * Message implementation for ondewo.nlu.ReindexAgentRequest
+ */
+class ReindexAgentRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ReindexAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.branchName = _value.branchName;
+        this.indexTypes = (_value.indexTypes || []).slice();
+        ReindexAgentRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ReindexAgentRequest();
+        ReindexAgentRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.parent = _instance.parent || '';
+        _instance.branchName = _instance.branchName || '';
+        _instance.indexTypes = _instance.indexTypes || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.parent = _reader.readString();
+                    break;
+                case 2:
+                    _instance.branchName = _reader.readString();
+                    break;
+                case 3:
+                    (_instance.indexTypes = _instance.indexTypes || []).push(...(_reader.readPackedEnum() || []));
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ReindexAgentRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
+        }
+        if (_instance.branchName) {
+            _writer.writeString(2, _instance.branchName);
+        }
+        if (_instance.indexTypes && _instance.indexTypes.length) {
+            _writer.writePackedEnum(3, _instance.indexTypes);
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get branchName() {
+        return this._branchName;
+    }
+    set branchName(value) {
+        this._branchName = value;
+    }
+    get indexTypes() {
+        return this._indexTypes;
+    }
+    set indexTypes(value) {
+        this._indexTypes = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ReindexAgentRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            parent: this.parent,
+            branchName: this.branchName,
+            indexTypes: (this.indexTypes || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            parent: this.parent,
+            branchName: this.branchName,
+            indexTypes: (this.indexTypes || []).map(v => FullTextSearchRequest.QueryType[v])
+        };
+    }
+}
+ReindexAgentRequest.id = 'ondewo.nlu.ReindexAgentRequest';
 
 /* tslint:disable */
 /**
@@ -47318,6 +47451,24 @@ class AgentsClient {
                     requestClass: FullTextSearchRequest,
                     responseClass: FullTextSearchResponseIntentParameters
                 });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Agents/ReindexAgent
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<ondewoNlu005.Operation>>
+             */
+            reindexAgent: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Agents/ReindexAgent',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ReindexAgentRequest,
+                    responseClass: Operation
+                });
             }
         };
         this.client = clientFactory.createClient('ondewo.nlu.Agents', settings);
@@ -47776,6 +47927,18 @@ class AgentsClient {
     getFullTextSearchIntentParameters(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
             .getFullTextSearchIntentParameters(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Agents/ReindexAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu005.Operation>
+     */
+    reindexAgent(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .reindexAgent(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
@@ -52140,5 +52303,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.0", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Context, ContextsClient, CreateAgentRequest, CreateContextRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteContextRequest, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionRequest, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, EntityDetected, EntityEnrichmentConfig, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetContextRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionRequest, GetSessionReviewRequest, GetSynonymsRequest, GetSynonymsResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, LatLng, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListContextsRequest, ListContextsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIntentsRequest, ListIntentsResponse, ListOperationsRequest, ListOperationsResponse, ListParametersRequest, ListParametersResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserInfosResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LoginRequest, LoginResponse, Mode, ModelStatus, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, RemoveSessionLabelsRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, RestoreAgentRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, ServerRole, ServerStatisticsClient, Session, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SetAgentStatusRequest, SetResourcesRequest, SortingMode, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingRecognitionResult, StringUpdate, Synonym, TextInput, ThesaurusEnrichmentConfig, TrackSessionStepRequest, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, UpdateAgentRequest, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
+export { AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Context, ContextsClient, CreateAgentRequest, CreateContextRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteContextRequest, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionRequest, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, EntityDetected, EntityEnrichmentConfig, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetContextRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionRequest, GetSessionReviewRequest, GetSynonymsRequest, GetSynonymsResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, LatLng, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListContextsRequest, ListContextsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIntentsRequest, ListIntentsResponse, ListOperationsRequest, ListOperationsResponse, ListParametersRequest, ListParametersResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserInfosResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LoginRequest, LoginResponse, Mode, ModelStatus, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReindexAgentRequest, RemoveSessionLabelsRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, RestoreAgentRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, ServerRole, ServerStatisticsClient, Session, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SetAgentStatusRequest, SetResourcesRequest, SortingMode, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingRecognitionResult, StringUpdate, Synonym, TextInput, ThesaurusEnrichmentConfig, TrackSessionStepRequest, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, UpdateAgentRequest, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
 //# sourceMappingURL=ondewo-nlu-client-angular.mjs.map

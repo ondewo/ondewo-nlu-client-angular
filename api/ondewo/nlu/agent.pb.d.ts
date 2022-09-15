@@ -5471,3 +5471,82 @@ export declare module FullTextSearchResponseIntentParameters {
         }
     }
 }
+/**
+ * Message implementation for ondewo.nlu.ReindexAgentRequest
+ */
+export declare class ReindexAgentRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ReindexAgentRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ReindexAgentRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ReindexAgentRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ReindexAgentRequest, _writer: BinaryWriter): void;
+    private _parent?;
+    private _branchName?;
+    private _indexTypes?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ReindexAgentRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ReindexAgentRequest.AsObject>);
+    get parent(): string | undefined;
+    set parent(value: string | undefined);
+    get branchName(): string | undefined;
+    set branchName(value: string | undefined);
+    get indexTypes(): FullTextSearchRequest.QueryType[] | undefined;
+    set indexTypes(value: FullTextSearchRequest.QueryType[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ReindexAgentRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ReindexAgentRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ReindexAgentRequest.AsProtobufJSON;
+}
+export declare module ReindexAgentRequest {
+    /**
+     * Standard JavaScript object representation for ReindexAgentRequest
+     */
+    interface AsObject {
+        parent?: string;
+        branchName?: string;
+        indexTypes?: FullTextSearchRequest.QueryType[];
+    }
+    /**
+     * Protobuf JSON representation for ReindexAgentRequest
+     */
+    interface AsProtobufJSON {
+        parent?: string;
+        branchName?: string;
+        indexTypes?: string[];
+    }
+}

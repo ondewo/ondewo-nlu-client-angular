@@ -321,6 +321,14 @@ export declare class AgentsClient {
          * @returns Observable<GrpcEvent<thisProto.FullTextSearchResponseIntentParameters>>
          */
         getFullTextSearchIntentParameters: (requestData: thisProto.FullTextSearchRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.FullTextSearchResponseIntentParameters>>;
+        /**
+         * Unary call: /ondewo.nlu.Agents/ReindexAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu005.Operation>>
+         */
+        reindexAgent: (requestData: thisProto.ReindexAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu005.Operation>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -627,6 +635,14 @@ export declare class AgentsClient {
      * @returns Observable<thisProto.FullTextSearchResponseIntentParameters>
      */
     getFullTextSearchIntentParameters(requestData: thisProto.FullTextSearchRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.FullTextSearchResponseIntentParameters>;
+    /**
+     * Unary call @/ondewo.nlu.Agents/ReindexAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu005.Operation>
+     */
+    reindexAgent(requestData: thisProto.ReindexAgentRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu005.Operation>;
     static ɵfac: i0.ɵɵFactoryDeclaration<AgentsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<AgentsClient>;
 }
