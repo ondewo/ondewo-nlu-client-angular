@@ -7,7 +7,8 @@ export declare enum EntityTypeView {
     ENTITY_TYPE_VIEW_UNSPECIFIED = 0,
     ENTITY_TYPE_VIEW_FULL = 1,
     ENTITY_TYPE_VIEW_PARTIAL = 2,
-    ENTITY_TYPE_VIEW_SHALLOW = 3
+    ENTITY_TYPE_VIEW_SHALLOW = 3,
+    ENTITY_TYPE_VIEW_MINIMUM = 4
 }
 export declare enum EntityTypeCategory {
     ALL_ENTITY_TYPES = 0,

@@ -2118,6 +2118,7 @@ var IntentView;
     IntentView[IntentView["INTENT_VIEW_FULL"] = 1] = "INTENT_VIEW_FULL";
     IntentView[IntentView["INTENT_VIEW_PARTIAL"] = 2] = "INTENT_VIEW_PARTIAL";
     IntentView[IntentView["INTENT_VIEW_SHALLOW"] = 3] = "INTENT_VIEW_SHALLOW";
+    IntentView[IntentView["INTENT_VIEW_MINIMUM"] = 4] = "INTENT_VIEW_MINIMUM";
 })(IntentView || (IntentView = {}));
 var IntentCategory;
 (function (IntentCategory) {
@@ -12934,6 +12935,7 @@ var EntityTypeView;
     EntityTypeView[EntityTypeView["ENTITY_TYPE_VIEW_FULL"] = 1] = "ENTITY_TYPE_VIEW_FULL";
     EntityTypeView[EntityTypeView["ENTITY_TYPE_VIEW_PARTIAL"] = 2] = "ENTITY_TYPE_VIEW_PARTIAL";
     EntityTypeView[EntityTypeView["ENTITY_TYPE_VIEW_SHALLOW"] = 3] = "ENTITY_TYPE_VIEW_SHALLOW";
+    EntityTypeView[EntityTypeView["ENTITY_TYPE_VIEW_MINIMUM"] = 4] = "ENTITY_TYPE_VIEW_MINIMUM";
 })(EntityTypeView || (EntityTypeView = {}));
 var EntityTypeCategory;
 (function (EntityTypeCategory) {
@@ -36835,6 +36837,7 @@ var AgentView;
     AgentView[AgentView["AGENT_VIEW_UNSPECIFIED"] = 0] = "AGENT_VIEW_UNSPECIFIED";
     AgentView[AgentView["AGENT_VIEW_FULL"] = 1] = "AGENT_VIEW_FULL";
     AgentView[AgentView["AGENT_VIEW_SHALLOW"] = 2] = "AGENT_VIEW_SHALLOW";
+    AgentView[AgentView["AGENT_VIEW_MINIMUM"] = 3] = "AGENT_VIEW_MINIMUM";
 })(AgentView || (AgentView = {}));
 var InitiationProtocol;
 (function (InitiationProtocol) {

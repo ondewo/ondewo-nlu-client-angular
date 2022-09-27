@@ -10,7 +10,8 @@ export declare enum IntentView {
     INTENT_VIEW_UNSPECIFIED = 0,
     INTENT_VIEW_FULL = 1,
     INTENT_VIEW_PARTIAL = 2,
-    INTENT_VIEW_SHALLOW = 3
+    INTENT_VIEW_SHALLOW = 3,
+    INTENT_VIEW_MINIMUM = 4
 }
 export declare enum IntentCategory {
     ALL_INTENTS = 0,

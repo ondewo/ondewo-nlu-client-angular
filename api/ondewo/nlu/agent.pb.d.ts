@@ -10,7 +10,8 @@ import * as ondewoNlu015 from '../../ondewo/nlu/user.pb';
 export declare enum AgentView {
     AGENT_VIEW_UNSPECIFIED = 0,
     AGENT_VIEW_FULL = 1,
-    AGENT_VIEW_SHALLOW = 2
+    AGENT_VIEW_SHALLOW = 2,
+    AGENT_VIEW_MINIMUM = 3
 }
 export declare enum InitiationProtocol {
     AS_SOON_AS_POSSIBLE = 0,
