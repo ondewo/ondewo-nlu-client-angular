@@ -43617,6 +43617,7 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
             this.name = _value.name;
             this.displayName = _value.displayName;
             this.entityTypeName = _value.entityTypeName;
+            this.entityTypeDisplayName = _value.entityTypeDisplayName;
             this.language = _value.language;
             EntitySearchResult.refineValues(this);
         }
@@ -43637,6 +43638,7 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
             _instance.name = _instance.name || '';
             _instance.displayName = _instance.displayName || '';
             _instance.entityTypeName = _instance.entityTypeName || '';
+            _instance.entityTypeDisplayName = _instance.entityTypeDisplayName || '';
             _instance.language = _instance.language || '';
         }
         /**
@@ -43659,6 +43661,9 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
                         _instance.entityTypeName = _reader.readString();
                         break;
                     case 4:
+                        _instance.entityTypeDisplayName = _reader.readString();
+                        break;
+                    case 5:
                         _instance.language = _reader.readString();
                         break;
                     default:
@@ -43682,8 +43687,11 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
             if (_instance.entityTypeName) {
                 _writer.writeString(3, _instance.entityTypeName);
             }
+            if (_instance.entityTypeDisplayName) {
+                _writer.writeString(4, _instance.entityTypeDisplayName);
+            }
             if (_instance.language) {
-                _writer.writeString(4, _instance.language);
+                _writer.writeString(5, _instance.language);
             }
         }
         get name() {
@@ -43703,6 +43711,12 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
         }
         set entityTypeName(value) {
             this._entityTypeName = value;
+        }
+        get entityTypeDisplayName() {
+            return this._entityTypeDisplayName;
+        }
+        set entityTypeDisplayName(value) {
+            this._entityTypeDisplayName = value;
         }
         get language() {
             return this._language;
@@ -43727,6 +43741,7 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
                 name: this.name,
                 displayName: this.displayName,
                 entityTypeName: this.entityTypeName,
+                entityTypeDisplayName: this.entityTypeDisplayName,
                 language: this.language
             };
         }
@@ -43748,6 +43763,7 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
                 name: this.name,
                 displayName: this.displayName,
                 entityTypeName: this.entityTypeName,
+                entityTypeDisplayName: this.entityTypeDisplayName,
                 language: this.language
             };
         }
@@ -43972,7 +43988,9 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
             this.name = _value.name;
             this.displayName = _value.displayName;
             this.entityTypeName = _value.entityTypeName;
+            this.entityTypeDisplayName = _value.entityTypeDisplayName;
             this.entityName = _value.entityName;
+            this.entityDisplayName = _value.entityDisplayName;
             this.language = _value.language;
             EntitySynonymSearchResult.refineValues(this);
         }
@@ -43993,7 +44011,9 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
             _instance.name = _instance.name || '';
             _instance.displayName = _instance.displayName || '';
             _instance.entityTypeName = _instance.entityTypeName || '';
+            _instance.entityTypeDisplayName = _instance.entityTypeDisplayName || '';
             _instance.entityName = _instance.entityName || '';
+            _instance.entityDisplayName = _instance.entityDisplayName || '';
             _instance.language = _instance.language || '';
         }
         /**
@@ -44016,9 +44036,15 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
                         _instance.entityTypeName = _reader.readString();
                         break;
                     case 4:
-                        _instance.entityName = _reader.readString();
+                        _instance.entityTypeDisplayName = _reader.readString();
                         break;
                     case 5:
+                        _instance.entityName = _reader.readString();
+                        break;
+                    case 6:
+                        _instance.entityDisplayName = _reader.readString();
+                        break;
+                    case 7:
                         _instance.language = _reader.readString();
                         break;
                     default:
@@ -44042,11 +44068,17 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
             if (_instance.entityTypeName) {
                 _writer.writeString(3, _instance.entityTypeName);
             }
+            if (_instance.entityTypeDisplayName) {
+                _writer.writeString(4, _instance.entityTypeDisplayName);
+            }
             if (_instance.entityName) {
-                _writer.writeString(4, _instance.entityName);
+                _writer.writeString(5, _instance.entityName);
+            }
+            if (_instance.entityDisplayName) {
+                _writer.writeString(6, _instance.entityDisplayName);
             }
             if (_instance.language) {
-                _writer.writeString(5, _instance.language);
+                _writer.writeString(7, _instance.language);
             }
         }
         get name() {
@@ -44067,11 +44099,23 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
         set entityTypeName(value) {
             this._entityTypeName = value;
         }
+        get entityTypeDisplayName() {
+            return this._entityTypeDisplayName;
+        }
+        set entityTypeDisplayName(value) {
+            this._entityTypeDisplayName = value;
+        }
         get entityName() {
             return this._entityName;
         }
         set entityName(value) {
             this._entityName = value;
+        }
+        get entityDisplayName() {
+            return this._entityDisplayName;
+        }
+        set entityDisplayName(value) {
+            this._entityDisplayName = value;
         }
         get language() {
             return this._language;
@@ -44096,7 +44140,9 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
                 name: this.name,
                 displayName: this.displayName,
                 entityTypeName: this.entityTypeName,
+                entityTypeDisplayName: this.entityTypeDisplayName,
                 entityName: this.entityName,
+                entityDisplayName: this.entityDisplayName,
                 language: this.language
             };
         }
@@ -44118,7 +44164,9 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
                 name: this.name,
                 displayName: this.displayName,
                 entityTypeName: this.entityTypeName,
+                entityTypeDisplayName: this.entityTypeDisplayName,
                 entityName: this.entityName,
+                entityDisplayName: this.entityDisplayName,
                 language: this.language
             };
         }
@@ -44694,6 +44742,7 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
             _value = _value || {};
             this.name = _value.name;
             this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
             this.language = _value.language;
             IntentContextInSearchResult.refineValues(this);
         }
@@ -44713,6 +44762,7 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
         static refineValues(_instance) {
             _instance.name = _instance.name || '';
             _instance.intentName = _instance.intentName || '';
+            _instance.intentDisplayName = _instance.intentDisplayName || '';
             _instance.language = _instance.language || '';
         }
         /**
@@ -44732,6 +44782,9 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
                         _instance.intentName = _reader.readString();
                         break;
                     case 3:
+                        _instance.intentDisplayName = _reader.readString();
+                        break;
+                    case 4:
                         _instance.language = _reader.readString();
                         break;
                     default:
@@ -44752,8 +44805,11 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
             if (_instance.intentName) {
                 _writer.writeString(2, _instance.intentName);
             }
+            if (_instance.intentDisplayName) {
+                _writer.writeString(3, _instance.intentDisplayName);
+            }
             if (_instance.language) {
-                _writer.writeString(3, _instance.language);
+                _writer.writeString(4, _instance.language);
             }
         }
         get name() {
@@ -44767,6 +44823,12 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
         }
         set intentName(value) {
             this._intentName = value;
+        }
+        get intentDisplayName() {
+            return this._intentDisplayName;
+        }
+        set intentDisplayName(value) {
+            this._intentDisplayName = value;
         }
         get language() {
             return this._language;
@@ -44790,6 +44852,7 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
             return {
                 name: this.name,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -44810,6 +44873,7 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
             return {
                 name: this.name,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -45033,6 +45097,7 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
             _value = _value || {};
             this.name = _value.name;
             this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
             this.language = _value.language;
             IntentContextOutSearchResult.refineValues(this);
         }
@@ -45052,6 +45117,7 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
         static refineValues(_instance) {
             _instance.name = _instance.name || '';
             _instance.intentName = _instance.intentName || '';
+            _instance.intentDisplayName = _instance.intentDisplayName || '';
             _instance.language = _instance.language || '';
         }
         /**
@@ -45071,6 +45137,9 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
                         _instance.intentName = _reader.readString();
                         break;
                     case 3:
+                        _instance.intentDisplayName = _reader.readString();
+                        break;
+                    case 4:
                         _instance.language = _reader.readString();
                         break;
                     default:
@@ -45091,8 +45160,11 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
             if (_instance.intentName) {
                 _writer.writeString(2, _instance.intentName);
             }
+            if (_instance.intentDisplayName) {
+                _writer.writeString(3, _instance.intentDisplayName);
+            }
             if (_instance.language) {
-                _writer.writeString(3, _instance.language);
+                _writer.writeString(4, _instance.language);
             }
         }
         get name() {
@@ -45106,6 +45178,12 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
         }
         set intentName(value) {
             this._intentName = value;
+        }
+        get intentDisplayName() {
+            return this._intentDisplayName;
+        }
+        set intentDisplayName(value) {
+            this._intentDisplayName = value;
         }
         get language() {
             return this._language;
@@ -45129,6 +45207,7 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
             return {
                 name: this.name,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -45149,6 +45228,7 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
             return {
                 name: this.name,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -45376,6 +45456,7 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
             this.textAsEntityValues = _value.textAsEntityValues;
             this.type = _value.type;
             this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
             this.language = _value.language;
             IntentUsersaysSearchResult.refineValues(this);
         }
@@ -45399,6 +45480,7 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
             _instance.textAsEntityValues = _instance.textAsEntityValues || '';
             _instance.type = _instance.type || '';
             _instance.intentName = _instance.intentName || '';
+            _instance.intentDisplayName = _instance.intentDisplayName || '';
             _instance.language = _instance.language || '';
         }
         /**
@@ -45430,6 +45512,9 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
                         _instance.intentName = _reader.readString();
                         break;
                     case 7:
+                        _instance.intentDisplayName = _reader.readString();
+                        break;
+                    case 8:
                         _instance.language = _reader.readString();
                         break;
                     default:
@@ -45462,8 +45547,11 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
             if (_instance.intentName) {
                 _writer.writeString(6, _instance.intentName);
             }
+            if (_instance.intentDisplayName) {
+                _writer.writeString(7, _instance.intentDisplayName);
+            }
             if (_instance.language) {
-                _writer.writeString(7, _instance.language);
+                _writer.writeString(8, _instance.language);
             }
         }
         get name() {
@@ -45502,6 +45590,12 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
         set intentName(value) {
             this._intentName = value;
         }
+        get intentDisplayName() {
+            return this._intentDisplayName;
+        }
+        set intentDisplayName(value) {
+            this._intentDisplayName = value;
+        }
         get language() {
             return this._language;
         }
@@ -45528,6 +45622,7 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
                 textAsEntityValues: this.textAsEntityValues,
                 type: this.type,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -45552,6 +45647,7 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
                 textAsEntityValues: this.textAsEntityValues,
                 type: this.type,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -45775,6 +45871,7 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
             this.name = _value.name;
             this.text = _value.text;
             this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
             this.language = _value.language;
             IntentTagsSearchResult.refineValues(this);
         }
@@ -45795,6 +45892,7 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
             _instance.name = _instance.name || '';
             _instance.text = _instance.text || '';
             _instance.intentName = _instance.intentName || '';
+            _instance.intentDisplayName = _instance.intentDisplayName || '';
             _instance.language = _instance.language || '';
         }
         /**
@@ -45817,6 +45915,9 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
                         _instance.intentName = _reader.readString();
                         break;
                     case 4:
+                        _instance.intentDisplayName = _reader.readString();
+                        break;
+                    case 5:
                         _instance.language = _reader.readString();
                         break;
                     default:
@@ -45840,8 +45941,11 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
             if (_instance.intentName) {
                 _writer.writeString(3, _instance.intentName);
             }
+            if (_instance.intentDisplayName) {
+                _writer.writeString(4, _instance.intentDisplayName);
+            }
             if (_instance.language) {
-                _writer.writeString(4, _instance.language);
+                _writer.writeString(5, _instance.language);
             }
         }
         get name() {
@@ -45861,6 +45965,12 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
         }
         set intentName(value) {
             this._intentName = value;
+        }
+        get intentDisplayName() {
+            return this._intentDisplayName;
+        }
+        set intentDisplayName(value) {
+            this._intentDisplayName = value;
         }
         get language() {
             return this._language;
@@ -45885,6 +45995,7 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
                 name: this.name,
                 text: this.text,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -45906,6 +46017,7 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
                 name: this.name,
                 text: this.text,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -46131,6 +46243,7 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
             this.platform = _value.platform;
             this.responseType = _value.responseType;
             this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
             this.language = _value.language;
             IntentResponseSearchResult.refineValues(this);
         }
@@ -46152,6 +46265,7 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
             _instance.platform = _instance.platform || '';
             _instance.responseType = _instance.responseType || '';
             _instance.intentName = _instance.intentName || '';
+            _instance.intentDisplayName = _instance.intentDisplayName || '';
             _instance.language = _instance.language || '';
         }
         /**
@@ -46177,6 +46291,9 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
                         _instance.intentName = _reader.readString();
                         break;
                     case 5:
+                        _instance.intentDisplayName = _reader.readString();
+                        break;
+                    case 6:
                         _instance.language = _reader.readString();
                         break;
                     default:
@@ -46203,8 +46320,11 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
             if (_instance.intentName) {
                 _writer.writeString(4, _instance.intentName);
             }
+            if (_instance.intentDisplayName) {
+                _writer.writeString(5, _instance.intentDisplayName);
+            }
             if (_instance.language) {
-                _writer.writeString(5, _instance.language);
+                _writer.writeString(6, _instance.language);
             }
         }
         get text() {
@@ -46231,6 +46351,12 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
         set intentName(value) {
             this._intentName = value;
         }
+        get intentDisplayName() {
+            return this._intentDisplayName;
+        }
+        set intentDisplayName(value) {
+            this._intentDisplayName = value;
+        }
         get language() {
             return this._language;
         }
@@ -46255,6 +46381,7 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
                 platform: this.platform,
                 responseType: this.responseType,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -46277,6 +46404,7 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
                 platform: this.platform,
                 responseType: this.responseType,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -46501,6 +46629,7 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
             this.parameterName = _value.parameterName;
             this.parameterDisplayName = _value.parameterDisplayName;
             this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
             this.language = _value.language;
             IntentParametersSearchResult.refineValues(this);
         }
@@ -46521,6 +46650,7 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
             _instance.parameterName = _instance.parameterName || '';
             _instance.parameterDisplayName = _instance.parameterDisplayName || '';
             _instance.intentName = _instance.intentName || '';
+            _instance.intentDisplayName = _instance.intentDisplayName || '';
             _instance.language = _instance.language || '';
         }
         /**
@@ -46543,6 +46673,9 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
                         _instance.intentName = _reader.readString();
                         break;
                     case 4:
+                        _instance.intentDisplayName = _reader.readString();
+                        break;
+                    case 5:
                         _instance.language = _reader.readString();
                         break;
                     default:
@@ -46566,8 +46699,11 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
             if (_instance.intentName) {
                 _writer.writeString(3, _instance.intentName);
             }
+            if (_instance.intentDisplayName) {
+                _writer.writeString(4, _instance.intentDisplayName);
+            }
             if (_instance.language) {
-                _writer.writeString(4, _instance.language);
+                _writer.writeString(5, _instance.language);
             }
         }
         get parameterName() {
@@ -46587,6 +46723,12 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
         }
         set intentName(value) {
             this._intentName = value;
+        }
+        get intentDisplayName() {
+            return this._intentDisplayName;
+        }
+        set intentDisplayName(value) {
+            this._intentDisplayName = value;
         }
         get language() {
             return this._language;
@@ -46611,6 +46753,7 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
                 parameterName: this.parameterName,
                 parameterDisplayName: this.parameterDisplayName,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }
@@ -46632,6 +46775,7 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
                 parameterName: this.parameterName,
                 parameterDisplayName: this.parameterDisplayName,
                 intentName: this.intentName,
+                intentDisplayName: this.intentDisplayName,
                 language: this.language
             };
         }

@@ -3938,6 +3938,7 @@ export declare module FullTextSearchResponseEntity {
         private _name?;
         private _displayName?;
         private _entityTypeName?;
+        private _entityTypeDisplayName?;
         private _language?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -3950,6 +3951,8 @@ export declare module FullTextSearchResponseEntity {
         set displayName(value: string | undefined);
         get entityTypeName(): string | undefined;
         set entityTypeName(value: string | undefined);
+        get entityTypeDisplayName(): string | undefined;
+        set entityTypeDisplayName(value: string | undefined);
         get language(): string | undefined;
         set language(value: string | undefined);
         /**
@@ -3980,6 +3983,7 @@ export declare module FullTextSearchResponseEntity {
             name?: string;
             displayName?: string;
             entityTypeName?: string;
+            entityTypeDisplayName?: string;
             language?: string;
         }
         /**
@@ -3989,6 +3993,7 @@ export declare module FullTextSearchResponseEntity {
             name?: string;
             displayName?: string;
             entityTypeName?: string;
+            entityTypeDisplayName?: string;
             language?: string;
         }
     }
@@ -4121,7 +4126,9 @@ export declare module FullTextSearchResponseEntitySynonym {
         private _name?;
         private _displayName?;
         private _entityTypeName?;
+        private _entityTypeDisplayName?;
         private _entityName?;
+        private _entityDisplayName?;
         private _language?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -4134,8 +4141,12 @@ export declare module FullTextSearchResponseEntitySynonym {
         set displayName(value: string | undefined);
         get entityTypeName(): string | undefined;
         set entityTypeName(value: string | undefined);
+        get entityTypeDisplayName(): string | undefined;
+        set entityTypeDisplayName(value: string | undefined);
         get entityName(): string | undefined;
         set entityName(value: string | undefined);
+        get entityDisplayName(): string | undefined;
+        set entityDisplayName(value: string | undefined);
         get language(): string | undefined;
         set language(value: string | undefined);
         /**
@@ -4166,7 +4177,9 @@ export declare module FullTextSearchResponseEntitySynonym {
             name?: string;
             displayName?: string;
             entityTypeName?: string;
+            entityTypeDisplayName?: string;
             entityName?: string;
+            entityDisplayName?: string;
             language?: string;
         }
         /**
@@ -4176,7 +4189,9 @@ export declare module FullTextSearchResponseEntitySynonym {
             name?: string;
             displayName?: string;
             entityTypeName?: string;
+            entityTypeDisplayName?: string;
             entityName?: string;
+            entityDisplayName?: string;
             language?: string;
         }
     }
@@ -4491,6 +4506,7 @@ export declare module FullTextSearchResponseIntentContextIn {
         static serializeBinaryToWriter(_instance: IntentContextInSearchResult, _writer: BinaryWriter): void;
         private _name?;
         private _intentName?;
+        private _intentDisplayName?;
         private _language?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -4501,6 +4517,8 @@ export declare module FullTextSearchResponseIntentContextIn {
         set name(value: string | undefined);
         get intentName(): string | undefined;
         set intentName(value: string | undefined);
+        get intentDisplayName(): string | undefined;
+        set intentDisplayName(value: string | undefined);
         get language(): string | undefined;
         set language(value: string | undefined);
         /**
@@ -4530,6 +4548,7 @@ export declare module FullTextSearchResponseIntentContextIn {
         interface AsObject {
             name?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
         /**
@@ -4538,6 +4557,7 @@ export declare module FullTextSearchResponseIntentContextIn {
         interface AsProtobufJSON {
             name?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
     }
@@ -4669,6 +4689,7 @@ export declare module FullTextSearchResponseIntentContextOut {
         static serializeBinaryToWriter(_instance: IntentContextOutSearchResult, _writer: BinaryWriter): void;
         private _name?;
         private _intentName?;
+        private _intentDisplayName?;
         private _language?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -4679,6 +4700,8 @@ export declare module FullTextSearchResponseIntentContextOut {
         set name(value: string | undefined);
         get intentName(): string | undefined;
         set intentName(value: string | undefined);
+        get intentDisplayName(): string | undefined;
+        set intentDisplayName(value: string | undefined);
         get language(): string | undefined;
         set language(value: string | undefined);
         /**
@@ -4708,6 +4731,7 @@ export declare module FullTextSearchResponseIntentContextOut {
         interface AsObject {
             name?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
         /**
@@ -4716,6 +4740,7 @@ export declare module FullTextSearchResponseIntentContextOut {
         interface AsProtobufJSON {
             name?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
     }
@@ -4851,6 +4876,7 @@ export declare module FullTextSearchResponseIntentUsersays {
         private _textAsEntityValues?;
         private _type?;
         private _intentName?;
+        private _intentDisplayName?;
         private _language?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -4869,6 +4895,8 @@ export declare module FullTextSearchResponseIntentUsersays {
         set type(value: string | undefined);
         get intentName(): string | undefined;
         set intentName(value: string | undefined);
+        get intentDisplayName(): string | undefined;
+        set intentDisplayName(value: string | undefined);
         get language(): string | undefined;
         set language(value: string | undefined);
         /**
@@ -4902,6 +4930,7 @@ export declare module FullTextSearchResponseIntentUsersays {
             textAsEntityValues?: string;
             type?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
         /**
@@ -4914,6 +4943,7 @@ export declare module FullTextSearchResponseIntentUsersays {
             textAsEntityValues?: string;
             type?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
     }
@@ -5046,6 +5076,7 @@ export declare module FullTextSearchResponseIntentTags {
         private _name?;
         private _text?;
         private _intentName?;
+        private _intentDisplayName?;
         private _language?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -5058,6 +5089,8 @@ export declare module FullTextSearchResponseIntentTags {
         set text(value: string | undefined);
         get intentName(): string | undefined;
         set intentName(value: string | undefined);
+        get intentDisplayName(): string | undefined;
+        set intentDisplayName(value: string | undefined);
         get language(): string | undefined;
         set language(value: string | undefined);
         /**
@@ -5088,6 +5121,7 @@ export declare module FullTextSearchResponseIntentTags {
             name?: string;
             text?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
         /**
@@ -5097,6 +5131,7 @@ export declare module FullTextSearchResponseIntentTags {
             name?: string;
             text?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
     }
@@ -5230,6 +5265,7 @@ export declare module FullTextSearchResponseIntentResponse {
         private _platform?;
         private _responseType?;
         private _intentName?;
+        private _intentDisplayName?;
         private _language?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -5244,6 +5280,8 @@ export declare module FullTextSearchResponseIntentResponse {
         set responseType(value: string | undefined);
         get intentName(): string | undefined;
         set intentName(value: string | undefined);
+        get intentDisplayName(): string | undefined;
+        set intentDisplayName(value: string | undefined);
         get language(): string | undefined;
         set language(value: string | undefined);
         /**
@@ -5275,6 +5313,7 @@ export declare module FullTextSearchResponseIntentResponse {
             platform?: string;
             responseType?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
         /**
@@ -5285,6 +5324,7 @@ export declare module FullTextSearchResponseIntentResponse {
             platform?: string;
             responseType?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
     }
@@ -5417,6 +5457,7 @@ export declare module FullTextSearchResponseIntentParameters {
         private _parameterName?;
         private _parameterDisplayName?;
         private _intentName?;
+        private _intentDisplayName?;
         private _language?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -5429,6 +5470,8 @@ export declare module FullTextSearchResponseIntentParameters {
         set parameterDisplayName(value: string | undefined);
         get intentName(): string | undefined;
         set intentName(value: string | undefined);
+        get intentDisplayName(): string | undefined;
+        set intentDisplayName(value: string | undefined);
         get language(): string | undefined;
         set language(value: string | undefined);
         /**
@@ -5459,6 +5502,7 @@ export declare module FullTextSearchResponseIntentParameters {
             parameterName?: string;
             parameterDisplayName?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
         /**
@@ -5468,6 +5512,7 @@ export declare module FullTextSearchResponseIntentParameters {
             parameterName?: string;
             parameterDisplayName?: string;
             intentName?: string;
+            intentDisplayName?: string;
             language?: string;
         }
     }
