@@ -5077,6 +5077,7 @@ export declare module FullTextSearchResponseIntentTags {
         private _text?;
         private _intentName?;
         private _intentDisplayName?;
+        private _tags?;
         private _language?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -5091,6 +5092,8 @@ export declare module FullTextSearchResponseIntentTags {
         set intentName(value: string | undefined);
         get intentDisplayName(): string | undefined;
         set intentDisplayName(value: string | undefined);
+        get tags(): string[] | undefined;
+        set tags(value: string[] | undefined);
         get language(): string | undefined;
         set language(value: string | undefined);
         /**
@@ -5122,6 +5125,7 @@ export declare module FullTextSearchResponseIntentTags {
             text?: string;
             intentName?: string;
             intentDisplayName?: string;
+            tags?: string[];
             language?: string;
         }
         /**
@@ -5132,6 +5136,7 @@ export declare module FullTextSearchResponseIntentTags {
             text?: string;
             intentName?: string;
             intentDisplayName?: string;
+            tags?: string[];
             language?: string;
         }
     }
