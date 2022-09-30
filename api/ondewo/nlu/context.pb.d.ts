@@ -93,7 +93,7 @@ export declare module Context {
         lifespanTime?: number;
     }
     /**
-     * Message implementation for ondewo.nlu.Parameter
+     * Message implementation for ondewo.nlu.Context.Parameter
      */
     class Parameter implements GrpcMessage {
         static id: string;
@@ -177,7 +177,7 @@ export declare module Context {
         }
     }
     /**
-     * Message implementation for ondewo.nlu.ParametersEntry
+     * Message implementation for ondewo.nlu.Context.ParametersEntry
      */
     class ParametersEntry implements GrpcMessage {
         static id: string;

@@ -312,7 +312,7 @@ export declare module RunScraperResponse {
         scraperContainers?: RunScraperResponse.ScraperContainer.AsProtobufJSON[] | null;
     }
     /**
-     * Message implementation for ondewo.qa.ScraperContainer
+     * Message implementation for ondewo.qa.RunScraperResponse.ScraperContainer
      */
     class ScraperContainer implements GrpcMessage {
         static id: string;
