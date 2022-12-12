@@ -81,6 +81,14 @@ export declare class SessionsClient {
          */
         listSessionLabels: (requestData: thisProto.ListSessionLabelsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListSessionLabelsResponse>>;
         /**
+         * Unary call: /ondewo.nlu.Sessions/ListSessionLabelsOfAllSessions
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListSessionLabelsResponse>>
+         */
+        listSessionLabelsOfAllSessions: (requestData: thisProto.ListSessionLabelsOfAllSessionsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListSessionLabelsResponse>>;
+        /**
          * Unary call: /ondewo.nlu.Sessions/AddSessionLabels
          *
          * @param requestMessage Request message
@@ -89,13 +97,13 @@ export declare class SessionsClient {
          */
         addSessionLabels: (requestData: thisProto.AddSessionLabelsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
         /**
-         * Unary call: /ondewo.nlu.Sessions/RemoveSessionLabels
+         * Unary call: /ondewo.nlu.Sessions/DeleteSessionLabels
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<thisProto.Session>>
          */
-        removeSessionLabels: (requestData: thisProto.RemoveSessionLabelsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
+        deleteSessionLabels: (requestData: thisProto.DeleteSessionLabelsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.Session>>;
         /**
          * Unary call: /ondewo.nlu.Sessions/ListSessionReviews
          *
@@ -195,6 +203,14 @@ export declare class SessionsClient {
      */
     listSessionLabels(requestData: thisProto.ListSessionLabelsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListSessionLabelsResponse>;
     /**
+     * Unary call @/ondewo.nlu.Sessions/ListSessionLabelsOfAllSessions
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListSessionLabelsResponse>
+     */
+    listSessionLabelsOfAllSessions(requestData: thisProto.ListSessionLabelsOfAllSessionsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListSessionLabelsResponse>;
+    /**
      * Unary call @/ondewo.nlu.Sessions/AddSessionLabels
      *
      * @param requestMessage Request message
@@ -203,13 +219,13 @@ export declare class SessionsClient {
      */
     addSessionLabels(requestData: thisProto.AddSessionLabelsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
     /**
-     * Unary call @/ondewo.nlu.Sessions/RemoveSessionLabels
+     * Unary call @/ondewo.nlu.Sessions/DeleteSessionLabels
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
      * @returns Observable<thisProto.Session>
      */
-    removeSessionLabels(requestData: thisProto.RemoveSessionLabelsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
+    deleteSessionLabels(requestData: thisProto.DeleteSessionLabelsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.Session>;
     /**
      * Unary call @/ondewo.nlu.Sessions/ListSessionReviews
      *

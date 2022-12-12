@@ -28,33 +28,33 @@ export declare class GetAnswerRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetAnswerRequest, _writer: BinaryWriter): void;
-    private _sessionId?;
+    private _sessionId;
     private _text?;
-    private _maxNumAnswers?;
-    private _thresholdReader?;
-    private _thresholdRetriever?;
-    private _thresholdOverall?;
-    private _readerModelName?;
+    private _maxNumAnswers;
+    private _thresholdReader;
+    private _thresholdRetriever;
+    private _thresholdOverall;
+    private _readerModelName;
     private _urlFilter?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetAnswerRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetAnswerRequest.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
     get text(): ondewoNlu010.TextInput | undefined;
     set text(value: ondewoNlu010.TextInput | undefined);
-    get maxNumAnswers(): number | undefined;
-    set maxNumAnswers(value: number | undefined);
-    get thresholdReader(): number | undefined;
-    set thresholdReader(value: number | undefined);
-    get thresholdRetriever(): number | undefined;
-    set thresholdRetriever(value: number | undefined);
-    get thresholdOverall(): number | undefined;
-    set thresholdOverall(value: number | undefined);
-    get readerModelName(): string | undefined;
-    set readerModelName(value: string | undefined);
+    get maxNumAnswers(): number;
+    set maxNumAnswers(value: number);
+    get thresholdReader(): number;
+    set thresholdReader(value: number);
+    get thresholdRetriever(): number;
+    set thresholdRetriever(value: number);
+    get thresholdOverall(): number;
+    set thresholdOverall(value: number);
+    get readerModelName(): string;
+    set readerModelName(value: string);
     get urlFilter(): UrlFilter | undefined;
     set urlFilter(value: UrlFilter | undefined);
     /**
@@ -82,27 +82,27 @@ export declare module GetAnswerRequest {
      * Standard JavaScript object representation for GetAnswerRequest
      */
     interface AsObject {
-        sessionId?: string;
+        sessionId: string;
         text?: ondewoNlu010.TextInput.AsObject;
-        maxNumAnswers?: number;
-        thresholdReader?: number;
-        thresholdRetriever?: number;
-        thresholdOverall?: number;
-        readerModelName?: string;
+        maxNumAnswers: number;
+        thresholdReader: number;
+        thresholdRetriever: number;
+        thresholdOverall: number;
+        readerModelName: string;
         urlFilter?: UrlFilter.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAnswerRequest
      */
     interface AsProtobufJSON {
-        sessionId?: string;
-        text?: ondewoNlu010.TextInput.AsProtobufJSON | null;
-        maxNumAnswers?: number;
-        thresholdReader?: number;
-        thresholdRetriever?: number;
-        thresholdOverall?: number;
-        readerModelName?: string;
-        urlFilter?: UrlFilter.AsProtobufJSON | null;
+        sessionId: string;
+        text: ondewoNlu010.TextInput.AsProtobufJSON | null;
+        maxNumAnswers: number;
+        thresholdReader: number;
+        thresholdRetriever: number;
+        thresholdOverall: number;
+        readerModelName: string;
+        urlFilter: UrlFilter.AsProtobufJSON | null;
     }
 }
 /**
@@ -171,7 +171,7 @@ export declare module GetAnswerResponse {
      * Protobuf JSON representation for GetAnswerResponse
      */
     interface AsProtobufJSON {
-        queryResult?: ondewoNlu010.DetectIntentResponse.AsProtobufJSON | null;
+        queryResult: ondewoNlu010.DetectIntentResponse.AsProtobufJSON | null;
     }
 }
 /**
@@ -201,14 +201,14 @@ export declare class RunScraperRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: RunScraperRequest, _writer: BinaryWriter): void;
-    private _projectIds?;
+    private _projectIds;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of RunScraperRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<RunScraperRequest.AsObject>);
-    get projectIds(): string[] | undefined;
-    set projectIds(value: string[] | undefined);
+    get projectIds(): string[];
+    set projectIds(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -234,13 +234,13 @@ export declare module RunScraperRequest {
      * Standard JavaScript object representation for RunScraperRequest
      */
     interface AsObject {
-        projectIds?: string[];
+        projectIds: string[];
     }
     /**
      * Protobuf JSON representation for RunScraperRequest
      */
     interface AsProtobufJSON {
-        projectIds?: string[];
+        projectIds: string[];
     }
 }
 /**
@@ -309,7 +309,7 @@ export declare module RunScraperResponse {
      * Protobuf JSON representation for RunScraperResponse
      */
     interface AsProtobufJSON {
-        scraperContainers?: RunScraperResponse.ScraperContainer.AsProtobufJSON[] | null;
+        scraperContainers: RunScraperResponse.ScraperContainer.AsProtobufJSON[] | null;
     }
     /**
      * Message implementation for ondewo.qa.RunScraperResponse.ScraperContainer
@@ -338,17 +338,17 @@ export declare module RunScraperResponse {
          * @param _writer binary writer instance
          */
         static serializeBinaryToWriter(_instance: ScraperContainer, _writer: BinaryWriter): void;
-        private _containerName?;
-        private _containerId?;
+        private _containerName;
+        private _containerId;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of ScraperContainer to deeply clone from
          */
         constructor(_value?: RecursivePartial<ScraperContainer.AsObject>);
-        get containerName(): string | undefined;
-        set containerName(value: string | undefined);
-        get containerId(): string | undefined;
-        set containerId(value: string | undefined);
+        get containerName(): string;
+        set containerName(value: string);
+        get containerId(): string;
+        set containerId(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -374,15 +374,15 @@ export declare module RunScraperResponse {
          * Standard JavaScript object representation for ScraperContainer
          */
         interface AsObject {
-            containerName?: string;
-            containerId?: string;
+            containerName: string;
+            containerId: string;
         }
         /**
          * Protobuf JSON representation for ScraperContainer
          */
         interface AsProtobufJSON {
-            containerName?: string;
-            containerId?: string;
+            containerName: string;
+            containerId: string;
         }
     }
 }
@@ -413,17 +413,17 @@ export declare class RunTrainingResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: RunTrainingResponse, _writer: BinaryWriter): void;
-    private _f1?;
-    private _accuracy?;
+    private _f1;
+    private _accuracy;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of RunTrainingResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<RunTrainingResponse.AsObject>);
-    get f1(): number | undefined;
-    set f1(value: number | undefined);
-    get accuracy(): number | undefined;
-    set accuracy(value: number | undefined);
+    get f1(): number;
+    set f1(value: number);
+    get accuracy(): number;
+    set accuracy(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -449,15 +449,15 @@ export declare module RunTrainingResponse {
      * Standard JavaScript object representation for RunTrainingResponse
      */
     interface AsObject {
-        f1?: number;
-        accuracy?: number;
+        f1: number;
+        accuracy: number;
     }
     /**
      * Protobuf JSON representation for RunTrainingResponse
      */
     interface AsProtobufJSON {
-        f1?: number;
-        accuracy?: number;
+        f1: number;
+        accuracy: number;
     }
 }
 /**
@@ -487,20 +487,20 @@ export declare class UrlFilter implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: UrlFilter, _writer: BinaryWriter): void;
-    private _allowedValues?;
-    private _regexFilterInclude?;
-    private _regexFilterExclude?;
+    private _allowedValues;
+    private _regexFilterInclude;
+    private _regexFilterExclude;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of UrlFilter to deeply clone from
      */
     constructor(_value?: RecursivePartial<UrlFilter.AsObject>);
-    get allowedValues(): string[] | undefined;
-    set allowedValues(value: string[] | undefined);
-    get regexFilterInclude(): string | undefined;
-    set regexFilterInclude(value: string | undefined);
-    get regexFilterExclude(): string | undefined;
-    set regexFilterExclude(value: string | undefined);
+    get allowedValues(): string[];
+    set allowedValues(value: string[]);
+    get regexFilterInclude(): string;
+    set regexFilterInclude(value: string);
+    get regexFilterExclude(): string;
+    set regexFilterExclude(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -526,17 +526,17 @@ export declare module UrlFilter {
      * Standard JavaScript object representation for UrlFilter
      */
     interface AsObject {
-        allowedValues?: string[];
-        regexFilterInclude?: string;
-        regexFilterExclude?: string;
+        allowedValues: string[];
+        regexFilterInclude: string;
+        regexFilterExclude: string;
     }
     /**
      * Protobuf JSON representation for UrlFilter
      */
     interface AsProtobufJSON {
-        allowedValues?: string[];
-        regexFilterInclude?: string;
-        regexFilterExclude?: string;
+        allowedValues: string[];
+        regexFilterInclude: string;
+        regexFilterExclude: string;
     }
 }
 /**
@@ -566,14 +566,14 @@ export declare class GetServerStateResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetServerStateResponse, _writer: BinaryWriter): void;
-    private _serverIsReady?;
+    private _serverIsReady;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetServerStateResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetServerStateResponse.AsObject>);
-    get serverIsReady(): boolean | undefined;
-    set serverIsReady(value: boolean | undefined);
+    get serverIsReady(): boolean;
+    set serverIsReady(value: boolean);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -599,13 +599,13 @@ export declare module GetServerStateResponse {
      * Standard JavaScript object representation for GetServerStateResponse
      */
     interface AsObject {
-        serverIsReady?: boolean;
+        serverIsReady: boolean;
     }
     /**
      * Protobuf JSON representation for GetServerStateResponse
      */
     interface AsProtobufJSON {
-        serverIsReady?: boolean;
+        serverIsReady: boolean;
     }
 }
 /**
@@ -635,14 +635,14 @@ export declare class ListProjectIdsResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListProjectIdsResponse, _writer: BinaryWriter): void;
-    private _projectIds?;
+    private _projectIds;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListProjectIdsResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListProjectIdsResponse.AsObject>);
-    get projectIds(): string[] | undefined;
-    set projectIds(value: string[] | undefined);
+    get projectIds(): string[];
+    set projectIds(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -668,13 +668,13 @@ export declare module ListProjectIdsResponse {
      * Standard JavaScript object representation for ListProjectIdsResponse
      */
     interface AsObject {
-        projectIds?: string[];
+        projectIds: string[];
     }
     /**
      * Protobuf JSON representation for ListProjectIdsResponse
      */
     interface AsProtobufJSON {
-        projectIds?: string[];
+        projectIds: string[];
     }
 }
 /**
@@ -704,14 +704,14 @@ export declare class GetProjectConfigRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetProjectConfigRequest, _writer: BinaryWriter): void;
-    private _projectId?;
+    private _projectId;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetProjectConfigRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetProjectConfigRequest.AsObject>);
-    get projectId(): string | undefined;
-    set projectId(value: string | undefined);
+    get projectId(): string;
+    set projectId(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -737,13 +737,13 @@ export declare module GetProjectConfigRequest {
      * Standard JavaScript object representation for GetProjectConfigRequest
      */
     interface AsObject {
-        projectId?: string;
+        projectId: string;
     }
     /**
      * Protobuf JSON representation for GetProjectConfigRequest
      */
     interface AsProtobufJSON {
-        projectId?: string;
+        projectId: string;
     }
 }
 /**
@@ -773,14 +773,14 @@ export declare class GetProjectConfigResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetProjectConfigResponse, _writer: BinaryWriter): void;
-    private _configSerialized?;
+    private _configSerialized;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetProjectConfigResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetProjectConfigResponse.AsObject>);
-    get configSerialized(): string | undefined;
-    set configSerialized(value: string | undefined);
+    get configSerialized(): string;
+    set configSerialized(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -806,13 +806,13 @@ export declare module GetProjectConfigResponse {
      * Standard JavaScript object representation for GetProjectConfigResponse
      */
     interface AsObject {
-        configSerialized?: string;
+        configSerialized: string;
     }
     /**
      * Protobuf JSON representation for GetProjectConfigResponse
      */
     interface AsProtobufJSON {
-        configSerialized?: string;
+        configSerialized: string;
     }
 }
 /**
@@ -842,14 +842,14 @@ export declare class UpdateDatabaseRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: UpdateDatabaseRequest, _writer: BinaryWriter): void;
-    private _projectIds?;
+    private _projectIds;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of UpdateDatabaseRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<UpdateDatabaseRequest.AsObject>);
-    get projectIds(): string[] | undefined;
-    set projectIds(value: string[] | undefined);
+    get projectIds(): string[];
+    set projectIds(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -875,13 +875,13 @@ export declare module UpdateDatabaseRequest {
      * Standard JavaScript object representation for UpdateDatabaseRequest
      */
     interface AsObject {
-        projectIds?: string[];
+        projectIds: string[];
     }
     /**
      * Protobuf JSON representation for UpdateDatabaseRequest
      */
     interface AsProtobufJSON {
-        projectIds?: string[];
+        projectIds: string[];
     }
 }
 /**
@@ -911,14 +911,14 @@ export declare class UpdateDatabaseResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: UpdateDatabaseResponse, _writer: BinaryWriter): void;
-    private _errorMessages?;
+    private _errorMessages;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of UpdateDatabaseResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<UpdateDatabaseResponse.AsObject>);
-    get errorMessages(): string[] | undefined;
-    set errorMessages(value: string[] | undefined);
+    get errorMessages(): string[];
+    set errorMessages(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -944,12 +944,12 @@ export declare module UpdateDatabaseResponse {
      * Standard JavaScript object representation for UpdateDatabaseResponse
      */
     interface AsObject {
-        errorMessages?: string[];
+        errorMessages: string[];
     }
     /**
      * Protobuf JSON representation for UpdateDatabaseResponse
      */
     interface AsProtobufJSON {
-        errorMessages?: string[];
+        errorMessages: string[];
     }
 }

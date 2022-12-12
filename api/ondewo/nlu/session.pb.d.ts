@@ -43,23 +43,23 @@ export declare class DetectIntentRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: DetectIntentRequest, _writer: BinaryWriter): void;
-    private _session?;
+    private _session;
     private _queryParams?;
     private _queryInput?;
-    private _inputAudio?;
+    private _inputAudio;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of DetectIntentRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<DetectIntentRequest.AsObject>);
-    get session(): string | undefined;
-    set session(value: string | undefined);
+    get session(): string;
+    set session(value: string);
     get queryParams(): QueryParameters | undefined;
     set queryParams(value: QueryParameters | undefined);
     get queryInput(): QueryInput | undefined;
     set queryInput(value: QueryInput | undefined);
-    get inputAudio(): Uint8Array | undefined;
-    set inputAudio(value: Uint8Array | undefined);
+    get inputAudio(): Uint8Array;
+    set inputAudio(value: Uint8Array);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -85,19 +85,19 @@ export declare module DetectIntentRequest {
      * Standard JavaScript object representation for DetectIntentRequest
      */
     interface AsObject {
-        session?: string;
+        session: string;
         queryParams?: QueryParameters.AsObject;
         queryInput?: QueryInput.AsObject;
-        inputAudio?: Uint8Array;
+        inputAudio: Uint8Array;
     }
     /**
      * Protobuf JSON representation for DetectIntentRequest
      */
     interface AsProtobufJSON {
-        session?: string;
-        queryParams?: QueryParameters.AsProtobufJSON | null;
-        queryInput?: QueryInput.AsProtobufJSON | null;
-        inputAudio?: string;
+        session: string;
+        queryParams: QueryParameters.AsProtobufJSON | null;
+        queryInput: QueryInput.AsProtobufJSON | null;
+        inputAudio: string;
     }
 }
 /**
@@ -127,7 +127,7 @@ export declare class DetectIntentResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: DetectIntentResponse, _writer: BinaryWriter): void;
-    private _responseId?;
+    private _responseId;
     private _queryResult?;
     private _webhookStatus?;
     /**
@@ -135,8 +135,8 @@ export declare class DetectIntentResponse implements GrpcMessage {
      * @param _value initial values object or instance of DetectIntentResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<DetectIntentResponse.AsObject>);
-    get responseId(): string | undefined;
-    set responseId(value: string | undefined);
+    get responseId(): string;
+    set responseId(value: string);
     get queryResult(): QueryResult | undefined;
     set queryResult(value: QueryResult | undefined);
     get webhookStatus(): googleRpc011.Status | undefined;
@@ -166,7 +166,7 @@ export declare module DetectIntentResponse {
      * Standard JavaScript object representation for DetectIntentResponse
      */
     interface AsObject {
-        responseId?: string;
+        responseId: string;
         queryResult?: QueryResult.AsObject;
         webhookStatus?: googleRpc011.Status.AsObject;
     }
@@ -174,9 +174,9 @@ export declare module DetectIntentResponse {
      * Protobuf JSON representation for DetectIntentResponse
      */
     interface AsProtobufJSON {
-        responseId?: string;
-        queryResult?: QueryResult.AsProtobufJSON | null;
-        webhookStatus?: googleRpc011.Status.AsProtobufJSON | null;
+        responseId: string;
+        queryResult: QueryResult.AsProtobufJSON | null;
+        webhookStatus: googleRpc011.Status.AsProtobufJSON | null;
     }
 }
 /**
@@ -206,24 +206,24 @@ export declare class QueryParameters implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: QueryParameters, _writer: BinaryWriter): void;
-    private _timeZone?;
+    private _timeZone;
     private _geoLocation?;
     private _contexts?;
-    private _resetContexts?;
+    private _resetContexts;
     private _payload?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of QueryParameters to deeply clone from
      */
     constructor(_value?: RecursivePartial<QueryParameters.AsObject>);
-    get timeZone(): string | undefined;
-    set timeZone(value: string | undefined);
+    get timeZone(): string;
+    set timeZone(value: string);
     get geoLocation(): googleType012.LatLng | undefined;
     set geoLocation(value: googleType012.LatLng | undefined);
     get contexts(): ondewoNlu006.Context[] | undefined;
     set contexts(value: ondewoNlu006.Context[] | undefined);
-    get resetContexts(): boolean | undefined;
-    set resetContexts(value: boolean | undefined);
+    get resetContexts(): boolean;
+    set resetContexts(value: boolean);
     get payload(): googleProtobuf010.Struct | undefined;
     set payload(value: googleProtobuf010.Struct | undefined);
     /**
@@ -251,21 +251,21 @@ export declare module QueryParameters {
      * Standard JavaScript object representation for QueryParameters
      */
     interface AsObject {
-        timeZone?: string;
+        timeZone: string;
         geoLocation?: googleType012.LatLng.AsObject;
         contexts?: ondewoNlu006.Context.AsObject[];
-        resetContexts?: boolean;
+        resetContexts: boolean;
         payload?: googleProtobuf010.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for QueryParameters
      */
     interface AsProtobufJSON {
-        timeZone?: string;
-        geoLocation?: googleType012.LatLng.AsProtobufJSON | null;
-        contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
-        resetContexts?: boolean;
-        payload?: googleProtobuf010.Struct.AsProtobufJSON | null;
+        timeZone: string;
+        geoLocation: googleType012.LatLng.AsProtobufJSON | null;
+        contexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        resetContexts: boolean;
+        payload: googleProtobuf010.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -344,9 +344,9 @@ export declare module QueryInput {
      * Protobuf JSON representation for QueryInput
      */
     interface AsProtobufJSON {
-        audioConfig?: InputAudioConfig.AsProtobufJSON | null;
-        text?: TextInput.AsProtobufJSON | null;
-        event?: EventInput.AsProtobufJSON | null;
+        audioConfig: InputAudioConfig.AsProtobufJSON | null;
+        text: TextInput.AsProtobufJSON | null;
+        event: EventInput.AsProtobufJSON | null;
     }
     enum InputCase {
         none = 0,
@@ -382,51 +382,51 @@ export declare class QueryResult implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: QueryResult, _writer: BinaryWriter): void;
-    private _queryText?;
-    private _languageCode?;
-    private _speechRecognitionConfidence?;
-    private _action?;
+    private _queryText;
+    private _languageCode;
+    private _speechRecognitionConfidence;
+    private _action;
     private _parameters?;
-    private _allRequiredParamsPresent?;
-    private _fulfillmentText?;
+    private _allRequiredParamsPresent;
+    private _fulfillmentText;
     private _fulfillmentMessages?;
-    private _webhookSource?;
+    private _webhookSource;
     private _webhookPayload?;
     private _outputContexts?;
     private _intent?;
-    private _intentDetectionConfidence?;
+    private _intentDetectionConfidence;
     private _diagnosticInfo?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of QueryResult to deeply clone from
      */
     constructor(_value?: RecursivePartial<QueryResult.AsObject>);
-    get queryText(): string | undefined;
-    set queryText(value: string | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
-    get speechRecognitionConfidence(): number | undefined;
-    set speechRecognitionConfidence(value: number | undefined);
-    get action(): string | undefined;
-    set action(value: string | undefined);
+    get queryText(): string;
+    set queryText(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get speechRecognitionConfidence(): number;
+    set speechRecognitionConfidence(value: number);
+    get action(): string;
+    set action(value: string);
     get parameters(): googleProtobuf010.Struct | undefined;
     set parameters(value: googleProtobuf010.Struct | undefined);
-    get allRequiredParamsPresent(): boolean | undefined;
-    set allRequiredParamsPresent(value: boolean | undefined);
-    get fulfillmentText(): string | undefined;
-    set fulfillmentText(value: string | undefined);
+    get allRequiredParamsPresent(): boolean;
+    set allRequiredParamsPresent(value: boolean);
+    get fulfillmentText(): string;
+    set fulfillmentText(value: string);
     get fulfillmentMessages(): ondewoNlu013.Intent.Message[] | undefined;
     set fulfillmentMessages(value: ondewoNlu013.Intent.Message[] | undefined);
-    get webhookSource(): string | undefined;
-    set webhookSource(value: string | undefined);
+    get webhookSource(): string;
+    set webhookSource(value: string);
     get webhookPayload(): googleProtobuf010.Struct | undefined;
     set webhookPayload(value: googleProtobuf010.Struct | undefined);
     get outputContexts(): ondewoNlu006.Context[] | undefined;
     set outputContexts(value: ondewoNlu006.Context[] | undefined);
     get intent(): ondewoNlu013.Intent | undefined;
     set intent(value: ondewoNlu013.Intent | undefined);
-    get intentDetectionConfidence(): number | undefined;
-    set intentDetectionConfidence(value: number | undefined);
+    get intentDetectionConfidence(): number;
+    set intentDetectionConfidence(value: number);
     get diagnosticInfo(): googleProtobuf010.Struct | undefined;
     set diagnosticInfo(value: googleProtobuf010.Struct | undefined);
     /**
@@ -454,39 +454,39 @@ export declare module QueryResult {
      * Standard JavaScript object representation for QueryResult
      */
     interface AsObject {
-        queryText?: string;
-        languageCode?: string;
-        speechRecognitionConfidence?: number;
-        action?: string;
+        queryText: string;
+        languageCode: string;
+        speechRecognitionConfidence: number;
+        action: string;
         parameters?: googleProtobuf010.Struct.AsObject;
-        allRequiredParamsPresent?: boolean;
-        fulfillmentText?: string;
+        allRequiredParamsPresent: boolean;
+        fulfillmentText: string;
         fulfillmentMessages?: ondewoNlu013.Intent.Message.AsObject[];
-        webhookSource?: string;
+        webhookSource: string;
         webhookPayload?: googleProtobuf010.Struct.AsObject;
         outputContexts?: ondewoNlu006.Context.AsObject[];
         intent?: ondewoNlu013.Intent.AsObject;
-        intentDetectionConfidence?: number;
+        intentDetectionConfidence: number;
         diagnosticInfo?: googleProtobuf010.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for QueryResult
      */
     interface AsProtobufJSON {
-        queryText?: string;
-        languageCode?: string;
-        speechRecognitionConfidence?: number;
-        action?: string;
-        parameters?: googleProtobuf010.Struct.AsProtobufJSON | null;
-        allRequiredParamsPresent?: boolean;
-        fulfillmentText?: string;
-        fulfillmentMessages?: ondewoNlu013.Intent.Message.AsProtobufJSON[] | null;
-        webhookSource?: string;
-        webhookPayload?: googleProtobuf010.Struct.AsProtobufJSON | null;
-        outputContexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
-        intent?: ondewoNlu013.Intent.AsProtobufJSON | null;
-        intentDetectionConfidence?: number;
-        diagnosticInfo?: googleProtobuf010.Struct.AsProtobufJSON | null;
+        queryText: string;
+        languageCode: string;
+        speechRecognitionConfidence: number;
+        action: string;
+        parameters: googleProtobuf010.Struct.AsProtobufJSON | null;
+        allRequiredParamsPresent: boolean;
+        fulfillmentText: string;
+        fulfillmentMessages: ondewoNlu013.Intent.Message.AsProtobufJSON[] | null;
+        webhookSource: string;
+        webhookPayload: googleProtobuf010.Struct.AsProtobufJSON | null;
+        outputContexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        intent: ondewoNlu013.Intent.AsProtobufJSON | null;
+        intentDetectionConfidence: number;
+        diagnosticInfo: googleProtobuf010.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -516,26 +516,26 @@ export declare class StreamingDetectIntentRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: StreamingDetectIntentRequest, _writer: BinaryWriter): void;
-    private _session?;
+    private _session;
     private _queryParams?;
     private _queryInput?;
-    private _singleUtterance?;
-    private _inputAudio?;
+    private _singleUtterance;
+    private _inputAudio;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of StreamingDetectIntentRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<StreamingDetectIntentRequest.AsObject>);
-    get session(): string | undefined;
-    set session(value: string | undefined);
+    get session(): string;
+    set session(value: string);
     get queryParams(): QueryParameters | undefined;
     set queryParams(value: QueryParameters | undefined);
     get queryInput(): QueryInput | undefined;
     set queryInput(value: QueryInput | undefined);
-    get singleUtterance(): boolean | undefined;
-    set singleUtterance(value: boolean | undefined);
-    get inputAudio(): Uint8Array | undefined;
-    set inputAudio(value: Uint8Array | undefined);
+    get singleUtterance(): boolean;
+    set singleUtterance(value: boolean);
+    get inputAudio(): Uint8Array;
+    set inputAudio(value: Uint8Array);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -561,21 +561,21 @@ export declare module StreamingDetectIntentRequest {
      * Standard JavaScript object representation for StreamingDetectIntentRequest
      */
     interface AsObject {
-        session?: string;
+        session: string;
         queryParams?: QueryParameters.AsObject;
         queryInput?: QueryInput.AsObject;
-        singleUtterance?: boolean;
-        inputAudio?: Uint8Array;
+        singleUtterance: boolean;
+        inputAudio: Uint8Array;
     }
     /**
      * Protobuf JSON representation for StreamingDetectIntentRequest
      */
     interface AsProtobufJSON {
-        session?: string;
-        queryParams?: QueryParameters.AsProtobufJSON | null;
-        queryInput?: QueryInput.AsProtobufJSON | null;
-        singleUtterance?: boolean;
-        inputAudio?: string;
+        session: string;
+        queryParams: QueryParameters.AsProtobufJSON | null;
+        queryInput: QueryInput.AsProtobufJSON | null;
+        singleUtterance: boolean;
+        inputAudio: string;
     }
 }
 /**
@@ -605,7 +605,7 @@ export declare class StreamingDetectIntentResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: StreamingDetectIntentResponse, _writer: BinaryWriter): void;
-    private _responseId?;
+    private _responseId;
     private _recognitionResult?;
     private _queryResult?;
     private _webhookStatus?;
@@ -614,8 +614,8 @@ export declare class StreamingDetectIntentResponse implements GrpcMessage {
      * @param _value initial values object or instance of StreamingDetectIntentResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<StreamingDetectIntentResponse.AsObject>);
-    get responseId(): string | undefined;
-    set responseId(value: string | undefined);
+    get responseId(): string;
+    set responseId(value: string);
     get recognitionResult(): StreamingRecognitionResult | undefined;
     set recognitionResult(value: StreamingRecognitionResult | undefined);
     get queryResult(): QueryResult | undefined;
@@ -647,7 +647,7 @@ export declare module StreamingDetectIntentResponse {
      * Standard JavaScript object representation for StreamingDetectIntentResponse
      */
     interface AsObject {
-        responseId?: string;
+        responseId: string;
         recognitionResult?: StreamingRecognitionResult.AsObject;
         queryResult?: QueryResult.AsObject;
         webhookStatus?: googleRpc011.Status.AsObject;
@@ -656,10 +656,10 @@ export declare module StreamingDetectIntentResponse {
      * Protobuf JSON representation for StreamingDetectIntentResponse
      */
     interface AsProtobufJSON {
-        responseId?: string;
-        recognitionResult?: StreamingRecognitionResult.AsProtobufJSON | null;
-        queryResult?: QueryResult.AsProtobufJSON | null;
-        webhookStatus?: googleRpc011.Status.AsProtobufJSON | null;
+        responseId: string;
+        recognitionResult: StreamingRecognitionResult.AsProtobufJSON | null;
+        queryResult: QueryResult.AsProtobufJSON | null;
+        webhookStatus: googleRpc011.Status.AsProtobufJSON | null;
     }
 }
 /**
@@ -689,23 +689,23 @@ export declare class StreamingRecognitionResult implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: StreamingRecognitionResult, _writer: BinaryWriter): void;
-    private _messageType?;
-    private _transcript?;
-    private _isFinal?;
-    private _confidence?;
+    private _messageType;
+    private _transcript;
+    private _isFinal;
+    private _confidence;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of StreamingRecognitionResult to deeply clone from
      */
     constructor(_value?: RecursivePartial<StreamingRecognitionResult.AsObject>);
-    get messageType(): StreamingRecognitionResult.MessageType | undefined;
-    set messageType(value: StreamingRecognitionResult.MessageType | undefined);
-    get transcript(): string | undefined;
-    set transcript(value: string | undefined);
-    get isFinal(): boolean | undefined;
-    set isFinal(value: boolean | undefined);
-    get confidence(): number | undefined;
-    set confidence(value: number | undefined);
+    get messageType(): StreamingRecognitionResult.MessageType;
+    set messageType(value: StreamingRecognitionResult.MessageType);
+    get transcript(): string;
+    set transcript(value: string);
+    get isFinal(): boolean;
+    set isFinal(value: boolean);
+    get confidence(): number;
+    set confidence(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -731,19 +731,19 @@ export declare module StreamingRecognitionResult {
      * Standard JavaScript object representation for StreamingRecognitionResult
      */
     interface AsObject {
-        messageType?: StreamingRecognitionResult.MessageType;
-        transcript?: string;
-        isFinal?: boolean;
-        confidence?: number;
+        messageType: StreamingRecognitionResult.MessageType;
+        transcript: string;
+        isFinal: boolean;
+        confidence: number;
     }
     /**
      * Protobuf JSON representation for StreamingRecognitionResult
      */
     interface AsProtobufJSON {
-        messageType?: string;
-        transcript?: string;
-        isFinal?: boolean;
-        confidence?: number;
+        messageType: string;
+        transcript: string;
+        isFinal: boolean;
+        confidence: number;
     }
     enum MessageType {
         MESSAGE_TYPE_UNSPECIFIED = 0,
@@ -778,23 +778,23 @@ export declare class InputAudioConfig implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: InputAudioConfig, _writer: BinaryWriter): void;
-    private _audioEncoding?;
-    private _sampleRateHertz?;
-    private _languageCode?;
-    private _phraseHints?;
+    private _audioEncoding;
+    private _sampleRateHertz;
+    private _languageCode;
+    private _phraseHints;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of InputAudioConfig to deeply clone from
      */
     constructor(_value?: RecursivePartial<InputAudioConfig.AsObject>);
-    get audioEncoding(): AudioEncoding | undefined;
-    set audioEncoding(value: AudioEncoding | undefined);
-    get sampleRateHertz(): number | undefined;
-    set sampleRateHertz(value: number | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
-    get phraseHints(): string[] | undefined;
-    set phraseHints(value: string[] | undefined);
+    get audioEncoding(): AudioEncoding;
+    set audioEncoding(value: AudioEncoding);
+    get sampleRateHertz(): number;
+    set sampleRateHertz(value: number);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get phraseHints(): string[];
+    set phraseHints(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -820,19 +820,19 @@ export declare module InputAudioConfig {
      * Standard JavaScript object representation for InputAudioConfig
      */
     interface AsObject {
-        audioEncoding?: AudioEncoding;
-        sampleRateHertz?: number;
-        languageCode?: string;
-        phraseHints?: string[];
+        audioEncoding: AudioEncoding;
+        sampleRateHertz: number;
+        languageCode: string;
+        phraseHints: string[];
     }
     /**
      * Protobuf JSON representation for InputAudioConfig
      */
     interface AsProtobufJSON {
-        audioEncoding?: string;
-        sampleRateHertz?: number;
-        languageCode?: string;
-        phraseHints?: string[];
+        audioEncoding: string;
+        sampleRateHertz: number;
+        languageCode: string;
+        phraseHints: string[];
     }
 }
 /**
@@ -862,17 +862,17 @@ export declare class TextInput implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: TextInput, _writer: BinaryWriter): void;
-    private _text?;
-    private _languageCode?;
+    private _text;
+    private _languageCode;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of TextInput to deeply clone from
      */
     constructor(_value?: RecursivePartial<TextInput.AsObject>);
-    get text(): string | undefined;
-    set text(value: string | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
+    get text(): string;
+    set text(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -898,15 +898,15 @@ export declare module TextInput {
      * Standard JavaScript object representation for TextInput
      */
     interface AsObject {
-        text?: string;
-        languageCode?: string;
+        text: string;
+        languageCode: string;
     }
     /**
      * Protobuf JSON representation for TextInput
      */
     interface AsProtobufJSON {
-        text?: string;
-        languageCode?: string;
+        text: string;
+        languageCode: string;
     }
 }
 /**
@@ -936,20 +936,20 @@ export declare class EventInput implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: EventInput, _writer: BinaryWriter): void;
-    private _name?;
+    private _name;
     private _parameters?;
-    private _languageCode?;
+    private _languageCode;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of EventInput to deeply clone from
      */
     constructor(_value?: RecursivePartial<EventInput.AsObject>);
-    get name(): string | undefined;
-    set name(value: string | undefined);
+    get name(): string;
+    set name(value: string);
     get parameters(): googleProtobuf010.Struct | undefined;
     set parameters(value: googleProtobuf010.Struct | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
+    get languageCode(): string;
+    set languageCode(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -975,17 +975,17 @@ export declare module EventInput {
      * Standard JavaScript object representation for EventInput
      */
     interface AsObject {
-        name?: string;
+        name: string;
         parameters?: googleProtobuf010.Struct.AsObject;
-        languageCode?: string;
+        languageCode: string;
     }
     /**
      * Protobuf JSON representation for EventInput
      */
     interface AsProtobufJSON {
-        name?: string;
-        parameters?: googleProtobuf010.Struct.AsProtobufJSON | null;
-        languageCode?: string;
+        name: string;
+        parameters: googleProtobuf010.Struct.AsProtobufJSON | null;
+        languageCode: string;
     }
 }
 /**
@@ -1015,7 +1015,7 @@ export declare class Session implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: Session, _writer: BinaryWriter): void;
-    private _sessionId?;
+    private _sessionId;
     private _sessionSteps?;
     private _sessionInfo?;
     /**
@@ -1023,8 +1023,8 @@ export declare class Session implements GrpcMessage {
      * @param _value initial values object or instance of Session to deeply clone from
      */
     constructor(_value?: RecursivePartial<Session.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
     get sessionSteps(): SessionStep[] | undefined;
     set sessionSteps(value: SessionStep[] | undefined);
     get sessionInfo(): SessionInfo | undefined;
@@ -1054,7 +1054,7 @@ export declare module Session {
      * Standard JavaScript object representation for Session
      */
     interface AsObject {
-        sessionId?: string;
+        sessionId: string;
         sessionSteps?: SessionStep.AsObject[];
         sessionInfo?: SessionInfo.AsObject;
     }
@@ -1062,9 +1062,9 @@ export declare module Session {
      * Protobuf JSON representation for Session
      */
     interface AsProtobufJSON {
-        sessionId?: string;
-        sessionSteps?: SessionStep.AsProtobufJSON[] | null;
-        sessionInfo?: SessionInfo.AsProtobufJSON | null;
+        sessionId: string;
+        sessionSteps: SessionStep.AsProtobufJSON[] | null;
+        sessionInfo: SessionInfo.AsProtobufJSON | null;
     }
     enum View {
         VIEW_UNSPECIFIED = 0,
@@ -1146,9 +1146,9 @@ export declare module SessionStep {
      * Protobuf JSON representation for SessionStep
      */
     interface AsProtobufJSON {
-        detectIntentRequest?: DetectIntentRequest.AsProtobufJSON | null;
-        detectIntentResponse?: DetectIntentResponse.AsProtobufJSON | null;
-        contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        detectIntentRequest: DetectIntentRequest.AsProtobufJSON | null;
+        detectIntentResponse: DetectIntentResponse.AsProtobufJSON | null;
+        contexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
     }
 }
 /**
@@ -1178,20 +1178,20 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: TrackSessionStepRequest, _writer: BinaryWriter): void;
-    private _sessionId?;
+    private _sessionId;
     private _sessionStep?;
-    private _sessionView?;
+    private _sessionView;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of TrackSessionStepRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<TrackSessionStepRequest.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
     get sessionStep(): SessionStep | undefined;
     set sessionStep(value: SessionStep | undefined);
-    get sessionView(): Session.View | undefined;
-    set sessionView(value: Session.View | undefined);
+    get sessionView(): Session.View;
+    set sessionView(value: Session.View);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1217,17 +1217,17 @@ export declare module TrackSessionStepRequest {
      * Standard JavaScript object representation for TrackSessionStepRequest
      */
     interface AsObject {
-        sessionId?: string;
+        sessionId: string;
         sessionStep?: SessionStep.AsObject;
-        sessionView?: Session.View;
+        sessionView: Session.View;
     }
     /**
      * Protobuf JSON representation for TrackSessionStepRequest
      */
     interface AsProtobufJSON {
-        sessionId?: string;
-        sessionStep?: SessionStep.AsProtobufJSON | null;
-        sessionView?: string;
+        sessionId: string;
+        sessionStep: SessionStep.AsProtobufJSON | null;
+        sessionView: string;
     }
 }
 /**
@@ -1257,21 +1257,21 @@ export declare class ListSessionsRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListSessionsRequest, _writer: BinaryWriter): void;
-    private _parent?;
-    private _sessionView?;
-    private _pageToken?;
+    private _parent;
+    private _sessionView;
+    private _pageToken;
     private _sessionFilter?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListSessionsRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListSessionsRequest.AsObject>);
-    get parent(): string | undefined;
-    set parent(value: string | undefined);
-    get sessionView(): Session.View | undefined;
-    set sessionView(value: Session.View | undefined);
-    get pageToken(): string | undefined;
-    set pageToken(value: string | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get sessionView(): Session.View;
+    set sessionView(value: Session.View);
+    get pageToken(): string;
+    set pageToken(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
     /**
@@ -1299,19 +1299,19 @@ export declare module ListSessionsRequest {
      * Standard JavaScript object representation for ListSessionsRequest
      */
     interface AsObject {
-        parent?: string;
-        sessionView?: Session.View;
-        pageToken?: string;
+        parent: string;
+        sessionView: Session.View;
+        pageToken: string;
         sessionFilter?: SessionFilter.AsObject;
     }
     /**
      * Protobuf JSON representation for ListSessionsRequest
      */
     interface AsProtobufJSON {
-        parent?: string;
-        sessionView?: string;
-        pageToken?: string;
-        sessionFilter?: SessionFilter.AsProtobufJSON | null;
+        parent: string;
+        sessionView: string;
+        pageToken: string;
+        sessionFilter: SessionFilter.AsProtobufJSON | null;
     }
 }
 /**
@@ -1341,21 +1341,21 @@ export declare class SessionFilter implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: SessionFilter, _writer: BinaryWriter): void;
-    private _languageCodes?;
+    private _languageCodes;
     private _matchedIntents?;
     private _matchedEntityTypes?;
-    private _minIntentsConfidenceMin?;
-    private _minIntentsConfidenceMax?;
-    private _minEntityTypesConfidenceMin?;
-    private _minEntityTypesConfidenceMax?;
-    private _earliest?;
-    private _latest?;
-    private _minNumberTurns?;
-    private _maxNumberTurns?;
-    private _labels?;
-    private _userIds?;
-    private _intentTags?;
-    private _sessionIds?;
+    private _minIntentsConfidenceMin;
+    private _minIntentsConfidenceMax;
+    private _minEntityTypesConfidenceMin;
+    private _minEntityTypesConfidenceMax;
+    private _earliest;
+    private _latest;
+    private _minNumberTurns;
+    private _maxNumberTurns;
+    private _labels;
+    private _userIds;
+    private _intentTags;
+    private _sessionIds;
     private _inputContexts?;
     private _outputContexts?;
     /**
@@ -1363,36 +1363,36 @@ export declare class SessionFilter implements GrpcMessage {
      * @param _value initial values object or instance of SessionFilter to deeply clone from
      */
     constructor(_value?: RecursivePartial<SessionFilter.AsObject>);
-    get languageCodes(): string[] | undefined;
-    set languageCodes(value: string[] | undefined);
+    get languageCodes(): string[];
+    set languageCodes(value: string[]);
     get matchedIntents(): ondewoNlu013.Intent[] | undefined;
     set matchedIntents(value: ondewoNlu013.Intent[] | undefined);
     get matchedEntityTypes(): ondewoNlu014.EntityType[] | undefined;
     set matchedEntityTypes(value: ondewoNlu014.EntityType[] | undefined);
-    get minIntentsConfidenceMin(): number | undefined;
-    set minIntentsConfidenceMin(value: number | undefined);
-    get minIntentsConfidenceMax(): number | undefined;
-    set minIntentsConfidenceMax(value: number | undefined);
-    get minEntityTypesConfidenceMin(): number | undefined;
-    set minEntityTypesConfidenceMin(value: number | undefined);
-    get minEntityTypesConfidenceMax(): number | undefined;
-    set minEntityTypesConfidenceMax(value: number | undefined);
-    get earliest(): number | undefined;
-    set earliest(value: number | undefined);
-    get latest(): number | undefined;
-    set latest(value: number | undefined);
-    get minNumberTurns(): number | undefined;
-    set minNumberTurns(value: number | undefined);
-    get maxNumberTurns(): number | undefined;
-    set maxNumberTurns(value: number | undefined);
-    get labels(): string[] | undefined;
-    set labels(value: string[] | undefined);
-    get userIds(): string[] | undefined;
-    set userIds(value: string[] | undefined);
-    get intentTags(): string[] | undefined;
-    set intentTags(value: string[] | undefined);
-    get sessionIds(): string[] | undefined;
-    set sessionIds(value: string[] | undefined);
+    get minIntentsConfidenceMin(): number;
+    set minIntentsConfidenceMin(value: number);
+    get minIntentsConfidenceMax(): number;
+    set minIntentsConfidenceMax(value: number);
+    get minEntityTypesConfidenceMin(): number;
+    set minEntityTypesConfidenceMin(value: number);
+    get minEntityTypesConfidenceMax(): number;
+    set minEntityTypesConfidenceMax(value: number);
+    get earliest(): number;
+    set earliest(value: number);
+    get latest(): number;
+    set latest(value: number);
+    get minNumberTurns(): number;
+    set minNumberTurns(value: number);
+    get maxNumberTurns(): number;
+    set maxNumberTurns(value: number);
+    get labels(): string[];
+    set labels(value: string[]);
+    get userIds(): string[];
+    set userIds(value: string[]);
+    get intentTags(): string[];
+    set intentTags(value: string[]);
+    get sessionIds(): string[];
+    set sessionIds(value: string[]);
     get inputContexts(): ondewoNlu006.Context[] | undefined;
     set inputContexts(value: ondewoNlu006.Context[] | undefined);
     get outputContexts(): ondewoNlu006.Context[] | undefined;
@@ -1422,21 +1422,21 @@ export declare module SessionFilter {
      * Standard JavaScript object representation for SessionFilter
      */
     interface AsObject {
-        languageCodes?: string[];
+        languageCodes: string[];
         matchedIntents?: ondewoNlu013.Intent.AsObject[];
         matchedEntityTypes?: ondewoNlu014.EntityType.AsObject[];
-        minIntentsConfidenceMin?: number;
-        minIntentsConfidenceMax?: number;
-        minEntityTypesConfidenceMin?: number;
-        minEntityTypesConfidenceMax?: number;
-        earliest?: number;
-        latest?: number;
-        minNumberTurns?: number;
-        maxNumberTurns?: number;
-        labels?: string[];
-        userIds?: string[];
-        intentTags?: string[];
-        sessionIds?: string[];
+        minIntentsConfidenceMin: number;
+        minIntentsConfidenceMax: number;
+        minEntityTypesConfidenceMin: number;
+        minEntityTypesConfidenceMax: number;
+        earliest: number;
+        latest: number;
+        minNumberTurns: number;
+        maxNumberTurns: number;
+        labels: string[];
+        userIds: string[];
+        intentTags: string[];
+        sessionIds: string[];
         inputContexts?: ondewoNlu006.Context.AsObject[];
         outputContexts?: ondewoNlu006.Context.AsObject[];
     }
@@ -1444,23 +1444,23 @@ export declare module SessionFilter {
      * Protobuf JSON representation for SessionFilter
      */
     interface AsProtobufJSON {
-        languageCodes?: string[];
-        matchedIntents?: ondewoNlu013.Intent.AsProtobufJSON[] | null;
-        matchedEntityTypes?: ondewoNlu014.EntityType.AsProtobufJSON[] | null;
-        minIntentsConfidenceMin?: number;
-        minIntentsConfidenceMax?: number;
-        minEntityTypesConfidenceMin?: number;
-        minEntityTypesConfidenceMax?: number;
-        earliest?: number;
-        latest?: number;
-        minNumberTurns?: number;
-        maxNumberTurns?: number;
-        labels?: string[];
-        userIds?: string[];
-        intentTags?: string[];
-        sessionIds?: string[];
-        inputContexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
-        outputContexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        languageCodes: string[];
+        matchedIntents: ondewoNlu013.Intent.AsProtobufJSON[] | null;
+        matchedEntityTypes: ondewoNlu014.EntityType.AsProtobufJSON[] | null;
+        minIntentsConfidenceMin: number;
+        minIntentsConfidenceMax: number;
+        minEntityTypesConfidenceMin: number;
+        minEntityTypesConfidenceMax: number;
+        earliest: number;
+        latest: number;
+        minNumberTurns: number;
+        maxNumberTurns: number;
+        labels: string[];
+        userIds: string[];
+        intentTags: string[];
+        sessionIds: string[];
+        inputContexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        outputContexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
     }
 }
 /**
@@ -1490,17 +1490,17 @@ export declare class SessionInfo implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: SessionInfo, _writer: BinaryWriter): void;
-    private _languageCodes?;
+    private _languageCodes;
     private _matchedIntents?;
     private _matchedEntityTypes?;
-    private _minIntentsConfidence?;
-    private _minEntityTypesConfidence?;
-    private _earliest?;
-    private _latest?;
-    private _numberTurns?;
-    private _labels?;
-    private _userIds?;
-    private _intentTags?;
+    private _minIntentsConfidence;
+    private _minEntityTypesConfidence;
+    private _earliest;
+    private _latest;
+    private _numberTurns;
+    private _labels;
+    private _userIds;
+    private _intentTags;
     private _inputContextSteps?;
     private _outputContextSteps?;
     /**
@@ -1508,28 +1508,28 @@ export declare class SessionInfo implements GrpcMessage {
      * @param _value initial values object or instance of SessionInfo to deeply clone from
      */
     constructor(_value?: RecursivePartial<SessionInfo.AsObject>);
-    get languageCodes(): string[] | undefined;
-    set languageCodes(value: string[] | undefined);
+    get languageCodes(): string[];
+    set languageCodes(value: string[]);
     get matchedIntents(): ondewoNlu013.Intent[] | undefined;
     set matchedIntents(value: ondewoNlu013.Intent[] | undefined);
     get matchedEntityTypes(): ondewoNlu014.EntityType[] | undefined;
     set matchedEntityTypes(value: ondewoNlu014.EntityType[] | undefined);
-    get minIntentsConfidence(): number | undefined;
-    set minIntentsConfidence(value: number | undefined);
-    get minEntityTypesConfidence(): number | undefined;
-    set minEntityTypesConfidence(value: number | undefined);
-    get earliest(): number | undefined;
-    set earliest(value: number | undefined);
-    get latest(): number | undefined;
-    set latest(value: number | undefined);
-    get numberTurns(): number | undefined;
-    set numberTurns(value: number | undefined);
-    get labels(): string[] | undefined;
-    set labels(value: string[] | undefined);
-    get userIds(): string[] | undefined;
-    set userIds(value: string[] | undefined);
-    get intentTags(): string[] | undefined;
-    set intentTags(value: string[] | undefined);
+    get minIntentsConfidence(): number;
+    set minIntentsConfidence(value: number);
+    get minEntityTypesConfidence(): number;
+    set minEntityTypesConfidence(value: number);
+    get earliest(): number;
+    set earliest(value: number);
+    get latest(): number;
+    set latest(value: number);
+    get numberTurns(): number;
+    set numberTurns(value: number);
+    get labels(): string[];
+    set labels(value: string[]);
+    get userIds(): string[];
+    set userIds(value: string[]);
+    get intentTags(): string[];
+    set intentTags(value: string[]);
     get inputContextSteps(): SessionInfo.ContextSteps[] | undefined;
     set inputContextSteps(value: SessionInfo.ContextSteps[] | undefined);
     get outputContextSteps(): SessionInfo.ContextSteps[] | undefined;
@@ -1559,17 +1559,17 @@ export declare module SessionInfo {
      * Standard JavaScript object representation for SessionInfo
      */
     interface AsObject {
-        languageCodes?: string[];
+        languageCodes: string[];
         matchedIntents?: ondewoNlu013.Intent.AsObject[];
         matchedEntityTypes?: ondewoNlu014.EntityType.AsObject[];
-        minIntentsConfidence?: number;
-        minEntityTypesConfidence?: number;
-        earliest?: number;
-        latest?: number;
-        numberTurns?: number;
-        labels?: string[];
-        userIds?: string[];
-        intentTags?: string[];
+        minIntentsConfidence: number;
+        minEntityTypesConfidence: number;
+        earliest: number;
+        latest: number;
+        numberTurns: number;
+        labels: string[];
+        userIds: string[];
+        intentTags: string[];
         inputContextSteps?: SessionInfo.ContextSteps.AsObject[];
         outputContextSteps?: SessionInfo.ContextSteps.AsObject[];
     }
@@ -1577,19 +1577,19 @@ export declare module SessionInfo {
      * Protobuf JSON representation for SessionInfo
      */
     interface AsProtobufJSON {
-        languageCodes?: string[];
-        matchedIntents?: ondewoNlu013.Intent.AsProtobufJSON[] | null;
-        matchedEntityTypes?: ondewoNlu014.EntityType.AsProtobufJSON[] | null;
-        minIntentsConfidence?: number;
-        minEntityTypesConfidence?: number;
-        earliest?: number;
-        latest?: number;
-        numberTurns?: number;
-        labels?: string[];
-        userIds?: string[];
-        intentTags?: string[];
-        inputContextSteps?: SessionInfo.ContextSteps.AsProtobufJSON[] | null;
-        outputContextSteps?: SessionInfo.ContextSteps.AsProtobufJSON[] | null;
+        languageCodes: string[];
+        matchedIntents: ondewoNlu013.Intent.AsProtobufJSON[] | null;
+        matchedEntityTypes: ondewoNlu014.EntityType.AsProtobufJSON[] | null;
+        minIntentsConfidence: number;
+        minEntityTypesConfidence: number;
+        earliest: number;
+        latest: number;
+        numberTurns: number;
+        labels: string[];
+        userIds: string[];
+        intentTags: string[];
+        inputContextSteps: SessionInfo.ContextSteps.AsProtobufJSON[] | null;
+        outputContextSteps: SessionInfo.ContextSteps.AsProtobufJSON[] | null;
     }
     /**
      * Message implementation for ondewo.nlu.SessionInfo.ContextSteps
@@ -1657,7 +1657,7 @@ export declare module SessionInfo {
          * Protobuf JSON representation for ContextSteps
          */
         interface AsProtobufJSON {
-            contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+            contexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
         }
     }
 }
@@ -1689,7 +1689,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListSessionsResponse, _writer: BinaryWriter): void;
     private _sessions?;
-    private _nextPageToken?;
+    private _nextPageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListSessionsResponse to deeply clone from
@@ -1697,8 +1697,8 @@ export declare class ListSessionsResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListSessionsResponse.AsObject>);
     get sessions(): Session[] | undefined;
     set sessions(value: Session[] | undefined);
-    get nextPageToken(): string | undefined;
-    set nextPageToken(value: string | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1725,14 +1725,14 @@ export declare module ListSessionsResponse {
      */
     interface AsObject {
         sessions?: Session.AsObject[];
-        nextPageToken?: string;
+        nextPageToken: string;
     }
     /**
      * Protobuf JSON representation for ListSessionsResponse
      */
     interface AsProtobufJSON {
-        sessions?: Session.AsProtobufJSON[] | null;
-        nextPageToken?: string;
+        sessions: Session.AsProtobufJSON[] | null;
+        nextPageToken: string;
     }
 }
 /**
@@ -1762,17 +1762,17 @@ export declare class GetSessionRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetSessionRequest, _writer: BinaryWriter): void;
-    private _sessionId?;
-    private _sessionView?;
+    private _sessionId;
+    private _sessionView;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetSessionRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetSessionRequest.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
-    get sessionView(): Session.View | undefined;
-    set sessionView(value: Session.View | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get sessionView(): Session.View;
+    set sessionView(value: Session.View);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1798,15 +1798,15 @@ export declare module GetSessionRequest {
      * Standard JavaScript object representation for GetSessionRequest
      */
     interface AsObject {
-        sessionId?: string;
-        sessionView?: Session.View;
+        sessionId: string;
+        sessionView: Session.View;
     }
     /**
      * Protobuf JSON representation for GetSessionRequest
      */
     interface AsProtobufJSON {
-        sessionId?: string;
-        sessionView?: string;
+        sessionId: string;
+        sessionView: string;
     }
 }
 /**
@@ -1836,17 +1836,20 @@ export declare class CreateSessionRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: CreateSessionRequest, _writer: BinaryWriter): void;
-    private _parent?;
-    private _sessionUuid?;
+    private _parent;
+    private _sessionUuid;
+    private _labels;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of CreateSessionRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<CreateSessionRequest.AsObject>);
-    get parent(): string | undefined;
-    set parent(value: string | undefined);
-    get sessionUuid(): string | undefined;
-    set sessionUuid(value: string | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get sessionUuid(): string;
+    set sessionUuid(value: string);
+    get labels(): string[];
+    set labels(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1872,15 +1875,17 @@ export declare module CreateSessionRequest {
      * Standard JavaScript object representation for CreateSessionRequest
      */
     interface AsObject {
-        parent?: string;
-        sessionUuid?: string;
+        parent: string;
+        sessionUuid: string;
+        labels: string[];
     }
     /**
      * Protobuf JSON representation for CreateSessionRequest
      */
     interface AsProtobufJSON {
-        parent?: string;
-        sessionUuid?: string;
+        parent: string;
+        sessionUuid: string;
+        labels: string[];
     }
 }
 /**
@@ -1910,14 +1915,14 @@ export declare class DeleteSessionRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: DeleteSessionRequest, _writer: BinaryWriter): void;
-    private _sessionId?;
+    private _sessionId;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of DeleteSessionRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<DeleteSessionRequest.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1943,13 +1948,13 @@ export declare module DeleteSessionRequest {
      * Standard JavaScript object representation for DeleteSessionRequest
      */
     interface AsObject {
-        sessionId?: string;
+        sessionId: string;
     }
     /**
      * Protobuf JSON representation for DeleteSessionRequest
      */
     interface AsProtobufJSON {
-        sessionId?: string;
+        sessionId: string;
     }
 }
 /**
@@ -1979,23 +1984,23 @@ export declare class CreateSessionReviewRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: CreateSessionReviewRequest, _writer: BinaryWriter): void;
-    private _sessionId?;
-    private _parentReviewId?;
+    private _sessionId;
+    private _parentReviewId;
     private _sessionReview?;
-    private _sessionReviewView?;
+    private _sessionReviewView;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of CreateSessionReviewRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<CreateSessionReviewRequest.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
-    get parentReviewId(): string | undefined;
-    set parentReviewId(value: string | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get parentReviewId(): string;
+    set parentReviewId(value: string);
     get sessionReview(): SessionReview | undefined;
     set sessionReview(value: SessionReview | undefined);
-    get sessionReviewView(): SessionReview.View | undefined;
-    set sessionReviewView(value: SessionReview.View | undefined);
+    get sessionReviewView(): SessionReview.View;
+    set sessionReviewView(value: SessionReview.View);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2021,19 +2026,19 @@ export declare module CreateSessionReviewRequest {
      * Standard JavaScript object representation for CreateSessionReviewRequest
      */
     interface AsObject {
-        sessionId?: string;
-        parentReviewId?: string;
+        sessionId: string;
+        parentReviewId: string;
         sessionReview?: SessionReview.AsObject;
-        sessionReviewView?: SessionReview.View;
+        sessionReviewView: SessionReview.View;
     }
     /**
      * Protobuf JSON representation for CreateSessionReviewRequest
      */
     interface AsProtobufJSON {
-        sessionId?: string;
-        parentReviewId?: string;
-        sessionReview?: SessionReview.AsProtobufJSON | null;
-        sessionReviewView?: string;
+        sessionId: string;
+        parentReviewId: string;
+        sessionReview: SessionReview.AsProtobufJSON | null;
+        sessionReviewView: string;
     }
 }
 /**
@@ -2063,15 +2068,15 @@ export declare class SessionReview implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: SessionReview, _writer: BinaryWriter): void;
-    private _sessionReviewId?;
+    private _sessionReviewId;
     private _sessionReviewSteps?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionReview to deeply clone from
      */
     constructor(_value?: RecursivePartial<SessionReview.AsObject>);
-    get sessionReviewId(): string | undefined;
-    set sessionReviewId(value: string | undefined);
+    get sessionReviewId(): string;
+    set sessionReviewId(value: string);
     get sessionReviewSteps(): SessionReviewStep[] | undefined;
     set sessionReviewSteps(value: SessionReviewStep[] | undefined);
     /**
@@ -2099,15 +2104,15 @@ export declare module SessionReview {
      * Standard JavaScript object representation for SessionReview
      */
     interface AsObject {
-        sessionReviewId?: string;
+        sessionReviewId: string;
         sessionReviewSteps?: SessionReviewStep.AsObject[];
     }
     /**
      * Protobuf JSON representation for SessionReview
      */
     interface AsProtobufJSON {
-        sessionReviewId?: string;
-        sessionReviewSteps?: SessionReviewStep.AsProtobufJSON[] | null;
+        sessionReviewId: string;
+        sessionReviewSteps: SessionReviewStep.AsProtobufJSON[] | null;
     }
     enum View {
         VIEW_UNSPECIFIED = 0,
@@ -2143,7 +2148,7 @@ export declare class SessionReviewStep implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: SessionReviewStep, _writer: BinaryWriter): void;
     private _annotatedUsersays?;
-    private _languageCode?;
+    private _languageCode;
     private _detectedIntents?;
     private _contexts?;
     private _contextsOut?;
@@ -2154,8 +2159,8 @@ export declare class SessionReviewStep implements GrpcMessage {
     constructor(_value?: RecursivePartial<SessionReviewStep.AsObject>);
     get annotatedUsersays(): ondewoNlu013.Intent.TrainingPhrase | undefined;
     set annotatedUsersays(value: ondewoNlu013.Intent.TrainingPhrase | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
+    get languageCode(): string;
+    set languageCode(value: string);
     get detectedIntents(): DetectedIntent[] | undefined;
     set detectedIntents(value: DetectedIntent[] | undefined);
     get contexts(): ondewoNlu006.Context[] | undefined;
@@ -2188,7 +2193,7 @@ export declare module SessionReviewStep {
      */
     interface AsObject {
         annotatedUsersays?: ondewoNlu013.Intent.TrainingPhrase.AsObject;
-        languageCode?: string;
+        languageCode: string;
         detectedIntents?: DetectedIntent.AsObject[];
         contexts?: ondewoNlu006.Context.AsObject[];
         contextsOut?: ondewoNlu006.Context.AsObject[];
@@ -2197,11 +2202,11 @@ export declare module SessionReviewStep {
      * Protobuf JSON representation for SessionReviewStep
      */
     interface AsProtobufJSON {
-        annotatedUsersays?: ondewoNlu013.Intent.TrainingPhrase.AsProtobufJSON | null;
-        languageCode?: string;
-        detectedIntents?: DetectedIntent.AsProtobufJSON[] | null;
-        contexts?: ondewoNlu006.Context.AsProtobufJSON[] | null;
-        contextsOut?: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        annotatedUsersays: ondewoNlu013.Intent.TrainingPhrase.AsProtobufJSON | null;
+        languageCode: string;
+        detectedIntents: DetectedIntent.AsProtobufJSON[] | null;
+        contexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        contextsOut: ondewoNlu006.Context.AsProtobufJSON[] | null;
     }
 }
 /**
@@ -2232,10 +2237,10 @@ export declare class DetectedIntent implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: DetectedIntent, _writer: BinaryWriter): void;
     private _intent?;
-    private _score?;
-    private _algorithm?;
+    private _score;
+    private _algorithm;
     private _fulfillmentMessages?;
-    private _requiredParamMissing?;
+    private _requiredParamMissing;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of DetectedIntent to deeply clone from
@@ -2243,14 +2248,14 @@ export declare class DetectedIntent implements GrpcMessage {
     constructor(_value?: RecursivePartial<DetectedIntent.AsObject>);
     get intent(): ondewoNlu013.Intent | undefined;
     set intent(value: ondewoNlu013.Intent | undefined);
-    get score(): number | undefined;
-    set score(value: number | undefined);
-    get algorithm(): string | undefined;
-    set algorithm(value: string | undefined);
+    get score(): number;
+    set score(value: number);
+    get algorithm(): string;
+    set algorithm(value: string);
     get fulfillmentMessages(): ondewoNlu013.Intent.Message[] | undefined;
     set fulfillmentMessages(value: ondewoNlu013.Intent.Message[] | undefined);
-    get requiredParamMissing(): boolean | undefined;
-    set requiredParamMissing(value: boolean | undefined);
+    get requiredParamMissing(): boolean;
+    set requiredParamMissing(value: boolean);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2277,20 +2282,20 @@ export declare module DetectedIntent {
      */
     interface AsObject {
         intent?: ondewoNlu013.Intent.AsObject;
-        score?: number;
-        algorithm?: string;
+        score: number;
+        algorithm: string;
         fulfillmentMessages?: ondewoNlu013.Intent.Message.AsObject[];
-        requiredParamMissing?: boolean;
+        requiredParamMissing: boolean;
     }
     /**
      * Protobuf JSON representation for DetectedIntent
      */
     interface AsProtobufJSON {
-        intent?: ondewoNlu013.Intent.AsProtobufJSON | null;
-        score?: number;
-        algorithm?: string;
-        fulfillmentMessages?: ondewoNlu013.Intent.Message.AsProtobufJSON[] | null;
-        requiredParamMissing?: boolean;
+        intent: ondewoNlu013.Intent.AsProtobufJSON | null;
+        score: number;
+        algorithm: string;
+        fulfillmentMessages: ondewoNlu013.Intent.Message.AsProtobufJSON[] | null;
+        requiredParamMissing: boolean;
     }
 }
 /**
@@ -2320,14 +2325,14 @@ export declare class ListSessionLabelsRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListSessionLabelsRequest, _writer: BinaryWriter): void;
-    private _parent?;
+    private _sessionId;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListSessionLabelsRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListSessionLabelsRequest.AsObject>);
-    get parent(): string | undefined;
-    set parent(value: string | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2353,13 +2358,82 @@ export declare module ListSessionLabelsRequest {
      * Standard JavaScript object representation for ListSessionLabelsRequest
      */
     interface AsObject {
-        parent?: string;
+        sessionId: string;
     }
     /**
      * Protobuf JSON representation for ListSessionLabelsRequest
      */
     interface AsProtobufJSON {
-        parent?: string;
+        sessionId: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionLabelsOfAllSessionsRequest
+ */
+export declare class ListSessionLabelsOfAllSessionsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionLabelsOfAllSessionsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionLabelsOfAllSessionsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionLabelsOfAllSessionsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionLabelsOfAllSessionsRequest, _writer: BinaryWriter): void;
+    private _parent;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionLabelsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListSessionLabelsOfAllSessionsRequest.AsObject>);
+    get parent(): string;
+    set parent(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionLabelsOfAllSessionsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionLabelsOfAllSessionsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionLabelsOfAllSessionsRequest.AsProtobufJSON;
+}
+export declare module ListSessionLabelsOfAllSessionsRequest {
+    /**
+     * Standard JavaScript object representation for ListSessionLabelsOfAllSessionsRequest
+     */
+    interface AsObject {
+        parent: string;
+    }
+    /**
+     * Protobuf JSON representation for ListSessionLabelsOfAllSessionsRequest
+     */
+    interface AsProtobufJSON {
+        parent: string;
     }
 }
 /**
@@ -2389,14 +2463,14 @@ export declare class ListSessionLabelsResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListSessionLabelsResponse, _writer: BinaryWriter): void;
-    private _labels?;
+    private _labels;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListSessionLabelsResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListSessionLabelsResponse.AsObject>);
-    get labels(): string[] | undefined;
-    set labels(value: string[] | undefined);
+    get labels(): string[];
+    set labels(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2422,13 +2496,13 @@ export declare module ListSessionLabelsResponse {
      * Standard JavaScript object representation for ListSessionLabelsResponse
      */
     interface AsObject {
-        labels?: string[];
+        labels: string[];
     }
     /**
      * Protobuf JSON representation for ListSessionLabelsResponse
      */
     interface AsProtobufJSON {
-        labels?: string[];
+        labels: string[];
     }
 }
 /**
@@ -2458,20 +2532,17 @@ export declare class AddSessionLabelsRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: AddSessionLabelsRequest, _writer: BinaryWriter): void;
-    private _sessionId?;
-    private _labels?;
-    private _sessionView?;
+    private _sessionId;
+    private _labels;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of AddSessionLabelsRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<AddSessionLabelsRequest.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
-    get labels(): string[] | undefined;
-    set labels(value: string[] | undefined);
-    get sessionView(): Session.View | undefined;
-    set sessionView(value: Session.View | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get labels(): string[];
+    set labels(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2497,60 +2568,55 @@ export declare module AddSessionLabelsRequest {
      * Standard JavaScript object representation for AddSessionLabelsRequest
      */
     interface AsObject {
-        sessionId?: string;
-        labels?: string[];
-        sessionView?: Session.View;
+        sessionId: string;
+        labels: string[];
     }
     /**
      * Protobuf JSON representation for AddSessionLabelsRequest
      */
     interface AsProtobufJSON {
-        sessionId?: string;
-        labels?: string[];
-        sessionView?: string;
+        sessionId: string;
+        labels: string[];
     }
 }
 /**
- * Message implementation for ondewo.nlu.RemoveSessionLabelsRequest
+ * Message implementation for ondewo.nlu.DeleteSessionLabelsRequest
  */
-export declare class RemoveSessionLabelsRequest implements GrpcMessage {
+export declare class DeleteSessionLabelsRequest implements GrpcMessage {
     static id: string;
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
-    static deserializeBinary(bytes: ByteSource): RemoveSessionLabelsRequest;
+    static deserializeBinary(bytes: ByteSource): DeleteSessionLabelsRequest;
     /**
      * Check all the properties and set default protobuf values if necessary
      * @param _instance message instance
      */
-    static refineValues(_instance: RemoveSessionLabelsRequest): void;
+    static refineValues(_instance: DeleteSessionLabelsRequest): void;
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
      * @param _instance message instance
      * @param _reader binary reader instance
      */
-    static deserializeBinaryFromReader(_instance: RemoveSessionLabelsRequest, _reader: BinaryReader): void;
+    static deserializeBinaryFromReader(_instance: DeleteSessionLabelsRequest, _reader: BinaryReader): void;
     /**
      * Serializes a message to binary format using provided binary reader
      * @param _instance message instance
      * @param _writer binary writer instance
      */
-    static serializeBinaryToWriter(_instance: RemoveSessionLabelsRequest, _writer: BinaryWriter): void;
-    private _sessionId?;
-    private _labels?;
-    private _sessionView?;
+    static serializeBinaryToWriter(_instance: DeleteSessionLabelsRequest, _writer: BinaryWriter): void;
+    private _sessionId;
+    private _labels;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of RemoveSessionLabelsRequest to deeply clone from
+     * @param _value initial values object or instance of DeleteSessionLabelsRequest to deeply clone from
      */
-    constructor(_value?: RecursivePartial<RemoveSessionLabelsRequest.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
-    get labels(): string[] | undefined;
-    set labels(value: string[] | undefined);
-    get sessionView(): Session.View | undefined;
-    set sessionView(value: Session.View | undefined);
+    constructor(_value?: RecursivePartial<DeleteSessionLabelsRequest.AsObject>);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get labels(): string[];
+    set labels(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2559,34 +2625,32 @@ export declare class RemoveSessionLabelsRequest implements GrpcMessage {
     /**
      * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
      */
-    toObject(): RemoveSessionLabelsRequest.AsObject;
+    toObject(): DeleteSessionLabelsRequest.AsObject;
     /**
      * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
      */
-    toJSON(): RemoveSessionLabelsRequest.AsObject;
+    toJSON(): DeleteSessionLabelsRequest.AsObject;
     /**
      * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
      * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
      * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
      */
-    toProtobufJSON(options?: ToProtobufJSONOptions): RemoveSessionLabelsRequest.AsProtobufJSON;
+    toProtobufJSON(options?: ToProtobufJSONOptions): DeleteSessionLabelsRequest.AsProtobufJSON;
 }
-export declare module RemoveSessionLabelsRequest {
+export declare module DeleteSessionLabelsRequest {
     /**
-     * Standard JavaScript object representation for RemoveSessionLabelsRequest
+     * Standard JavaScript object representation for DeleteSessionLabelsRequest
      */
     interface AsObject {
-        sessionId?: string;
-        labels?: string[];
-        sessionView?: Session.View;
+        sessionId: string;
+        labels: string[];
     }
     /**
-     * Protobuf JSON representation for RemoveSessionLabelsRequest
+     * Protobuf JSON representation for DeleteSessionLabelsRequest
      */
     interface AsProtobufJSON {
-        sessionId?: string;
-        labels?: string[];
-        sessionView?: string;
+        sessionId: string;
+        labels: string[];
     }
 }
 /**
@@ -2616,20 +2680,20 @@ export declare class ListSessionReviewsRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListSessionReviewsRequest, _writer: BinaryWriter): void;
-    private _sessionId?;
-    private _sessionReviewView?;
-    private _pageToken?;
+    private _sessionId;
+    private _sessionReviewView;
+    private _pageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListSessionReviewsRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListSessionReviewsRequest.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
-    get sessionReviewView(): SessionReview.View | undefined;
-    set sessionReviewView(value: SessionReview.View | undefined);
-    get pageToken(): string | undefined;
-    set pageToken(value: string | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get sessionReviewView(): SessionReview.View;
+    set sessionReviewView(value: SessionReview.View);
+    get pageToken(): string;
+    set pageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2655,17 +2719,17 @@ export declare module ListSessionReviewsRequest {
      * Standard JavaScript object representation for ListSessionReviewsRequest
      */
     interface AsObject {
-        sessionId?: string;
-        sessionReviewView?: SessionReview.View;
-        pageToken?: string;
+        sessionId: string;
+        sessionReviewView: SessionReview.View;
+        pageToken: string;
     }
     /**
      * Protobuf JSON representation for ListSessionReviewsRequest
      */
     interface AsProtobufJSON {
-        sessionId?: string;
-        sessionReviewView?: string;
-        pageToken?: string;
+        sessionId: string;
+        sessionReviewView: string;
+        pageToken: string;
     }
 }
 /**
@@ -2696,7 +2760,7 @@ export declare class ListSessionReviewsResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListSessionReviewsResponse, _writer: BinaryWriter): void;
     private _sessionReviews?;
-    private _nextPageToken?;
+    private _nextPageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListSessionReviewsResponse to deeply clone from
@@ -2704,8 +2768,8 @@ export declare class ListSessionReviewsResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListSessionReviewsResponse.AsObject>);
     get sessionReviews(): SessionReview[] | undefined;
     set sessionReviews(value: SessionReview[] | undefined);
-    get nextPageToken(): string | undefined;
-    set nextPageToken(value: string | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2732,14 +2796,14 @@ export declare module ListSessionReviewsResponse {
      */
     interface AsObject {
         sessionReviews?: SessionReview.AsObject[];
-        nextPageToken?: string;
+        nextPageToken: string;
     }
     /**
      * Protobuf JSON representation for ListSessionReviewsResponse
      */
     interface AsProtobufJSON {
-        sessionReviews?: SessionReview.AsProtobufJSON[] | null;
-        nextPageToken?: string;
+        sessionReviews: SessionReview.AsProtobufJSON[] | null;
+        nextPageToken: string;
     }
 }
 /**
@@ -2769,17 +2833,17 @@ export declare class GetSessionReviewRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetSessionReviewRequest, _writer: BinaryWriter): void;
-    private _sessionReviewId?;
-    private _sessionReviewView?;
+    private _sessionReviewId;
+    private _sessionReviewView;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetSessionReviewRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetSessionReviewRequest.AsObject>);
-    get sessionReviewId(): string | undefined;
-    set sessionReviewId(value: string | undefined);
-    get sessionReviewView(): SessionReview.View | undefined;
-    set sessionReviewView(value: SessionReview.View | undefined);
+    get sessionReviewId(): string;
+    set sessionReviewId(value: string);
+    get sessionReviewView(): SessionReview.View;
+    set sessionReviewView(value: SessionReview.View);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2805,15 +2869,15 @@ export declare module GetSessionReviewRequest {
      * Standard JavaScript object representation for GetSessionReviewRequest
      */
     interface AsObject {
-        sessionReviewId?: string;
-        sessionReviewView?: SessionReview.View;
+        sessionReviewId: string;
+        sessionReviewView: SessionReview.View;
     }
     /**
      * Protobuf JSON representation for GetSessionReviewRequest
      */
     interface AsProtobufJSON {
-        sessionReviewId?: string;
-        sessionReviewView?: string;
+        sessionReviewId: string;
+        sessionReviewView: string;
     }
 }
 /**
@@ -2843,17 +2907,17 @@ export declare class GetLatestSessionReviewRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetLatestSessionReviewRequest, _writer: BinaryWriter): void;
-    private _sessionId?;
-    private _sessionReviewView?;
+    private _sessionId;
+    private _sessionReviewView;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetLatestSessionReviewRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetLatestSessionReviewRequest.AsObject>);
-    get sessionId(): string | undefined;
-    set sessionId(value: string | undefined);
-    get sessionReviewView(): SessionReview.View | undefined;
-    set sessionReviewView(value: SessionReview.View | undefined);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get sessionReviewView(): SessionReview.View;
+    set sessionReviewView(value: SessionReview.View);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2879,14 +2943,14 @@ export declare module GetLatestSessionReviewRequest {
      * Standard JavaScript object representation for GetLatestSessionReviewRequest
      */
     interface AsObject {
-        sessionId?: string;
-        sessionReviewView?: SessionReview.View;
+        sessionId: string;
+        sessionReviewView: SessionReview.View;
     }
     /**
      * Protobuf JSON representation for GetLatestSessionReviewRequest
      */
     interface AsProtobufJSON {
-        sessionId?: string;
-        sessionReviewView?: string;
+        sessionId: string;
+        sessionReviewView: string;
     }
 }
