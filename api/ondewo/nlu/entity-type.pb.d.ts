@@ -42,38 +42,38 @@ export declare class EntityType implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: EntityType, _writer: BinaryWriter): void;
-    private _name?;
-    private _displayName?;
-    private _kind?;
-    private _autoExpansionMode?;
+    private _name;
+    private _displayName;
+    private _kind;
+    private _autoExpansionMode;
     private _entities?;
-    private _nextPageToken?;
-    private _entityCount?;
-    private _status?;
-    private _synonymCount?;
+    private _nextPageToken;
+    private _entityCount;
+    private _status;
+    private _synonymCount;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of EntityType to deeply clone from
      */
     constructor(_value?: RecursivePartial<EntityType.AsObject>);
-    get name(): string | undefined;
-    set name(value: string | undefined);
-    get displayName(): string | undefined;
-    set displayName(value: string | undefined);
-    get kind(): EntityType.Kind | undefined;
-    set kind(value: EntityType.Kind | undefined);
-    get autoExpansionMode(): EntityType.AutoExpansionMode | undefined;
-    set autoExpansionMode(value: EntityType.AutoExpansionMode | undefined);
+    get name(): string;
+    set name(value: string);
+    get displayName(): string;
+    set displayName(value: string);
+    get kind(): EntityType.Kind;
+    set kind(value: EntityType.Kind);
+    get autoExpansionMode(): EntityType.AutoExpansionMode;
+    set autoExpansionMode(value: EntityType.AutoExpansionMode);
     get entities(): EntityType.Entity[] | undefined;
     set entities(value: EntityType.Entity[] | undefined);
-    get nextPageToken(): string | undefined;
-    set nextPageToken(value: string | undefined);
-    get entityCount(): number | undefined;
-    set entityCount(value: number | undefined);
-    get status(): EntityType.EntityTypeStatus | undefined;
-    set status(value: EntityType.EntityTypeStatus | undefined);
-    get synonymCount(): number | undefined;
-    set synonymCount(value: number | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
+    get entityCount(): number;
+    set entityCount(value: number);
+    get status(): EntityType.EntityTypeStatus;
+    set status(value: EntityType.EntityTypeStatus);
+    get synonymCount(): number;
+    set synonymCount(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -99,29 +99,29 @@ export declare module EntityType {
      * Standard JavaScript object representation for EntityType
      */
     interface AsObject {
-        name?: string;
-        displayName?: string;
-        kind?: EntityType.Kind;
-        autoExpansionMode?: EntityType.AutoExpansionMode;
+        name: string;
+        displayName: string;
+        kind: EntityType.Kind;
+        autoExpansionMode: EntityType.AutoExpansionMode;
         entities?: EntityType.Entity.AsObject[];
-        nextPageToken?: string;
-        entityCount?: number;
-        status?: EntityType.EntityTypeStatus;
-        synonymCount?: number;
+        nextPageToken: string;
+        entityCount: number;
+        status: EntityType.EntityTypeStatus;
+        synonymCount: number;
     }
     /**
      * Protobuf JSON representation for EntityType
      */
     interface AsProtobufJSON {
-        name?: string;
-        displayName?: string;
-        kind?: string;
-        autoExpansionMode?: string;
-        entities?: EntityType.Entity.AsProtobufJSON[] | null;
-        nextPageToken?: string;
-        entityCount?: number;
-        status?: string;
-        synonymCount?: number;
+        name: string;
+        displayName: string;
+        kind: string;
+        autoExpansionMode: string;
+        entities: EntityType.Entity.AsProtobufJSON[] | null;
+        nextPageToken: string;
+        entityCount: number;
+        status: string;
+        synonymCount: number;
     }
     enum Kind {
         KIND_UNSPECIFIED = 0,
@@ -163,29 +163,29 @@ export declare module EntityType {
          * @param _writer binary writer instance
          */
         static serializeBinaryToWriter(_instance: Entity, _writer: BinaryWriter): void;
-        private _value?;
-        private _synonyms?;
-        private _name?;
-        private _displayName?;
-        private _synonymCount?;
-        private _languageCode?;
+        private _value;
+        private _synonyms;
+        private _name;
+        private _displayName;
+        private _synonymCount;
+        private _languageCode;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of Entity to deeply clone from
          */
         constructor(_value?: RecursivePartial<Entity.AsObject>);
-        get value(): string | undefined;
-        set value(value: string | undefined);
-        get synonyms(): string[] | undefined;
-        set synonyms(value: string[] | undefined);
-        get name(): string | undefined;
-        set name(value: string | undefined);
-        get displayName(): string | undefined;
-        set displayName(value: string | undefined);
-        get synonymCount(): number | undefined;
-        set synonymCount(value: number | undefined);
-        get languageCode(): string | undefined;
-        set languageCode(value: string | undefined);
+        get value(): string;
+        set value(value: string);
+        get synonyms(): string[];
+        set synonyms(value: string[]);
+        get name(): string;
+        set name(value: string);
+        get displayName(): string;
+        set displayName(value: string);
+        get synonymCount(): number;
+        set synonymCount(value: number);
+        get languageCode(): string;
+        set languageCode(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -211,23 +211,23 @@ export declare module EntityType {
          * Standard JavaScript object representation for Entity
          */
         interface AsObject {
-            value?: string;
-            synonyms?: string[];
-            name?: string;
-            displayName?: string;
-            synonymCount?: number;
-            languageCode?: string;
+            value: string;
+            synonyms: string[];
+            name: string;
+            displayName: string;
+            synonymCount: number;
+            languageCode: string;
         }
         /**
          * Protobuf JSON representation for Entity
          */
         interface AsProtobufJSON {
-            value?: string;
-            synonyms?: string[];
-            name?: string;
-            displayName?: string;
-            synonymCount?: number;
-            languageCode?: string;
+            value: string;
+            synonyms: string[];
+            name: string;
+            displayName: string;
+            synonymCount: number;
+            languageCode: string;
         }
     }
 }
@@ -258,27 +258,27 @@ export declare class ListEntityTypesRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListEntityTypesRequest, _writer: BinaryWriter): void;
-    private _parent?;
-    private _languageCode?;
-    private _pageToken?;
-    private _entityTypeView?;
-    private _filterByCategory?;
+    private _parent;
+    private _languageCode;
+    private _pageToken;
+    private _entityTypeView;
+    private _filterByCategory;
     private _sortByField?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListEntityTypesRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListEntityTypesRequest.AsObject>);
-    get parent(): string | undefined;
-    set parent(value: string | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
-    get pageToken(): string | undefined;
-    set pageToken(value: string | undefined);
-    get entityTypeView(): EntityTypeView | undefined;
-    set entityTypeView(value: EntityTypeView | undefined);
-    get filterByCategory(): EntityTypeCategory | undefined;
-    set filterByCategory(value: EntityTypeCategory | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get pageToken(): string;
+    set pageToken(value: string);
+    get entityTypeView(): EntityTypeView;
+    set entityTypeView(value: EntityTypeView);
+    get filterByCategory(): EntityTypeCategory;
+    set filterByCategory(value: EntityTypeCategory);
     get sortByField(): EntityTypeSorting | undefined;
     set sortByField(value: EntityTypeSorting | undefined);
     /**
@@ -306,23 +306,23 @@ export declare module ListEntityTypesRequest {
      * Standard JavaScript object representation for ListEntityTypesRequest
      */
     interface AsObject {
-        parent?: string;
-        languageCode?: string;
-        pageToken?: string;
-        entityTypeView?: EntityTypeView;
-        filterByCategory?: EntityTypeCategory;
+        parent: string;
+        languageCode: string;
+        pageToken: string;
+        entityTypeView: EntityTypeView;
+        filterByCategory: EntityTypeCategory;
         sortByField?: EntityTypeSorting.AsObject;
     }
     /**
      * Protobuf JSON representation for ListEntityTypesRequest
      */
     interface AsProtobufJSON {
-        parent?: string;
-        languageCode?: string;
-        pageToken?: string;
-        entityTypeView?: string;
-        filterByCategory?: string;
-        sortByField?: EntityTypeSorting.AsProtobufJSON | null;
+        parent: string;
+        languageCode: string;
+        pageToken: string;
+        entityTypeView: string;
+        filterByCategory: string;
+        sortByField: EntityTypeSorting.AsProtobufJSON | null;
     }
 }
 /**
@@ -353,7 +353,7 @@ export declare class ListEntityTypesResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListEntityTypesResponse, _writer: BinaryWriter): void;
     private _entityTypes?;
-    private _nextPageToken?;
+    private _nextPageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListEntityTypesResponse to deeply clone from
@@ -361,8 +361,8 @@ export declare class ListEntityTypesResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListEntityTypesResponse.AsObject>);
     get entityTypes(): EntityType[] | undefined;
     set entityTypes(value: EntityType[] | undefined);
-    get nextPageToken(): string | undefined;
-    set nextPageToken(value: string | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -389,14 +389,14 @@ export declare module ListEntityTypesResponse {
      */
     interface AsObject {
         entityTypes?: EntityType.AsObject[];
-        nextPageToken?: string;
+        nextPageToken: string;
     }
     /**
      * Protobuf JSON representation for ListEntityTypesResponse
      */
     interface AsProtobufJSON {
-        entityTypes?: EntityType.AsProtobufJSON[] | null;
-        nextPageToken?: string;
+        entityTypes: EntityType.AsProtobufJSON[] | null;
+        nextPageToken: string;
     }
 }
 /**
@@ -426,23 +426,23 @@ export declare class GetEntityTypeRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetEntityTypeRequest, _writer: BinaryWriter): void;
-    private _name?;
-    private _languageCode?;
-    private _pageToken?;
-    private _entityTypeView?;
+    private _name;
+    private _languageCode;
+    private _pageToken;
+    private _entityTypeView;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetEntityTypeRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetEntityTypeRequest.AsObject>);
-    get name(): string | undefined;
-    set name(value: string | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
-    get pageToken(): string | undefined;
-    set pageToken(value: string | undefined);
-    get entityTypeView(): EntityTypeView | undefined;
-    set entityTypeView(value: EntityTypeView | undefined);
+    get name(): string;
+    set name(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get pageToken(): string;
+    set pageToken(value: string);
+    get entityTypeView(): EntityTypeView;
+    set entityTypeView(value: EntityTypeView);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -468,19 +468,19 @@ export declare module GetEntityTypeRequest {
      * Standard JavaScript object representation for GetEntityTypeRequest
      */
     interface AsObject {
-        name?: string;
-        languageCode?: string;
-        pageToken?: string;
-        entityTypeView?: EntityTypeView;
+        name: string;
+        languageCode: string;
+        pageToken: string;
+        entityTypeView: EntityTypeView;
     }
     /**
      * Protobuf JSON representation for GetEntityTypeRequest
      */
     interface AsProtobufJSON {
-        name?: string;
-        languageCode?: string;
-        pageToken?: string;
-        entityTypeView?: string;
+        name: string;
+        languageCode: string;
+        pageToken: string;
+        entityTypeView: string;
     }
 }
 /**
@@ -510,23 +510,23 @@ export declare class CreateEntityTypeRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: CreateEntityTypeRequest, _writer: BinaryWriter): void;
-    private _parent?;
+    private _parent;
     private _entityType?;
-    private _languageCode?;
-    private _entityTypeView?;
+    private _languageCode;
+    private _entityTypeView;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of CreateEntityTypeRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<CreateEntityTypeRequest.AsObject>);
-    get parent(): string | undefined;
-    set parent(value: string | undefined);
+    get parent(): string;
+    set parent(value: string);
     get entityType(): EntityType | undefined;
     set entityType(value: EntityType | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
-    get entityTypeView(): EntityTypeView | undefined;
-    set entityTypeView(value: EntityTypeView | undefined);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get entityTypeView(): EntityTypeView;
+    set entityTypeView(value: EntityTypeView);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -552,19 +552,19 @@ export declare module CreateEntityTypeRequest {
      * Standard JavaScript object representation for CreateEntityTypeRequest
      */
     interface AsObject {
-        parent?: string;
+        parent: string;
         entityType?: EntityType.AsObject;
-        languageCode?: string;
-        entityTypeView?: EntityTypeView;
+        languageCode: string;
+        entityTypeView: EntityTypeView;
     }
     /**
      * Protobuf JSON representation for CreateEntityTypeRequest
      */
     interface AsProtobufJSON {
-        parent?: string;
-        entityType?: EntityType.AsProtobufJSON | null;
-        languageCode?: string;
-        entityTypeView?: string;
+        parent: string;
+        entityType: EntityType.AsProtobufJSON | null;
+        languageCode: string;
+        entityTypeView: string;
     }
 }
 /**
@@ -595,9 +595,9 @@ export declare class UpdateEntityTypeRequest implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: UpdateEntityTypeRequest, _writer: BinaryWriter): void;
     private _entityType?;
-    private _languageCode?;
+    private _languageCode;
     private _updateMask?;
-    private _entityTypeView?;
+    private _entityTypeView;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of UpdateEntityTypeRequest to deeply clone from
@@ -605,12 +605,12 @@ export declare class UpdateEntityTypeRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateEntityTypeRequest.AsObject>);
     get entityType(): EntityType | undefined;
     set entityType(value: EntityType | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
+    get languageCode(): string;
+    set languageCode(value: string);
     get updateMask(): googleProtobuf008.FieldMask | undefined;
     set updateMask(value: googleProtobuf008.FieldMask | undefined);
-    get entityTypeView(): EntityTypeView | undefined;
-    set entityTypeView(value: EntityTypeView | undefined);
+    get entityTypeView(): EntityTypeView;
+    set entityTypeView(value: EntityTypeView);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -637,18 +637,18 @@ export declare module UpdateEntityTypeRequest {
      */
     interface AsObject {
         entityType?: EntityType.AsObject;
-        languageCode?: string;
+        languageCode: string;
         updateMask?: googleProtobuf008.FieldMask.AsObject;
-        entityTypeView?: EntityTypeView;
+        entityTypeView: EntityTypeView;
     }
     /**
      * Protobuf JSON representation for UpdateEntityTypeRequest
      */
     interface AsProtobufJSON {
-        entityType?: EntityType.AsProtobufJSON | null;
-        languageCode?: string;
-        updateMask?: googleProtobuf008.FieldMask.AsProtobufJSON | null;
-        entityTypeView?: string;
+        entityType: EntityType.AsProtobufJSON | null;
+        languageCode: string;
+        updateMask: googleProtobuf008.FieldMask.AsProtobufJSON | null;
+        entityTypeView: string;
     }
 }
 /**
@@ -678,14 +678,14 @@ export declare class DeleteEntityTypeRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: DeleteEntityTypeRequest, _writer: BinaryWriter): void;
-    private _name?;
+    private _name;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of DeleteEntityTypeRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<DeleteEntityTypeRequest.AsObject>);
-    get name(): string | undefined;
-    set name(value: string | undefined);
+    get name(): string;
+    set name(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -711,13 +711,13 @@ export declare module DeleteEntityTypeRequest {
      * Standard JavaScript object representation for DeleteEntityTypeRequest
      */
     interface AsObject {
-        name?: string;
+        name: string;
     }
     /**
      * Protobuf JSON representation for DeleteEntityTypeRequest
      */
     interface AsProtobufJSON {
-        name?: string;
+        name: string;
     }
 }
 /**
@@ -747,10 +747,10 @@ export declare class BatchUpdateEntityTypesRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: BatchUpdateEntityTypesRequest, _writer: BinaryWriter): void;
-    private _parent?;
-    private _entityTypeBatchUri?;
+    private _parent;
+    private _entityTypeBatchUri;
     private _entityTypeBatchInline?;
-    private _languageCode?;
+    private _languageCode;
     private _updateMask?;
     private _entityTypeBatch;
     /**
@@ -758,14 +758,14 @@ export declare class BatchUpdateEntityTypesRequest implements GrpcMessage {
      * @param _value initial values object or instance of BatchUpdateEntityTypesRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<BatchUpdateEntityTypesRequest.AsObject>);
-    get parent(): string | undefined;
-    set parent(value: string | undefined);
-    get entityTypeBatchUri(): string | undefined;
-    set entityTypeBatchUri(value: string | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get entityTypeBatchUri(): string;
+    set entityTypeBatchUri(value: string);
     get entityTypeBatchInline(): EntityTypeBatch | undefined;
     set entityTypeBatchInline(value: EntityTypeBatch | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
+    get languageCode(): string;
+    set languageCode(value: string);
     get updateMask(): googleProtobuf008.FieldMask | undefined;
     set updateMask(value: googleProtobuf008.FieldMask | undefined);
     get entityTypeBatch(): BatchUpdateEntityTypesRequest.EntityTypeBatchCase;
@@ -794,21 +794,21 @@ export declare module BatchUpdateEntityTypesRequest {
      * Standard JavaScript object representation for BatchUpdateEntityTypesRequest
      */
     interface AsObject {
-        parent?: string;
-        entityTypeBatchUri?: string;
+        parent: string;
+        entityTypeBatchUri: string;
         entityTypeBatchInline?: EntityTypeBatch.AsObject;
-        languageCode?: string;
+        languageCode: string;
         updateMask?: googleProtobuf008.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for BatchUpdateEntityTypesRequest
      */
     interface AsProtobufJSON {
-        parent?: string;
-        entityTypeBatchUri?: string | null;
-        entityTypeBatchInline?: EntityTypeBatch.AsProtobufJSON | null;
-        languageCode?: string;
-        updateMask?: googleProtobuf008.FieldMask.AsProtobufJSON | null;
+        parent: string;
+        entityTypeBatchUri: string | null;
+        entityTypeBatchInline: EntityTypeBatch.AsProtobufJSON | null;
+        languageCode: string;
+        updateMask: googleProtobuf008.FieldMask.AsProtobufJSON | null;
     }
     enum EntityTypeBatchCase {
         none = 0,
@@ -882,7 +882,7 @@ export declare module BatchUpdateEntityTypesResponse {
      * Protobuf JSON representation for BatchUpdateEntityTypesResponse
      */
     interface AsProtobufJSON {
-        entityTypes?: EntityType.AsProtobufJSON[] | null;
+        entityTypes: EntityType.AsProtobufJSON[] | null;
     }
 }
 /**
@@ -912,17 +912,17 @@ export declare class BatchDeleteEntityTypesRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: BatchDeleteEntityTypesRequest, _writer: BinaryWriter): void;
-    private _parent?;
-    private _entityTypeNames?;
+    private _parent;
+    private _entityTypeNames;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of BatchDeleteEntityTypesRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<BatchDeleteEntityTypesRequest.AsObject>);
-    get parent(): string | undefined;
-    set parent(value: string | undefined);
-    get entityTypeNames(): string[] | undefined;
-    set entityTypeNames(value: string[] | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get entityTypeNames(): string[];
+    set entityTypeNames(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -948,15 +948,15 @@ export declare module BatchDeleteEntityTypesRequest {
      * Standard JavaScript object representation for BatchDeleteEntityTypesRequest
      */
     interface AsObject {
-        parent?: string;
-        entityTypeNames?: string[];
+        parent: string;
+        entityTypeNames: string[];
     }
     /**
      * Protobuf JSON representation for BatchDeleteEntityTypesRequest
      */
     interface AsProtobufJSON {
-        parent?: string;
-        entityTypeNames?: string[];
+        parent: string;
+        entityTypeNames: string[];
     }
 }
 /**
@@ -1025,7 +1025,7 @@ export declare module EntityTypeBatch {
      * Protobuf JSON representation for EntityTypeBatch
      */
     interface AsProtobufJSON {
-        entityTypes?: EntityType.AsProtobufJSON[] | null;
+        entityTypes: EntityType.AsProtobufJSON[] | null;
     }
 }
 /**
@@ -1055,17 +1055,17 @@ export declare class EntityTypeSorting implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: EntityTypeSorting, _writer: BinaryWriter): void;
-    private _sortingField?;
-    private _sortingMode?;
+    private _sortingField;
+    private _sortingMode;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of EntityTypeSorting to deeply clone from
      */
     constructor(_value?: RecursivePartial<EntityTypeSorting.AsObject>);
-    get sortingField(): EntityTypeSorting.EntityTypeSortingField | undefined;
-    set sortingField(value: EntityTypeSorting.EntityTypeSortingField | undefined);
-    get sortingMode(): ondewoNlu009.SortingMode | undefined;
-    set sortingMode(value: ondewoNlu009.SortingMode | undefined);
+    get sortingField(): EntityTypeSorting.EntityTypeSortingField;
+    set sortingField(value: EntityTypeSorting.EntityTypeSortingField);
+    get sortingMode(): ondewoNlu009.SortingMode;
+    set sortingMode(value: ondewoNlu009.SortingMode);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1091,15 +1091,15 @@ export declare module EntityTypeSorting {
      * Standard JavaScript object representation for EntityTypeSorting
      */
     interface AsObject {
-        sortingField?: EntityTypeSorting.EntityTypeSortingField;
-        sortingMode?: ondewoNlu009.SortingMode;
+        sortingField: EntityTypeSorting.EntityTypeSortingField;
+        sortingMode: ondewoNlu009.SortingMode;
     }
     /**
      * Protobuf JSON representation for EntityTypeSorting
      */
     interface AsProtobufJSON {
-        sortingField?: string;
-        sortingMode?: string;
+        sortingField: string;
+        sortingMode: string;
     }
     enum EntityTypeSortingField {
         NO_ENTITY_TYPE_SORTING = 0,
@@ -1138,7 +1138,7 @@ export declare class BatchEntitiesResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: BatchEntitiesResponse, _writer: BinaryWriter): void;
     private _entityStatuses?;
-    private _hasErrors?;
+    private _hasErrors;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of BatchEntitiesResponse to deeply clone from
@@ -1146,8 +1146,8 @@ export declare class BatchEntitiesResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<BatchEntitiesResponse.AsObject>);
     get entityStatuses(): BatchEntitiesResponse.EntityStatus[] | undefined;
     set entityStatuses(value: BatchEntitiesResponse.EntityStatus[] | undefined);
-    get hasErrors(): boolean | undefined;
-    set hasErrors(value: boolean | undefined);
+    get hasErrors(): boolean;
+    set hasErrors(value: boolean);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1174,14 +1174,14 @@ export declare module BatchEntitiesResponse {
      */
     interface AsObject {
         entityStatuses?: BatchEntitiesResponse.EntityStatus.AsObject[];
-        hasErrors?: boolean;
+        hasErrors: boolean;
     }
     /**
      * Protobuf JSON representation for BatchEntitiesResponse
      */
     interface AsProtobufJSON {
-        entityStatuses?: BatchEntitiesResponse.EntityStatus.AsProtobufJSON[] | null;
-        hasErrors?: boolean;
+        entityStatuses: BatchEntitiesResponse.EntityStatus.AsProtobufJSON[] | null;
+        hasErrors: boolean;
     }
     /**
      * Message implementation for ondewo.nlu.BatchEntitiesResponse.EntityStatus
@@ -1211,7 +1211,7 @@ export declare module BatchEntitiesResponse {
          */
         static serializeBinaryToWriter(_instance: EntityStatus, _writer: BinaryWriter): void;
         private _entity?;
-        private _errorMessage?;
+        private _errorMessage;
         private _entityOrStatus;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -1220,8 +1220,8 @@ export declare module BatchEntitiesResponse {
         constructor(_value?: RecursivePartial<EntityStatus.AsObject>);
         get entity(): EntityType.Entity | undefined;
         set entity(value: EntityType.Entity | undefined);
-        get errorMessage(): string | undefined;
-        set errorMessage(value: string | undefined);
+        get errorMessage(): string;
+        set errorMessage(value: string);
         get entityOrStatus(): EntityStatus.EntityOrStatusCase;
         /**
          * Serialize message to binary data
@@ -1249,14 +1249,14 @@ export declare module BatchEntitiesResponse {
          */
         interface AsObject {
             entity?: EntityType.Entity.AsObject;
-            errorMessage?: string;
+            errorMessage: string;
         }
         /**
          * Protobuf JSON representation for EntityStatus
          */
         interface AsProtobufJSON {
-            entity?: EntityType.Entity.AsProtobufJSON | null;
-            errorMessage?: string | null;
+            entity: EntityType.Entity.AsProtobufJSON | null;
+            errorMessage: string | null;
         }
         enum EntityOrStatusCase {
             none = 0,
@@ -1331,7 +1331,7 @@ export declare module BatchCreateEntitiesRequest {
      * Protobuf JSON representation for BatchCreateEntitiesRequest
      */
     interface AsProtobufJSON {
-        createEntityRequests?: BatchCreateEntitiesRequest.CreateEntityRequest.AsProtobufJSON[] | null;
+        createEntityRequests: BatchCreateEntitiesRequest.CreateEntityRequest.AsProtobufJSON[] | null;
     }
     /**
      * Message implementation for ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest
@@ -1360,15 +1360,15 @@ export declare module BatchCreateEntitiesRequest {
          * @param _writer binary writer instance
          */
         static serializeBinaryToWriter(_instance: CreateEntityRequest, _writer: BinaryWriter): void;
-        private _entityTypeName?;
+        private _entityTypeName;
         private _entity?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of CreateEntityRequest to deeply clone from
          */
         constructor(_value?: RecursivePartial<CreateEntityRequest.AsObject>);
-        get entityTypeName(): string | undefined;
-        set entityTypeName(value: string | undefined);
+        get entityTypeName(): string;
+        set entityTypeName(value: string);
         get entity(): EntityType.Entity | undefined;
         set entity(value: EntityType.Entity | undefined);
         /**
@@ -1396,15 +1396,15 @@ export declare module BatchCreateEntitiesRequest {
          * Standard JavaScript object representation for CreateEntityRequest
          */
         interface AsObject {
-            entityTypeName?: string;
+            entityTypeName: string;
             entity?: EntityType.Entity.AsObject;
         }
         /**
          * Protobuf JSON representation for CreateEntityRequest
          */
         interface AsProtobufJSON {
-            entityTypeName?: string;
-            entity?: EntityType.Entity.AsProtobufJSON | null;
+            entityTypeName: string;
+            entity: EntityType.Entity.AsProtobufJSON | null;
         }
     }
 }
@@ -1474,7 +1474,7 @@ export declare module BatchUpdateEntitiesRequest {
      * Protobuf JSON representation for BatchUpdateEntitiesRequest
      */
     interface AsProtobufJSON {
-        entities?: EntityType.Entity.AsProtobufJSON[] | null;
+        entities: EntityType.Entity.AsProtobufJSON[] | null;
     }
 }
 /**
@@ -1504,14 +1504,14 @@ export declare class BatchGetEntitiesRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: BatchGetEntitiesRequest, _writer: BinaryWriter): void;
-    private _names?;
+    private _names;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of BatchGetEntitiesRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<BatchGetEntitiesRequest.AsObject>);
-    get names(): string[] | undefined;
-    set names(value: string[] | undefined);
+    get names(): string[];
+    set names(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1537,13 +1537,13 @@ export declare module BatchGetEntitiesRequest {
      * Standard JavaScript object representation for BatchGetEntitiesRequest
      */
     interface AsObject {
-        names?: string[];
+        names: string[];
     }
     /**
      * Protobuf JSON representation for BatchGetEntitiesRequest
      */
     interface AsProtobufJSON {
-        names?: string[];
+        names: string[];
     }
 }
 /**
@@ -1573,14 +1573,14 @@ export declare class BatchDeleteEntitiesRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: BatchDeleteEntitiesRequest, _writer: BinaryWriter): void;
-    private _names?;
+    private _names;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of BatchDeleteEntitiesRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<BatchDeleteEntitiesRequest.AsObject>);
-    get names(): string[] | undefined;
-    set names(value: string[] | undefined);
+    get names(): string[];
+    set names(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1606,13 +1606,13 @@ export declare module BatchDeleteEntitiesRequest {
      * Standard JavaScript object representation for BatchDeleteEntitiesRequest
      */
     interface AsObject {
-        names?: string[];
+        names: string[];
     }
     /**
      * Protobuf JSON representation for BatchDeleteEntitiesRequest
      */
     interface AsProtobufJSON {
-        names?: string[];
+        names: string[];
     }
 }
 /**
@@ -1643,7 +1643,7 @@ export declare class BatchDeleteEntitiesResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: BatchDeleteEntitiesResponse, _writer: BinaryWriter): void;
     private _deleteStatuses?;
-    private _hasErrors?;
+    private _hasErrors;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of BatchDeleteEntitiesResponse to deeply clone from
@@ -1651,8 +1651,8 @@ export declare class BatchDeleteEntitiesResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<BatchDeleteEntitiesResponse.AsObject>);
     get deleteStatuses(): BatchDeleteEntitiesResponse.DeleteEntityStatus[] | undefined;
     set deleteStatuses(value: BatchDeleteEntitiesResponse.DeleteEntityStatus[] | undefined);
-    get hasErrors(): boolean | undefined;
-    set hasErrors(value: boolean | undefined);
+    get hasErrors(): boolean;
+    set hasErrors(value: boolean);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1679,14 +1679,14 @@ export declare module BatchDeleteEntitiesResponse {
      */
     interface AsObject {
         deleteStatuses?: BatchDeleteEntitiesResponse.DeleteEntityStatus.AsObject[];
-        hasErrors?: boolean;
+        hasErrors: boolean;
     }
     /**
      * Protobuf JSON representation for BatchDeleteEntitiesResponse
      */
     interface AsProtobufJSON {
-        deleteStatuses?: BatchDeleteEntitiesResponse.DeleteEntityStatus.AsProtobufJSON[] | null;
-        hasErrors?: boolean;
+        deleteStatuses: BatchDeleteEntitiesResponse.DeleteEntityStatus.AsProtobufJSON[] | null;
+        hasErrors: boolean;
     }
     /**
      * Message implementation for ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus
@@ -1716,7 +1716,7 @@ export declare module BatchDeleteEntitiesResponse {
          */
         static serializeBinaryToWriter(_instance: DeleteEntityStatus, _writer: BinaryWriter): void;
         private _successfullyDeleted?;
-        private _errorMessage?;
+        private _errorMessage;
         private _deleteStatus;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -1725,8 +1725,8 @@ export declare module BatchDeleteEntitiesResponse {
         constructor(_value?: RecursivePartial<DeleteEntityStatus.AsObject>);
         get successfullyDeleted(): googleProtobuf004.Empty | undefined;
         set successfullyDeleted(value: googleProtobuf004.Empty | undefined);
-        get errorMessage(): string | undefined;
-        set errorMessage(value: string | undefined);
+        get errorMessage(): string;
+        set errorMessage(value: string);
         get deleteStatus(): DeleteEntityStatus.DeleteStatusCase;
         /**
          * Serialize message to binary data
@@ -1754,14 +1754,14 @@ export declare module BatchDeleteEntitiesResponse {
          */
         interface AsObject {
             successfullyDeleted?: googleProtobuf004.Empty.AsObject;
-            errorMessage?: string;
+            errorMessage: string;
         }
         /**
          * Protobuf JSON representation for DeleteEntityStatus
          */
         interface AsProtobufJSON {
-            successfullyDeleted?: googleProtobuf004.Empty.AsProtobufJSON | null;
-            errorMessage?: string | null;
+            successfullyDeleted: googleProtobuf004.Empty.AsProtobufJSON | null;
+            errorMessage: string | null;
         }
         enum DeleteStatusCase {
             none = 0,
@@ -1797,26 +1797,26 @@ export declare class ListEntitiesRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListEntitiesRequest, _writer: BinaryWriter): void;
-    private _entityTypeName?;
-    private _languageCode?;
-    private _pageToken?;
+    private _entityTypeName;
+    private _languageCode;
+    private _pageToken;
     private _sortByField?;
-    private _searchByPattern?;
+    private _searchByPattern;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListEntitiesRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListEntitiesRequest.AsObject>);
-    get entityTypeName(): string | undefined;
-    set entityTypeName(value: string | undefined);
-    get languageCode(): string | undefined;
-    set languageCode(value: string | undefined);
-    get pageToken(): string | undefined;
-    set pageToken(value: string | undefined);
+    get entityTypeName(): string;
+    set entityTypeName(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get pageToken(): string;
+    set pageToken(value: string);
     get sortByField(): EntityValueSorting | undefined;
     set sortByField(value: EntityValueSorting | undefined);
-    get searchByPattern(): string | undefined;
-    set searchByPattern(value: string | undefined);
+    get searchByPattern(): string;
+    set searchByPattern(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1842,21 +1842,21 @@ export declare module ListEntitiesRequest {
      * Standard JavaScript object representation for ListEntitiesRequest
      */
     interface AsObject {
-        entityTypeName?: string;
-        languageCode?: string;
-        pageToken?: string;
+        entityTypeName: string;
+        languageCode: string;
+        pageToken: string;
         sortByField?: EntityValueSorting.AsObject;
-        searchByPattern?: string;
+        searchByPattern: string;
     }
     /**
      * Protobuf JSON representation for ListEntitiesRequest
      */
     interface AsProtobufJSON {
-        entityTypeName?: string;
-        languageCode?: string;
-        pageToken?: string;
-        sortByField?: EntityValueSorting.AsProtobufJSON | null;
-        searchByPattern?: string;
+        entityTypeName: string;
+        languageCode: string;
+        pageToken: string;
+        sortByField: EntityValueSorting.AsProtobufJSON | null;
+        searchByPattern: string;
     }
 }
 /**
@@ -1887,7 +1887,7 @@ export declare class ListEntitiesResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListEntitiesResponse, _writer: BinaryWriter): void;
     private _entities?;
-    private _nextPageToken?;
+    private _nextPageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListEntitiesResponse to deeply clone from
@@ -1895,8 +1895,8 @@ export declare class ListEntitiesResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListEntitiesResponse.AsObject>);
     get entities(): EntityType.Entity[] | undefined;
     set entities(value: EntityType.Entity[] | undefined);
-    get nextPageToken(): string | undefined;
-    set nextPageToken(value: string | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1923,14 +1923,14 @@ export declare module ListEntitiesResponse {
      */
     interface AsObject {
         entities?: EntityType.Entity.AsObject[];
-        nextPageToken?: string;
+        nextPageToken: string;
     }
     /**
      * Protobuf JSON representation for ListEntitiesResponse
      */
     interface AsProtobufJSON {
-        entities?: EntityType.Entity.AsProtobufJSON[] | null;
-        nextPageToken?: string;
+        entities: EntityType.Entity.AsProtobufJSON[] | null;
+        nextPageToken: string;
     }
 }
 /**
@@ -1960,17 +1960,17 @@ export declare class EntityValueSorting implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: EntityValueSorting, _writer: BinaryWriter): void;
-    private _sortingField?;
-    private _sortingMode?;
+    private _sortingField;
+    private _sortingMode;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of EntityValueSorting to deeply clone from
      */
     constructor(_value?: RecursivePartial<EntityValueSorting.AsObject>);
-    get sortingField(): EntityValueSorting.EntityValueSortingField | undefined;
-    set sortingField(value: EntityValueSorting.EntityValueSortingField | undefined);
-    get sortingMode(): ondewoNlu009.SortingMode | undefined;
-    set sortingMode(value: ondewoNlu009.SortingMode | undefined);
+    get sortingField(): EntityValueSorting.EntityValueSortingField;
+    set sortingField(value: EntityValueSorting.EntityValueSortingField);
+    get sortingMode(): ondewoNlu009.SortingMode;
+    set sortingMode(value: ondewoNlu009.SortingMode);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1996,15 +1996,15 @@ export declare module EntityValueSorting {
      * Standard JavaScript object representation for EntityValueSorting
      */
     interface AsObject {
-        sortingField?: EntityValueSorting.EntityValueSortingField;
-        sortingMode?: ondewoNlu009.SortingMode;
+        sortingField: EntityValueSorting.EntityValueSortingField;
+        sortingMode: ondewoNlu009.SortingMode;
     }
     /**
      * Protobuf JSON representation for EntityValueSorting
      */
     interface AsProtobufJSON {
-        sortingField?: string;
-        sortingMode?: string;
+        sortingField: string;
+        sortingMode: string;
     }
     enum EntityValueSortingField {
         NO_ENTITY_VALUE_SORTING = 0,

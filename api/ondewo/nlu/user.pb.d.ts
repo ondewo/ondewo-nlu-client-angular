@@ -36,23 +36,23 @@ export declare class User implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: User, _writer: BinaryWriter): void;
-    private _userId?;
-    private _displayName?;
-    private _serverRoleId?;
-    private _userEmail?;
+    private _userId;
+    private _displayName;
+    private _serverRoleId;
+    private _userEmail;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of User to deeply clone from
      */
     constructor(_value?: RecursivePartial<User.AsObject>);
-    get userId(): string | undefined;
-    set userId(value: string | undefined);
-    get displayName(): string | undefined;
-    set displayName(value: string | undefined);
-    get serverRoleId(): number | undefined;
-    set serverRoleId(value: number | undefined);
-    get userEmail(): string | undefined;
-    set userEmail(value: string | undefined);
+    get userId(): string;
+    set userId(value: string);
+    get displayName(): string;
+    set displayName(value: string);
+    get serverRoleId(): number;
+    set serverRoleId(value: number);
+    get userEmail(): string;
+    set userEmail(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -78,19 +78,19 @@ export declare module User {
      * Standard JavaScript object representation for User
      */
     interface AsObject {
-        userId?: string;
-        displayName?: string;
-        serverRoleId?: number;
-        userEmail?: string;
+        userId: string;
+        displayName: string;
+        serverRoleId: number;
+        userEmail: string;
     }
     /**
      * Protobuf JSON representation for User
      */
     interface AsProtobufJSON {
-        userId?: string;
-        displayName?: string;
-        serverRoleId?: number;
-        userEmail?: string;
+        userId: string;
+        displayName: string;
+        serverRoleId: number;
+        userEmail: string;
     }
 }
 /**
@@ -121,7 +121,7 @@ export declare class UserInfo implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: UserInfo, _writer: BinaryWriter): void;
     private _user?;
-    private _projectRoles?;
+    private _projectRoles;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of UserInfo to deeply clone from
@@ -131,10 +131,10 @@ export declare class UserInfo implements GrpcMessage {
     set user(value: User | undefined);
     get projectRoles(): {
         [prop: string]: ondewoNlu005.ProjectRole;
-    } | undefined;
+    };
     set projectRoles(value: {
         [prop: string]: ondewoNlu005.ProjectRole;
-    } | undefined);
+    });
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -161,7 +161,7 @@ export declare module UserInfo {
      */
     interface AsObject {
         user?: User.AsObject;
-        projectRoles?: {
+        projectRoles: {
             [prop: string]: ondewoNlu005.ProjectRole;
         };
     }
@@ -169,8 +169,8 @@ export declare module UserInfo {
      * Protobuf JSON representation for UserInfo
      */
     interface AsProtobufJSON {
-        user?: User.AsProtobufJSON | null;
-        projectRoles?: {
+        user: User.AsProtobufJSON | null;
+        projectRoles: {
             [prop: string]: ondewoNlu005.ProjectRole;
         };
     }
@@ -201,15 +201,15 @@ export declare module UserInfo {
          * @param _writer binary writer instance
          */
         static serializeBinaryToWriter(_instance: ProjectRolesEntry, _writer: BinaryWriter): void;
-        private _key?;
+        private _key;
         private _value?;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of ProjectRolesEntry to deeply clone from
          */
         constructor(_value?: RecursivePartial<ProjectRolesEntry.AsObject>);
-        get key(): string | undefined;
-        set key(value: string | undefined);
+        get key(): string;
+        set key(value: string);
         get value(): ondewoNlu005.ProjectRole | undefined;
         set value(value: ondewoNlu005.ProjectRole | undefined);
         /**
@@ -237,15 +237,15 @@ export declare module UserInfo {
          * Standard JavaScript object representation for ProjectRolesEntry
          */
         interface AsObject {
-            key?: string;
+            key: string;
             value?: ondewoNlu005.ProjectRole.AsObject;
         }
         /**
          * Protobuf JSON representation for ProjectRolesEntry
          */
         interface AsProtobufJSON {
-            key?: string;
-            value?: ondewoNlu005.ProjectRole.AsProtobufJSON | null;
+            key: string;
+            value: ondewoNlu005.ProjectRole.AsProtobufJSON | null;
         }
     }
 }
@@ -277,7 +277,7 @@ export declare class CreateUserRequest implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: CreateUserRequest, _writer: BinaryWriter): void;
     private _user?;
-    private _password?;
+    private _password;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of CreateUserRequest to deeply clone from
@@ -285,8 +285,8 @@ export declare class CreateUserRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<CreateUserRequest.AsObject>);
     get user(): User | undefined;
     set user(value: User | undefined);
-    get password(): string | undefined;
-    set password(value: string | undefined);
+    get password(): string;
+    set password(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -313,14 +313,14 @@ export declare module CreateUserRequest {
      */
     interface AsObject {
         user?: User.AsObject;
-        password?: string;
+        password: string;
     }
     /**
      * Protobuf JSON representation for CreateUserRequest
      */
     interface AsProtobufJSON {
-        user?: User.AsProtobufJSON | null;
-        password?: string;
+        user: User.AsProtobufJSON | null;
+        password: string;
     }
 }
 /**
@@ -351,7 +351,7 @@ export declare class UpdateUserRequest implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: UpdateUserRequest, _writer: BinaryWriter): void;
     private _user?;
-    private _password?;
+    private _password;
     private _updateMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -360,8 +360,8 @@ export declare class UpdateUserRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateUserRequest.AsObject>);
     get user(): User | undefined;
     set user(value: User | undefined);
-    get password(): string | undefined;
-    set password(value: string | undefined);
+    get password(): string;
+    set password(value: string);
     get updateMask(): googleProtobuf003.FieldMask | undefined;
     set updateMask(value: googleProtobuf003.FieldMask | undefined);
     /**
@@ -390,16 +390,16 @@ export declare module UpdateUserRequest {
      */
     interface AsObject {
         user?: User.AsObject;
-        password?: string;
+        password: string;
         updateMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateUserRequest
      */
     interface AsProtobufJSON {
-        user?: User.AsProtobufJSON | null;
-        password?: string;
-        updateMask?: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        user: User.AsProtobufJSON | null;
+        password: string;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -429,18 +429,18 @@ export declare class GetUserRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetUserRequest, _writer: BinaryWriter): void;
-    private _userId?;
-    private _userEmail?;
+    private _userId;
+    private _userEmail;
     private _userIdentifier;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetUserRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetUserRequest.AsObject>);
-    get userId(): string | undefined;
-    set userId(value: string | undefined);
-    get userEmail(): string | undefined;
-    set userEmail(value: string | undefined);
+    get userId(): string;
+    set userId(value: string);
+    get userEmail(): string;
+    set userEmail(value: string);
     get userIdentifier(): GetUserRequest.UserIdentifierCase;
     /**
      * Serialize message to binary data
@@ -467,15 +467,15 @@ export declare module GetUserRequest {
      * Standard JavaScript object representation for GetUserRequest
      */
     interface AsObject {
-        userId?: string;
-        userEmail?: string;
+        userId: string;
+        userEmail: string;
     }
     /**
      * Protobuf JSON representation for GetUserRequest
      */
     interface AsProtobufJSON {
-        userId?: string | null;
-        userEmail?: string | null;
+        userId: string | null;
+        userEmail: string | null;
     }
     enum UserIdentifierCase {
         none = 0,
@@ -510,14 +510,14 @@ export declare class DeleteUserRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: DeleteUserRequest, _writer: BinaryWriter): void;
-    private _userId?;
+    private _userId;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of DeleteUserRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<DeleteUserRequest.AsObject>);
-    get userId(): string | undefined;
-    set userId(value: string | undefined);
+    get userId(): string;
+    set userId(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -543,13 +543,13 @@ export declare module DeleteUserRequest {
      * Standard JavaScript object representation for DeleteUserRequest
      */
     interface AsObject {
-        userId?: string;
+        userId: string;
     }
     /**
      * Protobuf JSON representation for DeleteUserRequest
      */
     interface AsProtobufJSON {
-        userId?: string;
+        userId: string;
     }
 }
 /**
@@ -579,14 +579,14 @@ export declare class ListUsersRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListUsersRequest, _writer: BinaryWriter): void;
-    private _pageToken?;
+    private _pageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListUsersRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListUsersRequest.AsObject>);
-    get pageToken(): string | undefined;
-    set pageToken(value: string | undefined);
+    get pageToken(): string;
+    set pageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -612,13 +612,13 @@ export declare module ListUsersRequest {
      * Standard JavaScript object representation for ListUsersRequest
      */
     interface AsObject {
-        pageToken?: string;
+        pageToken: string;
     }
     /**
      * Protobuf JSON representation for ListUsersRequest
      */
     interface AsProtobufJSON {
-        pageToken?: string;
+        pageToken: string;
     }
 }
 /**
@@ -649,7 +649,7 @@ export declare class ListUsersResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListUsersResponse, _writer: BinaryWriter): void;
     private _users?;
-    private _nextPageToken?;
+    private _nextPageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListUsersResponse to deeply clone from
@@ -657,8 +657,8 @@ export declare class ListUsersResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListUsersResponse.AsObject>);
     get users(): User[] | undefined;
     set users(value: User[] | undefined);
-    get nextPageToken(): string | undefined;
-    set nextPageToken(value: string | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -685,14 +685,14 @@ export declare module ListUsersResponse {
      */
     interface AsObject {
         users?: User.AsObject[];
-        nextPageToken?: string;
+        nextPageToken: string;
     }
     /**
      * Protobuf JSON representation for ListUsersResponse
      */
     interface AsProtobufJSON {
-        users?: User.AsProtobufJSON[] | null;
-        nextPageToken?: string;
+        users: User.AsProtobufJSON[] | null;
+        nextPageToken: string;
     }
 }
 /**
@@ -723,7 +723,7 @@ export declare class ListUserInfosResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListUserInfosResponse, _writer: BinaryWriter): void;
     private _users?;
-    private _nextPageToken?;
+    private _nextPageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListUserInfosResponse to deeply clone from
@@ -731,8 +731,8 @@ export declare class ListUserInfosResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListUserInfosResponse.AsObject>);
     get users(): UserInfo[] | undefined;
     set users(value: UserInfo[] | undefined);
-    get nextPageToken(): string | undefined;
-    set nextPageToken(value: string | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -759,14 +759,14 @@ export declare module ListUserInfosResponse {
      */
     interface AsObject {
         users?: UserInfo.AsObject[];
-        nextPageToken?: string;
+        nextPageToken: string;
     }
     /**
      * Protobuf JSON representation for ListUserInfosResponse
      */
     interface AsProtobufJSON {
-        users?: UserInfo.AsProtobufJSON[] | null;
-        nextPageToken?: string;
+        users: UserInfo.AsProtobufJSON[] | null;
+        nextPageToken: string;
     }
 }
 /**
@@ -796,20 +796,20 @@ export declare class ServerRole implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ServerRole, _writer: BinaryWriter): void;
-    private _roleId?;
-    private _name?;
-    private _permissions?;
+    private _roleId;
+    private _name;
+    private _permissions;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ServerRole to deeply clone from
      */
     constructor(_value?: RecursivePartial<ServerRole.AsObject>);
-    get roleId(): number | undefined;
-    set roleId(value: number | undefined);
-    get name(): string | undefined;
-    set name(value: string | undefined);
-    get permissions(): string[] | undefined;
-    set permissions(value: string[] | undefined);
+    get roleId(): number;
+    set roleId(value: number);
+    get name(): string;
+    set name(value: string);
+    get permissions(): string[];
+    set permissions(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -835,17 +835,17 @@ export declare module ServerRole {
      * Standard JavaScript object representation for ServerRole
      */
     interface AsObject {
-        roleId?: number;
-        name?: string;
-        permissions?: string[];
+        roleId: number;
+        name: string;
+        permissions: string[];
     }
     /**
      * Protobuf JSON representation for ServerRole
      */
     interface AsProtobufJSON {
-        roleId?: number;
-        name?: string;
-        permissions?: string[];
+        roleId: number;
+        name: string;
+        permissions: string[];
     }
 }
 /**
@@ -914,7 +914,7 @@ export declare module CreateServerRoleRequest {
      * Protobuf JSON representation for CreateServerRoleRequest
      */
     interface AsProtobufJSON {
-        role?: ServerRole.AsProtobufJSON | null;
+        role: ServerRole.AsProtobufJSON | null;
     }
 }
 /**
@@ -987,8 +987,8 @@ export declare module UpdateServerRoleRequest {
      * Protobuf JSON representation for UpdateServerRoleRequest
      */
     interface AsProtobufJSON {
-        role?: ServerRole.AsProtobufJSON | null;
-        updateMask?: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        role: ServerRole.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1018,14 +1018,14 @@ export declare class DeleteServerRoleRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: DeleteServerRoleRequest, _writer: BinaryWriter): void;
-    private _roleId?;
+    private _roleId;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of DeleteServerRoleRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<DeleteServerRoleRequest.AsObject>);
-    get roleId(): number | undefined;
-    set roleId(value: number | undefined);
+    get roleId(): number;
+    set roleId(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1051,13 +1051,13 @@ export declare module DeleteServerRoleRequest {
      * Standard JavaScript object representation for DeleteServerRoleRequest
      */
     interface AsObject {
-        roleId?: number;
+        roleId: number;
     }
     /**
      * Protobuf JSON representation for DeleteServerRoleRequest
      */
     interface AsProtobufJSON {
-        roleId?: number;
+        roleId: number;
     }
 }
 /**
@@ -1087,18 +1087,18 @@ export declare class GetServerRoleRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: GetServerRoleRequest, _writer: BinaryWriter): void;
-    private _roleId?;
-    private _roleName?;
+    private _roleId;
+    private _roleName;
     private _serverRoleIdentifier;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetServerRoleRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetServerRoleRequest.AsObject>);
-    get roleId(): number | undefined;
-    set roleId(value: number | undefined);
-    get roleName(): string | undefined;
-    set roleName(value: string | undefined);
+    get roleId(): number;
+    set roleId(value: number);
+    get roleName(): string;
+    set roleName(value: string);
     get serverRoleIdentifier(): GetServerRoleRequest.ServerRoleIdentifierCase;
     /**
      * Serialize message to binary data
@@ -1125,15 +1125,15 @@ export declare module GetServerRoleRequest {
      * Standard JavaScript object representation for GetServerRoleRequest
      */
     interface AsObject {
-        roleId?: number;
-        roleName?: string;
+        roleId: number;
+        roleName: string;
     }
     /**
      * Protobuf JSON representation for GetServerRoleRequest
      */
     interface AsProtobufJSON {
-        roleId?: number | null;
-        roleName?: string | null;
+        roleId: number | null;
+        roleName: string | null;
     }
     enum ServerRoleIdentifierCase {
         none = 0,
@@ -1168,14 +1168,14 @@ export declare class ListServerRolesRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListServerRolesRequest, _writer: BinaryWriter): void;
-    private _pageToken?;
+    private _pageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListServerRolesRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListServerRolesRequest.AsObject>);
-    get pageToken(): string | undefined;
-    set pageToken(value: string | undefined);
+    get pageToken(): string;
+    set pageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1201,13 +1201,13 @@ export declare module ListServerRolesRequest {
      * Standard JavaScript object representation for ListServerRolesRequest
      */
     interface AsObject {
-        pageToken?: string;
+        pageToken: string;
     }
     /**
      * Protobuf JSON representation for ListServerRolesRequest
      */
     interface AsProtobufJSON {
-        pageToken?: string;
+        pageToken: string;
     }
 }
 /**
@@ -1238,7 +1238,7 @@ export declare class ListServerRolesResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListServerRolesResponse, _writer: BinaryWriter): void;
     private _serverRoles?;
-    private _nextPageToken?;
+    private _nextPageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListServerRolesResponse to deeply clone from
@@ -1246,8 +1246,8 @@ export declare class ListServerRolesResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListServerRolesResponse.AsObject>);
     get serverRoles(): ServerRole[] | undefined;
     set serverRoles(value: ServerRole[] | undefined);
-    get nextPageToken(): string | undefined;
-    set nextPageToken(value: string | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1274,14 +1274,14 @@ export declare module ListServerRolesResponse {
      */
     interface AsObject {
         serverRoles?: ServerRole.AsObject[];
-        nextPageToken?: string;
+        nextPageToken: string;
     }
     /**
      * Protobuf JSON representation for ListServerRolesResponse
      */
     interface AsProtobufJSON {
-        serverRoles?: ServerRole.AsProtobufJSON[] | null;
-        nextPageToken?: string;
+        serverRoles: ServerRole.AsProtobufJSON[] | null;
+        nextPageToken: string;
     }
 }
 /**
@@ -1311,14 +1311,14 @@ export declare class ListServerPermissionsRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListServerPermissionsRequest, _writer: BinaryWriter): void;
-    private _pageToken?;
+    private _pageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListServerPermissionsRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListServerPermissionsRequest.AsObject>);
-    get pageToken(): string | undefined;
-    set pageToken(value: string | undefined);
+    get pageToken(): string;
+    set pageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1344,13 +1344,13 @@ export declare module ListServerPermissionsRequest {
      * Standard JavaScript object representation for ListServerPermissionsRequest
      */
     interface AsObject {
-        pageToken?: string;
+        pageToken: string;
     }
     /**
      * Protobuf JSON representation for ListServerPermissionsRequest
      */
     interface AsProtobufJSON {
-        pageToken?: string;
+        pageToken: string;
     }
 }
 /**
@@ -1380,17 +1380,17 @@ export declare class ListServerPermissionsResponse implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: ListServerPermissionsResponse, _writer: BinaryWriter): void;
-    private _permissions?;
-    private _nextPageToken?;
+    private _permissions;
+    private _nextPageToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListServerPermissionsResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<ListServerPermissionsResponse.AsObject>);
-    get permissions(): string[] | undefined;
-    set permissions(value: string[] | undefined);
-    get nextPageToken(): string | undefined;
-    set nextPageToken(value: string | undefined);
+    get permissions(): string[];
+    set permissions(value: string[]);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1416,15 +1416,15 @@ export declare module ListServerPermissionsResponse {
      * Standard JavaScript object representation for ListServerPermissionsResponse
      */
     interface AsObject {
-        permissions?: string[];
-        nextPageToken?: string;
+        permissions: string[];
+        nextPageToken: string;
     }
     /**
      * Protobuf JSON representation for ListServerPermissionsResponse
      */
     interface AsProtobufJSON {
-        permissions?: string[];
-        nextPageToken?: string;
+        permissions: string[];
+        nextPageToken: string;
     }
 }
 /**
@@ -1454,17 +1454,17 @@ export declare class LoginRequest implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: LoginRequest, _writer: BinaryWriter): void;
-    private _userEmail?;
-    private _password?;
+    private _userEmail;
+    private _password;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of LoginRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<LoginRequest.AsObject>);
-    get userEmail(): string | undefined;
-    set userEmail(value: string | undefined);
-    get password(): string | undefined;
-    set password(value: string | undefined);
+    get userEmail(): string;
+    set userEmail(value: string);
+    get password(): string;
+    set password(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1490,15 +1490,15 @@ export declare module LoginRequest {
      * Standard JavaScript object representation for LoginRequest
      */
     interface AsObject {
-        userEmail?: string;
-        password?: string;
+        userEmail: string;
+        password: string;
     }
     /**
      * Protobuf JSON representation for LoginRequest
      */
     interface AsProtobufJSON {
-        userEmail?: string;
-        password?: string;
+        userEmail: string;
+        password: string;
     }
 }
 /**
@@ -1529,7 +1529,7 @@ export declare class LoginResponse implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: LoginResponse, _writer: BinaryWriter): void;
     private _user?;
-    private _authToken?;
+    private _authToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of LoginResponse to deeply clone from
@@ -1537,8 +1537,8 @@ export declare class LoginResponse implements GrpcMessage {
     constructor(_value?: RecursivePartial<LoginResponse.AsObject>);
     get user(): User | undefined;
     set user(value: User | undefined);
-    get authToken(): string | undefined;
-    set authToken(value: string | undefined);
+    get authToken(): string;
+    set authToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1565,13 +1565,13 @@ export declare module LoginResponse {
      */
     interface AsObject {
         user?: User.AsObject;
-        authToken?: string;
+        authToken: string;
     }
     /**
      * Protobuf JSON representation for LoginResponse
      */
     interface AsProtobufJSON {
-        user?: User.AsProtobufJSON | null;
-        authToken?: string;
+        user: User.AsProtobufJSON | null;
+        authToken: string;
     }
 }
