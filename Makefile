@@ -215,7 +215,7 @@ update_package: ## Updates Package Version in src/package.json
 
 # build: check_out_correct_submodule_versions build_compiler update_package npm_run_build ## Build Code with Proto-Compiler
 build: check_out_correct_submodule_versions update_package npm_run_build ## Build Code with Proto-Compiler
-	@echo "################### PROMT FOR CHANGING FILE OWNERSHIP FROM ROOT TO YOU ##########################"
+	@echo "################### PROMPT FOR CHANGING FILE OWNERSHIP FROM ROOT TO YOU ##########################"
 	@for f in `find . -group root`; \
 	do \
 		sudo chown -R `whoami`:`whoami` $$f && echo $$f; \
