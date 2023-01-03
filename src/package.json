@@ -16,8 +16,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run prebuild && npm run generate && npm run postbuild",
-    "prebuild": "cp ondewo-nlu-api/googleapis/google ondewo-nlu-api/ -R",
-    "postbuild": "rm -rf ondewo-nlu-api/google && cp README.md ../. && cp RELEASE.md ../.",
+    "prebuild": "# cp ondewo-nlu-api/googleapis/google ondewo-nlu-api/ -R",
+    "postbuild": "cp README.md ../. && cp RELEASE.md ../.",
     "submodule_update": "git submodule update --init --recursive",
     "generate": "docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
     "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
