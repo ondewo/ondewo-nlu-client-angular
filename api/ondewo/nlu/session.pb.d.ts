@@ -1,5 +1,6 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
+import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu006 from '../../ondewo/nlu/context.pb';
 import * as googleProtobuf010 from '@ngx-grpc/well-known-types';
 import * as googleRpc011 from '../../google/rpc/status.pb';
@@ -15,6 +16,15 @@ export declare enum AudioEncoding {
     AUDIO_ENCODING_AMR_WB = 5,
     AUDIO_ENCODING_OGG_OPUS = 6,
     AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+}
+export declare enum ComparisonOperator {
+    EQUAL = 0,
+    GREATER = 1,
+    GREATER_OR_EQUAL = 2,
+    LESS_OR_EQUAL = 3,
+    CONTAINS = 4,
+    STARTS_WITH = 5,
+    ENDS_WITH = 6
 }
 /**
  * Message implementation for ondewo.nlu.DetectIntentRequest
@@ -211,6 +221,7 @@ export declare class QueryParameters implements GrpcMessage {
     private _contexts?;
     private _resetContexts;
     private _payload?;
+    private _labels;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of QueryParameters to deeply clone from
@@ -226,6 +237,8 @@ export declare class QueryParameters implements GrpcMessage {
     set resetContexts(value: boolean);
     get payload(): googleProtobuf010.Struct | undefined;
     set payload(value: googleProtobuf010.Struct | undefined);
+    get labels(): string[];
+    set labels(value: string[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -256,6 +269,7 @@ export declare module QueryParameters {
         contexts?: ondewoNlu006.Context.AsObject[];
         resetContexts: boolean;
         payload?: googleProtobuf010.Struct.AsObject;
+        labels: string[];
     }
     /**
      * Protobuf JSON representation for QueryParameters
@@ -266,6 +280,7 @@ export declare module QueryParameters {
         contexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
         resetContexts: boolean;
         payload: googleProtobuf010.Struct.AsProtobufJSON | null;
+        labels: string[];
     }
 }
 /**
@@ -1015,7 +1030,7 @@ export declare class Session implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: Session, _writer: BinaryWriter): void;
-    private _sessionId;
+    private _name;
     private _sessionSteps?;
     private _sessionInfo?;
     /**
@@ -1023,8 +1038,8 @@ export declare class Session implements GrpcMessage {
      * @param _value initial values object or instance of Session to deeply clone from
      */
     constructor(_value?: RecursivePartial<Session.AsObject>);
-    get sessionId(): string;
-    set sessionId(value: string);
+    get name(): string;
+    set name(value: string);
     get sessionSteps(): SessionStep[] | undefined;
     set sessionSteps(value: SessionStep[] | undefined);
     get sessionInfo(): SessionInfo | undefined;
@@ -1054,7 +1069,7 @@ export declare module Session {
      * Standard JavaScript object representation for Session
      */
     interface AsObject {
-        sessionId: string;
+        name: string;
         sessionSteps?: SessionStep.AsObject[];
         sessionInfo?: SessionInfo.AsObject;
     }
@@ -1062,7 +1077,7 @@ export declare module Session {
      * Protobuf JSON representation for Session
      */
     interface AsProtobufJSON {
-        sessionId: string;
+        name: string;
         sessionSteps: SessionStep.AsProtobufJSON[] | null;
         sessionInfo: SessionInfo.AsProtobufJSON | null;
     }
@@ -1099,6 +1114,7 @@ export declare class SessionStep implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: SessionStep, _writer: BinaryWriter): void;
+    private _name;
     private _detectIntentRequest?;
     private _detectIntentResponse?;
     private _contexts?;
@@ -1107,6 +1123,8 @@ export declare class SessionStep implements GrpcMessage {
      * @param _value initial values object or instance of SessionStep to deeply clone from
      */
     constructor(_value?: RecursivePartial<SessionStep.AsObject>);
+    get name(): string;
+    set name(value: string);
     get detectIntentRequest(): DetectIntentRequest | undefined;
     set detectIntentRequest(value: DetectIntentRequest | undefined);
     get detectIntentResponse(): DetectIntentResponse | undefined;
@@ -1138,6 +1156,7 @@ export declare module SessionStep {
      * Standard JavaScript object representation for SessionStep
      */
     interface AsObject {
+        name: string;
         detectIntentRequest?: DetectIntentRequest.AsObject;
         detectIntentResponse?: DetectIntentResponse.AsObject;
         contexts?: ondewoNlu006.Context.AsObject[];
@@ -1146,6 +1165,7 @@ export declare module SessionStep {
      * Protobuf JSON representation for SessionStep
      */
     interface AsProtobufJSON {
+        name: string;
         detectIntentRequest: DetectIntentRequest.AsProtobufJSON | null;
         detectIntentResponse: DetectIntentResponse.AsProtobufJSON | null;
         contexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
@@ -1261,6 +1281,7 @@ export declare class ListSessionsRequest implements GrpcMessage {
     private _sessionView;
     private _pageToken;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListSessionsRequest to deeply clone from
@@ -1274,6 +1295,8 @@ export declare class ListSessionsRequest implements GrpcMessage {
     set pageToken(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1303,6 +1326,7 @@ export declare module ListSessionsRequest {
         sessionView: Session.View;
         pageToken: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListSessionsRequest
@@ -1312,6 +1336,91 @@ export declare module ListSessionsRequest {
         sessionView: string;
         pageToken: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ContextFilter
+ */
+export declare class ContextFilter implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ContextFilter;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ContextFilter): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ContextFilter, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ContextFilter, _writer: BinaryWriter): void;
+    private _contextName;
+    private _key;
+    private _value;
+    private _operator;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ContextFilter to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ContextFilter.AsObject>);
+    get contextName(): string;
+    set contextName(value: string);
+    get key(): string;
+    set key(value: string);
+    get value(): string;
+    set value(value: string);
+    get operator(): ComparisonOperator;
+    set operator(value: ComparisonOperator);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ContextFilter.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ContextFilter.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ContextFilter.AsProtobufJSON;
+}
+export declare module ContextFilter {
+    /**
+     * Standard JavaScript object representation for ContextFilter
+     */
+    interface AsObject {
+        contextName: string;
+        key: string;
+        value: string;
+        operator: ComparisonOperator;
+    }
+    /**
+     * Protobuf JSON representation for ContextFilter
+     */
+    interface AsProtobufJSON {
+        contextName: string;
+        key: string;
+        value: string;
+        operator: string;
     }
 }
 /**
@@ -1358,6 +1467,30 @@ export declare class SessionFilter implements GrpcMessage {
     private _sessionIds;
     private _inputContexts?;
     private _outputContexts?;
+    private _durationInSMin;
+    private _durationInSMax;
+    private _durationInMMin;
+    private _durationInMMax;
+    private _durationInMRoundedMin;
+    private _durationInMRoundedMax;
+    private _durationInterval15sRoundedMin;
+    private _durationInterval15sRoundedMax;
+    private _durationInterval30sRoundedMin;
+    private _durationInterval30sRoundedMax;
+    private _durationInterval45sRoundedMin;
+    private _durationInterval45sRoundedMax;
+    private _startedTimeSlotPerHourMin;
+    private _startedTimeSlotPerHourMax;
+    private _startedTimeSlotPerQuarterHourMin;
+    private _startedTimeSlotPerQuarterHourMax;
+    private _startedTimeSlotPerHalfHourMin;
+    private _startedTimeSlotPerHalfHourMax;
+    private _startedTimeSlotPerDayPhaseMin;
+    private _startedTimeSlotPerDayPhaseMax;
+    private _startedTimeSlotPerMinuteMin;
+    private _startedTimeSlotPerMinuteMax;
+    private _durationInSRoundedMin;
+    private _durationInSRoundedMax;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionFilter to deeply clone from
@@ -1397,6 +1530,54 @@ export declare class SessionFilter implements GrpcMessage {
     set inputContexts(value: ondewoNlu006.Context[] | undefined);
     get outputContexts(): ondewoNlu006.Context[] | undefined;
     set outputContexts(value: ondewoNlu006.Context[] | undefined);
+    get durationInSMin(): number;
+    set durationInSMin(value: number);
+    get durationInSMax(): number;
+    set durationInSMax(value: number);
+    get durationInMMin(): number;
+    set durationInMMin(value: number);
+    get durationInMMax(): number;
+    set durationInMMax(value: number);
+    get durationInMRoundedMin(): number;
+    set durationInMRoundedMin(value: number);
+    get durationInMRoundedMax(): number;
+    set durationInMRoundedMax(value: number);
+    get durationInterval15sRoundedMin(): number;
+    set durationInterval15sRoundedMin(value: number);
+    get durationInterval15sRoundedMax(): number;
+    set durationInterval15sRoundedMax(value: number);
+    get durationInterval30sRoundedMin(): number;
+    set durationInterval30sRoundedMin(value: number);
+    get durationInterval30sRoundedMax(): number;
+    set durationInterval30sRoundedMax(value: number);
+    get durationInterval45sRoundedMin(): number;
+    set durationInterval45sRoundedMin(value: number);
+    get durationInterval45sRoundedMax(): number;
+    set durationInterval45sRoundedMax(value: number);
+    get startedTimeSlotPerHourMin(): string;
+    set startedTimeSlotPerHourMin(value: string);
+    get startedTimeSlotPerHourMax(): string;
+    set startedTimeSlotPerHourMax(value: string);
+    get startedTimeSlotPerQuarterHourMin(): string;
+    set startedTimeSlotPerQuarterHourMin(value: string);
+    get startedTimeSlotPerQuarterHourMax(): string;
+    set startedTimeSlotPerQuarterHourMax(value: string);
+    get startedTimeSlotPerHalfHourMin(): string;
+    set startedTimeSlotPerHalfHourMin(value: string);
+    get startedTimeSlotPerHalfHourMax(): string;
+    set startedTimeSlotPerHalfHourMax(value: string);
+    get startedTimeSlotPerDayPhaseMin(): string;
+    set startedTimeSlotPerDayPhaseMin(value: string);
+    get startedTimeSlotPerDayPhaseMax(): string;
+    set startedTimeSlotPerDayPhaseMax(value: string);
+    get startedTimeSlotPerMinuteMin(): string;
+    set startedTimeSlotPerMinuteMin(value: string);
+    get startedTimeSlotPerMinuteMax(): string;
+    set startedTimeSlotPerMinuteMax(value: string);
+    get durationInSRoundedMin(): number;
+    set durationInSRoundedMin(value: number);
+    get durationInSRoundedMax(): number;
+    set durationInSRoundedMax(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1439,6 +1620,30 @@ export declare module SessionFilter {
         sessionIds: string[];
         inputContexts?: ondewoNlu006.Context.AsObject[];
         outputContexts?: ondewoNlu006.Context.AsObject[];
+        durationInSMin: number;
+        durationInSMax: number;
+        durationInMMin: number;
+        durationInMMax: number;
+        durationInMRoundedMin: number;
+        durationInMRoundedMax: number;
+        durationInterval15sRoundedMin: number;
+        durationInterval15sRoundedMax: number;
+        durationInterval30sRoundedMin: number;
+        durationInterval30sRoundedMax: number;
+        durationInterval45sRoundedMin: number;
+        durationInterval45sRoundedMax: number;
+        startedTimeSlotPerHourMin: string;
+        startedTimeSlotPerHourMax: string;
+        startedTimeSlotPerQuarterHourMin: string;
+        startedTimeSlotPerQuarterHourMax: string;
+        startedTimeSlotPerHalfHourMin: string;
+        startedTimeSlotPerHalfHourMax: string;
+        startedTimeSlotPerDayPhaseMin: string;
+        startedTimeSlotPerDayPhaseMax: string;
+        startedTimeSlotPerMinuteMin: string;
+        startedTimeSlotPerMinuteMax: string;
+        durationInSRoundedMin: number;
+        durationInSRoundedMax: number;
     }
     /**
      * Protobuf JSON representation for SessionFilter
@@ -1461,6 +1666,30 @@ export declare module SessionFilter {
         sessionIds: string[];
         inputContexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
         outputContexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        durationInSMin: number;
+        durationInSMax: number;
+        durationInMMin: number;
+        durationInMMax: number;
+        durationInMRoundedMin: number;
+        durationInMRoundedMax: number;
+        durationInterval15sRoundedMin: number;
+        durationInterval15sRoundedMax: number;
+        durationInterval30sRoundedMin: number;
+        durationInterval30sRoundedMax: number;
+        durationInterval45sRoundedMin: number;
+        durationInterval45sRoundedMax: number;
+        startedTimeSlotPerHourMin: string;
+        startedTimeSlotPerHourMax: string;
+        startedTimeSlotPerQuarterHourMin: string;
+        startedTimeSlotPerQuarterHourMax: string;
+        startedTimeSlotPerHalfHourMin: string;
+        startedTimeSlotPerHalfHourMax: string;
+        startedTimeSlotPerDayPhaseMin: string;
+        startedTimeSlotPerDayPhaseMax: string;
+        startedTimeSlotPerMinuteMin: string;
+        startedTimeSlotPerMinuteMax: string;
+        durationInSRoundedMin: number;
+        durationInSRoundedMax: number;
     }
 }
 /**
@@ -1503,6 +1732,18 @@ export declare class SessionInfo implements GrpcMessage {
     private _intentTags;
     private _inputContextSteps?;
     private _outputContextSteps?;
+    private _durationInS;
+    private _durationInM;
+    private _durationInMRounded;
+    private _durationInterval15sRounded;
+    private _durationInterval30sRounded;
+    private _durationInterval45sRounded;
+    private _startedTimeSlotPerHour;
+    private _startedTimeSlotPerQuarterHour;
+    private _startedTimeSlotPerHalfHour;
+    private _startedTimeSlotPerDayPhase;
+    private _startedTimeSlotPerMinute;
+    private _durationInSRounded;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionInfo to deeply clone from
@@ -1534,6 +1775,30 @@ export declare class SessionInfo implements GrpcMessage {
     set inputContextSteps(value: SessionInfo.ContextSteps[] | undefined);
     get outputContextSteps(): SessionInfo.ContextSteps[] | undefined;
     set outputContextSteps(value: SessionInfo.ContextSteps[] | undefined);
+    get durationInS(): number;
+    set durationInS(value: number);
+    get durationInM(): number;
+    set durationInM(value: number);
+    get durationInMRounded(): number;
+    set durationInMRounded(value: number);
+    get durationInterval15sRounded(): number;
+    set durationInterval15sRounded(value: number);
+    get durationInterval30sRounded(): number;
+    set durationInterval30sRounded(value: number);
+    get durationInterval45sRounded(): number;
+    set durationInterval45sRounded(value: number);
+    get startedTimeSlotPerHour(): string;
+    set startedTimeSlotPerHour(value: string);
+    get startedTimeSlotPerQuarterHour(): string;
+    set startedTimeSlotPerQuarterHour(value: string);
+    get startedTimeSlotPerHalfHour(): string;
+    set startedTimeSlotPerHalfHour(value: string);
+    get startedTimeSlotPerDayPhase(): string;
+    set startedTimeSlotPerDayPhase(value: string);
+    get startedTimeSlotPerMinute(): string;
+    set startedTimeSlotPerMinute(value: string);
+    get durationInSRounded(): number;
+    set durationInSRounded(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1572,6 +1837,18 @@ export declare module SessionInfo {
         intentTags: string[];
         inputContextSteps?: SessionInfo.ContextSteps.AsObject[];
         outputContextSteps?: SessionInfo.ContextSteps.AsObject[];
+        durationInS: number;
+        durationInM: number;
+        durationInMRounded: number;
+        durationInterval15sRounded: number;
+        durationInterval30sRounded: number;
+        durationInterval45sRounded: number;
+        startedTimeSlotPerHour: string;
+        startedTimeSlotPerQuarterHour: string;
+        startedTimeSlotPerHalfHour: string;
+        startedTimeSlotPerDayPhase: string;
+        startedTimeSlotPerMinute: string;
+        durationInSRounded: number;
     }
     /**
      * Protobuf JSON representation for SessionInfo
@@ -1590,6 +1867,18 @@ export declare module SessionInfo {
         intentTags: string[];
         inputContextSteps: SessionInfo.ContextSteps.AsProtobufJSON[] | null;
         outputContextSteps: SessionInfo.ContextSteps.AsProtobufJSON[] | null;
+        durationInS: number;
+        durationInM: number;
+        durationInMRounded: number;
+        durationInterval15sRounded: number;
+        durationInterval30sRounded: number;
+        durationInterval45sRounded: number;
+        startedTimeSlotPerHour: string;
+        startedTimeSlotPerQuarterHour: string;
+        startedTimeSlotPerHalfHour: string;
+        startedTimeSlotPerDayPhase: string;
+        startedTimeSlotPerMinute: string;
+        durationInSRounded: number;
     }
     /**
      * Message implementation for ondewo.nlu.SessionInfo.ContextSteps
@@ -1764,6 +2053,7 @@ export declare class GetSessionRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: GetSessionRequest, _writer: BinaryWriter): void;
     private _sessionId;
     private _sessionView;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetSessionRequest to deeply clone from
@@ -1773,6 +2063,8 @@ export declare class GetSessionRequest implements GrpcMessage {
     set sessionId(value: string);
     get sessionView(): Session.View;
     set sessionView(value: Session.View);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1800,6 +2092,7 @@ export declare module GetSessionRequest {
     interface AsObject {
         sessionId: string;
         sessionView: Session.View;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetSessionRequest
@@ -1807,6 +2100,7 @@ export declare module GetSessionRequest {
     interface AsProtobufJSON {
         sessionId: string;
         sessionView: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -2068,15 +2362,15 @@ export declare class SessionReview implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: SessionReview, _writer: BinaryWriter): void;
-    private _sessionReviewId;
+    private _name;
     private _sessionReviewSteps?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionReview to deeply clone from
      */
     constructor(_value?: RecursivePartial<SessionReview.AsObject>);
-    get sessionReviewId(): string;
-    set sessionReviewId(value: string);
+    get name(): string;
+    set name(value: string);
     get sessionReviewSteps(): SessionReviewStep[] | undefined;
     set sessionReviewSteps(value: SessionReviewStep[] | undefined);
     /**
@@ -2104,14 +2398,14 @@ export declare module SessionReview {
      * Standard JavaScript object representation for SessionReview
      */
     interface AsObject {
-        sessionReviewId: string;
+        name: string;
         sessionReviewSteps?: SessionReviewStep.AsObject[];
     }
     /**
      * Protobuf JSON representation for SessionReview
      */
     interface AsProtobufJSON {
-        sessionReviewId: string;
+        name: string;
         sessionReviewSteps: SessionReviewStep.AsProtobufJSON[] | null;
     }
     enum View {
@@ -2147,6 +2441,7 @@ export declare class SessionReviewStep implements GrpcMessage {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance: SessionReviewStep, _writer: BinaryWriter): void;
+    private _name;
     private _annotatedUsersays?;
     private _languageCode;
     private _detectedIntents?;
@@ -2157,6 +2452,8 @@ export declare class SessionReviewStep implements GrpcMessage {
      * @param _value initial values object or instance of SessionReviewStep to deeply clone from
      */
     constructor(_value?: RecursivePartial<SessionReviewStep.AsObject>);
+    get name(): string;
+    set name(value: string);
     get annotatedUsersays(): ondewoNlu013.Intent.TrainingPhrase | undefined;
     set annotatedUsersays(value: ondewoNlu013.Intent.TrainingPhrase | undefined);
     get languageCode(): string;
@@ -2192,6 +2489,7 @@ export declare module SessionReviewStep {
      * Standard JavaScript object representation for SessionReviewStep
      */
     interface AsObject {
+        name: string;
         annotatedUsersays?: ondewoNlu013.Intent.TrainingPhrase.AsObject;
         languageCode: string;
         detectedIntents?: DetectedIntent.AsObject[];
@@ -2202,6 +2500,7 @@ export declare module SessionReviewStep {
      * Protobuf JSON representation for SessionReviewStep
      */
     interface AsProtobufJSON {
+        name: string;
         annotatedUsersays: ondewoNlu013.Intent.TrainingPhrase.AsProtobufJSON | null;
         languageCode: string;
         detectedIntents: DetectedIntent.AsProtobufJSON[] | null;

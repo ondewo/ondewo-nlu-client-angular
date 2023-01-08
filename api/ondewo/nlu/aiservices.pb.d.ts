@@ -225,6 +225,7 @@ export declare class EntityTypeFuzzyNerConfig implements GrpcMessage {
     private _minimalScore;
     private _entityValues;
     private _algorithm;
+    private _allowOverlaps;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of EntityTypeFuzzyNerConfig to deeply clone from
@@ -238,6 +239,8 @@ export declare class EntityTypeFuzzyNerConfig implements GrpcMessage {
     set entityValues(value: string[]);
     get algorithm(): EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm;
     set algorithm(value: EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm);
+    get allowOverlaps(): boolean;
+    set allowOverlaps(value: boolean);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -267,6 +270,7 @@ export declare module EntityTypeFuzzyNerConfig {
         minimalScore: number;
         entityValues: string[];
         algorithm: EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm;
+        allowOverlaps: boolean;
     }
     /**
      * Protobuf JSON representation for EntityTypeFuzzyNerConfig
@@ -276,6 +280,7 @@ export declare module EntityTypeFuzzyNerConfig {
         minimalScore: number;
         entityValues: string[];
         algorithm: string;
+        allowOverlaps: boolean;
     }
     enum FuzzyNerAlgorithm {
         PREFILTER_LEVENSHTEIN = 0,

@@ -186,6 +186,14 @@ export declare class AgentsClient {
          */
         getAgentStatistics: (requestData: thisProto.GetAgentStatisticsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetAgentStatisticsResponse>>;
         /**
+         * Unary call: /ondewo.nlu.Agents/GetSessionsStatistics
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetSessionsStatisticsResponse>>
+         */
+        getSessionsStatistics: (requestData: thisProto.GetSessionsStatisticsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetSessionsStatisticsResponse>>;
+        /**
          * Unary call: /ondewo.nlu.Agents/SetAgentStatus
          *
          * @param requestMessage Request message
@@ -499,6 +507,14 @@ export declare class AgentsClient {
      * @returns Observable<thisProto.GetAgentStatisticsResponse>
      */
     getAgentStatistics(requestData: thisProto.GetAgentStatisticsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetAgentStatisticsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Agents/GetSessionsStatistics
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetSessionsStatisticsResponse>
+     */
+    getSessionsStatistics(requestData: thisProto.GetSessionsStatisticsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetSessionsStatisticsResponse>;
     /**
      * Unary call @/ondewo.nlu.Agents/SetAgentStatus
      *
