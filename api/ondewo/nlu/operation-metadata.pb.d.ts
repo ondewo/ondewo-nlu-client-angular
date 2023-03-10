@@ -44,6 +44,8 @@ export declare class OperationMetadata implements GrpcMessage {
     private _numReruns;
     private _maxNumReruns;
     private _description;
+    private _log;
+    private _logLimit;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of OperationMetadata to deeply clone from
@@ -81,6 +83,10 @@ export declare class OperationMetadata implements GrpcMessage {
     set maxNumReruns(value: number);
     get description(): string;
     set description(value: string);
+    get log(): string[];
+    set log(value: string[]);
+    get logLimit(): number;
+    set logLimit(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -122,6 +128,8 @@ export declare module OperationMetadata {
         numReruns: number;
         maxNumReruns: number;
         description: string;
+        log: string[];
+        logLimit: number;
     }
     /**
      * Protobuf JSON representation for OperationMetadata
@@ -143,6 +151,8 @@ export declare module OperationMetadata {
         numReruns: number;
         maxNumReruns: number;
         description: string;
+        log: string[];
+        logLimit: number;
     }
     enum Status {
         STATUS_UNSPECIFIED = 0,
