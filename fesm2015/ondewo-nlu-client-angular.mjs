@@ -25707,10 +25707,10 @@ class SessionFilter {
                     _instance.minEntityTypesConfidenceMax = _reader.readFloat();
                     break;
                 case 8:
-                    _instance.earliest = _reader.readFloat();
+                    _instance.earliest = _reader.readDouble();
                     break;
                 case 9:
-                    _instance.latest = _reader.readFloat();
+                    _instance.latest = _reader.readDouble();
                     break;
                 case 10:
                     _instance.minNumberTurns = _reader.readInt32();
@@ -25871,10 +25871,10 @@ class SessionFilter {
             _writer.writeFloat(7, _instance.minEntityTypesConfidenceMax);
         }
         if (_instance.earliest) {
-            _writer.writeFloat(8, _instance.earliest);
+            _writer.writeDouble(8, _instance.earliest);
         }
         if (_instance.latest) {
-            _writer.writeFloat(9, _instance.latest);
+            _writer.writeDouble(9, _instance.latest);
         }
         if (_instance.minNumberTurns) {
             _writer.writeInt32(10, _instance.minNumberTurns);
@@ -26555,10 +26555,10 @@ class SessionInfo {
                     _instance.minEntityTypesConfidence = _reader.readFloat();
                     break;
                 case 6:
-                    _instance.earliest = _reader.readFloat();
+                    _instance.earliest = _reader.readDouble();
                     break;
                 case 7:
-                    _instance.latest = _reader.readFloat();
+                    _instance.latest = _reader.readDouble();
                     break;
                 case 8:
                     _instance.numberTurns = _reader.readInt32();
@@ -26670,10 +26670,10 @@ class SessionInfo {
             _writer.writeFloat(5, _instance.minEntityTypesConfidence);
         }
         if (_instance.earliest) {
-            _writer.writeFloat(6, _instance.earliest);
+            _writer.writeDouble(6, _instance.earliest);
         }
         if (_instance.latest) {
-            _writer.writeFloat(7, _instance.latest);
+            _writer.writeDouble(7, _instance.latest);
         }
         if (_instance.numberTurns) {
             _writer.writeInt32(8, _instance.numberTurns);
