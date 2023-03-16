@@ -1532,6 +1532,8 @@ export declare class SessionFilter implements GrpcMessage {
     private _datastreamIds;
     private _originIds;
     private _identifiedUserIds;
+    private _durationInterval60sRoundedMin;
+    private _durationInterval60sRoundedMax;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionFilter to deeply clone from
@@ -1631,6 +1633,10 @@ export declare class SessionFilter implements GrpcMessage {
     set originIds(value: string[]);
     get identifiedUserIds(): string[];
     set identifiedUserIds(value: string[]);
+    get durationInterval60sRoundedMin(): number;
+    set durationInterval60sRoundedMin(value: number);
+    get durationInterval60sRoundedMax(): number;
+    set durationInterval60sRoundedMax(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1703,6 +1709,8 @@ export declare module SessionFilter {
         datastreamIds: string[];
         originIds: string[];
         identifiedUserIds: string[];
+        durationInterval60sRoundedMin: number;
+        durationInterval60sRoundedMax: number;
     }
     /**
      * Protobuf JSON representation for SessionFilter
@@ -1755,6 +1763,8 @@ export declare module SessionFilter {
         datastreamIds: string[];
         originIds: string[];
         identifiedUserIds: string[];
+        durationInterval60sRoundedMin: number;
+        durationInterval60sRoundedMax: number;
     }
 }
 /**
@@ -1815,6 +1825,7 @@ export declare class SessionInfo implements GrpcMessage {
     private _datastreamIds;
     private _originIds;
     private _identifiedUserIds;
+    private _durationInterval60sRounded;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionInfo to deeply clone from
@@ -1882,6 +1893,8 @@ export declare class SessionInfo implements GrpcMessage {
     set originIds(value: string[]);
     get identifiedUserIds(): string[];
     set identifiedUserIds(value: string[]);
+    get durationInterval60sRounded(): number;
+    set durationInterval60sRounded(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1938,6 +1951,7 @@ export declare module SessionInfo {
         datastreamIds: string[];
         originIds: string[];
         identifiedUserIds: string[];
+        durationInterval60sRounded: number;
     }
     /**
      * Protobuf JSON representation for SessionInfo
@@ -1974,6 +1988,7 @@ export declare module SessionInfo {
         datastreamIds: string[];
         originIds: string[];
         identifiedUserIds: string[];
+        durationInterval60sRounded: number;
     }
     /**
      * Message implementation for ondewo.nlu.SessionInfo.ContextSteps

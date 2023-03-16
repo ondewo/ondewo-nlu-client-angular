@@ -25582,6 +25582,8 @@ class SessionFilter {
         this.datastreamIds = (_value.datastreamIds || []).slice();
         this.originIds = (_value.originIds || []).slice();
         this.identifiedUserIds = (_value.identifiedUserIds || []).slice();
+        this.durationInterval60sRoundedMin = _value.durationInterval60sRoundedMin;
+        this.durationInterval60sRoundedMax = _value.durationInterval60sRoundedMax;
         SessionFilter.refineValues(this);
     }
     /**
@@ -25663,6 +25665,10 @@ class SessionFilter {
         _instance.datastreamIds = _instance.datastreamIds || [];
         _instance.originIds = _instance.originIds || [];
         _instance.identifiedUserIds = _instance.identifiedUserIds || [];
+        _instance.durationInterval60sRoundedMin =
+            _instance.durationInterval60sRoundedMin || 0;
+        _instance.durationInterval60sRoundedMax =
+            _instance.durationInterval60sRoundedMax || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -25825,6 +25831,12 @@ class SessionFilter {
                     (_instance.identifiedUserIds =
                         _instance.identifiedUserIds || []).push(_reader.readString());
                     break;
+                case 48:
+                    _instance.durationInterval60sRoundedMin = _reader.readFloat();
+                    break;
+                case 49:
+                    _instance.durationInterval60sRoundedMax = _reader.readFloat();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -25977,6 +25989,12 @@ class SessionFilter {
         }
         if (_instance.identifiedUserIds && _instance.identifiedUserIds.length) {
             _writer.writeRepeatedString(47, _instance.identifiedUserIds);
+        }
+        if (_instance.durationInterval60sRoundedMin) {
+            _writer.writeFloat(48, _instance.durationInterval60sRoundedMin);
+        }
+        if (_instance.durationInterval60sRoundedMax) {
+            _writer.writeFloat(49, _instance.durationInterval60sRoundedMax);
         }
     }
     get languageCodes() {
@@ -26261,6 +26279,18 @@ class SessionFilter {
     set identifiedUserIds(value) {
         this._identifiedUserIds = value;
     }
+    get durationInterval60sRoundedMin() {
+        return this._durationInterval60sRoundedMin;
+    }
+    set durationInterval60sRoundedMin(value) {
+        this._durationInterval60sRoundedMin = value;
+    }
+    get durationInterval60sRoundedMax() {
+        return this._durationInterval60sRoundedMax;
+    }
+    set durationInterval60sRoundedMax(value) {
+        this._durationInterval60sRoundedMax = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -26321,7 +26351,9 @@ class SessionFilter {
             propertyIds: (this.propertyIds || []).slice(),
             datastreamIds: (this.datastreamIds || []).slice(),
             originIds: (this.originIds || []).slice(),
-            identifiedUserIds: (this.identifiedUserIds || []).slice()
+            identifiedUserIds: (this.identifiedUserIds || []).slice(),
+            durationInterval60sRoundedMin: this.durationInterval60sRoundedMin,
+            durationInterval60sRoundedMax: this.durationInterval60sRoundedMax
         };
     }
     /**
@@ -26385,7 +26417,9 @@ class SessionFilter {
             propertyIds: (this.propertyIds || []).slice(),
             datastreamIds: (this.datastreamIds || []).slice(),
             originIds: (this.originIds || []).slice(),
-            identifiedUserIds: (this.identifiedUserIds || []).slice()
+            identifiedUserIds: (this.identifiedUserIds || []).slice(),
+            durationInterval60sRoundedMin: this.durationInterval60sRoundedMin,
+            durationInterval60sRoundedMax: this.durationInterval60sRoundedMax
         };
     }
 }
@@ -26431,6 +26465,7 @@ class SessionInfo {
         this.datastreamIds = (_value.datastreamIds || []).slice();
         this.originIds = (_value.originIds || []).slice();
         this.identifiedUserIds = (_value.identifiedUserIds || []).slice();
+        this.durationInterval60sRounded = _value.durationInterval60sRounded;
         SessionInfo.refineValues(this);
     }
     /**
@@ -26486,6 +26521,8 @@ class SessionInfo {
         _instance.datastreamIds = _instance.datastreamIds || [];
         _instance.originIds = _instance.originIds || [];
         _instance.identifiedUserIds = _instance.identifiedUserIds || [];
+        _instance.durationInterval60sRounded =
+            _instance.durationInterval60sRounded || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -26602,6 +26639,9 @@ class SessionInfo {
                     (_instance.identifiedUserIds =
                         _instance.identifiedUserIds || []).push(_reader.readString());
                     break;
+                case 32:
+                    _instance.durationInterval60sRounded = _reader.readFloat();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -26706,6 +26746,9 @@ class SessionInfo {
         }
         if (_instance.identifiedUserIds && _instance.identifiedUserIds.length) {
             _writer.writeRepeatedString(31, _instance.identifiedUserIds);
+        }
+        if (_instance.durationInterval60sRounded) {
+            _writer.writeFloat(32, _instance.durationInterval60sRounded);
         }
     }
     get languageCodes() {
@@ -26894,6 +26937,12 @@ class SessionInfo {
     set identifiedUserIds(value) {
         this._identifiedUserIds = value;
     }
+    get durationInterval60sRounded() {
+        return this._durationInterval60sRounded;
+    }
+    set durationInterval60sRounded(value) {
+        this._durationInterval60sRounded = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -26938,7 +26987,8 @@ class SessionInfo {
             propertyIds: (this.propertyIds || []).slice(),
             datastreamIds: (this.datastreamIds || []).slice(),
             originIds: (this.originIds || []).slice(),
-            identifiedUserIds: (this.identifiedUserIds || []).slice()
+            identifiedUserIds: (this.identifiedUserIds || []).slice(),
+            durationInterval60sRounded: this.durationInterval60sRounded
         };
     }
     /**
@@ -26986,7 +27036,8 @@ class SessionInfo {
             propertyIds: (this.propertyIds || []).slice(),
             datastreamIds: (this.datastreamIds || []).slice(),
             originIds: (this.originIds || []).slice(),
-            identifiedUserIds: (this.identifiedUserIds || []).slice()
+            identifiedUserIds: (this.identifiedUserIds || []).slice(),
+            durationInterval60sRounded: this.durationInterval60sRounded
         };
     }
 }
