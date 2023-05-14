@@ -11,22 +11,6 @@ import { throwStatusErrors, takeMessages, GRPC_CLIENT_FACTORY } from '@ngx-grpc/
  */
 class Context {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Context to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.lifespanCount = _value.lifespanCount;
-        (this.parameters = _value.parameters
-            ? Object.keys(_value.parameters).reduce((r, k) => (Object.assign(Object.assign({}, r), { [k]: _value.parameters[k]
-                    ? new Context.Parameter(_value.parameters[k])
-                    : undefined })), {})
-            : {}),
-            (this.lifespanTime = _value.lifespanTime);
-        Context.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -100,6 +84,22 @@ class Context {
         if (_instance.lifespanTime) {
             _writer.writeFloat(4, _instance.lifespanTime);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Context to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.lifespanCount = _value.lifespanCount;
+        (this.parameters = _value.parameters
+            ? Object.keys(_value.parameters).reduce((r, k) => (Object.assign(Object.assign({}, r), { [k]: _value.parameters[k]
+                    ? new Context.Parameter(_value.parameters[k])
+                    : undefined })), {})
+            : {}),
+            (this.lifespanTime = _value.lifespanTime);
+        Context.refineValues(this);
     }
     get name() {
         return this._name;
@@ -180,18 +180,6 @@ Context.id = 'ondewo.nlu.Context';
      */
     class Parameter {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of Parameter to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.displayName = _value.displayName;
-            this.value = _value.value;
-            this.valueOriginal = _value.valueOriginal;
-            Parameter.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -256,6 +244,18 @@ Context.id = 'ondewo.nlu.Context';
             if (_instance.valueOriginal) {
                 _writer.writeString(4, _instance.valueOriginal);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Parameter to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.displayName = _value.displayName;
+            this.value = _value.value;
+            this.valueOriginal = _value.valueOriginal;
+            Parameter.refineValues(this);
         }
         get name() {
             return this._name;
@@ -330,18 +330,6 @@ Context.id = 'ondewo.nlu.Context';
      */
     class ParametersEntry {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of ParametersEntry to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.key = _value.key;
-            this.value = _value.value
-                ? new Context.Parameter(_value.value)
-                : undefined;
-            ParametersEntry.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -393,6 +381,18 @@ Context.id = 'ondewo.nlu.Context';
             if (_instance.value) {
                 _writer.writeMessage(2, _instance.value, Context.Parameter.serializeBinaryToWriter);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ParametersEntry to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.key = _value.key;
+            this.value = _value.value
+                ? new Context.Parameter(_value.value)
+                : undefined;
+            ParametersEntry.refineValues(this);
         }
         get key() {
             return this._key;
@@ -452,16 +452,6 @@ Context.id = 'ondewo.nlu.Context';
  */
 class ListContextsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListContextsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.pageToken = _value.pageToken;
-        ListContextsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -512,6 +502,16 @@ class ListContextsRequest {
         if (_instance.pageToken) {
             _writer.writeString(3, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListContextsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.pageToken = _value.pageToken;
+        ListContextsRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -569,16 +569,6 @@ ListContextsRequest.id = 'ondewo.nlu.ListContextsRequest';
  */
 class ListContextsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListContextsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.contexts = (_value.contexts || []).map(m => new Context(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListContextsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -631,6 +621,16 @@ class ListContextsResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListContextsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.contexts = (_value.contexts || []).map(m => new Context(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListContextsResponse.refineValues(this);
     }
     get contexts() {
         return this._contexts;
@@ -688,15 +688,6 @@ ListContextsResponse.id = 'ondewo.nlu.ListContextsResponse';
  */
 class GetContextRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetContextRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        GetContextRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -740,6 +731,15 @@ class GetContextRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetContextRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        GetContextRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -788,16 +788,6 @@ GetContextRequest.id = 'ondewo.nlu.GetContextRequest';
  * Message implementation for ondewo.nlu.CreateContextRequest
  */
 class CreateContextRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateContextRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.context = _value.context ? new Context(_value.context) : undefined;
-        CreateContextRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -850,6 +840,16 @@ class CreateContextRequest {
         if (_instance.context) {
             _writer.writeMessage(2, _instance.context, Context.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateContextRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.context = _value.context ? new Context(_value.context) : undefined;
+        CreateContextRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -907,18 +907,6 @@ CreateContextRequest.id = 'ondewo.nlu.CreateContextRequest';
  */
 class UpdateContextRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateContextRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.context = _value.context ? new Context(_value.context) : undefined;
-        this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
-            : undefined;
-        UpdateContextRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -971,6 +959,18 @@ class UpdateContextRequest {
         if (_instance.updateMask) {
             _writer.writeMessage(2, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateContextRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.context = _value.context ? new Context(_value.context) : undefined;
+        this.updateMask = _value.updateMask
+            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            : undefined;
+        UpdateContextRequest.refineValues(this);
     }
     get context() {
         return this._context;
@@ -1030,15 +1030,6 @@ UpdateContextRequest.id = 'ondewo.nlu.UpdateContextRequest';
  */
 class DeleteContextRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteContextRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        DeleteContextRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -1082,6 +1073,15 @@ class DeleteContextRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteContextRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        DeleteContextRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -1131,15 +1131,6 @@ DeleteContextRequest.id = 'ondewo.nlu.DeleteContextRequest';
  */
 class DeleteAllContextsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteAllContextsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        DeleteAllContextsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -1183,6 +1174,15 @@ class DeleteAllContextsRequest {
         if (_instance.sessionId) {
             _writer.writeString(1, _instance.sessionId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteAllContextsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        DeleteAllContextsRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -1238,15 +1238,6 @@ var SortingMode;
  */
 class StatResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of StatResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.value = _value.value;
-        StatResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -1290,6 +1281,15 @@ class StatResponse {
         if (_instance.value) {
             _writer.writeUint32(1, _instance.value);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StatResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.value = _value.value;
+        StatResponse.refineValues(this);
     }
     get value() {
         return this._value;
@@ -1356,45 +1356,6 @@ var IntentCategory;
  * Message implementation for ondewo.nlu.Intent
  */
 class Intent {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Intent to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.displayName = _value.displayName;
-        this.webhookState = _value.webhookState;
-        this.priority = _value.priority;
-        this.isFallback = _value.isFallback;
-        this.mlDisabled = _value.mlDisabled;
-        this.inputContextNames = (_value.inputContextNames || []).slice();
-        this.events = (_value.events || []).slice();
-        this.trainingPhrases = (_value.trainingPhrases || []).map(m => new Intent.TrainingPhrase(m));
-        this.action = _value.action;
-        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
-        this.resetContexts = _value.resetContexts;
-        this.parameters = (_value.parameters || []).map(m => new Intent.Parameter(m));
-        this.messages = (_value.messages || []).map(m => new Intent.Message(m));
-        this.defaultResponsePlatforms = (_value.defaultResponsePlatforms || []).slice();
-        this.rootFollowupIntentName = _value.rootFollowupIntentName;
-        this.parentFollowupIntentName = _value.parentFollowupIntentName;
-        this.followupIntentInfo = (_value.followupIntentInfo || []).map(m => new Intent.FollowupIntentInfo(m));
-        this.nextPageToken = _value.nextPageToken;
-        this.domainName = _value.domainName;
-        this.isStartOfDeviation = _value.isStartOfDeviation;
-        this.isEndOfDeviation = _value.isEndOfDeviation;
-        this.trainingPhraseCount = _value.trainingPhraseCount;
-        this.status = _value.status;
-        this.startDate = _value.startDate
-            ? new googleProtobuf003.Timestamp(_value.startDate)
-            : undefined;
-        this.endDate = _value.endDate
-            ? new googleProtobuf003.Timestamp(_value.endDate)
-            : undefined;
-        this.tags = (_value.tags || []).slice();
-        Intent.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -1639,6 +1600,45 @@ class Intent {
         if (_instance.tags && _instance.tags.length) {
             _writer.writeRepeatedString(38, _instance.tags);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Intent to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.displayName = _value.displayName;
+        this.webhookState = _value.webhookState;
+        this.priority = _value.priority;
+        this.isFallback = _value.isFallback;
+        this.mlDisabled = _value.mlDisabled;
+        this.inputContextNames = (_value.inputContextNames || []).slice();
+        this.events = (_value.events || []).slice();
+        this.trainingPhrases = (_value.trainingPhrases || []).map(m => new Intent.TrainingPhrase(m));
+        this.action = _value.action;
+        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
+        this.resetContexts = _value.resetContexts;
+        this.parameters = (_value.parameters || []).map(m => new Intent.Parameter(m));
+        this.messages = (_value.messages || []).map(m => new Intent.Message(m));
+        this.defaultResponsePlatforms = (_value.defaultResponsePlatforms || []).slice();
+        this.rootFollowupIntentName = _value.rootFollowupIntentName;
+        this.parentFollowupIntentName = _value.parentFollowupIntentName;
+        this.followupIntentInfo = (_value.followupIntentInfo || []).map(m => new Intent.FollowupIntentInfo(m));
+        this.nextPageToken = _value.nextPageToken;
+        this.domainName = _value.domainName;
+        this.isStartOfDeviation = _value.isStartOfDeviation;
+        this.isEndOfDeviation = _value.isEndOfDeviation;
+        this.trainingPhraseCount = _value.trainingPhraseCount;
+        this.status = _value.status;
+        this.startDate = _value.startDate
+            ? new googleProtobuf003.Timestamp(_value.startDate)
+            : undefined;
+        this.endDate = _value.endDate
+            ? new googleProtobuf003.Timestamp(_value.endDate)
+            : undefined;
+        this.tags = (_value.tags || []).slice();
+        Intent.refineValues(this);
     }
     get name() {
         return this._name;
@@ -1910,20 +1910,6 @@ Intent.id = 'ondewo.nlu.Intent';
      */
     class TrainingPhrase {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of TrainingPhrase to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.type = _value.type;
-            this.text = _value.text;
-            this.entities = (_value.entities || []).map(m => new Intent.TrainingPhrase.Entity(m));
-            this.timesAddedCount = _value.timesAddedCount;
-            this.languageCode = _value.languageCode;
-            TrainingPhrase.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -2004,6 +1990,20 @@ Intent.id = 'ondewo.nlu.Intent';
             if (_instance.languageCode) {
                 _writer.writeString(6, _instance.languageCode);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of TrainingPhrase to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.type = _value.type;
+            this.text = _value.text;
+            this.entities = (_value.entities || []).map(m => new Intent.TrainingPhrase.Entity(m));
+            this.timesAddedCount = _value.timesAddedCount;
+            this.languageCode = _value.languageCode;
+            TrainingPhrase.refineValues(this);
         }
         get name() {
             return this._name;
@@ -2101,22 +2101,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class Entity {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of Entity to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.entityTypeName = _value.entityTypeName;
-                this.entityTypeDisplayName = _value.entityTypeDisplayName;
-                this.entityValueName = _value.entityValueName;
-                this.entityValueDisplayName = _value.entityValueDisplayName;
-                this.start = _value.start;
-                this.end = _value.end;
-                this.parameterName = _value.parameterName;
-                this.parameterDisplayName = _value.parameterDisplayName;
-                Entity.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -2210,6 +2194,22 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.parameterDisplayName) {
                     _writer.writeString(9, _instance.parameterDisplayName);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Entity to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.entityTypeName = _value.entityTypeName;
+                this.entityTypeDisplayName = _value.entityTypeDisplayName;
+                this.entityValueName = _value.entityValueName;
+                this.entityValueDisplayName = _value.entityValueDisplayName;
+                this.start = _value.start;
+                this.end = _value.end;
+                this.parameterName = _value.parameterName;
+                this.parameterDisplayName = _value.parameterDisplayName;
+                Entity.refineValues(this);
             }
             get entityTypeName() {
                 return this._entityTypeName;
@@ -2317,23 +2317,6 @@ Intent.id = 'ondewo.nlu.Intent';
      */
     class Parameter {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of Parameter to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.displayName = _value.displayName;
-            this.value = _value.value;
-            this.defaultValue = _value.defaultValue;
-            this.entityTypeName = _value.entityTypeName;
-            this.entityTypeDisplayName = _value.entityTypeDisplayName;
-            this.mandatory = _value.mandatory;
-            this.prompts = (_value.prompts || []).map(m => new Intent.Parameter.Prompt(m));
-            this.isList = _value.isList;
-            Parameter.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -2435,6 +2418,23 @@ Intent.id = 'ondewo.nlu.Intent';
             if (_instance.isList) {
                 _writer.writeBool(9, _instance.isList);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Parameter to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.displayName = _value.displayName;
+            this.value = _value.value;
+            this.defaultValue = _value.defaultValue;
+            this.entityTypeName = _value.entityTypeName;
+            this.entityTypeDisplayName = _value.entityTypeDisplayName;
+            this.mandatory = _value.mandatory;
+            this.prompts = (_value.prompts || []).map(m => new Intent.Parameter.Prompt(m));
+            this.isList = _value.isList;
+            Parameter.refineValues(this);
         }
         get name() {
             return this._name;
@@ -2550,17 +2550,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class Prompt {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of Prompt to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.name = _value.name;
-                this.text = _value.text;
-                this.languageCode = _value.languageCode;
-                Prompt.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -2618,6 +2607,17 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.languageCode) {
                     _writer.writeString(3, _instance.languageCode);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Prompt to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.name = _value.name;
+                this.text = _value.text;
+                this.languageCode = _value.languageCode;
+                Prompt.refineValues(this);
             }
             get name() {
                 return this._name;
@@ -2684,61 +2684,6 @@ Intent.id = 'ondewo.nlu.Intent';
      * Message implementation for ondewo.nlu.Intent.Message
      */
     class Message {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of Message to deeply clone from
-         */
-        constructor(_value) {
-            this._message = Message.MessageCase.none;
-            _value = _value || {};
-            this.name = _value.name;
-            this.languageCode = _value.languageCode;
-            this.text = _value.text
-                ? new Intent.Message.Text(_value.text)
-                : undefined;
-            this.image = _value.image
-                ? new Intent.Message.Image(_value.image)
-                : undefined;
-            this.quickReplies = _value.quickReplies
-                ? new Intent.Message.QuickReplies(_value.quickReplies)
-                : undefined;
-            this.card = _value.card
-                ? new Intent.Message.Card(_value.card)
-                : undefined;
-            this.payload = _value.payload
-                ? new googleProtobuf003.Struct(_value.payload)
-                : undefined;
-            this.simpleResponses = _value.simpleResponses
-                ? new Intent.Message.SimpleResponses(_value.simpleResponses)
-                : undefined;
-            this.basicCard = _value.basicCard
-                ? new Intent.Message.BasicCard(_value.basicCard)
-                : undefined;
-            this.suggestions = _value.suggestions
-                ? new Intent.Message.Suggestions(_value.suggestions)
-                : undefined;
-            this.linkOutSuggestion = _value.linkOutSuggestion
-                ? new Intent.Message.LinkOutSuggestion(_value.linkOutSuggestion)
-                : undefined;
-            this.listSelect = _value.listSelect
-                ? new Intent.Message.ListSelect(_value.listSelect)
-                : undefined;
-            this.carouselSelect = _value.carouselSelect
-                ? new Intent.Message.CarouselSelect(_value.carouselSelect)
-                : undefined;
-            this.htmlText = _value.htmlText
-                ? new Intent.Message.HTMLText(_value.htmlText)
-                : undefined;
-            this.video = _value.video
-                ? new Intent.Message.Video(_value.video)
-                : undefined;
-            this.audio = _value.audio
-                ? new Intent.Message.Audio(_value.audio)
-                : undefined;
-            this.platform = _value.platform;
-            this.isPrompt = _value.isPrompt;
-            Message.refineValues(this);
-        }
         /**
          * Deserialize binary data to message
          * @param instance message instance
@@ -2902,6 +2847,61 @@ Intent.id = 'ondewo.nlu.Intent';
             if (_instance.isPrompt) {
                 _writer.writeBool(18, _instance.isPrompt);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Message to deeply clone from
+         */
+        constructor(_value) {
+            this._message = Message.MessageCase.none;
+            _value = _value || {};
+            this.name = _value.name;
+            this.languageCode = _value.languageCode;
+            this.text = _value.text
+                ? new Intent.Message.Text(_value.text)
+                : undefined;
+            this.image = _value.image
+                ? new Intent.Message.Image(_value.image)
+                : undefined;
+            this.quickReplies = _value.quickReplies
+                ? new Intent.Message.QuickReplies(_value.quickReplies)
+                : undefined;
+            this.card = _value.card
+                ? new Intent.Message.Card(_value.card)
+                : undefined;
+            this.payload = _value.payload
+                ? new googleProtobuf003.Struct(_value.payload)
+                : undefined;
+            this.simpleResponses = _value.simpleResponses
+                ? new Intent.Message.SimpleResponses(_value.simpleResponses)
+                : undefined;
+            this.basicCard = _value.basicCard
+                ? new Intent.Message.BasicCard(_value.basicCard)
+                : undefined;
+            this.suggestions = _value.suggestions
+                ? new Intent.Message.Suggestions(_value.suggestions)
+                : undefined;
+            this.linkOutSuggestion = _value.linkOutSuggestion
+                ? new Intent.Message.LinkOutSuggestion(_value.linkOutSuggestion)
+                : undefined;
+            this.listSelect = _value.listSelect
+                ? new Intent.Message.ListSelect(_value.listSelect)
+                : undefined;
+            this.carouselSelect = _value.carouselSelect
+                ? new Intent.Message.CarouselSelect(_value.carouselSelect)
+                : undefined;
+            this.htmlText = _value.htmlText
+                ? new Intent.Message.HTMLText(_value.htmlText)
+                : undefined;
+            this.video = _value.video
+                ? new Intent.Message.Video(_value.video)
+                : undefined;
+            this.audio = _value.audio
+                ? new Intent.Message.Audio(_value.audio)
+                : undefined;
+            this.platform = _value.platform;
+            this.isPrompt = _value.isPrompt;
+            Message.refineValues(this);
         }
         get name() {
             return this._name;
@@ -3222,15 +3222,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class Text {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of Text to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.text = (_value.text || []).slice();
-                Text.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -3274,6 +3265,15 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.text && _instance.text.length) {
                     _writer.writeRepeatedString(1, _instance.text);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Text to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.text = (_value.text || []).slice();
+                Text.refineValues(this);
             }
             get text() {
                 return this._text;
@@ -3323,16 +3323,6 @@ Intent.id = 'ondewo.nlu.Intent';
          * Message implementation for ondewo.nlu.Intent.Message.Image
          */
         class Image {
-            /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of Image to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.imageUri = _value.imageUri;
-                this.accessibilityText = _value.accessibilityText;
-                Image.refineValues(this);
-            }
             /**
              * Deserialize binary data to message
              * @param instance message instance
@@ -3384,6 +3374,16 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.accessibilityText) {
                     _writer.writeString(2, _instance.accessibilityText);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Image to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.imageUri = _value.imageUri;
+                this.accessibilityText = _value.accessibilityText;
+                Image.refineValues(this);
             }
             get imageUri() {
                 return this._imageUri;
@@ -3442,16 +3442,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class QuickReplies {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of QuickReplies to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.title = _value.title;
-                this.quickReplies = (_value.quickReplies || []).slice();
-                QuickReplies.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -3502,6 +3492,16 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.quickReplies && _instance.quickReplies.length) {
                     _writer.writeRepeatedString(2, _instance.quickReplies);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of QuickReplies to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.title = _value.title;
+                this.quickReplies = (_value.quickReplies || []).slice();
+                QuickReplies.refineValues(this);
             }
             get title() {
                 return this._title;
@@ -3559,18 +3559,6 @@ Intent.id = 'ondewo.nlu.Intent';
          * Message implementation for ondewo.nlu.Intent.Message.Card
          */
         class Card {
-            /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of Card to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.title = _value.title;
-                this.subtitle = _value.subtitle;
-                this.imageUri = _value.imageUri;
-                this.buttons = (_value.buttons || []).map(m => new Intent.Message.Card.Button(m));
-                Card.refineValues(this);
-            }
             /**
              * Deserialize binary data to message
              * @param instance message instance
@@ -3638,6 +3626,18 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.buttons && _instance.buttons.length) {
                     _writer.writeRepeatedMessage(4, _instance.buttons, Intent.Message.Card.Button.serializeBinaryToWriter);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Card to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.title = _value.title;
+                this.subtitle = _value.subtitle;
+                this.imageUri = _value.imageUri;
+                this.buttons = (_value.buttons || []).map(m => new Intent.Message.Card.Button(m));
+                Card.refineValues(this);
             }
             get title() {
                 return this._title;
@@ -3713,16 +3713,6 @@ Intent.id = 'ondewo.nlu.Intent';
              */
             class Button {
                 /**
-                 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-                 * @param _value initial values object or instance of Button to deeply clone from
-                 */
-                constructor(_value) {
-                    _value = _value || {};
-                    this.text = _value.text;
-                    this.postback = _value.postback;
-                    Button.refineValues(this);
-                }
-                /**
                  * Deserialize binary data to message
                  * @param instance message instance
                  */
@@ -3773,6 +3763,16 @@ Intent.id = 'ondewo.nlu.Intent';
                     if (_instance.postback) {
                         _writer.writeString(2, _instance.postback);
                     }
+                }
+                /**
+                 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+                 * @param _value initial values object or instance of Button to deeply clone from
+                 */
+                constructor(_value) {
+                    _value = _value || {};
+                    this.text = _value.text;
+                    this.postback = _value.postback;
+                    Button.refineValues(this);
                 }
                 get text() {
                     return this._text;
@@ -3832,17 +3832,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class SimpleResponse {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of SimpleResponse to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.textToSpeech = _value.textToSpeech;
-                this.ssml = _value.ssml;
-                this.displayText = _value.displayText;
-                SimpleResponse.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -3900,6 +3889,17 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.displayText) {
                     _writer.writeString(3, _instance.displayText);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of SimpleResponse to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.textToSpeech = _value.textToSpeech;
+                this.ssml = _value.ssml;
+                this.displayText = _value.displayText;
+                SimpleResponse.refineValues(this);
             }
             get textToSpeech() {
                 return this._textToSpeech;
@@ -3966,15 +3966,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class SimpleResponses {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of SimpleResponses to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.simpleResponses = (_value.simpleResponses || []).map(m => new Intent.Message.SimpleResponse(m));
-                SimpleResponses.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -4021,6 +4012,15 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.simpleResponses && _instance.simpleResponses.length) {
                     _writer.writeRepeatedMessage(1, _instance.simpleResponses, Intent.Message.SimpleResponse.serializeBinaryToWriter);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of SimpleResponses to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.simpleResponses = (_value.simpleResponses || []).map(m => new Intent.Message.SimpleResponse(m));
+                SimpleResponses.refineValues(this);
             }
             get simpleResponses() {
                 return this._simpleResponses;
@@ -4070,21 +4070,6 @@ Intent.id = 'ondewo.nlu.Intent';
          * Message implementation for ondewo.nlu.Intent.Message.BasicCard
          */
         class BasicCard {
-            /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of BasicCard to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.title = _value.title;
-                this.subtitle = _value.subtitle;
-                this.formattedText = _value.formattedText;
-                this.image = _value.image
-                    ? new Intent.Message.Image(_value.image)
-                    : undefined;
-                this.buttons = (_value.buttons || []).map(m => new Intent.Message.BasicCard.Button(m));
-                BasicCard.refineValues(this);
-            }
             /**
              * Deserialize binary data to message
              * @param instance message instance
@@ -4160,6 +4145,21 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.buttons && _instance.buttons.length) {
                     _writer.writeRepeatedMessage(5, _instance.buttons, Intent.Message.BasicCard.Button.serializeBinaryToWriter);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of BasicCard to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.title = _value.title;
+                this.subtitle = _value.subtitle;
+                this.formattedText = _value.formattedText;
+                this.image = _value.image
+                    ? new Intent.Message.Image(_value.image)
+                    : undefined;
+                this.buttons = (_value.buttons || []).map(m => new Intent.Message.BasicCard.Button(m));
+                BasicCard.refineValues(this);
             }
             get title() {
                 return this._title;
@@ -4243,18 +4243,6 @@ Intent.id = 'ondewo.nlu.Intent';
              */
             class Button {
                 /**
-                 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-                 * @param _value initial values object or instance of Button to deeply clone from
-                 */
-                constructor(_value) {
-                    _value = _value || {};
-                    this.title = _value.title;
-                    this.openUriAction = _value.openUriAction
-                        ? new Intent.Message.BasicCard.Button.OpenUriAction(_value.openUriAction)
-                        : undefined;
-                    Button.refineValues(this);
-                }
-                /**
                  * Deserialize binary data to message
                  * @param instance message instance
                  */
@@ -4308,6 +4296,18 @@ Intent.id = 'ondewo.nlu.Intent';
                         _writer.writeMessage(2, _instance.openUriAction, Intent.Message.BasicCard.Button.OpenUriAction
                             .serializeBinaryToWriter);
                     }
+                }
+                /**
+                 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+                 * @param _value initial values object or instance of Button to deeply clone from
+                 */
+                constructor(_value) {
+                    _value = _value || {};
+                    this.title = _value.title;
+                    this.openUriAction = _value.openUriAction
+                        ? new Intent.Message.BasicCard.Button.OpenUriAction(_value.openUriAction)
+                        : undefined;
+                    Button.refineValues(this);
                 }
                 get title() {
                     return this._title;
@@ -4371,15 +4371,6 @@ Intent.id = 'ondewo.nlu.Intent';
                  */
                 class OpenUriAction {
                     /**
-                     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-                     * @param _value initial values object or instance of OpenUriAction to deeply clone from
-                     */
-                    constructor(_value) {
-                        _value = _value || {};
-                        this.uri = _value.uri;
-                        OpenUriAction.refineValues(this);
-                    }
-                    /**
                      * Deserialize binary data to message
                      * @param instance message instance
                      */
@@ -4423,6 +4414,15 @@ Intent.id = 'ondewo.nlu.Intent';
                         if (_instance.uri) {
                             _writer.writeString(1, _instance.uri);
                         }
+                    }
+                    /**
+                     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+                     * @param _value initial values object or instance of OpenUriAction to deeply clone from
+                     */
+                    constructor(_value) {
+                        _value = _value || {};
+                        this.uri = _value.uri;
+                        OpenUriAction.refineValues(this);
                     }
                     get uri() {
                         return this._uri;
@@ -4475,15 +4475,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class Suggestion {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of Suggestion to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.title = _value.title;
-                Suggestion.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -4527,6 +4518,15 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.title) {
                     _writer.writeString(1, _instance.title);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Suggestion to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.title = _value.title;
+                Suggestion.refineValues(this);
             }
             get title() {
                 return this._title;
@@ -4577,15 +4577,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class Suggestions {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of Suggestions to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.suggestions = (_value.suggestions || []).map(m => new Intent.Message.Suggestion(m));
-                Suggestions.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -4631,6 +4622,15 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.suggestions && _instance.suggestions.length) {
                     _writer.writeRepeatedMessage(1, _instance.suggestions, Intent.Message.Suggestion.serializeBinaryToWriter);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Suggestions to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.suggestions = (_value.suggestions || []).map(m => new Intent.Message.Suggestion(m));
+                Suggestions.refineValues(this);
             }
             get suggestions() {
                 return this._suggestions;
@@ -4680,16 +4680,6 @@ Intent.id = 'ondewo.nlu.Intent';
          * Message implementation for ondewo.nlu.Intent.Message.LinkOutSuggestion
          */
         class LinkOutSuggestion {
-            /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of LinkOutSuggestion to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.destinationName = _value.destinationName;
-                this.uri = _value.uri;
-                LinkOutSuggestion.refineValues(this);
-            }
             /**
              * Deserialize binary data to message
              * @param instance message instance
@@ -4741,6 +4731,16 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.uri) {
                     _writer.writeString(2, _instance.uri);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of LinkOutSuggestion to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.destinationName = _value.destinationName;
+                this.uri = _value.uri;
+                LinkOutSuggestion.refineValues(this);
             }
             get destinationName() {
                 return this._destinationName;
@@ -4799,16 +4799,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class ListSelect {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of ListSelect to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.title = _value.title;
-                this.items = (_value.items || []).map(m => new Intent.Message.ListSelect.Item(m));
-                ListSelect.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -4861,6 +4851,16 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.items && _instance.items.length) {
                     _writer.writeRepeatedMessage(2, _instance.items, Intent.Message.ListSelect.Item.serializeBinaryToWriter);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of ListSelect to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.title = _value.title;
+                this.items = (_value.items || []).map(m => new Intent.Message.ListSelect.Item(m));
+                ListSelect.refineValues(this);
             }
             get title() {
                 return this._title;
@@ -4919,22 +4919,6 @@ Intent.id = 'ondewo.nlu.Intent';
              * Message implementation for ondewo.nlu.Intent.Message.ListSelect.Item
              */
             class Item {
-                /**
-                 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-                 * @param _value initial values object or instance of Item to deeply clone from
-                 */
-                constructor(_value) {
-                    _value = _value || {};
-                    this.info = _value.info
-                        ? new Intent.Message.SelectItemInfo(_value.info)
-                        : undefined;
-                    this.title = _value.title;
-                    this.description = _value.description;
-                    this.image = _value.image
-                        ? new Intent.Message.Image(_value.image)
-                        : undefined;
-                    Item.refineValues(this);
-                }
                 /**
                  * Deserialize binary data to message
                  * @param instance message instance
@@ -5002,6 +4986,22 @@ Intent.id = 'ondewo.nlu.Intent';
                     if (_instance.image) {
                         _writer.writeMessage(4, _instance.image, Intent.Message.Image.serializeBinaryToWriter);
                     }
+                }
+                /**
+                 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+                 * @param _value initial values object or instance of Item to deeply clone from
+                 */
+                constructor(_value) {
+                    _value = _value || {};
+                    this.info = _value.info
+                        ? new Intent.Message.SelectItemInfo(_value.info)
+                        : undefined;
+                    this.title = _value.title;
+                    this.description = _value.description;
+                    this.image = _value.image
+                        ? new Intent.Message.Image(_value.image)
+                        : undefined;
+                    Item.refineValues(this);
                 }
                 get info() {
                     return this._info;
@@ -5077,15 +5077,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class CarouselSelect {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of CarouselSelect to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.items = (_value.items || []).map(m => new Intent.Message.CarouselSelect.Item(m));
-                CarouselSelect.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -5131,6 +5122,15 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.items && _instance.items.length) {
                     _writer.writeRepeatedMessage(1, _instance.items, Intent.Message.CarouselSelect.Item.serializeBinaryToWriter);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of CarouselSelect to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.items = (_value.items || []).map(m => new Intent.Message.CarouselSelect.Item(m));
+                CarouselSelect.refineValues(this);
             }
             get items() {
                 return this._items;
@@ -5181,22 +5181,6 @@ Intent.id = 'ondewo.nlu.Intent';
              * Message implementation for ondewo.nlu.Intent.Message.CarouselSelect.Item
              */
             class Item {
-                /**
-                 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-                 * @param _value initial values object or instance of Item to deeply clone from
-                 */
-                constructor(_value) {
-                    _value = _value || {};
-                    this.info = _value.info
-                        ? new Intent.Message.SelectItemInfo(_value.info)
-                        : undefined;
-                    this.title = _value.title;
-                    this.description = _value.description;
-                    this.image = _value.image
-                        ? new Intent.Message.Image(_value.image)
-                        : undefined;
-                    Item.refineValues(this);
-                }
                 /**
                  * Deserialize binary data to message
                  * @param instance message instance
@@ -5264,6 +5248,22 @@ Intent.id = 'ondewo.nlu.Intent';
                     if (_instance.image) {
                         _writer.writeMessage(4, _instance.image, Intent.Message.Image.serializeBinaryToWriter);
                     }
+                }
+                /**
+                 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+                 * @param _value initial values object or instance of Item to deeply clone from
+                 */
+                constructor(_value) {
+                    _value = _value || {};
+                    this.info = _value.info
+                        ? new Intent.Message.SelectItemInfo(_value.info)
+                        : undefined;
+                    this.title = _value.title;
+                    this.description = _value.description;
+                    this.image = _value.image
+                        ? new Intent.Message.Image(_value.image)
+                        : undefined;
+                    Item.refineValues(this);
                 }
                 get info() {
                     return this._info;
@@ -5339,15 +5339,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class HTMLText {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of HTMLText to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.text = (_value.text || []).slice();
-                HTMLText.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -5391,6 +5382,15 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.text && _instance.text.length) {
                     _writer.writeRepeatedString(1, _instance.text);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of HTMLText to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.text = (_value.text || []).slice();
+                HTMLText.refineValues(this);
             }
             get text() {
                 return this._text;
@@ -5440,16 +5440,6 @@ Intent.id = 'ondewo.nlu.Intent';
          * Message implementation for ondewo.nlu.Intent.Message.Video
          */
         class Video {
-            /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of Video to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.uri = _value.uri;
-                this.accessibilityText = _value.accessibilityText;
-                Video.refineValues(this);
-            }
             /**
              * Deserialize binary data to message
              * @param instance message instance
@@ -5501,6 +5491,16 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.accessibilityText) {
                     _writer.writeString(2, _instance.accessibilityText);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Video to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.uri = _value.uri;
+                this.accessibilityText = _value.accessibilityText;
+                Video.refineValues(this);
             }
             get uri() {
                 return this._uri;
@@ -5559,16 +5559,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class Audio {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of Audio to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.uri = _value.uri;
-                this.accessibilityText = _value.accessibilityText;
-                Audio.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -5619,6 +5609,16 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.accessibilityText) {
                     _writer.writeString(2, _instance.accessibilityText);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of Audio to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.uri = _value.uri;
+                this.accessibilityText = _value.accessibilityText;
+                Audio.refineValues(this);
             }
             get uri() {
                 return this._uri;
@@ -5677,16 +5677,6 @@ Intent.id = 'ondewo.nlu.Intent';
          */
         class SelectItemInfo {
             /**
-             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-             * @param _value initial values object or instance of SelectItemInfo to deeply clone from
-             */
-            constructor(_value) {
-                _value = _value || {};
-                this.key = _value.key;
-                this.synonyms = (_value.synonyms || []).slice();
-                SelectItemInfo.refineValues(this);
-            }
-            /**
              * Deserialize binary data to message
              * @param instance message instance
              */
@@ -5737,6 +5727,16 @@ Intent.id = 'ondewo.nlu.Intent';
                 if (_instance.synonyms && _instance.synonyms.length) {
                     _writer.writeRepeatedString(2, _instance.synonyms);
                 }
+            }
+            /**
+             * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+             * @param _value initial values object or instance of SelectItemInfo to deeply clone from
+             */
+            constructor(_value) {
+                _value = _value || {};
+                this.key = _value.key;
+                this.synonyms = (_value.synonyms || []).slice();
+                SelectItemInfo.refineValues(this);
             }
             get key() {
                 return this._key;
@@ -5796,16 +5796,6 @@ Intent.id = 'ondewo.nlu.Intent';
      */
     class FollowupIntentInfo {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of FollowupIntentInfo to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.followupIntentName = _value.followupIntentName;
-            this.parentFollowupIntentName = _value.parentFollowupIntentName;
-            FollowupIntentInfo.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -5857,6 +5847,16 @@ Intent.id = 'ondewo.nlu.Intent';
             if (_instance.parentFollowupIntentName) {
                 _writer.writeString(2, _instance.parentFollowupIntentName);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of FollowupIntentInfo to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.followupIntentName = _value.followupIntentName;
+            this.parentFollowupIntentName = _value.parentFollowupIntentName;
+            FollowupIntentInfo.refineValues(this);
         }
         get followupIntentName() {
             return this._followupIntentName;
@@ -5915,23 +5915,6 @@ Intent.id = 'ondewo.nlu.Intent';
  * Message implementation for ondewo.nlu.ListIntentsRequest
  */
 class ListIntentsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListIntentsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.intentView = _value.intentView;
-        this.pageToken = _value.pageToken;
-        this.filterByCategory = _value.filterByCategory;
-        this.sortByField = _value.sortByField
-            ? new IntentSorting(_value.sortByField)
-            : undefined;
-        this.filterByTags = (_value.filterByTags || []).slice();
-        ListIntentsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -6019,6 +6002,23 @@ class ListIntentsRequest {
         if (_instance.filterByTags && _instance.filterByTags.length) {
             _writer.writeRepeatedString(8, _instance.filterByTags);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListIntentsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.intentView = _value.intentView;
+        this.pageToken = _value.pageToken;
+        this.filterByCategory = _value.filterByCategory;
+        this.sortByField = _value.sortByField
+            ? new IntentSorting(_value.sortByField)
+            : undefined;
+        this.filterByTags = (_value.filterByTags || []).slice();
+        ListIntentsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -6122,16 +6122,6 @@ ListIntentsRequest.id = 'ondewo.nlu.ListIntentsRequest';
  */
 class ListIntentsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListIntentsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intents = (_value.intents || []).map(m => new Intent(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListIntentsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -6184,6 +6174,16 @@ class ListIntentsResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListIntentsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intents = (_value.intents || []).map(m => new Intent(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListIntentsResponse.refineValues(this);
     }
     get intents() {
         return this._intents;
@@ -6240,18 +6240,6 @@ ListIntentsResponse.id = 'ondewo.nlu.ListIntentsResponse';
  * Message implementation for ondewo.nlu.GetIntentRequest
  */
 class GetIntentRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetIntentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.languageCode = _value.languageCode;
-        this.intentView = _value.intentView;
-        this.pageToken = _value.pageToken;
-        GetIntentRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -6317,6 +6305,18 @@ class GetIntentRequest {
         if (_instance.pageToken) {
             _writer.writeString(10, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.languageCode = _value.languageCode;
+        this.intentView = _value.intentView;
+        this.pageToken = _value.pageToken;
+        GetIntentRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -6392,18 +6392,6 @@ GetIntentRequest.id = 'ondewo.nlu.GetIntentRequest';
  */
 class CreateIntentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateIntentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.intent = _value.intent ? new Intent(_value.intent) : undefined;
-        this.languageCode = _value.languageCode;
-        this.intentView = _value.intentView;
-        CreateIntentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -6469,6 +6457,18 @@ class CreateIntentRequest {
         if (_instance.intentView) {
             _writer.writeEnum(4, _instance.intentView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateIntentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.intent = _value.intent ? new Intent(_value.intent) : undefined;
+        this.languageCode = _value.languageCode;
+        this.intentView = _value.intentView;
+        CreateIntentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -6544,20 +6544,6 @@ CreateIntentRequest.id = 'ondewo.nlu.CreateIntentRequest';
  */
 class UpdateIntentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateIntentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intent = _value.intent ? new Intent(_value.intent) : undefined;
-        this.languageCode = _value.languageCode;
-        this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
-            : undefined;
-        this.intentView = _value.intentView;
-        UpdateIntentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -6624,6 +6610,20 @@ class UpdateIntentRequest {
         if (_instance.intentView) {
             _writer.writeEnum(4, _instance.intentView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateIntentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intent = _value.intent ? new Intent(_value.intent) : undefined;
+        this.languageCode = _value.languageCode;
+        this.updateMask = _value.updateMask
+            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            : undefined;
+        this.intentView = _value.intentView;
+        UpdateIntentRequest.refineValues(this);
     }
     get intent() {
         return this._intent;
@@ -6701,15 +6701,6 @@ UpdateIntentRequest.id = 'ondewo.nlu.UpdateIntentRequest';
  */
 class DeleteIntentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteIntentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        DeleteIntentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -6753,6 +6744,15 @@ class DeleteIntentRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteIntentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        DeleteIntentRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -6801,25 +6801,6 @@ DeleteIntentRequest.id = 'ondewo.nlu.DeleteIntentRequest';
  * Message implementation for ondewo.nlu.BatchUpdateIntentsRequest
  */
 class BatchUpdateIntentsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchUpdateIntentsRequest to deeply clone from
-     */
-    constructor(_value) {
-        this._intentBatch = BatchUpdateIntentsRequest.IntentBatchCase.none;
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.intentBatchUri = _value.intentBatchUri;
-        this.intentBatchInline = _value.intentBatchInline
-            ? new IntentBatch(_value.intentBatchInline)
-            : undefined;
-        this.languageCode = _value.languageCode;
-        this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
-            : undefined;
-        this.intentView = _value.intentView;
-        BatchUpdateIntentsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -6899,6 +6880,25 @@ class BatchUpdateIntentsRequest {
         if (_instance.intentView) {
             _writer.writeEnum(6, _instance.intentView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateIntentsRequest to deeply clone from
+     */
+    constructor(_value) {
+        this._intentBatch = BatchUpdateIntentsRequest.IntentBatchCase.none;
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.intentBatchUri = _value.intentBatchUri;
+        this.intentBatchInline = _value.intentBatchInline
+            ? new IntentBatch(_value.intentBatchInline)
+            : undefined;
+        this.languageCode = _value.languageCode;
+        this.updateMask = _value.updateMask
+            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            : undefined;
+        this.intentView = _value.intentView;
+        BatchUpdateIntentsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -7019,15 +7019,6 @@ BatchUpdateIntentsRequest.id = 'ondewo.nlu.BatchUpdateIntentsRequest';
  */
 class BatchUpdateIntentsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchUpdateIntentsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intents = (_value.intents || []).map(m => new Intent(m));
-        BatchUpdateIntentsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -7073,6 +7064,15 @@ class BatchUpdateIntentsResponse {
         if (_instance.intents && _instance.intents.length) {
             _writer.writeRepeatedMessage(1, _instance.intents, Intent.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateIntentsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intents = (_value.intents || []).map(m => new Intent(m));
+        BatchUpdateIntentsResponse.refineValues(this);
     }
     get intents() {
         return this._intents;
@@ -7121,16 +7121,6 @@ BatchUpdateIntentsResponse.id = 'ondewo.nlu.BatchUpdateIntentsResponse';
  * Message implementation for ondewo.nlu.BatchDeleteIntentsRequest
  */
 class BatchDeleteIntentsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteIntentsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.intents = (_value.intents || []).map(m => new Intent(m));
-        BatchDeleteIntentsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -7184,6 +7174,16 @@ class BatchDeleteIntentsRequest {
         if (_instance.intents && _instance.intents.length) {
             _writer.writeRepeatedMessage(2, _instance.intents, Intent.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteIntentsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.intents = (_value.intents || []).map(m => new Intent(m));
+        BatchDeleteIntentsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -7241,15 +7241,6 @@ BatchDeleteIntentsRequest.id = 'ondewo.nlu.BatchDeleteIntentsRequest';
  */
 class IntentBatch {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of IntentBatch to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intents = (_value.intents || []).map(m => new Intent(m));
-        IntentBatch.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -7295,6 +7286,15 @@ class IntentBatch {
         if (_instance.intents && _instance.intents.length) {
             _writer.writeRepeatedMessage(1, _instance.intents, Intent.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of IntentBatch to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intents = (_value.intents || []).map(m => new Intent(m));
+        IntentBatch.refineValues(this);
     }
     get intents() {
         return this._intents;
@@ -7343,16 +7343,6 @@ IntentBatch.id = 'ondewo.nlu.IntentBatch';
  * Message implementation for ondewo.nlu.IntentSorting
  */
 class IntentSorting {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of IntentSorting to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sortingField = _value.sortingField;
-        this.sortingMode = _value.sortingMode;
-        IntentSorting.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -7404,6 +7394,16 @@ class IntentSorting {
         if (_instance.sortingMode) {
             _writer.writeEnum(2, _instance.sortingMode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of IntentSorting to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sortingField = _value.sortingField;
+        this.sortingMode = _value.sortingMode;
+        IntentSorting.refineValues(this);
     }
     get sortingField() {
         return this._sortingField;
@@ -7477,16 +7477,6 @@ IntentSorting.id = 'ondewo.nlu.IntentSorting';
  */
 class IntentTagRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of IntentTagRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intentName = _value.intentName;
-        this.tags = (_value.tags || []).slice();
-        IntentTagRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -7537,6 +7527,16 @@ class IntentTagRequest {
         if (_instance.tags && _instance.tags.length) {
             _writer.writeRepeatedString(2, _instance.tags);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of IntentTagRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentName = _value.intentName;
+        this.tags = (_value.tags || []).slice();
+        IntentTagRequest.refineValues(this);
     }
     get intentName() {
         return this._intentName;
@@ -7594,15 +7594,6 @@ IntentTagRequest.id = 'ondewo.nlu.IntentTagRequest';
  */
 class GetIntentTagsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetIntentTagsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intentName = _value.intentName;
-        GetIntentTagsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -7646,6 +7637,15 @@ class GetIntentTagsRequest {
         if (_instance.intentName) {
             _writer.writeString(1, _instance.intentName);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentTagsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentName = _value.intentName;
+        GetIntentTagsRequest.refineValues(this);
     }
     get intentName() {
         return this._intentName;
@@ -7695,15 +7695,6 @@ GetIntentTagsRequest.id = 'ondewo.nlu.GetIntentTagsRequest';
  */
 class GetIntentTagsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetIntentTagsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intentTags = (_value.intentTags || []).slice();
-        GetIntentTagsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -7747,6 +7738,15 @@ class GetIntentTagsResponse {
         if (_instance.intentTags && _instance.intentTags.length) {
             _writer.writeRepeatedString(1, _instance.intentTags);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentTagsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentTags = (_value.intentTags || []).slice();
+        GetIntentTagsResponse.refineValues(this);
     }
     get intentTags() {
         return this._intentTags;
@@ -7796,15 +7796,6 @@ GetIntentTagsResponse.id = 'ondewo.nlu.GetIntentTagsResponse';
  */
 class GetAllIntentTagsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAllIntentTagsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        GetAllIntentTagsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -7848,6 +7839,15 @@ class GetAllIntentTagsRequest {
         if (_instance.parent) {
             _writer.writeString(1, _instance.parent);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAllIntentTagsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        GetAllIntentTagsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -7897,15 +7897,6 @@ GetAllIntentTagsRequest.id = 'ondewo.nlu.GetAllIntentTagsRequest';
  */
 class BatchUpdateTrainingPhrasesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchUpdateTrainingPhrasesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.trainingPhrases = (_value.trainingPhrases || []).map(m => new Intent.TrainingPhrase(m));
-        BatchUpdateTrainingPhrasesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -7951,6 +7942,15 @@ class BatchUpdateTrainingPhrasesRequest {
         if (_instance.trainingPhrases && _instance.trainingPhrases.length) {
             _writer.writeRepeatedMessage(1, _instance.trainingPhrases, Intent.TrainingPhrase.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.trainingPhrases = (_value.trainingPhrases || []).map(m => new Intent.TrainingPhrase(m));
+        BatchUpdateTrainingPhrasesRequest.refineValues(this);
     }
     get trainingPhrases() {
         return this._trainingPhrases;
@@ -8000,19 +8000,6 @@ BatchUpdateTrainingPhrasesRequest.id = 'ondewo.nlu.BatchUpdateTrainingPhrasesReq
  */
 class TrainingPhraseStatus {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of TrainingPhraseStatus to deeply clone from
-     */
-    constructor(_value) {
-        this._phraseOrStatus = TrainingPhraseStatus.PhraseOrStatusCase.none;
-        _value = _value || {};
-        this.trainingPhrase = _value.trainingPhrase
-            ? new Intent.TrainingPhrase(_value.trainingPhrase)
-            : undefined;
-        this.errorMessage = _value.errorMessage;
-        TrainingPhraseStatus.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -8061,6 +8048,19 @@ class TrainingPhraseStatus {
         if (_instance.errorMessage || _instance.errorMessage === '') {
             _writer.writeString(2, _instance.errorMessage);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TrainingPhraseStatus to deeply clone from
+     */
+    constructor(_value) {
+        this._phraseOrStatus = TrainingPhraseStatus.PhraseOrStatusCase.none;
+        _value = _value || {};
+        this.trainingPhrase = _value.trainingPhrase
+            ? new Intent.TrainingPhrase(_value.trainingPhrase)
+            : undefined;
+        this.errorMessage = _value.errorMessage;
+        TrainingPhraseStatus.refineValues(this);
     }
     get trainingPhrase() {
         return this._trainingPhrase;
@@ -8145,16 +8145,6 @@ TrainingPhraseStatus.id = 'ondewo.nlu.TrainingPhraseStatus';
  */
 class BatchTrainingPhrasesStatusResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchTrainingPhrasesStatusResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.trainingPhraseStatuses = (_value.trainingPhraseStatuses || []).map(m => new TrainingPhraseStatus(m));
-        this.hasErrors = _value.hasErrors;
-        BatchTrainingPhrasesStatusResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -8209,6 +8199,16 @@ class BatchTrainingPhrasesStatusResponse {
         if (_instance.hasErrors) {
             _writer.writeBool(2, _instance.hasErrors);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchTrainingPhrasesStatusResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.trainingPhraseStatuses = (_value.trainingPhraseStatuses || []).map(m => new TrainingPhraseStatus(m));
+        this.hasErrors = _value.hasErrors;
+        BatchTrainingPhrasesStatusResponse.refineValues(this);
     }
     get trainingPhraseStatuses() {
         return this._trainingPhraseStatuses;
@@ -8266,15 +8266,6 @@ BatchTrainingPhrasesStatusResponse.id = 'ondewo.nlu.BatchTrainingPhrasesStatusRe
  */
 class BatchCreateTrainingPhrasesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchCreateTrainingPhrasesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.trainingPhraseRequests = (_value.trainingPhraseRequests || []).map(m => new BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest(m));
-        BatchCreateTrainingPhrasesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -8325,6 +8316,15 @@ class BatchCreateTrainingPhrasesRequest {
                 .serializeBinaryToWriter);
         }
     }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchCreateTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.trainingPhraseRequests = (_value.trainingPhraseRequests || []).map(m => new BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest(m));
+        BatchCreateTrainingPhrasesRequest.refineValues(this);
+    }
     get trainingPhraseRequests() {
         return this._trainingPhraseRequests;
     }
@@ -8373,18 +8373,6 @@ BatchCreateTrainingPhrasesRequest.id = 'ondewo.nlu.BatchCreateTrainingPhrasesReq
      * Message implementation for ondewo.nlu.BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest
      */
     class CreateTrainingPhraseRequest {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of CreateTrainingPhraseRequest to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.intentName = _value.intentName;
-            this.trainingPhrase = _value.trainingPhrase
-                ? new Intent.TrainingPhrase(_value.trainingPhrase)
-                : undefined;
-            CreateTrainingPhraseRequest.refineValues(this);
-        }
         /**
          * Deserialize binary data to message
          * @param instance message instance
@@ -8437,6 +8425,18 @@ BatchCreateTrainingPhrasesRequest.id = 'ondewo.nlu.BatchCreateTrainingPhrasesReq
             if (_instance.trainingPhrase) {
                 _writer.writeMessage(2, _instance.trainingPhrase, Intent.TrainingPhrase.serializeBinaryToWriter);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CreateTrainingPhraseRequest to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.intentName = _value.intentName;
+            this.trainingPhrase = _value.trainingPhrase
+                ? new Intent.TrainingPhrase(_value.trainingPhrase)
+                : undefined;
+            CreateTrainingPhraseRequest.refineValues(this);
         }
         get intentName() {
             return this._intentName;
@@ -8500,15 +8500,6 @@ BatchCreateTrainingPhrasesRequest.id = 'ondewo.nlu.BatchCreateTrainingPhrasesReq
  */
 class BatchGetTrainingPhrasesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchGetTrainingPhrasesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.names = (_value.names || []).slice();
-        BatchGetTrainingPhrasesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -8552,6 +8543,15 @@ class BatchGetTrainingPhrasesRequest {
         if (_instance.names && _instance.names.length) {
             _writer.writeRepeatedString(1, _instance.names);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchGetTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.names = (_value.names || []).slice();
+        BatchGetTrainingPhrasesRequest.refineValues(this);
     }
     get names() {
         return this._names;
@@ -8601,15 +8601,6 @@ BatchGetTrainingPhrasesRequest.id = 'ondewo.nlu.BatchGetTrainingPhrasesRequest';
  */
 class BatchDeleteTrainingPhrasesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteTrainingPhrasesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.names = (_value.names || []).slice();
-        BatchDeleteTrainingPhrasesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -8653,6 +8644,15 @@ class BatchDeleteTrainingPhrasesRequest {
         if (_instance.names && _instance.names.length) {
             _writer.writeRepeatedString(1, _instance.names);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.names = (_value.names || []).slice();
+        BatchDeleteTrainingPhrasesRequest.refineValues(this);
     }
     get names() {
         return this._names;
@@ -8701,16 +8701,6 @@ BatchDeleteTrainingPhrasesRequest.id = 'ondewo.nlu.BatchDeleteTrainingPhrasesReq
  * Message implementation for ondewo.nlu.BatchDeleteTrainingPhrasesResponse
  */
 class BatchDeleteTrainingPhrasesResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteTrainingPhrasesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.deleteStatuses = (_value.deleteStatuses || []).map(m => new BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus(m));
-        this.hasErrors = _value.hasErrors;
-        BatchDeleteTrainingPhrasesResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -8766,6 +8756,16 @@ class BatchDeleteTrainingPhrasesResponse {
         if (_instance.hasErrors) {
             _writer.writeBool(2, _instance.hasErrors);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteTrainingPhrasesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.deleteStatuses = (_value.deleteStatuses || []).map(m => new BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus(m));
+        this.hasErrors = _value.hasErrors;
+        BatchDeleteTrainingPhrasesResponse.refineValues(this);
     }
     get deleteStatuses() {
         return this._deleteStatuses;
@@ -8824,19 +8824,6 @@ BatchDeleteTrainingPhrasesResponse.id = 'ondewo.nlu.BatchDeleteTrainingPhrasesRe
      */
     class DeleteTrainingPhraseStatus {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of DeleteTrainingPhraseStatus to deeply clone from
-         */
-        constructor(_value) {
-            this._deleteStatus = DeleteTrainingPhraseStatus.DeleteStatusCase.none;
-            _value = _value || {};
-            this.successfullyDeleted = _value.successfullyDeleted
-                ? new googleProtobuf003.Empty(_value.successfullyDeleted)
-                : undefined;
-            this.errorMessage = _value.errorMessage;
-            DeleteTrainingPhraseStatus.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -8885,6 +8872,19 @@ BatchDeleteTrainingPhrasesResponse.id = 'ondewo.nlu.BatchDeleteTrainingPhrasesRe
             if (_instance.errorMessage || _instance.errorMessage === '') {
                 _writer.writeString(2, _instance.errorMessage);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of DeleteTrainingPhraseStatus to deeply clone from
+         */
+        constructor(_value) {
+            this._deleteStatus = DeleteTrainingPhraseStatus.DeleteStatusCase.none;
+            _value = _value || {};
+            this.successfullyDeleted = _value.successfullyDeleted
+                ? new googleProtobuf003.Empty(_value.successfullyDeleted)
+                : undefined;
+            this.errorMessage = _value.errorMessage;
+            DeleteTrainingPhraseStatus.refineValues(this);
         }
         get successfullyDeleted() {
             return this._successfullyDeleted;
@@ -8971,17 +8971,6 @@ BatchDeleteTrainingPhrasesResponse.id = 'ondewo.nlu.BatchDeleteTrainingPhrasesRe
  */
 class ListTrainingPhrasesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListTrainingPhrasesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intentName = _value.intentName;
-        this.languageCode = _value.languageCode;
-        this.pageToken = _value.pageToken;
-        ListTrainingPhrasesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -9039,6 +9028,17 @@ class ListTrainingPhrasesRequest {
         if (_instance.pageToken) {
             _writer.writeString(3, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentName = _value.intentName;
+        this.languageCode = _value.languageCode;
+        this.pageToken = _value.pageToken;
+        ListTrainingPhrasesRequest.refineValues(this);
     }
     get intentName() {
         return this._intentName;
@@ -9104,16 +9104,6 @@ ListTrainingPhrasesRequest.id = 'ondewo.nlu.ListTrainingPhrasesRequest';
  */
 class ListTrainingPhrasesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListTrainingPhrasesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.trainingPhrases = (_value.trainingPhrases || []).map(m => new Intent.TrainingPhrase(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListTrainingPhrasesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -9166,6 +9156,16 @@ class ListTrainingPhrasesResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTrainingPhrasesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.trainingPhrases = (_value.trainingPhrases || []).map(m => new Intent.TrainingPhrase(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListTrainingPhrasesResponse.refineValues(this);
     }
     get trainingPhrases() {
         return this._trainingPhrases;
@@ -9222,16 +9222,6 @@ ListTrainingPhrasesResponse.id = 'ondewo.nlu.ListTrainingPhrasesResponse';
  * Message implementation for ondewo.nlu.BatchResponseMessagesStatusResponse
  */
 class BatchResponseMessagesStatusResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchResponseMessagesStatusResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.responseMessageStatuses = (_value.responseMessageStatuses || []).map(m => new BatchResponseMessagesStatusResponse.ResponseMessageStatus(m));
-        this.hasErrors = _value.hasErrors;
-        BatchResponseMessagesStatusResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -9290,6 +9280,16 @@ class BatchResponseMessagesStatusResponse {
             _writer.writeBool(2, _instance.hasErrors);
         }
     }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchResponseMessagesStatusResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseMessageStatuses = (_value.responseMessageStatuses || []).map(m => new BatchResponseMessagesStatusResponse.ResponseMessageStatus(m));
+        this.hasErrors = _value.hasErrors;
+        BatchResponseMessagesStatusResponse.refineValues(this);
+    }
     get responseMessageStatuses() {
         return this._responseMessageStatuses;
     }
@@ -9347,19 +9347,6 @@ BatchResponseMessagesStatusResponse.id = 'ondewo.nlu.BatchResponseMessagesStatus
      */
     class ResponseMessageStatus {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of ResponseMessageStatus to deeply clone from
-         */
-        constructor(_value) {
-            this._phraseOrStatus = ResponseMessageStatus.PhraseOrStatusCase.none;
-            _value = _value || {};
-            this.responseMessage = _value.responseMessage
-                ? new Intent.Message(_value.responseMessage)
-                : undefined;
-            this.errorMessage = _value.errorMessage;
-            ResponseMessageStatus.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -9408,6 +9395,19 @@ BatchResponseMessagesStatusResponse.id = 'ondewo.nlu.BatchResponseMessagesStatus
             if (_instance.errorMessage || _instance.errorMessage === '') {
                 _writer.writeString(2, _instance.errorMessage);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ResponseMessageStatus to deeply clone from
+         */
+        constructor(_value) {
+            this._phraseOrStatus = ResponseMessageStatus.PhraseOrStatusCase.none;
+            _value = _value || {};
+            this.responseMessage = _value.responseMessage
+                ? new Intent.Message(_value.responseMessage)
+                : undefined;
+            this.errorMessage = _value.errorMessage;
+            ResponseMessageStatus.refineValues(this);
         }
         get responseMessage() {
             return this._responseMessage;
@@ -9494,15 +9494,6 @@ BatchResponseMessagesStatusResponse.id = 'ondewo.nlu.BatchResponseMessagesStatus
  */
 class BatchCreateResponseMessagesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchCreateResponseMessagesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.responseMessageRequests = (_value.responseMessageRequests || []).map(m => new BatchCreateResponseMessagesRequest.CreateResponseMessageRequest(m));
-        BatchCreateResponseMessagesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -9553,6 +9544,15 @@ class BatchCreateResponseMessagesRequest {
                 .serializeBinaryToWriter);
         }
     }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchCreateResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseMessageRequests = (_value.responseMessageRequests || []).map(m => new BatchCreateResponseMessagesRequest.CreateResponseMessageRequest(m));
+        BatchCreateResponseMessagesRequest.refineValues(this);
+    }
     get responseMessageRequests() {
         return this._responseMessageRequests;
     }
@@ -9601,18 +9601,6 @@ BatchCreateResponseMessagesRequest.id = 'ondewo.nlu.BatchCreateResponseMessagesR
      * Message implementation for ondewo.nlu.BatchCreateResponseMessagesRequest.CreateResponseMessageRequest
      */
     class CreateResponseMessageRequest {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of CreateResponseMessageRequest to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.intentName = _value.intentName;
-            this.responseMessage = _value.responseMessage
-                ? new Intent.Message(_value.responseMessage)
-                : undefined;
-            CreateResponseMessageRequest.refineValues(this);
-        }
         /**
          * Deserialize binary data to message
          * @param instance message instance
@@ -9665,6 +9653,18 @@ BatchCreateResponseMessagesRequest.id = 'ondewo.nlu.BatchCreateResponseMessagesR
             if (_instance.responseMessage) {
                 _writer.writeMessage(2, _instance.responseMessage, Intent.Message.serializeBinaryToWriter);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CreateResponseMessageRequest to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.intentName = _value.intentName;
+            this.responseMessage = _value.responseMessage
+                ? new Intent.Message(_value.responseMessage)
+                : undefined;
+            CreateResponseMessageRequest.refineValues(this);
         }
         get intentName() {
             return this._intentName;
@@ -9728,15 +9728,6 @@ BatchCreateResponseMessagesRequest.id = 'ondewo.nlu.BatchCreateResponseMessagesR
  */
 class BatchUpdateResponseMessagesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchUpdateResponseMessagesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.responseMessages = (_value.responseMessages || []).map(m => new Intent.Message(m));
-        BatchUpdateResponseMessagesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -9782,6 +9773,15 @@ class BatchUpdateResponseMessagesRequest {
         if (_instance.responseMessages && _instance.responseMessages.length) {
             _writer.writeRepeatedMessage(1, _instance.responseMessages, Intent.Message.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseMessages = (_value.responseMessages || []).map(m => new Intent.Message(m));
+        BatchUpdateResponseMessagesRequest.refineValues(this);
     }
     get responseMessages() {
         return this._responseMessages;
@@ -9831,15 +9831,6 @@ BatchUpdateResponseMessagesRequest.id = 'ondewo.nlu.BatchUpdateResponseMessagesR
  */
 class BatchGetResponseMessagesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchGetResponseMessagesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.names = (_value.names || []).slice();
-        BatchGetResponseMessagesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -9883,6 +9874,15 @@ class BatchGetResponseMessagesRequest {
         if (_instance.names && _instance.names.length) {
             _writer.writeRepeatedString(1, _instance.names);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchGetResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.names = (_value.names || []).slice();
+        BatchGetResponseMessagesRequest.refineValues(this);
     }
     get names() {
         return this._names;
@@ -9932,15 +9932,6 @@ BatchGetResponseMessagesRequest.id = 'ondewo.nlu.BatchGetResponseMessagesRequest
  */
 class BatchDeleteResponseMessagesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteResponseMessagesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.names = (_value.names || []).slice();
-        BatchDeleteResponseMessagesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -9984,6 +9975,15 @@ class BatchDeleteResponseMessagesRequest {
         if (_instance.names && _instance.names.length) {
             _writer.writeRepeatedString(1, _instance.names);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.names = (_value.names || []).slice();
+        BatchDeleteResponseMessagesRequest.refineValues(this);
     }
     get names() {
         return this._names;
@@ -10032,16 +10032,6 @@ BatchDeleteResponseMessagesRequest.id = 'ondewo.nlu.BatchDeleteResponseMessagesR
  * Message implementation for ondewo.nlu.BatchDeleteResponseMessagesResponse
  */
 class BatchDeleteResponseMessagesResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteResponseMessagesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.deleteStatuses = (_value.deleteStatuses || []).map(m => new BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus(m));
-        this.hasErrors = _value.hasErrors;
-        BatchDeleteResponseMessagesResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -10097,6 +10087,16 @@ class BatchDeleteResponseMessagesResponse {
         if (_instance.hasErrors) {
             _writer.writeBool(2, _instance.hasErrors);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteResponseMessagesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.deleteStatuses = (_value.deleteStatuses || []).map(m => new BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus(m));
+        this.hasErrors = _value.hasErrors;
+        BatchDeleteResponseMessagesResponse.refineValues(this);
     }
     get deleteStatuses() {
         return this._deleteStatuses;
@@ -10155,19 +10155,6 @@ BatchDeleteResponseMessagesResponse.id = 'ondewo.nlu.BatchDeleteResponseMessages
      */
     class DeleteResponseMessageStatus {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of DeleteResponseMessageStatus to deeply clone from
-         */
-        constructor(_value) {
-            this._deleteStatus = DeleteResponseMessageStatus.DeleteStatusCase.none;
-            _value = _value || {};
-            this.successfullyDeleted = _value.successfullyDeleted
-                ? new googleProtobuf003.Empty(_value.successfullyDeleted)
-                : undefined;
-            this.errorMessage = _value.errorMessage;
-            DeleteResponseMessageStatus.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -10216,6 +10203,19 @@ BatchDeleteResponseMessagesResponse.id = 'ondewo.nlu.BatchDeleteResponseMessages
             if (_instance.errorMessage || _instance.errorMessage === '') {
                 _writer.writeString(2, _instance.errorMessage);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of DeleteResponseMessageStatus to deeply clone from
+         */
+        constructor(_value) {
+            this._deleteStatus = DeleteResponseMessageStatus.DeleteStatusCase.none;
+            _value = _value || {};
+            this.successfullyDeleted = _value.successfullyDeleted
+                ? new googleProtobuf003.Empty(_value.successfullyDeleted)
+                : undefined;
+            this.errorMessage = _value.errorMessage;
+            DeleteResponseMessageStatus.refineValues(this);
         }
         get successfullyDeleted() {
             return this._successfullyDeleted;
@@ -10302,17 +10302,6 @@ BatchDeleteResponseMessagesResponse.id = 'ondewo.nlu.BatchDeleteResponseMessages
  */
 class ListResponseMessagesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListResponseMessagesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intentName = _value.intentName;
-        this.languageCode = _value.languageCode;
-        this.pageToken = _value.pageToken;
-        ListResponseMessagesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -10370,6 +10359,17 @@ class ListResponseMessagesRequest {
         if (_instance.pageToken) {
             _writer.writeString(3, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListResponseMessagesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentName = _value.intentName;
+        this.languageCode = _value.languageCode;
+        this.pageToken = _value.pageToken;
+        ListResponseMessagesRequest.refineValues(this);
     }
     get intentName() {
         return this._intentName;
@@ -10435,16 +10435,6 @@ ListResponseMessagesRequest.id = 'ondewo.nlu.ListResponseMessagesRequest';
  */
 class ListResponseMessagesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListResponseMessagesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.responseMessages = (_value.responseMessages || []).map(m => new Intent.Message(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListResponseMessagesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -10497,6 +10487,16 @@ class ListResponseMessagesResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListResponseMessagesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseMessages = (_value.responseMessages || []).map(m => new Intent.Message(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListResponseMessagesResponse.refineValues(this);
     }
     get responseMessages() {
         return this._responseMessages;
@@ -10554,16 +10554,6 @@ ListResponseMessagesResponse.id = 'ondewo.nlu.ListResponseMessagesResponse';
  */
 class BatchParametersStatusResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchParametersStatusResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parameterStatuses = (_value.parameterStatuses || []).map(m => new BatchParametersStatusResponse.ParameterStatus(m));
-        this.hasErrors = _value.hasErrors;
-        BatchParametersStatusResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -10618,6 +10608,16 @@ class BatchParametersStatusResponse {
         if (_instance.hasErrors) {
             _writer.writeBool(2, _instance.hasErrors);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchParametersStatusResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parameterStatuses = (_value.parameterStatuses || []).map(m => new BatchParametersStatusResponse.ParameterStatus(m));
+        this.hasErrors = _value.hasErrors;
+        BatchParametersStatusResponse.refineValues(this);
     }
     get parameterStatuses() {
         return this._parameterStatuses;
@@ -10676,19 +10676,6 @@ BatchParametersStatusResponse.id = 'ondewo.nlu.BatchParametersStatusResponse';
      */
     class ParameterStatus {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of ParameterStatus to deeply clone from
-         */
-        constructor(_value) {
-            this._phraseOrStatus = ParameterStatus.PhraseOrStatusCase.none;
-            _value = _value || {};
-            this.parameter = _value.parameter
-                ? new Intent.Parameter(_value.parameter)
-                : undefined;
-            this.errorMessage = _value.errorMessage;
-            ParameterStatus.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -10737,6 +10724,19 @@ BatchParametersStatusResponse.id = 'ondewo.nlu.BatchParametersStatusResponse';
             if (_instance.errorMessage || _instance.errorMessage === '') {
                 _writer.writeString(2, _instance.errorMessage);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ParameterStatus to deeply clone from
+         */
+        constructor(_value) {
+            this._phraseOrStatus = ParameterStatus.PhraseOrStatusCase.none;
+            _value = _value || {};
+            this.parameter = _value.parameter
+                ? new Intent.Parameter(_value.parameter)
+                : undefined;
+            this.errorMessage = _value.errorMessage;
+            ParameterStatus.refineValues(this);
         }
         get parameter() {
             return this._parameter;
@@ -10819,15 +10819,6 @@ BatchParametersStatusResponse.id = 'ondewo.nlu.BatchParametersStatusResponse';
  */
 class BatchCreateParametersRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchCreateParametersRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parameterRequests = (_value.parameterRequests || []).map(m => new BatchCreateParametersRequest.CreateParameterRequest(m));
-        BatchCreateParametersRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -10877,6 +10868,15 @@ class BatchCreateParametersRequest {
                 .serializeBinaryToWriter);
         }
     }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchCreateParametersRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parameterRequests = (_value.parameterRequests || []).map(m => new BatchCreateParametersRequest.CreateParameterRequest(m));
+        BatchCreateParametersRequest.refineValues(this);
+    }
     get parameterRequests() {
         return this._parameterRequests;
     }
@@ -10925,18 +10925,6 @@ BatchCreateParametersRequest.id = 'ondewo.nlu.BatchCreateParametersRequest';
      * Message implementation for ondewo.nlu.BatchCreateParametersRequest.CreateParameterRequest
      */
     class CreateParameterRequest {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of CreateParameterRequest to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.intentName = _value.intentName;
-            this.parameter = _value.parameter
-                ? new Intent.Parameter(_value.parameter)
-                : undefined;
-            CreateParameterRequest.refineValues(this);
-        }
         /**
          * Deserialize binary data to message
          * @param instance message instance
@@ -10989,6 +10977,18 @@ BatchCreateParametersRequest.id = 'ondewo.nlu.BatchCreateParametersRequest';
             if (_instance.parameter) {
                 _writer.writeMessage(2, _instance.parameter, Intent.Parameter.serializeBinaryToWriter);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CreateParameterRequest to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.intentName = _value.intentName;
+            this.parameter = _value.parameter
+                ? new Intent.Parameter(_value.parameter)
+                : undefined;
+            CreateParameterRequest.refineValues(this);
         }
         get intentName() {
             return this._intentName;
@@ -11050,15 +11050,6 @@ BatchCreateParametersRequest.id = 'ondewo.nlu.BatchCreateParametersRequest';
  */
 class BatchUpdateParametersRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchUpdateParametersRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parameters = (_value.parameters || []).map(m => new Intent.Parameter(m));
-        BatchUpdateParametersRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -11104,6 +11095,15 @@ class BatchUpdateParametersRequest {
         if (_instance.parameters && _instance.parameters.length) {
             _writer.writeRepeatedMessage(1, _instance.parameters, Intent.Parameter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateParametersRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parameters = (_value.parameters || []).map(m => new Intent.Parameter(m));
+        BatchUpdateParametersRequest.refineValues(this);
     }
     get parameters() {
         return this._parameters;
@@ -11153,15 +11153,6 @@ BatchUpdateParametersRequest.id = 'ondewo.nlu.BatchUpdateParametersRequest';
  */
 class BatchGetParametersRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchGetParametersRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.names = (_value.names || []).slice();
-        BatchGetParametersRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -11205,6 +11196,15 @@ class BatchGetParametersRequest {
         if (_instance.names && _instance.names.length) {
             _writer.writeRepeatedString(1, _instance.names);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchGetParametersRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.names = (_value.names || []).slice();
+        BatchGetParametersRequest.refineValues(this);
     }
     get names() {
         return this._names;
@@ -11254,15 +11254,6 @@ BatchGetParametersRequest.id = 'ondewo.nlu.BatchGetParametersRequest';
  */
 class BatchDeleteParametersRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteParametersRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.names = (_value.names || []).slice();
-        BatchDeleteParametersRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -11306,6 +11297,15 @@ class BatchDeleteParametersRequest {
         if (_instance.names && _instance.names.length) {
             _writer.writeRepeatedString(1, _instance.names);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteParametersRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.names = (_value.names || []).slice();
+        BatchDeleteParametersRequest.refineValues(this);
     }
     get names() {
         return this._names;
@@ -11354,16 +11354,6 @@ BatchDeleteParametersRequest.id = 'ondewo.nlu.BatchDeleteParametersRequest';
  * Message implementation for ondewo.nlu.BatchDeleteParametersResponse
  */
 class BatchDeleteParametersResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteParametersResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.deleteStatuses = (_value.deleteStatuses || []).map(m => new BatchDeleteParametersResponse.DeleteParameterStatus(m));
-        this.hasErrors = _value.hasErrors;
-        BatchDeleteParametersResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -11419,6 +11409,16 @@ class BatchDeleteParametersResponse {
         if (_instance.hasErrors) {
             _writer.writeBool(2, _instance.hasErrors);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteParametersResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.deleteStatuses = (_value.deleteStatuses || []).map(m => new BatchDeleteParametersResponse.DeleteParameterStatus(m));
+        this.hasErrors = _value.hasErrors;
+        BatchDeleteParametersResponse.refineValues(this);
     }
     get deleteStatuses() {
         return this._deleteStatuses;
@@ -11477,19 +11477,6 @@ BatchDeleteParametersResponse.id = 'ondewo.nlu.BatchDeleteParametersResponse';
      */
     class DeleteParameterStatus {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of DeleteParameterStatus to deeply clone from
-         */
-        constructor(_value) {
-            this._deleteStatus = DeleteParameterStatus.DeleteStatusCase.none;
-            _value = _value || {};
-            this.successfullyDeleted = _value.successfullyDeleted
-                ? new googleProtobuf003.Empty(_value.successfullyDeleted)
-                : undefined;
-            this.errorMessage = _value.errorMessage;
-            DeleteParameterStatus.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -11538,6 +11525,19 @@ BatchDeleteParametersResponse.id = 'ondewo.nlu.BatchDeleteParametersResponse';
             if (_instance.errorMessage || _instance.errorMessage === '') {
                 _writer.writeString(2, _instance.errorMessage);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of DeleteParameterStatus to deeply clone from
+         */
+        constructor(_value) {
+            this._deleteStatus = DeleteParameterStatus.DeleteStatusCase.none;
+            _value = _value || {};
+            this.successfullyDeleted = _value.successfullyDeleted
+                ? new googleProtobuf003.Empty(_value.successfullyDeleted)
+                : undefined;
+            this.errorMessage = _value.errorMessage;
+            DeleteParameterStatus.refineValues(this);
         }
         get successfullyDeleted() {
             return this._successfullyDeleted;
@@ -11624,17 +11624,6 @@ BatchDeleteParametersResponse.id = 'ondewo.nlu.BatchDeleteParametersResponse';
  */
 class ListParametersRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListParametersRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intentName = _value.intentName;
-        this.languageCode = _value.languageCode;
-        this.pageToken = _value.pageToken;
-        ListParametersRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -11692,6 +11681,17 @@ class ListParametersRequest {
         if (_instance.pageToken) {
             _writer.writeString(3, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListParametersRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentName = _value.intentName;
+        this.languageCode = _value.languageCode;
+        this.pageToken = _value.pageToken;
+        ListParametersRequest.refineValues(this);
     }
     get intentName() {
         return this._intentName;
@@ -11757,16 +11757,6 @@ ListParametersRequest.id = 'ondewo.nlu.ListParametersRequest';
  */
 class ListParametersResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListParametersResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parameters = (_value.parameters || []).map(m => new Intent.Parameter(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListParametersResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -11819,6 +11809,16 @@ class ListParametersResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListParametersResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parameters = (_value.parameters || []).map(m => new Intent.Parameter(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListParametersResponse.refineValues(this);
     }
     get parameters() {
         return this._parameters;
@@ -11875,18 +11875,6 @@ ListParametersResponse.id = 'ondewo.nlu.ListParametersResponse';
  * Message implementation for ondewo.nlu.ListTrainingPhrasesofIntentsWithEnrichmentRequest
  */
 class ListTrainingPhrasesofIntentsWithEnrichmentRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListTrainingPhrasesofIntentsWithEnrichmentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.intentIds = (_value.intentIds || []).slice();
-        this.pageToken = _value.pageToken;
-        ListTrainingPhrasesofIntentsWithEnrichmentRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -11952,6 +11940,18 @@ class ListTrainingPhrasesofIntentsWithEnrichmentRequest {
         if (_instance.pageToken) {
             _writer.writeString(4, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTrainingPhrasesofIntentsWithEnrichmentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.intentIds = (_value.intentIds || []).slice();
+        this.pageToken = _value.pageToken;
+        ListTrainingPhrasesofIntentsWithEnrichmentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -12025,16 +12025,6 @@ ListTrainingPhrasesofIntentsWithEnrichmentRequest.id = 'ondewo.nlu.ListTrainingP
  */
 class ListTrainingPhrasesofIntentsWithEnrichmentResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListTrainingPhrasesofIntentsWithEnrichmentResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.trainingPhrases = (_value.trainingPhrases || []).slice();
-        this.nextPageToken = _value.nextPageToken;
-        ListTrainingPhrasesofIntentsWithEnrichmentResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -12085,6 +12075,16 @@ class ListTrainingPhrasesofIntentsWithEnrichmentResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTrainingPhrasesofIntentsWithEnrichmentResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.trainingPhrases = (_value.trainingPhrases || []).slice();
+        this.nextPageToken = _value.nextPageToken;
+        ListTrainingPhrasesofIntentsWithEnrichmentResponse.refineValues(this);
     }
     get trainingPhrases() {
         return this._trainingPhrases;
@@ -12156,23 +12156,6 @@ var EntityTypeCategory;
  * Message implementation for ondewo.nlu.EntityType
  */
 class EntityType {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityType to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.displayName = _value.displayName;
-        this.kind = _value.kind;
-        this.autoExpansionMode = _value.autoExpansionMode;
-        this.entities = (_value.entities || []).map(m => new EntityType.Entity(m));
-        this.nextPageToken = _value.nextPageToken;
-        this.entityCount = _value.entityCount;
-        this.status = _value.status;
-        this.synonymCount = _value.synonymCount;
-        EntityType.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -12275,6 +12258,23 @@ class EntityType {
         if (_instance.synonymCount) {
             _writer.writeInt32(13, _instance.synonymCount);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityType to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.displayName = _value.displayName;
+        this.kind = _value.kind;
+        this.autoExpansionMode = _value.autoExpansionMode;
+        this.entities = (_value.entities || []).map(m => new EntityType.Entity(m));
+        this.nextPageToken = _value.nextPageToken;
+        this.entityCount = _value.entityCount;
+        this.status = _value.status;
+        this.synonymCount = _value.synonymCount;
+        EntityType.refineValues(this);
     }
     get name() {
         return this._name;
@@ -12408,20 +12408,6 @@ EntityType.id = 'ondewo.nlu.EntityType';
      */
     class Entity {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of Entity to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.value = _value.value;
-            this.synonyms = (_value.synonyms || []).slice();
-            this.name = _value.name;
-            this.displayName = _value.displayName;
-            this.synonymCount = _value.synonymCount;
-            this.languageCode = _value.languageCode;
-            Entity.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -12500,6 +12486,20 @@ EntityType.id = 'ondewo.nlu.EntityType';
             if (_instance.languageCode) {
                 _writer.writeString(6, _instance.languageCode);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Entity to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.value = _value.value;
+            this.synonyms = (_value.synonyms || []).slice();
+            this.name = _value.name;
+            this.displayName = _value.displayName;
+            this.synonymCount = _value.synonymCount;
+            this.languageCode = _value.languageCode;
+            Entity.refineValues(this);
         }
         get value() {
             return this._value;
@@ -12591,22 +12591,6 @@ EntityType.id = 'ondewo.nlu.EntityType';
  */
 class ListEntityTypesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListEntityTypesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.pageToken = _value.pageToken;
-        this.entityTypeView = _value.entityTypeView;
-        this.filterByCategory = _value.filterByCategory;
-        this.sortByField = _value.sortByField
-            ? new EntityTypeSorting(_value.sortByField)
-            : undefined;
-        ListEntityTypesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -12686,6 +12670,22 @@ class ListEntityTypesRequest {
         if (_instance.sortByField) {
             _writer.writeMessage(7, _instance.sortByField, EntityTypeSorting.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListEntityTypesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.pageToken = _value.pageToken;
+        this.entityTypeView = _value.entityTypeView;
+        this.filterByCategory = _value.filterByCategory;
+        this.sortByField = _value.sortByField
+            ? new EntityTypeSorting(_value.sortByField)
+            : undefined;
+        ListEntityTypesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -12781,16 +12781,6 @@ ListEntityTypesRequest.id = 'ondewo.nlu.ListEntityTypesRequest';
  */
 class ListEntityTypesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListEntityTypesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityTypes = (_value.entityTypes || []).map(m => new EntityType(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListEntityTypesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -12843,6 +12833,16 @@ class ListEntityTypesResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListEntityTypesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityTypes = (_value.entityTypes || []).map(m => new EntityType(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListEntityTypesResponse.refineValues(this);
     }
     get entityTypes() {
         return this._entityTypes;
@@ -12899,18 +12899,6 @@ ListEntityTypesResponse.id = 'ondewo.nlu.ListEntityTypesResponse';
  * Message implementation for ondewo.nlu.GetEntityTypeRequest
  */
 class GetEntityTypeRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetEntityTypeRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.languageCode = _value.languageCode;
-        this.pageToken = _value.pageToken;
-        this.entityTypeView = _value.entityTypeView;
-        GetEntityTypeRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -12976,6 +12964,18 @@ class GetEntityTypeRequest {
         if (_instance.entityTypeView) {
             _writer.writeEnum(6, _instance.entityTypeView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetEntityTypeRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.languageCode = _value.languageCode;
+        this.pageToken = _value.pageToken;
+        this.entityTypeView = _value.entityTypeView;
+        GetEntityTypeRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -13051,20 +13051,6 @@ GetEntityTypeRequest.id = 'ondewo.nlu.GetEntityTypeRequest';
  */
 class CreateEntityTypeRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateEntityTypeRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.entityType = _value.entityType
-            ? new EntityType(_value.entityType)
-            : undefined;
-        this.languageCode = _value.languageCode;
-        this.entityTypeView = _value.entityTypeView;
-        CreateEntityTypeRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -13130,6 +13116,20 @@ class CreateEntityTypeRequest {
         if (_instance.entityTypeView) {
             _writer.writeEnum(6, _instance.entityTypeView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateEntityTypeRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.entityType = _value.entityType
+            ? new EntityType(_value.entityType)
+            : undefined;
+        this.languageCode = _value.languageCode;
+        this.entityTypeView = _value.entityTypeView;
+        CreateEntityTypeRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -13207,22 +13207,6 @@ CreateEntityTypeRequest.id = 'ondewo.nlu.CreateEntityTypeRequest';
  */
 class UpdateEntityTypeRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateEntityTypeRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityType = _value.entityType
-            ? new EntityType(_value.entityType)
-            : undefined;
-        this.languageCode = _value.languageCode;
-        this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
-            : undefined;
-        this.entityTypeView = _value.entityTypeView;
-        UpdateEntityTypeRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -13289,6 +13273,22 @@ class UpdateEntityTypeRequest {
         if (_instance.entityTypeView) {
             _writer.writeEnum(6, _instance.entityTypeView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateEntityTypeRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityType = _value.entityType
+            ? new EntityType(_value.entityType)
+            : undefined;
+        this.languageCode = _value.languageCode;
+        this.updateMask = _value.updateMask
+            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            : undefined;
+        this.entityTypeView = _value.entityTypeView;
+        UpdateEntityTypeRequest.refineValues(this);
     }
     get entityType() {
         return this._entityType;
@@ -13368,15 +13368,6 @@ UpdateEntityTypeRequest.id = 'ondewo.nlu.UpdateEntityTypeRequest';
  */
 class DeleteEntityTypeRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteEntityTypeRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        DeleteEntityTypeRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -13420,6 +13411,15 @@ class DeleteEntityTypeRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteEntityTypeRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        DeleteEntityTypeRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -13468,24 +13468,6 @@ DeleteEntityTypeRequest.id = 'ondewo.nlu.DeleteEntityTypeRequest';
  * Message implementation for ondewo.nlu.BatchUpdateEntityTypesRequest
  */
 class BatchUpdateEntityTypesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchUpdateEntityTypesRequest to deeply clone from
-     */
-    constructor(_value) {
-        this._entityTypeBatch = BatchUpdateEntityTypesRequest.EntityTypeBatchCase.none;
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.entityTypeBatchUri = _value.entityTypeBatchUri;
-        this.entityTypeBatchInline = _value.entityTypeBatchInline
-            ? new EntityTypeBatch(_value.entityTypeBatchInline)
-            : undefined;
-        this.languageCode = _value.languageCode;
-        this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
-            : undefined;
-        BatchUpdateEntityTypesRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -13558,6 +13540,24 @@ class BatchUpdateEntityTypesRequest {
         if (_instance.updateMask) {
             _writer.writeMessage(5, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateEntityTypesRequest to deeply clone from
+     */
+    constructor(_value) {
+        this._entityTypeBatch = BatchUpdateEntityTypesRequest.EntityTypeBatchCase.none;
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.entityTypeBatchUri = _value.entityTypeBatchUri;
+        this.entityTypeBatchInline = _value.entityTypeBatchInline
+            ? new EntityTypeBatch(_value.entityTypeBatchInline)
+            : undefined;
+        this.languageCode = _value.languageCode;
+        this.updateMask = _value.updateMask
+            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            : undefined;
+        BatchUpdateEntityTypesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -13669,15 +13669,6 @@ BatchUpdateEntityTypesRequest.id = 'ondewo.nlu.BatchUpdateEntityTypesRequest';
  */
 class BatchUpdateEntityTypesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchUpdateEntityTypesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityTypes = (_value.entityTypes || []).map(m => new EntityType(m));
-        BatchUpdateEntityTypesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -13723,6 +13714,15 @@ class BatchUpdateEntityTypesResponse {
         if (_instance.entityTypes && _instance.entityTypes.length) {
             _writer.writeRepeatedMessage(1, _instance.entityTypes, EntityType.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateEntityTypesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityTypes = (_value.entityTypes || []).map(m => new EntityType(m));
+        BatchUpdateEntityTypesResponse.refineValues(this);
     }
     get entityTypes() {
         return this._entityTypes;
@@ -13771,16 +13771,6 @@ BatchUpdateEntityTypesResponse.id = 'ondewo.nlu.BatchUpdateEntityTypesResponse';
  * Message implementation for ondewo.nlu.BatchDeleteEntityTypesRequest
  */
 class BatchDeleteEntityTypesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteEntityTypesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.entityTypeNames = (_value.entityTypeNames || []).slice();
-        BatchDeleteEntityTypesRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -13832,6 +13822,16 @@ class BatchDeleteEntityTypesRequest {
         if (_instance.entityTypeNames && _instance.entityTypeNames.length) {
             _writer.writeRepeatedString(2, _instance.entityTypeNames);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteEntityTypesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.entityTypeNames = (_value.entityTypeNames || []).slice();
+        BatchDeleteEntityTypesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -13889,15 +13889,6 @@ BatchDeleteEntityTypesRequest.id = 'ondewo.nlu.BatchDeleteEntityTypesRequest';
  */
 class EntityTypeBatch {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityTypeBatch to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityTypes = (_value.entityTypes || []).map(m => new EntityType(m));
-        EntityTypeBatch.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -13943,6 +13934,15 @@ class EntityTypeBatch {
         if (_instance.entityTypes && _instance.entityTypes.length) {
             _writer.writeRepeatedMessage(1, _instance.entityTypes, EntityType.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityTypeBatch to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityTypes = (_value.entityTypes || []).map(m => new EntityType(m));
+        EntityTypeBatch.refineValues(this);
     }
     get entityTypes() {
         return this._entityTypes;
@@ -13991,16 +13991,6 @@ EntityTypeBatch.id = 'ondewo.nlu.EntityTypeBatch';
  * Message implementation for ondewo.nlu.EntityTypeSorting
  */
 class EntityTypeSorting {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityTypeSorting to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sortingField = _value.sortingField;
-        this.sortingMode = _value.sortingMode;
-        EntityTypeSorting.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -14052,6 +14042,16 @@ class EntityTypeSorting {
         if (_instance.sortingMode) {
             _writer.writeEnum(2, _instance.sortingMode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityTypeSorting to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sortingField = _value.sortingField;
+        this.sortingMode = _value.sortingMode;
+        EntityTypeSorting.refineValues(this);
     }
     get sortingField() {
         return this._sortingField;
@@ -14124,19 +14124,6 @@ EntityTypeSorting.id = 'ondewo.nlu.EntityTypeSorting';
  */
 class EntityStatus {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityStatus to deeply clone from
-     */
-    constructor(_value) {
-        this._entityOrStatus = EntityStatus.EntityOrStatusCase.none;
-        _value = _value || {};
-        this.entity = _value.entity
-            ? new EntityType.Entity(_value.entity)
-            : undefined;
-        this.errorMessage = _value.errorMessage;
-        EntityStatus.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -14185,6 +14172,19 @@ class EntityStatus {
         if (_instance.errorMessage || _instance.errorMessage === '') {
             _writer.writeString(2, _instance.errorMessage);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityStatus to deeply clone from
+     */
+    constructor(_value) {
+        this._entityOrStatus = EntityStatus.EntityOrStatusCase.none;
+        _value = _value || {};
+        this.entity = _value.entity
+            ? new EntityType.Entity(_value.entity)
+            : undefined;
+        this.errorMessage = _value.errorMessage;
+        EntityStatus.refineValues(this);
     }
     get entity() {
         return this._entity;
@@ -14263,16 +14263,6 @@ EntityStatus.id = 'ondewo.nlu.EntityStatus';
  */
 class BatchEntitiesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchEntitiesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityStatuses = (_value.entityStatuses || []).map(m => new EntityStatus(m));
-        this.hasErrors = _value.hasErrors;
-        BatchEntitiesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -14325,6 +14315,16 @@ class BatchEntitiesResponse {
         if (_instance.hasErrors) {
             _writer.writeBool(2, _instance.hasErrors);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchEntitiesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityStatuses = (_value.entityStatuses || []).map(m => new EntityStatus(m));
+        this.hasErrors = _value.hasErrors;
+        BatchEntitiesResponse.refineValues(this);
     }
     get entityStatuses() {
         return this._entityStatuses;
@@ -14382,18 +14382,6 @@ BatchEntitiesResponse.id = 'ondewo.nlu.BatchEntitiesResponse';
  */
 class CreateEntityRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateEntityRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityTypeName = _value.entityTypeName;
-        this.entity = _value.entity
-            ? new EntityType.Entity(_value.entity)
-            : undefined;
-        CreateEntityRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -14445,6 +14433,18 @@ class CreateEntityRequest {
         if (_instance.entity) {
             _writer.writeMessage(2, _instance.entity, EntityType.Entity.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateEntityRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityTypeName = _value.entityTypeName;
+        this.entity = _value.entity
+            ? new EntityType.Entity(_value.entity)
+            : undefined;
+        CreateEntityRequest.refineValues(this);
     }
     get entityTypeName() {
         return this._entityTypeName;
@@ -14502,15 +14502,6 @@ CreateEntityRequest.id = 'ondewo.nlu.CreateEntityRequest';
  */
 class BatchCreateEntitiesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchCreateEntitiesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.createEntityRequests = (_value.createEntityRequests || []).map(m => new CreateEntityRequest(m));
-        BatchCreateEntitiesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -14558,6 +14549,15 @@ class BatchCreateEntitiesRequest {
             _instance.createEntityRequests.length) {
             _writer.writeRepeatedMessage(1, _instance.createEntityRequests, CreateEntityRequest.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchCreateEntitiesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.createEntityRequests = (_value.createEntityRequests || []).map(m => new CreateEntityRequest(m));
+        BatchCreateEntitiesRequest.refineValues(this);
     }
     get createEntityRequests() {
         return this._createEntityRequests;
@@ -14607,15 +14607,6 @@ BatchCreateEntitiesRequest.id = 'ondewo.nlu.BatchCreateEntitiesRequest';
  */
 class BatchUpdateEntitiesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchUpdateEntitiesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entities = (_value.entities || []).map(m => new EntityType.Entity(m));
-        BatchUpdateEntitiesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -14661,6 +14652,15 @@ class BatchUpdateEntitiesRequest {
         if (_instance.entities && _instance.entities.length) {
             _writer.writeRepeatedMessage(1, _instance.entities, EntityType.Entity.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchUpdateEntitiesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entities = (_value.entities || []).map(m => new EntityType.Entity(m));
+        BatchUpdateEntitiesRequest.refineValues(this);
     }
     get entities() {
         return this._entities;
@@ -14710,17 +14710,6 @@ BatchUpdateEntitiesRequest.id = 'ondewo.nlu.BatchUpdateEntitiesRequest';
  */
 class UpdateEntityRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateEntityRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entity = _value.entity
-            ? new EntityType.Entity(_value.entity)
-            : undefined;
-        UpdateEntityRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -14765,6 +14754,17 @@ class UpdateEntityRequest {
         if (_instance.entity) {
             _writer.writeMessage(1, _instance.entity, EntityType.Entity.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateEntityRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entity = _value.entity
+            ? new EntityType.Entity(_value.entity)
+            : undefined;
+        UpdateEntityRequest.refineValues(this);
     }
     get entity() {
         return this._entity;
@@ -14814,15 +14814,6 @@ UpdateEntityRequest.id = 'ondewo.nlu.UpdateEntityRequest';
  */
 class GetEntityRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetEntityRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        GetEntityRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -14866,6 +14857,15 @@ class GetEntityRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetEntityRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        GetEntityRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -14915,15 +14915,6 @@ GetEntityRequest.id = 'ondewo.nlu.GetEntityRequest';
  */
 class BatchGetEntitiesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchGetEntitiesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.names = (_value.names || []).slice();
-        BatchGetEntitiesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -14967,6 +14958,15 @@ class BatchGetEntitiesRequest {
         if (_instance.names && _instance.names.length) {
             _writer.writeRepeatedString(1, _instance.names);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchGetEntitiesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.names = (_value.names || []).slice();
+        BatchGetEntitiesRequest.refineValues(this);
     }
     get names() {
         return this._names;
@@ -15016,15 +15016,6 @@ BatchGetEntitiesRequest.id = 'ondewo.nlu.BatchGetEntitiesRequest';
  */
 class BatchDeleteEntitiesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteEntitiesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.names = (_value.names || []).slice();
-        BatchDeleteEntitiesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -15068,6 +15059,15 @@ class BatchDeleteEntitiesRequest {
         if (_instance.names && _instance.names.length) {
             _writer.writeRepeatedString(1, _instance.names);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteEntitiesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.names = (_value.names || []).slice();
+        BatchDeleteEntitiesRequest.refineValues(this);
     }
     get names() {
         return this._names;
@@ -15117,15 +15117,6 @@ BatchDeleteEntitiesRequest.id = 'ondewo.nlu.BatchDeleteEntitiesRequest';
  */
 class DeleteEntityRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteEntityRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        DeleteEntityRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -15169,6 +15160,15 @@ class DeleteEntityRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteEntityRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        DeleteEntityRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -15218,19 +15218,6 @@ DeleteEntityRequest.id = 'ondewo.nlu.DeleteEntityRequest';
  */
 class DeleteEntityStatus {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteEntityStatus to deeply clone from
-     */
-    constructor(_value) {
-        this._deleteStatus = DeleteEntityStatus.DeleteStatusCase.none;
-        _value = _value || {};
-        this.successfullyDeleted = _value.successfullyDeleted
-            ? new googleProtobuf003.Empty(_value.successfullyDeleted)
-            : undefined;
-        this.errorMessage = _value.errorMessage;
-        DeleteEntityStatus.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -15279,6 +15266,19 @@ class DeleteEntityStatus {
         if (_instance.errorMessage || _instance.errorMessage === '') {
             _writer.writeString(2, _instance.errorMessage);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteEntityStatus to deeply clone from
+     */
+    constructor(_value) {
+        this._deleteStatus = DeleteEntityStatus.DeleteStatusCase.none;
+        _value = _value || {};
+        this.successfullyDeleted = _value.successfullyDeleted
+            ? new googleProtobuf003.Empty(_value.successfullyDeleted)
+            : undefined;
+        this.errorMessage = _value.errorMessage;
+        DeleteEntityStatus.refineValues(this);
     }
     get successfullyDeleted() {
         return this._successfullyDeleted;
@@ -15362,16 +15362,6 @@ DeleteEntityStatus.id = 'ondewo.nlu.DeleteEntityStatus';
  */
 class BatchDeleteEntitiesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BatchDeleteEntitiesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.deleteStatuses = (_value.deleteStatuses || []).map(m => new DeleteEntityStatus(m));
-        this.hasErrors = _value.hasErrors;
-        BatchDeleteEntitiesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -15424,6 +15414,16 @@ class BatchDeleteEntitiesResponse {
         if (_instance.hasErrors) {
             _writer.writeBool(2, _instance.hasErrors);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BatchDeleteEntitiesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.deleteStatuses = (_value.deleteStatuses || []).map(m => new DeleteEntityStatus(m));
+        this.hasErrors = _value.hasErrors;
+        BatchDeleteEntitiesResponse.refineValues(this);
     }
     get deleteStatuses() {
         return this._deleteStatuses;
@@ -15480,21 +15480,6 @@ BatchDeleteEntitiesResponse.id = 'ondewo.nlu.BatchDeleteEntitiesResponse';
  * Message implementation for ondewo.nlu.ListEntitiesRequest
  */
 class ListEntitiesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListEntitiesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityTypeName = _value.entityTypeName;
-        this.languageCode = _value.languageCode;
-        this.pageToken = _value.pageToken;
-        this.sortByField = _value.sortByField
-            ? new EntityValueSorting(_value.sortByField)
-            : undefined;
-        this.searchByPattern = _value.searchByPattern;
-        ListEntitiesRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -15568,6 +15553,21 @@ class ListEntitiesRequest {
         if (_instance.searchByPattern) {
             _writer.writeString(6, _instance.searchByPattern);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListEntitiesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityTypeName = _value.entityTypeName;
+        this.languageCode = _value.languageCode;
+        this.pageToken = _value.pageToken;
+        this.sortByField = _value.sortByField
+            ? new EntityValueSorting(_value.sortByField)
+            : undefined;
+        this.searchByPattern = _value.searchByPattern;
+        ListEntitiesRequest.refineValues(this);
     }
     get entityTypeName() {
         return this._entityTypeName;
@@ -15651,16 +15651,6 @@ ListEntitiesRequest.id = 'ondewo.nlu.ListEntitiesRequest';
  */
 class ListEntitiesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListEntitiesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entities = (_value.entities || []).map(m => new EntityType.Entity(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListEntitiesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -15713,6 +15703,16 @@ class ListEntitiesResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListEntitiesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entities = (_value.entities || []).map(m => new EntityType.Entity(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListEntitiesResponse.refineValues(this);
     }
     get entities() {
         return this._entities;
@@ -15770,16 +15770,6 @@ ListEntitiesResponse.id = 'ondewo.nlu.ListEntitiesResponse';
  */
 class EntityValueSorting {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityValueSorting to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sortingField = _value.sortingField;
-        this.sortingMode = _value.sortingMode;
-        EntityValueSorting.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -15830,6 +15820,16 @@ class EntityValueSorting {
         if (_instance.sortingMode) {
             _writer.writeEnum(8, _instance.sortingMode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityValueSorting to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sortingField = _value.sortingField;
+        this.sortingMode = _value.sortingMode;
+        EntityValueSorting.refineValues(this);
     }
     get sortingField() {
         return this._sortingField;
@@ -15910,15 +15910,6 @@ var ReannotateEntitiesOptions;
  */
 class ValidateRegexRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ValidateRegexRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.regex = _value.regex;
-        ValidateRegexRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -15962,6 +15953,15 @@ class ValidateRegexRequest {
         if (_instance.regex) {
             _writer.writeString(1, _instance.regex);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ValidateRegexRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.regex = _value.regex;
+        ValidateRegexRequest.refineValues(this);
     }
     get regex() {
         return this._regex;
@@ -16011,15 +16011,6 @@ ValidateRegexRequest.id = 'ondewo.nlu.ValidateRegexRequest';
  */
 class ValidateRegexResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ValidateRegexResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.errorMessages = (_value.errorMessages || []).slice();
-        ValidateRegexResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -16063,6 +16054,15 @@ class ValidateRegexResponse {
         if (_instance.errorMessages && _instance.errorMessages.length) {
             _writer.writeRepeatedString(1, _instance.errorMessages);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ValidateRegexResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.errorMessages = (_value.errorMessages || []).slice();
+        ValidateRegexResponse.refineValues(this);
     }
     get errorMessages() {
         return this._errorMessages;
@@ -16112,17 +16112,6 @@ ValidateRegexResponse.id = 'ondewo.nlu.ValidateRegexResponse';
  */
 class ValidateEmbeddedRegexRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ValidateEmbeddedRegexRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityType = _value.entityType
-            ? new EntityType.Entity(_value.entityType)
-            : undefined;
-        ValidateEmbeddedRegexRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -16167,6 +16156,17 @@ class ValidateEmbeddedRegexRequest {
         if (_instance.entityType) {
             _writer.writeMessage(1, _instance.entityType, EntityType.Entity.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ValidateEmbeddedRegexRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityType = _value.entityType
+            ? new EntityType.Entity(_value.entityType)
+            : undefined;
+        ValidateEmbeddedRegexRequest.refineValues(this);
     }
     get entityType() {
         return this._entityType;
@@ -16218,15 +16218,6 @@ ValidateEmbeddedRegexRequest.id = 'ondewo.nlu.ValidateEmbeddedRegexRequest';
  */
 class ValidateEmbeddedRegexResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ValidateEmbeddedRegexResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.errorMessages = (_value.errorMessages || []).slice();
-        ValidateEmbeddedRegexResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -16270,6 +16261,15 @@ class ValidateEmbeddedRegexResponse {
         if (_instance.errorMessages && _instance.errorMessages.length) {
             _writer.writeRepeatedString(1, _instance.errorMessages);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ValidateEmbeddedRegexResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.errorMessages = (_value.errorMessages || []).slice();
+        ValidateEmbeddedRegexResponse.refineValues(this);
     }
     get errorMessages() {
         return this._errorMessages;
@@ -16318,24 +16318,6 @@ ValidateEmbeddedRegexResponse.id = 'ondewo.nlu.ValidateEmbeddedRegexResponse';
  * Message implementation for ondewo.nlu.CleanAllIntentsRequest
  */
 class CleanAllIntentsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CleanAllIntentsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.specialCharacters = _value.specialCharacters;
-        this.substringWhiteList = (_value.substringWhiteList || []).slice();
-        this.dryRun = _value.dryRun;
-        this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
-            ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
-            : undefined;
-        this.reannotateEntitiesOptions = _value.reannotateEntitiesOptions;
-        this.numberOfWorkers = _value.numberOfWorkers;
-        CleanAllIntentsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -16433,6 +16415,24 @@ class CleanAllIntentsRequest {
         if (_instance.numberOfWorkers) {
             _writer.writeInt32(8, _instance.numberOfWorkers);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CleanAllIntentsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.specialCharacters = _value.specialCharacters;
+        this.substringWhiteList = (_value.substringWhiteList || []).slice();
+        this.dryRun = _value.dryRun;
+        this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
+            ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
+            : undefined;
+        this.reannotateEntitiesOptions = _value.reannotateEntitiesOptions;
+        this.numberOfWorkers = _value.numberOfWorkers;
+        CleanAllIntentsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -16545,16 +16545,6 @@ CleanAllIntentsRequest.id = 'ondewo.nlu.CleanAllIntentsRequest';
  */
 class CleanAllIntentsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CleanAllIntentsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.cleanedIntents = (_value.cleanedIntents || []).map(m => new Intent(m));
-        this.intentUpdateList = (_value.intentUpdateList || []).map(m => new IntentUpdate(m));
-        CleanAllIntentsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -16609,6 +16599,16 @@ class CleanAllIntentsResponse {
         if (_instance.intentUpdateList && _instance.intentUpdateList.length) {
             _writer.writeRepeatedMessage(2, _instance.intentUpdateList, IntentUpdate.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CleanAllIntentsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.cleanedIntents = (_value.cleanedIntents || []).map(m => new Intent(m));
+        this.intentUpdateList = (_value.intentUpdateList || []).map(m => new IntentUpdate(m));
+        CleanAllIntentsResponse.refineValues(this);
     }
     get cleanedIntents() {
         return this._cleanedIntents;
@@ -16665,24 +16665,6 @@ CleanAllIntentsResponse.id = 'ondewo.nlu.CleanAllIntentsResponse';
  * Message implementation for ondewo.nlu.CleanIntentRequest
  */
 class CleanIntentRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CleanIntentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.intentName = _value.intentName;
-        this.languageCode = _value.languageCode;
-        this.specialCharacters = _value.specialCharacters;
-        this.substringWhiteList = (_value.substringWhiteList || []).slice();
-        this.dryRun = _value.dryRun;
-        this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
-            ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
-            : undefined;
-        this.reannotateEntitiesOptions = _value.reannotateEntitiesOptions;
-        CleanIntentRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -16780,6 +16762,24 @@ class CleanIntentRequest {
         if (_instance.reannotateEntitiesOptions) {
             _writer.writeEnum(8, _instance.reannotateEntitiesOptions);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CleanIntentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.intentName = _value.intentName;
+        this.languageCode = _value.languageCode;
+        this.specialCharacters = _value.specialCharacters;
+        this.substringWhiteList = (_value.substringWhiteList || []).slice();
+        this.dryRun = _value.dryRun;
+        this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
+            ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
+            : undefined;
+        this.reannotateEntitiesOptions = _value.reannotateEntitiesOptions;
+        CleanIntentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -16892,20 +16892,6 @@ CleanIntentRequest.id = 'ondewo.nlu.CleanIntentRequest';
  */
 class CleanIntentResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CleanIntentResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.cleanedIntent = _value.cleanedIntent
-            ? new Intent(_value.cleanedIntent)
-            : undefined;
-        this.intentUpdate = _value.intentUpdate
-            ? new IntentUpdate(_value.intentUpdate)
-            : undefined;
-        CleanIntentResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -16958,6 +16944,20 @@ class CleanIntentResponse {
         if (_instance.intentUpdate) {
             _writer.writeMessage(2, _instance.intentUpdate, IntentUpdate.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CleanIntentResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.cleanedIntent = _value.cleanedIntent
+            ? new Intent(_value.cleanedIntent)
+            : undefined;
+        this.intentUpdate = _value.intentUpdate
+            ? new IntentUpdate(_value.intentUpdate)
+            : undefined;
+        CleanIntentResponse.refineValues(this);
     }
     get cleanedIntent() {
         return this._cleanedIntent;
@@ -17021,18 +17021,6 @@ CleanIntentResponse.id = 'ondewo.nlu.CleanIntentResponse';
  */
 class TrainingPhraseCleanerOptions {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of TrainingPhraseCleanerOptions to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.deleteRepeatedWhitespaces = _value.deleteRepeatedWhitespaces;
-        this.deleteLeadingSpecialCharacters = _value.deleteLeadingSpecialCharacters;
-        this.deleteTrailingSpecialCharacters =
-            _value.deleteTrailingSpecialCharacters;
-        TrainingPhraseCleanerOptions.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -17093,6 +17081,18 @@ class TrainingPhraseCleanerOptions {
         if (_instance.deleteTrailingSpecialCharacters) {
             _writer.writeBool(3, _instance.deleteTrailingSpecialCharacters);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TrainingPhraseCleanerOptions to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.deleteRepeatedWhitespaces = _value.deleteRepeatedWhitespaces;
+        this.deleteLeadingSpecialCharacters = _value.deleteLeadingSpecialCharacters;
+        this.deleteTrailingSpecialCharacters =
+            _value.deleteTrailingSpecialCharacters;
+        TrainingPhraseCleanerOptions.refineValues(this);
     }
     get deleteRepeatedWhitespaces() {
         return this._deleteRepeatedWhitespaces;
@@ -17158,16 +17158,6 @@ TrainingPhraseCleanerOptions.id = 'ondewo.nlu.TrainingPhraseCleanerOptions';
  */
 class StringUpdate {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of StringUpdate to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.new = _value.new;
-        this.old = _value.old;
-        StringUpdate.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -17218,6 +17208,16 @@ class StringUpdate {
         if (_instance.old) {
             _writer.writeString(2, _instance.old);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StringUpdate to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.new = _value.new;
+        this.old = _value.old;
+        StringUpdate.refineValues(this);
     }
     get new() {
         return this._new;
@@ -17274,17 +17274,6 @@ StringUpdate.id = 'ondewo.nlu.StringUpdate';
  * Message implementation for ondewo.nlu.IntentUpdate
  */
 class IntentUpdate {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of IntentUpdate to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intentDisplayName = _value.intentDisplayName;
-        this.trainingPhraseUpdateList = (_value.trainingPhraseUpdateList || []).map(m => new IntentUpdate.TrainingPhraseUpdate(m));
-        this.deletedParameters = (_value.deletedParameters || []).slice();
-        IntentUpdate.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -17350,6 +17339,17 @@ class IntentUpdate {
             _writer.writeRepeatedString(3, _instance.deletedParameters);
         }
     }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of IntentUpdate to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentDisplayName = _value.intentDisplayName;
+        this.trainingPhraseUpdateList = (_value.trainingPhraseUpdateList || []).map(m => new IntentUpdate.TrainingPhraseUpdate(m));
+        this.deletedParameters = (_value.deletedParameters || []).slice();
+        IntentUpdate.refineValues(this);
+    }
     get intentDisplayName() {
         return this._intentDisplayName;
     }
@@ -17414,20 +17414,6 @@ IntentUpdate.id = 'ondewo.nlu.IntentUpdate';
      * Message implementation for ondewo.nlu.IntentUpdate.TrainingPhraseUpdate
      */
     class TrainingPhraseUpdate {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of TrainingPhraseUpdate to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.trainingPhraseUpdate = _value.trainingPhraseUpdate
-                ? new StringUpdate(_value.trainingPhraseUpdate)
-                : undefined;
-            this.entityUpdates = (_value.entityUpdates || []).map(m => new StringUpdate(m));
-            this.entitiesReannotated = (_value.entitiesReannotated || []).slice();
-            this.containsUpdateVariable = _value.containsUpdateVariable;
-            TrainingPhraseUpdate.refineValues(this);
-        }
         /**
          * Deserialize binary data to message
          * @param instance message instance
@@ -17500,6 +17486,20 @@ IntentUpdate.id = 'ondewo.nlu.IntentUpdate';
             if (_instance.containsUpdateVariable) {
                 _writer.writeBool(4, _instance.containsUpdateVariable);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of TrainingPhraseUpdate to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.trainingPhraseUpdate = _value.trainingPhraseUpdate
+                ? new StringUpdate(_value.trainingPhraseUpdate)
+                : undefined;
+            this.entityUpdates = (_value.entityUpdates || []).map(m => new StringUpdate(m));
+            this.entitiesReannotated = (_value.entitiesReannotated || []).slice();
+            this.containsUpdateVariable = _value.containsUpdateVariable;
+            TrainingPhraseUpdate.refineValues(this);
         }
         get trainingPhraseUpdate() {
             return this._trainingPhraseUpdate;
@@ -17579,16 +17579,6 @@ IntentUpdate.id = 'ondewo.nlu.IntentUpdate';
  */
 class EntityTypeUpdate {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityTypeUpdate to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityTypeName = _value.entityTypeName;
-        this.valuesUpdateList = (_value.valuesUpdateList || []).map(m => new EntityTypeUpdate.EntityUpdate(m));
-        EntityTypeUpdate.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -17641,6 +17631,16 @@ class EntityTypeUpdate {
         if (_instance.valuesUpdateList && _instance.valuesUpdateList.length) {
             _writer.writeRepeatedMessage(2, _instance.valuesUpdateList, EntityTypeUpdate.EntityUpdate.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityTypeUpdate to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityTypeName = _value.entityTypeName;
+        this.valuesUpdateList = (_value.valuesUpdateList || []).map(m => new EntityTypeUpdate.EntityUpdate(m));
+        EntityTypeUpdate.refineValues(this);
     }
     get entityTypeName() {
         return this._entityTypeName;
@@ -17699,18 +17699,6 @@ EntityTypeUpdate.id = 'ondewo.nlu.EntityTypeUpdate';
      */
     class EntityUpdate {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of EntityUpdate to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.entityValueUpdate = _value.entityValueUpdate
-                ? new StringUpdate(_value.entityValueUpdate)
-                : undefined;
-            this.entitySynonymUpdates = (_value.entitySynonymUpdates || []).map(m => new StringUpdate(m));
-            EntityUpdate.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -17766,6 +17754,18 @@ EntityTypeUpdate.id = 'ondewo.nlu.EntityTypeUpdate';
                 _instance.entitySynonymUpdates.length) {
                 _writer.writeRepeatedMessage(2, _instance.entitySynonymUpdates, StringUpdate.serializeBinaryToWriter);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of EntityUpdate to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.entityValueUpdate = _value.entityValueUpdate
+                ? new StringUpdate(_value.entityValueUpdate)
+                : undefined;
+            this.entitySynonymUpdates = (_value.entitySynonymUpdates || []).map(m => new StringUpdate(m));
+            EntityUpdate.refineValues(this);
         }
         get entityValueUpdate() {
             return this._entityValueUpdate;
@@ -17828,22 +17828,6 @@ EntityTypeUpdate.id = 'ondewo.nlu.EntityTypeUpdate';
  * Message implementation for ondewo.nlu.CleanAllEntityTypesRequest
  */
 class CleanAllEntityTypesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CleanAllEntityTypesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.specialCharacters = _value.specialCharacters;
-        this.substringWhiteList = (_value.substringWhiteList || []).slice();
-        this.maxEntityCountUpdate = _value.maxEntityCountUpdate;
-        this.forbiddenEntityTypePatterns = (_value.forbiddenEntityTypePatterns || []).slice();
-        this.dryRun = _value.dryRun;
-        this.numberOfWorkers = _value.numberOfWorkers;
-        CleanAllEntityTypesRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -17941,6 +17925,22 @@ class CleanAllEntityTypesRequest {
         if (_instance.numberOfWorkers) {
             _writer.writeInt32(8, _instance.numberOfWorkers);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CleanAllEntityTypesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.specialCharacters = _value.specialCharacters;
+        this.substringWhiteList = (_value.substringWhiteList || []).slice();
+        this.maxEntityCountUpdate = _value.maxEntityCountUpdate;
+        this.forbiddenEntityTypePatterns = (_value.forbiddenEntityTypePatterns || []).slice();
+        this.dryRun = _value.dryRun;
+        this.numberOfWorkers = _value.numberOfWorkers;
+        CleanAllEntityTypesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -18046,18 +18046,6 @@ CleanAllEntityTypesRequest.id = 'ondewo.nlu.CleanAllEntityTypesRequest';
  */
 class CleanAllEntityTypesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CleanAllEntityTypesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.cleanedEntityTypes = (_value.cleanedEntityTypes || []).map(m => new EntityType(m));
-        this.deletedEntityTypes = (_value.deletedEntityTypes || []).map(m => new EntityType(m));
-        this.entityTypeUpdates = (_value.entityTypeUpdates || []).map(m => new EntityTypeUpdate(m));
-        this.entityTypeDeletions = (_value.entityTypeDeletions || []).map(m => new EntityTypeUpdate(m));
-        CleanAllEntityTypesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -18135,6 +18123,18 @@ class CleanAllEntityTypesResponse {
             _writer.writeRepeatedMessage(4, _instance.entityTypeDeletions, EntityTypeUpdate.serializeBinaryToWriter);
         }
     }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CleanAllEntityTypesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.cleanedEntityTypes = (_value.cleanedEntityTypes || []).map(m => new EntityType(m));
+        this.deletedEntityTypes = (_value.deletedEntityTypes || []).map(m => new EntityType(m));
+        this.entityTypeUpdates = (_value.entityTypeUpdates || []).map(m => new EntityTypeUpdate(m));
+        this.entityTypeDeletions = (_value.entityTypeDeletions || []).map(m => new EntityTypeUpdate(m));
+        CleanAllEntityTypesResponse.refineValues(this);
+    }
     get cleanedEntityTypes() {
         return this._cleanedEntityTypes;
     }
@@ -18206,21 +18206,6 @@ CleanAllEntityTypesResponse.id = 'ondewo.nlu.CleanAllEntityTypesResponse';
  * Message implementation for ondewo.nlu.CleanEntityTypeRequest
  */
 class CleanEntityTypeRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CleanEntityTypeRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.entityTypeName = _value.entityTypeName;
-        this.languageCode = _value.languageCode;
-        this.specialCharacters = _value.specialCharacters;
-        this.substringWhiteList = (_value.substringWhiteList || []).slice();
-        this.maxEntityCountUpdate = _value.maxEntityCountUpdate;
-        this.dryRun = _value.dryRun;
-        CleanEntityTypeRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -18308,6 +18293,21 @@ class CleanEntityTypeRequest {
         if (_instance.dryRun) {
             _writer.writeBool(7, _instance.dryRun);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CleanEntityTypeRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.entityTypeName = _value.entityTypeName;
+        this.languageCode = _value.languageCode;
+        this.specialCharacters = _value.specialCharacters;
+        this.substringWhiteList = (_value.substringWhiteList || []).slice();
+        this.maxEntityCountUpdate = _value.maxEntityCountUpdate;
+        this.dryRun = _value.dryRun;
+        CleanEntityTypeRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -18405,20 +18405,6 @@ CleanEntityTypeRequest.id = 'ondewo.nlu.CleanEntityTypeRequest';
  */
 class CleanEntityTypeResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CleanEntityTypeResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.cleanedEntityType = _value.cleanedEntityType
-            ? new EntityType(_value.cleanedEntityType)
-            : undefined;
-        this.entityTypeUpdate = _value.entityTypeUpdate
-            ? new EntityTypeUpdate(_value.entityTypeUpdate)
-            : undefined;
-        CleanEntityTypeResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -18471,6 +18457,20 @@ class CleanEntityTypeResponse {
         if (_instance.entityTypeUpdate) {
             _writer.writeMessage(2, _instance.entityTypeUpdate, EntityTypeUpdate.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CleanEntityTypeResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.cleanedEntityType = _value.cleanedEntityType
+            ? new EntityType(_value.cleanedEntityType)
+            : undefined;
+        this.entityTypeUpdate = _value.entityTypeUpdate
+            ? new EntityTypeUpdate(_value.entityTypeUpdate)
+            : undefined;
+        CleanEntityTypeResponse.refineValues(this);
     }
     get cleanedEntityType() {
         return this._cleanedEntityType;
@@ -18535,23 +18535,6 @@ CleanEntityTypeResponse.id = 'ondewo.nlu.CleanEntityTypeResponse';
  * Message implementation for ondewo.nlu.AddTrainingPhrasesRequest
  */
 class AddTrainingPhrasesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AddTrainingPhrasesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.trainingPhraseList = (_value.trainingPhraseList || []).map(m => new AddTrainingPhrasesRequest.TrainingPhraseForIntent(m));
-        this.extractEntities = _value.extractEntities;
-        this.specialCharacters = _value.specialCharacters;
-        this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
-            ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
-            : undefined;
-        this.numberOfWorkers = _value.numberOfWorkers;
-        AddTrainingPhrasesRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -18645,6 +18628,23 @@ class AddTrainingPhrasesRequest {
         if (_instance.numberOfWorkers) {
             _writer.writeInt32(7, _instance.numberOfWorkers);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AddTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.trainingPhraseList = (_value.trainingPhraseList || []).map(m => new AddTrainingPhrasesRequest.TrainingPhraseForIntent(m));
+        this.extractEntities = _value.extractEntities;
+        this.specialCharacters = _value.specialCharacters;
+        this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
+            ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
+            : undefined;
+        this.numberOfWorkers = _value.numberOfWorkers;
+        AddTrainingPhrasesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -18747,17 +18747,6 @@ AddTrainingPhrasesRequest.id = 'ondewo.nlu.AddTrainingPhrasesRequest';
      */
     class TrainingPhraseForIntent {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of TrainingPhraseForIntent to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.trainingPhrase = _value.trainingPhrase;
-            this.intentDisplayName = _value.intentDisplayName;
-            this.entities = (_value.entities || []).map(m => new Intent.TrainingPhrase.Entity(m));
-            TrainingPhraseForIntent.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -18818,6 +18807,17 @@ AddTrainingPhrasesRequest.id = 'ondewo.nlu.AddTrainingPhrasesRequest';
             if (_instance.entities && _instance.entities.length) {
                 _writer.writeRepeatedMessage(3, _instance.entities, Intent.TrainingPhrase.Entity.serializeBinaryToWriter);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of TrainingPhraseForIntent to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.trainingPhrase = _value.trainingPhrase;
+            this.intentDisplayName = _value.intentDisplayName;
+            this.entities = (_value.entities || []).map(m => new Intent.TrainingPhrase.Entity(m));
+            TrainingPhraseForIntent.refineValues(this);
         }
         get trainingPhrase() {
             return this._trainingPhrase;
@@ -18885,15 +18885,6 @@ AddTrainingPhrasesRequest.id = 'ondewo.nlu.AddTrainingPhrasesRequest';
  */
 class AddTrainingPhrasesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AddTrainingPhrasesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.errorMessages = (_value.errorMessages || []).slice();
-        AddTrainingPhrasesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -18937,6 +18928,15 @@ class AddTrainingPhrasesResponse {
         if (_instance.errorMessages && _instance.errorMessages.length) {
             _writer.writeRepeatedString(1, _instance.errorMessages);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AddTrainingPhrasesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.errorMessages = (_value.errorMessages || []).slice();
+        AddTrainingPhrasesResponse.refineValues(this);
     }
     get errorMessages() {
         return this._errorMessages;
@@ -18985,23 +18985,6 @@ AddTrainingPhrasesResponse.id = 'ondewo.nlu.AddTrainingPhrasesResponse';
  * Message implementation for ondewo.nlu.AddTrainingPhrasesFromCSVRequest
  */
 class AddTrainingPhrasesFromCSVRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AddTrainingPhrasesFromCSVRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.csvContents = _value.csvContents;
-        this.extractEntities = _value.extractEntities;
-        this.specialCharacters = _value.specialCharacters;
-        this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
-            ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
-            : undefined;
-        this.numberOfWorkers = _value.numberOfWorkers;
-        AddTrainingPhrasesFromCSVRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -19090,6 +19073,23 @@ class AddTrainingPhrasesFromCSVRequest {
         if (_instance.numberOfWorkers) {
             _writer.writeInt32(7, _instance.numberOfWorkers);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AddTrainingPhrasesFromCSVRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.csvContents = _value.csvContents;
+        this.extractEntities = _value.extractEntities;
+        this.specialCharacters = _value.specialCharacters;
+        this.trainingPhraseCleanerOptions = _value.trainingPhraseCleanerOptions
+            ? new TrainingPhraseCleanerOptions(_value.trainingPhraseCleanerOptions)
+            : undefined;
+        this.numberOfWorkers = _value.numberOfWorkers;
+        AddTrainingPhrasesFromCSVRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -19244,17 +19244,6 @@ var ProjectRoleView;
  */
 class ProjectRole {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ProjectRole to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.roleId = _value.roleId;
-        this.name = _value.name;
-        this.permissions = (_value.permissions || []).slice();
-        ProjectRole.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -19312,6 +19301,17 @@ class ProjectRole {
         if (_instance.permissions && _instance.permissions.length) {
             _writer.writeRepeatedString(3, _instance.permissions);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ProjectRole to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.roleId = _value.roleId;
+        this.name = _value.name;
+        this.permissions = (_value.permissions || []).slice();
+        ProjectRole.refineValues(this);
     }
     get roleId() {
         return this._roleId;
@@ -19377,17 +19377,6 @@ ProjectRole.id = 'ondewo.nlu.ProjectRole';
  */
 class CreateProjectRoleRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateProjectRoleRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.role = _value.role ? new ProjectRole(_value.role) : undefined;
-        this.projectRoleView = _value.projectRoleView;
-        CreateProjectRoleRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -19446,6 +19435,17 @@ class CreateProjectRoleRequest {
         if (_instance.projectRoleView) {
             _writer.writeEnum(3, _instance.projectRoleView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateProjectRoleRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.role = _value.role ? new ProjectRole(_value.role) : undefined;
+        this.projectRoleView = _value.projectRoleView;
+        CreateProjectRoleRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -19513,20 +19513,6 @@ CreateProjectRoleRequest.id = 'ondewo.nlu.CreateProjectRoleRequest';
  */
 class UpdateProjectRoleRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateProjectRoleRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.role = _value.role ? new ProjectRole(_value.role) : undefined;
-        this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
-            : undefined;
-        this.projectRoleView = _value.projectRoleView;
-        UpdateProjectRoleRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -19593,6 +19579,20 @@ class UpdateProjectRoleRequest {
         if (_instance.projectRoleView) {
             _writer.writeEnum(4, _instance.projectRoleView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateProjectRoleRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.role = _value.role ? new ProjectRole(_value.role) : undefined;
+        this.updateMask = _value.updateMask
+            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            : undefined;
+        this.projectRoleView = _value.projectRoleView;
+        UpdateProjectRoleRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -19670,19 +19670,6 @@ UpdateProjectRoleRequest.id = 'ondewo.nlu.UpdateProjectRoleRequest';
  */
 class GetProjectRoleRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetProjectRoleRequest to deeply clone from
-     */
-    constructor(_value) {
-        this._projectRoleIdentifier = GetProjectRoleRequest.ProjectRoleIdentifierCase.none;
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.roleId = _value.roleId;
-        this.roleName = _value.roleName;
-        this.projectRoleView = _value.projectRoleView;
-        GetProjectRoleRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -19745,6 +19732,19 @@ class GetProjectRoleRequest {
         if (_instance.projectRoleView) {
             _writer.writeEnum(4, _instance.projectRoleView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetProjectRoleRequest to deeply clone from
+     */
+    constructor(_value) {
+        this._projectRoleIdentifier = GetProjectRoleRequest.ProjectRoleIdentifierCase.none;
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.roleId = _value.roleId;
+        this.roleName = _value.roleName;
+        this.projectRoleView = _value.projectRoleView;
+        GetProjectRoleRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -19843,16 +19843,6 @@ GetProjectRoleRequest.id = 'ondewo.nlu.GetProjectRoleRequest';
  */
 class DeleteProjectRoleRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteProjectRoleRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.roleId = _value.roleId;
-        DeleteProjectRoleRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -19903,6 +19893,16 @@ class DeleteProjectRoleRequest {
         if (_instance.roleId) {
             _writer.writeUint32(2, _instance.roleId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteProjectRoleRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.roleId = _value.roleId;
+        DeleteProjectRoleRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -19959,17 +19959,6 @@ DeleteProjectRoleRequest.id = 'ondewo.nlu.DeleteProjectRoleRequest';
  * Message implementation for ondewo.nlu.ListProjectRolesRequest
  */
 class ListProjectRolesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListProjectRolesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.pageToken = _value.pageToken;
-        this.projectRoleView = _value.projectRoleView;
-        ListProjectRolesRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -20028,6 +20017,17 @@ class ListProjectRolesRequest {
         if (_instance.projectRoleView) {
             _writer.writeEnum(3, _instance.projectRoleView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListProjectRolesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.pageToken = _value.pageToken;
+        this.projectRoleView = _value.projectRoleView;
+        ListProjectRolesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -20095,16 +20095,6 @@ ListProjectRolesRequest.id = 'ondewo.nlu.ListProjectRolesRequest';
  */
 class ListProjectRolesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListProjectRolesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.projectRoles = (_value.projectRoles || []).map(m => new ProjectRole(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListProjectRolesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -20157,6 +20147,16 @@ class ListProjectRolesResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListProjectRolesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.projectRoles = (_value.projectRoles || []).map(m => new ProjectRole(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListProjectRolesResponse.refineValues(this);
     }
     get projectRoles() {
         return this._projectRoles;
@@ -20230,18 +20230,6 @@ var DefaultServerRole;
  */
 class User {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of User to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.userId = _value.userId;
-        this.displayName = _value.displayName;
-        this.serverRoleId = _value.serverRoleId;
-        this.userEmail = _value.userEmail;
-        User.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -20306,6 +20294,18 @@ class User {
         if (_instance.userEmail) {
             _writer.writeString(7, _instance.userEmail);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of User to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.userId = _value.userId;
+        this.displayName = _value.displayName;
+        this.serverRoleId = _value.serverRoleId;
+        this.userEmail = _value.userEmail;
+        User.refineValues(this);
     }
     get userId() {
         return this._userId;
@@ -20379,20 +20379,6 @@ User.id = 'ondewo.nlu.User';
  */
 class UserInfo {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UserInfo to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.user = _value.user ? new User(_value.user) : undefined;
-        (this.projectRoles = _value.projectRoles
-            ? Object.keys(_value.projectRoles).reduce((r, k) => (Object.assign(Object.assign({}, r), { [k]: _value.projectRoles[k]
-                    ? new ProjectRole(_value.projectRoles[k])
-                    : undefined })), {})
-            : {}),
-            UserInfo.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -20457,6 +20443,20 @@ class UserInfo {
             }
         }
     }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UserInfo to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.user = _value.user ? new User(_value.user) : undefined;
+        (this.projectRoles = _value.projectRoles
+            ? Object.keys(_value.projectRoles).reduce((r, k) => (Object.assign(Object.assign({}, r), { [k]: _value.projectRoles[k]
+                    ? new ProjectRole(_value.projectRoles[k])
+                    : undefined })), {})
+            : {}),
+            UserInfo.refineValues(this);
+    }
     get user() {
         return this._user;
     }
@@ -20520,18 +20520,6 @@ UserInfo.id = 'ondewo.nlu.UserInfo';
      */
     class ProjectRolesEntry {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of ProjectRolesEntry to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.key = _value.key;
-            this.value = _value.value
-                ? new ProjectRole(_value.value)
-                : undefined;
-            ProjectRolesEntry.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -20583,6 +20571,18 @@ UserInfo.id = 'ondewo.nlu.UserInfo';
             if (_instance.value) {
                 _writer.writeMessage(2, _instance.value, ProjectRole.serializeBinaryToWriter);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ProjectRolesEntry to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.key = _value.key;
+            this.value = _value.value
+                ? new ProjectRole(_value.value)
+                : undefined;
+            ProjectRolesEntry.refineValues(this);
         }
         get key() {
             return this._key;
@@ -20642,16 +20642,6 @@ UserInfo.id = 'ondewo.nlu.UserInfo';
  */
 class CreateUserRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateUserRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.user = _value.user ? new User(_value.user) : undefined;
-        this.password = _value.password;
-        CreateUserRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -20703,6 +20693,16 @@ class CreateUserRequest {
         if (_instance.password) {
             _writer.writeString(3, _instance.password);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateUserRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.user = _value.user ? new User(_value.user) : undefined;
+        this.password = _value.password;
+        CreateUserRequest.refineValues(this);
     }
     get user() {
         return this._user;
@@ -20759,19 +20759,6 @@ CreateUserRequest.id = 'ondewo.nlu.CreateUserRequest';
  * Message implementation for ondewo.nlu.UpdateUserRequest
  */
 class UpdateUserRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateUserRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.user = _value.user ? new User(_value.user) : undefined;
-        this.password = _value.password;
-        this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
-            : undefined;
-        UpdateUserRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -20832,6 +20819,19 @@ class UpdateUserRequest {
         if (_instance.updateMask) {
             _writer.writeMessage(5, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateUserRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.user = _value.user ? new User(_value.user) : undefined;
+        this.password = _value.password;
+        this.updateMask = _value.updateMask
+            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            : undefined;
+        UpdateUserRequest.refineValues(this);
     }
     get user() {
         return this._user;
@@ -20899,17 +20899,6 @@ UpdateUserRequest.id = 'ondewo.nlu.UpdateUserRequest';
  */
 class GetUserRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetUserRequest to deeply clone from
-     */
-    constructor(_value) {
-        this._userIdentifier = GetUserRequest.UserIdentifierCase.none;
-        _value = _value || {};
-        this.userId = _value.userId;
-        this.userEmail = _value.userEmail;
-        GetUserRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -20957,6 +20946,17 @@ class GetUserRequest {
         if (_instance.userEmail || _instance.userEmail === '') {
             _writer.writeString(3, _instance.userEmail);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetUserRequest to deeply clone from
+     */
+    constructor(_value) {
+        this._userIdentifier = GetUserRequest.UserIdentifierCase.none;
+        _value = _value || {};
+        this.userId = _value.userId;
+        this.userEmail = _value.userEmail;
+        GetUserRequest.refineValues(this);
     }
     get userId() {
         return this._userId;
@@ -21035,15 +21035,6 @@ GetUserRequest.id = 'ondewo.nlu.GetUserRequest';
  */
 class DeleteUserRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteUserRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.userId = _value.userId;
-        DeleteUserRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -21087,6 +21078,15 @@ class DeleteUserRequest {
         if (_instance.userId) {
             _writer.writeString(1, _instance.userId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteUserRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.userId = _value.userId;
+        DeleteUserRequest.refineValues(this);
     }
     get userId() {
         return this._userId;
@@ -21136,15 +21136,6 @@ DeleteUserRequest.id = 'ondewo.nlu.DeleteUserRequest';
  */
 class ListUsersRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListUsersRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.pageToken = _value.pageToken;
-        ListUsersRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -21188,6 +21179,15 @@ class ListUsersRequest {
         if (_instance.pageToken) {
             _writer.writeString(1, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListUsersRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.pageToken = _value.pageToken;
+        ListUsersRequest.refineValues(this);
     }
     get pageToken() {
         return this._pageToken;
@@ -21236,16 +21236,6 @@ ListUsersRequest.id = 'ondewo.nlu.ListUsersRequest';
  * Message implementation for ondewo.nlu.ListUsersResponse
  */
 class ListUsersResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListUsersResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.users = (_value.users || []).map(m => new User(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListUsersResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -21299,6 +21289,16 @@ class ListUsersResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListUsersResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.users = (_value.users || []).map(m => new User(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListUsersResponse.refineValues(this);
     }
     get users() {
         return this._users;
@@ -21356,16 +21356,6 @@ ListUsersResponse.id = 'ondewo.nlu.ListUsersResponse';
  */
 class ListUserInfosResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListUserInfosResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.users = (_value.users || []).map(m => new UserInfo(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListUserInfosResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -21418,6 +21408,16 @@ class ListUserInfosResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListUserInfosResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.users = (_value.users || []).map(m => new UserInfo(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListUserInfosResponse.refineValues(this);
     }
     get users() {
         return this._users;
@@ -21474,17 +21474,6 @@ ListUserInfosResponse.id = 'ondewo.nlu.ListUserInfosResponse';
  * Message implementation for ondewo.nlu.ServerRole
  */
 class ServerRole {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ServerRole to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.roleId = _value.roleId;
-        this.name = _value.name;
-        this.permissions = (_value.permissions || []).slice();
-        ServerRole.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -21543,6 +21532,17 @@ class ServerRole {
         if (_instance.permissions && _instance.permissions.length) {
             _writer.writeRepeatedString(3, _instance.permissions);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ServerRole to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.roleId = _value.roleId;
+        this.name = _value.name;
+        this.permissions = (_value.permissions || []).slice();
+        ServerRole.refineValues(this);
     }
     get roleId() {
         return this._roleId;
@@ -21608,15 +21608,6 @@ ServerRole.id = 'ondewo.nlu.ServerRole';
  */
 class CreateServerRoleRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateServerRoleRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.role = _value.role ? new ServerRole(_value.role) : undefined;
-        CreateServerRoleRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -21661,6 +21652,15 @@ class CreateServerRoleRequest {
         if (_instance.role) {
             _writer.writeMessage(1, _instance.role, ServerRole.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateServerRoleRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.role = _value.role ? new ServerRole(_value.role) : undefined;
+        CreateServerRoleRequest.refineValues(this);
     }
     get role() {
         return this._role;
@@ -21709,18 +21709,6 @@ CreateServerRoleRequest.id = 'ondewo.nlu.CreateServerRoleRequest';
  * Message implementation for ondewo.nlu.UpdateServerRoleRequest
  */
 class UpdateServerRoleRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateServerRoleRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.role = _value.role ? new ServerRole(_value.role) : undefined;
-        this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
-            : undefined;
-        UpdateServerRoleRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -21774,6 +21762,18 @@ class UpdateServerRoleRequest {
         if (_instance.updateMask) {
             _writer.writeMessage(2, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateServerRoleRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.role = _value.role ? new ServerRole(_value.role) : undefined;
+        this.updateMask = _value.updateMask
+            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            : undefined;
+        UpdateServerRoleRequest.refineValues(this);
     }
     get role() {
         return this._role;
@@ -21833,15 +21833,6 @@ UpdateServerRoleRequest.id = 'ondewo.nlu.UpdateServerRoleRequest';
  */
 class DeleteServerRoleRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteServerRoleRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.roleId = _value.roleId;
-        DeleteServerRoleRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -21885,6 +21876,15 @@ class DeleteServerRoleRequest {
         if (_instance.roleId) {
             _writer.writeUint32(1, _instance.roleId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteServerRoleRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.roleId = _value.roleId;
+        DeleteServerRoleRequest.refineValues(this);
     }
     get roleId() {
         return this._roleId;
@@ -21934,17 +21934,6 @@ DeleteServerRoleRequest.id = 'ondewo.nlu.DeleteServerRoleRequest';
  */
 class GetServerRoleRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetServerRoleRequest to deeply clone from
-     */
-    constructor(_value) {
-        this._serverRoleIdentifier = GetServerRoleRequest.ServerRoleIdentifierCase.none;
-        _value = _value || {};
-        this.roleId = _value.roleId;
-        this.roleName = _value.roleName;
-        GetServerRoleRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -21992,6 +21981,17 @@ class GetServerRoleRequest {
         if (_instance.roleName || _instance.roleName === '') {
             _writer.writeString(2, _instance.roleName);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetServerRoleRequest to deeply clone from
+     */
+    constructor(_value) {
+        this._serverRoleIdentifier = GetServerRoleRequest.ServerRoleIdentifierCase.none;
+        _value = _value || {};
+        this.roleId = _value.roleId;
+        this.roleName = _value.roleName;
+        GetServerRoleRequest.refineValues(this);
     }
     get roleId() {
         return this._roleId;
@@ -22072,15 +22072,6 @@ GetServerRoleRequest.id = 'ondewo.nlu.GetServerRoleRequest';
  */
 class ListServerRolesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListServerRolesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.pageToken = _value.pageToken;
-        ListServerRolesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -22124,6 +22115,15 @@ class ListServerRolesRequest {
         if (_instance.pageToken) {
             _writer.writeString(1, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListServerRolesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.pageToken = _value.pageToken;
+        ListServerRolesRequest.refineValues(this);
     }
     get pageToken() {
         return this._pageToken;
@@ -22172,16 +22172,6 @@ ListServerRolesRequest.id = 'ondewo.nlu.ListServerRolesRequest';
  * Message implementation for ondewo.nlu.ListServerRolesResponse
  */
 class ListServerRolesResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListServerRolesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.serverRoles = (_value.serverRoles || []).map(m => new ServerRole(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListServerRolesResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -22235,6 +22225,16 @@ class ListServerRolesResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListServerRolesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.serverRoles = (_value.serverRoles || []).map(m => new ServerRole(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListServerRolesResponse.refineValues(this);
     }
     get serverRoles() {
         return this._serverRoles;
@@ -22292,15 +22292,6 @@ ListServerRolesResponse.id = 'ondewo.nlu.ListServerRolesResponse';
  */
 class ListServerPermissionsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListServerPermissionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.pageToken = _value.pageToken;
-        ListServerPermissionsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -22344,6 +22335,15 @@ class ListServerPermissionsRequest {
         if (_instance.pageToken) {
             _writer.writeString(1, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListServerPermissionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.pageToken = _value.pageToken;
+        ListServerPermissionsRequest.refineValues(this);
     }
     get pageToken() {
         return this._pageToken;
@@ -22392,16 +22392,6 @@ ListServerPermissionsRequest.id = 'ondewo.nlu.ListServerPermissionsRequest';
  * Message implementation for ondewo.nlu.ListServerPermissionsResponse
  */
 class ListServerPermissionsResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListServerPermissionsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.permissions = (_value.permissions || []).slice();
-        this.nextPageToken = _value.nextPageToken;
-        ListServerPermissionsResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -22453,6 +22443,16 @@ class ListServerPermissionsResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListServerPermissionsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.permissions = (_value.permissions || []).slice();
+        this.nextPageToken = _value.nextPageToken;
+        ListServerPermissionsResponse.refineValues(this);
     }
     get permissions() {
         return this._permissions;
@@ -22510,16 +22510,6 @@ ListServerPermissionsResponse.id = 'ondewo.nlu.ListServerPermissionsResponse';
  */
 class LoginRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of LoginRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.userEmail = _value.userEmail;
-        this.password = _value.password;
-        LoginRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -22570,6 +22560,16 @@ class LoginRequest {
         if (_instance.password) {
             _writer.writeString(2, _instance.password);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LoginRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.userEmail = _value.userEmail;
+        this.password = _value.password;
+        LoginRequest.refineValues(this);
     }
     get userEmail() {
         return this._userEmail;
@@ -22627,16 +22627,6 @@ LoginRequest.id = 'ondewo.nlu.LoginRequest';
  */
 class LoginResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of LoginResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.user = _value.user ? new User(_value.user) : undefined;
-        this.authToken = _value.authToken;
-        LoginResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -22688,6 +22678,16 @@ class LoginResponse {
         if (_instance.authToken) {
             _writer.writeString(2, _instance.authToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LoginResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.user = _value.user ? new User(_value.user) : undefined;
+        this.authToken = _value.authToken;
+        LoginResponse.refineValues(this);
     }
     get user() {
         return this._user;
@@ -22745,17 +22745,6 @@ LoginResponse.id = 'ondewo.nlu.LoginResponse';
  * Message implementation for google.rpc.Status
  */
 class Status {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Status to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.code = _value.code;
-        this.message = _value.message;
-        this.details = (_value.details || []).map(m => new googleProtobuf003.Any(m));
-        Status.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -22816,6 +22805,17 @@ class Status {
         if (_instance.details && _instance.details.length) {
             _writer.writeRepeatedMessage(3, _instance.details, googleProtobuf003.Any.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Status to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.code = _value.code;
+        this.message = _value.message;
+        this.details = (_value.details || []).map(m => new googleProtobuf003.Any(m));
+        Status.refineValues(this);
     }
     get code() {
         return this._code;
@@ -22882,16 +22882,6 @@ Status.id = 'google.rpc.Status';
  */
 class LatLng {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of LatLng to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.latitude = _value.latitude;
-        this.longitude = _value.longitude;
-        LatLng.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -22942,6 +22932,16 @@ class LatLng {
         if (_instance.longitude) {
             _writer.writeDouble(2, _instance.longitude);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LatLng to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.latitude = _value.latitude;
+        this.longitude = _value.longitude;
+        LatLng.refineValues(this);
     }
     get latitude() {
         return this._latitude;
@@ -23022,22 +23022,6 @@ var ComparisonOperator;
  */
 class DetectIntentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DetectIntentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.session = _value.session;
-        this.queryParams = _value.queryParams
-            ? new QueryParameters(_value.queryParams)
-            : undefined;
-        this.queryInput = _value.queryInput
-            ? new QueryInput(_value.queryInput)
-            : undefined;
-        this.inputAudio = _value.inputAudio;
-        DetectIntentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -23104,6 +23088,22 @@ class DetectIntentRequest {
         if (_instance.inputAudio && _instance.inputAudio.length) {
             _writer.writeBytes(5, _instance.inputAudio);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DetectIntentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.session = _value.session;
+        this.queryParams = _value.queryParams
+            ? new QueryParameters(_value.queryParams)
+            : undefined;
+        this.queryInput = _value.queryInput
+            ? new QueryInput(_value.queryInput)
+            : undefined;
+        this.inputAudio = _value.inputAudio;
+        DetectIntentRequest.refineValues(this);
     }
     get session() {
         return this._session;
@@ -23183,21 +23183,6 @@ DetectIntentRequest.id = 'ondewo.nlu.DetectIntentRequest';
  */
 class DetectIntentResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DetectIntentResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.responseId = _value.responseId;
-        this.queryResult = _value.queryResult
-            ? new QueryResult(_value.queryResult)
-            : undefined;
-        this.webhookStatus = _value.webhookStatus
-            ? new Status(_value.webhookStatus)
-            : undefined;
-        DetectIntentResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -23257,6 +23242,21 @@ class DetectIntentResponse {
         if (_instance.webhookStatus) {
             _writer.writeMessage(3, _instance.webhookStatus, Status.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DetectIntentResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseId = _value.responseId;
+        this.queryResult = _value.queryResult
+            ? new QueryResult(_value.queryResult)
+            : undefined;
+        this.webhookStatus = _value.webhookStatus
+            ? new Status(_value.webhookStatus)
+            : undefined;
+        DetectIntentResponse.refineValues(this);
     }
     get responseId() {
         return this._responseId;
@@ -23327,30 +23327,6 @@ DetectIntentResponse.id = 'ondewo.nlu.DetectIntentResponse';
  * Message implementation for ondewo.nlu.QueryParameters
  */
 class QueryParameters {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of QueryParameters to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.timeZone = _value.timeZone;
-        this.geoLocation = _value.geoLocation
-            ? new LatLng(_value.geoLocation)
-            : undefined;
-        this.contexts = (_value.contexts || []).map(m => new Context(m));
-        this.resetContexts = _value.resetContexts;
-        this.payload = _value.payload
-            ? new googleProtobuf003.Struct(_value.payload)
-            : undefined;
-        this.labels = (_value.labels || []).slice();
-        this.platforms = (_value.platforms || []).slice();
-        this.accountId = _value.accountId;
-        this.propertyId = _value.propertyId;
-        this.datastreamId = _value.datastreamId;
-        this.originId = _value.originId;
-        this.identifiedUserId = _value.identifiedUserId;
-        QueryParameters.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -23476,6 +23452,30 @@ class QueryParameters {
         if (_instance.identifiedUserId) {
             _writer.writeString(13, _instance.identifiedUserId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of QueryParameters to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.timeZone = _value.timeZone;
+        this.geoLocation = _value.geoLocation
+            ? new LatLng(_value.geoLocation)
+            : undefined;
+        this.contexts = (_value.contexts || []).map(m => new Context(m));
+        this.resetContexts = _value.resetContexts;
+        this.payload = _value.payload
+            ? new googleProtobuf003.Struct(_value.payload)
+            : undefined;
+        this.labels = (_value.labels || []).slice();
+        this.platforms = (_value.platforms || []).slice();
+        this.accountId = _value.accountId;
+        this.propertyId = _value.propertyId;
+        this.datastreamId = _value.datastreamId;
+        this.originId = _value.originId;
+        this.identifiedUserId = _value.identifiedUserId;
+        QueryParameters.refineValues(this);
     }
     get timeZone() {
         return this._timeZone;
@@ -23615,20 +23615,6 @@ QueryParameters.id = 'ondewo.nlu.QueryParameters';
  */
 class QueryInput {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of QueryInput to deeply clone from
-     */
-    constructor(_value) {
-        this._input = QueryInput.InputCase.none;
-        _value = _value || {};
-        this.audioConfig = _value.audioConfig
-            ? new InputAudioConfig(_value.audioConfig)
-            : undefined;
-        this.text = _value.text ? new TextInput(_value.text) : undefined;
-        this.event = _value.event ? new EventInput(_value.event) : undefined;
-        QueryInput.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -23685,6 +23671,20 @@ class QueryInput {
         if (_instance.event) {
             _writer.writeMessage(3, _instance.event, EventInput.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of QueryInput to deeply clone from
+     */
+    constructor(_value) {
+        this._input = QueryInput.InputCase.none;
+        _value = _value || {};
+        this.audioConfig = _value.audioConfig
+            ? new InputAudioConfig(_value.audioConfig)
+            : undefined;
+        this.text = _value.text ? new TextInput(_value.text) : undefined;
+        this.event = _value.event ? new EventInput(_value.event) : undefined;
+        QueryInput.refineValues(this);
     }
     get audioConfig() {
         return this._audioConfig;
@@ -23775,37 +23775,6 @@ QueryInput.id = 'ondewo.nlu.QueryInput';
  * Message implementation for ondewo.nlu.QueryResult
  */
 class QueryResult {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of QueryResult to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.queryText = _value.queryText;
-        this.speechRecognitionConfidence = _value.speechRecognitionConfidence;
-        this.action = _value.action;
-        this.parameters = _value.parameters
-            ? new googleProtobuf003.Struct(_value.parameters)
-            : undefined;
-        this.allRequiredParamsPresent = _value.allRequiredParamsPresent;
-        this.fulfillmentText = _value.fulfillmentText;
-        this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
-        this.webhookSource = _value.webhookSource;
-        this.webhookPayload = _value.webhookPayload
-            ? new googleProtobuf003.Struct(_value.webhookPayload)
-            : undefined;
-        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
-        this.intent = _value.intent
-            ? new Intent(_value.intent)
-            : undefined;
-        this.intentDetectionConfidence = _value.intentDetectionConfidence;
-        this.queryTextOriginal = _value.queryTextOriginal;
-        this.diagnosticInfo = _value.diagnosticInfo
-            ? new googleProtobuf003.Struct(_value.diagnosticInfo)
-            : undefined;
-        this.languageCode = _value.languageCode;
-        QueryResult.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -23960,6 +23929,37 @@ class QueryResult {
         if (_instance.languageCode) {
             _writer.writeString(15, _instance.languageCode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of QueryResult to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.queryText = _value.queryText;
+        this.speechRecognitionConfidence = _value.speechRecognitionConfidence;
+        this.action = _value.action;
+        this.parameters = _value.parameters
+            ? new googleProtobuf003.Struct(_value.parameters)
+            : undefined;
+        this.allRequiredParamsPresent = _value.allRequiredParamsPresent;
+        this.fulfillmentText = _value.fulfillmentText;
+        this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
+        this.webhookSource = _value.webhookSource;
+        this.webhookPayload = _value.webhookPayload
+            ? new googleProtobuf003.Struct(_value.webhookPayload)
+            : undefined;
+        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
+        this.intent = _value.intent
+            ? new Intent(_value.intent)
+            : undefined;
+        this.intentDetectionConfidence = _value.intentDetectionConfidence;
+        this.queryTextOriginal = _value.queryTextOriginal;
+        this.diagnosticInfo = _value.diagnosticInfo
+            ? new googleProtobuf003.Struct(_value.diagnosticInfo)
+            : undefined;
+        this.languageCode = _value.languageCode;
+        QueryResult.refineValues(this);
     }
     get queryText() {
         return this._queryText;
@@ -24131,23 +24131,6 @@ QueryResult.id = 'ondewo.nlu.QueryResult';
  */
 class StreamingDetectIntentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of StreamingDetectIntentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.session = _value.session;
-        this.queryParams = _value.queryParams
-            ? new QueryParameters(_value.queryParams)
-            : undefined;
-        this.queryInput = _value.queryInput
-            ? new QueryInput(_value.queryInput)
-            : undefined;
-        this.singleUtterance = _value.singleUtterance;
-        this.inputAudio = _value.inputAudio;
-        StreamingDetectIntentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -24221,6 +24204,23 @@ class StreamingDetectIntentRequest {
         if (_instance.inputAudio && _instance.inputAudio.length) {
             _writer.writeBytes(6, _instance.inputAudio);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamingDetectIntentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.session = _value.session;
+        this.queryParams = _value.queryParams
+            ? new QueryParameters(_value.queryParams)
+            : undefined;
+        this.queryInput = _value.queryInput
+            ? new QueryInput(_value.queryInput)
+            : undefined;
+        this.singleUtterance = _value.singleUtterance;
+        this.inputAudio = _value.inputAudio;
+        StreamingDetectIntentRequest.refineValues(this);
     }
     get session() {
         return this._session;
@@ -24308,24 +24308,6 @@ StreamingDetectIntentRequest.id = 'ondewo.nlu.StreamingDetectIntentRequest';
  */
 class StreamingDetectIntentResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of StreamingDetectIntentResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.responseId = _value.responseId;
-        this.recognitionResult = _value.recognitionResult
-            ? new StreamingRecognitionResult(_value.recognitionResult)
-            : undefined;
-        this.queryResult = _value.queryResult
-            ? new QueryResult(_value.queryResult)
-            : undefined;
-        this.webhookStatus = _value.webhookStatus
-            ? new Status(_value.webhookStatus)
-            : undefined;
-        StreamingDetectIntentResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -24393,6 +24375,24 @@ class StreamingDetectIntentResponse {
         if (_instance.webhookStatus) {
             _writer.writeMessage(4, _instance.webhookStatus, Status.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamingDetectIntentResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseId = _value.responseId;
+        this.recognitionResult = _value.recognitionResult
+            ? new StreamingRecognitionResult(_value.recognitionResult)
+            : undefined;
+        this.queryResult = _value.queryResult
+            ? new QueryResult(_value.queryResult)
+            : undefined;
+        this.webhookStatus = _value.webhookStatus
+            ? new Status(_value.webhookStatus)
+            : undefined;
+        StreamingDetectIntentResponse.refineValues(this);
     }
     get responseId() {
         return this._responseId;
@@ -24476,18 +24476,6 @@ StreamingDetectIntentResponse.id = 'ondewo.nlu.StreamingDetectIntentResponse';
  */
 class StreamingRecognitionResult {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of StreamingRecognitionResult to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.messageType = _value.messageType;
-        this.transcript = _value.transcript;
-        this.isFinal = _value.isFinal;
-        this.confidence = _value.confidence;
-        StreamingRecognitionResult.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -24552,6 +24540,18 @@ class StreamingRecognitionResult {
         if (_instance.confidence) {
             _writer.writeFloat(4, _instance.confidence);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamingRecognitionResult to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.messageType = _value.messageType;
+        this.transcript = _value.transcript;
+        this.isFinal = _value.isFinal;
+        this.confidence = _value.confidence;
+        StreamingRecognitionResult.refineValues(this);
     }
     get messageType() {
         return this._messageType;
@@ -24635,18 +24635,6 @@ StreamingRecognitionResult.id = 'ondewo.nlu.StreamingRecognitionResult';
  */
 class InputAudioConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of InputAudioConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.audioEncoding = _value.audioEncoding;
-        this.sampleRateHertz = _value.sampleRateHertz;
-        this.languageCode = _value.languageCode;
-        this.phraseHints = (_value.phraseHints || []).slice();
-        InputAudioConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -24711,6 +24699,18 @@ class InputAudioConfig {
         if (_instance.phraseHints && _instance.phraseHints.length) {
             _writer.writeRepeatedString(4, _instance.phraseHints);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of InputAudioConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.audioEncoding = _value.audioEncoding;
+        this.sampleRateHertz = _value.sampleRateHertz;
+        this.languageCode = _value.languageCode;
+        this.phraseHints = (_value.phraseHints || []).slice();
+        InputAudioConfig.refineValues(this);
     }
     get audioEncoding() {
         return this._audioEncoding;
@@ -24786,16 +24786,6 @@ InputAudioConfig.id = 'ondewo.nlu.InputAudioConfig';
  */
 class TextInput {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of TextInput to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.text = _value.text;
-        this.languageCode = _value.languageCode;
-        TextInput.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -24846,6 +24836,16 @@ class TextInput {
         if (_instance.languageCode) {
             _writer.writeString(2, _instance.languageCode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TextInput to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.text = _value.text;
+        this.languageCode = _value.languageCode;
+        TextInput.refineValues(this);
     }
     get text() {
         return this._text;
@@ -24902,19 +24902,6 @@ TextInput.id = 'ondewo.nlu.TextInput';
  * Message implementation for ondewo.nlu.EventInput
  */
 class EventInput {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EventInput to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.parameters = _value.parameters
-            ? new googleProtobuf003.Struct(_value.parameters)
-            : undefined;
-        this.languageCode = _value.languageCode;
-        EventInput.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -24974,6 +24961,19 @@ class EventInput {
         if (_instance.languageCode) {
             _writer.writeString(3, _instance.languageCode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EventInput to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.parameters = _value.parameters
+            ? new googleProtobuf003.Struct(_value.parameters)
+            : undefined;
+        this.languageCode = _value.languageCode;
+        EventInput.refineValues(this);
     }
     get name() {
         return this._name;
@@ -25041,19 +25041,6 @@ EventInput.id = 'ondewo.nlu.EventInput';
  */
 class Session {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Session to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.sessionSteps = (_value.sessionSteps || []).map(m => new SessionStep(m));
-        this.sessionInfo = _value.sessionInfo
-            ? new SessionInfo(_value.sessionInfo)
-            : undefined;
-        Session.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -25114,6 +25101,19 @@ class Session {
         if (_instance.sessionInfo) {
             _writer.writeMessage(3, _instance.sessionInfo, SessionInfo.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Session to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.sessionSteps = (_value.sessionSteps || []).map(m => new SessionStep(m));
+        this.sessionInfo = _value.sessionInfo
+            ? new SessionInfo(_value.sessionInfo)
+            : undefined;
+        Session.refineValues(this);
     }
     get name() {
         return this._name;
@@ -25189,22 +25189,6 @@ Session.id = 'ondewo.nlu.Session';
  */
 class SessionStep {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of SessionStep to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.detectIntentRequest = _value.detectIntentRequest
-            ? new DetectIntentRequest(_value.detectIntentRequest)
-            : undefined;
-        this.detectIntentResponse = _value.detectIntentResponse
-            ? new DetectIntentResponse(_value.detectIntentResponse)
-            : undefined;
-        this.contexts = (_value.contexts || []).map(m => new Context(m));
-        SessionStep.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -25223,6 +25207,7 @@ class SessionStep {
         _instance.detectIntentResponse =
             _instance.detectIntentResponse || undefined;
         _instance.contexts = _instance.contexts || [];
+        _instance.timestamp = _instance.timestamp || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -25250,6 +25235,10 @@ class SessionStep {
                     _reader.readMessage(messageInitializer4, Context.deserializeBinaryFromReader);
                     (_instance.contexts = _instance.contexts || []).push(messageInitializer4);
                     break;
+                case 5:
+                    _instance.timestamp = new googleProtobuf003.Timestamp();
+                    _reader.readMessage(_instance.timestamp, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -25274,6 +25263,28 @@ class SessionStep {
         if (_instance.contexts && _instance.contexts.length) {
             _writer.writeRepeatedMessage(4, _instance.contexts, Context.serializeBinaryToWriter);
         }
+        if (_instance.timestamp) {
+            _writer.writeMessage(5, _instance.timestamp, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionStep to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.detectIntentRequest = _value.detectIntentRequest
+            ? new DetectIntentRequest(_value.detectIntentRequest)
+            : undefined;
+        this.detectIntentResponse = _value.detectIntentResponse
+            ? new DetectIntentResponse(_value.detectIntentResponse)
+            : undefined;
+        this.contexts = (_value.contexts || []).map(m => new Context(m));
+        this.timestamp = _value.timestamp
+            ? new googleProtobuf003.Timestamp(_value.timestamp)
+            : undefined;
+        SessionStep.refineValues(this);
     }
     get name() {
         return this._name;
@@ -25299,6 +25310,12 @@ class SessionStep {
     set contexts(value) {
         this._contexts = value;
     }
+    get timestamp() {
+        return this._timestamp;
+    }
+    set timestamp(value) {
+        this._timestamp = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -25320,7 +25337,8 @@ class SessionStep {
             detectIntentResponse: this.detectIntentResponse
                 ? this.detectIntentResponse.toObject()
                 : undefined,
-            contexts: (this.contexts || []).map(m => m.toObject())
+            contexts: (this.contexts || []).map(m => m.toObject()),
+            timestamp: this.timestamp ? this.timestamp.toObject() : undefined
         };
     }
     /**
@@ -25345,7 +25363,8 @@ class SessionStep {
             detectIntentResponse: this.detectIntentResponse
                 ? this.detectIntentResponse.toProtobufJSON(options)
                 : null,
-            contexts: (this.contexts || []).map(m => m.toProtobufJSON(options))
+            contexts: (this.contexts || []).map(m => m.toProtobufJSON(options)),
+            timestamp: this.timestamp ? this.timestamp.toProtobufJSON(options) : null
         };
     }
 }
@@ -25354,19 +25373,6 @@ SessionStep.id = 'ondewo.nlu.SessionStep';
  * Message implementation for ondewo.nlu.TrackSessionStepRequest
  */
 class TrackSessionStepRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of TrackSessionStepRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.sessionStep = _value.sessionStep
-            ? new SessionStep(_value.sessionStep)
-            : undefined;
-        this.sessionView = _value.sessionView;
-        TrackSessionStepRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -25426,6 +25432,19 @@ class TrackSessionStepRequest {
         if (_instance.sessionView) {
             _writer.writeEnum(3, _instance.sessionView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TrackSessionStepRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.sessionStep = _value.sessionStep
+            ? new SessionStep(_value.sessionStep)
+            : undefined;
+        this.sessionView = _value.sessionView;
+        TrackSessionStepRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -25494,23 +25513,6 @@ TrackSessionStepRequest.id = 'ondewo.nlu.TrackSessionStepRequest';
  * Message implementation for ondewo.nlu.ListSessionsRequest
  */
 class ListSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionView = _value.sessionView;
-        this.pageToken = _value.pageToken;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
-            : undefined;
-        ListSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -25585,6 +25587,23 @@ class ListSessionsRequest {
         if (_instance.fieldMask) {
             _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionView = _value.sessionView;
+        this.pageToken = _value.pageToken;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
+        ListSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -25672,18 +25691,6 @@ ListSessionsRequest.id = 'ondewo.nlu.ListSessionsRequest';
  */
 class ContextFilter {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ContextFilter to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.contextName = _value.contextName;
-        this.key = _value.key;
-        this.value = _value.value;
-        this.operator = _value.operator;
-        ContextFilter.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -25748,6 +25755,18 @@ class ContextFilter {
         if (_instance.operator) {
             _writer.writeEnum(4, _instance.operator);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ContextFilter to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.contextName = _value.contextName;
+        this.key = _value.key;
+        this.value = _value.value;
+        this.operator = _value.operator;
+        ContextFilter.refineValues(this);
     }
     get contextName() {
         return this._contextName;
@@ -25822,65 +25841,6 @@ ContextFilter.id = 'ondewo.nlu.ContextFilter';
  * Message implementation for ondewo.nlu.SessionFilter
  */
 class SessionFilter {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of SessionFilter to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.languageCodes = (_value.languageCodes || []).slice();
-        this.matchedIntents = (_value.matchedIntents || []).map(m => new Intent(m));
-        this.matchedEntityTypes = (_value.matchedEntityTypes || []).map(m => new EntityType(m));
-        this.minIntentsConfidenceMin = _value.minIntentsConfidenceMin;
-        this.minIntentsConfidenceMax = _value.minIntentsConfidenceMax;
-        this.minEntityTypesConfidenceMin = _value.minEntityTypesConfidenceMin;
-        this.minEntityTypesConfidenceMax = _value.minEntityTypesConfidenceMax;
-        this.earliest = _value.earliest;
-        this.latest = _value.latest;
-        this.minNumberTurns = _value.minNumberTurns;
-        this.maxNumberTurns = _value.maxNumberTurns;
-        this.labels = (_value.labels || []).slice();
-        this.userIds = (_value.userIds || []).slice();
-        this.intentTags = (_value.intentTags || []).slice();
-        this.sessionIds = (_value.sessionIds || []).slice();
-        this.inputContexts = (_value.inputContexts || []).map(m => new Context(m));
-        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
-        this.durationInSMin = _value.durationInSMin;
-        this.durationInSMax = _value.durationInSMax;
-        this.durationInMMin = _value.durationInMMin;
-        this.durationInMMax = _value.durationInMMax;
-        this.durationInMRoundedMin = _value.durationInMRoundedMin;
-        this.durationInMRoundedMax = _value.durationInMRoundedMax;
-        this.durationInterval15sRoundedMin = _value.durationInterval15sRoundedMin;
-        this.durationInterval15sRoundedMax = _value.durationInterval15sRoundedMax;
-        this.durationInterval30sRoundedMin = _value.durationInterval30sRoundedMin;
-        this.durationInterval30sRoundedMax = _value.durationInterval30sRoundedMax;
-        this.durationInterval45sRoundedMin = _value.durationInterval45sRoundedMin;
-        this.durationInterval45sRoundedMax = _value.durationInterval45sRoundedMax;
-        this.startedTimeSlotPerHourMin = _value.startedTimeSlotPerHourMin;
-        this.startedTimeSlotPerHourMax = _value.startedTimeSlotPerHourMax;
-        this.startedTimeSlotPerQuarterHourMin =
-            _value.startedTimeSlotPerQuarterHourMin;
-        this.startedTimeSlotPerQuarterHourMax =
-            _value.startedTimeSlotPerQuarterHourMax;
-        this.startedTimeSlotPerHalfHourMin = _value.startedTimeSlotPerHalfHourMin;
-        this.startedTimeSlotPerHalfHourMax = _value.startedTimeSlotPerHalfHourMax;
-        this.startedTimeSlotPerDayPhaseMin = _value.startedTimeSlotPerDayPhaseMin;
-        this.startedTimeSlotPerDayPhaseMax = _value.startedTimeSlotPerDayPhaseMax;
-        this.startedTimeSlotPerMinuteMin = _value.startedTimeSlotPerMinuteMin;
-        this.startedTimeSlotPerMinuteMax = _value.startedTimeSlotPerMinuteMax;
-        this.durationInSRoundedMin = _value.durationInSRoundedMin;
-        this.durationInSRoundedMax = _value.durationInSRoundedMax;
-        this.platforms = (_value.platforms || []).slice();
-        this.accountIds = (_value.accountIds || []).slice();
-        this.propertyIds = (_value.propertyIds || []).slice();
-        this.datastreamIds = (_value.datastreamIds || []).slice();
-        this.originIds = (_value.originIds || []).slice();
-        this.identifiedUserIds = (_value.identifiedUserIds || []).slice();
-        this.durationInterval60sRoundedMin = _value.durationInterval60sRoundedMin;
-        this.durationInterval60sRoundedMax = _value.durationInterval60sRoundedMax;
-        SessionFilter.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -26291,6 +26251,65 @@ class SessionFilter {
         if (_instance.durationInterval60sRoundedMax) {
             _writer.writeFloat(49, _instance.durationInterval60sRoundedMax);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionFilter to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.languageCodes = (_value.languageCodes || []).slice();
+        this.matchedIntents = (_value.matchedIntents || []).map(m => new Intent(m));
+        this.matchedEntityTypes = (_value.matchedEntityTypes || []).map(m => new EntityType(m));
+        this.minIntentsConfidenceMin = _value.minIntentsConfidenceMin;
+        this.minIntentsConfidenceMax = _value.minIntentsConfidenceMax;
+        this.minEntityTypesConfidenceMin = _value.minEntityTypesConfidenceMin;
+        this.minEntityTypesConfidenceMax = _value.minEntityTypesConfidenceMax;
+        this.earliest = _value.earliest;
+        this.latest = _value.latest;
+        this.minNumberTurns = _value.minNumberTurns;
+        this.maxNumberTurns = _value.maxNumberTurns;
+        this.labels = (_value.labels || []).slice();
+        this.userIds = (_value.userIds || []).slice();
+        this.intentTags = (_value.intentTags || []).slice();
+        this.sessionIds = (_value.sessionIds || []).slice();
+        this.inputContexts = (_value.inputContexts || []).map(m => new Context(m));
+        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
+        this.durationInSMin = _value.durationInSMin;
+        this.durationInSMax = _value.durationInSMax;
+        this.durationInMMin = _value.durationInMMin;
+        this.durationInMMax = _value.durationInMMax;
+        this.durationInMRoundedMin = _value.durationInMRoundedMin;
+        this.durationInMRoundedMax = _value.durationInMRoundedMax;
+        this.durationInterval15sRoundedMin = _value.durationInterval15sRoundedMin;
+        this.durationInterval15sRoundedMax = _value.durationInterval15sRoundedMax;
+        this.durationInterval30sRoundedMin = _value.durationInterval30sRoundedMin;
+        this.durationInterval30sRoundedMax = _value.durationInterval30sRoundedMax;
+        this.durationInterval45sRoundedMin = _value.durationInterval45sRoundedMin;
+        this.durationInterval45sRoundedMax = _value.durationInterval45sRoundedMax;
+        this.startedTimeSlotPerHourMin = _value.startedTimeSlotPerHourMin;
+        this.startedTimeSlotPerHourMax = _value.startedTimeSlotPerHourMax;
+        this.startedTimeSlotPerQuarterHourMin =
+            _value.startedTimeSlotPerQuarterHourMin;
+        this.startedTimeSlotPerQuarterHourMax =
+            _value.startedTimeSlotPerQuarterHourMax;
+        this.startedTimeSlotPerHalfHourMin = _value.startedTimeSlotPerHalfHourMin;
+        this.startedTimeSlotPerHalfHourMax = _value.startedTimeSlotPerHalfHourMax;
+        this.startedTimeSlotPerDayPhaseMin = _value.startedTimeSlotPerDayPhaseMin;
+        this.startedTimeSlotPerDayPhaseMax = _value.startedTimeSlotPerDayPhaseMax;
+        this.startedTimeSlotPerMinuteMin = _value.startedTimeSlotPerMinuteMin;
+        this.startedTimeSlotPerMinuteMax = _value.startedTimeSlotPerMinuteMax;
+        this.durationInSRoundedMin = _value.durationInSRoundedMin;
+        this.durationInSRoundedMax = _value.durationInSRoundedMax;
+        this.platforms = (_value.platforms || []).slice();
+        this.accountIds = (_value.accountIds || []).slice();
+        this.propertyIds = (_value.propertyIds || []).slice();
+        this.datastreamIds = (_value.datastreamIds || []).slice();
+        this.originIds = (_value.originIds || []).slice();
+        this.identifiedUserIds = (_value.identifiedUserIds || []).slice();
+        this.durationInterval60sRoundedMin = _value.durationInterval60sRoundedMin;
+        this.durationInterval60sRoundedMax = _value.durationInterval60sRoundedMax;
+        SessionFilter.refineValues(this);
     }
     get languageCodes() {
         return this._languageCodes;
@@ -26724,46 +26743,6 @@ SessionFilter.id = 'ondewo.nlu.SessionFilter';
  */
 class SessionInfo {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of SessionInfo to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.languageCodes = (_value.languageCodes || []).slice();
-        this.matchedIntents = (_value.matchedIntents || []).map(m => new Intent(m));
-        this.matchedEntityTypes = (_value.matchedEntityTypes || []).map(m => new EntityType(m));
-        this.minIntentsConfidence = _value.minIntentsConfidence;
-        this.minEntityTypesConfidence = _value.minEntityTypesConfidence;
-        this.earliest = _value.earliest;
-        this.latest = _value.latest;
-        this.numberTurns = _value.numberTurns;
-        this.labels = (_value.labels || []).slice();
-        this.userIds = (_value.userIds || []).slice();
-        this.intentTags = (_value.intentTags || []).slice();
-        this.inputContextSteps = (_value.inputContextSteps || []).map(m => new SessionInfo.ContextSteps(m));
-        this.outputContextSteps = (_value.outputContextSteps || []).map(m => new SessionInfo.ContextSteps(m));
-        this.durationInS = _value.durationInS;
-        this.durationInM = _value.durationInM;
-        this.durationInMRounded = _value.durationInMRounded;
-        this.durationInterval15sRounded = _value.durationInterval15sRounded;
-        this.durationInterval30sRounded = _value.durationInterval30sRounded;
-        this.durationInterval45sRounded = _value.durationInterval45sRounded;
-        this.startedTimeSlotPerHour = _value.startedTimeSlotPerHour;
-        this.startedTimeSlotPerQuarterHour = _value.startedTimeSlotPerQuarterHour;
-        this.startedTimeSlotPerHalfHour = _value.startedTimeSlotPerHalfHour;
-        this.startedTimeSlotPerDayPhase = _value.startedTimeSlotPerDayPhase;
-        this.startedTimeSlotPerMinute = _value.startedTimeSlotPerMinute;
-        this.durationInSRounded = _value.durationInSRounded;
-        this.platforms = (_value.platforms || []).slice();
-        this.accountIds = (_value.accountIds || []).slice();
-        this.propertyIds = (_value.propertyIds || []).slice();
-        this.datastreamIds = (_value.datastreamIds || []).slice();
-        this.originIds = (_value.originIds || []).slice();
-        this.identifiedUserIds = (_value.identifiedUserIds || []).slice();
-        this.durationInterval60sRounded = _value.durationInterval60sRounded;
-        SessionInfo.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -27045,6 +27024,46 @@ class SessionInfo {
         if (_instance.durationInterval60sRounded) {
             _writer.writeFloat(32, _instance.durationInterval60sRounded);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionInfo to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.languageCodes = (_value.languageCodes || []).slice();
+        this.matchedIntents = (_value.matchedIntents || []).map(m => new Intent(m));
+        this.matchedEntityTypes = (_value.matchedEntityTypes || []).map(m => new EntityType(m));
+        this.minIntentsConfidence = _value.minIntentsConfidence;
+        this.minEntityTypesConfidence = _value.minEntityTypesConfidence;
+        this.earliest = _value.earliest;
+        this.latest = _value.latest;
+        this.numberTurns = _value.numberTurns;
+        this.labels = (_value.labels || []).slice();
+        this.userIds = (_value.userIds || []).slice();
+        this.intentTags = (_value.intentTags || []).slice();
+        this.inputContextSteps = (_value.inputContextSteps || []).map(m => new SessionInfo.ContextSteps(m));
+        this.outputContextSteps = (_value.outputContextSteps || []).map(m => new SessionInfo.ContextSteps(m));
+        this.durationInS = _value.durationInS;
+        this.durationInM = _value.durationInM;
+        this.durationInMRounded = _value.durationInMRounded;
+        this.durationInterval15sRounded = _value.durationInterval15sRounded;
+        this.durationInterval30sRounded = _value.durationInterval30sRounded;
+        this.durationInterval45sRounded = _value.durationInterval45sRounded;
+        this.startedTimeSlotPerHour = _value.startedTimeSlotPerHour;
+        this.startedTimeSlotPerQuarterHour = _value.startedTimeSlotPerQuarterHour;
+        this.startedTimeSlotPerHalfHour = _value.startedTimeSlotPerHalfHour;
+        this.startedTimeSlotPerDayPhase = _value.startedTimeSlotPerDayPhase;
+        this.startedTimeSlotPerMinute = _value.startedTimeSlotPerMinute;
+        this.durationInSRounded = _value.durationInSRounded;
+        this.platforms = (_value.platforms || []).slice();
+        this.accountIds = (_value.accountIds || []).slice();
+        this.propertyIds = (_value.propertyIds || []).slice();
+        this.datastreamIds = (_value.datastreamIds || []).slice();
+        this.originIds = (_value.originIds || []).slice();
+        this.identifiedUserIds = (_value.identifiedUserIds || []).slice();
+        this.durationInterval60sRounded = _value.durationInterval60sRounded;
+        SessionInfo.refineValues(this);
     }
     get languageCodes() {
         return this._languageCodes;
@@ -27343,15 +27362,6 @@ SessionInfo.id = 'ondewo.nlu.SessionInfo';
      */
     class ContextSteps {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of ContextSteps to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.contexts = (_value.contexts || []).map(m => new Context(m));
-            ContextSteps.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -27397,6 +27407,15 @@ SessionInfo.id = 'ondewo.nlu.SessionInfo';
             if (_instance.contexts && _instance.contexts.length) {
                 _writer.writeRepeatedMessage(1, _instance.contexts, Context.serializeBinaryToWriter);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ContextSteps to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.contexts = (_value.contexts || []).map(m => new Context(m));
+            ContextSteps.refineValues(this);
         }
         get contexts() {
             return this._contexts;
@@ -27447,16 +27466,6 @@ SessionInfo.id = 'ondewo.nlu.SessionInfo';
  * Message implementation for ondewo.nlu.ListSessionsResponse
  */
 class ListSessionsResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListSessionsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessions = (_value.sessions || []).map(m => new Session(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListSessionsResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -27510,6 +27519,16 @@ class ListSessionsResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessions = (_value.sessions || []).map(m => new Session(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListSessionsResponse.refineValues(this);
     }
     get sessions() {
         return this._sessions;
@@ -27566,19 +27585,6 @@ ListSessionsResponse.id = 'ondewo.nlu.ListSessionsResponse';
  * Message implementation for ondewo.nlu.GetSessionRequest
  */
 class GetSessionRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetSessionRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.sessionView = _value.sessionView;
-        this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
-            : undefined;
-        GetSessionRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -27638,6 +27644,19 @@ class GetSessionRequest {
         if (_instance.fieldMask) {
             _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSessionRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.sessionView = _value.sessionView;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
+        GetSessionRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -27705,18 +27724,6 @@ GetSessionRequest.id = 'ondewo.nlu.GetSessionRequest';
  */
 class CreateSessionRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateSessionRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionUuid = _value.sessionUuid;
-        this.labels = (_value.labels || []).slice();
-        this.contexts = (_value.contexts || []).map(m => new Context(m));
-        CreateSessionRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -27783,6 +27790,18 @@ class CreateSessionRequest {
         if (_instance.contexts && _instance.contexts.length) {
             _writer.writeRepeatedMessage(4, _instance.contexts, Context.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateSessionRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionUuid = _value.sessionUuid;
+        this.labels = (_value.labels || []).slice();
+        this.contexts = (_value.contexts || []).map(m => new Context(m));
+        CreateSessionRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -27856,15 +27875,6 @@ CreateSessionRequest.id = 'ondewo.nlu.CreateSessionRequest';
  */
 class DeleteSessionRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteSessionRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        DeleteSessionRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -27908,6 +27918,15 @@ class DeleteSessionRequest {
         if (_instance.sessionId) {
             _writer.writeString(1, _instance.sessionId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteSessionRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        DeleteSessionRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -27956,20 +27975,6 @@ DeleteSessionRequest.id = 'ondewo.nlu.DeleteSessionRequest';
  * Message implementation for ondewo.nlu.CreateSessionReviewRequest
  */
 class CreateSessionReviewRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateSessionReviewRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.parentReviewId = _value.parentReviewId;
-        this.sessionReview = _value.sessionReview
-            ? new SessionReview(_value.sessionReview)
-            : undefined;
-        this.sessionReviewView = _value.sessionReviewView;
-        CreateSessionReviewRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -28036,6 +28041,20 @@ class CreateSessionReviewRequest {
         if (_instance.sessionReviewView) {
             _writer.writeEnum(4, _instance.sessionReviewView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateSessionReviewRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.parentReviewId = _value.parentReviewId;
+        this.sessionReview = _value.sessionReview
+            ? new SessionReview(_value.sessionReview)
+            : undefined;
+        this.sessionReviewView = _value.sessionReviewView;
+        CreateSessionReviewRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -28116,16 +28135,6 @@ CreateSessionReviewRequest.id = 'ondewo.nlu.CreateSessionReviewRequest';
  */
 class SessionReview {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of SessionReview to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.sessionReviewSteps = (_value.sessionReviewSteps || []).map(m => new SessionReviewStep(m));
-        SessionReview.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -28179,6 +28188,16 @@ class SessionReview {
         if (_instance.sessionReviewSteps && _instance.sessionReviewSteps.length) {
             _writer.writeRepeatedMessage(2, _instance.sessionReviewSteps, SessionReviewStep.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionReview to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.sessionReviewSteps = (_value.sessionReviewSteps || []).map(m => new SessionReviewStep(m));
+        SessionReview.refineValues(this);
     }
     get name() {
         return this._name;
@@ -28244,24 +28263,6 @@ SessionReview.id = 'ondewo.nlu.SessionReview';
  */
 class SessionReviewStep {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of SessionReviewStep to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.annotatedUsersays = _value.annotatedUsersays
-            ? new Intent.TrainingPhrase(_value.annotatedUsersays)
-            : undefined;
-        this.languageCode = _value.languageCode;
-        this.detectedIntents = (_value.detectedIntents || []).map(m => new DetectedIntent(m));
-        this.contexts = (_value.contexts || []).map(m => new Context(m));
-        this.contextsOut = (_value.contextsOut || []).map(m => new Context(m));
-        this.queryTextOriginal = _value.queryTextOriginal;
-        this.platforms = (_value.platforms || []).slice();
-        SessionReviewStep.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -28283,6 +28284,7 @@ class SessionReviewStep {
         _instance.contextsOut = _instance.contextsOut || [];
         _instance.queryTextOriginal = _instance.queryTextOriginal || '';
         _instance.platforms = _instance.platforms || [];
+        _instance.timestamp = _instance.timestamp || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -28325,6 +28327,10 @@ class SessionReviewStep {
                 case 8:
                     (_instance.platforms = _instance.platforms || []).push(...(_reader.readPackedEnum() || []));
                     break;
+                case 9:
+                    _instance.timestamp = new googleProtobuf003.Timestamp();
+                    _reader.readMessage(_instance.timestamp, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -28361,6 +28367,30 @@ class SessionReviewStep {
         if (_instance.platforms && _instance.platforms.length) {
             _writer.writePackedEnum(8, _instance.platforms);
         }
+        if (_instance.timestamp) {
+            _writer.writeMessage(9, _instance.timestamp, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionReviewStep to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.annotatedUsersays = _value.annotatedUsersays
+            ? new Intent.TrainingPhrase(_value.annotatedUsersays)
+            : undefined;
+        this.languageCode = _value.languageCode;
+        this.detectedIntents = (_value.detectedIntents || []).map(m => new DetectedIntent(m));
+        this.contexts = (_value.contexts || []).map(m => new Context(m));
+        this.contextsOut = (_value.contextsOut || []).map(m => new Context(m));
+        this.queryTextOriginal = _value.queryTextOriginal;
+        this.platforms = (_value.platforms || []).slice();
+        this.timestamp = _value.timestamp
+            ? new googleProtobuf003.Timestamp(_value.timestamp)
+            : undefined;
+        SessionReviewStep.refineValues(this);
     }
     get name() {
         return this._name;
@@ -28410,6 +28440,12 @@ class SessionReviewStep {
     set platforms(value) {
         this._platforms = value;
     }
+    get timestamp() {
+        return this._timestamp;
+    }
+    set timestamp(value) {
+        this._timestamp = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -28433,7 +28469,8 @@ class SessionReviewStep {
             contexts: (this.contexts || []).map(m => m.toObject()),
             contextsOut: (this.contextsOut || []).map(m => m.toObject()),
             queryTextOriginal: this.queryTextOriginal,
-            platforms: (this.platforms || []).slice()
+            platforms: (this.platforms || []).slice(),
+            timestamp: this.timestamp ? this.timestamp.toObject() : undefined
         };
     }
     /**
@@ -28460,7 +28497,8 @@ class SessionReviewStep {
             contexts: (this.contexts || []).map(m => m.toProtobufJSON(options)),
             contextsOut: (this.contextsOut || []).map(m => m.toProtobufJSON(options)),
             queryTextOriginal: this.queryTextOriginal,
-            platforms: (this.platforms || []).map(v => Intent.Message.Platform[v])
+            platforms: (this.platforms || []).map(v => Intent.Message.Platform[v]),
+            timestamp: this.timestamp ? this.timestamp.toProtobufJSON(options) : null
         };
     }
 }
@@ -28469,21 +28507,6 @@ SessionReviewStep.id = 'ondewo.nlu.SessionReviewStep';
  * Message implementation for ondewo.nlu.DetectedIntent
  */
 class DetectedIntent {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DetectedIntent to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intent = _value.intent
-            ? new Intent(_value.intent)
-            : undefined;
-        this.score = _value.score;
-        this.algorithm = _value.algorithm;
-        this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
-        this.requiredParamMissing = _value.requiredParamMissing;
-        DetectedIntent.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -28560,6 +28583,21 @@ class DetectedIntent {
         if (_instance.requiredParamMissing) {
             _writer.writeBool(5, _instance.requiredParamMissing);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DetectedIntent to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intent = _value.intent
+            ? new Intent(_value.intent)
+            : undefined;
+        this.score = _value.score;
+        this.algorithm = _value.algorithm;
+        this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
+        this.requiredParamMissing = _value.requiredParamMissing;
+        DetectedIntent.refineValues(this);
     }
     get intent() {
         return this._intent;
@@ -28641,15 +28679,6 @@ DetectedIntent.id = 'ondewo.nlu.DetectedIntent';
  */
 class ListSessionLabelsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListSessionLabelsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        ListSessionLabelsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -28693,6 +28722,15 @@ class ListSessionLabelsRequest {
         if (_instance.sessionId) {
             _writer.writeString(1, _instance.sessionId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionLabelsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        ListSessionLabelsRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -28741,18 +28779,6 @@ ListSessionLabelsRequest.id = 'ondewo.nlu.ListSessionLabelsRequest';
  * Message implementation for ondewo.nlu.ListSessionLabelsOfAllSessionsRequest
  */
 class ListSessionLabelsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListSessionLabelsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListSessionLabelsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -28805,6 +28831,18 @@ class ListSessionLabelsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionLabelsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListSessionLabelsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -28866,15 +28904,6 @@ ListSessionLabelsOfAllSessionsRequest.id = 'ondewo.nlu.ListSessionLabelsOfAllSes
  */
 class ListSessionLabelsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListSessionLabelsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.labels = (_value.labels || []).slice();
-        ListSessionLabelsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -28918,6 +28947,15 @@ class ListSessionLabelsResponse {
         if (_instance.labels && _instance.labels.length) {
             _writer.writeRepeatedString(1, _instance.labels);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionLabelsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.labels = (_value.labels || []).slice();
+        ListSessionLabelsResponse.refineValues(this);
     }
     get labels() {
         return this._labels;
@@ -28966,18 +29004,6 @@ ListSessionLabelsResponse.id = 'ondewo.nlu.ListSessionLabelsResponse';
  * Message implementation for ondewo.nlu.ListLanguageCodesOfAllSessionsRequest
  */
 class ListLanguageCodesOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListLanguageCodesOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListLanguageCodesOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -29030,6 +29056,18 @@ class ListLanguageCodesOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLanguageCodesOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListLanguageCodesOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -29091,15 +29129,6 @@ ListLanguageCodesOfAllSessionsRequest.id = 'ondewo.nlu.ListLanguageCodesOfAllSes
  */
 class ListLanguageCodesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListLanguageCodesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.languageCodes = (_value.languageCodes || []).slice();
-        ListLanguageCodesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -29143,6 +29172,15 @@ class ListLanguageCodesResponse {
         if (_instance.languageCodes && _instance.languageCodes.length) {
             _writer.writeRepeatedString(1, _instance.languageCodes);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLanguageCodesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.languageCodes = (_value.languageCodes || []).slice();
+        ListLanguageCodesResponse.refineValues(this);
     }
     get languageCodes() {
         return this._languageCodes;
@@ -29191,18 +29229,6 @@ ListLanguageCodesResponse.id = 'ondewo.nlu.ListLanguageCodesResponse';
  * Message implementation for ondewo.nlu.ListMatchedIntentsOfAllSessionsRequest
  */
 class ListMatchedIntentsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListMatchedIntentsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListMatchedIntentsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -29255,6 +29281,18 @@ class ListMatchedIntentsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListMatchedIntentsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListMatchedIntentsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -29316,15 +29354,6 @@ ListMatchedIntentsOfAllSessionsRequest.id = 'ondewo.nlu.ListMatchedIntentsOfAllS
  */
 class ListMatchedIntentsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListMatchedIntentsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.matchedIntents = (_value.matchedIntents || []).slice();
-        ListMatchedIntentsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -29368,6 +29397,15 @@ class ListMatchedIntentsResponse {
         if (_instance.matchedIntents && _instance.matchedIntents.length) {
             _writer.writeRepeatedString(1, _instance.matchedIntents);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListMatchedIntentsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.matchedIntents = (_value.matchedIntents || []).slice();
+        ListMatchedIntentsResponse.refineValues(this);
     }
     get matchedIntents() {
         return this._matchedIntents;
@@ -29416,18 +29454,6 @@ ListMatchedIntentsResponse.id = 'ondewo.nlu.ListMatchedIntentsResponse';
  * Message implementation for ondewo.nlu.ListMatchedEntityTypesOfAllSessionsRequest
  */
 class ListMatchedEntityTypesOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListMatchedEntityTypesOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListMatchedEntityTypesOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -29480,6 +29506,18 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListMatchedEntityTypesOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListMatchedEntityTypesOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -29541,15 +29579,6 @@ ListMatchedEntityTypesOfAllSessionsRequest.id = 'ondewo.nlu.ListMatchedEntityTyp
  */
 class ListMatchedEntityTypesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListMatchedEntityTypesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.matchedEntityTypes = (_value.matchedEntityTypes || []).slice();
-        ListMatchedEntityTypesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -29594,6 +29623,15 @@ class ListMatchedEntityTypesResponse {
         if (_instance.matchedEntityTypes && _instance.matchedEntityTypes.length) {
             _writer.writeRepeatedString(1, _instance.matchedEntityTypes);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListMatchedEntityTypesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.matchedEntityTypes = (_value.matchedEntityTypes || []).slice();
+        ListMatchedEntityTypesResponse.refineValues(this);
     }
     get matchedEntityTypes() {
         return this._matchedEntityTypes;
@@ -29642,18 +29680,6 @@ ListMatchedEntityTypesResponse.id = 'ondewo.nlu.ListMatchedEntityTypesResponse';
  * Message implementation for ondewo.nlu.ListUserIdsOfAllSessionsRequest
  */
 class ListUserIdsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListUserIdsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListUserIdsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -29706,6 +29732,18 @@ class ListUserIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListUserIdsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListUserIdsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -29767,15 +29805,6 @@ ListUserIdsOfAllSessionsRequest.id = 'ondewo.nlu.ListUserIdsOfAllSessionsRequest
  */
 class ListUserIdsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListUserIdsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.userIds = (_value.userIds || []).slice();
-        ListUserIdsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -29819,6 +29848,15 @@ class ListUserIdsResponse {
         if (_instance.userIds && _instance.userIds.length) {
             _writer.writeRepeatedString(1, _instance.userIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListUserIdsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.userIds = (_value.userIds || []).slice();
+        ListUserIdsResponse.refineValues(this);
     }
     get userIds() {
         return this._userIds;
@@ -29867,18 +29905,6 @@ ListUserIdsResponse.id = 'ondewo.nlu.ListUserIdsResponse';
  * Message implementation for ondewo.nlu.ListIdentifiedUserIdsOfAllSessionsRequest
  */
 class ListIdentifiedUserIdsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListIdentifiedUserIdsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListIdentifiedUserIdsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -29931,6 +29957,18 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListIdentifiedUserIdsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListIdentifiedUserIdsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -29992,15 +30030,6 @@ ListIdentifiedUserIdsOfAllSessionsRequest.id = 'ondewo.nlu.ListIdentifiedUserIds
  */
 class ListIdentifiedUserIdsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListIdentifiedUserIdsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.identifiedUserIds = (_value.identifiedUserIds || []).slice();
-        ListIdentifiedUserIdsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -30045,6 +30074,15 @@ class ListIdentifiedUserIdsResponse {
         if (_instance.identifiedUserIds && _instance.identifiedUserIds.length) {
             _writer.writeRepeatedString(1, _instance.identifiedUserIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListIdentifiedUserIdsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.identifiedUserIds = (_value.identifiedUserIds || []).slice();
+        ListIdentifiedUserIdsResponse.refineValues(this);
     }
     get identifiedUserIds() {
         return this._identifiedUserIds;
@@ -30093,18 +30131,6 @@ ListIdentifiedUserIdsResponse.id = 'ondewo.nlu.ListIdentifiedUserIdsResponse';
  * Message implementation for ondewo.nlu.ListTagsOfAllSessionsRequest
  */
 class ListTagsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListTagsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListTagsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -30157,6 +30183,18 @@ class ListTagsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTagsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListTagsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -30218,15 +30256,6 @@ ListTagsOfAllSessionsRequest.id = 'ondewo.nlu.ListTagsOfAllSessionsRequest';
  */
 class ListTagsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListTagsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.tags = (_value.tags || []).slice();
-        ListTagsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -30270,6 +30299,15 @@ class ListTagsResponse {
         if (_instance.tags && _instance.tags.length) {
             _writer.writeRepeatedString(1, _instance.tags);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListTagsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.tags = (_value.tags || []).slice();
+        ListTagsResponse.refineValues(this);
     }
     get tags() {
         return this._tags;
@@ -30318,18 +30356,6 @@ ListTagsResponse.id = 'ondewo.nlu.ListTagsResponse';
  * Message implementation for ondewo.nlu.ListInputContextsOfAllSessionsRequest
  */
 class ListInputContextsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListInputContextsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListInputContextsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -30382,6 +30408,18 @@ class ListInputContextsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListInputContextsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListInputContextsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -30443,15 +30481,6 @@ ListInputContextsOfAllSessionsRequest.id = 'ondewo.nlu.ListInputContextsOfAllSes
  */
 class ListInputContextsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListInputContextsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.inputContexts = (_value.inputContexts || []).slice();
-        ListInputContextsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -30495,6 +30524,15 @@ class ListInputContextsResponse {
         if (_instance.inputContexts && _instance.inputContexts.length) {
             _writer.writeRepeatedString(1, _instance.inputContexts);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListInputContextsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.inputContexts = (_value.inputContexts || []).slice();
+        ListInputContextsResponse.refineValues(this);
     }
     get inputContexts() {
         return this._inputContexts;
@@ -30543,18 +30581,6 @@ ListInputContextsResponse.id = 'ondewo.nlu.ListInputContextsResponse';
  * Message implementation for ondewo.nlu.ListOutputContextsOfAllSessionsRequest
  */
 class ListOutputContextsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListOutputContextsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListOutputContextsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -30607,6 +30633,18 @@ class ListOutputContextsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListOutputContextsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListOutputContextsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -30668,15 +30706,6 @@ ListOutputContextsOfAllSessionsRequest.id = 'ondewo.nlu.ListOutputContextsOfAllS
  */
 class ListOutputContextsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListOutputContextsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.outputContexts = (_value.outputContexts || []).slice();
-        ListOutputContextsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -30720,6 +30749,15 @@ class ListOutputContextsResponse {
         if (_instance.outputContexts && _instance.outputContexts.length) {
             _writer.writeRepeatedString(1, _instance.outputContexts);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListOutputContextsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.outputContexts = (_value.outputContexts || []).slice();
+        ListOutputContextsResponse.refineValues(this);
     }
     get outputContexts() {
         return this._outputContexts;
@@ -30768,18 +30806,6 @@ ListOutputContextsResponse.id = 'ondewo.nlu.ListOutputContextsResponse';
  * Message implementation for ondewo.nlu.ListPlatformsOfAllSessionsRequest
  */
 class ListPlatformsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListPlatformsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListPlatformsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -30832,6 +30858,18 @@ class ListPlatformsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListPlatformsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListPlatformsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -30893,15 +30931,6 @@ ListPlatformsOfAllSessionsRequest.id = 'ondewo.nlu.ListPlatformsOfAllSessionsReq
  */
 class ListPlatformsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListPlatformsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.platforms = (_value.platforms || []).slice();
-        ListPlatformsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -30945,6 +30974,15 @@ class ListPlatformsResponse {
         if (_instance.platforms && _instance.platforms.length) {
             _writer.writeRepeatedString(1, _instance.platforms);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListPlatformsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.platforms = (_value.platforms || []).slice();
+        ListPlatformsResponse.refineValues(this);
     }
     get platforms() {
         return this._platforms;
@@ -30993,18 +31031,6 @@ ListPlatformsResponse.id = 'ondewo.nlu.ListPlatformsResponse';
  * Message implementation for ondewo.nlu.ListAccountIdsOfAllSessionsRequest
  */
 class ListAccountIdsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListAccountIdsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListAccountIdsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -31057,6 +31083,18 @@ class ListAccountIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListAccountIdsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListAccountIdsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -31118,15 +31156,6 @@ ListAccountIdsOfAllSessionsRequest.id = 'ondewo.nlu.ListAccountIdsOfAllSessionsR
  */
 class ListAccountIdsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListAccountIdsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.accountIds = (_value.accountIds || []).slice();
-        ListAccountIdsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -31170,6 +31199,15 @@ class ListAccountIdsResponse {
         if (_instance.accountIds && _instance.accountIds.length) {
             _writer.writeRepeatedString(1, _instance.accountIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListAccountIdsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.accountIds = (_value.accountIds || []).slice();
+        ListAccountIdsResponse.refineValues(this);
     }
     get accountIds() {
         return this._accountIds;
@@ -31218,18 +31256,6 @@ ListAccountIdsResponse.id = 'ondewo.nlu.ListAccountIdsResponse';
  * Message implementation for ondewo.nlu.ListPropertyIdsOfAllSessionsRequest
  */
 class ListPropertyIdsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListPropertyIdsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListPropertyIdsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -31282,6 +31308,18 @@ class ListPropertyIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListPropertyIdsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListPropertyIdsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -31343,15 +31381,6 @@ ListPropertyIdsOfAllSessionsRequest.id = 'ondewo.nlu.ListPropertyIdsOfAllSession
  */
 class ListPropertyIdsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListPropertyIdsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.propertyIds = (_value.propertyIds || []).slice();
-        ListPropertyIdsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -31395,6 +31424,15 @@ class ListPropertyIdsResponse {
         if (_instance.propertyIds && _instance.propertyIds.length) {
             _writer.writeRepeatedString(1, _instance.propertyIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListPropertyIdsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.propertyIds = (_value.propertyIds || []).slice();
+        ListPropertyIdsResponse.refineValues(this);
     }
     get propertyIds() {
         return this._propertyIds;
@@ -31443,18 +31481,6 @@ ListPropertyIdsResponse.id = 'ondewo.nlu.ListPropertyIdsResponse';
  * Message implementation for ondewo.nlu.ListDatastreamIdsOfAllSessionsRequest
  */
 class ListDatastreamIdsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListDatastreamIdsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListDatastreamIdsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -31507,6 +31533,18 @@ class ListDatastreamIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListDatastreamIdsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListDatastreamIdsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -31568,15 +31606,6 @@ ListDatastreamIdsOfAllSessionsRequest.id = 'ondewo.nlu.ListDatastreamIdsOfAllSes
  */
 class ListDatastreamIdsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListDatastreamIdsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.datastreamIds = (_value.datastreamIds || []).slice();
-        ListDatastreamIdsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -31620,6 +31649,15 @@ class ListDatastreamIdsResponse {
         if (_instance.datastreamIds && _instance.datastreamIds.length) {
             _writer.writeRepeatedString(1, _instance.datastreamIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListDatastreamIdsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.datastreamIds = (_value.datastreamIds || []).slice();
+        ListDatastreamIdsResponse.refineValues(this);
     }
     get datastreamIds() {
         return this._datastreamIds;
@@ -31668,18 +31706,6 @@ ListDatastreamIdsResponse.id = 'ondewo.nlu.ListDatastreamIdsResponse';
  * Message implementation for ondewo.nlu.ListOriginIdsOfAllSessionsRequest
  */
 class ListOriginIdsOfAllSessionsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListOriginIdsOfAllSessionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        ListOriginIdsOfAllSessionsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -31732,6 +31758,18 @@ class ListOriginIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListOriginIdsOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        ListOriginIdsOfAllSessionsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -31793,15 +31831,6 @@ ListOriginIdsOfAllSessionsRequest.id = 'ondewo.nlu.ListOriginIdsOfAllSessionsReq
  */
 class ListOriginIdsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListOriginIdsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.originIds = (_value.originIds || []).slice();
-        ListOriginIdsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -31845,6 +31874,15 @@ class ListOriginIdsResponse {
         if (_instance.originIds && _instance.originIds.length) {
             _writer.writeRepeatedString(1, _instance.originIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListOriginIdsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.originIds = (_value.originIds || []).slice();
+        ListOriginIdsResponse.refineValues(this);
     }
     get originIds() {
         return this._originIds;
@@ -31893,16 +31931,6 @@ ListOriginIdsResponse.id = 'ondewo.nlu.ListOriginIdsResponse';
  * Message implementation for ondewo.nlu.AddSessionLabelsRequest
  */
 class AddSessionLabelsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AddSessionLabelsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.labels = (_value.labels || []).slice();
-        AddSessionLabelsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -31954,6 +31982,16 @@ class AddSessionLabelsRequest {
         if (_instance.labels && _instance.labels.length) {
             _writer.writeRepeatedString(2, _instance.labels);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AddSessionLabelsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.labels = (_value.labels || []).slice();
+        AddSessionLabelsRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -32011,16 +32049,6 @@ AddSessionLabelsRequest.id = 'ondewo.nlu.AddSessionLabelsRequest';
  */
 class DeleteSessionLabelsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteSessionLabelsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.labels = (_value.labels || []).slice();
-        DeleteSessionLabelsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -32071,6 +32099,16 @@ class DeleteSessionLabelsRequest {
         if (_instance.labels && _instance.labels.length) {
             _writer.writeRepeatedString(2, _instance.labels);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteSessionLabelsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.labels = (_value.labels || []).slice();
+        DeleteSessionLabelsRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -32127,17 +32165,6 @@ DeleteSessionLabelsRequest.id = 'ondewo.nlu.DeleteSessionLabelsRequest';
  * Message implementation for ondewo.nlu.ListSessionReviewsRequest
  */
 class ListSessionReviewsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListSessionReviewsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.sessionReviewView = _value.sessionReviewView;
-        this.pageToken = _value.pageToken;
-        ListSessionReviewsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -32196,6 +32223,17 @@ class ListSessionReviewsRequest {
         if (_instance.pageToken) {
             _writer.writeString(4, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionReviewsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.sessionReviewView = _value.sessionReviewView;
+        this.pageToken = _value.pageToken;
+        ListSessionReviewsRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -32264,16 +32302,6 @@ ListSessionReviewsRequest.id = 'ondewo.nlu.ListSessionReviewsRequest';
  */
 class ListSessionReviewsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListSessionReviewsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionReviews = (_value.sessionReviews || []).map(m => new SessionReview(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListSessionReviewsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -32326,6 +32354,16 @@ class ListSessionReviewsResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionReviewsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionReviews = (_value.sessionReviews || []).map(m => new SessionReview(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListSessionReviewsResponse.refineValues(this);
     }
     get sessionReviews() {
         return this._sessionReviews;
@@ -32383,16 +32421,6 @@ ListSessionReviewsResponse.id = 'ondewo.nlu.ListSessionReviewsResponse';
  */
 class GetSessionReviewRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetSessionReviewRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionReviewId = _value.sessionReviewId;
-        this.sessionReviewView = _value.sessionReviewView;
-        GetSessionReviewRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -32443,6 +32471,16 @@ class GetSessionReviewRequest {
         if (_instance.sessionReviewView) {
             _writer.writeEnum(2, _instance.sessionReviewView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSessionReviewRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionReviewId = _value.sessionReviewId;
+        this.sessionReviewView = _value.sessionReviewView;
+        GetSessionReviewRequest.refineValues(this);
     }
     get sessionReviewId() {
         return this._sessionReviewId;
@@ -32503,16 +32541,6 @@ GetSessionReviewRequest.id = 'ondewo.nlu.GetSessionReviewRequest';
  */
 class GetLatestSessionReviewRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetLatestSessionReviewRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.sessionReviewView = _value.sessionReviewView;
-        GetLatestSessionReviewRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -32563,6 +32591,16 @@ class GetLatestSessionReviewRequest {
         if (_instance.sessionReviewView) {
             _writer.writeEnum(2, _instance.sessionReviewView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetLatestSessionReviewRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.sessionReviewView = _value.sessionReviewView;
+        GetLatestSessionReviewRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -32678,26 +32716,6 @@ var AgentStatus;
  */
 class Agent {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Agent to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.displayName = _value.displayName;
-        this.defaultLanguageCode = _value.defaultLanguageCode;
-        this.supportedLanguageCodes = (_value.supportedLanguageCodes || []).slice();
-        this.timeZone = _value.timeZone;
-        this.nluPlatform = _value.nluPlatform;
-        this.configs = _value.configs
-            ? new googleProtobuf003.Struct(_value.configs)
-            : undefined;
-        this.ownerId = _value.ownerId;
-        this.status = _value.status;
-        this.description = _value.description;
-        Agent.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -32807,6 +32825,26 @@ class Agent {
         if (_instance.description) {
             _writer.writeString(10, _instance.description);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Agent to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.displayName = _value.displayName;
+        this.defaultLanguageCode = _value.defaultLanguageCode;
+        this.supportedLanguageCodes = (_value.supportedLanguageCodes || []).slice();
+        this.timeZone = _value.timeZone;
+        this.nluPlatform = _value.nluPlatform;
+        this.configs = _value.configs
+            ? new googleProtobuf003.Struct(_value.configs)
+            : undefined;
+        this.ownerId = _value.ownerId;
+        this.status = _value.status;
+        this.description = _value.description;
+        Agent.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -32928,16 +32966,6 @@ Agent.id = 'ondewo.nlu.Agent';
  */
 class AgentWithOwner {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AgentWithOwner to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.agent = _value.agent ? new Agent(_value.agent) : undefined;
-        this.owner = _value.owner ? new User(_value.owner) : undefined;
-        AgentWithOwner.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -32990,6 +33018,16 @@ class AgentWithOwner {
         if (_instance.owner) {
             _writer.writeMessage(2, _instance.owner, User.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AgentWithOwner to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.agent = _value.agent ? new Agent(_value.agent) : undefined;
+        this.owner = _value.owner ? new User(_value.owner) : undefined;
+        AgentWithOwner.refineValues(this);
     }
     get agent() {
         return this._agent;
@@ -33047,20 +33085,6 @@ AgentWithOwner.id = 'ondewo.nlu.AgentWithOwner';
  */
 class AgentOfUserWithOwner {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AgentOfUserWithOwner to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.agentWithOwner = _value.agentWithOwner
-            ? new AgentWithOwner(_value.agentWithOwner)
-            : undefined;
-        this.projectRole = _value.projectRole
-            ? new ProjectRole(_value.projectRole)
-            : undefined;
-        AgentOfUserWithOwner.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -33113,6 +33137,20 @@ class AgentOfUserWithOwner {
         if (_instance.projectRole) {
             _writer.writeMessage(2, _instance.projectRole, ProjectRole.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AgentOfUserWithOwner to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.agentWithOwner = _value.agentWithOwner
+            ? new AgentWithOwner(_value.agentWithOwner)
+            : undefined;
+        this.projectRole = _value.projectRole
+            ? new ProjectRole(_value.projectRole)
+            : undefined;
+        AgentOfUserWithOwner.refineValues(this);
     }
     get agentWithOwner() {
         return this._agentWithOwner;
@@ -33176,16 +33214,6 @@ AgentOfUserWithOwner.id = 'ondewo.nlu.AgentOfUserWithOwner';
  */
 class CreateAgentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CreateAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.agent = _value.agent ? new Agent(_value.agent) : undefined;
-        this.agentView = _value.agentView;
-        CreateAgentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -33237,6 +33265,16 @@ class CreateAgentRequest {
         if (_instance.agentView) {
             _writer.writeEnum(2, _instance.agentView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.agent = _value.agent ? new Agent(_value.agent) : undefined;
+        this.agentView = _value.agentView;
+        CreateAgentRequest.refineValues(this);
     }
     get agent() {
         return this._agent;
@@ -33295,19 +33333,6 @@ CreateAgentRequest.id = 'ondewo.nlu.CreateAgentRequest';
  * Message implementation for ondewo.nlu.UpdateAgentRequest
  */
 class UpdateAgentRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.agent = _value.agent ? new Agent(_value.agent) : undefined;
-        this.agentView = _value.agentView;
-        this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
-            : undefined;
-        UpdateAgentRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -33368,6 +33393,19 @@ class UpdateAgentRequest {
         if (_instance.updateMask) {
             _writer.writeMessage(3, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.agent = _value.agent ? new Agent(_value.agent) : undefined;
+        this.agentView = _value.agentView;
+        this.updateMask = _value.updateMask
+            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            : undefined;
+        UpdateAgentRequest.refineValues(this);
     }
     get agent() {
         return this._agent;
@@ -33437,15 +33475,6 @@ UpdateAgentRequest.id = 'ondewo.nlu.UpdateAgentRequest';
  */
 class DeleteAgentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        DeleteAgentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -33489,6 +33518,15 @@ class DeleteAgentRequest {
         if (_instance.parent) {
             _writer.writeString(1, _instance.parent);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        DeleteAgentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -33537,16 +33575,6 @@ DeleteAgentRequest.id = 'ondewo.nlu.DeleteAgentRequest';
  * Message implementation for ondewo.nlu.GetAgentRequest
  */
 class GetAgentRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.agentView = _value.agentView;
-        GetAgentRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -33598,6 +33626,16 @@ class GetAgentRequest {
         if (_instance.agentView) {
             _writer.writeEnum(2, _instance.agentView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.agentView = _value.agentView;
+        GetAgentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -33657,19 +33695,6 @@ GetAgentRequest.id = 'ondewo.nlu.GetAgentRequest';
  */
 class ListAgentsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListAgentsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.agentView = _value.agentView;
-        this.pageToken = _value.pageToken;
-        this.sortByField = _value.sortByField
-            ? new AgentSorting(_value.sortByField)
-            : undefined;
-        ListAgentsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -33728,6 +33753,19 @@ class ListAgentsRequest {
         if (_instance.sortByField) {
             _writer.writeMessage(3, _instance.sortByField, AgentSorting.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListAgentsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.agentView = _value.agentView;
+        this.pageToken = _value.pageToken;
+        this.sortByField = _value.sortByField
+            ? new AgentSorting(_value.sortByField)
+            : undefined;
+        ListAgentsRequest.refineValues(this);
     }
     get agentView() {
         return this._agentView;
@@ -33797,16 +33835,6 @@ ListAgentsRequest.id = 'ondewo.nlu.ListAgentsRequest';
  */
 class ListAgentsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListAgentsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.agentsWithOwners = (_value.agentsWithOwners || []).map(m => new AgentWithOwner(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListAgentsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -33859,6 +33887,16 @@ class ListAgentsResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListAgentsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.agentsWithOwners = (_value.agentsWithOwners || []).map(m => new AgentWithOwner(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListAgentsResponse.refineValues(this);
     }
     get agentsWithOwners() {
         return this._agentsWithOwners;
@@ -33916,16 +33954,6 @@ ListAgentsResponse.id = 'ondewo.nlu.ListAgentsResponse';
  */
 class ListAgentsOfUserResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListAgentsOfUserResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.agentsOfUserWithOwners = (_value.agentsOfUserWithOwners || []).map(m => new AgentOfUserWithOwner(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListAgentsOfUserResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -33980,6 +34008,16 @@ class ListAgentsOfUserResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListAgentsOfUserResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.agentsOfUserWithOwners = (_value.agentsOfUserWithOwners || []).map(m => new AgentOfUserWithOwner(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListAgentsOfUserResponse.refineValues(this);
     }
     get agentsOfUserWithOwners() {
         return this._agentsOfUserWithOwners;
@@ -34036,17 +34074,6 @@ ListAgentsOfUserResponse.id = 'ondewo.nlu.ListAgentsOfUserResponse';
  * Message implementation for ondewo.nlu.TrainAgentRequest
  */
 class TrainAgentRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of TrainAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.branch = _value.branch;
-        this.initiationProtocol = _value.initiationProtocol;
-        TrainAgentRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -34105,6 +34132,17 @@ class TrainAgentRequest {
         if (_instance.initiationProtocol) {
             _writer.writeEnum(3, _instance.initiationProtocol);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TrainAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.branch = _value.branch;
+        this.initiationProtocol = _value.initiationProtocol;
+        TrainAgentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -34173,16 +34211,6 @@ TrainAgentRequest.id = 'ondewo.nlu.TrainAgentRequest';
  */
 class BuildCacheRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BuildCacheRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.branch = _value.branch;
-        BuildCacheRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -34233,6 +34261,16 @@ class BuildCacheRequest {
         if (_instance.branch) {
             _writer.writeString(2, _instance.branch);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BuildCacheRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.branch = _value.branch;
+        BuildCacheRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -34289,17 +34327,6 @@ BuildCacheRequest.id = 'ondewo.nlu.BuildCacheRequest';
  * Message implementation for ondewo.nlu.ExportAgentRequest
  */
 class ExportAgentRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExportAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.agentUri = _value.agentUri;
-        this.compressionLevel = _value.compressionLevel;
-        ExportAgentRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -34358,6 +34385,17 @@ class ExportAgentRequest {
         if (_instance.compressionLevel) {
             _writer.writeInt32(3, _instance.compressionLevel);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.agentUri = _value.agentUri;
+        this.compressionLevel = _value.compressionLevel;
+        ExportAgentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -34423,17 +34461,6 @@ ExportAgentRequest.id = 'ondewo.nlu.ExportAgentRequest';
  */
 class ExportAgentResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExportAgentResponse to deeply clone from
-     */
-    constructor(_value) {
-        this._agent = ExportAgentResponse.AgentCase.none;
-        _value = _value || {};
-        this.agentUri = _value.agentUri;
-        this.agentContent = _value.agentContent;
-        ExportAgentResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -34481,6 +34508,17 @@ class ExportAgentResponse {
         if (_instance.agentContent && _instance.agentContent.length) {
             _writer.writeBytes(2, _instance.agentContent);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportAgentResponse to deeply clone from
+     */
+    constructor(_value) {
+        this._agent = ExportAgentResponse.AgentCase.none;
+        _value = _value || {};
+        this.agentUri = _value.agentUri;
+        this.agentContent = _value.agentContent;
+        ExportAgentResponse.refineValues(this);
     }
     get agentUri() {
         return this._agentUri;
@@ -34563,19 +34601,6 @@ ExportAgentResponse.id = 'ondewo.nlu.ExportAgentResponse';
  */
 class ExportBenchmarkAgentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExportBenchmarkAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.compressionLevel = _value.compressionLevel;
-        this.testSize = _value.testSize;
-        this.trainSize = _value.trainSize;
-        this.randomState = _value.randomState;
-        ExportBenchmarkAgentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -34647,6 +34672,19 @@ class ExportBenchmarkAgentRequest {
         if (_instance.randomState) {
             _writer.writeInt32(5, _instance.randomState);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportBenchmarkAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.compressionLevel = _value.compressionLevel;
+        this.testSize = _value.testSize;
+        this.trainSize = _value.trainSize;
+        this.randomState = _value.randomState;
+        ExportBenchmarkAgentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -34728,20 +34766,6 @@ ExportBenchmarkAgentRequest.id = 'ondewo.nlu.ExportBenchmarkAgentRequest';
  */
 class ExportBenchmarkAgentResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExportBenchmarkAgentResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.agentContent = _value.agentContent;
-        (this.trainingPhrases = _value.trainingPhrases
-            ? Object.keys(_value.trainingPhrases).reduce((r, k) => (Object.assign(Object.assign({}, r), { [k]: _value.trainingPhrases[k]
-                    ? new ListTrainingPhrasesResponse(_value.trainingPhrases[k])
-                    : undefined })), {})
-            : {}),
-            ExportBenchmarkAgentResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -34806,6 +34830,20 @@ class ExportBenchmarkAgentResponse {
                     .serializeBinaryToWriter);
             }
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportBenchmarkAgentResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.agentContent = _value.agentContent;
+        (this.trainingPhrases = _value.trainingPhrases
+            ? Object.keys(_value.trainingPhrases).reduce((r, k) => (Object.assign(Object.assign({}, r), { [k]: _value.trainingPhrases[k]
+                    ? new ListTrainingPhrasesResponse(_value.trainingPhrases[k])
+                    : undefined })), {})
+            : {}),
+            ExportBenchmarkAgentResponse.refineValues(this);
     }
     get agentContent() {
         return this._agentContent;
@@ -34876,18 +34914,6 @@ ExportBenchmarkAgentResponse.id = 'ondewo.nlu.ExportBenchmarkAgentResponse';
      */
     class TrainingPhrasesEntry {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of TrainingPhrasesEntry to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.key = _value.key;
-            this.value = _value.value
-                ? new ListTrainingPhrasesResponse(_value.value)
-                : undefined;
-            TrainingPhrasesEntry.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -34940,6 +34966,18 @@ ExportBenchmarkAgentResponse.id = 'ondewo.nlu.ExportBenchmarkAgentResponse';
             if (_instance.value) {
                 _writer.writeMessage(2, _instance.value, ListTrainingPhrasesResponse.serializeBinaryToWriter);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of TrainingPhrasesEntry to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.key = _value.key;
+            this.value = _value.value
+                ? new ListTrainingPhrasesResponse(_value.value)
+                : undefined;
+            TrainingPhrasesEntry.refineValues(this);
         }
         get key() {
             return this._key;
@@ -34998,18 +35036,6 @@ ExportBenchmarkAgentResponse.id = 'ondewo.nlu.ExportBenchmarkAgentResponse';
  * Message implementation for ondewo.nlu.OptimizeRankingMatchRequest
  */
 class OptimizeRankingMatchRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of OptimizeRankingMatchRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCodes = (_value.languageCodes || []).slice();
-        this.optimizationConfigs = (_value.optimizationConfigs || []).map(m => new RankingMatchOptimizationConfig(m));
-        this.inPlace = _value.inPlace;
-        OptimizeRankingMatchRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -35078,6 +35104,18 @@ class OptimizeRankingMatchRequest {
         if (_instance.inPlace) {
             _writer.writeBool(4, _instance.inPlace);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of OptimizeRankingMatchRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCodes = (_value.languageCodes || []).slice();
+        this.optimizationConfigs = (_value.optimizationConfigs || []).map(m => new RankingMatchOptimizationConfig(m));
+        this.inPlace = _value.inPlace;
+        OptimizeRankingMatchRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -35151,20 +35189,6 @@ OptimizeRankingMatchRequest.id = 'ondewo.nlu.OptimizeRankingMatchRequest';
  */
 class RankingMatchOptimizationConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of RankingMatchOptimizationConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.languageCode = _value.languageCode;
-        this.nSplits = _value.nSplits;
-        this.randomSeed = _value.randomSeed;
-        this.initialThresholds = _value.initialThresholds
-            ? new googleProtobuf003.Struct(_value.initialThresholds)
-            : undefined;
-        RankingMatchOptimizationConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -35230,6 +35254,20 @@ class RankingMatchOptimizationConfig {
         if (_instance.initialThresholds) {
             _writer.writeMessage(4, _instance.initialThresholds, googleProtobuf003.Struct.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RankingMatchOptimizationConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.languageCode = _value.languageCode;
+        this.nSplits = _value.nSplits;
+        this.randomSeed = _value.randomSeed;
+        this.initialThresholds = _value.initialThresholds
+            ? new googleProtobuf003.Struct(_value.initialThresholds)
+            : undefined;
+        RankingMatchOptimizationConfig.refineValues(this);
     }
     get languageCode() {
         return this._languageCode;
@@ -35307,20 +35345,6 @@ RankingMatchOptimizationConfig.id = 'ondewo.nlu.RankingMatchOptimizationConfig';
  */
 class OptimizeRankingMatchResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of OptimizeRankingMatchResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.optimizationInfo = _value.optimizationInfo
-            ? new googleProtobuf003.Struct(_value.optimizationInfo)
-            : undefined;
-        this.optimizedOndewoConfig = _value.optimizedOndewoConfig
-            ? new googleProtobuf003.Struct(_value.optimizedOndewoConfig)
-            : undefined;
-        OptimizeRankingMatchResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -35374,6 +35398,20 @@ class OptimizeRankingMatchResponse {
         if (_instance.optimizedOndewoConfig) {
             _writer.writeMessage(3, _instance.optimizedOndewoConfig, googleProtobuf003.Struct.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of OptimizeRankingMatchResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.optimizationInfo = _value.optimizationInfo
+            ? new googleProtobuf003.Struct(_value.optimizationInfo)
+            : undefined;
+        this.optimizedOndewoConfig = _value.optimizedOndewoConfig
+            ? new googleProtobuf003.Struct(_value.optimizedOndewoConfig)
+            : undefined;
+        OptimizeRankingMatchResponse.refineValues(this);
     }
     get optimizationInfo() {
         return this._optimizationInfo;
@@ -35439,18 +35477,6 @@ OptimizeRankingMatchResponse.id = 'ondewo.nlu.OptimizeRankingMatchResponse';
  */
 class ImportAgentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ImportAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        this._agent = ImportAgentRequest.AgentCase.none;
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.agentUri = _value.agentUri;
-        this.agentContent = _value.agentContent;
-        ImportAgentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -35506,6 +35532,18 @@ class ImportAgentRequest {
         if (_instance.agentContent && _instance.agentContent.length) {
             _writer.writeBytes(3, _instance.agentContent);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ImportAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        this._agent = ImportAgentRequest.AgentCase.none;
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.agentUri = _value.agentUri;
+        this.agentContent = _value.agentContent;
+        ImportAgentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -35596,18 +35634,6 @@ ImportAgentRequest.id = 'ondewo.nlu.ImportAgentRequest';
  */
 class RestoreAgentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of RestoreAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        this._agent = RestoreAgentRequest.AgentCase.none;
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.agentUri = _value.agentUri;
-        this.agentContent = _value.agentContent;
-        RestoreAgentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -35663,6 +35689,18 @@ class RestoreAgentRequest {
         if (_instance.agentContent && _instance.agentContent.length) {
             _writer.writeBytes(3, _instance.agentContent);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RestoreAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        this._agent = RestoreAgentRequest.AgentCase.none;
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.agentUri = _value.agentUri;
+        this.agentContent = _value.agentContent;
+        RestoreAgentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -35753,18 +35791,6 @@ RestoreAgentRequest.id = 'ondewo.nlu.RestoreAgentRequest';
  */
 class GetAgentStatisticsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAgentStatisticsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.format = _value.format;
-        this.languageCode = _value.languageCode;
-        this.type = _value.type;
-        GetAgentStatisticsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -35829,6 +35855,18 @@ class GetAgentStatisticsRequest {
         if (_instance.type) {
             _writer.writeEnum(4, _instance.type);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAgentStatisticsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.format = _value.format;
+        this.languageCode = _value.languageCode;
+        this.type = _value.type;
+        GetAgentStatisticsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -35902,17 +35940,6 @@ GetAgentStatisticsRequest.id = 'ondewo.nlu.GetAgentStatisticsRequest';
  */
 class GetAgentStatisticsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAgentStatisticsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.reports = _value.reports;
-        this.format = _value.format;
-        this.type = _value.type;
-        GetAgentStatisticsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -35970,6 +35997,17 @@ class GetAgentStatisticsResponse {
         if (_instance.type) {
             _writer.writeEnum(3, _instance.type);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAgentStatisticsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.reports = _value.reports;
+        this.format = _value.format;
+        this.type = _value.type;
+        GetAgentStatisticsResponse.refineValues(this);
     }
     get reports() {
         return this._reports;
@@ -36034,28 +36072,6 @@ GetAgentStatisticsResponse.id = 'ondewo.nlu.GetAgentStatisticsResponse';
  * Message implementation for ondewo.nlu.GetSessionsStatisticsRequest
  */
 class GetSessionsStatisticsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetSessionsStatisticsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.format = _value.format;
-        this.type = _value.type;
-        this.sessionFilter = _value.sessionFilter
-            ? new SessionFilter(_value.sessionFilter)
-            : undefined;
-        this.contextFilters = (_value.contextFilters || []).map(m => new ContextFilter(m));
-        this.limit = _value.limit;
-        this.groupBys = (_value.groupBys || []).slice();
-        this.orderBys = (_value.orderBys || []).slice();
-        this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
-            : undefined;
-        this.sqlQuery = _value.sqlQuery;
-        GetSessionsStatisticsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -36167,6 +36183,28 @@ class GetSessionsStatisticsRequest {
         if (_instance.sqlQuery) {
             _writer.writeString(10, _instance.sqlQuery);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSessionsStatisticsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.format = _value.format;
+        this.type = _value.type;
+        this.sessionFilter = _value.sessionFilter
+            ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.contextFilters = (_value.contextFilters || []).map(m => new ContextFilter(m));
+        this.limit = _value.limit;
+        this.groupBys = (_value.groupBys || []).slice();
+        this.orderBys = (_value.orderBys || []).slice();
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
+        this.sqlQuery = _value.sqlQuery;
+        GetSessionsStatisticsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -36292,17 +36330,6 @@ GetSessionsStatisticsRequest.id = 'ondewo.nlu.GetSessionsStatisticsRequest';
  */
 class GetSessionsStatisticsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetSessionsStatisticsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.reports = _value.reports;
-        this.format = _value.format;
-        this.type = _value.type;
-        GetSessionsStatisticsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -36360,6 +36387,17 @@ class GetSessionsStatisticsResponse {
         if (_instance.type) {
             _writer.writeEnum(3, _instance.type);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSessionsStatisticsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.reports = _value.reports;
+        this.format = _value.format;
+        this.type = _value.type;
+        GetSessionsStatisticsResponse.refineValues(this);
     }
     get reports() {
         return this._reports;
@@ -36425,17 +36463,6 @@ GetSessionsStatisticsResponse.id = 'ondewo.nlu.GetSessionsStatisticsResponse';
  */
 class AddUserToProjectRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AddUserToProjectRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.userId = _value.userId;
-        this.projectRoleId = _value.projectRoleId;
-        AddUserToProjectRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -36493,6 +36520,17 @@ class AddUserToProjectRequest {
         if (_instance.projectRoleId) {
             _writer.writeUint32(4, _instance.projectRoleId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AddUserToProjectRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.userId = _value.userId;
+        this.projectRoleId = _value.projectRoleId;
+        AddUserToProjectRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -36558,16 +36596,6 @@ AddUserToProjectRequest.id = 'ondewo.nlu.AddUserToProjectRequest';
  */
 class RemoveUserFromProjectRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of RemoveUserFromProjectRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.userId = _value.userId;
-        RemoveUserFromProjectRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -36618,6 +36646,16 @@ class RemoveUserFromProjectRequest {
         if (_instance.userId) {
             _writer.writeString(2, _instance.userId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RemoveUserFromProjectRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.userId = _value.userId;
+        RemoveUserFromProjectRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -36675,16 +36713,6 @@ RemoveUserFromProjectRequest.id = 'ondewo.nlu.RemoveUserFromProjectRequest';
  */
 class ListUsersInProjectRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListUsersInProjectRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.pageToken = _value.pageToken;
-        ListUsersInProjectRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -36735,6 +36763,16 @@ class ListUsersInProjectRequest {
         if (_instance.pageToken) {
             _writer.writeString(2, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListUsersInProjectRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.pageToken = _value.pageToken;
+        ListUsersInProjectRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -36791,17 +36829,6 @@ ListUsersInProjectRequest.id = 'ondewo.nlu.ListUsersInProjectRequest';
  * Message implementation for ondewo.nlu.UserInProject
  */
 class UserInProject {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UserInProject to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.user = _value.user ? new User(_value.user) : undefined;
-        this.roleId = _value.roleId;
-        UserInProject.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -36861,6 +36888,17 @@ class UserInProject {
         if (_instance.roleId) {
             _writer.writeUint32(3, _instance.roleId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UserInProject to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.user = _value.user ? new User(_value.user) : undefined;
+        this.roleId = _value.roleId;
+        UserInProject.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -36926,16 +36964,6 @@ UserInProject.id = 'ondewo.nlu.UserInProject';
  */
 class ListUsersInProjectResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListUsersInProjectResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.users = (_value.users || []).map(m => new UserInProject(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListUsersInProjectResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -36988,6 +37016,16 @@ class ListUsersInProjectResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListUsersInProjectResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.users = (_value.users || []).map(m => new UserInProject(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListUsersInProjectResponse.refineValues(this);
     }
     get users() {
         return this._users;
@@ -37045,16 +37083,6 @@ ListUsersInProjectResponse.id = 'ondewo.nlu.ListUsersInProjectResponse';
  */
 class GetPlatformInfoResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetPlatformInfoResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.version = _value.version;
-        this.commitHash = _value.commitHash;
-        GetPlatformInfoResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -37105,6 +37133,16 @@ class GetPlatformInfoResponse {
         if (_instance.commitHash) {
             _writer.writeString(2, _instance.commitHash);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetPlatformInfoResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.version = _value.version;
+        this.commitHash = _value.commitHash;
+        GetPlatformInfoResponse.refineValues(this);
     }
     get version() {
         return this._version;
@@ -37162,15 +37200,6 @@ GetPlatformInfoResponse.id = 'ondewo.nlu.GetPlatformInfoResponse';
  */
 class ListProjectPermissionsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListProjectPermissionsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.pageToken = _value.pageToken;
-        ListProjectPermissionsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -37214,6 +37243,15 @@ class ListProjectPermissionsRequest {
         if (_instance.pageToken) {
             _writer.writeString(1, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListProjectPermissionsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.pageToken = _value.pageToken;
+        ListProjectPermissionsRequest.refineValues(this);
     }
     get pageToken() {
         return this._pageToken;
@@ -37262,16 +37300,6 @@ ListProjectPermissionsRequest.id = 'ondewo.nlu.ListProjectPermissionsRequest';
  * Message implementation for ondewo.nlu.ListProjectPermissionsResponse
  */
 class ListProjectPermissionsResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListProjectPermissionsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.permissions = (_value.permissions || []).slice();
-        this.nextPageToken = _value.nextPageToken;
-        ListProjectPermissionsResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -37323,6 +37351,16 @@ class ListProjectPermissionsResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListProjectPermissionsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.permissions = (_value.permissions || []).slice();
+        this.nextPageToken = _value.nextPageToken;
+        ListProjectPermissionsResponse.refineValues(this);
     }
     get permissions() {
         return this._permissions;
@@ -37379,17 +37417,6 @@ ListProjectPermissionsResponse.id = 'ondewo.nlu.ListProjectPermissionsResponse';
  * Message implementation for ondewo.nlu.SetAgentStatusRequest
  */
 class SetAgentStatusRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of SetAgentStatusRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.status = _value.status;
-        this.agentView = _value.agentView;
-        SetAgentStatusRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -37448,6 +37475,17 @@ class SetAgentStatusRequest {
         if (_instance.agentView) {
             _writer.writeEnum(3, _instance.agentView);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SetAgentStatusRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.status = _value.status;
+        this.agentView = _value.agentView;
+        SetAgentStatusRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -37515,16 +37553,6 @@ SetAgentStatusRequest.id = 'ondewo.nlu.SetAgentStatusRequest';
  */
 class AgentSorting {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AgentSorting to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sortingField = _value.sortingField;
-        this.sortingMode = _value.sortingMode;
-        AgentSorting.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -37575,6 +37603,16 @@ class AgentSorting {
         if (_instance.sortingMode) {
             _writer.writeEnum(2, _instance.sortingMode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AgentSorting to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sortingField = _value.sortingField;
+        this.sortingMode = _value.sortingMode;
+        AgentSorting.refineValues(this);
     }
     get sortingField() {
         return this._sortingField;
@@ -37645,19 +37683,6 @@ AgentSorting.id = 'ondewo.nlu.AgentSorting';
  * Message implementation for ondewo.nlu.SetResourcesRequest
  */
 class SetResourcesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of SetResourcesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.name = _value.name;
-        this.type = _value.type;
-        this.resourceFile = _value.resourceFile;
-        this.languageCode = _value.languageCode;
-        SetResourcesRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -37730,6 +37755,19 @@ class SetResourcesRequest {
         if (_instance.languageCode) {
             _writer.writeString(5, _instance.languageCode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SetResourcesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.name = _value.name;
+        this.type = _value.type;
+        this.resourceFile = _value.resourceFile;
+        this.languageCode = _value.languageCode;
+        SetResourcesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -37815,18 +37853,6 @@ SetResourcesRequest.id = 'ondewo.nlu.SetResourcesRequest';
  */
 class DeleteResourcesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteResourcesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.name = _value.name;
-        this.type = _value.type;
-        this.languageCode = _value.languageCode;
-        DeleteResourcesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -37891,6 +37917,18 @@ class DeleteResourcesRequest {
         if (_instance.languageCode) {
             _writer.writeString(4, _instance.languageCode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteResourcesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.name = _value.name;
+        this.type = _value.type;
+        this.languageCode = _value.languageCode;
+        DeleteResourcesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -37964,18 +38002,6 @@ DeleteResourcesRequest.id = 'ondewo.nlu.DeleteResourcesRequest';
  */
 class ExportResourcesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExportResourcesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.name = _value.name;
-        this.type = _value.type;
-        this.languageCode = _value.languageCode;
-        ExportResourcesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -38040,6 +38066,18 @@ class ExportResourcesRequest {
         if (_instance.languageCode) {
             _writer.writeString(4, _instance.languageCode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportResourcesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.name = _value.name;
+        this.type = _value.type;
+        this.languageCode = _value.languageCode;
+        ExportResourcesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -38113,19 +38151,6 @@ ExportResourcesRequest.id = 'ondewo.nlu.ExportResourcesRequest';
  */
 class ExportResourcesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExportResourcesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.name = _value.name;
-        this.type = _value.type;
-        this.languageCode = _value.languageCode;
-        this.resourceFile = _value.resourceFile;
-        ExportResourcesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -38197,6 +38222,19 @@ class ExportResourcesResponse {
         if (_instance.resourceFile && _instance.resourceFile.length) {
             _writer.writeBytes(5, _instance.resourceFile);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportResourcesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.name = _value.name;
+        this.type = _value.type;
+        this.languageCode = _value.languageCode;
+        this.resourceFile = _value.resourceFile;
+        ExportResourcesResponse.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -38282,18 +38320,6 @@ ExportResourcesResponse.id = 'ondewo.nlu.ExportResourcesResponse';
  */
 class GetModelStatusesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetModelStatusesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.cacheVersion = _value.cacheVersion;
-        this.languageCode = _value.languageCode;
-        this.modelName = _value.modelName;
-        GetModelStatusesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -38358,6 +38384,18 @@ class GetModelStatusesRequest {
         if (_instance.modelName) {
             _writer.writeString(4, _instance.modelName);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetModelStatusesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.cacheVersion = _value.cacheVersion;
+        this.languageCode = _value.languageCode;
+        this.modelName = _value.modelName;
+        GetModelStatusesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -38430,22 +38468,6 @@ GetModelStatusesRequest.id = 'ondewo.nlu.GetModelStatusesRequest';
  * Message implementation for ondewo.nlu.ModelStatus
  */
 class ModelStatus {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ModelStatus to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.cacheVersion = _value.cacheVersion;
-        this.languageCode = _value.languageCode;
-        this.modelName = _value.modelName;
-        this.statusSetTime = _value.statusSetTime
-            ? new googleProtobuf003.Timestamp(_value.statusSetTime)
-            : undefined;
-        this.config = _value.config;
-        this.status = _value.status;
-        ModelStatus.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -38526,6 +38548,22 @@ class ModelStatus {
         if (_instance.status) {
             _writer.writeEnum(6, _instance.status);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ModelStatus to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.cacheVersion = _value.cacheVersion;
+        this.languageCode = _value.languageCode;
+        this.modelName = _value.modelName;
+        this.statusSetTime = _value.statusSetTime
+            ? new googleProtobuf003.Timestamp(_value.statusSetTime)
+            : undefined;
+        this.config = _value.config;
+        this.status = _value.status;
+        ModelStatus.refineValues(this);
     }
     get cacheVersion() {
         return this._cacheVersion;
@@ -38631,15 +38669,6 @@ ModelStatus.id = 'ondewo.nlu.ModelStatus';
  */
 class GetModelStatusesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetModelStatusesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.modelStatuses = (_value.modelStatuses || []).map(m => new ModelStatus(m));
-        GetModelStatusesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -38685,6 +38714,15 @@ class GetModelStatusesResponse {
         if (_instance.modelStatuses && _instance.modelStatuses.length) {
             _writer.writeRepeatedMessage(1, _instance.modelStatuses, ModelStatus.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetModelStatusesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.modelStatuses = (_value.modelStatuses || []).map(m => new ModelStatus(m));
+        GetModelStatusesResponse.refineValues(this);
     }
     get modelStatuses() {
         return this._modelStatuses;
@@ -38733,17 +38771,6 @@ GetModelStatusesResponse.id = 'ondewo.nlu.GetModelStatusesResponse';
  * Message implementation for ondewo.nlu.CustomPlatformInfo
  */
 class CustomPlatformInfo {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CustomPlatformInfo to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.platform = _value.platform;
-        this.displayName = _value.displayName;
-        this.position = _value.position;
-        CustomPlatformInfo.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -38802,6 +38829,17 @@ class CustomPlatformInfo {
         if (_instance.position) {
             _writer.writeUint32(3, _instance.position);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CustomPlatformInfo to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.platform = _value.platform;
+        this.displayName = _value.displayName;
+        this.position = _value.position;
+        CustomPlatformInfo.refineValues(this);
     }
     get platform() {
         return this._platform;
@@ -38869,15 +38907,6 @@ CustomPlatformInfo.id = 'ondewo.nlu.CustomPlatformInfo';
  */
 class GetPlatformMappingRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetPlatformMappingRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        GetPlatformMappingRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -38921,6 +38950,15 @@ class GetPlatformMappingRequest {
         if (_instance.parent) {
             _writer.writeString(1, _instance.parent);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetPlatformMappingRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        GetPlatformMappingRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -38969,16 +39007,6 @@ GetPlatformMappingRequest.id = 'ondewo.nlu.GetPlatformMappingRequest';
  * Message implementation for ondewo.nlu.PlatformMapping
  */
 class PlatformMapping {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of PlatformMapping to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.platformInfo = (_value.platformInfo || []).map(m => new CustomPlatformInfo(m));
-        PlatformMapping.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -39032,6 +39060,16 @@ class PlatformMapping {
         if (_instance.platformInfo && _instance.platformInfo.length) {
             _writer.writeRepeatedMessage(2, _instance.platformInfo, CustomPlatformInfo.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PlatformMapping to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.platformInfo = (_value.platformInfo || []).map(m => new CustomPlatformInfo(m));
+        PlatformMapping.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -39088,18 +39126,6 @@ PlatformMapping.id = 'ondewo.nlu.PlatformMapping';
  * Message implementation for ondewo.nlu.FullTextSearchRequest
  */
 class FullTextSearchRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.term = _value.term;
-        this.pageToken = _value.pageToken;
-        FullTextSearchRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -39165,6 +39191,18 @@ class FullTextSearchRequest {
         if (_instance.pageToken) {
             _writer.writeString(4, _instance.pageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.term = _value.term;
+        this.pageToken = _value.pageToken;
+        FullTextSearchRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -39253,21 +39291,6 @@ FullTextSearchRequest.id = 'ondewo.nlu.FullTextSearchRequest';
  * Message implementation for ondewo.nlu.FullTextSearchResponseEntityType
  */
 class FullTextSearchResponseEntityType {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseEntityType to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.entityTypeResults = (_value.entityTypeResults || []).map(m => new FullTextSearchResponseEntityType.EntityTypeSearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseEntityType.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -39359,6 +39382,21 @@ class FullTextSearchResponseEntityType {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseEntityType to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.entityTypeResults = (_value.entityTypeResults || []).map(m => new FullTextSearchResponseEntityType.EntityTypeSearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseEntityType.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -39457,17 +39495,6 @@ FullTextSearchResponseEntityType.id = 'ondewo.nlu.FullTextSearchResponseEntityTy
      */
     class EntityTypeSearchResult {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of EntityTypeSearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.displayName = _value.displayName;
-            this.language = _value.language;
-            EntityTypeSearchResult.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -39525,6 +39552,17 @@ FullTextSearchResponseEntityType.id = 'ondewo.nlu.FullTextSearchResponseEntityTy
             if (_instance.language) {
                 _writer.writeString(3, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of EntityTypeSearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.displayName = _value.displayName;
+            this.language = _value.language;
+            EntityTypeSearchResult.refineValues(this);
         }
         get name() {
             return this._name;
@@ -39591,21 +39629,6 @@ FullTextSearchResponseEntityType.id = 'ondewo.nlu.FullTextSearchResponseEntityTy
  * Message implementation for ondewo.nlu.FullTextSearchResponseEntity
  */
 class FullTextSearchResponseEntity {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseEntity to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.entityResults = (_value.entityResults || []).map(m => new FullTextSearchResponseEntity.EntitySearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseEntity.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -39695,6 +39718,21 @@ class FullTextSearchResponseEntity {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseEntity to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.entityResults = (_value.entityResults || []).map(m => new FullTextSearchResponseEntity.EntitySearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseEntity.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -39793,19 +39831,6 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
      */
     class EntitySearchResult {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of EntitySearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.displayName = _value.displayName;
-            this.entityTypeName = _value.entityTypeName;
-            this.entityTypeDisplayName = _value.entityTypeDisplayName;
-            this.language = _value.language;
-            EntitySearchResult.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -39877,6 +39902,19 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
             if (_instance.language) {
                 _writer.writeString(5, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of EntitySearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.displayName = _value.displayName;
+            this.entityTypeName = _value.entityTypeName;
+            this.entityTypeDisplayName = _value.entityTypeDisplayName;
+            this.language = _value.language;
+            EntitySearchResult.refineValues(this);
         }
         get name() {
             return this._name;
@@ -39959,21 +39997,6 @@ FullTextSearchResponseEntity.id = 'ondewo.nlu.FullTextSearchResponseEntity';
  * Message implementation for ondewo.nlu.FullTextSearchResponseEntitySynonym
  */
 class FullTextSearchResponseEntitySynonym {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseEntitySynonym to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.entitySynonymResults = (_value.entitySynonymResults || []).map(m => new FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseEntitySynonym.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -40066,6 +40089,21 @@ class FullTextSearchResponseEntitySynonym {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseEntitySynonym to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.entitySynonymResults = (_value.entitySynonymResults || []).map(m => new FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseEntitySynonym.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -40164,21 +40202,6 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
      */
     class EntitySynonymSearchResult {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of EntitySynonymSearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.displayName = _value.displayName;
-            this.entityTypeName = _value.entityTypeName;
-            this.entityTypeDisplayName = _value.entityTypeDisplayName;
-            this.entityName = _value.entityName;
-            this.entityDisplayName = _value.entityDisplayName;
-            this.language = _value.language;
-            EntitySynonymSearchResult.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -40264,6 +40287,21 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
             if (_instance.language) {
                 _writer.writeString(7, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of EntitySynonymSearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.displayName = _value.displayName;
+            this.entityTypeName = _value.entityTypeName;
+            this.entityTypeDisplayName = _value.entityTypeDisplayName;
+            this.entityName = _value.entityName;
+            this.entityDisplayName = _value.entityDisplayName;
+            this.language = _value.language;
+            EntitySynonymSearchResult.refineValues(this);
         }
         get name() {
             return this._name;
@@ -40363,21 +40401,6 @@ FullTextSearchResponseEntitySynonym.id = 'ondewo.nlu.FullTextSearchResponseEntit
  */
 class FullTextSearchResponseIntent {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseIntent to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.intentResults = (_value.intentResults || []).map(m => new FullTextSearchResponseIntent.IntentSearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseIntent.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -40466,6 +40489,21 @@ class FullTextSearchResponseIntent {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseIntent to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.intentResults = (_value.intentResults || []).map(m => new FullTextSearchResponseIntent.IntentSearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseIntent.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -40564,19 +40602,6 @@ FullTextSearchResponseIntent.id = 'ondewo.nlu.FullTextSearchResponseIntent';
      */
     class IntentSearchResult {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of IntentSearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.displayName = _value.displayName;
-            this.domainName = _value.domainName;
-            this.tags = (_value.tags || []).slice();
-            this.language = _value.language;
-            IntentSearchResult.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -40648,6 +40673,19 @@ FullTextSearchResponseIntent.id = 'ondewo.nlu.FullTextSearchResponseIntent';
             if (_instance.language) {
                 _writer.writeString(5, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of IntentSearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.displayName = _value.displayName;
+            this.domainName = _value.domainName;
+            this.tags = (_value.tags || []).slice();
+            this.language = _value.language;
+            IntentSearchResult.refineValues(this);
         }
         get name() {
             return this._name;
@@ -40730,21 +40768,6 @@ FullTextSearchResponseIntent.id = 'ondewo.nlu.FullTextSearchResponseIntent';
  * Message implementation for ondewo.nlu.FullTextSearchResponseIntentContextIn
  */
 class FullTextSearchResponseIntentContextIn {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseIntentContextIn to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.intentContextInResults = (_value.intentContextInResults || []).map(m => new FullTextSearchResponseIntentContextIn.IntentContextInSearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseIntentContextIn.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -40837,6 +40860,21 @@ class FullTextSearchResponseIntentContextIn {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseIntentContextIn to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.intentContextInResults = (_value.intentContextInResults || []).map(m => new FullTextSearchResponseIntentContextIn.IntentContextInSearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseIntentContextIn.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -40935,19 +40973,6 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
      */
     class IntentContextInSearchResult {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of IntentContextInSearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.intentName = _value.intentName;
-            this.intentDisplayName = _value.intentDisplayName;
-            this.tags = (_value.tags || []).slice();
-            this.language = _value.language;
-            IntentContextInSearchResult.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -41019,6 +41044,19 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
             if (_instance.language) {
                 _writer.writeString(5, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of IntentContextInSearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
+            this.tags = (_value.tags || []).slice();
+            this.language = _value.language;
+            IntentContextInSearchResult.refineValues(this);
         }
         get name() {
             return this._name;
@@ -41101,21 +41139,6 @@ FullTextSearchResponseIntentContextIn.id = 'ondewo.nlu.FullTextSearchResponseInt
  * Message implementation for ondewo.nlu.FullTextSearchResponseIntentContextOut
  */
 class FullTextSearchResponseIntentContextOut {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseIntentContextOut to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.intentContextOutResults = (_value.intentContextOutResults || []).map(m => new FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseIntentContextOut.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -41208,6 +41231,21 @@ class FullTextSearchResponseIntentContextOut {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseIntentContextOut to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.intentContextOutResults = (_value.intentContextOutResults || []).map(m => new FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseIntentContextOut.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -41306,19 +41344,6 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
      */
     class IntentContextOutSearchResult {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of IntentContextOutSearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.intentName = _value.intentName;
-            this.intentDisplayName = _value.intentDisplayName;
-            this.tags = (_value.tags || []).slice();
-            this.language = _value.language;
-            IntentContextOutSearchResult.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -41390,6 +41415,19 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
             if (_instance.language) {
                 _writer.writeString(5, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of IntentContextOutSearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
+            this.tags = (_value.tags || []).slice();
+            this.language = _value.language;
+            IntentContextOutSearchResult.refineValues(this);
         }
         get name() {
             return this._name;
@@ -41472,21 +41510,6 @@ FullTextSearchResponseIntentContextOut.id = 'ondewo.nlu.FullTextSearchResponseIn
  * Message implementation for ondewo.nlu.FullTextSearchResponseIntentUsersays
  */
 class FullTextSearchResponseIntentUsersays {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseIntentUsersays to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.intentUsersaysResults = (_value.intentUsersaysResults || []).map(m => new FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseIntentUsersays.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -41579,6 +41602,21 @@ class FullTextSearchResponseIntentUsersays {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseIntentUsersays to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.intentUsersaysResults = (_value.intentUsersaysResults || []).map(m => new FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseIntentUsersays.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -41676,23 +41714,6 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
      * Message implementation for ondewo.nlu.FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult
      */
     class IntentUsersaysSearchResult {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of IntentUsersaysSearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.text = _value.text;
-            this.textAsEntityTypes = _value.textAsEntityTypes;
-            this.textAsEntityValues = _value.textAsEntityValues;
-            this.type = _value.type;
-            this.intentName = _value.intentName;
-            this.intentDisplayName = _value.intentDisplayName;
-            this.tags = (_value.tags || []).slice();
-            this.language = _value.language;
-            IntentUsersaysSearchResult.refineValues(this);
-        }
         /**
          * Deserialize binary data to message
          * @param instance message instance
@@ -41793,6 +41814,23 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
             if (_instance.language) {
                 _writer.writeString(9, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of IntentUsersaysSearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.text = _value.text;
+            this.textAsEntityTypes = _value.textAsEntityTypes;
+            this.textAsEntityValues = _value.textAsEntityValues;
+            this.type = _value.type;
+            this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
+            this.tags = (_value.tags || []).slice();
+            this.language = _value.language;
+            IntentUsersaysSearchResult.refineValues(this);
         }
         get name() {
             return this._name;
@@ -41908,21 +41946,6 @@ FullTextSearchResponseIntentUsersays.id = 'ondewo.nlu.FullTextSearchResponseInte
  */
 class FullTextSearchResponseIntentTags {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseIntentTags to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.intentTagsResults = (_value.intentTagsResults || []).map(m => new FullTextSearchResponseIntentTags.IntentTagsSearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseIntentTags.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -42013,6 +42036,21 @@ class FullTextSearchResponseIntentTags {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseIntentTags to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.intentTagsResults = (_value.intentTagsResults || []).map(m => new FullTextSearchResponseIntentTags.IntentTagsSearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseIntentTags.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -42111,20 +42149,6 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
      */
     class IntentTagsSearchResult {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of IntentTagsSearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.name = _value.name;
-            this.text = _value.text;
-            this.intentName = _value.intentName;
-            this.intentDisplayName = _value.intentDisplayName;
-            this.tags = (_value.tags || []).slice();
-            this.language = _value.language;
-            IntentTagsSearchResult.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -42203,6 +42227,20 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
             if (_instance.language) {
                 _writer.writeString(6, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of IntentTagsSearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.name = _value.name;
+            this.text = _value.text;
+            this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
+            this.tags = (_value.tags || []).slice();
+            this.language = _value.language;
+            IntentTagsSearchResult.refineValues(this);
         }
         get name() {
             return this._name;
@@ -42293,21 +42331,6 @@ FullTextSearchResponseIntentTags.id = 'ondewo.nlu.FullTextSearchResponseIntentTa
  * Message implementation for ondewo.nlu.FullTextSearchResponseIntentResponse
  */
 class FullTextSearchResponseIntentResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseIntentResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.intentResponseResults = (_value.intentResponseResults || []).map(m => new FullTextSearchResponseIntentResponse.IntentResponseSearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseIntentResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -42400,6 +42423,21 @@ class FullTextSearchResponseIntentResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseIntentResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.intentResponseResults = (_value.intentResponseResults || []).map(m => new FullTextSearchResponseIntentResponse.IntentResponseSearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseIntentResponse.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -42498,21 +42536,6 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
      */
     class IntentResponseSearchResult {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of IntentResponseSearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.text = _value.text;
-            this.platform = _value.platform;
-            this.responseType = _value.responseType;
-            this.intentName = _value.intentName;
-            this.intentDisplayName = _value.intentDisplayName;
-            this.tags = (_value.tags || []).slice();
-            this.language = _value.language;
-            IntentResponseSearchResult.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -42598,6 +42621,21 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
             if (_instance.language) {
                 _writer.writeString(7, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of IntentResponseSearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.text = _value.text;
+            this.platform = _value.platform;
+            this.responseType = _value.responseType;
+            this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
+            this.tags = (_value.tags || []).slice();
+            this.language = _value.language;
+            IntentResponseSearchResult.refineValues(this);
         }
         get text() {
             return this._text;
@@ -42697,21 +42735,6 @@ FullTextSearchResponseIntentResponse.id = 'ondewo.nlu.FullTextSearchResponseInte
  */
 class FullTextSearchResponseIntentParameters {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of FullTextSearchResponseIntentParameters to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.languageCode = _value.languageCode;
-        this.intentParametersResults = (_value.intentParametersResults || []).map(m => new FullTextSearchResponseIntentParameters.IntentParametersSearchResult(m));
-        this.term = _value.term;
-        this.elasticQuery = _value.elasticQuery;
-        this.time = _value.time;
-        this.nextPageToken = _value.nextPageToken;
-        FullTextSearchResponseIntentParameters.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -42803,6 +42826,21 @@ class FullTextSearchResponseIntentParameters {
         if (_instance.nextPageToken) {
             _writer.writeString(7, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FullTextSearchResponseIntentParameters to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.intentParametersResults = (_value.intentParametersResults || []).map(m => new FullTextSearchResponseIntentParameters.IntentParametersSearchResult(m));
+        this.term = _value.term;
+        this.elasticQuery = _value.elasticQuery;
+        this.time = _value.time;
+        this.nextPageToken = _value.nextPageToken;
+        FullTextSearchResponseIntentParameters.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -42901,20 +42939,6 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
      */
     class IntentParametersSearchResult {
         /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of IntentParametersSearchResult to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.parameterName = _value.parameterName;
-            this.parameterDisplayName = _value.parameterDisplayName;
-            this.intentName = _value.intentName;
-            this.intentDisplayName = _value.intentDisplayName;
-            this.tags = (_value.tags || []).slice();
-            this.language = _value.language;
-            IntentParametersSearchResult.refineValues(this);
-        }
-        /**
          * Deserialize binary data to message
          * @param instance message instance
          */
@@ -42993,6 +43017,20 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
             if (_instance.language) {
                 _writer.writeString(6, _instance.language);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of IntentParametersSearchResult to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.parameterName = _value.parameterName;
+            this.parameterDisplayName = _value.parameterDisplayName;
+            this.intentName = _value.intentName;
+            this.intentDisplayName = _value.intentDisplayName;
+            this.tags = (_value.tags || []).slice();
+            this.language = _value.language;
+            IntentParametersSearchResult.refineValues(this);
         }
         get parameterName() {
             return this._parameterName;
@@ -43084,17 +43122,6 @@ FullTextSearchResponseIntentParameters.id = 'ondewo.nlu.FullTextSearchResponseIn
  */
 class ReindexAgentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ReindexAgentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.branchName = _value.branchName;
-        this.indexTypes = (_value.indexTypes || []).slice();
-        ReindexAgentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -43152,6 +43179,17 @@ class ReindexAgentRequest {
         if (_instance.indexTypes && _instance.indexTypes.length) {
             _writer.writePackedEnum(3, _instance.indexTypes);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ReindexAgentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.branchName = _value.branchName;
+        this.indexTypes = (_value.indexTypes || []).slice();
+        ReindexAgentRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -43239,18 +43277,6 @@ var IntentAlgorithms;
  */
 class ExtractEntitiesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExtractEntitiesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.text = _value.text;
-        this.languageCode = _value.languageCode;
-        this.intentName = _value.intentName;
-        ExtractEntitiesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -43315,6 +43341,18 @@ class ExtractEntitiesRequest {
         if (_instance.intentName) {
             _writer.writeString(4, _instance.intentName);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExtractEntitiesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.text = _value.text;
+        this.languageCode = _value.languageCode;
+        this.intentName = _value.intentName;
+        ExtractEntitiesRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -43387,19 +43425,6 @@ ExtractEntitiesRequest.id = 'ondewo.nlu.ExtractEntitiesRequest';
  * Message implementation for ondewo.nlu.ExtractEntitiesFuzzyRequest
  */
 class ExtractEntitiesFuzzyRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExtractEntitiesFuzzyRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.text = _value.text;
-        this.potentialEntities = (_value.potentialEntities || []).map(m => new EntityTypeFuzzyNerConfig(m));
-        this.minimalScore = _value.minimalScore;
-        this.allowOverlaps = _value.allowOverlaps;
-        ExtractEntitiesFuzzyRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -43475,6 +43500,19 @@ class ExtractEntitiesFuzzyRequest {
         if (_instance.allowOverlaps) {
             _writer.writeBool(5, _instance.allowOverlaps);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExtractEntitiesFuzzyRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.text = _value.text;
+        this.potentialEntities = (_value.potentialEntities || []).map(m => new EntityTypeFuzzyNerConfig(m));
+        this.minimalScore = _value.minimalScore;
+        this.allowOverlaps = _value.allowOverlaps;
+        ExtractEntitiesFuzzyRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -43556,21 +43594,6 @@ ExtractEntitiesFuzzyRequest.id = 'ondewo.nlu.ExtractEntitiesFuzzyRequest';
  */
 class EntityTypeFuzzyNerConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityTypeFuzzyNerConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityType = _value.entityType
-            ? new EntityType(_value.entityType)
-            : undefined;
-        this.minimalScore = _value.minimalScore;
-        this.entityValues = (_value.entityValues || []).slice();
-        this.algorithm = _value.algorithm;
-        this.allowOverlaps = _value.allowOverlaps;
-        EntityTypeFuzzyNerConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -43643,6 +43666,21 @@ class EntityTypeFuzzyNerConfig {
         if (_instance.allowOverlaps) {
             _writer.writeBool(5, _instance.allowOverlaps);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityTypeFuzzyNerConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityType = _value.entityType
+            ? new EntityType(_value.entityType)
+            : undefined;
+        this.minimalScore = _value.minimalScore;
+        this.entityValues = (_value.entityValues || []).slice();
+        this.algorithm = _value.algorithm;
+        this.allowOverlaps = _value.allowOverlaps;
+        EntityTypeFuzzyNerConfig.refineValues(this);
     }
     get entityType() {
         return this._entityType;
@@ -43735,19 +43773,6 @@ EntityTypeFuzzyNerConfig.id = 'ondewo.nlu.EntityTypeFuzzyNerConfig';
  */
 class EntityDetected {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityDetected to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entity = _value.entity
-            ? new Intent.TrainingPhrase.Entity(_value.entity)
-            : undefined;
-        this.extractionMethod = _value.extractionMethod;
-        this.score = _value.score;
-        EntityDetected.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -43807,6 +43832,19 @@ class EntityDetected {
         if (_instance.score) {
             _writer.writeFloat(3, _instance.score);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityDetected to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entity = _value.entity
+            ? new Intent.TrainingPhrase.Entity(_value.entity)
+            : undefined;
+        this.extractionMethod = _value.extractionMethod;
+        this.score = _value.score;
+        EntityDetected.refineValues(this);
     }
     get entity() {
         return this._entity;
@@ -43872,16 +43910,6 @@ EntityDetected.id = 'ondewo.nlu.EntityDetected';
  */
 class ExtractEntitiesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ExtractEntitiesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entitiesDetected = (_value.entitiesDetected || []).map(m => new EntityDetected(m));
-        this.text = _value.text;
-        ExtractEntitiesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -43934,6 +43962,16 @@ class ExtractEntitiesResponse {
         if (_instance.text) {
             _writer.writeString(2, _instance.text);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExtractEntitiesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entitiesDetected = (_value.entitiesDetected || []).map(m => new EntityDetected(m));
+        this.text = _value.text;
+        ExtractEntitiesResponse.refineValues(this);
     }
     get entitiesDetected() {
         return this._entitiesDetected;
@@ -43990,22 +44028,6 @@ ExtractEntitiesResponse.id = 'ondewo.nlu.ExtractEntitiesResponse';
  * Message implementation for ondewo.nlu.GetAlternativeSentencesRequest
  */
 class GetAlternativeSentencesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAlternativeSentencesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.config = _value.config
-            ? new DataEnrichmentConfig(_value.config)
-            : undefined;
-        this.sentence = _value.sentence;
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        this.protectedWords = (_value.protectedWords || []).slice();
-        this.wordsToChange = (_value.wordsToChange || []).slice();
-        GetAlternativeSentencesRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -44086,6 +44108,22 @@ class GetAlternativeSentencesRequest {
         if (_instance.wordsToChange && _instance.wordsToChange.length) {
             _writer.writeRepeatedString(7, _instance.wordsToChange);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeSentencesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.config = _value.config
+            ? new DataEnrichmentConfig(_value.config)
+            : undefined;
+        this.sentence = _value.sentence;
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        this.protectedWords = (_value.protectedWords || []).slice();
+        this.wordsToChange = (_value.wordsToChange || []).slice();
+        GetAlternativeSentencesRequest.refineValues(this);
     }
     get config() {
         return this._config;
@@ -44175,18 +44213,6 @@ GetAlternativeSentencesRequest.id = 'ondewo.nlu.GetAlternativeSentencesRequest';
  */
 class GenerateUserSaysRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GenerateUserSaysRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        this.nRepeatSynonym = _value.nRepeatSynonym;
-        this.branch = _value.branch;
-        GenerateUserSaysRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -44251,6 +44277,18 @@ class GenerateUserSaysRequest {
         if (_instance.branch) {
             _writer.writeString(8, _instance.branch);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateUserSaysRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        this.nRepeatSynonym = _value.nRepeatSynonym;
+        this.branch = _value.branch;
+        GenerateUserSaysRequest.refineValues(this);
     }
     get languageCode() {
         return this._languageCode;
@@ -44324,19 +44362,6 @@ GenerateUserSaysRequest.id = 'ondewo.nlu.GenerateUserSaysRequest';
  */
 class GenerateResponsesRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GenerateResponsesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        this.nRepeatSynonym = _value.nRepeatSynonym;
-        this.branch = _value.branch;
-        this.dropUnknownParameters = _value.dropUnknownParameters;
-        GenerateResponsesRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -44408,6 +44433,19 @@ class GenerateResponsesRequest {
         if (_instance.dropUnknownParameters) {
             _writer.writeBool(9, _instance.dropUnknownParameters);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateResponsesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        this.nRepeatSynonym = _value.nRepeatSynonym;
+        this.branch = _value.branch;
+        this.dropUnknownParameters = _value.dropUnknownParameters;
+        GenerateResponsesRequest.refineValues(this);
     }
     get languageCode() {
         return this._languageCode;
@@ -44488,28 +44526,6 @@ GenerateResponsesRequest.id = 'ondewo.nlu.GenerateResponsesRequest';
  * Message implementation for ondewo.nlu.GetAlternativeTrainingPhrasesRequest
  */
 class GetAlternativeTrainingPhrasesRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.config = _value.config
-            ? new DataEnrichmentConfig(_value.config)
-            : undefined;
-        this.trainingPhrase = _value.trainingPhrase
-            ? new Intent.TrainingPhrase(_value.trainingPhrase)
-            : undefined;
-        this.intentName = _value.intentName;
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        this.detectEntities = _value.detectEntities;
-        this.similarityThreshold = _value.similarityThreshold;
-        this.protectedWords = (_value.protectedWords || []).slice();
-        this.wordsToChange = (_value.wordsToChange || []).slice();
-        this.branch = _value.branch;
-        GetAlternativeTrainingPhrasesRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -44619,6 +44635,28 @@ class GetAlternativeTrainingPhrasesRequest {
         if (_instance.branch) {
             _writer.writeString(10, _instance.branch);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.config = _value.config
+            ? new DataEnrichmentConfig(_value.config)
+            : undefined;
+        this.trainingPhrase = _value.trainingPhrase
+            ? new Intent.TrainingPhrase(_value.trainingPhrase)
+            : undefined;
+        this.intentName = _value.intentName;
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        this.detectEntities = _value.detectEntities;
+        this.similarityThreshold = _value.similarityThreshold;
+        this.protectedWords = (_value.protectedWords || []).slice();
+        this.wordsToChange = (_value.wordsToChange || []).slice();
+        this.branch = _value.branch;
+        GetAlternativeTrainingPhrasesRequest.refineValues(this);
     }
     get config() {
         return this._config;
@@ -44744,20 +44782,6 @@ GetAlternativeTrainingPhrasesRequest.id = 'ondewo.nlu.GetAlternativeTrainingPhra
  */
 class GetSynonymsRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetSynonymsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.config = _value.config
-            ? new DataEnrichmentConfig(_value.config)
-            : undefined;
-        this.word = _value.word;
-        this.languageCode = _value.languageCode;
-        this.parent = _value.parent;
-        GetSynonymsRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -44823,6 +44847,20 @@ class GetSynonymsRequest {
         if (_instance.parent) {
             _writer.writeString(5, _instance.parent);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSynonymsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.config = _value.config
+            ? new DataEnrichmentConfig(_value.config)
+            : undefined;
+        this.word = _value.word;
+        this.languageCode = _value.languageCode;
+        this.parent = _value.parent;
+        GetSynonymsRequest.refineValues(this);
     }
     get config() {
         return this._config;
@@ -44896,15 +44934,6 @@ GetSynonymsRequest.id = 'ondewo.nlu.GetSynonymsRequest';
  */
 class GetSynonymsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetSynonymsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.synonyms = (_value.synonyms || []).map(m => new Synonym(m));
-        GetSynonymsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -44950,6 +44979,15 @@ class GetSynonymsResponse {
         if (_instance.synonyms && _instance.synonyms.length) {
             _writer.writeRepeatedMessage(1, _instance.synonyms, Synonym.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSynonymsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.synonyms = (_value.synonyms || []).map(m => new Synonym(m));
+        GetSynonymsResponse.refineValues(this);
     }
     get synonyms() {
         return this._synonyms;
@@ -44998,16 +45036,6 @@ GetSynonymsResponse.id = 'ondewo.nlu.GetSynonymsResponse';
  * Message implementation for ondewo.nlu.Synonym
  */
 class Synonym {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Synonym to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.synonym = _value.synonym;
-        this.score = _value.score;
-        Synonym.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -45059,6 +45087,16 @@ class Synonym {
         if (_instance.score) {
             _writer.writeInt32(2, _instance.score);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Synonym to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.synonym = _value.synonym;
+        this.score = _value.score;
+        Synonym.refineValues(this);
     }
     get synonym() {
         return this._synonym;
@@ -45116,15 +45154,6 @@ Synonym.id = 'ondewo.nlu.Synonym';
  */
 class GetAlternativeSentencesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAlternativeSentencesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.alternativeSentences = (_value.alternativeSentences || []).map(m => new AltSentence(m));
-        GetAlternativeSentencesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -45172,6 +45201,15 @@ class GetAlternativeSentencesResponse {
             _instance.alternativeSentences.length) {
             _writer.writeRepeatedMessage(1, _instance.alternativeSentences, AltSentence.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeSentencesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.alternativeSentences = (_value.alternativeSentences || []).map(m => new AltSentence(m));
+        GetAlternativeSentencesResponse.refineValues(this);
     }
     get alternativeSentences() {
         return this._alternativeSentences;
@@ -45221,15 +45259,6 @@ GetAlternativeSentencesResponse.id = 'ondewo.nlu.GetAlternativeSentencesResponse
  */
 class GenerateResponsesResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GenerateResponsesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.responses = (_value.responses || []).slice();
-        GenerateResponsesResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -45273,6 +45302,15 @@ class GenerateResponsesResponse {
         if (_instance.responses && _instance.responses.length) {
             _writer.writeRepeatedString(1, _instance.responses);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateResponsesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responses = (_value.responses || []).slice();
+        GenerateResponsesResponse.refineValues(this);
     }
     get responses() {
         return this._responses;
@@ -45322,15 +45360,6 @@ GenerateResponsesResponse.id = 'ondewo.nlu.GenerateResponsesResponse';
  */
 class GenerateUserSaysResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GenerateUserSaysResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.userSays = (_value.userSays || []).slice();
-        GenerateUserSaysResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -45374,6 +45403,15 @@ class GenerateUserSaysResponse {
         if (_instance.userSays && _instance.userSays.length) {
             _writer.writeRepeatedString(1, _instance.userSays);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GenerateUserSaysResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.userSays = (_value.userSays || []).slice();
+        GenerateUserSaysResponse.refineValues(this);
     }
     get userSays() {
         return this._userSays;
@@ -45422,15 +45460,6 @@ GenerateUserSaysResponse.id = 'ondewo.nlu.GenerateUserSaysResponse';
  * Message implementation for ondewo.nlu.GetAlternativeTrainingPhrasesResponse
  */
 class GetAlternativeTrainingPhrasesResponse {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.alternativeTrainingPhrases = (_value.alternativeTrainingPhrases || []).map(m => new AltTrainingPhrase(m));
-        GetAlternativeTrainingPhrasesResponse.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -45481,6 +45510,15 @@ class GetAlternativeTrainingPhrasesResponse {
             _writer.writeRepeatedMessage(1, _instance.alternativeTrainingPhrases, AltTrainingPhrase.serializeBinaryToWriter);
         }
     }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAlternativeTrainingPhrasesResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.alternativeTrainingPhrases = (_value.alternativeTrainingPhrases || []).map(m => new AltTrainingPhrase(m));
+        GetAlternativeTrainingPhrasesResponse.refineValues(this);
+    }
     get alternativeTrainingPhrases() {
         return this._alternativeTrainingPhrases;
     }
@@ -45528,16 +45566,6 @@ GetAlternativeTrainingPhrasesResponse.id = 'ondewo.nlu.GetAlternativeTrainingPhr
  * Message implementation for ondewo.nlu.AltSentence
  */
 class AltSentence {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AltSentence to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sentence = _value.sentence;
-        this.score = _value.score;
-        AltSentence.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -45589,6 +45617,16 @@ class AltSentence {
         if (_instance.score) {
             _writer.writeFloat(2, _instance.score);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AltSentence to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sentence = _value.sentence;
+        this.score = _value.score;
+        AltSentence.refineValues(this);
     }
     get sentence() {
         return this._sentence;
@@ -45646,18 +45684,6 @@ AltSentence.id = 'ondewo.nlu.AltSentence';
  */
 class AltTrainingPhrase {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of AltTrainingPhrase to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.trainingPhrase = _value.trainingPhrase
-            ? new Intent.TrainingPhrase(_value.trainingPhrase)
-            : undefined;
-        this.score = _value.score;
-        AltTrainingPhrase.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -45709,6 +45735,18 @@ class AltTrainingPhrase {
         if (_instance.score) {
             _writer.writeFloat(2, _instance.score);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AltTrainingPhrase to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.trainingPhrase = _value.trainingPhrase
+            ? new Intent.TrainingPhrase(_value.trainingPhrase)
+            : undefined;
+        this.score = _value.score;
+        AltTrainingPhrase.refineValues(this);
     }
     get trainingPhrase() {
         return this._trainingPhrase;
@@ -45769,38 +45807,6 @@ AltTrainingPhrase.id = 'ondewo.nlu.AltTrainingPhrase';
  * Message implementation for ondewo.nlu.DataEnrichmentConfig
  */
 class DataEnrichmentConfig {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DataEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.entityEnrichment = _value.entityEnrichment
-            ? new EntityEnrichmentConfig(_value.entityEnrichment)
-            : undefined;
-        this.thesaurusEnrichment = _value.thesaurusEnrichment
-            ? new ThesaurusEnrichmentConfig(_value.thesaurusEnrichment)
-            : undefined;
-        this.word2vecEnrichment = _value.word2vecEnrichment
-            ? new Word2VecEnrichmentConfig(_value.word2vecEnrichment)
-            : undefined;
-        this.wordNetEnrichment = _value.wordNetEnrichment
-            ? new WordNetAugEnrichmentConfig(_value.wordNetEnrichment)
-            : undefined;
-        this.gpt2Enrichment = _value.gpt2Enrichment
-            ? new GPT2EnrichmentConfig(_value.gpt2Enrichment)
-            : undefined;
-        this.gloveEnrichment = _value.gloveEnrichment
-            ? new GloVeEnrichmentConfig(_value.gloveEnrichment)
-            : undefined;
-        this.bertEnrichment = _value.bertEnrichment
-            ? new BertAugEnrichmentConfig(_value.bertEnrichment)
-            : undefined;
-        this.xlnetEnrichment = _value.xlnetEnrichment
-            ? new XLNetAugEnrichmentConfig(_value.xlnetEnrichment)
-            : undefined;
-        DataEnrichmentConfig.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -45902,6 +45908,38 @@ class DataEnrichmentConfig {
         if (_instance.xlnetEnrichment) {
             _writer.writeMessage(9, _instance.xlnetEnrichment, XLNetAugEnrichmentConfig.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DataEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.entityEnrichment = _value.entityEnrichment
+            ? new EntityEnrichmentConfig(_value.entityEnrichment)
+            : undefined;
+        this.thesaurusEnrichment = _value.thesaurusEnrichment
+            ? new ThesaurusEnrichmentConfig(_value.thesaurusEnrichment)
+            : undefined;
+        this.word2vecEnrichment = _value.word2vecEnrichment
+            ? new Word2VecEnrichmentConfig(_value.word2vecEnrichment)
+            : undefined;
+        this.wordNetEnrichment = _value.wordNetEnrichment
+            ? new WordNetAugEnrichmentConfig(_value.wordNetEnrichment)
+            : undefined;
+        this.gpt2Enrichment = _value.gpt2Enrichment
+            ? new GPT2EnrichmentConfig(_value.gpt2Enrichment)
+            : undefined;
+        this.gloveEnrichment = _value.gloveEnrichment
+            ? new GloVeEnrichmentConfig(_value.gloveEnrichment)
+            : undefined;
+        this.bertEnrichment = _value.bertEnrichment
+            ? new BertAugEnrichmentConfig(_value.bertEnrichment)
+            : undefined;
+        this.xlnetEnrichment = _value.xlnetEnrichment
+            ? new XLNetAugEnrichmentConfig(_value.xlnetEnrichment)
+            : undefined;
+        DataEnrichmentConfig.refineValues(this);
     }
     get entityEnrichment() {
         return this._entityEnrichment;
@@ -46039,17 +46077,6 @@ DataEnrichmentConfig.id = 'ondewo.nlu.DataEnrichmentConfig';
  */
 class EntityEnrichmentConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of EntityEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        EntityEnrichmentConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -46107,6 +46134,17 @@ class EntityEnrichmentConfig {
         if (_instance.executionOrder) {
             _writer.writeInt32(3, _instance.executionOrder);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EntityEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        EntityEnrichmentConfig.refineValues(this);
     }
     get isActive() {
         return this._isActive;
@@ -46172,17 +46210,6 @@ EntityEnrichmentConfig.id = 'ondewo.nlu.EntityEnrichmentConfig';
  */
 class ThesaurusEnrichmentConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ThesaurusEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        ThesaurusEnrichmentConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -46240,6 +46267,17 @@ class ThesaurusEnrichmentConfig {
         if (_instance.executionOrder) {
             _writer.writeInt32(3, _instance.executionOrder);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ThesaurusEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        ThesaurusEnrichmentConfig.refineValues(this);
     }
     get isActive() {
         return this._isActive;
@@ -46305,17 +46343,6 @@ ThesaurusEnrichmentConfig.id = 'ondewo.nlu.ThesaurusEnrichmentConfig';
  */
 class BertAugEnrichmentConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of BertAugEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        BertAugEnrichmentConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -46373,6 +46400,17 @@ class BertAugEnrichmentConfig {
         if (_instance.executionOrder) {
             _writer.writeInt32(3, _instance.executionOrder);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of BertAugEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        BertAugEnrichmentConfig.refineValues(this);
     }
     get isActive() {
         return this._isActive;
@@ -46438,17 +46476,6 @@ BertAugEnrichmentConfig.id = 'ondewo.nlu.BertAugEnrichmentConfig';
  */
 class GloVeEnrichmentConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GloVeEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        GloVeEnrichmentConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -46506,6 +46533,17 @@ class GloVeEnrichmentConfig {
         if (_instance.executionOrder) {
             _writer.writeInt32(3, _instance.executionOrder);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GloVeEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        GloVeEnrichmentConfig.refineValues(this);
     }
     get isActive() {
         return this._isActive;
@@ -46571,17 +46609,6 @@ GloVeEnrichmentConfig.id = 'ondewo.nlu.GloVeEnrichmentConfig';
  */
 class GPT2EnrichmentConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GPT2EnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        GPT2EnrichmentConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -46639,6 +46666,17 @@ class GPT2EnrichmentConfig {
         if (_instance.executionOrder) {
             _writer.writeInt32(3, _instance.executionOrder);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GPT2EnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        GPT2EnrichmentConfig.refineValues(this);
     }
     get isActive() {
         return this._isActive;
@@ -46704,17 +46742,6 @@ GPT2EnrichmentConfig.id = 'ondewo.nlu.GPT2EnrichmentConfig';
  */
 class Word2VecEnrichmentConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Word2VecEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        Word2VecEnrichmentConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -46772,6 +46799,17 @@ class Word2VecEnrichmentConfig {
         if (_instance.executionOrder) {
             _writer.writeInt32(3, _instance.executionOrder);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Word2VecEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        Word2VecEnrichmentConfig.refineValues(this);
     }
     get isActive() {
         return this._isActive;
@@ -46837,17 +46875,6 @@ Word2VecEnrichmentConfig.id = 'ondewo.nlu.Word2VecEnrichmentConfig';
  */
 class WordNetAugEnrichmentConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of WordNetAugEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        WordNetAugEnrichmentConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -46905,6 +46932,17 @@ class WordNetAugEnrichmentConfig {
         if (_instance.executionOrder) {
             _writer.writeInt32(3, _instance.executionOrder);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WordNetAugEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        WordNetAugEnrichmentConfig.refineValues(this);
     }
     get isActive() {
         return this._isActive;
@@ -46970,17 +47008,6 @@ WordNetAugEnrichmentConfig.id = 'ondewo.nlu.WordNetAugEnrichmentConfig';
  */
 class XLNetAugEnrichmentConfig {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of XLNetAugEnrichmentConfig to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isActive = _value.isActive;
-        this.enrichmentFactor = _value.enrichmentFactor;
-        this.executionOrder = _value.executionOrder;
-        XLNetAugEnrichmentConfig.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -47038,6 +47065,17 @@ class XLNetAugEnrichmentConfig {
         if (_instance.executionOrder) {
             _writer.writeInt32(3, _instance.executionOrder);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of XLNetAugEnrichmentConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.enrichmentFactor = _value.enrichmentFactor;
+        this.executionOrder = _value.executionOrder;
+        XLNetAugEnrichmentConfig.refineValues(this);
     }
     get isActive() {
         return this._isActive;
@@ -47102,21 +47140,6 @@ XLNetAugEnrichmentConfig.id = 'ondewo.nlu.XLNetAugEnrichmentConfig';
  * Message implementation for ondewo.nlu.ClassifyIntentsRequest
  */
 class ClassifyIntentsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ClassifyIntentsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.text = _value.text;
-        this.languageCode = _value.languageCode;
-        this.activeContexts = _value.activeContexts;
-        this.contextNames = (_value.contextNames || []).slice();
-        this.mode = _value.mode;
-        this.algorithms = (_value.algorithms || []).slice();
-        ClassifyIntentsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -47203,6 +47226,21 @@ class ClassifyIntentsRequest {
         if (_instance.algorithms && _instance.algorithms.length) {
             _writer.writePackedEnum(7, _instance.algorithms);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ClassifyIntentsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.text = _value.text;
+        this.languageCode = _value.languageCode;
+        this.activeContexts = _value.activeContexts;
+        this.contextNames = (_value.contextNames || []).slice();
+        this.mode = _value.mode;
+        this.algorithms = (_value.algorithms || []).slice();
+        ClassifyIntentsRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -47300,18 +47338,6 @@ ClassifyIntentsRequest.id = 'ondewo.nlu.ClassifyIntentsRequest';
  */
 class IntentClassified {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of IntentClassified to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intentName = _value.intentName;
-        this.intentDisplayName = _value.intentDisplayName;
-        this.classifier = _value.classifier;
-        this.score = _value.score;
-        IntentClassified.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -47376,6 +47402,18 @@ class IntentClassified {
         if (_instance.score) {
             _writer.writeFloat(4, _instance.score);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of IntentClassified to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentName = _value.intentName;
+        this.intentDisplayName = _value.intentDisplayName;
+        this.classifier = _value.classifier;
+        this.score = _value.score;
+        IntentClassified.refineValues(this);
     }
     get intentName() {
         return this._intentName;
@@ -47449,18 +47487,6 @@ IntentClassified.id = 'ondewo.nlu.IntentClassified';
  */
 class ClassifyIntentsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ClassifyIntentsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.intentsClassified = (_value.intentsClassified || []).map(m => new IntentClassified(m));
-        this.text = _value.text;
-        this.activeContexts = _value.activeContexts;
-        this.contextNames = (_value.contextNames || []).slice();
-        ClassifyIntentsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -47528,6 +47554,18 @@ class ClassifyIntentsResponse {
         if (_instance.contextNames && _instance.contextNames.length) {
             _writer.writeRepeatedString(4, _instance.contextNames);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ClassifyIntentsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.intentsClassified = (_value.intentsClassified || []).map(m => new IntentClassified(m));
+        this.text = _value.text;
+        this.activeContexts = _value.activeContexts;
+        this.contextNames = (_value.contextNames || []).slice();
+        ClassifyIntentsResponse.refineValues(this);
     }
     get intentsClassified() {
         return this._intentsClassified;
@@ -47861,9 +47899,9 @@ class AiServicesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-AiServicesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: AiServicesClient, deps: [{ token: GRPC_AI_SERVICES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-AiServicesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: AiServicesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: AiServicesClient, decorators: [{
+AiServicesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: AiServicesClient, deps: [{ token: GRPC_AI_SERVICES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+AiServicesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: AiServicesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: AiServicesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -48352,9 +48390,9 @@ class UsersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-UsersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: UsersClient, deps: [{ token: GRPC_USERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-UsersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: UsersClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: UsersClient, decorators: [{
+UsersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: UsersClient, deps: [{ token: GRPC_USERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+UsersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: UsersClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: UsersClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -48387,38 +48425,6 @@ const GRPC_WEBHOOK_CLIENT_SETTINGS = new InjectionToken('GRPC_WEBHOOK_CLIENT_SET
  * Message implementation for ondewo.nlu.OperationMetadata
  */
 class OperationMetadata {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of OperationMetadata to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.status = _value.status;
-        this.parentOperationName = _value.parentOperationName;
-        this.subOperationNames = (_value.subOperationNames || []).slice();
-        this.createTime = _value.createTime
-            ? new googleProtobuf003.Timestamp(_value.createTime)
-            : undefined;
-        this.startTime = _value.startTime
-            ? new googleProtobuf003.Timestamp(_value.startTime)
-            : undefined;
-        this.endTime = _value.endTime
-            ? new googleProtobuf003.Timestamp(_value.endTime)
-            : undefined;
-        this.isCancellationRequested = _value.isCancellationRequested;
-        this.cancelCommand = _value.cancelCommand;
-        this.userIdCreated = _value.userIdCreated;
-        this.userIdCancelled = _value.userIdCancelled;
-        this.projectParent = _value.projectParent;
-        this.operationType = _value.operationType;
-        this.hostName = _value.hostName;
-        this.numReruns = _value.numReruns;
-        this.maxNumReruns = _value.maxNumReruns;
-        this.description = _value.description;
-        this.log = (_value.log || []).slice();
-        this.logLimit = _value.logLimit;
-        OperationMetadata.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -48587,6 +48593,38 @@ class OperationMetadata {
         if (_instance.logLimit) {
             _writer.writeInt32(18, _instance.logLimit);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of OperationMetadata to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.status = _value.status;
+        this.parentOperationName = _value.parentOperationName;
+        this.subOperationNames = (_value.subOperationNames || []).slice();
+        this.createTime = _value.createTime
+            ? new googleProtobuf003.Timestamp(_value.createTime)
+            : undefined;
+        this.startTime = _value.startTime
+            ? new googleProtobuf003.Timestamp(_value.startTime)
+            : undefined;
+        this.endTime = _value.endTime
+            ? new googleProtobuf003.Timestamp(_value.endTime)
+            : undefined;
+        this.isCancellationRequested = _value.isCancellationRequested;
+        this.cancelCommand = _value.cancelCommand;
+        this.userIdCreated = _value.userIdCreated;
+        this.userIdCancelled = _value.userIdCancelled;
+        this.projectParent = _value.projectParent;
+        this.operationType = _value.operationType;
+        this.hostName = _value.hostName;
+        this.numReruns = _value.numReruns;
+        this.maxNumReruns = _value.maxNumReruns;
+        this.description = _value.description;
+        this.log = (_value.log || []).slice();
+        this.logLimit = _value.logLimit;
+        OperationMetadata.refineValues(this);
     }
     get status() {
         return this._status;
@@ -48800,26 +48838,6 @@ OperationMetadata.id = 'ondewo.nlu.OperationMetadata';
  */
 class Operation {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Operation to deeply clone from
-     */
-    constructor(_value) {
-        this._result = Operation.ResultCase.none;
-        _value = _value || {};
-        this.name = _value.name;
-        this.metadata = _value.metadata
-            ? new OperationMetadata(_value.metadata)
-            : undefined;
-        this.done = _value.done;
-        this.error = _value.error
-            ? new Status(_value.error)
-            : undefined;
-        this.response = _value.response
-            ? new googleProtobuf003.Any(_value.response)
-            : undefined;
-        Operation.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -48892,6 +48910,26 @@ class Operation {
         if (_instance.response) {
             _writer.writeMessage(5, _instance.response, googleProtobuf003.Any.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Operation to deeply clone from
+     */
+    constructor(_value) {
+        this._result = Operation.ResultCase.none;
+        _value = _value || {};
+        this.name = _value.name;
+        this.metadata = _value.metadata
+            ? new OperationMetadata(_value.metadata)
+            : undefined;
+        this.done = _value.done;
+        this.error = _value.error
+            ? new Status(_value.error)
+            : undefined;
+        this.response = _value.response
+            ? new googleProtobuf003.Any(_value.response)
+            : undefined;
+        Operation.refineValues(this);
     }
     get name() {
         return this._name;
@@ -48992,15 +49030,6 @@ Operation.id = 'ondewo.nlu.Operation';
  */
 class GetOperationRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetOperationRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        GetOperationRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -49044,6 +49073,15 @@ class GetOperationRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetOperationRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        GetOperationRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -49092,21 +49130,6 @@ GetOperationRequest.id = 'ondewo.nlu.GetOperationRequest';
  * Message implementation for ondewo.nlu.ListOperationsRequest
  */
 class ListOperationsRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListOperationsRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.filter = _value.filter;
-        this.pageSize = _value.pageSize;
-        this.pageToken = _value.pageToken;
-        this.operationFilter = _value.operationFilter
-            ? new OperationFilter(_value.operationFilter)
-            : undefined;
-        ListOperationsRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -49180,6 +49203,21 @@ class ListOperationsRequest {
         if (_instance.operationFilter) {
             _writer.writeMessage(5, _instance.operationFilter, OperationFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListOperationsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.filter = _value.filter;
+        this.pageSize = _value.pageSize;
+        this.pageToken = _value.pageToken;
+        this.operationFilter = _value.operationFilter
+            ? new OperationFilter(_value.operationFilter)
+            : undefined;
+        ListOperationsRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -49265,26 +49303,6 @@ ListOperationsRequest.id = 'ondewo.nlu.ListOperationsRequest';
  */
 class OperationFilter {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of OperationFilter to deeply clone from
-     */
-    constructor(_value) {
-        this._startTimeOneof = OperationFilter.StartTimeOneofCase.none;
-        this._endTimeOneof = OperationFilter.EndTimeOneofCase.none;
-        _value = _value || {};
-        this.projectParents = (_value.projectParents || []).slice();
-        this.statuses = (_value.statuses || []).slice();
-        this.types = (_value.types || []).slice();
-        this.startTime = _value.startTime
-            ? new googleProtobuf003.Timestamp(_value.startTime)
-            : undefined;
-        this.endTime = _value.endTime
-            ? new googleProtobuf003.Timestamp(_value.endTime)
-            : undefined;
-        this.userIds = (_value.userIds || []).slice();
-        OperationFilter.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -49363,6 +49381,26 @@ class OperationFilter {
         if (_instance.userIds && _instance.userIds.length) {
             _writer.writeRepeatedString(6, _instance.userIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of OperationFilter to deeply clone from
+     */
+    constructor(_value) {
+        this._startTimeOneof = OperationFilter.StartTimeOneofCase.none;
+        this._endTimeOneof = OperationFilter.EndTimeOneofCase.none;
+        _value = _value || {};
+        this.projectParents = (_value.projectParents || []).slice();
+        this.statuses = (_value.statuses || []).slice();
+        this.types = (_value.types || []).slice();
+        this.startTime = _value.startTime
+            ? new googleProtobuf003.Timestamp(_value.startTime)
+            : undefined;
+        this.endTime = _value.endTime
+            ? new googleProtobuf003.Timestamp(_value.endTime)
+            : undefined;
+        this.userIds = (_value.userIds || []).slice();
+        OperationFilter.refineValues(this);
     }
     get projectParents() {
         return this._projectParents;
@@ -49476,16 +49514,6 @@ OperationFilter.id = 'ondewo.nlu.OperationFilter';
  */
 class ListOperationsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListOperationsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.operations = (_value.operations || []).map(m => new Operation(m));
-        this.nextPageToken = _value.nextPageToken;
-        ListOperationsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -49538,6 +49566,16 @@ class ListOperationsResponse {
         if (_instance.nextPageToken) {
             _writer.writeString(2, _instance.nextPageToken);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListOperationsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.operations = (_value.operations || []).map(m => new Operation(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListOperationsResponse.refineValues(this);
     }
     get operations() {
         return this._operations;
@@ -49595,15 +49633,6 @@ ListOperationsResponse.id = 'ondewo.nlu.ListOperationsResponse';
  */
 class CancelOperationRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CancelOperationRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        CancelOperationRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -49647,6 +49676,15 @@ class CancelOperationRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CancelOperationRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        CancelOperationRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -49696,15 +49734,6 @@ CancelOperationRequest.id = 'ondewo.nlu.CancelOperationRequest';
  */
 class DeleteOperationRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of DeleteOperationRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        DeleteOperationRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -49748,6 +49777,15 @@ class DeleteOperationRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteOperationRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        DeleteOperationRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -50620,9 +50658,9 @@ class IntentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-IntentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: IntentsClient, deps: [{ token: GRPC_INTENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-IntentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: IntentsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: IntentsClient, decorators: [{
+IntentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: IntentsClient, deps: [{ token: GRPC_INTENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+IntentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: IntentsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: IntentsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -51501,9 +51539,9 @@ class SessionsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-SessionsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: SessionsClient, deps: [{ token: GRPC_SESSIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-SessionsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: SessionsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: SessionsClient, decorators: [{
+SessionsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: SessionsClient, deps: [{ token: GRPC_SESSIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+SessionsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: SessionsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: SessionsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -51685,9 +51723,9 @@ class ProjectRolesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ProjectRolesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ProjectRolesClient, deps: [{ token: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ProjectRolesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ProjectRolesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ProjectRolesClient, decorators: [{
+ProjectRolesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ProjectRolesClient, deps: [{ token: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ProjectRolesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ProjectRolesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ProjectRolesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -51713,16 +51751,6 @@ const GRPC_CONTEXTS_CLIENT_SETTINGS = new InjectionToken('GRPC_CONTEXTS_CLIENT_S
  * Message implementation for ondewo.nlu.GetIntentCountRequest
  */
 class GetIntentCountRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetIntentCountRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.filterByCategory = _value.filterByCategory;
-        GetIntentCountRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -51774,6 +51802,16 @@ class GetIntentCountRequest {
         if (_instance.filterByCategory) {
             _writer.writeEnum(2, _instance.filterByCategory);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetIntentCountRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.filterByCategory = _value.filterByCategory;
+        GetIntentCountRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -51833,16 +51871,6 @@ GetIntentCountRequest.id = 'ondewo.nlu.GetIntentCountRequest';
  */
 class GetEntityTypeCountRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetEntityTypeCountRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        this.filterByCategory = _value.filterByCategory;
-        GetEntityTypeCountRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -51893,6 +51921,16 @@ class GetEntityTypeCountRequest {
         if (_instance.filterByCategory) {
             _writer.writeEnum(2, _instance.filterByCategory);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetEntityTypeCountRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.filterByCategory = _value.filterByCategory;
+        GetEntityTypeCountRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -51952,15 +51990,6 @@ GetEntityTypeCountRequest.id = 'ondewo.nlu.GetEntityTypeCountRequest';
  */
 class GetProjectStatRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetProjectStatRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.parent = _value.parent;
-        GetProjectStatRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -52004,6 +52033,15 @@ class GetProjectStatRequest {
         if (_instance.parent) {
             _writer.writeString(1, _instance.parent);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetProjectStatRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        GetProjectStatRequest.refineValues(this);
     }
     get parent() {
         return this._parent;
@@ -52052,16 +52090,6 @@ GetProjectStatRequest.id = 'ondewo.nlu.GetProjectStatRequest';
  * Message implementation for ondewo.nlu.GetProjectElementStatRequest
  */
 class GetProjectElementStatRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetProjectElementStatRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.name = _value.name;
-        this.languageCode = _value.languageCode;
-        GetProjectElementStatRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -52113,6 +52141,16 @@ class GetProjectElementStatRequest {
         if (_instance.languageCode) {
             _writer.writeString(2, _instance.languageCode);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetProjectElementStatRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.languageCode = _value.languageCode;
+        GetProjectElementStatRequest.refineValues(this);
     }
     get name() {
         return this._name;
@@ -52171,15 +52209,6 @@ GetProjectElementStatRequest.id = 'ondewo.nlu.GetProjectElementStatRequest';
  */
 class GetUserProjectCountRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetUserProjectCountRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.userId = _value.userId;
-        GetUserProjectCountRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -52223,6 +52252,15 @@ class GetUserProjectCountRequest {
         if (_instance.userId) {
             _writer.writeString(1, _instance.userId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetUserProjectCountRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.userId = _value.userId;
+        GetUserProjectCountRequest.refineValues(this);
     }
     get userId() {
         return this._userId;
@@ -52273,15 +52311,6 @@ GetUserProjectCountRequest.id = 'ondewo.nlu.GetUserProjectCountRequest';
  */
 class PingRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of PingRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.session = _value.session;
-        PingRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -52325,6 +52354,15 @@ class PingRequest {
         if (_instance.session) {
             _writer.writeString(1, _instance.session);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PingRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.session = _value.session;
+        PingRequest.refineValues(this);
     }
     get session() {
         return this._session;
@@ -52373,25 +52411,6 @@ PingRequest.id = 'ondewo.nlu.PingRequest';
  * Message implementation for ondewo.nlu.WebhookRequest
  */
 class WebhookRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of WebhookRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.session = _value.session;
-        this.responseId = _value.responseId;
-        this.queryResult = _value.queryResult
-            ? new QueryResult(_value.queryResult)
-            : undefined;
-        this.originalDetectIntentRequest = _value.originalDetectIntentRequest
-            ? new OriginalDetectIntentRequest(_value.originalDetectIntentRequest)
-            : undefined;
-        this.headers = _value.headers
-            ? new googleProtobuf003.Struct(_value.headers)
-            : undefined;
-        WebhookRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -52468,6 +52487,25 @@ class WebhookRequest {
         if (_instance.headers) {
             _writer.writeMessage(5, _instance.headers, googleProtobuf003.Struct.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WebhookRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.session = _value.session;
+        this.responseId = _value.responseId;
+        this.queryResult = _value.queryResult
+            ? new QueryResult(_value.queryResult)
+            : undefined;
+        this.originalDetectIntentRequest = _value.originalDetectIntentRequest
+            ? new OriginalDetectIntentRequest(_value.originalDetectIntentRequest)
+            : undefined;
+        this.headers = _value.headers
+            ? new googleProtobuf003.Struct(_value.headers)
+            : undefined;
+        WebhookRequest.refineValues(this);
     }
     get session() {
         return this._session;
@@ -52555,24 +52593,6 @@ WebhookRequest.id = 'ondewo.nlu.WebhookRequest';
  */
 class WebhookResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of WebhookResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.fulfillmentText = _value.fulfillmentText;
-        this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
-        this.source = _value.source;
-        this.payload = _value.payload
-            ? new googleProtobuf003.Struct(_value.payload)
-            : undefined;
-        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
-        this.followupEventInput = _value.followupEventInput
-            ? new EventInput(_value.followupEventInput)
-            : undefined;
-        WebhookResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -52658,6 +52678,24 @@ class WebhookResponse {
         if (_instance.followupEventInput) {
             _writer.writeMessage(6, _instance.followupEventInput, EventInput.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WebhookResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.fulfillmentText = _value.fulfillmentText;
+        this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
+        this.source = _value.source;
+        this.payload = _value.payload
+            ? new googleProtobuf003.Struct(_value.payload)
+            : undefined;
+        this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
+        this.followupEventInput = _value.followupEventInput
+            ? new EventInput(_value.followupEventInput)
+            : undefined;
+        WebhookResponse.refineValues(this);
     }
     get fulfillmentText() {
         return this._fulfillmentText;
@@ -52751,18 +52789,6 @@ WebhookResponse.id = 'ondewo.nlu.WebhookResponse';
  */
 class OriginalDetectIntentRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of OriginalDetectIntentRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.source = _value.source;
-        this.payload = _value.payload
-            ? new googleProtobuf003.Struct(_value.payload)
-            : undefined;
-        OriginalDetectIntentRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -52814,6 +52840,18 @@ class OriginalDetectIntentRequest {
         if (_instance.payload) {
             _writer.writeMessage(3, _instance.payload, googleProtobuf003.Struct.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of OriginalDetectIntentRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.source = _value.source;
+        this.payload = _value.payload
+            ? new googleProtobuf003.Struct(_value.payload)
+            : undefined;
+        OriginalDetectIntentRequest.refineValues(this);
     }
     get source() {
         return this._source;
@@ -52871,15 +52909,6 @@ OriginalDetectIntentRequest.id = 'ondewo.nlu.OriginalDetectIntentRequest';
  */
 class PingResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of PingResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.isReachable = _value.isReachable;
-        PingResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -52923,6 +52952,15 @@ class PingResponse {
         if (_instance.isReachable) {
             _writer.writeBool(1, _instance.isReachable);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PingResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isReachable = _value.isReachable;
+        PingResponse.refineValues(this);
     }
     get isReachable() {
         return this._isReachable;
@@ -54185,9 +54223,9 @@ class AgentsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-AgentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: AgentsClient, deps: [{ token: GRPC_AGENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-AgentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: AgentsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: AgentsClient, decorators: [{
+AgentsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: AgentsClient, deps: [{ token: GRPC_AGENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+AgentsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: AgentsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: AgentsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -54309,9 +54347,9 @@ class ServerStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ServerStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ServerStatisticsClient, deps: [{ token: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ServerStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ServerStatisticsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ServerStatisticsClient, decorators: [{
+ServerStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ServerStatisticsClient, deps: [{ token: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ServerStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ServerStatisticsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ServerStatisticsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -54583,9 +54621,9 @@ class ProjectStatisticsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ProjectStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ProjectStatisticsClient, deps: [{ token: GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ProjectStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ProjectStatisticsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ProjectStatisticsClient, decorators: [{
+ProjectStatisticsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ProjectStatisticsClient, deps: [{ token: GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ProjectStatisticsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ProjectStatisticsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ProjectStatisticsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -54707,9 +54745,9 @@ class WebhookClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-WebhookClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: WebhookClient, deps: [{ token: GRPC_WEBHOOK_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-WebhookClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: WebhookClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: WebhookClient, decorators: [{
+WebhookClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: WebhookClient, deps: [{ token: GRPC_WEBHOOK_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+WebhookClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: WebhookClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: WebhookClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -54928,9 +54966,9 @@ class ContextsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-ContextsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ContextsClient, deps: [{ token: GRPC_CONTEXTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-ContextsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ContextsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: ContextsClient, decorators: [{
+ContextsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ContextsClient, deps: [{ token: GRPC_CONTEXTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+ContextsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ContextsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: ContextsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -55202,9 +55240,9 @@ class UtilitiesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-UtilitiesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: UtilitiesClient, deps: [{ token: GRPC_UTILITIES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-UtilitiesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: UtilitiesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: UtilitiesClient, decorators: [{
+UtilitiesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: UtilitiesClient, deps: [{ token: GRPC_UTILITIES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+UtilitiesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: UtilitiesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: UtilitiesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -55356,9 +55394,9 @@ class OperationsClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-OperationsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: OperationsClient, deps: [{ token: GRPC_OPERATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-OperationsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: OperationsClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: OperationsClient, decorators: [{
+OperationsClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: OperationsClient, deps: [{ token: GRPC_OPERATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+OperationsClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: OperationsClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: OperationsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -55870,9 +55908,9 @@ class EntityTypesClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-EntityTypesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: EntityTypesClient, deps: [{ token: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-EntityTypesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: EntityTypesClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: EntityTypesClient, decorators: [{
+EntityTypesClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: EntityTypesClient, deps: [{ token: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+EntityTypesClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: EntityTypesClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: EntityTypesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -55891,26 +55929,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImpor
  * Message implementation for ondewo.qa.GetAnswerRequest
  */
 class GetAnswerRequest {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAnswerRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.sessionId = _value.sessionId;
-        this.text = _value.text
-            ? new TextInput(_value.text)
-            : undefined;
-        this.maxNumAnswers = _value.maxNumAnswers;
-        this.thresholdReader = _value.thresholdReader;
-        this.thresholdRetriever = _value.thresholdRetriever;
-        this.thresholdOverall = _value.thresholdOverall;
-        this.readerModelName = _value.readerModelName;
-        this.urlFilter = _value.urlFilter
-            ? new UrlFilter(_value.urlFilter)
-            : undefined;
-        GetAnswerRequest.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -56006,6 +56024,26 @@ class GetAnswerRequest {
         if (_instance.urlFilter) {
             _writer.writeMessage(8, _instance.urlFilter, UrlFilter.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAnswerRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sessionId = _value.sessionId;
+        this.text = _value.text
+            ? new TextInput(_value.text)
+            : undefined;
+        this.maxNumAnswers = _value.maxNumAnswers;
+        this.thresholdReader = _value.thresholdReader;
+        this.thresholdRetriever = _value.thresholdRetriever;
+        this.thresholdOverall = _value.thresholdOverall;
+        this.readerModelName = _value.readerModelName;
+        this.urlFilter = _value.urlFilter
+            ? new UrlFilter(_value.urlFilter)
+            : undefined;
+        GetAnswerRequest.refineValues(this);
     }
     get sessionId() {
         return this._sessionId;
@@ -56111,17 +56149,6 @@ GetAnswerRequest.id = 'ondewo.qa.GetAnswerRequest';
  */
 class GetAnswerResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetAnswerResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.queryResult = _value.queryResult
-            ? new DetectIntentResponse(_value.queryResult)
-            : undefined;
-        GetAnswerResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -56166,6 +56193,17 @@ class GetAnswerResponse {
         if (_instance.queryResult) {
             _writer.writeMessage(2, _instance.queryResult, DetectIntentResponse.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetAnswerResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.queryResult = _value.queryResult
+            ? new DetectIntentResponse(_value.queryResult)
+            : undefined;
+        GetAnswerResponse.refineValues(this);
     }
     get queryResult() {
         return this._queryResult;
@@ -56217,15 +56255,6 @@ GetAnswerResponse.id = 'ondewo.qa.GetAnswerResponse';
  */
 class RunScraperRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of RunScraperRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.projectIds = (_value.projectIds || []).slice();
-        RunScraperRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -56269,6 +56298,15 @@ class RunScraperRequest {
         if (_instance.projectIds && _instance.projectIds.length) {
             _writer.writeRepeatedString(1, _instance.projectIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RunScraperRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.projectIds = (_value.projectIds || []).slice();
+        RunScraperRequest.refineValues(this);
     }
     get projectIds() {
         return this._projectIds;
@@ -56318,15 +56356,6 @@ RunScraperRequest.id = 'ondewo.qa.RunScraperRequest';
  */
 class RunScraperResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of RunScraperResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.scraperContainers = (_value.scraperContainers || []).map(m => new RunScraperResponse.ScraperContainer(m));
-        RunScraperResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -56373,6 +56402,15 @@ class RunScraperResponse {
         if (_instance.scraperContainers && _instance.scraperContainers.length) {
             _writer.writeRepeatedMessage(1, _instance.scraperContainers, RunScraperResponse.ScraperContainer.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RunScraperResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.scraperContainers = (_value.scraperContainers || []).map(m => new RunScraperResponse.ScraperContainer(m));
+        RunScraperResponse.refineValues(this);
     }
     get scraperContainers() {
         return this._scraperContainers;
@@ -56422,16 +56460,6 @@ RunScraperResponse.id = 'ondewo.qa.RunScraperResponse';
      * Message implementation for ondewo.qa.RunScraperResponse.ScraperContainer
      */
     class ScraperContainer {
-        /**
-         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-         * @param _value initial values object or instance of ScraperContainer to deeply clone from
-         */
-        constructor(_value) {
-            _value = _value || {};
-            this.containerName = _value.containerName;
-            this.containerId = _value.containerId;
-            ScraperContainer.refineValues(this);
-        }
         /**
          * Deserialize binary data to message
          * @param instance message instance
@@ -56483,6 +56511,16 @@ RunScraperResponse.id = 'ondewo.qa.RunScraperResponse';
             if (_instance.containerId) {
                 _writer.writeString(2, _instance.containerId);
             }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ScraperContainer to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.containerName = _value.containerName;
+            this.containerId = _value.containerId;
+            ScraperContainer.refineValues(this);
         }
         get containerName() {
             return this._containerName;
@@ -56542,16 +56580,6 @@ RunScraperResponse.id = 'ondewo.qa.RunScraperResponse';
  */
 class RunTrainingResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of RunTrainingResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.f1 = _value.f1;
-        this.accuracy = _value.accuracy;
-        RunTrainingResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -56602,6 +56630,16 @@ class RunTrainingResponse {
         if (_instance.accuracy) {
             _writer.writeFloat(2, _instance.accuracy);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RunTrainingResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.f1 = _value.f1;
+        this.accuracy = _value.accuracy;
+        RunTrainingResponse.refineValues(this);
     }
     get f1() {
         return this._f1;
@@ -56658,17 +56696,6 @@ RunTrainingResponse.id = 'ondewo.qa.RunTrainingResponse';
  * Message implementation for ondewo.qa.UrlFilter
  */
 class UrlFilter {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UrlFilter to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.allowedValues = (_value.allowedValues || []).slice();
-        this.regexFilterInclude = _value.regexFilterInclude;
-        this.regexFilterExclude = _value.regexFilterExclude;
-        UrlFilter.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -56727,6 +56754,17 @@ class UrlFilter {
         if (_instance.regexFilterExclude) {
             _writer.writeString(3, _instance.regexFilterExclude);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UrlFilter to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.allowedValues = (_value.allowedValues || []).slice();
+        this.regexFilterInclude = _value.regexFilterInclude;
+        this.regexFilterExclude = _value.regexFilterExclude;
+        UrlFilter.refineValues(this);
     }
     get allowedValues() {
         return this._allowedValues;
@@ -56792,15 +56830,6 @@ UrlFilter.id = 'ondewo.qa.UrlFilter';
  */
 class GetServerStateResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetServerStateResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.serverIsReady = _value.serverIsReady;
-        GetServerStateResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -56844,6 +56873,15 @@ class GetServerStateResponse {
         if (_instance.serverIsReady) {
             _writer.writeBool(1, _instance.serverIsReady);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetServerStateResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.serverIsReady = _value.serverIsReady;
+        GetServerStateResponse.refineValues(this);
     }
     get serverIsReady() {
         return this._serverIsReady;
@@ -56893,15 +56931,6 @@ GetServerStateResponse.id = 'ondewo.qa.GetServerStateResponse';
  */
 class ListProjectIdsResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of ListProjectIdsResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.projectIds = (_value.projectIds || []).slice();
-        ListProjectIdsResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -56945,6 +56974,15 @@ class ListProjectIdsResponse {
         if (_instance.projectIds && _instance.projectIds.length) {
             _writer.writeRepeatedString(1, _instance.projectIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListProjectIdsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.projectIds = (_value.projectIds || []).slice();
+        ListProjectIdsResponse.refineValues(this);
     }
     get projectIds() {
         return this._projectIds;
@@ -56994,15 +57032,6 @@ ListProjectIdsResponse.id = 'ondewo.qa.ListProjectIdsResponse';
  */
 class GetProjectConfigRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetProjectConfigRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.projectId = _value.projectId;
-        GetProjectConfigRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -57046,6 +57075,15 @@ class GetProjectConfigRequest {
         if (_instance.projectId) {
             _writer.writeString(1, _instance.projectId);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetProjectConfigRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.projectId = _value.projectId;
+        GetProjectConfigRequest.refineValues(this);
     }
     get projectId() {
         return this._projectId;
@@ -57095,15 +57133,6 @@ GetProjectConfigRequest.id = 'ondewo.qa.GetProjectConfigRequest';
  */
 class GetProjectConfigResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of GetProjectConfigResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.configSerialized = _value.configSerialized;
-        GetProjectConfigResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -57147,6 +57176,15 @@ class GetProjectConfigResponse {
         if (_instance.configSerialized) {
             _writer.writeString(1, _instance.configSerialized);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetProjectConfigResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.configSerialized = _value.configSerialized;
+        GetProjectConfigResponse.refineValues(this);
     }
     get configSerialized() {
         return this._configSerialized;
@@ -57196,15 +57234,6 @@ GetProjectConfigResponse.id = 'ondewo.qa.GetProjectConfigResponse';
  */
 class UpdateDatabaseRequest {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateDatabaseRequest to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.projectIds = (_value.projectIds || []).slice();
-        UpdateDatabaseRequest.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -57248,6 +57277,15 @@ class UpdateDatabaseRequest {
         if (_instance.projectIds && _instance.projectIds.length) {
             _writer.writeRepeatedString(1, _instance.projectIds);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateDatabaseRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.projectIds = (_value.projectIds || []).slice();
+        UpdateDatabaseRequest.refineValues(this);
     }
     get projectIds() {
         return this._projectIds;
@@ -57297,15 +57335,6 @@ UpdateDatabaseRequest.id = 'ondewo.qa.UpdateDatabaseRequest';
  */
 class UpdateDatabaseResponse {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of UpdateDatabaseResponse to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.errorMessages = (_value.errorMessages || []).slice();
-        UpdateDatabaseResponse.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -57349,6 +57378,15 @@ class UpdateDatabaseResponse {
         if (_instance.errorMessages && _instance.errorMessages.length) {
             _writer.writeRepeatedString(1, _instance.errorMessages);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateDatabaseResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.errorMessages = (_value.errorMessages || []).slice();
+        UpdateDatabaseResponse.refineValues(this);
     }
     get errorMessages() {
         return this._errorMessages;
@@ -57628,9 +57666,9 @@ class QAClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-QAClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: QAClient, deps: [{ token: GRPC_QA_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-QAClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: QAClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImport: i0, type: QAClient, decorators: [{
+QAClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: QAClient, deps: [{ token: GRPC_QA_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+QAClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: QAClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.8", ngImport: i0, type: QAClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -57649,16 +57687,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.3", ngImpor
  * Message implementation for google.api.Http
  */
 class Http {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Http to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.rules = (_value.rules || []).map(m => new HttpRule(m));
-        this.fullyDecodeReservedExpansion = _value.fullyDecodeReservedExpansion;
-        Http.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -57713,6 +57741,16 @@ class Http {
         if (_instance.fullyDecodeReservedExpansion) {
             _writer.writeBool(2, _instance.fullyDecodeReservedExpansion);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of Http to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.rules = (_value.rules || []).map(m => new HttpRule(m));
+        this.fullyDecodeReservedExpansion = _value.fullyDecodeReservedExpansion;
+        Http.refineValues(this);
     }
     get rules() {
         return this._rules;
@@ -57769,27 +57807,6 @@ Http.id = 'google.api.Http';
  * Message implementation for google.api.HttpRule
  */
 class HttpRule {
-    /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of HttpRule to deeply clone from
-     */
-    constructor(_value) {
-        this._pattern = HttpRule.PatternCase.none;
-        _value = _value || {};
-        this.selector = _value.selector;
-        this.get = _value.get;
-        this.put = _value.put;
-        this.post = _value.post;
-        this.delete = _value.delete;
-        this.patch = _value.patch;
-        this.custom = _value.custom
-            ? new CustomHttpPattern(_value.custom)
-            : undefined;
-        this.body = _value.body;
-        this.responseBody = _value.responseBody;
-        this.additionalBindings = (_value.additionalBindings || []).map(m => new HttpRule(m));
-        HttpRule.refineValues(this);
-    }
     /**
      * Deserialize binary data to message
      * @param instance message instance
@@ -57895,6 +57912,27 @@ class HttpRule {
         if (_instance.additionalBindings && _instance.additionalBindings.length) {
             _writer.writeRepeatedMessage(11, _instance.additionalBindings, HttpRule.serializeBinaryToWriter);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of HttpRule to deeply clone from
+     */
+    constructor(_value) {
+        this._pattern = HttpRule.PatternCase.none;
+        _value = _value || {};
+        this.selector = _value.selector;
+        this.get = _value.get;
+        this.put = _value.put;
+        this.post = _value.post;
+        this.delete = _value.delete;
+        this.patch = _value.patch;
+        this.custom = _value.custom
+            ? new CustomHttpPattern(_value.custom)
+            : undefined;
+        this.body = _value.body;
+        this.responseBody = _value.responseBody;
+        this.additionalBindings = (_value.additionalBindings || []).map(m => new HttpRule(m));
+        HttpRule.refineValues(this);
     }
     get selector() {
         return this._selector;
@@ -58055,16 +58093,6 @@ HttpRule.id = 'google.api.HttpRule';
  */
 class CustomHttpPattern {
     /**
-     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of CustomHttpPattern to deeply clone from
-     */
-    constructor(_value) {
-        _value = _value || {};
-        this.kind = _value.kind;
-        this.path = _value.path;
-        CustomHttpPattern.refineValues(this);
-    }
-    /**
      * Deserialize binary data to message
      * @param instance message instance
      */
@@ -58115,6 +58143,16 @@ class CustomHttpPattern {
         if (_instance.path) {
             _writer.writeString(2, _instance.path);
         }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CustomHttpPattern to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.kind = _value.kind;
+        this.path = _value.path;
+        CustomHttpPattern.refineValues(this);
     }
     get kind() {
         return this._kind;

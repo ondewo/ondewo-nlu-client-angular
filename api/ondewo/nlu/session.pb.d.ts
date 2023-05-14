@@ -2,6 +2,7 @@ import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu006 from '../../ondewo/nlu/context.pb';
+import * as googleProtobuf009 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf010 from '@ngx-grpc/well-known-types';
 import * as googleRpc011 from '../../google/rpc/status.pb';
 import * as googleType012 from '../../google/type/latlng.pb';
@@ -1153,6 +1154,7 @@ export declare class SessionStep implements GrpcMessage {
     private _detectIntentRequest?;
     private _detectIntentResponse?;
     private _contexts?;
+    private _timestamp?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionStep to deeply clone from
@@ -1166,6 +1168,8 @@ export declare class SessionStep implements GrpcMessage {
     set detectIntentResponse(value: DetectIntentResponse | undefined);
     get contexts(): ondewoNlu006.Context[] | undefined;
     set contexts(value: ondewoNlu006.Context[] | undefined);
+    get timestamp(): googleProtobuf009.Timestamp | undefined;
+    set timestamp(value: googleProtobuf009.Timestamp | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1195,6 +1199,7 @@ export declare module SessionStep {
         detectIntentRequest?: DetectIntentRequest.AsObject;
         detectIntentResponse?: DetectIntentResponse.AsObject;
         contexts?: ondewoNlu006.Context.AsObject[];
+        timestamp?: googleProtobuf009.Timestamp.AsObject;
     }
     /**
      * Protobuf JSON representation for SessionStep
@@ -1204,6 +1209,7 @@ export declare module SessionStep {
         detectIntentRequest: DetectIntentRequest.AsProtobufJSON | null;
         detectIntentResponse: DetectIntentResponse.AsProtobufJSON | null;
         contexts: ondewoNlu006.Context.AsProtobufJSON[] | null;
+        timestamp: googleProtobuf009.Timestamp.AsProtobufJSON | null;
     }
 }
 /**
@@ -2564,6 +2570,7 @@ export declare class SessionReviewStep implements GrpcMessage {
     private _contextsOut?;
     private _queryTextOriginal;
     private _platforms;
+    private _timestamp?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of SessionReviewStep to deeply clone from
@@ -2585,6 +2592,8 @@ export declare class SessionReviewStep implements GrpcMessage {
     set queryTextOriginal(value: string);
     get platforms(): ondewoNlu013.Intent.Message.Platform[];
     set platforms(value: ondewoNlu013.Intent.Message.Platform[]);
+    get timestamp(): googleProtobuf009.Timestamp | undefined;
+    set timestamp(value: googleProtobuf009.Timestamp | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2618,6 +2627,7 @@ export declare module SessionReviewStep {
         contextsOut?: ondewoNlu006.Context.AsObject[];
         queryTextOriginal: string;
         platforms: ondewoNlu013.Intent.Message.Platform[];
+        timestamp?: googleProtobuf009.Timestamp.AsObject;
     }
     /**
      * Protobuf JSON representation for SessionReviewStep
@@ -2631,6 +2641,7 @@ export declare module SessionReviewStep {
         contextsOut: ondewoNlu006.Context.AsProtobufJSON[] | null;
         queryTextOriginal: string;
         platforms: string[];
+        timestamp: googleProtobuf009.Timestamp.AsProtobufJSON | null;
     }
 }
 /**
