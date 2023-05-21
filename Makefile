@@ -90,8 +90,8 @@ check_build: #Checks if all built proto-code is there
 		if test $$? != 0; then  echo "No Proto-Code for $${file} in api" & exit 1;fi; \
 		find esm2020 -iname "*pb*" | grep -q $${file}; \
 		if test $$? != 0; then  echo "No Proto-Code for $${file} in esm2020" & exit 1;fi; \
-		find fesm2015 -iname "*ondewo-nlu-client-angular*" | wc -l | grep -q "2"; \
-		if test $$? != 0; then  echo "No Proto-Code for $${file} in fesm2015" & exit 1;fi; \
+		find fesm2022 -iname "*ondewo-nlu-client-angular*" | wc -l | grep -q "2"; \
+		if test $$? != 0; then  echo "No Proto-Code for $${file} in fesm2022" & exit 1;fi; \
 		find fesm2020 -iname "*ondewo-nlu-client-angular*" | wc -l | grep -q "2"; \
 		if test $$? != 0; then  echo "No Proto-Code for $${file} in fesm2020" & exit 1;fi; \
 	done
@@ -115,7 +115,7 @@ release: ## Create Github and NPM Release
 	git add api
 	git add esm2020
 	git add fesm2020
-	git add fesm2015
+	git add fesm2022
 	git add src
 	git add README.md
 	git add RELEASE.md
