@@ -18,7 +18,7 @@ export
 ONDEWO_NLU_VERSION = 4.7.0
 
 NLU_API_GIT_BRANCH=tags/4.7.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.2.0
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.6.0
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 NLU_APIS_DIR=src/ondewo-nlu-api
 NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
@@ -233,8 +233,10 @@ check_out_correct_submodule_versions: ## Fetches all Submodules and checksout sp
 	git submodule update --init --recursive
 	git -C ${NLU_APIS_DIR} fetch --all
 	git -C ${NLU_APIS_DIR} checkout ${NLU_API_GIT_BRANCH}
+	git -C ${NLU_APIS_DIR} pull
 	git -C ${ONDEWO_PROTO_COMPILER_DIR} fetch --all
 	git -C ${ONDEWO_PROTO_COMPILER_DIR} checkout ${ONDEWO_PROTO_COMPILER_GIT_BRANCH}
+	git -C ${ONDEWO_PROTO_COMPILER_DIR} pull
 	@echo "DONE checking out correct submodule versions."
 
 
