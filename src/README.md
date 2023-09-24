@@ -71,7 +71,7 @@ npm
 │           ├── qa.pbconf.d.ts
 │           ├── qa.pb.d.ts
 │           └── qa.pbsc.d.ts
-├── esm2020
+├── esm2022
 │   ├── api
 │   │   ├── google
 │   │   │   ├── api
@@ -93,14 +93,11 @@ npm
 │   │           └── qa.pbsc.mjs
 │   ├── ondewo-nlu-client-angular.mjs
 │   └── public-api.mjs
-├── fesm2015
-│   ├── ondewo-nlu-client-angular.mjs
-│   └── ondewo-nlu-client-angular.mjs.map
-├── fesm2020
+├── fesm2022
 │   ├── ondewo-nlu-client-angular.mjs
 │   └── ondewo-nlu-client-angular.mjs.map
 ├── index.d.ts
-├── LICENSE
+├── LICENSE.MD
 ├── package.json
 ├── public-api.d.ts
 └── README.md

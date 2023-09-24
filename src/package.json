@@ -1,37 +1,37 @@
 {
-  "name": "@ondewo/nlu-client-angular",
-  "version": "4.7.0",
-  "description": "ONDEWO Natural Language Understanding (NLU) Platfrom client library for Angular",
-  "author": "ONDEWO GmbH <office@ondewo.com>",
-  "homepage": "https://ondewo.com/",
-  "license": "Apache-2.0",
-  "keywords": [
-    "ondewo",
-    "nlu",
-    "api",
-    "client",
-    "ngx-grpc",
-    "grpc"
-  ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run prebuild && npm run generate && npm run postbuild",
-    "prebuild": "pwd && cd ../ondewo-proto-compiler/angular && sh build.sh && cd ../../src && pwd # cp ondewo-nlu-api/googleapis/google ondewo-nlu-api/ -R",
-    "postbuild": "cp README.md ../. && cp RELEASE.md ../.",
-    "submodule_update": "git submodule update --init --recursive",
-    "generate": "docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
-    "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
-    "publish-npm": "npm publish ../npm --access public",
-    "test-in-ondewo-aim": "npm run build && rm -rf ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/* && cp ../npm/* ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/. -R"
-  },
-  "peerDependencies": {
-    "@angular/common": ">=14.1.3",
-    "@angular/core": ">=14.1.3",
-    "@ngx-grpc/common": ">=3.0.2",
-    "@ngx-grpc/core": ">=3.0.2"
-  },
-  "repository": {
-    "type": "git",
-    "directory": "https://github.com/ondewo/ondewo-nlu-client-angular"
-  }
+    "name": "@ondewo/nlu-client-angular",
+    "version": "4.7.1",
+    "description": "ONDEWO Natural Language Understanding (NLU) Platform client library for Angular",
+    "author": "ONDEWO GmbH <office@ondewo.com>",
+    "homepage": "https://ondewo.com/",
+    "license": "Apache-2.0",
+    "keywords": [
+        "ondewo",
+        "nlu",
+        "api",
+        "client",
+        "ngx-grpc",
+        "grpc"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "npm run prebuild && npm run generate && npm run postbuild",
+        "prebuild": "pwd && cd ../ondewo-proto-compiler/angular && sh build.sh && cd ../../src && pwd # cp ondewo-nlu-api/googleapis/google ondewo-nlu-api/ -R",
+        "postbuild": "cp README.md ../. && cp RELEASE.md ../.",
+        "submodule_update": "git submodule update --init --recursive",
+        "generate": "docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
+        "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
+        "publish-npm": "npm publish ../npm --access public",
+        "test-in-ondewo-aim": "npm run build && rm -rf ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/* && cp ../npm/* ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/. -R"
+    },
+    "peerDependencies": {
+        "@angular/common": ">=16.2.6",
+        "@angular/core": ">=16.2.6",
+        "@ngx-grpc/common": ">=3.1.1",
+        "@ngx-grpc/core": ">=3.1.1"
+    },
+    "repository": {
+        "type": "git",
+        "directory": "https://github.com/ondewo/ondewo-nlu-client-angular"
+    }
 }

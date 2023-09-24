@@ -1,108 +1,149 @@
 # Release History
 
 ***************** 
-## Release ONDEWO NLU Angular Client 4.7.0 
- 
-### Improvements 
- * Tracking API Version [4.7.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.7.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
 
+## Release ONDEWO NLU Angular Client 4.7.1
 
-***************** 
-## Release ONDEWO NLU Angular Client 4.6.0 
- 
-### Improvements 
- * Tracking API Version [4.6.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.6.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
+### Improvements
 
+* Optimized for Angular 16 (esm2022 and fesm2022)
+* Tracking API
+  Version [4.7.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.7.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 ***************** 
-## Release ONDEWO NLU Angular Client 4.5.0 
- 
-### Improvements 
- * Tracking API Version [4.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
 
+## Release ONDEWO NLU Angular Client 4.7.0
 
-***************** 
-## Release ONDEWO NLU Angular Client 4.4.0 
- 
-### Improvements 
- * Tracking API Version [4.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
+### Improvements
 
+* Tracking API
+  Version [4.7.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.7.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 ***************** 
-## Release ONDEWO NLU Angular Client 4.3.0 
- 
-### Improvements 
- * Tracking API Version [4.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
 
+## Release ONDEWO NLU Angular Client 4.6.0
 
-***************** 
-## Release ONDEWO NLU Angular Client 4.2.0 
- 
-### Improvements 
- * Tracking API Version [4.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
+### Improvements
 
+* Tracking API
+  Version [4.6.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.6.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 ***************** 
-## Release ONDEWO NLU Angular Client 4.0.0 
- 
-### Improvements 
- * Tracking API Version [4.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
 
+## Release ONDEWO NLU Angular Client 4.5.0
 
-***************** 
-## Release ONDEWO NLU Angular Client 3.5.2 
- 
-### Improvements 
- * Tracking API Version [3.5.2](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.5.2) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
+### Improvements
 
+* Tracking API
+  Version [4.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 ***************** 
-## Release ONDEWO NLU Angular Client 3.5.0 
- 
-### Improvements 
- * Tracking API Version [3.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
 
+## Release ONDEWO NLU Angular Client 4.4.0
 
-***************** 
-## Release ONDEWO NLU Angular Client 3.5.0 
- 
-### Improvements 
- * Tracking API Version [3.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
+### Improvements
 
+* Tracking API
+  Version [4.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 ***************** 
-## Release ONDEWO NLU Angular Client 3.4.0 
- 
-### Improvements 
- * Tracking API Version [3.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
 
+## Release ONDEWO NLU Angular Client 4.3.0
 
-***************** 
-## Release ONDEWO NLU Angular Client 3.3.0 
- 
-### Improvements 
- * Tracking API Version [3.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
+### Improvements
 
+* Tracking API
+  Version [4.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 ***************** 
-## Release ONDEWO NLU Angular Client 3.2.0 
- 
-### Improvements 
- * Tracking API Version [3.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
 
+## Release ONDEWO NLU Angular Client 4.2.0
 
-***************** 
-## Release ONDEWO NLU Angular Client 3.1.0 
- 
-### Improvements 
- * Tracking API Version [3.1.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.1.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
+### Improvements
 
+* Tracking API
+  Version [4.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 ***************** 
-## Release ONDEWO NLU Angular Client 3.0.0 
- 
-### Improvements 
- * Tracking API Version [3.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
+
+## Release ONDEWO NLU Angular Client 4.0.0
+
+### Improvements
+
+* Tracking API
+  Version [4.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+***************** 
+
+## Release ONDEWO NLU Angular Client 3.5.2
+
+### Improvements
+
+* Tracking API
+  Version [3.5.2](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.5.2) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+***************** 
+
+## Release ONDEWO NLU Angular Client 3.5.0
+
+### Improvements
+
+* Tracking API
+  Version [3.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+***************** 
+
+## Release ONDEWO NLU Angular Client 3.5.0
+
+### Improvements
+
+* Tracking API
+  Version [3.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+***************** 
+
+## Release ONDEWO NLU Angular Client 3.4.0
+
+### Improvements
+
+* Tracking API
+  Version [3.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+***************** 
+
+## Release ONDEWO NLU Angular Client 3.3.0
+
+### Improvements
+
+* Tracking API
+  Version [3.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+***************** 
+
+## Release ONDEWO NLU Angular Client 3.2.0
+
+### Improvements
+
+* Tracking API
+  Version [3.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+***************** 
+
+## Release ONDEWO NLU Angular Client 3.1.0
+
+### Improvements
+
+* Tracking API
+  Version [3.1.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.1.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+***************** 
+
+## Release ONDEWO NLU Angular Client 3.0.0
+
+### Improvements
+
+* Tracking API
+  Version [3.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
@@ -125,21 +166,25 @@
 * [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Added pre-commit hooks and adjusted files to them
 
 *****************
+
 ## Release ONDEWO NLU Angular Client 2.11.0
 
 * Track version 2.11.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.11.0)
 
 *****************
+
 ## Release ONDEWO NLU Angular Client 2.10.0
 
 * Track version 2.10.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.10.0)
 
 *****************
+
 ## Release ONDEWO NLU Angular Client 2.9.1
 
 * Track version 2.9.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.9.0)
 
 *****************
+
 ## Release ONDEWO NLU Angular Client 2.9.0
 
 * Track version 2.9.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.9.0)
