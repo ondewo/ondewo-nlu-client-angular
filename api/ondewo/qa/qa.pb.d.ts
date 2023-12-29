@@ -1,6 +1,6 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as ondewoNlu012 from '../../ondewo/nlu/session.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/session.pb';
 /**
  * Message implementation for ondewo.qa.GetAnswerRequest
  */
@@ -43,8 +43,8 @@ export declare class GetAnswerRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetAnswerRequest.AsObject>);
     get sessionId(): string;
     set sessionId(value: string);
-    get text(): ondewoNlu012.TextInput | undefined;
-    set text(value: ondewoNlu012.TextInput | undefined);
+    get text(): ondewoNlu013.TextInput | undefined;
+    set text(value: ondewoNlu013.TextInput | undefined);
     get maxNumAnswers(): number;
     set maxNumAnswers(value: number);
     get thresholdReader(): number;
@@ -83,7 +83,7 @@ export declare module GetAnswerRequest {
      */
     interface AsObject {
         sessionId: string;
-        text?: ondewoNlu012.TextInput.AsObject;
+        text?: ondewoNlu013.TextInput.AsObject;
         maxNumAnswers: number;
         thresholdReader: number;
         thresholdRetriever: number;
@@ -96,7 +96,7 @@ export declare module GetAnswerRequest {
      */
     interface AsProtobufJSON {
         sessionId: string;
-        text: ondewoNlu012.TextInput.AsProtobufJSON | null;
+        text: ondewoNlu013.TextInput.AsProtobufJSON | null;
         maxNumAnswers: number;
         thresholdReader: number;
         thresholdRetriever: number;
@@ -138,8 +138,8 @@ export declare class GetAnswerResponse implements GrpcMessage {
      * @param _value initial values object or instance of GetAnswerResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<GetAnswerResponse.AsObject>);
-    get queryResult(): ondewoNlu012.DetectIntentResponse | undefined;
-    set queryResult(value: ondewoNlu012.DetectIntentResponse | undefined);
+    get queryResult(): ondewoNlu013.DetectIntentResponse | undefined;
+    set queryResult(value: ondewoNlu013.DetectIntentResponse | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -165,13 +165,13 @@ export declare module GetAnswerResponse {
      * Standard JavaScript object representation for GetAnswerResponse
      */
     interface AsObject {
-        queryResult?: ondewoNlu012.DetectIntentResponse.AsObject;
+        queryResult?: ondewoNlu013.DetectIntentResponse.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAnswerResponse
      */
     interface AsProtobufJSON {
-        queryResult: ondewoNlu012.DetectIntentResponse.AsProtobufJSON | null;
+        queryResult: ondewoNlu013.DetectIntentResponse.AsProtobufJSON | null;
     }
 }
 /**

@@ -2,7 +2,8 @@ import { GrpcClientFactory, GrpcEvent, GrpcMetadata } from '@ngx-grpc/common';
 import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './user.pb';
-import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu007 from '../../ondewo/nlu/common.pb';
 import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.nlu.Users
@@ -45,9 +46,9 @@ export declare class UsersClient {
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteUser: (requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        deleteUser: (requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Users/UpdateUser
          *
@@ -93,9 +94,9 @@ export declare class UsersClient {
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteServerRole: (requestData: thisProto.DeleteServerRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        deleteServerRole: (requestData: thisProto.DeleteServerRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Users/UpdateServerRole
          *
@@ -133,9 +134,65 @@ export declare class UsersClient {
          *
          * @param requestMessage Request message
          * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<googleProtobuf004.Empty>>
+         * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        checkLogin: (requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf004.Empty>>;
+        checkLogin: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
+        /**
+         * Unary call: /ondewo.nlu.Users/ListNotifications
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>
+         */
+        listNotifications: (requestData: ondewoNlu007.ListNotificationsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Users/SetNotificationsFlaggedStatus
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>
+         */
+        setNotificationsFlaggedStatus: (requestData: ondewoNlu007.SetNotificationsFlaggedStatusRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Users/SetNotificationsReadStatus
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>
+         */
+        setNotificationsReadStatus: (requestData: ondewoNlu007.SetNotificationsReadStatusRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Users/GetUserPreferences
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetUserPreferencesResponse>>
+         */
+        getUserPreferences: (requestData: thisProto.GetUserPreferencesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.GetUserPreferencesResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Users/SetUserPreferences
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.SetUserPreferencesResponse>>
+         */
+        setUserPreferences: (requestData: thisProto.SetUserPreferencesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.SetUserPreferencesResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Users/DeleteUserPreferences
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.DeleteUserPreferencesResponse>>
+         */
+        deleteUserPreferences: (requestData: thisProto.DeleteUserPreferencesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.DeleteUserPreferencesResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Users/DeleteAllUserPreferences
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.DeleteUserPreferencesResponse>>
+         */
+        deleteAllUserPreferences: (requestData: thisProto.DeleteAllUserPreferencesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.DeleteUserPreferencesResponse>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -167,9 +224,9 @@ export declare class UsersClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
+     * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteUser(requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    deleteUser(requestData: thisProto.GetUserRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Users/UpdateUser
      *
@@ -215,9 +272,9 @@ export declare class UsersClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
+     * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteServerRole(requestData: thisProto.DeleteServerRoleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    deleteServerRole(requestData: thisProto.DeleteServerRoleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Users/UpdateServerRole
      *
@@ -255,9 +312,65 @@ export declare class UsersClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf004.Empty>
+     * @returns Observable<googleProtobuf003.Empty>
      */
-    checkLogin(requestData: googleProtobuf004.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf004.Empty>;
+    checkLogin(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
+    /**
+     * Unary call @/ondewo.nlu.Users/ListNotifications
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu007.ListNotificationsResponse>
+     */
+    listNotifications(requestData: ondewoNlu007.ListNotificationsRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu007.ListNotificationsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Users/SetNotificationsFlaggedStatus
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu007.ListNotificationsResponse>
+     */
+    setNotificationsFlaggedStatus(requestData: ondewoNlu007.SetNotificationsFlaggedStatusRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu007.ListNotificationsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Users/SetNotificationsReadStatus
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu007.ListNotificationsResponse>
+     */
+    setNotificationsReadStatus(requestData: ondewoNlu007.SetNotificationsReadStatusRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu007.ListNotificationsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Users/GetUserPreferences
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetUserPreferencesResponse>
+     */
+    getUserPreferences(requestData: thisProto.GetUserPreferencesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.GetUserPreferencesResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Users/SetUserPreferences
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.SetUserPreferencesResponse>
+     */
+    setUserPreferences(requestData: thisProto.SetUserPreferencesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.SetUserPreferencesResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Users/DeleteUserPreferences
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.DeleteUserPreferencesResponse>
+     */
+    deleteUserPreferences(requestData: thisProto.DeleteUserPreferencesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.DeleteUserPreferencesResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Users/DeleteAllUserPreferences
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.DeleteUserPreferencesResponse>
+     */
+    deleteAllUserPreferences(requestData: thisProto.DeleteAllUserPreferencesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.DeleteUserPreferencesResponse>;
     static ɵfac: i0.ɵɵFactoryDeclaration<UsersClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<UsersClient>;
 }

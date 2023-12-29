@@ -1,8 +1,8 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as ondewoNlu004 from '../../ondewo/nlu/common.pb';
-import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf008 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu006 from '../../ondewo/nlu/common.pb';
 import * as googleProtobuf009 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu010 from '../../ondewo/nlu/project-role.pb';
 import * as ondewoNlu015 from '../../ondewo/nlu/intent.pb';
@@ -92,6 +92,10 @@ export declare class Agent implements GrpcMessage {
     private _ownerId;
     private _status;
     private _description;
+    private _createdAt?;
+    private _modifiedAt?;
+    private _createdBy;
+    private _modifiedBy;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of Agent to deeply clone from
@@ -117,6 +121,14 @@ export declare class Agent implements GrpcMessage {
     set status(value: AgentStatus);
     get description(): string;
     set description(value: string);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+    get createdBy(): string;
+    set createdBy(value: string);
+    get modifiedBy(): string;
+    set modifiedBy(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -152,6 +164,10 @@ export declare module Agent {
         ownerId: string;
         status: AgentStatus;
         description: string;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+        createdBy: string;
+        modifiedBy: string;
     }
     /**
      * Protobuf JSON representation for Agent
@@ -167,6 +183,10 @@ export declare module Agent {
         ownerId: string;
         status: string;
         description: string;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createdBy: string;
+        modifiedBy: string;
     }
 }
 /**
@@ -430,8 +450,8 @@ export declare class UpdateAgentRequest implements GrpcMessage {
     set agent(value: Agent | undefined);
     get agentView(): AgentView;
     set agentView(value: AgentView);
-    get updateMask(): googleProtobuf008.FieldMask | undefined;
-    set updateMask(value: googleProtobuf008.FieldMask | undefined);
+    get updateMask(): googleProtobuf002.FieldMask | undefined;
+    set updateMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -459,7 +479,7 @@ export declare module UpdateAgentRequest {
     interface AsObject {
         agent?: Agent.AsObject;
         agentView: AgentView;
-        updateMask?: googleProtobuf008.FieldMask.AsObject;
+        updateMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateAgentRequest
@@ -467,7 +487,7 @@ export declare module UpdateAgentRequest {
     interface AsProtobufJSON {
         agent: Agent.AsProtobufJSON | null;
         agentView: string;
-        updateMask: googleProtobuf008.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -2033,8 +2053,8 @@ export declare class GetSessionsStatisticsRequest implements GrpcMessage {
     set groupBys(value: string[]);
     get orderBys(): string[];
     set orderBys(value: string[]);
-    get fieldMask(): googleProtobuf008.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf008.FieldMask | undefined);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     get sqlQuery(): string;
     set sqlQuery(value: string);
     /**
@@ -2070,7 +2090,7 @@ export declare module GetSessionsStatisticsRequest {
         limit: number;
         groupBys: string[];
         orderBys: string[];
-        fieldMask?: googleProtobuf008.FieldMask.AsObject;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
         sqlQuery: string;
     }
     /**
@@ -2085,7 +2105,7 @@ export declare module GetSessionsStatisticsRequest {
         limit: number;
         groupBys: string[];
         orderBys: string[];
-        fieldMask: googleProtobuf008.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
         sqlQuery: string;
     }
 }
@@ -2880,8 +2900,8 @@ export declare class AgentSorting implements GrpcMessage {
     constructor(_value?: RecursivePartial<AgentSorting.AsObject>);
     get sortingField(): AgentSorting.AgentSortingField;
     set sortingField(value: AgentSorting.AgentSortingField);
-    get sortingMode(): ondewoNlu004.SortingMode;
-    set sortingMode(value: ondewoNlu004.SortingMode);
+    get sortingMode(): ondewoNlu006.SortingMode;
+    set sortingMode(value: ondewoNlu006.SortingMode);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2908,7 +2928,7 @@ export declare module AgentSorting {
      */
     interface AsObject {
         sortingField: AgentSorting.AgentSortingField;
-        sortingMode: ondewoNlu004.SortingMode;
+        sortingMode: ondewoNlu006.SortingMode;
     }
     /**
      * Protobuf JSON representation for AgentSorting
@@ -3399,8 +3419,8 @@ export declare class ModelStatus implements GrpcMessage {
     set languageCode(value: string);
     get modelName(): string;
     set modelName(value: string);
-    get statusSetTime(): googleProtobuf007.Timestamp | undefined;
-    set statusSetTime(value: googleProtobuf007.Timestamp | undefined);
+    get statusSetTime(): googleProtobuf003.Timestamp | undefined;
+    set statusSetTime(value: googleProtobuf003.Timestamp | undefined);
     get config(): string;
     set config(value: string);
     get status(): ModelStatus.StatusName;
@@ -3433,7 +3453,7 @@ export declare module ModelStatus {
         cacheVersion: number;
         languageCode: string;
         modelName: string;
-        statusSetTime?: googleProtobuf007.Timestamp.AsObject;
+        statusSetTime?: googleProtobuf003.Timestamp.AsObject;
         config: string;
         status: ModelStatus.StatusName;
     }
@@ -3444,7 +3464,7 @@ export declare module ModelStatus {
         cacheVersion: number;
         languageCode: string;
         modelName: string;
-        statusSetTime: googleProtobuf007.Timestamp.AsProtobufJSON | null;
+        statusSetTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         config: string;
         status: string;
     }
@@ -3974,6 +3994,10 @@ export declare module FullTextSearchResponseEntityType {
         private _name;
         private _displayName;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of EntityTypeSearchResult to deeply clone from
@@ -3985,6 +4009,14 @@ export declare module FullTextSearchResponseEntityType {
         set displayName(value: string);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -4013,6 +4045,10 @@ export declare module FullTextSearchResponseEntityType {
             name: string;
             displayName: string;
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for EntityTypeSearchResult
@@ -4021,6 +4057,10 @@ export declare module FullTextSearchResponseEntityType {
             name: string;
             displayName: string;
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
@@ -4154,6 +4194,10 @@ export declare module FullTextSearchResponseEntity {
         private _entityTypeName;
         private _entityTypeDisplayName;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of EntitySearchResult to deeply clone from
@@ -4169,6 +4213,14 @@ export declare module FullTextSearchResponseEntity {
         set entityTypeDisplayName(value: string);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -4199,6 +4251,10 @@ export declare module FullTextSearchResponseEntity {
             entityTypeName: string;
             entityTypeDisplayName: string;
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for EntitySearchResult
@@ -4209,6 +4265,10 @@ export declare module FullTextSearchResponseEntity {
             entityTypeName: string;
             entityTypeDisplayName: string;
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
@@ -4344,6 +4404,10 @@ export declare module FullTextSearchResponseEntitySynonym {
         private _entityName;
         private _entityDisplayName;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of EntitySynonymSearchResult to deeply clone from
@@ -4363,6 +4427,14 @@ export declare module FullTextSearchResponseEntitySynonym {
         set entityDisplayName(value: string);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -4395,6 +4467,10 @@ export declare module FullTextSearchResponseEntitySynonym {
             entityName: string;
             entityDisplayName: string;
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for EntitySynonymSearchResult
@@ -4407,6 +4483,10 @@ export declare module FullTextSearchResponseEntitySynonym {
             entityName: string;
             entityDisplayName: string;
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
@@ -4540,6 +4620,10 @@ export declare module FullTextSearchResponseIntent {
         private _domainName;
         private _tags;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of IntentSearchResult to deeply clone from
@@ -4555,6 +4639,14 @@ export declare module FullTextSearchResponseIntent {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -4585,6 +4677,10 @@ export declare module FullTextSearchResponseIntent {
             domainName: string;
             tags: string[];
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for IntentSearchResult
@@ -4595,6 +4691,10 @@ export declare module FullTextSearchResponseIntent {
             domainName: string;
             tags: string[];
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
@@ -4728,6 +4828,10 @@ export declare module FullTextSearchResponseIntentContextIn {
         private _intentDisplayName;
         private _tags;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of IntentContextInSearchResult to deeply clone from
@@ -4743,6 +4847,14 @@ export declare module FullTextSearchResponseIntentContextIn {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -4773,6 +4885,10 @@ export declare module FullTextSearchResponseIntentContextIn {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for IntentContextInSearchResult
@@ -4783,6 +4899,10 @@ export declare module FullTextSearchResponseIntentContextIn {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
@@ -4916,6 +5036,10 @@ export declare module FullTextSearchResponseIntentContextOut {
         private _intentDisplayName;
         private _tags;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of IntentContextOutSearchResult to deeply clone from
@@ -4931,6 +5055,14 @@ export declare module FullTextSearchResponseIntentContextOut {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -4961,6 +5093,10 @@ export declare module FullTextSearchResponseIntentContextOut {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for IntentContextOutSearchResult
@@ -4971,6 +5107,10 @@ export declare module FullTextSearchResponseIntentContextOut {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
@@ -5108,6 +5248,10 @@ export declare module FullTextSearchResponseIntentUsersays {
         private _intentDisplayName;
         private _tags;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of IntentUsersaysSearchResult to deeply clone from
@@ -5131,6 +5275,14 @@ export declare module FullTextSearchResponseIntentUsersays {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -5165,6 +5317,10 @@ export declare module FullTextSearchResponseIntentUsersays {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for IntentUsersaysSearchResult
@@ -5179,6 +5335,10 @@ export declare module FullTextSearchResponseIntentUsersays {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
@@ -5313,6 +5473,10 @@ export declare module FullTextSearchResponseIntentTags {
         private _intentDisplayName;
         private _tags;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of IntentTagsSearchResult to deeply clone from
@@ -5330,6 +5494,14 @@ export declare module FullTextSearchResponseIntentTags {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -5361,6 +5533,10 @@ export declare module FullTextSearchResponseIntentTags {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for IntentTagsSearchResult
@@ -5372,6 +5548,10 @@ export declare module FullTextSearchResponseIntentTags {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
@@ -5507,6 +5687,10 @@ export declare module FullTextSearchResponseIntentResponse {
         private _intentDisplayName;
         private _tags;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of IntentResponseSearchResult to deeply clone from
@@ -5526,6 +5710,14 @@ export declare module FullTextSearchResponseIntentResponse {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -5558,6 +5750,10 @@ export declare module FullTextSearchResponseIntentResponse {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for IntentResponseSearchResult
@@ -5570,6 +5766,10 @@ export declare module FullTextSearchResponseIntentResponse {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
@@ -5704,6 +5904,10 @@ export declare module FullTextSearchResponseIntentParameters {
         private _intentDisplayName;
         private _tags;
         private _language;
+        private _createdAt?;
+        private _modifiedAt?;
+        private _createdBy;
+        private _modifiedBy;
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of IntentParametersSearchResult to deeply clone from
@@ -5721,6 +5925,14 @@ export declare module FullTextSearchResponseIntentParameters {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+        get createdBy(): string;
+        set createdBy(value: string);
+        get modifiedBy(): string;
+        set modifiedBy(value: string);
         /**
          * Serialize message to binary data
          * @param instance message instance
@@ -5752,6 +5964,10 @@ export declare module FullTextSearchResponseIntentParameters {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+            createdBy: string;
+            modifiedBy: string;
         }
         /**
          * Protobuf JSON representation for IntentParametersSearchResult
@@ -5763,6 +5979,10 @@ export declare module FullTextSearchResponseIntentParameters {
             intentDisplayName: string;
             tags: string[];
             language: string;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            createdBy: string;
+            modifiedBy: string;
         }
     }
 }
