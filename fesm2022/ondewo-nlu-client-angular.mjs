@@ -46897,7 +46897,7 @@ class IntentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu011.Operation>>
+             * @returns Observable<GrpcEvent<thisProto.BatchUpdateIntentsResponse>>
              */
             batchUpdateIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -46907,7 +46907,7 @@ class IntentsClient {
                     requestData,
                     requestMetadata,
                     requestClass: BatchUpdateIntentsRequest,
-                    responseClass: Operation
+                    responseClass: BatchUpdateIntentsResponse
                 });
             },
             /**
@@ -47356,7 +47356,7 @@ class IntentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu011.Operation>
+     * @returns Observable<thisProto.BatchUpdateIntentsResponse>
      */
     batchUpdateIntents(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53861,6 +53861,10 @@ class CustomPlatformInfo {
         _instance.platform = _instance.platform || 0;
         _instance.displayName = _instance.displayName || '';
         _instance.position = _instance.position || 0;
+        _instance.createdAt = _instance.createdAt || undefined;
+        _instance.modifiedAt = _instance.modifiedAt || undefined;
+        _instance.createdBy = _instance.createdBy || '';
+        _instance.modifiedBy = _instance.modifiedBy || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -53880,6 +53884,20 @@ class CustomPlatformInfo {
                     break;
                 case 3:
                     _instance.position = _reader.readUint32();
+                    break;
+                case 4:
+                    _instance.createdAt = new googleProtobuf003.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 5:
+                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 6:
+                    _instance.createdBy = _reader.readString();
+                    break;
+                case 7:
+                    _instance.modifiedBy = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
@@ -53902,6 +53920,18 @@ class CustomPlatformInfo {
         if (_instance.position) {
             _writer.writeUint32(3, _instance.position);
         }
+        if (_instance.createdAt) {
+            _writer.writeMessage(4, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.modifiedAt) {
+            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.createdBy) {
+            _writer.writeString(6, _instance.createdBy);
+        }
+        if (_instance.modifiedBy) {
+            _writer.writeString(7, _instance.modifiedBy);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -53912,6 +53942,14 @@ class CustomPlatformInfo {
         this.platform = _value.platform;
         this.displayName = _value.displayName;
         this.position = _value.position;
+        this.createdAt = _value.createdAt
+            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            : undefined;
+        this.modifiedAt = _value.modifiedAt
+            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            : undefined;
+        this.createdBy = _value.createdBy;
+        this.modifiedBy = _value.modifiedBy;
         CustomPlatformInfo.refineValues(this);
     }
     get platform() {
@@ -53932,6 +53970,30 @@ class CustomPlatformInfo {
     set position(value) {
         this._position = value;
     }
+    get createdAt() {
+        return this._createdAt;
+    }
+    set createdAt(value) {
+        this._createdAt = value;
+    }
+    get modifiedAt() {
+        return this._modifiedAt;
+    }
+    set modifiedAt(value) {
+        this._modifiedAt = value;
+    }
+    get createdBy() {
+        return this._createdBy;
+    }
+    set createdBy(value) {
+        this._createdBy = value;
+    }
+    get modifiedBy() {
+        return this._modifiedBy;
+    }
+    set modifiedBy(value) {
+        this._modifiedBy = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -53948,7 +54010,11 @@ class CustomPlatformInfo {
         return {
             platform: this.platform,
             displayName: this.displayName,
-            position: this.position
+            position: this.position,
+            createdAt: this.createdAt ? this.createdAt.toObject() : undefined,
+            modifiedAt: this.modifiedAt ? this.modifiedAt.toObject() : undefined,
+            createdBy: this.createdBy,
+            modifiedBy: this.modifiedBy
         };
     }
     /**
@@ -53970,7 +54036,13 @@ class CustomPlatformInfo {
                 ? 0
                 : this.platform],
             displayName: this.displayName,
-            position: this.position
+            position: this.position,
+            createdAt: this.createdAt ? this.createdAt.toProtobufJSON(options) : null,
+            modifiedAt: this.modifiedAt
+                ? this.modifiedAt.toProtobufJSON(options)
+                : null,
+            createdBy: this.createdBy,
+            modifiedBy: this.modifiedBy
         };
     }
 }

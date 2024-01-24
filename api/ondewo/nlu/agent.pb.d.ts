@@ -3577,6 +3577,10 @@ export declare class CustomPlatformInfo implements GrpcMessage {
     private _platform;
     private _displayName;
     private _position;
+    private _createdAt?;
+    private _modifiedAt?;
+    private _createdBy;
+    private _modifiedBy;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of CustomPlatformInfo to deeply clone from
@@ -3588,6 +3592,14 @@ export declare class CustomPlatformInfo implements GrpcMessage {
     set displayName(value: string);
     get position(): number;
     set position(value: number);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+    get createdBy(): string;
+    set createdBy(value: string);
+    get modifiedBy(): string;
+    set modifiedBy(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3616,6 +3628,10 @@ export declare module CustomPlatformInfo {
         platform: ondewoNlu015.Intent.Message.Platform;
         displayName: string;
         position: number;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+        createdBy: string;
+        modifiedBy: string;
     }
     /**
      * Protobuf JSON representation for CustomPlatformInfo
@@ -3624,6 +3640,10 @@ export declare module CustomPlatformInfo {
         platform: string;
         displayName: string;
         position: number;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createdBy: string;
+        modifiedBy: string;
     }
 }
 /**
