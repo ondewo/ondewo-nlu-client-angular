@@ -277,8 +277,8 @@ export declare class QueryParameters implements GrpcMessage {
     set originId(value: string);
     get identifiedUserId(): string;
     set identifiedUserId(value: string);
-    get transcriptions(): Transcription[] | undefined;
-    set transcriptions(value: Transcription[] | undefined);
+    get transcriptions(): S2tTranscription[] | undefined;
+    set transcriptions(value: S2tTranscription[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -316,7 +316,7 @@ export declare module QueryParameters {
         datastreamId: string;
         originId: string;
         identifiedUserId: string;
-        transcriptions?: Transcription.AsObject[];
+        transcriptions?: S2tTranscription.AsObject[];
     }
     /**
      * Protobuf JSON representation for QueryParameters
@@ -334,36 +334,36 @@ export declare module QueryParameters {
         datastreamId: string;
         originId: string;
         identifiedUserId: string;
-        transcriptions: Transcription.AsProtobufJSON[] | null;
+        transcriptions: S2tTranscription.AsProtobufJSON[] | null;
     }
 }
 /**
- * Message implementation for ondewo.nlu.Transcription
+ * Message implementation for ondewo.nlu.S2tTranscription
  */
-export declare class Transcription implements GrpcMessage {
+export declare class S2tTranscription implements GrpcMessage {
     static id: string;
     /**
      * Deserialize binary data to message
      * @param instance message instance
      */
-    static deserializeBinary(bytes: ByteSource): Transcription;
+    static deserializeBinary(bytes: ByteSource): S2tTranscription;
     /**
      * Check all the properties and set default protobuf values if necessary
      * @param _instance message instance
      */
-    static refineValues(_instance: Transcription): void;
+    static refineValues(_instance: S2tTranscription): void;
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
      * @param _instance message instance
      * @param _reader binary reader instance
      */
-    static deserializeBinaryFromReader(_instance: Transcription, _reader: BinaryReader): void;
+    static deserializeBinaryFromReader(_instance: S2tTranscription, _reader: BinaryReader): void;
     /**
      * Serializes a message to binary format using provided binary reader
      * @param _instance message instance
      * @param _writer binary writer instance
      */
-    static serializeBinaryToWriter(_instance: Transcription, _writer: BinaryWriter): void;
+    static serializeBinaryToWriter(_instance: S2tTranscription, _writer: BinaryWriter): void;
     private _name;
     private _text;
     private _score;
@@ -378,9 +378,9 @@ export declare class Transcription implements GrpcMessage {
     private _modifiedBy;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-     * @param _value initial values object or instance of Transcription to deeply clone from
+     * @param _value initial values object or instance of S2tTranscription to deeply clone from
      */
-    constructor(_value?: RecursivePartial<Transcription.AsObject>);
+    constructor(_value?: RecursivePartial<S2tTranscription.AsObject>);
     get name(): string;
     set name(value: string);
     get text(): string;
@@ -413,21 +413,21 @@ export declare class Transcription implements GrpcMessage {
     /**
      * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
      */
-    toObject(): Transcription.AsObject;
+    toObject(): S2tTranscription.AsObject;
     /**
      * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
      */
-    toJSON(): Transcription.AsObject;
+    toJSON(): S2tTranscription.AsObject;
     /**
      * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
      * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
      * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
      */
-    toProtobufJSON(options?: ToProtobufJSONOptions): Transcription.AsProtobufJSON;
+    toProtobufJSON(options?: ToProtobufJSONOptions): S2tTranscription.AsProtobufJSON;
 }
-export declare module Transcription {
+export declare module S2tTranscription {
     /**
-     * Standard JavaScript object representation for Transcription
+     * Standard JavaScript object representation for S2tTranscription
      */
     interface AsObject {
         name: string;
@@ -444,7 +444,7 @@ export declare module Transcription {
         modifiedBy: string;
     }
     /**
-     * Protobuf JSON representation for Transcription
+     * Protobuf JSON representation for S2tTranscription
      */
     interface AsProtobufJSON {
         name: string;
@@ -5920,8 +5920,8 @@ export declare class AudioFileResource implements GrpcMessage {
     set sampleRate(value: number);
     get audioFileResourceType(): AudioFileResourceType;
     set audioFileResourceType(value: AudioFileResourceType);
-    get transcriptions(): Transcription[] | undefined;
-    set transcriptions(value: Transcription[] | undefined);
+    get transcriptions(): S2tTranscription[] | undefined;
+    set transcriptions(value: S2tTranscription[] | undefined);
     get createdAt(): googleProtobuf004.Timestamp | undefined;
     set createdAt(value: googleProtobuf004.Timestamp | undefined);
     get modifiedAt(): googleProtobuf004.Timestamp | undefined;
@@ -5961,7 +5961,7 @@ export declare module AudioFileResource {
         durationInS: number;
         sampleRate: number;
         audioFileResourceType: AudioFileResourceType;
-        transcriptions?: Transcription.AsObject[];
+        transcriptions?: S2tTranscription.AsObject[];
         createdAt?: googleProtobuf004.Timestamp.AsObject;
         modifiedAt?: googleProtobuf004.Timestamp.AsObject;
         createdBy: string;
@@ -5977,7 +5977,7 @@ export declare module AudioFileResource {
         durationInS: number;
         sampleRate: number;
         audioFileResourceType: string;
-        transcriptions: Transcription.AsProtobufJSON[] | null;
+        transcriptions: S2tTranscription.AsProtobufJSON[] | null;
         createdAt: googleProtobuf004.Timestamp.AsProtobufJSON | null;
         modifiedAt: googleProtobuf004.Timestamp.AsProtobufJSON | null;
         createdBy: string;
