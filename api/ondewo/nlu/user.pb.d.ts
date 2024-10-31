@@ -90,7 +90,7 @@ export declare class User implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): User.AsProtobufJSON;
 }
-export declare module User {
+export declare namespace User {
     /**
      * Standard JavaScript object representation for User
      */
@@ -182,7 +182,7 @@ export declare class UserInfo implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UserInfo.AsProtobufJSON;
 }
-export declare module UserInfo {
+export declare namespace UserInfo {
     /**
      * Standard JavaScript object representation for UserInfo
      */
@@ -259,7 +259,7 @@ export declare module UserInfo {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): ProjectRolesEntry.AsProtobufJSON;
     }
-    module ProjectRolesEntry {
+    namespace ProjectRolesEntry {
         /**
          * Standard JavaScript object representation for ProjectRolesEntry
          */
@@ -334,7 +334,7 @@ export declare class CreateUserRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateUserRequest.AsProtobufJSON;
 }
-export declare module CreateUserRequest {
+export declare namespace CreateUserRequest {
     /**
      * Standard JavaScript object representation for CreateUserRequest
      */
@@ -411,7 +411,7 @@ export declare class UpdateUserRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateUserRequest.AsProtobufJSON;
 }
-export declare module UpdateUserRequest {
+export declare namespace UpdateUserRequest {
     /**
      * Standard JavaScript object representation for UpdateUserRequest
      */
@@ -489,7 +489,7 @@ export declare class GetUserRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetUserRequest.AsProtobufJSON;
 }
-export declare module GetUserRequest {
+export declare namespace GetUserRequest {
     /**
      * Standard JavaScript object representation for GetUserRequest
      */
@@ -565,7 +565,7 @@ export declare class DeleteUserRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteUserRequest.AsProtobufJSON;
 }
-export declare module DeleteUserRequest {
+export declare namespace DeleteUserRequest {
     /**
      * Standard JavaScript object representation for DeleteUserRequest
      */
@@ -634,7 +634,7 @@ export declare class ListUsersRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListUsersRequest.AsProtobufJSON;
 }
-export declare module ListUsersRequest {
+export declare namespace ListUsersRequest {
     /**
      * Standard JavaScript object representation for ListUsersRequest
      */
@@ -706,7 +706,7 @@ export declare class ListUsersResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListUsersResponse.AsProtobufJSON;
 }
-export declare module ListUsersResponse {
+export declare namespace ListUsersResponse {
     /**
      * Standard JavaScript object representation for ListUsersResponse
      */
@@ -780,7 +780,7 @@ export declare class ListUserInfosResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListUserInfosResponse.AsProtobufJSON;
 }
-export declare module ListUserInfosResponse {
+export declare namespace ListUserInfosResponse {
     /**
      * Standard JavaScript object representation for ListUserInfosResponse
      */
@@ -869,7 +869,7 @@ export declare class ServerRole implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ServerRole.AsProtobufJSON;
 }
-export declare module ServerRole {
+export declare namespace ServerRole {
     /**
      * Standard JavaScript object representation for ServerRole
      */
@@ -950,7 +950,7 @@ export declare class CreateServerRoleRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateServerRoleRequest.AsProtobufJSON;
 }
-export declare module CreateServerRoleRequest {
+export declare namespace CreateServerRoleRequest {
     /**
      * Standard JavaScript object representation for CreateServerRoleRequest
      */
@@ -1022,7 +1022,7 @@ export declare class UpdateServerRoleRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateServerRoleRequest.AsProtobufJSON;
 }
-export declare module UpdateServerRoleRequest {
+export declare namespace UpdateServerRoleRequest {
     /**
      * Standard JavaScript object representation for UpdateServerRoleRequest
      */
@@ -1093,7 +1093,7 @@ export declare class DeleteServerRoleRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteServerRoleRequest.AsProtobufJSON;
 }
-export declare module DeleteServerRoleRequest {
+export declare namespace DeleteServerRoleRequest {
     /**
      * Standard JavaScript object representation for DeleteServerRoleRequest
      */
@@ -1167,7 +1167,7 @@ export declare class GetServerRoleRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetServerRoleRequest.AsProtobufJSON;
 }
-export declare module GetServerRoleRequest {
+export declare namespace GetServerRoleRequest {
     /**
      * Standard JavaScript object representation for GetServerRoleRequest
      */
@@ -1243,7 +1243,7 @@ export declare class ListServerRolesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListServerRolesRequest.AsProtobufJSON;
 }
-export declare module ListServerRolesRequest {
+export declare namespace ListServerRolesRequest {
     /**
      * Standard JavaScript object representation for ListServerRolesRequest
      */
@@ -1315,7 +1315,7 @@ export declare class ListServerRolesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListServerRolesResponse.AsProtobufJSON;
 }
-export declare module ListServerRolesResponse {
+export declare namespace ListServerRolesResponse {
     /**
      * Standard JavaScript object representation for ListServerRolesResponse
      */
@@ -1386,7 +1386,7 @@ export declare class ListServerPermissionsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListServerPermissionsRequest.AsProtobufJSON;
 }
-export declare module ListServerPermissionsRequest {
+export declare namespace ListServerPermissionsRequest {
     /**
      * Standard JavaScript object representation for ListServerPermissionsRequest
      */
@@ -1458,7 +1458,7 @@ export declare class ListServerPermissionsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListServerPermissionsResponse.AsProtobufJSON;
 }
-export declare module ListServerPermissionsResponse {
+export declare namespace ListServerPermissionsResponse {
     /**
      * Standard JavaScript object representation for ListServerPermissionsResponse
      */
@@ -1532,7 +1532,7 @@ export declare class LoginRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): LoginRequest.AsProtobufJSON;
 }
-export declare module LoginRequest {
+export declare namespace LoginRequest {
     /**
      * Standard JavaScript object representation for LoginRequest
      */
@@ -1606,7 +1606,7 @@ export declare class LoginResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): LoginResponse.AsProtobufJSON;
 }
-export declare module LoginResponse {
+export declare namespace LoginResponse {
     /**
      * Standard JavaScript object representation for LoginResponse
      */
@@ -1683,7 +1683,7 @@ export declare class GetUserPreferencesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetUserPreferencesRequest.AsProtobufJSON;
 }
-export declare module GetUserPreferencesRequest {
+export declare namespace GetUserPreferencesRequest {
     /**
      * Standard JavaScript object representation for GetUserPreferencesRequest
      */
@@ -1762,7 +1762,7 @@ export declare class GetUserPreferencesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetUserPreferencesResponse.AsProtobufJSON;
 }
-export declare module GetUserPreferencesResponse {
+export declare namespace GetUserPreferencesResponse {
     /**
      * Standard JavaScript object representation for GetUserPreferencesResponse
      */
@@ -1838,7 +1838,7 @@ export declare class SetUserPreferencesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SetUserPreferencesRequest.AsProtobufJSON;
 }
-export declare module SetUserPreferencesRequest {
+export declare namespace SetUserPreferencesRequest {
     /**
      * Standard JavaScript object representation for SetUserPreferencesRequest
      */
@@ -1915,7 +1915,7 @@ export declare class SetUserPreferencesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SetUserPreferencesResponse.AsProtobufJSON;
 }
-export declare module SetUserPreferencesResponse {
+export declare namespace SetUserPreferencesResponse {
     /**
      * Standard JavaScript object representation for SetUserPreferencesResponse
      */
@@ -1994,7 +1994,7 @@ export declare class DeleteUserPreferencesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteUserPreferencesRequest.AsProtobufJSON;
 }
-export declare module DeleteUserPreferencesRequest {
+export declare namespace DeleteUserPreferencesRequest {
     /**
      * Standard JavaScript object representation for DeleteUserPreferencesRequest
      */
@@ -2073,7 +2073,7 @@ export declare class DeleteUserPreferencesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteUserPreferencesResponse.AsProtobufJSON;
 }
-export declare module DeleteUserPreferencesResponse {
+export declare namespace DeleteUserPreferencesResponse {
     /**
      * Standard JavaScript object representation for DeleteUserPreferencesResponse
      */
@@ -2149,7 +2149,7 @@ export declare class DeleteAllUserPreferencesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteAllUserPreferencesRequest.AsProtobufJSON;
 }
-export declare module DeleteAllUserPreferencesRequest {
+export declare namespace DeleteAllUserPreferencesRequest {
     /**
      * Standard JavaScript object representation for DeleteAllUserPreferencesRequest
      */
@@ -2223,7 +2223,7 @@ export declare class ListUserPreferencesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListUserPreferencesRequest.AsProtobufJSON;
 }
-export declare module ListUserPreferencesRequest {
+export declare namespace ListUserPreferencesRequest {
     /**
      * Standard JavaScript object representation for ListUserPreferencesRequest
      */
@@ -2300,7 +2300,7 @@ export declare class ListUserPreferencesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListUserPreferencesResponse.AsProtobufJSON;
 }
-export declare module ListUserPreferencesResponse {
+export declare namespace ListUserPreferencesResponse {
     /**
      * Standard JavaScript object representation for ListUserPreferencesResponse
      */

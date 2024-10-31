@@ -85,7 +85,7 @@ export declare class ExtractEntitiesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ExtractEntitiesRequest.AsProtobufJSON;
 }
-export declare module ExtractEntitiesRequest {
+export declare namespace ExtractEntitiesRequest {
     /**
      * Standard JavaScript object representation for ExtractEntitiesRequest
      */
@@ -172,7 +172,7 @@ export declare class ExtractEntitiesFuzzyRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ExtractEntitiesFuzzyRequest.AsProtobufJSON;
 }
-export declare module ExtractEntitiesFuzzyRequest {
+export declare namespace ExtractEntitiesFuzzyRequest {
     /**
      * Standard JavaScript object representation for ExtractEntitiesFuzzyRequest
      */
@@ -261,7 +261,7 @@ export declare class EntityTypeFuzzyNerConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EntityTypeFuzzyNerConfig.AsProtobufJSON;
 }
-export declare module EntityTypeFuzzyNerConfig {
+export declare namespace EntityTypeFuzzyNerConfig {
     /**
      * Standard JavaScript object representation for EntityTypeFuzzyNerConfig
      */
@@ -348,7 +348,7 @@ export declare class EntityDetected implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EntityDetected.AsProtobufJSON;
 }
-export declare module EntityDetected {
+export declare namespace EntityDetected {
     /**
      * Standard JavaScript object representation for EntityDetected
      */
@@ -424,7 +424,7 @@ export declare class ExtractEntitiesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ExtractEntitiesResponse.AsProtobufJSON;
 }
-export declare module ExtractEntitiesResponse {
+export declare namespace ExtractEntitiesResponse {
     /**
      * Standard JavaScript object representation for ExtractEntitiesResponse
      */
@@ -510,7 +510,7 @@ export declare class GetAlternativeSentencesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAlternativeSentencesRequest.AsProtobufJSON;
 }
-export declare module GetAlternativeSentencesRequest {
+export declare namespace GetAlternativeSentencesRequest {
     /**
      * Standard JavaScript object representation for GetAlternativeSentencesRequest
      */
@@ -598,7 +598,7 @@ export declare class GenerateUserSaysRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GenerateUserSaysRequest.AsProtobufJSON;
 }
-export declare module GenerateUserSaysRequest {
+export declare namespace GenerateUserSaysRequest {
     /**
      * Standard JavaScript object representation for GenerateUserSaysRequest
      */
@@ -685,7 +685,7 @@ export declare class GenerateResponsesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GenerateResponsesRequest.AsProtobufJSON;
 }
-export declare module GenerateResponsesRequest {
+export declare namespace GenerateResponsesRequest {
     /**
      * Standard JavaScript object representation for GenerateResponsesRequest
      */
@@ -789,7 +789,7 @@ export declare class GetAlternativeTrainingPhrasesRequest implements GrpcMessage
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAlternativeTrainingPhrasesRequest.AsProtobufJSON;
 }
-export declare module GetAlternativeTrainingPhrasesRequest {
+export declare namespace GetAlternativeTrainingPhrasesRequest {
     /**
      * Standard JavaScript object representation for GetAlternativeTrainingPhrasesRequest
      */
@@ -885,7 +885,7 @@ export declare class GetSynonymsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetSynonymsRequest.AsProtobufJSON;
 }
-export declare module GetSynonymsRequest {
+export declare namespace GetSynonymsRequest {
     /**
      * Standard JavaScript object representation for GetSynonymsRequest
      */
@@ -960,7 +960,7 @@ export declare class GetSynonymsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetSynonymsResponse.AsProtobufJSON;
 }
-export declare module GetSynonymsResponse {
+export declare namespace GetSynonymsResponse {
     /**
      * Standard JavaScript object representation for GetSynonymsResponse
      */
@@ -1032,7 +1032,7 @@ export declare class Synonym implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Synonym.AsProtobufJSON;
 }
-export declare module Synonym {
+export declare namespace Synonym {
     /**
      * Standard JavaScript object representation for Synonym
      */
@@ -1103,7 +1103,7 @@ export declare class GetAlternativeSentencesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAlternativeSentencesResponse.AsProtobufJSON;
 }
-export declare module GetAlternativeSentencesResponse {
+export declare namespace GetAlternativeSentencesResponse {
     /**
      * Standard JavaScript object representation for GetAlternativeSentencesResponse
      */
@@ -1172,7 +1172,7 @@ export declare class GenerateResponsesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GenerateResponsesResponse.AsProtobufJSON;
 }
-export declare module GenerateResponsesResponse {
+export declare namespace GenerateResponsesResponse {
     /**
      * Standard JavaScript object representation for GenerateResponsesResponse
      */
@@ -1241,7 +1241,7 @@ export declare class GenerateUserSaysResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GenerateUserSaysResponse.AsProtobufJSON;
 }
-export declare module GenerateUserSaysResponse {
+export declare namespace GenerateUserSaysResponse {
     /**
      * Standard JavaScript object representation for GenerateUserSaysResponse
      */
@@ -1310,7 +1310,7 @@ export declare class GetAlternativeTrainingPhrasesResponse implements GrpcMessag
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAlternativeTrainingPhrasesResponse.AsProtobufJSON;
 }
-export declare module GetAlternativeTrainingPhrasesResponse {
+export declare namespace GetAlternativeTrainingPhrasesResponse {
     /**
      * Standard JavaScript object representation for GetAlternativeTrainingPhrasesResponse
      */
@@ -1382,7 +1382,7 @@ export declare class AltSentence implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AltSentence.AsProtobufJSON;
 }
-export declare module AltSentence {
+export declare namespace AltSentence {
     /**
      * Standard JavaScript object representation for AltSentence
      */
@@ -1456,7 +1456,7 @@ export declare class AltTrainingPhrase implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AltTrainingPhrase.AsProtobufJSON;
 }
-export declare module AltTrainingPhrase {
+export declare namespace AltTrainingPhrase {
     /**
      * Standard JavaScript object representation for AltTrainingPhrase
      */
@@ -1548,7 +1548,7 @@ export declare class DataEnrichmentConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DataEnrichmentConfig.AsProtobufJSON;
 }
-export declare module DataEnrichmentConfig {
+export declare namespace DataEnrichmentConfig {
     /**
      * Standard JavaScript object representation for DataEnrichmentConfig
      */
@@ -1637,7 +1637,7 @@ export declare class EntityEnrichmentConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EntityEnrichmentConfig.AsProtobufJSON;
 }
-export declare module EntityEnrichmentConfig {
+export declare namespace EntityEnrichmentConfig {
     /**
      * Standard JavaScript object representation for EntityEnrichmentConfig
      */
@@ -1716,7 +1716,7 @@ export declare class ThesaurusEnrichmentConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ThesaurusEnrichmentConfig.AsProtobufJSON;
 }
-export declare module ThesaurusEnrichmentConfig {
+export declare namespace ThesaurusEnrichmentConfig {
     /**
      * Standard JavaScript object representation for ThesaurusEnrichmentConfig
      */
@@ -1795,7 +1795,7 @@ export declare class BertAugEnrichmentConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BertAugEnrichmentConfig.AsProtobufJSON;
 }
-export declare module BertAugEnrichmentConfig {
+export declare namespace BertAugEnrichmentConfig {
     /**
      * Standard JavaScript object representation for BertAugEnrichmentConfig
      */
@@ -1874,7 +1874,7 @@ export declare class GloVeEnrichmentConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GloVeEnrichmentConfig.AsProtobufJSON;
 }
-export declare module GloVeEnrichmentConfig {
+export declare namespace GloVeEnrichmentConfig {
     /**
      * Standard JavaScript object representation for GloVeEnrichmentConfig
      */
@@ -1953,7 +1953,7 @@ export declare class GPT2EnrichmentConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GPT2EnrichmentConfig.AsProtobufJSON;
 }
-export declare module GPT2EnrichmentConfig {
+export declare namespace GPT2EnrichmentConfig {
     /**
      * Standard JavaScript object representation for GPT2EnrichmentConfig
      */
@@ -2032,7 +2032,7 @@ export declare class Word2VecEnrichmentConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Word2VecEnrichmentConfig.AsProtobufJSON;
 }
-export declare module Word2VecEnrichmentConfig {
+export declare namespace Word2VecEnrichmentConfig {
     /**
      * Standard JavaScript object representation for Word2VecEnrichmentConfig
      */
@@ -2111,7 +2111,7 @@ export declare class WordNetAugEnrichmentConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): WordNetAugEnrichmentConfig.AsProtobufJSON;
 }
-export declare module WordNetAugEnrichmentConfig {
+export declare namespace WordNetAugEnrichmentConfig {
     /**
      * Standard JavaScript object representation for WordNetAugEnrichmentConfig
      */
@@ -2190,7 +2190,7 @@ export declare class XLNetAugEnrichmentConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): XLNetAugEnrichmentConfig.AsProtobufJSON;
 }
-export declare module XLNetAugEnrichmentConfig {
+export declare namespace XLNetAugEnrichmentConfig {
     /**
      * Standard JavaScript object representation for XLNetAugEnrichmentConfig
      */
@@ -2281,7 +2281,7 @@ export declare class ClassifyIntentsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ClassifyIntentsRequest.AsProtobufJSON;
 }
-export declare module ClassifyIntentsRequest {
+export declare namespace ClassifyIntentsRequest {
     /**
      * Standard JavaScript object representation for ClassifyIntentsRequest
      */
@@ -2371,7 +2371,7 @@ export declare class IntentClassified implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): IntentClassified.AsProtobufJSON;
 }
-export declare module IntentClassified {
+export declare namespace IntentClassified {
     /**
      * Standard JavaScript object representation for IntentClassified
      */
@@ -2455,7 +2455,7 @@ export declare class ClassifyIntentsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ClassifyIntentsResponse.AsProtobufJSON;
 }
-export declare module ClassifyIntentsResponse {
+export declare namespace ClassifyIntentsResponse {
     /**
      * Standard JavaScript object representation for ClassifyIntentsResponse
      */

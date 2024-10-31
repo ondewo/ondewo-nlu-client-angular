@@ -61,7 +61,7 @@ export declare class PingRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): PingRequest.AsProtobufJSON;
 }
-export declare module PingRequest {
+export declare namespace PingRequest {
     /**
      * Standard JavaScript object representation for PingRequest
      */
@@ -142,7 +142,7 @@ export declare class WebhookRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): WebhookRequest.AsProtobufJSON;
 }
-export declare module WebhookRequest {
+export declare namespace WebhookRequest {
     /**
      * Standard JavaScript object representation for WebhookRequest
      */
@@ -237,7 +237,7 @@ export declare class WebhookResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): WebhookResponse.AsProtobufJSON;
 }
-export declare module WebhookResponse {
+export declare namespace WebhookResponse {
     /**
      * Standard JavaScript object representation for WebhookResponse
      */
@@ -321,7 +321,7 @@ export declare class OriginalDetectIntentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): OriginalDetectIntentRequest.AsProtobufJSON;
 }
-export declare module OriginalDetectIntentRequest {
+export declare namespace OriginalDetectIntentRequest {
     /**
      * Standard JavaScript object representation for OriginalDetectIntentRequest
      */
@@ -392,7 +392,7 @@ export declare class PingResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): PingResponse.AsProtobufJSON;
 }
-export declare module PingResponse {
+export declare namespace PingResponse {
     /**
      * Standard JavaScript object representation for PingResponse
      */
@@ -467,7 +467,7 @@ export declare class SessionEntityType implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SessionEntityType.AsProtobufJSON;
 }
-export declare module SessionEntityType {
+export declare namespace SessionEntityType {
     /**
      * Standard JavaScript object representation for SessionEntityType
      */
@@ -551,7 +551,7 @@ export declare class ListSessionEntityTypesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionEntityTypesRequest.AsProtobufJSON;
 }
-export declare module ListSessionEntityTypesRequest {
+export declare namespace ListSessionEntityTypesRequest {
     /**
      * Standard JavaScript object representation for ListSessionEntityTypesRequest
      */
@@ -627,7 +627,7 @@ export declare class ListSessionEntityTypesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionEntityTypesResponse.AsProtobufJSON;
 }
-export declare module ListSessionEntityTypesResponse {
+export declare namespace ListSessionEntityTypesResponse {
     /**
      * Standard JavaScript object representation for ListSessionEntityTypesResponse
      */
@@ -698,7 +698,7 @@ export declare class GetSessionEntityTypeRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetSessionEntityTypeRequest.AsProtobufJSON;
 }
-export declare module GetSessionEntityTypeRequest {
+export declare namespace GetSessionEntityTypeRequest {
     /**
      * Standard JavaScript object representation for GetSessionEntityTypeRequest
      */
@@ -773,7 +773,7 @@ export declare class CreateSessionEntityTypeRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateSessionEntityTypeRequest.AsProtobufJSON;
 }
-export declare module CreateSessionEntityTypeRequest {
+export declare namespace CreateSessionEntityTypeRequest {
     /**
      * Standard JavaScript object representation for CreateSessionEntityTypeRequest
      */
@@ -849,7 +849,7 @@ export declare class UpdateSessionEntityTypeRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateSessionEntityTypeRequest.AsProtobufJSON;
 }
-export declare module UpdateSessionEntityTypeRequest {
+export declare namespace UpdateSessionEntityTypeRequest {
     /**
      * Standard JavaScript object representation for UpdateSessionEntityTypeRequest
      */
@@ -920,7 +920,7 @@ export declare class DeleteSessionEntityTypeRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteSessionEntityTypeRequest.AsProtobufJSON;
 }
-export declare module DeleteSessionEntityTypeRequest {
+export declare namespace DeleteSessionEntityTypeRequest {
     /**
      * Standard JavaScript object representation for DeleteSessionEntityTypeRequest
      */

@@ -119,7 +119,7 @@ export declare class OperationMetadata implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): OperationMetadata.AsProtobufJSON;
 }
-export declare module OperationMetadata {
+export declare namespace OperationMetadata {
     /**
      * Standard JavaScript object representation for OperationMetadata
      */

@@ -55,7 +55,7 @@ export declare class GetUserProjectCountRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetUserProjectCountRequest.AsProtobufJSON;
 }
-export declare module GetUserProjectCountRequest {
+export declare namespace GetUserProjectCountRequest {
     /**
      * Standard JavaScript object representation for GetUserProjectCountRequest
      */

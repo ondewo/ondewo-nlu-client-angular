@@ -82,7 +82,7 @@ export declare class Context implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Context.AsProtobufJSON;
 }
-export declare module Context {
+export declare namespace Context {
     /**
      * Standard JavaScript object representation for Context
      */
@@ -189,7 +189,7 @@ export declare module Context {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): Parameter.AsProtobufJSON;
     }
-    module Parameter {
+    namespace Parameter {
         /**
          * Standard JavaScript object representation for Parameter
          */
@@ -275,7 +275,7 @@ export declare module Context {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): ParametersEntry.AsProtobufJSON;
     }
-    module ParametersEntry {
+    namespace ParametersEntry {
         /**
          * Standard JavaScript object representation for ParametersEntry
          */
@@ -350,7 +350,7 @@ export declare class ListContextsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListContextsRequest.AsProtobufJSON;
 }
-export declare module ListContextsRequest {
+export declare namespace ListContextsRequest {
     /**
      * Standard JavaScript object representation for ListContextsRequest
      */
@@ -424,7 +424,7 @@ export declare class ListContextsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListContextsResponse.AsProtobufJSON;
 }
-export declare module ListContextsResponse {
+export declare namespace ListContextsResponse {
     /**
      * Standard JavaScript object representation for ListContextsResponse
      */
@@ -495,7 +495,7 @@ export declare class GetContextRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetContextRequest.AsProtobufJSON;
 }
-export declare module GetContextRequest {
+export declare namespace GetContextRequest {
     /**
      * Standard JavaScript object representation for GetContextRequest
      */
@@ -567,7 +567,7 @@ export declare class CreateContextRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateContextRequest.AsProtobufJSON;
 }
-export declare module CreateContextRequest {
+export declare namespace CreateContextRequest {
     /**
      * Standard JavaScript object representation for CreateContextRequest
      */
@@ -641,7 +641,7 @@ export declare class UpdateContextRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateContextRequest.AsProtobufJSON;
 }
-export declare module UpdateContextRequest {
+export declare namespace UpdateContextRequest {
     /**
      * Standard JavaScript object representation for UpdateContextRequest
      */
@@ -712,7 +712,7 @@ export declare class DeleteContextRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteContextRequest.AsProtobufJSON;
 }
-export declare module DeleteContextRequest {
+export declare namespace DeleteContextRequest {
     /**
      * Standard JavaScript object representation for DeleteContextRequest
      */
@@ -781,7 +781,7 @@ export declare class DeleteAllContextsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteAllContextsRequest.AsProtobufJSON;
 }
-export declare module DeleteAllContextsRequest {
+export declare namespace DeleteAllContextsRequest {
     /**
      * Standard JavaScript object representation for DeleteAllContextsRequest
      */

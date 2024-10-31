@@ -58,7 +58,7 @@ export declare class Http implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Http.AsProtobufJSON;
 }
-export declare module Http {
+export declare namespace Http {
     /**
      * Standard JavaScript object representation for Http
      */
@@ -158,7 +158,7 @@ export declare class HttpRule implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): HttpRule.AsProtobufJSON;
 }
-export declare module HttpRule {
+export declare namespace HttpRule {
     /**
      * Standard JavaScript object representation for HttpRule
      */
@@ -257,7 +257,7 @@ export declare class CustomHttpPattern implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CustomHttpPattern.AsProtobufJSON;
 }
-export declare module CustomHttpPattern {
+export declare namespace CustomHttpPattern {
     /**
      * Standard JavaScript object representation for CustomHttpPattern
      */

@@ -58,7 +58,7 @@ export declare class LatLng implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): LatLng.AsProtobufJSON;
 }
-export declare module LatLng {
+export declare namespace LatLng {
     /**
      * Standard JavaScript object representation for LatLng
      */

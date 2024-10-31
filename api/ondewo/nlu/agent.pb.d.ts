@@ -149,7 +149,7 @@ export declare class Agent implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Agent.AsProtobufJSON;
 }
-export declare module Agent {
+export declare namespace Agent {
     /**
      * Standard JavaScript object representation for Agent
      */
@@ -247,7 +247,7 @@ export declare class AgentWithOwner implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AgentWithOwner.AsProtobufJSON;
 }
-export declare module AgentWithOwner {
+export declare namespace AgentWithOwner {
     /**
      * Standard JavaScript object representation for AgentWithOwner
      */
@@ -321,7 +321,7 @@ export declare class AgentOfUserWithOwner implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AgentOfUserWithOwner.AsProtobufJSON;
 }
-export declare module AgentOfUserWithOwner {
+export declare namespace AgentOfUserWithOwner {
     /**
      * Standard JavaScript object representation for AgentOfUserWithOwner
      */
@@ -395,7 +395,7 @@ export declare class CreateAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateAgentRequest.AsProtobufJSON;
 }
-export declare module CreateAgentRequest {
+export declare namespace CreateAgentRequest {
     /**
      * Standard JavaScript object representation for CreateAgentRequest
      */
@@ -472,7 +472,7 @@ export declare class UpdateAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateAgentRequest.AsProtobufJSON;
 }
-export declare module UpdateAgentRequest {
+export declare namespace UpdateAgentRequest {
     /**
      * Standard JavaScript object representation for UpdateAgentRequest
      */
@@ -545,7 +545,7 @@ export declare class DeleteAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteAgentRequest.AsProtobufJSON;
 }
-export declare module DeleteAgentRequest {
+export declare namespace DeleteAgentRequest {
     /**
      * Standard JavaScript object representation for DeleteAgentRequest
      */
@@ -617,7 +617,7 @@ export declare class GetAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAgentRequest.AsProtobufJSON;
 }
-export declare module GetAgentRequest {
+export declare namespace GetAgentRequest {
     /**
      * Standard JavaScript object representation for GetAgentRequest
      */
@@ -694,7 +694,7 @@ export declare class ListAgentsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListAgentsRequest.AsProtobufJSON;
 }
-export declare module ListAgentsRequest {
+export declare namespace ListAgentsRequest {
     /**
      * Standard JavaScript object representation for ListAgentsRequest
      */
@@ -770,7 +770,7 @@ export declare class ListAgentsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListAgentsResponse.AsProtobufJSON;
 }
-export declare module ListAgentsResponse {
+export declare namespace ListAgentsResponse {
     /**
      * Standard JavaScript object representation for ListAgentsResponse
      */
@@ -844,7 +844,7 @@ export declare class ListAgentsOfUserResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListAgentsOfUserResponse.AsProtobufJSON;
 }
-export declare module ListAgentsOfUserResponse {
+export declare namespace ListAgentsOfUserResponse {
     /**
      * Standard JavaScript object representation for ListAgentsOfUserResponse
      */
@@ -921,7 +921,7 @@ export declare class TrainAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): TrainAgentRequest.AsProtobufJSON;
 }
-export declare module TrainAgentRequest {
+export declare namespace TrainAgentRequest {
     /**
      * Standard JavaScript object representation for TrainAgentRequest
      */
@@ -997,7 +997,7 @@ export declare class BuildCacheRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BuildCacheRequest.AsProtobufJSON;
 }
-export declare module BuildCacheRequest {
+export declare namespace BuildCacheRequest {
     /**
      * Standard JavaScript object representation for BuildCacheRequest
      */
@@ -1074,7 +1074,7 @@ export declare class ExportAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ExportAgentRequest.AsProtobufJSON;
 }
-export declare module ExportAgentRequest {
+export declare namespace ExportAgentRequest {
     /**
      * Standard JavaScript object representation for ExportAgentRequest
      */
@@ -1152,7 +1152,7 @@ export declare class ExportAgentResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ExportAgentResponse.AsProtobufJSON;
 }
-export declare module ExportAgentResponse {
+export declare namespace ExportAgentResponse {
     /**
      * Standard JavaScript object representation for ExportAgentResponse
      */
@@ -1240,7 +1240,7 @@ export declare class ExportBenchmarkAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ExportBenchmarkAgentRequest.AsProtobufJSON;
 }
-export declare module ExportBenchmarkAgentRequest {
+export declare namespace ExportBenchmarkAgentRequest {
     /**
      * Standard JavaScript object representation for ExportBenchmarkAgentRequest
      */
@@ -1324,7 +1324,7 @@ export declare class ExportBenchmarkAgentResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ExportBenchmarkAgentResponse.AsProtobufJSON;
 }
-export declare module ExportBenchmarkAgentResponse {
+export declare namespace ExportBenchmarkAgentResponse {
     /**
      * Standard JavaScript object representation for ExportBenchmarkAgentResponse
      */
@@ -1401,7 +1401,7 @@ export declare module ExportBenchmarkAgentResponse {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): TrainingPhrasesEntry.AsProtobufJSON;
     }
-    module TrainingPhrasesEntry {
+    namespace TrainingPhrasesEntry {
         /**
          * Standard JavaScript object representation for TrainingPhrasesEntry
          */
@@ -1482,7 +1482,7 @@ export declare class OptimizeRankingMatchRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): OptimizeRankingMatchRequest.AsProtobufJSON;
 }
-export declare module OptimizeRankingMatchRequest {
+export declare namespace OptimizeRankingMatchRequest {
     /**
      * Standard JavaScript object representation for OptimizeRankingMatchRequest
      */
@@ -1566,7 +1566,7 @@ export declare class RankingMatchOptimizationConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): RankingMatchOptimizationConfig.AsProtobufJSON;
 }
-export declare module RankingMatchOptimizationConfig {
+export declare namespace RankingMatchOptimizationConfig {
     /**
      * Standard JavaScript object representation for RankingMatchOptimizationConfig
      */
@@ -1644,7 +1644,7 @@ export declare class OptimizeRankingMatchResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): OptimizeRankingMatchResponse.AsProtobufJSON;
 }
-export declare module OptimizeRankingMatchResponse {
+export declare namespace OptimizeRankingMatchResponse {
     /**
      * Standard JavaScript object representation for OptimizeRankingMatchResponse
      */
@@ -1723,7 +1723,7 @@ export declare class ImportAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ImportAgentRequest.AsProtobufJSON;
 }
-export declare module ImportAgentRequest {
+export declare namespace ImportAgentRequest {
     /**
      * Standard JavaScript object representation for ImportAgentRequest
      */
@@ -1809,7 +1809,7 @@ export declare class RestoreAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): RestoreAgentRequest.AsProtobufJSON;
 }
-export declare module RestoreAgentRequest {
+export declare namespace RestoreAgentRequest {
     /**
      * Standard JavaScript object representation for RestoreAgentRequest
      */
@@ -1896,7 +1896,7 @@ export declare class GetAgentStatisticsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAgentStatisticsRequest.AsProtobufJSON;
 }
-export declare module GetAgentStatisticsRequest {
+export declare namespace GetAgentStatisticsRequest {
     /**
      * Standard JavaScript object representation for GetAgentStatisticsRequest
      */
@@ -1977,7 +1977,7 @@ export declare class GetAgentStatisticsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAgentStatisticsResponse.AsProtobufJSON;
 }
-export declare module GetAgentStatisticsResponse {
+export declare namespace GetAgentStatisticsResponse {
     /**
      * Standard JavaScript object representation for GetAgentStatisticsResponse
      */
@@ -2077,7 +2077,7 @@ export declare class GetSessionsStatisticsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetSessionsStatisticsRequest.AsProtobufJSON;
 }
-export declare module GetSessionsStatisticsRequest {
+export declare namespace GetSessionsStatisticsRequest {
     /**
      * Standard JavaScript object representation for GetSessionsStatisticsRequest
      */
@@ -2170,7 +2170,7 @@ export declare class GetSessionsStatisticsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetSessionsStatisticsResponse.AsProtobufJSON;
 }
-export declare module GetSessionsStatisticsResponse {
+export declare namespace GetSessionsStatisticsResponse {
     /**
      * Standard JavaScript object representation for GetSessionsStatisticsResponse
      */
@@ -2249,7 +2249,7 @@ export declare class AddUserToProjectRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddUserToProjectRequest.AsProtobufJSON;
 }
-export declare module AddUserToProjectRequest {
+export declare namespace AddUserToProjectRequest {
     /**
      * Standard JavaScript object representation for AddUserToProjectRequest
      */
@@ -2325,7 +2325,7 @@ export declare class RemoveUserFromProjectRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): RemoveUserFromProjectRequest.AsProtobufJSON;
 }
-export declare module RemoveUserFromProjectRequest {
+export declare namespace RemoveUserFromProjectRequest {
     /**
      * Standard JavaScript object representation for RemoveUserFromProjectRequest
      */
@@ -2399,7 +2399,7 @@ export declare class ListUsersInProjectRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListUsersInProjectRequest.AsProtobufJSON;
 }
-export declare module ListUsersInProjectRequest {
+export declare namespace ListUsersInProjectRequest {
     /**
      * Standard JavaScript object representation for ListUsersInProjectRequest
      */
@@ -2476,7 +2476,7 @@ export declare class UserInProject implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UserInProject.AsProtobufJSON;
 }
-export declare module UserInProject {
+export declare namespace UserInProject {
     /**
      * Standard JavaScript object representation for UserInProject
      */
@@ -2552,7 +2552,7 @@ export declare class ListUsersInProjectResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListUsersInProjectResponse.AsProtobufJSON;
 }
-export declare module ListUsersInProjectResponse {
+export declare namespace ListUsersInProjectResponse {
     /**
      * Standard JavaScript object representation for ListUsersInProjectResponse
      */
@@ -2626,7 +2626,7 @@ export declare class GetPlatformInfoResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetPlatformInfoResponse.AsProtobufJSON;
 }
-export declare module GetPlatformInfoResponse {
+export declare namespace GetPlatformInfoResponse {
     /**
      * Standard JavaScript object representation for GetPlatformInfoResponse
      */
@@ -2697,7 +2697,7 @@ export declare class ListProjectPermissionsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListProjectPermissionsRequest.AsProtobufJSON;
 }
-export declare module ListProjectPermissionsRequest {
+export declare namespace ListProjectPermissionsRequest {
     /**
      * Standard JavaScript object representation for ListProjectPermissionsRequest
      */
@@ -2769,7 +2769,7 @@ export declare class ListProjectPermissionsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListProjectPermissionsResponse.AsProtobufJSON;
 }
-export declare module ListProjectPermissionsResponse {
+export declare namespace ListProjectPermissionsResponse {
     /**
      * Standard JavaScript object representation for ListProjectPermissionsResponse
      */
@@ -2846,7 +2846,7 @@ export declare class SetAgentStatusRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SetAgentStatusRequest.AsProtobufJSON;
 }
-export declare module SetAgentStatusRequest {
+export declare namespace SetAgentStatusRequest {
     /**
      * Standard JavaScript object representation for SetAgentStatusRequest
      */
@@ -2922,7 +2922,7 @@ export declare class AgentSorting implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AgentSorting.AsProtobufJSON;
 }
-export declare module AgentSorting {
+export declare namespace AgentSorting {
     /**
      * Standard JavaScript object representation for AgentSorting
      */
@@ -3012,7 +3012,7 @@ export declare class SetResourcesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SetResourcesRequest.AsProtobufJSON;
 }
-export declare module SetResourcesRequest {
+export declare namespace SetResourcesRequest {
     /**
      * Standard JavaScript object representation for SetResourcesRequest
      */
@@ -3098,7 +3098,7 @@ export declare class DeleteResourcesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteResourcesRequest.AsProtobufJSON;
 }
-export declare module DeleteResourcesRequest {
+export declare namespace DeleteResourcesRequest {
     /**
      * Standard JavaScript object representation for DeleteResourcesRequest
      */
@@ -3182,7 +3182,7 @@ export declare class ExportResourcesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ExportResourcesRequest.AsProtobufJSON;
 }
-export declare module ExportResourcesRequest {
+export declare namespace ExportResourcesRequest {
     /**
      * Standard JavaScript object representation for ExportResourcesRequest
      */
@@ -3269,7 +3269,7 @@ export declare class ExportResourcesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ExportResourcesResponse.AsProtobufJSON;
 }
-export declare module ExportResourcesResponse {
+export declare namespace ExportResourcesResponse {
     /**
      * Standard JavaScript object representation for ExportResourcesResponse
      */
@@ -3355,7 +3355,7 @@ export declare class GetModelStatusesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetModelStatusesRequest.AsProtobufJSON;
 }
-export declare module GetModelStatusesRequest {
+export declare namespace GetModelStatusesRequest {
     /**
      * Standard JavaScript object representation for GetModelStatusesRequest
      */
@@ -3445,7 +3445,7 @@ export declare class ModelStatus implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ModelStatus.AsProtobufJSON;
 }
-export declare module ModelStatus {
+export declare namespace ModelStatus {
     /**
      * Standard JavaScript object representation for ModelStatus
      */
@@ -3533,7 +3533,7 @@ export declare class GetModelStatusesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetModelStatusesResponse.AsProtobufJSON;
 }
-export declare module GetModelStatusesResponse {
+export declare namespace GetModelStatusesResponse {
     /**
      * Standard JavaScript object representation for GetModelStatusesResponse
      */
@@ -3620,7 +3620,7 @@ export declare class CustomPlatformInfo implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CustomPlatformInfo.AsProtobufJSON;
 }
-export declare module CustomPlatformInfo {
+export declare namespace CustomPlatformInfo {
     /**
      * Standard JavaScript object representation for CustomPlatformInfo
      */
@@ -3701,7 +3701,7 @@ export declare class GetPlatformMappingRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetPlatformMappingRequest.AsProtobufJSON;
 }
-export declare module GetPlatformMappingRequest {
+export declare namespace GetPlatformMappingRequest {
     /**
      * Standard JavaScript object representation for GetPlatformMappingRequest
      */
@@ -3773,7 +3773,7 @@ export declare class PlatformMapping implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): PlatformMapping.AsProtobufJSON;
 }
-export declare module PlatformMapping {
+export declare namespace PlatformMapping {
     /**
      * Standard JavaScript object representation for PlatformMapping
      */
@@ -3853,7 +3853,7 @@ export declare class FullTextSearchRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchRequest.AsProtobufJSON;
 }
-export declare module FullTextSearchRequest {
+export declare namespace FullTextSearchRequest {
     /**
      * Standard JavaScript object representation for FullTextSearchRequest
      */
@@ -3959,7 +3959,7 @@ export declare class FullTextSearchResponseEntityType implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseEntityType.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseEntityType {
+export declare namespace FullTextSearchResponseEntityType {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseEntityType
      */
@@ -4057,7 +4057,7 @@ export declare module FullTextSearchResponseEntityType {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): EntityTypeSearchResult.AsProtobufJSON;
     }
-    module EntityTypeSearchResult {
+    namespace EntityTypeSearchResult {
         /**
          * Standard JavaScript object representation for EntityTypeSearchResult
          */
@@ -4157,7 +4157,7 @@ export declare class FullTextSearchResponseEntity implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseEntity.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseEntity {
+export declare namespace FullTextSearchResponseEntity {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseEntity
      */
@@ -4261,7 +4261,7 @@ export declare module FullTextSearchResponseEntity {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): EntitySearchResult.AsProtobufJSON;
     }
-    module EntitySearchResult {
+    namespace EntitySearchResult {
         /**
          * Standard JavaScript object representation for EntitySearchResult
          */
@@ -4365,7 +4365,7 @@ export declare class FullTextSearchResponseEntitySynonym implements GrpcMessage 
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseEntitySynonym.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseEntitySynonym {
+export declare namespace FullTextSearchResponseEntitySynonym {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseEntitySynonym
      */
@@ -4475,7 +4475,7 @@ export declare module FullTextSearchResponseEntitySynonym {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): EntitySynonymSearchResult.AsProtobufJSON;
     }
-    module EntitySynonymSearchResult {
+    namespace EntitySynonymSearchResult {
         /**
          * Standard JavaScript object representation for EntitySynonymSearchResult
          */
@@ -4583,7 +4583,7 @@ export declare class FullTextSearchResponseIntent implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseIntent.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseIntent {
+export declare namespace FullTextSearchResponseIntent {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseIntent
      */
@@ -4687,7 +4687,7 @@ export declare module FullTextSearchResponseIntent {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): IntentSearchResult.AsProtobufJSON;
     }
-    module IntentSearchResult {
+    namespace IntentSearchResult {
         /**
          * Standard JavaScript object representation for IntentSearchResult
          */
@@ -4791,7 +4791,7 @@ export declare class FullTextSearchResponseIntentContextIn implements GrpcMessag
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseIntentContextIn.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseIntentContextIn {
+export declare namespace FullTextSearchResponseIntentContextIn {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseIntentContextIn
      */
@@ -4895,7 +4895,7 @@ export declare module FullTextSearchResponseIntentContextIn {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): IntentContextInSearchResult.AsProtobufJSON;
     }
-    module IntentContextInSearchResult {
+    namespace IntentContextInSearchResult {
         /**
          * Standard JavaScript object representation for IntentContextInSearchResult
          */
@@ -4999,7 +4999,7 @@ export declare class FullTextSearchResponseIntentContextOut implements GrpcMessa
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseIntentContextOut.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseIntentContextOut {
+export declare namespace FullTextSearchResponseIntentContextOut {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseIntentContextOut
      */
@@ -5103,7 +5103,7 @@ export declare module FullTextSearchResponseIntentContextOut {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): IntentContextOutSearchResult.AsProtobufJSON;
     }
-    module IntentContextOutSearchResult {
+    namespace IntentContextOutSearchResult {
         /**
          * Standard JavaScript object representation for IntentContextOutSearchResult
          */
@@ -5207,7 +5207,7 @@ export declare class FullTextSearchResponseIntentUsersays implements GrpcMessage
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseIntentUsersays.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseIntentUsersays {
+export declare namespace FullTextSearchResponseIntentUsersays {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseIntentUsersays
      */
@@ -5323,7 +5323,7 @@ export declare module FullTextSearchResponseIntentUsersays {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): IntentUsersaysSearchResult.AsProtobufJSON;
     }
-    module IntentUsersaysSearchResult {
+    namespace IntentUsersaysSearchResult {
         /**
          * Standard JavaScript object representation for IntentUsersaysSearchResult
          */
@@ -5435,7 +5435,7 @@ export declare class FullTextSearchResponseIntentTags implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseIntentTags.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseIntentTags {
+export declare namespace FullTextSearchResponseIntentTags {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseIntentTags
      */
@@ -5542,7 +5542,7 @@ export declare module FullTextSearchResponseIntentTags {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): IntentTagsSearchResult.AsProtobufJSON;
     }
-    module IntentTagsSearchResult {
+    namespace IntentTagsSearchResult {
         /**
          * Standard JavaScript object representation for IntentTagsSearchResult
          */
@@ -5648,7 +5648,7 @@ export declare class FullTextSearchResponseIntentResponse implements GrpcMessage
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseIntentResponse.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseIntentResponse {
+export declare namespace FullTextSearchResponseIntentResponse {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseIntentResponse
      */
@@ -5758,7 +5758,7 @@ export declare module FullTextSearchResponseIntentResponse {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): IntentResponseSearchResult.AsProtobufJSON;
     }
-    module IntentResponseSearchResult {
+    namespace IntentResponseSearchResult {
         /**
          * Standard JavaScript object representation for IntentResponseSearchResult
          */
@@ -5866,7 +5866,7 @@ export declare class FullTextSearchResponseIntentParameters implements GrpcMessa
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): FullTextSearchResponseIntentParameters.AsProtobufJSON;
 }
-export declare module FullTextSearchResponseIntentParameters {
+export declare namespace FullTextSearchResponseIntentParameters {
     /**
      * Standard JavaScript object representation for FullTextSearchResponseIntentParameters
      */
@@ -5973,7 +5973,7 @@ export declare module FullTextSearchResponseIntentParameters {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): IntentParametersSearchResult.AsProtobufJSON;
     }
-    module IntentParametersSearchResult {
+    namespace IntentParametersSearchResult {
         /**
          * Standard JavaScript object representation for IntentParametersSearchResult
          */
@@ -6067,7 +6067,7 @@ export declare class ReindexAgentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ReindexAgentRequest.AsProtobufJSON;
 }
-export declare module ReindexAgentRequest {
+export declare namespace ReindexAgentRequest {
     /**
      * Standard JavaScript object representation for ReindexAgentRequest
      */

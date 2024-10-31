@@ -109,7 +109,7 @@ export declare class DetectIntentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DetectIntentRequest.AsProtobufJSON;
 }
-export declare module DetectIntentRequest {
+export declare namespace DetectIntentRequest {
     /**
      * Standard JavaScript object representation for DetectIntentRequest
      */
@@ -190,7 +190,7 @@ export declare class DetectIntentResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DetectIntentResponse.AsProtobufJSON;
 }
-export declare module DetectIntentResponse {
+export declare namespace DetectIntentResponse {
     /**
      * Standard JavaScript object representation for DetectIntentResponse
      */
@@ -299,7 +299,7 @@ export declare class QueryParameters implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): QueryParameters.AsProtobufJSON;
 }
-export declare module QueryParameters {
+export declare namespace QueryParameters {
     /**
      * Standard JavaScript object representation for QueryParameters
      */
@@ -425,7 +425,7 @@ export declare class S2tTranscription implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): S2tTranscription.AsProtobufJSON;
 }
-export declare module S2tTranscription {
+export declare namespace S2tTranscription {
     /**
      * Standard JavaScript object representation for S2tTranscription
      */
@@ -524,7 +524,7 @@ export declare class QueryInput implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): QueryInput.AsProtobufJSON;
 }
-export declare module QueryInput {
+export declare namespace QueryInput {
     /**
      * Standard JavaScript object representation for QueryInput
      */
@@ -645,7 +645,7 @@ export declare class QueryResult implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): QueryResult.AsProtobufJSON;
 }
-export declare module QueryResult {
+export declare namespace QueryResult {
     /**
      * Standard JavaScript object representation for QueryResult
      */
@@ -754,7 +754,7 @@ export declare class StreamingDetectIntentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): StreamingDetectIntentRequest.AsProtobufJSON;
 }
-export declare module StreamingDetectIntentRequest {
+export declare namespace StreamingDetectIntentRequest {
     /**
      * Standard JavaScript object representation for StreamingDetectIntentRequest
      */
@@ -840,7 +840,7 @@ export declare class StreamingDetectIntentResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): StreamingDetectIntentResponse.AsProtobufJSON;
 }
-export declare module StreamingDetectIntentResponse {
+export declare namespace StreamingDetectIntentResponse {
     /**
      * Standard JavaScript object representation for StreamingDetectIntentResponse
      */
@@ -924,7 +924,7 @@ export declare class StreamingRecognitionResult implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): StreamingRecognitionResult.AsProtobufJSON;
 }
-export declare module StreamingRecognitionResult {
+export declare namespace StreamingRecognitionResult {
     /**
      * Standard JavaScript object representation for StreamingRecognitionResult
      */
@@ -1013,7 +1013,7 @@ export declare class InputAudioConfig implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): InputAudioConfig.AsProtobufJSON;
 }
-export declare module InputAudioConfig {
+export declare namespace InputAudioConfig {
     /**
      * Standard JavaScript object representation for InputAudioConfig
      */
@@ -1091,7 +1091,7 @@ export declare class TextInput implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): TextInput.AsProtobufJSON;
 }
-export declare module TextInput {
+export declare namespace TextInput {
     /**
      * Standard JavaScript object representation for TextInput
      */
@@ -1168,7 +1168,7 @@ export declare class EventInput implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EventInput.AsProtobufJSON;
 }
-export declare module EventInput {
+export declare namespace EventInput {
     /**
      * Standard JavaScript object representation for EventInput
      */
@@ -1259,7 +1259,7 @@ export declare class Session implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Session.AsProtobufJSON;
 }
-export declare module Session {
+export declare namespace Session {
     /**
      * Standard JavaScript object representation for Session
      */
@@ -1372,7 +1372,7 @@ export declare class SessionStep implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SessionStep.AsProtobufJSON;
 }
-export declare module SessionStep {
+export declare namespace SessionStep {
     /**
      * Standard JavaScript object representation for SessionStep
      */
@@ -1465,7 +1465,7 @@ export declare class TrackSessionStepRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): TrackSessionStepRequest.AsProtobufJSON;
 }
-export declare module TrackSessionStepRequest {
+export declare namespace TrackSessionStepRequest {
     /**
      * Standard JavaScript object representation for TrackSessionStepRequest
      */
@@ -1550,7 +1550,7 @@ export declare class ListSessionsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionsRequest.AsProtobufJSON;
 }
-export declare module ListSessionsRequest {
+export declare namespace ListSessionsRequest {
     /**
      * Standard JavaScript object representation for ListSessionsRequest
      */
@@ -1636,7 +1636,7 @@ export declare class ContextFilter implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ContextFilter.AsProtobufJSON;
 }
-export declare module ContextFilter {
+export declare namespace ContextFilter {
     /**
      * Standard JavaScript object representation for ContextFilter
      */
@@ -1855,7 +1855,7 @@ export declare class SessionFilter implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SessionFilter.AsProtobufJSON;
 }
-export declare module SessionFilter {
+export declare namespace SessionFilter {
     /**
      * Standard JavaScript object representation for SessionFilter
      */
@@ -2116,7 +2116,7 @@ export declare class SessionInfo implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SessionInfo.AsProtobufJSON;
 }
-export declare module SessionInfo {
+export declare namespace SessionInfo {
     /**
      * Standard JavaScript object representation for SessionInfo
      */
@@ -2248,7 +2248,7 @@ export declare module SessionInfo {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): ContextSteps.AsProtobufJSON;
     }
-    module ContextSteps {
+    namespace ContextSteps {
         /**
          * Standard JavaScript object representation for ContextSteps
          */
@@ -2321,7 +2321,7 @@ export declare class ListSessionsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionsResponse.AsProtobufJSON;
 }
-export declare module ListSessionsResponse {
+export declare namespace ListSessionsResponse {
     /**
      * Standard JavaScript object representation for ListSessionsResponse
      */
@@ -2398,7 +2398,7 @@ export declare class GetSessionRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetSessionRequest.AsProtobufJSON;
 }
-export declare module GetSessionRequest {
+export declare namespace GetSessionRequest {
     /**
      * Standard JavaScript object representation for GetSessionRequest
      */
@@ -2480,7 +2480,7 @@ export declare class CreateSessionRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateSessionRequest.AsProtobufJSON;
 }
-export declare module CreateSessionRequest {
+export declare namespace CreateSessionRequest {
     /**
      * Standard JavaScript object representation for CreateSessionRequest
      */
@@ -2555,7 +2555,7 @@ export declare class DeleteSessionRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteSessionRequest.AsProtobufJSON;
 }
-export declare module DeleteSessionRequest {
+export declare namespace DeleteSessionRequest {
     /**
      * Standard JavaScript object representation for DeleteSessionRequest
      */
@@ -2633,7 +2633,7 @@ export declare class CreateSessionReviewRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateSessionReviewRequest.AsProtobufJSON;
 }
-export declare module CreateSessionReviewRequest {
+export declare namespace CreateSessionReviewRequest {
     /**
      * Standard JavaScript object representation for CreateSessionReviewRequest
      */
@@ -2723,7 +2723,7 @@ export declare class SessionReview implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SessionReview.AsProtobufJSON;
 }
-export declare module SessionReview {
+export declare namespace SessionReview {
     /**
      * Standard JavaScript object representation for SessionReview
      */
@@ -2846,7 +2846,7 @@ export declare class SessionReviewStep implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SessionReviewStep.AsProtobufJSON;
 }
-export declare module SessionReviewStep {
+export declare namespace SessionReviewStep {
     /**
      * Standard JavaScript object representation for SessionReviewStep
      */
@@ -2953,7 +2953,7 @@ export declare class DetectedIntent implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DetectedIntent.AsProtobufJSON;
 }
-export declare module DetectedIntent {
+export declare namespace DetectedIntent {
     /**
      * Standard JavaScript object representation for DetectedIntent
      */
@@ -3030,7 +3030,7 @@ export declare class ListSessionLabelsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionLabelsRequest.AsProtobufJSON;
 }
-export declare module ListSessionLabelsRequest {
+export declare namespace ListSessionLabelsRequest {
     /**
      * Standard JavaScript object representation for ListSessionLabelsRequest
      */
@@ -3102,7 +3102,7 @@ export declare class ListSessionLabelsOfAllSessionsRequest implements GrpcMessag
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionLabelsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListSessionLabelsOfAllSessionsRequest {
+export declare namespace ListSessionLabelsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListSessionLabelsOfAllSessionsRequest
      */
@@ -3173,7 +3173,7 @@ export declare class ListSessionLabelsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionLabelsResponse.AsProtobufJSON;
 }
-export declare module ListSessionLabelsResponse {
+export declare namespace ListSessionLabelsResponse {
     /**
      * Standard JavaScript object representation for ListSessionLabelsResponse
      */
@@ -3245,7 +3245,7 @@ export declare class ListLanguageCodesOfAllSessionsRequest implements GrpcMessag
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListLanguageCodesOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListLanguageCodesOfAllSessionsRequest {
+export declare namespace ListLanguageCodesOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListLanguageCodesOfAllSessionsRequest
      */
@@ -3316,7 +3316,7 @@ export declare class ListLanguageCodesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListLanguageCodesResponse.AsProtobufJSON;
 }
-export declare module ListLanguageCodesResponse {
+export declare namespace ListLanguageCodesResponse {
     /**
      * Standard JavaScript object representation for ListLanguageCodesResponse
      */
@@ -3388,7 +3388,7 @@ export declare class ListMatchedIntentsOfAllSessionsRequest implements GrpcMessa
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListMatchedIntentsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListMatchedIntentsOfAllSessionsRequest {
+export declare namespace ListMatchedIntentsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListMatchedIntentsOfAllSessionsRequest
      */
@@ -3459,7 +3459,7 @@ export declare class ListMatchedIntentsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListMatchedIntentsResponse.AsProtobufJSON;
 }
-export declare module ListMatchedIntentsResponse {
+export declare namespace ListMatchedIntentsResponse {
     /**
      * Standard JavaScript object representation for ListMatchedIntentsResponse
      */
@@ -3531,7 +3531,7 @@ export declare class ListMatchedEntityTypesOfAllSessionsRequest implements GrpcM
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListMatchedEntityTypesOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListMatchedEntityTypesOfAllSessionsRequest {
+export declare namespace ListMatchedEntityTypesOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListMatchedEntityTypesOfAllSessionsRequest
      */
@@ -3602,7 +3602,7 @@ export declare class ListMatchedEntityTypesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListMatchedEntityTypesResponse.AsProtobufJSON;
 }
-export declare module ListMatchedEntityTypesResponse {
+export declare namespace ListMatchedEntityTypesResponse {
     /**
      * Standard JavaScript object representation for ListMatchedEntityTypesResponse
      */
@@ -3674,7 +3674,7 @@ export declare class ListUserIdsOfAllSessionsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListUserIdsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListUserIdsOfAllSessionsRequest {
+export declare namespace ListUserIdsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListUserIdsOfAllSessionsRequest
      */
@@ -3745,7 +3745,7 @@ export declare class ListUserIdsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListUserIdsResponse.AsProtobufJSON;
 }
-export declare module ListUserIdsResponse {
+export declare namespace ListUserIdsResponse {
     /**
      * Standard JavaScript object representation for ListUserIdsResponse
      */
@@ -3817,7 +3817,7 @@ export declare class ListIdentifiedUserIdsOfAllSessionsRequest implements GrpcMe
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListIdentifiedUserIdsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListIdentifiedUserIdsOfAllSessionsRequest {
+export declare namespace ListIdentifiedUserIdsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListIdentifiedUserIdsOfAllSessionsRequest
      */
@@ -3888,7 +3888,7 @@ export declare class ListIdentifiedUserIdsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListIdentifiedUserIdsResponse.AsProtobufJSON;
 }
-export declare module ListIdentifiedUserIdsResponse {
+export declare namespace ListIdentifiedUserIdsResponse {
     /**
      * Standard JavaScript object representation for ListIdentifiedUserIdsResponse
      */
@@ -3960,7 +3960,7 @@ export declare class ListTagsOfAllSessionsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListTagsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListTagsOfAllSessionsRequest {
+export declare namespace ListTagsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListTagsOfAllSessionsRequest
      */
@@ -4031,7 +4031,7 @@ export declare class ListTagsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListTagsResponse.AsProtobufJSON;
 }
-export declare module ListTagsResponse {
+export declare namespace ListTagsResponse {
     /**
      * Standard JavaScript object representation for ListTagsResponse
      */
@@ -4103,7 +4103,7 @@ export declare class ListInputContextsOfAllSessionsRequest implements GrpcMessag
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListInputContextsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListInputContextsOfAllSessionsRequest {
+export declare namespace ListInputContextsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListInputContextsOfAllSessionsRequest
      */
@@ -4174,7 +4174,7 @@ export declare class ListInputContextsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListInputContextsResponse.AsProtobufJSON;
 }
-export declare module ListInputContextsResponse {
+export declare namespace ListInputContextsResponse {
     /**
      * Standard JavaScript object representation for ListInputContextsResponse
      */
@@ -4246,7 +4246,7 @@ export declare class ListOutputContextsOfAllSessionsRequest implements GrpcMessa
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListOutputContextsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListOutputContextsOfAllSessionsRequest {
+export declare namespace ListOutputContextsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListOutputContextsOfAllSessionsRequest
      */
@@ -4317,7 +4317,7 @@ export declare class ListOutputContextsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListOutputContextsResponse.AsProtobufJSON;
 }
-export declare module ListOutputContextsResponse {
+export declare namespace ListOutputContextsResponse {
     /**
      * Standard JavaScript object representation for ListOutputContextsResponse
      */
@@ -4389,7 +4389,7 @@ export declare class ListPlatformsOfAllSessionsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListPlatformsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListPlatformsOfAllSessionsRequest {
+export declare namespace ListPlatformsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListPlatformsOfAllSessionsRequest
      */
@@ -4460,7 +4460,7 @@ export declare class ListPlatformsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListPlatformsResponse.AsProtobufJSON;
 }
-export declare module ListPlatformsResponse {
+export declare namespace ListPlatformsResponse {
     /**
      * Standard JavaScript object representation for ListPlatformsResponse
      */
@@ -4532,7 +4532,7 @@ export declare class ListAccountIdsOfAllSessionsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListAccountIdsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListAccountIdsOfAllSessionsRequest {
+export declare namespace ListAccountIdsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListAccountIdsOfAllSessionsRequest
      */
@@ -4603,7 +4603,7 @@ export declare class ListAccountIdsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListAccountIdsResponse.AsProtobufJSON;
 }
-export declare module ListAccountIdsResponse {
+export declare namespace ListAccountIdsResponse {
     /**
      * Standard JavaScript object representation for ListAccountIdsResponse
      */
@@ -4675,7 +4675,7 @@ export declare class ListPropertyIdsOfAllSessionsRequest implements GrpcMessage 
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListPropertyIdsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListPropertyIdsOfAllSessionsRequest {
+export declare namespace ListPropertyIdsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListPropertyIdsOfAllSessionsRequest
      */
@@ -4746,7 +4746,7 @@ export declare class ListPropertyIdsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListPropertyIdsResponse.AsProtobufJSON;
 }
-export declare module ListPropertyIdsResponse {
+export declare namespace ListPropertyIdsResponse {
     /**
      * Standard JavaScript object representation for ListPropertyIdsResponse
      */
@@ -4818,7 +4818,7 @@ export declare class ListDatastreamIdsOfAllSessionsRequest implements GrpcMessag
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListDatastreamIdsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListDatastreamIdsOfAllSessionsRequest {
+export declare namespace ListDatastreamIdsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListDatastreamIdsOfAllSessionsRequest
      */
@@ -4889,7 +4889,7 @@ export declare class ListDatastreamIdsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListDatastreamIdsResponse.AsProtobufJSON;
 }
-export declare module ListDatastreamIdsResponse {
+export declare namespace ListDatastreamIdsResponse {
     /**
      * Standard JavaScript object representation for ListDatastreamIdsResponse
      */
@@ -4961,7 +4961,7 @@ export declare class ListOriginIdsOfAllSessionsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListOriginIdsOfAllSessionsRequest.AsProtobufJSON;
 }
-export declare module ListOriginIdsOfAllSessionsRequest {
+export declare namespace ListOriginIdsOfAllSessionsRequest {
     /**
      * Standard JavaScript object representation for ListOriginIdsOfAllSessionsRequest
      */
@@ -5032,7 +5032,7 @@ export declare class ListOriginIdsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListOriginIdsResponse.AsProtobufJSON;
 }
-export declare module ListOriginIdsResponse {
+export declare namespace ListOriginIdsResponse {
     /**
      * Standard JavaScript object representation for ListOriginIdsResponse
      */
@@ -5104,7 +5104,7 @@ export declare class AddSessionLabelsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddSessionLabelsRequest.AsProtobufJSON;
 }
-export declare module AddSessionLabelsRequest {
+export declare namespace AddSessionLabelsRequest {
     /**
      * Standard JavaScript object representation for AddSessionLabelsRequest
      */
@@ -5178,7 +5178,7 @@ export declare class DeleteSessionLabelsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteSessionLabelsRequest.AsProtobufJSON;
 }
-export declare module DeleteSessionLabelsRequest {
+export declare namespace DeleteSessionLabelsRequest {
     /**
      * Standard JavaScript object representation for DeleteSessionLabelsRequest
      */
@@ -5252,7 +5252,7 @@ export declare class AddSessionCommentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddSessionCommentRequest.AsProtobufJSON;
 }
-export declare module AddSessionCommentRequest {
+export declare namespace AddSessionCommentRequest {
     /**
      * Standard JavaScript object representation for AddSessionCommentRequest
      */
@@ -5326,7 +5326,7 @@ export declare class DeleteSessionCommentsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteSessionCommentsRequest.AsProtobufJSON;
 }
-export declare module DeleteSessionCommentsRequest {
+export declare namespace DeleteSessionCommentsRequest {
     /**
      * Standard JavaScript object representation for DeleteSessionCommentsRequest
      */
@@ -5400,7 +5400,7 @@ export declare class UpdateSessionCommentsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateSessionCommentsRequest.AsProtobufJSON;
 }
-export declare module UpdateSessionCommentsRequest {
+export declare namespace UpdateSessionCommentsRequest {
     /**
      * Standard JavaScript object representation for UpdateSessionCommentsRequest
      */
@@ -5474,7 +5474,7 @@ export declare class ListSessionCommentsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionCommentsRequest.AsProtobufJSON;
 }
-export declare module ListSessionCommentsRequest {
+export declare namespace ListSessionCommentsRequest {
     /**
      * Standard JavaScript object representation for ListSessionCommentsRequest
      */
@@ -5548,7 +5548,7 @@ export declare class ListSessionCommentsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionCommentsResponse.AsProtobufJSON;
 }
-export declare module ListSessionCommentsResponse {
+export declare namespace ListSessionCommentsResponse {
     /**
      * Standard JavaScript object representation for ListSessionCommentsResponse
      */
@@ -5625,7 +5625,7 @@ export declare class ListSessionReviewsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionReviewsRequest.AsProtobufJSON;
 }
-export declare module ListSessionReviewsRequest {
+export declare namespace ListSessionReviewsRequest {
     /**
      * Standard JavaScript object representation for ListSessionReviewsRequest
      */
@@ -5701,7 +5701,7 @@ export declare class ListSessionReviewsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionReviewsResponse.AsProtobufJSON;
 }
-export declare module ListSessionReviewsResponse {
+export declare namespace ListSessionReviewsResponse {
     /**
      * Standard JavaScript object representation for ListSessionReviewsResponse
      */
@@ -5775,7 +5775,7 @@ export declare class GetSessionReviewRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetSessionReviewRequest.AsProtobufJSON;
 }
-export declare module GetSessionReviewRequest {
+export declare namespace GetSessionReviewRequest {
     /**
      * Standard JavaScript object representation for GetSessionReviewRequest
      */
@@ -5849,7 +5849,7 @@ export declare class GetLatestSessionReviewRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetLatestSessionReviewRequest.AsProtobufJSON;
 }
-export declare module GetLatestSessionReviewRequest {
+export declare namespace GetLatestSessionReviewRequest {
     /**
      * Standard JavaScript object representation for GetLatestSessionReviewRequest
      */
@@ -5950,7 +5950,7 @@ export declare class AudioFileResource implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AudioFileResource.AsProtobufJSON;
 }
-export declare module AudioFileResource {
+export declare namespace AudioFileResource {
     /**
      * Standard JavaScript object representation for AudioFileResource
      */
@@ -6051,7 +6051,7 @@ export declare class GetAudioFilesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAudioFilesRequest.AsProtobufJSON;
 }
-export declare module GetAudioFilesRequest {
+export declare namespace GetAudioFilesRequest {
     /**
      * Standard JavaScript object representation for GetAudioFilesRequest
      */
@@ -6134,7 +6134,7 @@ export declare class GetAudioFilesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAudioFilesResponse.AsProtobufJSON;
 }
-export declare module GetAudioFilesResponse {
+export declare namespace GetAudioFilesResponse {
     /**
      * Standard JavaScript object representation for GetAudioFilesResponse
      */
@@ -6213,7 +6213,7 @@ export declare class AddAudioFilesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddAudioFilesRequest.AsProtobufJSON;
 }
-export declare module AddAudioFilesRequest {
+export declare namespace AddAudioFilesRequest {
     /**
      * Standard JavaScript object representation for AddAudioFilesRequest
      */
@@ -6289,7 +6289,7 @@ export declare class AddAudioFilesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddAudioFilesResponse.AsProtobufJSON;
 }
-export declare module AddAudioFilesResponse {
+export declare namespace AddAudioFilesResponse {
     /**
      * Standard JavaScript object representation for AddAudioFilesResponse
      */
@@ -6363,7 +6363,7 @@ export declare class DeleteAudioFilesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteAudioFilesRequest.AsProtobufJSON;
 }
-export declare module DeleteAudioFilesRequest {
+export declare namespace DeleteAudioFilesRequest {
     /**
      * Standard JavaScript object representation for DeleteAudioFilesRequest
      */
@@ -6437,7 +6437,7 @@ export declare class DeleteAudioFilesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteAudioFilesResponse.AsProtobufJSON;
 }
-export declare module DeleteAudioFilesResponse {
+export declare namespace DeleteAudioFilesResponse {
     /**
      * Standard JavaScript object representation for DeleteAudioFilesResponse
      */
@@ -6520,7 +6520,7 @@ export declare class ListAudioFilesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListAudioFilesRequest.AsProtobufJSON;
 }
-export declare module ListAudioFilesRequest {
+export declare namespace ListAudioFilesRequest {
     /**
      * Standard JavaScript object representation for ListAudioFilesRequest
      */
@@ -6603,7 +6603,7 @@ export declare class ListAudioFilesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListAudioFilesResponse.AsProtobufJSON;
 }
-export declare module ListAudioFilesResponse {
+export declare namespace ListAudioFilesResponse {
     /**
      * Standard JavaScript object representation for ListAudioFilesResponse
      */
@@ -6682,7 +6682,7 @@ export declare class GetAudioFileOfSessionRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAudioFileOfSessionRequest.AsProtobufJSON;
 }
-export declare module GetAudioFileOfSessionRequest {
+export declare namespace GetAudioFileOfSessionRequest {
     /**
      * Standard JavaScript object representation for GetAudioFileOfSessionRequest
      */

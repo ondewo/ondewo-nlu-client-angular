@@ -18,7 +18,7 @@ export
 ONDEWO_NLU_VERSION = 5.0.0
 
 NLU_API_GIT_BRANCH=tags/5.0.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.7.0
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.0.0
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 NLU_APIS_DIR=src/ondewo-nlu-api
 NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
@@ -57,7 +57,7 @@ prettier: ## Checks formatting with Prettier - Use PRETTIER_WRITE=-w to also aut
 	node_modules/.bin/prettier --config .prettierrc --check --ignore-path .prettierignore $(PRETTIER_WRITE) ./
 
 eslint: ## Checks Code Logic and Typing
-	./node_modules/.bin/eslint .
+	./node_modules/.bin/eslint --config eslint.config.mjs .
 
 TEST:	## Prints some important variables
 	@echo "Release Notes: \n \n $(CURRENT_RELEASE_NOTES)"
@@ -215,15 +215,19 @@ build: check_out_correct_submodule_versions update_package npm_run_build ## Buil
 	do \
 		sudo chown -R `whoami`:`whoami` $$f && echo $$f; \
 	done
+	-cd src/ondewo-nlu-api && git checkout -- '**/*.proto' && cd ../..
 	@$(eval README_CUT_LINES:=$(shell cat -n src/README.md | sed -n "/START OF GITHUB README/,/END OF GITHUB README/p" | grep -o -E '[0-9]+' | sed -e 's/^0\+//' | awk 'NR==1; END{print}'))
 	@$(eval DELETE_LINES:=$(shell echo ${README_CUT_LINES}| sed -e "s/[[:space:]]/,/"))
 	@sed -i "${DELETE_LINES}d" npm/README.md
 	npm i eslint --save-dev
+	npm i @eslint/eslintrc --save-dev
+	npm i @eslint/js --save-dev
+	npm i global --save-dev
 	npm i prettier --save-dev
 	npm i @typescript-eslint/eslint-plugin --save-dev
 	npm i husky --save-dev
 
-check_out_correct_submodule_versions: ## Fetches all Submodules and checksout specified branch
+check_out_correct_submodule_versions: ## Fetches all Submodules and checks out specified branch
 	@echo "START checking out correct submodule versions ..."
 	git submodule update --init --recursive
 	git -C ${NLU_APIS_DIR} fetch --all
@@ -239,8 +243,19 @@ npm_run_build: ## Runs the build command in package.json
 	cd src/ && npm run build && cd ..
 	@echo "DONE npm run build."
 
+npm_run_generate: ## Runs test
+	@echo "START generate files ..."
+	cd src/ && npm run generate && cd ..
+	-cd src/ondewo-nlu-api && git checkout -- '**/*.proto' && cd ../..
+	@echo "DONE generating files ."
+
 test-in-ondewo-aim: ## Runs test
 	@echo "START copying files to local AIM for testing ..."
 	cd src/ && npm run test-in-ondewo-aim && cd ..
+	@echo "DONE copying files to local AIM for testing."
+
+test-in-ondewo-aim-copy-only: ## Runs test
+	@echo "START copying files to local AIM for testing ..."
+	cd src/ && npm run test-in-ondewo-aim-copy-only && cd ..
 	@echo "DONE copying files to local AIM for testing."
 

@@ -166,7 +166,7 @@ export declare class Intent implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Intent.AsProtobufJSON;
 }
-export declare module Intent {
+export declare namespace Intent {
     /**
      * Standard JavaScript object representation for Intent
      */
@@ -330,7 +330,7 @@ export declare module Intent {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): TrainingPhrase.AsProtobufJSON;
     }
-    module TrainingPhrase {
+    namespace TrainingPhrase {
         /**
          * Standard JavaScript object representation for TrainingPhrase
          */
@@ -454,7 +454,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): Entity.AsProtobufJSON;
         }
-        module Entity {
+        namespace Entity {
             /**
              * Standard JavaScript object representation for Entity
              */
@@ -582,7 +582,7 @@ export declare module Intent {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): Parameter.AsProtobufJSON;
     }
-    module Parameter {
+    namespace Parameter {
         /**
          * Standard JavaScript object representation for Parameter
          */
@@ -692,7 +692,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): Prompt.AsProtobufJSON;
         }
-        module Prompt {
+        namespace Prompt {
             /**
              * Standard JavaScript object representation for Prompt
              */
@@ -839,7 +839,7 @@ export declare module Intent {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): Message.AsProtobufJSON;
     }
-    module Message {
+    namespace Message {
         /**
          * Standard JavaScript object representation for Message
          */
@@ -997,7 +997,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): Text.AsProtobufJSON;
         }
-        module Text {
+        namespace Text {
             /**
              * Standard JavaScript object representation for Text
              */
@@ -1069,7 +1069,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): Image.AsProtobufJSON;
         }
-        module Image {
+        namespace Image {
             /**
              * Standard JavaScript object representation for Image
              */
@@ -1143,7 +1143,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): QuickReplies.AsProtobufJSON;
         }
-        module QuickReplies {
+        namespace QuickReplies {
             /**
              * Standard JavaScript object representation for QuickReplies
              */
@@ -1223,7 +1223,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): Card.AsProtobufJSON;
         }
-        module Card {
+        namespace Card {
             /**
              * Standard JavaScript object representation for Card
              */
@@ -1300,7 +1300,7 @@ export declare module Intent {
                  */
                 toProtobufJSON(options?: ToProtobufJSONOptions): Button.AsProtobufJSON;
             }
-            module Button {
+            namespace Button {
                 /**
                  * Standard JavaScript object representation for Button
                  */
@@ -1378,7 +1378,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): SimpleResponse.AsProtobufJSON;
         }
-        module SimpleResponse {
+        namespace SimpleResponse {
             /**
              * Standard JavaScript object representation for SimpleResponse
              */
@@ -1451,7 +1451,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): SimpleResponses.AsProtobufJSON;
         }
-        module SimpleResponses {
+        namespace SimpleResponses {
             /**
              * Standard JavaScript object representation for SimpleResponses
              */
@@ -1532,7 +1532,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): BasicCard.AsProtobufJSON;
         }
-        module BasicCard {
+        namespace BasicCard {
             /**
              * Standard JavaScript object representation for BasicCard
              */
@@ -1611,7 +1611,7 @@ export declare module Intent {
                  */
                 toProtobufJSON(options?: ToProtobufJSONOptions): Button.AsProtobufJSON;
             }
-            module Button {
+            namespace Button {
                 /**
                  * Standard JavaScript object representation for Button
                  */
@@ -1681,7 +1681,7 @@ export declare module Intent {
                      */
                     toProtobufJSON(options?: ToProtobufJSONOptions): OpenUriAction.AsProtobufJSON;
                 }
-                module OpenUriAction {
+                namespace OpenUriAction {
                     /**
                      * Standard JavaScript object representation for OpenUriAction
                      */
@@ -1752,7 +1752,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): Suggestion.AsProtobufJSON;
         }
-        module Suggestion {
+        namespace Suggestion {
             /**
              * Standard JavaScript object representation for Suggestion
              */
@@ -1821,7 +1821,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): Suggestions.AsProtobufJSON;
         }
-        module Suggestions {
+        namespace Suggestions {
             /**
              * Standard JavaScript object representation for Suggestions
              */
@@ -1893,7 +1893,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): LinkOutSuggestion.AsProtobufJSON;
         }
-        module LinkOutSuggestion {
+        namespace LinkOutSuggestion {
             /**
              * Standard JavaScript object representation for LinkOutSuggestion
              */
@@ -1967,7 +1967,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): ListSelect.AsProtobufJSON;
         }
-        module ListSelect {
+        namespace ListSelect {
             /**
              * Standard JavaScript object representation for ListSelect
              */
@@ -2046,7 +2046,7 @@ export declare module Intent {
                  */
                 toProtobufJSON(options?: ToProtobufJSONOptions): Item.AsProtobufJSON;
             }
-            module Item {
+            namespace Item {
                 /**
                  * Standard JavaScript object representation for Item
                  */
@@ -2122,7 +2122,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): CarouselSelect.AsProtobufJSON;
         }
-        module CarouselSelect {
+        namespace CarouselSelect {
             /**
              * Standard JavaScript object representation for CarouselSelect
              */
@@ -2199,7 +2199,7 @@ export declare module Intent {
                  */
                 toProtobufJSON(options?: ToProtobufJSONOptions): Item.AsProtobufJSON;
             }
-            module Item {
+            namespace Item {
                 /**
                  * Standard JavaScript object representation for Item
                  */
@@ -2275,7 +2275,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): HTMLText.AsProtobufJSON;
         }
-        module HTMLText {
+        namespace HTMLText {
             /**
              * Standard JavaScript object representation for HTMLText
              */
@@ -2347,7 +2347,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): Video.AsProtobufJSON;
         }
-        module Video {
+        namespace Video {
             /**
              * Standard JavaScript object representation for Video
              */
@@ -2421,7 +2421,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): Audio.AsProtobufJSON;
         }
-        module Audio {
+        namespace Audio {
             /**
              * Standard JavaScript object representation for Audio
              */
@@ -2495,7 +2495,7 @@ export declare module Intent {
              */
             toProtobufJSON(options?: ToProtobufJSONOptions): SelectItemInfo.AsProtobufJSON;
         }
-        module SelectItemInfo {
+        namespace SelectItemInfo {
             /**
              * Standard JavaScript object representation for SelectItemInfo
              */
@@ -2570,7 +2570,7 @@ export declare module Intent {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): FollowupIntentInfo.AsProtobufJSON;
     }
-    module FollowupIntentInfo {
+    namespace FollowupIntentInfo {
         /**
          * Standard JavaScript object representation for FollowupIntentInfo
          */
@@ -2660,7 +2660,7 @@ export declare class ListIntentsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListIntentsRequest.AsProtobufJSON;
 }
-export declare module ListIntentsRequest {
+export declare namespace ListIntentsRequest {
     /**
      * Standard JavaScript object representation for ListIntentsRequest
      */
@@ -2744,7 +2744,7 @@ export declare class ListIntentsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListIntentsResponse.AsProtobufJSON;
 }
-export declare module ListIntentsResponse {
+export declare namespace ListIntentsResponse {
     /**
      * Standard JavaScript object representation for ListIntentsResponse
      */
@@ -2824,7 +2824,7 @@ export declare class GetIntentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetIntentRequest.AsProtobufJSON;
 }
-export declare module GetIntentRequest {
+export declare namespace GetIntentRequest {
     /**
      * Standard JavaScript object representation for GetIntentRequest
      */
@@ -2908,7 +2908,7 @@ export declare class CreateIntentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateIntentRequest.AsProtobufJSON;
 }
-export declare module CreateIntentRequest {
+export declare namespace CreateIntentRequest {
     /**
      * Standard JavaScript object representation for CreateIntentRequest
      */
@@ -2992,7 +2992,7 @@ export declare class UpdateIntentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateIntentRequest.AsProtobufJSON;
 }
-export declare module UpdateIntentRequest {
+export declare namespace UpdateIntentRequest {
     /**
      * Standard JavaScript object representation for UpdateIntentRequest
      */
@@ -3067,7 +3067,7 @@ export declare class DeleteIntentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteIntentRequest.AsProtobufJSON;
 }
-export declare module DeleteIntentRequest {
+export declare namespace DeleteIntentRequest {
     /**
      * Standard JavaScript object representation for DeleteIntentRequest
      */
@@ -3153,7 +3153,7 @@ export declare class BatchUpdateIntentsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateIntentsRequest.AsProtobufJSON;
 }
-export declare module BatchUpdateIntentsRequest {
+export declare namespace BatchUpdateIntentsRequest {
     /**
      * Standard JavaScript object representation for BatchUpdateIntentsRequest
      */
@@ -3237,7 +3237,7 @@ export declare class BatchUpdateIntentsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateIntentsResponse.AsProtobufJSON;
 }
-export declare module BatchUpdateIntentsResponse {
+export declare namespace BatchUpdateIntentsResponse {
     /**
      * Standard JavaScript object representation for BatchUpdateIntentsResponse
      */
@@ -3309,7 +3309,7 @@ export declare class BatchDeleteIntentsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteIntentsRequest.AsProtobufJSON;
 }
-export declare module BatchDeleteIntentsRequest {
+export declare namespace BatchDeleteIntentsRequest {
     /**
      * Standard JavaScript object representation for BatchDeleteIntentsRequest
      */
@@ -3380,7 +3380,7 @@ export declare class IntentBatch implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): IntentBatch.AsProtobufJSON;
 }
-export declare module IntentBatch {
+export declare namespace IntentBatch {
     /**
      * Standard JavaScript object representation for IntentBatch
      */
@@ -3452,7 +3452,7 @@ export declare class IntentSorting implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): IntentSorting.AsProtobufJSON;
 }
-export declare module IntentSorting {
+export declare namespace IntentSorting {
     /**
      * Standard JavaScript object representation for IntentSorting
      */
@@ -3535,7 +3535,7 @@ export declare class IntentTagRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): IntentTagRequest.AsProtobufJSON;
 }
-export declare module IntentTagRequest {
+export declare namespace IntentTagRequest {
     /**
      * Standard JavaScript object representation for IntentTagRequest
      */
@@ -3606,7 +3606,7 @@ export declare class GetIntentTagsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetIntentTagsRequest.AsProtobufJSON;
 }
-export declare module GetIntentTagsRequest {
+export declare namespace GetIntentTagsRequest {
     /**
      * Standard JavaScript object representation for GetIntentTagsRequest
      */
@@ -3675,7 +3675,7 @@ export declare class GetIntentTagsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetIntentTagsResponse.AsProtobufJSON;
 }
-export declare module GetIntentTagsResponse {
+export declare namespace GetIntentTagsResponse {
     /**
      * Standard JavaScript object representation for GetIntentTagsResponse
      */
@@ -3744,7 +3744,7 @@ export declare class GetAllIntentTagsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAllIntentTagsRequest.AsProtobufJSON;
 }
-export declare module GetAllIntentTagsRequest {
+export declare namespace GetAllIntentTagsRequest {
     /**
      * Standard JavaScript object representation for GetAllIntentTagsRequest
      */
@@ -3813,7 +3813,7 @@ export declare class BatchUpdateTrainingPhrasesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateTrainingPhrasesRequest.AsProtobufJSON;
 }
-export declare module BatchUpdateTrainingPhrasesRequest {
+export declare namespace BatchUpdateTrainingPhrasesRequest {
     /**
      * Standard JavaScript object representation for BatchUpdateTrainingPhrasesRequest
      */
@@ -3887,7 +3887,7 @@ export declare class TrainingPhraseStatus implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): TrainingPhraseStatus.AsProtobufJSON;
 }
-export declare module TrainingPhraseStatus {
+export declare namespace TrainingPhraseStatus {
     /**
      * Standard JavaScript object representation for TrainingPhraseStatus
      */
@@ -3966,7 +3966,7 @@ export declare class BatchTrainingPhrasesStatusResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchTrainingPhrasesStatusResponse.AsProtobufJSON;
 }
-export declare module BatchTrainingPhrasesStatusResponse {
+export declare namespace BatchTrainingPhrasesStatusResponse {
     /**
      * Standard JavaScript object representation for BatchTrainingPhrasesStatusResponse
      */
@@ -4037,7 +4037,7 @@ export declare class BatchCreateTrainingPhrasesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchCreateTrainingPhrasesRequest.AsProtobufJSON;
 }
-export declare module BatchCreateTrainingPhrasesRequest {
+export declare namespace BatchCreateTrainingPhrasesRequest {
     /**
      * Standard JavaScript object representation for BatchCreateTrainingPhrasesRequest
      */
@@ -4108,7 +4108,7 @@ export declare module BatchCreateTrainingPhrasesRequest {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): CreateTrainingPhraseRequest.AsProtobufJSON;
     }
-    module CreateTrainingPhraseRequest {
+    namespace CreateTrainingPhraseRequest {
         /**
          * Standard JavaScript object representation for CreateTrainingPhraseRequest
          */
@@ -4180,7 +4180,7 @@ export declare class BatchGetTrainingPhrasesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchGetTrainingPhrasesRequest.AsProtobufJSON;
 }
-export declare module BatchGetTrainingPhrasesRequest {
+export declare namespace BatchGetTrainingPhrasesRequest {
     /**
      * Standard JavaScript object representation for BatchGetTrainingPhrasesRequest
      */
@@ -4249,7 +4249,7 @@ export declare class BatchDeleteTrainingPhrasesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteTrainingPhrasesRequest.AsProtobufJSON;
 }
-export declare module BatchDeleteTrainingPhrasesRequest {
+export declare namespace BatchDeleteTrainingPhrasesRequest {
     /**
      * Standard JavaScript object representation for BatchDeleteTrainingPhrasesRequest
      */
@@ -4321,7 +4321,7 @@ export declare class BatchDeleteTrainingPhrasesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteTrainingPhrasesResponse.AsProtobufJSON;
 }
-export declare module BatchDeleteTrainingPhrasesResponse {
+export declare namespace BatchDeleteTrainingPhrasesResponse {
     /**
      * Standard JavaScript object representation for BatchDeleteTrainingPhrasesResponse
      */
@@ -4396,7 +4396,7 @@ export declare module BatchDeleteTrainingPhrasesResponse {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): DeleteTrainingPhraseStatus.AsProtobufJSON;
     }
-    module DeleteTrainingPhraseStatus {
+    namespace DeleteTrainingPhraseStatus {
         /**
          * Standard JavaScript object representation for DeleteTrainingPhraseStatus
          */
@@ -4479,7 +4479,7 @@ export declare class ListTrainingPhrasesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListTrainingPhrasesRequest.AsProtobufJSON;
 }
-export declare module ListTrainingPhrasesRequest {
+export declare namespace ListTrainingPhrasesRequest {
     /**
      * Standard JavaScript object representation for ListTrainingPhrasesRequest
      */
@@ -4555,7 +4555,7 @@ export declare class ListTrainingPhrasesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListTrainingPhrasesResponse.AsProtobufJSON;
 }
-export declare module ListTrainingPhrasesResponse {
+export declare namespace ListTrainingPhrasesResponse {
     /**
      * Standard JavaScript object representation for ListTrainingPhrasesResponse
      */
@@ -4629,7 +4629,7 @@ export declare class BatchResponseMessagesStatusResponse implements GrpcMessage 
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchResponseMessagesStatusResponse.AsProtobufJSON;
 }
-export declare module BatchResponseMessagesStatusResponse {
+export declare namespace BatchResponseMessagesStatusResponse {
     /**
      * Standard JavaScript object representation for BatchResponseMessagesStatusResponse
      */
@@ -4704,7 +4704,7 @@ export declare module BatchResponseMessagesStatusResponse {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): ResponseMessageStatus.AsProtobufJSON;
     }
-    module ResponseMessageStatus {
+    namespace ResponseMessageStatus {
         /**
          * Standard JavaScript object representation for ResponseMessageStatus
          */
@@ -4781,7 +4781,7 @@ export declare class BatchCreateResponseMessagesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchCreateResponseMessagesRequest.AsProtobufJSON;
 }
-export declare module BatchCreateResponseMessagesRequest {
+export declare namespace BatchCreateResponseMessagesRequest {
     /**
      * Standard JavaScript object representation for BatchCreateResponseMessagesRequest
      */
@@ -4852,7 +4852,7 @@ export declare module BatchCreateResponseMessagesRequest {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): CreateResponseMessageRequest.AsProtobufJSON;
     }
-    module CreateResponseMessageRequest {
+    namespace CreateResponseMessageRequest {
         /**
          * Standard JavaScript object representation for CreateResponseMessageRequest
          */
@@ -4924,7 +4924,7 @@ export declare class BatchUpdateResponseMessagesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateResponseMessagesRequest.AsProtobufJSON;
 }
-export declare module BatchUpdateResponseMessagesRequest {
+export declare namespace BatchUpdateResponseMessagesRequest {
     /**
      * Standard JavaScript object representation for BatchUpdateResponseMessagesRequest
      */
@@ -4993,7 +4993,7 @@ export declare class BatchGetResponseMessagesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchGetResponseMessagesRequest.AsProtobufJSON;
 }
-export declare module BatchGetResponseMessagesRequest {
+export declare namespace BatchGetResponseMessagesRequest {
     /**
      * Standard JavaScript object representation for BatchGetResponseMessagesRequest
      */
@@ -5062,7 +5062,7 @@ export declare class BatchDeleteResponseMessagesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteResponseMessagesRequest.AsProtobufJSON;
 }
-export declare module BatchDeleteResponseMessagesRequest {
+export declare namespace BatchDeleteResponseMessagesRequest {
     /**
      * Standard JavaScript object representation for BatchDeleteResponseMessagesRequest
      */
@@ -5134,7 +5134,7 @@ export declare class BatchDeleteResponseMessagesResponse implements GrpcMessage 
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteResponseMessagesResponse.AsProtobufJSON;
 }
-export declare module BatchDeleteResponseMessagesResponse {
+export declare namespace BatchDeleteResponseMessagesResponse {
     /**
      * Standard JavaScript object representation for BatchDeleteResponseMessagesResponse
      */
@@ -5209,7 +5209,7 @@ export declare module BatchDeleteResponseMessagesResponse {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): DeleteResponseMessageStatus.AsProtobufJSON;
     }
-    module DeleteResponseMessageStatus {
+    namespace DeleteResponseMessageStatus {
         /**
          * Standard JavaScript object representation for DeleteResponseMessageStatus
          */
@@ -5292,7 +5292,7 @@ export declare class ListResponseMessagesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListResponseMessagesRequest.AsProtobufJSON;
 }
-export declare module ListResponseMessagesRequest {
+export declare namespace ListResponseMessagesRequest {
     /**
      * Standard JavaScript object representation for ListResponseMessagesRequest
      */
@@ -5368,7 +5368,7 @@ export declare class ListResponseMessagesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListResponseMessagesResponse.AsProtobufJSON;
 }
-export declare module ListResponseMessagesResponse {
+export declare namespace ListResponseMessagesResponse {
     /**
      * Standard JavaScript object representation for ListResponseMessagesResponse
      */
@@ -5442,7 +5442,7 @@ export declare class BatchParametersStatusResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchParametersStatusResponse.AsProtobufJSON;
 }
-export declare module BatchParametersStatusResponse {
+export declare namespace BatchParametersStatusResponse {
     /**
      * Standard JavaScript object representation for BatchParametersStatusResponse
      */
@@ -5517,7 +5517,7 @@ export declare module BatchParametersStatusResponse {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): ParameterStatus.AsProtobufJSON;
     }
-    module ParameterStatus {
+    namespace ParameterStatus {
         /**
          * Standard JavaScript object representation for ParameterStatus
          */
@@ -5594,7 +5594,7 @@ export declare class BatchCreateParametersRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchCreateParametersRequest.AsProtobufJSON;
 }
-export declare module BatchCreateParametersRequest {
+export declare namespace BatchCreateParametersRequest {
     /**
      * Standard JavaScript object representation for BatchCreateParametersRequest
      */
@@ -5665,7 +5665,7 @@ export declare module BatchCreateParametersRequest {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): CreateParameterRequest.AsProtobufJSON;
     }
-    module CreateParameterRequest {
+    namespace CreateParameterRequest {
         /**
          * Standard JavaScript object representation for CreateParameterRequest
          */
@@ -5737,7 +5737,7 @@ export declare class BatchUpdateParametersRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateParametersRequest.AsProtobufJSON;
 }
-export declare module BatchUpdateParametersRequest {
+export declare namespace BatchUpdateParametersRequest {
     /**
      * Standard JavaScript object representation for BatchUpdateParametersRequest
      */
@@ -5806,7 +5806,7 @@ export declare class BatchGetParametersRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchGetParametersRequest.AsProtobufJSON;
 }
-export declare module BatchGetParametersRequest {
+export declare namespace BatchGetParametersRequest {
     /**
      * Standard JavaScript object representation for BatchGetParametersRequest
      */
@@ -5875,7 +5875,7 @@ export declare class BatchDeleteParametersRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteParametersRequest.AsProtobufJSON;
 }
-export declare module BatchDeleteParametersRequest {
+export declare namespace BatchDeleteParametersRequest {
     /**
      * Standard JavaScript object representation for BatchDeleteParametersRequest
      */
@@ -5947,7 +5947,7 @@ export declare class BatchDeleteParametersResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteParametersResponse.AsProtobufJSON;
 }
-export declare module BatchDeleteParametersResponse {
+export declare namespace BatchDeleteParametersResponse {
     /**
      * Standard JavaScript object representation for BatchDeleteParametersResponse
      */
@@ -6022,7 +6022,7 @@ export declare module BatchDeleteParametersResponse {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): DeleteParameterStatus.AsProtobufJSON;
     }
-    module DeleteParameterStatus {
+    namespace DeleteParameterStatus {
         /**
          * Standard JavaScript object representation for DeleteParameterStatus
          */
@@ -6105,7 +6105,7 @@ export declare class ListParametersRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListParametersRequest.AsProtobufJSON;
 }
-export declare module ListParametersRequest {
+export declare namespace ListParametersRequest {
     /**
      * Standard JavaScript object representation for ListParametersRequest
      */
@@ -6181,7 +6181,7 @@ export declare class ListParametersResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListParametersResponse.AsProtobufJSON;
 }
-export declare module ListParametersResponse {
+export declare namespace ListParametersResponse {
     /**
      * Standard JavaScript object representation for ListParametersResponse
      */
@@ -6261,7 +6261,7 @@ export declare class ListTrainingPhrasesofIntentsWithEnrichmentRequest implement
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListTrainingPhrasesofIntentsWithEnrichmentRequest.AsProtobufJSON;
 }
-export declare module ListTrainingPhrasesofIntentsWithEnrichmentRequest {
+export declare namespace ListTrainingPhrasesofIntentsWithEnrichmentRequest {
     /**
      * Standard JavaScript object representation for ListTrainingPhrasesofIntentsWithEnrichmentRequest
      */
@@ -6339,7 +6339,7 @@ export declare class ListTrainingPhrasesofIntentsWithEnrichmentResponse implemen
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListTrainingPhrasesofIntentsWithEnrichmentResponse.AsProtobufJSON;
 }
-export declare module ListTrainingPhrasesofIntentsWithEnrichmentResponse {
+export declare namespace ListTrainingPhrasesofIntentsWithEnrichmentResponse {
     /**
      * Standard JavaScript object representation for ListTrainingPhrasesofIntentsWithEnrichmentResponse
      */

@@ -121,7 +121,7 @@ export declare class CcaiProject implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CcaiProject.AsProtobufJSON;
 }
-export declare module CcaiProject {
+export declare namespace CcaiProject {
     /**
      * Standard JavaScript object representation for CcaiProject
      */
@@ -214,7 +214,7 @@ export declare module CcaiProject {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): CcaiServicesMapEntry.AsProtobufJSON;
     }
-    module CcaiServicesMapEntry {
+    namespace CcaiServicesMapEntry {
         /**
          * Standard JavaScript object representation for CcaiServicesMapEntry
          */
@@ -286,7 +286,7 @@ export declare class CcaiServiceList implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CcaiServiceList.AsProtobufJSON;
 }
-export declare module CcaiServiceList {
+export declare namespace CcaiServiceList {
     /**
      * Standard JavaScript object representation for CcaiServiceList
      */
@@ -418,7 +418,7 @@ export declare class CcaiService implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CcaiService.AsProtobufJSON;
 }
-export declare module CcaiService {
+export declare namespace CcaiService {
     /**
      * Standard JavaScript object representation for CcaiService
      */
@@ -532,7 +532,7 @@ export declare class CreateCcaiProjectRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateCcaiProjectRequest.AsProtobufJSON;
 }
-export declare module CreateCcaiProjectRequest {
+export declare namespace CreateCcaiProjectRequest {
     /**
      * Standard JavaScript object representation for CreateCcaiProjectRequest
      */
@@ -606,7 +606,7 @@ export declare class CreateCcaiProjectResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateCcaiProjectResponse.AsProtobufJSON;
 }
-export declare module CreateCcaiProjectResponse {
+export declare namespace CreateCcaiProjectResponse {
     /**
      * Standard JavaScript object representation for CreateCcaiProjectResponse
      */
@@ -686,7 +686,7 @@ export declare class GetCcaiProjectRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetCcaiProjectRequest.AsProtobufJSON;
 }
-export declare module GetCcaiProjectRequest {
+export declare namespace GetCcaiProjectRequest {
     /**
      * Standard JavaScript object representation for GetCcaiProjectRequest
      */
@@ -773,7 +773,7 @@ export declare class ListCcaiProjectsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListCcaiProjectsRequest.AsProtobufJSON;
 }
-export declare module ListCcaiProjectsRequest {
+export declare namespace ListCcaiProjectsRequest {
     /**
      * Standard JavaScript object representation for ListCcaiProjectsRequest
      */
@@ -853,7 +853,7 @@ export declare class ListCcaiProjectsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListCcaiProjectsResponse.AsProtobufJSON;
 }
-export declare module ListCcaiProjectsResponse {
+export declare namespace ListCcaiProjectsResponse {
     /**
      * Standard JavaScript object representation for ListCcaiProjectsResponse
      */
@@ -927,7 +927,7 @@ export declare class CcaiProjectSorting implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CcaiProjectSorting.AsProtobufJSON;
 }
-export declare module CcaiProjectSorting {
+export declare namespace CcaiProjectSorting {
     /**
      * Standard JavaScript object representation for CcaiProjectSorting
      */
@@ -1008,7 +1008,7 @@ export declare class CcaiServiceFilter implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CcaiServiceFilter.AsProtobufJSON;
 }
-export declare module CcaiServiceFilter {
+export declare namespace CcaiServiceFilter {
     /**
      * Standard JavaScript object representation for CcaiServiceFilter
      */
@@ -1088,7 +1088,7 @@ export declare class UpdateCcaiProjectRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateCcaiProjectRequest.AsProtobufJSON;
 }
-export declare module UpdateCcaiProjectRequest {
+export declare namespace UpdateCcaiProjectRequest {
     /**
      * Standard JavaScript object representation for UpdateCcaiProjectRequest
      */
@@ -1166,7 +1166,7 @@ export declare class UpdateCcaiProjectResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateCcaiProjectResponse.AsProtobufJSON;
 }
-export declare module UpdateCcaiProjectResponse {
+export declare namespace UpdateCcaiProjectResponse {
     /**
      * Standard JavaScript object representation for UpdateCcaiProjectResponse
      */
@@ -1240,7 +1240,7 @@ export declare class DeleteCcaiProjectRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteCcaiProjectRequest.AsProtobufJSON;
 }
-export declare module DeleteCcaiProjectRequest {
+export declare namespace DeleteCcaiProjectRequest {
     /**
      * Standard JavaScript object representation for DeleteCcaiProjectRequest
      */
@@ -1317,7 +1317,7 @@ export declare class DeleteCcaiProjectResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteCcaiProjectResponse.AsProtobufJSON;
 }
-export declare module DeleteCcaiProjectResponse {
+export declare namespace DeleteCcaiProjectResponse {
     /**
      * Standard JavaScript object representation for DeleteCcaiProjectResponse
      */

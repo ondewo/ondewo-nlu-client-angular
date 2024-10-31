@@ -106,7 +106,7 @@ export declare class StatResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): StatResponse.AsProtobufJSON;
 }
-export declare module StatResponse {
+export declare namespace StatResponse {
     /**
      * Standard JavaScript object representation for StatResponse
      */
@@ -199,7 +199,7 @@ export declare class Comment implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Comment.AsProtobufJSON;
 }
-export declare module Comment {
+export declare namespace Comment {
     /**
      * Standard JavaScript object representation for Comment
      */
@@ -335,7 +335,7 @@ export declare class Notification implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Notification.AsProtobufJSON;
 }
-export declare module Notification {
+export declare namespace Notification {
     /**
      * Standard JavaScript object representation for Notification
      */
@@ -438,7 +438,7 @@ export declare class AddNotificationsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddNotificationsRequest.AsProtobufJSON;
 }
-export declare module AddNotificationsRequest {
+export declare namespace AddNotificationsRequest {
     /**
      * Standard JavaScript object representation for AddNotificationsRequest
      */
@@ -507,7 +507,7 @@ export declare class AddNotificationsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddNotificationsResponse.AsProtobufJSON;
 }
-export declare module AddNotificationsResponse {
+export declare namespace AddNotificationsResponse {
     /**
      * Standard JavaScript object representation for AddNotificationsResponse
      */
@@ -600,7 +600,7 @@ export declare class NotificationFilter implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): NotificationFilter.AsProtobufJSON;
 }
-export declare module NotificationFilter {
+export declare namespace NotificationFilter {
     /**
      * Standard JavaScript object representation for NotificationFilter
      */
@@ -691,7 +691,7 @@ export declare class ListNotificationsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListNotificationsRequest.AsProtobufJSON;
 }
-export declare module ListNotificationsRequest {
+export declare namespace ListNotificationsRequest {
     /**
      * Standard JavaScript object representation for ListNotificationsRequest
      */
@@ -764,7 +764,7 @@ export declare class ListNotificationsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListNotificationsResponse.AsProtobufJSON;
 }
-export declare module ListNotificationsResponse {
+export declare namespace ListNotificationsResponse {
     /**
      * Standard JavaScript object representation for ListNotificationsResponse
      */
@@ -836,7 +836,7 @@ export declare class SetNotificationsFlaggedStatusRequest implements GrpcMessage
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SetNotificationsFlaggedStatusRequest.AsProtobufJSON;
 }
-export declare module SetNotificationsFlaggedStatusRequest {
+export declare namespace SetNotificationsFlaggedStatusRequest {
     /**
      * Standard JavaScript object representation for SetNotificationsFlaggedStatusRequest
      */
@@ -910,7 +910,7 @@ export declare class SetNotificationsReadStatusRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): SetNotificationsReadStatusRequest.AsProtobufJSON;
 }
-export declare module SetNotificationsReadStatusRequest {
+export declare namespace SetNotificationsReadStatusRequest {
     /**
      * Standard JavaScript object representation for SetNotificationsReadStatusRequest
      */
@@ -998,7 +998,7 @@ export declare class KeyValuePair implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): KeyValuePair.AsProtobufJSON;
 }
-export declare module KeyValuePair {
+export declare namespace KeyValuePair {
     /**
      * Standard JavaScript object representation for KeyValuePair
      */

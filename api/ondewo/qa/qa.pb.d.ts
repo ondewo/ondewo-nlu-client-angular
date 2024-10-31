@@ -77,7 +77,7 @@ export declare class GetAnswerRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAnswerRequest.AsProtobufJSON;
 }
-export declare module GetAnswerRequest {
+export declare namespace GetAnswerRequest {
     /**
      * Standard JavaScript object representation for GetAnswerRequest
      */
@@ -160,7 +160,7 @@ export declare class GetAnswerResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetAnswerResponse.AsProtobufJSON;
 }
-export declare module GetAnswerResponse {
+export declare namespace GetAnswerResponse {
     /**
      * Standard JavaScript object representation for GetAnswerResponse
      */
@@ -229,7 +229,7 @@ export declare class RunScraperRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): RunScraperRequest.AsProtobufJSON;
 }
-export declare module RunScraperRequest {
+export declare namespace RunScraperRequest {
     /**
      * Standard JavaScript object representation for RunScraperRequest
      */
@@ -298,7 +298,7 @@ export declare class RunScraperResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): RunScraperResponse.AsProtobufJSON;
 }
-export declare module RunScraperResponse {
+export declare namespace RunScraperResponse {
     /**
      * Standard JavaScript object representation for RunScraperResponse
      */
@@ -369,7 +369,7 @@ export declare module RunScraperResponse {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): ScraperContainer.AsProtobufJSON;
     }
-    module ScraperContainer {
+    namespace ScraperContainer {
         /**
          * Standard JavaScript object representation for ScraperContainer
          */
@@ -444,7 +444,7 @@ export declare class RunTrainingResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): RunTrainingResponse.AsProtobufJSON;
 }
-export declare module RunTrainingResponse {
+export declare namespace RunTrainingResponse {
     /**
      * Standard JavaScript object representation for RunTrainingResponse
      */
@@ -521,7 +521,7 @@ export declare class UrlFilter implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UrlFilter.AsProtobufJSON;
 }
-export declare module UrlFilter {
+export declare namespace UrlFilter {
     /**
      * Standard JavaScript object representation for UrlFilter
      */
@@ -594,7 +594,7 @@ export declare class GetServerStateResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetServerStateResponse.AsProtobufJSON;
 }
-export declare module GetServerStateResponse {
+export declare namespace GetServerStateResponse {
     /**
      * Standard JavaScript object representation for GetServerStateResponse
      */
@@ -663,7 +663,7 @@ export declare class ListProjectIdsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListProjectIdsResponse.AsProtobufJSON;
 }
-export declare module ListProjectIdsResponse {
+export declare namespace ListProjectIdsResponse {
     /**
      * Standard JavaScript object representation for ListProjectIdsResponse
      */
@@ -732,7 +732,7 @@ export declare class GetProjectConfigRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetProjectConfigRequest.AsProtobufJSON;
 }
-export declare module GetProjectConfigRequest {
+export declare namespace GetProjectConfigRequest {
     /**
      * Standard JavaScript object representation for GetProjectConfigRequest
      */
@@ -801,7 +801,7 @@ export declare class GetProjectConfigResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetProjectConfigResponse.AsProtobufJSON;
 }
-export declare module GetProjectConfigResponse {
+export declare namespace GetProjectConfigResponse {
     /**
      * Standard JavaScript object representation for GetProjectConfigResponse
      */
@@ -870,7 +870,7 @@ export declare class UpdateDatabaseRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateDatabaseRequest.AsProtobufJSON;
 }
-export declare module UpdateDatabaseRequest {
+export declare namespace UpdateDatabaseRequest {
     /**
      * Standard JavaScript object representation for UpdateDatabaseRequest
      */
@@ -939,7 +939,7 @@ export declare class UpdateDatabaseResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateDatabaseResponse.AsProtobufJSON;
 }
-export declare module UpdateDatabaseResponse {
+export declare namespace UpdateDatabaseResponse {
     /**
      * Standard JavaScript object representation for UpdateDatabaseResponse
      */

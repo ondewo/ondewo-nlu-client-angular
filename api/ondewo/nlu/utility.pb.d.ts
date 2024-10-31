@@ -64,7 +64,7 @@ export declare class ValidateRegexRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ValidateRegexRequest.AsProtobufJSON;
 }
-export declare module ValidateRegexRequest {
+export declare namespace ValidateRegexRequest {
     /**
      * Standard JavaScript object representation for ValidateRegexRequest
      */
@@ -133,7 +133,7 @@ export declare class ValidateRegexResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ValidateRegexResponse.AsProtobufJSON;
 }
-export declare module ValidateRegexResponse {
+export declare namespace ValidateRegexResponse {
     /**
      * Standard JavaScript object representation for ValidateRegexResponse
      */
@@ -202,7 +202,7 @@ export declare class ValidateEmbeddedRegexRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ValidateEmbeddedRegexRequest.AsProtobufJSON;
 }
-export declare module ValidateEmbeddedRegexRequest {
+export declare namespace ValidateEmbeddedRegexRequest {
     /**
      * Standard JavaScript object representation for ValidateEmbeddedRegexRequest
      */
@@ -271,7 +271,7 @@ export declare class ValidateEmbeddedRegexResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ValidateEmbeddedRegexResponse.AsProtobufJSON;
 }
-export declare module ValidateEmbeddedRegexResponse {
+export declare namespace ValidateEmbeddedRegexResponse {
     /**
      * Standard JavaScript object representation for ValidateEmbeddedRegexResponse
      */
@@ -361,7 +361,7 @@ export declare class CleanAllIntentsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CleanAllIntentsRequest.AsProtobufJSON;
 }
-export declare module CleanAllIntentsRequest {
+export declare namespace CleanAllIntentsRequest {
     /**
      * Standard JavaScript object representation for CleanAllIntentsRequest
      */
@@ -447,7 +447,7 @@ export declare class CleanAllIntentsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CleanAllIntentsResponse.AsProtobufJSON;
 }
-export declare module CleanAllIntentsResponse {
+export declare namespace CleanAllIntentsResponse {
     /**
      * Standard JavaScript object representation for CleanAllIntentsResponse
      */
@@ -539,7 +539,7 @@ export declare class CleanIntentRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CleanIntentRequest.AsProtobufJSON;
 }
-export declare module CleanIntentRequest {
+export declare namespace CleanIntentRequest {
     /**
      * Standard JavaScript object representation for CleanIntentRequest
      */
@@ -625,7 +625,7 @@ export declare class CleanIntentResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CleanIntentResponse.AsProtobufJSON;
 }
-export declare module CleanIntentResponse {
+export declare namespace CleanIntentResponse {
     /**
      * Standard JavaScript object representation for CleanIntentResponse
      */
@@ -702,7 +702,7 @@ export declare class TrainingPhraseCleanerOptions implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): TrainingPhraseCleanerOptions.AsProtobufJSON;
 }
-export declare module TrainingPhraseCleanerOptions {
+export declare namespace TrainingPhraseCleanerOptions {
     /**
      * Standard JavaScript object representation for TrainingPhraseCleanerOptions
      */
@@ -778,7 +778,7 @@ export declare class StringUpdate implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): StringUpdate.AsProtobufJSON;
 }
-export declare module StringUpdate {
+export declare namespace StringUpdate {
     /**
      * Standard JavaScript object representation for StringUpdate
      */
@@ -855,7 +855,7 @@ export declare class IntentUpdate implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): IntentUpdate.AsProtobufJSON;
 }
-export declare module IntentUpdate {
+export declare namespace IntentUpdate {
     /**
      * Standard JavaScript object representation for IntentUpdate
      */
@@ -936,7 +936,7 @@ export declare module IntentUpdate {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): TrainingPhraseUpdate.AsProtobufJSON;
     }
-    module TrainingPhraseUpdate {
+    namespace TrainingPhraseUpdate {
         /**
          * Standard JavaScript object representation for TrainingPhraseUpdate
          */
@@ -1015,7 +1015,7 @@ export declare class EntityTypeUpdate implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EntityTypeUpdate.AsProtobufJSON;
 }
-export declare module EntityTypeUpdate {
+export declare namespace EntityTypeUpdate {
     /**
      * Standard JavaScript object representation for EntityTypeUpdate
      */
@@ -1088,7 +1088,7 @@ export declare module EntityTypeUpdate {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): EntityUpdate.AsProtobufJSON;
     }
-    module EntityUpdate {
+    namespace EntityUpdate {
         /**
          * Standard JavaScript object representation for EntityUpdate
          */
@@ -1181,7 +1181,7 @@ export declare class CleanAllEntityTypesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CleanAllEntityTypesRequest.AsProtobufJSON;
 }
-export declare module CleanAllEntityTypesRequest {
+export declare namespace CleanAllEntityTypesRequest {
     /**
      * Standard JavaScript object representation for CleanAllEntityTypesRequest
      */
@@ -1273,7 +1273,7 @@ export declare class CleanAllEntityTypesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CleanAllEntityTypesResponse.AsProtobufJSON;
 }
-export declare module CleanAllEntityTypesResponse {
+export declare namespace CleanAllEntityTypesResponse {
     /**
      * Standard JavaScript object representation for CleanAllEntityTypesResponse
      */
@@ -1366,7 +1366,7 @@ export declare class CleanEntityTypeRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CleanEntityTypeRequest.AsProtobufJSON;
 }
-export declare module CleanEntityTypeRequest {
+export declare namespace CleanEntityTypeRequest {
     /**
      * Standard JavaScript object representation for CleanEntityTypeRequest
      */
@@ -1450,7 +1450,7 @@ export declare class CleanEntityTypeResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CleanEntityTypeResponse.AsProtobufJSON;
 }
-export declare module CleanEntityTypeResponse {
+export declare namespace CleanEntityTypeResponse {
     /**
      * Standard JavaScript object representation for CleanEntityTypeResponse
      */
@@ -1539,7 +1539,7 @@ export declare class AddTrainingPhrasesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddTrainingPhrasesRequest.AsProtobufJSON;
 }
-export declare module AddTrainingPhrasesRequest {
+export declare namespace AddTrainingPhrasesRequest {
     /**
      * Standard JavaScript object representation for AddTrainingPhrasesRequest
      */
@@ -1625,7 +1625,7 @@ export declare module AddTrainingPhrasesRequest {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): TrainingPhraseForIntent.AsProtobufJSON;
     }
-    module TrainingPhraseForIntent {
+    namespace TrainingPhraseForIntent {
         /**
          * Standard JavaScript object representation for TrainingPhraseForIntent
          */
@@ -1699,7 +1699,7 @@ export declare class AddTrainingPhrasesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddTrainingPhrasesResponse.AsProtobufJSON;
 }
-export declare module AddTrainingPhrasesResponse {
+export declare namespace AddTrainingPhrasesResponse {
     /**
      * Standard JavaScript object representation for AddTrainingPhrasesResponse
      */
@@ -1786,7 +1786,7 @@ export declare class AddTrainingPhrasesFromCSVRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): AddTrainingPhrasesFromCSVRequest.AsProtobufJSON;
 }
-export declare module AddTrainingPhrasesFromCSVRequest {
+export declare namespace AddTrainingPhrasesFromCSVRequest {
     /**
      * Standard JavaScript object representation for AddTrainingPhrasesFromCSVRequest
      */

@@ -60,7 +60,7 @@ export declare class GetIntentCountRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetIntentCountRequest.AsProtobufJSON;
 }
-export declare module GetIntentCountRequest {
+export declare namespace GetIntentCountRequest {
     /**
      * Standard JavaScript object representation for GetIntentCountRequest
      */
@@ -134,7 +134,7 @@ export declare class GetEntityTypeCountRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetEntityTypeCountRequest.AsProtobufJSON;
 }
-export declare module GetEntityTypeCountRequest {
+export declare namespace GetEntityTypeCountRequest {
     /**
      * Standard JavaScript object representation for GetEntityTypeCountRequest
      */
@@ -205,7 +205,7 @@ export declare class GetProjectStatRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetProjectStatRequest.AsProtobufJSON;
 }
-export declare module GetProjectStatRequest {
+export declare namespace GetProjectStatRequest {
     /**
      * Standard JavaScript object representation for GetProjectStatRequest
      */
@@ -277,7 +277,7 @@ export declare class GetProjectElementStatRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetProjectElementStatRequest.AsProtobufJSON;
 }
-export declare module GetProjectElementStatRequest {
+export declare namespace GetProjectElementStatRequest {
     /**
      * Standard JavaScript object representation for GetProjectElementStatRequest
      */

@@ -107,7 +107,7 @@ export declare class EntityType implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EntityType.AsProtobufJSON;
 }
-export declare module EntityType {
+export declare namespace EntityType {
     /**
      * Standard JavaScript object representation for EntityType
      */
@@ -239,7 +239,7 @@ export declare module EntityType {
          */
         toProtobufJSON(options?: ToProtobufJSONOptions): Entity.AsProtobufJSON;
     }
-    module Entity {
+    namespace Entity {
         /**
          * Standard JavaScript object representation for Entity
          */
@@ -342,7 +342,7 @@ export declare class ListEntityTypesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListEntityTypesRequest.AsProtobufJSON;
 }
-export declare module ListEntityTypesRequest {
+export declare namespace ListEntityTypesRequest {
     /**
      * Standard JavaScript object representation for ListEntityTypesRequest
      */
@@ -424,7 +424,7 @@ export declare class ListEntityTypesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListEntityTypesResponse.AsProtobufJSON;
 }
-export declare module ListEntityTypesResponse {
+export declare namespace ListEntityTypesResponse {
     /**
      * Standard JavaScript object representation for ListEntityTypesResponse
      */
@@ -504,7 +504,7 @@ export declare class GetEntityTypeRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetEntityTypeRequest.AsProtobufJSON;
 }
-export declare module GetEntityTypeRequest {
+export declare namespace GetEntityTypeRequest {
     /**
      * Standard JavaScript object representation for GetEntityTypeRequest
      */
@@ -588,7 +588,7 @@ export declare class CreateEntityTypeRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateEntityTypeRequest.AsProtobufJSON;
 }
-export declare module CreateEntityTypeRequest {
+export declare namespace CreateEntityTypeRequest {
     /**
      * Standard JavaScript object representation for CreateEntityTypeRequest
      */
@@ -672,7 +672,7 @@ export declare class UpdateEntityTypeRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateEntityTypeRequest.AsProtobufJSON;
 }
-export declare module UpdateEntityTypeRequest {
+export declare namespace UpdateEntityTypeRequest {
     /**
      * Standard JavaScript object representation for UpdateEntityTypeRequest
      */
@@ -747,7 +747,7 @@ export declare class DeleteEntityTypeRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteEntityTypeRequest.AsProtobufJSON;
 }
-export declare module DeleteEntityTypeRequest {
+export declare namespace DeleteEntityTypeRequest {
     /**
      * Standard JavaScript object representation for DeleteEntityTypeRequest
      */
@@ -830,7 +830,7 @@ export declare class BatchUpdateEntityTypesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateEntityTypesRequest.AsProtobufJSON;
 }
-export declare module BatchUpdateEntityTypesRequest {
+export declare namespace BatchUpdateEntityTypesRequest {
     /**
      * Standard JavaScript object representation for BatchUpdateEntityTypesRequest
      */
@@ -912,7 +912,7 @@ export declare class BatchUpdateEntityTypesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateEntityTypesResponse.AsProtobufJSON;
 }
-export declare module BatchUpdateEntityTypesResponse {
+export declare namespace BatchUpdateEntityTypesResponse {
     /**
      * Standard JavaScript object representation for BatchUpdateEntityTypesResponse
      */
@@ -984,7 +984,7 @@ export declare class BatchDeleteEntityTypesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteEntityTypesRequest.AsProtobufJSON;
 }
-export declare module BatchDeleteEntityTypesRequest {
+export declare namespace BatchDeleteEntityTypesRequest {
     /**
      * Standard JavaScript object representation for BatchDeleteEntityTypesRequest
      */
@@ -1055,7 +1055,7 @@ export declare class EntityTypeBatch implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EntityTypeBatch.AsProtobufJSON;
 }
-export declare module EntityTypeBatch {
+export declare namespace EntityTypeBatch {
     /**
      * Standard JavaScript object representation for EntityTypeBatch
      */
@@ -1127,7 +1127,7 @@ export declare class EntityTypeSorting implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EntityTypeSorting.AsProtobufJSON;
 }
-export declare module EntityTypeSorting {
+export declare namespace EntityTypeSorting {
     /**
      * Standard JavaScript object representation for EntityTypeSorting
      */
@@ -1211,7 +1211,7 @@ export declare class EntityStatus implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EntityStatus.AsProtobufJSON;
 }
-export declare module EntityStatus {
+export declare namespace EntityStatus {
     /**
      * Standard JavaScript object representation for EntityStatus
      */
@@ -1290,7 +1290,7 @@ export declare class BatchEntitiesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchEntitiesResponse.AsProtobufJSON;
 }
-export declare module BatchEntitiesResponse {
+export declare namespace BatchEntitiesResponse {
     /**
      * Standard JavaScript object representation for BatchEntitiesResponse
      */
@@ -1364,7 +1364,7 @@ export declare class CreateEntityRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateEntityRequest.AsProtobufJSON;
 }
-export declare module CreateEntityRequest {
+export declare namespace CreateEntityRequest {
     /**
      * Standard JavaScript object representation for CreateEntityRequest
      */
@@ -1435,7 +1435,7 @@ export declare class BatchCreateEntitiesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchCreateEntitiesRequest.AsProtobufJSON;
 }
-export declare module BatchCreateEntitiesRequest {
+export declare namespace BatchCreateEntitiesRequest {
     /**
      * Standard JavaScript object representation for BatchCreateEntitiesRequest
      */
@@ -1504,7 +1504,7 @@ export declare class BatchUpdateEntitiesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchUpdateEntitiesRequest.AsProtobufJSON;
 }
-export declare module BatchUpdateEntitiesRequest {
+export declare namespace BatchUpdateEntitiesRequest {
     /**
      * Standard JavaScript object representation for BatchUpdateEntitiesRequest
      */
@@ -1573,7 +1573,7 @@ export declare class UpdateEntityRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateEntityRequest.AsProtobufJSON;
 }
-export declare module UpdateEntityRequest {
+export declare namespace UpdateEntityRequest {
     /**
      * Standard JavaScript object representation for UpdateEntityRequest
      */
@@ -1642,7 +1642,7 @@ export declare class GetEntityRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetEntityRequest.AsProtobufJSON;
 }
-export declare module GetEntityRequest {
+export declare namespace GetEntityRequest {
     /**
      * Standard JavaScript object representation for GetEntityRequest
      */
@@ -1711,7 +1711,7 @@ export declare class BatchGetEntitiesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchGetEntitiesRequest.AsProtobufJSON;
 }
-export declare module BatchGetEntitiesRequest {
+export declare namespace BatchGetEntitiesRequest {
     /**
      * Standard JavaScript object representation for BatchGetEntitiesRequest
      */
@@ -1780,7 +1780,7 @@ export declare class BatchDeleteEntitiesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteEntitiesRequest.AsProtobufJSON;
 }
-export declare module BatchDeleteEntitiesRequest {
+export declare namespace BatchDeleteEntitiesRequest {
     /**
      * Standard JavaScript object representation for BatchDeleteEntitiesRequest
      */
@@ -1849,7 +1849,7 @@ export declare class DeleteEntityRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteEntityRequest.AsProtobufJSON;
 }
-export declare module DeleteEntityRequest {
+export declare namespace DeleteEntityRequest {
     /**
      * Standard JavaScript object representation for DeleteEntityRequest
      */
@@ -1923,7 +1923,7 @@ export declare class DeleteEntityStatus implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteEntityStatus.AsProtobufJSON;
 }
-export declare module DeleteEntityStatus {
+export declare namespace DeleteEntityStatus {
     /**
      * Standard JavaScript object representation for DeleteEntityStatus
      */
@@ -2002,7 +2002,7 @@ export declare class BatchDeleteEntitiesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): BatchDeleteEntitiesResponse.AsProtobufJSON;
 }
-export declare module BatchDeleteEntitiesResponse {
+export declare namespace BatchDeleteEntitiesResponse {
     /**
      * Standard JavaScript object representation for BatchDeleteEntitiesResponse
      */
@@ -2085,7 +2085,7 @@ export declare class ListEntitiesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListEntitiesRequest.AsProtobufJSON;
 }
-export declare module ListEntitiesRequest {
+export declare namespace ListEntitiesRequest {
     /**
      * Standard JavaScript object representation for ListEntitiesRequest
      */
@@ -2165,7 +2165,7 @@ export declare class ListEntitiesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListEntitiesResponse.AsProtobufJSON;
 }
-export declare module ListEntitiesResponse {
+export declare namespace ListEntitiesResponse {
     /**
      * Standard JavaScript object representation for ListEntitiesResponse
      */
@@ -2239,7 +2239,7 @@ export declare class EntityValueSorting implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): EntityValueSorting.AsProtobufJSON;
 }
-export declare module EntityValueSorting {
+export declare namespace EntityValueSorting {
     /**
      * Standard JavaScript object representation for EntityValueSorting
      */

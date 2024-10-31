@@ -88,7 +88,7 @@ export declare class ProjectRole implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ProjectRole.AsProtobufJSON;
 }
-export declare module ProjectRole {
+export declare namespace ProjectRole {
     /**
      * Standard JavaScript object representation for ProjectRole
      */
@@ -175,7 +175,7 @@ export declare class CreateProjectRoleRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CreateProjectRoleRequest.AsProtobufJSON;
 }
-export declare module CreateProjectRoleRequest {
+export declare namespace CreateProjectRoleRequest {
     /**
      * Standard JavaScript object representation for CreateProjectRoleRequest
      */
@@ -257,7 +257,7 @@ export declare class UpdateProjectRoleRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): UpdateProjectRoleRequest.AsProtobufJSON;
 }
-export declare module UpdateProjectRoleRequest {
+export declare namespace UpdateProjectRoleRequest {
     /**
      * Standard JavaScript object representation for UpdateProjectRoleRequest
      */
@@ -343,7 +343,7 @@ export declare class GetProjectRoleRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetProjectRoleRequest.AsProtobufJSON;
 }
-export declare module GetProjectRoleRequest {
+export declare namespace GetProjectRoleRequest {
     /**
      * Standard JavaScript object representation for GetProjectRoleRequest
      */
@@ -426,7 +426,7 @@ export declare class DeleteProjectRoleRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteProjectRoleRequest.AsProtobufJSON;
 }
-export declare module DeleteProjectRoleRequest {
+export declare namespace DeleteProjectRoleRequest {
     /**
      * Standard JavaScript object representation for DeleteProjectRoleRequest
      */
@@ -503,7 +503,7 @@ export declare class ListProjectRolesRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListProjectRolesRequest.AsProtobufJSON;
 }
-export declare module ListProjectRolesRequest {
+export declare namespace ListProjectRolesRequest {
     /**
      * Standard JavaScript object representation for ListProjectRolesRequest
      */
@@ -579,7 +579,7 @@ export declare class ListProjectRolesResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListProjectRolesResponse.AsProtobufJSON;
 }
-export declare module ListProjectRolesResponse {
+export declare namespace ListProjectRolesResponse {
     /**
      * Standard JavaScript object representation for ListProjectRolesResponse
      */

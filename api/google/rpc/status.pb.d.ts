@@ -62,7 +62,7 @@ export declare class Status implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Status.AsProtobufJSON;
 }
-export declare module Status {
+export declare namespace Status {
     /**
      * Standard JavaScript object representation for Status
      */

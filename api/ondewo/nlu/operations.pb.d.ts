@@ -73,7 +73,7 @@ export declare class Operation implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): Operation.AsProtobufJSON;
 }
-export declare module Operation {
+export declare namespace Operation {
     /**
      * Standard JavaScript object representation for Operation
      */
@@ -155,7 +155,7 @@ export declare class GetOperationRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): GetOperationRequest.AsProtobufJSON;
 }
-export declare module GetOperationRequest {
+export declare namespace GetOperationRequest {
     /**
      * Standard JavaScript object representation for GetOperationRequest
      */
@@ -236,7 +236,7 @@ export declare class ListOperationsRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListOperationsRequest.AsProtobufJSON;
 }
-export declare module ListOperationsRequest {
+export declare namespace ListOperationsRequest {
     /**
      * Standard JavaScript object representation for ListOperationsRequest
      */
@@ -332,7 +332,7 @@ export declare class OperationFilter implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): OperationFilter.AsProtobufJSON;
 }
-export declare module OperationFilter {
+export declare namespace OperationFilter {
     /**
      * Standard JavaScript object representation for OperationFilter
      */
@@ -422,7 +422,7 @@ export declare class ListOperationsResponse implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): ListOperationsResponse.AsProtobufJSON;
 }
-export declare module ListOperationsResponse {
+export declare namespace ListOperationsResponse {
     /**
      * Standard JavaScript object representation for ListOperationsResponse
      */
@@ -493,7 +493,7 @@ export declare class CancelOperationRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): CancelOperationRequest.AsProtobufJSON;
 }
-export declare module CancelOperationRequest {
+export declare namespace CancelOperationRequest {
     /**
      * Standard JavaScript object representation for CancelOperationRequest
      */
@@ -562,7 +562,7 @@ export declare class DeleteOperationRequest implements GrpcMessage {
      */
     toProtobufJSON(options?: ToProtobufJSONOptions): DeleteOperationRequest.AsProtobufJSON;
 }
-export declare module DeleteOperationRequest {
+export declare namespace DeleteOperationRequest {
     /**
      * Standard JavaScript object representation for DeleteOperationRequest
      */
