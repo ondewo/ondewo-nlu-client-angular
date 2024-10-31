@@ -219,13 +219,17 @@ build: check_out_correct_submodule_versions update_package npm_run_build ## Buil
 	@$(eval README_CUT_LINES:=$(shell cat -n src/README.md | sed -n "/START OF GITHUB README/,/END OF GITHUB README/p" | grep -o -E '[0-9]+' | sed -e 's/^0\+//' | awk 'NR==1; END{print}'))
 	@$(eval DELETE_LINES:=$(shell echo ${README_CUT_LINES}| sed -e "s/[[:space:]]/,/"))
 	@sed -i "${DELETE_LINES}d" npm/README.md
-	npm i eslint --save-dev
-	npm i @eslint/eslintrc --save-dev
-	npm i @eslint/js --save-dev
-	npm i global --save-dev
-	npm i prettier --save-dev
-	npm i @typescript-eslint/eslint-plugin --save-dev
-	npm i husky --save-dev
+	make install_dependencies
+
+install_dependencies:
+	npm i --save-dev \
+		@eslint/eslintrc \
+		@eslint/js \
+		@typescript-eslint/eslint-plugin \
+		eslint \
+		global \
+		husky \
+		prettier
 
 check_out_correct_submodule_versions: ## Fetches all Submodules and checks out specified branch
 	@echo "START checking out correct submodule versions ..."
