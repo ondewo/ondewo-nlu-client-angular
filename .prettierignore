@@ -10,3 +10,7 @@ src/
 
 ondewo-proto-compiler
 
+ondewo-nlu-api
+ondewo-nlu-client-angular.d.ts
+ondewo-nlu-client-angular.d.ts.map
+ondewo-nlu-client-angular.metadata.json
