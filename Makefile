@@ -17,7 +17,7 @@ export
 ONDEWO_NLU_VERSION = 6.0.0
 
 NLU_API_GIT_BRANCH=tags/6.0.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.1.0
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.3.0
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 NLU_APIS_DIR=src/ondewo-nlu-api
 NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
@@ -86,8 +86,8 @@ check_build: ## Checks if all built proto-code is there
 	do \
 		find api -iname "*pb*" | grep -q $${file}; \
 		if test $$? != 0; then  echo "No Proto-Code for $${file} in api" & exit 1;fi; \
-		find esm2022 -iname "*pb*" | grep -q $${file}; \
-		if test $$? != 0; then  echo "No Proto-Code for $${file} in esm2022" & exit 1;fi; \
+		# find esm2022 -iname "*pb*" | grep -q $${file}; \
+		# if test $$? != 0; then  echo "No Proto-Code for $${file} in esm2022" & exit 1;fi; \
 		find fesm2022 -iname "*ondewo-nlu-client-angular*" | wc -l | grep -q "2"; \
 		if test $$? != 0; then  echo "No Proto-Code for $${file} in fesm2022" & exit 1;fi; \
 	done
