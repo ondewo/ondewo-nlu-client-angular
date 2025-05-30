@@ -162,6 +162,14 @@ export declare class AgentsClient {
          */
         importAgent: (requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu007.Operation>>;
         /**
+         * Unary call: /ondewo.nlu.Agents/MigrateAgent
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+         */
+        migrateAgent: (requestData: thisProto.MigrateAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ondewoNlu007.Operation>>;
+        /**
          * Unary call: /ondewo.nlu.Agents/OptimizeRankingMatch
          *
          * @param requestMessage Request message
@@ -483,6 +491,14 @@ export declare class AgentsClient {
      * @returns Observable<ondewoNlu007.Operation>
      */
     importAgent(requestData: thisProto.ImportAgentRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu007.Operation>;
+    /**
+     * Unary call @/ondewo.nlu.Agents/MigrateAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<ondewoNlu007.Operation>
+     */
+    migrateAgent(requestData: thisProto.MigrateAgentRequest, requestMetadata?: GrpcMetadata): Observable<ondewoNlu007.Operation>;
     /**
      * Unary call @/ondewo.nlu.Agents/OptimizeRankingMatch
      *

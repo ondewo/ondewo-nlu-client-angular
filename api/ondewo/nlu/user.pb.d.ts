@@ -458,6 +458,7 @@ export declare class GetUserRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: GetUserRequest, _writer: BinaryWriter): void;
     private _userId;
     private _userEmail;
+    private _fieldMask?;
     private _userIdentifier;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -468,6 +469,8 @@ export declare class GetUserRequest implements GrpcMessage {
     set userId(value: string);
     get userEmail(): string;
     set userEmail(value: string);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     get userIdentifier(): GetUserRequest.UserIdentifierCase;
     /**
      * Serialize message to binary data
@@ -496,6 +499,7 @@ export declare namespace GetUserRequest {
     interface AsObject {
         userId: string;
         userEmail: string;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetUserRequest
@@ -503,6 +507,7 @@ export declare namespace GetUserRequest {
     interface AsProtobufJSON {
         userId: string | null;
         userEmail: string | null;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
     enum UserIdentifierCase {
         none = 0,
