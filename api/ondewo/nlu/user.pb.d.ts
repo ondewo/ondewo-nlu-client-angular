@@ -612,6 +612,7 @@ export declare class ListUsersRequest implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListUsersRequest, _writer: BinaryWriter): void;
     private _pageToken;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListUsersRequest to deeply clone from
@@ -619,6 +620,8 @@ export declare class ListUsersRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListUsersRequest.AsObject>);
     get pageToken(): string;
     set pageToken(value: string);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -645,12 +648,14 @@ export declare namespace ListUsersRequest {
      */
     interface AsObject {
         pageToken: string;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListUsersRequest
      */
     interface AsProtobufJSON {
         pageToken: string;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1141,6 +1146,7 @@ export declare class GetServerRoleRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: GetServerRoleRequest, _writer: BinaryWriter): void;
     private _roleId;
     private _roleName;
+    private _fieldMask?;
     private _serverRoleIdentifier;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -1151,6 +1157,8 @@ export declare class GetServerRoleRequest implements GrpcMessage {
     set roleId(value: number);
     get roleName(): string;
     set roleName(value: string);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     get serverRoleIdentifier(): GetServerRoleRequest.ServerRoleIdentifierCase;
     /**
      * Serialize message to binary data
@@ -1179,6 +1187,7 @@ export declare namespace GetServerRoleRequest {
     interface AsObject {
         roleId: number;
         roleName: string;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetServerRoleRequest
@@ -1186,6 +1195,7 @@ export declare namespace GetServerRoleRequest {
     interface AsProtobufJSON {
         roleId: number | null;
         roleName: string | null;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
     enum ServerRoleIdentifierCase {
         none = 0,
@@ -1221,6 +1231,7 @@ export declare class ListServerRolesRequest implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListServerRolesRequest, _writer: BinaryWriter): void;
     private _pageToken;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListServerRolesRequest to deeply clone from
@@ -1228,6 +1239,8 @@ export declare class ListServerRolesRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListServerRolesRequest.AsObject>);
     get pageToken(): string;
     set pageToken(value: string);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1254,12 +1267,14 @@ export declare namespace ListServerRolesRequest {
      */
     interface AsObject {
         pageToken: string;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListServerRolesRequest
      */
     interface AsProtobufJSON {
         pageToken: string;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1364,6 +1379,7 @@ export declare class ListServerPermissionsRequest implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListServerPermissionsRequest, _writer: BinaryWriter): void;
     private _pageToken;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListServerPermissionsRequest to deeply clone from
@@ -1371,6 +1387,8 @@ export declare class ListServerPermissionsRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListServerPermissionsRequest.AsObject>);
     get pageToken(): string;
     set pageToken(value: string);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1397,12 +1415,14 @@ export declare namespace ListServerPermissionsRequest {
      */
     interface AsObject {
         pageToken: string;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListServerPermissionsRequest
      */
     interface AsProtobufJSON {
         pageToken: string;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1508,6 +1528,7 @@ export declare class LoginRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: LoginRequest, _writer: BinaryWriter): void;
     private _userEmail;
     private _password;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of LoginRequest to deeply clone from
@@ -1517,6 +1538,8 @@ export declare class LoginRequest implements GrpcMessage {
     set userEmail(value: string);
     get password(): string;
     set password(value: string);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1544,6 +1567,7 @@ export declare namespace LoginRequest {
     interface AsObject {
         userEmail: string;
         password: string;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for LoginRequest
@@ -1551,6 +1575,7 @@ export declare namespace LoginRequest {
     interface AsProtobufJSON {
         userEmail: string;
         password: string;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1657,6 +1682,7 @@ export declare class GetUserPreferencesRequest implements GrpcMessage {
     private _userName;
     private _keys;
     private _regexInclude;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetUserPreferencesRequest to deeply clone from
@@ -1668,6 +1694,8 @@ export declare class GetUserPreferencesRequest implements GrpcMessage {
     set keys(value: string[]);
     get regexInclude(): string;
     set regexInclude(value: string);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1696,6 +1724,7 @@ export declare namespace GetUserPreferencesRequest {
         userName: string;
         keys: string[];
         regexInclude: string;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetUserPreferencesRequest
@@ -1704,6 +1733,7 @@ export declare namespace GetUserPreferencesRequest {
         userName: string;
         keys: string[];
         regexInclude: string;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -2199,6 +2229,7 @@ export declare class ListUserPreferencesRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ListUserPreferencesRequest, _writer: BinaryWriter): void;
     private _userName;
     private _regexFilter;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListUserPreferencesRequest to deeply clone from
@@ -2208,6 +2239,8 @@ export declare class ListUserPreferencesRequest implements GrpcMessage {
     set userName(value: string);
     get regexFilter(): string;
     set regexFilter(value: string);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2235,6 +2268,7 @@ export declare namespace ListUserPreferencesRequest {
     interface AsObject {
         userName: string;
         regexFilter: string;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListUserPreferencesRequest
@@ -2242,6 +2276,7 @@ export declare namespace ListUserPreferencesRequest {
     interface AsProtobufJSON {
         userName: string;
         regexFilter: string;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
 }
 /**

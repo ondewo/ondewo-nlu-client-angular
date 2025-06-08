@@ -34,7 +34,10 @@ export declare enum CcaiServiceType {
     CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE = 16,
     CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE = 17,
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT = 18,
-    CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP = 19
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP = 19,
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG = 20,
+    CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS = 21,
+    CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD = 22
 }
 export declare enum CcaiServiceProvider {
     NO_CCAI_SERVICE_PROVIDER = 0,
@@ -67,7 +70,10 @@ export declare enum CcaiServiceProvider {
     CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGE = 27,
     CCAI_SERVICE_PROVIDER_HUGGINGFACE_SMOLAGENTS = 28,
     CCAI_SERVICE_PROVIDER_GOOGLE_AGENT_DEVELOPMENT_KIT = 29,
-    CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL = 30
+    CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL = 30,
+    CCAI_SERVICE_PROVIDER_OPENSEARCH = 31,
+    CCAI_SERVICE_PROVIDER_GROK = 32,
+    CCAI_SERVICE_PROVIDER_POSTGRES = 33
 }
 export declare enum CcaiProjectView {
     CCAI_PROJECT_VIEW_UNSPECIFIED = 0,
@@ -708,6 +714,7 @@ export declare class GetCcaiProjectRequest implements GrpcMessage {
     private _ccaiProjectView;
     private _ccaiServiceFilter?;
     private _nluProjectName;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetCcaiProjectRequest to deeply clone from
@@ -721,6 +728,8 @@ export declare class GetCcaiProjectRequest implements GrpcMessage {
     set ccaiServiceFilter(value: CcaiServiceFilter | undefined);
     get nluProjectName(): string;
     set nluProjectName(value: string);
+    get fieldMask(): googleProtobuf000.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf000.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -750,6 +759,7 @@ export declare namespace GetCcaiProjectRequest {
         ccaiProjectView: CcaiProjectView;
         ccaiServiceFilter?: CcaiServiceFilter.AsObject;
         nluProjectName: string;
+        fieldMask?: googleProtobuf000.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetCcaiProjectRequest
@@ -759,6 +769,7 @@ export declare namespace GetCcaiProjectRequest {
         ccaiProjectView: string;
         ccaiServiceFilter: CcaiServiceFilter.AsProtobufJSON | null;
         nluProjectName: string;
+        fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -790,6 +801,7 @@ export declare class GetCcaiServiceRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: GetCcaiServiceRequest, _writer: BinaryWriter): void;
     private _name;
     private _nluProjectName;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetCcaiServiceRequest to deeply clone from
@@ -799,6 +811,8 @@ export declare class GetCcaiServiceRequest implements GrpcMessage {
     set name(value: string);
     get nluProjectName(): string;
     set nluProjectName(value: string);
+    get fieldMask(): googleProtobuf000.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf000.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -826,6 +840,7 @@ export declare namespace GetCcaiServiceRequest {
     interface AsObject {
         name: string;
         nluProjectName: string;
+        fieldMask?: googleProtobuf000.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetCcaiServiceRequest
@@ -833,6 +848,7 @@ export declare namespace GetCcaiServiceRequest {
     interface AsProtobufJSON {
         name: string;
         nluProjectName: string;
+        fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -867,6 +883,7 @@ export declare class ListCcaiProjectsRequest implements GrpcMessage {
     private _ccaiProjectSorting?;
     private _pageToken;
     private _nluProjectName;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListCcaiProjectsRequest to deeply clone from
@@ -882,6 +899,8 @@ export declare class ListCcaiProjectsRequest implements GrpcMessage {
     set pageToken(value: string);
     get nluProjectName(): string;
     set nluProjectName(value: string);
+    get fieldMask(): googleProtobuf000.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf000.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -912,6 +931,7 @@ export declare namespace ListCcaiProjectsRequest {
         ccaiProjectSorting?: CcaiProjectSorting.AsObject;
         pageToken: string;
         nluProjectName: string;
+        fieldMask?: googleProtobuf000.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListCcaiProjectsRequest
@@ -922,6 +942,7 @@ export declare namespace ListCcaiProjectsRequest {
         ccaiProjectSorting: CcaiProjectSorting.AsProtobufJSON | null;
         pageToken: string;
         nluProjectName: string;
+        fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1108,6 +1129,7 @@ export declare class CcaiServiceFilter implements GrpcMessage {
     static serializeBinaryToWriter(_instance: CcaiServiceFilter, _writer: BinaryWriter): void;
     private _languageCodes;
     private _ccaiServiceTypes;
+    private _ccaiServiceProviders;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of CcaiServiceFilter to deeply clone from
@@ -1117,6 +1139,8 @@ export declare class CcaiServiceFilter implements GrpcMessage {
     set languageCodes(value: string[]);
     get ccaiServiceTypes(): CcaiServiceType[];
     set ccaiServiceTypes(value: CcaiServiceType[]);
+    get ccaiServiceProviders(): CcaiServiceProvider[];
+    set ccaiServiceProviders(value: CcaiServiceProvider[]);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1144,6 +1168,7 @@ export declare namespace CcaiServiceFilter {
     interface AsObject {
         languageCodes: string[];
         ccaiServiceTypes: CcaiServiceType[];
+        ccaiServiceProviders: CcaiServiceProvider[];
     }
     /**
      * Protobuf JSON representation for CcaiServiceFilter
@@ -1151,6 +1176,7 @@ export declare namespace CcaiServiceFilter {
     interface AsProtobufJSON {
         languageCodes: string[];
         ccaiServiceTypes: string[];
+        ccaiServiceProviders: string[];
     }
 }
 /**

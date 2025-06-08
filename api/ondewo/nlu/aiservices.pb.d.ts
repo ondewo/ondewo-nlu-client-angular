@@ -1,5 +1,6 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
+import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu012 from '../../ondewo/nlu/intent.pb';
 import * as ondewoNlu013 from '../../ondewo/nlu/entity-type.pb';
@@ -52,6 +53,7 @@ export declare class ListLlmModelsRequest implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListLlmModelsRequest, _writer: BinaryWriter): void;
     private _ccaiServiceName;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListLlmModelsRequest to deeply clone from
@@ -59,6 +61,8 @@ export declare class ListLlmModelsRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListLlmModelsRequest.AsObject>);
     get ccaiServiceName(): string;
     set ccaiServiceName(value: string);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -85,12 +89,14 @@ export declare namespace ListLlmModelsRequest {
      */
     interface AsObject {
         ccaiServiceName: string;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListLlmModelsRequest
      */
     interface AsProtobufJSON {
         ccaiServiceName: string;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -281,6 +287,7 @@ export declare class LlmGenerateRequest implements GrpcMessage {
     private _llmGenerationRequest?;
     private _ccaiServiceName;
     private _fileResources?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of LlmGenerateRequest to deeply clone from
@@ -292,6 +299,8 @@ export declare class LlmGenerateRequest implements GrpcMessage {
     set ccaiServiceName(value: string);
     get fileResources(): ondewoNlu015.FileResource[] | undefined;
     set fileResources(value: ondewoNlu015.FileResource[] | undefined);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -320,6 +329,7 @@ export declare namespace LlmGenerateRequest {
         llmGenerationRequest?: googleProtobuf003.Struct.AsObject;
         ccaiServiceName: string;
         fileResources?: ondewoNlu015.FileResource.AsObject[];
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for LlmGenerateRequest
@@ -328,6 +338,7 @@ export declare namespace LlmGenerateRequest {
         llmGenerationRequest: googleProtobuf003.Struct.AsProtobufJSON | null;
         ccaiServiceName: string;
         fileResources: ondewoNlu015.FileResource.AsProtobufJSON[] | null;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -504,6 +515,7 @@ export declare class ExtractEntitiesRequest implements GrpcMessage {
     private _text;
     private _languageCode;
     private _intentName;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ExtractEntitiesRequest to deeply clone from
@@ -517,6 +529,8 @@ export declare class ExtractEntitiesRequest implements GrpcMessage {
     set languageCode(value: string);
     get intentName(): string;
     set intentName(value: string);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -546,6 +560,7 @@ export declare namespace ExtractEntitiesRequest {
         text: string;
         languageCode: string;
         intentName: string;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ExtractEntitiesRequest
@@ -555,6 +570,7 @@ export declare namespace ExtractEntitiesRequest {
         text: string;
         languageCode: string;
         intentName: string;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -589,6 +605,7 @@ export declare class ExtractEntitiesFuzzyRequest implements GrpcMessage {
     private _potentialEntities?;
     private _minimalScore;
     private _allowOverlaps;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ExtractEntitiesFuzzyRequest to deeply clone from
@@ -604,6 +621,8 @@ export declare class ExtractEntitiesFuzzyRequest implements GrpcMessage {
     set minimalScore(value: number);
     get allowOverlaps(): boolean;
     set allowOverlaps(value: boolean);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -634,6 +653,7 @@ export declare namespace ExtractEntitiesFuzzyRequest {
         potentialEntities?: EntityTypeFuzzyNerConfig.AsObject[];
         minimalScore: number;
         allowOverlaps: boolean;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ExtractEntitiesFuzzyRequest
@@ -644,6 +664,7 @@ export declare namespace ExtractEntitiesFuzzyRequest {
         potentialEntities: EntityTypeFuzzyNerConfig.AsProtobufJSON[] | null;
         minimalScore: number;
         allowOverlaps: boolean;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -925,6 +946,7 @@ export declare class GetAlternativeSentencesRequest implements GrpcMessage {
     private _parent;
     private _protectedWords;
     private _wordsToChange;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetAlternativeSentencesRequest to deeply clone from
@@ -942,6 +964,8 @@ export declare class GetAlternativeSentencesRequest implements GrpcMessage {
     set protectedWords(value: string[]);
     get wordsToChange(): string[];
     set wordsToChange(value: string[]);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -973,6 +997,7 @@ export declare namespace GetAlternativeSentencesRequest {
         parent: string;
         protectedWords: string[];
         wordsToChange: string[];
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAlternativeSentencesRequest
@@ -984,6 +1009,7 @@ export declare namespace GetAlternativeSentencesRequest {
         parent: string;
         protectedWords: string[];
         wordsToChange: string[];
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1017,6 +1043,7 @@ export declare class GenerateUserSaysRequest implements GrpcMessage {
     private _parent;
     private _nRepeatSynonym;
     private _branch;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GenerateUserSaysRequest to deeply clone from
@@ -1030,6 +1057,8 @@ export declare class GenerateUserSaysRequest implements GrpcMessage {
     set nRepeatSynonym(value: number);
     get branch(): string;
     set branch(value: string);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1059,6 +1088,7 @@ export declare namespace GenerateUserSaysRequest {
         parent: string;
         nRepeatSynonym: number;
         branch: string;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GenerateUserSaysRequest
@@ -1068,6 +1098,7 @@ export declare namespace GenerateUserSaysRequest {
         parent: string;
         nRepeatSynonym: number;
         branch: string;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1102,6 +1133,7 @@ export declare class GenerateResponsesRequest implements GrpcMessage {
     private _nRepeatSynonym;
     private _branch;
     private _dropUnknownParameters;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GenerateResponsesRequest to deeply clone from
@@ -1117,6 +1149,8 @@ export declare class GenerateResponsesRequest implements GrpcMessage {
     set branch(value: string);
     get dropUnknownParameters(): boolean;
     set dropUnknownParameters(value: boolean);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1147,6 +1181,7 @@ export declare namespace GenerateResponsesRequest {
         nRepeatSynonym: number;
         branch: string;
         dropUnknownParameters: boolean;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GenerateResponsesRequest
@@ -1157,6 +1192,7 @@ export declare namespace GenerateResponsesRequest {
         nRepeatSynonym: number;
         branch: string;
         dropUnknownParameters: boolean;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1196,6 +1232,7 @@ export declare class GetAlternativeTrainingPhrasesRequest implements GrpcMessage
     private _protectedWords;
     private _wordsToChange;
     private _branch;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetAlternativeTrainingPhrasesRequest to deeply clone from
@@ -1221,6 +1258,8 @@ export declare class GetAlternativeTrainingPhrasesRequest implements GrpcMessage
     set wordsToChange(value: string[]);
     get branch(): string;
     set branch(value: string);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1256,6 +1295,7 @@ export declare namespace GetAlternativeTrainingPhrasesRequest {
         protectedWords: string[];
         wordsToChange: string[];
         branch: string;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAlternativeTrainingPhrasesRequest
@@ -1271,6 +1311,7 @@ export declare namespace GetAlternativeTrainingPhrasesRequest {
         protectedWords: string[];
         wordsToChange: string[];
         branch: string;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1304,6 +1345,7 @@ export declare class GetSynonymsRequest implements GrpcMessage {
     private _word;
     private _languageCode;
     private _parent;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetSynonymsRequest to deeply clone from
@@ -1317,6 +1359,8 @@ export declare class GetSynonymsRequest implements GrpcMessage {
     set languageCode(value: string);
     get parent(): string;
     set parent(value: string);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1346,6 +1390,7 @@ export declare namespace GetSynonymsRequest {
         word: string;
         languageCode: string;
         parent: string;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetSynonymsRequest
@@ -1355,6 +1400,7 @@ export declare namespace GetSynonymsRequest {
         word: string;
         languageCode: string;
         parent: string;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -2783,6 +2829,7 @@ export declare class ClassifyIntentsRequest implements GrpcMessage {
     private _contextNames;
     private _mode;
     private _algorithms;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ClassifyIntentsRequest to deeply clone from
@@ -2802,6 +2849,8 @@ export declare class ClassifyIntentsRequest implements GrpcMessage {
     set mode(value: Mode);
     get algorithms(): IntentAlgorithms[];
     set algorithms(value: IntentAlgorithms[]);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2834,6 +2883,7 @@ export declare namespace ClassifyIntentsRequest {
         contextNames: string[];
         mode: Mode;
         algorithms: IntentAlgorithms[];
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ClassifyIntentsRequest
@@ -2846,6 +2896,7 @@ export declare namespace ClassifyIntentsRequest {
         contextNames: string[];
         mode: string;
         algorithms: string[];
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**

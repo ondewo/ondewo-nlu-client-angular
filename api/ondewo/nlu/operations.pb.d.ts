@@ -2,8 +2,9 @@ import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
-import * as googleRpc006 from '../../google/rpc/status.pb';
-import * as ondewoNlu007 from '../../ondewo/nlu/operation-metadata.pb';
+import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
+import * as googleRpc007 from '../../google/rpc/status.pb';
+import * as ondewoNlu008 from '../../ondewo/nlu/operation-metadata.pb';
 /**
  * Message implementation for ondewo.nlu.Operation
  */
@@ -44,12 +45,12 @@ export declare class Operation implements GrpcMessage {
     constructor(_value?: RecursivePartial<Operation.AsObject>);
     get name(): string;
     set name(value: string);
-    get metadata(): ondewoNlu007.OperationMetadata | undefined;
-    set metadata(value: ondewoNlu007.OperationMetadata | undefined);
+    get metadata(): ondewoNlu008.OperationMetadata | undefined;
+    set metadata(value: ondewoNlu008.OperationMetadata | undefined);
     get done(): boolean;
     set done(value: boolean);
-    get error(): googleRpc006.Status | undefined;
-    set error(value: googleRpc006.Status | undefined);
+    get error(): googleRpc007.Status | undefined;
+    set error(value: googleRpc007.Status | undefined);
     get response(): googleProtobuf002.Any | undefined;
     set response(value: googleProtobuf002.Any | undefined);
     get result(): Operation.ResultCase;
@@ -79,9 +80,9 @@ export declare namespace Operation {
      */
     interface AsObject {
         name: string;
-        metadata?: ondewoNlu007.OperationMetadata.AsObject;
+        metadata?: ondewoNlu008.OperationMetadata.AsObject;
         done: boolean;
-        error?: googleRpc006.Status.AsObject;
+        error?: googleRpc007.Status.AsObject;
         response?: googleProtobuf002.Any.AsObject;
     }
     /**
@@ -89,9 +90,9 @@ export declare namespace Operation {
      */
     interface AsProtobufJSON {
         name: string;
-        metadata: ondewoNlu007.OperationMetadata.AsProtobufJSON | null;
+        metadata: ondewoNlu008.OperationMetadata.AsProtobufJSON | null;
         done: boolean;
-        error: googleRpc006.Status.AsProtobufJSON | null;
+        error: googleRpc007.Status.AsProtobufJSON | null;
         response: googleProtobuf002.Any.AsProtobufJSON | null;
     }
     enum ResultCase {
@@ -128,6 +129,7 @@ export declare class GetOperationRequest implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: GetOperationRequest, _writer: BinaryWriter): void;
     private _name;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetOperationRequest to deeply clone from
@@ -135,6 +137,8 @@ export declare class GetOperationRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetOperationRequest.AsObject>);
     get name(): string;
     set name(value: string);
+    get fieldMask(): googleProtobuf006.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf006.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -161,12 +165,14 @@ export declare namespace GetOperationRequest {
      */
     interface AsObject {
         name: string;
+        fieldMask?: googleProtobuf006.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetOperationRequest
      */
     interface AsProtobufJSON {
         name: string;
+        fieldMask: googleProtobuf006.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -201,6 +207,7 @@ export declare class ListOperationsRequest implements GrpcMessage {
     private _pageSize;
     private _pageToken;
     private _operationFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListOperationsRequest to deeply clone from
@@ -216,6 +223,8 @@ export declare class ListOperationsRequest implements GrpcMessage {
     set pageToken(value: string);
     get operationFilter(): OperationFilter | undefined;
     set operationFilter(value: OperationFilter | undefined);
+    get fieldMask(): googleProtobuf006.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf006.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -246,6 +255,7 @@ export declare namespace ListOperationsRequest {
         pageSize: number;
         pageToken: string;
         operationFilter?: OperationFilter.AsObject;
+        fieldMask?: googleProtobuf006.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListOperationsRequest
@@ -256,6 +266,7 @@ export declare namespace ListOperationsRequest {
         pageSize: number;
         pageToken: string;
         operationFilter: OperationFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf006.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -300,10 +311,10 @@ export declare class OperationFilter implements GrpcMessage {
     constructor(_value?: RecursivePartial<OperationFilter.AsObject>);
     get projectParents(): string[];
     set projectParents(value: string[]);
-    get statuses(): ondewoNlu007.OperationMetadata.Status[];
-    set statuses(value: ondewoNlu007.OperationMetadata.Status[]);
-    get types(): ondewoNlu007.OperationMetadata.OperationType[];
-    set types(value: ondewoNlu007.OperationMetadata.OperationType[]);
+    get statuses(): ondewoNlu008.OperationMetadata.Status[];
+    set statuses(value: ondewoNlu008.OperationMetadata.Status[]);
+    get types(): ondewoNlu008.OperationMetadata.OperationType[];
+    set types(value: ondewoNlu008.OperationMetadata.OperationType[]);
     get startTime(): googleProtobuf003.Timestamp | undefined;
     set startTime(value: googleProtobuf003.Timestamp | undefined);
     get endTime(): googleProtobuf003.Timestamp | undefined;
@@ -338,8 +349,8 @@ export declare namespace OperationFilter {
      */
     interface AsObject {
         projectParents: string[];
-        statuses: ondewoNlu007.OperationMetadata.Status[];
-        types: ondewoNlu007.OperationMetadata.OperationType[];
+        statuses: ondewoNlu008.OperationMetadata.Status[];
+        types: ondewoNlu008.OperationMetadata.OperationType[];
         startTime?: googleProtobuf003.Timestamp.AsObject;
         endTime?: googleProtobuf003.Timestamp.AsObject;
         userIds: string[];

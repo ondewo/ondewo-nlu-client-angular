@@ -588,6 +588,7 @@ export declare class GetAgentRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: GetAgentRequest, _writer: BinaryWriter): void;
     private _parent;
     private _agentView;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetAgentRequest to deeply clone from
@@ -597,6 +598,8 @@ export declare class GetAgentRequest implements GrpcMessage {
     set parent(value: string);
     get agentView(): AgentView;
     set agentView(value: AgentView);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -624,6 +627,7 @@ export declare namespace GetAgentRequest {
     interface AsObject {
         parent: string;
         agentView: AgentView;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAgentRequest
@@ -631,6 +635,7 @@ export declare namespace GetAgentRequest {
     interface AsProtobufJSON {
         parent: string;
         agentView: string;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -663,6 +668,7 @@ export declare class ListAgentsRequest implements GrpcMessage {
     private _agentView;
     private _pageToken;
     private _sortByField?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListAgentsRequest to deeply clone from
@@ -674,6 +680,8 @@ export declare class ListAgentsRequest implements GrpcMessage {
     set pageToken(value: string);
     get sortByField(): AgentSorting | undefined;
     set sortByField(value: AgentSorting | undefined);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -702,6 +710,7 @@ export declare namespace ListAgentsRequest {
         agentView: AgentView;
         pageToken: string;
         sortByField?: AgentSorting.AsObject;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListAgentsRequest
@@ -710,6 +719,7 @@ export declare namespace ListAgentsRequest {
         agentView: string;
         pageToken: string;
         sortByField: AgentSorting.AsProtobufJSON | null;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -2439,6 +2449,7 @@ export declare class ListUsersInProjectRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ListUsersInProjectRequest, _writer: BinaryWriter): void;
     private _parent;
     private _pageToken;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListUsersInProjectRequest to deeply clone from
@@ -2448,6 +2459,8 @@ export declare class ListUsersInProjectRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2475,6 +2488,7 @@ export declare namespace ListUsersInProjectRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListUsersInProjectRequest
@@ -2482,6 +2496,7 @@ export declare namespace ListUsersInProjectRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -2739,6 +2754,7 @@ export declare class ListProjectPermissionsRequest implements GrpcMessage {
      */
     static serializeBinaryToWriter(_instance: ListProjectPermissionsRequest, _writer: BinaryWriter): void;
     private _pageToken;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListProjectPermissionsRequest to deeply clone from
@@ -2746,6 +2762,8 @@ export declare class ListProjectPermissionsRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListProjectPermissionsRequest.AsObject>);
     get pageToken(): string;
     set pageToken(value: string);
+    get fieldMask(): googleProtobuf002.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf002.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2772,12 +2790,14 @@ export declare namespace ListProjectPermissionsRequest {
      */
     interface AsObject {
         pageToken: string;
+        fieldMask?: googleProtobuf002.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListProjectPermissionsRequest
      */
     interface AsProtobufJSON {
         pageToken: string;
+        fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
     }
 }
 /**

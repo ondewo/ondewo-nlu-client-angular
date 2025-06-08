@@ -308,6 +308,7 @@ export declare class GetProjectRoleRequest implements GrpcMessage {
     private _roleId;
     private _roleName;
     private _projectRoleView;
+    private _fieldMask?;
     private _projectRoleIdentifier;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -322,6 +323,8 @@ export declare class GetProjectRoleRequest implements GrpcMessage {
     set roleName(value: string);
     get projectRoleView(): ProjectRoleView;
     set projectRoleView(value: ProjectRoleView);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     get projectRoleIdentifier(): GetProjectRoleRequest.ProjectRoleIdentifierCase;
     /**
      * Serialize message to binary data
@@ -352,6 +355,7 @@ export declare namespace GetProjectRoleRequest {
         roleId: number;
         roleName: string;
         projectRoleView: ProjectRoleView;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetProjectRoleRequest
@@ -361,6 +365,7 @@ export declare namespace GetProjectRoleRequest {
         roleId: number | null;
         roleName: string | null;
         projectRoleView: string;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
     enum ProjectRoleIdentifierCase {
         none = 0,
@@ -472,6 +477,7 @@ export declare class ListProjectRolesRequest implements GrpcMessage {
     private _parent;
     private _pageToken;
     private _projectRoleView;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListProjectRolesRequest to deeply clone from
@@ -483,6 +489,8 @@ export declare class ListProjectRolesRequest implements GrpcMessage {
     set pageToken(value: string);
     get projectRoleView(): ProjectRoleView;
     set projectRoleView(value: ProjectRoleView);
+    get fieldMask(): googleProtobuf004.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf004.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -511,6 +519,7 @@ export declare namespace ListProjectRolesRequest {
         parent: string;
         pageToken: string;
         projectRoleView: ProjectRoleView;
+        fieldMask?: googleProtobuf004.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListProjectRolesRequest
@@ -519,6 +528,7 @@ export declare namespace ListProjectRolesRequest {
         parent: string;
         pageToken: string;
         projectRoleView: string;
+        fieldMask: googleProtobuf004.FieldMask.AsProtobufJSON | null;
     }
 }
 /**

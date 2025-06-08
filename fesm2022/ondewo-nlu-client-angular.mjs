@@ -25639,6 +25639,7 @@ class ListSessionLabelsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -25656,6 +25657,10 @@ class ListSessionLabelsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -25675,6 +25680,9 @@ class ListSessionLabelsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -25685,6 +25693,9 @@ class ListSessionLabelsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListSessionLabelsOfAllSessionsRequest.refineValues(this);
     }
@@ -25699,6 +25710,12 @@ class ListSessionLabelsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -25717,7 +25734,8 @@ class ListSessionLabelsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -25738,7 +25756,8 @@ class ListSessionLabelsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -25864,6 +25883,7 @@ class ListLanguageCodesOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -25881,6 +25901,10 @@ class ListLanguageCodesOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -25900,6 +25924,9 @@ class ListLanguageCodesOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -25910,6 +25937,9 @@ class ListLanguageCodesOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListLanguageCodesOfAllSessionsRequest.refineValues(this);
     }
@@ -25924,6 +25954,12 @@ class ListLanguageCodesOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -25942,7 +25978,8 @@ class ListLanguageCodesOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -25963,7 +26000,8 @@ class ListLanguageCodesOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -26089,6 +26127,7 @@ class ListMatchedIntentsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -26106,6 +26145,10 @@ class ListMatchedIntentsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -26125,6 +26168,9 @@ class ListMatchedIntentsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -26135,6 +26181,9 @@ class ListMatchedIntentsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListMatchedIntentsOfAllSessionsRequest.refineValues(this);
     }
@@ -26149,6 +26198,12 @@ class ListMatchedIntentsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -26167,7 +26222,8 @@ class ListMatchedIntentsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -26188,7 +26244,8 @@ class ListMatchedIntentsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -26314,6 +26371,7 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -26331,6 +26389,10 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -26350,6 +26412,9 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -26360,6 +26425,9 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListMatchedEntityTypesOfAllSessionsRequest.refineValues(this);
     }
@@ -26374,6 +26442,12 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -26392,7 +26466,8 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -26413,7 +26488,8 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -26540,6 +26616,7 @@ class ListUserIdsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -26557,6 +26634,10 @@ class ListUserIdsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -26576,6 +26657,9 @@ class ListUserIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -26586,6 +26670,9 @@ class ListUserIdsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListUserIdsOfAllSessionsRequest.refineValues(this);
     }
@@ -26600,6 +26687,12 @@ class ListUserIdsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -26618,7 +26711,8 @@ class ListUserIdsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -26639,7 +26733,8 @@ class ListUserIdsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -26765,6 +26860,7 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -26782,6 +26878,10 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -26801,6 +26901,9 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -26811,6 +26914,9 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListIdentifiedUserIdsOfAllSessionsRequest.refineValues(this);
     }
@@ -26825,6 +26931,12 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -26843,7 +26955,8 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -26864,7 +26977,8 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -26991,6 +27105,7 @@ class ListTagsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -27008,6 +27123,10 @@ class ListTagsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -27027,6 +27146,9 @@ class ListTagsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -27037,6 +27159,9 @@ class ListTagsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListTagsOfAllSessionsRequest.refineValues(this);
     }
@@ -27051,6 +27176,12 @@ class ListTagsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -27069,7 +27200,8 @@ class ListTagsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -27090,7 +27222,8 @@ class ListTagsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -27216,6 +27349,7 @@ class ListInputContextsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -27233,6 +27367,10 @@ class ListInputContextsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -27252,6 +27390,9 @@ class ListInputContextsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -27262,6 +27403,9 @@ class ListInputContextsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListInputContextsOfAllSessionsRequest.refineValues(this);
     }
@@ -27276,6 +27420,12 @@ class ListInputContextsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -27294,7 +27444,8 @@ class ListInputContextsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -27315,7 +27466,8 @@ class ListInputContextsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -27441,6 +27593,7 @@ class ListOutputContextsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -27458,6 +27611,10 @@ class ListOutputContextsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -27477,6 +27634,9 @@ class ListOutputContextsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -27487,6 +27647,9 @@ class ListOutputContextsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListOutputContextsOfAllSessionsRequest.refineValues(this);
     }
@@ -27501,6 +27664,12 @@ class ListOutputContextsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -27519,7 +27688,8 @@ class ListOutputContextsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -27540,7 +27710,8 @@ class ListOutputContextsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -27666,6 +27837,7 @@ class ListPlatformsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -27683,6 +27855,10 @@ class ListPlatformsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -27702,6 +27878,9 @@ class ListPlatformsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -27712,6 +27891,9 @@ class ListPlatformsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListPlatformsOfAllSessionsRequest.refineValues(this);
     }
@@ -27726,6 +27908,12 @@ class ListPlatformsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -27744,7 +27932,8 @@ class ListPlatformsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -27765,7 +27954,8 @@ class ListPlatformsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -27891,6 +28081,7 @@ class ListAccountIdsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -27908,6 +28099,10 @@ class ListAccountIdsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -27927,6 +28122,9 @@ class ListAccountIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -27937,6 +28135,9 @@ class ListAccountIdsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListAccountIdsOfAllSessionsRequest.refineValues(this);
     }
@@ -27951,6 +28152,12 @@ class ListAccountIdsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -27969,7 +28176,8 @@ class ListAccountIdsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -27990,7 +28198,8 @@ class ListAccountIdsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -28566,6 +28775,7 @@ class ListOriginIdsOfAllSessionsRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.sessionFilter = _instance.sessionFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -28583,6 +28793,10 @@ class ListOriginIdsOfAllSessionsRequest {
                 case 2:
                     _instance.sessionFilter = new SessionFilter();
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -28602,6 +28816,9 @@ class ListOriginIdsOfAllSessionsRequest {
         if (_instance.sessionFilter) {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -28612,6 +28829,9 @@ class ListOriginIdsOfAllSessionsRequest {
         this.parent = _value.parent;
         this.sessionFilter = _value.sessionFilter
             ? new SessionFilter(_value.sessionFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListOriginIdsOfAllSessionsRequest.refineValues(this);
     }
@@ -28626,6 +28846,12 @@ class ListOriginIdsOfAllSessionsRequest {
     }
     set sessionFilter(value) {
         this._sessionFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -28644,7 +28870,8 @@ class ListOriginIdsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -28665,7 +28892,8 @@ class ListOriginIdsOfAllSessionsRequest {
             parent: this.parent,
             sessionFilter: this.sessionFilter
                 ? this.sessionFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -29382,6 +29610,7 @@ class ListSessionCommentsRequest {
     static refineValues(_instance) {
         _instance.sessionId = _instance.sessionId || '';
         _instance.pageToken = _instance.pageToken || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -29398,6 +29627,10 @@ class ListSessionCommentsRequest {
                     break;
                 case 2:
                     _instance.pageToken = _reader.readString();
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -29417,6 +29650,9 @@ class ListSessionCommentsRequest {
         if (_instance.pageToken) {
             _writer.writeString(2, _instance.pageToken);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -29426,6 +29662,9 @@ class ListSessionCommentsRequest {
         _value = _value || {};
         this.sessionId = _value.sessionId;
         this.pageToken = _value.pageToken;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListSessionCommentsRequest.refineValues(this);
     }
     get sessionId() {
@@ -29439,6 +29678,12 @@ class ListSessionCommentsRequest {
     }
     set pageToken(value) {
         this._pageToken = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -29455,7 +29700,8 @@ class ListSessionCommentsRequest {
     toObject() {
         return {
             sessionId: this.sessionId,
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -29474,7 +29720,8 @@ class ListSessionCommentsRequest {
     options) {
         return {
             sessionId: this.sessionId,
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -29873,6 +30120,7 @@ class GetSessionReviewRequest {
     static refineValues(_instance) {
         _instance.sessionReviewId = _instance.sessionReviewId || '';
         _instance.sessionReviewView = _instance.sessionReviewView || 0;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -29889,6 +30137,10 @@ class GetSessionReviewRequest {
                     break;
                 case 2:
                     _instance.sessionReviewView = _reader.readEnum();
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -29908,6 +30160,9 @@ class GetSessionReviewRequest {
         if (_instance.sessionReviewView) {
             _writer.writeEnum(2, _instance.sessionReviewView);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -29917,6 +30172,9 @@ class GetSessionReviewRequest {
         _value = _value || {};
         this.sessionReviewId = _value.sessionReviewId;
         this.sessionReviewView = _value.sessionReviewView;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetSessionReviewRequest.refineValues(this);
     }
     get sessionReviewId() {
@@ -29930,6 +30188,12 @@ class GetSessionReviewRequest {
     }
     set sessionReviewView(value) {
         this._sessionReviewView = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -29946,7 +30210,8 @@ class GetSessionReviewRequest {
     toObject() {
         return {
             sessionReviewId: this.sessionReviewId,
-            sessionReviewView: this.sessionReviewView
+            sessionReviewView: this.sessionReviewView,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -29968,7 +30233,8 @@ class GetSessionReviewRequest {
             sessionReviewView: SessionReview.View[this.sessionReviewView === null ||
                 this.sessionReviewView === undefined
                 ? 0
-                : this.sessionReviewView]
+                : this.sessionReviewView],
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -29993,6 +30259,7 @@ class GetLatestSessionReviewRequest {
     static refineValues(_instance) {
         _instance.sessionId = _instance.sessionId || '';
         _instance.sessionReviewView = _instance.sessionReviewView || 0;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -30009,6 +30276,10 @@ class GetLatestSessionReviewRequest {
                     break;
                 case 2:
                     _instance.sessionReviewView = _reader.readEnum();
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -30028,6 +30299,9 @@ class GetLatestSessionReviewRequest {
         if (_instance.sessionReviewView) {
             _writer.writeEnum(2, _instance.sessionReviewView);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -30037,6 +30311,9 @@ class GetLatestSessionReviewRequest {
         _value = _value || {};
         this.sessionId = _value.sessionId;
         this.sessionReviewView = _value.sessionReviewView;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetLatestSessionReviewRequest.refineValues(this);
     }
     get sessionId() {
@@ -30050,6 +30327,12 @@ class GetLatestSessionReviewRequest {
     }
     set sessionReviewView(value) {
         this._sessionReviewView = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -30066,7 +30349,8 @@ class GetLatestSessionReviewRequest {
     toObject() {
         return {
             sessionId: this.sessionId,
-            sessionReviewView: this.sessionReviewView
+            sessionReviewView: this.sessionReviewView,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -30088,7 +30372,8 @@ class GetLatestSessionReviewRequest {
             sessionReviewView: SessionReview.View[this.sessionReviewView === null ||
                 this.sessionReviewView === undefined
                 ? 0
-                : this.sessionReviewView]
+                : this.sessionReviewView],
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -31271,6 +31556,7 @@ class GetAudioFilesRequest {
         _instance.resourceView = _instance.resourceView || 0;
         _instance.pageToken = _instance.pageToken || '';
         _instance.sortingMode = _instance.sortingMode || 0;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -31296,6 +31582,10 @@ class GetAudioFilesRequest {
                     break;
                 case 5:
                     _instance.sortingMode = _reader.readEnum();
+                    break;
+                case 6:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -31324,6 +31614,9 @@ class GetAudioFilesRequest {
         if (_instance.sortingMode) {
             _writer.writeEnum(5, _instance.sortingMode);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -31336,6 +31629,9 @@ class GetAudioFilesRequest {
         this.resourceView = _value.resourceView;
         this.pageToken = _value.pageToken;
         this.sortingMode = _value.sortingMode;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetAudioFilesRequest.refineValues(this);
     }
     get parent() {
@@ -31368,6 +31664,12 @@ class GetAudioFilesRequest {
     set sortingMode(value) {
         this._sortingMode = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -31386,7 +31688,8 @@ class GetAudioFilesRequest {
             names: (this.names || []).slice(),
             resourceView: this.resourceView,
             pageToken: this.pageToken,
-            sortingMode: this.sortingMode
+            sortingMode: this.sortingMode,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -31412,7 +31715,8 @@ class GetAudioFilesRequest {
             pageToken: this.pageToken,
             sortingMode: SortingMode[this.sortingMode === null || this.sortingMode === undefined
                 ? 0
-                : this.sortingMode]
+                : this.sortingMode],
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -32081,6 +32385,7 @@ class ListAudioFilesRequest {
         _instance.resourceView = _instance.resourceView || 0;
         _instance.pageToken = _instance.pageToken || '';
         _instance.sortingMode = _instance.sortingMode || 0;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -32106,6 +32411,10 @@ class ListAudioFilesRequest {
                     break;
                 case 5:
                     _instance.sortingMode = _reader.readEnum();
+                    break;
+                case 6:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -32134,6 +32443,9 @@ class ListAudioFilesRequest {
         if (_instance.sortingMode) {
             _writer.writeEnum(5, _instance.sortingMode);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -32146,6 +32458,9 @@ class ListAudioFilesRequest {
         this.resourceView = _value.resourceView;
         this.pageToken = _value.pageToken;
         this.sortingMode = _value.sortingMode;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListAudioFilesRequest.refineValues(this);
     }
     get parent() {
@@ -32178,6 +32493,12 @@ class ListAudioFilesRequest {
     set sortingMode(value) {
         this._sortingMode = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32196,7 +32517,8 @@ class ListAudioFilesRequest {
             sessionId: this.sessionId,
             resourceView: this.resourceView,
             pageToken: this.pageToken,
-            sortingMode: this.sortingMode
+            sortingMode: this.sortingMode,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -32222,7 +32544,8 @@ class ListAudioFilesRequest {
             pageToken: this.pageToken,
             sortingMode: SortingMode[this.sortingMode === null || this.sortingMode === undefined
                 ? 0
-                : this.sortingMode]
+                : this.sortingMode],
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -32383,6 +32706,7 @@ class GetAudioFileOfSessionRequest {
         _instance.parent = _instance.parent || '';
         _instance.sessionId = _instance.sessionId || '';
         _instance.resourceView = _instance.resourceView || 0;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -32402,6 +32726,10 @@ class GetAudioFileOfSessionRequest {
                     break;
                 case 3:
                     _instance.resourceView = _reader.readEnum();
+                    break;
+                case 4:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -32424,6 +32752,9 @@ class GetAudioFileOfSessionRequest {
         if (_instance.resourceView) {
             _writer.writeEnum(3, _instance.resourceView);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -32434,6 +32765,9 @@ class GetAudioFileOfSessionRequest {
         this.parent = _value.parent;
         this.sessionId = _value.sessionId;
         this.resourceView = _value.resourceView;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetAudioFileOfSessionRequest.refineValues(this);
     }
     get parent() {
@@ -32454,6 +32788,12 @@ class GetAudioFileOfSessionRequest {
     set resourceView(value) {
         this._resourceView = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32470,7 +32810,8 @@ class GetAudioFileOfSessionRequest {
         return {
             parent: this.parent,
             sessionId: this.sessionId,
-            resourceView: this.resourceView
+            resourceView: this.resourceView,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -32492,7 +32833,8 @@ class GetAudioFileOfSessionRequest {
             sessionId: this.sessionId,
             resourceView: ResourceView[this.resourceView === null || this.resourceView === undefined
                 ? 0
-                : this.resourceView]
+                : this.resourceView],
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -35555,6 +35897,7 @@ class GetProjectRoleRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.projectRoleView = _instance.projectRoleView || 0;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -35577,6 +35920,10 @@ class GetProjectRoleRequest {
                     break;
                 case 4:
                     _instance.projectRoleView = _reader.readEnum();
+                    break;
+                case 5:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -35602,6 +35949,9 @@ class GetProjectRoleRequest {
         if (_instance.projectRoleView) {
             _writer.writeEnum(4, _instance.projectRoleView);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -35614,6 +35964,9 @@ class GetProjectRoleRequest {
         this.roleId = _value.roleId;
         this.roleName = _value.roleName;
         this.projectRoleView = _value.projectRoleView;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetProjectRoleRequest.refineValues(this);
     }
     get parent() {
@@ -35650,6 +36003,12 @@ class GetProjectRoleRequest {
     set projectRoleView(value) {
         this._projectRoleView = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     get projectRoleIdentifier() {
         return this._projectRoleIdentifier;
     }
@@ -35670,7 +36029,8 @@ class GetProjectRoleRequest {
             parent: this.parent,
             roleId: this.roleId,
             roleName: this.roleName,
-            projectRoleView: this.projectRoleView
+            projectRoleView: this.projectRoleView,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -35695,7 +36055,8 @@ class GetProjectRoleRequest {
                 : this.roleName,
             projectRoleView: ProjectRoleView[this.projectRoleView === null || this.projectRoleView === undefined
                 ? 0
-                : this.projectRoleView]
+                : this.projectRoleView],
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -35846,6 +36207,7 @@ class ListProjectRolesRequest {
         _instance.parent = _instance.parent || '';
         _instance.pageToken = _instance.pageToken || '';
         _instance.projectRoleView = _instance.projectRoleView || 0;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -35865,6 +36227,10 @@ class ListProjectRolesRequest {
                     break;
                 case 3:
                     _instance.projectRoleView = _reader.readEnum();
+                    break;
+                case 4:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -35887,6 +36253,9 @@ class ListProjectRolesRequest {
         if (_instance.projectRoleView) {
             _writer.writeEnum(3, _instance.projectRoleView);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -35897,6 +36266,9 @@ class ListProjectRolesRequest {
         this.parent = _value.parent;
         this.pageToken = _value.pageToken;
         this.projectRoleView = _value.projectRoleView;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListProjectRolesRequest.refineValues(this);
     }
     get parent() {
@@ -35917,6 +36289,12 @@ class ListProjectRolesRequest {
     set projectRoleView(value) {
         this._projectRoleView = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -35933,7 +36311,8 @@ class ListProjectRolesRequest {
         return {
             parent: this.parent,
             pageToken: this.pageToken,
-            projectRoleView: this.projectRoleView
+            projectRoleView: this.projectRoleView,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -35955,7 +36334,8 @@ class ListProjectRolesRequest {
             pageToken: this.pageToken,
             projectRoleView: ProjectRoleView[this.projectRoleView === null || this.projectRoleView === undefined
                 ? 0
-                : this.projectRoleView]
+                : this.projectRoleView],
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -37141,6 +37521,7 @@ class ListUsersRequest {
      */
     static refineValues(_instance) {
         _instance.pageToken = _instance.pageToken || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -37154,6 +37535,10 @@ class ListUsersRequest {
             switch (_reader.getFieldNumber()) {
                 case 1:
                     _instance.pageToken = _reader.readString();
+                    break;
+                case 2:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -37170,6 +37555,9 @@ class ListUsersRequest {
         if (_instance.pageToken) {
             _writer.writeString(1, _instance.pageToken);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -37178,6 +37566,9 @@ class ListUsersRequest {
     constructor(_value) {
         _value = _value || {};
         this.pageToken = _value.pageToken;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListUsersRequest.refineValues(this);
     }
     get pageToken() {
@@ -37185,6 +37576,12 @@ class ListUsersRequest {
     }
     set pageToken(value) {
         this._pageToken = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -37200,7 +37597,8 @@ class ListUsersRequest {
      */
     toObject() {
         return {
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -37218,7 +37616,8 @@ class ListUsersRequest {
     // @ts-ignore
     options) {
         return {
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -38009,7 +38408,9 @@ class GetServerRoleRequest {
      * Check all the properties and set default protobuf values if necessary
      * @param _instance message instance
      */
-    static refineValues(_instance) { }
+    static refineValues(_instance) {
+        _instance.fieldMask = _instance.fieldMask || undefined;
+    }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
      * @param _instance message instance
@@ -38025,6 +38426,10 @@ class GetServerRoleRequest {
                     break;
                 case 2:
                     _instance.roleName = _reader.readString();
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -38044,6 +38449,9 @@ class GetServerRoleRequest {
         if (_instance.roleName || _instance.roleName === '') {
             _writer.writeString(2, _instance.roleName);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -38054,6 +38462,9 @@ class GetServerRoleRequest {
         _value = _value || {};
         this.roleId = _value.roleId;
         this.roleName = _value.roleName;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetServerRoleRequest.refineValues(this);
     }
     get roleId() {
@@ -38078,6 +38489,12 @@ class GetServerRoleRequest {
         }
         this._roleName = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     get serverRoleIdentifier() {
         return this._serverRoleIdentifier;
     }
@@ -38096,7 +38513,8 @@ class GetServerRoleRequest {
     toObject() {
         return {
             roleId: this.roleId,
-            roleName: this.roleName
+            roleName: this.roleName,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -38117,7 +38535,8 @@ class GetServerRoleRequest {
             roleId: this.roleId === null || this.roleId === undefined ? null : this.roleId,
             roleName: this.roleName === null || this.roleName === undefined
                 ? null
-                : this.roleName
+                : this.roleName,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -38149,6 +38568,7 @@ class ListServerRolesRequest {
      */
     static refineValues(_instance) {
         _instance.pageToken = _instance.pageToken || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -38162,6 +38582,10 @@ class ListServerRolesRequest {
             switch (_reader.getFieldNumber()) {
                 case 1:
                     _instance.pageToken = _reader.readString();
+                    break;
+                case 2:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -38178,6 +38602,9 @@ class ListServerRolesRequest {
         if (_instance.pageToken) {
             _writer.writeString(1, _instance.pageToken);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -38186,6 +38613,9 @@ class ListServerRolesRequest {
     constructor(_value) {
         _value = _value || {};
         this.pageToken = _value.pageToken;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListServerRolesRequest.refineValues(this);
     }
     get pageToken() {
@@ -38193,6 +38623,12 @@ class ListServerRolesRequest {
     }
     set pageToken(value) {
         this._pageToken = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -38208,7 +38644,8 @@ class ListServerRolesRequest {
      */
     toObject() {
         return {
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -38226,7 +38663,8 @@ class ListServerRolesRequest {
     // @ts-ignore
     options) {
         return {
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -38369,6 +38807,7 @@ class ListServerPermissionsRequest {
      */
     static refineValues(_instance) {
         _instance.pageToken = _instance.pageToken || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -38382,6 +38821,10 @@ class ListServerPermissionsRequest {
             switch (_reader.getFieldNumber()) {
                 case 1:
                     _instance.pageToken = _reader.readString();
+                    break;
+                case 2:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -38398,6 +38841,9 @@ class ListServerPermissionsRequest {
         if (_instance.pageToken) {
             _writer.writeString(1, _instance.pageToken);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -38406,6 +38852,9 @@ class ListServerPermissionsRequest {
     constructor(_value) {
         _value = _value || {};
         this.pageToken = _value.pageToken;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListServerPermissionsRequest.refineValues(this);
     }
     get pageToken() {
@@ -38413,6 +38862,12 @@ class ListServerPermissionsRequest {
     }
     set pageToken(value) {
         this._pageToken = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -38428,7 +38883,8 @@ class ListServerPermissionsRequest {
      */
     toObject() {
         return {
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -38446,7 +38902,8 @@ class ListServerPermissionsRequest {
     // @ts-ignore
     options) {
         return {
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -38588,6 +39045,7 @@ class LoginRequest {
     static refineValues(_instance) {
         _instance.userEmail = _instance.userEmail || '';
         _instance.password = _instance.password || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -38604,6 +39062,10 @@ class LoginRequest {
                     break;
                 case 2:
                     _instance.password = _reader.readString();
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -38623,6 +39085,9 @@ class LoginRequest {
         if (_instance.password) {
             _writer.writeString(2, _instance.password);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -38632,6 +39097,9 @@ class LoginRequest {
         _value = _value || {};
         this.userEmail = _value.userEmail;
         this.password = _value.password;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         LoginRequest.refineValues(this);
     }
     get userEmail() {
@@ -38645,6 +39113,12 @@ class LoginRequest {
     }
     set password(value) {
         this._password = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -38661,7 +39135,8 @@ class LoginRequest {
     toObject() {
         return {
             userEmail: this.userEmail,
-            password: this.password
+            password: this.password,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -38680,7 +39155,8 @@ class LoginRequest {
     options) {
         return {
             userEmail: this.userEmail,
-            password: this.password
+            password: this.password,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -38824,6 +39300,7 @@ class GetUserPreferencesRequest {
         _instance.userName = _instance.userName || '';
         _instance.keys = _instance.keys || [];
         _instance.regexInclude = _instance.regexInclude || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -38843,6 +39320,10 @@ class GetUserPreferencesRequest {
                     break;
                 case 3:
                     _instance.regexInclude = _reader.readString();
+                    break;
+                case 4:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -38865,6 +39346,9 @@ class GetUserPreferencesRequest {
         if (_instance.regexInclude) {
             _writer.writeString(3, _instance.regexInclude);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -38875,6 +39359,9 @@ class GetUserPreferencesRequest {
         this.userName = _value.userName;
         this.keys = (_value.keys || []).slice();
         this.regexInclude = _value.regexInclude;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetUserPreferencesRequest.refineValues(this);
     }
     get userName() {
@@ -38895,6 +39382,12 @@ class GetUserPreferencesRequest {
     set regexInclude(value) {
         this._regexInclude = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -38911,7 +39404,8 @@ class GetUserPreferencesRequest {
         return {
             userName: this.userName,
             keys: (this.keys || []).slice(),
-            regexInclude: this.regexInclude
+            regexInclude: this.regexInclude,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -38931,7 +39425,8 @@ class GetUserPreferencesRequest {
         return {
             userName: this.userName,
             keys: (this.keys || []).slice(),
-            regexInclude: this.regexInclude
+            regexInclude: this.regexInclude,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -39726,6 +40221,7 @@ class ListUserPreferencesRequest {
     static refineValues(_instance) {
         _instance.userName = _instance.userName || '';
         _instance.regexFilter = _instance.regexFilter || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -39742,6 +40238,10 @@ class ListUserPreferencesRequest {
                     break;
                 case 2:
                     _instance.regexFilter = _reader.readString();
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -39761,6 +40261,9 @@ class ListUserPreferencesRequest {
         if (_instance.regexFilter) {
             _writer.writeString(2, _instance.regexFilter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -39770,6 +40273,9 @@ class ListUserPreferencesRequest {
         _value = _value || {};
         this.userName = _value.userName;
         this.regexFilter = _value.regexFilter;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListUserPreferencesRequest.refineValues(this);
     }
     get userName() {
@@ -39783,6 +40289,12 @@ class ListUserPreferencesRequest {
     }
     set regexFilter(value) {
         this._regexFilter = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -39799,7 +40311,8 @@ class ListUserPreferencesRequest {
     toObject() {
         return {
             userName: this.userName,
-            regexFilter: this.regexFilter
+            regexFilter: this.regexFilter,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -39818,7 +40331,8 @@ class ListUserPreferencesRequest {
     options) {
         return {
             userName: this.userName,
-            regexFilter: this.regexFilter
+            regexFilter: this.regexFilter,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -43182,6 +43696,7 @@ class GetOperationRequest {
      */
     static refineValues(_instance) {
         _instance.name = _instance.name || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -43195,6 +43710,10 @@ class GetOperationRequest {
             switch (_reader.getFieldNumber()) {
                 case 1:
                     _instance.name = _reader.readString();
+                    break;
+                case 2:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -43211,6 +43730,9 @@ class GetOperationRequest {
         if (_instance.name) {
             _writer.writeString(1, _instance.name);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -43219,6 +43741,9 @@ class GetOperationRequest {
     constructor(_value) {
         _value = _value || {};
         this.name = _value.name;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetOperationRequest.refineValues(this);
     }
     get name() {
@@ -43226,6 +43751,12 @@ class GetOperationRequest {
     }
     set name(value) {
         this._name = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -43241,7 +43772,8 @@ class GetOperationRequest {
      */
     toObject() {
         return {
-            name: this.name
+            name: this.name,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -43259,7 +43791,8 @@ class GetOperationRequest {
     // @ts-ignore
     options) {
         return {
-            name: this.name
+            name: this.name,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -43287,6 +43820,7 @@ class ListOperationsRequest {
         _instance.pageSize = _instance.pageSize || 0;
         _instance.pageToken = _instance.pageToken || '';
         _instance.operationFilter = _instance.operationFilter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -43313,6 +43847,10 @@ class ListOperationsRequest {
                 case 5:
                     _instance.operationFilter = new OperationFilter();
                     _reader.readMessage(_instance.operationFilter, OperationFilter.deserializeBinaryFromReader);
+                    break;
+                case 6:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -43341,6 +43879,9 @@ class ListOperationsRequest {
         if (_instance.operationFilter) {
             _writer.writeMessage(5, _instance.operationFilter, OperationFilter.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -43354,6 +43895,9 @@ class ListOperationsRequest {
         this.pageToken = _value.pageToken;
         this.operationFilter = _value.operationFilter
             ? new OperationFilter(_value.operationFilter)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListOperationsRequest.refineValues(this);
     }
@@ -43387,6 +43931,12 @@ class ListOperationsRequest {
     set operationFilter(value) {
         this._operationFilter = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -43407,7 +43957,8 @@ class ListOperationsRequest {
             pageToken: this.pageToken,
             operationFilter: this.operationFilter
                 ? this.operationFilter.toObject()
-                : undefined
+                : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -43431,7 +43982,8 @@ class ListOperationsRequest {
             pageToken: this.pageToken,
             operationFilter: this.operationFilter
                 ? this.operationFilter.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -49979,6 +50531,7 @@ class GetAgentRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.agentView = _instance.agentView || 0;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -49995,6 +50548,10 @@ class GetAgentRequest {
                     break;
                 case 2:
                     _instance.agentView = _reader.readEnum();
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -50014,6 +50571,9 @@ class GetAgentRequest {
         if (_instance.agentView) {
             _writer.writeEnum(2, _instance.agentView);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -50023,6 +50583,9 @@ class GetAgentRequest {
         _value = _value || {};
         this.parent = _value.parent;
         this.agentView = _value.agentView;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetAgentRequest.refineValues(this);
     }
     get parent() {
@@ -50036,6 +50599,12 @@ class GetAgentRequest {
     }
     set agentView(value) {
         this._agentView = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -50052,7 +50621,8 @@ class GetAgentRequest {
     toObject() {
         return {
             parent: this.parent,
-            agentView: this.agentView
+            agentView: this.agentView,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -50073,7 +50643,8 @@ class GetAgentRequest {
             parent: this.parent,
             agentView: AgentView[this.agentView === null || this.agentView === undefined
                 ? 0
-                : this.agentView]
+                : this.agentView],
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -50099,6 +50670,7 @@ class ListAgentsRequest {
         _instance.agentView = _instance.agentView || 0;
         _instance.pageToken = _instance.pageToken || '';
         _instance.sortByField = _instance.sortByField || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -50119,6 +50691,10 @@ class ListAgentsRequest {
                 case 3:
                     _instance.sortByField = new AgentSorting();
                     _reader.readMessage(_instance.sortByField, AgentSorting.deserializeBinaryFromReader);
+                    break;
+                case 4:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -50141,6 +50717,9 @@ class ListAgentsRequest {
         if (_instance.sortByField) {
             _writer.writeMessage(3, _instance.sortByField, AgentSorting.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -50152,6 +50731,9 @@ class ListAgentsRequest {
         this.pageToken = _value.pageToken;
         this.sortByField = _value.sortByField
             ? new AgentSorting(_value.sortByField)
+            : undefined;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
             : undefined;
         ListAgentsRequest.refineValues(this);
     }
@@ -50173,6 +50755,12 @@ class ListAgentsRequest {
     set sortByField(value) {
         this._sortByField = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -50189,7 +50777,8 @@ class ListAgentsRequest {
         return {
             agentView: this.agentView,
             pageToken: this.pageToken,
-            sortByField: this.sortByField ? this.sortByField.toObject() : undefined
+            sortByField: this.sortByField ? this.sortByField.toObject() : undefined,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -50213,7 +50802,8 @@ class ListAgentsRequest {
             pageToken: this.pageToken,
             sortByField: this.sortByField
                 ? this.sortByField.toProtobufJSON(options)
-                : null
+                : null,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -53230,6 +53820,7 @@ class ListUsersInProjectRequest {
     static refineValues(_instance) {
         _instance.parent = _instance.parent || '';
         _instance.pageToken = _instance.pageToken || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -53246,6 +53837,10 @@ class ListUsersInProjectRequest {
                     break;
                 case 2:
                     _instance.pageToken = _reader.readString();
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -53265,6 +53860,9 @@ class ListUsersInProjectRequest {
         if (_instance.pageToken) {
             _writer.writeString(2, _instance.pageToken);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -53274,6 +53872,9 @@ class ListUsersInProjectRequest {
         _value = _value || {};
         this.parent = _value.parent;
         this.pageToken = _value.pageToken;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListUsersInProjectRequest.refineValues(this);
     }
     get parent() {
@@ -53287,6 +53888,12 @@ class ListUsersInProjectRequest {
     }
     set pageToken(value) {
         this._pageToken = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -53303,7 +53910,8 @@ class ListUsersInProjectRequest {
     toObject() {
         return {
             parent: this.parent,
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -53322,7 +53930,8 @@ class ListUsersInProjectRequest {
     options) {
         return {
             parent: this.parent,
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -53716,6 +54325,7 @@ class ListProjectPermissionsRequest {
      */
     static refineValues(_instance) {
         _instance.pageToken = _instance.pageToken || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -53729,6 +54339,10 @@ class ListProjectPermissionsRequest {
             switch (_reader.getFieldNumber()) {
                 case 1:
                     _instance.pageToken = _reader.readString();
+                    break;
+                case 2:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -53745,6 +54359,9 @@ class ListProjectPermissionsRequest {
         if (_instance.pageToken) {
             _writer.writeString(1, _instance.pageToken);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -53753,6 +54370,9 @@ class ListProjectPermissionsRequest {
     constructor(_value) {
         _value = _value || {};
         this.pageToken = _value.pageToken;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListProjectPermissionsRequest.refineValues(this);
     }
     get pageToken() {
@@ -53760,6 +54380,12 @@ class ListProjectPermissionsRequest {
     }
     set pageToken(value) {
         this._pageToken = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -53775,7 +54401,8 @@ class ListProjectPermissionsRequest {
      */
     toObject() {
         return {
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -53793,7 +54420,8 @@ class ListProjectPermissionsRequest {
     // @ts-ignore
     options) {
         return {
-            pageToken: this.pageToken
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -60609,6 +61237,9 @@ var CcaiServiceType;
     CcaiServiceType[CcaiServiceType["CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE"] = 17] = "CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE";
     CcaiServiceType[CcaiServiceType["CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT"] = 18] = "CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT";
     CcaiServiceType[CcaiServiceType["CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP"] = 19] = "CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP";
+    CcaiServiceType[CcaiServiceType["CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG"] = 20] = "CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG";
+    CcaiServiceType[CcaiServiceType["CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS"] = 21] = "CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS";
+    CcaiServiceType[CcaiServiceType["CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD"] = 22] = "CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD";
 })(CcaiServiceType || (CcaiServiceType = {}));
 var CcaiServiceProvider;
 (function (CcaiServiceProvider) {
@@ -60643,6 +61274,9 @@ var CcaiServiceProvider;
     CcaiServiceProvider[CcaiServiceProvider["CCAI_SERVICE_PROVIDER_HUGGINGFACE_SMOLAGENTS"] = 28] = "CCAI_SERVICE_PROVIDER_HUGGINGFACE_SMOLAGENTS";
     CcaiServiceProvider[CcaiServiceProvider["CCAI_SERVICE_PROVIDER_GOOGLE_AGENT_DEVELOPMENT_KIT"] = 29] = "CCAI_SERVICE_PROVIDER_GOOGLE_AGENT_DEVELOPMENT_KIT";
     CcaiServiceProvider[CcaiServiceProvider["CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL"] = 30] = "CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL";
+    CcaiServiceProvider[CcaiServiceProvider["CCAI_SERVICE_PROVIDER_OPENSEARCH"] = 31] = "CCAI_SERVICE_PROVIDER_OPENSEARCH";
+    CcaiServiceProvider[CcaiServiceProvider["CCAI_SERVICE_PROVIDER_GROK"] = 32] = "CCAI_SERVICE_PROVIDER_GROK";
+    CcaiServiceProvider[CcaiServiceProvider["CCAI_SERVICE_PROVIDER_POSTGRES"] = 33] = "CCAI_SERVICE_PROVIDER_POSTGRES";
 })(CcaiServiceProvider || (CcaiServiceProvider = {}));
 var CcaiProjectView;
 (function (CcaiProjectView) {
@@ -61939,6 +62573,7 @@ class GetCcaiProjectRequest {
         _instance.ccaiProjectView = _instance.ccaiProjectView || 0;
         _instance.ccaiServiceFilter = _instance.ccaiServiceFilter || undefined;
         _instance.nluProjectName = _instance.nluProjectName || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -61962,6 +62597,10 @@ class GetCcaiProjectRequest {
                     break;
                 case 4:
                     _instance.nluProjectName = _reader.readString();
+                    break;
+                case 5:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -61987,6 +62626,9 @@ class GetCcaiProjectRequest {
         if (_instance.nluProjectName) {
             _writer.writeString(4, _instance.nluProjectName);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -62000,6 +62642,9 @@ class GetCcaiProjectRequest {
             ? new CcaiServiceFilter(_value.ccaiServiceFilter)
             : undefined;
         this.nluProjectName = _value.nluProjectName;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetCcaiProjectRequest.refineValues(this);
     }
     get name() {
@@ -62026,6 +62671,12 @@ class GetCcaiProjectRequest {
     set nluProjectName(value) {
         this._nluProjectName = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -62045,7 +62696,8 @@ class GetCcaiProjectRequest {
             ccaiServiceFilter: this.ccaiServiceFilter
                 ? this.ccaiServiceFilter.toObject()
                 : undefined,
-            nluProjectName: this.nluProjectName
+            nluProjectName: this.nluProjectName,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -62070,7 +62722,8 @@ class GetCcaiProjectRequest {
             ccaiServiceFilter: this.ccaiServiceFilter
                 ? this.ccaiServiceFilter.toProtobufJSON(options)
                 : null,
-            nluProjectName: this.nluProjectName
+            nluProjectName: this.nluProjectName,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -62095,6 +62748,7 @@ class GetCcaiServiceRequest {
     static refineValues(_instance) {
         _instance.name = _instance.name || '';
         _instance.nluProjectName = _instance.nluProjectName || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -62111,6 +62765,10 @@ class GetCcaiServiceRequest {
                     break;
                 case 4:
                     _instance.nluProjectName = _reader.readString();
+                    break;
+                case 5:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -62130,6 +62788,9 @@ class GetCcaiServiceRequest {
         if (_instance.nluProjectName) {
             _writer.writeString(4, _instance.nluProjectName);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -62139,6 +62800,9 @@ class GetCcaiServiceRequest {
         _value = _value || {};
         this.name = _value.name;
         this.nluProjectName = _value.nluProjectName;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetCcaiServiceRequest.refineValues(this);
     }
     get name() {
@@ -62152,6 +62816,12 @@ class GetCcaiServiceRequest {
     }
     set nluProjectName(value) {
         this._nluProjectName = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -62168,7 +62838,8 @@ class GetCcaiServiceRequest {
     toObject() {
         return {
             name: this.name,
-            nluProjectName: this.nluProjectName
+            nluProjectName: this.nluProjectName,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -62187,7 +62858,8 @@ class GetCcaiServiceRequest {
     options) {
         return {
             name: this.name,
-            nluProjectName: this.nluProjectName
+            nluProjectName: this.nluProjectName,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -62215,6 +62887,7 @@ class ListCcaiProjectsRequest {
         _instance.ccaiProjectSorting = _instance.ccaiProjectSorting || undefined;
         _instance.pageToken = _instance.pageToken || '';
         _instance.nluProjectName = _instance.nluProjectName || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -62243,6 +62916,10 @@ class ListCcaiProjectsRequest {
                 case 5:
                     _instance.nluProjectName = _reader.readString();
                     break;
+                case 6:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -62270,6 +62947,9 @@ class ListCcaiProjectsRequest {
         if (_instance.nluProjectName) {
             _writer.writeString(5, _instance.nluProjectName);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -62286,6 +62966,9 @@ class ListCcaiProjectsRequest {
             : undefined;
         this.pageToken = _value.pageToken;
         this.nluProjectName = _value.nluProjectName;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListCcaiProjectsRequest.refineValues(this);
     }
     get ccaiProjectView() {
@@ -62318,6 +63001,12 @@ class ListCcaiProjectsRequest {
     set nluProjectName(value) {
         this._nluProjectName = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -62340,7 +63029,8 @@ class ListCcaiProjectsRequest {
                 ? this.ccaiProjectSorting.toObject()
                 : undefined,
             pageToken: this.pageToken,
-            nluProjectName: this.nluProjectName
+            nluProjectName: this.nluProjectName,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -62368,7 +63058,8 @@ class ListCcaiProjectsRequest {
                 ? this.ccaiProjectSorting.toProtobufJSON(options)
                 : null,
             pageToken: this.pageToken,
-            nluProjectName: this.nluProjectName
+            nluProjectName: this.nluProjectName,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -62643,6 +63334,7 @@ class CcaiServiceFilter {
     static refineValues(_instance) {
         _instance.languageCodes = _instance.languageCodes || [];
         _instance.ccaiServiceTypes = _instance.ccaiServiceTypes || [];
+        _instance.ccaiServiceProviders = _instance.ccaiServiceProviders || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -62659,6 +63351,10 @@ class CcaiServiceFilter {
                     break;
                 case 2:
                     (_instance.ccaiServiceTypes = _instance.ccaiServiceTypes || []).push(...(_reader.readPackedEnum() || []));
+                    break;
+                case 3:
+                    (_instance.ccaiServiceProviders =
+                        _instance.ccaiServiceProviders || []).push(...(_reader.readPackedEnum() || []));
                     break;
                 default:
                     _reader.skipField();
@@ -62678,6 +63374,10 @@ class CcaiServiceFilter {
         if (_instance.ccaiServiceTypes && _instance.ccaiServiceTypes.length) {
             _writer.writePackedEnum(2, _instance.ccaiServiceTypes);
         }
+        if (_instance.ccaiServiceProviders &&
+            _instance.ccaiServiceProviders.length) {
+            _writer.writePackedEnum(3, _instance.ccaiServiceProviders);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -62687,6 +63387,7 @@ class CcaiServiceFilter {
         _value = _value || {};
         this.languageCodes = (_value.languageCodes || []).slice();
         this.ccaiServiceTypes = (_value.ccaiServiceTypes || []).slice();
+        this.ccaiServiceProviders = (_value.ccaiServiceProviders || []).slice();
         CcaiServiceFilter.refineValues(this);
     }
     get languageCodes() {
@@ -62700,6 +63401,12 @@ class CcaiServiceFilter {
     }
     set ccaiServiceTypes(value) {
         this._ccaiServiceTypes = value;
+    }
+    get ccaiServiceProviders() {
+        return this._ccaiServiceProviders;
+    }
+    set ccaiServiceProviders(value) {
+        this._ccaiServiceProviders = value;
     }
     /**
      * Serialize message to binary data
@@ -62716,7 +63423,8 @@ class CcaiServiceFilter {
     toObject() {
         return {
             languageCodes: (this.languageCodes || []).slice(),
-            ccaiServiceTypes: (this.ccaiServiceTypes || []).slice()
+            ccaiServiceTypes: (this.ccaiServiceTypes || []).slice(),
+            ccaiServiceProviders: (this.ccaiServiceProviders || []).slice()
         };
     }
     /**
@@ -62735,7 +63443,8 @@ class CcaiServiceFilter {
     options) {
         return {
             languageCodes: (this.languageCodes || []).slice(),
-            ccaiServiceTypes: (this.ccaiServiceTypes || []).map(v => CcaiServiceType[v])
+            ccaiServiceTypes: (this.ccaiServiceTypes || []).map(v => CcaiServiceType[v]),
+            ccaiServiceProviders: (this.ccaiServiceProviders || []).map(v => CcaiServiceProvider[v])
         };
     }
 }
@@ -63543,6 +64252,7 @@ class ListLlmModelsRequest {
      */
     static refineValues(_instance) {
         _instance.ccaiServiceName = _instance.ccaiServiceName || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -63556,6 +64266,10 @@ class ListLlmModelsRequest {
             switch (_reader.getFieldNumber()) {
                 case 1:
                     _instance.ccaiServiceName = _reader.readString();
+                    break;
+                case 2:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -63572,6 +64286,9 @@ class ListLlmModelsRequest {
         if (_instance.ccaiServiceName) {
             _writer.writeString(1, _instance.ccaiServiceName);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -63580,6 +64297,9 @@ class ListLlmModelsRequest {
     constructor(_value) {
         _value = _value || {};
         this.ccaiServiceName = _value.ccaiServiceName;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ListLlmModelsRequest.refineValues(this);
     }
     get ccaiServiceName() {
@@ -63587,6 +64307,12 @@ class ListLlmModelsRequest {
     }
     set ccaiServiceName(value) {
         this._ccaiServiceName = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
     }
     /**
      * Serialize message to binary data
@@ -63602,7 +64328,8 @@ class ListLlmModelsRequest {
      */
     toObject() {
         return {
-            ccaiServiceName: this.ccaiServiceName
+            ccaiServiceName: this.ccaiServiceName,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -63620,7 +64347,8 @@ class ListLlmModelsRequest {
     // @ts-ignore
     options) {
         return {
-            ccaiServiceName: this.ccaiServiceName
+            ccaiServiceName: this.ccaiServiceName,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -63918,6 +64646,7 @@ class LlmGenerateRequest {
             _instance.llmGenerationRequest || undefined;
         _instance.ccaiServiceName = _instance.ccaiServiceName || '';
         _instance.fileResources = _instance.fileResources || [];
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -63941,6 +64670,10 @@ class LlmGenerateRequest {
                     _reader.readMessage(messageInitializer3, FileResource.deserializeBinaryFromReader);
                     (_instance.fileResources = _instance.fileResources || []).push(messageInitializer3);
                     break;
+                case 4:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -63962,6 +64695,9 @@ class LlmGenerateRequest {
         if (_instance.fileResources && _instance.fileResources.length) {
             _writer.writeRepeatedMessage(3, _instance.fileResources, FileResource.serializeBinaryToWriter);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -63974,6 +64710,9 @@ class LlmGenerateRequest {
             : undefined;
         this.ccaiServiceName = _value.ccaiServiceName;
         this.fileResources = (_value.fileResources || []).map(m => new FileResource(m));
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         LlmGenerateRequest.refineValues(this);
     }
     get llmGenerationRequest() {
@@ -63994,6 +64733,12 @@ class LlmGenerateRequest {
     set fileResources(value) {
         this._fileResources = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -64012,7 +64757,8 @@ class LlmGenerateRequest {
                 ? this.llmGenerationRequest.toObject()
                 : undefined,
             ccaiServiceName: this.ccaiServiceName,
-            fileResources: (this.fileResources || []).map(m => m.toObject())
+            fileResources: (this.fileResources || []).map(m => m.toObject()),
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -64034,7 +64780,8 @@ class LlmGenerateRequest {
                 ? this.llmGenerationRequest.toProtobufJSON(options)
                 : null,
             ccaiServiceName: this.ccaiServiceName,
-            fileResources: (this.fileResources || []).map(m => m.toProtobufJSON(options))
+            fileResources: (this.fileResources || []).map(m => m.toProtobufJSON(options)),
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -64297,6 +65044,7 @@ class ExtractEntitiesRequest {
         _instance.text = _instance.text || '';
         _instance.languageCode = _instance.languageCode || '';
         _instance.intentName = _instance.intentName || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -64319,6 +65067,10 @@ class ExtractEntitiesRequest {
                     break;
                 case 4:
                     _instance.intentName = _reader.readString();
+                    break;
+                case 5:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -64344,6 +65096,9 @@ class ExtractEntitiesRequest {
         if (_instance.intentName) {
             _writer.writeString(4, _instance.intentName);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -64355,6 +65110,9 @@ class ExtractEntitiesRequest {
         this.text = _value.text;
         this.languageCode = _value.languageCode;
         this.intentName = _value.intentName;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ExtractEntitiesRequest.refineValues(this);
     }
     get parent() {
@@ -64381,6 +65139,12 @@ class ExtractEntitiesRequest {
     set intentName(value) {
         this._intentName = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -64398,7 +65162,8 @@ class ExtractEntitiesRequest {
             parent: this.parent,
             text: this.text,
             languageCode: this.languageCode,
-            intentName: this.intentName
+            intentName: this.intentName,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -64419,7 +65184,8 @@ class ExtractEntitiesRequest {
             parent: this.parent,
             text: this.text,
             languageCode: this.languageCode,
-            intentName: this.intentName
+            intentName: this.intentName,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -64447,6 +65213,7 @@ class ExtractEntitiesFuzzyRequest {
         _instance.potentialEntities = _instance.potentialEntities || [];
         _instance.minimalScore = _instance.minimalScore || 0;
         _instance.allowOverlaps = _instance.allowOverlaps || false;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -64476,6 +65243,10 @@ class ExtractEntitiesFuzzyRequest {
                 case 5:
                     _instance.allowOverlaps = _reader.readBool();
                     break;
+                case 6:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -64503,6 +65274,9 @@ class ExtractEntitiesFuzzyRequest {
         if (_instance.allowOverlaps) {
             _writer.writeBool(5, _instance.allowOverlaps);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -64515,6 +65289,9 @@ class ExtractEntitiesFuzzyRequest {
         this.potentialEntities = (_value.potentialEntities || []).map(m => new EntityTypeFuzzyNerConfig(m));
         this.minimalScore = _value.minimalScore;
         this.allowOverlaps = _value.allowOverlaps;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ExtractEntitiesFuzzyRequest.refineValues(this);
     }
     get parent() {
@@ -64547,6 +65324,12 @@ class ExtractEntitiesFuzzyRequest {
     set allowOverlaps(value) {
         this._allowOverlaps = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -64565,7 +65348,8 @@ class ExtractEntitiesFuzzyRequest {
             text: this.text,
             potentialEntities: (this.potentialEntities || []).map(m => m.toObject()),
             minimalScore: this.minimalScore,
-            allowOverlaps: this.allowOverlaps
+            allowOverlaps: this.allowOverlaps,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -64587,7 +65371,8 @@ class ExtractEntitiesFuzzyRequest {
             text: this.text,
             potentialEntities: (this.potentialEntities || []).map(m => m.toProtobufJSON(options)),
             minimalScore: this.minimalScore,
-            allowOverlaps: this.allowOverlaps
+            allowOverlaps: this.allowOverlaps,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -65051,6 +65836,7 @@ class GetAlternativeSentencesRequest {
         _instance.parent = _instance.parent || '';
         _instance.protectedWords = _instance.protectedWords || [];
         _instance.wordsToChange = _instance.wordsToChange || [];
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -65080,6 +65866,10 @@ class GetAlternativeSentencesRequest {
                     break;
                 case 7:
                     (_instance.wordsToChange = _instance.wordsToChange || []).push(_reader.readString());
+                    break;
+                case 8:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -65111,6 +65901,9 @@ class GetAlternativeSentencesRequest {
         if (_instance.wordsToChange && _instance.wordsToChange.length) {
             _writer.writeRepeatedString(7, _instance.wordsToChange);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(8, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -65126,6 +65919,9 @@ class GetAlternativeSentencesRequest {
         this.parent = _value.parent;
         this.protectedWords = (_value.protectedWords || []).slice();
         this.wordsToChange = (_value.wordsToChange || []).slice();
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetAlternativeSentencesRequest.refineValues(this);
     }
     get config() {
@@ -65164,6 +65960,12 @@ class GetAlternativeSentencesRequest {
     set wordsToChange(value) {
         this._wordsToChange = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -65183,7 +65985,8 @@ class GetAlternativeSentencesRequest {
             languageCode: this.languageCode,
             parent: this.parent,
             protectedWords: (this.protectedWords || []).slice(),
-            wordsToChange: (this.wordsToChange || []).slice()
+            wordsToChange: (this.wordsToChange || []).slice(),
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -65206,7 +66009,8 @@ class GetAlternativeSentencesRequest {
             languageCode: this.languageCode,
             parent: this.parent,
             protectedWords: (this.protectedWords || []).slice(),
-            wordsToChange: (this.wordsToChange || []).slice()
+            wordsToChange: (this.wordsToChange || []).slice(),
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -65233,6 +66037,7 @@ class GenerateUserSaysRequest {
         _instance.parent = _instance.parent || '';
         _instance.nRepeatSynonym = _instance.nRepeatSynonym || 0;
         _instance.branch = _instance.branch || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -65255,6 +66060,10 @@ class GenerateUserSaysRequest {
                     break;
                 case 8:
                     _instance.branch = _reader.readString();
+                    break;
+                case 9:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -65280,6 +66089,9 @@ class GenerateUserSaysRequest {
         if (_instance.branch) {
             _writer.writeString(8, _instance.branch);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(9, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -65291,6 +66103,9 @@ class GenerateUserSaysRequest {
         this.parent = _value.parent;
         this.nRepeatSynonym = _value.nRepeatSynonym;
         this.branch = _value.branch;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GenerateUserSaysRequest.refineValues(this);
     }
     get languageCode() {
@@ -65317,6 +66132,12 @@ class GenerateUserSaysRequest {
     set branch(value) {
         this._branch = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -65334,7 +66155,8 @@ class GenerateUserSaysRequest {
             languageCode: this.languageCode,
             parent: this.parent,
             nRepeatSynonym: this.nRepeatSynonym,
-            branch: this.branch
+            branch: this.branch,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -65355,7 +66177,8 @@ class GenerateUserSaysRequest {
             languageCode: this.languageCode,
             parent: this.parent,
             nRepeatSynonym: this.nRepeatSynonym,
-            branch: this.branch
+            branch: this.branch,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -65383,6 +66206,7 @@ class GenerateResponsesRequest {
         _instance.nRepeatSynonym = _instance.nRepeatSynonym || 0;
         _instance.branch = _instance.branch || '';
         _instance.dropUnknownParameters = _instance.dropUnknownParameters || false;
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -65408,6 +66232,10 @@ class GenerateResponsesRequest {
                     break;
                 case 9:
                     _instance.dropUnknownParameters = _reader.readBool();
+                    break;
+                case 10:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -65436,6 +66264,9 @@ class GenerateResponsesRequest {
         if (_instance.dropUnknownParameters) {
             _writer.writeBool(9, _instance.dropUnknownParameters);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(10, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -65448,6 +66279,9 @@ class GenerateResponsesRequest {
         this.nRepeatSynonym = _value.nRepeatSynonym;
         this.branch = _value.branch;
         this.dropUnknownParameters = _value.dropUnknownParameters;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GenerateResponsesRequest.refineValues(this);
     }
     get languageCode() {
@@ -65480,6 +66314,12 @@ class GenerateResponsesRequest {
     set dropUnknownParameters(value) {
         this._dropUnknownParameters = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -65498,7 +66338,8 @@ class GenerateResponsesRequest {
             parent: this.parent,
             nRepeatSynonym: this.nRepeatSynonym,
             branch: this.branch,
-            dropUnknownParameters: this.dropUnknownParameters
+            dropUnknownParameters: this.dropUnknownParameters,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -65520,7 +66361,8 @@ class GenerateResponsesRequest {
             parent: this.parent,
             nRepeatSynonym: this.nRepeatSynonym,
             branch: this.branch,
-            dropUnknownParameters: this.dropUnknownParameters
+            dropUnknownParameters: this.dropUnknownParameters,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -65553,6 +66395,7 @@ class GetAlternativeTrainingPhrasesRequest {
         _instance.protectedWords = _instance.protectedWords || [];
         _instance.wordsToChange = _instance.wordsToChange || [];
         _instance.branch = _instance.branch || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -65596,6 +66439,10 @@ class GetAlternativeTrainingPhrasesRequest {
                 case 10:
                     _instance.branch = _reader.readString();
                     break;
+                case 11:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -65638,6 +66485,9 @@ class GetAlternativeTrainingPhrasesRequest {
         if (_instance.branch) {
             _writer.writeString(10, _instance.branch);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(11, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -65659,6 +66509,9 @@ class GetAlternativeTrainingPhrasesRequest {
         this.protectedWords = (_value.protectedWords || []).slice();
         this.wordsToChange = (_value.wordsToChange || []).slice();
         this.branch = _value.branch;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetAlternativeTrainingPhrasesRequest.refineValues(this);
     }
     get config() {
@@ -65721,6 +66574,12 @@ class GetAlternativeTrainingPhrasesRequest {
     set branch(value) {
         this._branch = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -65746,7 +66605,8 @@ class GetAlternativeTrainingPhrasesRequest {
             similarityThreshold: this.similarityThreshold,
             protectedWords: (this.protectedWords || []).slice(),
             wordsToChange: (this.wordsToChange || []).slice(),
-            branch: this.branch
+            branch: this.branch,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -65775,7 +66635,8 @@ class GetAlternativeTrainingPhrasesRequest {
             similarityThreshold: this.similarityThreshold,
             protectedWords: (this.protectedWords || []).slice(),
             wordsToChange: (this.wordsToChange || []).slice(),
-            branch: this.branch
+            branch: this.branch,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -65802,6 +66663,7 @@ class GetSynonymsRequest {
         _instance.word = _instance.word || '';
         _instance.languageCode = _instance.languageCode || '';
         _instance.parent = _instance.parent || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -65825,6 +66687,10 @@ class GetSynonymsRequest {
                     break;
                 case 5:
                     _instance.parent = _reader.readString();
+                    break;
+                case 6:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -65850,6 +66716,9 @@ class GetSynonymsRequest {
         if (_instance.parent) {
             _writer.writeString(5, _instance.parent);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -65863,6 +66732,9 @@ class GetSynonymsRequest {
         this.word = _value.word;
         this.languageCode = _value.languageCode;
         this.parent = _value.parent;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         GetSynonymsRequest.refineValues(this);
     }
     get config() {
@@ -65889,6 +66761,12 @@ class GetSynonymsRequest {
     set parent(value) {
         this._parent = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -65906,7 +66784,8 @@ class GetSynonymsRequest {
             config: this.config ? this.config.toObject() : undefined,
             word: this.word,
             languageCode: this.languageCode,
-            parent: this.parent
+            parent: this.parent,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -65927,7 +66806,8 @@ class GetSynonymsRequest {
             config: this.config ? this.config.toProtobufJSON(options) : null,
             word: this.word,
             languageCode: this.languageCode,
-            parent: this.parent
+            parent: this.parent,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }
@@ -68336,6 +69216,7 @@ class ClassifyIntentsRequest {
         _instance.contextNames = _instance.contextNames || [];
         _instance.mode = _instance.mode || 0;
         _instance.algorithms = _instance.algorithms || [];
+        _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -68367,6 +69248,10 @@ class ClassifyIntentsRequest {
                     break;
                 case 7:
                     (_instance.algorithms = _instance.algorithms || []).push(...(_reader.readPackedEnum() || []));
+                    break;
+                case 8:
+                    _instance.fieldMask = new googleProtobuf003.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -68401,6 +69286,9 @@ class ClassifyIntentsRequest {
         if (_instance.algorithms && _instance.algorithms.length) {
             _writer.writePackedEnum(7, _instance.algorithms);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(8, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -68415,6 +69303,9 @@ class ClassifyIntentsRequest {
         this.contextNames = (_value.contextNames || []).slice();
         this.mode = _value.mode;
         this.algorithms = (_value.algorithms || []).slice();
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            : undefined;
         ClassifyIntentsRequest.refineValues(this);
     }
     get parent() {
@@ -68459,6 +69350,12 @@ class ClassifyIntentsRequest {
     set algorithms(value) {
         this._algorithms = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -68479,7 +69376,8 @@ class ClassifyIntentsRequest {
             activeContexts: this.activeContexts,
             contextNames: (this.contextNames || []).slice(),
             mode: this.mode,
-            algorithms: (this.algorithms || []).slice()
+            algorithms: (this.algorithms || []).slice(),
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
         };
     }
     /**
@@ -68503,7 +69401,8 @@ class ClassifyIntentsRequest {
             activeContexts: this.activeContexts,
             contextNames: (this.contextNames || []).slice(),
             mode: Mode[this.mode === null || this.mode === undefined ? 0 : this.mode],
-            algorithms: (this.algorithms || []).map(v => IntentAlgorithms[v])
+            algorithms: (this.algorithms || []).map(v => IntentAlgorithms[v]),
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
         };
     }
 }

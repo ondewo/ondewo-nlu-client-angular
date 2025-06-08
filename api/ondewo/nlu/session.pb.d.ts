@@ -3305,6 +3305,7 @@ export declare class ListSessionLabelsOfAllSessionsRequest implements GrpcMessag
     static serializeBinaryToWriter(_instance: ListSessionLabelsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListSessionLabelsOfAllSessionsRequest to deeply clone from
@@ -3314,6 +3315,8 @@ export declare class ListSessionLabelsOfAllSessionsRequest implements GrpcMessag
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3341,6 +3344,7 @@ export declare namespace ListSessionLabelsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListSessionLabelsOfAllSessionsRequest
@@ -3348,6 +3352,7 @@ export declare namespace ListSessionLabelsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -3448,6 +3453,7 @@ export declare class ListLanguageCodesOfAllSessionsRequest implements GrpcMessag
     static serializeBinaryToWriter(_instance: ListLanguageCodesOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListLanguageCodesOfAllSessionsRequest to deeply clone from
@@ -3457,6 +3463,8 @@ export declare class ListLanguageCodesOfAllSessionsRequest implements GrpcMessag
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3484,6 +3492,7 @@ export declare namespace ListLanguageCodesOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListLanguageCodesOfAllSessionsRequest
@@ -3491,6 +3500,7 @@ export declare namespace ListLanguageCodesOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -3591,6 +3601,7 @@ export declare class ListMatchedIntentsOfAllSessionsRequest implements GrpcMessa
     static serializeBinaryToWriter(_instance: ListMatchedIntentsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListMatchedIntentsOfAllSessionsRequest to deeply clone from
@@ -3600,6 +3611,8 @@ export declare class ListMatchedIntentsOfAllSessionsRequest implements GrpcMessa
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3627,6 +3640,7 @@ export declare namespace ListMatchedIntentsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListMatchedIntentsOfAllSessionsRequest
@@ -3634,6 +3648,7 @@ export declare namespace ListMatchedIntentsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -3734,6 +3749,7 @@ export declare class ListMatchedEntityTypesOfAllSessionsRequest implements GrpcM
     static serializeBinaryToWriter(_instance: ListMatchedEntityTypesOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListMatchedEntityTypesOfAllSessionsRequest to deeply clone from
@@ -3743,6 +3759,8 @@ export declare class ListMatchedEntityTypesOfAllSessionsRequest implements GrpcM
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3770,6 +3788,7 @@ export declare namespace ListMatchedEntityTypesOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListMatchedEntityTypesOfAllSessionsRequest
@@ -3777,6 +3796,7 @@ export declare namespace ListMatchedEntityTypesOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -3877,6 +3897,7 @@ export declare class ListUserIdsOfAllSessionsRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ListUserIdsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListUserIdsOfAllSessionsRequest to deeply clone from
@@ -3886,6 +3907,8 @@ export declare class ListUserIdsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3913,6 +3936,7 @@ export declare namespace ListUserIdsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListUserIdsOfAllSessionsRequest
@@ -3920,6 +3944,7 @@ export declare namespace ListUserIdsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -4020,6 +4045,7 @@ export declare class ListIdentifiedUserIdsOfAllSessionsRequest implements GrpcMe
     static serializeBinaryToWriter(_instance: ListIdentifiedUserIdsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListIdentifiedUserIdsOfAllSessionsRequest to deeply clone from
@@ -4029,6 +4055,8 @@ export declare class ListIdentifiedUserIdsOfAllSessionsRequest implements GrpcMe
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -4056,6 +4084,7 @@ export declare namespace ListIdentifiedUserIdsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListIdentifiedUserIdsOfAllSessionsRequest
@@ -4063,6 +4092,7 @@ export declare namespace ListIdentifiedUserIdsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -4163,6 +4193,7 @@ export declare class ListTagsOfAllSessionsRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ListTagsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListTagsOfAllSessionsRequest to deeply clone from
@@ -4172,6 +4203,8 @@ export declare class ListTagsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -4199,6 +4232,7 @@ export declare namespace ListTagsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListTagsOfAllSessionsRequest
@@ -4206,6 +4240,7 @@ export declare namespace ListTagsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -4306,6 +4341,7 @@ export declare class ListInputContextsOfAllSessionsRequest implements GrpcMessag
     static serializeBinaryToWriter(_instance: ListInputContextsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListInputContextsOfAllSessionsRequest to deeply clone from
@@ -4315,6 +4351,8 @@ export declare class ListInputContextsOfAllSessionsRequest implements GrpcMessag
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -4342,6 +4380,7 @@ export declare namespace ListInputContextsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListInputContextsOfAllSessionsRequest
@@ -4349,6 +4388,7 @@ export declare namespace ListInputContextsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -4449,6 +4489,7 @@ export declare class ListOutputContextsOfAllSessionsRequest implements GrpcMessa
     static serializeBinaryToWriter(_instance: ListOutputContextsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListOutputContextsOfAllSessionsRequest to deeply clone from
@@ -4458,6 +4499,8 @@ export declare class ListOutputContextsOfAllSessionsRequest implements GrpcMessa
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -4485,6 +4528,7 @@ export declare namespace ListOutputContextsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListOutputContextsOfAllSessionsRequest
@@ -4492,6 +4536,7 @@ export declare namespace ListOutputContextsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -4592,6 +4637,7 @@ export declare class ListPlatformsOfAllSessionsRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ListPlatformsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListPlatformsOfAllSessionsRequest to deeply clone from
@@ -4601,6 +4647,8 @@ export declare class ListPlatformsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -4628,6 +4676,7 @@ export declare namespace ListPlatformsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListPlatformsOfAllSessionsRequest
@@ -4635,6 +4684,7 @@ export declare namespace ListPlatformsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -4735,6 +4785,7 @@ export declare class ListAccountIdsOfAllSessionsRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ListAccountIdsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListAccountIdsOfAllSessionsRequest to deeply clone from
@@ -4744,6 +4795,8 @@ export declare class ListAccountIdsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -4771,6 +4824,7 @@ export declare namespace ListAccountIdsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListAccountIdsOfAllSessionsRequest
@@ -4778,6 +4832,7 @@ export declare namespace ListAccountIdsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -5164,6 +5219,7 @@ export declare class ListOriginIdsOfAllSessionsRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ListOriginIdsOfAllSessionsRequest, _writer: BinaryWriter): void;
     private _parent;
     private _sessionFilter?;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListOriginIdsOfAllSessionsRequest to deeply clone from
@@ -5173,6 +5229,8 @@ export declare class ListOriginIdsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -5200,6 +5258,7 @@ export declare namespace ListOriginIdsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListOriginIdsOfAllSessionsRequest
@@ -5207,6 +5266,7 @@ export declare namespace ListOriginIdsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -5677,6 +5737,7 @@ export declare class ListSessionCommentsRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ListSessionCommentsRequest, _writer: BinaryWriter): void;
     private _sessionId;
     private _pageToken;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListSessionCommentsRequest to deeply clone from
@@ -5686,6 +5747,8 @@ export declare class ListSessionCommentsRequest implements GrpcMessage {
     set sessionId(value: string);
     get pageToken(): string;
     set pageToken(value: string);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -5713,6 +5776,7 @@ export declare namespace ListSessionCommentsRequest {
     interface AsObject {
         sessionId: string;
         pageToken: string;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListSessionCommentsRequest
@@ -5720,6 +5784,7 @@ export declare namespace ListSessionCommentsRequest {
     interface AsProtobufJSON {
         sessionId: string;
         pageToken: string;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -5978,6 +6043,7 @@ export declare class GetSessionReviewRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: GetSessionReviewRequest, _writer: BinaryWriter): void;
     private _sessionReviewId;
     private _sessionReviewView;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetSessionReviewRequest to deeply clone from
@@ -5987,6 +6053,8 @@ export declare class GetSessionReviewRequest implements GrpcMessage {
     set sessionReviewId(value: string);
     get sessionReviewView(): SessionReview.View;
     set sessionReviewView(value: SessionReview.View);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -6014,6 +6082,7 @@ export declare namespace GetSessionReviewRequest {
     interface AsObject {
         sessionReviewId: string;
         sessionReviewView: SessionReview.View;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetSessionReviewRequest
@@ -6021,6 +6090,7 @@ export declare namespace GetSessionReviewRequest {
     interface AsProtobufJSON {
         sessionReviewId: string;
         sessionReviewView: string;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -6052,6 +6122,7 @@ export declare class GetLatestSessionReviewRequest implements GrpcMessage {
     static serializeBinaryToWriter(_instance: GetLatestSessionReviewRequest, _writer: BinaryWriter): void;
     private _sessionId;
     private _sessionReviewView;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetLatestSessionReviewRequest to deeply clone from
@@ -6061,6 +6132,8 @@ export declare class GetLatestSessionReviewRequest implements GrpcMessage {
     set sessionId(value: string);
     get sessionReviewView(): SessionReview.View;
     set sessionReviewView(value: SessionReview.View);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -6088,6 +6161,7 @@ export declare namespace GetLatestSessionReviewRequest {
     interface AsObject {
         sessionId: string;
         sessionReviewView: SessionReview.View;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetLatestSessionReviewRequest
@@ -6095,6 +6169,7 @@ export declare namespace GetLatestSessionReviewRequest {
     interface AsProtobufJSON {
         sessionId: string;
         sessionReviewView: string;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -6658,6 +6733,7 @@ export declare class GetAudioFilesRequest implements GrpcMessage {
     private _resourceView;
     private _pageToken;
     private _sortingMode;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetAudioFilesRequest to deeply clone from
@@ -6673,6 +6749,8 @@ export declare class GetAudioFilesRequest implements GrpcMessage {
     set pageToken(value: string);
     get sortingMode(): ondewoNlu008.SortingMode;
     set sortingMode(value: ondewoNlu008.SortingMode);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -6703,6 +6781,7 @@ export declare namespace GetAudioFilesRequest {
         resourceView: ResourceView;
         pageToken: string;
         sortingMode: ondewoNlu008.SortingMode;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAudioFilesRequest
@@ -6713,6 +6792,7 @@ export declare namespace GetAudioFilesRequest {
         resourceView: string;
         pageToken: string;
         sortingMode: string;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -7132,6 +7212,7 @@ export declare class ListAudioFilesRequest implements GrpcMessage {
     private _resourceView;
     private _pageToken;
     private _sortingMode;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ListAudioFilesRequest to deeply clone from
@@ -7147,6 +7228,8 @@ export declare class ListAudioFilesRequest implements GrpcMessage {
     set pageToken(value: string);
     get sortingMode(): ondewoNlu008.SortingMode;
     set sortingMode(value: ondewoNlu008.SortingMode);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -7177,6 +7260,7 @@ export declare namespace ListAudioFilesRequest {
         resourceView: ResourceView;
         pageToken: string;
         sortingMode: ondewoNlu008.SortingMode;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListAudioFilesRequest
@@ -7187,6 +7271,7 @@ export declare namespace ListAudioFilesRequest {
         resourceView: string;
         pageToken: string;
         sortingMode: string;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -7298,6 +7383,7 @@ export declare class GetAudioFileOfSessionRequest implements GrpcMessage {
     private _parent;
     private _sessionId;
     private _resourceView;
+    private _fieldMask?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetAudioFileOfSessionRequest to deeply clone from
@@ -7309,6 +7395,8 @@ export declare class GetAudioFileOfSessionRequest implements GrpcMessage {
     set sessionId(value: string);
     get resourceView(): ResourceView;
     set resourceView(value: ResourceView);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -7337,6 +7425,7 @@ export declare namespace GetAudioFileOfSessionRequest {
         parent: string;
         sessionId: string;
         resourceView: ResourceView;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAudioFileOfSessionRequest
@@ -7345,5 +7434,6 @@ export declare namespace GetAudioFileOfSessionRequest {
         parent: string;
         sessionId: string;
         resourceView: string;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
