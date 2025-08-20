@@ -1,50 +1,50 @@
 {
-	"name": "@ondewo/nlu-client-angular",
-	"version": "6.2.0",
-	"description": "ONDEWO Natural Language Understanding (NLU) Client library for Angular",
-	"author": "ONDEWO GmbH <office@ondewo.com>",
-	"homepage": "https://ondewo.com",
-	"license": "Apache-2.0",
-	"keywords": [
-		"ondewo",
-		"nlu",
-		"api",
-		"client",
-		"ngx-grpc",
-		"grpc"
-	],
-	"repository": {
-		"type": "git",
-		"directory": "https://github.com/ondewo/ondewo-nlu-client-angular"
-	},
-	"peerDependencies": {
-		"@angular/common": ">=19.2.14 <20.0.0",
-		"@angular/core": ">=19.2.14 <20.0.0",
-		"@ngx-grpc/common": ">=3.1.2",
-		"@ngx-grpc/core": ">=3.1.2"
-	},
-	"module": "fesm2022/ondewo-nlu-client-angular.mjs",
-	"typings": "index.d.ts",
-	"exports": {
-		"./package.json": {
-			"default": "./package.json"
-		},
-		".": {
-			"types": "./index.d.ts",
-			"default": "./fesm2022/ondewo-nlu-client-angular.mjs"
-		}
-	},
-	"sideEffects": false,
-	"dependencies": {
-		"tslib": "^2.3.0"
-	},
-	"devDependencies": {
-		"@eslint/eslintrc": "^3.3.1",
-		"@eslint/js": "^9.28.0",
-		"@typescript-eslint/eslint-plugin": "^8.33.1",
-		"eslint": "^9.28.0",
-		"global": "^4.4.0",
-		"husky": "^9.1.7",
-		"prettier": "^3.5.3"
-	}
+  "name": "@ondewo/nlu-client-angular",
+  "version": "6.2.0",
+  "description": "ONDEWO Natural Language Understanding (NLU) Client library for Angular",
+  "author": "ONDEWO GmbH <office@ondewo.com>",
+  "homepage": "https://ondewo.com",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ondewo",
+    "nlu",
+    "api",
+    "client",
+    "ngx-grpc",
+    "grpc"
+  ],
+  "repository": {
+    "type": "git",
+    "directory": "https://github.com/ondewo/ondewo-nlu-client-angular"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=20.1.7 <21.0.0",
+    "@angular/core": ">=20.1.7 <21.0.0",
+    "@ngx-grpc/common": ">=3.1.2",
+    "@ngx-grpc/core": ">=3.1.2"
+  },
+  "module": "fesm2022/ondewo-nlu-client-angular.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./fesm2022/ondewo-nlu-client-angular.mjs"
+    }
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.33.0",
+    "@typescript-eslint/eslint-plugin": "^8.40.0",
+    "eslint": "^9.33.0",
+    "global": "^4.4.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2"
+  }
 }
