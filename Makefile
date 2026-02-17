@@ -14,7 +14,7 @@ export
 # 		Variables
 ########################################################
 
-ONDEWO_NLU_VERSION = 6.2.0
+ONDEWO_NLU_VERSION = 6.3.0
 
 NLU_API_GIT_BRANCH=tags/6.3.0
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.9.0
