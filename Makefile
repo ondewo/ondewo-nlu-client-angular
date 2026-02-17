@@ -222,9 +222,11 @@ build: check_out_correct_submodule_versions build_compiler update_package npm_ru
 
 install_dependencies:
 	@for pkg in \
+		typescript \
 		eslint \
 		@eslint/eslintrc \
 		@eslint/js \
+		@typescript-eslint/typescript-estree \
 		@typescript-eslint/eslint-plugin \
 		@typescript-eslint/parser \
 		global \
