@@ -221,14 +221,23 @@ build: check_out_correct_submodule_versions build_compiler update_package npm_ru
 	make install_dependencies
 
 install_dependencies:
-	npm i --save-dev \
+	@for pkg in \
+		eslint \
 		@eslint/eslintrc \
 		@eslint/js \
 		@typescript-eslint/eslint-plugin \
-		eslint \
 		global \
 		husky \
-		prettier
+		prettier; \
+	do \
+		if npm ls "$$pkg" --depth=0 >/dev/null 2>&1; then \
+			echo "Already installed: $$pkg — skipping"; \
+		else \
+			echo "Installing: $$pkg"; \
+			npm i --save-dev --prefer-offline --legacy-peer-deps "$$pkg" || exit 1; \
+		fi; \
+	done; \
+	echo "All dependencies installed."
 
 check_out_correct_submodule_versions: ## Fetches all Submodules and checks out specified branch
 	@echo "START checking out correct submodule versions ..."
