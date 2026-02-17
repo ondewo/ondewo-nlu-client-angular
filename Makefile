@@ -226,6 +226,7 @@ install_dependencies:
 		@eslint/eslintrc \
 		@eslint/js \
 		@typescript-eslint/eslint-plugin \
+		@typescript-eslint/parser \
 		global \
 		husky \
 		prettier; \
