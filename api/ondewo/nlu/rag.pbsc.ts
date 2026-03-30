@@ -21,7 +21,20 @@ import {
 import { Observable } from 'rxjs';
 import * as thisProto from './rag.pb';
 import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
+import * as googleApi001 from '../../google/api/annotations.pb';
+import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
+import * as googleRpc005 from '../../google/rpc/status.pb';
+import * as ondewoNlu006 from '../../ondewo/nlu/operation-metadata.pb';
+import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
+import * as googleType008 from '../../google/type/latlng.pb';
+import * as ondewoNlu009 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/context.pb';
+import * as ondewoNlu011 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu012 from '../../ondewo/nlu/entity-type.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/operations.pb';
+import * as ondewoNlu014 from '../../ondewo/nlu/session.pb';
 import { GRPC_RAGS_CLIENT_SETTINGS } from './rag.pbconf';
 /**
  * Service client implementation for ondewo.nlu.Rags
@@ -86,7 +99,7 @@ export class RagsClient {
      * @returns Observable<GrpcEvent<thisProto.RagPartialSuccess>>
      */
     ragDeleteDatasets: (
-      requestData: thisProto.RagDeleteDatasetsRequest,
+      requestData: thisProto.RagDeleteRequest,
       requestMetadata = new GrpcMetadata()
     ): Observable<GrpcEvent<thisProto.RagPartialSuccess>> => {
       return this.handler.handle({
@@ -95,7 +108,7 @@ export class RagsClient {
         path: '/ondewo.nlu.Rags/RagDeleteDatasets',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagDeleteDatasetsRequest,
+        requestClass: thisProto.RagDeleteRequest,
         responseClass: thisProto.RagPartialSuccess
       });
     },
@@ -121,66 +134,24 @@ export class RagsClient {
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagGetKnowledgeGraph
+     * Client streaming: /ondewo.nlu.Rags/RagUploadDocument
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagGetKnowledgeGraphResponse>>
+     * @returns Observable<GrpcEvent<thisProto.RagDocument>>
      */
-    ragGetKnowledgeGraph: (
-      requestData: thisProto.RagGetKnowledgeGraphRequest,
+    ragUploadDocument: (
+      requestData: Observable<thisProto.RagUploadDocumentRequest>,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagGetKnowledgeGraphResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagGetKnowledgeGraph',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagGetKnowledgeGraphRequest,
-        responseClass: thisProto.RagGetKnowledgeGraphResponse
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagDeleteKnowledgeGraph
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-     */
-    ragDeleteKnowledgeGraph: (
-      requestData: thisProto.RagDeleteKnowledgeGraphRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagDeleteKnowledgeGraph',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagDeleteKnowledgeGraphRequest,
-        responseClass: googleProtobuf000.Empty
-      });
-    },
-    /**
-     * Client streaming: /ondewo.nlu.Rags/RagUploadDocuments
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagDocumentList>>
-     */
-    ragUploadDocuments: (
-      requestData: Observable<thisProto.RagUploadDocumentsRequest>,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagDocumentList>> => {
+    ): Observable<GrpcEvent<thisProto.RagDocument>> => {
       return this.handler.handle({
         type: GrpcCallType.clientStream,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagUploadDocuments',
+        path: '/ondewo.nlu.Rags/RagUploadDocument',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagUploadDocumentsRequest,
-        responseClass: thisProto.RagDocumentList
+        requestClass: thisProto.RagUploadDocumentRequest,
+        responseClass: thisProto.RagDocument
       });
     },
     /**
@@ -230,12 +201,12 @@ export class RagsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagListDocumentsResponse>>
+     * @returns Observable<GrpcEvent<thisProto.RagDocumentList>>
      */
     ragListDocuments: (
       requestData: thisProto.RagListDocumentsRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagListDocumentsResponse>> => {
+    ): Observable<GrpcEvent<thisProto.RagDocumentList>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -243,7 +214,7 @@ export class RagsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.RagListDocumentsRequest,
-        responseClass: thisProto.RagListDocumentsResponse
+        responseClass: thisProto.RagDocumentList
       });
     },
     /**
@@ -265,6 +236,153 @@ export class RagsClient {
         requestMetadata,
         requestClass: thisProto.RagDeleteDocumentsRequest,
         responseClass: thisProto.RagPartialSuccess
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagRetrieval
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagRetrievalResponse>>
+     */
+    ragRetrieval: (
+      requestData: thisProto.RagRetrievalRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagRetrievalResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagRetrieval',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagRetrievalRequest,
+        responseClass: thisProto.RagRetrievalResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagGetKnowledgeGraph
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagGetKnowledgeGraphResponse>>
+     */
+    ragGetKnowledgeGraph: (
+      requestData: thisProto.RagDatasetIdRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagGetKnowledgeGraphResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagGetKnowledgeGraph',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagDatasetIdRequest,
+        responseClass: thisProto.RagGetKnowledgeGraphResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagDeleteKnowledgeGraph
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+     */
+    ragDeleteKnowledgeGraph: (
+      requestData: thisProto.RagDatasetIdRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<googleProtobuf003.Empty>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagDeleteKnowledgeGraph',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagDatasetIdRequest,
+        responseClass: googleProtobuf003.Empty
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagConstructKnowledgeGraph
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagConstructKnowledgeGraphResponse>>
+     */
+    ragConstructKnowledgeGraph: (
+      requestData: thisProto.RagDatasetIdRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagConstructKnowledgeGraphResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagConstructKnowledgeGraph',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagDatasetIdRequest,
+        responseClass: thisProto.RagConstructKnowledgeGraphResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagKnowledgeGraphStatus
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagTaskStatus>>
+     */
+    ragKnowledgeGraphStatus: (
+      requestData: thisProto.RagDatasetIdRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagTaskStatus>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagKnowledgeGraphStatus',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagDatasetIdRequest,
+        responseClass: thisProto.RagTaskStatus
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagConstructRaptor
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagConstructRaptorResponse>>
+     */
+    ragConstructRaptor: (
+      requestData: thisProto.RagDatasetIdRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagConstructRaptorResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagConstructRaptor',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagDatasetIdRequest,
+        responseClass: thisProto.RagConstructRaptorResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagRaptorStatus
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagTaskStatus>>
+     */
+    ragRaptorStatus: (
+      requestData: thisProto.RagDatasetIdRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagTaskStatus>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagRaptorStatus',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagDatasetIdRequest,
+        responseClass: thisProto.RagTaskStatus
       });
     },
     /**
@@ -377,12 +495,12 @@ export class RagsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+     * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
      */
     ragUpdateChunk: (
       requestData: thisProto.RagUpdateChunkRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
+    ): Observable<GrpcEvent<googleProtobuf003.Empty>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -390,112 +508,175 @@ export class RagsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.RagUpdateChunkRequest,
-        responseClass: googleProtobuf000.Empty
+        responseClass: googleProtobuf003.Empty
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagRetrieval
+     * Unary call: /ondewo.nlu.Rags/RagCreateChatAssistant
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagRetrievalResponse>>
+     * @returns Observable<GrpcEvent<thisProto.RagChatAssistant>>
      */
-    ragRetrieval: (
-      requestData: thisProto.RagRetrievalRequest,
+    ragCreateChatAssistant: (
+      requestData: thisProto.RagCreateChatAssistantRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagRetrievalResponse>> => {
+    ): Observable<GrpcEvent<thisProto.RagChatAssistant>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagRetrieval',
+        path: '/ondewo.nlu.Rags/RagCreateChatAssistant',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagRetrievalRequest,
-        responseClass: thisProto.RagRetrievalResponse
+        requestClass: thisProto.RagCreateChatAssistantRequest,
+        responseClass: thisProto.RagChatAssistant
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagCreateChat
+     * Unary call: /ondewo.nlu.Rags/RagUpdateChatAssistant
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagChat>>
+     * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
      */
-    ragCreateChat: (
-      requestData: thisProto.RagCreateChatRequest,
+    ragUpdateChatAssistant: (
+      requestData: thisProto.RagUpdateChatAssistantRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagChat>> => {
+    ): Observable<GrpcEvent<googleProtobuf003.Empty>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagCreateChat',
+        path: '/ondewo.nlu.Rags/RagUpdateChatAssistant',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagCreateChatRequest,
-        responseClass: thisProto.RagChat
+        requestClass: thisProto.RagUpdateChatAssistantRequest,
+        responseClass: googleProtobuf003.Empty
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagUpdateChat
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-     */
-    ragUpdateChat: (
-      requestData: thisProto.RagUpdateChatRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagUpdateChat',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagUpdateChatRequest,
-        responseClass: googleProtobuf000.Empty
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagDeleteChats
+     * Unary call: /ondewo.nlu.Rags/RagDeleteChatAssistants
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
      * @returns Observable<GrpcEvent<thisProto.RagPartialSuccess>>
      */
-    ragDeleteChats: (
-      requestData: thisProto.RagDeleteChatsRequest,
+    ragDeleteChatAssistants: (
+      requestData: thisProto.RagDeleteRequest,
       requestMetadata = new GrpcMetadata()
     ): Observable<GrpcEvent<thisProto.RagPartialSuccess>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagDeleteChats',
+        path: '/ondewo.nlu.Rags/RagDeleteChatAssistants',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagDeleteChatsRequest,
+        requestClass: thisProto.RagDeleteRequest,
         responseClass: thisProto.RagPartialSuccess
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagListChats
+     * Unary call: /ondewo.nlu.Rags/RagListChatAssistants
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagChatList>>
+     * @returns Observable<GrpcEvent<thisProto.RagChatAssistantList>>
      */
-    ragListChats: (
-      requestData: thisProto.RagListChatsRequest,
+    ragListChatAssistants: (
+      requestData: thisProto.RagListChatAssistantsRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagChatList>> => {
+    ): Observable<GrpcEvent<thisProto.RagChatAssistantList>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagListChats',
+        path: '/ondewo.nlu.Rags/RagListChatAssistants',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagListChatsRequest,
-        responseClass: thisProto.RagChatList
+        requestClass: thisProto.RagListChatAssistantsRequest,
+        responseClass: thisProto.RagChatAssistantList
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagCreateAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+     */
+    ragCreateAgent: (
+      requestData: thisProto.RagCreateAgentRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<googleProtobuf003.Empty>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagCreateAgent',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagCreateAgentRequest,
+        responseClass: googleProtobuf003.Empty
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagUpdateAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+     */
+    ragUpdateAgent: (
+      requestData: thisProto.RagUpdateAgentRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<googleProtobuf003.Empty>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagUpdateAgent',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagUpdateAgentRequest,
+        responseClass: googleProtobuf003.Empty
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagDeleteAgent
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+     */
+    ragDeleteAgent: (
+      requestData: thisProto.RagDeleteAgentRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<googleProtobuf003.Empty>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagDeleteAgent',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagDeleteAgentRequest,
+        responseClass: googleProtobuf003.Empty
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagListAgents
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagAgentList>>
+     */
+    ragListAgents: (
+      requestData: thisProto.RagListAgentsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagAgentList>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagListAgents',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagListAgentsRequest,
+        responseClass: thisProto.RagAgentList
       });
     },
     /**
@@ -520,37 +701,16 @@ export class RagsClient {
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagCreateAgentSession
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagAgentSession>>
-     */
-    ragCreateAgentSession: (
-      requestData: thisProto.RagCreateAgentSessionRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagAgentSession>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagCreateAgentSession',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagCreateAgentSessionRequest,
-        responseClass: thisProto.RagAgentSession
-      });
-    },
-    /**
      * Unary call: /ondewo.nlu.Rags/RagUpdateChatSession
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+     * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
      */
     ragUpdateChatSession: (
       requestData: thisProto.RagUpdateChatSessionRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
+    ): Observable<GrpcEvent<googleProtobuf003.Empty>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -558,7 +718,7 @@ export class RagsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.RagUpdateChatSessionRequest,
-        responseClass: googleProtobuf000.Empty
+        responseClass: googleProtobuf003.Empty
       });
     },
     /**
@@ -583,27 +743,6 @@ export class RagsClient {
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagListAgentSessions
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagAgentSessionList>>
-     */
-    ragListAgentSessions: (
-      requestData: thisProto.RagListAgentSessionsRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagAgentSessionList>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagListAgentSessions',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagListAgentSessionsRequest,
-        responseClass: thisProto.RagAgentSessionList
-      });
-    },
-    /**
      * Unary call: /ondewo.nlu.Rags/RagDeleteChatSessions
      *
      * @param requestMessage Request message
@@ -622,6 +761,27 @@ export class RagsClient {
         requestMetadata,
         requestClass: thisProto.RagDeleteChatSessionsRequest,
         responseClass: thisProto.RagPartialSuccess
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagListAgentSessions
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagAgentSessionList>>
+     */
+    ragListAgentSessions: (
+      requestData: thisProto.RagListAgentSessionsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagAgentSessionList>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagListAgentSessions',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagListAgentSessionsRequest,
+        responseClass: thisProto.RagAgentSessionList
       });
     },
     /**
@@ -667,27 +827,6 @@ export class RagsClient {
       });
     },
     /**
-     * Server streaming: /ondewo.nlu.Rags/RagOpenAiChatCompletion
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagOpenAiChatCompletionResponse>>
-     */
-    ragOpenAiChatCompletion: (
-      requestData: thisProto.RagOpenAiChatCompletionRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagOpenAiChatCompletionResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.serverStream,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagOpenAiChatCompletion',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagOpenAiChatCompletionRequest,
-        responseClass: thisProto.RagOpenAiChatCompletionResponse
-      });
-    },
-    /**
      * Server streaming: /ondewo.nlu.Rags/RagAgentCompletion
      *
      * @param requestMessage Request message
@@ -706,363 +845,6 @@ export class RagsClient {
         requestMetadata,
         requestClass: thisProto.RagAgentCompletionRequest,
         responseClass: thisProto.RagAgentCompletionResponse
-      });
-    },
-    /**
-     * Server streaming: /ondewo.nlu.Rags/RagOpenAiAgentCompletion
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagOpenAiChatCompletionResponse>>
-     */
-    ragOpenAiAgentCompletion: (
-      requestData: thisProto.RagOpenAiAgentCompletionRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagOpenAiChatCompletionResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.serverStream,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagOpenAiAgentCompletion',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagOpenAiAgentCompletionRequest,
-        responseClass: thisProto.RagOpenAiChatCompletionResponse
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagCreateAgent
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-     */
-    ragCreateAgent: (
-      requestData: thisProto.RagCreateAgentRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagCreateAgent',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagCreateAgentRequest,
-        responseClass: googleProtobuf000.Empty
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagUpdateAgent
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-     */
-    ragUpdateAgent: (
-      requestData: thisProto.RagUpdateAgentRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagUpdateAgent',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagUpdateAgentRequest,
-        responseClass: googleProtobuf000.Empty
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagDeleteAgent
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-     */
-    ragDeleteAgent: (
-      requestData: thisProto.RagDeleteAgentRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagDeleteAgent',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagDeleteAgentRequest,
-        responseClass: googleProtobuf000.Empty
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagListAgents
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagAgentList>>
-     */
-    ragListAgents: (
-      requestData: thisProto.RagListAgentsRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagAgentList>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagListAgents',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagListAgentsRequest,
-        responseClass: thisProto.RagAgentList
-      });
-    },
-    /**
-     * Client streaming: /ondewo.nlu.Rags/RagUploadFiles
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagFileList>>
-     */
-    ragUploadFiles: (
-      requestData: Observable<thisProto.RagUploadFilesRequest>,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagFileList>> => {
-      return this.handler.handle({
-        type: GrpcCallType.clientStream,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagUploadFiles',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagUploadFilesRequest,
-        responseClass: thisProto.RagFileList
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagCreateFile
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagFile>>
-     */
-    ragCreateFile: (
-      requestData: thisProto.RagCreateFileRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagFile>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagCreateFile',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagCreateFileRequest,
-        responseClass: thisProto.RagFile
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagListFiles
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagListFilesResponse>>
-     */
-    ragListFiles: (
-      requestData: thisProto.RagListFilesRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagListFilesResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagListFiles',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagListFilesRequest,
-        responseClass: thisProto.RagListFilesResponse
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagGetRootFolder
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagGetRootFolderResponse>>
-     */
-    ragGetRootFolder: (
-      requestData: thisProto.RagGetRootFolderRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagGetRootFolderResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagGetRootFolder',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagGetRootFolderRequest,
-        responseClass: thisProto.RagGetRootFolderResponse
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagGetParentFolder
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagGetParentFolderResponse>>
-     */
-    ragGetParentFolder: (
-      requestData: thisProto.RagGetParentFolderRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagGetParentFolderResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagGetParentFolder',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagGetParentFolderRequest,
-        responseClass: thisProto.RagGetParentFolderResponse
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagGetAllParentFolders
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagGetAllParentFoldersResponse>>
-     */
-    ragGetAllParentFolders: (
-      requestData: thisProto.RagGetAllParentFoldersRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagGetAllParentFoldersResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagGetAllParentFolders',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagGetAllParentFoldersRequest,
-        responseClass: thisProto.RagGetAllParentFoldersResponse
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagDeleteFiles
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-     */
-    ragDeleteFiles: (
-      requestData: thisProto.RagDeleteFilesRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagDeleteFiles',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagDeleteFilesRequest,
-        responseClass: googleProtobuf000.Empty
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagRenameFile
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-     */
-    ragRenameFile: (
-      requestData: thisProto.RagRenameFileRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagRenameFile',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagRenameFileRequest,
-        responseClass: googleProtobuf000.Empty
-      });
-    },
-    /**
-     * Server streaming: /ondewo.nlu.Rags/RagGetFile
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagFileChunk>>
-     */
-    ragGetFile: (
-      requestData: thisProto.RagGetFileRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagFileChunk>> => {
-      return this.handler.handle({
-        type: GrpcCallType.serverStream,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagGetFile',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagGetFileRequest,
-        responseClass: thisProto.RagFileChunk
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagMoveFile
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-     */
-    ragMoveFile: (
-      requestData: thisProto.RagMoveFileRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagMoveFile',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagMoveFileRequest,
-        responseClass: googleProtobuf000.Empty
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagFileToDocument
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagFileToDocumentList>>
-     */
-    ragFileToDocument: (
-      requestData: thisProto.RagFileToDocumentRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagFileToDocumentList>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagFileToDocument',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagFileToDocumentRequest,
-        responseClass: thisProto.RagFileToDocumentList
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagDifyRetrieval
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagDifyRecordList>>
-     */
-    ragDifyRetrieval: (
-      requestData: thisProto.RagDifyRetrievalRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagDifyRecordList>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagDifyRetrieval',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagDifyRetrievalRequest,
-        responseClass: thisProto.RagDifyRecordList
       });
     },
     /**
@@ -1108,192 +890,341 @@ export class RagsClient {
       });
     },
     /**
-     * Server streaming: /ondewo.nlu.Rags/RagChatbotCompletion
+     * Unary call: /ondewo.nlu.Rags/RagCreateCrawler
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagChatCompletionResponse>>
+     * @returns Observable<GrpcEvent<thisProto.RagCrawler>>
      */
-    ragChatbotCompletion: (
-      requestData: thisProto.RagChatbotCompletionRequest,
+    ragCreateCrawler: (
+      requestData: thisProto.RagCreateCrawlerRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagChatCompletionResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.serverStream,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagChatbotCompletion',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagChatbotCompletionRequest,
-        responseClass: thisProto.RagChatCompletionResponse
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagChatbotInfo
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagChatbotInfoResponse>>
-     */
-    ragChatbotInfo: (
-      requestData: thisProto.RagChatbotInfoRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagChatbotInfoResponse>> => {
+    ): Observable<GrpcEvent<thisProto.RagCrawler>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagChatbotInfo',
+        path: '/ondewo.nlu.Rags/RagCreateCrawler',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagChatbotInfoRequest,
-        responseClass: thisProto.RagChatbotInfoResponse
+        requestClass: thisProto.RagCreateCrawlerRequest,
+        responseClass: thisProto.RagCrawler
       });
     },
     /**
-     * Server streaming: /ondewo.nlu.Rags/RagAgentbotCompletion
+     * Unary call: /ondewo.nlu.Rags/RagGetCrawler
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagAgentCompletionResponse>>
+     * @returns Observable<GrpcEvent<thisProto.RagCrawler>>
      */
-    ragAgentbotCompletion: (
-      requestData: thisProto.RagAgentbotCompletionRequest,
+    ragGetCrawler: (
+      requestData: thisProto.RagGetCrawlerRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagAgentCompletionResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.serverStream,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagAgentbotCompletion',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagAgentbotCompletionRequest,
-        responseClass: thisProto.RagAgentCompletionResponse
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagAgentbotInputs
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagAgentbotInputsResponse>>
-     */
-    ragAgentbotInputs: (
-      requestData: thisProto.RagAgentbotInputsRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagAgentbotInputsResponse>> => {
+    ): Observable<GrpcEvent<thisProto.RagCrawler>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagAgentbotInputs',
+        path: '/ondewo.nlu.Rags/RagGetCrawler',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagAgentbotInputsRequest,
-        responseClass: thisProto.RagAgentbotInputsResponse
+        requestClass: thisProto.RagGetCrawlerRequest,
+        responseClass: thisProto.RagCrawler
       });
     },
     /**
-     * Server streaming: /ondewo.nlu.Rags/RagSearchbotAsk
+     * Unary call: /ondewo.nlu.Rags/RagListCrawlers
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagAskResponse>>
+     * @returns Observable<GrpcEvent<thisProto.RagListCrawlersResponse>>
      */
-    ragSearchbotAsk: (
-      requestData: thisProto.RagSearchbotAskRequest,
+    ragListCrawlers: (
+      requestData: thisProto.RagListCrawlersRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagAskResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.serverStream,
-        client: this.client,
-        path: '/ondewo.nlu.Rags/RagSearchbotAsk',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.RagSearchbotAskRequest,
-        responseClass: thisProto.RagAskResponse
-      });
-    },
-    /**
-     * Unary call: /ondewo.nlu.Rags/RagSearchbotRetrieval
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagSearchbotRetrievalResponse>>
-     */
-    ragSearchbotRetrieval: (
-      requestData: thisProto.RagSearchbotRetrievalRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagSearchbotRetrievalResponse>> => {
+    ): Observable<GrpcEvent<thisProto.RagListCrawlersResponse>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagSearchbotRetrieval',
+        path: '/ondewo.nlu.Rags/RagListCrawlers',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagSearchbotRetrievalRequest,
-        responseClass: thisProto.RagSearchbotRetrievalResponse
+        requestClass: thisProto.RagListCrawlersRequest,
+        responseClass: thisProto.RagListCrawlersResponse
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagSearchbotRelatedQuestions
+     * Unary call: /ondewo.nlu.Rags/RagUpdateCrawler
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagRelatedQuestionsResponse>>
+     * @returns Observable<GrpcEvent<thisProto.RagCrawler>>
      */
-    ragSearchbotRelatedQuestions: (
-      requestData: thisProto.RagSearchbotRelatedQuestionsRequest,
+    ragUpdateCrawler: (
+      requestData: thisProto.RagUpdateCrawlerRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagRelatedQuestionsResponse>> => {
+    ): Observable<GrpcEvent<thisProto.RagCrawler>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagSearchbotRelatedQuestions',
+        path: '/ondewo.nlu.Rags/RagUpdateCrawler',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagSearchbotRelatedQuestionsRequest,
-        responseClass: thisProto.RagRelatedQuestionsResponse
+        requestClass: thisProto.RagUpdateCrawlerRequest,
+        responseClass: thisProto.RagCrawler
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagSearchbotDetail
+     * Unary call: /ondewo.nlu.Rags/RagDeleteCrawler
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.RagSearchbotDetailResponse>>
+     * @returns Observable<GrpcEvent<thisProto.RagDeleteCrawlerResponse>>
      */
-    ragSearchbotDetail: (
-      requestData: thisProto.RagSearchbotDetailRequest,
+    ragDeleteCrawler: (
+      requestData: thisProto.RagDeleteCrawlerRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.RagSearchbotDetailResponse>> => {
+    ): Observable<GrpcEvent<thisProto.RagDeleteCrawlerResponse>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagSearchbotDetail',
+        path: '/ondewo.nlu.Rags/RagDeleteCrawler',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagSearchbotDetailRequest,
-        responseClass: thisProto.RagSearchbotDetailResponse
+        requestClass: thisProto.RagDeleteCrawlerRequest,
+        responseClass: thisProto.RagDeleteCrawlerResponse
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Rags/RagSearchbotMindmap
+     * Unary call: /ondewo.nlu.Rags/RagStartCrawler
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf001.Struct>>
+     * @returns Observable<GrpcEvent<ondewoNlu013.Operation>>
      */
-    ragSearchbotMindmap: (
-      requestData: thisProto.RagSearchbotMindmapRequest,
+    ragStartCrawler: (
+      requestData: thisProto.RagStartCrawlerRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf001.Struct>> => {
+    ): Observable<GrpcEvent<ondewoNlu013.Operation>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
-        path: '/ondewo.nlu.Rags/RagSearchbotMindmap',
+        path: '/ondewo.nlu.Rags/RagStartCrawler',
         requestData,
         requestMetadata,
-        requestClass: thisProto.RagSearchbotMindmapRequest,
-        responseClass: googleProtobuf001.Struct
+        requestClass: thisProto.RagStartCrawlerRequest,
+        responseClass: ondewoNlu013.Operation
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagStopCrawler
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagStopCrawlerResponse>>
+     */
+    ragStopCrawler: (
+      requestData: thisProto.RagStopCrawlerRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagStopCrawlerResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagStopCrawler',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagStopCrawlerRequest,
+        responseClass: thisProto.RagStopCrawlerResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagGetCrawlerRun
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<ondewoNlu013.Operation>>
+     */
+    ragGetCrawlerRun: (
+      requestData: thisProto.RagGetCrawlerRunRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<ondewoNlu013.Operation>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagGetCrawlerRun',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagGetCrawlerRunRequest,
+        responseClass: ondewoNlu013.Operation
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagListCrawlerRuns
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagListCrawlerRunsResponse>>
+     */
+    ragListCrawlerRuns: (
+      requestData: thisProto.RagListCrawlerRunsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagListCrawlerRunsResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagListCrawlerRuns',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagListCrawlerRunsRequest,
+        responseClass: thisProto.RagListCrawlerRunsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagDeleteCrawlerRuns
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagDeleteCrawlerRunsResponse>>
+     */
+    ragDeleteCrawlerRuns: (
+      requestData: thisProto.RagDeleteCrawlerRunsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagDeleteCrawlerRunsResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagDeleteCrawlerRuns',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagDeleteCrawlerRunsRequest,
+        responseClass: thisProto.RagDeleteCrawlerRunsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagGetCrawlerResult
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagCrawlerResult>>
+     */
+    ragGetCrawlerResult: (
+      requestData: thisProto.RagGetCrawlerResultRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagCrawlerResult>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagGetCrawlerResult',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagGetCrawlerResultRequest,
+        responseClass: thisProto.RagCrawlerResult
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagGetCrawlerResults
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagGetCrawlerResultsResponse>>
+     */
+    ragGetCrawlerResults: (
+      requestData: thisProto.RagGetCrawlerResultsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagGetCrawlerResultsResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagGetCrawlerResults',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagGetCrawlerResultsRequest,
+        responseClass: thisProto.RagGetCrawlerResultsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagAddCrawlerResultsToDatasets
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<ondewoNlu013.Operation>>
+     */
+    ragAddCrawlerResultsToDatasets: (
+      requestData: thisProto.RagAddCrawlerResultsToDatasetsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<ondewoNlu013.Operation>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagAddCrawlerResultsToDatasets',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagAddCrawlerResultsToDatasetsRequest,
+        responseClass: ondewoNlu013.Operation
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagRemoveCrawlerResultsFromDatasets
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<ondewoNlu013.Operation>>
+     */
+    ragRemoveCrawlerResultsFromDatasets: (
+      requestData: thisProto.RagRemoveCrawlerResultsFromDatasetsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<ondewoNlu013.Operation>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagRemoveCrawlerResultsFromDatasets',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagRemoveCrawlerResultsFromDatasetsRequest,
+        responseClass: ondewoNlu013.Operation
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagGetCrawlerAttachedDatasets
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagGetCrawlerAttachedDatasetsResponse>>
+     */
+    ragGetCrawlerAttachedDatasets: (
+      requestData: thisProto.RagGetCrawlerAttachedDatasetsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.RagGetCrawlerAttachedDatasetsResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagGetCrawlerAttachedDatasets',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagGetCrawlerAttachedDatasetsRequest,
+        responseClass: thisProto.RagGetCrawlerAttachedDatasetsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagDeleteCrawlers
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagDeleteCrawlersResponse>>
+     */
+    ragDeleteCrawlers: (
+      requestData: thisProto.RagDeleteCrawlersRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagDeleteCrawlersResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagDeleteCrawlers',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagDeleteCrawlersRequest,
+        responseClass: thisProto.RagDeleteCrawlersResponse
       });
     }
   };
@@ -1346,7 +1277,7 @@ export class RagsClient {
    * @returns Observable<thisProto.RagPartialSuccess>
    */
   ragDeleteDatasets(
-    requestData: thisProto.RagDeleteDatasetsRequest,
+    requestData: thisProto.RagDeleteRequest,
     requestMetadata = new GrpcMetadata()
   ): Observable<thisProto.RagPartialSuccess> {
     return this.$raw
@@ -1371,50 +1302,18 @@ export class RagsClient {
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagGetKnowledgeGraph
+   * Client streaming @/ondewo.nlu.Rags/RagUploadDocument
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagGetKnowledgeGraphResponse>
+   * @returns Observable<thisProto.RagDocument>
    */
-  ragGetKnowledgeGraph(
-    requestData: thisProto.RagGetKnowledgeGraphRequest,
+  ragUploadDocument(
+    requestData: Observable<thisProto.RagUploadDocumentRequest>,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagGetKnowledgeGraphResponse> {
+  ): Observable<thisProto.RagDocument> {
     return this.$raw
-      .ragGetKnowledgeGraph(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagDeleteKnowledgeGraph
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
-   */
-  ragDeleteKnowledgeGraph(
-    requestData: thisProto.RagDeleteKnowledgeGraphRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
-    return this.$raw
-      .ragDeleteKnowledgeGraph(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Client streaming @/ondewo.nlu.Rags/RagUploadDocuments
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagDocumentList>
-   */
-  ragUploadDocuments(
-    requestData: Observable<thisProto.RagUploadDocumentsRequest>,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagDocumentList> {
-    return this.$raw
-      .ragUploadDocuments(requestData, requestMetadata)
+      .ragUploadDocument(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
@@ -1455,12 +1354,12 @@ export class RagsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagListDocumentsResponse>
+   * @returns Observable<thisProto.RagDocumentList>
    */
   ragListDocuments(
     requestData: thisProto.RagListDocumentsRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagListDocumentsResponse> {
+  ): Observable<thisProto.RagDocumentList> {
     return this.$raw
       .ragListDocuments(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -1479,6 +1378,118 @@ export class RagsClient {
   ): Observable<thisProto.RagPartialSuccess> {
     return this.$raw
       .ragDeleteDocuments(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagRetrieval
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagRetrievalResponse>
+   */
+  ragRetrieval(
+    requestData: thisProto.RagRetrievalRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagRetrievalResponse> {
+    return this.$raw
+      .ragRetrieval(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagGetKnowledgeGraph
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagGetKnowledgeGraphResponse>
+   */
+  ragGetKnowledgeGraph(
+    requestData: thisProto.RagDatasetIdRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagGetKnowledgeGraphResponse> {
+    return this.$raw
+      .ragGetKnowledgeGraph(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagDeleteKnowledgeGraph
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<googleProtobuf003.Empty>
+   */
+  ragDeleteKnowledgeGraph(
+    requestData: thisProto.RagDatasetIdRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<googleProtobuf003.Empty> {
+    return this.$raw
+      .ragDeleteKnowledgeGraph(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagConstructKnowledgeGraph
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagConstructKnowledgeGraphResponse>
+   */
+  ragConstructKnowledgeGraph(
+    requestData: thisProto.RagDatasetIdRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagConstructKnowledgeGraphResponse> {
+    return this.$raw
+      .ragConstructKnowledgeGraph(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagKnowledgeGraphStatus
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagTaskStatus>
+   */
+  ragKnowledgeGraphStatus(
+    requestData: thisProto.RagDatasetIdRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagTaskStatus> {
+    return this.$raw
+      .ragKnowledgeGraphStatus(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagConstructRaptor
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagConstructRaptorResponse>
+   */
+  ragConstructRaptor(
+    requestData: thisProto.RagDatasetIdRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagConstructRaptorResponse> {
+    return this.$raw
+      .ragConstructRaptor(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagRaptorStatus
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagTaskStatus>
+   */
+  ragRaptorStatus(
+    requestData: thisProto.RagDatasetIdRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagTaskStatus> {
+    return this.$raw
+      .ragRaptorStatus(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
@@ -1567,94 +1578,142 @@ export class RagsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
+   * @returns Observable<googleProtobuf003.Empty>
    */
   ragUpdateChunk(
     requestData: thisProto.RagUpdateChunkRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
+  ): Observable<googleProtobuf003.Empty> {
     return this.$raw
       .ragUpdateChunk(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagRetrieval
+   * Unary call @/ondewo.nlu.Rags/RagCreateChatAssistant
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagRetrievalResponse>
+   * @returns Observable<thisProto.RagChatAssistant>
    */
-  ragRetrieval(
-    requestData: thisProto.RagRetrievalRequest,
+  ragCreateChatAssistant(
+    requestData: thisProto.RagCreateChatAssistantRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagRetrievalResponse> {
+  ): Observable<thisProto.RagChatAssistant> {
     return this.$raw
-      .ragRetrieval(requestData, requestMetadata)
+      .ragCreateChatAssistant(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagCreateChat
+   * Unary call @/ondewo.nlu.Rags/RagUpdateChatAssistant
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagChat>
+   * @returns Observable<googleProtobuf003.Empty>
    */
-  ragCreateChat(
-    requestData: thisProto.RagCreateChatRequest,
+  ragUpdateChatAssistant(
+    requestData: thisProto.RagUpdateChatAssistantRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagChat> {
+  ): Observable<googleProtobuf003.Empty> {
     return this.$raw
-      .ragCreateChat(requestData, requestMetadata)
+      .ragUpdateChatAssistant(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagUpdateChat
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
-   */
-  ragUpdateChat(
-    requestData: thisProto.RagUpdateChatRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
-    return this.$raw
-      .ragUpdateChat(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagDeleteChats
+   * Unary call @/ondewo.nlu.Rags/RagDeleteChatAssistants
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
    * @returns Observable<thisProto.RagPartialSuccess>
    */
-  ragDeleteChats(
-    requestData: thisProto.RagDeleteChatsRequest,
+  ragDeleteChatAssistants(
+    requestData: thisProto.RagDeleteRequest,
     requestMetadata = new GrpcMetadata()
   ): Observable<thisProto.RagPartialSuccess> {
     return this.$raw
-      .ragDeleteChats(requestData, requestMetadata)
+      .ragDeleteChatAssistants(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagListChats
+   * Unary call @/ondewo.nlu.Rags/RagListChatAssistants
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagChatList>
+   * @returns Observable<thisProto.RagChatAssistantList>
    */
-  ragListChats(
-    requestData: thisProto.RagListChatsRequest,
+  ragListChatAssistants(
+    requestData: thisProto.RagListChatAssistantsRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagChatList> {
+  ): Observable<thisProto.RagChatAssistantList> {
     return this.$raw
-      .ragListChats(requestData, requestMetadata)
+      .ragListChatAssistants(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagCreateAgent
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<googleProtobuf003.Empty>
+   */
+  ragCreateAgent(
+    requestData: thisProto.RagCreateAgentRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<googleProtobuf003.Empty> {
+    return this.$raw
+      .ragCreateAgent(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagUpdateAgent
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<googleProtobuf003.Empty>
+   */
+  ragUpdateAgent(
+    requestData: thisProto.RagUpdateAgentRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<googleProtobuf003.Empty> {
+    return this.$raw
+      .ragUpdateAgent(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagDeleteAgent
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<googleProtobuf003.Empty>
+   */
+  ragDeleteAgent(
+    requestData: thisProto.RagDeleteAgentRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<googleProtobuf003.Empty> {
+    return this.$raw
+      .ragDeleteAgent(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagListAgents
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagAgentList>
+   */
+  ragListAgents(
+    requestData: thisProto.RagListAgentsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagAgentList> {
+    return this.$raw
+      .ragListAgents(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
@@ -1675,32 +1734,16 @@ export class RagsClient {
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagCreateAgentSession
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagAgentSession>
-   */
-  ragCreateAgentSession(
-    requestData: thisProto.RagCreateAgentSessionRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagAgentSession> {
-    return this.$raw
-      .ragCreateAgentSession(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
    * Unary call @/ondewo.nlu.Rags/RagUpdateChatSession
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
+   * @returns Observable<googleProtobuf003.Empty>
    */
   ragUpdateChatSession(
     requestData: thisProto.RagUpdateChatSessionRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
+  ): Observable<googleProtobuf003.Empty> {
     return this.$raw
       .ragUpdateChatSession(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -1723,22 +1766,6 @@ export class RagsClient {
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagListAgentSessions
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagAgentSessionList>
-   */
-  ragListAgentSessions(
-    requestData: thisProto.RagListAgentSessionsRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagAgentSessionList> {
-    return this.$raw
-      .ragListAgentSessions(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
    * Unary call @/ondewo.nlu.Rags/RagDeleteChatSessions
    *
    * @param requestMessage Request message
@@ -1751,6 +1778,22 @@ export class RagsClient {
   ): Observable<thisProto.RagPartialSuccess> {
     return this.$raw
       .ragDeleteChatSessions(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagListAgentSessions
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagAgentSessionList>
+   */
+  ragListAgentSessions(
+    requestData: thisProto.RagListAgentSessionsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagAgentSessionList> {
+    return this.$raw
+      .ragListAgentSessions(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
@@ -1787,22 +1830,6 @@ export class RagsClient {
   }
 
   /**
-   * Server streaming @/ondewo.nlu.Rags/RagOpenAiChatCompletion
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagOpenAiChatCompletionResponse>
-   */
-  ragOpenAiChatCompletion(
-    requestData: thisProto.RagOpenAiChatCompletionRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagOpenAiChatCompletionResponse> {
-    return this.$raw
-      .ragOpenAiChatCompletion(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
    * Server streaming @/ondewo.nlu.Rags/RagAgentCompletion
    *
    * @param requestMessage Request message
@@ -1815,278 +1842,6 @@ export class RagsClient {
   ): Observable<thisProto.RagAgentCompletionResponse> {
     return this.$raw
       .ragAgentCompletion(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Server streaming @/ondewo.nlu.Rags/RagOpenAiAgentCompletion
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagOpenAiChatCompletionResponse>
-   */
-  ragOpenAiAgentCompletion(
-    requestData: thisProto.RagOpenAiAgentCompletionRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagOpenAiChatCompletionResponse> {
-    return this.$raw
-      .ragOpenAiAgentCompletion(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagCreateAgent
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
-   */
-  ragCreateAgent(
-    requestData: thisProto.RagCreateAgentRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
-    return this.$raw
-      .ragCreateAgent(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagUpdateAgent
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
-   */
-  ragUpdateAgent(
-    requestData: thisProto.RagUpdateAgentRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
-    return this.$raw
-      .ragUpdateAgent(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagDeleteAgent
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
-   */
-  ragDeleteAgent(
-    requestData: thisProto.RagDeleteAgentRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
-    return this.$raw
-      .ragDeleteAgent(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagListAgents
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagAgentList>
-   */
-  ragListAgents(
-    requestData: thisProto.RagListAgentsRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagAgentList> {
-    return this.$raw
-      .ragListAgents(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Client streaming @/ondewo.nlu.Rags/RagUploadFiles
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagFileList>
-   */
-  ragUploadFiles(
-    requestData: Observable<thisProto.RagUploadFilesRequest>,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagFileList> {
-    return this.$raw
-      .ragUploadFiles(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagCreateFile
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagFile>
-   */
-  ragCreateFile(
-    requestData: thisProto.RagCreateFileRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagFile> {
-    return this.$raw
-      .ragCreateFile(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagListFiles
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagListFilesResponse>
-   */
-  ragListFiles(
-    requestData: thisProto.RagListFilesRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagListFilesResponse> {
-    return this.$raw
-      .ragListFiles(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagGetRootFolder
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagGetRootFolderResponse>
-   */
-  ragGetRootFolder(
-    requestData: thisProto.RagGetRootFolderRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagGetRootFolderResponse> {
-    return this.$raw
-      .ragGetRootFolder(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagGetParentFolder
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagGetParentFolderResponse>
-   */
-  ragGetParentFolder(
-    requestData: thisProto.RagGetParentFolderRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagGetParentFolderResponse> {
-    return this.$raw
-      .ragGetParentFolder(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagGetAllParentFolders
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagGetAllParentFoldersResponse>
-   */
-  ragGetAllParentFolders(
-    requestData: thisProto.RagGetAllParentFoldersRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagGetAllParentFoldersResponse> {
-    return this.$raw
-      .ragGetAllParentFolders(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagDeleteFiles
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
-   */
-  ragDeleteFiles(
-    requestData: thisProto.RagDeleteFilesRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
-    return this.$raw
-      .ragDeleteFiles(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagRenameFile
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
-   */
-  ragRenameFile(
-    requestData: thisProto.RagRenameFileRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
-    return this.$raw
-      .ragRenameFile(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Server streaming @/ondewo.nlu.Rags/RagGetFile
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagFileChunk>
-   */
-  ragGetFile(
-    requestData: thisProto.RagGetFileRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagFileChunk> {
-    return this.$raw
-      .ragGetFile(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagMoveFile
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf000.Empty>
-   */
-  ragMoveFile(
-    requestData: thisProto.RagMoveFileRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf000.Empty> {
-    return this.$raw
-      .ragMoveFile(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagFileToDocument
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagFileToDocumentList>
-   */
-  ragFileToDocument(
-    requestData: thisProto.RagFileToDocumentRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagFileToDocumentList> {
-    return this.$raw
-      .ragFileToDocument(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Rags/RagDifyRetrieval
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagDifyRecordList>
-   */
-  ragDifyRetrieval(
-    requestData: thisProto.RagDifyRetrievalRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagDifyRecordList> {
-    return this.$raw
-      .ragDifyRetrieval(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
@@ -2123,146 +1878,258 @@ export class RagsClient {
   }
 
   /**
-   * Server streaming @/ondewo.nlu.Rags/RagChatbotCompletion
+   * Unary call @/ondewo.nlu.Rags/RagCreateCrawler
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagChatCompletionResponse>
+   * @returns Observable<thisProto.RagCrawler>
    */
-  ragChatbotCompletion(
-    requestData: thisProto.RagChatbotCompletionRequest,
+  ragCreateCrawler(
+    requestData: thisProto.RagCreateCrawlerRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagChatCompletionResponse> {
+  ): Observable<thisProto.RagCrawler> {
     return this.$raw
-      .ragChatbotCompletion(requestData, requestMetadata)
+      .ragCreateCrawler(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagChatbotInfo
+   * Unary call @/ondewo.nlu.Rags/RagGetCrawler
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagChatbotInfoResponse>
+   * @returns Observable<thisProto.RagCrawler>
    */
-  ragChatbotInfo(
-    requestData: thisProto.RagChatbotInfoRequest,
+  ragGetCrawler(
+    requestData: thisProto.RagGetCrawlerRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagChatbotInfoResponse> {
+  ): Observable<thisProto.RagCrawler> {
     return this.$raw
-      .ragChatbotInfo(requestData, requestMetadata)
+      .ragGetCrawler(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Server streaming @/ondewo.nlu.Rags/RagAgentbotCompletion
+   * Unary call @/ondewo.nlu.Rags/RagListCrawlers
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagAgentCompletionResponse>
+   * @returns Observable<thisProto.RagListCrawlersResponse>
    */
-  ragAgentbotCompletion(
-    requestData: thisProto.RagAgentbotCompletionRequest,
+  ragListCrawlers(
+    requestData: thisProto.RagListCrawlersRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagAgentCompletionResponse> {
+  ): Observable<thisProto.RagListCrawlersResponse> {
     return this.$raw
-      .ragAgentbotCompletion(requestData, requestMetadata)
+      .ragListCrawlers(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagAgentbotInputs
+   * Unary call @/ondewo.nlu.Rags/RagUpdateCrawler
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagAgentbotInputsResponse>
+   * @returns Observable<thisProto.RagCrawler>
    */
-  ragAgentbotInputs(
-    requestData: thisProto.RagAgentbotInputsRequest,
+  ragUpdateCrawler(
+    requestData: thisProto.RagUpdateCrawlerRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagAgentbotInputsResponse> {
+  ): Observable<thisProto.RagCrawler> {
     return this.$raw
-      .ragAgentbotInputs(requestData, requestMetadata)
+      .ragUpdateCrawler(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Server streaming @/ondewo.nlu.Rags/RagSearchbotAsk
+   * Unary call @/ondewo.nlu.Rags/RagDeleteCrawler
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagAskResponse>
+   * @returns Observable<thisProto.RagDeleteCrawlerResponse>
    */
-  ragSearchbotAsk(
-    requestData: thisProto.RagSearchbotAskRequest,
+  ragDeleteCrawler(
+    requestData: thisProto.RagDeleteCrawlerRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagAskResponse> {
+  ): Observable<thisProto.RagDeleteCrawlerResponse> {
     return this.$raw
-      .ragSearchbotAsk(requestData, requestMetadata)
+      .ragDeleteCrawler(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagSearchbotRetrieval
+   * Unary call @/ondewo.nlu.Rags/RagStartCrawler
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagSearchbotRetrievalResponse>
+   * @returns Observable<ondewoNlu013.Operation>
    */
-  ragSearchbotRetrieval(
-    requestData: thisProto.RagSearchbotRetrievalRequest,
+  ragStartCrawler(
+    requestData: thisProto.RagStartCrawlerRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagSearchbotRetrievalResponse> {
+  ): Observable<ondewoNlu013.Operation> {
     return this.$raw
-      .ragSearchbotRetrieval(requestData, requestMetadata)
+      .ragStartCrawler(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagSearchbotRelatedQuestions
+   * Unary call @/ondewo.nlu.Rags/RagStopCrawler
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagRelatedQuestionsResponse>
+   * @returns Observable<thisProto.RagStopCrawlerResponse>
    */
-  ragSearchbotRelatedQuestions(
-    requestData: thisProto.RagSearchbotRelatedQuestionsRequest,
+  ragStopCrawler(
+    requestData: thisProto.RagStopCrawlerRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagRelatedQuestionsResponse> {
+  ): Observable<thisProto.RagStopCrawlerResponse> {
     return this.$raw
-      .ragSearchbotRelatedQuestions(requestData, requestMetadata)
+      .ragStopCrawler(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagSearchbotDetail
+   * Unary call @/ondewo.nlu.Rags/RagGetCrawlerRun
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.RagSearchbotDetailResponse>
+   * @returns Observable<ondewoNlu013.Operation>
    */
-  ragSearchbotDetail(
-    requestData: thisProto.RagSearchbotDetailRequest,
+  ragGetCrawlerRun(
+    requestData: thisProto.RagGetCrawlerRunRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.RagSearchbotDetailResponse> {
+  ): Observable<ondewoNlu013.Operation> {
     return this.$raw
-      .ragSearchbotDetail(requestData, requestMetadata)
+      .ragGetCrawlerRun(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
   /**
-   * Unary call @/ondewo.nlu.Rags/RagSearchbotMindmap
+   * Unary call @/ondewo.nlu.Rags/RagListCrawlerRuns
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf001.Struct>
+   * @returns Observable<thisProto.RagListCrawlerRunsResponse>
    */
-  ragSearchbotMindmap(
-    requestData: thisProto.RagSearchbotMindmapRequest,
+  ragListCrawlerRuns(
+    requestData: thisProto.RagListCrawlerRunsRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf001.Struct> {
+  ): Observable<thisProto.RagListCrawlerRunsResponse> {
     return this.$raw
-      .ragSearchbotMindmap(requestData, requestMetadata)
+      .ragListCrawlerRuns(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagDeleteCrawlerRuns
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagDeleteCrawlerRunsResponse>
+   */
+  ragDeleteCrawlerRuns(
+    requestData: thisProto.RagDeleteCrawlerRunsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagDeleteCrawlerRunsResponse> {
+    return this.$raw
+      .ragDeleteCrawlerRuns(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagGetCrawlerResult
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagCrawlerResult>
+   */
+  ragGetCrawlerResult(
+    requestData: thisProto.RagGetCrawlerResultRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagCrawlerResult> {
+    return this.$raw
+      .ragGetCrawlerResult(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagGetCrawlerResults
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagGetCrawlerResultsResponse>
+   */
+  ragGetCrawlerResults(
+    requestData: thisProto.RagGetCrawlerResultsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagGetCrawlerResultsResponse> {
+    return this.$raw
+      .ragGetCrawlerResults(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagAddCrawlerResultsToDatasets
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<ondewoNlu013.Operation>
+   */
+  ragAddCrawlerResultsToDatasets(
+    requestData: thisProto.RagAddCrawlerResultsToDatasetsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<ondewoNlu013.Operation> {
+    return this.$raw
+      .ragAddCrawlerResultsToDatasets(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagRemoveCrawlerResultsFromDatasets
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<ondewoNlu013.Operation>
+   */
+  ragRemoveCrawlerResultsFromDatasets(
+    requestData: thisProto.RagRemoveCrawlerResultsFromDatasetsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<ondewoNlu013.Operation> {
+    return this.$raw
+      .ragRemoveCrawlerResultsFromDatasets(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagGetCrawlerAttachedDatasets
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagGetCrawlerAttachedDatasetsResponse>
+   */
+  ragGetCrawlerAttachedDatasets(
+    requestData: thisProto.RagGetCrawlerAttachedDatasetsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagGetCrawlerAttachedDatasetsResponse> {
+    return this.$raw
+      .ragGetCrawlerAttachedDatasets(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagDeleteCrawlers
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagDeleteCrawlersResponse>
+   */
+  ragDeleteCrawlers(
+    requestData: thisProto.RagDeleteCrawlersRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagDeleteCrawlersResponse> {
+    return this.$raw
+      .ragDeleteCrawlers(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 }
