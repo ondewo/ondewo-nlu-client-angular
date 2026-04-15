@@ -4,7 +4,7 @@ import { uint8ArrayToBase64, GrpcMetadata, GrpcCallType } from '@ngx-grpc/common
 import * as i1 from '@ngx-grpc/core';
 import { throwStatusErrors, takeMessages, GRPC_CLIENT_FACTORY } from '@ngx-grpc/core';
 import { BinaryReader, BinaryWriter } from 'google-protobuf';
-import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 
 /**
  * Message implementation for ondewo.nlu.Context
@@ -60,12 +60,12 @@ class Context {
                     _instance.lifespanTime = _reader.readFloat();
                     break;
                 case 5:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 7:
                     _instance.createdBy = _reader.readString();
@@ -104,10 +104,10 @@ class Context {
             _writer.writeFloat(4, _instance.lifespanTime);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(5, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(6, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(7, _instance.createdBy);
@@ -134,10 +134,10 @@ class Context {
             : {}),
             (this.lifespanTime = _value.lifespanTime);
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -307,12 +307,12 @@ class Context {
                         _instance.valueOriginal = _reader.readString();
                         break;
                     case 5:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 6:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 7:
                         _instance.createdBy = _reader.readString();
@@ -345,10 +345,10 @@ class Context {
                 _writer.writeString(4, _instance.valueOriginal);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(5, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(5, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(6, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(6, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(7, _instance.createdBy);
@@ -368,10 +368,10 @@ class Context {
             this.value = _value.value;
             this.valueOriginal = _value.valueOriginal;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -1094,8 +1094,8 @@ class UpdateContextRequest {
                     _reader.readMessage(_instance.context, Context.deserializeBinaryFromReader);
                     break;
                 case 2:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -1113,7 +1113,7 @@ class UpdateContextRequest {
             _writer.writeMessage(1, _instance.context, Context.serializeBinaryToWriter);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(2, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -1124,7 +1124,7 @@ class UpdateContextRequest {
         _value = _value || {};
         this.context = _value.context ? new Context(_value.context) : undefined;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         UpdateContextRequest.refineValues(this);
     }
@@ -1438,6 +1438,17 @@ var NotificationOrigin;
     NotificationOrigin[NotificationOrigin["NOTIFICATION_ORIGIN_ONDEWO_VTSI"] = 8] = "NOTIFICATION_ORIGIN_ONDEWO_VTSI";
     NotificationOrigin[NotificationOrigin["NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ"] = 9] = "NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ";
 })(NotificationOrigin || (NotificationOrigin = {}));
+var LogSeverity;
+(function (LogSeverity) {
+    LogSeverity[LogSeverity["LOG_SEVERITY_UNSPECIFIED"] = 0] = "LOG_SEVERITY_UNSPECIFIED";
+    LogSeverity[LogSeverity["LOG_SEVERITY_TRACE"] = 1] = "LOG_SEVERITY_TRACE";
+    LogSeverity[LogSeverity["LOG_SEVERITY_DEBUG"] = 2] = "LOG_SEVERITY_DEBUG";
+    LogSeverity[LogSeverity["LOG_SEVERITY_INFO"] = 3] = "LOG_SEVERITY_INFO";
+    LogSeverity[LogSeverity["LOG_SEVERITY_SUCCESS"] = 4] = "LOG_SEVERITY_SUCCESS";
+    LogSeverity[LogSeverity["LOG_SEVERITY_WARNING"] = 5] = "LOG_SEVERITY_WARNING";
+    LogSeverity[LogSeverity["LOG_SEVERITY_ERROR"] = 6] = "LOG_SEVERITY_ERROR";
+    LogSeverity[LogSeverity["LOG_SEVERITY_CRITICAL"] = 7] = "LOG_SEVERITY_CRITICAL";
+})(LogSeverity || (LogSeverity = {}));
 /**
  * Message implementation for ondewo.nlu.StatResponse
  */
@@ -1594,12 +1605,12 @@ class Comment {
                     _instance.parentCommentName = _reader.readString();
                     break;
                 case 6:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 7:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 8:
                     _instance.createdBy = _reader.readString();
@@ -1635,10 +1646,10 @@ class Comment {
             _writer.writeString(5, _instance.parentCommentName);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(6, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(8, _instance.createdBy);
@@ -1659,10 +1670,10 @@ class Comment {
         this.commentAboutName = _value.commentAboutName;
         this.parentCommentName = _value.parentCommentName;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -1846,15 +1857,15 @@ class Notification {
                     _instance.notificationFlaggedStatus = _reader.readEnum();
                     break;
                 case 7:
-                    _instance.notificationFlaggedTimestamp = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.notificationFlaggedTimestamp, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.notificationFlaggedTimestamp = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.notificationFlaggedTimestamp, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 8:
                     _instance.notificationReadStatus = _reader.readEnum();
                     break;
                 case 9:
-                    _instance.notificationReadTimestamp = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.notificationReadTimestamp, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.notificationReadTimestamp = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.notificationReadTimestamp, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 10:
                     _instance.notificationOrigin = _reader.readEnum();
@@ -1872,12 +1883,12 @@ class Notification {
                     _instance.notificationVisibility = _reader.readEnum();
                     break;
                 case 15:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 16:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 17:
                     _instance.createdBy = _reader.readString();
@@ -1916,13 +1927,13 @@ class Notification {
             _writer.writeEnum(6, _instance.notificationFlaggedStatus);
         }
         if (_instance.notificationFlaggedTimestamp) {
-            _writer.writeMessage(7, _instance.notificationFlaggedTimestamp, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(7, _instance.notificationFlaggedTimestamp, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.notificationReadStatus) {
             _writer.writeEnum(8, _instance.notificationReadStatus);
         }
         if (_instance.notificationReadTimestamp) {
-            _writer.writeMessage(9, _instance.notificationReadTimestamp, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.notificationReadTimestamp, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.notificationOrigin) {
             _writer.writeEnum(10, _instance.notificationOrigin);
@@ -1940,10 +1951,10 @@ class Notification {
             _writer.writeEnum(14, _instance.notificationVisibility);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(15, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(15, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(16, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(16, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(17, _instance.createdBy);
@@ -1965,11 +1976,11 @@ class Notification {
         this.descriptionLong = _value.descriptionLong;
         this.notificationFlaggedStatus = _value.notificationFlaggedStatus;
         this.notificationFlaggedTimestamp = _value.notificationFlaggedTimestamp
-            ? new googleProtobuf003.Timestamp(_value.notificationFlaggedTimestamp)
+            ? new googleProtobuf004.Timestamp(_value.notificationFlaggedTimestamp)
             : undefined;
         this.notificationReadStatus = _value.notificationReadStatus;
         this.notificationReadTimestamp = _value.notificationReadTimestamp
-            ? new googleProtobuf003.Timestamp(_value.notificationReadTimestamp)
+            ? new googleProtobuf004.Timestamp(_value.notificationReadTimestamp)
             : undefined;
         this.notificationOrigin = _value.notificationOrigin;
         this.originName = _value.originName;
@@ -1977,10 +1988,10 @@ class Notification {
         this.notificationType = _value.notificationType;
         this.notificationVisibility = _value.notificationVisibility;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -2455,12 +2466,12 @@ class NotificationFilter {
                         _instance.notificationReadStatus || []));
                     break;
                 case 6:
-                    _instance.earliest = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.earliest, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.earliest = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.earliest, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 7:
-                    _instance.latest = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.latest, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.latest = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.latest, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 8:
                     (_instance.userNames = _instance.userNames || []).push(_reader.readString());
@@ -2499,10 +2510,10 @@ class NotificationFilter {
             _writer.writePackedEnum(5, _instance.notificationReadStatus);
         }
         if (_instance.earliest) {
-            _writer.writeMessage(6, _instance.earliest, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.earliest, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.latest) {
-            _writer.writeMessage(7, _instance.latest, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(7, _instance.latest, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.userNames && _instance.userNames.length) {
             _writer.writeRepeatedString(8, _instance.userNames);
@@ -2523,10 +2534,10 @@ class NotificationFilter {
         this.notificationFlaggedStatus = (_value.notificationFlaggedStatus || []).slice();
         this.notificationReadStatus = (_value.notificationReadStatus || []).slice();
         this.earliest = _value.earliest
-            ? new googleProtobuf003.Timestamp(_value.earliest)
+            ? new googleProtobuf004.Timestamp(_value.earliest)
             : undefined;
         this.latest = _value.latest
-            ? new googleProtobuf003.Timestamp(_value.latest)
+            ? new googleProtobuf004.Timestamp(_value.latest)
             : undefined;
         this.userNames = (_value.userNames || []).slice();
         this.originNames = (_value.originNames || []).slice();
@@ -2679,8 +2690,8 @@ class ListNotificationsRequest {
                     _instance.pageToken = _reader.readString();
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -2701,7 +2712,7 @@ class ListNotificationsRequest {
             _writer.writeString(2, _instance.pageToken);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -2715,7 +2726,7 @@ class ListNotificationsRequest {
             : undefined;
         this.pageToken = _value.pageToken;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListNotificationsRequest.refineValues(this);
     }
@@ -3167,8 +3178,8 @@ class KeyValuePair {
                     _instance.stringValue = _reader.readString();
                     break;
                 case 6:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -3198,7 +3209,7 @@ class KeyValuePair {
             _writer.writeString(5, _instance.stringValue);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(6, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
     }
     /**
@@ -3214,7 +3225,7 @@ class KeyValuePair {
         this.doubleValue = _value.doubleValue;
         this.stringValue = _value.stringValue;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         KeyValuePair.refineValues(this);
     }
@@ -3342,6 +3353,282 @@ class KeyValuePair {
         ValueCase[ValueCase["createdAt"] = 5] = "createdAt";
     })(ValueCase = KeyValuePair.ValueCase || (KeyValuePair.ValueCase = {}));
 })(KeyValuePair || (KeyValuePair = {}));
+/**
+ * Message implementation for ondewo.nlu.LogEntry
+ */
+class LogEntry {
+    static { this.id = 'ondewo.nlu.LogEntry'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new LogEntry();
+        LogEntry.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.name = _instance.name || '';
+        _instance.logEntrySequenceIndex = _instance.logEntrySequenceIndex || 0;
+        _instance.displayName = _instance.displayName || '';
+        _instance.logEntryTimestamp = _instance.logEntryTimestamp || undefined;
+        _instance.logEntryReceiveTimestamp =
+            _instance.logEntryReceiveTimestamp || undefined;
+        _instance.logEntrySeverity = _instance.logEntrySeverity || 0;
+        _instance.logEntryPhase = _instance.logEntryPhase || '';
+        _instance.logEntryOperationName = _instance.logEntryOperationName || '';
+        _instance.logEntryDetails = _instance.logEntryDetails || undefined;
+        _instance.logEntryContext = _instance.logEntryContext || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.name = _reader.readString();
+                    break;
+                case 2:
+                    _instance.logEntrySequenceIndex = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.displayName = _reader.readString();
+                    break;
+                case 4:
+                    _instance.logEntryTimestamp = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.logEntryTimestamp, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 5:
+                    _instance.logEntryReceiveTimestamp = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.logEntryReceiveTimestamp, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 6:
+                    _instance.logEntrySeverity = _reader.readEnum();
+                    break;
+                case 7:
+                    _instance.logEntryPhase = _reader.readString();
+                    break;
+                case 8:
+                    _instance.logEntryOperationName = _reader.readString();
+                    break;
+                case 9:
+                    _instance.logEntryDetails = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.logEntryDetails, googleProtobuf004.Struct.deserializeBinaryFromReader);
+                    break;
+                case 10:
+                    _instance.logEntryContext = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.logEntryContext, googleProtobuf004.Struct.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        LogEntry.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.name) {
+            _writer.writeString(1, _instance.name);
+        }
+        if (_instance.logEntrySequenceIndex) {
+            _writer.writeInt32(2, _instance.logEntrySequenceIndex);
+        }
+        if (_instance.displayName) {
+            _writer.writeString(3, _instance.displayName);
+        }
+        if (_instance.logEntryTimestamp) {
+            _writer.writeMessage(4, _instance.logEntryTimestamp, googleProtobuf004.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.logEntryReceiveTimestamp) {
+            _writer.writeMessage(5, _instance.logEntryReceiveTimestamp, googleProtobuf004.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.logEntrySeverity) {
+            _writer.writeEnum(6, _instance.logEntrySeverity);
+        }
+        if (_instance.logEntryPhase) {
+            _writer.writeString(7, _instance.logEntryPhase);
+        }
+        if (_instance.logEntryOperationName) {
+            _writer.writeString(8, _instance.logEntryOperationName);
+        }
+        if (_instance.logEntryDetails) {
+            _writer.writeMessage(9, _instance.logEntryDetails, googleProtobuf004.Struct.serializeBinaryToWriter);
+        }
+        if (_instance.logEntryContext) {
+            _writer.writeMessage(10, _instance.logEntryContext, googleProtobuf004.Struct.serializeBinaryToWriter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LogEntry to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.logEntrySequenceIndex = _value.logEntrySequenceIndex;
+        this.displayName = _value.displayName;
+        this.logEntryTimestamp = _value.logEntryTimestamp
+            ? new googleProtobuf004.Timestamp(_value.logEntryTimestamp)
+            : undefined;
+        this.logEntryReceiveTimestamp = _value.logEntryReceiveTimestamp
+            ? new googleProtobuf004.Timestamp(_value.logEntryReceiveTimestamp)
+            : undefined;
+        this.logEntrySeverity = _value.logEntrySeverity;
+        this.logEntryPhase = _value.logEntryPhase;
+        this.logEntryOperationName = _value.logEntryOperationName;
+        this.logEntryDetails = _value.logEntryDetails
+            ? new googleProtobuf004.Struct(_value.logEntryDetails)
+            : undefined;
+        this.logEntryContext = _value.logEntryContext
+            ? new googleProtobuf004.Struct(_value.logEntryContext)
+            : undefined;
+        LogEntry.refineValues(this);
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    get logEntrySequenceIndex() {
+        return this._logEntrySequenceIndex;
+    }
+    set logEntrySequenceIndex(value) {
+        this._logEntrySequenceIndex = value;
+    }
+    get displayName() {
+        return this._displayName;
+    }
+    set displayName(value) {
+        this._displayName = value;
+    }
+    get logEntryTimestamp() {
+        return this._logEntryTimestamp;
+    }
+    set logEntryTimestamp(value) {
+        this._logEntryTimestamp = value;
+    }
+    get logEntryReceiveTimestamp() {
+        return this._logEntryReceiveTimestamp;
+    }
+    set logEntryReceiveTimestamp(value) {
+        this._logEntryReceiveTimestamp = value;
+    }
+    get logEntrySeverity() {
+        return this._logEntrySeverity;
+    }
+    set logEntrySeverity(value) {
+        this._logEntrySeverity = value;
+    }
+    get logEntryPhase() {
+        return this._logEntryPhase;
+    }
+    set logEntryPhase(value) {
+        this._logEntryPhase = value;
+    }
+    get logEntryOperationName() {
+        return this._logEntryOperationName;
+    }
+    set logEntryOperationName(value) {
+        this._logEntryOperationName = value;
+    }
+    get logEntryDetails() {
+        return this._logEntryDetails;
+    }
+    set logEntryDetails(value) {
+        this._logEntryDetails = value;
+    }
+    get logEntryContext() {
+        return this._logEntryContext;
+    }
+    set logEntryContext(value) {
+        this._logEntryContext = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        LogEntry.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            name: this.name,
+            logEntrySequenceIndex: this.logEntrySequenceIndex,
+            displayName: this.displayName,
+            logEntryTimestamp: this.logEntryTimestamp
+                ? this.logEntryTimestamp.toObject()
+                : undefined,
+            logEntryReceiveTimestamp: this.logEntryReceiveTimestamp
+                ? this.logEntryReceiveTimestamp.toObject()
+                : undefined,
+            logEntrySeverity: this.logEntrySeverity,
+            logEntryPhase: this.logEntryPhase,
+            logEntryOperationName: this.logEntryOperationName,
+            logEntryDetails: this.logEntryDetails
+                ? this.logEntryDetails.toObject()
+                : undefined,
+            logEntryContext: this.logEntryContext
+                ? this.logEntryContext.toObject()
+                : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            name: this.name,
+            logEntrySequenceIndex: this.logEntrySequenceIndex,
+            displayName: this.displayName,
+            logEntryTimestamp: this.logEntryTimestamp
+                ? this.logEntryTimestamp.toProtobufJSON(options)
+                : null,
+            logEntryReceiveTimestamp: this.logEntryReceiveTimestamp
+                ? this.logEntryReceiveTimestamp.toProtobufJSON(options)
+                : null,
+            logEntrySeverity: LogSeverity[this.logEntrySeverity === null || this.logEntrySeverity === undefined
+                ? 0
+                : this.logEntrySeverity],
+            logEntryPhase: this.logEntryPhase,
+            logEntryOperationName: this.logEntryOperationName,
+            logEntryDetails: this.logEntryDetails
+                ? this.logEntryDetails.toProtobufJSON(options)
+                : null,
+            logEntryContext: this.logEntryContext
+                ? this.logEntryContext.toProtobufJSON(options)
+                : null
+        };
+    }
+}
 
 /**
  * Message implementation for google.rpc.Status
@@ -3383,8 +3670,8 @@ class Status {
                     _instance.message = _reader.readString();
                     break;
                 case 3:
-                    const messageInitializer3 = new googleProtobuf003.Any();
-                    _reader.readMessage(messageInitializer3, googleProtobuf003.Any.deserializeBinaryFromReader);
+                    const messageInitializer3 = new googleProtobuf004.Any();
+                    _reader.readMessage(messageInitializer3, googleProtobuf004.Any.deserializeBinaryFromReader);
                     (_instance.details = _instance.details || []).push(messageInitializer3);
                     break;
                 default:
@@ -3406,7 +3693,7 @@ class Status {
             _writer.writeString(2, _instance.message);
         }
         if (_instance.details && _instance.details.length) {
-            _writer.writeRepeatedMessage(3, _instance.details, googleProtobuf003.Any.serializeBinaryToWriter);
+            _writer.writeRepeatedMessage(3, _instance.details, googleProtobuf004.Any.serializeBinaryToWriter);
         }
     }
     /**
@@ -3417,7 +3704,7 @@ class Status {
         _value = _value || {};
         this.code = _value.code;
         this.message = _value.message;
-        this.details = (_value.details || []).map(m => new googleProtobuf003.Any(m));
+        this.details = (_value.details || []).map(m => new googleProtobuf004.Any(m));
         Status.refineValues(this);
     }
     get code() {
@@ -3763,23 +4050,23 @@ class Intent {
                     _instance.status = _reader.readEnum();
                     break;
                 case 36:
-                    _instance.startDate = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.startDate, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.startDate = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.startDate, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 37:
-                    _instance.endDate = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.endDate, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.endDate = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.endDate, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 38:
                     (_instance.tags = _instance.tags || []).push(_reader.readString());
                     break;
                 case 39:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 40:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 41:
                     _instance.createdBy = _reader.readString();
@@ -3873,19 +4160,19 @@ class Intent {
             _writer.writeEnum(35, _instance.status);
         }
         if (_instance.startDate) {
-            _writer.writeMessage(36, _instance.startDate, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(36, _instance.startDate, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.endDate) {
-            _writer.writeMessage(37, _instance.endDate, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(37, _instance.endDate, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.tags && _instance.tags.length) {
             _writer.writeRepeatedString(38, _instance.tags);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(39, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(39, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(40, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(40, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(41, _instance.createdBy);
@@ -3925,17 +4212,17 @@ class Intent {
         this.trainingPhraseCount = _value.trainingPhraseCount;
         this.status = _value.status;
         this.startDate = _value.startDate
-            ? new googleProtobuf003.Timestamp(_value.startDate)
+            ? new googleProtobuf004.Timestamp(_value.startDate)
             : undefined;
         this.endDate = _value.endDate
-            ? new googleProtobuf003.Timestamp(_value.endDate)
+            ? new googleProtobuf004.Timestamp(_value.endDate)
             : undefined;
         this.tags = (_value.tags || []).slice();
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -4300,12 +4587,12 @@ class Intent {
                         _instance.languageCode = _reader.readString();
                         break;
                     case 7:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 8:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 9:
                         _instance.createdBy = _reader.readString();
@@ -4344,10 +4631,10 @@ class Intent {
                 _writer.writeString(6, _instance.languageCode);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(7, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(7, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(9, _instance.createdBy);
@@ -4369,10 +4656,10 @@ class Intent {
             this.timesAddedCount = _value.timesAddedCount;
             this.languageCode = _value.languageCode;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -4572,12 +4859,12 @@ class Intent {
                             _instance.parameterDisplayName = _reader.readString();
                             break;
                         case 10:
-                            _instance.createdAt = new googleProtobuf003.Timestamp();
-                            _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                            _instance.createdAt = new googleProtobuf004.Timestamp();
+                            _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                             break;
                         case 11:
-                            _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                            _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                            _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                            _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                             break;
                         case 12:
                             _instance.createdBy = _reader.readString();
@@ -4622,10 +4909,10 @@ class Intent {
                     _writer.writeString(9, _instance.parameterDisplayName);
                 }
                 if (_instance.createdAt) {
-                    _writer.writeMessage(10, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                    _writer.writeMessage(10, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
                 }
                 if (_instance.modifiedAt) {
-                    _writer.writeMessage(11, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                    _writer.writeMessage(11, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
                 }
                 if (_instance.createdBy) {
                     _writer.writeString(12, _instance.createdBy);
@@ -4649,10 +4936,10 @@ class Intent {
                 this.parameterName = _value.parameterName;
                 this.parameterDisplayName = _value.parameterDisplayName;
                 this.createdAt = _value.createdAt
-                    ? new googleProtobuf003.Timestamp(_value.createdAt)
+                    ? new googleProtobuf004.Timestamp(_value.createdAt)
                     : undefined;
                 this.modifiedAt = _value.modifiedAt
-                    ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                    ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                     : undefined;
                 this.createdBy = _value.createdBy;
                 this.modifiedBy = _value.modifiedBy;
@@ -4867,12 +5154,12 @@ class Intent {
                         _instance.isList = _reader.readBool();
                         break;
                     case 10:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 11:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 12:
                         _instance.createdBy = _reader.readString();
@@ -4920,10 +5207,10 @@ class Intent {
                 _writer.writeBool(9, _instance.isList);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(10, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(10, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(11, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(11, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(12, _instance.createdBy);
@@ -4948,10 +5235,10 @@ class Intent {
             this.prompts = (_value.prompts || []).map(m => new Intent.Parameter.Prompt(m));
             this.isList = _value.isList;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -5148,12 +5435,12 @@ class Intent {
                             _instance.languageCode = _reader.readString();
                             break;
                         case 4:
-                            _instance.createdAt = new googleProtobuf003.Timestamp();
-                            _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                            _instance.createdAt = new googleProtobuf004.Timestamp();
+                            _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                             break;
                         case 5:
-                            _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                            _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                            _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                            _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                             break;
                         case 6:
                             _instance.createdBy = _reader.readString();
@@ -5183,10 +5470,10 @@ class Intent {
                     _writer.writeString(3, _instance.languageCode);
                 }
                 if (_instance.createdAt) {
-                    _writer.writeMessage(4, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                    _writer.writeMessage(4, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
                 }
                 if (_instance.modifiedAt) {
-                    _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                    _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
                 }
                 if (_instance.createdBy) {
                     _writer.writeString(6, _instance.createdBy);
@@ -5205,10 +5492,10 @@ class Intent {
                 this.text = _value.text;
                 this.languageCode = _value.languageCode;
                 this.createdAt = _value.createdAt
-                    ? new googleProtobuf003.Timestamp(_value.createdAt)
+                    ? new googleProtobuf004.Timestamp(_value.createdAt)
                     : undefined;
                 this.modifiedAt = _value.modifiedAt
-                    ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                    ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                     : undefined;
                 this.createdBy = _value.createdBy;
                 this.modifiedBy = _value.modifiedBy;
@@ -5371,8 +5658,8 @@ class Intent {
                         _reader.readMessage(_instance.card, Intent.Message.Card.deserializeBinaryFromReader);
                         break;
                     case 5:
-                        _instance.payload = new googleProtobuf003.Struct();
-                        _reader.readMessage(_instance.payload, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                        _instance.payload = new googleProtobuf004.Struct();
+                        _reader.readMessage(_instance.payload, googleProtobuf004.Struct.deserializeBinaryFromReader);
                         break;
                     case 7:
                         _instance.simpleResponses = new Intent.Message.SimpleResponses();
@@ -5417,12 +5704,12 @@ class Intent {
                         _instance.isPrompt = _reader.readBool();
                         break;
                     case 19:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 20:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 21:
                         _instance.createdBy = _reader.readString();
@@ -5461,7 +5748,7 @@ class Intent {
                 _writer.writeMessage(4, _instance.card, Intent.Message.Card.serializeBinaryToWriter);
             }
             if (_instance.payload) {
-                _writer.writeMessage(5, _instance.payload, googleProtobuf003.Struct.serializeBinaryToWriter);
+                _writer.writeMessage(5, _instance.payload, googleProtobuf004.Struct.serializeBinaryToWriter);
             }
             if (_instance.simpleResponses) {
                 _writer.writeMessage(7, _instance.simpleResponses, Intent.Message.SimpleResponses.serializeBinaryToWriter);
@@ -5497,10 +5784,10 @@ class Intent {
                 _writer.writeBool(18, _instance.isPrompt);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(19, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(19, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(20, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(20, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(21, _instance.createdBy);
@@ -5531,7 +5818,7 @@ class Intent {
                 ? new Intent.Message.Card(_value.card)
                 : undefined;
             this.payload = _value.payload
-                ? new googleProtobuf003.Struct(_value.payload)
+                ? new googleProtobuf004.Struct(_value.payload)
                 : undefined;
             this.simpleResponses = _value.simpleResponses
                 ? new Intent.Message.SimpleResponses(_value.simpleResponses)
@@ -5563,10 +5850,10 @@ class Intent {
             this.platform = _value.platform;
             this.isPrompt = _value.isPrompt;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -9285,8 +9572,8 @@ class UpdateIntentRequest {
                     _instance.languageCode = _reader.readString();
                     break;
                 case 3:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 case 4:
                     _instance.intentView = _reader.readEnum();
@@ -9310,7 +9597,7 @@ class UpdateIntentRequest {
             _writer.writeString(2, _instance.languageCode);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(3, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
         if (_instance.intentView) {
             _writer.writeEnum(4, _instance.intentView);
@@ -9325,7 +9612,7 @@ class UpdateIntentRequest {
         this.intent = _value.intent ? new Intent(_value.intent) : undefined;
         this.languageCode = _value.languageCode;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         this.intentView = _value.intentView;
         UpdateIntentRequest.refineValues(this);
@@ -9549,8 +9836,8 @@ class BatchUpdateIntentsRequest {
                     _instance.languageCode = _reader.readString();
                     break;
                 case 5:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 case 6:
                     _instance.intentView = _reader.readEnum();
@@ -9580,7 +9867,7 @@ class BatchUpdateIntentsRequest {
             _writer.writeString(4, _instance.languageCode);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(5, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
         if (_instance.intentView) {
             _writer.writeEnum(6, _instance.intentView);
@@ -9600,7 +9887,7 @@ class BatchUpdateIntentsRequest {
             : undefined;
         this.languageCode = _value.languageCode;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         this.intentView = _value.intentView;
         BatchUpdateIntentsRequest.refineValues(this);
@@ -11553,8 +11840,8 @@ class BatchDeleteTrainingPhrasesResponse {
                     break;
                 switch (_reader.getFieldNumber()) {
                     case 1:
-                        _instance.successfullyDeleted = new googleProtobuf003.Empty();
-                        _reader.readMessage(_instance.successfullyDeleted, googleProtobuf003.Empty.deserializeBinaryFromReader);
+                        _instance.successfullyDeleted = new googleProtobuf004.Empty();
+                        _reader.readMessage(_instance.successfullyDeleted, googleProtobuf004.Empty.deserializeBinaryFromReader);
                         break;
                     case 2:
                         _instance.errorMessage = _reader.readString();
@@ -11572,7 +11859,7 @@ class BatchDeleteTrainingPhrasesResponse {
          */
         static serializeBinaryToWriter(_instance, _writer) {
             if (_instance.successfullyDeleted) {
-                _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf003.Empty.serializeBinaryToWriter);
+                _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf004.Empty.serializeBinaryToWriter);
             }
             if (_instance.errorMessage || _instance.errorMessage === '') {
                 _writer.writeString(2, _instance.errorMessage);
@@ -11586,7 +11873,7 @@ class BatchDeleteTrainingPhrasesResponse {
             this._deleteStatus = DeleteTrainingPhraseStatus.DeleteStatusCase.none;
             _value = _value || {};
             this.successfullyDeleted = _value.successfullyDeleted
-                ? new googleProtobuf003.Empty(_value.successfullyDeleted)
+                ? new googleProtobuf004.Empty(_value.successfullyDeleted)
                 : undefined;
             this.errorMessage = _value.errorMessage;
             DeleteTrainingPhraseStatus.refineValues(this);
@@ -12884,8 +13171,8 @@ class BatchDeleteResponseMessagesResponse {
                     break;
                 switch (_reader.getFieldNumber()) {
                     case 1:
-                        _instance.successfullyDeleted = new googleProtobuf003.Empty();
-                        _reader.readMessage(_instance.successfullyDeleted, googleProtobuf003.Empty.deserializeBinaryFromReader);
+                        _instance.successfullyDeleted = new googleProtobuf004.Empty();
+                        _reader.readMessage(_instance.successfullyDeleted, googleProtobuf004.Empty.deserializeBinaryFromReader);
                         break;
                     case 2:
                         _instance.errorMessage = _reader.readString();
@@ -12903,7 +13190,7 @@ class BatchDeleteResponseMessagesResponse {
          */
         static serializeBinaryToWriter(_instance, _writer) {
             if (_instance.successfullyDeleted) {
-                _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf003.Empty.serializeBinaryToWriter);
+                _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf004.Empty.serializeBinaryToWriter);
             }
             if (_instance.errorMessage || _instance.errorMessage === '') {
                 _writer.writeString(2, _instance.errorMessage);
@@ -12917,7 +13204,7 @@ class BatchDeleteResponseMessagesResponse {
             this._deleteStatus = DeleteResponseMessageStatus.DeleteStatusCase.none;
             _value = _value || {};
             this.successfullyDeleted = _value.successfullyDeleted
-                ? new googleProtobuf003.Empty(_value.successfullyDeleted)
+                ? new googleProtobuf004.Empty(_value.successfullyDeleted)
                 : undefined;
             this.errorMessage = _value.errorMessage;
             DeleteResponseMessageStatus.refineValues(this);
@@ -14206,8 +14493,8 @@ class BatchDeleteParametersResponse {
                     break;
                 switch (_reader.getFieldNumber()) {
                     case 1:
-                        _instance.successfullyDeleted = new googleProtobuf003.Empty();
-                        _reader.readMessage(_instance.successfullyDeleted, googleProtobuf003.Empty.deserializeBinaryFromReader);
+                        _instance.successfullyDeleted = new googleProtobuf004.Empty();
+                        _reader.readMessage(_instance.successfullyDeleted, googleProtobuf004.Empty.deserializeBinaryFromReader);
                         break;
                     case 2:
                         _instance.errorMessage = _reader.readString();
@@ -14225,7 +14512,7 @@ class BatchDeleteParametersResponse {
          */
         static serializeBinaryToWriter(_instance, _writer) {
             if (_instance.successfullyDeleted) {
-                _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf003.Empty.serializeBinaryToWriter);
+                _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf004.Empty.serializeBinaryToWriter);
             }
             if (_instance.errorMessage || _instance.errorMessage === '') {
                 _writer.writeString(2, _instance.errorMessage);
@@ -14239,7 +14526,7 @@ class BatchDeleteParametersResponse {
             this._deleteStatus = DeleteParameterStatus.DeleteStatusCase.none;
             _value = _value || {};
             this.successfullyDeleted = _value.successfullyDeleted
-                ? new googleProtobuf003.Empty(_value.successfullyDeleted)
+                ? new googleProtobuf004.Empty(_value.successfullyDeleted)
                 : undefined;
             this.errorMessage = _value.errorMessage;
             DeleteParameterStatus.refineValues(this);
@@ -14929,12 +15216,12 @@ class EntityType {
                     _instance.synonymCount = _reader.readInt32();
                     break;
                 case 14:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 15:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 16:
                     _instance.createdBy = _reader.readString();
@@ -14982,10 +15269,10 @@ class EntityType {
             _writer.writeInt32(13, _instance.synonymCount);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(14, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(14, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(15, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(15, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(16, _instance.createdBy);
@@ -15010,10 +15297,10 @@ class EntityType {
         this.status = _value.status;
         this.synonymCount = _value.synonymCount;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -15238,12 +15525,12 @@ class EntityType {
                         _instance.languageCode = _reader.readString();
                         break;
                     case 7:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 8:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 9:
                         _instance.createdBy = _reader.readString();
@@ -15282,10 +15569,10 @@ class EntityType {
                 _writer.writeString(6, _instance.languageCode);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(7, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(7, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(9, _instance.createdBy);
@@ -15307,10 +15594,10 @@ class EntityType {
             this.synonymCount = _value.synonymCount;
             this.languageCode = _value.languageCode;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -16094,8 +16381,8 @@ class UpdateEntityTypeRequest {
                     _instance.languageCode = _reader.readString();
                     break;
                 case 3:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 case 6:
                     _instance.entityTypeView = _reader.readEnum();
@@ -16119,7 +16406,7 @@ class UpdateEntityTypeRequest {
             _writer.writeString(2, _instance.languageCode);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(3, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
         if (_instance.entityTypeView) {
             _writer.writeEnum(6, _instance.entityTypeView);
@@ -16136,7 +16423,7 @@ class UpdateEntityTypeRequest {
             : undefined;
         this.languageCode = _value.languageCode;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         this.entityTypeView = _value.entityTypeView;
         UpdateEntityTypeRequest.refineValues(this);
@@ -16361,8 +16648,8 @@ class BatchUpdateEntityTypesRequest {
                     _instance.languageCode = _reader.readString();
                     break;
                 case 5:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -16389,7 +16676,7 @@ class BatchUpdateEntityTypesRequest {
             _writer.writeString(4, _instance.languageCode);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(5, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -16406,7 +16693,7 @@ class BatchUpdateEntityTypesRequest {
             : undefined;
         this.languageCode = _value.languageCode;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         BatchUpdateEntityTypesRequest.refineValues(this);
     }
@@ -18093,8 +18380,8 @@ class DeleteEntityStatus {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.successfullyDeleted = new googleProtobuf003.Empty();
-                    _reader.readMessage(_instance.successfullyDeleted, googleProtobuf003.Empty.deserializeBinaryFromReader);
+                    _instance.successfullyDeleted = new googleProtobuf004.Empty();
+                    _reader.readMessage(_instance.successfullyDeleted, googleProtobuf004.Empty.deserializeBinaryFromReader);
                     break;
                 case 2:
                     _instance.errorMessage = _reader.readString();
@@ -18112,7 +18399,7 @@ class DeleteEntityStatus {
      */
     static serializeBinaryToWriter(_instance, _writer) {
         if (_instance.successfullyDeleted) {
-            _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf003.Empty.serializeBinaryToWriter);
+            _writer.writeMessage(1, _instance.successfullyDeleted, googleProtobuf004.Empty.serializeBinaryToWriter);
         }
         if (_instance.errorMessage || _instance.errorMessage === '') {
             _writer.writeString(2, _instance.errorMessage);
@@ -18126,7 +18413,7 @@ class DeleteEntityStatus {
         this._deleteStatus = DeleteEntityStatus.DeleteStatusCase.none;
         _value = _value || {};
         this.successfullyDeleted = _value.successfullyDeleted
-            ? new googleProtobuf003.Empty(_value.successfullyDeleted)
+            ? new googleProtobuf004.Empty(_value.successfullyDeleted)
             : undefined;
         this.errorMessage = _value.errorMessage;
         DeleteEntityStatus.refineValues(this);
@@ -19158,8 +19445,8 @@ class QueryParameters {
                     _instance.resetContexts = _reader.readBool();
                     break;
                 case 6:
-                    _instance.payload = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.payload, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.payload = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.payload, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 7:
                     (_instance.labels = _instance.labels || []).push(_reader.readString());
@@ -19212,7 +19499,7 @@ class QueryParameters {
             _writer.writeBool(4, _instance.resetContexts);
         }
         if (_instance.payload) {
-            _writer.writeMessage(6, _instance.payload, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.payload, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.labels && _instance.labels.length) {
             _writer.writeRepeatedString(7, _instance.labels);
@@ -19252,7 +19539,7 @@ class QueryParameters {
         this.contexts = (_value.contexts || []).map(m => new Context(m));
         this.resetContexts = _value.resetContexts;
         this.payload = _value.payload
-            ? new googleProtobuf003.Struct(_value.payload)
+            ? new googleProtobuf004.Struct(_value.payload)
             : undefined;
         this.labels = (_value.labels || []).slice();
         this.platforms = (_value.platforms || []).slice();
@@ -19471,12 +19758,12 @@ class S2tTranscription {
                     _instance.transcriptionType = _reader.readEnum();
                     break;
                 case 9:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 10:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 11:
                     _instance.createdBy = _reader.readString();
@@ -19521,10 +19808,10 @@ class S2tTranscription {
             _writer.writeEnum(8, _instance.transcriptionType);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(9, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(10, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(10, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(11, _instance.createdBy);
@@ -19548,10 +19835,10 @@ class S2tTranscription {
         this.durationInS = _value.durationInS;
         this.transcriptionType = _value.transcriptionType;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -19931,8 +20218,8 @@ class QueryResult {
                     _instance.action = _reader.readString();
                     break;
                 case 4:
-                    _instance.parameters = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.parameters, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.parameters = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.parameters, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 5:
                     _instance.allRequiredParamsPresent = _reader.readBool();
@@ -19950,8 +20237,8 @@ class QueryResult {
                     _instance.webhookSource = _reader.readString();
                     break;
                 case 9:
-                    _instance.webhookPayload = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.webhookPayload, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.webhookPayload = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.webhookPayload, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 10:
                     const messageInitializer10 = new Context();
@@ -19969,8 +20256,8 @@ class QueryResult {
                     _instance.queryTextOriginal = _reader.readString();
                     break;
                 case 14:
-                    _instance.diagnosticInfo = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.diagnosticInfo, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.diagnosticInfo = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.diagnosticInfo, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 15:
                     _instance.languageCode = _reader.readString();
@@ -20002,7 +20289,7 @@ class QueryResult {
             _writer.writeString(3, _instance.action);
         }
         if (_instance.parameters) {
-            _writer.writeMessage(4, _instance.parameters, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.parameters, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.allRequiredParamsPresent) {
             _writer.writeBool(5, _instance.allRequiredParamsPresent);
@@ -20017,7 +20304,7 @@ class QueryResult {
             _writer.writeString(8, _instance.webhookSource);
         }
         if (_instance.webhookPayload) {
-            _writer.writeMessage(9, _instance.webhookPayload, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.webhookPayload, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.outputContexts && _instance.outputContexts.length) {
             _writer.writeRepeatedMessage(10, _instance.outputContexts, Context.serializeBinaryToWriter);
@@ -20032,7 +20319,7 @@ class QueryResult {
             _writer.writeString(13, _instance.queryTextOriginal);
         }
         if (_instance.diagnosticInfo) {
-            _writer.writeMessage(14, _instance.diagnosticInfo, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(14, _instance.diagnosticInfo, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.languageCode) {
             _writer.writeString(15, _instance.languageCode);
@@ -20051,14 +20338,14 @@ class QueryResult {
         this.speechRecognitionConfidence = _value.speechRecognitionConfidence;
         this.action = _value.action;
         this.parameters = _value.parameters
-            ? new googleProtobuf003.Struct(_value.parameters)
+            ? new googleProtobuf004.Struct(_value.parameters)
             : undefined;
         this.allRequiredParamsPresent = _value.allRequiredParamsPresent;
         this.fulfillmentText = _value.fulfillmentText;
         this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
         this.webhookSource = _value.webhookSource;
         this.webhookPayload = _value.webhookPayload
-            ? new googleProtobuf003.Struct(_value.webhookPayload)
+            ? new googleProtobuf004.Struct(_value.webhookPayload)
             : undefined;
         this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
         this.intent = _value.intent
@@ -20067,7 +20354,7 @@ class QueryResult {
         this.intentDetectionConfidence = _value.intentDetectionConfidence;
         this.queryTextOriginal = _value.queryTextOriginal;
         this.diagnosticInfo = _value.diagnosticInfo
-            ? new googleProtobuf003.Struct(_value.diagnosticInfo)
+            ? new googleProtobuf004.Struct(_value.diagnosticInfo)
             : undefined;
         this.languageCode = _value.languageCode;
         this.fileResources = (_value.fileResources || []).map(m => new FileResource(m));
@@ -21054,8 +21341,8 @@ class EventInput {
                     _instance.name = _reader.readString();
                     break;
                 case 2:
-                    _instance.parameters = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.parameters, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.parameters = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.parameters, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 3:
                     _instance.languageCode = _reader.readString();
@@ -21076,7 +21363,7 @@ class EventInput {
             _writer.writeString(1, _instance.name);
         }
         if (_instance.parameters) {
-            _writer.writeMessage(2, _instance.parameters, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.parameters, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.languageCode) {
             _writer.writeString(3, _instance.languageCode);
@@ -21090,7 +21377,7 @@ class EventInput {
         _value = _value || {};
         this.name = _value.name;
         this.parameters = _value.parameters
-            ? new googleProtobuf003.Struct(_value.parameters)
+            ? new googleProtobuf004.Struct(_value.parameters)
             : undefined;
         this.languageCode = _value.languageCode;
         EventInput.refineValues(this);
@@ -21205,12 +21492,12 @@ class Session {
                     _reader.readMessage(_instance.sessionInfo, SessionInfo.deserializeBinaryFromReader);
                     break;
                 case 4:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
                     _instance.createdBy = _reader.readString();
@@ -21240,10 +21527,10 @@ class Session {
             _writer.writeMessage(3, _instance.sessionInfo, SessionInfo.serializeBinaryToWriter);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(4, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(6, _instance.createdBy);
@@ -21264,10 +21551,10 @@ class Session {
             ? new SessionInfo(_value.sessionInfo)
             : undefined;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -21433,16 +21720,16 @@ class SessionStep {
                     (_instance.contexts = _instance.contexts || []).push(messageInitializer4);
                     break;
                 case 5:
-                    _instance.timestamp = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.timestamp, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.timestamp = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.timestamp, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 7:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 8:
                     _instance.createdBy = _reader.readString();
@@ -21481,13 +21768,13 @@ class SessionStep {
             _writer.writeRepeatedMessage(4, _instance.contexts, Context.serializeBinaryToWriter);
         }
         if (_instance.timestamp) {
-            _writer.writeMessage(5, _instance.timestamp, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.timestamp, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(6, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(8, _instance.createdBy);
@@ -21514,13 +21801,13 @@ class SessionStep {
             : undefined;
         this.contexts = (_value.contexts || []).map(m => new Context(m));
         this.timestamp = _value.timestamp
-            ? new googleProtobuf003.Timestamp(_value.timestamp)
+            ? new googleProtobuf004.Timestamp(_value.timestamp)
             : undefined;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -21687,8 +21974,8 @@ class GetSessionStepRequest {
                     _instance.name = _reader.readString();
                     break;
                 case 2:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -21706,7 +21993,7 @@ class GetSessionStepRequest {
             _writer.writeString(1, _instance.name);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -21717,7 +22004,7 @@ class GetSessionStepRequest {
         _value = _value || {};
         this.name = _value.name;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetSessionStepRequest.refineValues(this);
     }
@@ -21809,12 +22096,12 @@ class UpdateSessionStepRequest {
                     _reader.readMessage(_instance.sessionStep, SessionStep.deserializeBinaryFromReader);
                     break;
                 case 2:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -21832,10 +22119,10 @@ class UpdateSessionStepRequest {
             _writer.writeMessage(1, _instance.sessionStep, SessionStep.serializeBinaryToWriter);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(2, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -21848,10 +22135,10 @@ class UpdateSessionStepRequest {
             ? new SessionStep(_value.sessionStep)
             : undefined;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         UpdateSessionStepRequest.refineValues(this);
     }
@@ -22059,8 +22346,8 @@ class CreateSessionStepRequest {
                     _reader.readMessage(_instance.sessionStep, SessionStep.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -22081,7 +22368,7 @@ class CreateSessionStepRequest {
             _writer.writeMessage(2, _instance.sessionStep, SessionStep.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -22095,7 +22382,7 @@ class CreateSessionStepRequest {
             ? new SessionStep(_value.sessionStep)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         CreateSessionStepRequest.refineValues(this);
     }
@@ -22208,8 +22495,8 @@ class ListSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 6:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -22236,7 +22523,7 @@ class ListSessionsRequest {
             _writer.writeMessage(5, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -22252,7 +22539,7 @@ class ListSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListSessionsRequest.refineValues(this);
     }
@@ -24289,8 +24576,8 @@ class GetSessionRequest {
                     _instance.sessionView = _reader.readEnum();
                     break;
                 case 6:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -24311,7 +24598,7 @@ class GetSessionRequest {
             _writer.writeEnum(2, _instance.sessionView);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -24323,7 +24610,7 @@ class GetSessionRequest {
         this.sessionId = _value.sessionId;
         this.sessionView = _value.sessionView;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetSessionRequest.refineValues(this);
     }
@@ -24844,12 +25131,12 @@ class SessionReview {
                         _instance.sessionReviewSteps || []).push(messageInitializer2);
                     break;
                 case 3:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 4:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
                     _instance.createdBy = _reader.readString();
@@ -24876,10 +25163,10 @@ class SessionReview {
             _writer.writeRepeatedMessage(2, _instance.sessionReviewSteps, SessionReviewStep.serializeBinaryToWriter);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(3, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(4, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(5, _instance.createdBy);
@@ -24897,10 +25184,10 @@ class SessionReview {
         this.name = _value.name;
         this.sessionReviewSteps = (_value.sessionReviewSteps || []).map(m => new SessionReviewStep(m));
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -25074,16 +25361,16 @@ class SessionReviewStep {
                     _reader.readPackableEnumInto((_instance.platforms = _instance.platforms || []));
                     break;
                 case 9:
-                    _instance.timestamp = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.timestamp, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.timestamp = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.timestamp, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 10:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 11:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 12:
                     _instance.createdBy = _reader.readString();
@@ -25134,13 +25421,13 @@ class SessionReviewStep {
             _writer.writePackedEnum(8, _instance.platforms);
         }
         if (_instance.timestamp) {
-            _writer.writeMessage(9, _instance.timestamp, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.timestamp, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(10, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(10, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(11, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(11, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(12, _instance.createdBy);
@@ -25169,13 +25456,13 @@ class SessionReviewStep {
         this.queryTextOriginal = _value.queryTextOriginal;
         this.platforms = (_value.platforms || []).slice();
         this.timestamp = _value.timestamp
-            ? new googleProtobuf003.Timestamp(_value.timestamp)
+            ? new googleProtobuf004.Timestamp(_value.timestamp)
             : undefined;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -25647,8 +25934,8 @@ class ListSessionLabelsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -25669,7 +25956,7 @@ class ListSessionLabelsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -25683,7 +25970,7 @@ class ListSessionLabelsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListSessionLabelsOfAllSessionsRequest.refineValues(this);
     }
@@ -25891,8 +26178,8 @@ class ListLanguageCodesOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -25913,7 +26200,7 @@ class ListLanguageCodesOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -25927,7 +26214,7 @@ class ListLanguageCodesOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListLanguageCodesOfAllSessionsRequest.refineValues(this);
     }
@@ -26135,8 +26422,8 @@ class ListMatchedIntentsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -26157,7 +26444,7 @@ class ListMatchedIntentsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -26171,7 +26458,7 @@ class ListMatchedIntentsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListMatchedIntentsOfAllSessionsRequest.refineValues(this);
     }
@@ -26379,8 +26666,8 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -26401,7 +26688,7 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -26415,7 +26702,7 @@ class ListMatchedEntityTypesOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListMatchedEntityTypesOfAllSessionsRequest.refineValues(this);
     }
@@ -26624,8 +26911,8 @@ class ListUserIdsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -26646,7 +26933,7 @@ class ListUserIdsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -26660,7 +26947,7 @@ class ListUserIdsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListUserIdsOfAllSessionsRequest.refineValues(this);
     }
@@ -26868,8 +27155,8 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -26890,7 +27177,7 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -26904,7 +27191,7 @@ class ListIdentifiedUserIdsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListIdentifiedUserIdsOfAllSessionsRequest.refineValues(this);
     }
@@ -27113,8 +27400,8 @@ class ListTagsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -27135,7 +27422,7 @@ class ListTagsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -27149,7 +27436,7 @@ class ListTagsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListTagsOfAllSessionsRequest.refineValues(this);
     }
@@ -27357,8 +27644,8 @@ class ListInputContextsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -27379,7 +27666,7 @@ class ListInputContextsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -27393,7 +27680,7 @@ class ListInputContextsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListInputContextsOfAllSessionsRequest.refineValues(this);
     }
@@ -27601,8 +27888,8 @@ class ListOutputContextsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -27623,7 +27910,7 @@ class ListOutputContextsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -27637,7 +27924,7 @@ class ListOutputContextsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListOutputContextsOfAllSessionsRequest.refineValues(this);
     }
@@ -27845,8 +28132,8 @@ class ListPlatformsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -27867,7 +28154,7 @@ class ListPlatformsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -27881,7 +28168,7 @@ class ListPlatformsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListPlatformsOfAllSessionsRequest.refineValues(this);
     }
@@ -28089,8 +28376,8 @@ class ListAccountIdsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -28111,7 +28398,7 @@ class ListAccountIdsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -28125,7 +28412,7 @@ class ListAccountIdsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListAccountIdsOfAllSessionsRequest.refineValues(this);
     }
@@ -28783,8 +29070,8 @@ class ListOriginIdsOfAllSessionsRequest {
                     _reader.readMessage(_instance.sessionFilter, SessionFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -28805,7 +29092,7 @@ class ListOriginIdsOfAllSessionsRequest {
             _writer.writeMessage(2, _instance.sessionFilter, SessionFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -28819,7 +29106,7 @@ class ListOriginIdsOfAllSessionsRequest {
             ? new SessionFilter(_value.sessionFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListOriginIdsOfAllSessionsRequest.refineValues(this);
     }
@@ -29617,8 +29904,8 @@ class ListSessionCommentsRequest {
                     _instance.pageToken = _reader.readString();
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -29639,7 +29926,7 @@ class ListSessionCommentsRequest {
             _writer.writeString(2, _instance.pageToken);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -29651,7 +29938,7 @@ class ListSessionCommentsRequest {
         this.sessionId = _value.sessionId;
         this.pageToken = _value.pageToken;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListSessionCommentsRequest.refineValues(this);
     }
@@ -30127,8 +30414,8 @@ class GetSessionReviewRequest {
                     _instance.sessionReviewView = _reader.readEnum();
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -30149,7 +30436,7 @@ class GetSessionReviewRequest {
             _writer.writeEnum(2, _instance.sessionReviewView);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -30161,7 +30448,7 @@ class GetSessionReviewRequest {
         this.sessionReviewId = _value.sessionReviewId;
         this.sessionReviewView = _value.sessionReviewView;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetSessionReviewRequest.refineValues(this);
     }
@@ -30266,8 +30553,8 @@ class GetLatestSessionReviewRequest {
                     _instance.sessionReviewView = _reader.readEnum();
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -30288,7 +30575,7 @@ class GetLatestSessionReviewRequest {
             _writer.writeEnum(2, _instance.sessionReviewView);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -30300,7 +30587,7 @@ class GetLatestSessionReviewRequest {
         this.sessionId = _value.sessionId;
         this.sessionReviewView = _value.sessionReviewView;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetLatestSessionReviewRequest.refineValues(this);
     }
@@ -30614,12 +30901,12 @@ class DocumentFileResource {
                     _instance.bytes = _reader.readBytes();
                     break;
                 case 4:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
                     _instance.createdBy = _reader.readString();
@@ -30649,10 +30936,10 @@ class DocumentFileResource {
             _writer.writeBytes(3, _instance.bytes);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(4, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(6, _instance.createdBy);
@@ -30671,10 +30958,10 @@ class DocumentFileResource {
         this.displayName = _value.displayName;
         this.bytes = _value.bytes;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -30819,12 +31106,12 @@ class ImageFileResource {
                     _instance.bytes = _reader.readBytes();
                     break;
                 case 4:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
                     _instance.createdBy = _reader.readString();
@@ -30854,10 +31141,10 @@ class ImageFileResource {
             _writer.writeBytes(3, _instance.bytes);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(4, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(6, _instance.createdBy);
@@ -30876,10 +31163,10 @@ class ImageFileResource {
         this.displayName = _value.displayName;
         this.bytes = _value.bytes;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -31043,12 +31330,12 @@ class AudioFileResource {
                     (_instance.transcriptions = _instance.transcriptions || []).push(messageInitializer7);
                     break;
                 case 8:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 9:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 10:
                     _instance.createdBy = _reader.readString();
@@ -31093,10 +31380,10 @@ class AudioFileResource {
             _writer.writeRepeatedMessage(7, _instance.transcriptions, S2tTranscription.serializeBinaryToWriter);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(8, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(8, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(9, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(10, _instance.createdBy);
@@ -31122,10 +31409,10 @@ class AudioFileResource {
         this.audioFileResourceType = _value.audioFileResourceType;
         this.transcriptions = (_value.transcriptions || []).map(m => new S2tTranscription(m));
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -31326,12 +31613,12 @@ class VideoFileResource {
                     _instance.frameRate = _reader.readFloat();
                     break;
                 case 7:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 8:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 9:
                     _instance.createdBy = _reader.readString();
@@ -31370,10 +31657,10 @@ class VideoFileResource {
             _writer.writeFloat(6, _instance.frameRate);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(7, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(7, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(9, _instance.createdBy);
@@ -31395,10 +31682,10 @@ class VideoFileResource {
         this.resolution = _value.resolution;
         this.frameRate = _value.frameRate;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -31572,8 +31859,8 @@ class GetAudioFilesRequest {
                     _instance.sortingMode = _reader.readEnum();
                     break;
                 case 6:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -31603,7 +31890,7 @@ class GetAudioFilesRequest {
             _writer.writeEnum(5, _instance.sortingMode);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -31618,7 +31905,7 @@ class GetAudioFilesRequest {
         this.pageToken = _value.pageToken;
         this.sortingMode = _value.sortingMode;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetAudioFilesRequest.refineValues(this);
     }
@@ -32401,8 +32688,8 @@ class ListAudioFilesRequest {
                     _instance.sortingMode = _reader.readEnum();
                     break;
                 case 6:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -32432,7 +32719,7 @@ class ListAudioFilesRequest {
             _writer.writeEnum(5, _instance.sortingMode);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -32447,7 +32734,7 @@ class ListAudioFilesRequest {
         this.pageToken = _value.pageToken;
         this.sortingMode = _value.sortingMode;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListAudioFilesRequest.refineValues(this);
     }
@@ -32716,8 +33003,8 @@ class GetAudioFileOfSessionRequest {
                     _instance.resourceView = _reader.readEnum();
                     break;
                 case 4:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -32741,7 +33028,7 @@ class GetAudioFileOfSessionRequest {
             _writer.writeEnum(3, _instance.resourceView);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -32754,7 +33041,7 @@ class GetAudioFileOfSessionRequest {
         this.sessionId = _value.sessionId;
         this.resourceView = _value.resourceView;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetAudioFileOfSessionRequest.refineValues(this);
     }
@@ -34432,7 +34719,7 @@ class QAClient {
                     path: '/ondewo.qa.QA/RunTraining',
                     requestData,
                     requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
+                    requestClass: googleProtobuf004.Empty,
                     responseClass: RunTrainingResponse
                 });
             },
@@ -34450,7 +34737,7 @@ class QAClient {
                     path: '/ondewo.qa.QA/GetServerState',
                     requestData,
                     requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
+                    requestClass: googleProtobuf004.Empty,
                     responseClass: GetServerStateResponse
                 });
             },
@@ -34468,7 +34755,7 @@ class QAClient {
                     path: '/ondewo.qa.QA/ListProjectIds',
                     requestData,
                     requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
+                    requestClass: googleProtobuf004.Empty,
                     responseClass: ListProjectIdsResponse
                 });
             },
@@ -34667,12 +34954,12 @@ class ProjectRole {
                     (_instance.permissions = _instance.permissions || []).push(_reader.readString());
                     break;
                 case 4:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
                     _instance.createdBy = _reader.readString();
@@ -34702,10 +34989,10 @@ class ProjectRole {
             _writer.writeRepeatedString(3, _instance.permissions);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(4, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(6, _instance.createdBy);
@@ -34724,10 +35011,10 @@ class ProjectRole {
         this.name = _value.name;
         this.permissions = (_value.permissions || []).slice();
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -35003,8 +35290,8 @@ class UpdateProjectRoleRequest {
                     _reader.readMessage(_instance.role, ProjectRole.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 case 4:
                     _instance.projectRoleView = _reader.readEnum();
@@ -35028,7 +35315,7 @@ class UpdateProjectRoleRequest {
             _writer.writeMessage(2, _instance.role, ProjectRole.serializeBinaryToWriter);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(3, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
         if (_instance.projectRoleView) {
             _writer.writeEnum(4, _instance.projectRoleView);
@@ -35043,7 +35330,7 @@ class UpdateProjectRoleRequest {
         this.parent = _value.parent;
         this.role = _value.role ? new ProjectRole(_value.role) : undefined;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         this.projectRoleView = _value.projectRoleView;
         UpdateProjectRoleRequest.refineValues(this);
@@ -35164,8 +35451,8 @@ class GetProjectRoleRequest {
                     _instance.projectRoleView = _reader.readEnum();
                     break;
                 case 5:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -35192,7 +35479,7 @@ class GetProjectRoleRequest {
             _writer.writeEnum(4, _instance.projectRoleView);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -35207,7 +35494,7 @@ class GetProjectRoleRequest {
         this.roleName = _value.roleName;
         this.projectRoleView = _value.projectRoleView;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetProjectRoleRequest.refineValues(this);
     }
@@ -35471,8 +35758,8 @@ class ListProjectRolesRequest {
                     _instance.projectRoleView = _reader.readEnum();
                     break;
                 case 4:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -35496,7 +35783,7 @@ class ListProjectRolesRequest {
             _writer.writeEnum(3, _instance.projectRoleView);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -35509,7 +35796,7 @@ class ListProjectRolesRequest {
         this.pageToken = _value.pageToken;
         this.projectRoleView = _value.projectRoleView;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListProjectRolesRequest.refineValues(this);
     }
@@ -35771,12 +36058,12 @@ class User {
                     _instance.userProfilePicture = _reader.readBytes();
                     break;
                 case 9:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 10:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 11:
                     _instance.createdBy = _reader.readString();
@@ -35812,10 +36099,10 @@ class User {
             _writer.writeBytes(8, _instance.userProfilePicture);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(9, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(10, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(10, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(11, _instance.createdBy);
@@ -35836,10 +36123,10 @@ class User {
         this.userEmail = _value.userEmail;
         this.userProfilePicture = _value.userProfilePicture;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -36388,8 +36675,8 @@ class UpdateUserRequest {
                     _instance.password = _reader.readString();
                     break;
                 case 5:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -36410,7 +36697,7 @@ class UpdateUserRequest {
             _writer.writeString(4, _instance.password);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(5, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -36422,7 +36709,7 @@ class UpdateUserRequest {
         this.user = _value.user ? new User(_value.user) : undefined;
         this.password = _value.password;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         UpdateUserRequest.refineValues(this);
     }
@@ -36524,8 +36811,8 @@ class GetUserRequest {
                     _instance.userEmail = _reader.readString();
                     break;
                 case 4:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -36546,7 +36833,7 @@ class GetUserRequest {
             _writer.writeString(3, _instance.userEmail);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -36559,7 +36846,7 @@ class GetUserRequest {
         this.userId = _value.userId;
         this.userEmail = _value.userEmail;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetUserRequest.refineValues(this);
     }
@@ -36779,8 +37066,8 @@ class ListUsersRequest {
                     _instance.pageToken = _reader.readString();
                     break;
                 case 2:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -36798,7 +37085,7 @@ class ListUsersRequest {
             _writer.writeString(1, _instance.pageToken);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -36809,7 +37096,7 @@ class ListUsersRequest {
         _value = _value || {};
         this.pageToken = _value.pageToken;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListUsersRequest.refineValues(this);
     }
@@ -37148,12 +37435,12 @@ class ServerRole {
                     (_instance.permissions = _instance.permissions || []).push(_reader.readString());
                     break;
                 case 4:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
                     _instance.createdBy = _reader.readString();
@@ -37183,10 +37470,10 @@ class ServerRole {
             _writer.writeRepeatedString(3, _instance.permissions);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(4, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(6, _instance.createdBy);
@@ -37205,10 +37492,10 @@ class ServerRole {
         this.name = _value.name;
         this.permissions = (_value.permissions || []).slice();
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -37445,8 +37732,8 @@ class UpdateServerRoleRequest {
                     _reader.readMessage(_instance.role, ServerRole.deserializeBinaryFromReader);
                     break;
                 case 2:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -37464,7 +37751,7 @@ class UpdateServerRoleRequest {
             _writer.writeMessage(1, _instance.role, ServerRole.serializeBinaryToWriter);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(2, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -37475,7 +37762,7 @@ class UpdateServerRoleRequest {
         _value = _value || {};
         this.role = _value.role ? new ServerRole(_value.role) : undefined;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         UpdateServerRoleRequest.refineValues(this);
     }
@@ -37670,8 +37957,8 @@ class GetServerRoleRequest {
                     _instance.roleName = _reader.readString();
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -37692,7 +37979,7 @@ class GetServerRoleRequest {
             _writer.writeString(2, _instance.roleName);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -37705,7 +37992,7 @@ class GetServerRoleRequest {
         this.roleId = _value.roleId;
         this.roleName = _value.roleName;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetServerRoleRequest.refineValues(this);
     }
@@ -37826,8 +38113,8 @@ class ListServerRolesRequest {
                     _instance.pageToken = _reader.readString();
                     break;
                 case 2:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -37845,7 +38132,7 @@ class ListServerRolesRequest {
             _writer.writeString(1, _instance.pageToken);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -37856,7 +38143,7 @@ class ListServerRolesRequest {
         _value = _value || {};
         this.pageToken = _value.pageToken;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListServerRolesRequest.refineValues(this);
     }
@@ -38065,8 +38352,8 @@ class ListServerPermissionsRequest {
                     _instance.pageToken = _reader.readString();
                     break;
                 case 2:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -38084,7 +38371,7 @@ class ListServerPermissionsRequest {
             _writer.writeString(1, _instance.pageToken);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -38095,7 +38382,7 @@ class ListServerPermissionsRequest {
         _value = _value || {};
         this.pageToken = _value.pageToken;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListServerPermissionsRequest.refineValues(this);
     }
@@ -38306,8 +38593,8 @@ class LoginRequest {
                     _instance.password = _reader.readString();
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -38328,7 +38615,7 @@ class LoginRequest {
             _writer.writeString(2, _instance.password);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -38340,7 +38627,7 @@ class LoginRequest {
         this.userEmail = _value.userEmail;
         this.password = _value.password;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         LoginRequest.refineValues(this);
     }
@@ -38564,8 +38851,8 @@ class GetUserPreferencesRequest {
                     _instance.regexInclude = _reader.readString();
                     break;
                 case 4:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -38589,7 +38876,7 @@ class GetUserPreferencesRequest {
             _writer.writeString(3, _instance.regexInclude);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -38602,7 +38889,7 @@ class GetUserPreferencesRequest {
         this.keys = (_value.keys || []).slice();
         this.regexInclude = _value.regexInclude;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetUserPreferencesRequest.refineValues(this);
     }
@@ -39482,8 +39769,8 @@ class ListUserPreferencesRequest {
                     _instance.regexFilter = _reader.readString();
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -39504,7 +39791,7 @@ class ListUserPreferencesRequest {
             _writer.writeString(2, _instance.regexFilter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -39516,7 +39803,7 @@ class ListUserPreferencesRequest {
         this.userName = _value.userName;
         this.regexFilter = _value.regexFilter;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListUserPreferencesRequest.refineValues(this);
     }
@@ -39837,8 +40124,8 @@ class Agent {
                     _instance.nluPlatform = _reader.readString();
                     break;
                 case 7:
-                    _instance.configs = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.configs, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.configs = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.configs, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 8:
                     _instance.ownerId = _reader.readString();
@@ -39850,12 +40137,12 @@ class Agent {
                     _instance.description = _reader.readString();
                     break;
                 case 11:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 12:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 13:
                     _instance.createdBy = _reader.readString();
@@ -39895,7 +40182,7 @@ class Agent {
             _writer.writeString(6, _instance.nluPlatform);
         }
         if (_instance.configs) {
-            _writer.writeMessage(7, _instance.configs, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(7, _instance.configs, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.ownerId) {
             _writer.writeString(8, _instance.ownerId);
@@ -39907,10 +40194,10 @@ class Agent {
             _writer.writeString(10, _instance.description);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(11, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(11, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(12, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(12, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(13, _instance.createdBy);
@@ -39932,16 +40219,16 @@ class Agent {
         this.timeZone = _value.timeZone;
         this.nluPlatform = _value.nluPlatform;
         this.configs = _value.configs
-            ? new googleProtobuf003.Struct(_value.configs)
+            ? new googleProtobuf004.Struct(_value.configs)
             : undefined;
         this.ownerId = _value.ownerId;
         this.status = _value.status;
         this.description = _value.description;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -40504,8 +40791,8 @@ class UpdateAgentRequest {
                     _instance.agentView = _reader.readEnum();
                     break;
                 case 3:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -40526,7 +40813,7 @@ class UpdateAgentRequest {
             _writer.writeEnum(2, _instance.agentView);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(3, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -40538,7 +40825,7 @@ class UpdateAgentRequest {
         this.agent = _value.agent ? new Agent(_value.agent) : undefined;
         this.agentView = _value.agentView;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         UpdateAgentRequest.refineValues(this);
     }
@@ -40745,8 +41032,8 @@ class GetAgentRequest {
                     _instance.agentView = _reader.readEnum();
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -40767,7 +41054,7 @@ class GetAgentRequest {
             _writer.writeEnum(2, _instance.agentView);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -40779,7 +41066,7 @@ class GetAgentRequest {
         this.parent = _value.parent;
         this.agentView = _value.agentView;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetAgentRequest.refineValues(this);
     }
@@ -40888,8 +41175,8 @@ class ListAgentsRequest {
                     _reader.readMessage(_instance.sortByField, AgentSorting.deserializeBinaryFromReader);
                     break;
                 case 4:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -40913,7 +41200,7 @@ class ListAgentsRequest {
             _writer.writeMessage(3, _instance.sortByField, AgentSorting.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -40928,7 +41215,7 @@ class ListAgentsRequest {
             ? new AgentSorting(_value.sortByField)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListAgentsRequest.refineValues(this);
     }
@@ -42409,8 +42696,8 @@ class RankingMatchOptimizationConfig {
                     _instance.randomSeed = _reader.readInt32();
                     break;
                 case 4:
-                    _instance.initialThresholds = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.initialThresholds, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.initialThresholds = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.initialThresholds, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -42434,7 +42721,7 @@ class RankingMatchOptimizationConfig {
             _writer.writeInt32(3, _instance.randomSeed);
         }
         if (_instance.initialThresholds) {
-            _writer.writeMessage(4, _instance.initialThresholds, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.initialThresholds, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
     }
     /**
@@ -42447,7 +42734,7 @@ class RankingMatchOptimizationConfig {
         this.nSplits = _value.nSplits;
         this.randomSeed = _value.randomSeed;
         this.initialThresholds = _value.initialThresholds
-            ? new googleProtobuf003.Struct(_value.initialThresholds)
+            ? new googleProtobuf004.Struct(_value.initialThresholds)
             : undefined;
         RankingMatchOptimizationConfig.refineValues(this);
     }
@@ -42555,12 +42842,12 @@ class OptimizeRankingMatchResponse {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.optimizationInfo = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.optimizationInfo, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.optimizationInfo = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.optimizationInfo, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.optimizedOndewoConfig = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.optimizedOndewoConfig, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.optimizedOndewoConfig = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.optimizedOndewoConfig, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -42575,10 +42862,10 @@ class OptimizeRankingMatchResponse {
      */
     static serializeBinaryToWriter(_instance, _writer) {
         if (_instance.optimizationInfo) {
-            _writer.writeMessage(1, _instance.optimizationInfo, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(1, _instance.optimizationInfo, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.optimizedOndewoConfig) {
-            _writer.writeMessage(3, _instance.optimizedOndewoConfig, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.optimizedOndewoConfig, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
     }
     /**
@@ -42588,10 +42875,10 @@ class OptimizeRankingMatchResponse {
     constructor(_value) {
         _value = _value || {};
         this.optimizationInfo = _value.optimizationInfo
-            ? new googleProtobuf003.Struct(_value.optimizationInfo)
+            ? new googleProtobuf004.Struct(_value.optimizationInfo)
             : undefined;
         this.optimizedOndewoConfig = _value.optimizedOndewoConfig
-            ? new googleProtobuf003.Struct(_value.optimizedOndewoConfig)
+            ? new googleProtobuf004.Struct(_value.optimizedOndewoConfig)
             : undefined;
         OptimizeRankingMatchResponse.refineValues(this);
     }
@@ -43422,8 +43709,8 @@ class GetSessionsStatisticsRequest {
                     (_instance.orderBys = _instance.orderBys || []).push(_reader.readString());
                     break;
                 case 9:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 case 10:
                     _instance.sqlQuery = _reader.readString();
@@ -43465,7 +43752,7 @@ class GetSessionsStatisticsRequest {
             _writer.writeRepeatedString(8, _instance.orderBys);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(9, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
         if (_instance.sqlQuery) {
             _writer.writeString(10, _instance.sqlQuery);
@@ -43488,7 +43775,7 @@ class GetSessionsStatisticsRequest {
         this.groupBys = (_value.groupBys || []).slice();
         this.orderBys = (_value.orderBys || []).slice();
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         this.sqlQuery = _value.sqlQuery;
         GetSessionsStatisticsRequest.refineValues(this);
@@ -44034,8 +44321,8 @@ class ListUsersInProjectRequest {
                     _instance.pageToken = _reader.readString();
                     break;
                 case 3:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -44056,7 +44343,7 @@ class ListUsersInProjectRequest {
             _writer.writeString(2, _instance.pageToken);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -44068,7 +44355,7 @@ class ListUsersInProjectRequest {
         this.parent = _value.parent;
         this.pageToken = _value.pageToken;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListUsersInProjectRequest.refineValues(this);
     }
@@ -44536,8 +44823,8 @@ class ListProjectPermissionsRequest {
                     _instance.pageToken = _reader.readString();
                     break;
                 case 2:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -44555,7 +44842,7 @@ class ListProjectPermissionsRequest {
             _writer.writeString(1, _instance.pageToken);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -44566,7 +44853,7 @@ class ListProjectPermissionsRequest {
         _value = _value || {};
         this.pageToken = _value.pageToken;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListProjectPermissionsRequest.refineValues(this);
     }
@@ -45834,8 +46121,8 @@ class ModelStatus {
                     _instance.modelName = _reader.readString();
                     break;
                 case 4:
-                    _instance.statusSetTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.statusSetTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.statusSetTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.statusSetTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
                     _instance.config = _reader.readString();
@@ -45865,7 +46152,7 @@ class ModelStatus {
             _writer.writeString(3, _instance.modelName);
         }
         if (_instance.statusSetTime) {
-            _writer.writeMessage(4, _instance.statusSetTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.statusSetTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.config) {
             _writer.writeString(5, _instance.config);
@@ -45884,7 +46171,7 @@ class ModelStatus {
         this.languageCode = _value.languageCode;
         this.modelName = _value.modelName;
         this.statusSetTime = _value.statusSetTime
-            ? new googleProtobuf003.Timestamp(_value.statusSetTime)
+            ? new googleProtobuf004.Timestamp(_value.statusSetTime)
             : undefined;
         this.config = _value.config;
         this.status = _value.status;
@@ -46138,12 +46425,12 @@ class CustomPlatformInfo {
                     _instance.position = _reader.readUint32();
                     break;
                 case 4:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
                     _instance.createdBy = _reader.readString();
@@ -46173,10 +46460,10 @@ class CustomPlatformInfo {
             _writer.writeUint32(3, _instance.position);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(4, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(6, _instance.createdBy);
@@ -46195,10 +46482,10 @@ class CustomPlatformInfo {
         this.displayName = _value.displayName;
         this.position = _value.position;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -46933,12 +47220,12 @@ class FullTextSearchResponseEntityType {
                         _instance.language = _reader.readString();
                         break;
                     case 4:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 5:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 6:
                         _instance.createdBy = _reader.readString();
@@ -46968,10 +47255,10 @@ class FullTextSearchResponseEntityType {
                 _writer.writeString(3, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(4, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(4, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(5, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(6, _instance.createdBy);
@@ -46990,10 +47277,10 @@ class FullTextSearchResponseEntityType {
             this.displayName = _value.displayName;
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -47351,12 +47638,12 @@ class FullTextSearchResponseEntity {
                         _instance.language = _reader.readString();
                         break;
                     case 6:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 7:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 8:
                         _instance.createdBy = _reader.readString();
@@ -47392,10 +47679,10 @@ class FullTextSearchResponseEntity {
                 _writer.writeString(5, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(6, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(6, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(8, _instance.createdBy);
@@ -47416,10 +47703,10 @@ class FullTextSearchResponseEntity {
             this.entityTypeDisplayName = _value.entityTypeDisplayName;
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -47804,12 +48091,12 @@ class FullTextSearchResponseEntitySynonym {
                         _instance.language = _reader.readString();
                         break;
                     case 8:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 9:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 10:
                         _instance.createdBy = _reader.readString();
@@ -47851,10 +48138,10 @@ class FullTextSearchResponseEntitySynonym {
                 _writer.writeString(7, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(8, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(8, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(9, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(9, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(10, _instance.createdBy);
@@ -47877,10 +48164,10 @@ class FullTextSearchResponseEntitySynonym {
             this.entityDisplayName = _value.entityDisplayName;
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -48270,12 +48557,12 @@ class FullTextSearchResponseIntent {
                         _instance.language = _reader.readString();
                         break;
                     case 6:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 7:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 8:
                         _instance.createdBy = _reader.readString();
@@ -48311,10 +48598,10 @@ class FullTextSearchResponseIntent {
                 _writer.writeString(5, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(6, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(6, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(8, _instance.createdBy);
@@ -48335,10 +48622,10 @@ class FullTextSearchResponseIntent {
             this.tags = (_value.tags || []).slice();
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -48715,12 +49002,12 @@ class FullTextSearchResponseIntentContextIn {
                         _instance.language = _reader.readString();
                         break;
                     case 6:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 7:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 8:
                         _instance.createdBy = _reader.readString();
@@ -48756,10 +49043,10 @@ class FullTextSearchResponseIntentContextIn {
                 _writer.writeString(5, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(6, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(6, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(8, _instance.createdBy);
@@ -48780,10 +49067,10 @@ class FullTextSearchResponseIntentContextIn {
             this.tags = (_value.tags || []).slice();
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -49160,12 +49447,12 @@ class FullTextSearchResponseIntentContextOut {
                         _instance.language = _reader.readString();
                         break;
                     case 6:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 7:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 8:
                         _instance.createdBy = _reader.readString();
@@ -49201,10 +49488,10 @@ class FullTextSearchResponseIntentContextOut {
                 _writer.writeString(5, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(6, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(6, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(8, _instance.createdBy);
@@ -49225,10 +49512,10 @@ class FullTextSearchResponseIntentContextOut {
             this.tags = (_value.tags || []).slice();
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -49621,12 +49908,12 @@ class FullTextSearchResponseIntentUsersays {
                         _instance.language = _reader.readString();
                         break;
                     case 10:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 11:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 12:
                         _instance.createdBy = _reader.readString();
@@ -49674,10 +49961,10 @@ class FullTextSearchResponseIntentUsersays {
                 _writer.writeString(9, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(10, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(10, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(11, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(11, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(12, _instance.createdBy);
@@ -49702,10 +49989,10 @@ class FullTextSearchResponseIntentUsersays {
             this.tags = (_value.tags || []).slice();
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -50117,12 +50404,12 @@ class FullTextSearchResponseIntentTags {
                         _instance.language = _reader.readString();
                         break;
                     case 7:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 8:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 9:
                         _instance.createdBy = _reader.readString();
@@ -50161,10 +50448,10 @@ class FullTextSearchResponseIntentTags {
                 _writer.writeString(6, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(7, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(7, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(9, _instance.createdBy);
@@ -50186,10 +50473,10 @@ class FullTextSearchResponseIntentTags {
             this.tags = (_value.tags || []).slice();
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -50582,12 +50869,12 @@ class FullTextSearchResponseIntentResponse {
                         _instance.language = _reader.readString();
                         break;
                     case 8:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 9:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 10:
                         _instance.createdBy = _reader.readString();
@@ -50629,10 +50916,10 @@ class FullTextSearchResponseIntentResponse {
                 _writer.writeString(7, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(8, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(8, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(9, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(9, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(10, _instance.createdBy);
@@ -50655,10 +50942,10 @@ class FullTextSearchResponseIntentResponse {
             this.tags = (_value.tags || []).slice();
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -51055,12 +51342,12 @@ class FullTextSearchResponseIntentParameters {
                         _instance.language = _reader.readString();
                         break;
                     case 7:
-                        _instance.createdAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.createdAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 8:
-                        _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                        _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                        _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                        _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                         break;
                     case 9:
                         _instance.createdBy = _reader.readString();
@@ -51099,10 +51386,10 @@ class FullTextSearchResponseIntentParameters {
                 _writer.writeString(6, _instance.language);
             }
             if (_instance.createdAt) {
-                _writer.writeMessage(7, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(7, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.modifiedAt) {
-                _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+                _writer.writeMessage(8, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
             }
             if (_instance.createdBy) {
                 _writer.writeString(9, _instance.createdBy);
@@ -51124,10 +51411,10 @@ class FullTextSearchResponseIntentParameters {
             this.tags = (_value.tags || []).slice();
             this.language = _value.language;
             this.createdAt = _value.createdAt
-                ? new googleProtobuf003.Timestamp(_value.createdAt)
+                ? new googleProtobuf004.Timestamp(_value.createdAt)
                 : undefined;
             this.modifiedAt = _value.modifiedAt
-                ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+                ? new googleProtobuf004.Timestamp(_value.modifiedAt)
                 : undefined;
             this.createdBy = _value.createdBy;
             this.modifiedBy = _value.modifiedBy;
@@ -51451,16 +51738,16 @@ class OperationMetadata {
                         _instance.subOperationNames || []).push(_reader.readString());
                     break;
                 case 4:
-                    _instance.createTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.startTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.startTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.startTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.startTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
-                    _instance.endTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.endTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.endTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.endTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 7:
                     _instance.isCancellationRequested = _reader.readBool();
@@ -51499,12 +51786,12 @@ class OperationMetadata {
                     _instance.logLimit = _reader.readInt32();
                     break;
                 case 19:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 20:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 21:
                     _instance.createdBy = _reader.readString();
@@ -51534,13 +51821,13 @@ class OperationMetadata {
             _writer.writeRepeatedString(3, _instance.subOperationNames);
         }
         if (_instance.createTime) {
-            _writer.writeMessage(4, _instance.createTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.createTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.startTime) {
-            _writer.writeMessage(5, _instance.startTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.startTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.endTime) {
-            _writer.writeMessage(6, _instance.endTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.endTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.isCancellationRequested) {
             _writer.writeBool(7, _instance.isCancellationRequested);
@@ -51579,10 +51866,10 @@ class OperationMetadata {
             _writer.writeInt32(18, _instance.logLimit);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(19, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(19, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(20, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(20, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(21, _instance.createdBy);
@@ -51601,13 +51888,13 @@ class OperationMetadata {
         this.parentOperationName = _value.parentOperationName;
         this.subOperationNames = (_value.subOperationNames || []).slice();
         this.createTime = _value.createTime
-            ? new googleProtobuf003.Timestamp(_value.createTime)
+            ? new googleProtobuf004.Timestamp(_value.createTime)
             : undefined;
         this.startTime = _value.startTime
-            ? new googleProtobuf003.Timestamp(_value.startTime)
+            ? new googleProtobuf004.Timestamp(_value.startTime)
             : undefined;
         this.endTime = _value.endTime
-            ? new googleProtobuf003.Timestamp(_value.endTime)
+            ? new googleProtobuf004.Timestamp(_value.endTime)
             : undefined;
         this.isCancellationRequested = _value.isCancellationRequested;
         this.cancelCommand = _value.cancelCommand;
@@ -51622,10 +51909,10 @@ class OperationMetadata {
         this.log = (_value.log || []).slice();
         this.logLimit = _value.logLimit;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -51923,8 +52210,8 @@ class Operation {
                     _reader.readMessage(_instance.error, Status.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.response = new googleProtobuf003.Any();
-                    _reader.readMessage(_instance.response, googleProtobuf003.Any.deserializeBinaryFromReader);
+                    _instance.response = new googleProtobuf004.Any();
+                    _reader.readMessage(_instance.response, googleProtobuf004.Any.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -51951,7 +52238,7 @@ class Operation {
             _writer.writeMessage(4, _instance.error, Status.serializeBinaryToWriter);
         }
         if (_instance.response) {
-            _writer.writeMessage(5, _instance.response, googleProtobuf003.Any.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.response, googleProtobuf004.Any.serializeBinaryToWriter);
         }
     }
     /**
@@ -51970,7 +52257,7 @@ class Operation {
             ? new Status(_value.error)
             : undefined;
         this.response = _value.response
-            ? new googleProtobuf003.Any(_value.response)
+            ? new googleProtobuf004.Any(_value.response)
             : undefined;
         Operation.refineValues(this);
     }
@@ -52103,8 +52390,8 @@ class GetOperationRequest {
                     _instance.name = _reader.readString();
                     break;
                 case 2:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -52122,7 +52409,7 @@ class GetOperationRequest {
             _writer.writeString(1, _instance.name);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -52133,7 +52420,7 @@ class GetOperationRequest {
         _value = _value || {};
         this.name = _value.name;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetOperationRequest.refineValues(this);
     }
@@ -52240,8 +52527,8 @@ class ListOperationsRequest {
                     _reader.readMessage(_instance.operationFilter, OperationFilter.deserializeBinaryFromReader);
                     break;
                 case 6:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -52271,7 +52558,7 @@ class ListOperationsRequest {
             _writer.writeMessage(5, _instance.operationFilter, OperationFilter.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -52288,7 +52575,7 @@ class ListOperationsRequest {
             ? new OperationFilter(_value.operationFilter)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListOperationsRequest.refineValues(this);
     }
@@ -52422,12 +52709,12 @@ class OperationFilter {
                     _reader.readPackableEnumInto((_instance.types = _instance.types || []));
                     break;
                 case 4:
-                    _instance.startTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.startTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.startTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.startTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.endTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.endTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.endTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.endTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 6:
                     (_instance.userIds = _instance.userIds || []).push(_reader.readString());
@@ -52454,10 +52741,10 @@ class OperationFilter {
             _writer.writePackedEnum(3, _instance.types);
         }
         if (_instance.startTime) {
-            _writer.writeMessage(4, _instance.startTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.startTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.endTime) {
-            _writer.writeMessage(5, _instance.endTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.endTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.userIds && _instance.userIds.length) {
             _writer.writeRepeatedString(6, _instance.userIds);
@@ -52475,10 +52762,10 @@ class OperationFilter {
         this.statuses = (_value.statuses || []).slice();
         this.types = (_value.types || []).slice();
         this.startTime = _value.startTime
-            ? new googleProtobuf003.Timestamp(_value.startTime)
+            ? new googleProtobuf004.Timestamp(_value.startTime)
             : undefined;
         this.endTime = _value.endTime
-            ? new googleProtobuf003.Timestamp(_value.endTime)
+            ? new googleProtobuf004.Timestamp(_value.endTime)
             : undefined;
         this.userIds = (_value.userIds || []).slice();
         OperationFilter.refineValues(this);
@@ -53000,7 +53287,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
+             * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
              */
             deleteAgent: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53010,7 +53297,7 @@ class AgentsClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteAgentRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -53018,7 +53305,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
+             * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
              */
             deleteAllAgents: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53027,8 +53314,8 @@ class AgentsClient {
                     path: '/ondewo.nlu.Agents/DeleteAllAgents',
                     requestData,
                     requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
-                    responseClass: googleProtobuf003.Empty
+                    requestClass: googleProtobuf004.Empty,
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -53090,7 +53377,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
+             * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
              */
             addUserToProject: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53100,7 +53387,7 @@ class AgentsClient {
                     requestData,
                     requestMetadata,
                     requestClass: AddUserToProjectRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -53108,7 +53395,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
+             * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
              */
             removeUserFromProject: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53118,7 +53405,7 @@ class AgentsClient {
                     requestData,
                     requestMetadata,
                     requestClass: RemoveUserFromProjectRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -53153,7 +53440,7 @@ class AgentsClient {
                     path: '/ondewo.nlu.Agents/GetPlatformInfo',
                     requestData,
                     requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
+                    requestClass: googleProtobuf004.Empty,
                     responseClass: GetPlatformInfoResponse
                 });
             },
@@ -53180,7 +53467,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
              */
             trainAgent: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53198,7 +53485,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
              */
             buildCache: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53216,7 +53503,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
              */
             exportAgent: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53234,7 +53521,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
              */
             exportBenchmarkAgent: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53252,7 +53539,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
              */
             importAgent: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53270,7 +53557,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
              */
             migrateAgent: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53288,7 +53575,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
              */
             optimizeRankingMatch: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53306,7 +53593,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
              */
             restoreAgent: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53378,7 +53665,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
+             * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
              */
             setResources: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53388,7 +53675,7 @@ class AgentsClient {
                     requestData,
                     requestMetadata,
                     requestClass: SetResourcesRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -53396,7 +53683,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
+             * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
              */
             deleteResources: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53406,7 +53693,7 @@ class AgentsClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteResourcesRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -53666,7 +53953,7 @@ class AgentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
              */
             reindexAgent: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -53723,7 +54010,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf008.Empty>
+     * @returns Observable<googleProtobuf009.Empty>
      */
     deleteAgent(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53735,7 +54022,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf008.Empty>
+     * @returns Observable<googleProtobuf009.Empty>
      */
     deleteAllAgents(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53783,7 +54070,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf008.Empty>
+     * @returns Observable<googleProtobuf009.Empty>
      */
     addUserToProject(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53795,7 +54082,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf008.Empty>
+     * @returns Observable<googleProtobuf009.Empty>
      */
     removeUserFromProject(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53843,7 +54130,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.Operation>
+     * @returns Observable<ondewoNlu008.Operation>
      */
     trainAgent(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53855,7 +54142,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.Operation>
+     * @returns Observable<ondewoNlu008.Operation>
      */
     buildCache(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53867,7 +54154,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.Operation>
+     * @returns Observable<ondewoNlu008.Operation>
      */
     exportAgent(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53879,7 +54166,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.Operation>
+     * @returns Observable<ondewoNlu008.Operation>
      */
     exportBenchmarkAgent(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53891,7 +54178,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.Operation>
+     * @returns Observable<ondewoNlu008.Operation>
      */
     importAgent(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53903,7 +54190,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.Operation>
+     * @returns Observable<ondewoNlu008.Operation>
      */
     migrateAgent(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53915,7 +54202,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.Operation>
+     * @returns Observable<ondewoNlu008.Operation>
      */
     optimizeRankingMatch(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53927,7 +54214,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.Operation>
+     * @returns Observable<ondewoNlu008.Operation>
      */
     restoreAgent(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53975,7 +54262,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf008.Empty>
+     * @returns Observable<googleProtobuf009.Empty>
      */
     setResources(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -53987,7 +54274,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf008.Empty>
+     * @returns Observable<googleProtobuf009.Empty>
      */
     deleteResources(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -54167,7 +54454,7 @@ class AgentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.Operation>
+     * @returns Observable<ondewoNlu008.Operation>
      */
     reindexAgent(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -54307,7 +54594,7 @@ class IntentsClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteIntentRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -54333,7 +54620,7 @@ class IntentsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu011.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu012.Operation>>
              */
             batchDeleteIntents: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -54361,7 +54648,7 @@ class IntentsClient {
                     requestData,
                     requestMetadata,
                     requestClass: IntentTagRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -54379,7 +54666,7 @@ class IntentsClient {
                     requestData,
                     requestMetadata,
                     requestClass: IntentTagRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -54786,7 +55073,7 @@ class IntentsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu011.Operation>
+     * @returns Observable<ondewoNlu012.Operation>
      */
     batchDeleteIntents(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -55689,7 +55976,7 @@ class ProjectRolesClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteProjectRoleRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -55949,12 +56236,12 @@ class CcaiProject {
                     _instance.ccaiProjectStatus = _reader.readEnum();
                     break;
                 case 6:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 7:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 8:
                     _instance.createdBy = _reader.readString();
@@ -56002,10 +56289,10 @@ class CcaiProject {
             _writer.writeEnum(5, _instance.ccaiProjectStatus);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(6, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(7, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(8, _instance.createdBy);
@@ -56036,10 +56323,10 @@ class CcaiProject {
             : {}),
             (this.ccaiProjectStatus = _value.ccaiProjectStatus);
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -56510,16 +56797,16 @@ class CcaiService {
                     _instance.ccaiProjectName = _reader.readString();
                     break;
                 case 18:
-                    _instance.ccaiServiceConfig = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.ccaiServiceConfig, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.ccaiServiceConfig = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.ccaiServiceConfig, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 19:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 20:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 21:
                     _instance.createdBy = _reader.readString();
@@ -56528,8 +56815,8 @@ class CcaiService {
                     _instance.modifiedBy = _reader.readString();
                     break;
                 case 23:
-                    _instance.headers = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.headers, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.headers = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.headers, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 24:
                     _instance.ccaiServiceProvider = _reader.readEnum();
@@ -56601,13 +56888,13 @@ class CcaiService {
             _writer.writeString(17, _instance.ccaiProjectName);
         }
         if (_instance.ccaiServiceConfig) {
-            _writer.writeMessage(18, _instance.ccaiServiceConfig, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(18, _instance.ccaiServiceConfig, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(19, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(19, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(20, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(20, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(21, _instance.createdBy);
@@ -56616,7 +56903,7 @@ class CcaiService {
             _writer.writeString(22, _instance.modifiedBy);
         }
         if (_instance.headers) {
-            _writer.writeMessage(23, _instance.headers, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(23, _instance.headers, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.ccaiServiceProvider) {
             _writer.writeEnum(24, _instance.ccaiServiceProvider);
@@ -56649,18 +56936,18 @@ class CcaiService {
         this.ccaiServiceType = _value.ccaiServiceType;
         this.ccaiProjectName = _value.ccaiProjectName;
         this.ccaiServiceConfig = _value.ccaiServiceConfig
-            ? new googleProtobuf003.Struct(_value.ccaiServiceConfig)
+            ? new googleProtobuf004.Struct(_value.ccaiServiceConfig)
             : undefined;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
         this.headers = _value.headers
-            ? new googleProtobuf003.Struct(_value.headers)
+            ? new googleProtobuf004.Struct(_value.headers)
             : undefined;
         this.ccaiServiceProvider = _value.ccaiServiceProvider;
         this.serviceHierarchy = _value.serviceHierarchy;
@@ -57204,8 +57491,8 @@ class GetCcaiProjectRequest {
                     _instance.nluProjectName = _reader.readString();
                     break;
                 case 5:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -57232,7 +57519,7 @@ class GetCcaiProjectRequest {
             _writer.writeString(4, _instance.nluProjectName);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -57248,7 +57535,7 @@ class GetCcaiProjectRequest {
             : undefined;
         this.nluProjectName = _value.nluProjectName;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetCcaiProjectRequest.refineValues(this);
     }
@@ -57372,8 +57659,8 @@ class GetCcaiServiceRequest {
                     _instance.nluProjectName = _reader.readString();
                     break;
                 case 5:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -57394,7 +57681,7 @@ class GetCcaiServiceRequest {
             _writer.writeString(4, _instance.nluProjectName);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -57406,7 +57693,7 @@ class GetCcaiServiceRequest {
         this.name = _value.name;
         this.nluProjectName = _value.nluProjectName;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetCcaiServiceRequest.refineValues(this);
     }
@@ -57522,8 +57809,8 @@ class ListCcaiProjectsRequest {
                     _instance.nluProjectName = _reader.readString();
                     break;
                 case 6:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -57553,7 +57840,7 @@ class ListCcaiProjectsRequest {
             _writer.writeString(5, _instance.nluProjectName);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -57572,7 +57859,7 @@ class ListCcaiProjectsRequest {
         this.pageToken = _value.pageToken;
         this.nluProjectName = _value.nluProjectName;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListCcaiProjectsRequest.refineValues(this);
     }
@@ -58096,8 +58383,8 @@ class UpdateCcaiProjectRequest {
                     _reader.readMessage(_instance.ccaiServiceFilter, CcaiServiceFilter.deserializeBinaryFromReader);
                     break;
                 case 3:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 case 4:
                     _instance.nluProjectName = _reader.readString();
@@ -58121,7 +58408,7 @@ class UpdateCcaiProjectRequest {
             _writer.writeMessage(2, _instance.ccaiServiceFilter, CcaiServiceFilter.serializeBinaryToWriter);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(3, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
         if (_instance.nluProjectName) {
             _writer.writeString(4, _instance.nluProjectName);
@@ -58140,7 +58427,7 @@ class UpdateCcaiProjectRequest {
             ? new CcaiServiceFilter(_value.ccaiServiceFilter)
             : undefined;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         this.nluProjectName = _value.nluProjectName;
         UpdateCcaiProjectRequest.refineValues(this);
@@ -58694,7 +58981,7 @@ class EntityTypesClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf006.Empty>>
+             * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
              */
             deleteEntityType: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -58704,7 +58991,7 @@ class EntityTypesClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteEntityTypeRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -58712,7 +58999,7 @@ class EntityTypesClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu010.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu011.Operation>>
              */
             batchUpdateEntityTypes: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -58730,7 +59017,7 @@ class EntityTypesClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu010.Operation>>
+             * @returns Observable<GrpcEvent<ondewoNlu011.Operation>>
              */
             batchDeleteEntityTypes: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -58961,7 +59248,7 @@ class EntityTypesClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf006.Empty>
+     * @returns Observable<googleProtobuf007.Empty>
      */
     deleteEntityType(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -58973,7 +59260,7 @@ class EntityTypesClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu010.Operation>
+     * @returns Observable<ondewoNlu011.Operation>
      */
     batchUpdateEntityTypes(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -58985,7 +59272,7 @@ class EntityTypesClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu010.Operation>
+     * @returns Observable<ondewoNlu011.Operation>
      */
     batchDeleteEntityTypes(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -60391,12 +60678,12 @@ class RagDataset {
                     _reader.readMessage(_instance.parsingStatus, RagDatasetParsingStatus.deserializeBinaryFromReader);
                     break;
                 case 12:
-                    _instance.createTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 13:
-                    _instance.updateTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.updateTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.updateTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.updateTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -60444,10 +60731,10 @@ class RagDataset {
             _writer.writeMessage(11, _instance.parsingStatus, RagDatasetParsingStatus.serializeBinaryToWriter);
         }
         if (_instance.createTime) {
-            _writer.writeMessage(12, _instance.createTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(12, _instance.createTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.updateTime) {
-            _writer.writeMessage(13, _instance.updateTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(13, _instance.updateTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
     }
     /**
@@ -60472,10 +60759,10 @@ class RagDataset {
             ? new RagDatasetParsingStatus(_value.parsingStatus)
             : undefined;
         this.createTime = _value.createTime
-            ? new googleProtobuf003.Timestamp(_value.createTime)
+            ? new googleProtobuf004.Timestamp(_value.createTime)
             : undefined;
         this.updateTime = _value.updateTime
-            ? new googleProtobuf003.Timestamp(_value.updateTime)
+            ? new googleProtobuf004.Timestamp(_value.updateTime)
             : undefined;
         RagDataset.refineValues(this);
     }
@@ -61770,15 +62057,15 @@ class RagDocument {
                     _instance.progressMsg = _reader.readString();
                     break;
                 case 13:
-                    _instance.processBeginAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.processBeginAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.processBeginAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.processBeginAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 14:
                     _instance.processDuration = _reader.readFloat();
                     break;
                 case 15:
-                    _instance.metaFields = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.metaFields, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.metaFields = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.metaFields, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 16:
                     _instance.run = _reader.readEnum();
@@ -61787,12 +62074,12 @@ class RagDocument {
                     _instance.status = _reader.readString();
                     break;
                 case 18:
-                    _instance.createTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 19:
-                    _instance.updateTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.updateTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.updateTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.updateTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -61843,13 +62130,13 @@ class RagDocument {
             _writer.writeString(12, _instance.progressMsg);
         }
         if (_instance.processBeginAt) {
-            _writer.writeMessage(13, _instance.processBeginAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(13, _instance.processBeginAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.processDuration) {
             _writer.writeFloat(14, _instance.processDuration);
         }
         if (_instance.metaFields) {
-            _writer.writeMessage(15, _instance.metaFields, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(15, _instance.metaFields, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.run) {
             _writer.writeEnum(16, _instance.run);
@@ -61858,10 +62145,10 @@ class RagDocument {
             _writer.writeString(17, _instance.status);
         }
         if (_instance.createTime) {
-            _writer.writeMessage(18, _instance.createTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(18, _instance.createTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.updateTime) {
-            _writer.writeMessage(19, _instance.updateTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(19, _instance.updateTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
     }
     /**
@@ -61885,19 +62172,19 @@ class RagDocument {
         this.progress = _value.progress;
         this.progressMsg = _value.progressMsg;
         this.processBeginAt = _value.processBeginAt
-            ? new googleProtobuf003.Timestamp(_value.processBeginAt)
+            ? new googleProtobuf004.Timestamp(_value.processBeginAt)
             : undefined;
         this.processDuration = _value.processDuration;
         this.metaFields = _value.metaFields
-            ? new googleProtobuf003.Struct(_value.metaFields)
+            ? new googleProtobuf004.Struct(_value.metaFields)
             : undefined;
         this.run = _value.run;
         this.status = _value.status;
         this.createTime = _value.createTime
-            ? new googleProtobuf003.Timestamp(_value.createTime)
+            ? new googleProtobuf004.Timestamp(_value.createTime)
             : undefined;
         this.updateTime = _value.updateTime
-            ? new googleProtobuf003.Timestamp(_value.updateTime)
+            ? new googleProtobuf004.Timestamp(_value.updateTime)
             : undefined;
         RagDocument.refineValues(this);
     }
@@ -62168,8 +62455,8 @@ class RagUpdateDocumentRequest {
                     _instance.enabled = _reader.readBool();
                     break;
                 case 9:
-                    _instance.metaFields = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.metaFields, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.metaFields = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.metaFields, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -62208,7 +62495,7 @@ class RagUpdateDocumentRequest {
             _writer.writeBool(8, _instance.enabled);
         }
         if (_instance.metaFields) {
-            _writer.writeMessage(9, _instance.metaFields, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.metaFields, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
     }
     /**
@@ -62228,7 +62515,7 @@ class RagUpdateDocumentRequest {
             : undefined;
         this.enabled = _value.enabled;
         this.metaFields = _value.metaFields
-            ? new googleProtobuf003.Struct(_value.metaFields)
+            ? new googleProtobuf004.Struct(_value.metaFields)
             : undefined;
         RagUpdateDocumentRequest.refineValues(this);
     }
@@ -62693,12 +62980,12 @@ class RagListDocumentsRequest {
                     _reader.readPackableEnumInto((_instance.runStatus = _instance.runStatus || []));
                     break;
                 case 12:
-                    _instance.createTimeFrom = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createTimeFrom, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createTimeFrom = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createTimeFrom, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 13:
-                    _instance.createTimeTo = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createTimeTo, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createTimeTo = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createTimeTo, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 14:
                     _instance.metadataCondition = new RagMetadataConditions();
@@ -62750,10 +63037,10 @@ class RagListDocumentsRequest {
             _writer.writePackedEnum(11, _instance.runStatus);
         }
         if (_instance.createTimeFrom) {
-            _writer.writeMessage(12, _instance.createTimeFrom, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(12, _instance.createTimeFrom, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createTimeTo) {
-            _writer.writeMessage(13, _instance.createTimeTo, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(13, _instance.createTimeTo, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.metadataCondition) {
             _writer.writeMessage(14, _instance.metadataCondition, RagMetadataConditions.serializeBinaryToWriter);
@@ -62777,10 +63064,10 @@ class RagListDocumentsRequest {
         this.suffix = (_value.suffix || []).slice();
         this.runStatus = (_value.runStatus || []).slice();
         this.createTimeFrom = _value.createTimeFrom
-            ? new googleProtobuf003.Timestamp(_value.createTimeFrom)
+            ? new googleProtobuf004.Timestamp(_value.createTimeFrom)
             : undefined;
         this.createTimeTo = _value.createTimeTo
-            ? new googleProtobuf003.Timestamp(_value.createTimeTo)
+            ? new googleProtobuf004.Timestamp(_value.createTimeTo)
             : undefined;
         this.metadataCondition = _value.metadataCondition
             ? new RagMetadataConditions(_value.metadataCondition)
@@ -64182,13 +64469,13 @@ class RagChunk {
                     _instance.imageId = _reader.readString();
                     break;
                 case 8:
-                    const messageInitializer8 = new googleProtobuf003.ListValue();
-                    _reader.readMessage(messageInitializer8, googleProtobuf003.ListValue.deserializeBinaryFromReader);
+                    const messageInitializer8 = new googleProtobuf004.ListValue();
+                    _reader.readMessage(messageInitializer8, googleProtobuf004.ListValue.deserializeBinaryFromReader);
                     (_instance.positions = _instance.positions || []).push(messageInitializer8);
                     break;
                 case 9:
-                    _instance.createTime = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createTime, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 10:
                     _instance.documentKeyword = _reader.readString();
@@ -64230,10 +64517,10 @@ class RagChunk {
             _writer.writeString(7, _instance.imageId);
         }
         if (_instance.positions && _instance.positions.length) {
-            _writer.writeRepeatedMessage(8, _instance.positions, googleProtobuf003.ListValue.serializeBinaryToWriter);
+            _writer.writeRepeatedMessage(8, _instance.positions, googleProtobuf004.ListValue.serializeBinaryToWriter);
         }
         if (_instance.createTime) {
-            _writer.writeMessage(9, _instance.createTime, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.createTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.documentKeyword) {
             _writer.writeString(10, _instance.documentKeyword);
@@ -64255,9 +64542,9 @@ class RagChunk {
         this.importantKeywords = (_value.importantKeywords || []).slice();
         this.questions = (_value.questions || []).slice();
         this.imageId = _value.imageId;
-        this.positions = (_value.positions || []).map(m => new googleProtobuf003.ListValue(m));
+        this.positions = (_value.positions || []).map(m => new googleProtobuf004.ListValue(m));
         this.createTime = _value.createTime
-            ? new googleProtobuf003.Timestamp(_value.createTime)
+            ? new googleProtobuf004.Timestamp(_value.createTime)
             : undefined;
         this.documentKeyword = _value.documentKeyword;
         this.similarity = _value.similarity;
@@ -64565,8 +64852,8 @@ class RagCreateCrawlerRequest {
                     _reader.readMessage(_instance.crawler, RagCrawler.deserializeBinaryFromReader);
                     break;
                 case 4:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -64590,7 +64877,7 @@ class RagCreateCrawlerRequest {
             _writer.writeMessage(3, _instance.crawler, RagCrawler.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -64603,7 +64890,7 @@ class RagCreateCrawlerRequest {
         this.languageCode = _value.languageCode;
         this.crawler = _value.crawler ? new RagCrawler(_value.crawler) : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         RagCreateCrawlerRequest.refineValues(this);
     }
@@ -65539,8 +65826,8 @@ class RagGetCrawlerRequest {
                     _instance.languageCode = _reader.readString();
                     break;
                 case 4:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -65564,7 +65851,7 @@ class RagGetCrawlerRequest {
             _writer.writeString(3, _instance.languageCode);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -65577,7 +65864,7 @@ class RagGetCrawlerRequest {
         this.parent = _value.parent;
         this.languageCode = _value.languageCode;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         RagGetCrawlerRequest.refineValues(this);
     }
@@ -65693,12 +65980,12 @@ class RagUpdateCrawlerRequest {
                     _instance.languageCode = _reader.readString();
                     break;
                 case 4:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -65722,10 +66009,10 @@ class RagUpdateCrawlerRequest {
             _writer.writeString(3, _instance.languageCode);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(4, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -65738,10 +66025,10 @@ class RagUpdateCrawlerRequest {
         this.parent = _value.parent;
         this.languageCode = _value.languageCode;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         RagUpdateCrawlerRequest.refineValues(this);
     }
@@ -65872,12 +66159,12 @@ class RagCrawler {
                     _instance.displayName = _reader.readString();
                     break;
                 case 3:
-                    _instance.createdAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.createdAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.createdAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.createdAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 4:
-                    _instance.modifiedAt = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.modifiedAt, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.modifiedAt = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.modifiedAt, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 5:
                     _instance.createdBy = _reader.readString();
@@ -65928,10 +66215,10 @@ class RagCrawler {
             _writer.writeString(2, _instance.displayName);
         }
         if (_instance.createdAt) {
-            _writer.writeMessage(3, _instance.createdAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.createdAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.modifiedAt) {
-            _writer.writeMessage(4, _instance.modifiedAt, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.modifiedAt, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.createdBy) {
             _writer.writeString(5, _instance.createdBy);
@@ -65967,10 +66254,10 @@ class RagCrawler {
         this.name = _value.name;
         this.displayName = _value.displayName;
         this.createdAt = _value.createdAt
-            ? new googleProtobuf003.Timestamp(_value.createdAt)
+            ? new googleProtobuf004.Timestamp(_value.createdAt)
             : undefined;
         this.modifiedAt = _value.modifiedAt
-            ? new googleProtobuf003.Timestamp(_value.modifiedAt)
+            ? new googleProtobuf004.Timestamp(_value.modifiedAt)
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
@@ -66287,6 +66574,10 @@ class RagCrawlerFilters {
         _instance.allowInternalLinks = _instance.allowInternalLinks || false;
         _instance.allowExternalLinks = _instance.allowExternalLinks || false;
         _instance.allowSocialMediaLinks = _instance.allowSocialMediaLinks || false;
+        _instance.allowedRegex = _instance.allowedRegex || [];
+        _instance.disallowedRegex = _instance.disallowedRegex || [];
+        _instance.allowedPaths = _instance.allowedPaths || [];
+        _instance.disallowedPaths = _instance.disallowedPaths || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -66313,6 +66604,18 @@ class RagCrawlerFilters {
                     break;
                 case 5:
                     _instance.allowSocialMediaLinks = _reader.readBool();
+                    break;
+                case 6:
+                    (_instance.allowedRegex = _instance.allowedRegex || []).push(_reader.readString());
+                    break;
+                case 7:
+                    (_instance.disallowedRegex = _instance.disallowedRegex || []).push(_reader.readString());
+                    break;
+                case 8:
+                    (_instance.allowedPaths = _instance.allowedPaths || []).push(_reader.readString());
+                    break;
+                case 9:
+                    (_instance.disallowedPaths = _instance.disallowedPaths || []).push(_reader.readString());
                     break;
                 default:
                     _reader.skipField();
@@ -66341,6 +66644,18 @@ class RagCrawlerFilters {
         if (_instance.allowSocialMediaLinks) {
             _writer.writeBool(5, _instance.allowSocialMediaLinks);
         }
+        if (_instance.allowedRegex && _instance.allowedRegex.length) {
+            _writer.writeRepeatedString(6, _instance.allowedRegex);
+        }
+        if (_instance.disallowedRegex && _instance.disallowedRegex.length) {
+            _writer.writeRepeatedString(7, _instance.disallowedRegex);
+        }
+        if (_instance.allowedPaths && _instance.allowedPaths.length) {
+            _writer.writeRepeatedString(8, _instance.allowedPaths);
+        }
+        if (_instance.disallowedPaths && _instance.disallowedPaths.length) {
+            _writer.writeRepeatedString(9, _instance.disallowedPaths);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -66353,6 +66668,10 @@ class RagCrawlerFilters {
         this.allowInternalLinks = _value.allowInternalLinks;
         this.allowExternalLinks = _value.allowExternalLinks;
         this.allowSocialMediaLinks = _value.allowSocialMediaLinks;
+        this.allowedRegex = (_value.allowedRegex || []).slice();
+        this.disallowedRegex = (_value.disallowedRegex || []).slice();
+        this.allowedPaths = (_value.allowedPaths || []).slice();
+        this.disallowedPaths = (_value.disallowedPaths || []).slice();
         RagCrawlerFilters.refineValues(this);
     }
     get allowedDomains() {
@@ -66385,6 +66704,30 @@ class RagCrawlerFilters {
     set allowSocialMediaLinks(value) {
         this._allowSocialMediaLinks = value;
     }
+    get allowedRegex() {
+        return this._allowedRegex;
+    }
+    set allowedRegex(value) {
+        this._allowedRegex = value;
+    }
+    get disallowedRegex() {
+        return this._disallowedRegex;
+    }
+    set disallowedRegex(value) {
+        this._disallowedRegex = value;
+    }
+    get allowedPaths() {
+        return this._allowedPaths;
+    }
+    set allowedPaths(value) {
+        this._allowedPaths = value;
+    }
+    get disallowedPaths() {
+        return this._disallowedPaths;
+    }
+    set disallowedPaths(value) {
+        this._disallowedPaths = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -66403,7 +66746,11 @@ class RagCrawlerFilters {
             disallowedDomains: (this.disallowedDomains || []).slice(),
             allowInternalLinks: this.allowInternalLinks,
             allowExternalLinks: this.allowExternalLinks,
-            allowSocialMediaLinks: this.allowSocialMediaLinks
+            allowSocialMediaLinks: this.allowSocialMediaLinks,
+            allowedRegex: (this.allowedRegex || []).slice(),
+            disallowedRegex: (this.disallowedRegex || []).slice(),
+            allowedPaths: (this.allowedPaths || []).slice(),
+            disallowedPaths: (this.disallowedPaths || []).slice()
         };
     }
     /**
@@ -66425,7 +66772,11 @@ class RagCrawlerFilters {
             disallowedDomains: (this.disallowedDomains || []).slice(),
             allowInternalLinks: this.allowInternalLinks,
             allowExternalLinks: this.allowExternalLinks,
-            allowSocialMediaLinks: this.allowSocialMediaLinks
+            allowSocialMediaLinks: this.allowSocialMediaLinks,
+            allowedRegex: (this.allowedRegex || []).slice(),
+            disallowedRegex: (this.disallowedRegex || []).slice(),
+            allowedPaths: (this.allowedPaths || []).slice(),
+            disallowedPaths: (this.disallowedPaths || []).slice()
         };
     }
 }
@@ -66950,7 +67301,6 @@ class RagCrawlerHttpAuth {
     static refineValues(_instance) {
         _instance.httpAuthUsername = _instance.httpAuthUsername || '';
         _instance.httpAuthPassword = _instance.httpAuthPassword || '';
-        _instance.httpAuthUserAgent = _instance.httpAuthUserAgent || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -66967,9 +67317,6 @@ class RagCrawlerHttpAuth {
                     break;
                 case 2:
                     _instance.httpAuthPassword = _reader.readString();
-                    break;
-                case 3:
-                    _instance.httpAuthUserAgent = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
@@ -66989,9 +67336,6 @@ class RagCrawlerHttpAuth {
         if (_instance.httpAuthPassword) {
             _writer.writeString(2, _instance.httpAuthPassword);
         }
-        if (_instance.httpAuthUserAgent) {
-            _writer.writeString(3, _instance.httpAuthUserAgent);
-        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -67001,7 +67345,6 @@ class RagCrawlerHttpAuth {
         _value = _value || {};
         this.httpAuthUsername = _value.httpAuthUsername;
         this.httpAuthPassword = _value.httpAuthPassword;
-        this.httpAuthUserAgent = _value.httpAuthUserAgent;
         RagCrawlerHttpAuth.refineValues(this);
     }
     get httpAuthUsername() {
@@ -67015,12 +67358,6 @@ class RagCrawlerHttpAuth {
     }
     set httpAuthPassword(value) {
         this._httpAuthPassword = value;
-    }
-    get httpAuthUserAgent() {
-        return this._httpAuthUserAgent;
-    }
-    set httpAuthUserAgent(value) {
-        this._httpAuthUserAgent = value;
     }
     /**
      * Serialize message to binary data
@@ -67037,8 +67374,7 @@ class RagCrawlerHttpAuth {
     toObject() {
         return {
             httpAuthUsername: this.httpAuthUsername,
-            httpAuthPassword: this.httpAuthPassword,
-            httpAuthUserAgent: this.httpAuthUserAgent
+            httpAuthPassword: this.httpAuthPassword
         };
     }
     /**
@@ -67057,8 +67393,7 @@ class RagCrawlerHttpAuth {
     options) {
         return {
             httpAuthUsername: this.httpAuthUsername,
-            httpAuthPassword: this.httpAuthPassword,
-            httpAuthUserAgent: this.httpAuthUserAgent
+            httpAuthPassword: this.httpAuthPassword
         };
     }
 }
@@ -67083,6 +67418,7 @@ class RagCrawlerBrowserConfig {
     static refineValues(_instance) {
         _instance.crawlerHeaders = _instance.crawlerHeaders || [];
         _instance.crawlerCookies = _instance.crawlerCookies || [];
+        _instance.crawlerUserAgent = _instance.crawlerUserAgent || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -67095,14 +67431,17 @@ class RagCrawlerBrowserConfig {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    const messageInitializer1 = new googleProtobuf003.Struct();
-                    _reader.readMessage(messageInitializer1, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    const messageInitializer1 = new googleProtobuf004.Struct();
+                    _reader.readMessage(messageInitializer1, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     (_instance.crawlerHeaders = _instance.crawlerHeaders || []).push(messageInitializer1);
                     break;
                 case 2:
                     const messageInitializer2 = new RagCrawlerCookie();
                     _reader.readMessage(messageInitializer2, RagCrawlerCookie.deserializeBinaryFromReader);
                     (_instance.crawlerCookies = _instance.crawlerCookies || []).push(messageInitializer2);
+                    break;
+                case 3:
+                    _instance.crawlerUserAgent = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
@@ -67117,10 +67456,13 @@ class RagCrawlerBrowserConfig {
      */
     static serializeBinaryToWriter(_instance, _writer) {
         if (_instance.crawlerHeaders && _instance.crawlerHeaders.length) {
-            _writer.writeRepeatedMessage(1, _instance.crawlerHeaders, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeRepeatedMessage(1, _instance.crawlerHeaders, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.crawlerCookies && _instance.crawlerCookies.length) {
             _writer.writeRepeatedMessage(2, _instance.crawlerCookies, RagCrawlerCookie.serializeBinaryToWriter);
+        }
+        if (_instance.crawlerUserAgent) {
+            _writer.writeString(3, _instance.crawlerUserAgent);
         }
     }
     /**
@@ -67129,8 +67471,9 @@ class RagCrawlerBrowserConfig {
      */
     constructor(_value) {
         _value = _value || {};
-        this.crawlerHeaders = (_value.crawlerHeaders || []).map(m => new googleProtobuf003.Struct(m));
+        this.crawlerHeaders = (_value.crawlerHeaders || []).map(m => new googleProtobuf004.Struct(m));
         this.crawlerCookies = (_value.crawlerCookies || []).map(m => new RagCrawlerCookie(m));
+        this.crawlerUserAgent = _value.crawlerUserAgent;
         RagCrawlerBrowserConfig.refineValues(this);
     }
     get crawlerHeaders() {
@@ -67144,6 +67487,12 @@ class RagCrawlerBrowserConfig {
     }
     set crawlerCookies(value) {
         this._crawlerCookies = value;
+    }
+    get crawlerUserAgent() {
+        return this._crawlerUserAgent;
+    }
+    set crawlerUserAgent(value) {
+        this._crawlerUserAgent = value;
     }
     /**
      * Serialize message to binary data
@@ -67160,7 +67509,8 @@ class RagCrawlerBrowserConfig {
     toObject() {
         return {
             crawlerHeaders: (this.crawlerHeaders || []).map(m => m.toObject()),
-            crawlerCookies: (this.crawlerCookies || []).map(m => m.toObject())
+            crawlerCookies: (this.crawlerCookies || []).map(m => m.toObject()),
+            crawlerUserAgent: this.crawlerUserAgent
         };
     }
     /**
@@ -67179,7 +67529,8 @@ class RagCrawlerBrowserConfig {
     options) {
         return {
             crawlerHeaders: (this.crawlerHeaders || []).map(m => m.toProtobufJSON(options)),
-            crawlerCookies: (this.crawlerCookies || []).map(m => m.toProtobufJSON(options))
+            crawlerCookies: (this.crawlerCookies || []).map(m => m.toProtobufJSON(options)),
+            crawlerUserAgent: this.crawlerUserAgent
         };
     }
 }
@@ -68146,8 +68497,8 @@ class RagCrawlerContentResult {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.metadata = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.metadata, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.metadata = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.metadata, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 2:
                     _instance.markdown = _reader.readString();
@@ -68165,7 +68516,7 @@ class RagCrawlerContentResult {
      */
     static serializeBinaryToWriter(_instance, _writer) {
         if (_instance.metadata) {
-            _writer.writeMessage(1, _instance.metadata, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(1, _instance.metadata, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.markdown) {
             _writer.writeString(2, _instance.markdown);
@@ -68178,7 +68529,7 @@ class RagCrawlerContentResult {
     constructor(_value) {
         _value = _value || {};
         this.metadata = _value.metadata
-            ? new googleProtobuf003.Struct(_value.metadata)
+            ? new googleProtobuf004.Struct(_value.metadata)
             : undefined;
         this.markdown = _value.markdown;
         RagCrawlerContentResult.refineValues(this);
@@ -68267,8 +68618,8 @@ class RagCrawlerExecutionInfo {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.sslCertificate = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.sslCertificate, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.sslCertificate = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.sslCertificate, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 2:
                     _instance.success = _reader.readBool();
@@ -68289,7 +68640,7 @@ class RagCrawlerExecutionInfo {
      */
     static serializeBinaryToWriter(_instance, _writer) {
         if (_instance.sslCertificate) {
-            _writer.writeMessage(1, _instance.sslCertificate, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(1, _instance.sslCertificate, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.success) {
             _writer.writeBool(2, _instance.success);
@@ -68305,7 +68656,7 @@ class RagCrawlerExecutionInfo {
     constructor(_value) {
         _value = _value || {};
         this.sslCertificate = _value.sslCertificate
-            ? new googleProtobuf003.Struct(_value.sslCertificate)
+            ? new googleProtobuf004.Struct(_value.sslCertificate)
             : undefined;
         this.success = _value.success;
         this.errorMessage = _value.errorMessage;
@@ -68428,16 +68779,16 @@ class RagCrawlerResult {
                     _reader.readMessage(_instance.fileResource, FileResource.deserializeBinaryFromReader);
                     break;
                 case 6:
-                    _instance.lastCrawledDate = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.lastCrawledDate, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.lastCrawledDate = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.lastCrawledDate, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 case 7:
                     _instance.contentResult = new RagCrawlerContentResult();
                     _reader.readMessage(_instance.contentResult, RagCrawlerContentResult.deserializeBinaryFromReader);
                     break;
                 case 8:
-                    _instance.pageLastUpdatedDate = new googleProtobuf003.Timestamp();
-                    _reader.readMessage(_instance.pageLastUpdatedDate, googleProtobuf003.Timestamp.deserializeBinaryFromReader);
+                    _instance.pageLastUpdatedDate = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.pageLastUpdatedDate, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -68467,13 +68818,13 @@ class RagCrawlerResult {
             _writer.writeMessage(5, _instance.fileResource, FileResource.serializeBinaryToWriter);
         }
         if (_instance.lastCrawledDate) {
-            _writer.writeMessage(6, _instance.lastCrawledDate, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.lastCrawledDate, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
         if (_instance.contentResult) {
             _writer.writeMessage(7, _instance.contentResult, RagCrawlerContentResult.serializeBinaryToWriter);
         }
         if (_instance.pageLastUpdatedDate) {
-            _writer.writeMessage(8, _instance.pageLastUpdatedDate, googleProtobuf003.Timestamp.serializeBinaryToWriter);
+            _writer.writeMessage(8, _instance.pageLastUpdatedDate, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
     }
     /**
@@ -68490,13 +68841,13 @@ class RagCrawlerResult {
             ? new FileResource(_value.fileResource)
             : undefined;
         this.lastCrawledDate = _value.lastCrawledDate
-            ? new googleProtobuf003.Timestamp(_value.lastCrawledDate)
+            ? new googleProtobuf004.Timestamp(_value.lastCrawledDate)
             : undefined;
         this.contentResult = _value.contentResult
             ? new RagCrawlerContentResult(_value.contentResult)
             : undefined;
         this.pageLastUpdatedDate = _value.pageLastUpdatedDate
-            ? new googleProtobuf003.Timestamp(_value.pageLastUpdatedDate)
+            ? new googleProtobuf004.Timestamp(_value.pageLastUpdatedDate)
             : undefined;
         RagCrawlerResult.refineValues(this);
     }
@@ -68903,7 +69254,7 @@ class RagListCrawlerRunsRequest {
         _instance.languageCode = _instance.languageCode || '';
         _instance.crawlerName = _instance.crawlerName || '';
         _instance.pageToken = _instance.pageToken || '';
-        _instance.state = _instance.state || 0;
+        _instance.status = _instance.status || 0;
         _instance.orderby = _instance.orderby || '';
         _instance.sortingMode = _instance.sortingMode || 0;
     }
@@ -68930,7 +69281,7 @@ class RagListCrawlerRunsRequest {
                     _instance.pageToken = _reader.readString();
                     break;
                 case 5:
-                    _instance.state = _reader.readEnum();
+                    _instance.status = _reader.readEnum();
                     break;
                 case 6:
                     _instance.orderby = _reader.readString();
@@ -68962,8 +69313,8 @@ class RagListCrawlerRunsRequest {
         if (_instance.pageToken) {
             _writer.writeString(4, _instance.pageToken);
         }
-        if (_instance.state) {
-            _writer.writeEnum(5, _instance.state);
+        if (_instance.status) {
+            _writer.writeEnum(5, _instance.status);
         }
         if (_instance.orderby) {
             _writer.writeString(6, _instance.orderby);
@@ -68982,7 +69333,7 @@ class RagListCrawlerRunsRequest {
         this.languageCode = _value.languageCode;
         this.crawlerName = _value.crawlerName;
         this.pageToken = _value.pageToken;
-        this.state = _value.state;
+        this.status = _value.status;
         this.orderby = _value.orderby;
         this.sortingMode = _value.sortingMode;
         RagListCrawlerRunsRequest.refineValues(this);
@@ -69011,11 +69362,11 @@ class RagListCrawlerRunsRequest {
     set pageToken(value) {
         this._pageToken = value;
     }
-    get state() {
-        return this._state;
+    get status() {
+        return this._status;
     }
-    set state(value) {
-        this._state = value;
+    set status(value) {
+        this._status = value;
     }
     get orderby() {
         return this._orderby;
@@ -69047,7 +69398,7 @@ class RagListCrawlerRunsRequest {
             languageCode: this.languageCode,
             crawlerName: this.crawlerName,
             pageToken: this.pageToken,
-            state: this.state,
+            status: this.status,
             orderby: this.orderby,
             sortingMode: this.sortingMode
         };
@@ -69071,7 +69422,7 @@ class RagListCrawlerRunsRequest {
             languageCode: this.languageCode,
             crawlerName: this.crawlerName,
             pageToken: this.pageToken,
-            state: OperationMetadata.Status[this.state === null || this.state === undefined ? 0 : this.state],
+            status: OperationMetadata.Status[this.status === null || this.status === undefined ? 0 : this.status],
             orderby: this.orderby,
             sortingMode: SortingMode[this.sortingMode === null || this.sortingMode === undefined
                 ? 0
@@ -70547,8 +70898,8 @@ class RagGetCrawlerAttachedDatasetsRequest {
                     _instance.pageToken = _reader.readString();
                     break;
                 case 6:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -70578,7 +70929,7 @@ class RagGetCrawlerAttachedDatasetsRequest {
             _writer.writeString(5, _instance.pageToken);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -70593,7 +70944,7 @@ class RagGetCrawlerAttachedDatasetsRequest {
         this.pageSize = _value.pageSize;
         this.pageToken = _value.pageToken;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         RagGetCrawlerAttachedDatasetsRequest.refineValues(this);
     }
@@ -70794,6 +71145,440 @@ class RagGetCrawlerAttachedDatasetsResponse {
     options) {
         return {
             datasets: (this.datasets || []).map(m => m.toProtobufJSON(options)),
+            nextPageToken: this.nextPageToken
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.RagGetCrawlerRunLogsRequest
+ */
+class RagGetCrawlerRunLogsRequest {
+    static { this.id = 'ondewo.nlu.RagGetCrawlerRunLogsRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new RagGetCrawlerRunLogsRequest();
+        RagGetCrawlerRunLogsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.parent = _instance.parent || '';
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.operationName = _instance.operationName || '';
+        _instance.pageToken = _instance.pageToken || '';
+        _instance.pageSize = _instance.pageSize || 0;
+        _instance.levelFilters = _instance.levelFilters || [];
+        _instance.phaseFilter = _instance.phaseFilter || '';
+        _instance.searchQuery = _instance.searchQuery || '';
+        _instance.startTime = _instance.startTime || undefined;
+        _instance.endTime = _instance.endTime || undefined;
+        _instance.sourceUrlFilter = _instance.sourceUrlFilter || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.parent = _reader.readString();
+                    break;
+                case 2:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                case 3:
+                    _instance.operationName = _reader.readString();
+                    break;
+                case 4:
+                    _instance.pageToken = _reader.readString();
+                    break;
+                case 5:
+                    _instance.pageSize = _reader.readInt32();
+                    break;
+                case 6:
+                    _reader.readPackableEnumInto((_instance.levelFilters = _instance.levelFilters || []));
+                    break;
+                case 7:
+                    _instance.phaseFilter = _reader.readString();
+                    break;
+                case 8:
+                    _instance.searchQuery = _reader.readString();
+                    break;
+                case 9:
+                    _instance.startTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.startTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 10:
+                    _instance.endTime = new googleProtobuf004.Timestamp();
+                    _reader.readMessage(_instance.endTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 11:
+                    _instance.sourceUrlFilter = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        RagGetCrawlerRunLogsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.parent) {
+            _writer.writeString(1, _instance.parent);
+        }
+        if (_instance.languageCode) {
+            _writer.writeString(2, _instance.languageCode);
+        }
+        if (_instance.operationName) {
+            _writer.writeString(3, _instance.operationName);
+        }
+        if (_instance.pageToken) {
+            _writer.writeString(4, _instance.pageToken);
+        }
+        if (_instance.pageSize) {
+            _writer.writeInt32(5, _instance.pageSize);
+        }
+        if (_instance.levelFilters && _instance.levelFilters.length) {
+            _writer.writePackedEnum(6, _instance.levelFilters);
+        }
+        if (_instance.phaseFilter) {
+            _writer.writeString(7, _instance.phaseFilter);
+        }
+        if (_instance.searchQuery) {
+            _writer.writeString(8, _instance.searchQuery);
+        }
+        if (_instance.startTime) {
+            _writer.writeMessage(9, _instance.startTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.endTime) {
+            _writer.writeMessage(10, _instance.endTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.sourceUrlFilter) {
+            _writer.writeString(11, _instance.sourceUrlFilter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RagGetCrawlerRunLogsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.parent = _value.parent;
+        this.languageCode = _value.languageCode;
+        this.operationName = _value.operationName;
+        this.pageToken = _value.pageToken;
+        this.pageSize = _value.pageSize;
+        this.levelFilters = (_value.levelFilters || []).slice();
+        this.phaseFilter = _value.phaseFilter;
+        this.searchQuery = _value.searchQuery;
+        this.startTime = _value.startTime
+            ? new googleProtobuf004.Timestamp(_value.startTime)
+            : undefined;
+        this.endTime = _value.endTime
+            ? new googleProtobuf004.Timestamp(_value.endTime)
+            : undefined;
+        this.sourceUrlFilter = _value.sourceUrlFilter;
+        RagGetCrawlerRunLogsRequest.refineValues(this);
+    }
+    get parent() {
+        return this._parent;
+    }
+    set parent(value) {
+        this._parent = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get operationName() {
+        return this._operationName;
+    }
+    set operationName(value) {
+        this._operationName = value;
+    }
+    get pageToken() {
+        return this._pageToken;
+    }
+    set pageToken(value) {
+        this._pageToken = value;
+    }
+    get pageSize() {
+        return this._pageSize;
+    }
+    set pageSize(value) {
+        this._pageSize = value;
+    }
+    get levelFilters() {
+        return this._levelFilters;
+    }
+    set levelFilters(value) {
+        this._levelFilters = value;
+    }
+    get phaseFilter() {
+        return this._phaseFilter;
+    }
+    set phaseFilter(value) {
+        this._phaseFilter = value;
+    }
+    get searchQuery() {
+        return this._searchQuery;
+    }
+    set searchQuery(value) {
+        this._searchQuery = value;
+    }
+    get startTime() {
+        return this._startTime;
+    }
+    set startTime(value) {
+        this._startTime = value;
+    }
+    get endTime() {
+        return this._endTime;
+    }
+    set endTime(value) {
+        this._endTime = value;
+    }
+    get sourceUrlFilter() {
+        return this._sourceUrlFilter;
+    }
+    set sourceUrlFilter(value) {
+        this._sourceUrlFilter = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        RagGetCrawlerRunLogsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            parent: this.parent,
+            languageCode: this.languageCode,
+            operationName: this.operationName,
+            pageToken: this.pageToken,
+            pageSize: this.pageSize,
+            levelFilters: (this.levelFilters || []).slice(),
+            phaseFilter: this.phaseFilter,
+            searchQuery: this.searchQuery,
+            startTime: this.startTime ? this.startTime.toObject() : undefined,
+            endTime: this.endTime ? this.endTime.toObject() : undefined,
+            sourceUrlFilter: this.sourceUrlFilter
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            parent: this.parent,
+            languageCode: this.languageCode,
+            operationName: this.operationName,
+            pageToken: this.pageToken,
+            pageSize: this.pageSize,
+            levelFilters: (this.levelFilters || []).map(v => LogSeverity[v]),
+            phaseFilter: this.phaseFilter,
+            searchQuery: this.searchQuery,
+            startTime: this.startTime ? this.startTime.toProtobufJSON(options) : null,
+            endTime: this.endTime ? this.endTime.toProtobufJSON(options) : null,
+            sourceUrlFilter: this.sourceUrlFilter
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.RagGetCrawlerRunLogsResponse
+ */
+class RagGetCrawlerRunLogsResponse {
+    static { this.id = 'ondewo.nlu.RagGetCrawlerRunLogsResponse'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new RagGetCrawlerRunLogsResponse();
+        RagGetCrawlerRunLogsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.operationName = _instance.operationName || '';
+        _instance.crawlerName = _instance.crawlerName || '';
+        _instance.status = _instance.status || 0;
+        _instance.entries = _instance.entries || [];
+        _instance.nextPageToken = _instance.nextPageToken || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.operationName = _reader.readString();
+                    break;
+                case 2:
+                    _instance.crawlerName = _reader.readString();
+                    break;
+                case 3:
+                    _instance.status = _reader.readEnum();
+                    break;
+                case 4:
+                    const messageInitializer4 = new LogEntry();
+                    _reader.readMessage(messageInitializer4, LogEntry.deserializeBinaryFromReader);
+                    (_instance.entries = _instance.entries || []).push(messageInitializer4);
+                    break;
+                case 5:
+                    _instance.nextPageToken = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        RagGetCrawlerRunLogsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.operationName) {
+            _writer.writeString(1, _instance.operationName);
+        }
+        if (_instance.crawlerName) {
+            _writer.writeString(2, _instance.crawlerName);
+        }
+        if (_instance.status) {
+            _writer.writeEnum(3, _instance.status);
+        }
+        if (_instance.entries && _instance.entries.length) {
+            _writer.writeRepeatedMessage(4, _instance.entries, LogEntry.serializeBinaryToWriter);
+        }
+        if (_instance.nextPageToken) {
+            _writer.writeString(5, _instance.nextPageToken);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RagGetCrawlerRunLogsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.operationName = _value.operationName;
+        this.crawlerName = _value.crawlerName;
+        this.status = _value.status;
+        this.entries = (_value.entries || []).map(m => new LogEntry(m));
+        this.nextPageToken = _value.nextPageToken;
+        RagGetCrawlerRunLogsResponse.refineValues(this);
+    }
+    get operationName() {
+        return this._operationName;
+    }
+    set operationName(value) {
+        this._operationName = value;
+    }
+    get crawlerName() {
+        return this._crawlerName;
+    }
+    set crawlerName(value) {
+        this._crawlerName = value;
+    }
+    get status() {
+        return this._status;
+    }
+    set status(value) {
+        this._status = value;
+    }
+    get entries() {
+        return this._entries;
+    }
+    set entries(value) {
+        this._entries = value;
+    }
+    get nextPageToken() {
+        return this._nextPageToken;
+    }
+    set nextPageToken(value) {
+        this._nextPageToken = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        RagGetCrawlerRunLogsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            operationName: this.operationName,
+            crawlerName: this.crawlerName,
+            status: this.status,
+            entries: (this.entries || []).map(m => m.toObject()),
+            nextPageToken: this.nextPageToken
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            operationName: this.operationName,
+            crawlerName: this.crawlerName,
+            status: OperationMetadata.Status[this.status === null || this.status === undefined ? 0 : this.status],
+            entries: (this.entries || []).map(m => m.toProtobufJSON(options)),
             nextPageToken: this.nextPageToken
         };
     }
@@ -71332,6 +72117,24 @@ class RagsClient {
                     requestClass: RagDeleteCrawlersRequest,
                     responseClass: RagDeleteCrawlersResponse
                 });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Rags/RagGetCrawlerRunLogs
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.RagGetCrawlerRunLogsResponse>>
+             */
+            ragGetCrawlerRunLogs: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Rags/RagGetCrawlerRunLogs',
+                    requestData,
+                    requestMetadata,
+                    requestClass: RagGetCrawlerRunLogsRequest,
+                    responseClass: RagGetCrawlerRunLogsResponse
+                });
             }
         };
         this.client = clientFactory.createClient('ondewo.nlu.Rags', settings);
@@ -71670,6 +72473,18 @@ class RagsClient {
     ragDeleteCrawlers(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
             .ragDeleteCrawlers(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Rags/RagGetCrawlerRunLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.RagGetCrawlerRunLogsResponse>
+     */
+    ragGetCrawlerRunLogs(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .ragGetCrawlerRunLogs(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: RagsClient, deps: [{ token: GRPC_RAGS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
@@ -72141,8 +72956,8 @@ class WebhookRequest {
                     _instance.session = _reader.readString();
                     break;
                 case 5:
-                    _instance.headers = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.headers, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.headers = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.headers, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -72169,7 +72984,7 @@ class WebhookRequest {
             _writer.writeString(4, _instance.session);
         }
         if (_instance.headers) {
-            _writer.writeMessage(5, _instance.headers, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.headers, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
     }
     /**
@@ -72187,7 +73002,7 @@ class WebhookRequest {
             : undefined;
         this.session = _value.session;
         this.headers = _value.headers
-            ? new googleProtobuf003.Struct(_value.headers)
+            ? new googleProtobuf004.Struct(_value.headers)
             : undefined;
         WebhookRequest.refineValues(this);
     }
@@ -72321,8 +73136,8 @@ class WebhookResponse {
                     _instance.source = _reader.readString();
                     break;
                 case 4:
-                    _instance.payload = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.payload, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.payload = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.payload, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 5:
                     const messageInitializer5 = new Context();
@@ -72361,7 +73176,7 @@ class WebhookResponse {
             _writer.writeString(3, _instance.source);
         }
         if (_instance.payload) {
-            _writer.writeMessage(4, _instance.payload, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.payload, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.outputContexts && _instance.outputContexts.length) {
             _writer.writeRepeatedMessage(5, _instance.outputContexts, Context.serializeBinaryToWriter);
@@ -72383,7 +73198,7 @@ class WebhookResponse {
         this.fulfillmentMessages = (_value.fulfillmentMessages || []).map(m => new Intent.Message(m));
         this.source = _value.source;
         this.payload = _value.payload
-            ? new googleProtobuf003.Struct(_value.payload)
+            ? new googleProtobuf004.Struct(_value.payload)
             : undefined;
         this.outputContexts = (_value.outputContexts || []).map(m => new Context(m));
         this.followupEventInput = _value.followupEventInput
@@ -72522,8 +73337,8 @@ class OriginalDetectIntentRequest {
                     _instance.source = _reader.readString();
                     break;
                 case 3:
-                    _instance.payload = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.payload, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.payload = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.payload, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -72541,7 +73356,7 @@ class OriginalDetectIntentRequest {
             _writer.writeString(1, _instance.source);
         }
         if (_instance.payload) {
-            _writer.writeMessage(3, _instance.payload, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(3, _instance.payload, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
     }
     /**
@@ -72552,7 +73367,7 @@ class OriginalDetectIntentRequest {
         _value = _value || {};
         this.source = _value.source;
         this.payload = _value.payload
-            ? new googleProtobuf003.Struct(_value.payload)
+            ? new googleProtobuf004.Struct(_value.payload)
             : undefined;
         OriginalDetectIntentRequest.refineValues(this);
     }
@@ -73384,8 +74199,8 @@ class UpdateSessionEntityTypeRequest {
                     _reader.readMessage(_instance.sessionEntityType, SessionEntityType.deserializeBinaryFromReader);
                     break;
                 case 2:
-                    _instance.updateMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.updateMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.updateMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.updateMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -73403,7 +74218,7 @@ class UpdateSessionEntityTypeRequest {
             _writer.writeMessage(1, _instance.sessionEntityType, SessionEntityType.serializeBinaryToWriter);
         }
         if (_instance.updateMask) {
-            _writer.writeMessage(2, _instance.updateMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.updateMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -73416,7 +74231,7 @@ class UpdateSessionEntityTypeRequest {
             ? new SessionEntityType(_value.sessionEntityType)
             : undefined;
         this.updateMask = _value.updateMask
-            ? new googleProtobuf003.FieldMask(_value.updateMask)
+            ? new googleProtobuf004.FieldMask(_value.updateMask)
             : undefined;
         UpdateSessionEntityTypeRequest.refineValues(this);
     }
@@ -73635,8 +74450,8 @@ class ListLlmModelsRequest {
                     _instance.ccaiServiceName = _reader.readString();
                     break;
                 case 2:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -73654,7 +74469,7 @@ class ListLlmModelsRequest {
             _writer.writeString(1, _instance.ccaiServiceName);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -73665,7 +74480,7 @@ class ListLlmModelsRequest {
         _value = _value || {};
         this.ccaiServiceName = _value.ccaiServiceName;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ListLlmModelsRequest.refineValues(this);
     }
@@ -74026,8 +74841,8 @@ class LlmGenerateRequest {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.llmGenerationRequest = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.llmGenerationRequest, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.llmGenerationRequest = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.llmGenerationRequest, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 2:
                     _instance.ccaiServiceName = _reader.readString();
@@ -74038,8 +74853,8 @@ class LlmGenerateRequest {
                     (_instance.fileResources = _instance.fileResources || []).push(messageInitializer3);
                     break;
                 case 4:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -74054,7 +74869,7 @@ class LlmGenerateRequest {
      */
     static serializeBinaryToWriter(_instance, _writer) {
         if (_instance.llmGenerationRequest) {
-            _writer.writeMessage(1, _instance.llmGenerationRequest, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(1, _instance.llmGenerationRequest, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.ccaiServiceName) {
             _writer.writeString(2, _instance.ccaiServiceName);
@@ -74063,7 +74878,7 @@ class LlmGenerateRequest {
             _writer.writeRepeatedMessage(3, _instance.fileResources, FileResource.serializeBinaryToWriter);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(4, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -74073,12 +74888,12 @@ class LlmGenerateRequest {
     constructor(_value) {
         _value = _value || {};
         this.llmGenerationRequest = _value.llmGenerationRequest
-            ? new googleProtobuf003.Struct(_value.llmGenerationRequest)
+            ? new googleProtobuf004.Struct(_value.llmGenerationRequest)
             : undefined;
         this.ccaiServiceName = _value.ccaiServiceName;
         this.fileResources = (_value.fileResources || []).map(m => new FileResource(m));
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         LlmGenerateRequest.refineValues(this);
     }
@@ -74186,8 +75001,8 @@ class LlmGenerateResponse {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.llmGenerationResponse = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.llmGenerationResponse, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.llmGenerationResponse = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.llmGenerationResponse, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 case 2:
                     const messageInitializer2 = new FileResource();
@@ -74207,7 +75022,7 @@ class LlmGenerateResponse {
      */
     static serializeBinaryToWriter(_instance, _writer) {
         if (_instance.llmGenerationResponse) {
-            _writer.writeMessage(1, _instance.llmGenerationResponse, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(1, _instance.llmGenerationResponse, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
         if (_instance.fileResources && _instance.fileResources.length) {
             _writer.writeRepeatedMessage(2, _instance.fileResources, FileResource.serializeBinaryToWriter);
@@ -74220,7 +75035,7 @@ class LlmGenerateResponse {
     constructor(_value) {
         _value = _value || {};
         this.llmGenerationResponse = _value.llmGenerationResponse
-            ? new googleProtobuf003.Struct(_value.llmGenerationResponse)
+            ? new googleProtobuf004.Struct(_value.llmGenerationResponse)
             : undefined;
         this.fileResources = (_value.fileResources || []).map(m => new FileResource(m));
         LlmGenerateResponse.refineValues(this);
@@ -74312,8 +75127,8 @@ class StreamingLlmGenerateResponse {
                 break;
             switch (_reader.getFieldNumber()) {
                 case 1:
-                    _instance.llmGenerationStreamResponse = new googleProtobuf003.Struct();
-                    _reader.readMessage(_instance.llmGenerationStreamResponse, googleProtobuf003.Struct.deserializeBinaryFromReader);
+                    _instance.llmGenerationStreamResponse = new googleProtobuf004.Struct();
+                    _reader.readMessage(_instance.llmGenerationStreamResponse, googleProtobuf004.Struct.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -74328,7 +75143,7 @@ class StreamingLlmGenerateResponse {
      */
     static serializeBinaryToWriter(_instance, _writer) {
         if (_instance.llmGenerationStreamResponse) {
-            _writer.writeMessage(1, _instance.llmGenerationStreamResponse, googleProtobuf003.Struct.serializeBinaryToWriter);
+            _writer.writeMessage(1, _instance.llmGenerationStreamResponse, googleProtobuf004.Struct.serializeBinaryToWriter);
         }
     }
     /**
@@ -74338,7 +75153,7 @@ class StreamingLlmGenerateResponse {
     constructor(_value) {
         _value = _value || {};
         this.llmGenerationStreamResponse = _value.llmGenerationStreamResponse
-            ? new googleProtobuf003.Struct(_value.llmGenerationStreamResponse)
+            ? new googleProtobuf004.Struct(_value.llmGenerationStreamResponse)
             : undefined;
         StreamingLlmGenerateResponse.refineValues(this);
     }
@@ -74436,8 +75251,8 @@ class ExtractEntitiesRequest {
                     _instance.intentName = _reader.readString();
                     break;
                 case 5:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -74464,7 +75279,7 @@ class ExtractEntitiesRequest {
             _writer.writeString(4, _instance.intentName);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -74478,7 +75293,7 @@ class ExtractEntitiesRequest {
         this.languageCode = _value.languageCode;
         this.intentName = _value.intentName;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ExtractEntitiesRequest.refineValues(this);
     }
@@ -74611,8 +75426,8 @@ class ExtractEntitiesFuzzyRequest {
                     _instance.allowOverlaps = _reader.readBool();
                     break;
                 case 6:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -74642,7 +75457,7 @@ class ExtractEntitiesFuzzyRequest {
             _writer.writeBool(5, _instance.allowOverlaps);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -74657,7 +75472,7 @@ class ExtractEntitiesFuzzyRequest {
         this.minimalScore = _value.minimalScore;
         this.allowOverlaps = _value.allowOverlaps;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ExtractEntitiesFuzzyRequest.refineValues(this);
     }
@@ -75235,8 +76050,8 @@ class GetAlternativeSentencesRequest {
                     (_instance.wordsToChange = _instance.wordsToChange || []).push(_reader.readString());
                     break;
                 case 8:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -75269,7 +76084,7 @@ class GetAlternativeSentencesRequest {
             _writer.writeRepeatedString(7, _instance.wordsToChange);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(8, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(8, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -75287,7 +76102,7 @@ class GetAlternativeSentencesRequest {
         this.protectedWords = (_value.protectedWords || []).slice();
         this.wordsToChange = (_value.wordsToChange || []).slice();
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetAlternativeSentencesRequest.refineValues(this);
     }
@@ -75429,8 +76244,8 @@ class GenerateUserSaysRequest {
                     _instance.branch = _reader.readString();
                     break;
                 case 9:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -75457,7 +76272,7 @@ class GenerateUserSaysRequest {
             _writer.writeString(8, _instance.branch);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(9, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(9, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -75471,7 +76286,7 @@ class GenerateUserSaysRequest {
         this.nRepeatSynonym = _value.nRepeatSynonym;
         this.branch = _value.branch;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GenerateUserSaysRequest.refineValues(this);
     }
@@ -75601,8 +76416,8 @@ class GenerateResponsesRequest {
                     _instance.dropUnknownParameters = _reader.readBool();
                     break;
                 case 10:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -75632,7 +76447,7 @@ class GenerateResponsesRequest {
             _writer.writeBool(9, _instance.dropUnknownParameters);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(10, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(10, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -75647,7 +76462,7 @@ class GenerateResponsesRequest {
         this.branch = _value.branch;
         this.dropUnknownParameters = _value.dropUnknownParameters;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GenerateResponsesRequest.refineValues(this);
     }
@@ -75807,8 +76622,8 @@ class GetAlternativeTrainingPhrasesRequest {
                     _instance.branch = _reader.readString();
                     break;
                 case 11:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -75853,7 +76668,7 @@ class GetAlternativeTrainingPhrasesRequest {
             _writer.writeString(10, _instance.branch);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(11, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(11, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -75877,7 +76692,7 @@ class GetAlternativeTrainingPhrasesRequest {
         this.wordsToChange = (_value.wordsToChange || []).slice();
         this.branch = _value.branch;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetAlternativeTrainingPhrasesRequest.refineValues(this);
     }
@@ -76056,8 +76871,8 @@ class GetSynonymsRequest {
                     _instance.parent = _reader.readString();
                     break;
                 case 6:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -76084,7 +76899,7 @@ class GetSynonymsRequest {
             _writer.writeString(5, _instance.parent);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(6, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -76100,7 +76915,7 @@ class GetSynonymsRequest {
         this.languageCode = _value.languageCode;
         this.parent = _value.parent;
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         GetSynonymsRequest.refineValues(this);
     }
@@ -78617,8 +79432,8 @@ class ClassifyIntentsRequest {
                     _reader.readPackableEnumInto((_instance.algorithms = _instance.algorithms || []));
                     break;
                 case 8:
-                    _instance.fieldMask = new googleProtobuf003.FieldMask();
-                    _reader.readMessage(_instance.fieldMask, googleProtobuf003.FieldMask.deserializeBinaryFromReader);
+                    _instance.fieldMask = new googleProtobuf004.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf004.FieldMask.deserializeBinaryFromReader);
                     break;
                 default:
                     _reader.skipField();
@@ -78654,7 +79469,7 @@ class ClassifyIntentsRequest {
             _writer.writePackedEnum(7, _instance.algorithms);
         }
         if (_instance.fieldMask) {
-            _writer.writeMessage(8, _instance.fieldMask, googleProtobuf003.FieldMask.serializeBinaryToWriter);
+            _writer.writeMessage(8, _instance.fieldMask, googleProtobuf004.FieldMask.serializeBinaryToWriter);
         }
     }
     /**
@@ -78671,7 +79486,7 @@ class ClassifyIntentsRequest {
         this.mode = _value.mode;
         this.algorithms = (_value.algorithms || []).slice();
         this.fieldMask = _value.fieldMask
-            ? new googleProtobuf003.FieldMask(_value.fieldMask)
+            ? new googleProtobuf004.FieldMask(_value.fieldMask)
             : undefined;
         ClassifyIntentsRequest.refineValues(this);
     }
@@ -82731,7 +83546,7 @@ class OperationsClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteOperationRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -82749,7 +83564,7 @@ class OperationsClient {
                     requestData,
                     requestMetadata,
                     requestClass: CancelOperationRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             }
         };
@@ -83333,7 +84148,7 @@ class WebhookClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteSessionEntityTypeRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             }
         };
@@ -83514,7 +84329,7 @@ class UsersClient {
                     requestData,
                     requestMetadata,
                     requestClass: GetUserRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -83622,7 +84437,7 @@ class UsersClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteServerRoleRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -83711,8 +84526,8 @@ class UsersClient {
                     path: '/ondewo.nlu.Users/CheckLogin',
                     requestData,
                     requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
-                    responseClass: googleProtobuf003.Empty
+                    requestClass: googleProtobuf004.Empty,
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -83720,7 +84535,7 @@ class UsersClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.ListNotificationsResponse>>
              */
             listNotifications: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -83738,7 +84553,7 @@ class UsersClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.ListNotificationsResponse>>
              */
             setNotificationsFlaggedStatus: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -83756,7 +84571,7 @@ class UsersClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>
+             * @returns Observable<GrpcEvent<ondewoNlu008.ListNotificationsResponse>>
              */
             setNotificationsReadStatus: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -84029,7 +84844,7 @@ class UsersClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.ListNotificationsResponse>
+     * @returns Observable<ondewoNlu008.ListNotificationsResponse>
      */
     listNotifications(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -84041,7 +84856,7 @@ class UsersClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.ListNotificationsResponse>
+     * @returns Observable<ondewoNlu008.ListNotificationsResponse>
      */
     setNotificationsFlaggedStatus(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -84053,7 +84868,7 @@ class UsersClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu007.ListNotificationsResponse>
+     * @returns Observable<ondewoNlu008.ListNotificationsResponse>
      */
     setNotificationsReadStatus(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -84315,7 +85130,7 @@ class SessionsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf006.Empty>>
+             * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
              */
             deleteSessionStep: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -84325,7 +85140,7 @@ class SessionsClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteSessionStepRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -84333,7 +85148,7 @@ class SessionsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf006.Empty>>
+             * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
              */
             deleteSession: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -84343,7 +85158,7 @@ class SessionsClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteSessionRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -84657,7 +85472,7 @@ class SessionsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu008.Comment>>
+             * @returns Observable<GrpcEvent<ondewoNlu009.Comment>>
              */
             addSessionComment: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -84990,7 +85805,7 @@ class SessionsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf006.Empty>
+     * @returns Observable<googleProtobuf007.Empty>
      */
     deleteSessionStep(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -85002,7 +85817,7 @@ class SessionsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf006.Empty>
+     * @returns Observable<googleProtobuf007.Empty>
      */
     deleteSession(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -85218,7 +86033,7 @@ class SessionsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu008.Comment>
+     * @returns Observable<ondewoNlu009.Comment>
      */
     addSessionComment(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -85502,7 +86317,7 @@ class ContextsClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteContextRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             },
             /**
@@ -85520,7 +86335,7 @@ class ContextsClient {
                     requestData,
                     requestMetadata,
                     requestClass: DeleteAllContextsRequest,
-                    responseClass: googleProtobuf003.Empty
+                    responseClass: googleProtobuf004.Empty
                 });
             }
         };
@@ -85854,7 +86669,7 @@ class ServerStatisticsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu006.StatResponse>>
+             * @returns Observable<GrpcEvent<ondewoNlu007.StatResponse>>
              */
             getProjectCount: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -85863,7 +86678,7 @@ class ServerStatisticsClient {
                     path: '/ondewo.nlu.ServerStatistics/GetProjectCount',
                     requestData,
                     requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
+                    requestClass: googleProtobuf004.Empty,
                     responseClass: StatResponse
                 });
             },
@@ -85872,7 +86687,7 @@ class ServerStatisticsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu006.StatResponse>>
+             * @returns Observable<GrpcEvent<ondewoNlu007.StatResponse>>
              */
             getUserProjectCount: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -85890,7 +86705,7 @@ class ServerStatisticsClient {
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<ondewoNlu006.StatResponse>>
+             * @returns Observable<GrpcEvent<ondewoNlu007.StatResponse>>
              */
             getUserCount: (requestData, requestMetadata = new GrpcMetadata()) => {
                 return this.handler.handle({
@@ -85899,7 +86714,7 @@ class ServerStatisticsClient {
                     path: '/ondewo.nlu.ServerStatistics/GetUserCount',
                     requestData,
                     requestMetadata,
-                    requestClass: googleProtobuf003.Empty,
+                    requestClass: googleProtobuf004.Empty,
                     responseClass: StatResponse
                 });
             }
@@ -85911,7 +86726,7 @@ class ServerStatisticsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu006.StatResponse>
+     * @returns Observable<ondewoNlu007.StatResponse>
      */
     getProjectCount(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -85923,7 +86738,7 @@ class ServerStatisticsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu006.StatResponse>
+     * @returns Observable<ondewoNlu007.StatResponse>
      */
     getUserProjectCount(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -85935,7 +86750,7 @@ class ServerStatisticsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<ondewoNlu006.StatResponse>
+     * @returns Observable<ondewoNlu007.StatResponse>
      */
     getUserCount(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
@@ -86485,5 +87300,5 @@ class CustomHttpPattern {
  * Generated bundle index. Do not edit.
  */
 
-export { AddAudioFilesRequest, AddAudioFilesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, AudioFileResource, AudioFileResourceType, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KeyValuePair, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmEnrichmentConfig, LlmGenerateRequest, LlmGenerateResponse, LlmModel, LoginRequest, LoginResponse, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReindexAgentRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SortingMode, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, Synonym, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
+export { AddAudioFilesRequest, AddAudioFilesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, AudioFileResource, AudioFileResourceType, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KeyValuePair, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmEnrichmentConfig, LlmGenerateRequest, LlmGenerateResponse, LlmModel, LogEntry, LogSeverity, LoginRequest, LoginResponse, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReindexAgentRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SortingMode, StatResponse, Status, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, Synonym, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
 //# sourceMappingURL=ondewo-nlu-client-angular.mjs.map

@@ -17,8 +17,9 @@ import * as googleApi002 from '../../google/api/annotations.pb';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu006 from '../../ondewo/nlu/project-role.pb';
-import * as ondewoNlu007 from '../../ondewo/nlu/common.pb';
+import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu007 from '../../ondewo/nlu/project-role.pb';
+import * as ondewoNlu008 from '../../ondewo/nlu/common.pb';
 export enum DefaultServerRole {
   SERVER_UNSPECIFIED = 0,
   SERVER_USER = 1,
@@ -428,7 +429,7 @@ export class UserInfo implements GrpcMessage {
   }
 
   private _user?: User;
-  private _projectRoles: { [prop: string]: ondewoNlu006.ProjectRole };
+  private _projectRoles: { [prop: string]: ondewoNlu007.ProjectRole };
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -442,7 +443,7 @@ export class UserInfo implements GrpcMessage {
           (r, k) => ({
             ...r,
             [k]: _value!.projectRoles![k]
-              ? new ondewoNlu006.ProjectRole(_value!.projectRoles![k])
+              ? new ondewoNlu007.ProjectRole(_value!.projectRoles![k])
               : undefined
           }),
           {}
@@ -456,10 +457,10 @@ export class UserInfo implements GrpcMessage {
   set user(value: User | undefined) {
     this._user = value;
   }
-  get projectRoles(): { [prop: string]: ondewoNlu006.ProjectRole } {
+  get projectRoles(): { [prop: string]: ondewoNlu007.ProjectRole } {
     return this._projectRoles;
   }
-  set projectRoles(value: { [prop: string]: ondewoNlu006.ProjectRole }) {
+  set projectRoles(value: { [prop: string]: ondewoNlu007.ProjectRole }) {
     this._projectRoles = value;
   }
 
@@ -529,7 +530,7 @@ export module UserInfo {
    */
   export interface AsObject {
     user?: User.AsObject;
-    projectRoles: { [prop: string]: ondewoNlu006.ProjectRole };
+    projectRoles: { [prop: string]: ondewoNlu007.ProjectRole };
   }
 
   /**
@@ -537,7 +538,7 @@ export module UserInfo {
    */
   export interface AsProtobufJSON {
     user: User.AsProtobufJSON | null;
-    projectRoles: { [prop: string]: ondewoNlu006.ProjectRole };
+    projectRoles: { [prop: string]: ondewoNlu007.ProjectRole };
   }
 
   /**
@@ -585,10 +586,10 @@ export module UserInfo {
             _instance.key = _reader.readString();
             break;
           case 2:
-            _instance.value = new ondewoNlu006.ProjectRole();
+            _instance.value = new ondewoNlu007.ProjectRole();
             _reader.readMessage(
               _instance.value,
-              ondewoNlu006.ProjectRole.deserializeBinaryFromReader
+              ondewoNlu007.ProjectRole.deserializeBinaryFromReader
             );
             break;
           default:
@@ -615,13 +616,13 @@ export module UserInfo {
         _writer.writeMessage(
           2,
           _instance.value as any,
-          ondewoNlu006.ProjectRole.serializeBinaryToWriter
+          ondewoNlu007.ProjectRole.serializeBinaryToWriter
         );
       }
     }
 
     private _key: string;
-    private _value?: ondewoNlu006.ProjectRole;
+    private _value?: ondewoNlu007.ProjectRole;
 
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -631,7 +632,7 @@ export module UserInfo {
       _value = _value || {};
       this.key = _value.key;
       this.value = _value.value
-        ? new ondewoNlu006.ProjectRole(_value.value)
+        ? new ondewoNlu007.ProjectRole(_value.value)
         : undefined;
       ProjectRolesEntry.refineValues(this);
     }
@@ -641,10 +642,10 @@ export module UserInfo {
     set key(value: string) {
       this._key = value;
     }
-    get value(): ondewoNlu006.ProjectRole | undefined {
+    get value(): ondewoNlu007.ProjectRole | undefined {
       return this._value;
     }
-    set value(value: ondewoNlu006.ProjectRole | undefined) {
+    set value(value: ondewoNlu007.ProjectRole | undefined) {
       this._value = value;
     }
 
@@ -696,7 +697,7 @@ export module UserInfo {
      */
     export interface AsObject {
       key: string;
-      value?: ondewoNlu006.ProjectRole.AsObject;
+      value?: ondewoNlu007.ProjectRole.AsObject;
     }
 
     /**
@@ -704,7 +705,7 @@ export module UserInfo {
      */
     export interface AsProtobufJSON {
       key: string;
-      value: ondewoNlu006.ProjectRole.AsProtobufJSON | null;
+      value: ondewoNlu007.ProjectRole.AsProtobufJSON | null;
     }
   }
 }
@@ -4128,10 +4129,10 @@ export class GetUserPreferencesResponse implements GrpcMessage {
           _instance.userName = _reader.readString();
           break;
         case 2:
-          const messageInitializer2 = new ondewoNlu007.KeyValuePair();
+          const messageInitializer2 = new ondewoNlu008.KeyValuePair();
           _reader.readMessage(
             messageInitializer2,
-            ondewoNlu007.KeyValuePair.deserializeBinaryFromReader
+            ondewoNlu008.KeyValuePair.deserializeBinaryFromReader
           );
           (_instance.keyValuePairs = _instance.keyValuePairs || []).push(
             messageInitializer2
@@ -4164,7 +4165,7 @@ export class GetUserPreferencesResponse implements GrpcMessage {
       _writer.writeRepeatedMessage(
         2,
         _instance.keyValuePairs as any,
-        ondewoNlu007.KeyValuePair.serializeBinaryToWriter
+        ondewoNlu008.KeyValuePair.serializeBinaryToWriter
       );
     }
     if (_instance.errorMessage) {
@@ -4173,7 +4174,7 @@ export class GetUserPreferencesResponse implements GrpcMessage {
   }
 
   private _userName: string;
-  private _keyValuePairs?: ondewoNlu007.KeyValuePair[];
+  private _keyValuePairs?: ondewoNlu008.KeyValuePair[];
   private _errorMessage: string;
 
   /**
@@ -4184,7 +4185,7 @@ export class GetUserPreferencesResponse implements GrpcMessage {
     _value = _value || {};
     this.userName = _value.userName;
     this.keyValuePairs = (_value.keyValuePairs || []).map(
-      m => new ondewoNlu007.KeyValuePair(m)
+      m => new ondewoNlu008.KeyValuePair(m)
     );
     this.errorMessage = _value.errorMessage;
     GetUserPreferencesResponse.refineValues(this);
@@ -4195,10 +4196,10 @@ export class GetUserPreferencesResponse implements GrpcMessage {
   set userName(value: string) {
     this._userName = value;
   }
-  get keyValuePairs(): ondewoNlu007.KeyValuePair[] | undefined {
+  get keyValuePairs(): ondewoNlu008.KeyValuePair[] | undefined {
     return this._keyValuePairs;
   }
-  set keyValuePairs(value: ondewoNlu007.KeyValuePair[] | undefined) {
+  set keyValuePairs(value: ondewoNlu008.KeyValuePair[] | undefined) {
     this._keyValuePairs = value;
   }
   get errorMessage(): string {
@@ -4260,7 +4261,7 @@ export module GetUserPreferencesResponse {
    */
   export interface AsObject {
     userName: string;
-    keyValuePairs?: ondewoNlu007.KeyValuePair.AsObject[];
+    keyValuePairs?: ondewoNlu008.KeyValuePair.AsObject[];
     errorMessage: string;
   }
 
@@ -4269,7 +4270,7 @@ export module GetUserPreferencesResponse {
    */
   export interface AsProtobufJSON {
     userName: string;
-    keyValuePairs: ondewoNlu007.KeyValuePair.AsProtobufJSON[] | null;
+    keyValuePairs: ondewoNlu008.KeyValuePair.AsProtobufJSON[] | null;
     errorMessage: string;
   }
 }
@@ -4319,10 +4320,10 @@ export class SetUserPreferencesRequest implements GrpcMessage {
           _instance.userName = _reader.readString();
           break;
         case 2:
-          const messageInitializer2 = new ondewoNlu007.KeyValuePair();
+          const messageInitializer2 = new ondewoNlu008.KeyValuePair();
           _reader.readMessage(
             messageInitializer2,
-            ondewoNlu007.KeyValuePair.deserializeBinaryFromReader
+            ondewoNlu008.KeyValuePair.deserializeBinaryFromReader
           );
           (_instance.keyValuePairs = _instance.keyValuePairs || []).push(
             messageInitializer2
@@ -4352,13 +4353,13 @@ export class SetUserPreferencesRequest implements GrpcMessage {
       _writer.writeRepeatedMessage(
         2,
         _instance.keyValuePairs as any,
-        ondewoNlu007.KeyValuePair.serializeBinaryToWriter
+        ondewoNlu008.KeyValuePair.serializeBinaryToWriter
       );
     }
   }
 
   private _userName: string;
-  private _keyValuePairs?: ondewoNlu007.KeyValuePair[];
+  private _keyValuePairs?: ondewoNlu008.KeyValuePair[];
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -4368,7 +4369,7 @@ export class SetUserPreferencesRequest implements GrpcMessage {
     _value = _value || {};
     this.userName = _value.userName;
     this.keyValuePairs = (_value.keyValuePairs || []).map(
-      m => new ondewoNlu007.KeyValuePair(m)
+      m => new ondewoNlu008.KeyValuePair(m)
     );
     SetUserPreferencesRequest.refineValues(this);
   }
@@ -4378,10 +4379,10 @@ export class SetUserPreferencesRequest implements GrpcMessage {
   set userName(value: string) {
     this._userName = value;
   }
-  get keyValuePairs(): ondewoNlu007.KeyValuePair[] | undefined {
+  get keyValuePairs(): ondewoNlu008.KeyValuePair[] | undefined {
     return this._keyValuePairs;
   }
-  set keyValuePairs(value: ondewoNlu007.KeyValuePair[] | undefined) {
+  set keyValuePairs(value: ondewoNlu008.KeyValuePair[] | undefined) {
     this._keyValuePairs = value;
   }
 
@@ -4435,7 +4436,7 @@ export module SetUserPreferencesRequest {
    */
   export interface AsObject {
     userName: string;
-    keyValuePairs?: ondewoNlu007.KeyValuePair.AsObject[];
+    keyValuePairs?: ondewoNlu008.KeyValuePair.AsObject[];
   }
 
   /**
@@ -4443,7 +4444,7 @@ export module SetUserPreferencesRequest {
    */
   export interface AsProtobufJSON {
     userName: string;
-    keyValuePairs: ondewoNlu007.KeyValuePair.AsProtobufJSON[] | null;
+    keyValuePairs: ondewoNlu008.KeyValuePair.AsProtobufJSON[] | null;
   }
 }
 
@@ -5375,10 +5376,10 @@ export class ListUserPreferencesResponse implements GrpcMessage {
           _instance.userName = _reader.readString();
           break;
         case 2:
-          const messageInitializer2 = new ondewoNlu007.KeyValuePair();
+          const messageInitializer2 = new ondewoNlu008.KeyValuePair();
           _reader.readMessage(
             messageInitializer2,
-            ondewoNlu007.KeyValuePair.deserializeBinaryFromReader
+            ondewoNlu008.KeyValuePair.deserializeBinaryFromReader
           );
           (_instance.keyValuePairs = _instance.keyValuePairs || []).push(
             messageInitializer2
@@ -5411,7 +5412,7 @@ export class ListUserPreferencesResponse implements GrpcMessage {
       _writer.writeRepeatedMessage(
         2,
         _instance.keyValuePairs as any,
-        ondewoNlu007.KeyValuePair.serializeBinaryToWriter
+        ondewoNlu008.KeyValuePair.serializeBinaryToWriter
       );
     }
     if (_instance.errorMessage) {
@@ -5420,7 +5421,7 @@ export class ListUserPreferencesResponse implements GrpcMessage {
   }
 
   private _userName: string;
-  private _keyValuePairs?: ondewoNlu007.KeyValuePair[];
+  private _keyValuePairs?: ondewoNlu008.KeyValuePair[];
   private _errorMessage: string;
 
   /**
@@ -5431,7 +5432,7 @@ export class ListUserPreferencesResponse implements GrpcMessage {
     _value = _value || {};
     this.userName = _value.userName;
     this.keyValuePairs = (_value.keyValuePairs || []).map(
-      m => new ondewoNlu007.KeyValuePair(m)
+      m => new ondewoNlu008.KeyValuePair(m)
     );
     this.errorMessage = _value.errorMessage;
     ListUserPreferencesResponse.refineValues(this);
@@ -5442,10 +5443,10 @@ export class ListUserPreferencesResponse implements GrpcMessage {
   set userName(value: string) {
     this._userName = value;
   }
-  get keyValuePairs(): ondewoNlu007.KeyValuePair[] | undefined {
+  get keyValuePairs(): ondewoNlu008.KeyValuePair[] | undefined {
     return this._keyValuePairs;
   }
-  set keyValuePairs(value: ondewoNlu007.KeyValuePair[] | undefined) {
+  set keyValuePairs(value: ondewoNlu008.KeyValuePair[] | undefined) {
     this._keyValuePairs = value;
   }
   get errorMessage(): string {
@@ -5507,7 +5508,7 @@ export module ListUserPreferencesResponse {
    */
   export interface AsObject {
     userName: string;
-    keyValuePairs?: ondewoNlu007.KeyValuePair.AsObject[];
+    keyValuePairs?: ondewoNlu008.KeyValuePair.AsObject[];
     errorMessage: string;
   }
 
@@ -5516,7 +5517,7 @@ export module ListUserPreferencesResponse {
    */
   export interface AsProtobufJSON {
     userName: string;
-    keyValuePairs: ondewoNlu007.KeyValuePair.AsProtobufJSON[] | null;
+    keyValuePairs: ondewoNlu008.KeyValuePair.AsProtobufJSON[] | null;
     errorMessage: string;
   }
 }

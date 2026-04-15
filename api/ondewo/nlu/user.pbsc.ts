@@ -26,8 +26,9 @@ import * as googleApi002 from '../../google/api/annotations.pb';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu006 from '../../ondewo/nlu/project-role.pb';
-import * as ondewoNlu007 from '../../ondewo/nlu/common.pb';
+import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu007 from '../../ondewo/nlu/project-role.pb';
+import * as ondewoNlu008 from '../../ondewo/nlu/common.pb';
 import { GRPC_USERS_CLIENT_SETTINGS } from './user.pbconf';
 /**
  * Service client implementation for ondewo.nlu.Users
@@ -362,20 +363,20 @@ export class UsersClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>
+     * @returns Observable<GrpcEvent<ondewoNlu008.ListNotificationsResponse>>
      */
     listNotifications: (
-      requestData: ondewoNlu007.ListNotificationsRequest,
+      requestData: ondewoNlu008.ListNotificationsRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>> => {
+    ): Observable<GrpcEvent<ondewoNlu008.ListNotificationsResponse>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
         path: '/ondewo.nlu.Users/ListNotifications',
         requestData,
         requestMetadata,
-        requestClass: ondewoNlu007.ListNotificationsRequest,
-        responseClass: ondewoNlu007.ListNotificationsResponse
+        requestClass: ondewoNlu008.ListNotificationsRequest,
+        responseClass: ondewoNlu008.ListNotificationsResponse
       });
     },
     /**
@@ -383,20 +384,20 @@ export class UsersClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>
+     * @returns Observable<GrpcEvent<ondewoNlu008.ListNotificationsResponse>>
      */
     setNotificationsFlaggedStatus: (
-      requestData: ondewoNlu007.SetNotificationsFlaggedStatusRequest,
+      requestData: ondewoNlu008.SetNotificationsFlaggedStatusRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>> => {
+    ): Observable<GrpcEvent<ondewoNlu008.ListNotificationsResponse>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
         path: '/ondewo.nlu.Users/SetNotificationsFlaggedStatus',
         requestData,
         requestMetadata,
-        requestClass: ondewoNlu007.SetNotificationsFlaggedStatusRequest,
-        responseClass: ondewoNlu007.ListNotificationsResponse
+        requestClass: ondewoNlu008.SetNotificationsFlaggedStatusRequest,
+        responseClass: ondewoNlu008.ListNotificationsResponse
       });
     },
     /**
@@ -404,20 +405,20 @@ export class UsersClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>>
+     * @returns Observable<GrpcEvent<ondewoNlu008.ListNotificationsResponse>>
      */
     setNotificationsReadStatus: (
-      requestData: ondewoNlu007.SetNotificationsReadStatusRequest,
+      requestData: ondewoNlu008.SetNotificationsReadStatusRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu007.ListNotificationsResponse>> => {
+    ): Observable<GrpcEvent<ondewoNlu008.ListNotificationsResponse>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
         path: '/ondewo.nlu.Users/SetNotificationsReadStatus',
         requestData,
         requestMetadata,
-        requestClass: ondewoNlu007.SetNotificationsReadStatusRequest,
-        responseClass: ondewoNlu007.ListNotificationsResponse
+        requestClass: ondewoNlu008.SetNotificationsReadStatusRequest,
+        responseClass: ondewoNlu008.ListNotificationsResponse
       });
     },
     /**
@@ -759,12 +760,12 @@ export class UsersClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu007.ListNotificationsResponse>
+   * @returns Observable<ondewoNlu008.ListNotificationsResponse>
    */
   listNotifications(
-    requestData: ondewoNlu007.ListNotificationsRequest,
+    requestData: ondewoNlu008.ListNotificationsRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu007.ListNotificationsResponse> {
+  ): Observable<ondewoNlu008.ListNotificationsResponse> {
     return this.$raw
       .listNotifications(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -775,12 +776,12 @@ export class UsersClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu007.ListNotificationsResponse>
+   * @returns Observable<ondewoNlu008.ListNotificationsResponse>
    */
   setNotificationsFlaggedStatus(
-    requestData: ondewoNlu007.SetNotificationsFlaggedStatusRequest,
+    requestData: ondewoNlu008.SetNotificationsFlaggedStatusRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu007.ListNotificationsResponse> {
+  ): Observable<ondewoNlu008.ListNotificationsResponse> {
     return this.$raw
       .setNotificationsFlaggedStatus(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -791,12 +792,12 @@ export class UsersClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu007.ListNotificationsResponse>
+   * @returns Observable<ondewoNlu008.ListNotificationsResponse>
    */
   setNotificationsReadStatus(
-    requestData: ondewoNlu007.SetNotificationsReadStatusRequest,
+    requestData: ondewoNlu008.SetNotificationsReadStatusRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu007.ListNotificationsResponse> {
+  ): Observable<ondewoNlu008.ListNotificationsResponse> {
     return this.$raw
       .setNotificationsReadStatus(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());

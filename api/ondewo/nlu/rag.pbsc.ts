@@ -21,13 +21,13 @@ import {
 import { Observable } from 'rxjs';
 import * as thisProto from './rag.pb';
 import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
-import * as googleApi001 from '../../google/api/annotations.pb';
+import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
+import * as googleApi003 from '../../google/api/annotations.pb';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
-import * as googleRpc005 from '../../google/rpc/status.pb';
-import * as ondewoNlu006 from '../../ondewo/nlu/operation-metadata.pb';
-import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
+import * as googleRpc006 from '../../google/rpc/status.pb';
+import * as ondewoNlu007 from '../../ondewo/nlu/operation-metadata.pb';
 import * as googleType008 from '../../google/type/latlng.pb';
 import * as ondewoNlu009 from '../../ondewo/nlu/common.pb';
 import * as ondewoNlu010 from '../../ondewo/nlu/context.pb';
@@ -638,6 +638,27 @@ export class RagsClient {
         requestClass: thisProto.RagDeleteCrawlersRequest,
         responseClass: thisProto.RagDeleteCrawlersResponse
       });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Rags/RagGetCrawlerRunLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RagGetCrawlerRunLogsResponse>>
+     */
+    ragGetCrawlerRunLogs: (
+      requestData: thisProto.RagGetCrawlerRunLogsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RagGetCrawlerRunLogsResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Rags/RagGetCrawlerRunLogs',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.RagGetCrawlerRunLogsRequest,
+        responseClass: thisProto.RagGetCrawlerRunLogsResponse
+      });
     }
   };
 
@@ -1094,6 +1115,22 @@ export class RagsClient {
   ): Observable<thisProto.RagDeleteCrawlersResponse> {
     return this.$raw
       .ragDeleteCrawlers(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Rags/RagGetCrawlerRunLogs
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RagGetCrawlerRunLogsResponse>
+   */
+  ragGetCrawlerRunLogs(
+    requestData: thisProto.RagGetCrawlerRunLogsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RagGetCrawlerRunLogsResponse> {
+    return this.$raw
+      .ragGetCrawlerRunLogs(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 }

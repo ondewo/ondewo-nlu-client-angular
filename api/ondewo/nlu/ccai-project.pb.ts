@@ -161,17 +161,17 @@ export class CcaiProject implements GrpcMessage {
           _instance.ccaiProjectStatus = _reader.readEnum();
           break;
         case 6:
-          _instance.createdAt = new googleProtobuf001.Timestamp();
+          _instance.createdAt = new googleProtobuf002.Timestamp();
           _reader.readMessage(
             _instance.createdAt,
-            googleProtobuf001.Timestamp.deserializeBinaryFromReader
+            googleProtobuf002.Timestamp.deserializeBinaryFromReader
           );
           break;
         case 7:
-          _instance.modifiedAt = new googleProtobuf001.Timestamp();
+          _instance.modifiedAt = new googleProtobuf002.Timestamp();
           _reader.readMessage(
             _instance.modifiedAt,
-            googleProtobuf001.Timestamp.deserializeBinaryFromReader
+            googleProtobuf002.Timestamp.deserializeBinaryFromReader
           );
           break;
         case 8:
@@ -234,14 +234,14 @@ export class CcaiProject implements GrpcMessage {
       _writer.writeMessage(
         6,
         _instance.createdAt as any,
-        googleProtobuf001.Timestamp.serializeBinaryToWriter
+        googleProtobuf002.Timestamp.serializeBinaryToWriter
       );
     }
     if (_instance.modifiedAt) {
       _writer.writeMessage(
         7,
         _instance.modifiedAt as any,
-        googleProtobuf001.Timestamp.serializeBinaryToWriter
+        googleProtobuf002.Timestamp.serializeBinaryToWriter
       );
     }
     if (_instance.createdBy) {
@@ -260,8 +260,8 @@ export class CcaiProject implements GrpcMessage {
   private _ownerName: string;
   private _ccaiServicesMap: { [prop: string]: CcaiServiceList };
   private _ccaiProjectStatus: CcaiProjectStatus;
-  private _createdAt?: googleProtobuf001.Timestamp;
-  private _modifiedAt?: googleProtobuf001.Timestamp;
+  private _createdAt?: googleProtobuf002.Timestamp;
+  private _modifiedAt?: googleProtobuf002.Timestamp;
   private _createdBy: string;
   private _modifiedBy: string;
   private _nluProjectName: string;
@@ -288,10 +288,10 @@ export class CcaiProject implements GrpcMessage {
       : {}),
       (this.ccaiProjectStatus = _value.ccaiProjectStatus);
     this.createdAt = _value.createdAt
-      ? new googleProtobuf001.Timestamp(_value.createdAt)
+      ? new googleProtobuf002.Timestamp(_value.createdAt)
       : undefined;
     this.modifiedAt = _value.modifiedAt
-      ? new googleProtobuf001.Timestamp(_value.modifiedAt)
+      ? new googleProtobuf002.Timestamp(_value.modifiedAt)
       : undefined;
     this.createdBy = _value.createdBy;
     this.modifiedBy = _value.modifiedBy;
@@ -328,16 +328,16 @@ export class CcaiProject implements GrpcMessage {
   set ccaiProjectStatus(value: CcaiProjectStatus) {
     this._ccaiProjectStatus = value;
   }
-  get createdAt(): googleProtobuf001.Timestamp | undefined {
+  get createdAt(): googleProtobuf002.Timestamp | undefined {
     return this._createdAt;
   }
-  set createdAt(value: googleProtobuf001.Timestamp | undefined) {
+  set createdAt(value: googleProtobuf002.Timestamp | undefined) {
     this._createdAt = value;
   }
-  get modifiedAt(): googleProtobuf001.Timestamp | undefined {
+  get modifiedAt(): googleProtobuf002.Timestamp | undefined {
     return this._modifiedAt;
   }
-  set modifiedAt(value: googleProtobuf001.Timestamp | undefined) {
+  set modifiedAt(value: googleProtobuf002.Timestamp | undefined) {
     this._modifiedAt = value;
   }
   get createdBy(): string {
@@ -455,8 +455,8 @@ export module CcaiProject {
     ownerName: string;
     ccaiServicesMap: { [prop: string]: CcaiServiceList };
     ccaiProjectStatus: CcaiProjectStatus;
-    createdAt?: googleProtobuf001.Timestamp.AsObject;
-    modifiedAt?: googleProtobuf001.Timestamp.AsObject;
+    createdAt?: googleProtobuf002.Timestamp.AsObject;
+    modifiedAt?: googleProtobuf002.Timestamp.AsObject;
     createdBy: string;
     modifiedBy: string;
     nluProjectName: string;
@@ -471,8 +471,8 @@ export module CcaiProject {
     ownerName: string;
     ccaiServicesMap: { [prop: string]: CcaiServiceList };
     ccaiProjectStatus: string;
-    createdAt: googleProtobuf001.Timestamp.AsProtobufJSON | null;
-    modifiedAt: googleProtobuf001.Timestamp.AsProtobufJSON | null;
+    createdAt: googleProtobuf002.Timestamp.AsProtobufJSON | null;
+    modifiedAt: googleProtobuf002.Timestamp.AsProtobufJSON | null;
     createdBy: string;
     modifiedBy: string;
     nluProjectName: string;
@@ -912,24 +912,24 @@ export class CcaiService implements GrpcMessage {
           _instance.ccaiProjectName = _reader.readString();
           break;
         case 18:
-          _instance.ccaiServiceConfig = new googleProtobuf002.Struct();
+          _instance.ccaiServiceConfig = new googleProtobuf001.Struct();
           _reader.readMessage(
             _instance.ccaiServiceConfig,
-            googleProtobuf002.Struct.deserializeBinaryFromReader
+            googleProtobuf001.Struct.deserializeBinaryFromReader
           );
           break;
         case 19:
-          _instance.createdAt = new googleProtobuf001.Timestamp();
+          _instance.createdAt = new googleProtobuf002.Timestamp();
           _reader.readMessage(
             _instance.createdAt,
-            googleProtobuf001.Timestamp.deserializeBinaryFromReader
+            googleProtobuf002.Timestamp.deserializeBinaryFromReader
           );
           break;
         case 20:
-          _instance.modifiedAt = new googleProtobuf001.Timestamp();
+          _instance.modifiedAt = new googleProtobuf002.Timestamp();
           _reader.readMessage(
             _instance.modifiedAt,
-            googleProtobuf001.Timestamp.deserializeBinaryFromReader
+            googleProtobuf002.Timestamp.deserializeBinaryFromReader
           );
           break;
         case 21:
@@ -939,10 +939,10 @@ export class CcaiService implements GrpcMessage {
           _instance.modifiedBy = _reader.readString();
           break;
         case 23:
-          _instance.headers = new googleProtobuf002.Struct();
+          _instance.headers = new googleProtobuf001.Struct();
           _reader.readMessage(
             _instance.headers,
-            googleProtobuf002.Struct.deserializeBinaryFromReader
+            googleProtobuf001.Struct.deserializeBinaryFromReader
           );
           break;
         case 24:
@@ -1023,21 +1023,21 @@ export class CcaiService implements GrpcMessage {
       _writer.writeMessage(
         18,
         _instance.ccaiServiceConfig as any,
-        googleProtobuf002.Struct.serializeBinaryToWriter
+        googleProtobuf001.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.createdAt) {
       _writer.writeMessage(
         19,
         _instance.createdAt as any,
-        googleProtobuf001.Timestamp.serializeBinaryToWriter
+        googleProtobuf002.Timestamp.serializeBinaryToWriter
       );
     }
     if (_instance.modifiedAt) {
       _writer.writeMessage(
         20,
         _instance.modifiedAt as any,
-        googleProtobuf001.Timestamp.serializeBinaryToWriter
+        googleProtobuf002.Timestamp.serializeBinaryToWriter
       );
     }
     if (_instance.createdBy) {
@@ -1050,7 +1050,7 @@ export class CcaiService implements GrpcMessage {
       _writer.writeMessage(
         23,
         _instance.headers as any,
-        googleProtobuf002.Struct.serializeBinaryToWriter
+        googleProtobuf001.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.ccaiServiceProvider) {
@@ -1078,12 +1078,12 @@ export class CcaiService implements GrpcMessage {
   private _apiKey: string;
   private _ccaiServiceType: CcaiServiceType;
   private _ccaiProjectName: string;
-  private _ccaiServiceConfig?: googleProtobuf002.Struct;
-  private _createdAt?: googleProtobuf001.Timestamp;
-  private _modifiedAt?: googleProtobuf001.Timestamp;
+  private _ccaiServiceConfig?: googleProtobuf001.Struct;
+  private _createdAt?: googleProtobuf002.Timestamp;
+  private _modifiedAt?: googleProtobuf002.Timestamp;
   private _createdBy: string;
   private _modifiedBy: string;
-  private _headers?: googleProtobuf002.Struct;
+  private _headers?: googleProtobuf001.Struct;
   private _ccaiServiceProvider: CcaiServiceProvider;
   private _serviceHierarchy: string;
 
@@ -1111,18 +1111,18 @@ export class CcaiService implements GrpcMessage {
     this.ccaiServiceType = _value.ccaiServiceType;
     this.ccaiProjectName = _value.ccaiProjectName;
     this.ccaiServiceConfig = _value.ccaiServiceConfig
-      ? new googleProtobuf002.Struct(_value.ccaiServiceConfig)
+      ? new googleProtobuf001.Struct(_value.ccaiServiceConfig)
       : undefined;
     this.createdAt = _value.createdAt
-      ? new googleProtobuf001.Timestamp(_value.createdAt)
+      ? new googleProtobuf002.Timestamp(_value.createdAt)
       : undefined;
     this.modifiedAt = _value.modifiedAt
-      ? new googleProtobuf001.Timestamp(_value.modifiedAt)
+      ? new googleProtobuf002.Timestamp(_value.modifiedAt)
       : undefined;
     this.createdBy = _value.createdBy;
     this.modifiedBy = _value.modifiedBy;
     this.headers = _value.headers
-      ? new googleProtobuf002.Struct(_value.headers)
+      ? new googleProtobuf001.Struct(_value.headers)
       : undefined;
     this.ccaiServiceProvider = _value.ccaiServiceProvider;
     this.serviceHierarchy = _value.serviceHierarchy;
@@ -1230,22 +1230,22 @@ export class CcaiService implements GrpcMessage {
   set ccaiProjectName(value: string) {
     this._ccaiProjectName = value;
   }
-  get ccaiServiceConfig(): googleProtobuf002.Struct | undefined {
+  get ccaiServiceConfig(): googleProtobuf001.Struct | undefined {
     return this._ccaiServiceConfig;
   }
-  set ccaiServiceConfig(value: googleProtobuf002.Struct | undefined) {
+  set ccaiServiceConfig(value: googleProtobuf001.Struct | undefined) {
     this._ccaiServiceConfig = value;
   }
-  get createdAt(): googleProtobuf001.Timestamp | undefined {
+  get createdAt(): googleProtobuf002.Timestamp | undefined {
     return this._createdAt;
   }
-  set createdAt(value: googleProtobuf001.Timestamp | undefined) {
+  set createdAt(value: googleProtobuf002.Timestamp | undefined) {
     this._createdAt = value;
   }
-  get modifiedAt(): googleProtobuf001.Timestamp | undefined {
+  get modifiedAt(): googleProtobuf002.Timestamp | undefined {
     return this._modifiedAt;
   }
-  set modifiedAt(value: googleProtobuf001.Timestamp | undefined) {
+  set modifiedAt(value: googleProtobuf002.Timestamp | undefined) {
     this._modifiedAt = value;
   }
   get createdBy(): string {
@@ -1260,10 +1260,10 @@ export class CcaiService implements GrpcMessage {
   set modifiedBy(value: string) {
     this._modifiedBy = value;
   }
-  get headers(): googleProtobuf002.Struct | undefined {
+  get headers(): googleProtobuf001.Struct | undefined {
     return this._headers;
   }
-  set headers(value: googleProtobuf002.Struct | undefined) {
+  set headers(value: googleProtobuf001.Struct | undefined) {
     this._headers = value;
   }
   get ccaiServiceProvider(): CcaiServiceProvider {
@@ -1406,12 +1406,12 @@ export module CcaiService {
     apiKey: string;
     ccaiServiceType: CcaiServiceType;
     ccaiProjectName: string;
-    ccaiServiceConfig?: googleProtobuf002.Struct.AsObject;
-    createdAt?: googleProtobuf001.Timestamp.AsObject;
-    modifiedAt?: googleProtobuf001.Timestamp.AsObject;
+    ccaiServiceConfig?: googleProtobuf001.Struct.AsObject;
+    createdAt?: googleProtobuf002.Timestamp.AsObject;
+    modifiedAt?: googleProtobuf002.Timestamp.AsObject;
     createdBy: string;
     modifiedBy: string;
-    headers?: googleProtobuf002.Struct.AsObject;
+    headers?: googleProtobuf001.Struct.AsObject;
     ccaiServiceProvider: CcaiServiceProvider;
     serviceHierarchy: string;
   }
@@ -1437,12 +1437,12 @@ export module CcaiService {
     apiKey: string;
     ccaiServiceType: string;
     ccaiProjectName: string;
-    ccaiServiceConfig: googleProtobuf002.Struct.AsProtobufJSON | null;
-    createdAt: googleProtobuf001.Timestamp.AsProtobufJSON | null;
-    modifiedAt: googleProtobuf001.Timestamp.AsProtobufJSON | null;
+    ccaiServiceConfig: googleProtobuf001.Struct.AsProtobufJSON | null;
+    createdAt: googleProtobuf002.Timestamp.AsProtobufJSON | null;
+    modifiedAt: googleProtobuf002.Timestamp.AsProtobufJSON | null;
     createdBy: string;
     modifiedBy: string;
-    headers: googleProtobuf002.Struct.AsProtobufJSON | null;
+    headers: googleProtobuf001.Struct.AsProtobufJSON | null;
     ccaiServiceProvider: string;
     serviceHierarchy: string;
   }
