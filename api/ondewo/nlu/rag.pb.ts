@@ -2208,6 +2208,8 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
     _instance.chunkMethod = _instance.chunkMethod || 0;
     _instance.parserConfig = _instance.parserConfig || undefined;
     _instance.pagerank = _instance.pagerank || 0;
+    _instance.updateMask = _instance.updateMask || undefined;
+    _instance.fieldMask = _instance.fieldMask || undefined;
   }
 
   /**
@@ -2253,6 +2255,20 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
           break;
         case 9:
           _instance.pagerank = _reader.readInt32();
+          break;
+        case 10:
+          _instance.updateMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.updateMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 11:
+          _instance.fieldMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
           break;
         default:
           _reader.skipField();
@@ -2302,6 +2318,20 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
     if (_instance.pagerank) {
       _writer.writeInt32(9, _instance.pagerank);
     }
+    if (_instance.updateMask) {
+      _writer.writeMessage(
+        10,
+        _instance.updateMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        11,
+        _instance.fieldMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
@@ -2313,6 +2343,8 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
   private _chunkMethod: RagChunkMethod;
   private _parserConfig?: RagParserConfig;
   private _pagerank: number;
+  private _updateMask?: googleProtobuf000.FieldMask;
+  private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2331,6 +2363,12 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
       ? new RagParserConfig(_value.parserConfig)
       : undefined;
     this.pagerank = _value.pagerank;
+    this.updateMask = _value.updateMask
+      ? new googleProtobuf000.FieldMask(_value.updateMask)
+      : undefined;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf000.FieldMask(_value.fieldMask)
+      : undefined;
     RagUpdateDatasetRequest.refineValues(this);
   }
   get parent(): string {
@@ -2387,6 +2425,18 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
   set pagerank(value: number) {
     this._pagerank = value;
   }
+  get updateMask(): googleProtobuf000.FieldMask | undefined {
+    return this._updateMask;
+  }
+  set updateMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._updateMask = value;
+  }
+  get fieldMask(): googleProtobuf000.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -2413,7 +2463,9 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
       parserConfig: this.parserConfig
         ? this.parserConfig.toObject()
         : undefined,
-      pagerank: this.pagerank
+      pagerank: this.pagerank,
+      updateMask: this.updateMask ? this.updateMask.toObject() : undefined,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
     };
   }
 
@@ -2449,7 +2501,11 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
       parserConfig: this.parserConfig
         ? this.parserConfig.toProtobufJSON(options)
         : null,
-      pagerank: this.pagerank
+      pagerank: this.pagerank,
+      updateMask: this.updateMask
+        ? this.updateMask.toProtobufJSON(options)
+        : null,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
     };
   }
 }
@@ -2467,6 +2523,8 @@ export module RagUpdateDatasetRequest {
     chunkMethod: RagChunkMethod;
     parserConfig?: RagParserConfig.AsObject;
     pagerank: number;
+    updateMask?: googleProtobuf000.FieldMask.AsObject;
+    fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
   /**
@@ -2482,6 +2540,8 @@ export module RagUpdateDatasetRequest {
     chunkMethod: string;
     parserConfig: RagParserConfig.AsProtobufJSON | null;
     pagerank: number;
+    updateMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
+    fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
   }
 }
 
@@ -2712,6 +2772,8 @@ export class RagListDatasetsRequest implements GrpcMessage {
     _instance.name = _instance.name || '';
     _instance.orderby = _instance.orderby || '';
     _instance.desc = _instance.desc || false;
+    _instance.sortingMode = _instance.sortingMode || 0;
+    _instance.fieldMask = _instance.fieldMask || undefined;
   }
 
   /**
@@ -2747,6 +2809,16 @@ export class RagListDatasetsRequest implements GrpcMessage {
           break;
         case 7:
           _instance.desc = _reader.readBool();
+          break;
+        case 8:
+          _instance.sortingMode = _reader.readEnum();
+          break;
+        case 9:
+          _instance.fieldMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
           break;
         default:
           _reader.skipField();
@@ -2786,6 +2858,16 @@ export class RagListDatasetsRequest implements GrpcMessage {
     if (_instance.desc) {
       _writer.writeBool(7, _instance.desc);
     }
+    if (_instance.sortingMode) {
+      _writer.writeEnum(8, _instance.sortingMode);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        9,
+        _instance.fieldMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
@@ -2795,6 +2877,8 @@ export class RagListDatasetsRequest implements GrpcMessage {
   private _name: string;
   private _orderby: string;
   private _desc: boolean;
+  private _sortingMode: ondewoNlu009.SortingMode;
+  private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2809,6 +2893,10 @@ export class RagListDatasetsRequest implements GrpcMessage {
     this.name = _value.name;
     this.orderby = _value.orderby;
     this.desc = _value.desc;
+    this.sortingMode = _value.sortingMode;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf000.FieldMask(_value.fieldMask)
+      : undefined;
     RagListDatasetsRequest.refineValues(this);
   }
   get parent(): string {
@@ -2853,6 +2941,18 @@ export class RagListDatasetsRequest implements GrpcMessage {
   set desc(value: boolean) {
     this._desc = value;
   }
+  get sortingMode(): ondewoNlu009.SortingMode {
+    return this._sortingMode;
+  }
+  set sortingMode(value: ondewoNlu009.SortingMode) {
+    this._sortingMode = value;
+  }
+  get fieldMask(): googleProtobuf000.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -2875,7 +2975,9 @@ export class RagListDatasetsRequest implements GrpcMessage {
       id: this.id,
       name: this.name,
       orderby: this.orderby,
-      desc: this.desc
+      desc: this.desc,
+      sortingMode: this.sortingMode,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
     };
   }
 
@@ -2902,7 +3004,14 @@ export class RagListDatasetsRequest implements GrpcMessage {
       id: this.id,
       name: this.name,
       orderby: this.orderby,
-      desc: this.desc
+      desc: this.desc,
+      sortingMode:
+        ondewoNlu009.SortingMode[
+          this.sortingMode === null || this.sortingMode === undefined
+            ? 0
+            : this.sortingMode
+        ],
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
     };
   }
 }
@@ -2918,6 +3027,8 @@ export module RagListDatasetsRequest {
     name: string;
     orderby: string;
     desc: boolean;
+    sortingMode: ondewoNlu009.SortingMode;
+    fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
   /**
@@ -2931,6 +3042,8 @@ export module RagListDatasetsRequest {
     name: string;
     orderby: string;
     desc: boolean;
+    sortingMode: string;
+    fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
   }
 }
 
@@ -3933,6 +4046,8 @@ export class RagUpdateDocumentRequest implements GrpcMessage {
     _instance.parserConfig = _instance.parserConfig || undefined;
     _instance.enabled = _instance.enabled || false;
     _instance.metaFields = _instance.metaFields || undefined;
+    _instance.updateMask = _instance.updateMask || undefined;
+    _instance.fieldMask = _instance.fieldMask || undefined;
   }
 
   /**
@@ -3981,6 +4096,20 @@ export class RagUpdateDocumentRequest implements GrpcMessage {
           _reader.readMessage(
             _instance.metaFields,
             googleProtobuf001.Struct.deserializeBinaryFromReader
+          );
+          break;
+        case 10:
+          _instance.updateMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.updateMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 11:
+          _instance.fieldMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
           );
           break;
         default:
@@ -4035,6 +4164,20 @@ export class RagUpdateDocumentRequest implements GrpcMessage {
         googleProtobuf001.Struct.serializeBinaryToWriter
       );
     }
+    if (_instance.updateMask) {
+      _writer.writeMessage(
+        10,
+        _instance.updateMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        11,
+        _instance.fieldMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
@@ -4046,6 +4189,8 @@ export class RagUpdateDocumentRequest implements GrpcMessage {
   private _parserConfig?: RagParserConfig;
   private _enabled: boolean;
   private _metaFields?: googleProtobuf001.Struct;
+  private _updateMask?: googleProtobuf000.FieldMask;
+  private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -4065,6 +4210,12 @@ export class RagUpdateDocumentRequest implements GrpcMessage {
     this.enabled = _value.enabled;
     this.metaFields = _value.metaFields
       ? new googleProtobuf001.Struct(_value.metaFields)
+      : undefined;
+    this.updateMask = _value.updateMask
+      ? new googleProtobuf000.FieldMask(_value.updateMask)
+      : undefined;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf000.FieldMask(_value.fieldMask)
       : undefined;
     RagUpdateDocumentRequest.refineValues(this);
   }
@@ -4122,6 +4273,18 @@ export class RagUpdateDocumentRequest implements GrpcMessage {
   set metaFields(value: googleProtobuf001.Struct | undefined) {
     this._metaFields = value;
   }
+  get updateMask(): googleProtobuf000.FieldMask | undefined {
+    return this._updateMask;
+  }
+  set updateMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._updateMask = value;
+  }
+  get fieldMask(): googleProtobuf000.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -4148,7 +4311,9 @@ export class RagUpdateDocumentRequest implements GrpcMessage {
         ? this.parserConfig.toObject()
         : undefined,
       enabled: this.enabled,
-      metaFields: this.metaFields ? this.metaFields.toObject() : undefined
+      metaFields: this.metaFields ? this.metaFields.toObject() : undefined,
+      updateMask: this.updateMask ? this.updateMask.toObject() : undefined,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
     };
   }
 
@@ -4186,7 +4351,11 @@ export class RagUpdateDocumentRequest implements GrpcMessage {
       enabled: this.enabled,
       metaFields: this.metaFields
         ? this.metaFields.toProtobufJSON(options)
-        : null
+        : null,
+      updateMask: this.updateMask
+        ? this.updateMask.toProtobufJSON(options)
+        : null,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
     };
   }
 }
@@ -4204,6 +4373,8 @@ export module RagUpdateDocumentRequest {
     parserConfig?: RagParserConfig.AsObject;
     enabled: boolean;
     metaFields?: googleProtobuf001.Struct.AsObject;
+    updateMask?: googleProtobuf000.FieldMask.AsObject;
+    fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
   /**
@@ -4219,6 +4390,8 @@ export module RagUpdateDocumentRequest {
     parserConfig: RagParserConfig.AsProtobufJSON | null;
     enabled: boolean;
     metaFields: googleProtobuf001.Struct.AsProtobufJSON | null;
+    updateMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
+    fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
   }
 }
 
@@ -4621,6 +4794,8 @@ export class RagListDocumentsRequest implements GrpcMessage {
     _instance.createTimeFrom = _instance.createTimeFrom || undefined;
     _instance.createTimeTo = _instance.createTimeTo || undefined;
     _instance.metadataCondition = _instance.metadataCondition || undefined;
+    _instance.sortingMode = _instance.sortingMode || 0;
+    _instance.fieldMask = _instance.fieldMask || undefined;
   }
 
   /**
@@ -4694,6 +4869,16 @@ export class RagListDocumentsRequest implements GrpcMessage {
             RagMetadataConditions.deserializeBinaryFromReader
           );
           break;
+        case 15:
+          _instance.sortingMode = _reader.readEnum();
+          break;
+        case 16:
+          _instance.fieldMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
+          break;
         default:
           _reader.skipField();
       }
@@ -4765,6 +4950,16 @@ export class RagListDocumentsRequest implements GrpcMessage {
         RagMetadataConditions.serializeBinaryToWriter
       );
     }
+    if (_instance.sortingMode) {
+      _writer.writeEnum(15, _instance.sortingMode);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        16,
+        _instance.fieldMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
@@ -4781,6 +4976,8 @@ export class RagListDocumentsRequest implements GrpcMessage {
   private _createTimeFrom?: googleProtobuf002.Timestamp;
   private _createTimeTo?: googleProtobuf002.Timestamp;
   private _metadataCondition?: RagMetadataConditions;
+  private _sortingMode: ondewoNlu009.SortingMode;
+  private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -4807,6 +5004,10 @@ export class RagListDocumentsRequest implements GrpcMessage {
       : undefined;
     this.metadataCondition = _value.metadataCondition
       ? new RagMetadataConditions(_value.metadataCondition)
+      : undefined;
+    this.sortingMode = _value.sortingMode;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf000.FieldMask(_value.fieldMask)
       : undefined;
     RagListDocumentsRequest.refineValues(this);
   }
@@ -4894,6 +5095,18 @@ export class RagListDocumentsRequest implements GrpcMessage {
   set metadataCondition(value: RagMetadataConditions | undefined) {
     this._metadataCondition = value;
   }
+  get sortingMode(): ondewoNlu009.SortingMode {
+    return this._sortingMode;
+  }
+  set sortingMode(value: ondewoNlu009.SortingMode) {
+    this._sortingMode = value;
+  }
+  get fieldMask(): googleProtobuf000.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -4929,7 +5142,9 @@ export class RagListDocumentsRequest implements GrpcMessage {
         : undefined,
       metadataCondition: this.metadataCondition
         ? this.metadataCondition.toObject()
-        : undefined
+        : undefined,
+      sortingMode: this.sortingMode,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
     };
   }
 
@@ -4969,7 +5184,14 @@ export class RagListDocumentsRequest implements GrpcMessage {
         : null,
       metadataCondition: this.metadataCondition
         ? this.metadataCondition.toProtobufJSON(options)
-        : null
+        : null,
+      sortingMode:
+        ondewoNlu009.SortingMode[
+          this.sortingMode === null || this.sortingMode === undefined
+            ? 0
+            : this.sortingMode
+        ],
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
     };
   }
 }
@@ -4992,6 +5214,8 @@ export module RagListDocumentsRequest {
     createTimeFrom?: googleProtobuf002.Timestamp.AsObject;
     createTimeTo?: googleProtobuf002.Timestamp.AsObject;
     metadataCondition?: RagMetadataConditions.AsObject;
+    sortingMode: ondewoNlu009.SortingMode;
+    fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
   /**
@@ -5012,6 +5236,8 @@ export module RagListDocumentsRequest {
     createTimeFrom: googleProtobuf002.Timestamp.AsProtobufJSON | null;
     createTimeTo: googleProtobuf002.Timestamp.AsProtobufJSON | null;
     metadataCondition: RagMetadataConditions.AsProtobufJSON | null;
+    sortingMode: string;
+    fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
   }
 }
 
@@ -6011,6 +6237,7 @@ export class RagRetrievalRequest implements GrpcMessage {
     _instance.topK = _instance.topK || 0;
     _instance.highlight = _instance.highlight || false;
     _instance.keyword = _instance.keyword || false;
+    _instance.fieldMask = _instance.fieldMask || undefined;
   }
 
   /**
@@ -6078,6 +6305,13 @@ export class RagRetrievalRequest implements GrpcMessage {
         case 14:
           _instance.keyword = _reader.readBool();
           break;
+        case 15:
+          _instance.fieldMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
+          break;
         default:
           _reader.skipField();
       }
@@ -6141,6 +6375,13 @@ export class RagRetrievalRequest implements GrpcMessage {
     if (_instance.keyword) {
       _writer.writeBool(14, _instance.keyword);
     }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        15,
+        _instance.fieldMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
@@ -6157,6 +6398,7 @@ export class RagRetrievalRequest implements GrpcMessage {
   private _topK: number;
   private _highlight: boolean;
   private _keyword: boolean;
+  private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -6180,6 +6422,9 @@ export class RagRetrievalRequest implements GrpcMessage {
     this.topK = _value.topK;
     this.highlight = _value.highlight;
     this.keyword = _value.keyword;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf000.FieldMask(_value.fieldMask)
+      : undefined;
     RagRetrievalRequest.refineValues(this);
   }
   get parent(): string {
@@ -6266,6 +6511,12 @@ export class RagRetrievalRequest implements GrpcMessage {
   set keyword(value: boolean) {
     this._keyword = value;
   }
+  get fieldMask(): googleProtobuf000.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -6297,7 +6548,8 @@ export class RagRetrievalRequest implements GrpcMessage {
       vectorSimilarityWeight: this.vectorSimilarityWeight,
       topK: this.topK,
       highlight: this.highlight,
-      keyword: this.keyword
+      keyword: this.keyword,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
     };
   }
 
@@ -6333,7 +6585,8 @@ export class RagRetrievalRequest implements GrpcMessage {
       vectorSimilarityWeight: this.vectorSimilarityWeight,
       topK: this.topK,
       highlight: this.highlight,
-      keyword: this.keyword
+      keyword: this.keyword,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
     };
   }
 }
@@ -6356,6 +6609,7 @@ export module RagRetrievalRequest {
     topK: number;
     highlight: boolean;
     keyword: boolean;
+    fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
   /**
@@ -6376,6 +6630,7 @@ export module RagRetrievalRequest {
     topK: number;
     highlight: boolean;
     keyword: boolean;
+    fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
   }
 }
 
@@ -8051,6 +8306,7 @@ export class RagListCrawlersRequest implements GrpcMessage {
     _instance.crawlerName = _instance.crawlerName || '';
     _instance.orderby = _instance.orderby || '';
     _instance.sortingMode = _instance.sortingMode || 0;
+    _instance.fieldMask = _instance.fieldMask || undefined;
   }
 
   /**
@@ -8086,6 +8342,13 @@ export class RagListCrawlersRequest implements GrpcMessage {
           break;
         case 7:
           _instance.sortingMode = _reader.readEnum();
+          break;
+        case 8:
+          _instance.fieldMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
           break;
         default:
           _reader.skipField();
@@ -8125,6 +8388,13 @@ export class RagListCrawlersRequest implements GrpcMessage {
     if (_instance.sortingMode) {
       _writer.writeEnum(7, _instance.sortingMode);
     }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        8,
+        _instance.fieldMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
@@ -8134,6 +8404,7 @@ export class RagListCrawlersRequest implements GrpcMessage {
   private _crawlerName: string;
   private _orderby: string;
   private _sortingMode: ondewoNlu009.SortingMode;
+  private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -8148,6 +8419,9 @@ export class RagListCrawlersRequest implements GrpcMessage {
     this.crawlerName = _value.crawlerName;
     this.orderby = _value.orderby;
     this.sortingMode = _value.sortingMode;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf000.FieldMask(_value.fieldMask)
+      : undefined;
     RagListCrawlersRequest.refineValues(this);
   }
   get parent(): string {
@@ -8192,6 +8466,12 @@ export class RagListCrawlersRequest implements GrpcMessage {
   set sortingMode(value: ondewoNlu009.SortingMode) {
     this._sortingMode = value;
   }
+  get fieldMask(): googleProtobuf000.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -8214,7 +8494,8 @@ export class RagListCrawlersRequest implements GrpcMessage {
       datasetName: this.datasetName,
       crawlerName: this.crawlerName,
       orderby: this.orderby,
-      sortingMode: this.sortingMode
+      sortingMode: this.sortingMode,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
     };
   }
 
@@ -8246,7 +8527,8 @@ export class RagListCrawlersRequest implements GrpcMessage {
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
-        ]
+        ],
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
     };
   }
 }
@@ -8262,6 +8544,7 @@ export module RagListCrawlersRequest {
     crawlerName: string;
     orderby: string;
     sortingMode: ondewoNlu009.SortingMode;
+    fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
   /**
@@ -8275,6 +8558,7 @@ export module RagListCrawlersRequest {
     crawlerName: string;
     orderby: string;
     sortingMode: string;
+    fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
   }
 }
 
@@ -11051,6 +11335,7 @@ export class RagCrawlerConcurrencyConfig implements GrpcMessage {
    */
   static refineValues(_instance: RagCrawlerConcurrencyConfig) {
     _instance.maxConcurrentRequests = _instance.maxConcurrentRequests || 0;
+    _instance.slowCrawl = _instance.slowCrawl || false;
   }
 
   /**
@@ -11068,6 +11353,9 @@ export class RagCrawlerConcurrencyConfig implements GrpcMessage {
       switch (_reader.getFieldNumber()) {
         case 1:
           _instance.maxConcurrentRequests = _reader.readInt32();
+          break;
+        case 2:
+          _instance.slowCrawl = _reader.readBool();
           break;
         default:
           _reader.skipField();
@@ -11089,9 +11377,13 @@ export class RagCrawlerConcurrencyConfig implements GrpcMessage {
     if (_instance.maxConcurrentRequests) {
       _writer.writeInt32(1, _instance.maxConcurrentRequests);
     }
+    if (_instance.slowCrawl) {
+      _writer.writeBool(2, _instance.slowCrawl);
+    }
   }
 
   private _maxConcurrentRequests: number;
+  private _slowCrawl: boolean;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -11100,6 +11392,7 @@ export class RagCrawlerConcurrencyConfig implements GrpcMessage {
   constructor(_value?: RecursivePartial<RagCrawlerConcurrencyConfig.AsObject>) {
     _value = _value || {};
     this.maxConcurrentRequests = _value.maxConcurrentRequests;
+    this.slowCrawl = _value.slowCrawl;
     RagCrawlerConcurrencyConfig.refineValues(this);
   }
   get maxConcurrentRequests(): number {
@@ -11107,6 +11400,12 @@ export class RagCrawlerConcurrencyConfig implements GrpcMessage {
   }
   set maxConcurrentRequests(value: number) {
     this._maxConcurrentRequests = value;
+  }
+  get slowCrawl(): boolean {
+    return this._slowCrawl;
+  }
+  set slowCrawl(value: boolean) {
+    this._slowCrawl = value;
   }
 
   /**
@@ -11124,7 +11423,8 @@ export class RagCrawlerConcurrencyConfig implements GrpcMessage {
    */
   toObject(): RagCrawlerConcurrencyConfig.AsObject {
     return {
-      maxConcurrentRequests: this.maxConcurrentRequests
+      maxConcurrentRequests: this.maxConcurrentRequests,
+      slowCrawl: this.slowCrawl
     };
   }
 
@@ -11145,7 +11445,8 @@ export class RagCrawlerConcurrencyConfig implements GrpcMessage {
     options?: ToProtobufJSONOptions
   ): RagCrawlerConcurrencyConfig.AsProtobufJSON {
     return {
-      maxConcurrentRequests: this.maxConcurrentRequests
+      maxConcurrentRequests: this.maxConcurrentRequests,
+      slowCrawl: this.slowCrawl
     };
   }
 }
@@ -11155,6 +11456,7 @@ export module RagCrawlerConcurrencyConfig {
    */
   export interface AsObject {
     maxConcurrentRequests: number;
+    slowCrawl: boolean;
   }
 
   /**
@@ -11162,6 +11464,7 @@ export module RagCrawlerConcurrencyConfig {
    */
   export interface AsProtobufJSON {
     maxConcurrentRequests: number;
+    slowCrawl: boolean;
   }
 }
 
@@ -14325,6 +14628,9 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
     _instance.operationName = _instance.operationName || '';
     _instance.pageToken = _instance.pageToken || '';
     _instance.urlQuery = _instance.urlQuery || '';
+    _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.orderby = _instance.orderby || '';
+    _instance.sortingMode = _instance.sortingMode || 0;
   }
 
   /**
@@ -14354,6 +14660,19 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
           break;
         case 5:
           _instance.urlQuery = _reader.readString();
+          break;
+        case 6:
+          _instance.fieldMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 7:
+          _instance.orderby = _reader.readString();
+          break;
+        case 8:
+          _instance.sortingMode = _reader.readEnum();
           break;
         default:
           _reader.skipField();
@@ -14387,6 +14706,19 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
     if (_instance.urlQuery) {
       _writer.writeString(5, _instance.urlQuery);
     }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        6,
+        _instance.fieldMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
+    if (_instance.orderby) {
+      _writer.writeString(7, _instance.orderby);
+    }
+    if (_instance.sortingMode) {
+      _writer.writeEnum(8, _instance.sortingMode);
+    }
   }
 
   private _parent: string;
@@ -14394,6 +14726,9 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
   private _operationName: string;
   private _pageToken: string;
   private _urlQuery: string;
+  private _fieldMask?: googleProtobuf000.FieldMask;
+  private _orderby: string;
+  private _sortingMode: ondewoNlu009.SortingMode;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -14406,6 +14741,11 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
     this.operationName = _value.operationName;
     this.pageToken = _value.pageToken;
     this.urlQuery = _value.urlQuery;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf000.FieldMask(_value.fieldMask)
+      : undefined;
+    this.orderby = _value.orderby;
+    this.sortingMode = _value.sortingMode;
     RagGetCrawlerResultsRequest.refineValues(this);
   }
   get parent(): string {
@@ -14438,6 +14778,24 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
   set urlQuery(value: string) {
     this._urlQuery = value;
   }
+  get fieldMask(): googleProtobuf000.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+  get orderby(): string {
+    return this._orderby;
+  }
+  set orderby(value: string) {
+    this._orderby = value;
+  }
+  get sortingMode(): ondewoNlu009.SortingMode {
+    return this._sortingMode;
+  }
+  set sortingMode(value: ondewoNlu009.SortingMode) {
+    this._sortingMode = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -14458,7 +14816,10 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
       languageCode: this.languageCode,
       operationName: this.operationName,
       pageToken: this.pageToken,
-      urlQuery: this.urlQuery
+      urlQuery: this.urlQuery,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      orderby: this.orderby,
+      sortingMode: this.sortingMode
     };
   }
 
@@ -14483,7 +14844,15 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
       languageCode: this.languageCode,
       operationName: this.operationName,
       pageToken: this.pageToken,
-      urlQuery: this.urlQuery
+      urlQuery: this.urlQuery,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      orderby: this.orderby,
+      sortingMode:
+        ondewoNlu009.SortingMode[
+          this.sortingMode === null || this.sortingMode === undefined
+            ? 0
+            : this.sortingMode
+        ]
     };
   }
 }
@@ -14497,6 +14866,9 @@ export module RagGetCrawlerResultsRequest {
     operationName: string;
     pageToken: string;
     urlQuery: string;
+    fieldMask?: googleProtobuf000.FieldMask.AsObject;
+    orderby: string;
+    sortingMode: ondewoNlu009.SortingMode;
   }
 
   /**
@@ -14508,6 +14880,9 @@ export module RagGetCrawlerResultsRequest {
     operationName: string;
     pageToken: string;
     urlQuery: string;
+    fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
+    orderby: string;
+    sortingMode: string;
   }
 }
 
@@ -14733,6 +15108,7 @@ export class RagGetCrawlerResultRequest implements GrpcMessage {
     _instance.languageCode = _instance.languageCode || '';
     _instance.operationName = _instance.operationName || '';
     _instance.url = _instance.url || '';
+    _instance.fieldMask = _instance.fieldMask || undefined;
   }
 
   /**
@@ -14759,6 +15135,13 @@ export class RagGetCrawlerResultRequest implements GrpcMessage {
           break;
         case 4:
           _instance.url = _reader.readString();
+          break;
+        case 5:
+          _instance.fieldMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
           break;
         default:
           _reader.skipField();
@@ -14789,12 +15172,20 @@ export class RagGetCrawlerResultRequest implements GrpcMessage {
     if (_instance.url) {
       _writer.writeString(4, _instance.url);
     }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        5,
+        _instance.fieldMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
   private _languageCode: string;
   private _operationName: string;
   private _url: string;
+  private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -14806,6 +15197,9 @@ export class RagGetCrawlerResultRequest implements GrpcMessage {
     this.languageCode = _value.languageCode;
     this.operationName = _value.operationName;
     this.url = _value.url;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf000.FieldMask(_value.fieldMask)
+      : undefined;
     RagGetCrawlerResultRequest.refineValues(this);
   }
   get parent(): string {
@@ -14832,6 +15226,12 @@ export class RagGetCrawlerResultRequest implements GrpcMessage {
   set url(value: string) {
     this._url = value;
   }
+  get fieldMask(): googleProtobuf000.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -14851,7 +15251,8 @@ export class RagGetCrawlerResultRequest implements GrpcMessage {
       parent: this.parent,
       languageCode: this.languageCode,
       operationName: this.operationName,
-      url: this.url
+      url: this.url,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
     };
   }
 
@@ -14875,7 +15276,8 @@ export class RagGetCrawlerResultRequest implements GrpcMessage {
       parent: this.parent,
       languageCode: this.languageCode,
       operationName: this.operationName,
-      url: this.url
+      url: this.url,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
     };
   }
 }
@@ -14888,6 +15290,7 @@ export module RagGetCrawlerResultRequest {
     languageCode: string;
     operationName: string;
     url: string;
+    fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
   /**
@@ -14898,6 +15301,7 @@ export module RagGetCrawlerResultRequest {
     languageCode: string;
     operationName: string;
     url: string;
+    fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
   }
 }
 
@@ -15378,6 +15782,8 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
     _instance.pageSize = _instance.pageSize || 0;
     _instance.pageToken = _instance.pageToken || '';
     _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.orderby = _instance.orderby || '';
+    _instance.sortingMode = _instance.sortingMode || 0;
   }
 
   /**
@@ -15414,6 +15820,12 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
             _instance.fieldMask,
             googleProtobuf000.FieldMask.deserializeBinaryFromReader
           );
+          break;
+        case 7:
+          _instance.orderby = _reader.readString();
+          break;
+        case 8:
+          _instance.sortingMode = _reader.readEnum();
           break;
         default:
           _reader.skipField();
@@ -15454,6 +15866,12 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
         googleProtobuf000.FieldMask.serializeBinaryToWriter
       );
     }
+    if (_instance.orderby) {
+      _writer.writeString(7, _instance.orderby);
+    }
+    if (_instance.sortingMode) {
+      _writer.writeEnum(8, _instance.sortingMode);
+    }
   }
 
   private _parent: string;
@@ -15462,6 +15880,8 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
   private _pageSize: number;
   private _pageToken: string;
   private _fieldMask?: googleProtobuf000.FieldMask;
+  private _orderby: string;
+  private _sortingMode: ondewoNlu009.SortingMode;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -15479,6 +15899,8 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
     this.fieldMask = _value.fieldMask
       ? new googleProtobuf000.FieldMask(_value.fieldMask)
       : undefined;
+    this.orderby = _value.orderby;
+    this.sortingMode = _value.sortingMode;
     RagGetCrawlerAttachedDatasetsRequest.refineValues(this);
   }
   get parent(): string {
@@ -15517,6 +15939,18 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
   set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
     this._fieldMask = value;
   }
+  get orderby(): string {
+    return this._orderby;
+  }
+  set orderby(value: string) {
+    this._orderby = value;
+  }
+  get sortingMode(): ondewoNlu009.SortingMode {
+    return this._sortingMode;
+  }
+  set sortingMode(value: ondewoNlu009.SortingMode) {
+    this._sortingMode = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -15538,7 +15972,9 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
       crawlerName: this.crawlerName,
       pageSize: this.pageSize,
       pageToken: this.pageToken,
-      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      orderby: this.orderby,
+      sortingMode: this.sortingMode
     };
   }
 
@@ -15564,7 +16000,14 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
       crawlerName: this.crawlerName,
       pageSize: this.pageSize,
       pageToken: this.pageToken,
-      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      orderby: this.orderby,
+      sortingMode:
+        ondewoNlu009.SortingMode[
+          this.sortingMode === null || this.sortingMode === undefined
+            ? 0
+            : this.sortingMode
+        ]
     };
   }
 }
@@ -15579,6 +16022,8 @@ export module RagGetCrawlerAttachedDatasetsRequest {
     pageSize: number;
     pageToken: string;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
+    orderby: string;
+    sortingMode: ondewoNlu009.SortingMode;
   }
 
   /**
@@ -15591,6 +16036,8 @@ export module RagGetCrawlerAttachedDatasetsRequest {
     pageSize: number;
     pageToken: string;
     fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
+    orderby: string;
+    sortingMode: string;
   }
 }
 
@@ -15800,6 +16247,9 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
     _instance.startTime = _instance.startTime || undefined;
     _instance.endTime = _instance.endTime || undefined;
     _instance.sourceUrlFilter = _instance.sourceUrlFilter || '';
+    _instance.orderby = _instance.orderby || '';
+    _instance.sortingMode = _instance.sortingMode || 0;
+    _instance.fieldMask = _instance.fieldMask || undefined;
   }
 
   /**
@@ -15857,6 +16307,19 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
           break;
         case 11:
           _instance.sourceUrlFilter = _reader.readString();
+          break;
+        case 12:
+          _instance.orderby = _reader.readString();
+          break;
+        case 13:
+          _instance.sortingMode = _reader.readEnum();
+          break;
+        case 14:
+          _instance.fieldMask = new googleProtobuf000.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf000.FieldMask.deserializeBinaryFromReader
+          );
           break;
         default:
           _reader.skipField();
@@ -15916,6 +16379,19 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
     if (_instance.sourceUrlFilter) {
       _writer.writeString(11, _instance.sourceUrlFilter);
     }
+    if (_instance.orderby) {
+      _writer.writeString(12, _instance.orderby);
+    }
+    if (_instance.sortingMode) {
+      _writer.writeEnum(13, _instance.sortingMode);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        14,
+        _instance.fieldMask as any,
+        googleProtobuf000.FieldMask.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
@@ -15929,6 +16405,9 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
   private _startTime?: googleProtobuf002.Timestamp;
   private _endTime?: googleProtobuf002.Timestamp;
   private _sourceUrlFilter: string;
+  private _orderby: string;
+  private _sortingMode: ondewoNlu009.SortingMode;
+  private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -15951,6 +16430,11 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
       ? new googleProtobuf002.Timestamp(_value.endTime)
       : undefined;
     this.sourceUrlFilter = _value.sourceUrlFilter;
+    this.orderby = _value.orderby;
+    this.sortingMode = _value.sortingMode;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf000.FieldMask(_value.fieldMask)
+      : undefined;
     RagGetCrawlerRunLogsRequest.refineValues(this);
   }
   get parent(): string {
@@ -16019,6 +16503,24 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
   set sourceUrlFilter(value: string) {
     this._sourceUrlFilter = value;
   }
+  get orderby(): string {
+    return this._orderby;
+  }
+  set orderby(value: string) {
+    this._orderby = value;
+  }
+  get sortingMode(): ondewoNlu009.SortingMode {
+    return this._sortingMode;
+  }
+  set sortingMode(value: ondewoNlu009.SortingMode) {
+    this._sortingMode = value;
+  }
+  get fieldMask(): googleProtobuf000.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -16045,7 +16547,10 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
       searchQuery: this.searchQuery,
       startTime: this.startTime ? this.startTime.toObject() : undefined,
       endTime: this.endTime ? this.endTime.toObject() : undefined,
-      sourceUrlFilter: this.sourceUrlFilter
+      sourceUrlFilter: this.sourceUrlFilter,
+      orderby: this.orderby,
+      sortingMode: this.sortingMode,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
     };
   }
 
@@ -16078,7 +16583,15 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
       searchQuery: this.searchQuery,
       startTime: this.startTime ? this.startTime.toProtobufJSON(options) : null,
       endTime: this.endTime ? this.endTime.toProtobufJSON(options) : null,
-      sourceUrlFilter: this.sourceUrlFilter
+      sourceUrlFilter: this.sourceUrlFilter,
+      orderby: this.orderby,
+      sortingMode:
+        ondewoNlu009.SortingMode[
+          this.sortingMode === null || this.sortingMode === undefined
+            ? 0
+            : this.sortingMode
+        ],
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
     };
   }
 }
@@ -16098,6 +16611,9 @@ export module RagGetCrawlerRunLogsRequest {
     startTime?: googleProtobuf002.Timestamp.AsObject;
     endTime?: googleProtobuf002.Timestamp.AsObject;
     sourceUrlFilter: string;
+    orderby: string;
+    sortingMode: ondewoNlu009.SortingMode;
+    fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
   /**
@@ -16115,6 +16631,9 @@ export module RagGetCrawlerRunLogsRequest {
     startTime: googleProtobuf002.Timestamp.AsProtobufJSON | null;
     endTime: googleProtobuf002.Timestamp.AsProtobufJSON | null;
     sourceUrlFilter: string;
+    orderby: string;
+    sortingMode: string;
+    fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
   }
 }
 
@@ -16147,6 +16666,7 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
     _instance.status = _instance.status || 0;
     _instance.entries = _instance.entries || [];
     _instance.nextPageToken = _instance.nextPageToken || '';
+    _instance.totalLogEntries = _instance.totalLogEntries || 0;
   }
 
   /**
@@ -16184,6 +16704,9 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
         case 5:
           _instance.nextPageToken = _reader.readString();
           break;
+        case 6:
+          _instance.totalLogEntries = _reader.readInt32();
+          break;
         default:
           _reader.skipField();
       }
@@ -16220,6 +16743,9 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
     if (_instance.nextPageToken) {
       _writer.writeString(5, _instance.nextPageToken);
     }
+    if (_instance.totalLogEntries) {
+      _writer.writeInt32(6, _instance.totalLogEntries);
+    }
   }
 
   private _operationName: string;
@@ -16227,6 +16753,7 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
   private _status: ondewoNlu007.OperationMetadata.Status;
   private _entries?: ondewoNlu009.LogEntry[];
   private _nextPageToken: string;
+  private _totalLogEntries: number;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -16243,6 +16770,7 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
       m => new ondewoNlu009.LogEntry(m)
     );
     this.nextPageToken = _value.nextPageToken;
+    this.totalLogEntries = _value.totalLogEntries;
     RagGetCrawlerRunLogsResponse.refineValues(this);
   }
   get operationName(): string {
@@ -16275,6 +16803,12 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
   set nextPageToken(value: string) {
     this._nextPageToken = value;
   }
+  get totalLogEntries(): number {
+    return this._totalLogEntries;
+  }
+  set totalLogEntries(value: number) {
+    this._totalLogEntries = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -16295,7 +16829,8 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
       crawlerName: this.crawlerName,
       status: this.status,
       entries: (this.entries || []).map(m => m.toObject()),
-      nextPageToken: this.nextPageToken
+      nextPageToken: this.nextPageToken,
+      totalLogEntries: this.totalLogEntries
     };
   }
 
@@ -16323,7 +16858,8 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
           this.status === null || this.status === undefined ? 0 : this.status
         ],
       entries: (this.entries || []).map(m => m.toProtobufJSON(options)),
-      nextPageToken: this.nextPageToken
+      nextPageToken: this.nextPageToken,
+      totalLogEntries: this.totalLogEntries
     };
   }
 }
@@ -16337,6 +16873,7 @@ export module RagGetCrawlerRunLogsResponse {
     status: ondewoNlu007.OperationMetadata.Status;
     entries?: ondewoNlu009.LogEntry.AsObject[];
     nextPageToken: string;
+    totalLogEntries: number;
   }
 
   /**
@@ -16348,5 +16885,6 @@ export module RagGetCrawlerRunLogsResponse {
     status: string;
     entries: ondewoNlu009.LogEntry.AsProtobufJSON[] | null;
     nextPageToken: string;
+    totalLogEntries: number;
   }
 }
