@@ -479,6 +479,8 @@ export class RagCreateDatasetRequest implements GrpcMessage {
     _instance.avatar = _instance.avatar || '';
     _instance.chunkMethod = _instance.chunkMethod || 0;
     _instance.parserConfig = _instance.parserConfig || undefined;
+    _instance.embeddingModelCcaiServiceName =
+      _instance.embeddingModelCcaiServiceName || '';
   }
 
   /**
@@ -518,6 +520,9 @@ export class RagCreateDatasetRequest implements GrpcMessage {
             _instance.parserConfig,
             RagParserConfig.deserializeBinaryFromReader
           );
+          break;
+        case 8:
+          _instance.embeddingModelCcaiServiceName = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -561,6 +566,9 @@ export class RagCreateDatasetRequest implements GrpcMessage {
         RagParserConfig.serializeBinaryToWriter
       );
     }
+    if (_instance.embeddingModelCcaiServiceName) {
+      _writer.writeString(8, _instance.embeddingModelCcaiServiceName);
+    }
   }
 
   private _parent: string;
@@ -570,6 +578,7 @@ export class RagCreateDatasetRequest implements GrpcMessage {
   private _avatar: string;
   private _chunkMethod: RagChunkMethod;
   private _parserConfig?: RagParserConfig;
+  private _embeddingModelCcaiServiceName: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -586,6 +595,7 @@ export class RagCreateDatasetRequest implements GrpcMessage {
     this.parserConfig = _value.parserConfig
       ? new RagParserConfig(_value.parserConfig)
       : undefined;
+    this.embeddingModelCcaiServiceName = _value.embeddingModelCcaiServiceName;
     RagCreateDatasetRequest.refineValues(this);
   }
   get parent(): string {
@@ -630,6 +640,12 @@ export class RagCreateDatasetRequest implements GrpcMessage {
   set parserConfig(value: RagParserConfig | undefined) {
     this._parserConfig = value;
   }
+  get embeddingModelCcaiServiceName(): string {
+    return this._embeddingModelCcaiServiceName;
+  }
+  set embeddingModelCcaiServiceName(value: string) {
+    this._embeddingModelCcaiServiceName = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -652,7 +668,10 @@ export class RagCreateDatasetRequest implements GrpcMessage {
       description: this.description,
       avatar: this.avatar,
       chunkMethod: this.chunkMethod,
-      parserConfig: this.parserConfig ? this.parserConfig.toObject() : undefined
+      parserConfig: this.parserConfig
+        ? this.parserConfig.toObject()
+        : undefined,
+      embeddingModelCcaiServiceName: this.embeddingModelCcaiServiceName
     };
   }
 
@@ -686,7 +705,8 @@ export class RagCreateDatasetRequest implements GrpcMessage {
         ],
       parserConfig: this.parserConfig
         ? this.parserConfig.toProtobufJSON(options)
-        : null
+        : null,
+      embeddingModelCcaiServiceName: this.embeddingModelCcaiServiceName
     };
   }
 }
@@ -702,6 +722,7 @@ export module RagCreateDatasetRequest {
     avatar: string;
     chunkMethod: RagChunkMethod;
     parserConfig?: RagParserConfig.AsObject;
+    embeddingModelCcaiServiceName: string;
   }
 
   /**
@@ -715,6 +736,7 @@ export module RagCreateDatasetRequest {
     avatar: string;
     chunkMethod: string;
     parserConfig: RagParserConfig.AsProtobufJSON | null;
+    embeddingModelCcaiServiceName: string;
   }
 }
 
@@ -2210,6 +2232,8 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
     _instance.pagerank = _instance.pagerank || 0;
     _instance.updateMask = _instance.updateMask || undefined;
     _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.embeddingModelCcaiServiceName =
+      _instance.embeddingModelCcaiServiceName || '';
   }
 
   /**
@@ -2269,6 +2293,9 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
             _instance.fieldMask,
             googleProtobuf000.FieldMask.deserializeBinaryFromReader
           );
+          break;
+        case 12:
+          _instance.embeddingModelCcaiServiceName = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -2332,6 +2359,9 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
         googleProtobuf000.FieldMask.serializeBinaryToWriter
       );
     }
+    if (_instance.embeddingModelCcaiServiceName) {
+      _writer.writeString(12, _instance.embeddingModelCcaiServiceName);
+    }
   }
 
   private _parent: string;
@@ -2345,6 +2375,7 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
   private _pagerank: number;
   private _updateMask?: googleProtobuf000.FieldMask;
   private _fieldMask?: googleProtobuf000.FieldMask;
+  private _embeddingModelCcaiServiceName: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2369,6 +2400,7 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
     this.fieldMask = _value.fieldMask
       ? new googleProtobuf000.FieldMask(_value.fieldMask)
       : undefined;
+    this.embeddingModelCcaiServiceName = _value.embeddingModelCcaiServiceName;
     RagUpdateDatasetRequest.refineValues(this);
   }
   get parent(): string {
@@ -2437,6 +2469,12 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
   set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
     this._fieldMask = value;
   }
+  get embeddingModelCcaiServiceName(): string {
+    return this._embeddingModelCcaiServiceName;
+  }
+  set embeddingModelCcaiServiceName(value: string) {
+    this._embeddingModelCcaiServiceName = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -2465,7 +2503,8 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
         : undefined,
       pagerank: this.pagerank,
       updateMask: this.updateMask ? this.updateMask.toObject() : undefined,
-      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      embeddingModelCcaiServiceName: this.embeddingModelCcaiServiceName
     };
   }
 
@@ -2505,7 +2544,8 @@ export class RagUpdateDatasetRequest implements GrpcMessage {
       updateMask: this.updateMask
         ? this.updateMask.toProtobufJSON(options)
         : null,
-      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      embeddingModelCcaiServiceName: this.embeddingModelCcaiServiceName
     };
   }
 }
@@ -2525,6 +2565,7 @@ export module RagUpdateDatasetRequest {
     pagerank: number;
     updateMask?: googleProtobuf000.FieldMask.AsObject;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
+    embeddingModelCcaiServiceName: string;
   }
 
   /**
@@ -2542,6 +2583,7 @@ export module RagUpdateDatasetRequest {
     pagerank: number;
     updateMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
     fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
+    embeddingModelCcaiServiceName: string;
   }
 }
 
@@ -6238,6 +6280,8 @@ export class RagRetrievalRequest implements GrpcMessage {
     _instance.highlight = _instance.highlight || false;
     _instance.keyword = _instance.keyword || false;
     _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.rerankModelCcaiServiceName =
+      _instance.rerankModelCcaiServiceName || '';
   }
 
   /**
@@ -6312,6 +6356,9 @@ export class RagRetrievalRequest implements GrpcMessage {
             googleProtobuf000.FieldMask.deserializeBinaryFromReader
           );
           break;
+        case 16:
+          _instance.rerankModelCcaiServiceName = _reader.readString();
+          break;
         default:
           _reader.skipField();
       }
@@ -6382,6 +6429,9 @@ export class RagRetrievalRequest implements GrpcMessage {
         googleProtobuf000.FieldMask.serializeBinaryToWriter
       );
     }
+    if (_instance.rerankModelCcaiServiceName) {
+      _writer.writeString(16, _instance.rerankModelCcaiServiceName);
+    }
   }
 
   private _parent: string;
@@ -6399,6 +6449,7 @@ export class RagRetrievalRequest implements GrpcMessage {
   private _highlight: boolean;
   private _keyword: boolean;
   private _fieldMask?: googleProtobuf000.FieldMask;
+  private _rerankModelCcaiServiceName: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -6425,6 +6476,7 @@ export class RagRetrievalRequest implements GrpcMessage {
     this.fieldMask = _value.fieldMask
       ? new googleProtobuf000.FieldMask(_value.fieldMask)
       : undefined;
+    this.rerankModelCcaiServiceName = _value.rerankModelCcaiServiceName;
     RagRetrievalRequest.refineValues(this);
   }
   get parent(): string {
@@ -6517,6 +6569,12 @@ export class RagRetrievalRequest implements GrpcMessage {
   set fieldMask(value: googleProtobuf000.FieldMask | undefined) {
     this._fieldMask = value;
   }
+  get rerankModelCcaiServiceName(): string {
+    return this._rerankModelCcaiServiceName;
+  }
+  set rerankModelCcaiServiceName(value: string) {
+    this._rerankModelCcaiServiceName = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -6549,7 +6607,8 @@ export class RagRetrievalRequest implements GrpcMessage {
       topK: this.topK,
       highlight: this.highlight,
       keyword: this.keyword,
-      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      rerankModelCcaiServiceName: this.rerankModelCcaiServiceName
     };
   }
 
@@ -6586,7 +6645,8 @@ export class RagRetrievalRequest implements GrpcMessage {
       topK: this.topK,
       highlight: this.highlight,
       keyword: this.keyword,
-      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      rerankModelCcaiServiceName: this.rerankModelCcaiServiceName
     };
   }
 }
@@ -6610,6 +6670,7 @@ export module RagRetrievalRequest {
     highlight: boolean;
     keyword: boolean;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
+    rerankModelCcaiServiceName: string;
   }
 
   /**
@@ -6631,6 +6692,7 @@ export module RagRetrievalRequest {
     highlight: boolean;
     keyword: boolean;
     fieldMask: googleProtobuf000.FieldMask.AsProtobufJSON | null;
+    rerankModelCcaiServiceName: string;
   }
 }
 
