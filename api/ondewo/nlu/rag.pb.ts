@@ -1598,6 +1598,8 @@ export class RagDataset implements GrpcMessage {
     _instance.parsingStatus = _instance.parsingStatus || undefined;
     _instance.createTime = _instance.createTime || undefined;
     _instance.updateTime = _instance.updateTime || undefined;
+    _instance.embeddingModelCcaiServiceName =
+      _instance.embeddingModelCcaiServiceName || '';
   }
 
   /**
@@ -1668,6 +1670,9 @@ export class RagDataset implements GrpcMessage {
             googleProtobuf002.Timestamp.deserializeBinaryFromReader
           );
           break;
+        case 14:
+          _instance.embeddingModelCcaiServiceName = _reader.readString();
+          break;
         default:
           _reader.skipField();
       }
@@ -1737,6 +1742,9 @@ export class RagDataset implements GrpcMessage {
         googleProtobuf002.Timestamp.serializeBinaryToWriter
       );
     }
+    if (_instance.embeddingModelCcaiServiceName) {
+      _writer.writeString(14, _instance.embeddingModelCcaiServiceName);
+    }
   }
 
   private _id: string;
@@ -1752,6 +1760,7 @@ export class RagDataset implements GrpcMessage {
   private _parsingStatus?: RagDatasetParsingStatus;
   private _createTime?: googleProtobuf002.Timestamp;
   private _updateTime?: googleProtobuf002.Timestamp;
+  private _embeddingModelCcaiServiceName: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -1780,6 +1789,7 @@ export class RagDataset implements GrpcMessage {
     this.updateTime = _value.updateTime
       ? new googleProtobuf002.Timestamp(_value.updateTime)
       : undefined;
+    this.embeddingModelCcaiServiceName = _value.embeddingModelCcaiServiceName;
     RagDataset.refineValues(this);
   }
   get id(): string {
@@ -1860,6 +1870,12 @@ export class RagDataset implements GrpcMessage {
   set updateTime(value: googleProtobuf002.Timestamp | undefined) {
     this._updateTime = value;
   }
+  get embeddingModelCcaiServiceName(): string {
+    return this._embeddingModelCcaiServiceName;
+  }
+  set embeddingModelCcaiServiceName(value: string) {
+    this._embeddingModelCcaiServiceName = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -1892,7 +1908,8 @@ export class RagDataset implements GrpcMessage {
         ? this.parsingStatus.toObject()
         : undefined,
       createTime: this.createTime ? this.createTime.toObject() : undefined,
-      updateTime: this.updateTime ? this.updateTime.toObject() : undefined
+      updateTime: this.updateTime ? this.updateTime.toObject() : undefined,
+      embeddingModelCcaiServiceName: this.embeddingModelCcaiServiceName
     };
   }
 
@@ -1938,7 +1955,8 @@ export class RagDataset implements GrpcMessage {
         : null,
       updateTime: this.updateTime
         ? this.updateTime.toProtobufJSON(options)
-        : null
+        : null,
+      embeddingModelCcaiServiceName: this.embeddingModelCcaiServiceName
     };
   }
 }
@@ -1960,6 +1978,7 @@ export module RagDataset {
     parsingStatus?: RagDatasetParsingStatus.AsObject;
     createTime?: googleProtobuf002.Timestamp.AsObject;
     updateTime?: googleProtobuf002.Timestamp.AsObject;
+    embeddingModelCcaiServiceName: string;
   }
 
   /**
@@ -1979,6 +1998,7 @@ export module RagDataset {
     parsingStatus: RagDatasetParsingStatus.AsProtobufJSON | null;
     createTime: googleProtobuf002.Timestamp.AsProtobufJSON | null;
     updateTime: googleProtobuf002.Timestamp.AsProtobufJSON | null;
+    embeddingModelCcaiServiceName: string;
   }
 }
 

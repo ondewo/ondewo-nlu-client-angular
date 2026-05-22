@@ -52159,6 +52159,7 @@ class OperationMetadata {
         OperationType[OperationType["RUN_RAG_CRAWLER"] = 10] = "RUN_RAG_CRAWLER";
         OperationType[OperationType["ADD_RAG_CRAWLER_RESULT_TO_DATASET"] = 11] = "ADD_RAG_CRAWLER_RESULT_TO_DATASET";
         OperationType[OperationType["REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET"] = 12] = "REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET";
+        OperationType[OperationType["CHANGE_DATASET_EMBEDDING_MODEL"] = 13] = "CHANGE_DATASET_EMBEDDING_MODEL";
     })(OperationType = OperationMetadata.OperationType || (OperationMetadata.OperationType = {}));
 })(OperationMetadata || (OperationMetadata = {}));
 
@@ -60650,6 +60651,8 @@ class RagDataset {
         _instance.parsingStatus = _instance.parsingStatus || undefined;
         _instance.createTime = _instance.createTime || undefined;
         _instance.updateTime = _instance.updateTime || undefined;
+        _instance.embeddingModelCcaiServiceName =
+            _instance.embeddingModelCcaiServiceName || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -60704,6 +60707,9 @@ class RagDataset {
                     _instance.updateTime = new googleProtobuf004.Timestamp();
                     _reader.readMessage(_instance.updateTime, googleProtobuf004.Timestamp.deserializeBinaryFromReader);
                     break;
+                case 14:
+                    _instance.embeddingModelCcaiServiceName = _reader.readString();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -60755,6 +60761,9 @@ class RagDataset {
         if (_instance.updateTime) {
             _writer.writeMessage(13, _instance.updateTime, googleProtobuf004.Timestamp.serializeBinaryToWriter);
         }
+        if (_instance.embeddingModelCcaiServiceName) {
+            _writer.writeString(14, _instance.embeddingModelCcaiServiceName);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -60783,6 +60792,7 @@ class RagDataset {
         this.updateTime = _value.updateTime
             ? new googleProtobuf004.Timestamp(_value.updateTime)
             : undefined;
+        this.embeddingModelCcaiServiceName = _value.embeddingModelCcaiServiceName;
         RagDataset.refineValues(this);
     }
     get id() {
@@ -60863,6 +60873,12 @@ class RagDataset {
     set updateTime(value) {
         this._updateTime = value;
     }
+    get embeddingModelCcaiServiceName() {
+        return this._embeddingModelCcaiServiceName;
+    }
+    set embeddingModelCcaiServiceName(value) {
+        this._embeddingModelCcaiServiceName = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60893,7 +60909,8 @@ class RagDataset {
                 ? this.parsingStatus.toObject()
                 : undefined,
             createTime: this.createTime ? this.createTime.toObject() : undefined,
-            updateTime: this.updateTime ? this.updateTime.toObject() : undefined
+            updateTime: this.updateTime ? this.updateTime.toObject() : undefined,
+            embeddingModelCcaiServiceName: this.embeddingModelCcaiServiceName
         };
     }
     /**
@@ -60933,7 +60950,8 @@ class RagDataset {
                 : null,
             updateTime: this.updateTime
                 ? this.updateTime.toProtobufJSON(options)
-                : null
+                : null,
+            embeddingModelCcaiServiceName: this.embeddingModelCcaiServiceName
         };
     }
 }
