@@ -35,10 +35,12 @@ import * as googleProtobuf011 from '@ngx-grpc/well-known-types';
 import * as googleRpc012 from '../../google/rpc/status.pb';
 import * as ondewoNlu013 from '../../ondewo/nlu/operation-metadata.pb';
 import * as googleType014 from '../../google/type/latlng.pb';
-import * as ondewoNlu015 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu015 from '../../ondewo/nlu/ccai-project.pb';
 import * as ondewoNlu016 from '../../ondewo/nlu/entity-type.pb';
-import * as ondewoNlu017 from '../../ondewo/nlu/user.pb';
-import * as ondewoNlu018 from '../../ondewo/nlu/session.pb';
+import * as ondewoNlu017 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu018 from '../../ondewo/nlu/llm-evaluation.pb';
+import * as ondewoNlu019 from '../../ondewo/nlu/user.pb';
+import * as ondewoNlu020 from '../../ondewo/nlu/session.pb';
 import { GRPC_AGENTS_CLIENT_SETTINGS } from './agent.pbconf';
 /**
  * Service client implementation for ondewo.nlu.Agents

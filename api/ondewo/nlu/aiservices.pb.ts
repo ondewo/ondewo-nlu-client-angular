@@ -22,10 +22,11 @@ import * as ondewoNlu008 from '../../ondewo/nlu/operations.pb';
 import * as googleProtobuf009 from '@ngx-grpc/well-known-types';
 import * as googleRpc010 from '../../google/rpc/status.pb';
 import * as googleType011 from '../../google/type/latlng.pb';
-import * as ondewoNlu012 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu012 from '../../ondewo/nlu/ccai-project.pb';
 import * as ondewoNlu013 from '../../ondewo/nlu/entity-type.pb';
-import * as ondewoNlu014 from '../../ondewo/nlu/ccai-project.pb';
-import * as ondewoNlu015 from '../../ondewo/nlu/session.pb';
+import * as ondewoNlu014 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu015 from '../../ondewo/nlu/llm-evaluation.pb';
+import * as ondewoNlu016 from '../../ondewo/nlu/session.pb';
 export enum Mode {
   UNSPECIFIED = 0,
   EXCLUSIVE = 1,
@@ -454,7 +455,7 @@ export class LlmModel implements GrpcMessage {
   private _displayName: string;
   private _description: string;
   private _ccaiServiceName: string;
-  private _ccaiServiceProvider: ondewoNlu014.CcaiServiceProvider;
+  private _ccaiServiceProvider: ondewoNlu012.CcaiServiceProvider;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -493,10 +494,10 @@ export class LlmModel implements GrpcMessage {
   set ccaiServiceName(value: string) {
     this._ccaiServiceName = value;
   }
-  get ccaiServiceProvider(): ondewoNlu014.CcaiServiceProvider {
+  get ccaiServiceProvider(): ondewoNlu012.CcaiServiceProvider {
     return this._ccaiServiceProvider;
   }
-  set ccaiServiceProvider(value: ondewoNlu014.CcaiServiceProvider) {
+  set ccaiServiceProvider(value: ondewoNlu012.CcaiServiceProvider) {
     this._ccaiServiceProvider = value;
   }
 
@@ -545,7 +546,7 @@ export class LlmModel implements GrpcMessage {
       description: this.description,
       ccaiServiceName: this.ccaiServiceName,
       ccaiServiceProvider:
-        ondewoNlu014.CcaiServiceProvider[
+        ondewoNlu012.CcaiServiceProvider[
           this.ccaiServiceProvider === null ||
           this.ccaiServiceProvider === undefined
             ? 0
@@ -563,7 +564,7 @@ export module LlmModel {
     displayName: string;
     description: string;
     ccaiServiceName: string;
-    ccaiServiceProvider: ondewoNlu014.CcaiServiceProvider;
+    ccaiServiceProvider: ondewoNlu012.CcaiServiceProvider;
   }
 
   /**
@@ -633,10 +634,10 @@ export class LlmGenerateRequest implements GrpcMessage {
           _instance.ccaiServiceName = _reader.readString();
           break;
         case 3:
-          const messageInitializer3 = new ondewoNlu015.FileResource();
+          const messageInitializer3 = new ondewoNlu016.FileResource();
           _reader.readMessage(
             messageInitializer3,
-            ondewoNlu015.FileResource.deserializeBinaryFromReader
+            ondewoNlu016.FileResource.deserializeBinaryFromReader
           );
           (_instance.fileResources = _instance.fileResources || []).push(
             messageInitializer3
@@ -680,7 +681,7 @@ export class LlmGenerateRequest implements GrpcMessage {
       _writer.writeRepeatedMessage(
         3,
         _instance.fileResources as any,
-        ondewoNlu015.FileResource.serializeBinaryToWriter
+        ondewoNlu016.FileResource.serializeBinaryToWriter
       );
     }
     if (_instance.fieldMask) {
@@ -694,7 +695,7 @@ export class LlmGenerateRequest implements GrpcMessage {
 
   private _llmGenerationRequest?: googleProtobuf003.Struct;
   private _ccaiServiceName: string;
-  private _fileResources?: ondewoNlu015.FileResource[];
+  private _fileResources?: ondewoNlu016.FileResource[];
   private _fieldMask?: googleProtobuf002.FieldMask;
 
   /**
@@ -708,7 +709,7 @@ export class LlmGenerateRequest implements GrpcMessage {
       : undefined;
     this.ccaiServiceName = _value.ccaiServiceName;
     this.fileResources = (_value.fileResources || []).map(
-      m => new ondewoNlu015.FileResource(m)
+      m => new ondewoNlu016.FileResource(m)
     );
     this.fieldMask = _value.fieldMask
       ? new googleProtobuf002.FieldMask(_value.fieldMask)
@@ -727,10 +728,10 @@ export class LlmGenerateRequest implements GrpcMessage {
   set ccaiServiceName(value: string) {
     this._ccaiServiceName = value;
   }
-  get fileResources(): ondewoNlu015.FileResource[] | undefined {
+  get fileResources(): ondewoNlu016.FileResource[] | undefined {
     return this._fileResources;
   }
-  set fileResources(value: ondewoNlu015.FileResource[] | undefined) {
+  set fileResources(value: ondewoNlu016.FileResource[] | undefined) {
     this._fileResources = value;
   }
   get fieldMask(): googleProtobuf002.FieldMask | undefined {
@@ -799,7 +800,7 @@ export module LlmGenerateRequest {
   export interface AsObject {
     llmGenerationRequest?: googleProtobuf003.Struct.AsObject;
     ccaiServiceName: string;
-    fileResources?: ondewoNlu015.FileResource.AsObject[];
+    fileResources?: ondewoNlu016.FileResource.AsObject[];
     fieldMask?: googleProtobuf002.FieldMask.AsObject;
   }
 
@@ -809,7 +810,7 @@ export module LlmGenerateRequest {
   export interface AsProtobufJSON {
     llmGenerationRequest: googleProtobuf003.Struct.AsProtobufJSON | null;
     ccaiServiceName: string;
-    fileResources: ondewoNlu015.FileResource.AsProtobufJSON[] | null;
+    fileResources: ondewoNlu016.FileResource.AsProtobufJSON[] | null;
     fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
   }
 }
@@ -864,10 +865,10 @@ export class LlmGenerateResponse implements GrpcMessage {
           );
           break;
         case 2:
-          const messageInitializer2 = new ondewoNlu015.FileResource();
+          const messageInitializer2 = new ondewoNlu016.FileResource();
           _reader.readMessage(
             messageInitializer2,
-            ondewoNlu015.FileResource.deserializeBinaryFromReader
+            ondewoNlu016.FileResource.deserializeBinaryFromReader
           );
           (_instance.fileResources = _instance.fileResources || []).push(
             messageInitializer2
@@ -901,13 +902,13 @@ export class LlmGenerateResponse implements GrpcMessage {
       _writer.writeRepeatedMessage(
         2,
         _instance.fileResources as any,
-        ondewoNlu015.FileResource.serializeBinaryToWriter
+        ondewoNlu016.FileResource.serializeBinaryToWriter
       );
     }
   }
 
   private _llmGenerationResponse?: googleProtobuf003.Struct;
-  private _fileResources?: ondewoNlu015.FileResource[];
+  private _fileResources?: ondewoNlu016.FileResource[];
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -919,7 +920,7 @@ export class LlmGenerateResponse implements GrpcMessage {
       ? new googleProtobuf003.Struct(_value.llmGenerationResponse)
       : undefined;
     this.fileResources = (_value.fileResources || []).map(
-      m => new ondewoNlu015.FileResource(m)
+      m => new ondewoNlu016.FileResource(m)
     );
     LlmGenerateResponse.refineValues(this);
   }
@@ -929,10 +930,10 @@ export class LlmGenerateResponse implements GrpcMessage {
   set llmGenerationResponse(value: googleProtobuf003.Struct | undefined) {
     this._llmGenerationResponse = value;
   }
-  get fileResources(): ondewoNlu015.FileResource[] | undefined {
+  get fileResources(): ondewoNlu016.FileResource[] | undefined {
     return this._fileResources;
   }
-  set fileResources(value: ondewoNlu015.FileResource[] | undefined) {
+  set fileResources(value: ondewoNlu016.FileResource[] | undefined) {
     this._fileResources = value;
   }
 
@@ -990,7 +991,7 @@ export module LlmGenerateResponse {
    */
   export interface AsObject {
     llmGenerationResponse?: googleProtobuf003.Struct.AsObject;
-    fileResources?: ondewoNlu015.FileResource.AsObject[];
+    fileResources?: ondewoNlu016.FileResource.AsObject[];
   }
 
   /**
@@ -998,7 +999,7 @@ export module LlmGenerateResponse {
    */
   export interface AsProtobufJSON {
     llmGenerationResponse: googleProtobuf003.Struct.AsProtobufJSON | null;
-    fileResources: ondewoNlu015.FileResource.AsProtobufJSON[] | null;
+    fileResources: ondewoNlu016.FileResource.AsProtobufJSON[] | null;
   }
 }
 
@@ -1922,10 +1923,10 @@ export class EntityDetected implements GrpcMessage {
 
       switch (_reader.getFieldNumber()) {
         case 1:
-          _instance.entity = new ondewoNlu012.Intent.TrainingPhrase.Entity();
+          _instance.entity = new ondewoNlu014.Intent.TrainingPhrase.Entity();
           _reader.readMessage(
             _instance.entity,
-            ondewoNlu012.Intent.TrainingPhrase.Entity
+            ondewoNlu014.Intent.TrainingPhrase.Entity
               .deserializeBinaryFromReader
           );
           break;
@@ -1956,7 +1957,7 @@ export class EntityDetected implements GrpcMessage {
       _writer.writeMessage(
         1,
         _instance.entity as any,
-        ondewoNlu012.Intent.TrainingPhrase.Entity.serializeBinaryToWriter
+        ondewoNlu014.Intent.TrainingPhrase.Entity.serializeBinaryToWriter
       );
     }
     if (_instance.extractionMethod) {
@@ -1967,7 +1968,7 @@ export class EntityDetected implements GrpcMessage {
     }
   }
 
-  private _entity?: ondewoNlu012.Intent.TrainingPhrase.Entity;
+  private _entity?: ondewoNlu014.Intent.TrainingPhrase.Entity;
   private _extractionMethod: string;
   private _score: number;
 
@@ -1978,16 +1979,16 @@ export class EntityDetected implements GrpcMessage {
   constructor(_value?: RecursivePartial<EntityDetected.AsObject>) {
     _value = _value || {};
     this.entity = _value.entity
-      ? new ondewoNlu012.Intent.TrainingPhrase.Entity(_value.entity)
+      ? new ondewoNlu014.Intent.TrainingPhrase.Entity(_value.entity)
       : undefined;
     this.extractionMethod = _value.extractionMethod;
     this.score = _value.score;
     EntityDetected.refineValues(this);
   }
-  get entity(): ondewoNlu012.Intent.TrainingPhrase.Entity | undefined {
+  get entity(): ondewoNlu014.Intent.TrainingPhrase.Entity | undefined {
     return this._entity;
   }
-  set entity(value: ondewoNlu012.Intent.TrainingPhrase.Entity | undefined) {
+  set entity(value: ondewoNlu014.Intent.TrainingPhrase.Entity | undefined) {
     this._entity = value;
   }
   get extractionMethod(): string {
@@ -2052,7 +2053,7 @@ export module EntityDetected {
    * Standard JavaScript object representation for EntityDetected
    */
   export interface AsObject {
-    entity?: ondewoNlu012.Intent.TrainingPhrase.Entity.AsObject;
+    entity?: ondewoNlu014.Intent.TrainingPhrase.Entity.AsObject;
     extractionMethod: string;
     score: number;
   }
@@ -2061,7 +2062,7 @@ export module EntityDetected {
    * Protobuf JSON representation for EntityDetected
    */
   export interface AsProtobufJSON {
-    entity: ondewoNlu012.Intent.TrainingPhrase.Entity.AsProtobufJSON | null;
+    entity: ondewoNlu014.Intent.TrainingPhrase.Entity.AsProtobufJSON | null;
     extractionMethod: string;
     score: number;
   }
@@ -3046,10 +3047,10 @@ export class GetAlternativeTrainingPhrasesRequest implements GrpcMessage {
           );
           break;
         case 2:
-          _instance.trainingPhrase = new ondewoNlu012.Intent.TrainingPhrase();
+          _instance.trainingPhrase = new ondewoNlu014.Intent.TrainingPhrase();
           _reader.readMessage(
             _instance.trainingPhrase,
-            ondewoNlu012.Intent.TrainingPhrase.deserializeBinaryFromReader
+            ondewoNlu014.Intent.TrainingPhrase.deserializeBinaryFromReader
           );
           break;
         case 3:
@@ -3115,7 +3116,7 @@ export class GetAlternativeTrainingPhrasesRequest implements GrpcMessage {
       _writer.writeMessage(
         2,
         _instance.trainingPhrase as any,
-        ondewoNlu012.Intent.TrainingPhrase.serializeBinaryToWriter
+        ondewoNlu014.Intent.TrainingPhrase.serializeBinaryToWriter
       );
     }
     if (_instance.intentName) {
@@ -3152,7 +3153,7 @@ export class GetAlternativeTrainingPhrasesRequest implements GrpcMessage {
   }
 
   private _config?: DataEnrichmentConfig;
-  private _trainingPhrase?: ondewoNlu012.Intent.TrainingPhrase;
+  private _trainingPhrase?: ondewoNlu014.Intent.TrainingPhrase;
   private _intentName: string;
   private _languageCode: string;
   private _parent: string;
@@ -3175,7 +3176,7 @@ export class GetAlternativeTrainingPhrasesRequest implements GrpcMessage {
       ? new DataEnrichmentConfig(_value.config)
       : undefined;
     this.trainingPhrase = _value.trainingPhrase
-      ? new ondewoNlu012.Intent.TrainingPhrase(_value.trainingPhrase)
+      ? new ondewoNlu014.Intent.TrainingPhrase(_value.trainingPhrase)
       : undefined;
     this.intentName = _value.intentName;
     this.languageCode = _value.languageCode;
@@ -3196,10 +3197,10 @@ export class GetAlternativeTrainingPhrasesRequest implements GrpcMessage {
   set config(value: DataEnrichmentConfig | undefined) {
     this._config = value;
   }
-  get trainingPhrase(): ondewoNlu012.Intent.TrainingPhrase | undefined {
+  get trainingPhrase(): ondewoNlu014.Intent.TrainingPhrase | undefined {
     return this._trainingPhrase;
   }
-  set trainingPhrase(value: ondewoNlu012.Intent.TrainingPhrase | undefined) {
+  set trainingPhrase(value: ondewoNlu014.Intent.TrainingPhrase | undefined) {
     this._trainingPhrase = value;
   }
   get intentName(): string {
@@ -3327,7 +3328,7 @@ export module GetAlternativeTrainingPhrasesRequest {
    */
   export interface AsObject {
     config?: DataEnrichmentConfig.AsObject;
-    trainingPhrase?: ondewoNlu012.Intent.TrainingPhrase.AsObject;
+    trainingPhrase?: ondewoNlu014.Intent.TrainingPhrase.AsObject;
     intentName: string;
     languageCode: string;
     parent: string;
@@ -3344,7 +3345,7 @@ export module GetAlternativeTrainingPhrasesRequest {
    */
   export interface AsProtobufJSON {
     config: DataEnrichmentConfig.AsProtobufJSON | null;
-    trainingPhrase: ondewoNlu012.Intent.TrainingPhrase.AsProtobufJSON | null;
+    trainingPhrase: ondewoNlu014.Intent.TrainingPhrase.AsProtobufJSON | null;
     intentName: string;
     languageCode: string;
     parent: string;
@@ -4696,10 +4697,10 @@ export class AltTrainingPhrase implements GrpcMessage {
 
       switch (_reader.getFieldNumber()) {
         case 1:
-          _instance.trainingPhrase = new ondewoNlu012.Intent.TrainingPhrase();
+          _instance.trainingPhrase = new ondewoNlu014.Intent.TrainingPhrase();
           _reader.readMessage(
             _instance.trainingPhrase,
-            ondewoNlu012.Intent.TrainingPhrase.deserializeBinaryFromReader
+            ondewoNlu014.Intent.TrainingPhrase.deserializeBinaryFromReader
           );
           break;
         case 2:
@@ -4726,7 +4727,7 @@ export class AltTrainingPhrase implements GrpcMessage {
       _writer.writeMessage(
         1,
         _instance.trainingPhrase as any,
-        ondewoNlu012.Intent.TrainingPhrase.serializeBinaryToWriter
+        ondewoNlu014.Intent.TrainingPhrase.serializeBinaryToWriter
       );
     }
     if (_instance.score) {
@@ -4734,7 +4735,7 @@ export class AltTrainingPhrase implements GrpcMessage {
     }
   }
 
-  private _trainingPhrase?: ondewoNlu012.Intent.TrainingPhrase;
+  private _trainingPhrase?: ondewoNlu014.Intent.TrainingPhrase;
   private _score: number;
 
   /**
@@ -4744,15 +4745,15 @@ export class AltTrainingPhrase implements GrpcMessage {
   constructor(_value?: RecursivePartial<AltTrainingPhrase.AsObject>) {
     _value = _value || {};
     this.trainingPhrase = _value.trainingPhrase
-      ? new ondewoNlu012.Intent.TrainingPhrase(_value.trainingPhrase)
+      ? new ondewoNlu014.Intent.TrainingPhrase(_value.trainingPhrase)
       : undefined;
     this.score = _value.score;
     AltTrainingPhrase.refineValues(this);
   }
-  get trainingPhrase(): ondewoNlu012.Intent.TrainingPhrase | undefined {
+  get trainingPhrase(): ondewoNlu014.Intent.TrainingPhrase | undefined {
     return this._trainingPhrase;
   }
-  set trainingPhrase(value: ondewoNlu012.Intent.TrainingPhrase | undefined) {
+  set trainingPhrase(value: ondewoNlu014.Intent.TrainingPhrase | undefined) {
     this._trainingPhrase = value;
   }
   get score(): number {
@@ -4813,7 +4814,7 @@ export module AltTrainingPhrase {
    * Standard JavaScript object representation for AltTrainingPhrase
    */
   export interface AsObject {
-    trainingPhrase?: ondewoNlu012.Intent.TrainingPhrase.AsObject;
+    trainingPhrase?: ondewoNlu014.Intent.TrainingPhrase.AsObject;
     score: number;
   }
 
@@ -4821,7 +4822,7 @@ export module AltTrainingPhrase {
    * Protobuf JSON representation for AltTrainingPhrase
    */
   export interface AsProtobufJSON {
-    trainingPhrase: ondewoNlu012.Intent.TrainingPhrase.AsProtobufJSON | null;
+    trainingPhrase: ondewoNlu014.Intent.TrainingPhrase.AsProtobufJSON | null;
     score: number;
   }
 }
