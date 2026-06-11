@@ -42,6 +42,7 @@ Docker required (compiler image `ondewo-angular-proto-compiler`).
 ## Wiring into ondewo-aim (local dev)
 
 From `src/`:
+
 - `npm run test-in-ondewo-aim` — full rebuild + copy `npm/` into
   `ondewo-aim/node_modules/@ondewo/nlu-client-angular`
 - `npm run test-in-ondewo-aim-copy-only` — copy only (after a `make` build)
