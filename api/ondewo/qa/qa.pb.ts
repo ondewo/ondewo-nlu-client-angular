@@ -19,11 +19,13 @@ import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
 import * as googleRpc007 from '../../google/rpc/status.pb';
 import * as googleType008 from '../../google/type/latlng.pb';
-import * as ondewoNlu009 from '../../ondewo/nlu/common.pb';
-import * as ondewoNlu010 from '../../ondewo/nlu/context.pb';
-import * as ondewoNlu011 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu009 from '../../ondewo/nlu/ccai-project.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu011 from '../../ondewo/nlu/context.pb';
 import * as ondewoNlu012 from '../../ondewo/nlu/entity-type.pb';
-import * as ondewoNlu013 from '../../ondewo/nlu/session.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu014 from '../../ondewo/nlu/llm-evaluation.pb';
+import * as ondewoNlu015 from '../../ondewo/nlu/session.pb';
 /**
  * Message implementation for ondewo.qa.GetAnswerRequest
  */
@@ -75,10 +77,10 @@ export class GetAnswerRequest implements GrpcMessage {
           _instance.sessionId = _reader.readString();
           break;
         case 2:
-          _instance.text = new ondewoNlu013.TextInput();
+          _instance.text = new ondewoNlu015.TextInput();
           _reader.readMessage(
             _instance.text,
-            ondewoNlu013.TextInput.deserializeBinaryFromReader
+            ondewoNlu015.TextInput.deserializeBinaryFromReader
           );
           break;
         case 3:
@@ -127,7 +129,7 @@ export class GetAnswerRequest implements GrpcMessage {
       _writer.writeMessage(
         2,
         _instance.text as any,
-        ondewoNlu013.TextInput.serializeBinaryToWriter
+        ondewoNlu015.TextInput.serializeBinaryToWriter
       );
     }
     if (_instance.maxNumAnswers) {
@@ -155,7 +157,7 @@ export class GetAnswerRequest implements GrpcMessage {
   }
 
   private _sessionId: string;
-  private _text?: ondewoNlu013.TextInput;
+  private _text?: ondewoNlu015.TextInput;
   private _maxNumAnswers: number;
   private _thresholdReader: number;
   private _thresholdRetriever: number;
@@ -171,7 +173,7 @@ export class GetAnswerRequest implements GrpcMessage {
     _value = _value || {};
     this.sessionId = _value.sessionId;
     this.text = _value.text
-      ? new ondewoNlu013.TextInput(_value.text)
+      ? new ondewoNlu015.TextInput(_value.text)
       : undefined;
     this.maxNumAnswers = _value.maxNumAnswers;
     this.thresholdReader = _value.thresholdReader;
@@ -189,10 +191,10 @@ export class GetAnswerRequest implements GrpcMessage {
   set sessionId(value: string) {
     this._sessionId = value;
   }
-  get text(): ondewoNlu013.TextInput | undefined {
+  get text(): ondewoNlu015.TextInput | undefined {
     return this._text;
   }
-  set text(value: ondewoNlu013.TextInput | undefined) {
+  set text(value: ondewoNlu015.TextInput | undefined) {
     this._text = value;
   }
   get maxNumAnswers(): number {
@@ -292,7 +294,7 @@ export module GetAnswerRequest {
    */
   export interface AsObject {
     sessionId: string;
-    text?: ondewoNlu013.TextInput.AsObject;
+    text?: ondewoNlu015.TextInput.AsObject;
     maxNumAnswers: number;
     thresholdReader: number;
     thresholdRetriever: number;
@@ -306,7 +308,7 @@ export module GetAnswerRequest {
    */
   export interface AsProtobufJSON {
     sessionId: string;
-    text: ondewoNlu013.TextInput.AsProtobufJSON | null;
+    text: ondewoNlu015.TextInput.AsProtobufJSON | null;
     maxNumAnswers: number;
     thresholdReader: number;
     thresholdRetriever: number;
@@ -357,10 +359,10 @@ export class GetAnswerResponse implements GrpcMessage {
 
       switch (_reader.getFieldNumber()) {
         case 2:
-          _instance.queryResult = new ondewoNlu013.DetectIntentResponse();
+          _instance.queryResult = new ondewoNlu015.DetectIntentResponse();
           _reader.readMessage(
             _instance.queryResult,
-            ondewoNlu013.DetectIntentResponse.deserializeBinaryFromReader
+            ondewoNlu015.DetectIntentResponse.deserializeBinaryFromReader
           );
           break;
         default:
@@ -384,12 +386,12 @@ export class GetAnswerResponse implements GrpcMessage {
       _writer.writeMessage(
         2,
         _instance.queryResult as any,
-        ondewoNlu013.DetectIntentResponse.serializeBinaryToWriter
+        ondewoNlu015.DetectIntentResponse.serializeBinaryToWriter
       );
     }
   }
 
-  private _queryResult?: ondewoNlu013.DetectIntentResponse;
+  private _queryResult?: ondewoNlu015.DetectIntentResponse;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -398,14 +400,14 @@ export class GetAnswerResponse implements GrpcMessage {
   constructor(_value?: RecursivePartial<GetAnswerResponse.AsObject>) {
     _value = _value || {};
     this.queryResult = _value.queryResult
-      ? new ondewoNlu013.DetectIntentResponse(_value.queryResult)
+      ? new ondewoNlu015.DetectIntentResponse(_value.queryResult)
       : undefined;
     GetAnswerResponse.refineValues(this);
   }
-  get queryResult(): ondewoNlu013.DetectIntentResponse | undefined {
+  get queryResult(): ondewoNlu015.DetectIntentResponse | undefined {
     return this._queryResult;
   }
-  set queryResult(value: ondewoNlu013.DetectIntentResponse | undefined) {
+  set queryResult(value: ondewoNlu015.DetectIntentResponse | undefined) {
     this._queryResult = value;
   }
 
@@ -456,14 +458,14 @@ export module GetAnswerResponse {
    * Standard JavaScript object representation for GetAnswerResponse
    */
   export interface AsObject {
-    queryResult?: ondewoNlu013.DetectIntentResponse.AsObject;
+    queryResult?: ondewoNlu015.DetectIntentResponse.AsObject;
   }
 
   /**
    * Protobuf JSON representation for GetAnswerResponse
    */
   export interface AsProtobufJSON {
-    queryResult: ondewoNlu013.DetectIntentResponse.AsProtobufJSON | null;
+    queryResult: ondewoNlu015.DetectIntentResponse.AsProtobufJSON | null;
   }
 }
 

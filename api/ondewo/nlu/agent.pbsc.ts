@@ -35,10 +35,12 @@ import * as googleProtobuf011 from '@ngx-grpc/well-known-types';
 import * as googleRpc012 from '../../google/rpc/status.pb';
 import * as ondewoNlu013 from '../../ondewo/nlu/operation-metadata.pb';
 import * as googleType014 from '../../google/type/latlng.pb';
-import * as ondewoNlu015 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu015 from '../../ondewo/nlu/ccai-project.pb';
 import * as ondewoNlu016 from '../../ondewo/nlu/entity-type.pb';
-import * as ondewoNlu017 from '../../ondewo/nlu/user.pb';
-import * as ondewoNlu018 from '../../ondewo/nlu/session.pb';
+import * as ondewoNlu017 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu018 from '../../ondewo/nlu/llm-evaluation.pb';
+import * as ondewoNlu019 from '../../ondewo/nlu/user.pb';
+import * as ondewoNlu020 from '../../ondewo/nlu/session.pb';
 import { GRPC_AGENTS_CLIENT_SETTINGS } from './agent.pbconf';
 /**
  * Service client implementation for ondewo.nlu.Agents
@@ -534,6 +536,29 @@ export class AgentsClient {
         requestMetadata,
         requestClass: thisProto.GetSessionsStatisticsRequest,
         responseClass: thisProto.GetSessionsStatisticsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Agents/GetSessionsStatisticsTimeSeries
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.GetSessionsStatisticsTimeSeriesResponse>>
+     */
+    getSessionsStatisticsTimeSeries: (
+      requestData: thisProto.GetSessionsStatisticsTimeSeriesRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.GetSessionsStatisticsTimeSeriesResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Agents/GetSessionsStatisticsTimeSeries',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetSessionsStatisticsTimeSeriesRequest,
+        responseClass: thisProto.GetSessionsStatisticsTimeSeriesResponse
       });
     },
     /**
@@ -1299,6 +1324,22 @@ export class AgentsClient {
   ): Observable<thisProto.GetSessionsStatisticsResponse> {
     return this.$raw
       .getSessionsStatistics(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Agents/GetSessionsStatisticsTimeSeries
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.GetSessionsStatisticsTimeSeriesResponse>
+   */
+  getSessionsStatisticsTimeSeries(
+    requestData: thisProto.GetSessionsStatisticsTimeSeriesRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.GetSessionsStatisticsTimeSeriesResponse> {
+    return this.$raw
+      .getSessionsStatisticsTimeSeries(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 

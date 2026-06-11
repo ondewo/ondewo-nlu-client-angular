@@ -26,15 +26,17 @@ import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
-import * as googleApi006 from '../../google/api/annotations.pb';
-import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu008 from '../../ondewo/nlu/context.pb';
-import * as ondewoNlu009 from '../../ondewo/nlu/common.pb';
-import * as ondewoNlu010 from '../../ondewo/nlu/operations.pb';
+import * as ondewoNlu006 from '../../ondewo/nlu/common.pb';
+import * as googleApi007 from '../../google/api/annotations.pb';
+import * as googleProtobuf008 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu009 from '../../ondewo/nlu/operations.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/context.pb';
 import * as googleRpc011 from '../../google/rpc/status.pb';
 import * as googleType012 from '../../google/type/latlng.pb';
-import * as ondewoNlu013 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/ccai-project.pb';
 import * as ondewoNlu014 from '../../ondewo/nlu/entity-type.pb';
+import * as ondewoNlu015 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu016 from '../../ondewo/nlu/llm-evaluation.pb';
 import { GRPC_SESSIONS_CLIENT_SETTINGS } from './session.pbconf';
 /**
  * Service client implementation for ondewo.nlu.Sessions
@@ -222,12 +224,12 @@ export class SessionsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
+     * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
      */
     deleteSessionStep: (
       requestData: thisProto.DeleteSessionStepRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf007.Empty>> => {
+    ): Observable<GrpcEvent<googleProtobuf008.Empty>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -235,7 +237,7 @@ export class SessionsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.DeleteSessionStepRequest,
-        responseClass: googleProtobuf007.Empty
+        responseClass: googleProtobuf008.Empty
       });
     },
     /**
@@ -243,12 +245,12 @@ export class SessionsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
+     * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
      */
     deleteSession: (
       requestData: thisProto.DeleteSessionRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf007.Empty>> => {
+    ): Observable<GrpcEvent<googleProtobuf008.Empty>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -256,7 +258,7 @@ export class SessionsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.DeleteSessionRequest,
-        responseClass: googleProtobuf007.Empty
+        responseClass: googleProtobuf008.Empty
       });
     },
     /**
@@ -621,12 +623,12 @@ export class SessionsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu009.Comment>>
+     * @returns Observable<GrpcEvent<ondewoNlu006.Comment>>
      */
     addSessionComment: (
       requestData: thisProto.AddSessionCommentRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu009.Comment>> => {
+    ): Observable<GrpcEvent<ondewoNlu006.Comment>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -634,7 +636,7 @@ export class SessionsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.AddSessionCommentRequest,
-        responseClass: ondewoNlu009.Comment
+        responseClass: ondewoNlu006.Comment
       });
     },
     /**
@@ -1032,12 +1034,12 @@ export class SessionsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf007.Empty>
+   * @returns Observable<googleProtobuf008.Empty>
    */
   deleteSessionStep(
     requestData: thisProto.DeleteSessionStepRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf007.Empty> {
+  ): Observable<googleProtobuf008.Empty> {
     return this.$raw
       .deleteSessionStep(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -1048,12 +1050,12 @@ export class SessionsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf007.Empty>
+   * @returns Observable<googleProtobuf008.Empty>
    */
   deleteSession(
     requestData: thisProto.DeleteSessionRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf007.Empty> {
+  ): Observable<googleProtobuf008.Empty> {
     return this.$raw
       .deleteSession(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -1336,12 +1338,12 @@ export class SessionsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu009.Comment>
+   * @returns Observable<ondewoNlu006.Comment>
    */
   addSessionComment(
     requestData: thisProto.AddSessionCommentRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu009.Comment> {
+  ): Observable<ondewoNlu006.Comment> {
     return this.$raw
       .addSessionComment(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());

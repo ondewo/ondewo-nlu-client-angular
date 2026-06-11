@@ -29,12 +29,14 @@ import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
 import * as googleRpc006 from '../../google/rpc/status.pb';
 import * as ondewoNlu007 from '../../ondewo/nlu/operation-metadata.pb';
 import * as googleType008 from '../../google/type/latlng.pb';
-import * as ondewoNlu009 from '../../ondewo/nlu/common.pb';
-import * as ondewoNlu010 from '../../ondewo/nlu/context.pb';
-import * as ondewoNlu011 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu009 from '../../ondewo/nlu/ccai-project.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu011 from '../../ondewo/nlu/context.pb';
 import * as ondewoNlu012 from '../../ondewo/nlu/entity-type.pb';
-import * as ondewoNlu013 from '../../ondewo/nlu/operations.pb';
-import * as ondewoNlu014 from '../../ondewo/nlu/session.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu014 from '../../ondewo/nlu/llm-evaluation.pb';
+import * as ondewoNlu015 from '../../ondewo/nlu/operations.pb';
+import * as ondewoNlu016 from '../../ondewo/nlu/session.pb';
 import { GRPC_RAGS_CLIENT_SETTINGS } from './rag.pbconf';
 /**
  * Service client implementation for ondewo.nlu.Rags
@@ -411,12 +413,12 @@ export class RagsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu013.Operation>>
+     * @returns Observable<GrpcEvent<ondewoNlu015.Operation>>
      */
     ragStartCrawler: (
       requestData: thisProto.RagStartCrawlerRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu013.Operation>> => {
+    ): Observable<GrpcEvent<ondewoNlu015.Operation>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -424,7 +426,7 @@ export class RagsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.RagStartCrawlerRequest,
-        responseClass: ondewoNlu013.Operation
+        responseClass: ondewoNlu015.Operation
       });
     },
     /**
@@ -453,12 +455,12 @@ export class RagsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu013.Operation>>
+     * @returns Observable<GrpcEvent<ondewoNlu015.Operation>>
      */
     ragGetCrawlerRun: (
       requestData: thisProto.RagGetCrawlerRunRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu013.Operation>> => {
+    ): Observable<GrpcEvent<ondewoNlu015.Operation>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -466,7 +468,7 @@ export class RagsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.RagGetCrawlerRunRequest,
-        responseClass: ondewoNlu013.Operation
+        responseClass: ondewoNlu015.Operation
       });
     },
     /**
@@ -558,12 +560,12 @@ export class RagsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu013.Operation>>
+     * @returns Observable<GrpcEvent<ondewoNlu015.Operation>>
      */
     ragAddCrawlerResultsToDatasets: (
       requestData: thisProto.RagAddCrawlerResultsToDatasetsRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu013.Operation>> => {
+    ): Observable<GrpcEvent<ondewoNlu015.Operation>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -571,7 +573,7 @@ export class RagsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.RagAddCrawlerResultsToDatasetsRequest,
-        responseClass: ondewoNlu013.Operation
+        responseClass: ondewoNlu015.Operation
       });
     },
     /**
@@ -579,12 +581,12 @@ export class RagsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu013.Operation>>
+     * @returns Observable<GrpcEvent<ondewoNlu015.Operation>>
      */
     ragRemoveCrawlerResultsFromDatasets: (
       requestData: thisProto.RagRemoveCrawlerResultsFromDatasetsRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu013.Operation>> => {
+    ): Observable<GrpcEvent<ondewoNlu015.Operation>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -592,7 +594,7 @@ export class RagsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.RagRemoveCrawlerResultsFromDatasetsRequest,
-        responseClass: ondewoNlu013.Operation
+        responseClass: ondewoNlu015.Operation
       });
     },
     /**
@@ -947,12 +949,12 @@ export class RagsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu013.Operation>
+   * @returns Observable<ondewoNlu015.Operation>
    */
   ragStartCrawler(
     requestData: thisProto.RagStartCrawlerRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu013.Operation> {
+  ): Observable<ondewoNlu015.Operation> {
     return this.$raw
       .ragStartCrawler(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -979,12 +981,12 @@ export class RagsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu013.Operation>
+   * @returns Observable<ondewoNlu015.Operation>
    */
   ragGetCrawlerRun(
     requestData: thisProto.RagGetCrawlerRunRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu013.Operation> {
+  ): Observable<ondewoNlu015.Operation> {
     return this.$raw
       .ragGetCrawlerRun(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -1059,12 +1061,12 @@ export class RagsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu013.Operation>
+   * @returns Observable<ondewoNlu015.Operation>
    */
   ragAddCrawlerResultsToDatasets(
     requestData: thisProto.RagAddCrawlerResultsToDatasetsRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu013.Operation> {
+  ): Observable<ondewoNlu015.Operation> {
     return this.$raw
       .ragAddCrawlerResultsToDatasets(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -1075,12 +1077,12 @@ export class RagsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu013.Operation>
+   * @returns Observable<ondewoNlu015.Operation>
    */
   ragRemoveCrawlerResultsFromDatasets(
     requestData: thisProto.RagRemoveCrawlerResultsFromDatasetsRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu013.Operation> {
+  ): Observable<ondewoNlu015.Operation> {
     return this.$raw
       .ragRemoveCrawlerResultsFromDatasets(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());

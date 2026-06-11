@@ -29,11 +29,13 @@ import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
 import * as googleRpc007 from '../../google/rpc/status.pb';
 import * as googleType008 from '../../google/type/latlng.pb';
-import * as ondewoNlu009 from '../../ondewo/nlu/common.pb';
-import * as ondewoNlu010 from '../../ondewo/nlu/context.pb';
-import * as ondewoNlu011 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu009 from '../../ondewo/nlu/ccai-project.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu011 from '../../ondewo/nlu/context.pb';
 import * as ondewoNlu012 from '../../ondewo/nlu/entity-type.pb';
-import * as ondewoNlu013 from '../../ondewo/nlu/session.pb';
+import * as ondewoNlu013 from '../../ondewo/nlu/intent.pb';
+import * as ondewoNlu014 from '../../ondewo/nlu/llm-evaluation.pb';
+import * as ondewoNlu015 from '../../ondewo/nlu/session.pb';
 import { GRPC_QA_CLIENT_SETTINGS } from './qa.pbconf';
 /**
  * Service client implementation for ondewo.qa.QA
