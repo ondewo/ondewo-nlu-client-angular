@@ -84,6 +84,13 @@ export enum LlmEvaluationScheduleAction {
   LLM_EVALUATION_SCHEDULE_ACTION_RUN_EXPERIMENT = 1,
   LLM_EVALUATION_SCHEDULE_ACTION_RUN_RELEASE_GATE = 2
 }
+export enum LlmEvaluationAbExperimentStatus {
+  LLM_EVALUATION_AB_EXPERIMENT_STATUS_UNSPECIFIED = 0,
+  LLM_EVALUATION_AB_EXPERIMENT_STATUS_DRAFT = 1,
+  LLM_EVALUATION_AB_EXPERIMENT_STATUS_RUNNING = 2,
+  LLM_EVALUATION_AB_EXPERIMENT_STATUS_STOPPED = 3,
+  LLM_EVALUATION_AB_EXPERIMENT_STATUS_ARCHIVED = 4
+}
 /**
  * Message implementation for ondewo.nlu.LlmEvaluationDataset
  */
@@ -23127,5 +23134,3297 @@ export module DeleteLlmEvaluationReportRequest {
     name: string;
     parent: string;
     languageCode: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAbTrafficConfig
+ */
+export class LlmEvaluationAbTrafficConfig implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmEvaluationAbTrafficConfig';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmEvaluationAbTrafficConfig();
+    LlmEvaluationAbTrafficConfig.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmEvaluationAbTrafficConfig) {
+    _instance.enrollmentRate = _instance.enrollmentRate || 0;
+    _instance.assignmentSalt = _instance.assignmentSalt || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmEvaluationAbTrafficConfig,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.enrollmentRate = _reader.readDouble();
+          break;
+        case 2:
+          _instance.assignmentSalt = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmEvaluationAbTrafficConfig.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmEvaluationAbTrafficConfig,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.enrollmentRate) {
+      _writer.writeDouble(1, _instance.enrollmentRate);
+    }
+    if (_instance.assignmentSalt) {
+      _writer.writeString(2, _instance.assignmentSalt);
+    }
+  }
+
+  private _enrollmentRate: number;
+  private _assignmentSalt: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmEvaluationAbTrafficConfig to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<LlmEvaluationAbTrafficConfig.AsObject>
+  ) {
+    _value = _value || {};
+    this.enrollmentRate = _value.enrollmentRate;
+    this.assignmentSalt = _value.assignmentSalt;
+    LlmEvaluationAbTrafficConfig.refineValues(this);
+  }
+  get enrollmentRate(): number {
+    return this._enrollmentRate;
+  }
+  set enrollmentRate(value: number) {
+    this._enrollmentRate = value;
+  }
+  get assignmentSalt(): string {
+    return this._assignmentSalt;
+  }
+  set assignmentSalt(value: string) {
+    this._assignmentSalt = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmEvaluationAbTrafficConfig.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmEvaluationAbTrafficConfig.AsObject {
+    return {
+      enrollmentRate: this.enrollmentRate,
+      assignmentSalt: this.assignmentSalt
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmEvaluationAbTrafficConfig.AsProtobufJSON {
+    return {
+      enrollmentRate: this.enrollmentRate,
+      assignmentSalt: this.assignmentSalt
+    };
+  }
+}
+export module LlmEvaluationAbTrafficConfig {
+  /**
+   * Standard JavaScript object representation for LlmEvaluationAbTrafficConfig
+   */
+  export interface AsObject {
+    enrollmentRate: number;
+    assignmentSalt: string;
+  }
+
+  /**
+   * Protobuf JSON representation for LlmEvaluationAbTrafficConfig
+   */
+  export interface AsProtobufJSON {
+    enrollmentRate: number;
+    assignmentSalt: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAbVariant
+ */
+export class LlmEvaluationAbVariant implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmEvaluationAbVariant';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmEvaluationAbVariant();
+    LlmEvaluationAbVariant.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmEvaluationAbVariant) {
+    _instance.variantId = _instance.variantId || '';
+    _instance.displayName = _instance.displayName || '';
+    _instance.ccaiServiceNames = _instance.ccaiServiceNames || [];
+    _instance.trafficWeight = _instance.trafficWeight || 0;
+    _instance.isControl = _instance.isControl || false;
+    _instance.modelName = _instance.modelName || '';
+    _instance.promptVersion = _instance.promptVersion || '';
+    _instance.config = _instance.config || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmEvaluationAbVariant,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.variantId = _reader.readString();
+          break;
+        case 2:
+          _instance.displayName = _reader.readString();
+          break;
+        case 3:
+          (_instance.ccaiServiceNames = _instance.ccaiServiceNames || []).push(
+            _reader.readString()
+          );
+          break;
+        case 4:
+          _instance.trafficWeight = _reader.readDouble();
+          break;
+        case 5:
+          _instance.isControl = _reader.readBool();
+          break;
+        case 6:
+          _instance.modelName = _reader.readString();
+          break;
+        case 7:
+          _instance.promptVersion = _reader.readString();
+          break;
+        case 8:
+          _instance.config = new googleProtobuf007.Struct();
+          _reader.readMessage(
+            _instance.config,
+            googleProtobuf007.Struct.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmEvaluationAbVariant.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmEvaluationAbVariant,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.variantId) {
+      _writer.writeString(1, _instance.variantId);
+    }
+    if (_instance.displayName) {
+      _writer.writeString(2, _instance.displayName);
+    }
+    if (_instance.ccaiServiceNames && _instance.ccaiServiceNames.length) {
+      _writer.writeRepeatedString(3, _instance.ccaiServiceNames);
+    }
+    if (_instance.trafficWeight) {
+      _writer.writeDouble(4, _instance.trafficWeight);
+    }
+    if (_instance.isControl) {
+      _writer.writeBool(5, _instance.isControl);
+    }
+    if (_instance.modelName) {
+      _writer.writeString(6, _instance.modelName);
+    }
+    if (_instance.promptVersion) {
+      _writer.writeString(7, _instance.promptVersion);
+    }
+    if (_instance.config) {
+      _writer.writeMessage(
+        8,
+        _instance.config as any,
+        googleProtobuf007.Struct.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _variantId: string;
+  private _displayName: string;
+  private _ccaiServiceNames: string[];
+  private _trafficWeight: number;
+  private _isControl: boolean;
+  private _modelName: string;
+  private _promptVersion: string;
+  private _config?: googleProtobuf007.Struct;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmEvaluationAbVariant to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LlmEvaluationAbVariant.AsObject>) {
+    _value = _value || {};
+    this.variantId = _value.variantId;
+    this.displayName = _value.displayName;
+    this.ccaiServiceNames = (_value.ccaiServiceNames || []).slice();
+    this.trafficWeight = _value.trafficWeight;
+    this.isControl = _value.isControl;
+    this.modelName = _value.modelName;
+    this.promptVersion = _value.promptVersion;
+    this.config = _value.config
+      ? new googleProtobuf007.Struct(_value.config)
+      : undefined;
+    LlmEvaluationAbVariant.refineValues(this);
+  }
+  get variantId(): string {
+    return this._variantId;
+  }
+  set variantId(value: string) {
+    this._variantId = value;
+  }
+  get displayName(): string {
+    return this._displayName;
+  }
+  set displayName(value: string) {
+    this._displayName = value;
+  }
+  get ccaiServiceNames(): string[] {
+    return this._ccaiServiceNames;
+  }
+  set ccaiServiceNames(value: string[]) {
+    this._ccaiServiceNames = value;
+  }
+  get trafficWeight(): number {
+    return this._trafficWeight;
+  }
+  set trafficWeight(value: number) {
+    this._trafficWeight = value;
+  }
+  get isControl(): boolean {
+    return this._isControl;
+  }
+  set isControl(value: boolean) {
+    this._isControl = value;
+  }
+  get modelName(): string {
+    return this._modelName;
+  }
+  set modelName(value: string) {
+    this._modelName = value;
+  }
+  get promptVersion(): string {
+    return this._promptVersion;
+  }
+  set promptVersion(value: string) {
+    this._promptVersion = value;
+  }
+  get config(): googleProtobuf007.Struct | undefined {
+    return this._config;
+  }
+  set config(value: googleProtobuf007.Struct | undefined) {
+    this._config = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmEvaluationAbVariant.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmEvaluationAbVariant.AsObject {
+    return {
+      variantId: this.variantId,
+      displayName: this.displayName,
+      ccaiServiceNames: (this.ccaiServiceNames || []).slice(),
+      trafficWeight: this.trafficWeight,
+      isControl: this.isControl,
+      modelName: this.modelName,
+      promptVersion: this.promptVersion,
+      config: this.config ? this.config.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmEvaluationAbVariant.AsProtobufJSON {
+    return {
+      variantId: this.variantId,
+      displayName: this.displayName,
+      ccaiServiceNames: (this.ccaiServiceNames || []).slice(),
+      trafficWeight: this.trafficWeight,
+      isControl: this.isControl,
+      modelName: this.modelName,
+      promptVersion: this.promptVersion,
+      config: this.config ? this.config.toProtobufJSON(options) : null
+    };
+  }
+}
+export module LlmEvaluationAbVariant {
+  /**
+   * Standard JavaScript object representation for LlmEvaluationAbVariant
+   */
+  export interface AsObject {
+    variantId: string;
+    displayName: string;
+    ccaiServiceNames: string[];
+    trafficWeight: number;
+    isControl: boolean;
+    modelName: string;
+    promptVersion: string;
+    config?: googleProtobuf007.Struct.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for LlmEvaluationAbVariant
+   */
+  export interface AsProtobufJSON {
+    variantId: string;
+    displayName: string;
+    ccaiServiceNames: string[];
+    trafficWeight: number;
+    isControl: boolean;
+    modelName: string;
+    promptVersion: string;
+    config: googleProtobuf007.Struct.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAbExperiment
+ */
+export class LlmEvaluationAbExperiment implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmEvaluationAbExperiment';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmEvaluationAbExperiment();
+    LlmEvaluationAbExperiment.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmEvaluationAbExperiment) {
+    _instance.name = _instance.name || '';
+    _instance.displayName = _instance.displayName || '';
+    _instance.description = _instance.description || '';
+    _instance.status = _instance.status || 0;
+    _instance.variants = _instance.variants || [];
+    _instance.trafficConfig = _instance.trafficConfig || undefined;
+    _instance.startedAt = _instance.startedAt || undefined;
+    _instance.stoppedAt = _instance.stoppedAt || undefined;
+    _instance.createdAt = _instance.createdAt || undefined;
+    _instance.createdBy = _instance.createdBy || '';
+    _instance.modifiedAt = _instance.modifiedAt || undefined;
+    _instance.modifiedBy = _instance.modifiedBy || '';
+    _instance.parent = _instance.parent || '';
+    _instance.languageCode = _instance.languageCode || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmEvaluationAbExperiment,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.displayName = _reader.readString();
+          break;
+        case 3:
+          _instance.description = _reader.readString();
+          break;
+        case 4:
+          _instance.status = _reader.readEnum();
+          break;
+        case 5:
+          const messageInitializer5 = new LlmEvaluationAbVariant();
+          _reader.readMessage(
+            messageInitializer5,
+            LlmEvaluationAbVariant.deserializeBinaryFromReader
+          );
+          (_instance.variants = _instance.variants || []).push(
+            messageInitializer5
+          );
+          break;
+        case 6:
+          _instance.trafficConfig = new LlmEvaluationAbTrafficConfig();
+          _reader.readMessage(
+            _instance.trafficConfig,
+            LlmEvaluationAbTrafficConfig.deserializeBinaryFromReader
+          );
+          break;
+        case 7:
+          _instance.startedAt = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.startedAt,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 8:
+          _instance.stoppedAt = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.stoppedAt,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 9:
+          _instance.createdAt = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.createdAt,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 10:
+          _instance.createdBy = _reader.readString();
+          break;
+        case 11:
+          _instance.modifiedAt = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.modifiedAt,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 12:
+          _instance.modifiedBy = _reader.readString();
+          break;
+        case 13:
+          _instance.parent = _reader.readString();
+          break;
+        case 14:
+          _instance.languageCode = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmEvaluationAbExperiment.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmEvaluationAbExperiment,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+    if (_instance.displayName) {
+      _writer.writeString(2, _instance.displayName);
+    }
+    if (_instance.description) {
+      _writer.writeString(3, _instance.description);
+    }
+    if (_instance.status) {
+      _writer.writeEnum(4, _instance.status);
+    }
+    if (_instance.variants && _instance.variants.length) {
+      _writer.writeRepeatedMessage(
+        5,
+        _instance.variants as any,
+        LlmEvaluationAbVariant.serializeBinaryToWriter
+      );
+    }
+    if (_instance.trafficConfig) {
+      _writer.writeMessage(
+        6,
+        _instance.trafficConfig as any,
+        LlmEvaluationAbTrafficConfig.serializeBinaryToWriter
+      );
+    }
+    if (_instance.startedAt) {
+      _writer.writeMessage(
+        7,
+        _instance.startedAt as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.stoppedAt) {
+      _writer.writeMessage(
+        8,
+        _instance.stoppedAt as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.createdAt) {
+      _writer.writeMessage(
+        9,
+        _instance.createdAt as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.createdBy) {
+      _writer.writeString(10, _instance.createdBy);
+    }
+    if (_instance.modifiedAt) {
+      _writer.writeMessage(
+        11,
+        _instance.modifiedAt as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.modifiedBy) {
+      _writer.writeString(12, _instance.modifiedBy);
+    }
+    if (_instance.parent) {
+      _writer.writeString(13, _instance.parent);
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(14, _instance.languageCode);
+    }
+  }
+
+  private _name: string;
+  private _displayName: string;
+  private _description: string;
+  private _status: LlmEvaluationAbExperimentStatus;
+  private _variants?: LlmEvaluationAbVariant[];
+  private _trafficConfig?: LlmEvaluationAbTrafficConfig;
+  private _startedAt?: googleProtobuf005.Timestamp;
+  private _stoppedAt?: googleProtobuf005.Timestamp;
+  private _createdAt?: googleProtobuf005.Timestamp;
+  private _createdBy: string;
+  private _modifiedAt?: googleProtobuf005.Timestamp;
+  private _modifiedBy: string;
+  private _parent: string;
+  private _languageCode: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmEvaluationAbExperiment to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LlmEvaluationAbExperiment.AsObject>) {
+    _value = _value || {};
+    this.name = _value.name;
+    this.displayName = _value.displayName;
+    this.description = _value.description;
+    this.status = _value.status;
+    this.variants = (_value.variants || []).map(
+      m => new LlmEvaluationAbVariant(m)
+    );
+    this.trafficConfig = _value.trafficConfig
+      ? new LlmEvaluationAbTrafficConfig(_value.trafficConfig)
+      : undefined;
+    this.startedAt = _value.startedAt
+      ? new googleProtobuf005.Timestamp(_value.startedAt)
+      : undefined;
+    this.stoppedAt = _value.stoppedAt
+      ? new googleProtobuf005.Timestamp(_value.stoppedAt)
+      : undefined;
+    this.createdAt = _value.createdAt
+      ? new googleProtobuf005.Timestamp(_value.createdAt)
+      : undefined;
+    this.createdBy = _value.createdBy;
+    this.modifiedAt = _value.modifiedAt
+      ? new googleProtobuf005.Timestamp(_value.modifiedAt)
+      : undefined;
+    this.modifiedBy = _value.modifiedBy;
+    this.parent = _value.parent;
+    this.languageCode = _value.languageCode;
+    LlmEvaluationAbExperiment.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+  get displayName(): string {
+    return this._displayName;
+  }
+  set displayName(value: string) {
+    this._displayName = value;
+  }
+  get description(): string {
+    return this._description;
+  }
+  set description(value: string) {
+    this._description = value;
+  }
+  get status(): LlmEvaluationAbExperimentStatus {
+    return this._status;
+  }
+  set status(value: LlmEvaluationAbExperimentStatus) {
+    this._status = value;
+  }
+  get variants(): LlmEvaluationAbVariant[] | undefined {
+    return this._variants;
+  }
+  set variants(value: LlmEvaluationAbVariant[] | undefined) {
+    this._variants = value;
+  }
+  get trafficConfig(): LlmEvaluationAbTrafficConfig | undefined {
+    return this._trafficConfig;
+  }
+  set trafficConfig(value: LlmEvaluationAbTrafficConfig | undefined) {
+    this._trafficConfig = value;
+  }
+  get startedAt(): googleProtobuf005.Timestamp | undefined {
+    return this._startedAt;
+  }
+  set startedAt(value: googleProtobuf005.Timestamp | undefined) {
+    this._startedAt = value;
+  }
+  get stoppedAt(): googleProtobuf005.Timestamp | undefined {
+    return this._stoppedAt;
+  }
+  set stoppedAt(value: googleProtobuf005.Timestamp | undefined) {
+    this._stoppedAt = value;
+  }
+  get createdAt(): googleProtobuf005.Timestamp | undefined {
+    return this._createdAt;
+  }
+  set createdAt(value: googleProtobuf005.Timestamp | undefined) {
+    this._createdAt = value;
+  }
+  get createdBy(): string {
+    return this._createdBy;
+  }
+  set createdBy(value: string) {
+    this._createdBy = value;
+  }
+  get modifiedAt(): googleProtobuf005.Timestamp | undefined {
+    return this._modifiedAt;
+  }
+  set modifiedAt(value: googleProtobuf005.Timestamp | undefined) {
+    this._modifiedAt = value;
+  }
+  get modifiedBy(): string {
+    return this._modifiedBy;
+  }
+  set modifiedBy(value: string) {
+    this._modifiedBy = value;
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmEvaluationAbExperiment.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmEvaluationAbExperiment.AsObject {
+    return {
+      name: this.name,
+      displayName: this.displayName,
+      description: this.description,
+      status: this.status,
+      variants: (this.variants || []).map(m => m.toObject()),
+      trafficConfig: this.trafficConfig
+        ? this.trafficConfig.toObject()
+        : undefined,
+      startedAt: this.startedAt ? this.startedAt.toObject() : undefined,
+      stoppedAt: this.stoppedAt ? this.stoppedAt.toObject() : undefined,
+      createdAt: this.createdAt ? this.createdAt.toObject() : undefined,
+      createdBy: this.createdBy,
+      modifiedAt: this.modifiedAt ? this.modifiedAt.toObject() : undefined,
+      modifiedBy: this.modifiedBy,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmEvaluationAbExperiment.AsProtobufJSON {
+    return {
+      name: this.name,
+      displayName: this.displayName,
+      description: this.description,
+      status:
+        LlmEvaluationAbExperimentStatus[
+          this.status === null || this.status === undefined ? 0 : this.status
+        ],
+      variants: (this.variants || []).map(m => m.toProtobufJSON(options)),
+      trafficConfig: this.trafficConfig
+        ? this.trafficConfig.toProtobufJSON(options)
+        : null,
+      startedAt: this.startedAt ? this.startedAt.toProtobufJSON(options) : null,
+      stoppedAt: this.stoppedAt ? this.stoppedAt.toProtobufJSON(options) : null,
+      createdAt: this.createdAt ? this.createdAt.toProtobufJSON(options) : null,
+      createdBy: this.createdBy,
+      modifiedAt: this.modifiedAt
+        ? this.modifiedAt.toProtobufJSON(options)
+        : null,
+      modifiedBy: this.modifiedBy,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+}
+export module LlmEvaluationAbExperiment {
+  /**
+   * Standard JavaScript object representation for LlmEvaluationAbExperiment
+   */
+  export interface AsObject {
+    name: string;
+    displayName: string;
+    description: string;
+    status: LlmEvaluationAbExperimentStatus;
+    variants?: LlmEvaluationAbVariant.AsObject[];
+    trafficConfig?: LlmEvaluationAbTrafficConfig.AsObject;
+    startedAt?: googleProtobuf005.Timestamp.AsObject;
+    stoppedAt?: googleProtobuf005.Timestamp.AsObject;
+    createdAt?: googleProtobuf005.Timestamp.AsObject;
+    createdBy: string;
+    modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+    modifiedBy: string;
+    parent: string;
+    languageCode: string;
+  }
+
+  /**
+   * Protobuf JSON representation for LlmEvaluationAbExperiment
+   */
+  export interface AsProtobufJSON {
+    name: string;
+    displayName: string;
+    description: string;
+    status: string;
+    variants: LlmEvaluationAbVariant.AsProtobufJSON[] | null;
+    trafficConfig: LlmEvaluationAbTrafficConfig.AsProtobufJSON | null;
+    startedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    stoppedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    createdBy: string;
+    modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    modifiedBy: string;
+    parent: string;
+    languageCode: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAbVariantResult
+ */
+export class LlmEvaluationAbVariantResult implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmEvaluationAbVariantResult';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmEvaluationAbVariantResult();
+    LlmEvaluationAbVariantResult.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmEvaluationAbVariantResult) {
+    _instance.variantId = _instance.variantId || '';
+    _instance.sessionCount = _instance.sessionCount || '0';
+    _instance.telemetry = _instance.telemetry || undefined;
+    _instance.derivedMetrics = _instance.derivedMetrics || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmEvaluationAbVariantResult,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.variantId = _reader.readString();
+          break;
+        case 2:
+          _instance.sessionCount = _reader.readInt64String();
+          break;
+        case 3:
+          _instance.telemetry = new googleProtobuf007.Struct();
+          _reader.readMessage(
+            _instance.telemetry,
+            googleProtobuf007.Struct.deserializeBinaryFromReader
+          );
+          break;
+        case 4:
+          _instance.derivedMetrics = new googleProtobuf007.Struct();
+          _reader.readMessage(
+            _instance.derivedMetrics,
+            googleProtobuf007.Struct.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmEvaluationAbVariantResult.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmEvaluationAbVariantResult,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.variantId) {
+      _writer.writeString(1, _instance.variantId);
+    }
+    if (_instance.sessionCount) {
+      _writer.writeInt64String(2, _instance.sessionCount);
+    }
+    if (_instance.telemetry) {
+      _writer.writeMessage(
+        3,
+        _instance.telemetry as any,
+        googleProtobuf007.Struct.serializeBinaryToWriter
+      );
+    }
+    if (_instance.derivedMetrics) {
+      _writer.writeMessage(
+        4,
+        _instance.derivedMetrics as any,
+        googleProtobuf007.Struct.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _variantId: string;
+  private _sessionCount: string;
+  private _telemetry?: googleProtobuf007.Struct;
+  private _derivedMetrics?: googleProtobuf007.Struct;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmEvaluationAbVariantResult to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<LlmEvaluationAbVariantResult.AsObject>
+  ) {
+    _value = _value || {};
+    this.variantId = _value.variantId;
+    this.sessionCount = _value.sessionCount;
+    this.telemetry = _value.telemetry
+      ? new googleProtobuf007.Struct(_value.telemetry)
+      : undefined;
+    this.derivedMetrics = _value.derivedMetrics
+      ? new googleProtobuf007.Struct(_value.derivedMetrics)
+      : undefined;
+    LlmEvaluationAbVariantResult.refineValues(this);
+  }
+  get variantId(): string {
+    return this._variantId;
+  }
+  set variantId(value: string) {
+    this._variantId = value;
+  }
+  get sessionCount(): string {
+    return this._sessionCount;
+  }
+  set sessionCount(value: string) {
+    this._sessionCount = value;
+  }
+  get telemetry(): googleProtobuf007.Struct | undefined {
+    return this._telemetry;
+  }
+  set telemetry(value: googleProtobuf007.Struct | undefined) {
+    this._telemetry = value;
+  }
+  get derivedMetrics(): googleProtobuf007.Struct | undefined {
+    return this._derivedMetrics;
+  }
+  set derivedMetrics(value: googleProtobuf007.Struct | undefined) {
+    this._derivedMetrics = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmEvaluationAbVariantResult.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmEvaluationAbVariantResult.AsObject {
+    return {
+      variantId: this.variantId,
+      sessionCount: this.sessionCount,
+      telemetry: this.telemetry ? this.telemetry.toObject() : undefined,
+      derivedMetrics: this.derivedMetrics
+        ? this.derivedMetrics.toObject()
+        : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmEvaluationAbVariantResult.AsProtobufJSON {
+    return {
+      variantId: this.variantId,
+      sessionCount: this.sessionCount,
+      telemetry: this.telemetry ? this.telemetry.toProtobufJSON(options) : null,
+      derivedMetrics: this.derivedMetrics
+        ? this.derivedMetrics.toProtobufJSON(options)
+        : null
+    };
+  }
+}
+export module LlmEvaluationAbVariantResult {
+  /**
+   * Standard JavaScript object representation for LlmEvaluationAbVariantResult
+   */
+  export interface AsObject {
+    variantId: string;
+    sessionCount: string;
+    telemetry?: googleProtobuf007.Struct.AsObject;
+    derivedMetrics?: googleProtobuf007.Struct.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for LlmEvaluationAbVariantResult
+   */
+  export interface AsProtobufJSON {
+    variantId: string;
+    sessionCount: string;
+    telemetry: googleProtobuf007.Struct.AsProtobufJSON | null;
+    derivedMetrics: googleProtobuf007.Struct.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.CreateLlmEvaluationAbExperimentRequest
+ */
+export class CreateLlmEvaluationAbExperimentRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.CreateLlmEvaluationAbExperimentRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new CreateLlmEvaluationAbExperimentRequest();
+    CreateLlmEvaluationAbExperimentRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: CreateLlmEvaluationAbExperimentRequest) {
+    _instance.llmEvaluationAbExperiment =
+      _instance.llmEvaluationAbExperiment || undefined;
+    _instance.parent = _instance.parent || '';
+    _instance.languageCode = _instance.languageCode || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: CreateLlmEvaluationAbExperimentRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.llmEvaluationAbExperiment = new LlmEvaluationAbExperiment();
+          _reader.readMessage(
+            _instance.llmEvaluationAbExperiment,
+            LlmEvaluationAbExperiment.deserializeBinaryFromReader
+          );
+          break;
+        case 2:
+          _instance.parent = _reader.readString();
+          break;
+        case 3:
+          _instance.languageCode = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    CreateLlmEvaluationAbExperimentRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: CreateLlmEvaluationAbExperimentRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.llmEvaluationAbExperiment) {
+      _writer.writeMessage(
+        1,
+        _instance.llmEvaluationAbExperiment as any,
+        LlmEvaluationAbExperiment.serializeBinaryToWriter
+      );
+    }
+    if (_instance.parent) {
+      _writer.writeString(2, _instance.parent);
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(3, _instance.languageCode);
+    }
+  }
+
+  private _llmEvaluationAbExperiment?: LlmEvaluationAbExperiment;
+  private _parent: string;
+  private _languageCode: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of CreateLlmEvaluationAbExperimentRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<CreateLlmEvaluationAbExperimentRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.llmEvaluationAbExperiment = _value.llmEvaluationAbExperiment
+      ? new LlmEvaluationAbExperiment(_value.llmEvaluationAbExperiment)
+      : undefined;
+    this.parent = _value.parent;
+    this.languageCode = _value.languageCode;
+    CreateLlmEvaluationAbExperimentRequest.refineValues(this);
+  }
+  get llmEvaluationAbExperiment(): LlmEvaluationAbExperiment | undefined {
+    return this._llmEvaluationAbExperiment;
+  }
+  set llmEvaluationAbExperiment(value: LlmEvaluationAbExperiment | undefined) {
+    this._llmEvaluationAbExperiment = value;
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    CreateLlmEvaluationAbExperimentRequest.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): CreateLlmEvaluationAbExperimentRequest.AsObject {
+    return {
+      llmEvaluationAbExperiment: this.llmEvaluationAbExperiment
+        ? this.llmEvaluationAbExperiment.toObject()
+        : undefined,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): CreateLlmEvaluationAbExperimentRequest.AsProtobufJSON {
+    return {
+      llmEvaluationAbExperiment: this.llmEvaluationAbExperiment
+        ? this.llmEvaluationAbExperiment.toProtobufJSON(options)
+        : null,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+}
+export module CreateLlmEvaluationAbExperimentRequest {
+  /**
+   * Standard JavaScript object representation for CreateLlmEvaluationAbExperimentRequest
+   */
+  export interface AsObject {
+    llmEvaluationAbExperiment?: LlmEvaluationAbExperiment.AsObject;
+    parent: string;
+    languageCode: string;
+  }
+
+  /**
+   * Protobuf JSON representation for CreateLlmEvaluationAbExperimentRequest
+   */
+  export interface AsProtobufJSON {
+    llmEvaluationAbExperiment: LlmEvaluationAbExperiment.AsProtobufJSON | null;
+    parent: string;
+    languageCode: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetLlmEvaluationAbExperimentRequest
+ */
+export class GetLlmEvaluationAbExperimentRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.GetLlmEvaluationAbExperimentRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetLlmEvaluationAbExperimentRequest();
+    GetLlmEvaluationAbExperimentRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetLlmEvaluationAbExperimentRequest) {
+    _instance.name = _instance.name || '';
+    _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.parent = _instance.parent || '';
+    _instance.languageCode = _instance.languageCode || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetLlmEvaluationAbExperimentRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.fieldMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 3:
+          _instance.parent = _reader.readString();
+          break;
+        case 4:
+          _instance.languageCode = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetLlmEvaluationAbExperimentRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetLlmEvaluationAbExperimentRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        2,
+        _instance.fieldMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+    if (_instance.parent) {
+      _writer.writeString(3, _instance.parent);
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(4, _instance.languageCode);
+    }
+  }
+
+  private _name: string;
+  private _fieldMask?: googleProtobuf003.FieldMask;
+  private _parent: string;
+  private _languageCode: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetLlmEvaluationAbExperimentRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<GetLlmEvaluationAbExperimentRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.name = _value.name;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    this.parent = _value.parent;
+    this.languageCode = _value.languageCode;
+    GetLlmEvaluationAbExperimentRequest.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+  get fieldMask(): googleProtobuf003.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetLlmEvaluationAbExperimentRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetLlmEvaluationAbExperimentRequest.AsObject {
+    return {
+      name: this.name,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetLlmEvaluationAbExperimentRequest.AsProtobufJSON {
+    return {
+      name: this.name,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+}
+export module GetLlmEvaluationAbExperimentRequest {
+  /**
+   * Standard JavaScript object representation for GetLlmEvaluationAbExperimentRequest
+   */
+  export interface AsObject {
+    name: string;
+    fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    parent: string;
+    languageCode: string;
+  }
+
+  /**
+   * Protobuf JSON representation for GetLlmEvaluationAbExperimentRequest
+   */
+  export interface AsProtobufJSON {
+    name: string;
+    fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    parent: string;
+    languageCode: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAbExperimentFilter
+ */
+export class LlmEvaluationAbExperimentFilter implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmEvaluationAbExperimentFilter';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmEvaluationAbExperimentFilter();
+    LlmEvaluationAbExperimentFilter.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmEvaluationAbExperimentFilter) {
+    _instance.displayName = _instance.displayName || '';
+    _instance.status = _instance.status || 0;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmEvaluationAbExperimentFilter,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.displayName = _reader.readString();
+          break;
+        case 2:
+          _instance.status = _reader.readEnum();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmEvaluationAbExperimentFilter.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmEvaluationAbExperimentFilter,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.displayName) {
+      _writer.writeString(1, _instance.displayName);
+    }
+    if (_instance.status) {
+      _writer.writeEnum(2, _instance.status);
+    }
+  }
+
+  private _displayName: string;
+  private _status: LlmEvaluationAbExperimentStatus;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmEvaluationAbExperimentFilter to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<LlmEvaluationAbExperimentFilter.AsObject>
+  ) {
+    _value = _value || {};
+    this.displayName = _value.displayName;
+    this.status = _value.status;
+    LlmEvaluationAbExperimentFilter.refineValues(this);
+  }
+  get displayName(): string {
+    return this._displayName;
+  }
+  set displayName(value: string) {
+    this._displayName = value;
+  }
+  get status(): LlmEvaluationAbExperimentStatus {
+    return this._status;
+  }
+  set status(value: LlmEvaluationAbExperimentStatus) {
+    this._status = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmEvaluationAbExperimentFilter.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmEvaluationAbExperimentFilter.AsObject {
+    return {
+      displayName: this.displayName,
+      status: this.status
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmEvaluationAbExperimentFilter.AsProtobufJSON {
+    return {
+      displayName: this.displayName,
+      status:
+        LlmEvaluationAbExperimentStatus[
+          this.status === null || this.status === undefined ? 0 : this.status
+        ]
+    };
+  }
+}
+export module LlmEvaluationAbExperimentFilter {
+  /**
+   * Standard JavaScript object representation for LlmEvaluationAbExperimentFilter
+   */
+  export interface AsObject {
+    displayName: string;
+    status: LlmEvaluationAbExperimentStatus;
+  }
+
+  /**
+   * Protobuf JSON representation for LlmEvaluationAbExperimentFilter
+   */
+  export interface AsProtobufJSON {
+    displayName: string;
+    status: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationAbExperimentsRequest
+ */
+export class ListLlmEvaluationAbExperimentsRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.ListLlmEvaluationAbExperimentsRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListLlmEvaluationAbExperimentsRequest();
+    ListLlmEvaluationAbExperimentsRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListLlmEvaluationAbExperimentsRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.pageToken = _instance.pageToken || '';
+    _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.languageCode = _instance.languageCode || '';
+    _instance.llmEvaluationAbExperimentFilter =
+      _instance.llmEvaluationAbExperimentFilter || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListLlmEvaluationAbExperimentsRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.pageToken = _reader.readString();
+          break;
+        case 3:
+          _instance.fieldMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 4:
+          _instance.languageCode = _reader.readString();
+          break;
+        case 5:
+          _instance.llmEvaluationAbExperimentFilter = new LlmEvaluationAbExperimentFilter();
+          _reader.readMessage(
+            _instance.llmEvaluationAbExperimentFilter,
+            LlmEvaluationAbExperimentFilter.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListLlmEvaluationAbExperimentsRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListLlmEvaluationAbExperimentsRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.pageToken) {
+      _writer.writeString(2, _instance.pageToken);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        3,
+        _instance.fieldMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(4, _instance.languageCode);
+    }
+    if (_instance.llmEvaluationAbExperimentFilter) {
+      _writer.writeMessage(
+        5,
+        _instance.llmEvaluationAbExperimentFilter as any,
+        LlmEvaluationAbExperimentFilter.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _parent: string;
+  private _pageToken: string;
+  private _fieldMask?: googleProtobuf003.FieldMask;
+  private _languageCode: string;
+  private _llmEvaluationAbExperimentFilter?: LlmEvaluationAbExperimentFilter;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListLlmEvaluationAbExperimentsRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<ListLlmEvaluationAbExperimentsRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.pageToken = _value.pageToken;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    this.languageCode = _value.languageCode;
+    this.llmEvaluationAbExperimentFilter = _value.llmEvaluationAbExperimentFilter
+      ? new LlmEvaluationAbExperimentFilter(
+          _value.llmEvaluationAbExperimentFilter
+        )
+      : undefined;
+    ListLlmEvaluationAbExperimentsRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get pageToken(): string {
+    return this._pageToken;
+  }
+  set pageToken(value: string) {
+    this._pageToken = value;
+  }
+  get fieldMask(): googleProtobuf003.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+  get llmEvaluationAbExperimentFilter():
+    | LlmEvaluationAbExperimentFilter
+    | undefined {
+    return this._llmEvaluationAbExperimentFilter;
+  }
+  set llmEvaluationAbExperimentFilter(
+    value: LlmEvaluationAbExperimentFilter | undefined
+  ) {
+    this._llmEvaluationAbExperimentFilter = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListLlmEvaluationAbExperimentsRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListLlmEvaluationAbExperimentsRequest.AsObject {
+    return {
+      parent: this.parent,
+      pageToken: this.pageToken,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      languageCode: this.languageCode,
+      llmEvaluationAbExperimentFilter: this.llmEvaluationAbExperimentFilter
+        ? this.llmEvaluationAbExperimentFilter.toObject()
+        : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListLlmEvaluationAbExperimentsRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      pageToken: this.pageToken,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      languageCode: this.languageCode,
+      llmEvaluationAbExperimentFilter: this.llmEvaluationAbExperimentFilter
+        ? this.llmEvaluationAbExperimentFilter.toProtobufJSON(options)
+        : null
+    };
+  }
+}
+export module ListLlmEvaluationAbExperimentsRequest {
+  /**
+   * Standard JavaScript object representation for ListLlmEvaluationAbExperimentsRequest
+   */
+  export interface AsObject {
+    parent: string;
+    pageToken: string;
+    fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    languageCode: string;
+    llmEvaluationAbExperimentFilter?: LlmEvaluationAbExperimentFilter.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for ListLlmEvaluationAbExperimentsRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    pageToken: string;
+    fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    languageCode: string;
+    llmEvaluationAbExperimentFilter: LlmEvaluationAbExperimentFilter.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationAbExperimentsResponse
+ */
+export class ListLlmEvaluationAbExperimentsResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.ListLlmEvaluationAbExperimentsResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListLlmEvaluationAbExperimentsResponse();
+    ListLlmEvaluationAbExperimentsResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListLlmEvaluationAbExperimentsResponse) {
+    _instance.llmEvaluationAbExperiments =
+      _instance.llmEvaluationAbExperiments || [];
+    _instance.nextPageToken = _instance.nextPageToken || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListLlmEvaluationAbExperimentsResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          const messageInitializer1 = new LlmEvaluationAbExperiment();
+          _reader.readMessage(
+            messageInitializer1,
+            LlmEvaluationAbExperiment.deserializeBinaryFromReader
+          );
+          (_instance.llmEvaluationAbExperiments =
+            _instance.llmEvaluationAbExperiments || []).push(
+            messageInitializer1
+          );
+          break;
+        case 2:
+          _instance.nextPageToken = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListLlmEvaluationAbExperimentsResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListLlmEvaluationAbExperimentsResponse,
+    _writer: BinaryWriter
+  ) {
+    if (
+      _instance.llmEvaluationAbExperiments &&
+      _instance.llmEvaluationAbExperiments.length
+    ) {
+      _writer.writeRepeatedMessage(
+        1,
+        _instance.llmEvaluationAbExperiments as any,
+        LlmEvaluationAbExperiment.serializeBinaryToWriter
+      );
+    }
+    if (_instance.nextPageToken) {
+      _writer.writeString(2, _instance.nextPageToken);
+    }
+  }
+
+  private _llmEvaluationAbExperiments?: LlmEvaluationAbExperiment[];
+  private _nextPageToken: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListLlmEvaluationAbExperimentsResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<ListLlmEvaluationAbExperimentsResponse.AsObject>
+  ) {
+    _value = _value || {};
+    this.llmEvaluationAbExperiments = (
+      _value.llmEvaluationAbExperiments || []
+    ).map(m => new LlmEvaluationAbExperiment(m));
+    this.nextPageToken = _value.nextPageToken;
+    ListLlmEvaluationAbExperimentsResponse.refineValues(this);
+  }
+  get llmEvaluationAbExperiments(): LlmEvaluationAbExperiment[] | undefined {
+    return this._llmEvaluationAbExperiments;
+  }
+  set llmEvaluationAbExperiments(
+    value: LlmEvaluationAbExperiment[] | undefined
+  ) {
+    this._llmEvaluationAbExperiments = value;
+  }
+  get nextPageToken(): string {
+    return this._nextPageToken;
+  }
+  set nextPageToken(value: string) {
+    this._nextPageToken = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListLlmEvaluationAbExperimentsResponse.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListLlmEvaluationAbExperimentsResponse.AsObject {
+    return {
+      llmEvaluationAbExperiments: (
+        this.llmEvaluationAbExperiments || []
+      ).map(m => m.toObject()),
+      nextPageToken: this.nextPageToken
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListLlmEvaluationAbExperimentsResponse.AsProtobufJSON {
+    return {
+      llmEvaluationAbExperiments: (
+        this.llmEvaluationAbExperiments || []
+      ).map(m => m.toProtobufJSON(options)),
+      nextPageToken: this.nextPageToken
+    };
+  }
+}
+export module ListLlmEvaluationAbExperimentsResponse {
+  /**
+   * Standard JavaScript object representation for ListLlmEvaluationAbExperimentsResponse
+   */
+  export interface AsObject {
+    llmEvaluationAbExperiments?: LlmEvaluationAbExperiment.AsObject[];
+    nextPageToken: string;
+  }
+
+  /**
+   * Protobuf JSON representation for ListLlmEvaluationAbExperimentsResponse
+   */
+  export interface AsProtobufJSON {
+    llmEvaluationAbExperiments:
+      | LlmEvaluationAbExperiment.AsProtobufJSON[]
+      | null;
+    nextPageToken: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.UpdateLlmEvaluationAbExperimentRequest
+ */
+export class UpdateLlmEvaluationAbExperimentRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.UpdateLlmEvaluationAbExperimentRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new UpdateLlmEvaluationAbExperimentRequest();
+    UpdateLlmEvaluationAbExperimentRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: UpdateLlmEvaluationAbExperimentRequest) {
+    _instance.llmEvaluationAbExperiment =
+      _instance.llmEvaluationAbExperiment || undefined;
+    _instance.updateMask = _instance.updateMask || undefined;
+    _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.parent = _instance.parent || '';
+    _instance.languageCode = _instance.languageCode || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: UpdateLlmEvaluationAbExperimentRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.llmEvaluationAbExperiment = new LlmEvaluationAbExperiment();
+          _reader.readMessage(
+            _instance.llmEvaluationAbExperiment,
+            LlmEvaluationAbExperiment.deserializeBinaryFromReader
+          );
+          break;
+        case 2:
+          _instance.updateMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.updateMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 3:
+          _instance.fieldMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 4:
+          _instance.parent = _reader.readString();
+          break;
+        case 5:
+          _instance.languageCode = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    UpdateLlmEvaluationAbExperimentRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: UpdateLlmEvaluationAbExperimentRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.llmEvaluationAbExperiment) {
+      _writer.writeMessage(
+        1,
+        _instance.llmEvaluationAbExperiment as any,
+        LlmEvaluationAbExperiment.serializeBinaryToWriter
+      );
+    }
+    if (_instance.updateMask) {
+      _writer.writeMessage(
+        2,
+        _instance.updateMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        3,
+        _instance.fieldMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+    if (_instance.parent) {
+      _writer.writeString(4, _instance.parent);
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(5, _instance.languageCode);
+    }
+  }
+
+  private _llmEvaluationAbExperiment?: LlmEvaluationAbExperiment;
+  private _updateMask?: googleProtobuf003.FieldMask;
+  private _fieldMask?: googleProtobuf003.FieldMask;
+  private _parent: string;
+  private _languageCode: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of UpdateLlmEvaluationAbExperimentRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<UpdateLlmEvaluationAbExperimentRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.llmEvaluationAbExperiment = _value.llmEvaluationAbExperiment
+      ? new LlmEvaluationAbExperiment(_value.llmEvaluationAbExperiment)
+      : undefined;
+    this.updateMask = _value.updateMask
+      ? new googleProtobuf003.FieldMask(_value.updateMask)
+      : undefined;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    this.parent = _value.parent;
+    this.languageCode = _value.languageCode;
+    UpdateLlmEvaluationAbExperimentRequest.refineValues(this);
+  }
+  get llmEvaluationAbExperiment(): LlmEvaluationAbExperiment | undefined {
+    return this._llmEvaluationAbExperiment;
+  }
+  set llmEvaluationAbExperiment(value: LlmEvaluationAbExperiment | undefined) {
+    this._llmEvaluationAbExperiment = value;
+  }
+  get updateMask(): googleProtobuf003.FieldMask | undefined {
+    return this._updateMask;
+  }
+  set updateMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._updateMask = value;
+  }
+  get fieldMask(): googleProtobuf003.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    UpdateLlmEvaluationAbExperimentRequest.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): UpdateLlmEvaluationAbExperimentRequest.AsObject {
+    return {
+      llmEvaluationAbExperiment: this.llmEvaluationAbExperiment
+        ? this.llmEvaluationAbExperiment.toObject()
+        : undefined,
+      updateMask: this.updateMask ? this.updateMask.toObject() : undefined,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): UpdateLlmEvaluationAbExperimentRequest.AsProtobufJSON {
+    return {
+      llmEvaluationAbExperiment: this.llmEvaluationAbExperiment
+        ? this.llmEvaluationAbExperiment.toProtobufJSON(options)
+        : null,
+      updateMask: this.updateMask
+        ? this.updateMask.toProtobufJSON(options)
+        : null,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+}
+export module UpdateLlmEvaluationAbExperimentRequest {
+  /**
+   * Standard JavaScript object representation for UpdateLlmEvaluationAbExperimentRequest
+   */
+  export interface AsObject {
+    llmEvaluationAbExperiment?: LlmEvaluationAbExperiment.AsObject;
+    updateMask?: googleProtobuf003.FieldMask.AsObject;
+    fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    parent: string;
+    languageCode: string;
+  }
+
+  /**
+   * Protobuf JSON representation for UpdateLlmEvaluationAbExperimentRequest
+   */
+  export interface AsProtobufJSON {
+    llmEvaluationAbExperiment: LlmEvaluationAbExperiment.AsProtobufJSON | null;
+    updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    parent: string;
+    languageCode: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.DeleteLlmEvaluationAbExperimentRequest
+ */
+export class DeleteLlmEvaluationAbExperimentRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.DeleteLlmEvaluationAbExperimentRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new DeleteLlmEvaluationAbExperimentRequest();
+    DeleteLlmEvaluationAbExperimentRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: DeleteLlmEvaluationAbExperimentRequest) {
+    _instance.name = _instance.name || '';
+    _instance.parent = _instance.parent || '';
+    _instance.languageCode = _instance.languageCode || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: DeleteLlmEvaluationAbExperimentRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.parent = _reader.readString();
+          break;
+        case 3:
+          _instance.languageCode = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    DeleteLlmEvaluationAbExperimentRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: DeleteLlmEvaluationAbExperimentRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+    if (_instance.parent) {
+      _writer.writeString(2, _instance.parent);
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(3, _instance.languageCode);
+    }
+  }
+
+  private _name: string;
+  private _parent: string;
+  private _languageCode: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of DeleteLlmEvaluationAbExperimentRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<DeleteLlmEvaluationAbExperimentRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.name = _value.name;
+    this.parent = _value.parent;
+    this.languageCode = _value.languageCode;
+    DeleteLlmEvaluationAbExperimentRequest.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    DeleteLlmEvaluationAbExperimentRequest.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): DeleteLlmEvaluationAbExperimentRequest.AsObject {
+    return {
+      name: this.name,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): DeleteLlmEvaluationAbExperimentRequest.AsProtobufJSON {
+    return {
+      name: this.name,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+}
+export module DeleteLlmEvaluationAbExperimentRequest {
+  /**
+   * Standard JavaScript object representation for DeleteLlmEvaluationAbExperimentRequest
+   */
+  export interface AsObject {
+    name: string;
+    parent: string;
+    languageCode: string;
+  }
+
+  /**
+   * Protobuf JSON representation for DeleteLlmEvaluationAbExperimentRequest
+   */
+  export interface AsProtobufJSON {
+    name: string;
+    parent: string;
+    languageCode: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.StartLlmEvaluationAbExperimentRequest
+ */
+export class StartLlmEvaluationAbExperimentRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.StartLlmEvaluationAbExperimentRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new StartLlmEvaluationAbExperimentRequest();
+    StartLlmEvaluationAbExperimentRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: StartLlmEvaluationAbExperimentRequest) {
+    _instance.name = _instance.name || '';
+    _instance.parent = _instance.parent || '';
+    _instance.languageCode = _instance.languageCode || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: StartLlmEvaluationAbExperimentRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.parent = _reader.readString();
+          break;
+        case 3:
+          _instance.languageCode = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    StartLlmEvaluationAbExperimentRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: StartLlmEvaluationAbExperimentRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+    if (_instance.parent) {
+      _writer.writeString(2, _instance.parent);
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(3, _instance.languageCode);
+    }
+  }
+
+  private _name: string;
+  private _parent: string;
+  private _languageCode: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of StartLlmEvaluationAbExperimentRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<StartLlmEvaluationAbExperimentRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.name = _value.name;
+    this.parent = _value.parent;
+    this.languageCode = _value.languageCode;
+    StartLlmEvaluationAbExperimentRequest.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    StartLlmEvaluationAbExperimentRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): StartLlmEvaluationAbExperimentRequest.AsObject {
+    return {
+      name: this.name,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): StartLlmEvaluationAbExperimentRequest.AsProtobufJSON {
+    return {
+      name: this.name,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+}
+export module StartLlmEvaluationAbExperimentRequest {
+  /**
+   * Standard JavaScript object representation for StartLlmEvaluationAbExperimentRequest
+   */
+  export interface AsObject {
+    name: string;
+    parent: string;
+    languageCode: string;
+  }
+
+  /**
+   * Protobuf JSON representation for StartLlmEvaluationAbExperimentRequest
+   */
+  export interface AsProtobufJSON {
+    name: string;
+    parent: string;
+    languageCode: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.StopLlmEvaluationAbExperimentRequest
+ */
+export class StopLlmEvaluationAbExperimentRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.StopLlmEvaluationAbExperimentRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new StopLlmEvaluationAbExperimentRequest();
+    StopLlmEvaluationAbExperimentRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: StopLlmEvaluationAbExperimentRequest) {
+    _instance.name = _instance.name || '';
+    _instance.parent = _instance.parent || '';
+    _instance.languageCode = _instance.languageCode || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: StopLlmEvaluationAbExperimentRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.parent = _reader.readString();
+          break;
+        case 3:
+          _instance.languageCode = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    StopLlmEvaluationAbExperimentRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: StopLlmEvaluationAbExperimentRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+    if (_instance.parent) {
+      _writer.writeString(2, _instance.parent);
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(3, _instance.languageCode);
+    }
+  }
+
+  private _name: string;
+  private _parent: string;
+  private _languageCode: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of StopLlmEvaluationAbExperimentRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<StopLlmEvaluationAbExperimentRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.name = _value.name;
+    this.parent = _value.parent;
+    this.languageCode = _value.languageCode;
+    StopLlmEvaluationAbExperimentRequest.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    StopLlmEvaluationAbExperimentRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): StopLlmEvaluationAbExperimentRequest.AsObject {
+    return {
+      name: this.name,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): StopLlmEvaluationAbExperimentRequest.AsProtobufJSON {
+    return {
+      name: this.name,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+}
+export module StopLlmEvaluationAbExperimentRequest {
+  /**
+   * Standard JavaScript object representation for StopLlmEvaluationAbExperimentRequest
+   */
+  export interface AsObject {
+    name: string;
+    parent: string;
+    languageCode: string;
+  }
+
+  /**
+   * Protobuf JSON representation for StopLlmEvaluationAbExperimentRequest
+   */
+  export interface AsProtobufJSON {
+    name: string;
+    parent: string;
+    languageCode: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetLlmEvaluationAbExperimentResultsRequest
+ */
+export class GetLlmEvaluationAbExperimentResultsRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.GetLlmEvaluationAbExperimentResultsRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetLlmEvaluationAbExperimentResultsRequest();
+    GetLlmEvaluationAbExperimentResultsRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetLlmEvaluationAbExperimentResultsRequest) {
+    _instance.name = _instance.name || '';
+    _instance.parent = _instance.parent || '';
+    _instance.languageCode = _instance.languageCode || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetLlmEvaluationAbExperimentResultsRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.parent = _reader.readString();
+          break;
+        case 3:
+          _instance.languageCode = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetLlmEvaluationAbExperimentResultsRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetLlmEvaluationAbExperimentResultsRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+    if (_instance.parent) {
+      _writer.writeString(2, _instance.parent);
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(3, _instance.languageCode);
+    }
+  }
+
+  private _name: string;
+  private _parent: string;
+  private _languageCode: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetLlmEvaluationAbExperimentResultsRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<
+      GetLlmEvaluationAbExperimentResultsRequest.AsObject
+    >
+  ) {
+    _value = _value || {};
+    this.name = _value.name;
+    this.parent = _value.parent;
+    this.languageCode = _value.languageCode;
+    GetLlmEvaluationAbExperimentResultsRequest.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetLlmEvaluationAbExperimentResultsRequest.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetLlmEvaluationAbExperimentResultsRequest.AsObject {
+    return {
+      name: this.name,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetLlmEvaluationAbExperimentResultsRequest.AsProtobufJSON {
+    return {
+      name: this.name,
+      parent: this.parent,
+      languageCode: this.languageCode
+    };
+  }
+}
+export module GetLlmEvaluationAbExperimentResultsRequest {
+  /**
+   * Standard JavaScript object representation for GetLlmEvaluationAbExperimentResultsRequest
+   */
+  export interface AsObject {
+    name: string;
+    parent: string;
+    languageCode: string;
+  }
+
+  /**
+   * Protobuf JSON representation for GetLlmEvaluationAbExperimentResultsRequest
+   */
+  export interface AsProtobufJSON {
+    name: string;
+    parent: string;
+    languageCode: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetLlmEvaluationAbExperimentResultsResponse
+ */
+export class GetLlmEvaluationAbExperimentResultsResponse
+  implements GrpcMessage {
+  static id = 'ondewo.nlu.GetLlmEvaluationAbExperimentResultsResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetLlmEvaluationAbExperimentResultsResponse();
+    GetLlmEvaluationAbExperimentResultsResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetLlmEvaluationAbExperimentResultsResponse) {
+    _instance.llmEvaluationAbExperimentName =
+      _instance.llmEvaluationAbExperimentName || '';
+    _instance.variantResults = _instance.variantResults || [];
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetLlmEvaluationAbExperimentResultsResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.llmEvaluationAbExperimentName = _reader.readString();
+          break;
+        case 2:
+          const messageInitializer2 = new LlmEvaluationAbVariantResult();
+          _reader.readMessage(
+            messageInitializer2,
+            LlmEvaluationAbVariantResult.deserializeBinaryFromReader
+          );
+          (_instance.variantResults = _instance.variantResults || []).push(
+            messageInitializer2
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetLlmEvaluationAbExperimentResultsResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetLlmEvaluationAbExperimentResultsResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.llmEvaluationAbExperimentName) {
+      _writer.writeString(1, _instance.llmEvaluationAbExperimentName);
+    }
+    if (_instance.variantResults && _instance.variantResults.length) {
+      _writer.writeRepeatedMessage(
+        2,
+        _instance.variantResults as any,
+        LlmEvaluationAbVariantResult.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _llmEvaluationAbExperimentName: string;
+  private _variantResults?: LlmEvaluationAbVariantResult[];
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetLlmEvaluationAbExperimentResultsResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<
+      GetLlmEvaluationAbExperimentResultsResponse.AsObject
+    >
+  ) {
+    _value = _value || {};
+    this.llmEvaluationAbExperimentName = _value.llmEvaluationAbExperimentName;
+    this.variantResults = (_value.variantResults || []).map(
+      m => new LlmEvaluationAbVariantResult(m)
+    );
+    GetLlmEvaluationAbExperimentResultsResponse.refineValues(this);
+  }
+  get llmEvaluationAbExperimentName(): string {
+    return this._llmEvaluationAbExperimentName;
+  }
+  set llmEvaluationAbExperimentName(value: string) {
+    this._llmEvaluationAbExperimentName = value;
+  }
+  get variantResults(): LlmEvaluationAbVariantResult[] | undefined {
+    return this._variantResults;
+  }
+  set variantResults(value: LlmEvaluationAbVariantResult[] | undefined) {
+    this._variantResults = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetLlmEvaluationAbExperimentResultsResponse.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetLlmEvaluationAbExperimentResultsResponse.AsObject {
+    return {
+      llmEvaluationAbExperimentName: this.llmEvaluationAbExperimentName,
+      variantResults: (this.variantResults || []).map(m => m.toObject())
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetLlmEvaluationAbExperimentResultsResponse.AsProtobufJSON {
+    return {
+      llmEvaluationAbExperimentName: this.llmEvaluationAbExperimentName,
+      variantResults: (this.variantResults || []).map(m =>
+        m.toProtobufJSON(options)
+      )
+    };
+  }
+}
+export module GetLlmEvaluationAbExperimentResultsResponse {
+  /**
+   * Standard JavaScript object representation for GetLlmEvaluationAbExperimentResultsResponse
+   */
+  export interface AsObject {
+    llmEvaluationAbExperimentName: string;
+    variantResults?: LlmEvaluationAbVariantResult.AsObject[];
+  }
+
+  /**
+   * Protobuf JSON representation for GetLlmEvaluationAbExperimentResultsResponse
+   */
+  export interface AsProtobufJSON {
+    llmEvaluationAbExperimentName: string;
+    variantResults: LlmEvaluationAbVariantResult.AsProtobufJSON[] | null;
   }
 }

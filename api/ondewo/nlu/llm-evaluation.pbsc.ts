@@ -1080,6 +1080,178 @@ export class LlmEvaluationsClient {
         requestClass: thisProto.DeleteLlmEvaluationReportRequest,
         responseClass: googleProtobuf002.Empty
       });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationCreateAbExperiment
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>>
+     */
+    llmEvaluationCreateAbExperiment: (
+      requestData: thisProto.CreateLlmEvaluationAbExperimentRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateAbExperiment',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.CreateLlmEvaluationAbExperimentRequest,
+        responseClass: thisProto.LlmEvaluationAbExperiment
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbExperiment
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>>
+     */
+    llmEvaluationGetAbExperiment: (
+      requestData: thisProto.GetLlmEvaluationAbExperimentRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbExperiment',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetLlmEvaluationAbExperimentRequest,
+        responseClass: thisProto.LlmEvaluationAbExperiment
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationListAbExperiments
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.ListLlmEvaluationAbExperimentsResponse>>
+     */
+    llmEvaluationListAbExperiments: (
+      requestData: thisProto.ListLlmEvaluationAbExperimentsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.ListLlmEvaluationAbExperimentsResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationListAbExperiments',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ListLlmEvaluationAbExperimentsRequest,
+        responseClass: thisProto.ListLlmEvaluationAbExperimentsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAbExperiment
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>>
+     */
+    llmEvaluationUpdateAbExperiment: (
+      requestData: thisProto.UpdateLlmEvaluationAbExperimentRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAbExperiment',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.UpdateLlmEvaluationAbExperimentRequest,
+        responseClass: thisProto.LlmEvaluationAbExperiment
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteAbExperiment
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
+     */
+    llmEvaluationDeleteAbExperiment: (
+      requestData: thisProto.DeleteLlmEvaluationAbExperimentRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<googleProtobuf002.Empty>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteAbExperiment',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.DeleteLlmEvaluationAbExperimentRequest,
+        responseClass: googleProtobuf002.Empty
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationStartAbExperiment
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>>
+     */
+    llmEvaluationStartAbExperiment: (
+      requestData: thisProto.StartLlmEvaluationAbExperimentRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationStartAbExperiment',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.StartLlmEvaluationAbExperimentRequest,
+        responseClass: thisProto.LlmEvaluationAbExperiment
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationStopAbExperiment
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>>
+     */
+    llmEvaluationStopAbExperiment: (
+      requestData: thisProto.StopLlmEvaluationAbExperimentRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationAbExperiment>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationStopAbExperiment',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.StopLlmEvaluationAbExperimentRequest,
+        responseClass: thisProto.LlmEvaluationAbExperiment
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbExperimentResults
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.GetLlmEvaluationAbExperimentResultsResponse>>
+     */
+    llmEvaluationGetAbExperimentResults: (
+      requestData: thisProto.GetLlmEvaluationAbExperimentResultsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.GetLlmEvaluationAbExperimentResultsResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbExperimentResults',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetLlmEvaluationAbExperimentResultsRequest,
+        responseClass: thisProto.GetLlmEvaluationAbExperimentResultsResponse
+      });
     }
   };
 
@@ -1875,6 +2047,134 @@ export class LlmEvaluationsClient {
   ): Observable<googleProtobuf002.Empty> {
     return this.$raw
       .llmEvaluationDeleteReport(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateAbExperiment
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAbExperiment>
+   */
+  llmEvaluationCreateAbExperiment(
+    requestData: thisProto.CreateLlmEvaluationAbExperimentRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAbExperiment> {
+    return this.$raw
+      .llmEvaluationCreateAbExperiment(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbExperiment
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAbExperiment>
+   */
+  llmEvaluationGetAbExperiment(
+    requestData: thisProto.GetLlmEvaluationAbExperimentRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAbExperiment> {
+    return this.$raw
+      .llmEvaluationGetAbExperiment(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationListAbExperiments
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.ListLlmEvaluationAbExperimentsResponse>
+   */
+  llmEvaluationListAbExperiments(
+    requestData: thisProto.ListLlmEvaluationAbExperimentsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.ListLlmEvaluationAbExperimentsResponse> {
+    return this.$raw
+      .llmEvaluationListAbExperiments(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAbExperiment
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAbExperiment>
+   */
+  llmEvaluationUpdateAbExperiment(
+    requestData: thisProto.UpdateLlmEvaluationAbExperimentRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAbExperiment> {
+    return this.$raw
+      .llmEvaluationUpdateAbExperiment(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteAbExperiment
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<googleProtobuf002.Empty>
+   */
+  llmEvaluationDeleteAbExperiment(
+    requestData: thisProto.DeleteLlmEvaluationAbExperimentRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<googleProtobuf002.Empty> {
+    return this.$raw
+      .llmEvaluationDeleteAbExperiment(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationStartAbExperiment
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAbExperiment>
+   */
+  llmEvaluationStartAbExperiment(
+    requestData: thisProto.StartLlmEvaluationAbExperimentRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAbExperiment> {
+    return this.$raw
+      .llmEvaluationStartAbExperiment(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationStopAbExperiment
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAbExperiment>
+   */
+  llmEvaluationStopAbExperiment(
+    requestData: thisProto.StopLlmEvaluationAbExperimentRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAbExperiment> {
+    return this.$raw
+      .llmEvaluationStopAbExperiment(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbExperimentResults
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.GetLlmEvaluationAbExperimentResultsResponse>
+   */
+  llmEvaluationGetAbExperimentResults(
+    requestData: thisProto.GetLlmEvaluationAbExperimentResultsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.GetLlmEvaluationAbExperimentResultsResponse> {
+    return this.$raw
+      .llmEvaluationGetAbExperimentResults(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 }

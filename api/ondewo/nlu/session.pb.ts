@@ -40,6 +40,11 @@ export enum ReasoningEffort {
   REASONING_EFFORT_MEDIUM = 3,
   REASONING_EFFORT_HIGH = 4
 }
+export enum LlmSafetyLocation {
+  LLM_SAFETY_LOCATION_UNSPECIFIED = 0,
+  LLM_SAFETY_LOCATION_INPUT = 1,
+  LLM_SAFETY_LOCATION_OUTPUT = 2
+}
 export enum AudioEncoding {
   AUDIO_ENCODING_UNSPECIFIED = 0,
   AUDIO_ENCODING_LINEAR_16 = 1,
@@ -2436,6 +2441,9 @@ export class LlmTelemetry implements GrpcMessage {
     _instance.extraQuery = _instance.extraQuery || undefined;
     _instance.extraBody = _instance.extraBody || undefined;
     _instance.ccaiServiceProvider = _instance.ccaiServiceProvider || 0;
+    _instance.llmSafetyAssessment = _instance.llmSafetyAssessment || undefined;
+    _instance.llmRetrievalMetadata =
+      _instance.llmRetrievalMetadata || undefined;
   }
 
   /**
@@ -2696,6 +2704,20 @@ export class LlmTelemetry implements GrpcMessage {
           break;
         case 60:
           _instance.ccaiServiceProvider = _reader.readEnum();
+          break;
+        case 61:
+          _instance.llmSafetyAssessment = new LlmSafetyAssessment();
+          _reader.readMessage(
+            _instance.llmSafetyAssessment,
+            LlmSafetyAssessment.deserializeBinaryFromReader
+          );
+          break;
+        case 62:
+          _instance.llmRetrievalMetadata = new LlmRetrievalMetadata();
+          _reader.readMessage(
+            _instance.llmRetrievalMetadata,
+            LlmRetrievalMetadata.deserializeBinaryFromReader
+          );
           break;
         default:
           _reader.skipField();
@@ -2960,6 +2982,20 @@ export class LlmTelemetry implements GrpcMessage {
     if (_instance.ccaiServiceProvider) {
       _writer.writeEnum(60, _instance.ccaiServiceProvider);
     }
+    if (_instance.llmSafetyAssessment) {
+      _writer.writeMessage(
+        61,
+        _instance.llmSafetyAssessment as any,
+        LlmSafetyAssessment.serializeBinaryToWriter
+      );
+    }
+    if (_instance.llmRetrievalMetadata) {
+      _writer.writeMessage(
+        62,
+        _instance.llmRetrievalMetadata as any,
+        LlmRetrievalMetadata.serializeBinaryToWriter
+      );
+    }
   }
 
   private _provider: string;
@@ -3022,6 +3058,8 @@ export class LlmTelemetry implements GrpcMessage {
   private _extraQuery?: googleProtobuf004.Struct;
   private _extraBody?: googleProtobuf004.Struct;
   private _ccaiServiceProvider: ondewoNlu013.CcaiServiceProvider;
+  private _llmSafetyAssessment?: LlmSafetyAssessment;
+  private _llmRetrievalMetadata?: LlmRetrievalMetadata;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -3119,6 +3157,12 @@ export class LlmTelemetry implements GrpcMessage {
       ? new googleProtobuf004.Struct(_value.extraBody)
       : undefined;
     this.ccaiServiceProvider = _value.ccaiServiceProvider;
+    this.llmSafetyAssessment = _value.llmSafetyAssessment
+      ? new LlmSafetyAssessment(_value.llmSafetyAssessment)
+      : undefined;
+    this.llmRetrievalMetadata = _value.llmRetrievalMetadata
+      ? new LlmRetrievalMetadata(_value.llmRetrievalMetadata)
+      : undefined;
     LlmTelemetry.refineValues(this);
   }
   get provider(): string {
@@ -3485,6 +3529,18 @@ export class LlmTelemetry implements GrpcMessage {
   set ccaiServiceProvider(value: ondewoNlu013.CcaiServiceProvider) {
     this._ccaiServiceProvider = value;
   }
+  get llmSafetyAssessment(): LlmSafetyAssessment | undefined {
+    return this._llmSafetyAssessment;
+  }
+  set llmSafetyAssessment(value: LlmSafetyAssessment | undefined) {
+    this._llmSafetyAssessment = value;
+  }
+  get llmRetrievalMetadata(): LlmRetrievalMetadata | undefined {
+    return this._llmRetrievalMetadata;
+  }
+  set llmRetrievalMetadata(value: LlmRetrievalMetadata | undefined) {
+    this._llmRetrievalMetadata = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -3576,7 +3632,13 @@ export class LlmTelemetry implements GrpcMessage {
         : undefined,
       extraQuery: this.extraQuery ? this.extraQuery.toObject() : undefined,
       extraBody: this.extraBody ? this.extraBody.toObject() : undefined,
-      ccaiServiceProvider: this.ccaiServiceProvider
+      ccaiServiceProvider: this.ccaiServiceProvider,
+      llmSafetyAssessment: this.llmSafetyAssessment
+        ? this.llmSafetyAssessment.toObject()
+        : undefined,
+      llmRetrievalMetadata: this.llmRetrievalMetadata
+        ? this.llmRetrievalMetadata.toObject()
+        : undefined
     };
   }
 
@@ -3685,7 +3747,13 @@ export class LlmTelemetry implements GrpcMessage {
           this.ccaiServiceProvider === undefined
             ? 0
             : this.ccaiServiceProvider
-        ]
+        ],
+      llmSafetyAssessment: this.llmSafetyAssessment
+        ? this.llmSafetyAssessment.toProtobufJSON(options)
+        : null,
+      llmRetrievalMetadata: this.llmRetrievalMetadata
+        ? this.llmRetrievalMetadata.toProtobufJSON(options)
+        : null
     };
   }
 }
@@ -3754,6 +3822,8 @@ export module LlmTelemetry {
     extraQuery?: googleProtobuf004.Struct.AsObject;
     extraBody?: googleProtobuf004.Struct.AsObject;
     ccaiServiceProvider: ondewoNlu013.CcaiServiceProvider;
+    llmSafetyAssessment?: LlmSafetyAssessment.AsObject;
+    llmRetrievalMetadata?: LlmRetrievalMetadata.AsObject;
   }
 
   /**
@@ -3822,6 +3892,837 @@ export module LlmTelemetry {
     extraQuery: googleProtobuf004.Struct.AsProtobufJSON | null;
     extraBody: googleProtobuf004.Struct.AsProtobufJSON | null;
     ccaiServiceProvider: string;
+    llmSafetyAssessment: LlmSafetyAssessment.AsProtobufJSON | null;
+    llmRetrievalMetadata: LlmRetrievalMetadata.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmSafetyFinding
+ */
+export class LlmSafetyFinding implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmSafetyFinding';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmSafetyFinding();
+    LlmSafetyFinding.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmSafetyFinding) {
+    _instance.category = _instance.category || '';
+    _instance.severity = _instance.severity || '';
+    _instance.matchedPattern = _instance.matchedPattern || '';
+    _instance.location = _instance.location || 0;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmSafetyFinding,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.category = _reader.readString();
+          break;
+        case 2:
+          _instance.severity = _reader.readString();
+          break;
+        case 3:
+          _instance.matchedPattern = _reader.readString();
+          break;
+        case 4:
+          _instance.location = _reader.readEnum();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmSafetyFinding.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmSafetyFinding,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.category) {
+      _writer.writeString(1, _instance.category);
+    }
+    if (_instance.severity) {
+      _writer.writeString(2, _instance.severity);
+    }
+    if (_instance.matchedPattern) {
+      _writer.writeString(3, _instance.matchedPattern);
+    }
+    if (_instance.location) {
+      _writer.writeEnum(4, _instance.location);
+    }
+  }
+
+  private _category: string;
+  private _severity: string;
+  private _matchedPattern: string;
+  private _location: LlmSafetyLocation;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmSafetyFinding to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LlmSafetyFinding.AsObject>) {
+    _value = _value || {};
+    this.category = _value.category;
+    this.severity = _value.severity;
+    this.matchedPattern = _value.matchedPattern;
+    this.location = _value.location;
+    LlmSafetyFinding.refineValues(this);
+  }
+  get category(): string {
+    return this._category;
+  }
+  set category(value: string) {
+    this._category = value;
+  }
+  get severity(): string {
+    return this._severity;
+  }
+  set severity(value: string) {
+    this._severity = value;
+  }
+  get matchedPattern(): string {
+    return this._matchedPattern;
+  }
+  set matchedPattern(value: string) {
+    this._matchedPattern = value;
+  }
+  get location(): LlmSafetyLocation {
+    return this._location;
+  }
+  set location(value: LlmSafetyLocation) {
+    this._location = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmSafetyFinding.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmSafetyFinding.AsObject {
+    return {
+      category: this.category,
+      severity: this.severity,
+      matchedPattern: this.matchedPattern,
+      location: this.location
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmSafetyFinding.AsProtobufJSON {
+    return {
+      category: this.category,
+      severity: this.severity,
+      matchedPattern: this.matchedPattern,
+      location:
+        LlmSafetyLocation[
+          this.location === null || this.location === undefined
+            ? 0
+            : this.location
+        ]
+    };
+  }
+}
+export module LlmSafetyFinding {
+  /**
+   * Standard JavaScript object representation for LlmSafetyFinding
+   */
+  export interface AsObject {
+    category: string;
+    severity: string;
+    matchedPattern: string;
+    location: LlmSafetyLocation;
+  }
+
+  /**
+   * Protobuf JSON representation for LlmSafetyFinding
+   */
+  export interface AsProtobufJSON {
+    category: string;
+    severity: string;
+    matchedPattern: string;
+    location: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmSafetyAssessment
+ */
+export class LlmSafetyAssessment implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmSafetyAssessment';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmSafetyAssessment();
+    LlmSafetyAssessment.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmSafetyAssessment) {
+    _instance.flaggedCategories = _instance.flaggedCategories || [];
+    _instance.hasPii = _instance.hasPii || false;
+    _instance.hasInjectionAttempt = _instance.hasInjectionAttempt || false;
+    _instance.hasJailbreakAttempt = _instance.hasJailbreakAttempt || false;
+    _instance.safetyScore = _instance.safetyScore || 0;
+    _instance.findings = _instance.findings || [];
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmSafetyAssessment,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          (_instance.flaggedCategories =
+            _instance.flaggedCategories || []).push(_reader.readString());
+          break;
+        case 2:
+          _instance.hasPii = _reader.readBool();
+          break;
+        case 3:
+          _instance.hasInjectionAttempt = _reader.readBool();
+          break;
+        case 4:
+          _instance.hasJailbreakAttempt = _reader.readBool();
+          break;
+        case 5:
+          _instance.safetyScore = _reader.readDouble();
+          break;
+        case 6:
+          const messageInitializer6 = new LlmSafetyFinding();
+          _reader.readMessage(
+            messageInitializer6,
+            LlmSafetyFinding.deserializeBinaryFromReader
+          );
+          (_instance.findings = _instance.findings || []).push(
+            messageInitializer6
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmSafetyAssessment.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmSafetyAssessment,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.flaggedCategories && _instance.flaggedCategories.length) {
+      _writer.writeRepeatedString(1, _instance.flaggedCategories);
+    }
+    if (_instance.hasPii) {
+      _writer.writeBool(2, _instance.hasPii);
+    }
+    if (_instance.hasInjectionAttempt) {
+      _writer.writeBool(3, _instance.hasInjectionAttempt);
+    }
+    if (_instance.hasJailbreakAttempt) {
+      _writer.writeBool(4, _instance.hasJailbreakAttempt);
+    }
+    if (_instance.safetyScore) {
+      _writer.writeDouble(5, _instance.safetyScore);
+    }
+    if (_instance.findings && _instance.findings.length) {
+      _writer.writeRepeatedMessage(
+        6,
+        _instance.findings as any,
+        LlmSafetyFinding.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _flaggedCategories: string[];
+  private _hasPii: boolean;
+  private _hasInjectionAttempt: boolean;
+  private _hasJailbreakAttempt: boolean;
+  private _safetyScore: number;
+  private _findings?: LlmSafetyFinding[];
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmSafetyAssessment to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LlmSafetyAssessment.AsObject>) {
+    _value = _value || {};
+    this.flaggedCategories = (_value.flaggedCategories || []).slice();
+    this.hasPii = _value.hasPii;
+    this.hasInjectionAttempt = _value.hasInjectionAttempt;
+    this.hasJailbreakAttempt = _value.hasJailbreakAttempt;
+    this.safetyScore = _value.safetyScore;
+    this.findings = (_value.findings || []).map(m => new LlmSafetyFinding(m));
+    LlmSafetyAssessment.refineValues(this);
+  }
+  get flaggedCategories(): string[] {
+    return this._flaggedCategories;
+  }
+  set flaggedCategories(value: string[]) {
+    this._flaggedCategories = value;
+  }
+  get hasPii(): boolean {
+    return this._hasPii;
+  }
+  set hasPii(value: boolean) {
+    this._hasPii = value;
+  }
+  get hasInjectionAttempt(): boolean {
+    return this._hasInjectionAttempt;
+  }
+  set hasInjectionAttempt(value: boolean) {
+    this._hasInjectionAttempt = value;
+  }
+  get hasJailbreakAttempt(): boolean {
+    return this._hasJailbreakAttempt;
+  }
+  set hasJailbreakAttempt(value: boolean) {
+    this._hasJailbreakAttempt = value;
+  }
+  get safetyScore(): number {
+    return this._safetyScore;
+  }
+  set safetyScore(value: number) {
+    this._safetyScore = value;
+  }
+  get findings(): LlmSafetyFinding[] | undefined {
+    return this._findings;
+  }
+  set findings(value: LlmSafetyFinding[] | undefined) {
+    this._findings = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmSafetyAssessment.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmSafetyAssessment.AsObject {
+    return {
+      flaggedCategories: (this.flaggedCategories || []).slice(),
+      hasPii: this.hasPii,
+      hasInjectionAttempt: this.hasInjectionAttempt,
+      hasJailbreakAttempt: this.hasJailbreakAttempt,
+      safetyScore: this.safetyScore,
+      findings: (this.findings || []).map(m => m.toObject())
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmSafetyAssessment.AsProtobufJSON {
+    return {
+      flaggedCategories: (this.flaggedCategories || []).slice(),
+      hasPii: this.hasPii,
+      hasInjectionAttempt: this.hasInjectionAttempt,
+      hasJailbreakAttempt: this.hasJailbreakAttempt,
+      safetyScore: this.safetyScore,
+      findings: (this.findings || []).map(m => m.toProtobufJSON(options))
+    };
+  }
+}
+export module LlmSafetyAssessment {
+  /**
+   * Standard JavaScript object representation for LlmSafetyAssessment
+   */
+  export interface AsObject {
+    flaggedCategories: string[];
+    hasPii: boolean;
+    hasInjectionAttempt: boolean;
+    hasJailbreakAttempt: boolean;
+    safetyScore: number;
+    findings?: LlmSafetyFinding.AsObject[];
+  }
+
+  /**
+   * Protobuf JSON representation for LlmSafetyAssessment
+   */
+  export interface AsProtobufJSON {
+    flaggedCategories: string[];
+    hasPii: boolean;
+    hasInjectionAttempt: boolean;
+    hasJailbreakAttempt: boolean;
+    safetyScore: number;
+    findings: LlmSafetyFinding.AsProtobufJSON[] | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmRetrievedChunk
+ */
+export class LlmRetrievedChunk implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmRetrievedChunk';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmRetrievedChunk();
+    LlmRetrievedChunk.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmRetrievedChunk) {
+    _instance.documentId = _instance.documentId || '';
+    _instance.chunkId = _instance.chunkId || '';
+    _instance.score = _instance.score || 0;
+    _instance.text = _instance.text || '';
+    _instance.sourceUri = _instance.sourceUri || '';
+    _instance.rank = _instance.rank || 0;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmRetrievedChunk,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.documentId = _reader.readString();
+          break;
+        case 2:
+          _instance.chunkId = _reader.readString();
+          break;
+        case 3:
+          _instance.score = _reader.readDouble();
+          break;
+        case 4:
+          _instance.text = _reader.readString();
+          break;
+        case 5:
+          _instance.sourceUri = _reader.readString();
+          break;
+        case 6:
+          _instance.rank = _reader.readInt32();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmRetrievedChunk.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmRetrievedChunk,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.documentId) {
+      _writer.writeString(1, _instance.documentId);
+    }
+    if (_instance.chunkId) {
+      _writer.writeString(2, _instance.chunkId);
+    }
+    if (_instance.score) {
+      _writer.writeDouble(3, _instance.score);
+    }
+    if (_instance.text) {
+      _writer.writeString(4, _instance.text);
+    }
+    if (_instance.sourceUri) {
+      _writer.writeString(5, _instance.sourceUri);
+    }
+    if (_instance.rank) {
+      _writer.writeInt32(6, _instance.rank);
+    }
+  }
+
+  private _documentId: string;
+  private _chunkId: string;
+  private _score: number;
+  private _text: string;
+  private _sourceUri: string;
+  private _rank: number;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmRetrievedChunk to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LlmRetrievedChunk.AsObject>) {
+    _value = _value || {};
+    this.documentId = _value.documentId;
+    this.chunkId = _value.chunkId;
+    this.score = _value.score;
+    this.text = _value.text;
+    this.sourceUri = _value.sourceUri;
+    this.rank = _value.rank;
+    LlmRetrievedChunk.refineValues(this);
+  }
+  get documentId(): string {
+    return this._documentId;
+  }
+  set documentId(value: string) {
+    this._documentId = value;
+  }
+  get chunkId(): string {
+    return this._chunkId;
+  }
+  set chunkId(value: string) {
+    this._chunkId = value;
+  }
+  get score(): number {
+    return this._score;
+  }
+  set score(value: number) {
+    this._score = value;
+  }
+  get text(): string {
+    return this._text;
+  }
+  set text(value: string) {
+    this._text = value;
+  }
+  get sourceUri(): string {
+    return this._sourceUri;
+  }
+  set sourceUri(value: string) {
+    this._sourceUri = value;
+  }
+  get rank(): number {
+    return this._rank;
+  }
+  set rank(value: number) {
+    this._rank = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmRetrievedChunk.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmRetrievedChunk.AsObject {
+    return {
+      documentId: this.documentId,
+      chunkId: this.chunkId,
+      score: this.score,
+      text: this.text,
+      sourceUri: this.sourceUri,
+      rank: this.rank
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmRetrievedChunk.AsProtobufJSON {
+    return {
+      documentId: this.documentId,
+      chunkId: this.chunkId,
+      score: this.score,
+      text: this.text,
+      sourceUri: this.sourceUri,
+      rank: this.rank
+    };
+  }
+}
+export module LlmRetrievedChunk {
+  /**
+   * Standard JavaScript object representation for LlmRetrievedChunk
+   */
+  export interface AsObject {
+    documentId: string;
+    chunkId: string;
+    score: number;
+    text: string;
+    sourceUri: string;
+    rank: number;
+  }
+
+  /**
+   * Protobuf JSON representation for LlmRetrievedChunk
+   */
+  export interface AsProtobufJSON {
+    documentId: string;
+    chunkId: string;
+    score: number;
+    text: string;
+    sourceUri: string;
+    rank: number;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmRetrievalMetadata
+ */
+export class LlmRetrievalMetadata implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmRetrievalMetadata';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmRetrievalMetadata();
+    LlmRetrievalMetadata.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmRetrievalMetadata) {
+    _instance.chunks = _instance.chunks || [];
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmRetrievalMetadata,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          const messageInitializer1 = new LlmRetrievedChunk();
+          _reader.readMessage(
+            messageInitializer1,
+            LlmRetrievedChunk.deserializeBinaryFromReader
+          );
+          (_instance.chunks = _instance.chunks || []).push(messageInitializer1);
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmRetrievalMetadata.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmRetrievalMetadata,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.chunks && _instance.chunks.length) {
+      _writer.writeRepeatedMessage(
+        1,
+        _instance.chunks as any,
+        LlmRetrievedChunk.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _chunks?: LlmRetrievedChunk[];
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmRetrievalMetadata to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LlmRetrievalMetadata.AsObject>) {
+    _value = _value || {};
+    this.chunks = (_value.chunks || []).map(m => new LlmRetrievedChunk(m));
+    LlmRetrievalMetadata.refineValues(this);
+  }
+  get chunks(): LlmRetrievedChunk[] | undefined {
+    return this._chunks;
+  }
+  set chunks(value: LlmRetrievedChunk[] | undefined) {
+    this._chunks = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmRetrievalMetadata.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmRetrievalMetadata.AsObject {
+    return {
+      chunks: (this.chunks || []).map(m => m.toObject())
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmRetrievalMetadata.AsProtobufJSON {
+    return {
+      chunks: (this.chunks || []).map(m => m.toProtobufJSON(options))
+    };
+  }
+}
+export module LlmRetrievalMetadata {
+  /**
+   * Standard JavaScript object representation for LlmRetrievalMetadata
+   */
+  export interface AsObject {
+    chunks?: LlmRetrievedChunk.AsObject[];
+  }
+
+  /**
+   * Protobuf JSON representation for LlmRetrievalMetadata
+   */
+  export interface AsProtobufJSON {
+    chunks: LlmRetrievedChunk.AsProtobufJSON[] | null;
   }
 }
 
@@ -6634,6 +7535,7 @@ export class LlmTelemetryReport implements GrpcMessage {
     _instance.toolCallTokensTotal = _instance.toolCallTokensTotal || '0';
     _instance.toolCallDurationSecondsTotal =
       _instance.toolCallDurationSecondsTotal || 0;
+    _instance.safetyStats = _instance.safetyStats || undefined;
   }
 
   /**
@@ -6780,6 +7682,13 @@ export class LlmTelemetryReport implements GrpcMessage {
         case 19:
           _instance.toolCallDurationSecondsTotal = _reader.readDouble();
           break;
+        case 20:
+          _instance.safetyStats = new LlmSafetyStats();
+          _reader.readMessage(
+            _instance.safetyStats,
+            LlmSafetyStats.deserializeBinaryFromReader
+          );
+          break;
         default:
           _reader.skipField();
       }
@@ -6908,6 +7817,13 @@ export class LlmTelemetryReport implements GrpcMessage {
     if (_instance.toolCallDurationSecondsTotal) {
       _writer.writeDouble(19, _instance.toolCallDurationSecondsTotal);
     }
+    if (_instance.safetyStats) {
+      _writer.writeMessage(
+        20,
+        _instance.safetyStats as any,
+        LlmSafetyStats.serializeBinaryToWriter
+      );
+    }
   }
 
   private _llmTokenUsage?: LlmTokenUsage;
@@ -6929,6 +7845,7 @@ export class LlmTelemetryReport implements GrpcMessage {
   private _thinkingDurationSecondsTotal: number;
   private _toolCallTokensTotal: string;
   private _toolCallDurationSecondsTotal: number;
+  private _safetyStats?: LlmSafetyStats;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -6973,6 +7890,9 @@ export class LlmTelemetryReport implements GrpcMessage {
     this.thinkingDurationSecondsTotal = _value.thinkingDurationSecondsTotal;
     this.toolCallTokensTotal = _value.toolCallTokensTotal;
     this.toolCallDurationSecondsTotal = _value.toolCallDurationSecondsTotal;
+    this.safetyStats = _value.safetyStats
+      ? new LlmSafetyStats(_value.safetyStats)
+      : undefined;
     LlmTelemetryReport.refineValues(this);
   }
   get llmTokenUsage(): LlmTokenUsage | undefined {
@@ -7089,6 +8009,12 @@ export class LlmTelemetryReport implements GrpcMessage {
   set toolCallDurationSecondsTotal(value: number) {
     this._toolCallDurationSecondsTotal = value;
   }
+  get safetyStats(): LlmSafetyStats | undefined {
+    return this._safetyStats;
+  }
+  set safetyStats(value: LlmSafetyStats | undefined) {
+    this._safetyStats = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -7131,7 +8057,8 @@ export class LlmTelemetryReport implements GrpcMessage {
       thinkingTokensTotal: this.thinkingTokensTotal,
       thinkingDurationSecondsTotal: this.thinkingDurationSecondsTotal,
       toolCallTokensTotal: this.toolCallTokensTotal,
-      toolCallDurationSecondsTotal: this.toolCallDurationSecondsTotal
+      toolCallDurationSecondsTotal: this.toolCallDurationSecondsTotal,
+      safetyStats: this.safetyStats ? this.safetyStats.toObject() : undefined
     };
   }
 
@@ -7188,7 +8115,10 @@ export class LlmTelemetryReport implements GrpcMessage {
       thinkingTokensTotal: this.thinkingTokensTotal,
       thinkingDurationSecondsTotal: this.thinkingDurationSecondsTotal,
       toolCallTokensTotal: this.toolCallTokensTotal,
-      toolCallDurationSecondsTotal: this.toolCallDurationSecondsTotal
+      toolCallDurationSecondsTotal: this.toolCallDurationSecondsTotal,
+      safetyStats: this.safetyStats
+        ? this.safetyStats.toProtobufJSON(options)
+        : null
     };
   }
 }
@@ -7216,6 +8146,7 @@ export module LlmTelemetryReport {
     thinkingDurationSecondsTotal: number;
     toolCallTokensTotal: string;
     toolCallDurationSecondsTotal: number;
+    safetyStats?: LlmSafetyStats.AsObject;
   }
 
   /**
@@ -7241,6 +8172,395 @@ export module LlmTelemetryReport {
     thinkingDurationSecondsTotal: number;
     toolCallTokensTotal: string;
     toolCallDurationSecondsTotal: number;
+    safetyStats: LlmSafetyStats.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmSafetyCategoryStat
+ */
+export class LlmSafetyCategoryStat implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmSafetyCategoryStat';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmSafetyCategoryStat();
+    LlmSafetyCategoryStat.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmSafetyCategoryStat) {
+    _instance.category = _instance.category || '';
+    _instance.count = _instance.count || '0';
+    _instance.rate = _instance.rate || 0;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmSafetyCategoryStat,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.category = _reader.readString();
+          break;
+        case 2:
+          _instance.count = _reader.readInt64String();
+          break;
+        case 3:
+          _instance.rate = _reader.readDouble();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmSafetyCategoryStat.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmSafetyCategoryStat,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.category) {
+      _writer.writeString(1, _instance.category);
+    }
+    if (_instance.count) {
+      _writer.writeInt64String(2, _instance.count);
+    }
+    if (_instance.rate) {
+      _writer.writeDouble(3, _instance.rate);
+    }
+  }
+
+  private _category: string;
+  private _count: string;
+  private _rate: number;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmSafetyCategoryStat to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LlmSafetyCategoryStat.AsObject>) {
+    _value = _value || {};
+    this.category = _value.category;
+    this.count = _value.count;
+    this.rate = _value.rate;
+    LlmSafetyCategoryStat.refineValues(this);
+  }
+  get category(): string {
+    return this._category;
+  }
+  set category(value: string) {
+    this._category = value;
+  }
+  get count(): string {
+    return this._count;
+  }
+  set count(value: string) {
+    this._count = value;
+  }
+  get rate(): number {
+    return this._rate;
+  }
+  set rate(value: number) {
+    this._rate = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmSafetyCategoryStat.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmSafetyCategoryStat.AsObject {
+    return {
+      category: this.category,
+      count: this.count,
+      rate: this.rate
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmSafetyCategoryStat.AsProtobufJSON {
+    return {
+      category: this.category,
+      count: this.count,
+      rate: this.rate
+    };
+  }
+}
+export module LlmSafetyCategoryStat {
+  /**
+   * Standard JavaScript object representation for LlmSafetyCategoryStat
+   */
+  export interface AsObject {
+    category: string;
+    count: string;
+    rate: number;
+  }
+
+  /**
+   * Protobuf JSON representation for LlmSafetyCategoryStat
+   */
+  export interface AsProtobufJSON {
+    category: string;
+    count: string;
+    rate: number;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmSafetyStats
+ */
+export class LlmSafetyStats implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmSafetyStats';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmSafetyStats();
+    LlmSafetyStats.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmSafetyStats) {
+    _instance.totalAssessed = _instance.totalAssessed || '0';
+    _instance.flaggedCount = _instance.flaggedCount || '0';
+    _instance.overallSafetyScore = _instance.overallSafetyScore || 0;
+    _instance.categoryStats = _instance.categoryStats || [];
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmSafetyStats,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.totalAssessed = _reader.readInt64String();
+          break;
+        case 2:
+          _instance.flaggedCount = _reader.readInt64String();
+          break;
+        case 3:
+          _instance.overallSafetyScore = _reader.readDouble();
+          break;
+        case 4:
+          const messageInitializer4 = new LlmSafetyCategoryStat();
+          _reader.readMessage(
+            messageInitializer4,
+            LlmSafetyCategoryStat.deserializeBinaryFromReader
+          );
+          (_instance.categoryStats = _instance.categoryStats || []).push(
+            messageInitializer4
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmSafetyStats.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmSafetyStats,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.totalAssessed) {
+      _writer.writeInt64String(1, _instance.totalAssessed);
+    }
+    if (_instance.flaggedCount) {
+      _writer.writeInt64String(2, _instance.flaggedCount);
+    }
+    if (_instance.overallSafetyScore) {
+      _writer.writeDouble(3, _instance.overallSafetyScore);
+    }
+    if (_instance.categoryStats && _instance.categoryStats.length) {
+      _writer.writeRepeatedMessage(
+        4,
+        _instance.categoryStats as any,
+        LlmSafetyCategoryStat.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _totalAssessed: string;
+  private _flaggedCount: string;
+  private _overallSafetyScore: number;
+  private _categoryStats?: LlmSafetyCategoryStat[];
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmSafetyStats to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LlmSafetyStats.AsObject>) {
+    _value = _value || {};
+    this.totalAssessed = _value.totalAssessed;
+    this.flaggedCount = _value.flaggedCount;
+    this.overallSafetyScore = _value.overallSafetyScore;
+    this.categoryStats = (_value.categoryStats || []).map(
+      m => new LlmSafetyCategoryStat(m)
+    );
+    LlmSafetyStats.refineValues(this);
+  }
+  get totalAssessed(): string {
+    return this._totalAssessed;
+  }
+  set totalAssessed(value: string) {
+    this._totalAssessed = value;
+  }
+  get flaggedCount(): string {
+    return this._flaggedCount;
+  }
+  set flaggedCount(value: string) {
+    this._flaggedCount = value;
+  }
+  get overallSafetyScore(): number {
+    return this._overallSafetyScore;
+  }
+  set overallSafetyScore(value: number) {
+    this._overallSafetyScore = value;
+  }
+  get categoryStats(): LlmSafetyCategoryStat[] | undefined {
+    return this._categoryStats;
+  }
+  set categoryStats(value: LlmSafetyCategoryStat[] | undefined) {
+    this._categoryStats = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmSafetyStats.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmSafetyStats.AsObject {
+    return {
+      totalAssessed: this.totalAssessed,
+      flaggedCount: this.flaggedCount,
+      overallSafetyScore: this.overallSafetyScore,
+      categoryStats: (this.categoryStats || []).map(m => m.toObject())
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmSafetyStats.AsProtobufJSON {
+    return {
+      totalAssessed: this.totalAssessed,
+      flaggedCount: this.flaggedCount,
+      overallSafetyScore: this.overallSafetyScore,
+      categoryStats: (this.categoryStats || []).map(m =>
+        m.toProtobufJSON(options)
+      )
+    };
+  }
+}
+export module LlmSafetyStats {
+  /**
+   * Standard JavaScript object representation for LlmSafetyStats
+   */
+  export interface AsObject {
+    totalAssessed: string;
+    flaggedCount: string;
+    overallSafetyScore: number;
+    categoryStats?: LlmSafetyCategoryStat.AsObject[];
+  }
+
+  /**
+   * Protobuf JSON representation for LlmSafetyStats
+   */
+  export interface AsProtobufJSON {
+    totalAssessed: string;
+    flaggedCount: string;
+    overallSafetyScore: number;
+    categoryStats: LlmSafetyCategoryStat.AsProtobufJSON[] | null;
   }
 }
 
