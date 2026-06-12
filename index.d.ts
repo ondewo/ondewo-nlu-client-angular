@@ -12283,6 +12283,13 @@ declare enum LlmEvaluationAbExperimentStatus {
     LLM_EVALUATION_AB_EXPERIMENT_STATUS_STOPPED = 3,
     LLM_EVALUATION_AB_EXPERIMENT_STATUS_ARCHIVED = 4
 }
+declare enum LlmEvaluationAnnotationStatus {
+    LLM_EVALUATION_ANNOTATION_STATUS_UNSPECIFIED = 0,
+    LLM_EVALUATION_ANNOTATION_STATUS_PENDING = 1,
+    LLM_EVALUATION_ANNOTATION_STATUS_REVIEWED = 2,
+    LLM_EVALUATION_ANNOTATION_STATUS_PROMOTED = 3,
+    LLM_EVALUATION_ANNOTATION_STATUS_DISMISSED = 4
+}
 /**
  * Message implementation for ondewo.nlu.LlmEvaluationDataset
  */
@@ -21999,6 +22006,1984 @@ declare namespace GetLlmEvaluationAbExperimentResultsResponse {
     interface AsProtobufJSON {
         llmEvaluationAbExperimentName: string;
         variantResults: LlmEvaluationAbVariantResult.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationOnlineSessionFilter
+ */
+declare class LlmEvaluationOnlineSessionFilter implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationOnlineSessionFilter;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationOnlineSessionFilter): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationOnlineSessionFilter, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationOnlineSessionFilter, _writer: BinaryWriter): void;
+    private _labels;
+    private _languageCodes;
+    private _platforms;
+    private _requireTelemetry;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationOnlineSessionFilter to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationOnlineSessionFilter.AsObject>);
+    get labels(): string[];
+    set labels(value: string[]);
+    get languageCodes(): string[];
+    set languageCodes(value: string[]);
+    get platforms(): string[];
+    set platforms(value: string[]);
+    get requireTelemetry(): boolean;
+    set requireTelemetry(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationOnlineSessionFilter.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationOnlineSessionFilter.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationOnlineSessionFilter.AsProtobufJSON;
+}
+declare namespace LlmEvaluationOnlineSessionFilter {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationOnlineSessionFilter
+     */
+    interface AsObject {
+        labels: string[];
+        languageCodes: string[];
+        platforms: string[];
+        requireTelemetry: boolean;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationOnlineSessionFilter
+     */
+    interface AsProtobufJSON {
+        labels: string[];
+        languageCodes: string[];
+        platforms: string[];
+        requireTelemetry: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationOnlineConfig
+ */
+declare class LlmEvaluationOnlineConfig implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationOnlineConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationOnlineConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationOnlineConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationOnlineConfig, _writer: BinaryWriter): void;
+    private _name;
+    private _displayName;
+    private _description;
+    private _evaluatorNames;
+    private _sampleRate;
+    private _enabled;
+    private _targetDatasetName;
+    private _failThreshold;
+    private _settleSeconds;
+    private _requireTelemetry;
+    private _llmEvaluationOnlineSessionFilter?;
+    private _lastEvaluatedAt?;
+    private _nSessionsEvaluated;
+    private _createdAt?;
+    private _createdBy;
+    private _modifiedAt?;
+    private _modifiedBy;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationOnlineConfig to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationOnlineConfig.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get displayName(): string;
+    set displayName(value: string);
+    get description(): string;
+    set description(value: string);
+    get evaluatorNames(): string[];
+    set evaluatorNames(value: string[]);
+    get sampleRate(): number;
+    set sampleRate(value: number);
+    get enabled(): boolean;
+    set enabled(value: boolean);
+    get targetDatasetName(): string;
+    set targetDatasetName(value: string);
+    get failThreshold(): number;
+    set failThreshold(value: number);
+    get settleSeconds(): number;
+    set settleSeconds(value: number);
+    get requireTelemetry(): boolean;
+    set requireTelemetry(value: boolean);
+    get llmEvaluationOnlineSessionFilter(): LlmEvaluationOnlineSessionFilter | undefined;
+    set llmEvaluationOnlineSessionFilter(value: LlmEvaluationOnlineSessionFilter | undefined);
+    get lastEvaluatedAt(): googleProtobuf005.Timestamp | undefined;
+    set lastEvaluatedAt(value: googleProtobuf005.Timestamp | undefined);
+    get nSessionsEvaluated(): string;
+    set nSessionsEvaluated(value: string);
+    get createdAt(): googleProtobuf005.Timestamp | undefined;
+    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdBy(): string;
+    set createdBy(value: string);
+    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedBy(): string;
+    set modifiedBy(value: string);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationOnlineConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationOnlineConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationOnlineConfig.AsProtobufJSON;
+}
+declare namespace LlmEvaluationOnlineConfig {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationOnlineConfig
+     */
+    interface AsObject {
+        name: string;
+        displayName: string;
+        description: string;
+        evaluatorNames: string[];
+        sampleRate: number;
+        enabled: boolean;
+        targetDatasetName: string;
+        failThreshold: number;
+        settleSeconds: number;
+        requireTelemetry: boolean;
+        llmEvaluationOnlineSessionFilter?: LlmEvaluationOnlineSessionFilter.AsObject;
+        lastEvaluatedAt?: googleProtobuf005.Timestamp.AsObject;
+        nSessionsEvaluated: string;
+        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdBy: string;
+        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedBy: string;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationOnlineConfig
+     */
+    interface AsProtobufJSON {
+        name: string;
+        displayName: string;
+        description: string;
+        evaluatorNames: string[];
+        sampleRate: number;
+        enabled: boolean;
+        targetDatasetName: string;
+        failThreshold: number;
+        settleSeconds: number;
+        requireTelemetry: boolean;
+        llmEvaluationOnlineSessionFilter: LlmEvaluationOnlineSessionFilter.AsProtobufJSON | null;
+        lastEvaluatedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        nSessionsEvaluated: string;
+        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdBy: string;
+        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedBy: string;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.CreateLlmEvaluationOnlineConfigRequest
+ */
+declare class CreateLlmEvaluationOnlineConfigRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): CreateLlmEvaluationOnlineConfigRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: CreateLlmEvaluationOnlineConfigRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: CreateLlmEvaluationOnlineConfigRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: CreateLlmEvaluationOnlineConfigRequest, _writer: BinaryWriter): void;
+    private _llmEvaluationOnlineConfig?;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CreateLlmEvaluationOnlineConfigRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<CreateLlmEvaluationOnlineConfigRequest.AsObject>);
+    get llmEvaluationOnlineConfig(): LlmEvaluationOnlineConfig | undefined;
+    set llmEvaluationOnlineConfig(value: LlmEvaluationOnlineConfig | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): CreateLlmEvaluationOnlineConfigRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): CreateLlmEvaluationOnlineConfigRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): CreateLlmEvaluationOnlineConfigRequest.AsProtobufJSON;
+}
+declare namespace CreateLlmEvaluationOnlineConfigRequest {
+    /**
+     * Standard JavaScript object representation for CreateLlmEvaluationOnlineConfigRequest
+     */
+    interface AsObject {
+        llmEvaluationOnlineConfig?: LlmEvaluationOnlineConfig.AsObject;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for CreateLlmEvaluationOnlineConfigRequest
+     */
+    interface AsProtobufJSON {
+        llmEvaluationOnlineConfig: LlmEvaluationOnlineConfig.AsProtobufJSON | null;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetLlmEvaluationOnlineConfigRequest
+ */
+declare class GetLlmEvaluationOnlineConfigRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetLlmEvaluationOnlineConfigRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetLlmEvaluationOnlineConfigRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetLlmEvaluationOnlineConfigRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetLlmEvaluationOnlineConfigRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _fieldMask?;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetLlmEvaluationOnlineConfigRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetLlmEvaluationOnlineConfigRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetLlmEvaluationOnlineConfigRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetLlmEvaluationOnlineConfigRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetLlmEvaluationOnlineConfigRequest.AsProtobufJSON;
+}
+declare namespace GetLlmEvaluationOnlineConfigRequest {
+    /**
+     * Standard JavaScript object representation for GetLlmEvaluationOnlineConfigRequest
+     */
+    interface AsObject {
+        name: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for GetLlmEvaluationOnlineConfigRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationOnlineConfigFilter
+ */
+declare class LlmEvaluationOnlineConfigFilter implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationOnlineConfigFilter;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationOnlineConfigFilter): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationOnlineConfigFilter, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationOnlineConfigFilter, _writer: BinaryWriter): void;
+    private _displayName;
+    private _enabledOnly;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationOnlineConfigFilter to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationOnlineConfigFilter.AsObject>);
+    get displayName(): string;
+    set displayName(value: string);
+    get enabledOnly(): boolean;
+    set enabledOnly(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationOnlineConfigFilter.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationOnlineConfigFilter.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationOnlineConfigFilter.AsProtobufJSON;
+}
+declare namespace LlmEvaluationOnlineConfigFilter {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationOnlineConfigFilter
+     */
+    interface AsObject {
+        displayName: string;
+        enabledOnly: boolean;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationOnlineConfigFilter
+     */
+    interface AsProtobufJSON {
+        displayName: string;
+        enabledOnly: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationOnlineConfigsRequest
+ */
+declare class ListLlmEvaluationOnlineConfigsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLlmEvaluationOnlineConfigsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLlmEvaluationOnlineConfigsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLlmEvaluationOnlineConfigsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLlmEvaluationOnlineConfigsRequest, _writer: BinaryWriter): void;
+    private _parent;
+    private _pageToken;
+    private _fieldMask?;
+    private _languageCode;
+    private _llmEvaluationOnlineConfigFilter?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLlmEvaluationOnlineConfigsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLlmEvaluationOnlineConfigsRequest.AsObject>);
+    get parent(): string;
+    set parent(value: string);
+    get pageToken(): string;
+    set pageToken(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get llmEvaluationOnlineConfigFilter(): LlmEvaluationOnlineConfigFilter | undefined;
+    set llmEvaluationOnlineConfigFilter(value: LlmEvaluationOnlineConfigFilter | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLlmEvaluationOnlineConfigsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLlmEvaluationOnlineConfigsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLlmEvaluationOnlineConfigsRequest.AsProtobufJSON;
+}
+declare namespace ListLlmEvaluationOnlineConfigsRequest {
+    /**
+     * Standard JavaScript object representation for ListLlmEvaluationOnlineConfigsRequest
+     */
+    interface AsObject {
+        parent: string;
+        pageToken: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        languageCode: string;
+        llmEvaluationOnlineConfigFilter?: LlmEvaluationOnlineConfigFilter.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for ListLlmEvaluationOnlineConfigsRequest
+     */
+    interface AsProtobufJSON {
+        parent: string;
+        pageToken: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        languageCode: string;
+        llmEvaluationOnlineConfigFilter: LlmEvaluationOnlineConfigFilter.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationOnlineConfigsResponse
+ */
+declare class ListLlmEvaluationOnlineConfigsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLlmEvaluationOnlineConfigsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLlmEvaluationOnlineConfigsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLlmEvaluationOnlineConfigsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLlmEvaluationOnlineConfigsResponse, _writer: BinaryWriter): void;
+    private _llmEvaluationOnlineConfigs?;
+    private _nextPageToken;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLlmEvaluationOnlineConfigsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLlmEvaluationOnlineConfigsResponse.AsObject>);
+    get llmEvaluationOnlineConfigs(): LlmEvaluationOnlineConfig[] | undefined;
+    set llmEvaluationOnlineConfigs(value: LlmEvaluationOnlineConfig[] | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLlmEvaluationOnlineConfigsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLlmEvaluationOnlineConfigsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLlmEvaluationOnlineConfigsResponse.AsProtobufJSON;
+}
+declare namespace ListLlmEvaluationOnlineConfigsResponse {
+    /**
+     * Standard JavaScript object representation for ListLlmEvaluationOnlineConfigsResponse
+     */
+    interface AsObject {
+        llmEvaluationOnlineConfigs?: LlmEvaluationOnlineConfig.AsObject[];
+        nextPageToken: string;
+    }
+    /**
+     * Protobuf JSON representation for ListLlmEvaluationOnlineConfigsResponse
+     */
+    interface AsProtobufJSON {
+        llmEvaluationOnlineConfigs: LlmEvaluationOnlineConfig.AsProtobufJSON[] | null;
+        nextPageToken: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.UpdateLlmEvaluationOnlineConfigRequest
+ */
+declare class UpdateLlmEvaluationOnlineConfigRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): UpdateLlmEvaluationOnlineConfigRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: UpdateLlmEvaluationOnlineConfigRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: UpdateLlmEvaluationOnlineConfigRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: UpdateLlmEvaluationOnlineConfigRequest, _writer: BinaryWriter): void;
+    private _llmEvaluationOnlineConfig?;
+    private _updateMask?;
+    private _fieldMask?;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateLlmEvaluationOnlineConfigRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<UpdateLlmEvaluationOnlineConfigRequest.AsObject>);
+    get llmEvaluationOnlineConfig(): LlmEvaluationOnlineConfig | undefined;
+    set llmEvaluationOnlineConfig(value: LlmEvaluationOnlineConfig | undefined);
+    get updateMask(): googleProtobuf005.FieldMask | undefined;
+    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): UpdateLlmEvaluationOnlineConfigRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): UpdateLlmEvaluationOnlineConfigRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): UpdateLlmEvaluationOnlineConfigRequest.AsProtobufJSON;
+}
+declare namespace UpdateLlmEvaluationOnlineConfigRequest {
+    /**
+     * Standard JavaScript object representation for UpdateLlmEvaluationOnlineConfigRequest
+     */
+    interface AsObject {
+        llmEvaluationOnlineConfig?: LlmEvaluationOnlineConfig.AsObject;
+        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for UpdateLlmEvaluationOnlineConfigRequest
+     */
+    interface AsProtobufJSON {
+        llmEvaluationOnlineConfig: LlmEvaluationOnlineConfig.AsProtobufJSON | null;
+        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DeleteLlmEvaluationOnlineConfigRequest
+ */
+declare class DeleteLlmEvaluationOnlineConfigRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DeleteLlmEvaluationOnlineConfigRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DeleteLlmEvaluationOnlineConfigRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DeleteLlmEvaluationOnlineConfigRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DeleteLlmEvaluationOnlineConfigRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteLlmEvaluationOnlineConfigRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<DeleteLlmEvaluationOnlineConfigRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DeleteLlmEvaluationOnlineConfigRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DeleteLlmEvaluationOnlineConfigRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DeleteLlmEvaluationOnlineConfigRequest.AsProtobufJSON;
+}
+declare namespace DeleteLlmEvaluationOnlineConfigRequest {
+    /**
+     * Standard JavaScript object representation for DeleteLlmEvaluationOnlineConfigRequest
+     */
+    interface AsObject {
+        name: string;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for DeleteLlmEvaluationOnlineConfigRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationOnlineResult
+ */
+declare class LlmEvaluationOnlineResult implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationOnlineResult;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationOnlineResult): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationOnlineResult, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationOnlineResult, _writer: BinaryWriter): void;
+    private _name;
+    private _llmEvaluationOnlineConfigName;
+    private _sessionName;
+    private _sessionStepName;
+    private _llmEvaluationFeedbacks?;
+    private _passed;
+    private _aggregateScore;
+    private _evaluatedAt?;
+    private _createdAt?;
+    private _createdBy;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationOnlineResult to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationOnlineResult.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get llmEvaluationOnlineConfigName(): string;
+    set llmEvaluationOnlineConfigName(value: string);
+    get sessionName(): string;
+    set sessionName(value: string);
+    get sessionStepName(): string;
+    set sessionStepName(value: string);
+    get llmEvaluationFeedbacks(): LlmEvaluationFeedback[] | undefined;
+    set llmEvaluationFeedbacks(value: LlmEvaluationFeedback[] | undefined);
+    get passed(): boolean;
+    set passed(value: boolean);
+    get aggregateScore(): number;
+    set aggregateScore(value: number);
+    get evaluatedAt(): googleProtobuf005.Timestamp | undefined;
+    set evaluatedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf005.Timestamp | undefined;
+    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdBy(): string;
+    set createdBy(value: string);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationOnlineResult.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationOnlineResult.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationOnlineResult.AsProtobufJSON;
+}
+declare namespace LlmEvaluationOnlineResult {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationOnlineResult
+     */
+    interface AsObject {
+        name: string;
+        llmEvaluationOnlineConfigName: string;
+        sessionName: string;
+        sessionStepName: string;
+        llmEvaluationFeedbacks?: LlmEvaluationFeedback.AsObject[];
+        passed: boolean;
+        aggregateScore: number;
+        evaluatedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdBy: string;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationOnlineResult
+     */
+    interface AsProtobufJSON {
+        name: string;
+        llmEvaluationOnlineConfigName: string;
+        sessionName: string;
+        sessionStepName: string;
+        llmEvaluationFeedbacks: LlmEvaluationFeedback.AsProtobufJSON[] | null;
+        passed: boolean;
+        aggregateScore: number;
+        evaluatedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdBy: string;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetLlmEvaluationOnlineResultRequest
+ */
+declare class GetLlmEvaluationOnlineResultRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetLlmEvaluationOnlineResultRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetLlmEvaluationOnlineResultRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetLlmEvaluationOnlineResultRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetLlmEvaluationOnlineResultRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _fieldMask?;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetLlmEvaluationOnlineResultRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetLlmEvaluationOnlineResultRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetLlmEvaluationOnlineResultRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetLlmEvaluationOnlineResultRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetLlmEvaluationOnlineResultRequest.AsProtobufJSON;
+}
+declare namespace GetLlmEvaluationOnlineResultRequest {
+    /**
+     * Standard JavaScript object representation for GetLlmEvaluationOnlineResultRequest
+     */
+    interface AsObject {
+        name: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for GetLlmEvaluationOnlineResultRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationOnlineResultFilter
+ */
+declare class LlmEvaluationOnlineResultFilter implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationOnlineResultFilter;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationOnlineResultFilter): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationOnlineResultFilter, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationOnlineResultFilter, _writer: BinaryWriter): void;
+    private _llmEvaluationOnlineConfigName;
+    private _passed;
+    private _filterByPassed;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationOnlineResultFilter to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationOnlineResultFilter.AsObject>);
+    get llmEvaluationOnlineConfigName(): string;
+    set llmEvaluationOnlineConfigName(value: string);
+    get passed(): boolean;
+    set passed(value: boolean);
+    get filterByPassed(): boolean;
+    set filterByPassed(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationOnlineResultFilter.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationOnlineResultFilter.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationOnlineResultFilter.AsProtobufJSON;
+}
+declare namespace LlmEvaluationOnlineResultFilter {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationOnlineResultFilter
+     */
+    interface AsObject {
+        llmEvaluationOnlineConfigName: string;
+        passed: boolean;
+        filterByPassed: boolean;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationOnlineResultFilter
+     */
+    interface AsProtobufJSON {
+        llmEvaluationOnlineConfigName: string;
+        passed: boolean;
+        filterByPassed: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationOnlineResultsRequest
+ */
+declare class ListLlmEvaluationOnlineResultsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLlmEvaluationOnlineResultsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLlmEvaluationOnlineResultsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLlmEvaluationOnlineResultsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLlmEvaluationOnlineResultsRequest, _writer: BinaryWriter): void;
+    private _parent;
+    private _pageToken;
+    private _fieldMask?;
+    private _languageCode;
+    private _llmEvaluationOnlineResultFilter?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLlmEvaluationOnlineResultsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLlmEvaluationOnlineResultsRequest.AsObject>);
+    get parent(): string;
+    set parent(value: string);
+    get pageToken(): string;
+    set pageToken(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get llmEvaluationOnlineResultFilter(): LlmEvaluationOnlineResultFilter | undefined;
+    set llmEvaluationOnlineResultFilter(value: LlmEvaluationOnlineResultFilter | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLlmEvaluationOnlineResultsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLlmEvaluationOnlineResultsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLlmEvaluationOnlineResultsRequest.AsProtobufJSON;
+}
+declare namespace ListLlmEvaluationOnlineResultsRequest {
+    /**
+     * Standard JavaScript object representation for ListLlmEvaluationOnlineResultsRequest
+     */
+    interface AsObject {
+        parent: string;
+        pageToken: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        languageCode: string;
+        llmEvaluationOnlineResultFilter?: LlmEvaluationOnlineResultFilter.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for ListLlmEvaluationOnlineResultsRequest
+     */
+    interface AsProtobufJSON {
+        parent: string;
+        pageToken: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        languageCode: string;
+        llmEvaluationOnlineResultFilter: LlmEvaluationOnlineResultFilter.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationOnlineResultsResponse
+ */
+declare class ListLlmEvaluationOnlineResultsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLlmEvaluationOnlineResultsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLlmEvaluationOnlineResultsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLlmEvaluationOnlineResultsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLlmEvaluationOnlineResultsResponse, _writer: BinaryWriter): void;
+    private _llmEvaluationOnlineResults?;
+    private _nextPageToken;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLlmEvaluationOnlineResultsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLlmEvaluationOnlineResultsResponse.AsObject>);
+    get llmEvaluationOnlineResults(): LlmEvaluationOnlineResult[] | undefined;
+    set llmEvaluationOnlineResults(value: LlmEvaluationOnlineResult[] | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLlmEvaluationOnlineResultsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLlmEvaluationOnlineResultsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLlmEvaluationOnlineResultsResponse.AsProtobufJSON;
+}
+declare namespace ListLlmEvaluationOnlineResultsResponse {
+    /**
+     * Standard JavaScript object representation for ListLlmEvaluationOnlineResultsResponse
+     */
+    interface AsObject {
+        llmEvaluationOnlineResults?: LlmEvaluationOnlineResult.AsObject[];
+        nextPageToken: string;
+    }
+    /**
+     * Protobuf JSON representation for ListLlmEvaluationOnlineResultsResponse
+     */
+    interface AsProtobufJSON {
+        llmEvaluationOnlineResults: LlmEvaluationOnlineResult.AsProtobufJSON[] | null;
+        nextPageToken: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAnnotationQueueItem
+ */
+declare class LlmEvaluationAnnotationQueueItem implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationAnnotationQueueItem;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationAnnotationQueueItem): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationAnnotationQueueItem, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationAnnotationQueueItem, _writer: BinaryWriter): void;
+    private _name;
+    private _sessionName;
+    private _sessionStepName;
+    private _llmEvaluationOnlineResultName;
+    private _status;
+    private _assignedTo;
+    private _reason;
+    private _llmEvaluationDatasetName;
+    private _createdAt?;
+    private _createdBy;
+    private _modifiedAt?;
+    private _modifiedBy;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationAnnotationQueueItem to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationAnnotationQueueItem.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get sessionName(): string;
+    set sessionName(value: string);
+    get sessionStepName(): string;
+    set sessionStepName(value: string);
+    get llmEvaluationOnlineResultName(): string;
+    set llmEvaluationOnlineResultName(value: string);
+    get status(): LlmEvaluationAnnotationStatus;
+    set status(value: LlmEvaluationAnnotationStatus);
+    get assignedTo(): string;
+    set assignedTo(value: string);
+    get reason(): string;
+    set reason(value: string);
+    get llmEvaluationDatasetName(): string;
+    set llmEvaluationDatasetName(value: string);
+    get createdAt(): googleProtobuf005.Timestamp | undefined;
+    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdBy(): string;
+    set createdBy(value: string);
+    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedBy(): string;
+    set modifiedBy(value: string);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationAnnotationQueueItem.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationAnnotationQueueItem.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationAnnotationQueueItem.AsProtobufJSON;
+}
+declare namespace LlmEvaluationAnnotationQueueItem {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationAnnotationQueueItem
+     */
+    interface AsObject {
+        name: string;
+        sessionName: string;
+        sessionStepName: string;
+        llmEvaluationOnlineResultName: string;
+        status: LlmEvaluationAnnotationStatus;
+        assignedTo: string;
+        reason: string;
+        llmEvaluationDatasetName: string;
+        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdBy: string;
+        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedBy: string;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationAnnotationQueueItem
+     */
+    interface AsProtobufJSON {
+        name: string;
+        sessionName: string;
+        sessionStepName: string;
+        llmEvaluationOnlineResultName: string;
+        status: string;
+        assignedTo: string;
+        reason: string;
+        llmEvaluationDatasetName: string;
+        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdBy: string;
+        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedBy: string;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetLlmEvaluationAnnotationQueueItemRequest
+ */
+declare class GetLlmEvaluationAnnotationQueueItemRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetLlmEvaluationAnnotationQueueItemRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetLlmEvaluationAnnotationQueueItemRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetLlmEvaluationAnnotationQueueItemRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetLlmEvaluationAnnotationQueueItemRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _fieldMask?;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetLlmEvaluationAnnotationQueueItemRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetLlmEvaluationAnnotationQueueItemRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetLlmEvaluationAnnotationQueueItemRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetLlmEvaluationAnnotationQueueItemRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetLlmEvaluationAnnotationQueueItemRequest.AsProtobufJSON;
+}
+declare namespace GetLlmEvaluationAnnotationQueueItemRequest {
+    /**
+     * Standard JavaScript object representation for GetLlmEvaluationAnnotationQueueItemRequest
+     */
+    interface AsObject {
+        name: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for GetLlmEvaluationAnnotationQueueItemRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAnnotationQueueItemFilter
+ */
+declare class LlmEvaluationAnnotationQueueItemFilter implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationAnnotationQueueItemFilter;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationAnnotationQueueItemFilter): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationAnnotationQueueItemFilter, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationAnnotationQueueItemFilter, _writer: BinaryWriter): void;
+    private _status;
+    private _assignedTo;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationAnnotationQueueItemFilter to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationAnnotationQueueItemFilter.AsObject>);
+    get status(): LlmEvaluationAnnotationStatus;
+    set status(value: LlmEvaluationAnnotationStatus);
+    get assignedTo(): string;
+    set assignedTo(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationAnnotationQueueItemFilter.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationAnnotationQueueItemFilter.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationAnnotationQueueItemFilter.AsProtobufJSON;
+}
+declare namespace LlmEvaluationAnnotationQueueItemFilter {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationAnnotationQueueItemFilter
+     */
+    interface AsObject {
+        status: LlmEvaluationAnnotationStatus;
+        assignedTo: string;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationAnnotationQueueItemFilter
+     */
+    interface AsProtobufJSON {
+        status: string;
+        assignedTo: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationAnnotationQueueItemsRequest
+ */
+declare class ListLlmEvaluationAnnotationQueueItemsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLlmEvaluationAnnotationQueueItemsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLlmEvaluationAnnotationQueueItemsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLlmEvaluationAnnotationQueueItemsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLlmEvaluationAnnotationQueueItemsRequest, _writer: BinaryWriter): void;
+    private _parent;
+    private _pageToken;
+    private _fieldMask?;
+    private _languageCode;
+    private _llmEvaluationAnnotationQueueItemFilter?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLlmEvaluationAnnotationQueueItemsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLlmEvaluationAnnotationQueueItemsRequest.AsObject>);
+    get parent(): string;
+    set parent(value: string);
+    get pageToken(): string;
+    set pageToken(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get llmEvaluationAnnotationQueueItemFilter(): LlmEvaluationAnnotationQueueItemFilter | undefined;
+    set llmEvaluationAnnotationQueueItemFilter(value: LlmEvaluationAnnotationQueueItemFilter | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLlmEvaluationAnnotationQueueItemsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLlmEvaluationAnnotationQueueItemsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLlmEvaluationAnnotationQueueItemsRequest.AsProtobufJSON;
+}
+declare namespace ListLlmEvaluationAnnotationQueueItemsRequest {
+    /**
+     * Standard JavaScript object representation for ListLlmEvaluationAnnotationQueueItemsRequest
+     */
+    interface AsObject {
+        parent: string;
+        pageToken: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        languageCode: string;
+        llmEvaluationAnnotationQueueItemFilter?: LlmEvaluationAnnotationQueueItemFilter.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for ListLlmEvaluationAnnotationQueueItemsRequest
+     */
+    interface AsProtobufJSON {
+        parent: string;
+        pageToken: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        languageCode: string;
+        llmEvaluationAnnotationQueueItemFilter: LlmEvaluationAnnotationQueueItemFilter.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationAnnotationQueueItemsResponse
+ */
+declare class ListLlmEvaluationAnnotationQueueItemsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLlmEvaluationAnnotationQueueItemsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLlmEvaluationAnnotationQueueItemsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLlmEvaluationAnnotationQueueItemsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLlmEvaluationAnnotationQueueItemsResponse, _writer: BinaryWriter): void;
+    private _llmEvaluationAnnotationQueueItems?;
+    private _nextPageToken;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLlmEvaluationAnnotationQueueItemsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLlmEvaluationAnnotationQueueItemsResponse.AsObject>);
+    get llmEvaluationAnnotationQueueItems(): LlmEvaluationAnnotationQueueItem[] | undefined;
+    set llmEvaluationAnnotationQueueItems(value: LlmEvaluationAnnotationQueueItem[] | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLlmEvaluationAnnotationQueueItemsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLlmEvaluationAnnotationQueueItemsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLlmEvaluationAnnotationQueueItemsResponse.AsProtobufJSON;
+}
+declare namespace ListLlmEvaluationAnnotationQueueItemsResponse {
+    /**
+     * Standard JavaScript object representation for ListLlmEvaluationAnnotationQueueItemsResponse
+     */
+    interface AsObject {
+        llmEvaluationAnnotationQueueItems?: LlmEvaluationAnnotationQueueItem.AsObject[];
+        nextPageToken: string;
+    }
+    /**
+     * Protobuf JSON representation for ListLlmEvaluationAnnotationQueueItemsResponse
+     */
+    interface AsProtobufJSON {
+        llmEvaluationAnnotationQueueItems: LlmEvaluationAnnotationQueueItem.AsProtobufJSON[] | null;
+        nextPageToken: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.UpdateLlmEvaluationAnnotationQueueItemRequest
+ */
+declare class UpdateLlmEvaluationAnnotationQueueItemRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): UpdateLlmEvaluationAnnotationQueueItemRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: UpdateLlmEvaluationAnnotationQueueItemRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: UpdateLlmEvaluationAnnotationQueueItemRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: UpdateLlmEvaluationAnnotationQueueItemRequest, _writer: BinaryWriter): void;
+    private _llmEvaluationAnnotationQueueItem?;
+    private _updateMask?;
+    private _fieldMask?;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateLlmEvaluationAnnotationQueueItemRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<UpdateLlmEvaluationAnnotationQueueItemRequest.AsObject>);
+    get llmEvaluationAnnotationQueueItem(): LlmEvaluationAnnotationQueueItem | undefined;
+    set llmEvaluationAnnotationQueueItem(value: LlmEvaluationAnnotationQueueItem | undefined);
+    get updateMask(): googleProtobuf005.FieldMask | undefined;
+    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): UpdateLlmEvaluationAnnotationQueueItemRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): UpdateLlmEvaluationAnnotationQueueItemRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): UpdateLlmEvaluationAnnotationQueueItemRequest.AsProtobufJSON;
+}
+declare namespace UpdateLlmEvaluationAnnotationQueueItemRequest {
+    /**
+     * Standard JavaScript object representation for UpdateLlmEvaluationAnnotationQueueItemRequest
+     */
+    interface AsObject {
+        llmEvaluationAnnotationQueueItem?: LlmEvaluationAnnotationQueueItem.AsObject;
+        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for UpdateLlmEvaluationAnnotationQueueItemRequest
+     */
+    interface AsProtobufJSON {
+        llmEvaluationAnnotationQueueItem: LlmEvaluationAnnotationQueueItem.AsProtobufJSON | null;
+        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.PromoteLlmEvaluationAnnotationQueueItemRequest
+ */
+declare class PromoteLlmEvaluationAnnotationQueueItemRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): PromoteLlmEvaluationAnnotationQueueItemRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: PromoteLlmEvaluationAnnotationQueueItemRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: PromoteLlmEvaluationAnnotationQueueItemRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: PromoteLlmEvaluationAnnotationQueueItemRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _targetDatasetName;
+    private _llmEvaluationExampleExtractionMode;
+    private _includeToolCalls;
+    private _includeRetrievalContext;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PromoteLlmEvaluationAnnotationQueueItemRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<PromoteLlmEvaluationAnnotationQueueItemRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get targetDatasetName(): string;
+    set targetDatasetName(value: string);
+    get llmEvaluationExampleExtractionMode(): LlmEvaluationExampleExtractionMode;
+    set llmEvaluationExampleExtractionMode(value: LlmEvaluationExampleExtractionMode);
+    get includeToolCalls(): boolean;
+    set includeToolCalls(value: boolean);
+    get includeRetrievalContext(): boolean;
+    set includeRetrievalContext(value: boolean);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): PromoteLlmEvaluationAnnotationQueueItemRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): PromoteLlmEvaluationAnnotationQueueItemRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): PromoteLlmEvaluationAnnotationQueueItemRequest.AsProtobufJSON;
+}
+declare namespace PromoteLlmEvaluationAnnotationQueueItemRequest {
+    /**
+     * Standard JavaScript object representation for PromoteLlmEvaluationAnnotationQueueItemRequest
+     */
+    interface AsObject {
+        name: string;
+        targetDatasetName: string;
+        llmEvaluationExampleExtractionMode: LlmEvaluationExampleExtractionMode;
+        includeToolCalls: boolean;
+        includeRetrievalContext: boolean;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for PromoteLlmEvaluationAnnotationQueueItemRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        targetDatasetName: string;
+        llmEvaluationExampleExtractionMode: string;
+        includeToolCalls: boolean;
+        includeRetrievalContext: boolean;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.PromoteLlmEvaluationAnnotationQueueItemResponse
+ */
+declare class PromoteLlmEvaluationAnnotationQueueItemResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): PromoteLlmEvaluationAnnotationQueueItemResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: PromoteLlmEvaluationAnnotationQueueItemResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: PromoteLlmEvaluationAnnotationQueueItemResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: PromoteLlmEvaluationAnnotationQueueItemResponse, _writer: BinaryWriter): void;
+    private _llmEvaluationExamples?;
+    private _llmEvaluationAnnotationQueueItem?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PromoteLlmEvaluationAnnotationQueueItemResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<PromoteLlmEvaluationAnnotationQueueItemResponse.AsObject>);
+    get llmEvaluationExamples(): LlmEvaluationExample[] | undefined;
+    set llmEvaluationExamples(value: LlmEvaluationExample[] | undefined);
+    get llmEvaluationAnnotationQueueItem(): LlmEvaluationAnnotationQueueItem | undefined;
+    set llmEvaluationAnnotationQueueItem(value: LlmEvaluationAnnotationQueueItem | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): PromoteLlmEvaluationAnnotationQueueItemResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): PromoteLlmEvaluationAnnotationQueueItemResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): PromoteLlmEvaluationAnnotationQueueItemResponse.AsProtobufJSON;
+}
+declare namespace PromoteLlmEvaluationAnnotationQueueItemResponse {
+    /**
+     * Standard JavaScript object representation for PromoteLlmEvaluationAnnotationQueueItemResponse
+     */
+    interface AsObject {
+        llmEvaluationExamples?: LlmEvaluationExample.AsObject[];
+        llmEvaluationAnnotationQueueItem?: LlmEvaluationAnnotationQueueItem.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for PromoteLlmEvaluationAnnotationQueueItemResponse
+     */
+    interface AsProtobufJSON {
+        llmEvaluationExamples: LlmEvaluationExample.AsProtobufJSON[] | null;
+        llmEvaluationAnnotationQueueItem: LlmEvaluationAnnotationQueueItem.AsProtobufJSON | null;
     }
 }
 
@@ -60017,6 +62002,94 @@ declare class LlmEvaluationsClient {
          * @returns Observable<GrpcEvent<thisProto.GetLlmEvaluationAbExperimentResultsResponse>>
          */
         llmEvaluationGetAbExperimentResults: (requestData: GetLlmEvaluationAbExperimentResultsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<GetLlmEvaluationAbExperimentResultsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.LlmEvaluationOnlineConfig>>
+         */
+        llmEvaluationCreateOnlineConfig: (requestData: CreateLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<LlmEvaluationOnlineConfig>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineConfig
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.LlmEvaluationOnlineConfig>>
+         */
+        llmEvaluationGetOnlineConfig: (requestData: GetLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<LlmEvaluationOnlineConfig>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineConfigs
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListLlmEvaluationOnlineConfigsResponse>>
+         */
+        llmEvaluationListOnlineConfigs: (requestData: ListLlmEvaluationOnlineConfigsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListLlmEvaluationOnlineConfigsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateOnlineConfig
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.LlmEvaluationOnlineConfig>>
+         */
+        llmEvaluationUpdateOnlineConfig: (requestData: UpdateLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<LlmEvaluationOnlineConfig>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteOnlineConfig
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
+         */
+        llmEvaluationDeleteOnlineConfig: (requestData: DeleteLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineResult
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.LlmEvaluationOnlineResult>>
+         */
+        llmEvaluationGetOnlineResult: (requestData: GetLlmEvaluationOnlineResultRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<LlmEvaluationOnlineResult>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineResults
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListLlmEvaluationOnlineResultsResponse>>
+         */
+        llmEvaluationListOnlineResults: (requestData: ListLlmEvaluationOnlineResultsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListLlmEvaluationOnlineResultsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetAnnotationQueueItem
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAnnotationQueueItem>>
+         */
+        llmEvaluationGetAnnotationQueueItem: (requestData: GetLlmEvaluationAnnotationQueueItemRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<LlmEvaluationAnnotationQueueItem>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationListAnnotationQueueItems
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListLlmEvaluationAnnotationQueueItemsResponse>>
+         */
+        llmEvaluationListAnnotationQueueItems: (requestData: ListLlmEvaluationAnnotationQueueItemsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListLlmEvaluationAnnotationQueueItemsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAnnotationQueueItem
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAnnotationQueueItem>>
+         */
+        llmEvaluationUpdateAnnotationQueueItem: (requestData: UpdateLlmEvaluationAnnotationQueueItemRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<LlmEvaluationAnnotationQueueItem>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationPromoteAnnotationQueueItem
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.PromoteLlmEvaluationAnnotationQueueItemResponse>>
+         */
+        llmEvaluationPromoteAnnotationQueueItem: (requestData: PromoteLlmEvaluationAnnotationQueueItemRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<PromoteLlmEvaluationAnnotationQueueItemResponse>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -60475,6 +62548,94 @@ declare class LlmEvaluationsClient {
      * @returns Observable<thisProto.GetLlmEvaluationAbExperimentResultsResponse>
      */
     llmEvaluationGetAbExperimentResults(requestData: GetLlmEvaluationAbExperimentResultsRequest, requestMetadata?: GrpcMetadata): Observable<GetLlmEvaluationAbExperimentResultsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.LlmEvaluationOnlineConfig>
+     */
+    llmEvaluationCreateOnlineConfig(requestData: CreateLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata): Observable<LlmEvaluationOnlineConfig>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineConfig
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.LlmEvaluationOnlineConfig>
+     */
+    llmEvaluationGetOnlineConfig(requestData: GetLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata): Observable<LlmEvaluationOnlineConfig>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineConfigs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListLlmEvaluationOnlineConfigsResponse>
+     */
+    llmEvaluationListOnlineConfigs(requestData: ListLlmEvaluationOnlineConfigsRequest, requestMetadata?: GrpcMetadata): Observable<ListLlmEvaluationOnlineConfigsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateOnlineConfig
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.LlmEvaluationOnlineConfig>
+     */
+    llmEvaluationUpdateOnlineConfig(requestData: UpdateLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata): Observable<LlmEvaluationOnlineConfig>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteOnlineConfig
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf002.Empty>
+     */
+    llmEvaluationDeleteOnlineConfig(requestData: DeleteLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineResult
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.LlmEvaluationOnlineResult>
+     */
+    llmEvaluationGetOnlineResult(requestData: GetLlmEvaluationOnlineResultRequest, requestMetadata?: GrpcMetadata): Observable<LlmEvaluationOnlineResult>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineResults
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListLlmEvaluationOnlineResultsResponse>
+     */
+    llmEvaluationListOnlineResults(requestData: ListLlmEvaluationOnlineResultsRequest, requestMetadata?: GrpcMetadata): Observable<ListLlmEvaluationOnlineResultsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAnnotationQueueItem
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.LlmEvaluationAnnotationQueueItem>
+     */
+    llmEvaluationGetAnnotationQueueItem(requestData: GetLlmEvaluationAnnotationQueueItemRequest, requestMetadata?: GrpcMetadata): Observable<LlmEvaluationAnnotationQueueItem>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationListAnnotationQueueItems
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListLlmEvaluationAnnotationQueueItemsResponse>
+     */
+    llmEvaluationListAnnotationQueueItems(requestData: ListLlmEvaluationAnnotationQueueItemsRequest, requestMetadata?: GrpcMetadata): Observable<ListLlmEvaluationAnnotationQueueItemsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAnnotationQueueItem
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.LlmEvaluationAnnotationQueueItem>
+     */
+    llmEvaluationUpdateAnnotationQueueItem(requestData: UpdateLlmEvaluationAnnotationQueueItemRequest, requestMetadata?: GrpcMetadata): Observable<LlmEvaluationAnnotationQueueItem>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationPromoteAnnotationQueueItem
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.PromoteLlmEvaluationAnnotationQueueItemResponse>
+     */
+    llmEvaluationPromoteAnnotationQueueItem(requestData: PromoteLlmEvaluationAnnotationQueueItemRequest, requestMetadata?: GrpcMetadata): Observable<PromoteLlmEvaluationAnnotationQueueItemResponse>;
     static ɵfac: i0.ɵɵFactoryDeclaration<LlmEvaluationsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<LlmEvaluationsClient>;
 }
@@ -61751,4 +63912,4 @@ declare namespace CustomHttpPattern {
     }
 }
 
-export { AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, AudioFileResource, AudioFileResourceType, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KeyValuePair, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, LoginRequest, LoginResponse, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, QAClient, QueryInput, QueryParameters, QueryResult, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReindexAgentRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
+export { AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, AudioFileResource, AudioFileResourceType, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KeyValuePair, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, LoginRequest, LoginResponse, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReindexAgentRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };

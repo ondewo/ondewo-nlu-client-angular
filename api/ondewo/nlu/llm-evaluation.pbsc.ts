@@ -1252,6 +1252,248 @@ export class LlmEvaluationsClient {
         requestClass: thisProto.GetLlmEvaluationAbExperimentResultsRequest,
         responseClass: thisProto.GetLlmEvaluationAbExperimentResultsResponse
       });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationOnlineConfig>>
+     */
+    llmEvaluationCreateOnlineConfig: (
+      requestData: thisProto.CreateLlmEvaluationOnlineConfigRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationOnlineConfig>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.CreateLlmEvaluationOnlineConfigRequest,
+        responseClass: thisProto.LlmEvaluationOnlineConfig
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineConfig
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationOnlineConfig>>
+     */
+    llmEvaluationGetOnlineConfig: (
+      requestData: thisProto.GetLlmEvaluationOnlineConfigRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationOnlineConfig>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineConfig',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetLlmEvaluationOnlineConfigRequest,
+        responseClass: thisProto.LlmEvaluationOnlineConfig
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineConfigs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.ListLlmEvaluationOnlineConfigsResponse>>
+     */
+    llmEvaluationListOnlineConfigs: (
+      requestData: thisProto.ListLlmEvaluationOnlineConfigsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.ListLlmEvaluationOnlineConfigsResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineConfigs',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ListLlmEvaluationOnlineConfigsRequest,
+        responseClass: thisProto.ListLlmEvaluationOnlineConfigsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateOnlineConfig
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationOnlineConfig>>
+     */
+    llmEvaluationUpdateOnlineConfig: (
+      requestData: thisProto.UpdateLlmEvaluationOnlineConfigRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationOnlineConfig>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateOnlineConfig',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.UpdateLlmEvaluationOnlineConfigRequest,
+        responseClass: thisProto.LlmEvaluationOnlineConfig
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteOnlineConfig
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
+     */
+    llmEvaluationDeleteOnlineConfig: (
+      requestData: thisProto.DeleteLlmEvaluationOnlineConfigRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<googleProtobuf002.Empty>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteOnlineConfig',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.DeleteLlmEvaluationOnlineConfigRequest,
+        responseClass: googleProtobuf002.Empty
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineResult
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationOnlineResult>>
+     */
+    llmEvaluationGetOnlineResult: (
+      requestData: thisProto.GetLlmEvaluationOnlineResultRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationOnlineResult>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineResult',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetLlmEvaluationOnlineResultRequest,
+        responseClass: thisProto.LlmEvaluationOnlineResult
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineResults
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.ListLlmEvaluationOnlineResultsResponse>>
+     */
+    llmEvaluationListOnlineResults: (
+      requestData: thisProto.ListLlmEvaluationOnlineResultsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.ListLlmEvaluationOnlineResultsResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineResults',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ListLlmEvaluationOnlineResultsRequest,
+        responseClass: thisProto.ListLlmEvaluationOnlineResultsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetAnnotationQueueItem
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAnnotationQueueItem>>
+     */
+    llmEvaluationGetAnnotationQueueItem: (
+      requestData: thisProto.GetLlmEvaluationAnnotationQueueItemRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationAnnotationQueueItem>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAnnotationQueueItem',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetLlmEvaluationAnnotationQueueItemRequest,
+        responseClass: thisProto.LlmEvaluationAnnotationQueueItem
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationListAnnotationQueueItems
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.ListLlmEvaluationAnnotationQueueItemsResponse>>
+     */
+    llmEvaluationListAnnotationQueueItems: (
+      requestData: thisProto.ListLlmEvaluationAnnotationQueueItemsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.ListLlmEvaluationAnnotationQueueItemsResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path:
+          '/ondewo.nlu.LlmEvaluations/LlmEvaluationListAnnotationQueueItems',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ListLlmEvaluationAnnotationQueueItemsRequest,
+        responseClass: thisProto.ListLlmEvaluationAnnotationQueueItemsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAnnotationQueueItem
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAnnotationQueueItem>>
+     */
+    llmEvaluationUpdateAnnotationQueueItem: (
+      requestData: thisProto.UpdateLlmEvaluationAnnotationQueueItemRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationAnnotationQueueItem>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path:
+          '/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAnnotationQueueItem',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.UpdateLlmEvaluationAnnotationQueueItemRequest,
+        responseClass: thisProto.LlmEvaluationAnnotationQueueItem
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationPromoteAnnotationQueueItem
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.PromoteLlmEvaluationAnnotationQueueItemResponse>>
+     */
+    llmEvaluationPromoteAnnotationQueueItem: (
+      requestData: thisProto.PromoteLlmEvaluationAnnotationQueueItemRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.PromoteLlmEvaluationAnnotationQueueItemResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path:
+          '/ondewo.nlu.LlmEvaluations/LlmEvaluationPromoteAnnotationQueueItem',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.PromoteLlmEvaluationAnnotationQueueItemRequest,
+        responseClass: thisProto.PromoteLlmEvaluationAnnotationQueueItemResponse
+      });
     }
   };
 
@@ -2175,6 +2417,182 @@ export class LlmEvaluationsClient {
   ): Observable<thisProto.GetLlmEvaluationAbExperimentResultsResponse> {
     return this.$raw
       .llmEvaluationGetAbExperimentResults(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationOnlineConfig>
+   */
+  llmEvaluationCreateOnlineConfig(
+    requestData: thisProto.CreateLlmEvaluationOnlineConfigRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationOnlineConfig> {
+    return this.$raw
+      .llmEvaluationCreateOnlineConfig(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineConfig
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationOnlineConfig>
+   */
+  llmEvaluationGetOnlineConfig(
+    requestData: thisProto.GetLlmEvaluationOnlineConfigRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationOnlineConfig> {
+    return this.$raw
+      .llmEvaluationGetOnlineConfig(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineConfigs
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.ListLlmEvaluationOnlineConfigsResponse>
+   */
+  llmEvaluationListOnlineConfigs(
+    requestData: thisProto.ListLlmEvaluationOnlineConfigsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.ListLlmEvaluationOnlineConfigsResponse> {
+    return this.$raw
+      .llmEvaluationListOnlineConfigs(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateOnlineConfig
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationOnlineConfig>
+   */
+  llmEvaluationUpdateOnlineConfig(
+    requestData: thisProto.UpdateLlmEvaluationOnlineConfigRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationOnlineConfig> {
+    return this.$raw
+      .llmEvaluationUpdateOnlineConfig(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteOnlineConfig
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<googleProtobuf002.Empty>
+   */
+  llmEvaluationDeleteOnlineConfig(
+    requestData: thisProto.DeleteLlmEvaluationOnlineConfigRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<googleProtobuf002.Empty> {
+    return this.$raw
+      .llmEvaluationDeleteOnlineConfig(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineResult
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationOnlineResult>
+   */
+  llmEvaluationGetOnlineResult(
+    requestData: thisProto.GetLlmEvaluationOnlineResultRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationOnlineResult> {
+    return this.$raw
+      .llmEvaluationGetOnlineResult(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineResults
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.ListLlmEvaluationOnlineResultsResponse>
+   */
+  llmEvaluationListOnlineResults(
+    requestData: thisProto.ListLlmEvaluationOnlineResultsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.ListLlmEvaluationOnlineResultsResponse> {
+    return this.$raw
+      .llmEvaluationListOnlineResults(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAnnotationQueueItem
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAnnotationQueueItem>
+   */
+  llmEvaluationGetAnnotationQueueItem(
+    requestData: thisProto.GetLlmEvaluationAnnotationQueueItemRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAnnotationQueueItem> {
+    return this.$raw
+      .llmEvaluationGetAnnotationQueueItem(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationListAnnotationQueueItems
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.ListLlmEvaluationAnnotationQueueItemsResponse>
+   */
+  llmEvaluationListAnnotationQueueItems(
+    requestData: thisProto.ListLlmEvaluationAnnotationQueueItemsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.ListLlmEvaluationAnnotationQueueItemsResponse> {
+    return this.$raw
+      .llmEvaluationListAnnotationQueueItems(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAnnotationQueueItem
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAnnotationQueueItem>
+   */
+  llmEvaluationUpdateAnnotationQueueItem(
+    requestData: thisProto.UpdateLlmEvaluationAnnotationQueueItemRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAnnotationQueueItem> {
+    return this.$raw
+      .llmEvaluationUpdateAnnotationQueueItem(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationPromoteAnnotationQueueItem
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.PromoteLlmEvaluationAnnotationQueueItemResponse>
+   */
+  llmEvaluationPromoteAnnotationQueueItem(
+    requestData: thisProto.PromoteLlmEvaluationAnnotationQueueItemRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.PromoteLlmEvaluationAnnotationQueueItemResponse> {
+    return this.$raw
+      .llmEvaluationPromoteAnnotationQueueItem(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 }
