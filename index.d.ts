@@ -12283,6 +12283,14 @@ declare enum LlmEvaluationAbExperimentStatus {
     LLM_EVALUATION_AB_EXPERIMENT_STATUS_STOPPED = 3,
     LLM_EVALUATION_AB_EXPERIMENT_STATUS_ARCHIVED = 4
 }
+declare enum LlmEvaluationAbOptimizeMetric {
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_UNSPECIFIED = 0,
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_PASS_RATE = 1,
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_ERROR_RATE = 2,
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_MEAN_LATENCY = 3,
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_CRITERION_SCORE = 4,
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_SAFETY_SCORE = 5
+}
 declare enum LlmEvaluationAnnotationStatus {
     LLM_EVALUATION_ANNOTATION_STATUS_UNSPECIFIED = 0,
     LLM_EVALUATION_ANNOTATION_STATUS_PENDING = 1,
@@ -20808,6 +20816,95 @@ declare namespace LlmEvaluationAbTrafficConfig {
     }
 }
 /**
+ * Message implementation for ondewo.nlu.RagVariantConfig
+ */
+declare class RagVariantConfig implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): RagVariantConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: RagVariantConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: RagVariantConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: RagVariantConfig, _writer: BinaryWriter): void;
+    private _chatAssistantLlmCcaiServiceName;
+    private _topK;
+    private _similarityThreshold;
+    private _vectorSimilarityWeight;
+    private _rerankModelCcaiServiceName;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RagVariantConfig to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<RagVariantConfig.AsObject>);
+    get chatAssistantLlmCcaiServiceName(): string;
+    set chatAssistantLlmCcaiServiceName(value: string);
+    get topK(): number;
+    set topK(value: number);
+    get similarityThreshold(): number;
+    set similarityThreshold(value: number);
+    get vectorSimilarityWeight(): number;
+    set vectorSimilarityWeight(value: number);
+    get rerankModelCcaiServiceName(): string;
+    set rerankModelCcaiServiceName(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): RagVariantConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): RagVariantConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): RagVariantConfig.AsProtobufJSON;
+}
+declare namespace RagVariantConfig {
+    /**
+     * Standard JavaScript object representation for RagVariantConfig
+     */
+    interface AsObject {
+        chatAssistantLlmCcaiServiceName: string;
+        topK: number;
+        similarityThreshold: number;
+        vectorSimilarityWeight: number;
+        rerankModelCcaiServiceName: string;
+    }
+    /**
+     * Protobuf JSON representation for RagVariantConfig
+     */
+    interface AsProtobufJSON {
+        chatAssistantLlmCcaiServiceName: string;
+        topK: number;
+        similarityThreshold: number;
+        vectorSimilarityWeight: number;
+        rerankModelCcaiServiceName: string;
+    }
+}
+/**
  * Message implementation for ondewo.nlu.LlmEvaluationAbVariant
  */
 declare class LlmEvaluationAbVariant implements GrpcMessage {
@@ -20842,6 +20939,7 @@ declare class LlmEvaluationAbVariant implements GrpcMessage {
     private _modelName;
     private _promptVersion;
     private _config?;
+    private _ragVariantConfig?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of LlmEvaluationAbVariant to deeply clone from
@@ -20863,6 +20961,8 @@ declare class LlmEvaluationAbVariant implements GrpcMessage {
     set promptVersion(value: string);
     get config(): googleProtobuf005.Struct | undefined;
     set config(value: googleProtobuf005.Struct | undefined);
+    get ragVariantConfig(): RagVariantConfig | undefined;
+    set ragVariantConfig(value: RagVariantConfig | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -20896,6 +20996,7 @@ declare namespace LlmEvaluationAbVariant {
         modelName: string;
         promptVersion: string;
         config?: googleProtobuf005.Struct.AsObject;
+        ragVariantConfig?: RagVariantConfig.AsObject;
     }
     /**
      * Protobuf JSON representation for LlmEvaluationAbVariant
@@ -20909,6 +21010,7 @@ declare namespace LlmEvaluationAbVariant {
         modelName: string;
         promptVersion: string;
         config: googleProtobuf005.Struct.AsProtobufJSON | null;
+        ragVariantConfig: RagVariantConfig.AsProtobufJSON | null;
     }
 }
 /**
@@ -20952,6 +21054,7 @@ declare class LlmEvaluationAbExperiment implements GrpcMessage {
     private _modifiedBy;
     private _parent;
     private _languageCode;
+    private _llmEvaluationAbRolloutDecisionName;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of LlmEvaluationAbExperiment to deeply clone from
@@ -20985,6 +21088,8 @@ declare class LlmEvaluationAbExperiment implements GrpcMessage {
     set parent(value: string);
     get languageCode(): string;
     set languageCode(value: string);
+    get llmEvaluationAbRolloutDecisionName(): string;
+    set llmEvaluationAbRolloutDecisionName(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -21024,6 +21129,7 @@ declare namespace LlmEvaluationAbExperiment {
         modifiedBy: string;
         parent: string;
         languageCode: string;
+        llmEvaluationAbRolloutDecisionName: string;
     }
     /**
      * Protobuf JSON representation for LlmEvaluationAbExperiment
@@ -21043,6 +21149,7 @@ declare namespace LlmEvaluationAbExperiment {
         modifiedBy: string;
         parent: string;
         languageCode: string;
+        llmEvaluationAbRolloutDecisionName: string;
     }
 }
 /**
@@ -22006,6 +22113,840 @@ declare namespace GetLlmEvaluationAbExperimentResultsResponse {
     interface AsProtobufJSON {
         llmEvaluationAbExperimentName: string;
         variantResults: LlmEvaluationAbVariantResult.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAbRolloutRecommendation
+ */
+declare class LlmEvaluationAbRolloutRecommendation implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationAbRolloutRecommendation;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationAbRolloutRecommendation): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationAbRolloutRecommendation, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationAbRolloutRecommendation, _writer: BinaryWriter): void;
+    private _optimizeMetric;
+    private _winnerVariantId;
+    private _controlVariantId;
+    private _pValue;
+    private _effectSize;
+    private _isSignificant;
+    private _sessionsPerVariant;
+    private _needsMoreData;
+    private _reason;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationAbRolloutRecommendation to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationAbRolloutRecommendation.AsObject>);
+    get optimizeMetric(): LlmEvaluationAbOptimizeMetric;
+    set optimizeMetric(value: LlmEvaluationAbOptimizeMetric);
+    get winnerVariantId(): string;
+    set winnerVariantId(value: string);
+    get controlVariantId(): string;
+    set controlVariantId(value: string);
+    get pValue(): number;
+    set pValue(value: number);
+    get effectSize(): number;
+    set effectSize(value: number);
+    get isSignificant(): boolean;
+    set isSignificant(value: boolean);
+    get sessionsPerVariant(): {
+        [prop: string]: string;
+    };
+    set sessionsPerVariant(value: {
+        [prop: string]: string;
+    });
+    get needsMoreData(): boolean;
+    set needsMoreData(value: boolean);
+    get reason(): string;
+    set reason(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationAbRolloutRecommendation.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationAbRolloutRecommendation.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationAbRolloutRecommendation.AsProtobufJSON;
+}
+declare namespace LlmEvaluationAbRolloutRecommendation {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationAbRolloutRecommendation
+     */
+    interface AsObject {
+        optimizeMetric: LlmEvaluationAbOptimizeMetric;
+        winnerVariantId: string;
+        controlVariantId: string;
+        pValue: number;
+        effectSize: number;
+        isSignificant: boolean;
+        sessionsPerVariant: {
+            [prop: string]: string;
+        };
+        needsMoreData: boolean;
+        reason: string;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationAbRolloutRecommendation
+     */
+    interface AsProtobufJSON {
+        optimizeMetric: string;
+        winnerVariantId: string;
+        controlVariantId: string;
+        pValue: number;
+        effectSize: number;
+        isSignificant: boolean;
+        sessionsPerVariant: {
+            [prop: string]: string;
+        };
+        needsMoreData: boolean;
+        reason: string;
+    }
+    /**
+     * Message implementation for ondewo.nlu.LlmEvaluationAbRolloutRecommendation.SessionsPerVariantEntry
+     */
+    class SessionsPerVariantEntry implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): SessionsPerVariantEntry;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: SessionsPerVariantEntry): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: SessionsPerVariantEntry, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: SessionsPerVariantEntry, _writer: BinaryWriter): void;
+        private _key;
+        private _value;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of SessionsPerVariantEntry to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<SessionsPerVariantEntry.AsObject>);
+        get key(): string;
+        set key(value: string);
+        get value(): string;
+        set value(value: string);
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): SessionsPerVariantEntry.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): SessionsPerVariantEntry.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): SessionsPerVariantEntry.AsProtobufJSON;
+    }
+    namespace SessionsPerVariantEntry {
+        /**
+         * Standard JavaScript object representation for SessionsPerVariantEntry
+         */
+        interface AsObject {
+            key: string;
+            value: string;
+        }
+        /**
+         * Protobuf JSON representation for SessionsPerVariantEntry
+         */
+        interface AsProtobufJSON {
+            key: string;
+            value: string;
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAbRolloutDecision
+ */
+declare class LlmEvaluationAbRolloutDecision implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationAbRolloutDecision;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationAbRolloutDecision): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationAbRolloutDecision, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationAbRolloutDecision, _writer: BinaryWriter): void;
+    private _name;
+    private _llmEvaluationAbExperimentName;
+    private _appliedVariantId;
+    private _optimizeMetric;
+    private _pValue;
+    private _effectSize;
+    private _appliedAt?;
+    private _appliedBy;
+    private _createdAt?;
+    private _modifiedAt?;
+    private _createdBy;
+    private _modifiedBy;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationAbRolloutDecision to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationAbRolloutDecision.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get llmEvaluationAbExperimentName(): string;
+    set llmEvaluationAbExperimentName(value: string);
+    get appliedVariantId(): string;
+    set appliedVariantId(value: string);
+    get optimizeMetric(): LlmEvaluationAbOptimizeMetric;
+    set optimizeMetric(value: LlmEvaluationAbOptimizeMetric);
+    get pValue(): number;
+    set pValue(value: number);
+    get effectSize(): number;
+    set effectSize(value: number);
+    get appliedAt(): googleProtobuf005.Timestamp | undefined;
+    set appliedAt(value: googleProtobuf005.Timestamp | undefined);
+    get appliedBy(): string;
+    set appliedBy(value: string);
+    get createdAt(): googleProtobuf005.Timestamp | undefined;
+    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdBy(): string;
+    set createdBy(value: string);
+    get modifiedBy(): string;
+    set modifiedBy(value: string);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationAbRolloutDecision.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationAbRolloutDecision.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationAbRolloutDecision.AsProtobufJSON;
+}
+declare namespace LlmEvaluationAbRolloutDecision {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationAbRolloutDecision
+     */
+    interface AsObject {
+        name: string;
+        llmEvaluationAbExperimentName: string;
+        appliedVariantId: string;
+        optimizeMetric: LlmEvaluationAbOptimizeMetric;
+        pValue: number;
+        effectSize: number;
+        appliedAt?: googleProtobuf005.Timestamp.AsObject;
+        appliedBy: string;
+        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdBy: string;
+        modifiedBy: string;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationAbRolloutDecision
+     */
+    interface AsProtobufJSON {
+        name: string;
+        llmEvaluationAbExperimentName: string;
+        appliedVariantId: string;
+        optimizeMetric: string;
+        pValue: number;
+        effectSize: number;
+        appliedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        appliedBy: string;
+        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdBy: string;
+        modifiedBy: string;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetLlmEvaluationAbRolloutRecommendationRequest
+ */
+declare class GetLlmEvaluationAbRolloutRecommendationRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetLlmEvaluationAbRolloutRecommendationRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetLlmEvaluationAbRolloutRecommendationRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetLlmEvaluationAbRolloutRecommendationRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetLlmEvaluationAbRolloutRecommendationRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _optimizeMetric;
+    private _confidenceLevel;
+    private _minSessionsPerVariant;
+    private _minEffectSize;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetLlmEvaluationAbRolloutRecommendationRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetLlmEvaluationAbRolloutRecommendationRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get optimizeMetric(): LlmEvaluationAbOptimizeMetric;
+    set optimizeMetric(value: LlmEvaluationAbOptimizeMetric);
+    get confidenceLevel(): number;
+    set confidenceLevel(value: number);
+    get minSessionsPerVariant(): number;
+    set minSessionsPerVariant(value: number);
+    get minEffectSize(): number;
+    set minEffectSize(value: number);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetLlmEvaluationAbRolloutRecommendationRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetLlmEvaluationAbRolloutRecommendationRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetLlmEvaluationAbRolloutRecommendationRequest.AsProtobufJSON;
+}
+declare namespace GetLlmEvaluationAbRolloutRecommendationRequest {
+    /**
+     * Standard JavaScript object representation for GetLlmEvaluationAbRolloutRecommendationRequest
+     */
+    interface AsObject {
+        name: string;
+        optimizeMetric: LlmEvaluationAbOptimizeMetric;
+        confidenceLevel: number;
+        minSessionsPerVariant: number;
+        minEffectSize: number;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for GetLlmEvaluationAbRolloutRecommendationRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        optimizeMetric: string;
+        confidenceLevel: number;
+        minSessionsPerVariant: number;
+        minEffectSize: number;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ApplyLlmEvaluationAbRolloutRequest
+ */
+declare class ApplyLlmEvaluationAbRolloutRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ApplyLlmEvaluationAbRolloutRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ApplyLlmEvaluationAbRolloutRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ApplyLlmEvaluationAbRolloutRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ApplyLlmEvaluationAbRolloutRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _variantId;
+    private _optimizeMetric;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ApplyLlmEvaluationAbRolloutRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ApplyLlmEvaluationAbRolloutRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get variantId(): string;
+    set variantId(value: string);
+    get optimizeMetric(): LlmEvaluationAbOptimizeMetric;
+    set optimizeMetric(value: LlmEvaluationAbOptimizeMetric);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ApplyLlmEvaluationAbRolloutRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ApplyLlmEvaluationAbRolloutRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ApplyLlmEvaluationAbRolloutRequest.AsProtobufJSON;
+}
+declare namespace ApplyLlmEvaluationAbRolloutRequest {
+    /**
+     * Standard JavaScript object representation for ApplyLlmEvaluationAbRolloutRequest
+     */
+    interface AsObject {
+        name: string;
+        variantId: string;
+        optimizeMetric: LlmEvaluationAbOptimizeMetric;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for ApplyLlmEvaluationAbRolloutRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        variantId: string;
+        optimizeMetric: string;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetLlmEvaluationAbRolloutDecisionRequest
+ */
+declare class GetLlmEvaluationAbRolloutDecisionRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetLlmEvaluationAbRolloutDecisionRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetLlmEvaluationAbRolloutDecisionRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetLlmEvaluationAbRolloutDecisionRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetLlmEvaluationAbRolloutDecisionRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _fieldMask?;
+    private _parent;
+    private _languageCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetLlmEvaluationAbRolloutDecisionRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetLlmEvaluationAbRolloutDecisionRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get parent(): string;
+    set parent(value: string);
+    get languageCode(): string;
+    set languageCode(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetLlmEvaluationAbRolloutDecisionRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetLlmEvaluationAbRolloutDecisionRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetLlmEvaluationAbRolloutDecisionRequest.AsProtobufJSON;
+}
+declare namespace GetLlmEvaluationAbRolloutDecisionRequest {
+    /**
+     * Standard JavaScript object representation for GetLlmEvaluationAbRolloutDecisionRequest
+     */
+    interface AsObject {
+        name: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        parent: string;
+        languageCode: string;
+    }
+    /**
+     * Protobuf JSON representation for GetLlmEvaluationAbRolloutDecisionRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        parent: string;
+        languageCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.LlmEvaluationAbRolloutDecisionFilter
+ */
+declare class LlmEvaluationAbRolloutDecisionFilter implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): LlmEvaluationAbRolloutDecisionFilter;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: LlmEvaluationAbRolloutDecisionFilter): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: LlmEvaluationAbRolloutDecisionFilter, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: LlmEvaluationAbRolloutDecisionFilter, _writer: BinaryWriter): void;
+    private _llmEvaluationAbExperimentName;
+    private _appliedBy;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of LlmEvaluationAbRolloutDecisionFilter to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<LlmEvaluationAbRolloutDecisionFilter.AsObject>);
+    get llmEvaluationAbExperimentName(): string;
+    set llmEvaluationAbExperimentName(value: string);
+    get appliedBy(): string;
+    set appliedBy(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): LlmEvaluationAbRolloutDecisionFilter.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): LlmEvaluationAbRolloutDecisionFilter.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): LlmEvaluationAbRolloutDecisionFilter.AsProtobufJSON;
+}
+declare namespace LlmEvaluationAbRolloutDecisionFilter {
+    /**
+     * Standard JavaScript object representation for LlmEvaluationAbRolloutDecisionFilter
+     */
+    interface AsObject {
+        llmEvaluationAbExperimentName: string;
+        appliedBy: string;
+    }
+    /**
+     * Protobuf JSON representation for LlmEvaluationAbRolloutDecisionFilter
+     */
+    interface AsProtobufJSON {
+        llmEvaluationAbExperimentName: string;
+        appliedBy: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationAbRolloutDecisionsRequest
+ */
+declare class ListLlmEvaluationAbRolloutDecisionsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLlmEvaluationAbRolloutDecisionsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLlmEvaluationAbRolloutDecisionsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLlmEvaluationAbRolloutDecisionsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLlmEvaluationAbRolloutDecisionsRequest, _writer: BinaryWriter): void;
+    private _parent;
+    private _pageToken;
+    private _fieldMask?;
+    private _languageCode;
+    private _llmEvaluationAbRolloutDecisionFilter?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLlmEvaluationAbRolloutDecisionsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLlmEvaluationAbRolloutDecisionsRequest.AsObject>);
+    get parent(): string;
+    set parent(value: string);
+    get pageToken(): string;
+    set pageToken(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get llmEvaluationAbRolloutDecisionFilter(): LlmEvaluationAbRolloutDecisionFilter | undefined;
+    set llmEvaluationAbRolloutDecisionFilter(value: LlmEvaluationAbRolloutDecisionFilter | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLlmEvaluationAbRolloutDecisionsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLlmEvaluationAbRolloutDecisionsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLlmEvaluationAbRolloutDecisionsRequest.AsProtobufJSON;
+}
+declare namespace ListLlmEvaluationAbRolloutDecisionsRequest {
+    /**
+     * Standard JavaScript object representation for ListLlmEvaluationAbRolloutDecisionsRequest
+     */
+    interface AsObject {
+        parent: string;
+        pageToken: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        languageCode: string;
+        llmEvaluationAbRolloutDecisionFilter?: LlmEvaluationAbRolloutDecisionFilter.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for ListLlmEvaluationAbRolloutDecisionsRequest
+     */
+    interface AsProtobufJSON {
+        parent: string;
+        pageToken: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        languageCode: string;
+        llmEvaluationAbRolloutDecisionFilter: LlmEvaluationAbRolloutDecisionFilter.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLlmEvaluationAbRolloutDecisionsResponse
+ */
+declare class ListLlmEvaluationAbRolloutDecisionsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLlmEvaluationAbRolloutDecisionsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLlmEvaluationAbRolloutDecisionsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLlmEvaluationAbRolloutDecisionsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLlmEvaluationAbRolloutDecisionsResponse, _writer: BinaryWriter): void;
+    private _llmEvaluationAbRolloutDecisions?;
+    private _nextPageToken;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLlmEvaluationAbRolloutDecisionsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLlmEvaluationAbRolloutDecisionsResponse.AsObject>);
+    get llmEvaluationAbRolloutDecisions(): LlmEvaluationAbRolloutDecision[] | undefined;
+    set llmEvaluationAbRolloutDecisions(value: LlmEvaluationAbRolloutDecision[] | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLlmEvaluationAbRolloutDecisionsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLlmEvaluationAbRolloutDecisionsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLlmEvaluationAbRolloutDecisionsResponse.AsProtobufJSON;
+}
+declare namespace ListLlmEvaluationAbRolloutDecisionsResponse {
+    /**
+     * Standard JavaScript object representation for ListLlmEvaluationAbRolloutDecisionsResponse
+     */
+    interface AsObject {
+        llmEvaluationAbRolloutDecisions?: LlmEvaluationAbRolloutDecision.AsObject[];
+        nextPageToken: string;
+    }
+    /**
+     * Protobuf JSON representation for ListLlmEvaluationAbRolloutDecisionsResponse
+     */
+    interface AsProtobufJSON {
+        llmEvaluationAbRolloutDecisions: LlmEvaluationAbRolloutDecision.AsProtobufJSON[] | null;
+        nextPageToken: string;
     }
 }
 /**
@@ -62003,6 +62944,38 @@ declare class LlmEvaluationsClient {
          */
         llmEvaluationGetAbExperimentResults: (requestData: GetLlmEvaluationAbExperimentResultsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<GetLlmEvaluationAbExperimentResultsResponse>>;
         /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutRecommendation
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbRolloutRecommendation>>
+         */
+        llmEvaluationGetAbRolloutRecommendation: (requestData: GetLlmEvaluationAbRolloutRecommendationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<LlmEvaluationAbRolloutRecommendation>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationApplyAbRollout
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbRolloutDecision>>
+         */
+        llmEvaluationApplyAbRollout: (requestData: ApplyLlmEvaluationAbRolloutRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<LlmEvaluationAbRolloutDecision>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutDecision
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbRolloutDecision>>
+         */
+        llmEvaluationGetAbRolloutDecision: (requestData: GetLlmEvaluationAbRolloutDecisionRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<LlmEvaluationAbRolloutDecision>>;
+        /**
+         * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationListAbRolloutDecisions
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListLlmEvaluationAbRolloutDecisionsResponse>>
+         */
+        llmEvaluationListAbRolloutDecisions: (requestData: ListLlmEvaluationAbRolloutDecisionsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListLlmEvaluationAbRolloutDecisionsResponse>>;
+        /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig
          *
          * @param requestMessage Request message
@@ -62548,6 +63521,38 @@ declare class LlmEvaluationsClient {
      * @returns Observable<thisProto.GetLlmEvaluationAbExperimentResultsResponse>
      */
     llmEvaluationGetAbExperimentResults(requestData: GetLlmEvaluationAbExperimentResultsRequest, requestMetadata?: GrpcMetadata): Observable<GetLlmEvaluationAbExperimentResultsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutRecommendation
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.LlmEvaluationAbRolloutRecommendation>
+     */
+    llmEvaluationGetAbRolloutRecommendation(requestData: GetLlmEvaluationAbRolloutRecommendationRequest, requestMetadata?: GrpcMetadata): Observable<LlmEvaluationAbRolloutRecommendation>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationApplyAbRollout
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.LlmEvaluationAbRolloutDecision>
+     */
+    llmEvaluationApplyAbRollout(requestData: ApplyLlmEvaluationAbRolloutRequest, requestMetadata?: GrpcMetadata): Observable<LlmEvaluationAbRolloutDecision>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutDecision
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.LlmEvaluationAbRolloutDecision>
+     */
+    llmEvaluationGetAbRolloutDecision(requestData: GetLlmEvaluationAbRolloutDecisionRequest, requestMetadata?: GrpcMetadata): Observable<LlmEvaluationAbRolloutDecision>;
+    /**
+     * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationListAbRolloutDecisions
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListLlmEvaluationAbRolloutDecisionsResponse>
+     */
+    llmEvaluationListAbRolloutDecisions(requestData: ListLlmEvaluationAbRolloutDecisionsRequest, requestMetadata?: GrpcMetadata): Observable<ListLlmEvaluationAbRolloutDecisionsResponse>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig
      *
@@ -63912,4 +64917,4 @@ declare namespace CustomHttpPattern {
     }
 }
 
-export { AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, AudioEncoding, AudioFileResource, AudioFileResourceType, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KeyValuePair, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, LoginRequest, LoginResponse, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReindexAgentRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
+export { AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KeyValuePair, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, LoginRequest, LoginResponse, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReindexAgentRequest, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };

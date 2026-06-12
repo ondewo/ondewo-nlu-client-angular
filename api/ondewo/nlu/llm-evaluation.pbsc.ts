@@ -1254,6 +1254,95 @@ export class LlmEvaluationsClient {
       });
     },
     /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutRecommendation
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbRolloutRecommendation>>
+     */
+    llmEvaluationGetAbRolloutRecommendation: (
+      requestData: thisProto.GetLlmEvaluationAbRolloutRecommendationRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.LlmEvaluationAbRolloutRecommendation>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path:
+          '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutRecommendation',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetLlmEvaluationAbRolloutRecommendationRequest,
+        responseClass: thisProto.LlmEvaluationAbRolloutRecommendation
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationApplyAbRollout
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbRolloutDecision>>
+     */
+    llmEvaluationApplyAbRollout: (
+      requestData: thisProto.ApplyLlmEvaluationAbRolloutRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationAbRolloutDecision>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationApplyAbRollout',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ApplyLlmEvaluationAbRolloutRequest,
+        responseClass: thisProto.LlmEvaluationAbRolloutDecision
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutDecision
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.LlmEvaluationAbRolloutDecision>>
+     */
+    llmEvaluationGetAbRolloutDecision: (
+      requestData: thisProto.GetLlmEvaluationAbRolloutDecisionRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.LlmEvaluationAbRolloutDecision>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutDecision',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetLlmEvaluationAbRolloutDecisionRequest,
+        responseClass: thisProto.LlmEvaluationAbRolloutDecision
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationListAbRolloutDecisions
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.ListLlmEvaluationAbRolloutDecisionsResponse>>
+     */
+    llmEvaluationListAbRolloutDecisions: (
+      requestData: thisProto.ListLlmEvaluationAbRolloutDecisionsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.ListLlmEvaluationAbRolloutDecisionsResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.LlmEvaluations/LlmEvaluationListAbRolloutDecisions',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ListLlmEvaluationAbRolloutDecisionsRequest,
+        responseClass: thisProto.ListLlmEvaluationAbRolloutDecisionsResponse
+      });
+    },
+    /**
      * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig
      *
      * @param requestMessage Request message
@@ -2417,6 +2506,70 @@ export class LlmEvaluationsClient {
   ): Observable<thisProto.GetLlmEvaluationAbExperimentResultsResponse> {
     return this.$raw
       .llmEvaluationGetAbExperimentResults(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutRecommendation
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAbRolloutRecommendation>
+   */
+  llmEvaluationGetAbRolloutRecommendation(
+    requestData: thisProto.GetLlmEvaluationAbRolloutRecommendationRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAbRolloutRecommendation> {
+    return this.$raw
+      .llmEvaluationGetAbRolloutRecommendation(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationApplyAbRollout
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAbRolloutDecision>
+   */
+  llmEvaluationApplyAbRollout(
+    requestData: thisProto.ApplyLlmEvaluationAbRolloutRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAbRolloutDecision> {
+    return this.$raw
+      .llmEvaluationApplyAbRollout(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutDecision
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.LlmEvaluationAbRolloutDecision>
+   */
+  llmEvaluationGetAbRolloutDecision(
+    requestData: thisProto.GetLlmEvaluationAbRolloutDecisionRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.LlmEvaluationAbRolloutDecision> {
+    return this.$raw
+      .llmEvaluationGetAbRolloutDecision(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationListAbRolloutDecisions
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.ListLlmEvaluationAbRolloutDecisionsResponse>
+   */
+  llmEvaluationListAbRolloutDecisions(
+    requestData: thisProto.ListLlmEvaluationAbRolloutDecisionsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.ListLlmEvaluationAbRolloutDecisionsResponse> {
+    return this.$raw
+      .llmEvaluationListAbRolloutDecisions(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
