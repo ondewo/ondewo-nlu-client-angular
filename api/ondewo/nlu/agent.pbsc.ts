@@ -539,6 +539,29 @@ export class AgentsClient {
       });
     },
     /**
+     * Unary call: /ondewo.nlu.Agents/GetSessionsStatisticsTimeSeries
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.GetSessionsStatisticsTimeSeriesResponse>>
+     */
+    getSessionsStatisticsTimeSeries: (
+      requestData: thisProto.GetSessionsStatisticsTimeSeriesRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.GetSessionsStatisticsTimeSeriesResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Agents/GetSessionsStatisticsTimeSeries',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetSessionsStatisticsTimeSeriesRequest,
+        responseClass: thisProto.GetSessionsStatisticsTimeSeriesResponse
+      });
+    },
+    /**
      * Unary call: /ondewo.nlu.Agents/SetAgentStatus
      *
      * @param requestMessage Request message
@@ -1301,6 +1324,22 @@ export class AgentsClient {
   ): Observable<thisProto.GetSessionsStatisticsResponse> {
     return this.$raw
       .getSessionsStatistics(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Agents/GetSessionsStatisticsTimeSeries
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.GetSessionsStatisticsTimeSeriesResponse>
+   */
+  getSessionsStatisticsTimeSeries(
+    requestData: thisProto.GetSessionsStatisticsTimeSeriesRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.GetSessionsStatisticsTimeSeriesResponse> {
+    return this.$raw
+      .getSessionsStatisticsTimeSeries(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 

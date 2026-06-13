@@ -68,7 +68,8 @@ export enum ReportType {
   AGENT_LLM_TOOL_CALL_TOKEN_USAGE = 21,
   AGENT_LLM_TOP_X_MODELS = 22,
   AGENT_LLM_TOP_X_CCAI_SERVICE_PROVIDERS = 23,
-  AGENT_LLM_TOP_X_AGENT_NAMES = 24
+  AGENT_LLM_TOP_X_AGENT_NAMES = 24,
+  AGENT_LLM_SAFETY = 25
 }
 export enum SessionsReportType {
   SESSIONS = 0,
@@ -111,7 +112,8 @@ export enum SessionsReportType {
   SESSION_LLM_TOOL_CALL_TOKEN_USAGE = 37,
   SESSION_LLM_TOP_X_MODELS = 38,
   SESSION_LLM_TOP_X_CCAI_SERVICE_PROVIDERS = 39,
-  SESSION_LLM_TOP_X_AGENT_NAMES = 40
+  SESSION_LLM_TOP_X_AGENT_NAMES = 40,
+  SESSION_LLM_SAFETY = 41
 }
 export enum ReportFormat {
   CSV = 0,
@@ -5895,6 +5897,791 @@ export module GetSessionsStatisticsResponse {
     format: string;
     type: string;
     llmTelemetryReport: ondewoNlu020.LlmTelemetryReport.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetSessionsStatisticsTimeSeriesRequest
+ */
+export class GetSessionsStatisticsTimeSeriesRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.GetSessionsStatisticsTimeSeriesRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetSessionsStatisticsTimeSeriesRequest();
+    GetSessionsStatisticsTimeSeriesRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetSessionsStatisticsTimeSeriesRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.type = _instance.type || 0;
+    _instance.sessionFilter = _instance.sessionFilter || undefined;
+    _instance.bucketWidthSeconds = _instance.bucketWidthSeconds || 0;
+    _instance.maxBuckets = _instance.maxBuckets || 0;
+    _instance.llmModelFilter = _instance.llmModelFilter || [];
+    _instance.llmProviderFilter = _instance.llmProviderFilter || [];
+    _instance.llmAgentNameFilter = _instance.llmAgentNameFilter || [];
+    _instance.llmToolNameFilter = _instance.llmToolNameFilter || [];
+    _instance.llmCcaiServiceProviderFilter =
+      _instance.llmCcaiServiceProviderFilter || [];
+    _instance.fieldMask = _instance.fieldMask || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetSessionsStatisticsTimeSeriesRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.type = _reader.readEnum();
+          break;
+        case 3:
+          _instance.sessionFilter = new ondewoNlu020.SessionFilter();
+          _reader.readMessage(
+            _instance.sessionFilter,
+            ondewoNlu020.SessionFilter.deserializeBinaryFromReader
+          );
+          break;
+        case 4:
+          _instance.bucketWidthSeconds = _reader.readInt32();
+          break;
+        case 5:
+          _instance.maxBuckets = _reader.readInt32();
+          break;
+        case 6:
+          (_instance.llmModelFilter = _instance.llmModelFilter || []).push(
+            _reader.readString()
+          );
+          break;
+        case 7:
+          (_instance.llmProviderFilter =
+            _instance.llmProviderFilter || []).push(_reader.readString());
+          break;
+        case 8:
+          (_instance.llmAgentNameFilter =
+            _instance.llmAgentNameFilter || []).push(_reader.readString());
+          break;
+        case 9:
+          (_instance.llmToolNameFilter =
+            _instance.llmToolNameFilter || []).push(_reader.readString());
+          break;
+        case 10:
+          _reader.readPackableEnumInto(
+            (_instance.llmCcaiServiceProviderFilter =
+              _instance.llmCcaiServiceProviderFilter || [])
+          );
+          break;
+        case 11:
+          _instance.fieldMask = new googleProtobuf002.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf002.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetSessionsStatisticsTimeSeriesRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetSessionsStatisticsTimeSeriesRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.type) {
+      _writer.writeEnum(2, _instance.type);
+    }
+    if (_instance.sessionFilter) {
+      _writer.writeMessage(
+        3,
+        _instance.sessionFilter as any,
+        ondewoNlu020.SessionFilter.serializeBinaryToWriter
+      );
+    }
+    if (_instance.bucketWidthSeconds) {
+      _writer.writeInt32(4, _instance.bucketWidthSeconds);
+    }
+    if (_instance.maxBuckets) {
+      _writer.writeInt32(5, _instance.maxBuckets);
+    }
+    if (_instance.llmModelFilter && _instance.llmModelFilter.length) {
+      _writer.writeRepeatedString(6, _instance.llmModelFilter);
+    }
+    if (_instance.llmProviderFilter && _instance.llmProviderFilter.length) {
+      _writer.writeRepeatedString(7, _instance.llmProviderFilter);
+    }
+    if (_instance.llmAgentNameFilter && _instance.llmAgentNameFilter.length) {
+      _writer.writeRepeatedString(8, _instance.llmAgentNameFilter);
+    }
+    if (_instance.llmToolNameFilter && _instance.llmToolNameFilter.length) {
+      _writer.writeRepeatedString(9, _instance.llmToolNameFilter);
+    }
+    if (
+      _instance.llmCcaiServiceProviderFilter &&
+      _instance.llmCcaiServiceProviderFilter.length
+    ) {
+      _writer.writePackedEnum(10, _instance.llmCcaiServiceProviderFilter);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        11,
+        _instance.fieldMask as any,
+        googleProtobuf002.FieldMask.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _parent: string;
+  private _type: SessionsReportType;
+  private _sessionFilter?: ondewoNlu020.SessionFilter;
+  private _bucketWidthSeconds: number;
+  private _maxBuckets: number;
+  private _llmModelFilter: string[];
+  private _llmProviderFilter: string[];
+  private _llmAgentNameFilter: string[];
+  private _llmToolNameFilter: string[];
+  private _llmCcaiServiceProviderFilter: ondewoNlu015.CcaiServiceProvider[];
+  private _fieldMask?: googleProtobuf002.FieldMask;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetSessionsStatisticsTimeSeriesRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<GetSessionsStatisticsTimeSeriesRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.type = _value.type;
+    this.sessionFilter = _value.sessionFilter
+      ? new ondewoNlu020.SessionFilter(_value.sessionFilter)
+      : undefined;
+    this.bucketWidthSeconds = _value.bucketWidthSeconds;
+    this.maxBuckets = _value.maxBuckets;
+    this.llmModelFilter = (_value.llmModelFilter || []).slice();
+    this.llmProviderFilter = (_value.llmProviderFilter || []).slice();
+    this.llmAgentNameFilter = (_value.llmAgentNameFilter || []).slice();
+    this.llmToolNameFilter = (_value.llmToolNameFilter || []).slice();
+    this.llmCcaiServiceProviderFilter = (
+      _value.llmCcaiServiceProviderFilter || []
+    ).slice();
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf002.FieldMask(_value.fieldMask)
+      : undefined;
+    GetSessionsStatisticsTimeSeriesRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get type(): SessionsReportType {
+    return this._type;
+  }
+  set type(value: SessionsReportType) {
+    this._type = value;
+  }
+  get sessionFilter(): ondewoNlu020.SessionFilter | undefined {
+    return this._sessionFilter;
+  }
+  set sessionFilter(value: ondewoNlu020.SessionFilter | undefined) {
+    this._sessionFilter = value;
+  }
+  get bucketWidthSeconds(): number {
+    return this._bucketWidthSeconds;
+  }
+  set bucketWidthSeconds(value: number) {
+    this._bucketWidthSeconds = value;
+  }
+  get maxBuckets(): number {
+    return this._maxBuckets;
+  }
+  set maxBuckets(value: number) {
+    this._maxBuckets = value;
+  }
+  get llmModelFilter(): string[] {
+    return this._llmModelFilter;
+  }
+  set llmModelFilter(value: string[]) {
+    this._llmModelFilter = value;
+  }
+  get llmProviderFilter(): string[] {
+    return this._llmProviderFilter;
+  }
+  set llmProviderFilter(value: string[]) {
+    this._llmProviderFilter = value;
+  }
+  get llmAgentNameFilter(): string[] {
+    return this._llmAgentNameFilter;
+  }
+  set llmAgentNameFilter(value: string[]) {
+    this._llmAgentNameFilter = value;
+  }
+  get llmToolNameFilter(): string[] {
+    return this._llmToolNameFilter;
+  }
+  set llmToolNameFilter(value: string[]) {
+    this._llmToolNameFilter = value;
+  }
+  get llmCcaiServiceProviderFilter(): ondewoNlu015.CcaiServiceProvider[] {
+    return this._llmCcaiServiceProviderFilter;
+  }
+  set llmCcaiServiceProviderFilter(value: ondewoNlu015.CcaiServiceProvider[]) {
+    this._llmCcaiServiceProviderFilter = value;
+  }
+  get fieldMask(): googleProtobuf002.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf002.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetSessionsStatisticsTimeSeriesRequest.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetSessionsStatisticsTimeSeriesRequest.AsObject {
+    return {
+      parent: this.parent,
+      type: this.type,
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toObject()
+        : undefined,
+      bucketWidthSeconds: this.bucketWidthSeconds,
+      maxBuckets: this.maxBuckets,
+      llmModelFilter: (this.llmModelFilter || []).slice(),
+      llmProviderFilter: (this.llmProviderFilter || []).slice(),
+      llmAgentNameFilter: (this.llmAgentNameFilter || []).slice(),
+      llmToolNameFilter: (this.llmToolNameFilter || []).slice(),
+      llmCcaiServiceProviderFilter: (
+        this.llmCcaiServiceProviderFilter || []
+      ).slice(),
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetSessionsStatisticsTimeSeriesRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      type:
+        SessionsReportType[
+          this.type === null || this.type === undefined ? 0 : this.type
+        ],
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toProtobufJSON(options)
+        : null,
+      bucketWidthSeconds: this.bucketWidthSeconds,
+      maxBuckets: this.maxBuckets,
+      llmModelFilter: (this.llmModelFilter || []).slice(),
+      llmProviderFilter: (this.llmProviderFilter || []).slice(),
+      llmAgentNameFilter: (this.llmAgentNameFilter || []).slice(),
+      llmToolNameFilter: (this.llmToolNameFilter || []).slice(),
+      llmCcaiServiceProviderFilter: (
+        this.llmCcaiServiceProviderFilter || []
+      ).map(v => ondewoNlu015.CcaiServiceProvider[v]),
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+    };
+  }
+}
+export module GetSessionsStatisticsTimeSeriesRequest {
+  /**
+   * Standard JavaScript object representation for GetSessionsStatisticsTimeSeriesRequest
+   */
+  export interface AsObject {
+    parent: string;
+    type: SessionsReportType;
+    sessionFilter?: ondewoNlu020.SessionFilter.AsObject;
+    bucketWidthSeconds: number;
+    maxBuckets: number;
+    llmModelFilter: string[];
+    llmProviderFilter: string[];
+    llmAgentNameFilter: string[];
+    llmToolNameFilter: string[];
+    llmCcaiServiceProviderFilter: ondewoNlu015.CcaiServiceProvider[];
+    fieldMask?: googleProtobuf002.FieldMask.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for GetSessionsStatisticsTimeSeriesRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    type: string;
+    sessionFilter: ondewoNlu020.SessionFilter.AsProtobufJSON | null;
+    bucketWidthSeconds: number;
+    maxBuckets: number;
+    llmModelFilter: string[];
+    llmProviderFilter: string[];
+    llmAgentNameFilter: string[];
+    llmToolNameFilter: string[];
+    llmCcaiServiceProviderFilter: string[];
+    fieldMask: googleProtobuf002.FieldMask.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.LlmTelemetryTimeSeriesBucket
+ */
+export class LlmTelemetryTimeSeriesBucket implements GrpcMessage {
+  static id = 'ondewo.nlu.LlmTelemetryTimeSeriesBucket';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LlmTelemetryTimeSeriesBucket();
+    LlmTelemetryTimeSeriesBucket.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LlmTelemetryTimeSeriesBucket) {
+    _instance.bucketStart = _instance.bucketStart || undefined;
+    _instance.bucketEnd = _instance.bucketEnd || undefined;
+    _instance.llmTelemetryReport = _instance.llmTelemetryReport || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LlmTelemetryTimeSeriesBucket,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.bucketStart = new googleProtobuf004.Timestamp();
+          _reader.readMessage(
+            _instance.bucketStart,
+            googleProtobuf004.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 2:
+          _instance.bucketEnd = new googleProtobuf004.Timestamp();
+          _reader.readMessage(
+            _instance.bucketEnd,
+            googleProtobuf004.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 3:
+          _instance.llmTelemetryReport = new ondewoNlu020.LlmTelemetryReport();
+          _reader.readMessage(
+            _instance.llmTelemetryReport,
+            ondewoNlu020.LlmTelemetryReport.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LlmTelemetryTimeSeriesBucket.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LlmTelemetryTimeSeriesBucket,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.bucketStart) {
+      _writer.writeMessage(
+        1,
+        _instance.bucketStart as any,
+        googleProtobuf004.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.bucketEnd) {
+      _writer.writeMessage(
+        2,
+        _instance.bucketEnd as any,
+        googleProtobuf004.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.llmTelemetryReport) {
+      _writer.writeMessage(
+        3,
+        _instance.llmTelemetryReport as any,
+        ondewoNlu020.LlmTelemetryReport.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _bucketStart?: googleProtobuf004.Timestamp;
+  private _bucketEnd?: googleProtobuf004.Timestamp;
+  private _llmTelemetryReport?: ondewoNlu020.LlmTelemetryReport;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LlmTelemetryTimeSeriesBucket to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<LlmTelemetryTimeSeriesBucket.AsObject>
+  ) {
+    _value = _value || {};
+    this.bucketStart = _value.bucketStart
+      ? new googleProtobuf004.Timestamp(_value.bucketStart)
+      : undefined;
+    this.bucketEnd = _value.bucketEnd
+      ? new googleProtobuf004.Timestamp(_value.bucketEnd)
+      : undefined;
+    this.llmTelemetryReport = _value.llmTelemetryReport
+      ? new ondewoNlu020.LlmTelemetryReport(_value.llmTelemetryReport)
+      : undefined;
+    LlmTelemetryTimeSeriesBucket.refineValues(this);
+  }
+  get bucketStart(): googleProtobuf004.Timestamp | undefined {
+    return this._bucketStart;
+  }
+  set bucketStart(value: googleProtobuf004.Timestamp | undefined) {
+    this._bucketStart = value;
+  }
+  get bucketEnd(): googleProtobuf004.Timestamp | undefined {
+    return this._bucketEnd;
+  }
+  set bucketEnd(value: googleProtobuf004.Timestamp | undefined) {
+    this._bucketEnd = value;
+  }
+  get llmTelemetryReport(): ondewoNlu020.LlmTelemetryReport | undefined {
+    return this._llmTelemetryReport;
+  }
+  set llmTelemetryReport(value: ondewoNlu020.LlmTelemetryReport | undefined) {
+    this._llmTelemetryReport = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LlmTelemetryTimeSeriesBucket.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LlmTelemetryTimeSeriesBucket.AsObject {
+    return {
+      bucketStart: this.bucketStart ? this.bucketStart.toObject() : undefined,
+      bucketEnd: this.bucketEnd ? this.bucketEnd.toObject() : undefined,
+      llmTelemetryReport: this.llmTelemetryReport
+        ? this.llmTelemetryReport.toObject()
+        : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LlmTelemetryTimeSeriesBucket.AsProtobufJSON {
+    return {
+      bucketStart: this.bucketStart
+        ? this.bucketStart.toProtobufJSON(options)
+        : null,
+      bucketEnd: this.bucketEnd ? this.bucketEnd.toProtobufJSON(options) : null,
+      llmTelemetryReport: this.llmTelemetryReport
+        ? this.llmTelemetryReport.toProtobufJSON(options)
+        : null
+    };
+  }
+}
+export module LlmTelemetryTimeSeriesBucket {
+  /**
+   * Standard JavaScript object representation for LlmTelemetryTimeSeriesBucket
+   */
+  export interface AsObject {
+    bucketStart?: googleProtobuf004.Timestamp.AsObject;
+    bucketEnd?: googleProtobuf004.Timestamp.AsObject;
+    llmTelemetryReport?: ondewoNlu020.LlmTelemetryReport.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for LlmTelemetryTimeSeriesBucket
+   */
+  export interface AsProtobufJSON {
+    bucketStart: googleProtobuf004.Timestamp.AsProtobufJSON | null;
+    bucketEnd: googleProtobuf004.Timestamp.AsProtobufJSON | null;
+    llmTelemetryReport: ondewoNlu020.LlmTelemetryReport.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetSessionsStatisticsTimeSeriesResponse
+ */
+export class GetSessionsStatisticsTimeSeriesResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.GetSessionsStatisticsTimeSeriesResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetSessionsStatisticsTimeSeriesResponse();
+    GetSessionsStatisticsTimeSeriesResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetSessionsStatisticsTimeSeriesResponse) {
+    _instance.llmTelemetryTimeSeriesBuckets =
+      _instance.llmTelemetryTimeSeriesBuckets || [];
+    _instance.bucketWidthSeconds = _instance.bucketWidthSeconds || 0;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetSessionsStatisticsTimeSeriesResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          const messageInitializer1 = new LlmTelemetryTimeSeriesBucket();
+          _reader.readMessage(
+            messageInitializer1,
+            LlmTelemetryTimeSeriesBucket.deserializeBinaryFromReader
+          );
+          (_instance.llmTelemetryTimeSeriesBuckets =
+            _instance.llmTelemetryTimeSeriesBuckets || []).push(
+            messageInitializer1
+          );
+          break;
+        case 2:
+          _instance.bucketWidthSeconds = _reader.readInt32();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetSessionsStatisticsTimeSeriesResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetSessionsStatisticsTimeSeriesResponse,
+    _writer: BinaryWriter
+  ) {
+    if (
+      _instance.llmTelemetryTimeSeriesBuckets &&
+      _instance.llmTelemetryTimeSeriesBuckets.length
+    ) {
+      _writer.writeRepeatedMessage(
+        1,
+        _instance.llmTelemetryTimeSeriesBuckets as any,
+        LlmTelemetryTimeSeriesBucket.serializeBinaryToWriter
+      );
+    }
+    if (_instance.bucketWidthSeconds) {
+      _writer.writeInt32(2, _instance.bucketWidthSeconds);
+    }
+  }
+
+  private _llmTelemetryTimeSeriesBuckets?: LlmTelemetryTimeSeriesBucket[];
+  private _bucketWidthSeconds: number;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetSessionsStatisticsTimeSeriesResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<GetSessionsStatisticsTimeSeriesResponse.AsObject>
+  ) {
+    _value = _value || {};
+    this.llmTelemetryTimeSeriesBuckets = (
+      _value.llmTelemetryTimeSeriesBuckets || []
+    ).map(m => new LlmTelemetryTimeSeriesBucket(m));
+    this.bucketWidthSeconds = _value.bucketWidthSeconds;
+    GetSessionsStatisticsTimeSeriesResponse.refineValues(this);
+  }
+  get llmTelemetryTimeSeriesBuckets():
+    | LlmTelemetryTimeSeriesBucket[]
+    | undefined {
+    return this._llmTelemetryTimeSeriesBuckets;
+  }
+  set llmTelemetryTimeSeriesBuckets(
+    value: LlmTelemetryTimeSeriesBucket[] | undefined
+  ) {
+    this._llmTelemetryTimeSeriesBuckets = value;
+  }
+  get bucketWidthSeconds(): number {
+    return this._bucketWidthSeconds;
+  }
+  set bucketWidthSeconds(value: number) {
+    this._bucketWidthSeconds = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetSessionsStatisticsTimeSeriesResponse.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetSessionsStatisticsTimeSeriesResponse.AsObject {
+    return {
+      llmTelemetryTimeSeriesBuckets: (
+        this.llmTelemetryTimeSeriesBuckets || []
+      ).map(m => m.toObject()),
+      bucketWidthSeconds: this.bucketWidthSeconds
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetSessionsStatisticsTimeSeriesResponse.AsProtobufJSON {
+    return {
+      llmTelemetryTimeSeriesBuckets: (
+        this.llmTelemetryTimeSeriesBuckets || []
+      ).map(m => m.toProtobufJSON(options)),
+      bucketWidthSeconds: this.bucketWidthSeconds
+    };
+  }
+}
+export module GetSessionsStatisticsTimeSeriesResponse {
+  /**
+   * Standard JavaScript object representation for GetSessionsStatisticsTimeSeriesResponse
+   */
+  export interface AsObject {
+    llmTelemetryTimeSeriesBuckets?: LlmTelemetryTimeSeriesBucket.AsObject[];
+    bucketWidthSeconds: number;
+  }
+
+  /**
+   * Protobuf JSON representation for GetSessionsStatisticsTimeSeriesResponse
+   */
+  export interface AsProtobufJSON {
+    llmTelemetryTimeSeriesBuckets:
+      | LlmTelemetryTimeSeriesBucket.AsProtobufJSON[]
+      | null;
+    bucketWidthSeconds: number;
   }
 }
 
