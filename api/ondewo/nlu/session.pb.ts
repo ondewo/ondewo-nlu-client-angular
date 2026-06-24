@@ -9891,6 +9891,297 @@ export module LlmTokenUsageUpdateEvent {
 }
 
 /**
+ * Message implementation for ondewo.nlu.ReferencedChunk
+ */
+export class ReferencedChunk implements GrpcMessage {
+  static id = 'ondewo.nlu.ReferencedChunk';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ReferencedChunk();
+    ReferencedChunk.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ReferencedChunk) {
+    _instance.referenceIndex = _instance.referenceIndex || 0;
+    _instance.datasetId = _instance.datasetId || '';
+    _instance.documentId = _instance.documentId || '';
+    _instance.chunkId = _instance.chunkId || '';
+    _instance.documentName = _instance.documentName || '';
+    _instance.content = _instance.content || '';
+    _instance.similarity = _instance.similarity || 0;
+    _instance.documentUrl = _instance.documentUrl || '';
+    _instance.deepLinkUrl = _instance.deepLinkUrl || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ReferencedChunk,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.referenceIndex = _reader.readInt32();
+          break;
+        case 2:
+          _instance.datasetId = _reader.readString();
+          break;
+        case 3:
+          _instance.documentId = _reader.readString();
+          break;
+        case 4:
+          _instance.chunkId = _reader.readString();
+          break;
+        case 5:
+          _instance.documentName = _reader.readString();
+          break;
+        case 6:
+          _instance.content = _reader.readString();
+          break;
+        case 7:
+          _instance.similarity = _reader.readFloat();
+          break;
+        case 8:
+          _instance.documentUrl = _reader.readString();
+          break;
+        case 9:
+          _instance.deepLinkUrl = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ReferencedChunk.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ReferencedChunk,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.referenceIndex) {
+      _writer.writeInt32(1, _instance.referenceIndex);
+    }
+    if (_instance.datasetId) {
+      _writer.writeString(2, _instance.datasetId);
+    }
+    if (_instance.documentId) {
+      _writer.writeString(3, _instance.documentId);
+    }
+    if (_instance.chunkId) {
+      _writer.writeString(4, _instance.chunkId);
+    }
+    if (_instance.documentName) {
+      _writer.writeString(5, _instance.documentName);
+    }
+    if (_instance.content) {
+      _writer.writeString(6, _instance.content);
+    }
+    if (_instance.similarity) {
+      _writer.writeFloat(7, _instance.similarity);
+    }
+    if (_instance.documentUrl) {
+      _writer.writeString(8, _instance.documentUrl);
+    }
+    if (_instance.deepLinkUrl) {
+      _writer.writeString(9, _instance.deepLinkUrl);
+    }
+  }
+
+  private _referenceIndex: number;
+  private _datasetId: string;
+  private _documentId: string;
+  private _chunkId: string;
+  private _documentName: string;
+  private _content: string;
+  private _similarity: number;
+  private _documentUrl: string;
+  private _deepLinkUrl: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ReferencedChunk to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<ReferencedChunk.AsObject>) {
+    _value = _value || {};
+    this.referenceIndex = _value.referenceIndex;
+    this.datasetId = _value.datasetId;
+    this.documentId = _value.documentId;
+    this.chunkId = _value.chunkId;
+    this.documentName = _value.documentName;
+    this.content = _value.content;
+    this.similarity = _value.similarity;
+    this.documentUrl = _value.documentUrl;
+    this.deepLinkUrl = _value.deepLinkUrl;
+    ReferencedChunk.refineValues(this);
+  }
+  get referenceIndex(): number {
+    return this._referenceIndex;
+  }
+  set referenceIndex(value: number) {
+    this._referenceIndex = value;
+  }
+  get datasetId(): string {
+    return this._datasetId;
+  }
+  set datasetId(value: string) {
+    this._datasetId = value;
+  }
+  get documentId(): string {
+    return this._documentId;
+  }
+  set documentId(value: string) {
+    this._documentId = value;
+  }
+  get chunkId(): string {
+    return this._chunkId;
+  }
+  set chunkId(value: string) {
+    this._chunkId = value;
+  }
+  get documentName(): string {
+    return this._documentName;
+  }
+  set documentName(value: string) {
+    this._documentName = value;
+  }
+  get content(): string {
+    return this._content;
+  }
+  set content(value: string) {
+    this._content = value;
+  }
+  get similarity(): number {
+    return this._similarity;
+  }
+  set similarity(value: number) {
+    this._similarity = value;
+  }
+  get documentUrl(): string {
+    return this._documentUrl;
+  }
+  set documentUrl(value: string) {
+    this._documentUrl = value;
+  }
+  get deepLinkUrl(): string {
+    return this._deepLinkUrl;
+  }
+  set deepLinkUrl(value: string) {
+    this._deepLinkUrl = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ReferencedChunk.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ReferencedChunk.AsObject {
+    return {
+      referenceIndex: this.referenceIndex,
+      datasetId: this.datasetId,
+      documentId: this.documentId,
+      chunkId: this.chunkId,
+      documentName: this.documentName,
+      content: this.content,
+      similarity: this.similarity,
+      documentUrl: this.documentUrl,
+      deepLinkUrl: this.deepLinkUrl
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ReferencedChunk.AsProtobufJSON {
+    return {
+      referenceIndex: this.referenceIndex,
+      datasetId: this.datasetId,
+      documentId: this.documentId,
+      chunkId: this.chunkId,
+      documentName: this.documentName,
+      content: this.content,
+      similarity: this.similarity,
+      documentUrl: this.documentUrl,
+      deepLinkUrl: this.deepLinkUrl
+    };
+  }
+}
+export module ReferencedChunk {
+  /**
+   * Standard JavaScript object representation for ReferencedChunk
+   */
+  export interface AsObject {
+    referenceIndex: number;
+    datasetId: string;
+    documentId: string;
+    chunkId: string;
+    documentName: string;
+    content: string;
+    similarity: number;
+    documentUrl: string;
+    deepLinkUrl: string;
+  }
+
+  /**
+   * Protobuf JSON representation for ReferencedChunk
+   */
+  export interface AsProtobufJSON {
+    referenceIndex: number;
+    datasetId: string;
+    documentId: string;
+    chunkId: string;
+    documentName: string;
+    content: string;
+    similarity: number;
+    documentUrl: string;
+    deepLinkUrl: string;
+  }
+}
+
+/**
  * Message implementation for ondewo.nlu.QueryResult
  */
 export class QueryResult implements GrpcMessage {
@@ -9931,6 +10222,7 @@ export class QueryResult implements GrpcMessage {
     _instance.languageCode = _instance.languageCode || '';
     _instance.fileResources = _instance.fileResources || [];
     _instance.llmTelemetryReport = _instance.llmTelemetryReport || undefined;
+    _instance.referencedChunks = _instance.referencedChunks || [];
   }
 
   /**
@@ -10037,6 +10329,16 @@ export class QueryResult implements GrpcMessage {
             LlmTelemetryReport.deserializeBinaryFromReader
           );
           break;
+        case 18:
+          const messageInitializer18 = new ReferencedChunk();
+          _reader.readMessage(
+            messageInitializer18,
+            ReferencedChunk.deserializeBinaryFromReader
+          );
+          (_instance.referencedChunks = _instance.referencedChunks || []).push(
+            messageInitializer18
+          );
+          break;
         default:
           _reader.skipField();
       }
@@ -10137,6 +10439,13 @@ export class QueryResult implements GrpcMessage {
         LlmTelemetryReport.serializeBinaryToWriter
       );
     }
+    if (_instance.referencedChunks && _instance.referencedChunks.length) {
+      _writer.writeRepeatedMessage(
+        18,
+        _instance.referencedChunks as any,
+        ReferencedChunk.serializeBinaryToWriter
+      );
+    }
   }
 
   private _queryText: string;
@@ -10156,6 +10465,7 @@ export class QueryResult implements GrpcMessage {
   private _languageCode: string;
   private _fileResources?: FileResource[];
   private _llmTelemetryReport?: LlmTelemetryReport;
+  private _referencedChunks?: ReferencedChunk[];
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -10196,6 +10506,9 @@ export class QueryResult implements GrpcMessage {
     this.llmTelemetryReport = _value.llmTelemetryReport
       ? new LlmTelemetryReport(_value.llmTelemetryReport)
       : undefined;
+    this.referencedChunks = (_value.referencedChunks || []).map(
+      m => new ReferencedChunk(m)
+    );
     QueryResult.refineValues(this);
   }
   get queryText(): string {
@@ -10300,6 +10613,12 @@ export class QueryResult implements GrpcMessage {
   set llmTelemetryReport(value: LlmTelemetryReport | undefined) {
     this._llmTelemetryReport = value;
   }
+  get referencedChunks(): ReferencedChunk[] | undefined {
+    return this._referencedChunks;
+  }
+  set referencedChunks(value: ReferencedChunk[] | undefined) {
+    this._referencedChunks = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -10340,7 +10659,8 @@ export class QueryResult implements GrpcMessage {
       fileResources: (this.fileResources || []).map(m => m.toObject()),
       llmTelemetryReport: this.llmTelemetryReport
         ? this.llmTelemetryReport.toObject()
-        : undefined
+        : undefined,
+      referencedChunks: (this.referencedChunks || []).map(m => m.toObject())
     };
   }
 
@@ -10391,7 +10711,10 @@ export class QueryResult implements GrpcMessage {
       ),
       llmTelemetryReport: this.llmTelemetryReport
         ? this.llmTelemetryReport.toProtobufJSON(options)
-        : null
+        : null,
+      referencedChunks: (this.referencedChunks || []).map(m =>
+        m.toProtobufJSON(options)
+      )
     };
   }
 }
@@ -10417,6 +10740,7 @@ export module QueryResult {
     languageCode: string;
     fileResources?: FileResource.AsObject[];
     llmTelemetryReport?: LlmTelemetryReport.AsObject;
+    referencedChunks?: ReferencedChunk.AsObject[];
   }
 
   /**
@@ -10440,6 +10764,7 @@ export module QueryResult {
     languageCode: string;
     fileResources: FileResource.AsProtobufJSON[] | null;
     llmTelemetryReport: LlmTelemetryReport.AsProtobufJSON | null;
+    referencedChunks: ReferencedChunk.AsProtobufJSON[] | null;
   }
 }
 
