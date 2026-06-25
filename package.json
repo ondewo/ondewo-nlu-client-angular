@@ -13,6 +13,10 @@
     "ngx-grpc",
     "grpc"
   ],
+  "scripts": {
+    "test": "jest --config jest.config.js",
+    "test:coverage": "jest --config jest.config.js --coverage"
+  },
   "repository": {
     "type": "git",
     "directory": "https://github.com/ondewo/ondewo-nlu-client-angular"
@@ -37,5 +41,18 @@
   "sideEffects": false,
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/common": "20.1.7",
+    "@angular/core": "20.1.7",
+    "@ngx-grpc/common": "3.1.2",
+    "@ngx-grpc/core": "3.1.2",
+    "@types/jest": "29.5.14",
+    "jest": "29.7.0",
+    "jest-environment-node": "29.7.0",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2",
+    "ts-jest": "29.2.5",
+    "typescript": "5.8.3"
   }
 }
