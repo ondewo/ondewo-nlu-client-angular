@@ -61090,6 +61090,8 @@ declare class ProjectTechnicalUser implements GrpcMessage {
     static serializeBinaryToWriter(_instance: ProjectTechnicalUser, _writer: BinaryWriter): void;
     private _userId;
     private _username;
+    private _createdAt?;
+    private _createdBy;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ProjectTechnicalUser to deeply clone from
@@ -61099,6 +61101,10 @@ declare class ProjectTechnicalUser implements GrpcMessage {
     set userId(value: string);
     get username(): string;
     set username(value: string);
+    get createdAt(): googleProtobuf005.Timestamp | undefined;
+    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdBy(): string;
+    set createdBy(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -61126,6 +61132,8 @@ declare namespace ProjectTechnicalUser {
     interface AsObject {
         userId: string;
         username: string;
+        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdBy: string;
     }
     /**
      * Protobuf JSON representation for ProjectTechnicalUser
@@ -61133,6 +61141,8 @@ declare namespace ProjectTechnicalUser {
     interface AsProtobufJSON {
         userId: string;
         username: string;
+        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdBy: string;
     }
 }
 /**

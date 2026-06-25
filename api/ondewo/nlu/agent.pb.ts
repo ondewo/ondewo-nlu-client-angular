@@ -17499,6 +17499,8 @@ export class ProjectTechnicalUser implements GrpcMessage {
   static refineValues(_instance: ProjectTechnicalUser) {
     _instance.userId = _instance.userId || '';
     _instance.username = _instance.username || '';
+    _instance.createdAt = _instance.createdAt || undefined;
+    _instance.createdBy = _instance.createdBy || '';
   }
 
   /**
@@ -17519,6 +17521,16 @@ export class ProjectTechnicalUser implements GrpcMessage {
           break;
         case 2:
           _instance.username = _reader.readString();
+          break;
+        case 3:
+          _instance.createdAt = new googleProtobuf004.Timestamp();
+          _reader.readMessage(
+            _instance.createdAt,
+            googleProtobuf004.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 4:
+          _instance.createdBy = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -17543,10 +17555,22 @@ export class ProjectTechnicalUser implements GrpcMessage {
     if (_instance.username) {
       _writer.writeString(2, _instance.username);
     }
+    if (_instance.createdAt) {
+      _writer.writeMessage(
+        3,
+        _instance.createdAt as any,
+        googleProtobuf004.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.createdBy) {
+      _writer.writeString(4, _instance.createdBy);
+    }
   }
 
   private _userId: string;
   private _username: string;
+  private _createdAt?: googleProtobuf004.Timestamp;
+  private _createdBy: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -17556,6 +17580,10 @@ export class ProjectTechnicalUser implements GrpcMessage {
     _value = _value || {};
     this.userId = _value.userId;
     this.username = _value.username;
+    this.createdAt = _value.createdAt
+      ? new googleProtobuf004.Timestamp(_value.createdAt)
+      : undefined;
+    this.createdBy = _value.createdBy;
     ProjectTechnicalUser.refineValues(this);
   }
   get userId(): string {
@@ -17569,6 +17597,18 @@ export class ProjectTechnicalUser implements GrpcMessage {
   }
   set username(value: string) {
     this._username = value;
+  }
+  get createdAt(): googleProtobuf004.Timestamp | undefined {
+    return this._createdAt;
+  }
+  set createdAt(value: googleProtobuf004.Timestamp | undefined) {
+    this._createdAt = value;
+  }
+  get createdBy(): string {
+    return this._createdBy;
+  }
+  set createdBy(value: string) {
+    this._createdBy = value;
   }
 
   /**
@@ -17587,7 +17627,9 @@ export class ProjectTechnicalUser implements GrpcMessage {
   toObject(): ProjectTechnicalUser.AsObject {
     return {
       userId: this.userId,
-      username: this.username
+      username: this.username,
+      createdAt: this.createdAt ? this.createdAt.toObject() : undefined,
+      createdBy: this.createdBy
     };
   }
 
@@ -17609,7 +17651,9 @@ export class ProjectTechnicalUser implements GrpcMessage {
   ): ProjectTechnicalUser.AsProtobufJSON {
     return {
       userId: this.userId,
-      username: this.username
+      username: this.username,
+      createdAt: this.createdAt ? this.createdAt.toProtobufJSON(options) : null,
+      createdBy: this.createdBy
     };
   }
 }
@@ -17620,6 +17664,8 @@ export module ProjectTechnicalUser {
   export interface AsObject {
     userId: string;
     username: string;
+    createdAt?: googleProtobuf004.Timestamp.AsObject;
+    createdBy: string;
   }
 
   /**
@@ -17628,6 +17674,8 @@ export module ProjectTechnicalUser {
   export interface AsProtobufJSON {
     userId: string;
     username: string;
+    createdAt: googleProtobuf004.Timestamp.AsProtobufJSON | null;
+    createdBy: string;
   }
 }
 
