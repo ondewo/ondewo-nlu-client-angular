@@ -13,13 +13,13 @@ const TOKEN: string = "eyJhbGciOi.payload.signature";
 
 /**
  * Unit tests for the exported header constants: their exact values are part of
- * the wire contract (lower-case header name, standard `Bearer ` scheme), so they
- * are pinned here rather than left to drift.
+ * the wire contract (canonical `Authorization` header name, standard `Bearer `
+ * scheme), so they are pinned here rather than left to drift.
  */
 describe("constants", () => {
-  /** The header name is the lower-case form mandated by HTTP/2 and gRPC-web. */
-  it("uses a lower-case authorization header name", (): void => {
-    expect(AUTHORIZATION_HEADER).toBe("authorization");
+  /** The header name is the canonical `Authorization` form. */
+  it("uses the canonical Authorization header name", (): void => {
+    expect(AUTHORIZATION_HEADER).toBe("Authorization");
   });
 
   /** The credential scheme prefix is the standard `Bearer ` (note trailing space). */
