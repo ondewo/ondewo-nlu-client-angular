@@ -3,7 +3,6 @@ import {
   AUTHORIZATION_HEADER,
   BEARER_PREFIX,
   buildBearerValue,
-  once,
   resolveBearerValue,
   resolveToken
 } from "./resolve-token";
@@ -166,16 +165,5 @@ describe("resolveBearerValue", () => {
     source.next(TOKEN);
     source.complete();
     await expect(promise).resolves.toBe(`${BEARER_PREFIX}${TOKEN}`);
-  });
-});
-
-/**
- * Unit tests for {@link once}: the synchronous-value wrapper must emit its value
- * exactly once and complete.
- */
-describe("once", () => {
-  /** The wrapped value is emitted exactly once. */
-  it("emits the given value exactly once", async (): Promise<void> => {
-    await expect(firstValueFrom(once("value"))).resolves.toBe("value");
   });
 });

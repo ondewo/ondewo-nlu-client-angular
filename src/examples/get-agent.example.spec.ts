@@ -1,7 +1,7 @@
 import { firstValueFrom, Observable, of, throwError } from "rxjs";
 
-import { Agent, GetAgentRequest } from "../../../api/ondewo/nlu/agent.pb";
-import { AgentsClient } from "../../../api/ondewo/nlu/agent.pbsc";
+import { Agent, GetAgentRequest } from "../../api/ondewo/nlu/agent.pb";
+import { AgentsClient } from "../../api/ondewo/nlu/agent.pbsc";
 import { GetAgentExampleService } from "./get-agent.example";
 
 /** A well-formed agent resource name used across the example tests. */

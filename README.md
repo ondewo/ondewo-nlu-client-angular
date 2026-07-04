@@ -47,7 +47,7 @@ make setup_developer_environment_locally                          ## Install dep
 
 ## Authentication (Keycloak bearer token)
 
-The hand-written auth surface lives in [`src/lib/auth/`](src/lib/auth) and attaches the consumer's current
+The hand-written auth surface lives in [`src/auth/`](src/auth) and attaches the consumer's current
 Keycloak access token as an `Authorization: Bearer <token>` credential to every outgoing gRPC-web and HTTP
 request. This library performs **no** OAuth/OIDC flow itself — it never sees a password and never stores a
 token. Acquiring and refreshing the token is the responsibility of `keycloak-js` / `keycloak-angular` in the

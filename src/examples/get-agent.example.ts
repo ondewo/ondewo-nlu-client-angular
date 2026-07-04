@@ -4,9 +4,8 @@
  * It shows the three things every consumer needs: construct a generated gRPC-web
  * service client, call a representative unary RPC, and map the response — while
  * the Keycloak **bearer** token is attached transparently by this library's auth
- * interceptors (see below). No `cai-token` / HTTP-basic / `login()` credential is
- * used anywhere: under the Keycloak migration the only supported auth is an
- * `Authorization: Bearer <token>` credential fed from `keycloak-js` /
+ * interceptors (see below). Under the Keycloak migration the only supported auth
+ * is an `Authorization: Bearer <token>` credential fed from `keycloak-js` /
  * `keycloak-angular` through a {@link TokenProvider}.
  *
  * Wiring the auth once at application bootstrap is all that is required — every
@@ -34,8 +33,8 @@
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 
-import { Agent, GetAgentRequest } from "../../../api/ondewo/nlu/agent.pb";
-import { AgentsClient } from "../../../api/ondewo/nlu/agent.pbsc";
+import { Agent, GetAgentRequest } from "../../api/ondewo/nlu/agent.pb";
+import { AgentsClient } from "../../api/ondewo/nlu/agent.pbsc";
 
 /**
  * Example service that fetches a single agent through the generated

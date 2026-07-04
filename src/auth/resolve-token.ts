@@ -1,4 +1,4 @@
-import { from, isObservable, Observable, of, Subscriber, Subscription } from "rxjs";
+import { from, isObservable, Observable, Subscriber, Subscription } from "rxjs";
 import { TokenResult } from "./token-provider";
 
 /**
@@ -82,15 +82,4 @@ function normalizeToken(token: string | null | undefined): string | null {
   }
   const trimmed: string = token.trim();
   return trimmed.length === 0 ? null : trimmed;
-}
-
-/**
- * Wrap a synchronous value as a single-emission observable. Used by callers that
- * want to stay in the observable world without importing `rxjs` `of` directly.
- *
- * @param value the value to emit.
- * @returns an observable emitting `value` once and completing.
- */
-export function once<T>(value: T): Observable<T> {
-  return of(value);
 }
