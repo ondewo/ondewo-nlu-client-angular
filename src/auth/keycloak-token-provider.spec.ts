@@ -300,6 +300,61 @@ describe("KeycloakTokenProvider", () => {
     httpMock.expectNone(TOKEN_ENDPOINT);
   });
 
+  describe("keycloakVerifySsl (browser no-op, config -> provider parity)", () => {
+    /** An offline-token config that logs in via a `refresh_token` grant. */
+    const OFFLINE_CONFIG: KeycloakTokenProviderConfig = {
+      keycloakUrl: KEYCLOAK_URL,
+      realm: REALM,
+      clientId: CLIENT_ID,
+      offlineToken: "configured-offline-token"
+    };
+
+    /** Omitting the field defaults the stored flag to verification-ON (secure). */
+    it("defaults the stored flag to true when keycloakVerifySsl is omitted", (): void => {
+      const { provider, httpMock } = setup(OFFLINE_CONFIG);
+      expect(provider.keycloakVerifySsl).toBe(true);
+      httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
+    });
+
+    /** An explicit true is stored as true. */
+    it("stores an explicit keycloakVerifySsl: true as true", (): void => {
+      const { provider, httpMock } = setup({ ...OFFLINE_CONFIG, keycloakVerifySsl: true });
+      expect(provider.keycloakVerifySsl).toBe(true);
+      httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
+    });
+
+    /** An explicit false is threaded from config through to the provider field. */
+    it("stores keycloakVerifySsl: false as false (threaded config -> provider)", (): void => {
+      const { provider, httpMock } = setup({ ...OFFLINE_CONFIG, keycloakVerifySsl: false });
+      expect(provider.keycloakVerifySsl).toBe(false);
+      httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
+    });
+
+    /**
+     * The flag is inert at the transport layer: with keycloakVerifySsl: false the
+     * provider issues the SAME single POST (same URL, method, headers, body) and
+     * logs in exactly as with the field omitted — proving it is a no-op, not wired
+     * to TLS.
+     */
+    it("does not alter or break the token request when keycloakVerifySsl is false", async (): Promise<void> => {
+      const { provider, httpMock } = setup({ ...OFFLINE_CONFIG, keycloakVerifySsl: false });
+      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+
+      expect(request.request.method).toBe("POST");
+      expect(request.request.headers.get("Content-Type")).toBe("application/x-www-form-urlencoded");
+      const body: string = request.request.body as string;
+      expect(body).toContain("grant_type=refresh_token");
+      expect(body).toContain(`client_id=${CLIENT_ID}`);
+      expect(body).toContain("refresh_token=configured-offline-token");
+
+      request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await provider.whenReady();
+
+      expect(provider.getToken()).toBe(ACCESS_TOKEN);
+      provider.ngOnDestroy();
+    });
+  });
+
   /** KeycloakAuthenticationError carries the expected name + message. */
   it("KeycloakAuthenticationError exposes its name and message", (): void => {
     const error: KeycloakAuthenticationError = new KeycloakAuthenticationError("boom");
