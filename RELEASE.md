@@ -1,15 +1,6 @@
 # Release History
 
 ***************** 
-## Release ONDEWO NLU Angular Client 6.13.0 
- 
-### Improvements 
- * D14: project-scoped technical-user RPCs — Create / List / Delete / RotatePassword `ProjectTechnicalUser` (with `created_at` / `created_by`) 
- * Hand-written Keycloak bearer-token auth surface: `provideOndewoNluAuth`, `KeycloakTokenProvider`, `AuthGrpcInterceptor`, `authHttpInterceptor`, `TokenProvider`, and the `resolveToken` / `resolveBearerValue` helpers 
- * Tracking API Version [6.13.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.13.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
-
-
-***************** 
 ## Release ONDEWO NLU Angular Client 6.12.0 
  
 ### Improvements 

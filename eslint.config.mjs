@@ -16,7 +16,17 @@ const compat = new FlatCompat({
 
 export default [
 	{
-		ignores: ['**/api/', 'src/ondewo-nlu-api', '**/ondewo-proto-compiler', '**/*.mjs', '**/*.d.ts']
+		ignores: [
+			'coverage/lcov-report/block-navigation.js',
+			'coverage/lcov-report/prettify.js',
+			'coverage/lcov-report/sorter.js',
+			'jest.config.js',
+			'**/api/',
+			'src/ondewo-nlu-api',
+			'**/ondewo-proto-compiler',
+			'**/*.mjs',
+			'**/*.d.ts'
+		]
 	},
 	...compat.extends(
 		'plugin:@typescript-eslint/recommended',

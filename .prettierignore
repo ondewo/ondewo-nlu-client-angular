@@ -14,3 +14,9 @@ ondewo-nlu-api
 ondewo-nlu-client-angular.d.ts
 ondewo-nlu-client-angular.d.ts.map
 ondewo-nlu-client-angular.metadata.json
+package-lock.json
+package.json
+npm/
+dist/
+.test-build/
+.test-build-examples/
