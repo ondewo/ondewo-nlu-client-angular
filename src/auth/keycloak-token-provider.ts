@@ -9,14 +9,14 @@ import { TokenProvider, TokenResult } from "./token-provider";
  * the round-trip to Keycloak). Mirrors the node SDK's `REFRESH_SKEW_IN_S` and the
  * python SDK's `_EXPIRY_LEEWAY_S`.
  */
-export const REFRESH_SKEW_IN_S = 30;
+export const REFRESH_SKEW_IN_S: number = 30;
 
 /**
  * Lower bound (in seconds) for the scheduled refresh delay so a tiny / zero
  * `expires_in` cannot spin a hot loop. Mirrors the node SDK's
  * `MIN_REFRESH_DELAY_IN_S`.
  */
-export const MIN_REFRESH_DELAY_IN_S = 1;
+export const MIN_REFRESH_DELAY_IN_S: number = 1;
 
 /**
  * Runtime configuration for {@link KeycloakTokenProvider}.
@@ -98,7 +98,7 @@ export class KeycloakAuthenticationError extends Error {
   /**
    * @param message a human-readable description of the authentication failure.
    */
-  constructor(message: string) {
+  public constructor(message: string) {
     super(message);
     this.name = "KeycloakAuthenticationError";
   }
@@ -165,7 +165,7 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
   /** Handle of the armed refresh timer, or `null` when no refresh is scheduled. */
   private timer: ReturnType<typeof setTimeout> | null = null;
   /** Whether {@link ngOnDestroy} has run; suppresses any further (re-)scheduling. */
-  private stopped = false;
+  private stopped: boolean = false;
   /** Absolute epoch-ms deadline for the bounded loop, or `null` when unbounded. */
   private deadlineInMs: number | null = null;
   /** Promise resolving once the first login has completed (or rejecting if it failed). */
@@ -178,7 +178,7 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
    * login resolves. Await {@link whenReady} to block until the first token is
    * available.
    */
-  constructor() {
+  public constructor() {
     // Stored for cross-SDK config parity; a no-op on the browser transport (see field doc).
     this.verifySsl = this.config.keycloakVerifySsl ?? true;
     const base: string = this.config.keycloakUrl.replace(/\/+$/, "");
@@ -302,7 +302,7 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
       {
         grant_type: "refresh_token",
         client_id: this.config.clientId,
-        refresh_token: this.refreshToken as string
+        refresh_token: this.refreshToken
       },
       "refresh"
     );

@@ -20,7 +20,7 @@ class StubTokenProvider implements TokenProvider {
   /**
    * @param value the fixed `TokenResult` every `getToken` call returns.
    */
-  constructor(private readonly value: TokenResult) {}
+  public constructor(private readonly value: TokenResult) {}
 
   /**
    * @returns the caller-supplied {@link TokenResult}.
@@ -41,7 +41,7 @@ class FakeMetadata {
   /**
    * @param initial optional seed entries to pre-populate the metadata map with.
    */
-  constructor(initial?: Record<string, string>) {
+  public constructor(initial?: Record<string, string>) {
     if (initial !== undefined) {
       for (const key of Object.keys(initial)) {
         this.map.set(key, initial[key]);

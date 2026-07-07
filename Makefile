@@ -221,6 +221,7 @@ build: check_out_correct_submodule_versions build_compiler update_package npm_ru
 	make install_dependencies
 
 install_dependencies:
+	npm install --legacy-peer-deps
 	@for pkg in \
 		typescript \
 		eslint \

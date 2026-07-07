@@ -9,10 +9,10 @@ import { TokenResult } from "./token-provider";
  * header names on the wire regardless, so the canonical capitalization is the
  * safe, portable choice to carry in source.
  */
-export const AUTHORIZATION_HEADER = "Authorization";
+export const AUTHORIZATION_HEADER: string = "Authorization";
 
 /** The credential scheme prefix prepended to the raw access token. */
-export const BEARER_PREFIX = "Bearer ";
+export const BEARER_PREFIX: string = "Bearer ";
 
 /**
  * Normalize the value returned by a `TokenProvider.getToken()` call — which may

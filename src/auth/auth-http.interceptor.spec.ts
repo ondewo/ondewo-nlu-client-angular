@@ -23,7 +23,7 @@ class StubTokenProvider implements TokenProvider {
   /**
    * @param value the fixed `TokenResult` every `getToken` call returns.
    */
-  constructor(private readonly value: TokenResult) {}
+  public constructor(private readonly value: TokenResult) {}
 
   /**
    * @returns the caller-supplied {@link TokenResult}.
