@@ -16973,3 +16973,1392 @@ export module ReindexAgentRequest {
     indexTypes: string[];
   }
 }
+
+/**
+ * Message implementation for ondewo.nlu.CreateProjectTechnicalUserRequest
+ */
+export class CreateProjectTechnicalUserRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.CreateProjectTechnicalUserRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new CreateProjectTechnicalUserRequest();
+    CreateProjectTechnicalUserRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: CreateProjectTechnicalUserRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.name = _instance.name || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: CreateProjectTechnicalUserRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.name = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    CreateProjectTechnicalUserRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: CreateProjectTechnicalUserRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.name) {
+      _writer.writeString(2, _instance.name);
+    }
+  }
+
+  private _parent: string;
+  private _name: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of CreateProjectTechnicalUserRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<CreateProjectTechnicalUserRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.name = _value.name;
+    CreateProjectTechnicalUserRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    CreateProjectTechnicalUserRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): CreateProjectTechnicalUserRequest.AsObject {
+    return {
+      parent: this.parent,
+      name: this.name
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): CreateProjectTechnicalUserRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      name: this.name
+    };
+  }
+}
+export module CreateProjectTechnicalUserRequest {
+  /**
+   * Standard JavaScript object representation for CreateProjectTechnicalUserRequest
+   */
+  export interface AsObject {
+    parent: string;
+    name: string;
+  }
+
+  /**
+   * Protobuf JSON representation for CreateProjectTechnicalUserRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    name: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.CreateProjectTechnicalUserResponse
+ */
+export class CreateProjectTechnicalUserResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.CreateProjectTechnicalUserResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new CreateProjectTechnicalUserResponse();
+    CreateProjectTechnicalUserResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: CreateProjectTechnicalUserResponse) {
+    _instance.userId = _instance.userId || '';
+    _instance.username = _instance.username || '';
+    _instance.password = _instance.password || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: CreateProjectTechnicalUserResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.userId = _reader.readString();
+          break;
+        case 2:
+          _instance.username = _reader.readString();
+          break;
+        case 3:
+          _instance.password = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    CreateProjectTechnicalUserResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: CreateProjectTechnicalUserResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.userId) {
+      _writer.writeString(1, _instance.userId);
+    }
+    if (_instance.username) {
+      _writer.writeString(2, _instance.username);
+    }
+    if (_instance.password) {
+      _writer.writeString(3, _instance.password);
+    }
+  }
+
+  private _userId: string;
+  private _username: string;
+  private _password: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of CreateProjectTechnicalUserResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<CreateProjectTechnicalUserResponse.AsObject>
+  ) {
+    _value = _value || {};
+    this.userId = _value.userId;
+    this.username = _value.username;
+    this.password = _value.password;
+    CreateProjectTechnicalUserResponse.refineValues(this);
+  }
+  get userId(): string {
+    return this._userId;
+  }
+  set userId(value: string) {
+    this._userId = value;
+  }
+  get username(): string {
+    return this._username;
+  }
+  set username(value: string) {
+    this._username = value;
+  }
+  get password(): string {
+    return this._password;
+  }
+  set password(value: string) {
+    this._password = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    CreateProjectTechnicalUserResponse.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): CreateProjectTechnicalUserResponse.AsObject {
+    return {
+      userId: this.userId,
+      username: this.username,
+      password: this.password
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): CreateProjectTechnicalUserResponse.AsProtobufJSON {
+    return {
+      userId: this.userId,
+      username: this.username,
+      password: this.password
+    };
+  }
+}
+export module CreateProjectTechnicalUserResponse {
+  /**
+   * Standard JavaScript object representation for CreateProjectTechnicalUserResponse
+   */
+  export interface AsObject {
+    userId: string;
+    username: string;
+    password: string;
+  }
+
+  /**
+   * Protobuf JSON representation for CreateProjectTechnicalUserResponse
+   */
+  export interface AsProtobufJSON {
+    userId: string;
+    username: string;
+    password: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListProjectTechnicalUsersRequest
+ */
+export class ListProjectTechnicalUsersRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.ListProjectTechnicalUsersRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListProjectTechnicalUsersRequest();
+    ListProjectTechnicalUsersRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListProjectTechnicalUsersRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.pageToken = _instance.pageToken || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListProjectTechnicalUsersRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.pageToken = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListProjectTechnicalUsersRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListProjectTechnicalUsersRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.pageToken) {
+      _writer.writeString(2, _instance.pageToken);
+    }
+  }
+
+  private _parent: string;
+  private _pageToken: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListProjectTechnicalUsersRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<ListProjectTechnicalUsersRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.pageToken = _value.pageToken;
+    ListProjectTechnicalUsersRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get pageToken(): string {
+    return this._pageToken;
+  }
+  set pageToken(value: string) {
+    this._pageToken = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListProjectTechnicalUsersRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListProjectTechnicalUsersRequest.AsObject {
+    return {
+      parent: this.parent,
+      pageToken: this.pageToken
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListProjectTechnicalUsersRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      pageToken: this.pageToken
+    };
+  }
+}
+export module ListProjectTechnicalUsersRequest {
+  /**
+   * Standard JavaScript object representation for ListProjectTechnicalUsersRequest
+   */
+  export interface AsObject {
+    parent: string;
+    pageToken: string;
+  }
+
+  /**
+   * Protobuf JSON representation for ListProjectTechnicalUsersRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    pageToken: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ProjectTechnicalUser
+ */
+export class ProjectTechnicalUser implements GrpcMessage {
+  static id = 'ondewo.nlu.ProjectTechnicalUser';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ProjectTechnicalUser();
+    ProjectTechnicalUser.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ProjectTechnicalUser) {
+    _instance.userId = _instance.userId || '';
+    _instance.username = _instance.username || '';
+    _instance.createdAt = _instance.createdAt || undefined;
+    _instance.createdBy = _instance.createdBy || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ProjectTechnicalUser,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.userId = _reader.readString();
+          break;
+        case 2:
+          _instance.username = _reader.readString();
+          break;
+        case 3:
+          _instance.createdAt = new googleProtobuf004.Timestamp();
+          _reader.readMessage(
+            _instance.createdAt,
+            googleProtobuf004.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 4:
+          _instance.createdBy = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ProjectTechnicalUser.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ProjectTechnicalUser,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.userId) {
+      _writer.writeString(1, _instance.userId);
+    }
+    if (_instance.username) {
+      _writer.writeString(2, _instance.username);
+    }
+    if (_instance.createdAt) {
+      _writer.writeMessage(
+        3,
+        _instance.createdAt as any,
+        googleProtobuf004.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.createdBy) {
+      _writer.writeString(4, _instance.createdBy);
+    }
+  }
+
+  private _userId: string;
+  private _username: string;
+  private _createdAt?: googleProtobuf004.Timestamp;
+  private _createdBy: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ProjectTechnicalUser to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<ProjectTechnicalUser.AsObject>) {
+    _value = _value || {};
+    this.userId = _value.userId;
+    this.username = _value.username;
+    this.createdAt = _value.createdAt
+      ? new googleProtobuf004.Timestamp(_value.createdAt)
+      : undefined;
+    this.createdBy = _value.createdBy;
+    ProjectTechnicalUser.refineValues(this);
+  }
+  get userId(): string {
+    return this._userId;
+  }
+  set userId(value: string) {
+    this._userId = value;
+  }
+  get username(): string {
+    return this._username;
+  }
+  set username(value: string) {
+    this._username = value;
+  }
+  get createdAt(): googleProtobuf004.Timestamp | undefined {
+    return this._createdAt;
+  }
+  set createdAt(value: googleProtobuf004.Timestamp | undefined) {
+    this._createdAt = value;
+  }
+  get createdBy(): string {
+    return this._createdBy;
+  }
+  set createdBy(value: string) {
+    this._createdBy = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ProjectTechnicalUser.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ProjectTechnicalUser.AsObject {
+    return {
+      userId: this.userId,
+      username: this.username,
+      createdAt: this.createdAt ? this.createdAt.toObject() : undefined,
+      createdBy: this.createdBy
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ProjectTechnicalUser.AsProtobufJSON {
+    return {
+      userId: this.userId,
+      username: this.username,
+      createdAt: this.createdAt ? this.createdAt.toProtobufJSON(options) : null,
+      createdBy: this.createdBy
+    };
+  }
+}
+export module ProjectTechnicalUser {
+  /**
+   * Standard JavaScript object representation for ProjectTechnicalUser
+   */
+  export interface AsObject {
+    userId: string;
+    username: string;
+    createdAt?: googleProtobuf004.Timestamp.AsObject;
+    createdBy: string;
+  }
+
+  /**
+   * Protobuf JSON representation for ProjectTechnicalUser
+   */
+  export interface AsProtobufJSON {
+    userId: string;
+    username: string;
+    createdAt: googleProtobuf004.Timestamp.AsProtobufJSON | null;
+    createdBy: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListProjectTechnicalUsersResponse
+ */
+export class ListProjectTechnicalUsersResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.ListProjectTechnicalUsersResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListProjectTechnicalUsersResponse();
+    ListProjectTechnicalUsersResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListProjectTechnicalUsersResponse) {
+    _instance.technicalUsers = _instance.technicalUsers || [];
+    _instance.nextPageToken = _instance.nextPageToken || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListProjectTechnicalUsersResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          const messageInitializer1 = new ProjectTechnicalUser();
+          _reader.readMessage(
+            messageInitializer1,
+            ProjectTechnicalUser.deserializeBinaryFromReader
+          );
+          (_instance.technicalUsers = _instance.technicalUsers || []).push(
+            messageInitializer1
+          );
+          break;
+        case 2:
+          _instance.nextPageToken = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListProjectTechnicalUsersResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListProjectTechnicalUsersResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.technicalUsers && _instance.technicalUsers.length) {
+      _writer.writeRepeatedMessage(
+        1,
+        _instance.technicalUsers as any,
+        ProjectTechnicalUser.serializeBinaryToWriter
+      );
+    }
+    if (_instance.nextPageToken) {
+      _writer.writeString(2, _instance.nextPageToken);
+    }
+  }
+
+  private _technicalUsers?: ProjectTechnicalUser[];
+  private _nextPageToken: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListProjectTechnicalUsersResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<ListProjectTechnicalUsersResponse.AsObject>
+  ) {
+    _value = _value || {};
+    this.technicalUsers = (_value.technicalUsers || []).map(
+      m => new ProjectTechnicalUser(m)
+    );
+    this.nextPageToken = _value.nextPageToken;
+    ListProjectTechnicalUsersResponse.refineValues(this);
+  }
+  get technicalUsers(): ProjectTechnicalUser[] | undefined {
+    return this._technicalUsers;
+  }
+  set technicalUsers(value: ProjectTechnicalUser[] | undefined) {
+    this._technicalUsers = value;
+  }
+  get nextPageToken(): string {
+    return this._nextPageToken;
+  }
+  set nextPageToken(value: string) {
+    this._nextPageToken = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListProjectTechnicalUsersResponse.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListProjectTechnicalUsersResponse.AsObject {
+    return {
+      technicalUsers: (this.technicalUsers || []).map(m => m.toObject()),
+      nextPageToken: this.nextPageToken
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListProjectTechnicalUsersResponse.AsProtobufJSON {
+    return {
+      technicalUsers: (this.technicalUsers || []).map(m =>
+        m.toProtobufJSON(options)
+      ),
+      nextPageToken: this.nextPageToken
+    };
+  }
+}
+export module ListProjectTechnicalUsersResponse {
+  /**
+   * Standard JavaScript object representation for ListProjectTechnicalUsersResponse
+   */
+  export interface AsObject {
+    technicalUsers?: ProjectTechnicalUser.AsObject[];
+    nextPageToken: string;
+  }
+
+  /**
+   * Protobuf JSON representation for ListProjectTechnicalUsersResponse
+   */
+  export interface AsProtobufJSON {
+    technicalUsers: ProjectTechnicalUser.AsProtobufJSON[] | null;
+    nextPageToken: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.DeleteProjectTechnicalUserRequest
+ */
+export class DeleteProjectTechnicalUserRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.DeleteProjectTechnicalUserRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new DeleteProjectTechnicalUserRequest();
+    DeleteProjectTechnicalUserRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: DeleteProjectTechnicalUserRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.userId = _instance.userId || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: DeleteProjectTechnicalUserRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.userId = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    DeleteProjectTechnicalUserRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: DeleteProjectTechnicalUserRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.userId) {
+      _writer.writeString(2, _instance.userId);
+    }
+  }
+
+  private _parent: string;
+  private _userId: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of DeleteProjectTechnicalUserRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<DeleteProjectTechnicalUserRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.userId = _value.userId;
+    DeleteProjectTechnicalUserRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get userId(): string {
+    return this._userId;
+  }
+  set userId(value: string) {
+    this._userId = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    DeleteProjectTechnicalUserRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): DeleteProjectTechnicalUserRequest.AsObject {
+    return {
+      parent: this.parent,
+      userId: this.userId
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): DeleteProjectTechnicalUserRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      userId: this.userId
+    };
+  }
+}
+export module DeleteProjectTechnicalUserRequest {
+  /**
+   * Standard JavaScript object representation for DeleteProjectTechnicalUserRequest
+   */
+  export interface AsObject {
+    parent: string;
+    userId: string;
+  }
+
+  /**
+   * Protobuf JSON representation for DeleteProjectTechnicalUserRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    userId: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.RotateProjectTechnicalUserPasswordRequest
+ */
+export class RotateProjectTechnicalUserPasswordRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.RotateProjectTechnicalUserPasswordRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new RotateProjectTechnicalUserPasswordRequest();
+    RotateProjectTechnicalUserPasswordRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: RotateProjectTechnicalUserPasswordRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.userId = _instance.userId || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: RotateProjectTechnicalUserPasswordRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.userId = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    RotateProjectTechnicalUserPasswordRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: RotateProjectTechnicalUserPasswordRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.userId) {
+      _writer.writeString(2, _instance.userId);
+    }
+  }
+
+  private _parent: string;
+  private _userId: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of RotateProjectTechnicalUserPasswordRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<
+      RotateProjectTechnicalUserPasswordRequest.AsObject
+    >
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.userId = _value.userId;
+    RotateProjectTechnicalUserPasswordRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get userId(): string {
+    return this._userId;
+  }
+  set userId(value: string) {
+    this._userId = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    RotateProjectTechnicalUserPasswordRequest.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): RotateProjectTechnicalUserPasswordRequest.AsObject {
+    return {
+      parent: this.parent,
+      userId: this.userId
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): RotateProjectTechnicalUserPasswordRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      userId: this.userId
+    };
+  }
+}
+export module RotateProjectTechnicalUserPasswordRequest {
+  /**
+   * Standard JavaScript object representation for RotateProjectTechnicalUserPasswordRequest
+   */
+  export interface AsObject {
+    parent: string;
+    userId: string;
+  }
+
+  /**
+   * Protobuf JSON representation for RotateProjectTechnicalUserPasswordRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    userId: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.RotateProjectTechnicalUserPasswordResponse
+ */
+export class RotateProjectTechnicalUserPasswordResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.RotateProjectTechnicalUserPasswordResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new RotateProjectTechnicalUserPasswordResponse();
+    RotateProjectTechnicalUserPasswordResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: RotateProjectTechnicalUserPasswordResponse) {
+    _instance.userId = _instance.userId || '';
+    _instance.username = _instance.username || '';
+    _instance.password = _instance.password || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: RotateProjectTechnicalUserPasswordResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.userId = _reader.readString();
+          break;
+        case 2:
+          _instance.username = _reader.readString();
+          break;
+        case 3:
+          _instance.password = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    RotateProjectTechnicalUserPasswordResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: RotateProjectTechnicalUserPasswordResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.userId) {
+      _writer.writeString(1, _instance.userId);
+    }
+    if (_instance.username) {
+      _writer.writeString(2, _instance.username);
+    }
+    if (_instance.password) {
+      _writer.writeString(3, _instance.password);
+    }
+  }
+
+  private _userId: string;
+  private _username: string;
+  private _password: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of RotateProjectTechnicalUserPasswordResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<
+      RotateProjectTechnicalUserPasswordResponse.AsObject
+    >
+  ) {
+    _value = _value || {};
+    this.userId = _value.userId;
+    this.username = _value.username;
+    this.password = _value.password;
+    RotateProjectTechnicalUserPasswordResponse.refineValues(this);
+  }
+  get userId(): string {
+    return this._userId;
+  }
+  set userId(value: string) {
+    this._userId = value;
+  }
+  get username(): string {
+    return this._username;
+  }
+  set username(value: string) {
+    this._username = value;
+  }
+  get password(): string {
+    return this._password;
+  }
+  set password(value: string) {
+    this._password = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    RotateProjectTechnicalUserPasswordResponse.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): RotateProjectTechnicalUserPasswordResponse.AsObject {
+    return {
+      userId: this.userId,
+      username: this.username,
+      password: this.password
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): RotateProjectTechnicalUserPasswordResponse.AsProtobufJSON {
+    return {
+      userId: this.userId,
+      username: this.username,
+      password: this.password
+    };
+  }
+}
+export module RotateProjectTechnicalUserPasswordResponse {
+  /**
+   * Standard JavaScript object representation for RotateProjectTechnicalUserPasswordResponse
+   */
+  export interface AsObject {
+    userId: string;
+    username: string;
+    password: string;
+  }
+
+  /**
+   * Protobuf JSON representation for RotateProjectTechnicalUserPasswordResponse
+   */
+  export interface AsProtobufJSON {
+    userId: string;
+    username: string;
+    password: string;
+  }
+}
