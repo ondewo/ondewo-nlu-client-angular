@@ -302,7 +302,12 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
       {
         grant_type: "refresh_token",
         client_id: this.config.clientId,
-        refresh_token: this.refreshToken
+        // The refresh timer is only armed after bootstrap() proves refreshToken non-null
+        // (storeTokens preserves it), so this is safe. The assertion is REQUIRED by the
+        // strict jest/ts-jest config (refreshToken is `string | null`); the release eslint
+        // runs under a non-strict tsconfig (no strictNullChecks) where it looks redundant.
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+        refresh_token: this.refreshToken as string
       },
       "refresh"
     );
