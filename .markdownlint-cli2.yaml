@@ -1,0 +1,42 @@
+# Auto-fix the mechanical rules (blank-line spacing, list indentation, emphasis
+# style, ...) the same way ruff-format does for Python.
+fix: true
+config:
+  # MD013 line-length: docs contain long lines / tables.
+  MD013: false
+  # MD033 no-inline-html: docs embed <p>/<code> HTML tags.
+  MD033: false
+  # MD024 duplicate-heading: RELEASE.md / src/RELEASE.md changelogs repeat
+  # "Improvements" and per-version "Release ONDEWO NLU Angular Client …" headings
+  # across sections (some at the same level), so siblings_only is not enough.
+  MD024: false
+  # MD025 single-h1: the RELEASE.md changelog uses one top-level heading per
+  # release section rather than a single document title.
+  MD025: false
+  # MD035 hr-style: the changelog uses decorative asterisk rules of varying length
+  # as section separators.
+  MD035: false
+  # MD053 link-reference-definitions: README.md / src/README.md embed
+  # `[comment]: <> (START OF GITHUB README)` / `(END OF GITHUB README)` markers that
+  # the Makefile build reads (perl range match) to cut lines when generating
+  # npm/README.md. They look like "unused" reference definitions, so the auto-fixer
+  # would strip them and break the release — keep this rule off.
+  MD053: false
+  # MD040 fenced-code-language: README embeds plain directory-tree / output blocks.
+  MD040: false
+  # MD041 first-line-heading: README opens with the HTML branding/logo header.
+  MD041: false
+  # MD045 image-alt-text: the branding header uses <img> logos / social icons.
+  MD045: false
+globs:
+  - "*.md"
+ignores:
+  - "node_modules/**"
+  - "npm/**"
+  - "api/**"
+  - "esm2022/**"
+  - "fesm2022/**"
+  - "coverage/**"
+  - "src/ondewo-nlu-api/**"
+  - "ondewo-proto-compiler/**"
+  - ".venv/**"

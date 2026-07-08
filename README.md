@@ -119,16 +119,16 @@ import { TokenProvider, TokenResult } from '@ondewo/nlu-client-angular';
 
 @Injectable({ providedIn: 'root' })
 export class KeycloakTokenProvider implements TokenProvider {
-	constructor(private readonly keycloak: Keycloak) {}
+ constructor(private readonly keycloak: Keycloak) {}
 
-	// Refresh the token if it expires within 30s, then return the current one.
-	// Returning a Promise lets the interceptor await the refresh before sending.
-	getToken(): TokenResult {
-		return this.keycloak
-			.updateToken(30)
-			.then(() => this.keycloak.token ?? null)
-			.catch(() => null);
-	}
+ // Refresh the token if it expires within 30s, then return the current one.
+ // Returning a Promise lets the interceptor await the refresh before sending.
+ getToken(): TokenResult {
+  return this.keycloak
+   .updateToken(30)
+   .then(() => this.keycloak.token ?? null)
+   .catch(() => null);
+ }
 }
 ```
 
@@ -145,13 +145,13 @@ import { authHttpInterceptor, provideOndewoNluAuth } from '@ondewo/nlu-client-an
 import { KeycloakTokenProvider } from './keycloak-token-provider';
 
 bootstrapApplication(AppComponent, {
-	providers: [
-		// Binds TOKEN_PROVIDER to your implementation and registers the
-		// @ngx-grpc AuthGrpcInterceptor for all generated *.pbsc.ts clients.
-		provideOndewoNluAuth(KeycloakTokenProvider),
-		// For plain HTTP requests, also register the functional HTTP interceptor.
-		provideHttpClient(withInterceptors([authHttpInterceptor]))
-	]
+ providers: [
+  // Binds TOKEN_PROVIDER to your implementation and registers the
+  // @ngx-grpc AuthGrpcInterceptor for all generated *.pbsc.ts clients.
+  provideOndewoNluAuth(KeycloakTokenProvider),
+  // For plain HTTP requests, also register the functional HTTP interceptor.
+  provideHttpClient(withInterceptors([authHttpInterceptor]))
+ ]
 });
 ```
 
@@ -176,13 +176,17 @@ The repository is published to GitHub and NPM by the Automated Release Process o
 TODO after PR merge:
 
 - Checkout master
+
   ```shell
   git checkout master
   ```
+
 - Pull newest state
+
   ```shell
   git pull
   ```
+
 - Adjust `ONDEWO_NLU_VERSION` in the `Makefile` <br><br>
 - Add new Release Notes to `src/RELEASE.md` in following format:
 
@@ -195,9 +199,11 @@ TODO after PR merge:
   ```
 
 - Release
+
   ```shell
   make ondewo_release
   ```
+
   <br>
   The release process can be divided into 6 Steps:
 
