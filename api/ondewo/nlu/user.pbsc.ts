@@ -317,27 +317,6 @@ export class UsersClient {
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Users/Login
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.LoginResponse>>
-     */
-    login: (
-      requestData: thisProto.LoginRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.LoginResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Users/Login',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.LoginRequest,
-        responseClass: thisProto.LoginResponse
-      });
-    },
-    /**
      * Unary call: /ondewo.nlu.Users/CheckLogin
      *
      * @param requestMessage Request message
@@ -720,22 +699,6 @@ export class UsersClient {
   ): Observable<thisProto.ListServerPermissionsResponse> {
     return this.$raw
       .listServerPermissions(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
-   * Unary call @/ondewo.nlu.Users/Login
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.LoginResponse>
-   */
-  login(
-    requestData: thisProto.LoginRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.LoginResponse> {
-    return this.$raw
-      .login(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 

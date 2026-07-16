@@ -2,6 +2,16 @@
 
 *****************
 
+## Release ONDEWO NLU Angular Client 7.0.0
+
+### Breaking Changes
+
+* Tracking API Version [7.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) The `Login` RPC is removed from the API, and with it `UsersClient.login()` and the `LoginRequest` / `LoginResponse` messages. Authentication is Keycloak-only: this library reads the host application's current Keycloak access token through a `TokenProvider` and attaches it as `Authorization: Bearer <token>` to every call. See the Authentication section of the README for the `keycloak-js` / `keycloak-angular` wiring.
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `CheckLogin` is not affected and remains the way to probe whether a token is still valid.
+
+*****************
+
 ## Release ONDEWO NLU Angular Client 6.14.0
 
 ### Improvements

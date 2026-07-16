@@ -9,10 +9,9 @@
 #   - generated Angular bundles: esm2022/, fesm2022/                                        #
 #   - generated proto stubs: api/, *_pb.js, *_pb.d.ts, *_grpc_pb.js, *_pb2*                 #
 #   - git submodules: src/ondewo-nlu-api, ondewo-proto-compiler (+ any ondewo-*-api)        #
-#   - generated top-level type defs / metadata: index.d.ts,                                 #
-#     ondewo-nlu-client-angular.d.ts(.map)/.metadata.json, public-api.d.ts.map              #
+#   - generated top-level type defs: index.d.ts, public-api.d.ts.map                        #
 #   - package-lock.json                                                                     #
-exclude: '(^|/)(node_modules|lib|dist|build|npm|esm2022|fesm2022|coverage|\.venv)/|_(grpc_)?pb\.(js|d\.ts)$|_pb2(_grpc)?\.pyi?$|^(api|src/ondewo-.*-api|ondewo-.*-api|ondewo-proto-compiler)(/|$)|^(index\.d\.ts|ondewo-nlu-client-angular\.d\.ts|ondewo-nlu-client-angular\.d\.ts\.map|ondewo-nlu-client-angular\.metadata\.json|public-api\.d\.ts\.map|package-lock\.json)$'
+exclude: '(^|/)(node_modules|lib|dist|build|npm|esm2022|fesm2022|coverage|\.venv)/|_(grpc_)?pb\.(js|d\.ts)$|_pb2(_grpc)?\.pyi?$|^(api|src/ondewo-.*-api|ondewo-.*-api|ondewo-proto-compiler)(/|$)|^(index\.d\.ts|public-api\.d\.ts\.map|package-lock\.json)$'
 
 fail_fast: false
 

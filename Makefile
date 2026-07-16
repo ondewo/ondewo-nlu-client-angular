@@ -14,9 +14,9 @@ export
 # 		Variables
 ########################################################
 
-ONDEWO_NLU_VERSION=6.14.0
+ONDEWO_NLU_VERSION=7.0.0
 
-NLU_API_GIT_BRANCH=tags/6.14.0
+NLU_API_GIT_BRANCH=OND211-2418-add-keycloak-for-2-fa
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.10.0
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 NLU_APIS_DIR=src/ondewo-nlu-api
@@ -30,8 +30,12 @@ NPM_AUTOMATION_TOKEN?=
 IMAGE_UTILS_NAME=ondewo-nlu-client-utils-angular:${ONDEWO_NLU_VERSION}
 PRETTIER_WRITE?=
 
+# Terminate on the ***** separator that delimits release entries, NOT on /\*\*/ — that matched the first
+# markdown **bold** span inside the entry and silently truncated the notes there, with no error from
+# `gh release create`. Harmless only while no entry used inline bold; the 7.0.0 entry does. Same fix as
+# ondewo-nlu-api's and ondewo-nlu-client-python's Makefile.
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
-	| perl -ne 'print if /Release ONDEWO NLU Angular Client ${ONDEWO_NLU_VERSION}/../\*\*/'`
+	| perl -ne 'print if /Release ONDEWO NLU Angular Client ${ONDEWO_NLU_VERSION}/../^\*{5}/'`
 
 GH_REPO="https://github.com/ondewo/ondewo-nlu-client-angular"
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
@@ -115,9 +119,6 @@ release: ## Create Github and NPM Release
 	git add src
 	git add README.md
 	git add RELEASE.md
-	git add ondewo-nlu-client-angular.d.ts
-	git add ondewo-nlu-client-angular.d.ts.map
-	git add ondewo-nlu-client-angular.metadata.json
 	git add package-lock.json
 	git add package.json
 	-git add tsconfig.json
