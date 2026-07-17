@@ -238,6 +238,7 @@ export class Comment implements GrpcMessage {
     _instance.modifiedAt = _instance.modifiedAt || undefined;
     _instance.createdBy = _instance.createdBy || '';
     _instance.modifiedBy = _instance.modifiedBy || '';
+    _instance.isResolved = _instance.isResolved || false;
   }
 
   /**
@@ -288,6 +289,9 @@ export class Comment implements GrpcMessage {
         case 9:
           _instance.modifiedBy = _reader.readString();
           break;
+        case 10:
+          _instance.isResolved = _reader.readBool();
+          break;
         default:
           _reader.skipField();
       }
@@ -337,6 +341,9 @@ export class Comment implements GrpcMessage {
     if (_instance.modifiedBy) {
       _writer.writeString(9, _instance.modifiedBy);
     }
+    if (_instance.isResolved) {
+      _writer.writeBool(10, _instance.isResolved);
+    }
   }
 
   private _name: string;
@@ -348,6 +355,7 @@ export class Comment implements GrpcMessage {
   private _modifiedAt?: googleProtobuf002.Timestamp;
   private _createdBy: string;
   private _modifiedBy: string;
+  private _isResolved: boolean;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -368,6 +376,7 @@ export class Comment implements GrpcMessage {
       : undefined;
     this.createdBy = _value.createdBy;
     this.modifiedBy = _value.modifiedBy;
+    this.isResolved = _value.isResolved;
     Comment.refineValues(this);
   }
   get name(): string {
@@ -424,6 +433,12 @@ export class Comment implements GrpcMessage {
   set modifiedBy(value: string) {
     this._modifiedBy = value;
   }
+  get isResolved(): boolean {
+    return this._isResolved;
+  }
+  set isResolved(value: boolean) {
+    this._isResolved = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -448,7 +463,8 @@ export class Comment implements GrpcMessage {
       createdAt: this.createdAt ? this.createdAt.toObject() : undefined,
       modifiedAt: this.modifiedAt ? this.modifiedAt.toObject() : undefined,
       createdBy: this.createdBy,
-      modifiedBy: this.modifiedBy
+      modifiedBy: this.modifiedBy,
+      isResolved: this.isResolved
     };
   }
 
@@ -479,7 +495,8 @@ export class Comment implements GrpcMessage {
         ? this.modifiedAt.toProtobufJSON(options)
         : null,
       createdBy: this.createdBy,
-      modifiedBy: this.modifiedBy
+      modifiedBy: this.modifiedBy,
+      isResolved: this.isResolved
     };
   }
 }
@@ -497,6 +514,7 @@ export module Comment {
     modifiedAt?: googleProtobuf002.Timestamp.AsObject;
     createdBy: string;
     modifiedBy: string;
+    isResolved: boolean;
   }
 
   /**
@@ -512,6 +530,7 @@ export module Comment {
     modifiedAt: googleProtobuf002.Timestamp.AsProtobufJSON | null;
     createdBy: string;
     modifiedBy: string;
+    isResolved: boolean;
   }
 }
 

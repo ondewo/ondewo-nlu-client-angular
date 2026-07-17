@@ -23978,6 +23978,7 @@ export class ListSessionCommentsRequest implements GrpcMessage {
     _instance.sessionId = _instance.sessionId || '';
     _instance.pageToken = _instance.pageToken || '';
     _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.isResolved = _instance.isResolved || false;
   }
 
   /**
@@ -24005,6 +24006,9 @@ export class ListSessionCommentsRequest implements GrpcMessage {
             _instance.fieldMask,
             googleProtobuf003.FieldMask.deserializeBinaryFromReader
           );
+          break;
+        case 4:
+          _instance.isResolved = _reader.readBool();
           break;
         default:
           _reader.skipField();
@@ -24036,11 +24040,15 @@ export class ListSessionCommentsRequest implements GrpcMessage {
         googleProtobuf003.FieldMask.serializeBinaryToWriter
       );
     }
+    if (_instance.isResolved) {
+      _writer.writeBool(4, _instance.isResolved);
+    }
   }
 
   private _sessionId: string;
   private _pageToken: string;
   private _fieldMask?: googleProtobuf003.FieldMask;
+  private _isResolved: boolean;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -24053,6 +24061,7 @@ export class ListSessionCommentsRequest implements GrpcMessage {
     this.fieldMask = _value.fieldMask
       ? new googleProtobuf003.FieldMask(_value.fieldMask)
       : undefined;
+    this.isResolved = _value.isResolved;
     ListSessionCommentsRequest.refineValues(this);
   }
   get sessionId(): string {
@@ -24073,6 +24082,12 @@ export class ListSessionCommentsRequest implements GrpcMessage {
   set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
     this._fieldMask = value;
   }
+  get isResolved(): boolean {
+    return this._isResolved;
+  }
+  set isResolved(value: boolean) {
+    this._isResolved = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -24091,7 +24106,8 @@ export class ListSessionCommentsRequest implements GrpcMessage {
     return {
       sessionId: this.sessionId,
       pageToken: this.pageToken,
-      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      isResolved: this.isResolved
     };
   }
 
@@ -24114,7 +24130,8 @@ export class ListSessionCommentsRequest implements GrpcMessage {
     return {
       sessionId: this.sessionId,
       pageToken: this.pageToken,
-      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      isResolved: this.isResolved
     };
   }
 }
@@ -24126,6 +24143,7 @@ export module ListSessionCommentsRequest {
     sessionId: string;
     pageToken: string;
     fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    isResolved: boolean;
   }
 
   /**
@@ -24135,6 +24153,251 @@ export module ListSessionCommentsRequest {
     sessionId: string;
     pageToken: string;
     fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    isResolved: boolean;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListSessionCommentsOfAllSessionsRequest
+ */
+export class ListSessionCommentsOfAllSessionsRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.ListSessionCommentsOfAllSessionsRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListSessionCommentsOfAllSessionsRequest();
+    ListSessionCommentsOfAllSessionsRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListSessionCommentsOfAllSessionsRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.sessionFilter = _instance.sessionFilter || undefined;
+    _instance.pageToken = _instance.pageToken || '';
+    _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.isResolved = _instance.isResolved || false;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListSessionCommentsOfAllSessionsRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.sessionFilter = new SessionFilter();
+          _reader.readMessage(
+            _instance.sessionFilter,
+            SessionFilter.deserializeBinaryFromReader
+          );
+          break;
+        case 3:
+          _instance.pageToken = _reader.readString();
+          break;
+        case 4:
+          _instance.fieldMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 5:
+          _instance.isResolved = _reader.readBool();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListSessionCommentsOfAllSessionsRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListSessionCommentsOfAllSessionsRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.sessionFilter) {
+      _writer.writeMessage(
+        2,
+        _instance.sessionFilter as any,
+        SessionFilter.serializeBinaryToWriter
+      );
+    }
+    if (_instance.pageToken) {
+      _writer.writeString(3, _instance.pageToken);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        4,
+        _instance.fieldMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+    if (_instance.isResolved) {
+      _writer.writeBool(5, _instance.isResolved);
+    }
+  }
+
+  private _parent: string;
+  private _sessionFilter?: SessionFilter;
+  private _pageToken: string;
+  private _fieldMask?: googleProtobuf003.FieldMask;
+  private _isResolved: boolean;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListSessionCommentsOfAllSessionsRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<ListSessionCommentsOfAllSessionsRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.sessionFilter = _value.sessionFilter
+      ? new SessionFilter(_value.sessionFilter)
+      : undefined;
+    this.pageToken = _value.pageToken;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    this.isResolved = _value.isResolved;
+    ListSessionCommentsOfAllSessionsRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get sessionFilter(): SessionFilter | undefined {
+    return this._sessionFilter;
+  }
+  set sessionFilter(value: SessionFilter | undefined) {
+    this._sessionFilter = value;
+  }
+  get pageToken(): string {
+    return this._pageToken;
+  }
+  set pageToken(value: string) {
+    this._pageToken = value;
+  }
+  get fieldMask(): googleProtobuf003.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+  get isResolved(): boolean {
+    return this._isResolved;
+  }
+  set isResolved(value: boolean) {
+    this._isResolved = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListSessionCommentsOfAllSessionsRequest.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListSessionCommentsOfAllSessionsRequest.AsObject {
+    return {
+      parent: this.parent,
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toObject()
+        : undefined,
+      pageToken: this.pageToken,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      isResolved: this.isResolved
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListSessionCommentsOfAllSessionsRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toProtobufJSON(options)
+        : null,
+      pageToken: this.pageToken,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      isResolved: this.isResolved
+    };
+  }
+}
+export module ListSessionCommentsOfAllSessionsRequest {
+  /**
+   * Standard JavaScript object representation for ListSessionCommentsOfAllSessionsRequest
+   */
+  export interface AsObject {
+    parent: string;
+    sessionFilter?: SessionFilter.AsObject;
+    pageToken: string;
+    fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    isResolved: boolean;
+  }
+
+  /**
+   * Protobuf JSON representation for ListSessionCommentsOfAllSessionsRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    sessionFilter: SessionFilter.AsProtobufJSON | null;
+    pageToken: string;
+    fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    isResolved: boolean;
   }
 }
 

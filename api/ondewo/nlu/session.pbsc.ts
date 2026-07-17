@@ -703,6 +703,27 @@ export class SessionsClient {
       });
     },
     /**
+     * Unary call: /ondewo.nlu.Sessions/ListSessionCommentsOfAllSessions
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.ListSessionCommentsResponse>>
+     */
+    listSessionCommentsOfAllSessions: (
+      requestData: thisProto.ListSessionCommentsOfAllSessionsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.ListSessionCommentsResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/ListSessionCommentsOfAllSessions',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ListSessionCommentsOfAllSessionsRequest,
+        responseClass: thisProto.ListSessionCommentsResponse
+      });
+    },
+    /**
      * Unary call: /ondewo.nlu.Sessions/ListSessionReviews
      *
      * @param requestMessage Request message
@@ -1394,6 +1415,22 @@ export class SessionsClient {
   ): Observable<thisProto.ListSessionCommentsResponse> {
     return this.$raw
       .listSessionComments(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/ListSessionCommentsOfAllSessions
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.ListSessionCommentsResponse>
+   */
+  listSessionCommentsOfAllSessions(
+    requestData: thisProto.ListSessionCommentsOfAllSessionsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.ListSessionCommentsResponse> {
+    return this.$raw
+      .listSessionCommentsOfAllSessions(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 
