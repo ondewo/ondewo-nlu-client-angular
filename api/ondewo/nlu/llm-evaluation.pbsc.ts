@@ -27,8 +27,9 @@ import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as googleRpc004 from '../../google/rpc/status.pb';
 import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu006 from '../../ondewo/nlu/operation-metadata.pb';
-import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu008 from '../../ondewo/nlu/operations.pb';
+import * as ondewoNlu007 from '../../ondewo/nlu/common.pb';
+import * as googleProtobuf008 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu009 from '../../ondewo/nlu/operations.pb';
 import { GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS } from './llm-evaluation.pbconf';
 /**
  * Service client implementation for ondewo.nlu.LlmEvaluations
@@ -279,12 +280,12 @@ export class LlmEvaluationsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
+     * @returns Observable<GrpcEvent<ondewoNlu009.Operation>>
      */
     llmEvaluationRunExperiment: (
       requestData: thisProto.RunLlmEvaluationExperimentRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu008.Operation>> => {
+    ): Observable<GrpcEvent<ondewoNlu009.Operation>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -292,7 +293,7 @@ export class LlmEvaluationsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.RunLlmEvaluationExperimentRequest,
-        responseClass: ondewoNlu008.Operation
+        responseClass: ondewoNlu009.Operation
       });
     },
     /**
@@ -619,12 +620,12 @@ export class LlmEvaluationsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
+     * @returns Observable<GrpcEvent<ondewoNlu009.Operation>>
      */
     llmEvaluationRunReleaseGate: (
       requestData: thisProto.RunLlmEvaluationReleaseGateRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu008.Operation>> => {
+    ): Observable<GrpcEvent<ondewoNlu009.Operation>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -632,7 +633,7 @@ export class LlmEvaluationsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.RunLlmEvaluationReleaseGateRequest,
-        responseClass: ondewoNlu008.Operation
+        responseClass: ondewoNlu009.Operation
       });
     },
     /**
@@ -876,12 +877,12 @@ export class LlmEvaluationsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<ondewoNlu008.Operation>>
+     * @returns Observable<GrpcEvent<ondewoNlu009.Operation>>
      */
     llmEvaluationSimulateConversations: (
       requestData: thisProto.SimulateLlmEvaluationConversationsRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<ondewoNlu008.Operation>> => {
+    ): Observable<GrpcEvent<ondewoNlu009.Operation>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -889,7 +890,7 @@ export class LlmEvaluationsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.SimulateLlmEvaluationConversationsRequest,
-        responseClass: ondewoNlu008.Operation
+        responseClass: ondewoNlu009.Operation
       });
     },
     /**
@@ -1778,12 +1779,12 @@ export class LlmEvaluationsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu008.Operation>
+   * @returns Observable<ondewoNlu009.Operation>
    */
   llmEvaluationRunExperiment(
     requestData: thisProto.RunLlmEvaluationExperimentRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu008.Operation> {
+  ): Observable<ondewoNlu009.Operation> {
     return this.$raw
       .llmEvaluationRunExperiment(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -2034,12 +2035,12 @@ export class LlmEvaluationsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu008.Operation>
+   * @returns Observable<ondewoNlu009.Operation>
    */
   llmEvaluationRunReleaseGate(
     requestData: thisProto.RunLlmEvaluationReleaseGateRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu008.Operation> {
+  ): Observable<ondewoNlu009.Operation> {
     return this.$raw
       .llmEvaluationRunReleaseGate(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -2226,12 +2227,12 @@ export class LlmEvaluationsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<ondewoNlu008.Operation>
+   * @returns Observable<ondewoNlu009.Operation>
    */
   llmEvaluationSimulateConversations(
     requestData: thisProto.SimulateLlmEvaluationConversationsRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<ondewoNlu008.Operation> {
+  ): Observable<ondewoNlu009.Operation> {
     return this.$raw
       .llmEvaluationSimulateConversations(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());

@@ -30,8 +30,8 @@ import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
 import * as googleRpc008 from '../../google/rpc/status.pb';
 import * as ondewoNlu009 from '../../ondewo/nlu/operation-metadata.pb';
-import * as ondewoNlu010 from '../../ondewo/nlu/context.pb';
-import * as ondewoNlu011 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu011 from '../../ondewo/nlu/context.pb';
 import * as ondewoNlu012 from '../../ondewo/nlu/operations.pb';
 import { GRPC_INTENTS_CLIENT_SETTINGS } from './intent.pbconf';
 /**

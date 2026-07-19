@@ -19,9 +19,9 @@ import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
 import * as googleRpc006 from '../../google/rpc/status.pb';
 import * as ondewoNlu007 from '../../ondewo/nlu/operation-metadata.pb';
-import * as googleType008 from '../../google/type/latlng.pb';
-import * as ondewoNlu009 from '../../ondewo/nlu/ccai-project.pb';
-import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu008 from '../../ondewo/nlu/common.pb';
+import * as googleType009 from '../../google/type/latlng.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/ccai-project.pb';
 import * as ondewoNlu011 from '../../ondewo/nlu/context.pb';
 import * as ondewoNlu012 from '../../ondewo/nlu/entity-type.pb';
 import * as ondewoNlu013 from '../../ondewo/nlu/intent.pb';
@@ -2941,7 +2941,7 @@ export class RagListDatasetsRequest implements GrpcMessage {
   private _name: string;
   private _orderby: string;
   private _desc: boolean;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
   private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
@@ -3005,10 +3005,10 @@ export class RagListDatasetsRequest implements GrpcMessage {
   set desc(value: boolean) {
     this._desc = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
   get fieldMask(): googleProtobuf000.FieldMask | undefined {
@@ -3070,7 +3070,7 @@ export class RagListDatasetsRequest implements GrpcMessage {
       orderby: this.orderby,
       desc: this.desc,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -3091,7 +3091,7 @@ export module RagListDatasetsRequest {
     name: string;
     orderby: string;
     desc: boolean;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
@@ -5040,7 +5040,7 @@ export class RagListDocumentsRequest implements GrpcMessage {
   private _createTimeFrom?: googleProtobuf002.Timestamp;
   private _createTimeTo?: googleProtobuf002.Timestamp;
   private _metadataCondition?: RagMetadataConditions;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
   private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
@@ -5159,10 +5159,10 @@ export class RagListDocumentsRequest implements GrpcMessage {
   set metadataCondition(value: RagMetadataConditions | undefined) {
     this._metadataCondition = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
   get fieldMask(): googleProtobuf000.FieldMask | undefined {
@@ -5250,7 +5250,7 @@ export class RagListDocumentsRequest implements GrpcMessage {
         ? this.metadataCondition.toProtobufJSON(options)
         : null,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -5278,7 +5278,7 @@ export module RagListDocumentsRequest {
     createTimeFrom?: googleProtobuf002.Timestamp.AsObject;
     createTimeTo?: googleProtobuf002.Timestamp.AsObject;
     metadataCondition?: RagMetadataConditions.AsObject;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
@@ -8487,7 +8487,7 @@ export class RagListCrawlersRequest implements GrpcMessage {
   private _datasetName: string;
   private _crawlerName: string;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
   private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
@@ -8544,10 +8544,10 @@ export class RagListCrawlersRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
   get fieldMask(): googleProtobuf000.FieldMask | undefined {
@@ -8607,7 +8607,7 @@ export class RagListCrawlersRequest implements GrpcMessage {
       crawlerName: this.crawlerName,
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -8627,7 +8627,7 @@ export module RagListCrawlersRequest {
     datasetName: string;
     crawlerName: string;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
@@ -13667,7 +13667,7 @@ export class RagListCrawlerRunsRequest implements GrpcMessage {
   private _pageToken: string;
   private _status: ondewoNlu007.OperationMetadata.Status;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -13720,10 +13720,10 @@ export class RagListCrawlerRunsRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
 
@@ -13779,7 +13779,7 @@ export class RagListCrawlerRunsRequest implements GrpcMessage {
         ],
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -13798,7 +13798,7 @@ export module RagListCrawlerRunsRequest {
     pageToken: string;
     status: ondewoNlu007.OperationMetadata.Status;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
   }
 
   /**
@@ -14812,7 +14812,7 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
   private _urlQuery: string;
   private _fieldMask?: googleProtobuf000.FieldMask;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -14874,10 +14874,10 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
 
@@ -14932,7 +14932,7 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
       fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -14952,7 +14952,7 @@ export module RagGetCrawlerResultsRequest {
     urlQuery: string;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
   }
 
   /**
@@ -15965,7 +15965,7 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
   private _pageToken: string;
   private _fieldMask?: googleProtobuf000.FieldMask;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -16029,10 +16029,10 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
 
@@ -16087,7 +16087,7 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
       fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -16107,7 +16107,7 @@ export module RagGetCrawlerAttachedDatasetsRequest {
     pageToken: string;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
   }
 
   /**
@@ -16483,14 +16483,14 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
   private _operationName: string;
   private _pageToken: string;
   private _pageSize: number;
-  private _levelFilters: ondewoNlu010.LogSeverity[];
+  private _levelFilters: ondewoNlu008.LogSeverity[];
   private _phaseFilter: string;
   private _searchQuery: string;
   private _startTime?: googleProtobuf002.Timestamp;
   private _endTime?: googleProtobuf002.Timestamp;
   private _sourceUrlFilter: string;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
   private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
@@ -16551,10 +16551,10 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
   set pageSize(value: number) {
     this._pageSize = value;
   }
-  get levelFilters(): ondewoNlu010.LogSeverity[] {
+  get levelFilters(): ondewoNlu008.LogSeverity[] {
     return this._levelFilters;
   }
-  set levelFilters(value: ondewoNlu010.LogSeverity[]) {
+  set levelFilters(value: ondewoNlu008.LogSeverity[]) {
     this._levelFilters = value;
   }
   get phaseFilter(): string {
@@ -16593,10 +16593,10 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
   get fieldMask(): googleProtobuf000.FieldMask | undefined {
@@ -16661,7 +16661,7 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
       pageToken: this.pageToken,
       pageSize: this.pageSize,
       levelFilters: (this.levelFilters || []).map(
-        v => ondewoNlu010.LogSeverity[v]
+        v => ondewoNlu008.LogSeverity[v]
       ),
       phaseFilter: this.phaseFilter,
       searchQuery: this.searchQuery,
@@ -16670,7 +16670,7 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
       sourceUrlFilter: this.sourceUrlFilter,
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -16689,14 +16689,14 @@ export module RagGetCrawlerRunLogsRequest {
     operationName: string;
     pageToken: string;
     pageSize: number;
-    levelFilters: ondewoNlu010.LogSeverity[];
+    levelFilters: ondewoNlu008.LogSeverity[];
     phaseFilter: string;
     searchQuery: string;
     startTime?: googleProtobuf002.Timestamp.AsObject;
     endTime?: googleProtobuf002.Timestamp.AsObject;
     sourceUrlFilter: string;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
@@ -16776,10 +16776,10 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
           _instance.status = _reader.readEnum();
           break;
         case 4:
-          const messageInitializer4 = new ondewoNlu010.LogEntry();
+          const messageInitializer4 = new ondewoNlu008.LogEntry();
           _reader.readMessage(
             messageInitializer4,
-            ondewoNlu010.LogEntry.deserializeBinaryFromReader
+            ondewoNlu008.LogEntry.deserializeBinaryFromReader
           );
           (_instance.entries = _instance.entries || []).push(
             messageInitializer4
@@ -16821,7 +16821,7 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
       _writer.writeRepeatedMessage(
         4,
         _instance.entries as any,
-        ondewoNlu010.LogEntry.serializeBinaryToWriter
+        ondewoNlu008.LogEntry.serializeBinaryToWriter
       );
     }
     if (_instance.nextPageToken) {
@@ -16835,7 +16835,7 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
   private _operationName: string;
   private _crawlerName: string;
   private _status: ondewoNlu007.OperationMetadata.Status;
-  private _entries?: ondewoNlu010.LogEntry[];
+  private _entries?: ondewoNlu008.LogEntry[];
   private _nextPageToken: string;
   private _totalLogEntries: number;
 
@@ -16851,7 +16851,7 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
     this.crawlerName = _value.crawlerName;
     this.status = _value.status;
     this.entries = (_value.entries || []).map(
-      m => new ondewoNlu010.LogEntry(m)
+      m => new ondewoNlu008.LogEntry(m)
     );
     this.nextPageToken = _value.nextPageToken;
     this.totalLogEntries = _value.totalLogEntries;
@@ -16875,10 +16875,10 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
   set status(value: ondewoNlu007.OperationMetadata.Status) {
     this._status = value;
   }
-  get entries(): ondewoNlu010.LogEntry[] | undefined {
+  get entries(): ondewoNlu008.LogEntry[] | undefined {
     return this._entries;
   }
-  set entries(value: ondewoNlu010.LogEntry[] | undefined) {
+  set entries(value: ondewoNlu008.LogEntry[] | undefined) {
     this._entries = value;
   }
   get nextPageToken(): string {
@@ -16955,7 +16955,7 @@ export module RagGetCrawlerRunLogsResponse {
     operationName: string;
     crawlerName: string;
     status: ondewoNlu007.OperationMetadata.Status;
-    entries?: ondewoNlu010.LogEntry.AsObject[];
+    entries?: ondewoNlu008.LogEntry.AsObject[];
     nextPageToken: string;
     totalLogEntries: number;
   }
@@ -16967,7 +16967,7 @@ export module RagGetCrawlerRunLogsResponse {
     operationName: string;
     crawlerName: string;
     status: string;
-    entries: ondewoNlu010.LogEntry.AsProtobufJSON[] | null;
+    entries: ondewoNlu008.LogEntry.AsProtobufJSON[] | null;
     nextPageToken: string;
     totalLogEntries: number;
   }

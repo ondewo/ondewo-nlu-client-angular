@@ -24,11 +24,13 @@ import * as googleApi000 from '../../google/api/http.pb';
 import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
-import * as googleApi004 from '../../google/api/annotations.pb';
+import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
-import * as googleRpc007 from '../../google/rpc/status.pb';
-import * as ondewoNlu008 from '../../ondewo/nlu/operation-metadata.pb';
+import * as googleApi006 from '../../google/api/annotations.pb';
+import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
+import * as googleRpc008 from '../../google/rpc/status.pb';
+import * as ondewoNlu009 from '../../ondewo/nlu/operation-metadata.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
 import { GRPC_OPERATIONS_CLIENT_SETTINGS } from './operations.pbconf';
 /**
  * Service client implementation for ondewo.nlu.Operations
@@ -90,12 +92,12 @@ export class OperationsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf005.Empty>>
+     * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
      */
     deleteOperation: (
       requestData: thisProto.DeleteOperationRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf005.Empty>> => {
+    ): Observable<GrpcEvent<googleProtobuf007.Empty>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -103,7 +105,7 @@ export class OperationsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.DeleteOperationRequest,
-        responseClass: googleProtobuf005.Empty
+        responseClass: googleProtobuf007.Empty
       });
     },
     /**
@@ -111,12 +113,12 @@ export class OperationsClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf005.Empty>>
+     * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
      */
     cancelOperation: (
       requestData: thisProto.CancelOperationRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf005.Empty>> => {
+    ): Observable<GrpcEvent<googleProtobuf007.Empty>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -124,7 +126,72 @@ export class OperationsClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.CancelOperationRequest,
-        responseClass: googleProtobuf005.Empty
+        responseClass: googleProtobuf007.Empty
+      });
+    },
+    /**
+     * Server streaming: /ondewo.nlu.Operations/StreamRemoteOperationContainerLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RemoteOperationContainerLogLine>>
+     */
+    streamRemoteOperationContainerLogs: (
+      requestData: thisProto.StreamRemoteOperationContainerLogsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RemoteOperationContainerLogLine>> => {
+      return this.handler.handle({
+        type: GrpcCallType.serverStream,
+        client: this.client,
+        path: '/ondewo.nlu.Operations/StreamRemoteOperationContainerLogs',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.StreamRemoteOperationContainerLogsRequest,
+        responseClass: thisProto.RemoteOperationContainerLogLine
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Operations/GetRemoteOperationContainerLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.GetRemoteOperationContainerLogsResponse>>
+     */
+    getRemoteOperationContainerLogs: (
+      requestData: thisProto.GetRemoteOperationContainerLogsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.GetRemoteOperationContainerLogsResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Operations/GetRemoteOperationContainerLogs',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetRemoteOperationContainerLogsRequest,
+        responseClass: thisProto.GetRemoteOperationContainerLogsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Operations/GetRemoteOperationContainerStatus
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.RemoteOperationContainerStatus>>
+     */
+    getRemoteOperationContainerStatus: (
+      requestData: thisProto.GetRemoteOperationContainerStatusRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.RemoteOperationContainerStatus>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Operations/GetRemoteOperationContainerStatus',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetRemoteOperationContainerStatusRequest,
+        responseClass: thisProto.RemoteOperationContainerStatus
       });
     }
   };
@@ -174,12 +241,12 @@ export class OperationsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf005.Empty>
+   * @returns Observable<googleProtobuf007.Empty>
    */
   deleteOperation(
     requestData: thisProto.DeleteOperationRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf005.Empty> {
+  ): Observable<googleProtobuf007.Empty> {
     return this.$raw
       .deleteOperation(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
@@ -190,14 +257,62 @@ export class OperationsClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf005.Empty>
+   * @returns Observable<googleProtobuf007.Empty>
    */
   cancelOperation(
     requestData: thisProto.CancelOperationRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf005.Empty> {
+  ): Observable<googleProtobuf007.Empty> {
     return this.$raw
       .cancelOperation(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Server streaming @/ondewo.nlu.Operations/StreamRemoteOperationContainerLogs
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RemoteOperationContainerLogLine>
+   */
+  streamRemoteOperationContainerLogs(
+    requestData: thisProto.StreamRemoteOperationContainerLogsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RemoteOperationContainerLogLine> {
+    return this.$raw
+      .streamRemoteOperationContainerLogs(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Operations/GetRemoteOperationContainerLogs
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.GetRemoteOperationContainerLogsResponse>
+   */
+  getRemoteOperationContainerLogs(
+    requestData: thisProto.GetRemoteOperationContainerLogsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.GetRemoteOperationContainerLogsResponse> {
+    return this.$raw
+      .getRemoteOperationContainerLogs(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Operations/GetRemoteOperationContainerStatus
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.RemoteOperationContainerStatus>
+   */
+  getRemoteOperationContainerStatus(
+    requestData: thisProto.GetRemoteOperationContainerStatusRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.RemoteOperationContainerStatus> {
+    return this.$raw
+      .getRemoteOperationContainerStatus(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 }
