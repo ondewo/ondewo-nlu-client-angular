@@ -724,6 +724,197 @@ export class SessionsClient {
       });
     },
     /**
+     * Unary call: /ondewo.nlu.Sessions/AddSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.SessionFeedback>>
+     */
+    addSessionFeedback: (
+      requestData: thisProto.AddSessionFeedbackRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.SessionFeedback>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/AddSessionFeedback',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.AddSessionFeedbackRequest,
+        responseClass: thisProto.SessionFeedback
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Sessions/AddSessionStepFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.SessionFeedback>>
+     */
+    addSessionStepFeedback: (
+      requestData: thisProto.AddSessionStepFeedbackRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.SessionFeedback>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/AddSessionStepFeedback',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.AddSessionStepFeedbackRequest,
+        responseClass: thisProto.SessionFeedback
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Sessions/GetSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.SessionFeedback>>
+     */
+    getSessionFeedback: (
+      requestData: thisProto.GetSessionFeedbackRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.SessionFeedback>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/GetSessionFeedback',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetSessionFeedbackRequest,
+        responseClass: thisProto.SessionFeedback
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Sessions/UpdateSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.SessionFeedback>>
+     */
+    updateSessionFeedback: (
+      requestData: thisProto.UpdateSessionFeedbackRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.SessionFeedback>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/UpdateSessionFeedback',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.UpdateSessionFeedbackRequest,
+        responseClass: thisProto.SessionFeedback
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Sessions/DeleteSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
+     */
+    deleteSessionFeedback: (
+      requestData: thisProto.DeleteSessionFeedbackRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<googleProtobuf008.Empty>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/DeleteSessionFeedback',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.DeleteSessionFeedbackRequest,
+        responseClass: googleProtobuf008.Empty
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Sessions/ListSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.ListSessionFeedbackResponse>>
+     */
+    listSessionFeedback: (
+      requestData: thisProto.ListSessionFeedbackRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.ListSessionFeedbackResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/ListSessionFeedback',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ListSessionFeedbackRequest,
+        responseClass: thisProto.ListSessionFeedbackResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Sessions/ListSessionFeedbackOfAllSessions
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.ListSessionFeedbackResponse>>
+     */
+    listSessionFeedbackOfAllSessions: (
+      requestData: thisProto.ListSessionFeedbackOfAllSessionsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.ListSessionFeedbackResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/ListSessionFeedbackOfAllSessions',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ListSessionFeedbackOfAllSessionsRequest,
+        responseClass: thisProto.ListSessionFeedbackResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Sessions/GetFeedbackStatistics
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.GetFeedbackStatisticsResponse>>
+     */
+    getFeedbackStatistics: (
+      requestData: thisProto.GetFeedbackStatisticsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.GetFeedbackStatisticsResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/GetFeedbackStatistics',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetFeedbackStatisticsRequest,
+        responseClass: thisProto.GetFeedbackStatisticsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Sessions/GetFeedbackStatisticsTimeSeries
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.GetFeedbackStatisticsTimeSeriesResponse>>
+     */
+    getFeedbackStatisticsTimeSeries: (
+      requestData: thisProto.GetFeedbackStatisticsTimeSeriesRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.GetFeedbackStatisticsTimeSeriesResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/GetFeedbackStatisticsTimeSeries',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetFeedbackStatisticsTimeSeriesRequest,
+        responseClass: thisProto.GetFeedbackStatisticsTimeSeriesResponse
+      });
+    },
+    /**
      * Unary call: /ondewo.nlu.Sessions/ListSessionReviews
      *
      * @param requestMessage Request message
@@ -1431,6 +1622,150 @@ export class SessionsClient {
   ): Observable<thisProto.ListSessionCommentsResponse> {
     return this.$raw
       .listSessionCommentsOfAllSessions(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/AddSessionFeedback
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.SessionFeedback>
+   */
+  addSessionFeedback(
+    requestData: thisProto.AddSessionFeedbackRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.SessionFeedback> {
+    return this.$raw
+      .addSessionFeedback(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/AddSessionStepFeedback
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.SessionFeedback>
+   */
+  addSessionStepFeedback(
+    requestData: thisProto.AddSessionStepFeedbackRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.SessionFeedback> {
+    return this.$raw
+      .addSessionStepFeedback(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/GetSessionFeedback
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.SessionFeedback>
+   */
+  getSessionFeedback(
+    requestData: thisProto.GetSessionFeedbackRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.SessionFeedback> {
+    return this.$raw
+      .getSessionFeedback(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/UpdateSessionFeedback
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.SessionFeedback>
+   */
+  updateSessionFeedback(
+    requestData: thisProto.UpdateSessionFeedbackRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.SessionFeedback> {
+    return this.$raw
+      .updateSessionFeedback(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/DeleteSessionFeedback
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<googleProtobuf008.Empty>
+   */
+  deleteSessionFeedback(
+    requestData: thisProto.DeleteSessionFeedbackRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<googleProtobuf008.Empty> {
+    return this.$raw
+      .deleteSessionFeedback(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/ListSessionFeedback
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.ListSessionFeedbackResponse>
+   */
+  listSessionFeedback(
+    requestData: thisProto.ListSessionFeedbackRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.ListSessionFeedbackResponse> {
+    return this.$raw
+      .listSessionFeedback(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/ListSessionFeedbackOfAllSessions
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.ListSessionFeedbackResponse>
+   */
+  listSessionFeedbackOfAllSessions(
+    requestData: thisProto.ListSessionFeedbackOfAllSessionsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.ListSessionFeedbackResponse> {
+    return this.$raw
+      .listSessionFeedbackOfAllSessions(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/GetFeedbackStatistics
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.GetFeedbackStatisticsResponse>
+   */
+  getFeedbackStatistics(
+    requestData: thisProto.GetFeedbackStatisticsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.GetFeedbackStatisticsResponse> {
+    return this.$raw
+      .getFeedbackStatistics(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/GetFeedbackStatisticsTimeSeries
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.GetFeedbackStatisticsTimeSeriesResponse>
+   */
+  getFeedbackStatisticsTimeSeries(
+    requestData: thisProto.GetFeedbackStatisticsTimeSeriesRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.GetFeedbackStatisticsTimeSeriesResponse> {
+    return this.$raw
+      .getFeedbackStatisticsTimeSeries(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 

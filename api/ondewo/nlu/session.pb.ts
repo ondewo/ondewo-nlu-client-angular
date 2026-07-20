@@ -64,6 +64,17 @@ export enum ComparisonOperator {
   STARTS_WITH = 5,
   ENDS_WITH = 6
 }
+export enum FeedbackRating {
+  FEEDBACK_RATING_UNSPECIFIED = 0,
+  FEEDBACK_RATING_THUMBS_UP = 1,
+  FEEDBACK_RATING_THUMBS_DOWN = 2
+}
+export enum FeedbackAuthorType {
+  FEEDBACK_AUTHOR_TYPE_UNSPECIFIED = 0,
+  FEEDBACK_AUTHOR_TYPE_HUMAN_REVIEWER = 1,
+  FEEDBACK_AUTHOR_TYPE_TECHNICAL_USER = 2,
+  FEEDBACK_AUTHOR_TYPE_END_USER_ANONYMOUS = 3
+}
 export enum ResourceView {
   RESOURCE_VIEW_UNSPECIFIED = 0,
   RESOURCE_VIEW_FULL = 1,
@@ -24567,6 +24578,3508 @@ export module ListSessionCommentsResponse {
   export interface AsProtobufJSON {
     comment: ondewoNlu006.Comment.AsProtobufJSON[] | null;
     pageToken: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.SessionFeedback
+ */
+export class SessionFeedback implements GrpcMessage {
+  static id = 'ondewo.nlu.SessionFeedback';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new SessionFeedback();
+    SessionFeedback.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: SessionFeedback) {
+    _instance.name = _instance.name || '';
+    _instance.sessionId = _instance.sessionId || '';
+    _instance.sessionStepId = _instance.sessionStepId || '';
+    _instance.responseId = _instance.responseId || '';
+    _instance.sessionStepLlmTelemetryId =
+      _instance.sessionStepLlmTelemetryId || '';
+    _instance.rating = _instance.rating || 0;
+    _instance.categoricalValue = _instance.categoricalValue || '';
+    _instance.score = _instance.score || 0;
+    _instance.comment = _instance.comment || '';
+    _instance.criterion = _instance.criterion || '';
+    _instance.authorType = _instance.authorType || 0;
+    _instance.annotatorUserId = _instance.annotatorUserId || '';
+    _instance.originId = _instance.originId || '';
+    _instance.identifiedUserId = _instance.identifiedUserId || '';
+    _instance.raw = _instance.raw || undefined;
+    _instance.createdAt = _instance.createdAt || undefined;
+    _instance.modifiedAt = _instance.modifiedAt || undefined;
+    _instance.createdBy = _instance.createdBy || '';
+    _instance.modifiedBy = _instance.modifiedBy || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: SessionFeedback,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.sessionId = _reader.readString();
+          break;
+        case 3:
+          _instance.sessionStepId = _reader.readString();
+          break;
+        case 4:
+          _instance.responseId = _reader.readString();
+          break;
+        case 5:
+          _instance.sessionStepLlmTelemetryId = _reader.readString();
+          break;
+        case 6:
+          _instance.rating = _reader.readEnum();
+          break;
+        case 7:
+          _instance.categoricalValue = _reader.readString();
+          break;
+        case 8:
+          _instance.score = _reader.readFloat();
+          break;
+        case 9:
+          _instance.comment = _reader.readString();
+          break;
+        case 10:
+          _instance.criterion = _reader.readString();
+          break;
+        case 11:
+          _instance.authorType = _reader.readEnum();
+          break;
+        case 12:
+          _instance.annotatorUserId = _reader.readString();
+          break;
+        case 13:
+          _instance.originId = _reader.readString();
+          break;
+        case 14:
+          _instance.identifiedUserId = _reader.readString();
+          break;
+        case 15:
+          _instance.raw = new googleProtobuf004.Struct();
+          _reader.readMessage(
+            _instance.raw,
+            googleProtobuf004.Struct.deserializeBinaryFromReader
+          );
+          break;
+        case 16:
+          _instance.createdAt = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.createdAt,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 17:
+          _instance.modifiedAt = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.modifiedAt,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 18:
+          _instance.createdBy = _reader.readString();
+          break;
+        case 19:
+          _instance.modifiedBy = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    SessionFeedback.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: SessionFeedback,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+    if (_instance.sessionId) {
+      _writer.writeString(2, _instance.sessionId);
+    }
+    if (_instance.sessionStepId) {
+      _writer.writeString(3, _instance.sessionStepId);
+    }
+    if (_instance.responseId) {
+      _writer.writeString(4, _instance.responseId);
+    }
+    if (_instance.sessionStepLlmTelemetryId) {
+      _writer.writeString(5, _instance.sessionStepLlmTelemetryId);
+    }
+    if (_instance.rating) {
+      _writer.writeEnum(6, _instance.rating);
+    }
+    if (_instance.categoricalValue) {
+      _writer.writeString(7, _instance.categoricalValue);
+    }
+    if (_instance.score) {
+      _writer.writeFloat(8, _instance.score);
+    }
+    if (_instance.comment) {
+      _writer.writeString(9, _instance.comment);
+    }
+    if (_instance.criterion) {
+      _writer.writeString(10, _instance.criterion);
+    }
+    if (_instance.authorType) {
+      _writer.writeEnum(11, _instance.authorType);
+    }
+    if (_instance.annotatorUserId) {
+      _writer.writeString(12, _instance.annotatorUserId);
+    }
+    if (_instance.originId) {
+      _writer.writeString(13, _instance.originId);
+    }
+    if (_instance.identifiedUserId) {
+      _writer.writeString(14, _instance.identifiedUserId);
+    }
+    if (_instance.raw) {
+      _writer.writeMessage(
+        15,
+        _instance.raw as any,
+        googleProtobuf004.Struct.serializeBinaryToWriter
+      );
+    }
+    if (_instance.createdAt) {
+      _writer.writeMessage(
+        16,
+        _instance.createdAt as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.modifiedAt) {
+      _writer.writeMessage(
+        17,
+        _instance.modifiedAt as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.createdBy) {
+      _writer.writeString(18, _instance.createdBy);
+    }
+    if (_instance.modifiedBy) {
+      _writer.writeString(19, _instance.modifiedBy);
+    }
+  }
+
+  private _name: string;
+  private _sessionId: string;
+  private _sessionStepId: string;
+  private _responseId: string;
+  private _sessionStepLlmTelemetryId: string;
+  private _rating: FeedbackRating;
+  private _categoricalValue: string;
+  private _score: number;
+  private _comment: string;
+  private _criterion: string;
+  private _authorType: FeedbackAuthorType;
+  private _annotatorUserId: string;
+  private _originId: string;
+  private _identifiedUserId: string;
+  private _raw?: googleProtobuf004.Struct;
+  private _createdAt?: googleProtobuf005.Timestamp;
+  private _modifiedAt?: googleProtobuf005.Timestamp;
+  private _createdBy: string;
+  private _modifiedBy: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of SessionFeedback to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<SessionFeedback.AsObject>) {
+    _value = _value || {};
+    this.name = _value.name;
+    this.sessionId = _value.sessionId;
+    this.sessionStepId = _value.sessionStepId;
+    this.responseId = _value.responseId;
+    this.sessionStepLlmTelemetryId = _value.sessionStepLlmTelemetryId;
+    this.rating = _value.rating;
+    this.categoricalValue = _value.categoricalValue;
+    this.score = _value.score;
+    this.comment = _value.comment;
+    this.criterion = _value.criterion;
+    this.authorType = _value.authorType;
+    this.annotatorUserId = _value.annotatorUserId;
+    this.originId = _value.originId;
+    this.identifiedUserId = _value.identifiedUserId;
+    this.raw = _value.raw
+      ? new googleProtobuf004.Struct(_value.raw)
+      : undefined;
+    this.createdAt = _value.createdAt
+      ? new googleProtobuf005.Timestamp(_value.createdAt)
+      : undefined;
+    this.modifiedAt = _value.modifiedAt
+      ? new googleProtobuf005.Timestamp(_value.modifiedAt)
+      : undefined;
+    this.createdBy = _value.createdBy;
+    this.modifiedBy = _value.modifiedBy;
+    SessionFeedback.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+  get sessionId(): string {
+    return this._sessionId;
+  }
+  set sessionId(value: string) {
+    this._sessionId = value;
+  }
+  get sessionStepId(): string {
+    return this._sessionStepId;
+  }
+  set sessionStepId(value: string) {
+    this._sessionStepId = value;
+  }
+  get responseId(): string {
+    return this._responseId;
+  }
+  set responseId(value: string) {
+    this._responseId = value;
+  }
+  get sessionStepLlmTelemetryId(): string {
+    return this._sessionStepLlmTelemetryId;
+  }
+  set sessionStepLlmTelemetryId(value: string) {
+    this._sessionStepLlmTelemetryId = value;
+  }
+  get rating(): FeedbackRating {
+    return this._rating;
+  }
+  set rating(value: FeedbackRating) {
+    this._rating = value;
+  }
+  get categoricalValue(): string {
+    return this._categoricalValue;
+  }
+  set categoricalValue(value: string) {
+    this._categoricalValue = value;
+  }
+  get score(): number {
+    return this._score;
+  }
+  set score(value: number) {
+    this._score = value;
+  }
+  get comment(): string {
+    return this._comment;
+  }
+  set comment(value: string) {
+    this._comment = value;
+  }
+  get criterion(): string {
+    return this._criterion;
+  }
+  set criterion(value: string) {
+    this._criterion = value;
+  }
+  get authorType(): FeedbackAuthorType {
+    return this._authorType;
+  }
+  set authorType(value: FeedbackAuthorType) {
+    this._authorType = value;
+  }
+  get annotatorUserId(): string {
+    return this._annotatorUserId;
+  }
+  set annotatorUserId(value: string) {
+    this._annotatorUserId = value;
+  }
+  get originId(): string {
+    return this._originId;
+  }
+  set originId(value: string) {
+    this._originId = value;
+  }
+  get identifiedUserId(): string {
+    return this._identifiedUserId;
+  }
+  set identifiedUserId(value: string) {
+    this._identifiedUserId = value;
+  }
+  get raw(): googleProtobuf004.Struct | undefined {
+    return this._raw;
+  }
+  set raw(value: googleProtobuf004.Struct | undefined) {
+    this._raw = value;
+  }
+  get createdAt(): googleProtobuf005.Timestamp | undefined {
+    return this._createdAt;
+  }
+  set createdAt(value: googleProtobuf005.Timestamp | undefined) {
+    this._createdAt = value;
+  }
+  get modifiedAt(): googleProtobuf005.Timestamp | undefined {
+    return this._modifiedAt;
+  }
+  set modifiedAt(value: googleProtobuf005.Timestamp | undefined) {
+    this._modifiedAt = value;
+  }
+  get createdBy(): string {
+    return this._createdBy;
+  }
+  set createdBy(value: string) {
+    this._createdBy = value;
+  }
+  get modifiedBy(): string {
+    return this._modifiedBy;
+  }
+  set modifiedBy(value: string) {
+    this._modifiedBy = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    SessionFeedback.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): SessionFeedback.AsObject {
+    return {
+      name: this.name,
+      sessionId: this.sessionId,
+      sessionStepId: this.sessionStepId,
+      responseId: this.responseId,
+      sessionStepLlmTelemetryId: this.sessionStepLlmTelemetryId,
+      rating: this.rating,
+      categoricalValue: this.categoricalValue,
+      score: this.score,
+      comment: this.comment,
+      criterion: this.criterion,
+      authorType: this.authorType,
+      annotatorUserId: this.annotatorUserId,
+      originId: this.originId,
+      identifiedUserId: this.identifiedUserId,
+      raw: this.raw ? this.raw.toObject() : undefined,
+      createdAt: this.createdAt ? this.createdAt.toObject() : undefined,
+      modifiedAt: this.modifiedAt ? this.modifiedAt.toObject() : undefined,
+      createdBy: this.createdBy,
+      modifiedBy: this.modifiedBy
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): SessionFeedback.AsProtobufJSON {
+    return {
+      name: this.name,
+      sessionId: this.sessionId,
+      sessionStepId: this.sessionStepId,
+      responseId: this.responseId,
+      sessionStepLlmTelemetryId: this.sessionStepLlmTelemetryId,
+      rating:
+        FeedbackRating[
+          this.rating === null || this.rating === undefined ? 0 : this.rating
+        ],
+      categoricalValue: this.categoricalValue,
+      score: this.score,
+      comment: this.comment,
+      criterion: this.criterion,
+      authorType:
+        FeedbackAuthorType[
+          this.authorType === null || this.authorType === undefined
+            ? 0
+            : this.authorType
+        ],
+      annotatorUserId: this.annotatorUserId,
+      originId: this.originId,
+      identifiedUserId: this.identifiedUserId,
+      raw: this.raw ? this.raw.toProtobufJSON(options) : null,
+      createdAt: this.createdAt ? this.createdAt.toProtobufJSON(options) : null,
+      modifiedAt: this.modifiedAt
+        ? this.modifiedAt.toProtobufJSON(options)
+        : null,
+      createdBy: this.createdBy,
+      modifiedBy: this.modifiedBy
+    };
+  }
+}
+export module SessionFeedback {
+  /**
+   * Standard JavaScript object representation for SessionFeedback
+   */
+  export interface AsObject {
+    name: string;
+    sessionId: string;
+    sessionStepId: string;
+    responseId: string;
+    sessionStepLlmTelemetryId: string;
+    rating: FeedbackRating;
+    categoricalValue: string;
+    score: number;
+    comment: string;
+    criterion: string;
+    authorType: FeedbackAuthorType;
+    annotatorUserId: string;
+    originId: string;
+    identifiedUserId: string;
+    raw?: googleProtobuf004.Struct.AsObject;
+    createdAt?: googleProtobuf005.Timestamp.AsObject;
+    modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+    createdBy: string;
+    modifiedBy: string;
+  }
+
+  /**
+   * Protobuf JSON representation for SessionFeedback
+   */
+  export interface AsProtobufJSON {
+    name: string;
+    sessionId: string;
+    sessionStepId: string;
+    responseId: string;
+    sessionStepLlmTelemetryId: string;
+    rating: string;
+    categoricalValue: string;
+    score: number;
+    comment: string;
+    criterion: string;
+    authorType: string;
+    annotatorUserId: string;
+    originId: string;
+    identifiedUserId: string;
+    raw: googleProtobuf004.Struct.AsProtobufJSON | null;
+    createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    createdBy: string;
+    modifiedBy: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.AddSessionFeedbackRequest
+ */
+export class AddSessionFeedbackRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.AddSessionFeedbackRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new AddSessionFeedbackRequest();
+    AddSessionFeedbackRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: AddSessionFeedbackRequest) {
+    _instance.sessionId = _instance.sessionId || '';
+    _instance.feedback = _instance.feedback || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: AddSessionFeedbackRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.sessionId = _reader.readString();
+          break;
+        case 2:
+          _instance.feedback = new SessionFeedback();
+          _reader.readMessage(
+            _instance.feedback,
+            SessionFeedback.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    AddSessionFeedbackRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: AddSessionFeedbackRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.sessionId) {
+      _writer.writeString(1, _instance.sessionId);
+    }
+    if (_instance.feedback) {
+      _writer.writeMessage(
+        2,
+        _instance.feedback as any,
+        SessionFeedback.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _sessionId: string;
+  private _feedback?: SessionFeedback;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of AddSessionFeedbackRequest to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<AddSessionFeedbackRequest.AsObject>) {
+    _value = _value || {};
+    this.sessionId = _value.sessionId;
+    this.feedback = _value.feedback
+      ? new SessionFeedback(_value.feedback)
+      : undefined;
+    AddSessionFeedbackRequest.refineValues(this);
+  }
+  get sessionId(): string {
+    return this._sessionId;
+  }
+  set sessionId(value: string) {
+    this._sessionId = value;
+  }
+  get feedback(): SessionFeedback | undefined {
+    return this._feedback;
+  }
+  set feedback(value: SessionFeedback | undefined) {
+    this._feedback = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    AddSessionFeedbackRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): AddSessionFeedbackRequest.AsObject {
+    return {
+      sessionId: this.sessionId,
+      feedback: this.feedback ? this.feedback.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): AddSessionFeedbackRequest.AsProtobufJSON {
+    return {
+      sessionId: this.sessionId,
+      feedback: this.feedback ? this.feedback.toProtobufJSON(options) : null
+    };
+  }
+}
+export module AddSessionFeedbackRequest {
+  /**
+   * Standard JavaScript object representation for AddSessionFeedbackRequest
+   */
+  export interface AsObject {
+    sessionId: string;
+    feedback?: SessionFeedback.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for AddSessionFeedbackRequest
+   */
+  export interface AsProtobufJSON {
+    sessionId: string;
+    feedback: SessionFeedback.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.AddSessionStepFeedbackRequest
+ */
+export class AddSessionStepFeedbackRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.AddSessionStepFeedbackRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new AddSessionStepFeedbackRequest();
+    AddSessionStepFeedbackRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: AddSessionStepFeedbackRequest) {
+    _instance.sessionId = _instance.sessionId || '';
+    _instance.sessionStepId = _instance.sessionStepId || '';
+    _instance.feedback = _instance.feedback || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: AddSessionStepFeedbackRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.sessionId = _reader.readString();
+          break;
+        case 2:
+          _instance.sessionStepId = _reader.readString();
+          break;
+        case 3:
+          _instance.feedback = new SessionFeedback();
+          _reader.readMessage(
+            _instance.feedback,
+            SessionFeedback.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    AddSessionStepFeedbackRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: AddSessionStepFeedbackRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.sessionId) {
+      _writer.writeString(1, _instance.sessionId);
+    }
+    if (_instance.sessionStepId) {
+      _writer.writeString(2, _instance.sessionStepId);
+    }
+    if (_instance.feedback) {
+      _writer.writeMessage(
+        3,
+        _instance.feedback as any,
+        SessionFeedback.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _sessionId: string;
+  private _sessionStepId: string;
+  private _feedback?: SessionFeedback;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of AddSessionStepFeedbackRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<AddSessionStepFeedbackRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.sessionId = _value.sessionId;
+    this.sessionStepId = _value.sessionStepId;
+    this.feedback = _value.feedback
+      ? new SessionFeedback(_value.feedback)
+      : undefined;
+    AddSessionStepFeedbackRequest.refineValues(this);
+  }
+  get sessionId(): string {
+    return this._sessionId;
+  }
+  set sessionId(value: string) {
+    this._sessionId = value;
+  }
+  get sessionStepId(): string {
+    return this._sessionStepId;
+  }
+  set sessionStepId(value: string) {
+    this._sessionStepId = value;
+  }
+  get feedback(): SessionFeedback | undefined {
+    return this._feedback;
+  }
+  set feedback(value: SessionFeedback | undefined) {
+    this._feedback = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    AddSessionStepFeedbackRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): AddSessionStepFeedbackRequest.AsObject {
+    return {
+      sessionId: this.sessionId,
+      sessionStepId: this.sessionStepId,
+      feedback: this.feedback ? this.feedback.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): AddSessionStepFeedbackRequest.AsProtobufJSON {
+    return {
+      sessionId: this.sessionId,
+      sessionStepId: this.sessionStepId,
+      feedback: this.feedback ? this.feedback.toProtobufJSON(options) : null
+    };
+  }
+}
+export module AddSessionStepFeedbackRequest {
+  /**
+   * Standard JavaScript object representation for AddSessionStepFeedbackRequest
+   */
+  export interface AsObject {
+    sessionId: string;
+    sessionStepId: string;
+    feedback?: SessionFeedback.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for AddSessionStepFeedbackRequest
+   */
+  export interface AsProtobufJSON {
+    sessionId: string;
+    sessionStepId: string;
+    feedback: SessionFeedback.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetSessionFeedbackRequest
+ */
+export class GetSessionFeedbackRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.GetSessionFeedbackRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetSessionFeedbackRequest();
+    GetSessionFeedbackRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetSessionFeedbackRequest) {
+    _instance.name = _instance.name || '';
+    _instance.fieldMask = _instance.fieldMask || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetSessionFeedbackRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.fieldMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetSessionFeedbackRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetSessionFeedbackRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        2,
+        _instance.fieldMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _name: string;
+  private _fieldMask?: googleProtobuf003.FieldMask;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetSessionFeedbackRequest to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<GetSessionFeedbackRequest.AsObject>) {
+    _value = _value || {};
+    this.name = _value.name;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    GetSessionFeedbackRequest.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+  get fieldMask(): googleProtobuf003.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetSessionFeedbackRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetSessionFeedbackRequest.AsObject {
+    return {
+      name: this.name,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetSessionFeedbackRequest.AsProtobufJSON {
+    return {
+      name: this.name,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+    };
+  }
+}
+export module GetSessionFeedbackRequest {
+  /**
+   * Standard JavaScript object representation for GetSessionFeedbackRequest
+   */
+  export interface AsObject {
+    name: string;
+    fieldMask?: googleProtobuf003.FieldMask.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for GetSessionFeedbackRequest
+   */
+  export interface AsProtobufJSON {
+    name: string;
+    fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.UpdateSessionFeedbackRequest
+ */
+export class UpdateSessionFeedbackRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.UpdateSessionFeedbackRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new UpdateSessionFeedbackRequest();
+    UpdateSessionFeedbackRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: UpdateSessionFeedbackRequest) {
+    _instance.feedback = _instance.feedback || undefined;
+    _instance.updateMask = _instance.updateMask || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: UpdateSessionFeedbackRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.feedback = new SessionFeedback();
+          _reader.readMessage(
+            _instance.feedback,
+            SessionFeedback.deserializeBinaryFromReader
+          );
+          break;
+        case 2:
+          _instance.updateMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.updateMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    UpdateSessionFeedbackRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: UpdateSessionFeedbackRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.feedback) {
+      _writer.writeMessage(
+        1,
+        _instance.feedback as any,
+        SessionFeedback.serializeBinaryToWriter
+      );
+    }
+    if (_instance.updateMask) {
+      _writer.writeMessage(
+        2,
+        _instance.updateMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _feedback?: SessionFeedback;
+  private _updateMask?: googleProtobuf003.FieldMask;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of UpdateSessionFeedbackRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<UpdateSessionFeedbackRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.feedback = _value.feedback
+      ? new SessionFeedback(_value.feedback)
+      : undefined;
+    this.updateMask = _value.updateMask
+      ? new googleProtobuf003.FieldMask(_value.updateMask)
+      : undefined;
+    UpdateSessionFeedbackRequest.refineValues(this);
+  }
+  get feedback(): SessionFeedback | undefined {
+    return this._feedback;
+  }
+  set feedback(value: SessionFeedback | undefined) {
+    this._feedback = value;
+  }
+  get updateMask(): googleProtobuf003.FieldMask | undefined {
+    return this._updateMask;
+  }
+  set updateMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._updateMask = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    UpdateSessionFeedbackRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): UpdateSessionFeedbackRequest.AsObject {
+    return {
+      feedback: this.feedback ? this.feedback.toObject() : undefined,
+      updateMask: this.updateMask ? this.updateMask.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): UpdateSessionFeedbackRequest.AsProtobufJSON {
+    return {
+      feedback: this.feedback ? this.feedback.toProtobufJSON(options) : null,
+      updateMask: this.updateMask
+        ? this.updateMask.toProtobufJSON(options)
+        : null
+    };
+  }
+}
+export module UpdateSessionFeedbackRequest {
+  /**
+   * Standard JavaScript object representation for UpdateSessionFeedbackRequest
+   */
+  export interface AsObject {
+    feedback?: SessionFeedback.AsObject;
+    updateMask?: googleProtobuf003.FieldMask.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for UpdateSessionFeedbackRequest
+   */
+  export interface AsProtobufJSON {
+    feedback: SessionFeedback.AsProtobufJSON | null;
+    updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.DeleteSessionFeedbackRequest
+ */
+export class DeleteSessionFeedbackRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.DeleteSessionFeedbackRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new DeleteSessionFeedbackRequest();
+    DeleteSessionFeedbackRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: DeleteSessionFeedbackRequest) {
+    _instance.name = _instance.name || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: DeleteSessionFeedbackRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    DeleteSessionFeedbackRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: DeleteSessionFeedbackRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+  }
+
+  private _name: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of DeleteSessionFeedbackRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<DeleteSessionFeedbackRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.name = _value.name;
+    DeleteSessionFeedbackRequest.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    DeleteSessionFeedbackRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): DeleteSessionFeedbackRequest.AsObject {
+    return {
+      name: this.name
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): DeleteSessionFeedbackRequest.AsProtobufJSON {
+    return {
+      name: this.name
+    };
+  }
+}
+export module DeleteSessionFeedbackRequest {
+  /**
+   * Standard JavaScript object representation for DeleteSessionFeedbackRequest
+   */
+  export interface AsObject {
+    name: string;
+  }
+
+  /**
+   * Protobuf JSON representation for DeleteSessionFeedbackRequest
+   */
+  export interface AsProtobufJSON {
+    name: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListSessionFeedbackRequest
+ */
+export class ListSessionFeedbackRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.ListSessionFeedbackRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListSessionFeedbackRequest();
+    ListSessionFeedbackRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListSessionFeedbackRequest) {
+    _instance.sessionId = _instance.sessionId || '';
+    _instance.pageToken = _instance.pageToken || '';
+    _instance.fieldMask = _instance.fieldMask || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListSessionFeedbackRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.sessionId = _reader.readString();
+          break;
+        case 2:
+          _instance.pageToken = _reader.readString();
+          break;
+        case 3:
+          _instance.fieldMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListSessionFeedbackRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListSessionFeedbackRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.sessionId) {
+      _writer.writeString(1, _instance.sessionId);
+    }
+    if (_instance.pageToken) {
+      _writer.writeString(2, _instance.pageToken);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        3,
+        _instance.fieldMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _sessionId: string;
+  private _pageToken: string;
+  private _fieldMask?: googleProtobuf003.FieldMask;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListSessionFeedbackRequest to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<ListSessionFeedbackRequest.AsObject>) {
+    _value = _value || {};
+    this.sessionId = _value.sessionId;
+    this.pageToken = _value.pageToken;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    ListSessionFeedbackRequest.refineValues(this);
+  }
+  get sessionId(): string {
+    return this._sessionId;
+  }
+  set sessionId(value: string) {
+    this._sessionId = value;
+  }
+  get pageToken(): string {
+    return this._pageToken;
+  }
+  set pageToken(value: string) {
+    this._pageToken = value;
+  }
+  get fieldMask(): googleProtobuf003.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListSessionFeedbackRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListSessionFeedbackRequest.AsObject {
+    return {
+      sessionId: this.sessionId,
+      pageToken: this.pageToken,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListSessionFeedbackRequest.AsProtobufJSON {
+    return {
+      sessionId: this.sessionId,
+      pageToken: this.pageToken,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+    };
+  }
+}
+export module ListSessionFeedbackRequest {
+  /**
+   * Standard JavaScript object representation for ListSessionFeedbackRequest
+   */
+  export interface AsObject {
+    sessionId: string;
+    pageToken: string;
+    fieldMask?: googleProtobuf003.FieldMask.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for ListSessionFeedbackRequest
+   */
+  export interface AsProtobufJSON {
+    sessionId: string;
+    pageToken: string;
+    fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListSessionFeedbackOfAllSessionsRequest
+ */
+export class ListSessionFeedbackOfAllSessionsRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.ListSessionFeedbackOfAllSessionsRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListSessionFeedbackOfAllSessionsRequest();
+    ListSessionFeedbackOfAllSessionsRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListSessionFeedbackOfAllSessionsRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.sessionFilter = _instance.sessionFilter || undefined;
+    _instance.pageToken = _instance.pageToken || '';
+    _instance.fieldMask = _instance.fieldMask || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListSessionFeedbackOfAllSessionsRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.sessionFilter = new SessionFilter();
+          _reader.readMessage(
+            _instance.sessionFilter,
+            SessionFilter.deserializeBinaryFromReader
+          );
+          break;
+        case 3:
+          _instance.pageToken = _reader.readString();
+          break;
+        case 4:
+          _instance.fieldMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListSessionFeedbackOfAllSessionsRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListSessionFeedbackOfAllSessionsRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.sessionFilter) {
+      _writer.writeMessage(
+        2,
+        _instance.sessionFilter as any,
+        SessionFilter.serializeBinaryToWriter
+      );
+    }
+    if (_instance.pageToken) {
+      _writer.writeString(3, _instance.pageToken);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        4,
+        _instance.fieldMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _parent: string;
+  private _sessionFilter?: SessionFilter;
+  private _pageToken: string;
+  private _fieldMask?: googleProtobuf003.FieldMask;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListSessionFeedbackOfAllSessionsRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<ListSessionFeedbackOfAllSessionsRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.sessionFilter = _value.sessionFilter
+      ? new SessionFilter(_value.sessionFilter)
+      : undefined;
+    this.pageToken = _value.pageToken;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    ListSessionFeedbackOfAllSessionsRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get sessionFilter(): SessionFilter | undefined {
+    return this._sessionFilter;
+  }
+  set sessionFilter(value: SessionFilter | undefined) {
+    this._sessionFilter = value;
+  }
+  get pageToken(): string {
+    return this._pageToken;
+  }
+  set pageToken(value: string) {
+    this._pageToken = value;
+  }
+  get fieldMask(): googleProtobuf003.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListSessionFeedbackOfAllSessionsRequest.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListSessionFeedbackOfAllSessionsRequest.AsObject {
+    return {
+      parent: this.parent,
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toObject()
+        : undefined,
+      pageToken: this.pageToken,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListSessionFeedbackOfAllSessionsRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toProtobufJSON(options)
+        : null,
+      pageToken: this.pageToken,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+    };
+  }
+}
+export module ListSessionFeedbackOfAllSessionsRequest {
+  /**
+   * Standard JavaScript object representation for ListSessionFeedbackOfAllSessionsRequest
+   */
+  export interface AsObject {
+    parent: string;
+    sessionFilter?: SessionFilter.AsObject;
+    pageToken: string;
+    fieldMask?: googleProtobuf003.FieldMask.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for ListSessionFeedbackOfAllSessionsRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    sessionFilter: SessionFilter.AsProtobufJSON | null;
+    pageToken: string;
+    fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListSessionFeedbackResponse
+ */
+export class ListSessionFeedbackResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.ListSessionFeedbackResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListSessionFeedbackResponse();
+    ListSessionFeedbackResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListSessionFeedbackResponse) {
+    _instance.feedback = _instance.feedback || [];
+    _instance.nextPageToken = _instance.nextPageToken || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListSessionFeedbackResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          const messageInitializer1 = new SessionFeedback();
+          _reader.readMessage(
+            messageInitializer1,
+            SessionFeedback.deserializeBinaryFromReader
+          );
+          (_instance.feedback = _instance.feedback || []).push(
+            messageInitializer1
+          );
+          break;
+        case 2:
+          _instance.nextPageToken = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListSessionFeedbackResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListSessionFeedbackResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.feedback && _instance.feedback.length) {
+      _writer.writeRepeatedMessage(
+        1,
+        _instance.feedback as any,
+        SessionFeedback.serializeBinaryToWriter
+      );
+    }
+    if (_instance.nextPageToken) {
+      _writer.writeString(2, _instance.nextPageToken);
+    }
+  }
+
+  private _feedback?: SessionFeedback[];
+  private _nextPageToken: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListSessionFeedbackResponse to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<ListSessionFeedbackResponse.AsObject>) {
+    _value = _value || {};
+    this.feedback = (_value.feedback || []).map(m => new SessionFeedback(m));
+    this.nextPageToken = _value.nextPageToken;
+    ListSessionFeedbackResponse.refineValues(this);
+  }
+  get feedback(): SessionFeedback[] | undefined {
+    return this._feedback;
+  }
+  set feedback(value: SessionFeedback[] | undefined) {
+    this._feedback = value;
+  }
+  get nextPageToken(): string {
+    return this._nextPageToken;
+  }
+  set nextPageToken(value: string) {
+    this._nextPageToken = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListSessionFeedbackResponse.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListSessionFeedbackResponse.AsObject {
+    return {
+      feedback: (this.feedback || []).map(m => m.toObject()),
+      nextPageToken: this.nextPageToken
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListSessionFeedbackResponse.AsProtobufJSON {
+    return {
+      feedback: (this.feedback || []).map(m => m.toProtobufJSON(options)),
+      nextPageToken: this.nextPageToken
+    };
+  }
+}
+export module ListSessionFeedbackResponse {
+  /**
+   * Standard JavaScript object representation for ListSessionFeedbackResponse
+   */
+  export interface AsObject {
+    feedback?: SessionFeedback.AsObject[];
+    nextPageToken: string;
+  }
+
+  /**
+   * Protobuf JSON representation for ListSessionFeedbackResponse
+   */
+  export interface AsProtobufJSON {
+    feedback: SessionFeedback.AsProtobufJSON[] | null;
+    nextPageToken: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.FeedbackBreakdownBucket
+ */
+export class FeedbackBreakdownBucket implements GrpcMessage {
+  static id = 'ondewo.nlu.FeedbackBreakdownBucket';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new FeedbackBreakdownBucket();
+    FeedbackBreakdownBucket.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: FeedbackBreakdownBucket) {
+    _instance.key = _instance.key || '';
+    _instance.thumbsUpCount = _instance.thumbsUpCount || 0;
+    _instance.thumbsDownCount = _instance.thumbsDownCount || 0;
+    _instance.total = _instance.total || 0;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: FeedbackBreakdownBucket,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.key = _reader.readString();
+          break;
+        case 2:
+          _instance.thumbsUpCount = _reader.readInt32();
+          break;
+        case 3:
+          _instance.thumbsDownCount = _reader.readInt32();
+          break;
+        case 4:
+          _instance.total = _reader.readInt32();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    FeedbackBreakdownBucket.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: FeedbackBreakdownBucket,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.key) {
+      _writer.writeString(1, _instance.key);
+    }
+    if (_instance.thumbsUpCount) {
+      _writer.writeInt32(2, _instance.thumbsUpCount);
+    }
+    if (_instance.thumbsDownCount) {
+      _writer.writeInt32(3, _instance.thumbsDownCount);
+    }
+    if (_instance.total) {
+      _writer.writeInt32(4, _instance.total);
+    }
+  }
+
+  private _key: string;
+  private _thumbsUpCount: number;
+  private _thumbsDownCount: number;
+  private _total: number;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of FeedbackBreakdownBucket to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<FeedbackBreakdownBucket.AsObject>) {
+    _value = _value || {};
+    this.key = _value.key;
+    this.thumbsUpCount = _value.thumbsUpCount;
+    this.thumbsDownCount = _value.thumbsDownCount;
+    this.total = _value.total;
+    FeedbackBreakdownBucket.refineValues(this);
+  }
+  get key(): string {
+    return this._key;
+  }
+  set key(value: string) {
+    this._key = value;
+  }
+  get thumbsUpCount(): number {
+    return this._thumbsUpCount;
+  }
+  set thumbsUpCount(value: number) {
+    this._thumbsUpCount = value;
+  }
+  get thumbsDownCount(): number {
+    return this._thumbsDownCount;
+  }
+  set thumbsDownCount(value: number) {
+    this._thumbsDownCount = value;
+  }
+  get total(): number {
+    return this._total;
+  }
+  set total(value: number) {
+    this._total = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    FeedbackBreakdownBucket.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): FeedbackBreakdownBucket.AsObject {
+    return {
+      key: this.key,
+      thumbsUpCount: this.thumbsUpCount,
+      thumbsDownCount: this.thumbsDownCount,
+      total: this.total
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): FeedbackBreakdownBucket.AsProtobufJSON {
+    return {
+      key: this.key,
+      thumbsUpCount: this.thumbsUpCount,
+      thumbsDownCount: this.thumbsDownCount,
+      total: this.total
+    };
+  }
+}
+export module FeedbackBreakdownBucket {
+  /**
+   * Standard JavaScript object representation for FeedbackBreakdownBucket
+   */
+  export interface AsObject {
+    key: string;
+    thumbsUpCount: number;
+    thumbsDownCount: number;
+    total: number;
+  }
+
+  /**
+   * Protobuf JSON representation for FeedbackBreakdownBucket
+   */
+  export interface AsProtobufJSON {
+    key: string;
+    thumbsUpCount: number;
+    thumbsDownCount: number;
+    total: number;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.FeedbackStatistics
+ */
+export class FeedbackStatistics implements GrpcMessage {
+  static id = 'ondewo.nlu.FeedbackStatistics';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new FeedbackStatistics();
+    FeedbackStatistics.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: FeedbackStatistics) {
+    _instance.totalFeedback = _instance.totalFeedback || 0;
+    _instance.thumbsUpCount = _instance.thumbsUpCount || 0;
+    _instance.thumbsDownCount = _instance.thumbsDownCount || 0;
+    _instance.sessionLevelCount = _instance.sessionLevelCount || 0;
+    _instance.sessionStepLevelCount = _instance.sessionStepLevelCount || 0;
+    _instance.commentCount = _instance.commentCount || 0;
+    _instance.sessionReviewCount = _instance.sessionReviewCount || 0;
+    _instance.sessionCommentCount = _instance.sessionCommentCount || 0;
+    _instance.byLanguage = _instance.byLanguage || [];
+    _instance.byIntent = _instance.byIntent || [];
+    _instance.byAuthorType = _instance.byAuthorType || [];
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: FeedbackStatistics,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.totalFeedback = _reader.readInt32();
+          break;
+        case 2:
+          _instance.thumbsUpCount = _reader.readInt32();
+          break;
+        case 3:
+          _instance.thumbsDownCount = _reader.readInt32();
+          break;
+        case 4:
+          _instance.sessionLevelCount = _reader.readInt32();
+          break;
+        case 5:
+          _instance.sessionStepLevelCount = _reader.readInt32();
+          break;
+        case 6:
+          _instance.commentCount = _reader.readInt32();
+          break;
+        case 7:
+          _instance.sessionReviewCount = _reader.readInt32();
+          break;
+        case 8:
+          _instance.sessionCommentCount = _reader.readInt32();
+          break;
+        case 9:
+          const messageInitializer9 = new FeedbackBreakdownBucket();
+          _reader.readMessage(
+            messageInitializer9,
+            FeedbackBreakdownBucket.deserializeBinaryFromReader
+          );
+          (_instance.byLanguage = _instance.byLanguage || []).push(
+            messageInitializer9
+          );
+          break;
+        case 10:
+          const messageInitializer10 = new FeedbackBreakdownBucket();
+          _reader.readMessage(
+            messageInitializer10,
+            FeedbackBreakdownBucket.deserializeBinaryFromReader
+          );
+          (_instance.byIntent = _instance.byIntent || []).push(
+            messageInitializer10
+          );
+          break;
+        case 11:
+          const messageInitializer11 = new FeedbackBreakdownBucket();
+          _reader.readMessage(
+            messageInitializer11,
+            FeedbackBreakdownBucket.deserializeBinaryFromReader
+          );
+          (_instance.byAuthorType = _instance.byAuthorType || []).push(
+            messageInitializer11
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    FeedbackStatistics.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: FeedbackStatistics,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.totalFeedback) {
+      _writer.writeInt32(1, _instance.totalFeedback);
+    }
+    if (_instance.thumbsUpCount) {
+      _writer.writeInt32(2, _instance.thumbsUpCount);
+    }
+    if (_instance.thumbsDownCount) {
+      _writer.writeInt32(3, _instance.thumbsDownCount);
+    }
+    if (_instance.sessionLevelCount) {
+      _writer.writeInt32(4, _instance.sessionLevelCount);
+    }
+    if (_instance.sessionStepLevelCount) {
+      _writer.writeInt32(5, _instance.sessionStepLevelCount);
+    }
+    if (_instance.commentCount) {
+      _writer.writeInt32(6, _instance.commentCount);
+    }
+    if (_instance.sessionReviewCount) {
+      _writer.writeInt32(7, _instance.sessionReviewCount);
+    }
+    if (_instance.sessionCommentCount) {
+      _writer.writeInt32(8, _instance.sessionCommentCount);
+    }
+    if (_instance.byLanguage && _instance.byLanguage.length) {
+      _writer.writeRepeatedMessage(
+        9,
+        _instance.byLanguage as any,
+        FeedbackBreakdownBucket.serializeBinaryToWriter
+      );
+    }
+    if (_instance.byIntent && _instance.byIntent.length) {
+      _writer.writeRepeatedMessage(
+        10,
+        _instance.byIntent as any,
+        FeedbackBreakdownBucket.serializeBinaryToWriter
+      );
+    }
+    if (_instance.byAuthorType && _instance.byAuthorType.length) {
+      _writer.writeRepeatedMessage(
+        11,
+        _instance.byAuthorType as any,
+        FeedbackBreakdownBucket.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _totalFeedback: number;
+  private _thumbsUpCount: number;
+  private _thumbsDownCount: number;
+  private _sessionLevelCount: number;
+  private _sessionStepLevelCount: number;
+  private _commentCount: number;
+  private _sessionReviewCount: number;
+  private _sessionCommentCount: number;
+  private _byLanguage?: FeedbackBreakdownBucket[];
+  private _byIntent?: FeedbackBreakdownBucket[];
+  private _byAuthorType?: FeedbackBreakdownBucket[];
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of FeedbackStatistics to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<FeedbackStatistics.AsObject>) {
+    _value = _value || {};
+    this.totalFeedback = _value.totalFeedback;
+    this.thumbsUpCount = _value.thumbsUpCount;
+    this.thumbsDownCount = _value.thumbsDownCount;
+    this.sessionLevelCount = _value.sessionLevelCount;
+    this.sessionStepLevelCount = _value.sessionStepLevelCount;
+    this.commentCount = _value.commentCount;
+    this.sessionReviewCount = _value.sessionReviewCount;
+    this.sessionCommentCount = _value.sessionCommentCount;
+    this.byLanguage = (_value.byLanguage || []).map(
+      m => new FeedbackBreakdownBucket(m)
+    );
+    this.byIntent = (_value.byIntent || []).map(
+      m => new FeedbackBreakdownBucket(m)
+    );
+    this.byAuthorType = (_value.byAuthorType || []).map(
+      m => new FeedbackBreakdownBucket(m)
+    );
+    FeedbackStatistics.refineValues(this);
+  }
+  get totalFeedback(): number {
+    return this._totalFeedback;
+  }
+  set totalFeedback(value: number) {
+    this._totalFeedback = value;
+  }
+  get thumbsUpCount(): number {
+    return this._thumbsUpCount;
+  }
+  set thumbsUpCount(value: number) {
+    this._thumbsUpCount = value;
+  }
+  get thumbsDownCount(): number {
+    return this._thumbsDownCount;
+  }
+  set thumbsDownCount(value: number) {
+    this._thumbsDownCount = value;
+  }
+  get sessionLevelCount(): number {
+    return this._sessionLevelCount;
+  }
+  set sessionLevelCount(value: number) {
+    this._sessionLevelCount = value;
+  }
+  get sessionStepLevelCount(): number {
+    return this._sessionStepLevelCount;
+  }
+  set sessionStepLevelCount(value: number) {
+    this._sessionStepLevelCount = value;
+  }
+  get commentCount(): number {
+    return this._commentCount;
+  }
+  set commentCount(value: number) {
+    this._commentCount = value;
+  }
+  get sessionReviewCount(): number {
+    return this._sessionReviewCount;
+  }
+  set sessionReviewCount(value: number) {
+    this._sessionReviewCount = value;
+  }
+  get sessionCommentCount(): number {
+    return this._sessionCommentCount;
+  }
+  set sessionCommentCount(value: number) {
+    this._sessionCommentCount = value;
+  }
+  get byLanguage(): FeedbackBreakdownBucket[] | undefined {
+    return this._byLanguage;
+  }
+  set byLanguage(value: FeedbackBreakdownBucket[] | undefined) {
+    this._byLanguage = value;
+  }
+  get byIntent(): FeedbackBreakdownBucket[] | undefined {
+    return this._byIntent;
+  }
+  set byIntent(value: FeedbackBreakdownBucket[] | undefined) {
+    this._byIntent = value;
+  }
+  get byAuthorType(): FeedbackBreakdownBucket[] | undefined {
+    return this._byAuthorType;
+  }
+  set byAuthorType(value: FeedbackBreakdownBucket[] | undefined) {
+    this._byAuthorType = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    FeedbackStatistics.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): FeedbackStatistics.AsObject {
+    return {
+      totalFeedback: this.totalFeedback,
+      thumbsUpCount: this.thumbsUpCount,
+      thumbsDownCount: this.thumbsDownCount,
+      sessionLevelCount: this.sessionLevelCount,
+      sessionStepLevelCount: this.sessionStepLevelCount,
+      commentCount: this.commentCount,
+      sessionReviewCount: this.sessionReviewCount,
+      sessionCommentCount: this.sessionCommentCount,
+      byLanguage: (this.byLanguage || []).map(m => m.toObject()),
+      byIntent: (this.byIntent || []).map(m => m.toObject()),
+      byAuthorType: (this.byAuthorType || []).map(m => m.toObject())
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): FeedbackStatistics.AsProtobufJSON {
+    return {
+      totalFeedback: this.totalFeedback,
+      thumbsUpCount: this.thumbsUpCount,
+      thumbsDownCount: this.thumbsDownCount,
+      sessionLevelCount: this.sessionLevelCount,
+      sessionStepLevelCount: this.sessionStepLevelCount,
+      commentCount: this.commentCount,
+      sessionReviewCount: this.sessionReviewCount,
+      sessionCommentCount: this.sessionCommentCount,
+      byLanguage: (this.byLanguage || []).map(m => m.toProtobufJSON(options)),
+      byIntent: (this.byIntent || []).map(m => m.toProtobufJSON(options)),
+      byAuthorType: (this.byAuthorType || []).map(m =>
+        m.toProtobufJSON(options)
+      )
+    };
+  }
+}
+export module FeedbackStatistics {
+  /**
+   * Standard JavaScript object representation for FeedbackStatistics
+   */
+  export interface AsObject {
+    totalFeedback: number;
+    thumbsUpCount: number;
+    thumbsDownCount: number;
+    sessionLevelCount: number;
+    sessionStepLevelCount: number;
+    commentCount: number;
+    sessionReviewCount: number;
+    sessionCommentCount: number;
+    byLanguage?: FeedbackBreakdownBucket.AsObject[];
+    byIntent?: FeedbackBreakdownBucket.AsObject[];
+    byAuthorType?: FeedbackBreakdownBucket.AsObject[];
+  }
+
+  /**
+   * Protobuf JSON representation for FeedbackStatistics
+   */
+  export interface AsProtobufJSON {
+    totalFeedback: number;
+    thumbsUpCount: number;
+    thumbsDownCount: number;
+    sessionLevelCount: number;
+    sessionStepLevelCount: number;
+    commentCount: number;
+    sessionReviewCount: number;
+    sessionCommentCount: number;
+    byLanguage: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
+    byIntent: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
+    byAuthorType: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetFeedbackStatisticsRequest
+ */
+export class GetFeedbackStatisticsRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.GetFeedbackStatisticsRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetFeedbackStatisticsRequest();
+    GetFeedbackStatisticsRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetFeedbackStatisticsRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.sessionFilter = _instance.sessionFilter || undefined;
+    _instance.includeReviewAndCommentRollup =
+      _instance.includeReviewAndCommentRollup || false;
+    _instance.fieldMask = _instance.fieldMask || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetFeedbackStatisticsRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.sessionFilter = new SessionFilter();
+          _reader.readMessage(
+            _instance.sessionFilter,
+            SessionFilter.deserializeBinaryFromReader
+          );
+          break;
+        case 3:
+          _instance.includeReviewAndCommentRollup = _reader.readBool();
+          break;
+        case 4:
+          _instance.fieldMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetFeedbackStatisticsRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetFeedbackStatisticsRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.sessionFilter) {
+      _writer.writeMessage(
+        2,
+        _instance.sessionFilter as any,
+        SessionFilter.serializeBinaryToWriter
+      );
+    }
+    if (_instance.includeReviewAndCommentRollup) {
+      _writer.writeBool(3, _instance.includeReviewAndCommentRollup);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        4,
+        _instance.fieldMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _parent: string;
+  private _sessionFilter?: SessionFilter;
+  private _includeReviewAndCommentRollup: boolean;
+  private _fieldMask?: googleProtobuf003.FieldMask;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetFeedbackStatisticsRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<GetFeedbackStatisticsRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.sessionFilter = _value.sessionFilter
+      ? new SessionFilter(_value.sessionFilter)
+      : undefined;
+    this.includeReviewAndCommentRollup = _value.includeReviewAndCommentRollup;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    GetFeedbackStatisticsRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get sessionFilter(): SessionFilter | undefined {
+    return this._sessionFilter;
+  }
+  set sessionFilter(value: SessionFilter | undefined) {
+    this._sessionFilter = value;
+  }
+  get includeReviewAndCommentRollup(): boolean {
+    return this._includeReviewAndCommentRollup;
+  }
+  set includeReviewAndCommentRollup(value: boolean) {
+    this._includeReviewAndCommentRollup = value;
+  }
+  get fieldMask(): googleProtobuf003.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetFeedbackStatisticsRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetFeedbackStatisticsRequest.AsObject {
+    return {
+      parent: this.parent,
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toObject()
+        : undefined,
+      includeReviewAndCommentRollup: this.includeReviewAndCommentRollup,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetFeedbackStatisticsRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toProtobufJSON(options)
+        : null,
+      includeReviewAndCommentRollup: this.includeReviewAndCommentRollup,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+    };
+  }
+}
+export module GetFeedbackStatisticsRequest {
+  /**
+   * Standard JavaScript object representation for GetFeedbackStatisticsRequest
+   */
+  export interface AsObject {
+    parent: string;
+    sessionFilter?: SessionFilter.AsObject;
+    includeReviewAndCommentRollup: boolean;
+    fieldMask?: googleProtobuf003.FieldMask.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for GetFeedbackStatisticsRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    sessionFilter: SessionFilter.AsProtobufJSON | null;
+    includeReviewAndCommentRollup: boolean;
+    fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetFeedbackStatisticsResponse
+ */
+export class GetFeedbackStatisticsResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.GetFeedbackStatisticsResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetFeedbackStatisticsResponse();
+    GetFeedbackStatisticsResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetFeedbackStatisticsResponse) {
+    _instance.statistics = _instance.statistics || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetFeedbackStatisticsResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.statistics = new FeedbackStatistics();
+          _reader.readMessage(
+            _instance.statistics,
+            FeedbackStatistics.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetFeedbackStatisticsResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetFeedbackStatisticsResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.statistics) {
+      _writer.writeMessage(
+        1,
+        _instance.statistics as any,
+        FeedbackStatistics.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _statistics?: FeedbackStatistics;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetFeedbackStatisticsResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<GetFeedbackStatisticsResponse.AsObject>
+  ) {
+    _value = _value || {};
+    this.statistics = _value.statistics
+      ? new FeedbackStatistics(_value.statistics)
+      : undefined;
+    GetFeedbackStatisticsResponse.refineValues(this);
+  }
+  get statistics(): FeedbackStatistics | undefined {
+    return this._statistics;
+  }
+  set statistics(value: FeedbackStatistics | undefined) {
+    this._statistics = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetFeedbackStatisticsResponse.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetFeedbackStatisticsResponse.AsObject {
+    return {
+      statistics: this.statistics ? this.statistics.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetFeedbackStatisticsResponse.AsProtobufJSON {
+    return {
+      statistics: this.statistics
+        ? this.statistics.toProtobufJSON(options)
+        : null
+    };
+  }
+}
+export module GetFeedbackStatisticsResponse {
+  /**
+   * Standard JavaScript object representation for GetFeedbackStatisticsResponse
+   */
+  export interface AsObject {
+    statistics?: FeedbackStatistics.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for GetFeedbackStatisticsResponse
+   */
+  export interface AsProtobufJSON {
+    statistics: FeedbackStatistics.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.FeedbackTimeSeriesBucket
+ */
+export class FeedbackTimeSeriesBucket implements GrpcMessage {
+  static id = 'ondewo.nlu.FeedbackTimeSeriesBucket';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new FeedbackTimeSeriesBucket();
+    FeedbackTimeSeriesBucket.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: FeedbackTimeSeriesBucket) {
+    _instance.bucketStart = _instance.bucketStart || undefined;
+    _instance.thumbsUpCount = _instance.thumbsUpCount || 0;
+    _instance.thumbsDownCount = _instance.thumbsDownCount || 0;
+    _instance.total = _instance.total || 0;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: FeedbackTimeSeriesBucket,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.bucketStart = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.bucketStart,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 2:
+          _instance.thumbsUpCount = _reader.readInt32();
+          break;
+        case 3:
+          _instance.thumbsDownCount = _reader.readInt32();
+          break;
+        case 4:
+          _instance.total = _reader.readInt32();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    FeedbackTimeSeriesBucket.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: FeedbackTimeSeriesBucket,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.bucketStart) {
+      _writer.writeMessage(
+        1,
+        _instance.bucketStart as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.thumbsUpCount) {
+      _writer.writeInt32(2, _instance.thumbsUpCount);
+    }
+    if (_instance.thumbsDownCount) {
+      _writer.writeInt32(3, _instance.thumbsDownCount);
+    }
+    if (_instance.total) {
+      _writer.writeInt32(4, _instance.total);
+    }
+  }
+
+  private _bucketStart?: googleProtobuf005.Timestamp;
+  private _thumbsUpCount: number;
+  private _thumbsDownCount: number;
+  private _total: number;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of FeedbackTimeSeriesBucket to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<FeedbackTimeSeriesBucket.AsObject>) {
+    _value = _value || {};
+    this.bucketStart = _value.bucketStart
+      ? new googleProtobuf005.Timestamp(_value.bucketStart)
+      : undefined;
+    this.thumbsUpCount = _value.thumbsUpCount;
+    this.thumbsDownCount = _value.thumbsDownCount;
+    this.total = _value.total;
+    FeedbackTimeSeriesBucket.refineValues(this);
+  }
+  get bucketStart(): googleProtobuf005.Timestamp | undefined {
+    return this._bucketStart;
+  }
+  set bucketStart(value: googleProtobuf005.Timestamp | undefined) {
+    this._bucketStart = value;
+  }
+  get thumbsUpCount(): number {
+    return this._thumbsUpCount;
+  }
+  set thumbsUpCount(value: number) {
+    this._thumbsUpCount = value;
+  }
+  get thumbsDownCount(): number {
+    return this._thumbsDownCount;
+  }
+  set thumbsDownCount(value: number) {
+    this._thumbsDownCount = value;
+  }
+  get total(): number {
+    return this._total;
+  }
+  set total(value: number) {
+    this._total = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    FeedbackTimeSeriesBucket.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): FeedbackTimeSeriesBucket.AsObject {
+    return {
+      bucketStart: this.bucketStart ? this.bucketStart.toObject() : undefined,
+      thumbsUpCount: this.thumbsUpCount,
+      thumbsDownCount: this.thumbsDownCount,
+      total: this.total
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): FeedbackTimeSeriesBucket.AsProtobufJSON {
+    return {
+      bucketStart: this.bucketStart
+        ? this.bucketStart.toProtobufJSON(options)
+        : null,
+      thumbsUpCount: this.thumbsUpCount,
+      thumbsDownCount: this.thumbsDownCount,
+      total: this.total
+    };
+  }
+}
+export module FeedbackTimeSeriesBucket {
+  /**
+   * Standard JavaScript object representation for FeedbackTimeSeriesBucket
+   */
+  export interface AsObject {
+    bucketStart?: googleProtobuf005.Timestamp.AsObject;
+    thumbsUpCount: number;
+    thumbsDownCount: number;
+    total: number;
+  }
+
+  /**
+   * Protobuf JSON representation for FeedbackTimeSeriesBucket
+   */
+  export interface AsProtobufJSON {
+    bucketStart: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    thumbsUpCount: number;
+    thumbsDownCount: number;
+    total: number;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetFeedbackStatisticsTimeSeriesRequest
+ */
+export class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.GetFeedbackStatisticsTimeSeriesRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetFeedbackStatisticsTimeSeriesRequest();
+    GetFeedbackStatisticsTimeSeriesRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetFeedbackStatisticsTimeSeriesRequest) {
+    _instance.parent = _instance.parent || '';
+    _instance.sessionFilter = _instance.sessionFilter || undefined;
+    _instance.bucketWidthSeconds = _instance.bucketWidthSeconds || 0;
+    _instance.maxBuckets = _instance.maxBuckets || 0;
+    _instance.fieldMask = _instance.fieldMask || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetFeedbackStatisticsTimeSeriesRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.parent = _reader.readString();
+          break;
+        case 2:
+          _instance.sessionFilter = new SessionFilter();
+          _reader.readMessage(
+            _instance.sessionFilter,
+            SessionFilter.deserializeBinaryFromReader
+          );
+          break;
+        case 3:
+          _instance.bucketWidthSeconds = _reader.readInt32();
+          break;
+        case 4:
+          _instance.maxBuckets = _reader.readInt32();
+          break;
+        case 5:
+          _instance.fieldMask = new googleProtobuf003.FieldMask();
+          _reader.readMessage(
+            _instance.fieldMask,
+            googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetFeedbackStatisticsTimeSeriesRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetFeedbackStatisticsTimeSeriesRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.parent) {
+      _writer.writeString(1, _instance.parent);
+    }
+    if (_instance.sessionFilter) {
+      _writer.writeMessage(
+        2,
+        _instance.sessionFilter as any,
+        SessionFilter.serializeBinaryToWriter
+      );
+    }
+    if (_instance.bucketWidthSeconds) {
+      _writer.writeInt32(3, _instance.bucketWidthSeconds);
+    }
+    if (_instance.maxBuckets) {
+      _writer.writeInt32(4, _instance.maxBuckets);
+    }
+    if (_instance.fieldMask) {
+      _writer.writeMessage(
+        5,
+        _instance.fieldMask as any,
+        googleProtobuf003.FieldMask.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _parent: string;
+  private _sessionFilter?: SessionFilter;
+  private _bucketWidthSeconds: number;
+  private _maxBuckets: number;
+  private _fieldMask?: googleProtobuf003.FieldMask;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetFeedbackStatisticsTimeSeriesRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<GetFeedbackStatisticsTimeSeriesRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.parent = _value.parent;
+    this.sessionFilter = _value.sessionFilter
+      ? new SessionFilter(_value.sessionFilter)
+      : undefined;
+    this.bucketWidthSeconds = _value.bucketWidthSeconds;
+    this.maxBuckets = _value.maxBuckets;
+    this.fieldMask = _value.fieldMask
+      ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    GetFeedbackStatisticsTimeSeriesRequest.refineValues(this);
+  }
+  get parent(): string {
+    return this._parent;
+  }
+  set parent(value: string) {
+    this._parent = value;
+  }
+  get sessionFilter(): SessionFilter | undefined {
+    return this._sessionFilter;
+  }
+  set sessionFilter(value: SessionFilter | undefined) {
+    this._sessionFilter = value;
+  }
+  get bucketWidthSeconds(): number {
+    return this._bucketWidthSeconds;
+  }
+  set bucketWidthSeconds(value: number) {
+    this._bucketWidthSeconds = value;
+  }
+  get maxBuckets(): number {
+    return this._maxBuckets;
+  }
+  set maxBuckets(value: number) {
+    this._maxBuckets = value;
+  }
+  get fieldMask(): googleProtobuf003.FieldMask | undefined {
+    return this._fieldMask;
+  }
+  set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
+    this._fieldMask = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetFeedbackStatisticsTimeSeriesRequest.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetFeedbackStatisticsTimeSeriesRequest.AsObject {
+    return {
+      parent: this.parent,
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toObject()
+        : undefined,
+      bucketWidthSeconds: this.bucketWidthSeconds,
+      maxBuckets: this.maxBuckets,
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetFeedbackStatisticsTimeSeriesRequest.AsProtobufJSON {
+    return {
+      parent: this.parent,
+      sessionFilter: this.sessionFilter
+        ? this.sessionFilter.toProtobufJSON(options)
+        : null,
+      bucketWidthSeconds: this.bucketWidthSeconds,
+      maxBuckets: this.maxBuckets,
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+    };
+  }
+}
+export module GetFeedbackStatisticsTimeSeriesRequest {
+  /**
+   * Standard JavaScript object representation for GetFeedbackStatisticsTimeSeriesRequest
+   */
+  export interface AsObject {
+    parent: string;
+    sessionFilter?: SessionFilter.AsObject;
+    bucketWidthSeconds: number;
+    maxBuckets: number;
+    fieldMask?: googleProtobuf003.FieldMask.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for GetFeedbackStatisticsTimeSeriesRequest
+   */
+  export interface AsProtobufJSON {
+    parent: string;
+    sessionFilter: SessionFilter.AsProtobufJSON | null;
+    bucketWidthSeconds: number;
+    maxBuckets: number;
+    fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetFeedbackStatisticsTimeSeriesResponse
+ */
+export class GetFeedbackStatisticsTimeSeriesResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.GetFeedbackStatisticsTimeSeriesResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetFeedbackStatisticsTimeSeriesResponse();
+    GetFeedbackStatisticsTimeSeriesResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetFeedbackStatisticsTimeSeriesResponse) {
+    _instance.buckets = _instance.buckets || [];
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetFeedbackStatisticsTimeSeriesResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          const messageInitializer1 = new FeedbackTimeSeriesBucket();
+          _reader.readMessage(
+            messageInitializer1,
+            FeedbackTimeSeriesBucket.deserializeBinaryFromReader
+          );
+          (_instance.buckets = _instance.buckets || []).push(
+            messageInitializer1
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetFeedbackStatisticsTimeSeriesResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetFeedbackStatisticsTimeSeriesResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.buckets && _instance.buckets.length) {
+      _writer.writeRepeatedMessage(
+        1,
+        _instance.buckets as any,
+        FeedbackTimeSeriesBucket.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _buckets?: FeedbackTimeSeriesBucket[];
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetFeedbackStatisticsTimeSeriesResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<GetFeedbackStatisticsTimeSeriesResponse.AsObject>
+  ) {
+    _value = _value || {};
+    this.buckets = (_value.buckets || []).map(
+      m => new FeedbackTimeSeriesBucket(m)
+    );
+    GetFeedbackStatisticsTimeSeriesResponse.refineValues(this);
+  }
+  get buckets(): FeedbackTimeSeriesBucket[] | undefined {
+    return this._buckets;
+  }
+  set buckets(value: FeedbackTimeSeriesBucket[] | undefined) {
+    this._buckets = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetFeedbackStatisticsTimeSeriesResponse.serializeBinaryToWriter(
+      this,
+      writer
+    );
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetFeedbackStatisticsTimeSeriesResponse.AsObject {
+    return {
+      buckets: (this.buckets || []).map(m => m.toObject())
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetFeedbackStatisticsTimeSeriesResponse.AsProtobufJSON {
+    return {
+      buckets: (this.buckets || []).map(m => m.toProtobufJSON(options))
+    };
+  }
+}
+export module GetFeedbackStatisticsTimeSeriesResponse {
+  /**
+   * Standard JavaScript object representation for GetFeedbackStatisticsTimeSeriesResponse
+   */
+  export interface AsObject {
+    buckets?: FeedbackTimeSeriesBucket.AsObject[];
+  }
+
+  /**
+   * Protobuf JSON representation for GetFeedbackStatisticsTimeSeriesResponse
+   */
+  export interface AsProtobufJSON {
+    buckets: FeedbackTimeSeriesBucket.AsProtobufJSON[] | null;
   }
 }
 

@@ -2,7 +2,7 @@ import * as i0 from '@angular/core';
 import { InjectionToken } from '@angular/core';
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions, GrpcMetadata, GrpcEvent, GrpcClientFactory } from '@ngx-grpc/common';
 import { ByteSource, BinaryReader, BinaryWriter } from 'google-protobuf';
-import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
+import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 
@@ -192,10 +192,10 @@ declare class Comment implements GrpcMessage {
     set commentAboutName(value: string);
     get parentCommentName(): string;
     set parentCommentName(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -232,8 +232,8 @@ declare namespace Comment {
         userId: string;
         commentAboutName: string;
         parentCommentName: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
         isResolved: boolean;
@@ -247,8 +247,8 @@ declare namespace Comment {
         userId: string;
         commentAboutName: string;
         parentCommentName: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
         isResolved: boolean;
@@ -316,12 +316,12 @@ declare class Notification implements GrpcMessage {
     set descriptionLong(value: string);
     get notificationFlaggedStatus(): NotificationFlaggedStatus;
     set notificationFlaggedStatus(value: NotificationFlaggedStatus);
-    get notificationFlaggedTimestamp(): googleProtobuf005.Timestamp | undefined;
-    set notificationFlaggedTimestamp(value: googleProtobuf005.Timestamp | undefined);
+    get notificationFlaggedTimestamp(): googleProtobuf003.Timestamp | undefined;
+    set notificationFlaggedTimestamp(value: googleProtobuf003.Timestamp | undefined);
     get notificationReadStatus(): NotificationReadStatus;
     set notificationReadStatus(value: NotificationReadStatus);
-    get notificationReadTimestamp(): googleProtobuf005.Timestamp | undefined;
-    set notificationReadTimestamp(value: googleProtobuf005.Timestamp | undefined);
+    get notificationReadTimestamp(): googleProtobuf003.Timestamp | undefined;
+    set notificationReadTimestamp(value: googleProtobuf003.Timestamp | undefined);
     get notificationOrigin(): NotificationOrigin;
     set notificationOrigin(value: NotificationOrigin);
     get originName(): string;
@@ -332,10 +332,10 @@ declare class Notification implements GrpcMessage {
     set notificationType(value: NotificationType);
     get notificationVisibility(): NotificationVisibility;
     set notificationVisibility(value: NotificationVisibility);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -371,16 +371,16 @@ declare namespace Notification {
         descriptionShort: string;
         descriptionLong: string;
         notificationFlaggedStatus: NotificationFlaggedStatus;
-        notificationFlaggedTimestamp?: googleProtobuf005.Timestamp.AsObject;
+        notificationFlaggedTimestamp?: googleProtobuf003.Timestamp.AsObject;
         notificationReadStatus: NotificationReadStatus;
-        notificationReadTimestamp?: googleProtobuf005.Timestamp.AsObject;
+        notificationReadTimestamp?: googleProtobuf003.Timestamp.AsObject;
         notificationOrigin: NotificationOrigin;
         originName: string;
         originLanguage: string;
         notificationType: NotificationType;
         notificationVisibility: NotificationVisibility;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -394,16 +394,16 @@ declare namespace Notification {
         descriptionShort: string;
         descriptionLong: string;
         notificationFlaggedStatus: string;
-        notificationFlaggedTimestamp: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        notificationFlaggedTimestamp: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         notificationReadStatus: string;
-        notificationReadTimestamp: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        notificationReadTimestamp: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         notificationOrigin: string;
         originName: string;
         originLanguage: string;
         notificationType: string;
         notificationVisibility: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -597,10 +597,10 @@ declare class NotificationFilter implements GrpcMessage {
     set notificationFlaggedStatus(value: NotificationFlaggedStatus[]);
     get notificationReadStatus(): NotificationReadStatus[];
     set notificationReadStatus(value: NotificationReadStatus[]);
-    get earliest(): googleProtobuf005.Timestamp | undefined;
-    set earliest(value: googleProtobuf005.Timestamp | undefined);
-    get latest(): googleProtobuf005.Timestamp | undefined;
-    set latest(value: googleProtobuf005.Timestamp | undefined);
+    get earliest(): googleProtobuf003.Timestamp | undefined;
+    set earliest(value: googleProtobuf003.Timestamp | undefined);
+    get latest(): googleProtobuf003.Timestamp | undefined;
+    set latest(value: googleProtobuf003.Timestamp | undefined);
     get userNames(): string[];
     set userNames(value: string[]);
     get originNames(): string[];
@@ -635,8 +635,8 @@ declare namespace NotificationFilter {
         notificationVisibilities: NotificationVisibility[];
         notificationFlaggedStatus: NotificationFlaggedStatus[];
         notificationReadStatus: NotificationReadStatus[];
-        earliest?: googleProtobuf005.Timestamp.AsObject;
-        latest?: googleProtobuf005.Timestamp.AsObject;
+        earliest?: googleProtobuf003.Timestamp.AsObject;
+        latest?: googleProtobuf003.Timestamp.AsObject;
         userNames: string[];
         originNames: string[];
     }
@@ -649,8 +649,8 @@ declare namespace NotificationFilter {
         notificationVisibilities: string[];
         notificationFlaggedStatus: string[];
         notificationReadStatus: string[];
-        earliest: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        latest: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        earliest: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        latest: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         userNames: string[];
         originNames: string[];
     }
@@ -694,8 +694,8 @@ declare class ListNotificationsRequest implements GrpcMessage {
     set notificationFilter(value: NotificationFilter | undefined);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -723,7 +723,7 @@ declare namespace ListNotificationsRequest {
     interface AsObject {
         notificationFilter?: NotificationFilter.AsObject;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListNotificationsRequest
@@ -731,7 +731,7 @@ declare namespace ListNotificationsRequest {
     interface AsProtobufJSON {
         notificationFilter: NotificationFilter.AsProtobufJSON | null;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -1000,8 +1000,8 @@ declare class KeyValuePair implements GrpcMessage {
     set doubleValue(value: number);
     get stringValue(): string;
     set stringValue(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get value(): KeyValuePair.ValueCase;
     /**
      * Serialize message to binary data
@@ -1033,7 +1033,7 @@ declare namespace KeyValuePair {
         floatValue: number;
         doubleValue: number;
         stringValue: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
     }
     /**
      * Protobuf JSON representation for KeyValuePair
@@ -1044,7 +1044,7 @@ declare namespace KeyValuePair {
         floatValue: number | null;
         doubleValue: number | null;
         stringValue: string | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     }
     enum ValueCase {
         none = 0,
@@ -1103,20 +1103,20 @@ declare class LogEntry implements GrpcMessage {
     set logEntrySequenceIndex(value: number);
     get displayName(): string;
     set displayName(value: string);
-    get logEntryTimestamp(): googleProtobuf005.Timestamp | undefined;
-    set logEntryTimestamp(value: googleProtobuf005.Timestamp | undefined);
-    get logEntryReceiveTimestamp(): googleProtobuf005.Timestamp | undefined;
-    set logEntryReceiveTimestamp(value: googleProtobuf005.Timestamp | undefined);
+    get logEntryTimestamp(): googleProtobuf003.Timestamp | undefined;
+    set logEntryTimestamp(value: googleProtobuf003.Timestamp | undefined);
+    get logEntryReceiveTimestamp(): googleProtobuf003.Timestamp | undefined;
+    set logEntryReceiveTimestamp(value: googleProtobuf003.Timestamp | undefined);
     get logEntrySeverity(): LogSeverity;
     set logEntrySeverity(value: LogSeverity);
     get logEntryPhase(): string;
     set logEntryPhase(value: string);
     get logEntryOperationName(): string;
     set logEntryOperationName(value: string);
-    get logEntryDetails(): googleProtobuf005.Struct | undefined;
-    set logEntryDetails(value: googleProtobuf005.Struct | undefined);
-    get logEntryContext(): googleProtobuf005.Struct | undefined;
-    set logEntryContext(value: googleProtobuf005.Struct | undefined);
+    get logEntryDetails(): googleProtobuf003.Struct | undefined;
+    set logEntryDetails(value: googleProtobuf003.Struct | undefined);
+    get logEntryContext(): googleProtobuf003.Struct | undefined;
+    set logEntryContext(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1145,13 +1145,13 @@ declare namespace LogEntry {
         name: string;
         logEntrySequenceIndex: number;
         displayName: string;
-        logEntryTimestamp?: googleProtobuf005.Timestamp.AsObject;
-        logEntryReceiveTimestamp?: googleProtobuf005.Timestamp.AsObject;
+        logEntryTimestamp?: googleProtobuf003.Timestamp.AsObject;
+        logEntryReceiveTimestamp?: googleProtobuf003.Timestamp.AsObject;
         logEntrySeverity: LogSeverity;
         logEntryPhase: string;
         logEntryOperationName: string;
-        logEntryDetails?: googleProtobuf005.Struct.AsObject;
-        logEntryContext?: googleProtobuf005.Struct.AsObject;
+        logEntryDetails?: googleProtobuf003.Struct.AsObject;
+        logEntryContext?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for LogEntry
@@ -1160,13 +1160,13 @@ declare namespace LogEntry {
         name: string;
         logEntrySequenceIndex: number;
         displayName: string;
-        logEntryTimestamp: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        logEntryReceiveTimestamp: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        logEntryTimestamp: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        logEntryReceiveTimestamp: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         logEntrySeverity: string;
         logEntryPhase: string;
         logEntryOperationName: string;
-        logEntryDetails: googleProtobuf005.Struct.AsProtobufJSON | null;
-        logEntryContext: googleProtobuf005.Struct.AsProtobufJSON | null;
+        logEntryDetails: googleProtobuf003.Struct.AsProtobufJSON | null;
+        logEntryContext: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 
@@ -1222,10 +1222,10 @@ declare class Context implements GrpcMessage {
     });
     get lifespanTime(): number;
     set lifespanTime(value: number);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -1261,8 +1261,8 @@ declare namespace Context {
             [prop: string]: Context.Parameter;
         };
         lifespanTime: number;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -1276,8 +1276,8 @@ declare namespace Context {
             [prop: string]: Context.Parameter;
         };
         lifespanTime: number;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -1329,10 +1329,10 @@ declare namespace Context {
         set value(value: string);
         get valueOriginal(): string;
         set valueOriginal(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -1366,8 +1366,8 @@ declare namespace Context {
             displayName: string;
             value: string;
             valueOriginal: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -1379,8 +1379,8 @@ declare namespace Context {
             displayName: string;
             value: string;
             valueOriginal: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -1787,8 +1787,8 @@ declare class UpdateContextRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateContextRequest.AsObject>);
     get context(): Context | undefined;
     set context(value: Context | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1815,14 +1815,14 @@ declare namespace UpdateContextRequest {
      */
     interface AsObject {
         context?: Context.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateContextRequest
      */
     interface AsProtobufJSON {
         context: Context.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -2003,8 +2003,8 @@ declare class Status implements GrpcMessage {
     set code(value: number);
     get message(): string;
     set message(value: string);
-    get details(): googleProtobuf005.Any[] | undefined;
-    set details(value: googleProtobuf005.Any[] | undefined);
+    get details(): googleProtobuf003.Any[] | undefined;
+    set details(value: googleProtobuf003.Any[] | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2032,7 +2032,7 @@ declare namespace Status {
     interface AsObject {
         code: number;
         message: string;
-        details?: googleProtobuf005.Any.AsObject[];
+        details?: googleProtobuf003.Any.AsObject[];
     }
     /**
      * Protobuf JSON representation for Status
@@ -2040,7 +2040,7 @@ declare namespace Status {
     interface AsProtobufJSON {
         code: number;
         message: string;
-        details: googleProtobuf005.Any.AsProtobufJSON[] | null;
+        details: googleProtobuf003.Any.AsProtobufJSON[] | null;
     }
 }
 
@@ -2255,10 +2255,10 @@ declare class CcaiProject implements GrpcMessage {
     });
     get ccaiProjectStatus(): CcaiProjectStatus;
     set ccaiProjectStatus(value: CcaiProjectStatus);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -2297,8 +2297,8 @@ declare namespace CcaiProject {
             [prop: string]: CcaiServiceList;
         };
         ccaiProjectStatus: CcaiProjectStatus;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
         nluProjectName: string;
@@ -2314,8 +2314,8 @@ declare namespace CcaiProject {
             [prop: string]: CcaiServiceList;
         };
         ccaiProjectStatus: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
         nluProjectName: string;
@@ -2555,18 +2555,18 @@ declare class CcaiService implements GrpcMessage {
     set ccaiServiceType(value: CcaiServiceType);
     get ccaiProjectName(): string;
     set ccaiProjectName(value: string);
-    get ccaiServiceConfig(): googleProtobuf005.Struct | undefined;
-    set ccaiServiceConfig(value: googleProtobuf005.Struct | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get ccaiServiceConfig(): googleProtobuf003.Struct | undefined;
+    set ccaiServiceConfig(value: googleProtobuf003.Struct | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
     set modifiedBy(value: string);
-    get headers(): googleProtobuf005.Struct | undefined;
-    set headers(value: googleProtobuf005.Struct | undefined);
+    get headers(): googleProtobuf003.Struct | undefined;
+    set headers(value: googleProtobuf003.Struct | undefined);
     get ccaiServiceProvider(): CcaiServiceProvider;
     set ccaiServiceProvider(value: CcaiServiceProvider);
     get serviceHierarchy(): string;
@@ -2613,12 +2613,12 @@ declare namespace CcaiService {
         apiKey: string;
         ccaiServiceType: CcaiServiceType;
         ccaiProjectName: string;
-        ccaiServiceConfig?: googleProtobuf005.Struct.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        ccaiServiceConfig?: googleProtobuf003.Struct.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
-        headers?: googleProtobuf005.Struct.AsObject;
+        headers?: googleProtobuf003.Struct.AsObject;
         ccaiServiceProvider: CcaiServiceProvider;
         serviceHierarchy: string;
     }
@@ -2643,12 +2643,12 @@ declare namespace CcaiService {
         apiKey: string;
         ccaiServiceType: string;
         ccaiProjectName: string;
-        ccaiServiceConfig: googleProtobuf005.Struct.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        ccaiServiceConfig: googleProtobuf003.Struct.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
-        headers: googleProtobuf005.Struct.AsProtobufJSON | null;
+        headers: googleProtobuf003.Struct.AsProtobufJSON | null;
         ccaiServiceProvider: string;
         serviceHierarchy: string;
     }
@@ -2846,8 +2846,8 @@ declare class GetCcaiProjectRequest implements GrpcMessage {
     set ccaiServiceFilter(value: CcaiServiceFilter | undefined);
     get nluProjectName(): string;
     set nluProjectName(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2877,7 +2877,7 @@ declare namespace GetCcaiProjectRequest {
         ccaiProjectView: CcaiProjectView;
         ccaiServiceFilter?: CcaiServiceFilter.AsObject;
         nluProjectName: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetCcaiProjectRequest
@@ -2887,7 +2887,7 @@ declare namespace GetCcaiProjectRequest {
         ccaiProjectView: string;
         ccaiServiceFilter: CcaiServiceFilter.AsProtobufJSON | null;
         nluProjectName: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -2929,8 +2929,8 @@ declare class GetCcaiServiceRequest implements GrpcMessage {
     set name(value: string);
     get nluProjectName(): string;
     set nluProjectName(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2958,7 +2958,7 @@ declare namespace GetCcaiServiceRequest {
     interface AsObject {
         name: string;
         nluProjectName: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetCcaiServiceRequest
@@ -2966,7 +2966,7 @@ declare namespace GetCcaiServiceRequest {
     interface AsProtobufJSON {
         name: string;
         nluProjectName: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -3017,8 +3017,8 @@ declare class ListCcaiProjectsRequest implements GrpcMessage {
     set pageToken(value: string);
     get nluProjectName(): string;
     set nluProjectName(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3049,7 +3049,7 @@ declare namespace ListCcaiProjectsRequest {
         ccaiProjectSorting?: CcaiProjectSorting.AsObject;
         pageToken: string;
         nluProjectName: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListCcaiProjectsRequest
@@ -3060,7 +3060,7 @@ declare namespace ListCcaiProjectsRequest {
         ccaiProjectSorting: CcaiProjectSorting.AsProtobufJSON | null;
         pageToken: string;
         nluProjectName: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -3337,8 +3337,8 @@ declare class UpdateCcaiProjectRequest implements GrpcMessage {
     set ccaiProject(value: CcaiProject | undefined);
     get ccaiServiceFilter(): CcaiServiceFilter | undefined;
     set ccaiServiceFilter(value: CcaiServiceFilter | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     get nluProjectName(): string;
     set nluProjectName(value: string);
     /**
@@ -3368,7 +3368,7 @@ declare namespace UpdateCcaiProjectRequest {
     interface AsObject {
         ccaiProject?: CcaiProject.AsObject;
         ccaiServiceFilter?: CcaiServiceFilter.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
         nluProjectName: string;
     }
     /**
@@ -3377,7 +3377,7 @@ declare namespace UpdateCcaiProjectRequest {
     interface AsProtobufJSON {
         ccaiProject: CcaiProject.AsProtobufJSON | null;
         ccaiServiceFilter: CcaiServiceFilter.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         nluProjectName: string;
     }
 }
@@ -3684,10 +3684,10 @@ declare class EntityType implements GrpcMessage {
     set status(value: EntityType.EntityTypeStatus);
     get synonymCount(): number;
     set synonymCount(value: number);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -3726,8 +3726,8 @@ declare namespace EntityType {
         entityCount: number;
         status: EntityType.EntityTypeStatus;
         synonymCount: number;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -3744,8 +3744,8 @@ declare namespace EntityType {
         entityCount: number;
         status: string;
         synonymCount: number;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -3816,10 +3816,10 @@ declare namespace EntityType {
         set synonymCount(value: number);
         get languageCode(): string;
         set languageCode(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -3855,8 +3855,8 @@ declare namespace EntityType {
             displayName: string;
             synonymCount: number;
             languageCode: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -3870,8 +3870,8 @@ declare namespace EntityType {
             displayName: string;
             synonymCount: number;
             languageCode: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -4253,8 +4253,8 @@ declare class UpdateEntityTypeRequest implements GrpcMessage {
     set entityType(value: EntityType | undefined);
     get languageCode(): string;
     set languageCode(value: string);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     get entityTypeView(): EntityTypeView;
     set entityTypeView(value: EntityTypeView);
     /**
@@ -4284,7 +4284,7 @@ declare namespace UpdateEntityTypeRequest {
     interface AsObject {
         entityType?: EntityType.AsObject;
         languageCode: string;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
         entityTypeView: EntityTypeView;
     }
     /**
@@ -4293,7 +4293,7 @@ declare namespace UpdateEntityTypeRequest {
     interface AsProtobufJSON {
         entityType: EntityType.AsProtobufJSON | null;
         languageCode: string;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         entityTypeView: string;
     }
 }
@@ -4412,8 +4412,8 @@ declare class BatchUpdateEntityTypesRequest implements GrpcMessage {
     set entityTypeBatchInline(value: EntityTypeBatch | undefined);
     get languageCode(): string;
     set languageCode(value: string);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     get entityTypeBatch(): BatchUpdateEntityTypesRequest.EntityTypeBatchCase;
     /**
      * Serialize message to binary data
@@ -4444,7 +4444,7 @@ declare namespace BatchUpdateEntityTypesRequest {
         entityTypeBatchUri: string;
         entityTypeBatchInline?: EntityTypeBatch.AsObject;
         languageCode: string;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for BatchUpdateEntityTypesRequest
@@ -4454,7 +4454,7 @@ declare namespace BatchUpdateEntityTypesRequest {
         entityTypeBatchUri: string | null;
         entityTypeBatchInline: EntityTypeBatch.AsProtobufJSON | null;
         languageCode: string;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
     enum EntityTypeBatchCase {
         none = 0,
@@ -5503,8 +5503,8 @@ declare class DeleteEntityStatus implements GrpcMessage {
      * @param _value initial values object or instance of DeleteEntityStatus to deeply clone from
      */
     constructor(_value?: RecursivePartial<DeleteEntityStatus.AsObject>);
-    get successfullyDeleted(): googleProtobuf005.Empty | undefined;
-    set successfullyDeleted(value: googleProtobuf005.Empty | undefined);
+    get successfullyDeleted(): googleProtobuf003.Empty | undefined;
+    set successfullyDeleted(value: googleProtobuf003.Empty | undefined);
     get errorMessage(): string;
     set errorMessage(value: string);
     get deleteStatus(): DeleteEntityStatus.DeleteStatusCase;
@@ -5533,14 +5533,14 @@ declare namespace DeleteEntityStatus {
      * Standard JavaScript object representation for DeleteEntityStatus
      */
     interface AsObject {
-        successfullyDeleted?: googleProtobuf005.Empty.AsObject;
+        successfullyDeleted?: googleProtobuf003.Empty.AsObject;
         errorMessage: string;
     }
     /**
      * Protobuf JSON representation for DeleteEntityStatus
      */
     interface AsProtobufJSON {
-        successfullyDeleted: googleProtobuf005.Empty.AsProtobufJSON | null;
+        successfullyDeleted: googleProtobuf003.Empty.AsProtobufJSON | null;
         errorMessage: string | null;
     }
     enum DeleteStatusCase {
@@ -5993,16 +5993,16 @@ declare class Intent implements GrpcMessage {
     set trainingPhraseCount(value: number);
     get status(): Intent.IntentStatus;
     set status(value: Intent.IntentStatus);
-    get startDate(): googleProtobuf005.Timestamp | undefined;
-    set startDate(value: googleProtobuf005.Timestamp | undefined);
-    get endDate(): googleProtobuf005.Timestamp | undefined;
-    set endDate(value: googleProtobuf005.Timestamp | undefined);
+    get startDate(): googleProtobuf003.Timestamp | undefined;
+    set startDate(value: googleProtobuf003.Timestamp | undefined);
+    get endDate(): googleProtobuf003.Timestamp | undefined;
+    set endDate(value: googleProtobuf003.Timestamp | undefined);
     get tags(): string[];
     set tags(value: string[]);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -6056,11 +6056,11 @@ declare namespace Intent {
         isEndOfDeviation: boolean;
         trainingPhraseCount: number;
         status: Intent.IntentStatus;
-        startDate?: googleProtobuf005.Timestamp.AsObject;
-        endDate?: googleProtobuf005.Timestamp.AsObject;
+        startDate?: googleProtobuf003.Timestamp.AsObject;
+        endDate?: googleProtobuf003.Timestamp.AsObject;
         tags: string[];
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -6092,11 +6092,11 @@ declare namespace Intent {
         isEndOfDeviation: boolean;
         trainingPhraseCount: number;
         status: string;
-        startDate: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        endDate: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startDate: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        endDate: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         tags: string[];
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -6163,10 +6163,10 @@ declare namespace Intent {
         set timesAddedCount(value: number);
         get languageCode(): string;
         set languageCode(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -6202,8 +6202,8 @@ declare namespace Intent {
             entities?: Intent.TrainingPhrase.Entity.AsObject[];
             timesAddedCount: number;
             languageCode: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -6217,8 +6217,8 @@ declare namespace Intent {
             entities: Intent.TrainingPhrase.Entity.AsProtobufJSON[] | null;
             timesAddedCount: number;
             languageCode: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -6287,10 +6287,10 @@ declare namespace Intent {
             set parameterName(value: string);
             get parameterDisplayName(): string;
             set parameterDisplayName(value: string);
-            get createdAt(): googleProtobuf005.Timestamp | undefined;
-            set createdAt(value: googleProtobuf005.Timestamp | undefined);
-            get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-            set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+            get createdAt(): googleProtobuf003.Timestamp | undefined;
+            set createdAt(value: googleProtobuf003.Timestamp | undefined);
+            get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+            set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
             get createdBy(): string;
             set createdBy(value: string);
             get modifiedBy(): string;
@@ -6328,8 +6328,8 @@ declare namespace Intent {
                 end: number;
                 parameterName: string;
                 parameterDisplayName: string;
-                createdAt?: googleProtobuf005.Timestamp.AsObject;
-                modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+                createdAt?: googleProtobuf003.Timestamp.AsObject;
+                modifiedAt?: googleProtobuf003.Timestamp.AsObject;
                 createdBy: string;
                 modifiedBy: string;
             }
@@ -6345,8 +6345,8 @@ declare namespace Intent {
                 end: number;
                 parameterName: string;
                 parameterDisplayName: string;
-                createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-                modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+                createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+                modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
                 createdBy: string;
                 modifiedBy: string;
             }
@@ -6415,10 +6415,10 @@ declare namespace Intent {
         set prompts(value: Intent.Parameter.Prompt[] | undefined);
         get isList(): boolean;
         set isList(value: boolean);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -6457,8 +6457,8 @@ declare namespace Intent {
             mandatory: boolean;
             prompts?: Intent.Parameter.Prompt.AsObject[];
             isList: boolean;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -6475,8 +6475,8 @@ declare namespace Intent {
             mandatory: boolean;
             prompts: Intent.Parameter.Prompt.AsProtobufJSON[] | null;
             isList: boolean;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -6525,10 +6525,10 @@ declare namespace Intent {
             set text(value: string);
             get languageCode(): string;
             set languageCode(value: string);
-            get createdAt(): googleProtobuf005.Timestamp | undefined;
-            set createdAt(value: googleProtobuf005.Timestamp | undefined);
-            get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-            set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+            get createdAt(): googleProtobuf003.Timestamp | undefined;
+            set createdAt(value: googleProtobuf003.Timestamp | undefined);
+            get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+            set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
             get createdBy(): string;
             set createdBy(value: string);
             get modifiedBy(): string;
@@ -6561,8 +6561,8 @@ declare namespace Intent {
                 name: string;
                 text: string;
                 languageCode: string;
-                createdAt?: googleProtobuf005.Timestamp.AsObject;
-                modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+                createdAt?: googleProtobuf003.Timestamp.AsObject;
+                modifiedAt?: googleProtobuf003.Timestamp.AsObject;
                 createdBy: string;
                 modifiedBy: string;
             }
@@ -6573,8 +6573,8 @@ declare namespace Intent {
                 name: string;
                 text: string;
                 languageCode: string;
-                createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-                modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+                createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+                modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
                 createdBy: string;
                 modifiedBy: string;
             }
@@ -6647,8 +6647,8 @@ declare namespace Intent {
         set quickReplies(value: Intent.Message.QuickReplies | undefined);
         get card(): Intent.Message.Card | undefined;
         set card(value: Intent.Message.Card | undefined);
-        get payload(): googleProtobuf005.Struct | undefined;
-        set payload(value: googleProtobuf005.Struct | undefined);
+        get payload(): googleProtobuf003.Struct | undefined;
+        set payload(value: googleProtobuf003.Struct | undefined);
         get simpleResponses(): Intent.Message.SimpleResponses | undefined;
         set simpleResponses(value: Intent.Message.SimpleResponses | undefined);
         get basicCard(): Intent.Message.BasicCard | undefined;
@@ -6671,10 +6671,10 @@ declare namespace Intent {
         set platform(value: Intent.Message.Platform);
         get isPrompt(): boolean;
         set isPrompt(value: boolean);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -6711,7 +6711,7 @@ declare namespace Intent {
             image?: Intent.Message.Image.AsObject;
             quickReplies?: Intent.Message.QuickReplies.AsObject;
             card?: Intent.Message.Card.AsObject;
-            payload?: googleProtobuf005.Struct.AsObject;
+            payload?: googleProtobuf003.Struct.AsObject;
             simpleResponses?: Intent.Message.SimpleResponses.AsObject;
             basicCard?: Intent.Message.BasicCard.AsObject;
             suggestions?: Intent.Message.Suggestions.AsObject;
@@ -6723,8 +6723,8 @@ declare namespace Intent {
             audio?: Intent.Message.Audio.AsObject;
             platform: Intent.Message.Platform;
             isPrompt: boolean;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -6738,7 +6738,7 @@ declare namespace Intent {
             image: Intent.Message.Image.AsProtobufJSON | null;
             quickReplies: Intent.Message.QuickReplies.AsProtobufJSON | null;
             card: Intent.Message.Card.AsProtobufJSON | null;
-            payload: googleProtobuf005.Struct.AsProtobufJSON | null;
+            payload: googleProtobuf003.Struct.AsProtobufJSON | null;
             simpleResponses: Intent.Message.SimpleResponses.AsProtobufJSON | null;
             basicCard: Intent.Message.BasicCard.AsProtobufJSON | null;
             suggestions: Intent.Message.Suggestions.AsProtobufJSON | null;
@@ -6750,8 +6750,8 @@ declare namespace Intent {
             audio: Intent.Message.Audio.AsProtobufJSON | null;
             platform: string;
             isPrompt: boolean;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -8829,8 +8829,8 @@ declare class UpdateIntentRequest implements GrpcMessage {
     set intent(value: Intent | undefined);
     get languageCode(): string;
     set languageCode(value: string);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     get intentView(): IntentView;
     set intentView(value: IntentView);
     /**
@@ -8860,7 +8860,7 @@ declare namespace UpdateIntentRequest {
     interface AsObject {
         intent?: Intent.AsObject;
         languageCode: string;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
         intentView: IntentView;
     }
     /**
@@ -8869,7 +8869,7 @@ declare namespace UpdateIntentRequest {
     interface AsProtobufJSON {
         intent: Intent.AsProtobufJSON | null;
         languageCode: string;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         intentView: string;
     }
 }
@@ -8989,8 +8989,8 @@ declare class BatchUpdateIntentsRequest implements GrpcMessage {
     set intentBatchInline(value: IntentBatch | undefined);
     get languageCode(): string;
     set languageCode(value: string);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     get intentView(): IntentView;
     set intentView(value: IntentView);
     get intentBatch(): BatchUpdateIntentsRequest.IntentBatchCase;
@@ -9023,7 +9023,7 @@ declare namespace BatchUpdateIntentsRequest {
         intentBatchUri: string;
         intentBatchInline?: IntentBatch.AsObject;
         languageCode: string;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
         intentView: IntentView;
     }
     /**
@@ -9034,7 +9034,7 @@ declare namespace BatchUpdateIntentsRequest {
         intentBatchUri: string | null;
         intentBatchInline: IntentBatch.AsProtobufJSON | null;
         languageCode: string;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         intentView: string;
     }
     enum IntentBatchCase {
@@ -10232,8 +10232,8 @@ declare namespace BatchDeleteTrainingPhrasesResponse {
          * @param _value initial values object or instance of DeleteTrainingPhraseStatus to deeply clone from
          */
         constructor(_value?: RecursivePartial<DeleteTrainingPhraseStatus.AsObject>);
-        get successfullyDeleted(): googleProtobuf005.Empty | undefined;
-        set successfullyDeleted(value: googleProtobuf005.Empty | undefined);
+        get successfullyDeleted(): googleProtobuf003.Empty | undefined;
+        set successfullyDeleted(value: googleProtobuf003.Empty | undefined);
         get errorMessage(): string;
         set errorMessage(value: string);
         get deleteStatus(): DeleteTrainingPhraseStatus.DeleteStatusCase;
@@ -10262,14 +10262,14 @@ declare namespace BatchDeleteTrainingPhrasesResponse {
          * Standard JavaScript object representation for DeleteTrainingPhraseStatus
          */
         interface AsObject {
-            successfullyDeleted?: googleProtobuf005.Empty.AsObject;
+            successfullyDeleted?: googleProtobuf003.Empty.AsObject;
             errorMessage: string;
         }
         /**
          * Protobuf JSON representation for DeleteTrainingPhraseStatus
          */
         interface AsProtobufJSON {
-            successfullyDeleted: googleProtobuf005.Empty.AsProtobufJSON | null;
+            successfullyDeleted: googleProtobuf003.Empty.AsProtobufJSON | null;
             errorMessage: string | null;
         }
         enum DeleteStatusCase {
@@ -11045,8 +11045,8 @@ declare namespace BatchDeleteResponseMessagesResponse {
          * @param _value initial values object or instance of DeleteResponseMessageStatus to deeply clone from
          */
         constructor(_value?: RecursivePartial<DeleteResponseMessageStatus.AsObject>);
-        get successfullyDeleted(): googleProtobuf005.Empty | undefined;
-        set successfullyDeleted(value: googleProtobuf005.Empty | undefined);
+        get successfullyDeleted(): googleProtobuf003.Empty | undefined;
+        set successfullyDeleted(value: googleProtobuf003.Empty | undefined);
         get errorMessage(): string;
         set errorMessage(value: string);
         get deleteStatus(): DeleteResponseMessageStatus.DeleteStatusCase;
@@ -11075,14 +11075,14 @@ declare namespace BatchDeleteResponseMessagesResponse {
          * Standard JavaScript object representation for DeleteResponseMessageStatus
          */
         interface AsObject {
-            successfullyDeleted?: googleProtobuf005.Empty.AsObject;
+            successfullyDeleted?: googleProtobuf003.Empty.AsObject;
             errorMessage: string;
         }
         /**
          * Protobuf JSON representation for DeleteResponseMessageStatus
          */
         interface AsProtobufJSON {
-            successfullyDeleted: googleProtobuf005.Empty.AsProtobufJSON | null;
+            successfullyDeleted: googleProtobuf003.Empty.AsProtobufJSON | null;
             errorMessage: string | null;
         }
         enum DeleteStatusCase {
@@ -11858,8 +11858,8 @@ declare namespace BatchDeleteParametersResponse {
          * @param _value initial values object or instance of DeleteParameterStatus to deeply clone from
          */
         constructor(_value?: RecursivePartial<DeleteParameterStatus.AsObject>);
-        get successfullyDeleted(): googleProtobuf005.Empty | undefined;
-        set successfullyDeleted(value: googleProtobuf005.Empty | undefined);
+        get successfullyDeleted(): googleProtobuf003.Empty | undefined;
+        set successfullyDeleted(value: googleProtobuf003.Empty | undefined);
         get errorMessage(): string;
         set errorMessage(value: string);
         get deleteStatus(): DeleteParameterStatus.DeleteStatusCase;
@@ -11888,14 +11888,14 @@ declare namespace BatchDeleteParametersResponse {
          * Standard JavaScript object representation for DeleteParameterStatus
          */
         interface AsObject {
-            successfullyDeleted?: googleProtobuf005.Empty.AsObject;
+            successfullyDeleted?: googleProtobuf003.Empty.AsObject;
             errorMessage: string;
         }
         /**
          * Protobuf JSON representation for DeleteParameterStatus
          */
         interface AsProtobufJSON {
-            successfullyDeleted: googleProtobuf005.Empty.AsProtobufJSON | null;
+            successfullyDeleted: googleProtobuf003.Empty.AsProtobufJSON | null;
             errorMessage: string | null;
         }
         enum DeleteStatusCase {
@@ -12355,14 +12355,14 @@ declare class LlmEvaluationDataset implements GrpcMessage {
     set description(value: string);
     get llmEvaluationExamples(): LlmEvaluationExample[] | undefined;
     set llmEvaluationExamples(value: LlmEvaluationExample[] | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get tags(): string[];
     set tags(value: string[]);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -12400,10 +12400,10 @@ declare namespace LlmEvaluationDataset {
         displayName: string;
         description: string;
         llmEvaluationExamples?: LlmEvaluationExample.AsObject[];
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         tags: string[];
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -12417,10 +12417,10 @@ declare namespace LlmEvaluationDataset {
         displayName: string;
         description: string;
         llmEvaluationExamples: LlmEvaluationExample.AsProtobufJSON[] | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         tags: string[];
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -12478,24 +12478,24 @@ declare class LlmEvaluationExample implements GrpcMessage {
     set displayName(value: string);
     get description(): string;
     set description(value: string);
-    get inputs(): googleProtobuf005.Struct | undefined;
-    set inputs(value: googleProtobuf005.Struct | undefined);
-    get expectedOutputs(): googleProtobuf005.Struct | undefined;
-    set expectedOutputs(value: googleProtobuf005.Struct | undefined);
-    get metadata(): googleProtobuf005.Struct | undefined;
-    set metadata(value: googleProtobuf005.Struct | undefined);
+    get inputs(): googleProtobuf003.Struct | undefined;
+    set inputs(value: googleProtobuf003.Struct | undefined);
+    get expectedOutputs(): googleProtobuf003.Struct | undefined;
+    set expectedOutputs(value: googleProtobuf003.Struct | undefined);
+    get metadata(): googleProtobuf003.Struct | undefined;
+    set metadata(value: googleProtobuf003.Struct | undefined);
     get llmEvaluationDatasetName(): string;
     set llmEvaluationDatasetName(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
     set languageCode(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     /**
@@ -12526,15 +12526,15 @@ declare namespace LlmEvaluationExample {
         name: string;
         displayName: string;
         description: string;
-        inputs?: googleProtobuf005.Struct.AsObject;
-        expectedOutputs?: googleProtobuf005.Struct.AsObject;
-        metadata?: googleProtobuf005.Struct.AsObject;
+        inputs?: googleProtobuf003.Struct.AsObject;
+        expectedOutputs?: googleProtobuf003.Struct.AsObject;
+        metadata?: googleProtobuf003.Struct.AsObject;
         llmEvaluationDatasetName: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         parent: string;
         languageCode: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
     }
     /**
@@ -12544,15 +12544,15 @@ declare namespace LlmEvaluationExample {
         name: string;
         displayName: string;
         description: string;
-        inputs: googleProtobuf005.Struct.AsProtobufJSON | null;
-        expectedOutputs: googleProtobuf005.Struct.AsProtobufJSON | null;
-        metadata: googleProtobuf005.Struct.AsProtobufJSON | null;
+        inputs: googleProtobuf003.Struct.AsProtobufJSON | null;
+        expectedOutputs: googleProtobuf003.Struct.AsProtobufJSON | null;
+        metadata: googleProtobuf003.Struct.AsProtobufJSON | null;
         llmEvaluationDatasetName: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         parent: string;
         languageCode: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
     }
 }
@@ -12630,14 +12630,14 @@ declare class LlmEvaluationExperiment implements GrpcMessage {
     set promptVersion(value: string);
     get modelName(): string;
     set modelName(value: string);
-    get config(): googleProtobuf005.Struct | undefined;
-    set config(value: googleProtobuf005.Struct | undefined);
+    get config(): googleProtobuf003.Struct | undefined;
+    set config(value: googleProtobuf003.Struct | undefined);
     get llmEvaluationEvaluatorRuns(): LlmEvaluationEvaluatorRun[] | undefined;
     set llmEvaluationEvaluatorRuns(value: LlmEvaluationEvaluatorRun[] | undefined);
-    get startedAt(): googleProtobuf005.Timestamp | undefined;
-    set startedAt(value: googleProtobuf005.Timestamp | undefined);
-    get finishedAt(): googleProtobuf005.Timestamp | undefined;
-    set finishedAt(value: googleProtobuf005.Timestamp | undefined);
+    get startedAt(): googleProtobuf003.Timestamp | undefined;
+    set startedAt(value: googleProtobuf003.Timestamp | undefined);
+    get finishedAt(): googleProtobuf003.Timestamp | undefined;
+    set finishedAt(value: googleProtobuf003.Timestamp | undefined);
     get durationInS(): number;
     set durationInS(value: number);
     get nExamples(): number;
@@ -12658,10 +12658,10 @@ declare class LlmEvaluationExperiment implements GrpcMessage {
     set languageCode(value: string);
     get ccaiServiceNames(): string[];
     set ccaiServiceNames(value: string[]);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get repetitions(): number;
@@ -12704,10 +12704,10 @@ declare namespace LlmEvaluationExperiment {
         gitSha: string;
         promptVersion: string;
         modelName: string;
-        config?: googleProtobuf005.Struct.AsObject;
+        config?: googleProtobuf003.Struct.AsObject;
         llmEvaluationEvaluatorRuns?: LlmEvaluationEvaluatorRun.AsObject[];
-        startedAt?: googleProtobuf005.Timestamp.AsObject;
-        finishedAt?: googleProtobuf005.Timestamp.AsObject;
+        startedAt?: googleProtobuf003.Timestamp.AsObject;
+        finishedAt?: googleProtobuf003.Timestamp.AsObject;
         durationInS: number;
         nExamples: number;
         nPassed: number;
@@ -12718,8 +12718,8 @@ declare namespace LlmEvaluationExperiment {
         createdBy: string;
         languageCode: string;
         ccaiServiceNames: string[];
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         repetitions: number;
         llmEvaluationScheduleName: string;
@@ -12737,10 +12737,10 @@ declare namespace LlmEvaluationExperiment {
         gitSha: string;
         promptVersion: string;
         modelName: string;
-        config: googleProtobuf005.Struct.AsProtobufJSON | null;
+        config: googleProtobuf003.Struct.AsProtobufJSON | null;
         llmEvaluationEvaluatorRuns: LlmEvaluationEvaluatorRun.AsProtobufJSON[] | null;
-        startedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        finishedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        finishedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         durationInS: number;
         nExamples: number;
         nPassed: number;
@@ -12751,8 +12751,8 @@ declare namespace LlmEvaluationExperiment {
         createdBy: string;
         languageCode: string;
         ccaiServiceNames: string[];
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         repetitions: number;
         llmEvaluationScheduleName: string;
@@ -12825,14 +12825,14 @@ declare class LlmEvaluationEvaluatorRun implements GrpcMessage {
     set llmEvaluationFeedbacks(value: LlmEvaluationFeedback[] | undefined);
     get llmEvaluationExperimentName(): string;
     set llmEvaluationExperimentName(value: string);
-    get startedAt(): googleProtobuf005.Timestamp | undefined;
-    set startedAt(value: googleProtobuf005.Timestamp | undefined);
-    get finishedAt(): googleProtobuf005.Timestamp | undefined;
-    set finishedAt(value: googleProtobuf005.Timestamp | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get startedAt(): googleProtobuf003.Timestamp | undefined;
+    set startedAt(value: googleProtobuf003.Timestamp | undefined);
+    get finishedAt(): googleProtobuf003.Timestamp | undefined;
+    set finishedAt(value: googleProtobuf003.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -12841,8 +12841,8 @@ declare class LlmEvaluationEvaluatorRun implements GrpcMessage {
     set llmEvaluationTurnResults(value: LlmEvaluationTurnResult[] | undefined);
     get repetitionIndex(): number;
     set repetitionIndex(value: number);
-    get actualOutput(): googleProtobuf005.Struct | undefined;
-    set actualOutput(value: googleProtobuf005.Struct | undefined);
+    get actualOutput(): googleProtobuf003.Struct | undefined;
+    set actualOutput(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -12876,15 +12876,15 @@ declare namespace LlmEvaluationEvaluatorRun {
         evaluatorName: string;
         llmEvaluationFeedbacks?: LlmEvaluationFeedback.AsObject[];
         llmEvaluationExperimentName: string;
-        startedAt?: googleProtobuf005.Timestamp.AsObject;
-        finishedAt?: googleProtobuf005.Timestamp.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        startedAt?: googleProtobuf003.Timestamp.AsObject;
+        finishedAt?: googleProtobuf003.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
         llmEvaluationTurnResults?: LlmEvaluationTurnResult.AsObject[];
         repetitionIndex: number;
-        actualOutput?: googleProtobuf005.Struct.AsObject;
+        actualOutput?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for LlmEvaluationEvaluatorRun
@@ -12898,15 +12898,15 @@ declare namespace LlmEvaluationEvaluatorRun {
         evaluatorName: string;
         llmEvaluationFeedbacks: LlmEvaluationFeedback.AsProtobufJSON[] | null;
         llmEvaluationExperimentName: string;
-        startedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        finishedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        finishedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
         llmEvaluationTurnResults: LlmEvaluationTurnResult.AsProtobufJSON[] | null;
         repetitionIndex: number;
-        actualOutput: googleProtobuf005.Struct.AsProtobufJSON | null;
+        actualOutput: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -12970,18 +12970,18 @@ declare class LlmEvaluationFeedback implements GrpcMessage {
     set comment(value: string);
     get annotatorUserId(): string;
     set annotatorUserId(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get raw(): googleProtobuf005.Struct | undefined;
-    set raw(value: googleProtobuf005.Struct | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get raw(): googleProtobuf003.Struct | undefined;
+    set raw(value: googleProtobuf003.Struct | undefined);
     get llmEvaluationEvaluatorRunName(): string;
     set llmEvaluationEvaluatorRunName(value: string);
     get llmEvaluationExperimentName(): string;
     set llmEvaluationExperimentName(value: string);
     get llmEvaluationExampleName(): string;
     set llmEvaluationExampleName(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -13018,12 +13018,12 @@ declare namespace LlmEvaluationFeedback {
         categoricalValue: string;
         comment: string;
         annotatorUserId: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        raw?: googleProtobuf005.Struct.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        raw?: googleProtobuf003.Struct.AsObject;
         llmEvaluationEvaluatorRunName: string;
         llmEvaluationExperimentName: string;
         llmEvaluationExampleName: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -13038,12 +13038,12 @@ declare namespace LlmEvaluationFeedback {
         categoricalValue: string;
         comment: string;
         annotatorUserId: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        raw: googleProtobuf005.Struct.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        raw: googleProtobuf003.Struct.AsProtobufJSON | null;
         llmEvaluationEvaluatorRunName: string;
         llmEvaluationExperimentName: string;
         llmEvaluationExampleName: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -13100,12 +13100,12 @@ declare class LlmEvaluationComparison implements GrpcMessage {
     set llmEvaluationBaselineExperimentName(value: string);
     get llmEvaluationPairwiseResults(): LlmEvaluationPairwiseResult[] | undefined;
     set llmEvaluationPairwiseResults(value: LlmEvaluationPairwiseResult[] | undefined);
-    get aggregate(): googleProtobuf005.Struct | undefined;
-    set aggregate(value: googleProtobuf005.Struct | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get aggregate(): googleProtobuf003.Struct | undefined;
+    set aggregate(value: googleProtobuf003.Struct | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -13140,9 +13140,9 @@ declare namespace LlmEvaluationComparison {
         llmEvaluationExperimentNames: string[];
         llmEvaluationBaselineExperimentName: string;
         llmEvaluationPairwiseResults?: LlmEvaluationPairwiseResult.AsObject[];
-        aggregate?: googleProtobuf005.Struct.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        aggregate?: googleProtobuf003.Struct.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -13155,9 +13155,9 @@ declare namespace LlmEvaluationComparison {
         llmEvaluationExperimentNames: string[];
         llmEvaluationBaselineExperimentName: string;
         llmEvaluationPairwiseResults: LlmEvaluationPairwiseResult.AsProtobufJSON[] | null;
-        aggregate: googleProtobuf005.Struct.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        aggregate: googleProtobuf003.Struct.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -13378,8 +13378,8 @@ declare class GetLlmEvaluationDatasetRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationDatasetRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -13410,7 +13410,7 @@ declare namespace GetLlmEvaluationDatasetRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -13419,7 +13419,7 @@ declare namespace GetLlmEvaluationDatasetRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -13544,8 +13544,8 @@ declare class ListLlmEvaluationDatasetsRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationDatasetFilter(): LlmEvaluationDatasetFilter | undefined;
@@ -13577,7 +13577,7 @@ declare namespace ListLlmEvaluationDatasetsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationDatasetFilter?: LlmEvaluationDatasetFilter.AsObject;
     }
@@ -13587,7 +13587,7 @@ declare namespace ListLlmEvaluationDatasetsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationDatasetFilter: LlmEvaluationDatasetFilter.AsProtobufJSON | null;
     }
@@ -13705,10 +13705,10 @@ declare class UpdateLlmEvaluationDatasetRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationDatasetRequest.AsObject>);
     get llmEvaluationDataset(): LlmEvaluationDataset | undefined;
     set llmEvaluationDataset(value: LlmEvaluationDataset | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -13739,8 +13739,8 @@ declare namespace UpdateLlmEvaluationDatasetRequest {
      */
     interface AsObject {
         llmEvaluationDataset?: LlmEvaluationDataset.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -13749,8 +13749,8 @@ declare namespace UpdateLlmEvaluationDatasetRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationDataset: LlmEvaluationDataset.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -14109,8 +14109,8 @@ declare class GetLlmEvaluationExampleRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationExampleRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -14141,7 +14141,7 @@ declare namespace GetLlmEvaluationExampleRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -14150,7 +14150,7 @@ declare namespace GetLlmEvaluationExampleRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -14266,8 +14266,8 @@ declare class ListLlmEvaluationExamplesRequest implements GrpcMessage {
     set llmEvaluationDatasetName(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -14301,7 +14301,7 @@ declare namespace ListLlmEvaluationExamplesRequest {
     interface AsObject {
         llmEvaluationDatasetName: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
         llmEvaluationExampleFilter?: LlmEvaluationExampleFilter.AsObject;
@@ -14312,7 +14312,7 @@ declare namespace ListLlmEvaluationExamplesRequest {
     interface AsProtobufJSON {
         llmEvaluationDatasetName: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
         llmEvaluationExampleFilter: LlmEvaluationExampleFilter.AsProtobufJSON | null;
@@ -14431,10 +14431,10 @@ declare class UpdateLlmEvaluationExampleRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationExampleRequest.AsObject>);
     get llmEvaluationExample(): LlmEvaluationExample | undefined;
     set llmEvaluationExample(value: LlmEvaluationExample | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -14465,8 +14465,8 @@ declare namespace UpdateLlmEvaluationExampleRequest {
      */
     interface AsObject {
         llmEvaluationExample?: LlmEvaluationExample.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -14475,8 +14475,8 @@ declare namespace UpdateLlmEvaluationExampleRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationExample: LlmEvaluationExample.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -14618,8 +14618,8 @@ declare class RunLlmEvaluationExperimentRequest implements GrpcMessage {
     set promptVersion(value: string);
     get modelName(): string;
     set modelName(value: string);
-    get config(): googleProtobuf005.Struct | undefined;
-    set config(value: googleProtobuf005.Struct | undefined);
+    get config(): googleProtobuf003.Struct | undefined;
+    set config(value: googleProtobuf003.Struct | undefined);
     get llmEvaluationEvaluatorNames(): string[];
     set llmEvaluationEvaluatorNames(value: string[]);
     get llmEvaluationBaselineExperimentName(): string;
@@ -14632,8 +14632,8 @@ declare class RunLlmEvaluationExperimentRequest implements GrpcMessage {
     set repetitions(value: number);
     get llmEvaluationExperimentKind(): LlmEvaluationExperimentKind;
     set llmEvaluationExperimentKind(value: LlmEvaluationExperimentKind);
-    get evaluatorConfigs(): googleProtobuf005.Struct | undefined;
-    set evaluatorConfigs(value: googleProtobuf005.Struct | undefined);
+    get evaluatorConfigs(): googleProtobuf003.Struct | undefined;
+    set evaluatorConfigs(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -14665,14 +14665,14 @@ declare namespace RunLlmEvaluationExperimentRequest {
         gitSha: string;
         promptVersion: string;
         modelName: string;
-        config?: googleProtobuf005.Struct.AsObject;
+        config?: googleProtobuf003.Struct.AsObject;
         llmEvaluationEvaluatorNames: string[];
         llmEvaluationBaselineExperimentName: string;
         languageCode: string;
         ccaiServiceNames: string[];
         repetitions: number;
         llmEvaluationExperimentKind: LlmEvaluationExperimentKind;
-        evaluatorConfigs?: googleProtobuf005.Struct.AsObject;
+        evaluatorConfigs?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for RunLlmEvaluationExperimentRequest
@@ -14684,14 +14684,14 @@ declare namespace RunLlmEvaluationExperimentRequest {
         gitSha: string;
         promptVersion: string;
         modelName: string;
-        config: googleProtobuf005.Struct.AsProtobufJSON | null;
+        config: googleProtobuf003.Struct.AsProtobufJSON | null;
         llmEvaluationEvaluatorNames: string[];
         llmEvaluationBaselineExperimentName: string;
         languageCode: string;
         ccaiServiceNames: string[];
         repetitions: number;
         llmEvaluationExperimentKind: string;
-        evaluatorConfigs: googleProtobuf005.Struct.AsProtobufJSON | null;
+        evaluatorConfigs: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -14732,8 +14732,8 @@ declare class GetLlmEvaluationExperimentRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationExperimentRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -14764,7 +14764,7 @@ declare namespace GetLlmEvaluationExperimentRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -14773,7 +14773,7 @@ declare namespace GetLlmEvaluationExperimentRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -14913,8 +14913,8 @@ declare class ListLlmEvaluationExperimentsRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationExperimentFilter(): LlmEvaluationExperimentFilter | undefined;
@@ -14946,7 +14946,7 @@ declare namespace ListLlmEvaluationExperimentsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationExperimentFilter?: LlmEvaluationExperimentFilter.AsObject;
     }
@@ -14956,7 +14956,7 @@ declare namespace ListLlmEvaluationExperimentsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationExperimentFilter: LlmEvaluationExperimentFilter.AsProtobufJSON | null;
     }
@@ -15074,10 +15074,10 @@ declare class UpdateLlmEvaluationExperimentRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationExperimentRequest.AsObject>);
     get llmEvaluationExperiment(): LlmEvaluationExperiment | undefined;
     set llmEvaluationExperiment(value: LlmEvaluationExperiment | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -15108,8 +15108,8 @@ declare namespace UpdateLlmEvaluationExperimentRequest {
      */
     interface AsObject {
         llmEvaluationExperiment?: LlmEvaluationExperiment.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -15118,8 +15118,8 @@ declare namespace UpdateLlmEvaluationExperimentRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationExperiment: LlmEvaluationExperiment.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -15583,8 +15583,8 @@ declare class ListLlmEvaluationFeedbackRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListLlmEvaluationFeedbackRequest.AsObject>);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -15617,7 +15617,7 @@ declare namespace ListLlmEvaluationFeedbackRequest {
      */
     interface AsObject {
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
         llmEvaluationFeedbackFilter?: LlmEvaluationFeedbackFilter.AsObject;
@@ -15627,7 +15627,7 @@ declare namespace ListLlmEvaluationFeedbackRequest {
      */
     interface AsProtobufJSON {
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
         llmEvaluationFeedbackFilter: LlmEvaluationFeedbackFilter.AsProtobufJSON | null;
@@ -15825,10 +15825,10 @@ declare class UpdateLlmEvaluationFeedbackRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationFeedbackRequest.AsObject>);
     get llmEvaluationFeedback(): LlmEvaluationFeedback | undefined;
     set llmEvaluationFeedback(value: LlmEvaluationFeedback | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -15859,8 +15859,8 @@ declare namespace UpdateLlmEvaluationFeedbackRequest {
      */
     interface AsObject {
         llmEvaluationFeedback?: LlmEvaluationFeedback.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -15869,8 +15869,8 @@ declare namespace UpdateLlmEvaluationFeedbackRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationFeedback: LlmEvaluationFeedback.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -15917,12 +15917,12 @@ declare class LlmEvaluationTurnResult implements GrpcMessage {
     constructor(_value?: RecursivePartial<LlmEvaluationTurnResult.AsObject>);
     get turnIndex(): number;
     set turnIndex(value: number);
-    get userInput(): googleProtobuf005.Struct | undefined;
-    set userInput(value: googleProtobuf005.Struct | undefined);
-    get expectedOutput(): googleProtobuf005.Struct | undefined;
-    set expectedOutput(value: googleProtobuf005.Struct | undefined);
-    get actualOutput(): googleProtobuf005.Struct | undefined;
-    set actualOutput(value: googleProtobuf005.Struct | undefined);
+    get userInput(): googleProtobuf003.Struct | undefined;
+    set userInput(value: googleProtobuf003.Struct | undefined);
+    get expectedOutput(): googleProtobuf003.Struct | undefined;
+    set expectedOutput(value: googleProtobuf003.Struct | undefined);
+    get actualOutput(): googleProtobuf003.Struct | undefined;
+    set actualOutput(value: googleProtobuf003.Struct | undefined);
     get llmTelemetryRunId(): string;
     set llmTelemetryRunId(value: string);
     get sessionStepName(): string;
@@ -15957,9 +15957,9 @@ declare namespace LlmEvaluationTurnResult {
      */
     interface AsObject {
         turnIndex: number;
-        userInput?: googleProtobuf005.Struct.AsObject;
-        expectedOutput?: googleProtobuf005.Struct.AsObject;
-        actualOutput?: googleProtobuf005.Struct.AsObject;
+        userInput?: googleProtobuf003.Struct.AsObject;
+        expectedOutput?: googleProtobuf003.Struct.AsObject;
+        actualOutput?: googleProtobuf003.Struct.AsObject;
         llmTelemetryRunId: string;
         sessionStepName: string;
         llmEvaluationFeedbacks?: LlmEvaluationFeedback.AsObject[];
@@ -15970,9 +15970,9 @@ declare namespace LlmEvaluationTurnResult {
      */
     interface AsProtobufJSON {
         turnIndex: number;
-        userInput: googleProtobuf005.Struct.AsProtobufJSON | null;
-        expectedOutput: googleProtobuf005.Struct.AsProtobufJSON | null;
-        actualOutput: googleProtobuf005.Struct.AsProtobufJSON | null;
+        userInput: googleProtobuf003.Struct.AsProtobufJSON | null;
+        expectedOutput: googleProtobuf003.Struct.AsProtobufJSON | null;
+        actualOutput: googleProtobuf003.Struct.AsProtobufJSON | null;
         llmTelemetryRunId: string;
         sessionStepName: string;
         llmEvaluationFeedbacks: LlmEvaluationFeedback.AsProtobufJSON[] | null;
@@ -16221,20 +16221,20 @@ declare class LlmEvaluationReleaseGate implements GrpcMessage {
     set thresholds(value: LlmEvaluationReleaseGateThresholds | undefined);
     get safety(): LlmEvaluationReleaseGateSafetyConfig | undefined;
     set safety(value: LlmEvaluationReleaseGateSafetyConfig | undefined);
-    get weights(): googleProtobuf005.Struct | undefined;
-    set weights(value: googleProtobuf005.Struct | undefined);
+    get weights(): googleProtobuf003.Struct | undefined;
+    set weights(value: googleProtobuf003.Struct | undefined);
     get passCutoffScore(): number;
     set passCutoffScore(value: number);
     get stalenessWindowDays(): number;
     set stalenessWindowDays(value: number);
     get ccaiServiceNames(): string[];
     set ccaiServiceNames(value: string[]);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -16275,13 +16275,13 @@ declare namespace LlmEvaluationReleaseGate {
         llmEvaluationEvaluatorNames: string[];
         thresholds?: LlmEvaluationReleaseGateThresholds.AsObject;
         safety?: LlmEvaluationReleaseGateSafetyConfig.AsObject;
-        weights?: googleProtobuf005.Struct.AsObject;
+        weights?: googleProtobuf003.Struct.AsObject;
         passCutoffScore: number;
         stalenessWindowDays: number;
         ccaiServiceNames: string[];
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -16299,13 +16299,13 @@ declare namespace LlmEvaluationReleaseGate {
         llmEvaluationEvaluatorNames: string[];
         thresholds: LlmEvaluationReleaseGateThresholds.AsProtobufJSON | null;
         safety: LlmEvaluationReleaseGateSafetyConfig.AsProtobufJSON | null;
-        weights: googleProtobuf005.Struct.AsProtobufJSON | null;
+        weights: googleProtobuf003.Struct.AsProtobufJSON | null;
         passCutoffScore: number;
         stalenessWindowDays: number;
         ccaiServiceNames: string[];
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -16465,8 +16465,8 @@ declare class LlmEvaluationReleaseGateRun implements GrpcMessage {
     set llmEvaluationReleaseGateName(value: string);
     get gateRevision(): number;
     set gateRevision(value: number);
-    get gateSnapshot(): googleProtobuf005.Struct | undefined;
-    set gateSnapshot(value: googleProtobuf005.Struct | undefined);
+    get gateSnapshot(): googleProtobuf003.Struct | undefined;
+    set gateSnapshot(value: googleProtobuf003.Struct | undefined);
     get llmEvaluationExperimentName(): string;
     set llmEvaluationExperimentName(value: string);
     get llmEvaluationSafetyExperimentName(): string;
@@ -16477,16 +16477,16 @@ declare class LlmEvaluationReleaseGateRun implements GrpcMessage {
     set llmEvaluationReleaseGateVerdict(value: LlmEvaluationReleaseGateVerdict);
     get checks(): LlmEvaluationReleaseGateCheck[] | undefined;
     set checks(value: LlmEvaluationReleaseGateCheck[] | undefined);
-    get startedAt(): googleProtobuf005.Timestamp | undefined;
-    set startedAt(value: googleProtobuf005.Timestamp | undefined);
-    get finishedAt(): googleProtobuf005.Timestamp | undefined;
-    set finishedAt(value: googleProtobuf005.Timestamp | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get startedAt(): googleProtobuf003.Timestamp | undefined;
+    set startedAt(value: googleProtobuf003.Timestamp | undefined);
+    get finishedAt(): googleProtobuf003.Timestamp | undefined;
+    set finishedAt(value: googleProtobuf003.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -16521,17 +16521,17 @@ declare namespace LlmEvaluationReleaseGateRun {
         name: string;
         llmEvaluationReleaseGateName: string;
         gateRevision: number;
-        gateSnapshot?: googleProtobuf005.Struct.AsObject;
+        gateSnapshot?: googleProtobuf003.Struct.AsObject;
         llmEvaluationExperimentName: string;
         llmEvaluationSafetyExperimentName: string;
         llmEvaluationBaselineExperimentName: string;
         llmEvaluationReleaseGateVerdict: LlmEvaluationReleaseGateVerdict;
         checks?: LlmEvaluationReleaseGateCheck.AsObject[];
-        startedAt?: googleProtobuf005.Timestamp.AsObject;
-        finishedAt?: googleProtobuf005.Timestamp.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        startedAt?: googleProtobuf003.Timestamp.AsObject;
+        finishedAt?: googleProtobuf003.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -16543,17 +16543,17 @@ declare namespace LlmEvaluationReleaseGateRun {
         name: string;
         llmEvaluationReleaseGateName: string;
         gateRevision: number;
-        gateSnapshot: googleProtobuf005.Struct.AsProtobufJSON | null;
+        gateSnapshot: googleProtobuf003.Struct.AsProtobufJSON | null;
         llmEvaluationExperimentName: string;
         llmEvaluationSafetyExperimentName: string;
         llmEvaluationBaselineExperimentName: string;
         llmEvaluationReleaseGateVerdict: string;
         checks: LlmEvaluationReleaseGateCheck.AsProtobufJSON[] | null;
-        startedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        finishedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        finishedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -16676,8 +16676,8 @@ declare class GetLlmEvaluationReleaseGateRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationReleaseGateRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -16708,7 +16708,7 @@ declare namespace GetLlmEvaluationReleaseGateRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -16717,7 +16717,7 @@ declare namespace GetLlmEvaluationReleaseGateRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -16837,8 +16837,8 @@ declare class ListLlmEvaluationReleaseGatesRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationReleaseGateFilter(): LlmEvaluationReleaseGateFilter | undefined;
@@ -16870,7 +16870,7 @@ declare namespace ListLlmEvaluationReleaseGatesRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationReleaseGateFilter?: LlmEvaluationReleaseGateFilter.AsObject;
     }
@@ -16880,7 +16880,7 @@ declare namespace ListLlmEvaluationReleaseGatesRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationReleaseGateFilter: LlmEvaluationReleaseGateFilter.AsProtobufJSON | null;
     }
@@ -16998,10 +16998,10 @@ declare class UpdateLlmEvaluationReleaseGateRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationReleaseGateRequest.AsObject>);
     get llmEvaluationReleaseGate(): LlmEvaluationReleaseGate | undefined;
     set llmEvaluationReleaseGate(value: LlmEvaluationReleaseGate | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -17032,8 +17032,8 @@ declare namespace UpdateLlmEvaluationReleaseGateRequest {
      */
     interface AsObject {
         llmEvaluationReleaseGate?: LlmEvaluationReleaseGate.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -17042,8 +17042,8 @@ declare namespace UpdateLlmEvaluationReleaseGateRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationReleaseGate: LlmEvaluationReleaseGate.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -17259,8 +17259,8 @@ declare class GetLlmEvaluationReleaseGateRunRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationReleaseGateRunRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -17291,7 +17291,7 @@ declare namespace GetLlmEvaluationReleaseGateRunRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -17300,7 +17300,7 @@ declare namespace GetLlmEvaluationReleaseGateRunRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -17420,8 +17420,8 @@ declare class ListLlmEvaluationReleaseGateRunsRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationReleaseGateRunFilter(): LlmEvaluationReleaseGateRunFilter | undefined;
@@ -17453,7 +17453,7 @@ declare namespace ListLlmEvaluationReleaseGateRunsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationReleaseGateRunFilter?: LlmEvaluationReleaseGateRunFilter.AsObject;
     }
@@ -17463,7 +17463,7 @@ declare namespace ListLlmEvaluationReleaseGateRunsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationReleaseGateRunFilter: LlmEvaluationReleaseGateRunFilter.AsProtobufJSON | null;
     }
@@ -17676,12 +17676,12 @@ declare class LlmEvaluationScorecard implements GrpcMessage {
     set description(value: string);
     get llmEvaluationScorecardComponents(): LlmEvaluationScorecardComponent[] | undefined;
     set llmEvaluationScorecardComponents(value: LlmEvaluationScorecardComponent[] | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -17717,9 +17717,9 @@ declare namespace LlmEvaluationScorecard {
         displayName: string;
         description: string;
         llmEvaluationScorecardComponents?: LlmEvaluationScorecardComponent.AsObject[];
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -17732,9 +17732,9 @@ declare namespace LlmEvaluationScorecard {
         displayName: string;
         description: string;
         llmEvaluationScorecardComponents: LlmEvaluationScorecardComponent.AsProtobufJSON[] | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -17857,8 +17857,8 @@ declare class GetLlmEvaluationScorecardRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationScorecardRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -17889,7 +17889,7 @@ declare namespace GetLlmEvaluationScorecardRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -17898,7 +17898,7 @@ declare namespace GetLlmEvaluationScorecardRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -18013,8 +18013,8 @@ declare class ListLlmEvaluationScorecardsRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationScorecardFilter(): LlmEvaluationScorecardFilter | undefined;
@@ -18046,7 +18046,7 @@ declare namespace ListLlmEvaluationScorecardsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationScorecardFilter?: LlmEvaluationScorecardFilter.AsObject;
     }
@@ -18056,7 +18056,7 @@ declare namespace ListLlmEvaluationScorecardsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationScorecardFilter: LlmEvaluationScorecardFilter.AsProtobufJSON | null;
     }
@@ -18174,10 +18174,10 @@ declare class UpdateLlmEvaluationScorecardRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationScorecardRequest.AsObject>);
     get llmEvaluationScorecard(): LlmEvaluationScorecard | undefined;
     set llmEvaluationScorecard(value: LlmEvaluationScorecard | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -18208,8 +18208,8 @@ declare namespace UpdateLlmEvaluationScorecardRequest {
      */
     interface AsObject {
         llmEvaluationScorecard?: LlmEvaluationScorecard.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -18218,8 +18218,8 @@ declare namespace UpdateLlmEvaluationScorecardRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationScorecard: LlmEvaluationScorecard.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -18348,8 +18348,8 @@ declare class LlmEvaluationJudgeConfig implements GrpcMessage {
     set temperature(value: number);
     get verboseReasoning(): boolean;
     set verboseReasoning(value: boolean);
-    get evaluatorOverrides(): googleProtobuf005.Struct | undefined;
-    set evaluatorOverrides(value: googleProtobuf005.Struct | undefined);
+    get evaluatorOverrides(): googleProtobuf003.Struct | undefined;
+    set evaluatorOverrides(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -18379,7 +18379,7 @@ declare namespace LlmEvaluationJudgeConfig {
         modelName: string;
         temperature: number;
         verboseReasoning: boolean;
-        evaluatorOverrides?: googleProtobuf005.Struct.AsObject;
+        evaluatorOverrides?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for LlmEvaluationJudgeConfig
@@ -18389,7 +18389,7 @@ declare namespace LlmEvaluationJudgeConfig {
         modelName: string;
         temperature: number;
         verboseReasoning: boolean;
-        evaluatorOverrides: googleProtobuf005.Struct.AsProtobufJSON | null;
+        evaluatorOverrides: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -18439,18 +18439,18 @@ declare class LlmEvaluationProjectSettings implements GrpcMessage {
     set name(value: string);
     get llmEvaluationJudgeConfig(): LlmEvaluationJudgeConfig | undefined;
     set llmEvaluationJudgeConfig(value: LlmEvaluationJudgeConfig | undefined);
-    get defaultWeights(): googleProtobuf005.Struct | undefined;
-    set defaultWeights(value: googleProtobuf005.Struct | undefined);
+    get defaultWeights(): googleProtobuf003.Struct | undefined;
+    set defaultWeights(value: googleProtobuf003.Struct | undefined);
     get defaultPassCutoffScore(): number;
     set defaultPassCutoffScore(value: number);
     get defaultScorecardName(): string;
     set defaultScorecardName(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -18484,12 +18484,12 @@ declare namespace LlmEvaluationProjectSettings {
     interface AsObject {
         name: string;
         llmEvaluationJudgeConfig?: LlmEvaluationJudgeConfig.AsObject;
-        defaultWeights?: googleProtobuf005.Struct.AsObject;
+        defaultWeights?: googleProtobuf003.Struct.AsObject;
         defaultPassCutoffScore: number;
         defaultScorecardName: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -18500,12 +18500,12 @@ declare namespace LlmEvaluationProjectSettings {
     interface AsProtobufJSON {
         name: string;
         llmEvaluationJudgeConfig: LlmEvaluationJudgeConfig.AsProtobufJSON | null;
-        defaultWeights: googleProtobuf005.Struct.AsProtobufJSON | null;
+        defaultWeights: googleProtobuf003.Struct.AsProtobufJSON | null;
         defaultPassCutoffScore: number;
         defaultScorecardName: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -18550,8 +18550,8 @@ declare class GetLlmEvaluationProjectSettingsRequest implements GrpcMessage {
     set parent(value: string);
     get languageCode(): string;
     set languageCode(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -18579,7 +18579,7 @@ declare namespace GetLlmEvaluationProjectSettingsRequest {
     interface AsObject {
         parent: string;
         languageCode: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetLlmEvaluationProjectSettingsRequest
@@ -18587,7 +18587,7 @@ declare namespace GetLlmEvaluationProjectSettingsRequest {
     interface AsProtobufJSON {
         parent: string;
         languageCode: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -18629,10 +18629,10 @@ declare class UpdateLlmEvaluationProjectSettingsRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationProjectSettingsRequest.AsObject>);
     get llmEvaluationProjectSettings(): LlmEvaluationProjectSettings | undefined;
     set llmEvaluationProjectSettings(value: LlmEvaluationProjectSettings | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -18663,8 +18663,8 @@ declare namespace UpdateLlmEvaluationProjectSettingsRequest {
      */
     interface AsObject {
         llmEvaluationProjectSettings?: LlmEvaluationProjectSettings.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -18673,8 +18673,8 @@ declare namespace UpdateLlmEvaluationProjectSettingsRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationProjectSettings: LlmEvaluationProjectSettings.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -19348,8 +19348,8 @@ declare class SimulateLlmEvaluationConversationsRequest implements GrpcMessage {
     set ccaiServiceNames(value: string[]);
     get languageCode(): string;
     set languageCode(value: string);
-    get config(): googleProtobuf005.Struct | undefined;
-    set config(value: googleProtobuf005.Struct | undefined);
+    get config(): googleProtobuf003.Struct | undefined;
+    set config(value: googleProtobuf003.Struct | undefined);
     get llmEvaluationSimulationKind(): LlmEvaluationSimulationKind;
     set llmEvaluationSimulationKind(value: LlmEvaluationSimulationKind);
     get attackTypes(): string[];
@@ -19386,7 +19386,7 @@ declare namespace SimulateLlmEvaluationConversationsRequest {
         maxTurns: number;
         ccaiServiceNames: string[];
         languageCode: string;
-        config?: googleProtobuf005.Struct.AsObject;
+        config?: googleProtobuf003.Struct.AsObject;
         llmEvaluationSimulationKind: LlmEvaluationSimulationKind;
         attackTypes: string[];
     }
@@ -19401,7 +19401,7 @@ declare namespace SimulateLlmEvaluationConversationsRequest {
         maxTurns: number;
         ccaiServiceNames: string[];
         languageCode: string;
-        config: googleProtobuf005.Struct.AsProtobufJSON | null;
+        config: googleProtobuf003.Struct.AsProtobufJSON | null;
         llmEvaluationSimulationKind: string;
         attackTypes: string[];
     }
@@ -19475,20 +19475,20 @@ declare class LlmEvaluationSchedule implements GrpcMessage {
     set runLlmEvaluationExperimentRequest(value: RunLlmEvaluationExperimentRequest | undefined);
     get llmEvaluationReleaseGateName(): string;
     set llmEvaluationReleaseGateName(value: string);
-    get lastRunAt(): googleProtobuf005.Timestamp | undefined;
-    set lastRunAt(value: googleProtobuf005.Timestamp | undefined);
-    get nextRunAt(): googleProtobuf005.Timestamp | undefined;
-    set nextRunAt(value: googleProtobuf005.Timestamp | undefined);
+    get lastRunAt(): googleProtobuf003.Timestamp | undefined;
+    set lastRunAt(value: googleProtobuf003.Timestamp | undefined);
+    get nextRunAt(): googleProtobuf003.Timestamp | undefined;
+    set nextRunAt(value: googleProtobuf003.Timestamp | undefined);
     get lastRunResourceName(): string;
     set lastRunResourceName(value: string);
     get lastRunStatus(): LlmEvaluationExperimentStatus;
     set lastRunStatus(value: LlmEvaluationExperimentStatus);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -19529,13 +19529,13 @@ declare namespace LlmEvaluationSchedule {
         llmEvaluationScheduleAction: LlmEvaluationScheduleAction;
         runLlmEvaluationExperimentRequest?: RunLlmEvaluationExperimentRequest.AsObject;
         llmEvaluationReleaseGateName: string;
-        lastRunAt?: googleProtobuf005.Timestamp.AsObject;
-        nextRunAt?: googleProtobuf005.Timestamp.AsObject;
+        lastRunAt?: googleProtobuf003.Timestamp.AsObject;
+        nextRunAt?: googleProtobuf003.Timestamp.AsObject;
         lastRunResourceName: string;
         lastRunStatus: LlmEvaluationExperimentStatus;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -19553,13 +19553,13 @@ declare namespace LlmEvaluationSchedule {
         llmEvaluationScheduleAction: string;
         runLlmEvaluationExperimentRequest: RunLlmEvaluationExperimentRequest.AsProtobufJSON | null;
         llmEvaluationReleaseGateName: string;
-        lastRunAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        nextRunAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        lastRunAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        nextRunAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         lastRunResourceName: string;
         lastRunStatus: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -19682,8 +19682,8 @@ declare class GetLlmEvaluationScheduleRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationScheduleRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -19714,7 +19714,7 @@ declare namespace GetLlmEvaluationScheduleRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -19723,7 +19723,7 @@ declare namespace GetLlmEvaluationScheduleRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -19848,8 +19848,8 @@ declare class ListLlmEvaluationSchedulesRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationScheduleFilter(): LlmEvaluationScheduleFilter | undefined;
@@ -19881,7 +19881,7 @@ declare namespace ListLlmEvaluationSchedulesRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationScheduleFilter?: LlmEvaluationScheduleFilter.AsObject;
     }
@@ -19891,7 +19891,7 @@ declare namespace ListLlmEvaluationSchedulesRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationScheduleFilter: LlmEvaluationScheduleFilter.AsProtobufJSON | null;
     }
@@ -20009,10 +20009,10 @@ declare class UpdateLlmEvaluationScheduleRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationScheduleRequest.AsObject>);
     get llmEvaluationSchedule(): LlmEvaluationSchedule | undefined;
     set llmEvaluationSchedule(value: LlmEvaluationSchedule | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -20043,8 +20043,8 @@ declare namespace UpdateLlmEvaluationScheduleRequest {
      */
     interface AsObject {
         llmEvaluationSchedule?: LlmEvaluationSchedule.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -20053,8 +20053,8 @@ declare namespace UpdateLlmEvaluationScheduleRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationSchedule: LlmEvaluationSchedule.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -20195,14 +20195,14 @@ declare class LlmEvaluationReport implements GrpcMessage {
     set mimeType(value: string);
     get payload(): Uint8Array;
     set payload(value: Uint8Array);
-    get metadata(): googleProtobuf005.Struct | undefined;
-    set metadata(value: googleProtobuf005.Struct | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get metadata(): googleProtobuf003.Struct | undefined;
+    set metadata(value: googleProtobuf003.Struct | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -20240,10 +20240,10 @@ declare namespace LlmEvaluationReport {
         reportType: string;
         mimeType: string;
         payload: Uint8Array;
-        metadata?: googleProtobuf005.Struct.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        metadata?: googleProtobuf003.Struct.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -20258,10 +20258,10 @@ declare namespace LlmEvaluationReport {
         reportType: string;
         mimeType: string;
         payload: string;
-        metadata: googleProtobuf005.Struct.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        metadata: googleProtobuf003.Struct.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -20384,8 +20384,8 @@ declare class GetLlmEvaluationReportRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationReportRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -20416,7 +20416,7 @@ declare namespace GetLlmEvaluationReportRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -20425,7 +20425,7 @@ declare namespace GetLlmEvaluationReportRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -20545,8 +20545,8 @@ declare class ListLlmEvaluationReportsRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationReportFilter(): LlmEvaluationReportFilter | undefined;
@@ -20578,7 +20578,7 @@ declare namespace ListLlmEvaluationReportsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationReportFilter?: LlmEvaluationReportFilter.AsObject;
     }
@@ -20588,7 +20588,7 @@ declare namespace ListLlmEvaluationReportsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationReportFilter: LlmEvaluationReportFilter.AsProtobufJSON | null;
     }
@@ -20964,8 +20964,8 @@ declare class LlmEvaluationAbVariant implements GrpcMessage {
     set modelName(value: string);
     get promptVersion(): string;
     set promptVersion(value: string);
-    get config(): googleProtobuf005.Struct | undefined;
-    set config(value: googleProtobuf005.Struct | undefined);
+    get config(): googleProtobuf003.Struct | undefined;
+    set config(value: googleProtobuf003.Struct | undefined);
     get ragVariantConfig(): RagVariantConfig | undefined;
     set ragVariantConfig(value: RagVariantConfig | undefined);
     /**
@@ -21000,7 +21000,7 @@ declare namespace LlmEvaluationAbVariant {
         isControl: boolean;
         modelName: string;
         promptVersion: string;
-        config?: googleProtobuf005.Struct.AsObject;
+        config?: googleProtobuf003.Struct.AsObject;
         ragVariantConfig?: RagVariantConfig.AsObject;
     }
     /**
@@ -21014,7 +21014,7 @@ declare namespace LlmEvaluationAbVariant {
         isControl: boolean;
         modelName: string;
         promptVersion: string;
-        config: googleProtobuf005.Struct.AsProtobufJSON | null;
+        config: googleProtobuf003.Struct.AsProtobufJSON | null;
         ragVariantConfig: RagVariantConfig.AsProtobufJSON | null;
     }
 }
@@ -21077,16 +21077,16 @@ declare class LlmEvaluationAbExperiment implements GrpcMessage {
     set variants(value: LlmEvaluationAbVariant[] | undefined);
     get trafficConfig(): LlmEvaluationAbTrafficConfig | undefined;
     set trafficConfig(value: LlmEvaluationAbTrafficConfig | undefined);
-    get startedAt(): googleProtobuf005.Timestamp | undefined;
-    set startedAt(value: googleProtobuf005.Timestamp | undefined);
-    get stoppedAt(): googleProtobuf005.Timestamp | undefined;
-    set stoppedAt(value: googleProtobuf005.Timestamp | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get startedAt(): googleProtobuf003.Timestamp | undefined;
+    set startedAt(value: googleProtobuf003.Timestamp | undefined);
+    get stoppedAt(): googleProtobuf003.Timestamp | undefined;
+    set stoppedAt(value: googleProtobuf003.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -21126,11 +21126,11 @@ declare namespace LlmEvaluationAbExperiment {
         status: LlmEvaluationAbExperimentStatus;
         variants?: LlmEvaluationAbVariant.AsObject[];
         trafficConfig?: LlmEvaluationAbTrafficConfig.AsObject;
-        startedAt?: googleProtobuf005.Timestamp.AsObject;
-        stoppedAt?: googleProtobuf005.Timestamp.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        startedAt?: googleProtobuf003.Timestamp.AsObject;
+        stoppedAt?: googleProtobuf003.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -21146,11 +21146,11 @@ declare namespace LlmEvaluationAbExperiment {
         status: string;
         variants: LlmEvaluationAbVariant.AsProtobufJSON[] | null;
         trafficConfig: LlmEvaluationAbTrafficConfig.AsProtobufJSON | null;
-        startedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        stoppedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        stoppedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -21197,10 +21197,10 @@ declare class LlmEvaluationAbVariantResult implements GrpcMessage {
     set variantId(value: string);
     get sessionCount(): string;
     set sessionCount(value: string);
-    get telemetry(): googleProtobuf005.Struct | undefined;
-    set telemetry(value: googleProtobuf005.Struct | undefined);
-    get derivedMetrics(): googleProtobuf005.Struct | undefined;
-    set derivedMetrics(value: googleProtobuf005.Struct | undefined);
+    get telemetry(): googleProtobuf003.Struct | undefined;
+    set telemetry(value: googleProtobuf003.Struct | undefined);
+    get derivedMetrics(): googleProtobuf003.Struct | undefined;
+    set derivedMetrics(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -21228,8 +21228,8 @@ declare namespace LlmEvaluationAbVariantResult {
     interface AsObject {
         variantId: string;
         sessionCount: string;
-        telemetry?: googleProtobuf005.Struct.AsObject;
-        derivedMetrics?: googleProtobuf005.Struct.AsObject;
+        telemetry?: googleProtobuf003.Struct.AsObject;
+        derivedMetrics?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for LlmEvaluationAbVariantResult
@@ -21237,8 +21237,8 @@ declare namespace LlmEvaluationAbVariantResult {
     interface AsProtobufJSON {
         variantId: string;
         sessionCount: string;
-        telemetry: googleProtobuf005.Struct.AsProtobufJSON | null;
-        derivedMetrics: googleProtobuf005.Struct.AsProtobufJSON | null;
+        telemetry: googleProtobuf003.Struct.AsProtobufJSON | null;
+        derivedMetrics: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -21358,8 +21358,8 @@ declare class GetLlmEvaluationAbExperimentRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationAbExperimentRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -21390,7 +21390,7 @@ declare namespace GetLlmEvaluationAbExperimentRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -21399,7 +21399,7 @@ declare namespace GetLlmEvaluationAbExperimentRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -21519,8 +21519,8 @@ declare class ListLlmEvaluationAbExperimentsRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationAbExperimentFilter(): LlmEvaluationAbExperimentFilter | undefined;
@@ -21552,7 +21552,7 @@ declare namespace ListLlmEvaluationAbExperimentsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationAbExperimentFilter?: LlmEvaluationAbExperimentFilter.AsObject;
     }
@@ -21562,7 +21562,7 @@ declare namespace ListLlmEvaluationAbExperimentsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationAbExperimentFilter: LlmEvaluationAbExperimentFilter.AsProtobufJSON | null;
     }
@@ -21680,10 +21680,10 @@ declare class UpdateLlmEvaluationAbExperimentRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationAbExperimentRequest.AsObject>);
     get llmEvaluationAbExperiment(): LlmEvaluationAbExperiment | undefined;
     set llmEvaluationAbExperiment(value: LlmEvaluationAbExperiment | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -21714,8 +21714,8 @@ declare namespace UpdateLlmEvaluationAbExperimentRequest {
      */
     interface AsObject {
         llmEvaluationAbExperiment?: LlmEvaluationAbExperiment.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -21724,8 +21724,8 @@ declare namespace UpdateLlmEvaluationAbExperimentRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationAbExperiment: LlmEvaluationAbExperiment.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -22369,14 +22369,14 @@ declare class LlmEvaluationAbRolloutDecision implements GrpcMessage {
     set pValue(value: number);
     get effectSize(): number;
     set effectSize(value: number);
-    get appliedAt(): googleProtobuf005.Timestamp | undefined;
-    set appliedAt(value: googleProtobuf005.Timestamp | undefined);
+    get appliedAt(): googleProtobuf003.Timestamp | undefined;
+    set appliedAt(value: googleProtobuf003.Timestamp | undefined);
     get appliedBy(): string;
     set appliedBy(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -22416,10 +22416,10 @@ declare namespace LlmEvaluationAbRolloutDecision {
         optimizeMetric: LlmEvaluationAbOptimizeMetric;
         pValue: number;
         effectSize: number;
-        appliedAt?: googleProtobuf005.Timestamp.AsObject;
+        appliedAt?: googleProtobuf003.Timestamp.AsObject;
         appliedBy: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
         parent: string;
@@ -22435,10 +22435,10 @@ declare namespace LlmEvaluationAbRolloutDecision {
         optimizeMetric: string;
         pValue: number;
         effectSize: number;
-        appliedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        appliedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         appliedBy: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
         parent: string;
@@ -22671,8 +22671,8 @@ declare class GetLlmEvaluationAbRolloutDecisionRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationAbRolloutDecisionRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -22703,7 +22703,7 @@ declare namespace GetLlmEvaluationAbRolloutDecisionRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -22712,7 +22712,7 @@ declare namespace GetLlmEvaluationAbRolloutDecisionRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -22832,8 +22832,8 @@ declare class ListLlmEvaluationAbRolloutDecisionsRequest implements GrpcMessage 
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationAbRolloutDecisionFilter(): LlmEvaluationAbRolloutDecisionFilter | undefined;
@@ -22865,7 +22865,7 @@ declare namespace ListLlmEvaluationAbRolloutDecisionsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationAbRolloutDecisionFilter?: LlmEvaluationAbRolloutDecisionFilter.AsObject;
     }
@@ -22875,7 +22875,7 @@ declare namespace ListLlmEvaluationAbRolloutDecisionsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationAbRolloutDecisionFilter: LlmEvaluationAbRolloutDecisionFilter.AsProtobufJSON | null;
     }
@@ -23111,16 +23111,16 @@ declare class LlmEvaluationOnlineConfig implements GrpcMessage {
     set requireTelemetry(value: boolean);
     get llmEvaluationOnlineSessionFilter(): LlmEvaluationOnlineSessionFilter | undefined;
     set llmEvaluationOnlineSessionFilter(value: LlmEvaluationOnlineSessionFilter | undefined);
-    get lastEvaluatedAt(): googleProtobuf005.Timestamp | undefined;
-    set lastEvaluatedAt(value: googleProtobuf005.Timestamp | undefined);
+    get lastEvaluatedAt(): googleProtobuf003.Timestamp | undefined;
+    set lastEvaluatedAt(value: googleProtobuf003.Timestamp | undefined);
     get nSessionsEvaluated(): string;
     set nSessionsEvaluated(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -23163,11 +23163,11 @@ declare namespace LlmEvaluationOnlineConfig {
         settleSeconds: number;
         requireTelemetry: boolean;
         llmEvaluationOnlineSessionFilter?: LlmEvaluationOnlineSessionFilter.AsObject;
-        lastEvaluatedAt?: googleProtobuf005.Timestamp.AsObject;
+        lastEvaluatedAt?: googleProtobuf003.Timestamp.AsObject;
         nSessionsEvaluated: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -23187,11 +23187,11 @@ declare namespace LlmEvaluationOnlineConfig {
         settleSeconds: number;
         requireTelemetry: boolean;
         llmEvaluationOnlineSessionFilter: LlmEvaluationOnlineSessionFilter.AsProtobufJSON | null;
-        lastEvaluatedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        lastEvaluatedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         nSessionsEvaluated: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -23314,8 +23314,8 @@ declare class GetLlmEvaluationOnlineConfigRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationOnlineConfigRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -23346,7 +23346,7 @@ declare namespace GetLlmEvaluationOnlineConfigRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -23355,7 +23355,7 @@ declare namespace GetLlmEvaluationOnlineConfigRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -23475,8 +23475,8 @@ declare class ListLlmEvaluationOnlineConfigsRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationOnlineConfigFilter(): LlmEvaluationOnlineConfigFilter | undefined;
@@ -23508,7 +23508,7 @@ declare namespace ListLlmEvaluationOnlineConfigsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationOnlineConfigFilter?: LlmEvaluationOnlineConfigFilter.AsObject;
     }
@@ -23518,7 +23518,7 @@ declare namespace ListLlmEvaluationOnlineConfigsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationOnlineConfigFilter: LlmEvaluationOnlineConfigFilter.AsProtobufJSON | null;
     }
@@ -23636,10 +23636,10 @@ declare class UpdateLlmEvaluationOnlineConfigRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationOnlineConfigRequest.AsObject>);
     get llmEvaluationOnlineConfig(): LlmEvaluationOnlineConfig | undefined;
     set llmEvaluationOnlineConfig(value: LlmEvaluationOnlineConfig | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -23670,8 +23670,8 @@ declare namespace UpdateLlmEvaluationOnlineConfigRequest {
      */
     interface AsObject {
         llmEvaluationOnlineConfig?: LlmEvaluationOnlineConfig.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -23680,8 +23680,8 @@ declare namespace UpdateLlmEvaluationOnlineConfigRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationOnlineConfig: LlmEvaluationOnlineConfig.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -23823,10 +23823,10 @@ declare class LlmEvaluationOnlineResult implements GrpcMessage {
     set passed(value: boolean);
     get aggregateScore(): number;
     set aggregateScore(value: number);
-    get evaluatedAt(): googleProtobuf005.Timestamp | undefined;
-    set evaluatedAt(value: googleProtobuf005.Timestamp | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get evaluatedAt(): googleProtobuf003.Timestamp | undefined;
+    set evaluatedAt(value: googleProtobuf003.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get parent(): string;
@@ -23865,8 +23865,8 @@ declare namespace LlmEvaluationOnlineResult {
         llmEvaluationFeedbacks?: LlmEvaluationFeedback.AsObject[];
         passed: boolean;
         aggregateScore: number;
-        evaluatedAt?: googleProtobuf005.Timestamp.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        evaluatedAt?: googleProtobuf003.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         parent: string;
         languageCode: string;
@@ -23882,8 +23882,8 @@ declare namespace LlmEvaluationOnlineResult {
         llmEvaluationFeedbacks: LlmEvaluationFeedback.AsProtobufJSON[] | null;
         passed: boolean;
         aggregateScore: number;
-        evaluatedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        evaluatedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         parent: string;
         languageCode: string;
@@ -23927,8 +23927,8 @@ declare class GetLlmEvaluationOnlineResultRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetLlmEvaluationOnlineResultRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -23959,7 +23959,7 @@ declare namespace GetLlmEvaluationOnlineResultRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -23968,7 +23968,7 @@ declare namespace GetLlmEvaluationOnlineResultRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -24093,8 +24093,8 @@ declare class ListLlmEvaluationOnlineResultsRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationOnlineResultFilter(): LlmEvaluationOnlineResultFilter | undefined;
@@ -24126,7 +24126,7 @@ declare namespace ListLlmEvaluationOnlineResultsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationOnlineResultFilter?: LlmEvaluationOnlineResultFilter.AsObject;
     }
@@ -24136,7 +24136,7 @@ declare namespace ListLlmEvaluationOnlineResultsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationOnlineResultFilter: LlmEvaluationOnlineResultFilter.AsProtobufJSON | null;
     }
@@ -24277,12 +24277,12 @@ declare class LlmEvaluationAnnotationQueueItem implements GrpcMessage {
     set reason(value: string);
     get llmEvaluationDatasetName(): string;
     set llmEvaluationDatasetName(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get modifiedBy(): string;
     set modifiedBy(value: string);
     get parent(): string;
@@ -24322,9 +24322,9 @@ declare namespace LlmEvaluationAnnotationQueueItem {
         assignedTo: string;
         reason: string;
         llmEvaluationDatasetName: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -24341,9 +24341,9 @@ declare namespace LlmEvaluationAnnotationQueueItem {
         assignedTo: string;
         reason: string;
         llmEvaluationDatasetName: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         modifiedBy: string;
         parent: string;
         languageCode: string;
@@ -24387,8 +24387,8 @@ declare class GetLlmEvaluationAnnotationQueueItemRequest implements GrpcMessage 
     constructor(_value?: RecursivePartial<GetLlmEvaluationAnnotationQueueItemRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -24419,7 +24419,7 @@ declare namespace GetLlmEvaluationAnnotationQueueItemRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -24428,7 +24428,7 @@ declare namespace GetLlmEvaluationAnnotationQueueItemRequest {
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -24548,8 +24548,8 @@ declare class ListLlmEvaluationAnnotationQueueItemsRequest implements GrpcMessag
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get llmEvaluationAnnotationQueueItemFilter(): LlmEvaluationAnnotationQueueItemFilter | undefined;
@@ -24581,7 +24581,7 @@ declare namespace ListLlmEvaluationAnnotationQueueItemsRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         languageCode: string;
         llmEvaluationAnnotationQueueItemFilter?: LlmEvaluationAnnotationQueueItemFilter.AsObject;
     }
@@ -24591,7 +24591,7 @@ declare namespace ListLlmEvaluationAnnotationQueueItemsRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         languageCode: string;
         llmEvaluationAnnotationQueueItemFilter: LlmEvaluationAnnotationQueueItemFilter.AsProtobufJSON | null;
     }
@@ -24709,10 +24709,10 @@ declare class UpdateLlmEvaluationAnnotationQueueItemRequest implements GrpcMessa
     constructor(_value?: RecursivePartial<UpdateLlmEvaluationAnnotationQueueItemRequest.AsObject>);
     get llmEvaluationAnnotationQueueItem(): LlmEvaluationAnnotationQueueItem | undefined;
     set llmEvaluationAnnotationQueueItem(value: LlmEvaluationAnnotationQueueItem | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get parent(): string;
     set parent(value: string);
     get languageCode(): string;
@@ -24743,8 +24743,8 @@ declare namespace UpdateLlmEvaluationAnnotationQueueItemRequest {
      */
     interface AsObject {
         llmEvaluationAnnotationQueueItem?: LlmEvaluationAnnotationQueueItem.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         parent: string;
         languageCode: string;
     }
@@ -24753,8 +24753,8 @@ declare namespace UpdateLlmEvaluationAnnotationQueueItemRequest {
      */
     interface AsProtobufJSON {
         llmEvaluationAnnotationQueueItem: LlmEvaluationAnnotationQueueItem.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
     }
@@ -24968,6 +24968,17 @@ declare enum ComparisonOperator {
     CONTAINS = 4,
     STARTS_WITH = 5,
     ENDS_WITH = 6
+}
+declare enum FeedbackRating {
+    FEEDBACK_RATING_UNSPECIFIED = 0,
+    FEEDBACK_RATING_THUMBS_UP = 1,
+    FEEDBACK_RATING_THUMBS_DOWN = 2
+}
+declare enum FeedbackAuthorType {
+    FEEDBACK_AUTHOR_TYPE_UNSPECIFIED = 0,
+    FEEDBACK_AUTHOR_TYPE_HUMAN_REVIEWER = 1,
+    FEEDBACK_AUTHOR_TYPE_TECHNICAL_USER = 2,
+    FEEDBACK_AUTHOR_TYPE_END_USER_ANONYMOUS = 3
 }
 declare enum ResourceView {
     RESOURCE_VIEW_UNSPECIFIED = 0,
@@ -25202,8 +25213,8 @@ declare class QueryParameters implements GrpcMessage {
     set contexts(value: Context[] | undefined);
     get resetContexts(): boolean;
     set resetContexts(value: boolean);
-    get payload(): googleProtobuf005.Struct | undefined;
-    set payload(value: googleProtobuf005.Struct | undefined);
+    get payload(): googleProtobuf003.Struct | undefined;
+    set payload(value: googleProtobuf003.Struct | undefined);
     get labels(): string[];
     set labels(value: string[]);
     get platforms(): Intent.Message.Platform[];
@@ -25249,7 +25260,7 @@ declare namespace QueryParameters {
         geoLocation?: LatLng.AsObject;
         contexts?: Context.AsObject[];
         resetContexts: boolean;
-        payload?: googleProtobuf005.Struct.AsObject;
+        payload?: googleProtobuf003.Struct.AsObject;
         labels: string[];
         platforms: Intent.Message.Platform[];
         accountId: string;
@@ -25267,7 +25278,7 @@ declare namespace QueryParameters {
         geoLocation: LatLng.AsProtobufJSON | null;
         contexts: Context.AsProtobufJSON[] | null;
         resetContexts: boolean;
-        payload: googleProtobuf005.Struct.AsProtobufJSON | null;
+        payload: googleProtobuf003.Struct.AsProtobufJSON | null;
         labels: string[];
         platforms: string[];
         accountId: string;
@@ -25338,10 +25349,10 @@ declare class S2tTranscription implements GrpcMessage {
     set durationInS(value: number);
     get transcriptionType(): TranscriptionType;
     set transcriptionType(value: TranscriptionType);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -25379,8 +25390,8 @@ declare namespace S2tTranscription {
         pipelineId: string;
         durationInS: number;
         transcriptionType: TranscriptionType;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -25396,8 +25407,8 @@ declare namespace S2tTranscription {
         pipelineId: string;
         durationInS: number;
         transcriptionType: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -25618,18 +25629,18 @@ declare class LlmToolCallMetadata implements GrpcMessage {
     set toolCallId(value: string);
     get toolName(): string;
     set toolName(value: string);
-    get startTime(): googleProtobuf005.Timestamp | undefined;
-    set startTime(value: googleProtobuf005.Timestamp | undefined);
-    get endTime(): googleProtobuf005.Timestamp | undefined;
-    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    get startTime(): googleProtobuf003.Timestamp | undefined;
+    set startTime(value: googleProtobuf003.Timestamp | undefined);
+    get endTime(): googleProtobuf003.Timestamp | undefined;
+    set endTime(value: googleProtobuf003.Timestamp | undefined);
     get durationInS(): number;
     set durationInS(value: number);
     get llmTokenUsage(): LlmTokenUsage | undefined;
     set llmTokenUsage(value: LlmTokenUsage | undefined);
-    get arguments(): googleProtobuf005.Struct | undefined;
-    set arguments(value: googleProtobuf005.Struct | undefined);
-    get result(): googleProtobuf005.Struct | undefined;
-    set result(value: googleProtobuf005.Struct | undefined);
+    get arguments(): googleProtobuf003.Struct | undefined;
+    set arguments(value: googleProtobuf003.Struct | undefined);
+    get result(): googleProtobuf003.Struct | undefined;
+    set result(value: googleProtobuf003.Struct | undefined);
     get errorMessage(): string;
     set errorMessage(value: string);
     /**
@@ -25659,12 +25670,12 @@ declare namespace LlmToolCallMetadata {
     interface AsObject {
         toolCallId: string;
         toolName: string;
-        startTime?: googleProtobuf005.Timestamp.AsObject;
-        endTime?: googleProtobuf005.Timestamp.AsObject;
+        startTime?: googleProtobuf003.Timestamp.AsObject;
+        endTime?: googleProtobuf003.Timestamp.AsObject;
         durationInS: number;
         llmTokenUsage?: LlmTokenUsage.AsObject;
-        arguments?: googleProtobuf005.Struct.AsObject;
-        result?: googleProtobuf005.Struct.AsObject;
+        arguments?: googleProtobuf003.Struct.AsObject;
+        result?: googleProtobuf003.Struct.AsObject;
         errorMessage: string;
     }
     /**
@@ -25673,12 +25684,12 @@ declare namespace LlmToolCallMetadata {
     interface AsProtobufJSON {
         toolCallId: string;
         toolName: string;
-        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         durationInS: number;
         llmTokenUsage: LlmTokenUsage.AsProtobufJSON | null;
-        arguments: googleProtobuf005.Struct.AsProtobufJSON | null;
-        result: googleProtobuf005.Struct.AsProtobufJSON | null;
+        arguments: googleProtobuf003.Struct.AsProtobufJSON | null;
+        result: googleProtobuf003.Struct.AsProtobufJSON | null;
         errorMessage: string;
     }
 }
@@ -25721,10 +25732,10 @@ declare class LlmThinkingMetadata implements GrpcMessage {
     constructor(_value?: RecursivePartial<LlmThinkingMetadata.AsObject>);
     get llmTokenUsage(): LlmTokenUsage | undefined;
     set llmTokenUsage(value: LlmTokenUsage | undefined);
-    get startTime(): googleProtobuf005.Timestamp | undefined;
-    set startTime(value: googleProtobuf005.Timestamp | undefined);
-    get endTime(): googleProtobuf005.Timestamp | undefined;
-    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    get startTime(): googleProtobuf003.Timestamp | undefined;
+    set startTime(value: googleProtobuf003.Timestamp | undefined);
+    get endTime(): googleProtobuf003.Timestamp | undefined;
+    set endTime(value: googleProtobuf003.Timestamp | undefined);
     get durationInS(): number;
     set durationInS(value: number);
     get thinkingText(): string;
@@ -25755,8 +25766,8 @@ declare namespace LlmThinkingMetadata {
      */
     interface AsObject {
         llmTokenUsage?: LlmTokenUsage.AsObject;
-        startTime?: googleProtobuf005.Timestamp.AsObject;
-        endTime?: googleProtobuf005.Timestamp.AsObject;
+        startTime?: googleProtobuf003.Timestamp.AsObject;
+        endTime?: googleProtobuf003.Timestamp.AsObject;
         durationInS: number;
         thinkingText: string;
     }
@@ -25765,8 +25776,8 @@ declare namespace LlmThinkingMetadata {
      */
     interface AsProtobufJSON {
         llmTokenUsage: LlmTokenUsage.AsProtobufJSON | null;
-        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         durationInS: number;
         thinkingText: string;
     }
@@ -25879,10 +25890,10 @@ declare class LlmTelemetry implements GrpcMessage {
     set toolCallCount(value: number);
     get llmThinkingMetadata(): LlmThinkingMetadata | undefined;
     set llmThinkingMetadata(value: LlmThinkingMetadata | undefined);
-    get startTime(): googleProtobuf005.Timestamp | undefined;
-    set startTime(value: googleProtobuf005.Timestamp | undefined);
-    get endTime(): googleProtobuf005.Timestamp | undefined;
-    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    get startTime(): googleProtobuf003.Timestamp | undefined;
+    set startTime(value: googleProtobuf003.Timestamp | undefined);
+    get endTime(): googleProtobuf003.Timestamp | undefined;
+    set endTime(value: googleProtobuf003.Timestamp | undefined);
     get durationInS(): number;
     set durationInS(value: number);
     get runId(): string;
@@ -25895,12 +25906,12 @@ declare class LlmTelemetry implements GrpcMessage {
     set componentName(value: string);
     get tags(): string[];
     set tags(value: string[]);
-    get metadata(): googleProtobuf005.Struct | undefined;
-    set metadata(value: googleProtobuf005.Struct | undefined);
-    get inputs(): googleProtobuf005.Struct | undefined;
-    set inputs(value: googleProtobuf005.Struct | undefined);
-    get outputs(): googleProtobuf005.Struct | undefined;
-    set outputs(value: googleProtobuf005.Struct | undefined);
+    get metadata(): googleProtobuf003.Struct | undefined;
+    set metadata(value: googleProtobuf003.Struct | undefined);
+    get inputs(): googleProtobuf003.Struct | undefined;
+    set inputs(value: googleProtobuf003.Struct | undefined);
+    get outputs(): googleProtobuf003.Struct | undefined;
+    set outputs(value: googleProtobuf003.Struct | undefined);
     get errorClass(): string;
     set errorClass(value: string);
     get errorMessage(): string;
@@ -25959,14 +25970,14 @@ declare class LlmTelemetry implements GrpcMessage {
     set ccaiServiceName(value: string);
     get baseUrl(): string;
     set baseUrl(value: string);
-    get defaultHeaders(): googleProtobuf005.Struct | undefined;
-    set defaultHeaders(value: googleProtobuf005.Struct | undefined);
-    get defaultQuery(): googleProtobuf005.Struct | undefined;
-    set defaultQuery(value: googleProtobuf005.Struct | undefined);
+    get defaultHeaders(): googleProtobuf003.Struct | undefined;
+    set defaultHeaders(value: googleProtobuf003.Struct | undefined);
+    get defaultQuery(): googleProtobuf003.Struct | undefined;
+    set defaultQuery(value: googleProtobuf003.Struct | undefined);
     get frequencyPenalty(): number;
     set frequencyPenalty(value: number);
-    get openaiMetadata(): googleProtobuf005.Struct | undefined;
-    set openaiMetadata(value: googleProtobuf005.Struct | undefined);
+    get openaiMetadata(): googleProtobuf003.Struct | undefined;
+    set openaiMetadata(value: googleProtobuf003.Struct | undefined);
     get presencePenalty(): number;
     set presencePenalty(value: number);
     get reasoningEffort(): ReasoningEffort;
@@ -25977,12 +25988,12 @@ declare class LlmTelemetry implements GrpcMessage {
     set timeout(value: number);
     get strictResponseValidation(): boolean;
     set strictResponseValidation(value: boolean);
-    get extraHeaders(): googleProtobuf005.Struct | undefined;
-    set extraHeaders(value: googleProtobuf005.Struct | undefined);
-    get extraQuery(): googleProtobuf005.Struct | undefined;
-    set extraQuery(value: googleProtobuf005.Struct | undefined);
-    get extraBody(): googleProtobuf005.Struct | undefined;
-    set extraBody(value: googleProtobuf005.Struct | undefined);
+    get extraHeaders(): googleProtobuf003.Struct | undefined;
+    set extraHeaders(value: googleProtobuf003.Struct | undefined);
+    get extraQuery(): googleProtobuf003.Struct | undefined;
+    set extraQuery(value: googleProtobuf003.Struct | undefined);
+    get extraBody(): googleProtobuf003.Struct | undefined;
+    set extraBody(value: googleProtobuf003.Struct | undefined);
     get ccaiServiceProvider(): CcaiServiceProvider;
     set ccaiServiceProvider(value: CcaiServiceProvider);
     get llmSafetyAssessment(): LlmSafetyAssessment | undefined;
@@ -26021,17 +26032,17 @@ declare namespace LlmTelemetry {
         llmToolCallMetadatas?: LlmToolCallMetadata.AsObject[];
         toolCallCount: number;
         llmThinkingMetadata?: LlmThinkingMetadata.AsObject;
-        startTime?: googleProtobuf005.Timestamp.AsObject;
-        endTime?: googleProtobuf005.Timestamp.AsObject;
+        startTime?: googleProtobuf003.Timestamp.AsObject;
+        endTime?: googleProtobuf003.Timestamp.AsObject;
         durationInS: number;
         runId: string;
         parentRunId: string;
         runType: string;
         componentName: string;
         tags: string[];
-        metadata?: googleProtobuf005.Struct.AsObject;
-        inputs?: googleProtobuf005.Struct.AsObject;
-        outputs?: googleProtobuf005.Struct.AsObject;
+        metadata?: googleProtobuf003.Struct.AsObject;
+        inputs?: googleProtobuf003.Struct.AsObject;
+        outputs?: googleProtobuf003.Struct.AsObject;
         errorClass: string;
         errorMessage: string;
         traceback: string;
@@ -26061,18 +26072,18 @@ declare namespace LlmTelemetry {
         llmEvaluationFeedbacks?: LlmEvaluationFeedback.AsObject[];
         ccaiServiceName: string;
         baseUrl: string;
-        defaultHeaders?: googleProtobuf005.Struct.AsObject;
-        defaultQuery?: googleProtobuf005.Struct.AsObject;
+        defaultHeaders?: googleProtobuf003.Struct.AsObject;
+        defaultQuery?: googleProtobuf003.Struct.AsObject;
         frequencyPenalty: number;
-        openaiMetadata?: googleProtobuf005.Struct.AsObject;
+        openaiMetadata?: googleProtobuf003.Struct.AsObject;
         presencePenalty: number;
         reasoningEffort: ReasoningEffort;
         user: string;
         timeout: number;
         strictResponseValidation: boolean;
-        extraHeaders?: googleProtobuf005.Struct.AsObject;
-        extraQuery?: googleProtobuf005.Struct.AsObject;
-        extraBody?: googleProtobuf005.Struct.AsObject;
+        extraHeaders?: googleProtobuf003.Struct.AsObject;
+        extraQuery?: googleProtobuf003.Struct.AsObject;
+        extraBody?: googleProtobuf003.Struct.AsObject;
         ccaiServiceProvider: CcaiServiceProvider;
         llmSafetyAssessment?: LlmSafetyAssessment.AsObject;
         llmRetrievalMetadata?: LlmRetrievalMetadata.AsObject;
@@ -26088,17 +26099,17 @@ declare namespace LlmTelemetry {
         llmToolCallMetadatas: LlmToolCallMetadata.AsProtobufJSON[] | null;
         toolCallCount: number;
         llmThinkingMetadata: LlmThinkingMetadata.AsProtobufJSON | null;
-        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         durationInS: number;
         runId: string;
         parentRunId: string;
         runType: string;
         componentName: string;
         tags: string[];
-        metadata: googleProtobuf005.Struct.AsProtobufJSON | null;
-        inputs: googleProtobuf005.Struct.AsProtobufJSON | null;
-        outputs: googleProtobuf005.Struct.AsProtobufJSON | null;
+        metadata: googleProtobuf003.Struct.AsProtobufJSON | null;
+        inputs: googleProtobuf003.Struct.AsProtobufJSON | null;
+        outputs: googleProtobuf003.Struct.AsProtobufJSON | null;
         errorClass: string;
         errorMessage: string;
         traceback: string;
@@ -26128,18 +26139,18 @@ declare namespace LlmTelemetry {
         llmEvaluationFeedbacks: LlmEvaluationFeedback.AsProtobufJSON[] | null;
         ccaiServiceName: string;
         baseUrl: string;
-        defaultHeaders: googleProtobuf005.Struct.AsProtobufJSON | null;
-        defaultQuery: googleProtobuf005.Struct.AsProtobufJSON | null;
+        defaultHeaders: googleProtobuf003.Struct.AsProtobufJSON | null;
+        defaultQuery: googleProtobuf003.Struct.AsProtobufJSON | null;
         frequencyPenalty: number;
-        openaiMetadata: googleProtobuf005.Struct.AsProtobufJSON | null;
+        openaiMetadata: googleProtobuf003.Struct.AsProtobufJSON | null;
         presencePenalty: number;
         reasoningEffort: string;
         user: string;
         timeout: number;
         strictResponseValidation: boolean;
-        extraHeaders: googleProtobuf005.Struct.AsProtobufJSON | null;
-        extraQuery: googleProtobuf005.Struct.AsProtobufJSON | null;
-        extraBody: googleProtobuf005.Struct.AsProtobufJSON | null;
+        extraHeaders: googleProtobuf003.Struct.AsProtobufJSON | null;
+        extraQuery: googleProtobuf003.Struct.AsProtobufJSON | null;
+        extraBody: googleProtobuf003.Struct.AsProtobufJSON | null;
         ccaiServiceProvider: string;
         llmSafetyAssessment: LlmSafetyAssessment.AsProtobufJSON | null;
         llmRetrievalMetadata: LlmRetrievalMetadata.AsProtobufJSON | null;
@@ -27907,8 +27918,8 @@ declare class LlmCallStartedEvent implements GrpcMessage {
     set modelName(value: string);
     get agentName(): string;
     set agentName(value: string);
-    get startTime(): googleProtobuf005.Timestamp | undefined;
-    set startTime(value: googleProtobuf005.Timestamp | undefined);
+    get startTime(): googleProtobuf003.Timestamp | undefined;
+    set startTime(value: googleProtobuf003.Timestamp | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -27938,7 +27949,7 @@ declare namespace LlmCallStartedEvent {
         provider: string;
         modelName: string;
         agentName: string;
-        startTime?: googleProtobuf005.Timestamp.AsObject;
+        startTime?: googleProtobuf003.Timestamp.AsObject;
     }
     /**
      * Protobuf JSON representation for LlmCallStartedEvent
@@ -27948,7 +27959,7 @@ declare namespace LlmCallStartedEvent {
         provider: string;
         modelName: string;
         agentName: string;
-        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     }
 }
 /**
@@ -27989,8 +28000,8 @@ declare class LlmCallFinishedEvent implements GrpcMessage {
     constructor(_value?: RecursivePartial<LlmCallFinishedEvent.AsObject>);
     get llmCallId(): string;
     set llmCallId(value: string);
-    get endTime(): googleProtobuf005.Timestamp | undefined;
-    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    get endTime(): googleProtobuf003.Timestamp | undefined;
+    set endTime(value: googleProtobuf003.Timestamp | undefined);
     get durationInS(): number;
     set durationInS(value: number);
     get llmTokenUsage(): LlmTokenUsage | undefined;
@@ -28021,7 +28032,7 @@ declare namespace LlmCallFinishedEvent {
      */
     interface AsObject {
         llmCallId: string;
-        endTime?: googleProtobuf005.Timestamp.AsObject;
+        endTime?: googleProtobuf003.Timestamp.AsObject;
         durationInS: number;
         llmTokenUsage?: LlmTokenUsage.AsObject;
     }
@@ -28030,7 +28041,7 @@ declare namespace LlmCallFinishedEvent {
      */
     interface AsProtobufJSON {
         llmCallId: string;
-        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         durationInS: number;
         llmTokenUsage: LlmTokenUsage.AsProtobufJSON | null;
     }
@@ -28076,10 +28087,10 @@ declare class LlmToolCallStartedEvent implements GrpcMessage {
     set toolCallId(value: string);
     get toolName(): string;
     set toolName(value: string);
-    get arguments(): googleProtobuf005.Struct | undefined;
-    set arguments(value: googleProtobuf005.Struct | undefined);
-    get startTime(): googleProtobuf005.Timestamp | undefined;
-    set startTime(value: googleProtobuf005.Timestamp | undefined);
+    get arguments(): googleProtobuf003.Struct | undefined;
+    set arguments(value: googleProtobuf003.Struct | undefined);
+    get startTime(): googleProtobuf003.Timestamp | undefined;
+    set startTime(value: googleProtobuf003.Timestamp | undefined);
     get llmCallId(): string;
     set llmCallId(value: string);
     /**
@@ -28109,8 +28120,8 @@ declare namespace LlmToolCallStartedEvent {
     interface AsObject {
         toolCallId: string;
         toolName: string;
-        arguments?: googleProtobuf005.Struct.AsObject;
-        startTime?: googleProtobuf005.Timestamp.AsObject;
+        arguments?: googleProtobuf003.Struct.AsObject;
+        startTime?: googleProtobuf003.Timestamp.AsObject;
         llmCallId: string;
     }
     /**
@@ -28119,8 +28130,8 @@ declare namespace LlmToolCallStartedEvent {
     interface AsProtobufJSON {
         toolCallId: string;
         toolName: string;
-        arguments: googleProtobuf005.Struct.AsProtobufJSON | null;
-        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        arguments: googleProtobuf003.Struct.AsProtobufJSON | null;
+        startTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         llmCallId: string;
     }
 }
@@ -28165,14 +28176,14 @@ declare class LlmToolCallFinishedEvent implements GrpcMessage {
     constructor(_value?: RecursivePartial<LlmToolCallFinishedEvent.AsObject>);
     get toolCallId(): string;
     set toolCallId(value: string);
-    get endTime(): googleProtobuf005.Timestamp | undefined;
-    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    get endTime(): googleProtobuf003.Timestamp | undefined;
+    set endTime(value: googleProtobuf003.Timestamp | undefined);
     get durationInS(): number;
     set durationInS(value: number);
     get llmTokenUsage(): LlmTokenUsage | undefined;
     set llmTokenUsage(value: LlmTokenUsage | undefined);
-    get result(): googleProtobuf005.Struct | undefined;
-    set result(value: googleProtobuf005.Struct | undefined);
+    get result(): googleProtobuf003.Struct | undefined;
+    set result(value: googleProtobuf003.Struct | undefined);
     get errorMessage(): string;
     set errorMessage(value: string);
     get llmCallId(): string;
@@ -28203,10 +28214,10 @@ declare namespace LlmToolCallFinishedEvent {
      */
     interface AsObject {
         toolCallId: string;
-        endTime?: googleProtobuf005.Timestamp.AsObject;
+        endTime?: googleProtobuf003.Timestamp.AsObject;
         durationInS: number;
         llmTokenUsage?: LlmTokenUsage.AsObject;
-        result?: googleProtobuf005.Struct.AsObject;
+        result?: googleProtobuf003.Struct.AsObject;
         errorMessage: string;
         llmCallId: string;
     }
@@ -28215,10 +28226,10 @@ declare namespace LlmToolCallFinishedEvent {
      */
     interface AsProtobufJSON {
         toolCallId: string;
-        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         durationInS: number;
         llmTokenUsage: LlmTokenUsage.AsProtobufJSON | null;
-        result: googleProtobuf005.Struct.AsProtobufJSON | null;
+        result: googleProtobuf003.Struct.AsProtobufJSON | null;
         errorMessage: string;
         llmCallId: string;
     }
@@ -28262,8 +28273,8 @@ declare class LlmThinkingDeltaEvent implements GrpcMessage {
     set llmCallId(value: string);
     get textDelta(): string;
     set textDelta(value: string);
-    get timestamp(): googleProtobuf005.Timestamp | undefined;
-    set timestamp(value: googleProtobuf005.Timestamp | undefined);
+    get timestamp(): googleProtobuf003.Timestamp | undefined;
+    set timestamp(value: googleProtobuf003.Timestamp | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -28291,7 +28302,7 @@ declare namespace LlmThinkingDeltaEvent {
     interface AsObject {
         llmCallId: string;
         textDelta: string;
-        timestamp?: googleProtobuf005.Timestamp.AsObject;
+        timestamp?: googleProtobuf003.Timestamp.AsObject;
     }
     /**
      * Protobuf JSON representation for LlmThinkingDeltaEvent
@@ -28299,7 +28310,7 @@ declare namespace LlmThinkingDeltaEvent {
     interface AsProtobufJSON {
         llmCallId: string;
         textDelta: string;
-        timestamp: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        timestamp: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     }
 }
 /**
@@ -28541,8 +28552,8 @@ declare class QueryResult implements GrpcMessage {
     set speechRecognitionConfidence(value: number);
     get action(): string;
     set action(value: string);
-    get parameters(): googleProtobuf005.Struct | undefined;
-    set parameters(value: googleProtobuf005.Struct | undefined);
+    get parameters(): googleProtobuf003.Struct | undefined;
+    set parameters(value: googleProtobuf003.Struct | undefined);
     get allRequiredParamsPresent(): boolean;
     set allRequiredParamsPresent(value: boolean);
     get fulfillmentText(): string;
@@ -28551,8 +28562,8 @@ declare class QueryResult implements GrpcMessage {
     set fulfillmentMessages(value: Intent.Message[] | undefined);
     get webhookSource(): string;
     set webhookSource(value: string);
-    get webhookPayload(): googleProtobuf005.Struct | undefined;
-    set webhookPayload(value: googleProtobuf005.Struct | undefined);
+    get webhookPayload(): googleProtobuf003.Struct | undefined;
+    set webhookPayload(value: googleProtobuf003.Struct | undefined);
     get outputContexts(): Context[] | undefined;
     set outputContexts(value: Context[] | undefined);
     get intent(): Intent | undefined;
@@ -28561,8 +28572,8 @@ declare class QueryResult implements GrpcMessage {
     set intentDetectionConfidence(value: number);
     get queryTextOriginal(): string;
     set queryTextOriginal(value: string);
-    get diagnosticInfo(): googleProtobuf005.Struct | undefined;
-    set diagnosticInfo(value: googleProtobuf005.Struct | undefined);
+    get diagnosticInfo(): googleProtobuf003.Struct | undefined;
+    set diagnosticInfo(value: googleProtobuf003.Struct | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     get fileResources(): FileResource[] | undefined;
@@ -28599,17 +28610,17 @@ declare namespace QueryResult {
         queryText: string;
         speechRecognitionConfidence: number;
         action: string;
-        parameters?: googleProtobuf005.Struct.AsObject;
+        parameters?: googleProtobuf003.Struct.AsObject;
         allRequiredParamsPresent: boolean;
         fulfillmentText: string;
         fulfillmentMessages?: Intent.Message.AsObject[];
         webhookSource: string;
-        webhookPayload?: googleProtobuf005.Struct.AsObject;
+        webhookPayload?: googleProtobuf003.Struct.AsObject;
         outputContexts?: Context.AsObject[];
         intent?: Intent.AsObject;
         intentDetectionConfidence: number;
         queryTextOriginal: string;
-        diagnosticInfo?: googleProtobuf005.Struct.AsObject;
+        diagnosticInfo?: googleProtobuf003.Struct.AsObject;
         languageCode: string;
         fileResources?: FileResource.AsObject[];
         llmTelemetryReport?: LlmTelemetryReport.AsObject;
@@ -28622,17 +28633,17 @@ declare namespace QueryResult {
         queryText: string;
         speechRecognitionConfidence: number;
         action: string;
-        parameters: googleProtobuf005.Struct.AsProtobufJSON | null;
+        parameters: googleProtobuf003.Struct.AsProtobufJSON | null;
         allRequiredParamsPresent: boolean;
         fulfillmentText: string;
         fulfillmentMessages: Intent.Message.AsProtobufJSON[] | null;
         webhookSource: string;
-        webhookPayload: googleProtobuf005.Struct.AsProtobufJSON | null;
+        webhookPayload: googleProtobuf003.Struct.AsProtobufJSON | null;
         outputContexts: Context.AsProtobufJSON[] | null;
         intent: Intent.AsProtobufJSON | null;
         intentDetectionConfidence: number;
         queryTextOriginal: string;
-        diagnosticInfo: googleProtobuf005.Struct.AsProtobufJSON | null;
+        diagnosticInfo: googleProtobuf003.Struct.AsProtobufJSON | null;
         languageCode: string;
         fileResources: FileResource.AsProtobufJSON[] | null;
         llmTelemetryReport: LlmTelemetryReport.AsProtobufJSON | null;
@@ -29137,8 +29148,8 @@ declare class EventInput implements GrpcMessage {
     constructor(_value?: RecursivePartial<EventInput.AsObject>);
     get name(): string;
     set name(value: string);
-    get parameters(): googleProtobuf005.Struct | undefined;
-    set parameters(value: googleProtobuf005.Struct | undefined);
+    get parameters(): googleProtobuf003.Struct | undefined;
+    set parameters(value: googleProtobuf003.Struct | undefined);
     get languageCode(): string;
     set languageCode(value: string);
     /**
@@ -29167,7 +29178,7 @@ declare namespace EventInput {
      */
     interface AsObject {
         name: string;
-        parameters?: googleProtobuf005.Struct.AsObject;
+        parameters?: googleProtobuf003.Struct.AsObject;
         languageCode: string;
     }
     /**
@@ -29175,7 +29186,7 @@ declare namespace EventInput {
      */
     interface AsProtobufJSON {
         name: string;
-        parameters: googleProtobuf005.Struct.AsProtobufJSON | null;
+        parameters: googleProtobuf003.Struct.AsProtobufJSON | null;
         languageCode: string;
     }
 }
@@ -29224,10 +29235,10 @@ declare class Session implements GrpcMessage {
     set sessionSteps(value: SessionStep[] | undefined);
     get sessionInfo(): SessionInfo | undefined;
     set sessionInfo(value: SessionInfo | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -29260,8 +29271,8 @@ declare namespace Session {
         name: string;
         sessionSteps?: SessionStep.AsObject[];
         sessionInfo?: SessionInfo.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -29272,8 +29283,8 @@ declare namespace Session {
         name: string;
         sessionSteps: SessionStep.AsProtobufJSON[] | null;
         sessionInfo: SessionInfo.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -29334,12 +29345,12 @@ declare class SessionStep implements GrpcMessage {
     set detectIntentResponse(value: DetectIntentResponse | undefined);
     get contexts(): Context[] | undefined;
     set contexts(value: Context[] | undefined);
-    get timestamp(): googleProtobuf005.Timestamp | undefined;
-    set timestamp(value: googleProtobuf005.Timestamp | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get timestamp(): googleProtobuf003.Timestamp | undefined;
+    set timestamp(value: googleProtobuf003.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -29377,9 +29388,9 @@ declare namespace SessionStep {
         detectIntentRequest?: DetectIntentRequest.AsObject;
         detectIntentResponse?: DetectIntentResponse.AsObject;
         contexts?: Context.AsObject[];
-        timestamp?: googleProtobuf005.Timestamp.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        timestamp?: googleProtobuf003.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
         audioFileResources?: AudioFileResource.AsObject[];
@@ -29393,9 +29404,9 @@ declare namespace SessionStep {
         detectIntentRequest: DetectIntentRequest.AsProtobufJSON | null;
         detectIntentResponse: DetectIntentResponse.AsProtobufJSON | null;
         contexts: Context.AsProtobufJSON[] | null;
-        timestamp: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        timestamp: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
         audioFileResources: AudioFileResource.AsProtobufJSON[] | null;
@@ -29438,8 +29449,8 @@ declare class GetSessionStepRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetSessionStepRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -29466,14 +29477,14 @@ declare namespace GetSessionStepRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetSessionStepRequest
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -29513,10 +29524,10 @@ declare class UpdateSessionStepRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateSessionStepRequest.AsObject>);
     get sessionStep(): SessionStep | undefined;
     set sessionStep(value: SessionStep | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -29543,16 +29554,16 @@ declare namespace UpdateSessionStepRequest {
      */
     interface AsObject {
         sessionStep?: SessionStep.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateSessionStepRequest
      */
     interface AsProtobufJSON {
         sessionStep: SessionStep.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -29663,8 +29674,8 @@ declare class CreateSessionStepRequest implements GrpcMessage {
     set sessionId(value: string);
     get sessionStep(): SessionStep | undefined;
     set sessionStep(value: SessionStep | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -29692,7 +29703,7 @@ declare namespace CreateSessionStepRequest {
     interface AsObject {
         sessionId: string;
         sessionStep?: SessionStep.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for CreateSessionStepRequest
@@ -29700,7 +29711,7 @@ declare namespace CreateSessionStepRequest {
     interface AsProtobufJSON {
         sessionId: string;
         sessionStep: SessionStep.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -29748,8 +29759,8 @@ declare class ListSessionsRequest implements GrpcMessage {
     set pageToken(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -29779,7 +29790,7 @@ declare namespace ListSessionsRequest {
         sessionView: Session.View;
         pageToken: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListSessionsRequest
@@ -29789,7 +29800,7 @@ declare namespace ListSessionsRequest {
         sessionView: string;
         pageToken: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -30596,8 +30607,8 @@ declare class GetSessionRequest implements GrpcMessage {
     set sessionId(value: string);
     get sessionView(): Session.View;
     set sessionView(value: Session.View);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -30625,7 +30636,7 @@ declare namespace GetSessionRequest {
     interface AsObject {
         sessionId: string;
         sessionView: Session.View;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetSessionRequest
@@ -30633,7 +30644,7 @@ declare namespace GetSessionRequest {
     interface AsProtobufJSON {
         sessionId: string;
         sessionView: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -30915,10 +30926,10 @@ declare class SessionReview implements GrpcMessage {
     set name(value: string);
     get sessionReviewSteps(): SessionReviewStep[] | undefined;
     set sessionReviewSteps(value: SessionReviewStep[] | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -30950,8 +30961,8 @@ declare namespace SessionReview {
     interface AsObject {
         name: string;
         sessionReviewSteps?: SessionReviewStep.AsObject[];
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -30961,8 +30972,8 @@ declare namespace SessionReview {
     interface AsProtobufJSON {
         name: string;
         sessionReviewSteps: SessionReviewStep.AsProtobufJSON[] | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -31034,12 +31045,12 @@ declare class SessionReviewStep implements GrpcMessage {
     set queryTextOriginal(value: string);
     get platforms(): Intent.Message.Platform[];
     set platforms(value: Intent.Message.Platform[]);
-    get timestamp(): googleProtobuf005.Timestamp | undefined;
-    set timestamp(value: googleProtobuf005.Timestamp | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get timestamp(): googleProtobuf003.Timestamp | undefined;
+    set timestamp(value: googleProtobuf003.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -31079,9 +31090,9 @@ declare namespace SessionReviewStep {
         contextsOut?: Context.AsObject[];
         queryTextOriginal: string;
         platforms: Intent.Message.Platform[];
-        timestamp?: googleProtobuf005.Timestamp.AsObject;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        timestamp?: googleProtobuf003.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
         audioFileResources?: AudioFileResource.AsObject[];
@@ -31098,9 +31109,9 @@ declare namespace SessionReviewStep {
         contextsOut: Context.AsProtobufJSON[] | null;
         queryTextOriginal: string;
         platforms: string[];
-        timestamp: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        timestamp: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
         audioFileResources: AudioFileResource.AsProtobufJSON[] | null;
@@ -31303,8 +31314,8 @@ declare class ListSessionLabelsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -31332,7 +31343,7 @@ declare namespace ListSessionLabelsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListSessionLabelsOfAllSessionsRequest
@@ -31340,7 +31351,7 @@ declare namespace ListSessionLabelsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -31451,8 +31462,8 @@ declare class ListLanguageCodesOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -31480,7 +31491,7 @@ declare namespace ListLanguageCodesOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListLanguageCodesOfAllSessionsRequest
@@ -31488,7 +31499,7 @@ declare namespace ListLanguageCodesOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -31599,8 +31610,8 @@ declare class ListMatchedIntentsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -31628,7 +31639,7 @@ declare namespace ListMatchedIntentsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListMatchedIntentsOfAllSessionsRequest
@@ -31636,7 +31647,7 @@ declare namespace ListMatchedIntentsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -31747,8 +31758,8 @@ declare class ListMatchedEntityTypesOfAllSessionsRequest implements GrpcMessage 
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -31776,7 +31787,7 @@ declare namespace ListMatchedEntityTypesOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListMatchedEntityTypesOfAllSessionsRequest
@@ -31784,7 +31795,7 @@ declare namespace ListMatchedEntityTypesOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -31895,8 +31906,8 @@ declare class ListUserIdsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -31924,7 +31935,7 @@ declare namespace ListUserIdsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListUserIdsOfAllSessionsRequest
@@ -31932,7 +31943,7 @@ declare namespace ListUserIdsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -32043,8 +32054,8 @@ declare class ListIdentifiedUserIdsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32072,7 +32083,7 @@ declare namespace ListIdentifiedUserIdsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListIdentifiedUserIdsOfAllSessionsRequest
@@ -32080,7 +32091,7 @@ declare namespace ListIdentifiedUserIdsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -32191,8 +32202,8 @@ declare class ListTagsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32220,7 +32231,7 @@ declare namespace ListTagsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListTagsOfAllSessionsRequest
@@ -32228,7 +32239,7 @@ declare namespace ListTagsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -32339,8 +32350,8 @@ declare class ListInputContextsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32368,7 +32379,7 @@ declare namespace ListInputContextsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListInputContextsOfAllSessionsRequest
@@ -32376,7 +32387,7 @@ declare namespace ListInputContextsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -32487,8 +32498,8 @@ declare class ListOutputContextsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32516,7 +32527,7 @@ declare namespace ListOutputContextsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListOutputContextsOfAllSessionsRequest
@@ -32524,7 +32535,7 @@ declare namespace ListOutputContextsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -32635,8 +32646,8 @@ declare class ListPlatformsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32664,7 +32675,7 @@ declare namespace ListPlatformsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListPlatformsOfAllSessionsRequest
@@ -32672,7 +32683,7 @@ declare namespace ListPlatformsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -32783,8 +32794,8 @@ declare class ListAccountIdsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32812,7 +32823,7 @@ declare namespace ListAccountIdsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListAccountIdsOfAllSessionsRequest
@@ -32820,7 +32831,7 @@ declare namespace ListAccountIdsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -33217,8 +33228,8 @@ declare class ListOriginIdsOfAllSessionsRequest implements GrpcMessage {
     set parent(value: string);
     get sessionFilter(): SessionFilter | undefined;
     set sessionFilter(value: SessionFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -33246,7 +33257,7 @@ declare namespace ListOriginIdsOfAllSessionsRequest {
     interface AsObject {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListOriginIdsOfAllSessionsRequest
@@ -33254,7 +33265,7 @@ declare namespace ListOriginIdsOfAllSessionsRequest {
     interface AsProtobufJSON {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -33736,8 +33747,8 @@ declare class ListSessionCommentsRequest implements GrpcMessage {
     set sessionId(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get isResolved(): boolean;
     set isResolved(value: boolean);
     /**
@@ -33767,7 +33778,7 @@ declare namespace ListSessionCommentsRequest {
     interface AsObject {
         sessionId: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         isResolved: boolean;
     }
     /**
@@ -33776,7 +33787,7 @@ declare namespace ListSessionCommentsRequest {
     interface AsProtobufJSON {
         sessionId: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         isResolved: boolean;
     }
 }
@@ -33823,8 +33834,8 @@ declare class ListSessionCommentsOfAllSessionsRequest implements GrpcMessage {
     set sessionFilter(value: SessionFilter | undefined);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get isResolved(): boolean;
     set isResolved(value: boolean);
     /**
@@ -33855,7 +33866,7 @@ declare namespace ListSessionCommentsOfAllSessionsRequest {
         parent: string;
         sessionFilter?: SessionFilter.AsObject;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         isResolved: boolean;
     }
     /**
@@ -33865,7 +33876,7 @@ declare namespace ListSessionCommentsOfAllSessionsRequest {
         parent: string;
         sessionFilter: SessionFilter.AsProtobufJSON | null;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         isResolved: boolean;
     }
 }
@@ -33941,6 +33952,1370 @@ declare namespace ListSessionCommentsResponse {
     interface AsProtobufJSON {
         comment: Comment.AsProtobufJSON[] | null;
         pageToken: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.SessionFeedback
+ */
+declare class SessionFeedback implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): SessionFeedback;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: SessionFeedback): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: SessionFeedback, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: SessionFeedback, _writer: BinaryWriter): void;
+    private _name;
+    private _sessionId;
+    private _sessionStepId;
+    private _responseId;
+    private _sessionStepLlmTelemetryId;
+    private _rating;
+    private _categoricalValue;
+    private _score;
+    private _comment;
+    private _criterion;
+    private _authorType;
+    private _annotatorUserId;
+    private _originId;
+    private _identifiedUserId;
+    private _raw?;
+    private _createdAt?;
+    private _modifiedAt?;
+    private _createdBy;
+    private _modifiedBy;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of SessionFeedback to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<SessionFeedback.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get sessionStepId(): string;
+    set sessionStepId(value: string);
+    get responseId(): string;
+    set responseId(value: string);
+    get sessionStepLlmTelemetryId(): string;
+    set sessionStepLlmTelemetryId(value: string);
+    get rating(): FeedbackRating;
+    set rating(value: FeedbackRating);
+    get categoricalValue(): string;
+    set categoricalValue(value: string);
+    get score(): number;
+    set score(value: number);
+    get comment(): string;
+    set comment(value: string);
+    get criterion(): string;
+    set criterion(value: string);
+    get authorType(): FeedbackAuthorType;
+    set authorType(value: FeedbackAuthorType);
+    get annotatorUserId(): string;
+    set annotatorUserId(value: string);
+    get originId(): string;
+    set originId(value: string);
+    get identifiedUserId(): string;
+    set identifiedUserId(value: string);
+    get raw(): googleProtobuf003.Struct | undefined;
+    set raw(value: googleProtobuf003.Struct | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
+    get createdBy(): string;
+    set createdBy(value: string);
+    get modifiedBy(): string;
+    set modifiedBy(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): SessionFeedback.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): SessionFeedback.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): SessionFeedback.AsProtobufJSON;
+}
+declare namespace SessionFeedback {
+    /**
+     * Standard JavaScript object representation for SessionFeedback
+     */
+    interface AsObject {
+        name: string;
+        sessionId: string;
+        sessionStepId: string;
+        responseId: string;
+        sessionStepLlmTelemetryId: string;
+        rating: FeedbackRating;
+        categoricalValue: string;
+        score: number;
+        comment: string;
+        criterion: string;
+        authorType: FeedbackAuthorType;
+        annotatorUserId: string;
+        originId: string;
+        identifiedUserId: string;
+        raw?: googleProtobuf003.Struct.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
+        createdBy: string;
+        modifiedBy: string;
+    }
+    /**
+     * Protobuf JSON representation for SessionFeedback
+     */
+    interface AsProtobufJSON {
+        name: string;
+        sessionId: string;
+        sessionStepId: string;
+        responseId: string;
+        sessionStepLlmTelemetryId: string;
+        rating: string;
+        categoricalValue: string;
+        score: number;
+        comment: string;
+        criterion: string;
+        authorType: string;
+        annotatorUserId: string;
+        originId: string;
+        identifiedUserId: string;
+        raw: googleProtobuf003.Struct.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createdBy: string;
+        modifiedBy: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.AddSessionFeedbackRequest
+ */
+declare class AddSessionFeedbackRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): AddSessionFeedbackRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: AddSessionFeedbackRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: AddSessionFeedbackRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: AddSessionFeedbackRequest, _writer: BinaryWriter): void;
+    private _sessionId;
+    private _feedback?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AddSessionFeedbackRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<AddSessionFeedbackRequest.AsObject>);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get feedback(): SessionFeedback | undefined;
+    set feedback(value: SessionFeedback | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): AddSessionFeedbackRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): AddSessionFeedbackRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): AddSessionFeedbackRequest.AsProtobufJSON;
+}
+declare namespace AddSessionFeedbackRequest {
+    /**
+     * Standard JavaScript object representation for AddSessionFeedbackRequest
+     */
+    interface AsObject {
+        sessionId: string;
+        feedback?: SessionFeedback.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for AddSessionFeedbackRequest
+     */
+    interface AsProtobufJSON {
+        sessionId: string;
+        feedback: SessionFeedback.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.AddSessionStepFeedbackRequest
+ */
+declare class AddSessionStepFeedbackRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): AddSessionStepFeedbackRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: AddSessionStepFeedbackRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: AddSessionStepFeedbackRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: AddSessionStepFeedbackRequest, _writer: BinaryWriter): void;
+    private _sessionId;
+    private _sessionStepId;
+    private _feedback?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of AddSessionStepFeedbackRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<AddSessionStepFeedbackRequest.AsObject>);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get sessionStepId(): string;
+    set sessionStepId(value: string);
+    get feedback(): SessionFeedback | undefined;
+    set feedback(value: SessionFeedback | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): AddSessionStepFeedbackRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): AddSessionStepFeedbackRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): AddSessionStepFeedbackRequest.AsProtobufJSON;
+}
+declare namespace AddSessionStepFeedbackRequest {
+    /**
+     * Standard JavaScript object representation for AddSessionStepFeedbackRequest
+     */
+    interface AsObject {
+        sessionId: string;
+        sessionStepId: string;
+        feedback?: SessionFeedback.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for AddSessionStepFeedbackRequest
+     */
+    interface AsProtobufJSON {
+        sessionId: string;
+        sessionStepId: string;
+        feedback: SessionFeedback.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetSessionFeedbackRequest
+ */
+declare class GetSessionFeedbackRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetSessionFeedbackRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetSessionFeedbackRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetSessionFeedbackRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetSessionFeedbackRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _fieldMask?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetSessionFeedbackRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetSessionFeedbackRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetSessionFeedbackRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetSessionFeedbackRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetSessionFeedbackRequest.AsProtobufJSON;
+}
+declare namespace GetSessionFeedbackRequest {
+    /**
+     * Standard JavaScript object representation for GetSessionFeedbackRequest
+     */
+    interface AsObject {
+        name: string;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for GetSessionFeedbackRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.UpdateSessionFeedbackRequest
+ */
+declare class UpdateSessionFeedbackRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): UpdateSessionFeedbackRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: UpdateSessionFeedbackRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: UpdateSessionFeedbackRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: UpdateSessionFeedbackRequest, _writer: BinaryWriter): void;
+    private _feedback?;
+    private _updateMask?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of UpdateSessionFeedbackRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<UpdateSessionFeedbackRequest.AsObject>);
+    get feedback(): SessionFeedback | undefined;
+    set feedback(value: SessionFeedback | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): UpdateSessionFeedbackRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): UpdateSessionFeedbackRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): UpdateSessionFeedbackRequest.AsProtobufJSON;
+}
+declare namespace UpdateSessionFeedbackRequest {
+    /**
+     * Standard JavaScript object representation for UpdateSessionFeedbackRequest
+     */
+    interface AsObject {
+        feedback?: SessionFeedback.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for UpdateSessionFeedbackRequest
+     */
+    interface AsProtobufJSON {
+        feedback: SessionFeedback.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DeleteSessionFeedbackRequest
+ */
+declare class DeleteSessionFeedbackRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DeleteSessionFeedbackRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DeleteSessionFeedbackRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DeleteSessionFeedbackRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DeleteSessionFeedbackRequest, _writer: BinaryWriter): void;
+    private _name;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteSessionFeedbackRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<DeleteSessionFeedbackRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DeleteSessionFeedbackRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DeleteSessionFeedbackRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DeleteSessionFeedbackRequest.AsProtobufJSON;
+}
+declare namespace DeleteSessionFeedbackRequest {
+    /**
+     * Standard JavaScript object representation for DeleteSessionFeedbackRequest
+     */
+    interface AsObject {
+        name: string;
+    }
+    /**
+     * Protobuf JSON representation for DeleteSessionFeedbackRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionFeedbackRequest
+ */
+declare class ListSessionFeedbackRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionFeedbackRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionFeedbackRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionFeedbackRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionFeedbackRequest, _writer: BinaryWriter): void;
+    private _sessionId;
+    private _pageToken;
+    private _fieldMask?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionFeedbackRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListSessionFeedbackRequest.AsObject>);
+    get sessionId(): string;
+    set sessionId(value: string);
+    get pageToken(): string;
+    set pageToken(value: string);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionFeedbackRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionFeedbackRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionFeedbackRequest.AsProtobufJSON;
+}
+declare namespace ListSessionFeedbackRequest {
+    /**
+     * Standard JavaScript object representation for ListSessionFeedbackRequest
+     */
+    interface AsObject {
+        sessionId: string;
+        pageToken: string;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for ListSessionFeedbackRequest
+     */
+    interface AsProtobufJSON {
+        sessionId: string;
+        pageToken: string;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionFeedbackOfAllSessionsRequest
+ */
+declare class ListSessionFeedbackOfAllSessionsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionFeedbackOfAllSessionsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionFeedbackOfAllSessionsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionFeedbackOfAllSessionsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionFeedbackOfAllSessionsRequest, _writer: BinaryWriter): void;
+    private _parent;
+    private _sessionFilter?;
+    private _pageToken;
+    private _fieldMask?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionFeedbackOfAllSessionsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListSessionFeedbackOfAllSessionsRequest.AsObject>);
+    get parent(): string;
+    set parent(value: string);
+    get sessionFilter(): SessionFilter | undefined;
+    set sessionFilter(value: SessionFilter | undefined);
+    get pageToken(): string;
+    set pageToken(value: string);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionFeedbackOfAllSessionsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionFeedbackOfAllSessionsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionFeedbackOfAllSessionsRequest.AsProtobufJSON;
+}
+declare namespace ListSessionFeedbackOfAllSessionsRequest {
+    /**
+     * Standard JavaScript object representation for ListSessionFeedbackOfAllSessionsRequest
+     */
+    interface AsObject {
+        parent: string;
+        sessionFilter?: SessionFilter.AsObject;
+        pageToken: string;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for ListSessionFeedbackOfAllSessionsRequest
+     */
+    interface AsProtobufJSON {
+        parent: string;
+        sessionFilter: SessionFilter.AsProtobufJSON | null;
+        pageToken: string;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListSessionFeedbackResponse
+ */
+declare class ListSessionFeedbackResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListSessionFeedbackResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListSessionFeedbackResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListSessionFeedbackResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListSessionFeedbackResponse, _writer: BinaryWriter): void;
+    private _feedback?;
+    private _nextPageToken;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListSessionFeedbackResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListSessionFeedbackResponse.AsObject>);
+    get feedback(): SessionFeedback[] | undefined;
+    set feedback(value: SessionFeedback[] | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListSessionFeedbackResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListSessionFeedbackResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListSessionFeedbackResponse.AsProtobufJSON;
+}
+declare namespace ListSessionFeedbackResponse {
+    /**
+     * Standard JavaScript object representation for ListSessionFeedbackResponse
+     */
+    interface AsObject {
+        feedback?: SessionFeedback.AsObject[];
+        nextPageToken: string;
+    }
+    /**
+     * Protobuf JSON representation for ListSessionFeedbackResponse
+     */
+    interface AsProtobufJSON {
+        feedback: SessionFeedback.AsProtobufJSON[] | null;
+        nextPageToken: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.FeedbackBreakdownBucket
+ */
+declare class FeedbackBreakdownBucket implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): FeedbackBreakdownBucket;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: FeedbackBreakdownBucket): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: FeedbackBreakdownBucket, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: FeedbackBreakdownBucket, _writer: BinaryWriter): void;
+    private _key;
+    private _thumbsUpCount;
+    private _thumbsDownCount;
+    private _total;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FeedbackBreakdownBucket to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<FeedbackBreakdownBucket.AsObject>);
+    get key(): string;
+    set key(value: string);
+    get thumbsUpCount(): number;
+    set thumbsUpCount(value: number);
+    get thumbsDownCount(): number;
+    set thumbsDownCount(value: number);
+    get total(): number;
+    set total(value: number);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): FeedbackBreakdownBucket.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): FeedbackBreakdownBucket.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): FeedbackBreakdownBucket.AsProtobufJSON;
+}
+declare namespace FeedbackBreakdownBucket {
+    /**
+     * Standard JavaScript object representation for FeedbackBreakdownBucket
+     */
+    interface AsObject {
+        key: string;
+        thumbsUpCount: number;
+        thumbsDownCount: number;
+        total: number;
+    }
+    /**
+     * Protobuf JSON representation for FeedbackBreakdownBucket
+     */
+    interface AsProtobufJSON {
+        key: string;
+        thumbsUpCount: number;
+        thumbsDownCount: number;
+        total: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.FeedbackStatistics
+ */
+declare class FeedbackStatistics implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): FeedbackStatistics;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: FeedbackStatistics): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: FeedbackStatistics, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: FeedbackStatistics, _writer: BinaryWriter): void;
+    private _totalFeedback;
+    private _thumbsUpCount;
+    private _thumbsDownCount;
+    private _sessionLevelCount;
+    private _sessionStepLevelCount;
+    private _commentCount;
+    private _sessionReviewCount;
+    private _sessionCommentCount;
+    private _byLanguage?;
+    private _byIntent?;
+    private _byAuthorType?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FeedbackStatistics to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<FeedbackStatistics.AsObject>);
+    get totalFeedback(): number;
+    set totalFeedback(value: number);
+    get thumbsUpCount(): number;
+    set thumbsUpCount(value: number);
+    get thumbsDownCount(): number;
+    set thumbsDownCount(value: number);
+    get sessionLevelCount(): number;
+    set sessionLevelCount(value: number);
+    get sessionStepLevelCount(): number;
+    set sessionStepLevelCount(value: number);
+    get commentCount(): number;
+    set commentCount(value: number);
+    get sessionReviewCount(): number;
+    set sessionReviewCount(value: number);
+    get sessionCommentCount(): number;
+    set sessionCommentCount(value: number);
+    get byLanguage(): FeedbackBreakdownBucket[] | undefined;
+    set byLanguage(value: FeedbackBreakdownBucket[] | undefined);
+    get byIntent(): FeedbackBreakdownBucket[] | undefined;
+    set byIntent(value: FeedbackBreakdownBucket[] | undefined);
+    get byAuthorType(): FeedbackBreakdownBucket[] | undefined;
+    set byAuthorType(value: FeedbackBreakdownBucket[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): FeedbackStatistics.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): FeedbackStatistics.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): FeedbackStatistics.AsProtobufJSON;
+}
+declare namespace FeedbackStatistics {
+    /**
+     * Standard JavaScript object representation for FeedbackStatistics
+     */
+    interface AsObject {
+        totalFeedback: number;
+        thumbsUpCount: number;
+        thumbsDownCount: number;
+        sessionLevelCount: number;
+        sessionStepLevelCount: number;
+        commentCount: number;
+        sessionReviewCount: number;
+        sessionCommentCount: number;
+        byLanguage?: FeedbackBreakdownBucket.AsObject[];
+        byIntent?: FeedbackBreakdownBucket.AsObject[];
+        byAuthorType?: FeedbackBreakdownBucket.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for FeedbackStatistics
+     */
+    interface AsProtobufJSON {
+        totalFeedback: number;
+        thumbsUpCount: number;
+        thumbsDownCount: number;
+        sessionLevelCount: number;
+        sessionStepLevelCount: number;
+        commentCount: number;
+        sessionReviewCount: number;
+        sessionCommentCount: number;
+        byLanguage: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
+        byIntent: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
+        byAuthorType: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetFeedbackStatisticsRequest
+ */
+declare class GetFeedbackStatisticsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetFeedbackStatisticsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetFeedbackStatisticsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetFeedbackStatisticsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetFeedbackStatisticsRequest, _writer: BinaryWriter): void;
+    private _parent;
+    private _sessionFilter?;
+    private _includeReviewAndCommentRollup;
+    private _fieldMask?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetFeedbackStatisticsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetFeedbackStatisticsRequest.AsObject>);
+    get parent(): string;
+    set parent(value: string);
+    get sessionFilter(): SessionFilter | undefined;
+    set sessionFilter(value: SessionFilter | undefined);
+    get includeReviewAndCommentRollup(): boolean;
+    set includeReviewAndCommentRollup(value: boolean);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetFeedbackStatisticsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetFeedbackStatisticsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetFeedbackStatisticsRequest.AsProtobufJSON;
+}
+declare namespace GetFeedbackStatisticsRequest {
+    /**
+     * Standard JavaScript object representation for GetFeedbackStatisticsRequest
+     */
+    interface AsObject {
+        parent: string;
+        sessionFilter?: SessionFilter.AsObject;
+        includeReviewAndCommentRollup: boolean;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for GetFeedbackStatisticsRequest
+     */
+    interface AsProtobufJSON {
+        parent: string;
+        sessionFilter: SessionFilter.AsProtobufJSON | null;
+        includeReviewAndCommentRollup: boolean;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetFeedbackStatisticsResponse
+ */
+declare class GetFeedbackStatisticsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetFeedbackStatisticsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetFeedbackStatisticsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetFeedbackStatisticsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetFeedbackStatisticsResponse, _writer: BinaryWriter): void;
+    private _statistics?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetFeedbackStatisticsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetFeedbackStatisticsResponse.AsObject>);
+    get statistics(): FeedbackStatistics | undefined;
+    set statistics(value: FeedbackStatistics | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetFeedbackStatisticsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetFeedbackStatisticsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetFeedbackStatisticsResponse.AsProtobufJSON;
+}
+declare namespace GetFeedbackStatisticsResponse {
+    /**
+     * Standard JavaScript object representation for GetFeedbackStatisticsResponse
+     */
+    interface AsObject {
+        statistics?: FeedbackStatistics.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for GetFeedbackStatisticsResponse
+     */
+    interface AsProtobufJSON {
+        statistics: FeedbackStatistics.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.FeedbackTimeSeriesBucket
+ */
+declare class FeedbackTimeSeriesBucket implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): FeedbackTimeSeriesBucket;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: FeedbackTimeSeriesBucket): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: FeedbackTimeSeriesBucket, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: FeedbackTimeSeriesBucket, _writer: BinaryWriter): void;
+    private _bucketStart?;
+    private _thumbsUpCount;
+    private _thumbsDownCount;
+    private _total;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of FeedbackTimeSeriesBucket to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<FeedbackTimeSeriesBucket.AsObject>);
+    get bucketStart(): googleProtobuf003.Timestamp | undefined;
+    set bucketStart(value: googleProtobuf003.Timestamp | undefined);
+    get thumbsUpCount(): number;
+    set thumbsUpCount(value: number);
+    get thumbsDownCount(): number;
+    set thumbsDownCount(value: number);
+    get total(): number;
+    set total(value: number);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): FeedbackTimeSeriesBucket.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): FeedbackTimeSeriesBucket.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): FeedbackTimeSeriesBucket.AsProtobufJSON;
+}
+declare namespace FeedbackTimeSeriesBucket {
+    /**
+     * Standard JavaScript object representation for FeedbackTimeSeriesBucket
+     */
+    interface AsObject {
+        bucketStart?: googleProtobuf003.Timestamp.AsObject;
+        thumbsUpCount: number;
+        thumbsDownCount: number;
+        total: number;
+    }
+    /**
+     * Protobuf JSON representation for FeedbackTimeSeriesBucket
+     */
+    interface AsProtobufJSON {
+        bucketStart: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        thumbsUpCount: number;
+        thumbsDownCount: number;
+        total: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetFeedbackStatisticsTimeSeriesRequest
+ */
+declare class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetFeedbackStatisticsTimeSeriesRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetFeedbackStatisticsTimeSeriesRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetFeedbackStatisticsTimeSeriesRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetFeedbackStatisticsTimeSeriesRequest, _writer: BinaryWriter): void;
+    private _parent;
+    private _sessionFilter?;
+    private _bucketWidthSeconds;
+    private _maxBuckets;
+    private _fieldMask?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetFeedbackStatisticsTimeSeriesRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetFeedbackStatisticsTimeSeriesRequest.AsObject>);
+    get parent(): string;
+    set parent(value: string);
+    get sessionFilter(): SessionFilter | undefined;
+    set sessionFilter(value: SessionFilter | undefined);
+    get bucketWidthSeconds(): number;
+    set bucketWidthSeconds(value: number);
+    get maxBuckets(): number;
+    set maxBuckets(value: number);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetFeedbackStatisticsTimeSeriesRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetFeedbackStatisticsTimeSeriesRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetFeedbackStatisticsTimeSeriesRequest.AsProtobufJSON;
+}
+declare namespace GetFeedbackStatisticsTimeSeriesRequest {
+    /**
+     * Standard JavaScript object representation for GetFeedbackStatisticsTimeSeriesRequest
+     */
+    interface AsObject {
+        parent: string;
+        sessionFilter?: SessionFilter.AsObject;
+        bucketWidthSeconds: number;
+        maxBuckets: number;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for GetFeedbackStatisticsTimeSeriesRequest
+     */
+    interface AsProtobufJSON {
+        parent: string;
+        sessionFilter: SessionFilter.AsProtobufJSON | null;
+        bucketWidthSeconds: number;
+        maxBuckets: number;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetFeedbackStatisticsTimeSeriesResponse
+ */
+declare class GetFeedbackStatisticsTimeSeriesResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetFeedbackStatisticsTimeSeriesResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetFeedbackStatisticsTimeSeriesResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetFeedbackStatisticsTimeSeriesResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetFeedbackStatisticsTimeSeriesResponse, _writer: BinaryWriter): void;
+    private _buckets?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetFeedbackStatisticsTimeSeriesResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetFeedbackStatisticsTimeSeriesResponse.AsObject>);
+    get buckets(): FeedbackTimeSeriesBucket[] | undefined;
+    set buckets(value: FeedbackTimeSeriesBucket[] | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetFeedbackStatisticsTimeSeriesResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetFeedbackStatisticsTimeSeriesResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetFeedbackStatisticsTimeSeriesResponse.AsProtobufJSON;
+}
+declare namespace GetFeedbackStatisticsTimeSeriesResponse {
+    /**
+     * Standard JavaScript object representation for GetFeedbackStatisticsTimeSeriesResponse
+     */
+    interface AsObject {
+        buckets?: FeedbackTimeSeriesBucket.AsObject[];
+    }
+    /**
+     * Protobuf JSON representation for GetFeedbackStatisticsTimeSeriesResponse
+     */
+    interface AsProtobufJSON {
+        buckets: FeedbackTimeSeriesBucket.AsProtobufJSON[] | null;
     }
 }
 /**
@@ -34135,8 +35510,8 @@ declare class GetSessionReviewRequest implements GrpcMessage {
     set sessionReviewId(value: string);
     get sessionReviewView(): SessionReview.View;
     set sessionReviewView(value: SessionReview.View);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -34164,7 +35539,7 @@ declare namespace GetSessionReviewRequest {
     interface AsObject {
         sessionReviewId: string;
         sessionReviewView: SessionReview.View;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetSessionReviewRequest
@@ -34172,7 +35547,7 @@ declare namespace GetSessionReviewRequest {
     interface AsProtobufJSON {
         sessionReviewId: string;
         sessionReviewView: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -34214,8 +35589,8 @@ declare class GetLatestSessionReviewRequest implements GrpcMessage {
     set sessionId(value: string);
     get sessionReviewView(): SessionReview.View;
     set sessionReviewView(value: SessionReview.View);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -34243,7 +35618,7 @@ declare namespace GetLatestSessionReviewRequest {
     interface AsObject {
         sessionId: string;
         sessionReviewView: SessionReview.View;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetLatestSessionReviewRequest
@@ -34251,7 +35626,7 @@ declare namespace GetLatestSessionReviewRequest {
     interface AsProtobufJSON {
         sessionId: string;
         sessionReviewView: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -34392,10 +35767,10 @@ declare class DocumentFileResource implements GrpcMessage {
     set displayName(value: string);
     get bytes(): Uint8Array;
     set bytes(value: Uint8Array);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -34428,8 +35803,8 @@ declare namespace DocumentFileResource {
         name: string;
         displayName: string;
         bytes: Uint8Array;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -34440,8 +35815,8 @@ declare namespace DocumentFileResource {
         name: string;
         displayName: string;
         bytes: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -34491,10 +35866,10 @@ declare class ImageFileResource implements GrpcMessage {
     set displayName(value: string);
     get bytes(): Uint8Array;
     set bytes(value: Uint8Array);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -34527,8 +35902,8 @@ declare namespace ImageFileResource {
         name: string;
         displayName: string;
         bytes: Uint8Array;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -34539,8 +35914,8 @@ declare namespace ImageFileResource {
         name: string;
         displayName: string;
         bytes: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -34603,10 +35978,10 @@ declare class AudioFileResource implements GrpcMessage {
     set audioFileResourceType(value: AudioFileResourceType);
     get transcriptions(): S2tTranscription[] | undefined;
     set transcriptions(value: S2tTranscription[] | undefined);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -34645,8 +36020,8 @@ declare namespace AudioFileResource {
         sampleRate: number;
         audioFileResourceType: AudioFileResourceType;
         transcriptions?: S2tTranscription.AsObject[];
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
         displayName: string;
@@ -34662,8 +36037,8 @@ declare namespace AudioFileResource {
         sampleRate: number;
         audioFileResourceType: string;
         transcriptions: S2tTranscription.AsProtobufJSON[] | null;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
         displayName: string;
@@ -34723,10 +36098,10 @@ declare class VideoFileResource implements GrpcMessage {
     set resolution(value: string);
     get frameRate(): number;
     set frameRate(value: number);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -34762,8 +36137,8 @@ declare namespace VideoFileResource {
         durationInS: number;
         resolution: string;
         frameRate: number;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -34777,8 +36152,8 @@ declare namespace VideoFileResource {
         durationInS: number;
         resolution: string;
         frameRate: number;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -34831,8 +36206,8 @@ declare class GetAudioFilesRequest implements GrpcMessage {
     set pageToken(value: string);
     get sortingMode(): SortingMode;
     set sortingMode(value: SortingMode);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -34863,7 +36238,7 @@ declare namespace GetAudioFilesRequest {
         resourceView: ResourceView;
         pageToken: string;
         sortingMode: SortingMode;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAudioFilesRequest
@@ -34874,7 +36249,7 @@ declare namespace GetAudioFilesRequest {
         resourceView: string;
         pageToken: string;
         sortingMode: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -35310,8 +36685,8 @@ declare class ListAudioFilesRequest implements GrpcMessage {
     set pageToken(value: string);
     get sortingMode(): SortingMode;
     set sortingMode(value: SortingMode);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -35342,7 +36717,7 @@ declare namespace ListAudioFilesRequest {
         resourceView: ResourceView;
         pageToken: string;
         sortingMode: SortingMode;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListAudioFilesRequest
@@ -35353,7 +36728,7 @@ declare namespace ListAudioFilesRequest {
         resourceView: string;
         pageToken: string;
         sortingMode: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -35477,8 +36852,8 @@ declare class GetAudioFileOfSessionRequest implements GrpcMessage {
     set sessionId(value: string);
     get resourceView(): ResourceView;
     set resourceView(value: ResourceView);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -35507,7 +36882,7 @@ declare namespace GetAudioFileOfSessionRequest {
         parent: string;
         sessionId: string;
         resourceView: ResourceView;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAudioFileOfSessionRequest
@@ -35516,7 +36891,7 @@ declare namespace GetAudioFileOfSessionRequest {
         parent: string;
         sessionId: string;
         resourceView: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 
@@ -36516,7 +37891,7 @@ declare class QAClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<thisProto.RunTrainingResponse>>
          */
-        runTraining: (requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<RunTrainingResponse>>;
+        runTraining: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<RunTrainingResponse>>;
         /**
          * Unary call: /ondewo.qa.QA/GetServerState
          *
@@ -36524,7 +37899,7 @@ declare class QAClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<thisProto.GetServerStateResponse>>
          */
-        getServerState: (requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<GetServerStateResponse>>;
+        getServerState: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<GetServerStateResponse>>;
         /**
          * Unary call: /ondewo.qa.QA/ListProjectIds
          *
@@ -36532,7 +37907,7 @@ declare class QAClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<thisProto.ListProjectIdsResponse>>
          */
-        listProjectIds: (requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListProjectIdsResponse>>;
+        listProjectIds: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListProjectIdsResponse>>;
         /**
          * Unary call: /ondewo.qa.QA/GetProjectConfig
          *
@@ -36574,7 +37949,7 @@ declare class QAClient {
      * @param requestMetadata Request metadata
      * @returns Observable<thisProto.RunTrainingResponse>
      */
-    runTraining(requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata): Observable<RunTrainingResponse>;
+    runTraining(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<RunTrainingResponse>;
     /**
      * Unary call @/ondewo.qa.QA/GetServerState
      *
@@ -36582,7 +37957,7 @@ declare class QAClient {
      * @param requestMetadata Request metadata
      * @returns Observable<thisProto.GetServerStateResponse>
      */
-    getServerState(requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata): Observable<GetServerStateResponse>;
+    getServerState(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<GetServerStateResponse>;
     /**
      * Unary call @/ondewo.qa.QA/ListProjectIds
      *
@@ -36590,7 +37965,7 @@ declare class QAClient {
      * @param requestMetadata Request metadata
      * @returns Observable<thisProto.ListProjectIdsResponse>
      */
-    listProjectIds(requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata): Observable<ListProjectIdsResponse>;
+    listProjectIds(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<ListProjectIdsResponse>;
     /**
      * Unary call @/ondewo.qa.QA/GetProjectConfig
      *
@@ -36663,12 +38038,12 @@ declare class OperationMetadata implements GrpcMessage {
     set parentOperationName(value: string);
     get subOperationNames(): string[];
     set subOperationNames(value: string[]);
-    get createTime(): googleProtobuf005.Timestamp | undefined;
-    set createTime(value: googleProtobuf005.Timestamp | undefined);
-    get startTime(): googleProtobuf005.Timestamp | undefined;
-    set startTime(value: googleProtobuf005.Timestamp | undefined);
-    get endTime(): googleProtobuf005.Timestamp | undefined;
-    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    get createTime(): googleProtobuf003.Timestamp | undefined;
+    set createTime(value: googleProtobuf003.Timestamp | undefined);
+    get startTime(): googleProtobuf003.Timestamp | undefined;
+    set startTime(value: googleProtobuf003.Timestamp | undefined);
+    get endTime(): googleProtobuf003.Timestamp | undefined;
+    set endTime(value: googleProtobuf003.Timestamp | undefined);
     get isCancellationRequested(): boolean;
     set isCancellationRequested(value: boolean);
     get cancelCommand(): string;
@@ -36693,10 +38068,10 @@ declare class OperationMetadata implements GrpcMessage {
     set log(value: string[]);
     get logLimit(): number;
     set logLimit(value: number);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -36729,9 +38104,9 @@ declare namespace OperationMetadata {
         status: OperationMetadata.Status;
         parentOperationName: string;
         subOperationNames: string[];
-        createTime?: googleProtobuf005.Timestamp.AsObject;
-        startTime?: googleProtobuf005.Timestamp.AsObject;
-        endTime?: googleProtobuf005.Timestamp.AsObject;
+        createTime?: googleProtobuf003.Timestamp.AsObject;
+        startTime?: googleProtobuf003.Timestamp.AsObject;
+        endTime?: googleProtobuf003.Timestamp.AsObject;
         isCancellationRequested: boolean;
         cancelCommand: string;
         userIdCreated: string;
@@ -36744,8 +38119,8 @@ declare namespace OperationMetadata {
         description: string;
         log: string[];
         logLimit: number;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -36756,9 +38131,9 @@ declare namespace OperationMetadata {
         status: string;
         parentOperationName: string;
         subOperationNames: string[];
-        createTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        startTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         isCancellationRequested: boolean;
         cancelCommand: string;
         userIdCreated: string;
@@ -36771,8 +38146,8 @@ declare namespace OperationMetadata {
         description: string;
         log: string[];
         logLimit: number;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -36858,8 +38233,8 @@ declare class Operation implements GrpcMessage {
     set done(value: boolean);
     get error(): Status | undefined;
     set error(value: Status | undefined);
-    get response(): googleProtobuf005.Any | undefined;
-    set response(value: googleProtobuf005.Any | undefined);
+    get response(): googleProtobuf003.Any | undefined;
+    set response(value: googleProtobuf003.Any | undefined);
     get result(): Operation.ResultCase;
     /**
      * Serialize message to binary data
@@ -36890,7 +38265,7 @@ declare namespace Operation {
         metadata?: OperationMetadata.AsObject;
         done: boolean;
         error?: Status.AsObject;
-        response?: googleProtobuf005.Any.AsObject;
+        response?: googleProtobuf003.Any.AsObject;
     }
     /**
      * Protobuf JSON representation for Operation
@@ -36900,7 +38275,7 @@ declare namespace Operation {
         metadata: OperationMetadata.AsProtobufJSON | null;
         done: boolean;
         error: Status.AsProtobufJSON | null;
-        response: googleProtobuf005.Any.AsProtobufJSON | null;
+        response: googleProtobuf003.Any.AsProtobufJSON | null;
     }
     enum ResultCase {
         none = 0,
@@ -36944,8 +38319,8 @@ declare class GetOperationRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<GetOperationRequest.AsObject>);
     get name(): string;
     set name(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -36972,14 +38347,14 @@ declare namespace GetOperationRequest {
      */
     interface AsObject {
         name: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetOperationRequest
      */
     interface AsProtobufJSON {
         name: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -37030,8 +38405,8 @@ declare class ListOperationsRequest implements GrpcMessage {
     set pageToken(value: string);
     get operationFilter(): OperationFilter | undefined;
     set operationFilter(value: OperationFilter | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -37062,7 +38437,7 @@ declare namespace ListOperationsRequest {
         pageSize: number;
         pageToken: string;
         operationFilter?: OperationFilter.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListOperationsRequest
@@ -37073,7 +38448,7 @@ declare namespace ListOperationsRequest {
         pageSize: number;
         pageToken: string;
         operationFilter: OperationFilter.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -37122,10 +38497,10 @@ declare class OperationFilter implements GrpcMessage {
     set statuses(value: OperationMetadata.Status[]);
     get types(): OperationMetadata.OperationType[];
     set types(value: OperationMetadata.OperationType[]);
-    get startTime(): googleProtobuf005.Timestamp | undefined;
-    set startTime(value: googleProtobuf005.Timestamp | undefined);
-    get endTime(): googleProtobuf005.Timestamp | undefined;
-    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    get startTime(): googleProtobuf003.Timestamp | undefined;
+    set startTime(value: googleProtobuf003.Timestamp | undefined);
+    get endTime(): googleProtobuf003.Timestamp | undefined;
+    set endTime(value: googleProtobuf003.Timestamp | undefined);
     get userIds(): string[];
     set userIds(value: string[]);
     get startTimeOneof(): OperationFilter.StartTimeOneofCase;
@@ -37158,8 +38533,8 @@ declare namespace OperationFilter {
         projectParents: string[];
         statuses: OperationMetadata.Status[];
         types: OperationMetadata.OperationType[];
-        startTime?: googleProtobuf005.Timestamp.AsObject;
-        endTime?: googleProtobuf005.Timestamp.AsObject;
+        startTime?: googleProtobuf003.Timestamp.AsObject;
+        endTime?: googleProtobuf003.Timestamp.AsObject;
         userIds: string[];
     }
     /**
@@ -37169,8 +38544,8 @@ declare namespace OperationFilter {
         projectParents: string[];
         statuses: string[];
         types: string[];
-        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         userIds: string[];
     }
     enum StartTimeOneofCase {
@@ -37515,10 +38890,10 @@ declare class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     set name(value: string);
     get minLogLevel(): LogSeverity;
     set minLogLevel(value: LogSeverity);
-    get startTime(): googleProtobuf005.Timestamp | undefined;
-    set startTime(value: googleProtobuf005.Timestamp | undefined);
-    get endTime(): googleProtobuf005.Timestamp | undefined;
-    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    get startTime(): googleProtobuf003.Timestamp | undefined;
+    set startTime(value: googleProtobuf003.Timestamp | undefined);
+    get endTime(): googleProtobuf003.Timestamp | undefined;
+    set endTime(value: googleProtobuf003.Timestamp | undefined);
     get maxLines(): number;
     set maxLines(value: number);
     get regex(): string;
@@ -37550,8 +38925,8 @@ declare namespace GetRemoteOperationContainerLogsRequest {
     interface AsObject {
         name: string;
         minLogLevel: LogSeverity;
-        startTime?: googleProtobuf005.Timestamp.AsObject;
-        endTime?: googleProtobuf005.Timestamp.AsObject;
+        startTime?: googleProtobuf003.Timestamp.AsObject;
+        endTime?: googleProtobuf003.Timestamp.AsObject;
         maxLines: number;
         regex: string;
     }
@@ -37561,8 +38936,8 @@ declare namespace GetRemoteOperationContainerLogsRequest {
     interface AsProtobufJSON {
         name: string;
         minLogLevel: string;
-        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         maxLines: number;
         regex: string;
     }
@@ -37676,8 +39051,8 @@ declare class RemoteOperationContainerLogLine implements GrpcMessage {
      * @param _value initial values object or instance of RemoteOperationContainerLogLine to deeply clone from
      */
     constructor(_value?: RecursivePartial<RemoteOperationContainerLogLine.AsObject>);
-    get timestamp(): googleProtobuf005.Timestamp | undefined;
-    set timestamp(value: googleProtobuf005.Timestamp | undefined);
+    get timestamp(): googleProtobuf003.Timestamp | undefined;
+    set timestamp(value: googleProtobuf003.Timestamp | undefined);
     get level(): LogSeverity;
     set level(value: LogSeverity);
     get message(): string;
@@ -37707,7 +39082,7 @@ declare namespace RemoteOperationContainerLogLine {
      * Standard JavaScript object representation for RemoteOperationContainerLogLine
      */
     interface AsObject {
-        timestamp?: googleProtobuf005.Timestamp.AsObject;
+        timestamp?: googleProtobuf003.Timestamp.AsObject;
         level: LogSeverity;
         message: string;
     }
@@ -37715,7 +39090,7 @@ declare namespace RemoteOperationContainerLogLine {
      * Protobuf JSON representation for RemoteOperationContainerLogLine
      */
     interface AsProtobufJSON {
-        timestamp: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        timestamp: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         level: string;
         message: string;
     }
@@ -37845,12 +39220,12 @@ declare class RemoteOperationContainerStatus implements GrpcMessage {
     set oomKilled(value: boolean);
     get healthStatus(): string;
     set healthStatus(value: string);
-    get startedAt(): googleProtobuf005.Timestamp | undefined;
-    set startedAt(value: googleProtobuf005.Timestamp | undefined);
-    get finishedAt(): googleProtobuf005.Timestamp | undefined;
-    set finishedAt(value: googleProtobuf005.Timestamp | undefined);
-    get observedAt(): googleProtobuf005.Timestamp | undefined;
-    set observedAt(value: googleProtobuf005.Timestamp | undefined);
+    get startedAt(): googleProtobuf003.Timestamp | undefined;
+    set startedAt(value: googleProtobuf003.Timestamp | undefined);
+    get finishedAt(): googleProtobuf003.Timestamp | undefined;
+    set finishedAt(value: googleProtobuf003.Timestamp | undefined);
+    get observedAt(): googleProtobuf003.Timestamp | undefined;
+    set observedAt(value: googleProtobuf003.Timestamp | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -37883,9 +39258,9 @@ declare namespace RemoteOperationContainerStatus {
         exitCode: number;
         oomKilled: boolean;
         healthStatus: string;
-        startedAt?: googleProtobuf005.Timestamp.AsObject;
-        finishedAt?: googleProtobuf005.Timestamp.AsObject;
-        observedAt?: googleProtobuf005.Timestamp.AsObject;
+        startedAt?: googleProtobuf003.Timestamp.AsObject;
+        finishedAt?: googleProtobuf003.Timestamp.AsObject;
+        observedAt?: googleProtobuf003.Timestamp.AsObject;
     }
     /**
      * Protobuf JSON representation for RemoteOperationContainerStatus
@@ -37898,9 +39273,9 @@ declare namespace RemoteOperationContainerStatus {
         exitCode: number;
         oomKilled: boolean;
         healthStatus: string;
-        startedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        finishedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        observedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        finishedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        observedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     }
 }
 
@@ -38621,10 +39996,10 @@ declare class RagDataset implements GrpcMessage {
     set pagerank(value: number);
     get parsingStatus(): RagDatasetParsingStatus | undefined;
     set parsingStatus(value: RagDatasetParsingStatus | undefined);
-    get createTime(): googleProtobuf005.Timestamp | undefined;
-    set createTime(value: googleProtobuf005.Timestamp | undefined);
-    get updateTime(): googleProtobuf005.Timestamp | undefined;
-    set updateTime(value: googleProtobuf005.Timestamp | undefined);
+    get createTime(): googleProtobuf003.Timestamp | undefined;
+    set createTime(value: googleProtobuf003.Timestamp | undefined);
+    get updateTime(): googleProtobuf003.Timestamp | undefined;
+    set updateTime(value: googleProtobuf003.Timestamp | undefined);
     get embeddingModelCcaiServiceName(): string;
     set embeddingModelCcaiServiceName(value: string);
     /**
@@ -38663,8 +40038,8 @@ declare namespace RagDataset {
         parserConfig?: RagParserConfig.AsObject;
         pagerank: number;
         parsingStatus?: RagDatasetParsingStatus.AsObject;
-        createTime?: googleProtobuf005.Timestamp.AsObject;
-        updateTime?: googleProtobuf005.Timestamp.AsObject;
+        createTime?: googleProtobuf003.Timestamp.AsObject;
+        updateTime?: googleProtobuf003.Timestamp.AsObject;
         embeddingModelCcaiServiceName: string;
     }
     /**
@@ -38682,8 +40057,8 @@ declare namespace RagDataset {
         parserConfig: RagParserConfig.AsProtobufJSON | null;
         pagerank: number;
         parsingStatus: RagDatasetParsingStatus.AsProtobufJSON | null;
-        createTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        updateTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        updateTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         embeddingModelCcaiServiceName: string;
     }
 }
@@ -38838,10 +40213,10 @@ declare class RagUpdateDatasetRequest implements GrpcMessage {
     set parserConfig(value: RagParserConfig | undefined);
     get pagerank(): number;
     set pagerank(value: number);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get embeddingModelCcaiServiceName(): string;
     set embeddingModelCcaiServiceName(value: string);
     /**
@@ -38878,8 +40253,8 @@ declare namespace RagUpdateDatasetRequest {
         chunkMethod: RagChunkMethod;
         parserConfig?: RagParserConfig.AsObject;
         pagerank: number;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         embeddingModelCcaiServiceName: string;
     }
     /**
@@ -38895,8 +40270,8 @@ declare namespace RagUpdateDatasetRequest {
         chunkMethod: string;
         parserConfig: RagParserConfig.AsProtobufJSON | null;
         pagerank: number;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         embeddingModelCcaiServiceName: string;
     }
 }
@@ -39041,8 +40416,8 @@ declare class RagListDatasetsRequest implements GrpcMessage {
     set desc(value: boolean);
     get sortingMode(): SortingMode;
     set sortingMode(value: SortingMode);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -39076,7 +40451,7 @@ declare namespace RagListDatasetsRequest {
         orderby: string;
         desc: boolean;
         sortingMode: SortingMode;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for RagListDatasetsRequest
@@ -39090,7 +40465,7 @@ declare namespace RagListDatasetsRequest {
         orderby: string;
         desc: boolean;
         sortingMode: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -39336,20 +40711,20 @@ declare class RagDocument implements GrpcMessage {
     set progress(value: number);
     get progressMsg(): string;
     set progressMsg(value: string);
-    get processBeginAt(): googleProtobuf005.Timestamp | undefined;
-    set processBeginAt(value: googleProtobuf005.Timestamp | undefined);
+    get processBeginAt(): googleProtobuf003.Timestamp | undefined;
+    set processBeginAt(value: googleProtobuf003.Timestamp | undefined);
     get processDuration(): number;
     set processDuration(value: number);
-    get metaFields(): googleProtobuf005.Struct | undefined;
-    set metaFields(value: googleProtobuf005.Struct | undefined);
+    get metaFields(): googleProtobuf003.Struct | undefined;
+    set metaFields(value: googleProtobuf003.Struct | undefined);
     get run(): RagDocumentStatus;
     set run(value: RagDocumentStatus);
     get status(): string;
     set status(value: string);
-    get createTime(): googleProtobuf005.Timestamp | undefined;
-    set createTime(value: googleProtobuf005.Timestamp | undefined);
-    get updateTime(): googleProtobuf005.Timestamp | undefined;
-    set updateTime(value: googleProtobuf005.Timestamp | undefined);
+    get createTime(): googleProtobuf003.Timestamp | undefined;
+    set createTime(value: googleProtobuf003.Timestamp | undefined);
+    get updateTime(): googleProtobuf003.Timestamp | undefined;
+    set updateTime(value: googleProtobuf003.Timestamp | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -39387,13 +40762,13 @@ declare namespace RagDocument {
         tokenCount: number;
         progress: number;
         progressMsg: string;
-        processBeginAt?: googleProtobuf005.Timestamp.AsObject;
+        processBeginAt?: googleProtobuf003.Timestamp.AsObject;
         processDuration: number;
-        metaFields?: googleProtobuf005.Struct.AsObject;
+        metaFields?: googleProtobuf003.Struct.AsObject;
         run: RagDocumentStatus;
         status: string;
-        createTime?: googleProtobuf005.Timestamp.AsObject;
-        updateTime?: googleProtobuf005.Timestamp.AsObject;
+        createTime?: googleProtobuf003.Timestamp.AsObject;
+        updateTime?: googleProtobuf003.Timestamp.AsObject;
     }
     /**
      * Protobuf JSON representation for RagDocument
@@ -39411,13 +40786,13 @@ declare namespace RagDocument {
         tokenCount: number;
         progress: number;
         progressMsg: string;
-        processBeginAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        processBeginAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         processDuration: number;
-        metaFields: googleProtobuf005.Struct.AsProtobufJSON | null;
+        metaFields: googleProtobuf003.Struct.AsProtobufJSON | null;
         run: string;
         status: string;
-        createTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        updateTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        updateTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     }
 }
 /**
@@ -39479,12 +40854,12 @@ declare class RagUpdateDocumentRequest implements GrpcMessage {
     set parserConfig(value: RagParserConfig | undefined);
     get enabled(): boolean;
     set enabled(value: boolean);
-    get metaFields(): googleProtobuf005.Struct | undefined;
-    set metaFields(value: googleProtobuf005.Struct | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get metaFields(): googleProtobuf003.Struct | undefined;
+    set metaFields(value: googleProtobuf003.Struct | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -39518,9 +40893,9 @@ declare namespace RagUpdateDocumentRequest {
         chunkMethod: RagChunkMethod;
         parserConfig?: RagParserConfig.AsObject;
         enabled: boolean;
-        metaFields?: googleProtobuf005.Struct.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        metaFields?: googleProtobuf003.Struct.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for RagUpdateDocumentRequest
@@ -39534,9 +40909,9 @@ declare namespace RagUpdateDocumentRequest {
         chunkMethod: string;
         parserConfig: RagParserConfig.AsProtobufJSON | null;
         enabled: boolean;
-        metaFields: googleProtobuf005.Struct.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        metaFields: googleProtobuf003.Struct.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -39767,16 +41142,16 @@ declare class RagListDocumentsRequest implements GrpcMessage {
     set suffix(value: string[]);
     get runStatus(): RagDocumentStatus[];
     set runStatus(value: RagDocumentStatus[]);
-    get createTimeFrom(): googleProtobuf005.Timestamp | undefined;
-    set createTimeFrom(value: googleProtobuf005.Timestamp | undefined);
-    get createTimeTo(): googleProtobuf005.Timestamp | undefined;
-    set createTimeTo(value: googleProtobuf005.Timestamp | undefined);
+    get createTimeFrom(): googleProtobuf003.Timestamp | undefined;
+    set createTimeFrom(value: googleProtobuf003.Timestamp | undefined);
+    get createTimeTo(): googleProtobuf003.Timestamp | undefined;
+    set createTimeTo(value: googleProtobuf003.Timestamp | undefined);
     get metadataCondition(): RagMetadataConditions | undefined;
     set metadataCondition(value: RagMetadataConditions | undefined);
     get sortingMode(): SortingMode;
     set sortingMode(value: SortingMode);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -39813,11 +41188,11 @@ declare namespace RagListDocumentsRequest {
         keywords: string;
         suffix: string[];
         runStatus: RagDocumentStatus[];
-        createTimeFrom?: googleProtobuf005.Timestamp.AsObject;
-        createTimeTo?: googleProtobuf005.Timestamp.AsObject;
+        createTimeFrom?: googleProtobuf003.Timestamp.AsObject;
+        createTimeTo?: googleProtobuf003.Timestamp.AsObject;
         metadataCondition?: RagMetadataConditions.AsObject;
         sortingMode: SortingMode;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for RagListDocumentsRequest
@@ -39834,11 +41209,11 @@ declare namespace RagListDocumentsRequest {
         keywords: string;
         suffix: string[];
         runStatus: string[];
-        createTimeFrom: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        createTimeTo: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createTimeFrom: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        createTimeTo: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         metadataCondition: RagMetadataConditions.AsProtobufJSON | null;
         sortingMode: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -40322,8 +41697,8 @@ declare class RagRetrievalRequest implements GrpcMessage {
     set highlight(value: boolean);
     get keyword(): boolean;
     set keyword(value: boolean);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get rerankModelCcaiServiceName(): string;
     set rerankModelCcaiServiceName(value: string);
     /**
@@ -40365,7 +41740,7 @@ declare namespace RagRetrievalRequest {
         topK: number;
         highlight: boolean;
         keyword: boolean;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         rerankModelCcaiServiceName: string;
     }
     /**
@@ -40386,7 +41761,7 @@ declare namespace RagRetrievalRequest {
         topK: number;
         highlight: boolean;
         keyword: boolean;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         rerankModelCcaiServiceName: string;
     }
 }
@@ -40531,10 +41906,10 @@ declare class RagChunk implements GrpcMessage {
     set questions(value: string[]);
     get imageId(): string;
     set imageId(value: string);
-    get positions(): googleProtobuf005.ListValue[] | undefined;
-    set positions(value: googleProtobuf005.ListValue[] | undefined);
-    get createTime(): googleProtobuf005.Timestamp | undefined;
-    set createTime(value: googleProtobuf005.Timestamp | undefined);
+    get positions(): googleProtobuf003.ListValue[] | undefined;
+    set positions(value: googleProtobuf003.ListValue[] | undefined);
+    get createTime(): googleProtobuf003.Timestamp | undefined;
+    set createTime(value: googleProtobuf003.Timestamp | undefined);
     get documentKeyword(): string;
     set documentKeyword(value: string);
     get similarity(): number;
@@ -40571,8 +41946,8 @@ declare namespace RagChunk {
         importantKeywords: string[];
         questions: string[];
         imageId: string;
-        positions?: googleProtobuf005.ListValue.AsObject[];
-        createTime?: googleProtobuf005.Timestamp.AsObject;
+        positions?: googleProtobuf003.ListValue.AsObject[];
+        createTime?: googleProtobuf003.Timestamp.AsObject;
         documentKeyword: string;
         similarity: number;
     }
@@ -40587,8 +41962,8 @@ declare namespace RagChunk {
         importantKeywords: string[];
         questions: string[];
         imageId: string;
-        positions: googleProtobuf005.ListValue.AsProtobufJSON[] | null;
-        createTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        positions: googleProtobuf003.ListValue.AsProtobufJSON[] | null;
+        createTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         documentKeyword: string;
         similarity: number;
     }
@@ -40714,8 +42089,8 @@ declare class RagCreateCrawlerRequest implements GrpcMessage {
     set languageCode(value: string);
     get crawler(): RagCrawler | undefined;
     set crawler(value: RagCrawler | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -40744,7 +42119,7 @@ declare namespace RagCreateCrawlerRequest {
         parent: string;
         languageCode: string;
         crawler?: RagCrawler.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for RagCreateCrawlerRequest
@@ -40753,7 +42128,7 @@ declare namespace RagCreateCrawlerRequest {
         parent: string;
         languageCode: string;
         crawler: RagCrawler.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -41116,8 +42491,8 @@ declare class RagListCrawlersRequest implements GrpcMessage {
     set orderby(value: string);
     get sortingMode(): SortingMode;
     set sortingMode(value: SortingMode);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -41150,7 +42525,7 @@ declare namespace RagListCrawlersRequest {
         crawlerName: string;
         orderby: string;
         sortingMode: SortingMode;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for RagListCrawlersRequest
@@ -41163,7 +42538,7 @@ declare namespace RagListCrawlersRequest {
         crawlerName: string;
         orderby: string;
         sortingMode: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -41282,8 +42657,8 @@ declare class RagGetCrawlerRequest implements GrpcMessage {
     set parent(value: string);
     get languageCode(): string;
     set languageCode(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -41312,7 +42687,7 @@ declare namespace RagGetCrawlerRequest {
         name: string;
         parent: string;
         languageCode: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for RagGetCrawlerRequest
@@ -41321,7 +42696,7 @@ declare namespace RagGetCrawlerRequest {
         name: string;
         parent: string;
         languageCode: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -41367,10 +42742,10 @@ declare class RagUpdateCrawlerRequest implements GrpcMessage {
     set parent(value: string);
     get languageCode(): string;
     set languageCode(value: string);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -41399,8 +42774,8 @@ declare namespace RagUpdateCrawlerRequest {
         crawler?: RagCrawler.AsObject;
         parent: string;
         languageCode: string;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for RagUpdateCrawlerRequest
@@ -41409,8 +42784,8 @@ declare namespace RagUpdateCrawlerRequest {
         crawler: RagCrawler.AsProtobufJSON | null;
         parent: string;
         languageCode: string;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -41461,10 +42836,10 @@ declare class RagCrawler implements GrpcMessage {
     set name(value: string);
     get displayName(): string;
     set displayName(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -41508,8 +42883,8 @@ declare namespace RagCrawler {
     interface AsObject {
         name: string;
         displayName: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
         crawlerSources?: RagCrawlerSources.AsObject;
@@ -41525,8 +42900,8 @@ declare namespace RagCrawler {
     interface AsProtobufJSON {
         name: string;
         displayName: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
         crawlerSources: RagCrawlerSources.AsProtobufJSON | null;
@@ -42091,8 +43466,8 @@ declare class RagCrawlerBrowserConfig implements GrpcMessage {
      * @param _value initial values object or instance of RagCrawlerBrowserConfig to deeply clone from
      */
     constructor(_value?: RecursivePartial<RagCrawlerBrowserConfig.AsObject>);
-    get crawlerHeaders(): googleProtobuf005.Struct[] | undefined;
-    set crawlerHeaders(value: googleProtobuf005.Struct[] | undefined);
+    get crawlerHeaders(): googleProtobuf003.Struct[] | undefined;
+    set crawlerHeaders(value: googleProtobuf003.Struct[] | undefined);
     get crawlerCookies(): RagCrawlerCookie[] | undefined;
     set crawlerCookies(value: RagCrawlerCookie[] | undefined);
     get crawlerUserAgent(): string;
@@ -42122,7 +43497,7 @@ declare namespace RagCrawlerBrowserConfig {
      * Standard JavaScript object representation for RagCrawlerBrowserConfig
      */
     interface AsObject {
-        crawlerHeaders?: googleProtobuf005.Struct.AsObject[];
+        crawlerHeaders?: googleProtobuf003.Struct.AsObject[];
         crawlerCookies?: RagCrawlerCookie.AsObject[];
         crawlerUserAgent: string;
     }
@@ -42130,7 +43505,7 @@ declare namespace RagCrawlerBrowserConfig {
      * Protobuf JSON representation for RagCrawlerBrowserConfig
      */
     interface AsProtobufJSON {
-        crawlerHeaders: googleProtobuf005.Struct.AsProtobufJSON[] | null;
+        crawlerHeaders: googleProtobuf003.Struct.AsProtobufJSON[] | null;
         crawlerCookies: RagCrawlerCookie.AsProtobufJSON[] | null;
         crawlerUserAgent: string;
     }
@@ -42717,8 +44092,8 @@ declare class RagCrawlerContentResult implements GrpcMessage {
      * @param _value initial values object or instance of RagCrawlerContentResult to deeply clone from
      */
     constructor(_value?: RecursivePartial<RagCrawlerContentResult.AsObject>);
-    get metadata(): googleProtobuf005.Struct | undefined;
-    set metadata(value: googleProtobuf005.Struct | undefined);
+    get metadata(): googleProtobuf003.Struct | undefined;
+    set metadata(value: googleProtobuf003.Struct | undefined);
     get markdown(): string;
     set markdown(value: string);
     /**
@@ -42746,14 +44121,14 @@ declare namespace RagCrawlerContentResult {
      * Standard JavaScript object representation for RagCrawlerContentResult
      */
     interface AsObject {
-        metadata?: googleProtobuf005.Struct.AsObject;
+        metadata?: googleProtobuf003.Struct.AsObject;
         markdown: string;
     }
     /**
      * Protobuf JSON representation for RagCrawlerContentResult
      */
     interface AsProtobufJSON {
-        metadata: googleProtobuf005.Struct.AsProtobufJSON | null;
+        metadata: googleProtobuf003.Struct.AsProtobufJSON | null;
         markdown: string;
     }
 }
@@ -42792,8 +44167,8 @@ declare class RagCrawlerExecutionInfo implements GrpcMessage {
      * @param _value initial values object or instance of RagCrawlerExecutionInfo to deeply clone from
      */
     constructor(_value?: RecursivePartial<RagCrawlerExecutionInfo.AsObject>);
-    get sslCertificate(): googleProtobuf005.Struct | undefined;
-    set sslCertificate(value: googleProtobuf005.Struct | undefined);
+    get sslCertificate(): googleProtobuf003.Struct | undefined;
+    set sslCertificate(value: googleProtobuf003.Struct | undefined);
     get success(): boolean;
     set success(value: boolean);
     get errorMessage(): string;
@@ -42823,7 +44198,7 @@ declare namespace RagCrawlerExecutionInfo {
      * Standard JavaScript object representation for RagCrawlerExecutionInfo
      */
     interface AsObject {
-        sslCertificate?: googleProtobuf005.Struct.AsObject;
+        sslCertificate?: googleProtobuf003.Struct.AsObject;
         success: boolean;
         errorMessage: string;
     }
@@ -42831,7 +44206,7 @@ declare namespace RagCrawlerExecutionInfo {
      * Protobuf JSON representation for RagCrawlerExecutionInfo
      */
     interface AsProtobufJSON {
-        sslCertificate: googleProtobuf005.Struct.AsProtobufJSON | null;
+        sslCertificate: googleProtobuf003.Struct.AsProtobufJSON | null;
         success: boolean;
         errorMessage: string;
     }
@@ -42886,12 +44261,12 @@ declare class RagCrawlerResult implements GrpcMessage {
     set sourceUrl(value: string);
     get fileResource(): FileResource | undefined;
     set fileResource(value: FileResource | undefined);
-    get lastCrawledDate(): googleProtobuf005.Timestamp | undefined;
-    set lastCrawledDate(value: googleProtobuf005.Timestamp | undefined);
+    get lastCrawledDate(): googleProtobuf003.Timestamp | undefined;
+    set lastCrawledDate(value: googleProtobuf003.Timestamp | undefined);
     get contentResult(): RagCrawlerContentResult | undefined;
     set contentResult(value: RagCrawlerContentResult | undefined);
-    get pageLastUpdatedDate(): googleProtobuf005.Timestamp | undefined;
-    set pageLastUpdatedDate(value: googleProtobuf005.Timestamp | undefined);
+    get pageLastUpdatedDate(): googleProtobuf003.Timestamp | undefined;
+    set pageLastUpdatedDate(value: googleProtobuf003.Timestamp | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -42922,9 +44297,9 @@ declare namespace RagCrawlerResult {
         operationName: string;
         sourceUrl: string;
         fileResource?: FileResource.AsObject;
-        lastCrawledDate?: googleProtobuf005.Timestamp.AsObject;
+        lastCrawledDate?: googleProtobuf003.Timestamp.AsObject;
         contentResult?: RagCrawlerContentResult.AsObject;
-        pageLastUpdatedDate?: googleProtobuf005.Timestamp.AsObject;
+        pageLastUpdatedDate?: googleProtobuf003.Timestamp.AsObject;
     }
     /**
      * Protobuf JSON representation for RagCrawlerResult
@@ -42935,9 +44310,9 @@ declare namespace RagCrawlerResult {
         operationName: string;
         sourceUrl: string;
         fileResource: FileResource.AsProtobufJSON | null;
-        lastCrawledDate: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        lastCrawledDate: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         contentResult: RagCrawlerContentResult.AsProtobufJSON | null;
-        pageLastUpdatedDate: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        pageLastUpdatedDate: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     }
 }
 /**
@@ -43632,8 +45007,8 @@ declare class RagGetCrawlerResultsRequest implements GrpcMessage {
     set pageToken(value: string);
     get urlQuery(): string;
     set urlQuery(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get orderby(): string;
     set orderby(value: string);
     get sortingMode(): SortingMode;
@@ -43668,7 +45043,7 @@ declare namespace RagGetCrawlerResultsRequest {
         operationName: string;
         pageToken: string;
         urlQuery: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         orderby: string;
         sortingMode: SortingMode;
     }
@@ -43681,7 +45056,7 @@ declare namespace RagGetCrawlerResultsRequest {
         operationName: string;
         pageToken: string;
         urlQuery: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         orderby: string;
         sortingMode: string;
     }
@@ -43810,8 +45185,8 @@ declare class RagGetCrawlerResultRequest implements GrpcMessage {
     set operationName(value: string);
     get url(): string;
     set url(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -43841,7 +45216,7 @@ declare namespace RagGetCrawlerResultRequest {
         languageCode: string;
         operationName: string;
         url: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for RagGetCrawlerResultRequest
@@ -43851,7 +45226,7 @@ declare namespace RagGetCrawlerResultRequest {
         languageCode: string;
         operationName: string;
         url: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -44082,8 +45457,8 @@ declare class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
     set pageSize(value: number);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get orderby(): string;
     set orderby(value: string);
     get sortingMode(): SortingMode;
@@ -44118,7 +45493,7 @@ declare namespace RagGetCrawlerAttachedDatasetsRequest {
         crawlerName: string;
         pageSize: number;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         orderby: string;
         sortingMode: SortingMode;
     }
@@ -44131,7 +45506,7 @@ declare namespace RagGetCrawlerAttachedDatasetsRequest {
         crawlerName: string;
         pageSize: number;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         orderby: string;
         sortingMode: string;
     }
@@ -44272,18 +45647,18 @@ declare class RagGetCrawlerRunLogsRequest implements GrpcMessage {
     set phaseFilter(value: string);
     get searchQuery(): string;
     set searchQuery(value: string);
-    get startTime(): googleProtobuf005.Timestamp | undefined;
-    set startTime(value: googleProtobuf005.Timestamp | undefined);
-    get endTime(): googleProtobuf005.Timestamp | undefined;
-    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    get startTime(): googleProtobuf003.Timestamp | undefined;
+    set startTime(value: googleProtobuf003.Timestamp | undefined);
+    get endTime(): googleProtobuf003.Timestamp | undefined;
+    set endTime(value: googleProtobuf003.Timestamp | undefined);
     get sourceUrlFilter(): string;
     set sourceUrlFilter(value: string);
     get orderby(): string;
     set orderby(value: string);
     get sortingMode(): SortingMode;
     set sortingMode(value: SortingMode);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -44317,12 +45692,12 @@ declare namespace RagGetCrawlerRunLogsRequest {
         levelFilters: LogSeverity[];
         phaseFilter: string;
         searchQuery: string;
-        startTime?: googleProtobuf005.Timestamp.AsObject;
-        endTime?: googleProtobuf005.Timestamp.AsObject;
+        startTime?: googleProtobuf003.Timestamp.AsObject;
+        endTime?: googleProtobuf003.Timestamp.AsObject;
         sourceUrlFilter: string;
         orderby: string;
         sortingMode: SortingMode;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for RagGetCrawlerRunLogsRequest
@@ -44336,12 +45711,12 @@ declare namespace RagGetCrawlerRunLogsRequest {
         levelFilters: string[];
         phaseFilter: string;
         searchQuery: string;
-        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        startTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         sourceUrlFilter: string;
         orderby: string;
         sortingMode: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -45429,10 +46804,10 @@ declare class ProjectRole implements GrpcMessage {
     set name(value: string);
     get permissions(): string[];
     set permissions(value: string[]);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -45465,8 +46840,8 @@ declare namespace ProjectRole {
         roleId: number;
         name: string;
         permissions: string[];
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -45477,8 +46852,8 @@ declare namespace ProjectRole {
         roleId: number;
         name: string;
         permissions: string[];
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -45602,8 +46977,8 @@ declare class UpdateProjectRoleRequest implements GrpcMessage {
     set parent(value: string);
     get role(): ProjectRole | undefined;
     set role(value: ProjectRole | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     get projectRoleView(): ProjectRoleView;
     set projectRoleView(value: ProjectRoleView);
     /**
@@ -45633,7 +47008,7 @@ declare namespace UpdateProjectRoleRequest {
     interface AsObject {
         parent: string;
         role?: ProjectRole.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
         projectRoleView: ProjectRoleView;
     }
     /**
@@ -45642,7 +47017,7 @@ declare namespace UpdateProjectRoleRequest {
     interface AsProtobufJSON {
         parent: string;
         role: ProjectRole.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         projectRoleView: string;
     }
 }
@@ -45692,8 +47067,8 @@ declare class GetProjectRoleRequest implements GrpcMessage {
     set roleName(value: string);
     get projectRoleView(): ProjectRoleView;
     set projectRoleView(value: ProjectRoleView);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get projectRoleIdentifier(): GetProjectRoleRequest.ProjectRoleIdentifierCase;
     /**
      * Serialize message to binary data
@@ -45724,7 +47099,7 @@ declare namespace GetProjectRoleRequest {
         roleId: number;
         roleName: string;
         projectRoleView: ProjectRoleView;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetProjectRoleRequest
@@ -45734,7 +47109,7 @@ declare namespace GetProjectRoleRequest {
         roleId: number | null;
         roleName: string | null;
         projectRoleView: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
     enum ProjectRoleIdentifierCase {
         none = 0,
@@ -45858,8 +47233,8 @@ declare class ListProjectRolesRequest implements GrpcMessage {
     set pageToken(value: string);
     get projectRoleView(): ProjectRoleView;
     set projectRoleView(value: ProjectRoleView);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -45888,7 +47263,7 @@ declare namespace ListProjectRolesRequest {
         parent: string;
         pageToken: string;
         projectRoleView: ProjectRoleView;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListProjectRolesRequest
@@ -45897,7 +47272,7 @@ declare namespace ListProjectRolesRequest {
         parent: string;
         pageToken: string;
         projectRoleView: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -46033,10 +47408,10 @@ declare class User implements GrpcMessage {
     set userEmail(value: string);
     get userProfilePicture(): Uint8Array;
     set userProfilePicture(value: Uint8Array);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -46071,8 +47446,8 @@ declare namespace User {
         serverRoleId: number;
         userEmail: string;
         userProfilePicture: Uint8Array;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -46085,8 +47460,8 @@ declare namespace User {
         serverRoleId: number;
         userEmail: string;
         userProfilePicture: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -46360,8 +47735,8 @@ declare class UpdateUserRequest implements GrpcMessage {
     set user(value: User | undefined);
     get password(): string;
     set password(value: string);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -46389,7 +47764,7 @@ declare namespace UpdateUserRequest {
     interface AsObject {
         user?: User.AsObject;
         password: string;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateUserRequest
@@ -46397,7 +47772,7 @@ declare namespace UpdateUserRequest {
     interface AsProtobufJSON {
         user: User.AsProtobufJSON | null;
         password: string;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -46440,8 +47815,8 @@ declare class GetUserRequest implements GrpcMessage {
     set userId(value: string);
     get userEmail(): string;
     set userEmail(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get userIdentifier(): GetUserRequest.UserIdentifierCase;
     /**
      * Serialize message to binary data
@@ -46470,7 +47845,7 @@ declare namespace GetUserRequest {
     interface AsObject {
         userId: string;
         userEmail: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetUserRequest
@@ -46478,7 +47853,7 @@ declare namespace GetUserRequest {
     interface AsProtobufJSON {
         userId: string | null;
         userEmail: string | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
     enum UserIdentifierCase {
         none = 0,
@@ -46591,8 +47966,8 @@ declare class ListUsersRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListUsersRequest.AsObject>);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -46619,14 +47994,14 @@ declare namespace ListUsersRequest {
      */
     interface AsObject {
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListUsersRequest
      */
     interface AsProtobufJSON {
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -46822,10 +48197,10 @@ declare class ServerRole implements GrpcMessage {
     set name(value: string);
     get permissions(): string[];
     set permissions(value: string[]);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -46858,8 +48233,8 @@ declare namespace ServerRole {
         roleId: number;
         name: string;
         permissions: string[];
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -46870,8 +48245,8 @@ declare namespace ServerRole {
         roleId: number;
         name: string;
         permissions: string[];
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -46981,8 +48356,8 @@ declare class UpdateServerRoleRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateServerRoleRequest.AsObject>);
     get role(): ServerRole | undefined;
     set role(value: ServerRole | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -47009,14 +48384,14 @@ declare namespace UpdateServerRoleRequest {
      */
     interface AsObject {
         role?: ServerRole.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateServerRoleRequest
      */
     interface AsProtobufJSON {
         role: ServerRole.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -47128,8 +48503,8 @@ declare class GetServerRoleRequest implements GrpcMessage {
     set roleId(value: number);
     get roleName(): string;
     set roleName(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get serverRoleIdentifier(): GetServerRoleRequest.ServerRoleIdentifierCase;
     /**
      * Serialize message to binary data
@@ -47158,7 +48533,7 @@ declare namespace GetServerRoleRequest {
     interface AsObject {
         roleId: number;
         roleName: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetServerRoleRequest
@@ -47166,7 +48541,7 @@ declare namespace GetServerRoleRequest {
     interface AsProtobufJSON {
         roleId: number | null;
         roleName: string | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
     enum ServerRoleIdentifierCase {
         none = 0,
@@ -47210,8 +48585,8 @@ declare class ListServerRolesRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListServerRolesRequest.AsObject>);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -47238,14 +48613,14 @@ declare namespace ListServerRolesRequest {
      */
     interface AsObject {
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListServerRolesRequest
      */
     interface AsProtobufJSON {
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -47358,8 +48733,8 @@ declare class ListServerPermissionsRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListServerPermissionsRequest.AsObject>);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -47386,14 +48761,14 @@ declare namespace ListServerPermissionsRequest {
      */
     interface AsObject {
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListServerPermissionsRequest
      */
     interface AsProtobufJSON {
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -47512,8 +48887,8 @@ declare class GetUserPreferencesRequest implements GrpcMessage {
     set keys(value: string[]);
     get regexInclude(): string;
     set regexInclude(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -47542,7 +48917,7 @@ declare namespace GetUserPreferencesRequest {
         userName: string;
         keys: string[];
         regexInclude: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetUserPreferencesRequest
@@ -47551,7 +48926,7 @@ declare namespace GetUserPreferencesRequest {
         userName: string;
         keys: string[];
         regexInclude: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -48057,8 +49432,8 @@ declare class ListUserPreferencesRequest implements GrpcMessage {
     set userName(value: string);
     get regexFilter(): string;
     set regexFilter(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -48086,7 +49461,7 @@ declare namespace ListUserPreferencesRequest {
     interface AsObject {
         userName: string;
         regexFilter: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListUserPreferencesRequest
@@ -48094,7 +49469,7 @@ declare namespace ListUserPreferencesRequest {
     interface AsProtobufJSON {
         userName: string;
         regexFilter: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -48220,7 +49595,7 @@ declare class UsersClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteUser: (requestData: GetUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteUser: (requestData: GetUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Users/UpdateUser
          *
@@ -48268,7 +49643,7 @@ declare class UsersClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteServerRole: (requestData: DeleteServerRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteServerRole: (requestData: DeleteServerRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Users/UpdateServerRole
          *
@@ -48300,7 +49675,7 @@ declare class UsersClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        checkLogin: (requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        checkLogin: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Users/ListNotifications
          *
@@ -48390,7 +49765,7 @@ declare class UsersClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteUser(requestData: GetUserRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteUser(requestData: GetUserRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Users/UpdateUser
      *
@@ -48438,7 +49813,7 @@ declare class UsersClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteServerRole(requestData: DeleteServerRoleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteServerRole(requestData: DeleteServerRoleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Users/UpdateServerRole
      *
@@ -48470,7 +49845,7 @@ declare class UsersClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    checkLogin(requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    checkLogin(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Users/ListNotifications
      *
@@ -48645,8 +50020,8 @@ declare class WebhookRequest implements GrpcMessage {
     set originalDetectIntentRequest(value: OriginalDetectIntentRequest | undefined);
     get session(): string;
     set session(value: string);
-    get headers(): googleProtobuf005.Struct | undefined;
-    set headers(value: googleProtobuf005.Struct | undefined);
+    get headers(): googleProtobuf003.Struct | undefined;
+    set headers(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -48676,7 +50051,7 @@ declare namespace WebhookRequest {
         queryResult?: QueryResult.AsObject;
         originalDetectIntentRequest?: OriginalDetectIntentRequest.AsObject;
         session: string;
-        headers?: googleProtobuf005.Struct.AsObject;
+        headers?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for WebhookRequest
@@ -48686,7 +50061,7 @@ declare namespace WebhookRequest {
         queryResult: QueryResult.AsProtobufJSON | null;
         originalDetectIntentRequest: OriginalDetectIntentRequest.AsProtobufJSON | null;
         session: string;
-        headers: googleProtobuf005.Struct.AsProtobufJSON | null;
+        headers: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -48734,8 +50109,8 @@ declare class WebhookResponse implements GrpcMessage {
     set fulfillmentMessages(value: Intent.Message[] | undefined);
     get source(): string;
     set source(value: string);
-    get payload(): googleProtobuf005.Struct | undefined;
-    set payload(value: googleProtobuf005.Struct | undefined);
+    get payload(): googleProtobuf003.Struct | undefined;
+    set payload(value: googleProtobuf003.Struct | undefined);
     get outputContexts(): Context[] | undefined;
     set outputContexts(value: Context[] | undefined);
     get followupEventInput(): EventInput | undefined;
@@ -48770,7 +50145,7 @@ declare namespace WebhookResponse {
         fulfillmentText: string;
         fulfillmentMessages?: Intent.Message.AsObject[];
         source: string;
-        payload?: googleProtobuf005.Struct.AsObject;
+        payload?: googleProtobuf003.Struct.AsObject;
         outputContexts?: Context.AsObject[];
         followupEventInput?: EventInput.AsObject;
         sessionEntityTypes?: SessionEntityType.AsObject[];
@@ -48782,7 +50157,7 @@ declare namespace WebhookResponse {
         fulfillmentText: string;
         fulfillmentMessages: Intent.Message.AsProtobufJSON[] | null;
         source: string;
-        payload: googleProtobuf005.Struct.AsProtobufJSON | null;
+        payload: googleProtobuf003.Struct.AsProtobufJSON | null;
         outputContexts: Context.AsProtobufJSON[] | null;
         followupEventInput: EventInput.AsProtobufJSON | null;
         sessionEntityTypes: SessionEntityType.AsProtobufJSON[] | null;
@@ -48824,8 +50199,8 @@ declare class OriginalDetectIntentRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<OriginalDetectIntentRequest.AsObject>);
     get source(): string;
     set source(value: string);
-    get payload(): googleProtobuf005.Struct | undefined;
-    set payload(value: googleProtobuf005.Struct | undefined);
+    get payload(): googleProtobuf003.Struct | undefined;
+    set payload(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -48852,14 +50227,14 @@ declare namespace OriginalDetectIntentRequest {
      */
     interface AsObject {
         source: string;
-        payload?: googleProtobuf005.Struct.AsObject;
+        payload?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for OriginalDetectIntentRequest
      */
     interface AsProtobufJSON {
         source: string;
-        payload: googleProtobuf005.Struct.AsProtobufJSON | null;
+        payload: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -49352,8 +50727,8 @@ declare class UpdateSessionEntityTypeRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<UpdateSessionEntityTypeRequest.AsObject>);
     get sessionEntityType(): SessionEntityType | undefined;
     set sessionEntityType(value: SessionEntityType | undefined);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -49380,14 +50755,14 @@ declare namespace UpdateSessionEntityTypeRequest {
      */
     interface AsObject {
         sessionEntityType?: SessionEntityType.AsObject;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateSessionEntityTypeRequest
      */
     interface AsProtobufJSON {
         sessionEntityType: SessionEntityType.AsProtobufJSON | null;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -49519,7 +50894,7 @@ declare class WebhookClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteSessionEntityType: (requestData: DeleteSessionEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteSessionEntityType: (requestData: DeleteSessionEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -49569,7 +50944,7 @@ declare class WebhookClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteSessionEntityType(requestData: DeleteSessionEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteSessionEntityType(requestData: DeleteSessionEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     static ɵfac: i0.ɵɵFactoryDeclaration<WebhookClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<WebhookClient>;
 }
@@ -49625,7 +51000,7 @@ declare class EntityTypesClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
          */
-        deleteEntityType: (requestData: DeleteEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteEntityType: (requestData: DeleteEntityTypeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
          *
@@ -49755,7 +51130,7 @@ declare class EntityTypesClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf007.Empty>
      */
-    deleteEntityType(requestData: DeleteEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteEntityType(requestData: DeleteEntityTypeRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes
      *
@@ -51868,7 +53243,7 @@ declare class IntentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteIntent: (requestData: DeleteIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteIntent: (requestData: DeleteIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Intents/BatchUpdateIntents
          *
@@ -51892,7 +53267,7 @@ declare class IntentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        tagIntent: (requestData: IntentTagRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        tagIntent: (requestData: IntentTagRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Intents/DeleteIntentTag
          *
@@ -51900,7 +53275,7 @@ declare class IntentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteIntentTag: (requestData: IntentTagRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteIntentTag: (requestData: IntentTagRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Intents/GetIntentTags
          *
@@ -52086,7 +53461,7 @@ declare class IntentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteIntent(requestData: DeleteIntentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteIntent(requestData: DeleteIntentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Intents/BatchUpdateIntents
      *
@@ -52110,7 +53485,7 @@ declare class IntentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    tagIntent(requestData: IntentTagRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    tagIntent(requestData: IntentTagRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Intents/DeleteIntentTag
      *
@@ -52118,7 +53493,7 @@ declare class IntentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteIntentTag(requestData: IntentTagRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteIntentTag(requestData: IntentTagRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Intents/GetIntentTags
      *
@@ -52423,18 +53798,18 @@ declare class Agent implements GrpcMessage {
     set timeZone(value: string);
     get nluPlatform(): string;
     set nluPlatform(value: string);
-    get configs(): googleProtobuf005.Struct | undefined;
-    set configs(value: googleProtobuf005.Struct | undefined);
+    get configs(): googleProtobuf003.Struct | undefined;
+    set configs(value: googleProtobuf003.Struct | undefined);
     get ownerId(): string;
     set ownerId(value: string);
     get status(): AgentStatus;
     set status(value: AgentStatus);
     get description(): string;
     set description(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -52470,12 +53845,12 @@ declare namespace Agent {
         supportedLanguageCodes: string[];
         timeZone: string;
         nluPlatform: string;
-        configs?: googleProtobuf005.Struct.AsObject;
+        configs?: googleProtobuf003.Struct.AsObject;
         ownerId: string;
         status: AgentStatus;
         description: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -52489,12 +53864,12 @@ declare namespace Agent {
         supportedLanguageCodes: string[];
         timeZone: string;
         nluPlatform: string;
-        configs: googleProtobuf005.Struct.AsProtobufJSON | null;
+        configs: googleProtobuf003.Struct.AsProtobufJSON | null;
         ownerId: string;
         status: string;
         description: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -52760,8 +54135,8 @@ declare class UpdateAgentRequest implements GrpcMessage {
     set agent(value: Agent | undefined);
     get agentView(): AgentView;
     set agentView(value: AgentView);
-    get updateMask(): googleProtobuf005.FieldMask | undefined;
-    set updateMask(value: googleProtobuf005.FieldMask | undefined);
+    get updateMask(): googleProtobuf003.FieldMask | undefined;
+    set updateMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -52789,7 +54164,7 @@ declare namespace UpdateAgentRequest {
     interface AsObject {
         agent?: Agent.AsObject;
         agentView: AgentView;
-        updateMask?: googleProtobuf005.FieldMask.AsObject;
+        updateMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for UpdateAgentRequest
@@ -52797,7 +54172,7 @@ declare namespace UpdateAgentRequest {
     interface AsProtobufJSON {
         agent: Agent.AsProtobufJSON | null;
         agentView: string;
-        updateMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        updateMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -52908,8 +54283,8 @@ declare class GetAgentRequest implements GrpcMessage {
     set parent(value: string);
     get agentView(): AgentView;
     set agentView(value: AgentView);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -52937,7 +54312,7 @@ declare namespace GetAgentRequest {
     interface AsObject {
         parent: string;
         agentView: AgentView;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAgentRequest
@@ -52945,7 +54320,7 @@ declare namespace GetAgentRequest {
     interface AsProtobufJSON {
         parent: string;
         agentView: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -52990,8 +54365,8 @@ declare class ListAgentsRequest implements GrpcMessage {
     set pageToken(value: string);
     get sortByField(): AgentSorting | undefined;
     set sortByField(value: AgentSorting | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -53020,7 +54395,7 @@ declare namespace ListAgentsRequest {
         agentView: AgentView;
         pageToken: string;
         sortByField?: AgentSorting.AsObject;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListAgentsRequest
@@ -53029,7 +54404,7 @@ declare namespace ListAgentsRequest {
         agentView: string;
         pageToken: string;
         sortByField: AgentSorting.AsProtobufJSON | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -53864,8 +55239,8 @@ declare class RankingMatchOptimizationConfig implements GrpcMessage {
     set nSplits(value: number);
     get randomSeed(): number;
     set randomSeed(value: number);
-    get initialThresholds(): googleProtobuf005.Struct | undefined;
-    set initialThresholds(value: googleProtobuf005.Struct | undefined);
+    get initialThresholds(): googleProtobuf003.Struct | undefined;
+    set initialThresholds(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -53894,7 +55269,7 @@ declare namespace RankingMatchOptimizationConfig {
         languageCode: string;
         nSplits: number;
         randomSeed: number;
-        initialThresholds?: googleProtobuf005.Struct.AsObject;
+        initialThresholds?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for RankingMatchOptimizationConfig
@@ -53903,7 +55278,7 @@ declare namespace RankingMatchOptimizationConfig {
         languageCode: string;
         nSplits: number;
         randomSeed: number;
-        initialThresholds: googleProtobuf005.Struct.AsProtobufJSON | null;
+        initialThresholds: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -53940,10 +55315,10 @@ declare class OptimizeRankingMatchResponse implements GrpcMessage {
      * @param _value initial values object or instance of OptimizeRankingMatchResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<OptimizeRankingMatchResponse.AsObject>);
-    get optimizationInfo(): googleProtobuf005.Struct | undefined;
-    set optimizationInfo(value: googleProtobuf005.Struct | undefined);
-    get optimizedOndewoConfig(): googleProtobuf005.Struct | undefined;
-    set optimizedOndewoConfig(value: googleProtobuf005.Struct | undefined);
+    get optimizationInfo(): googleProtobuf003.Struct | undefined;
+    set optimizationInfo(value: googleProtobuf003.Struct | undefined);
+    get optimizedOndewoConfig(): googleProtobuf003.Struct | undefined;
+    set optimizedOndewoConfig(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -53969,15 +55344,15 @@ declare namespace OptimizeRankingMatchResponse {
      * Standard JavaScript object representation for OptimizeRankingMatchResponse
      */
     interface AsObject {
-        optimizationInfo?: googleProtobuf005.Struct.AsObject;
-        optimizedOndewoConfig?: googleProtobuf005.Struct.AsObject;
+        optimizationInfo?: googleProtobuf003.Struct.AsObject;
+        optimizedOndewoConfig?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for OptimizeRankingMatchResponse
      */
     interface AsProtobufJSON {
-        optimizationInfo: googleProtobuf005.Struct.AsProtobufJSON | null;
-        optimizedOndewoConfig: googleProtobuf005.Struct.AsProtobufJSON | null;
+        optimizationInfo: googleProtobuf003.Struct.AsProtobufJSON | null;
+        optimizedOndewoConfig: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -54279,8 +55654,8 @@ declare class GetAgentStatisticsRequest implements GrpcMessage {
     set llmAgentNameFilter(value: string[]);
     get llmGroupBys(): string[];
     set llmGroupBys(value: string[]);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get llmCcaiServiceProviderFilter(): CcaiServiceProvider[];
     set llmCcaiServiceProviderFilter(value: CcaiServiceProvider[]);
     /**
@@ -54316,7 +55691,7 @@ declare namespace GetAgentStatisticsRequest {
         llmProviderFilter: string[];
         llmAgentNameFilter: string[];
         llmGroupBys: string[];
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         llmCcaiServiceProviderFilter: CcaiServiceProvider[];
     }
     /**
@@ -54331,7 +55706,7 @@ declare namespace GetAgentStatisticsRequest {
         llmProviderFilter: string[];
         llmAgentNameFilter: string[];
         llmGroupBys: string[];
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         llmCcaiServiceProviderFilter: string[];
     }
 }
@@ -54482,8 +55857,8 @@ declare class GetSessionsStatisticsRequest implements GrpcMessage {
     set groupBys(value: string[]);
     get orderBys(): string[];
     set orderBys(value: string[]);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     get sqlQuery(): string;
     set sqlQuery(value: string);
     get llmModelFilter(): string[];
@@ -54529,7 +55904,7 @@ declare namespace GetSessionsStatisticsRequest {
         limit: number;
         groupBys: string[];
         orderBys: string[];
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
         sqlQuery: string;
         llmModelFilter: string[];
         llmProviderFilter: string[];
@@ -54549,7 +55924,7 @@ declare namespace GetSessionsStatisticsRequest {
         limit: number;
         groupBys: string[];
         orderBys: string[];
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
         sqlQuery: string;
         llmModelFilter: string[];
         llmProviderFilter: string[];
@@ -54705,8 +56080,8 @@ declare class GetSessionsStatisticsTimeSeriesRequest implements GrpcMessage {
     set llmToolNameFilter(value: string[]);
     get llmCcaiServiceProviderFilter(): CcaiServiceProvider[];
     set llmCcaiServiceProviderFilter(value: CcaiServiceProvider[]);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -54742,7 +56117,7 @@ declare namespace GetSessionsStatisticsTimeSeriesRequest {
         llmAgentNameFilter: string[];
         llmToolNameFilter: string[];
         llmCcaiServiceProviderFilter: CcaiServiceProvider[];
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetSessionsStatisticsTimeSeriesRequest
@@ -54758,7 +56133,7 @@ declare namespace GetSessionsStatisticsTimeSeriesRequest {
         llmAgentNameFilter: string[];
         llmToolNameFilter: string[];
         llmCcaiServiceProviderFilter: string[];
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -54796,10 +56171,10 @@ declare class LlmTelemetryTimeSeriesBucket implements GrpcMessage {
      * @param _value initial values object or instance of LlmTelemetryTimeSeriesBucket to deeply clone from
      */
     constructor(_value?: RecursivePartial<LlmTelemetryTimeSeriesBucket.AsObject>);
-    get bucketStart(): googleProtobuf005.Timestamp | undefined;
-    set bucketStart(value: googleProtobuf005.Timestamp | undefined);
-    get bucketEnd(): googleProtobuf005.Timestamp | undefined;
-    set bucketEnd(value: googleProtobuf005.Timestamp | undefined);
+    get bucketStart(): googleProtobuf003.Timestamp | undefined;
+    set bucketStart(value: googleProtobuf003.Timestamp | undefined);
+    get bucketEnd(): googleProtobuf003.Timestamp | undefined;
+    set bucketEnd(value: googleProtobuf003.Timestamp | undefined);
     get llmTelemetryReport(): LlmTelemetryReport | undefined;
     set llmTelemetryReport(value: LlmTelemetryReport | undefined);
     /**
@@ -54827,16 +56202,16 @@ declare namespace LlmTelemetryTimeSeriesBucket {
      * Standard JavaScript object representation for LlmTelemetryTimeSeriesBucket
      */
     interface AsObject {
-        bucketStart?: googleProtobuf005.Timestamp.AsObject;
-        bucketEnd?: googleProtobuf005.Timestamp.AsObject;
+        bucketStart?: googleProtobuf003.Timestamp.AsObject;
+        bucketEnd?: googleProtobuf003.Timestamp.AsObject;
         llmTelemetryReport?: LlmTelemetryReport.AsObject;
     }
     /**
      * Protobuf JSON representation for LlmTelemetryTimeSeriesBucket
      */
     interface AsProtobufJSON {
-        bucketStart: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        bucketEnd: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        bucketStart: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        bucketEnd: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         llmTelemetryReport: LlmTelemetryReport.AsProtobufJSON | null;
     }
 }
@@ -55106,8 +56481,8 @@ declare class ListUsersInProjectRequest implements GrpcMessage {
     set parent(value: string);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -55135,7 +56510,7 @@ declare namespace ListUsersInProjectRequest {
     interface AsObject {
         parent: string;
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListUsersInProjectRequest
@@ -55143,7 +56518,7 @@ declare namespace ListUsersInProjectRequest {
     interface AsProtobufJSON {
         parent: string;
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -55409,8 +56784,8 @@ declare class ListProjectPermissionsRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListProjectPermissionsRequest.AsObject>);
     get pageToken(): string;
     set pageToken(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -55437,14 +56812,14 @@ declare namespace ListProjectPermissionsRequest {
      */
     interface AsObject {
         pageToken: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListProjectPermissionsRequest
      */
     interface AsProtobufJSON {
         pageToken: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -56155,8 +57530,8 @@ declare class ModelStatus implements GrpcMessage {
     set languageCode(value: string);
     get modelName(): string;
     set modelName(value: string);
-    get statusSetTime(): googleProtobuf005.Timestamp | undefined;
-    set statusSetTime(value: googleProtobuf005.Timestamp | undefined);
+    get statusSetTime(): googleProtobuf003.Timestamp | undefined;
+    set statusSetTime(value: googleProtobuf003.Timestamp | undefined);
     get config(): string;
     set config(value: string);
     get status(): ModelStatus.StatusName;
@@ -56189,7 +57564,7 @@ declare namespace ModelStatus {
         cacheVersion: number;
         languageCode: string;
         modelName: string;
-        statusSetTime?: googleProtobuf005.Timestamp.AsObject;
+        statusSetTime?: googleProtobuf003.Timestamp.AsObject;
         config: string;
         status: ModelStatus.StatusName;
     }
@@ -56200,7 +57575,7 @@ declare namespace ModelStatus {
         cacheVersion: number;
         languageCode: string;
         modelName: string;
-        statusSetTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        statusSetTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         config: string;
         status: string;
     }
@@ -56328,10 +57703,10 @@ declare class CustomPlatformInfo implements GrpcMessage {
     set displayName(value: string);
     get position(): number;
     set position(value: number);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
-    get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-    set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
+    get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+    set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     get modifiedBy(): string;
@@ -56364,8 +57739,8 @@ declare namespace CustomPlatformInfo {
         platform: Intent.Message.Platform;
         displayName: string;
         position: number;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
-        modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
+        modifiedAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
         modifiedBy: string;
     }
@@ -56376,8 +57751,8 @@ declare namespace CustomPlatformInfo {
         platform: string;
         displayName: string;
         position: number;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-        modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+        modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
         modifiedBy: string;
     }
@@ -56765,10 +58140,10 @@ declare namespace FullTextSearchResponseEntityType {
         set displayName(value: string);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -56801,8 +58176,8 @@ declare namespace FullTextSearchResponseEntityType {
             name: string;
             displayName: string;
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -56813,8 +58188,8 @@ declare namespace FullTextSearchResponseEntityType {
             name: string;
             displayName: string;
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -56969,10 +58344,10 @@ declare namespace FullTextSearchResponseEntity {
         set entityTypeDisplayName(value: string);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -57007,8 +58382,8 @@ declare namespace FullTextSearchResponseEntity {
             entityTypeName: string;
             entityTypeDisplayName: string;
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -57021,8 +58396,8 @@ declare namespace FullTextSearchResponseEntity {
             entityTypeName: string;
             entityTypeDisplayName: string;
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -57183,10 +58558,10 @@ declare namespace FullTextSearchResponseEntitySynonym {
         set entityDisplayName(value: string);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -57223,8 +58598,8 @@ declare namespace FullTextSearchResponseEntitySynonym {
             entityName: string;
             entityDisplayName: string;
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -57239,8 +58614,8 @@ declare namespace FullTextSearchResponseEntitySynonym {
             entityName: string;
             entityDisplayName: string;
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -57395,10 +58770,10 @@ declare namespace FullTextSearchResponseIntent {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -57433,8 +58808,8 @@ declare namespace FullTextSearchResponseIntent {
             domainName: string;
             tags: string[];
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -57447,8 +58822,8 @@ declare namespace FullTextSearchResponseIntent {
             domainName: string;
             tags: string[];
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -57603,10 +58978,10 @@ declare namespace FullTextSearchResponseIntentContextIn {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -57641,8 +59016,8 @@ declare namespace FullTextSearchResponseIntentContextIn {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -57655,8 +59030,8 @@ declare namespace FullTextSearchResponseIntentContextIn {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -57811,10 +59186,10 @@ declare namespace FullTextSearchResponseIntentContextOut {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -57849,8 +59224,8 @@ declare namespace FullTextSearchResponseIntentContextOut {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -57863,8 +59238,8 @@ declare namespace FullTextSearchResponseIntentContextOut {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -58031,10 +59406,10 @@ declare namespace FullTextSearchResponseIntentUsersays {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -58073,8 +59448,8 @@ declare namespace FullTextSearchResponseIntentUsersays {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -58091,8 +59466,8 @@ declare namespace FullTextSearchResponseIntentUsersays {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -58250,10 +59625,10 @@ declare namespace FullTextSearchResponseIntentTags {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -58289,8 +59664,8 @@ declare namespace FullTextSearchResponseIntentTags {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -58304,8 +59679,8 @@ declare namespace FullTextSearchResponseIntentTags {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -58466,10 +59841,10 @@ declare namespace FullTextSearchResponseIntentResponse {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -58506,8 +59881,8 @@ declare namespace FullTextSearchResponseIntentResponse {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -58522,8 +59897,8 @@ declare namespace FullTextSearchResponseIntentResponse {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -58681,10 +60056,10 @@ declare namespace FullTextSearchResponseIntentParameters {
         set tags(value: string[]);
         get language(): string;
         set language(value: string);
-        get createdAt(): googleProtobuf005.Timestamp | undefined;
-        set createdAt(value: googleProtobuf005.Timestamp | undefined);
-        get modifiedAt(): googleProtobuf005.Timestamp | undefined;
-        set modifiedAt(value: googleProtobuf005.Timestamp | undefined);
+        get createdAt(): googleProtobuf003.Timestamp | undefined;
+        set createdAt(value: googleProtobuf003.Timestamp | undefined);
+        get modifiedAt(): googleProtobuf003.Timestamp | undefined;
+        set modifiedAt(value: googleProtobuf003.Timestamp | undefined);
         get createdBy(): string;
         set createdBy(value: string);
         get modifiedBy(): string;
@@ -58720,8 +60095,8 @@ declare namespace FullTextSearchResponseIntentParameters {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt?: googleProtobuf005.Timestamp.AsObject;
-            modifiedAt?: googleProtobuf005.Timestamp.AsObject;
+            createdAt?: googleProtobuf003.Timestamp.AsObject;
+            modifiedAt?: googleProtobuf003.Timestamp.AsObject;
             createdBy: string;
             modifiedBy: string;
         }
@@ -58735,8 +60110,8 @@ declare namespace FullTextSearchResponseIntentParameters {
             intentDisplayName: string;
             tags: string[];
             language: string;
-            createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-            modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+            createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+            modifiedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
             createdBy: string;
             modifiedBy: string;
         }
@@ -59088,8 +60463,8 @@ declare class ProjectTechnicalUser implements GrpcMessage {
     set userId(value: string);
     get username(): string;
     set username(value: string);
-    get createdAt(): googleProtobuf005.Timestamp | undefined;
-    set createdAt(value: googleProtobuf005.Timestamp | undefined);
+    get createdAt(): googleProtobuf003.Timestamp | undefined;
+    set createdAt(value: googleProtobuf003.Timestamp | undefined);
     get createdBy(): string;
     set createdBy(value: string);
     /**
@@ -59119,7 +60494,7 @@ declare namespace ProjectTechnicalUser {
     interface AsObject {
         userId: string;
         username: string;
-        createdAt?: googleProtobuf005.Timestamp.AsObject;
+        createdAt?: googleProtobuf003.Timestamp.AsObject;
         createdBy: string;
     }
     /**
@@ -59128,7 +60503,7 @@ declare namespace ProjectTechnicalUser {
     interface AsProtobufJSON {
         userId: string;
         username: string;
-        createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        createdAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
         createdBy: string;
     }
 }
@@ -59609,8 +60984,8 @@ declare class ListLlmModelsRequest implements GrpcMessage {
     constructor(_value?: RecursivePartial<ListLlmModelsRequest.AsObject>);
     get ccaiServiceName(): string;
     set ccaiServiceName(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -59637,14 +61012,14 @@ declare namespace ListLlmModelsRequest {
      */
     interface AsObject {
         ccaiServiceName: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ListLlmModelsRequest
      */
     interface AsProtobufJSON {
         ccaiServiceName: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -59841,14 +61216,14 @@ declare class LlmGenerateRequest implements GrpcMessage {
      * @param _value initial values object or instance of LlmGenerateRequest to deeply clone from
      */
     constructor(_value?: RecursivePartial<LlmGenerateRequest.AsObject>);
-    get llmGenerationRequest(): googleProtobuf005.Struct | undefined;
-    set llmGenerationRequest(value: googleProtobuf005.Struct | undefined);
+    get llmGenerationRequest(): googleProtobuf003.Struct | undefined;
+    set llmGenerationRequest(value: googleProtobuf003.Struct | undefined);
     get ccaiServiceName(): string;
     set ccaiServiceName(value: string);
     get fileResources(): FileResource[] | undefined;
     set fileResources(value: FileResource[] | undefined);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -59874,19 +61249,19 @@ declare namespace LlmGenerateRequest {
      * Standard JavaScript object representation for LlmGenerateRequest
      */
     interface AsObject {
-        llmGenerationRequest?: googleProtobuf005.Struct.AsObject;
+        llmGenerationRequest?: googleProtobuf003.Struct.AsObject;
         ccaiServiceName: string;
         fileResources?: FileResource.AsObject[];
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for LlmGenerateRequest
      */
     interface AsProtobufJSON {
-        llmGenerationRequest: googleProtobuf005.Struct.AsProtobufJSON | null;
+        llmGenerationRequest: googleProtobuf003.Struct.AsProtobufJSON | null;
         ccaiServiceName: string;
         fileResources: FileResource.AsProtobufJSON[] | null;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -59923,8 +61298,8 @@ declare class LlmGenerateResponse implements GrpcMessage {
      * @param _value initial values object or instance of LlmGenerateResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<LlmGenerateResponse.AsObject>);
-    get llmGenerationResponse(): googleProtobuf005.Struct | undefined;
-    set llmGenerationResponse(value: googleProtobuf005.Struct | undefined);
+    get llmGenerationResponse(): googleProtobuf003.Struct | undefined;
+    set llmGenerationResponse(value: googleProtobuf003.Struct | undefined);
     get fileResources(): FileResource[] | undefined;
     set fileResources(value: FileResource[] | undefined);
     /**
@@ -59952,14 +61327,14 @@ declare namespace LlmGenerateResponse {
      * Standard JavaScript object representation for LlmGenerateResponse
      */
     interface AsObject {
-        llmGenerationResponse?: googleProtobuf005.Struct.AsObject;
+        llmGenerationResponse?: googleProtobuf003.Struct.AsObject;
         fileResources?: FileResource.AsObject[];
     }
     /**
      * Protobuf JSON representation for LlmGenerateResponse
      */
     interface AsProtobufJSON {
-        llmGenerationResponse: googleProtobuf005.Struct.AsProtobufJSON | null;
+        llmGenerationResponse: googleProtobuf003.Struct.AsProtobufJSON | null;
         fileResources: FileResource.AsProtobufJSON[] | null;
     }
 }
@@ -59996,8 +61371,8 @@ declare class StreamingLlmGenerateResponse implements GrpcMessage {
      * @param _value initial values object or instance of StreamingLlmGenerateResponse to deeply clone from
      */
     constructor(_value?: RecursivePartial<StreamingLlmGenerateResponse.AsObject>);
-    get llmGenerationStreamResponse(): googleProtobuf005.Struct | undefined;
-    set llmGenerationStreamResponse(value: googleProtobuf005.Struct | undefined);
+    get llmGenerationStreamResponse(): googleProtobuf003.Struct | undefined;
+    set llmGenerationStreamResponse(value: googleProtobuf003.Struct | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60023,13 +61398,13 @@ declare namespace StreamingLlmGenerateResponse {
      * Standard JavaScript object representation for StreamingLlmGenerateResponse
      */
     interface AsObject {
-        llmGenerationStreamResponse?: googleProtobuf005.Struct.AsObject;
+        llmGenerationStreamResponse?: googleProtobuf003.Struct.AsObject;
     }
     /**
      * Protobuf JSON representation for StreamingLlmGenerateResponse
      */
     interface AsProtobufJSON {
-        llmGenerationStreamResponse: googleProtobuf005.Struct.AsProtobufJSON | null;
+        llmGenerationStreamResponse: googleProtobuf003.Struct.AsProtobufJSON | null;
     }
 }
 /**
@@ -60077,8 +61452,8 @@ declare class ExtractEntitiesRequest implements GrpcMessage {
     set languageCode(value: string);
     get intentName(): string;
     set intentName(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60108,7 +61483,7 @@ declare namespace ExtractEntitiesRequest {
         text: string;
         languageCode: string;
         intentName: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ExtractEntitiesRequest
@@ -60118,7 +61493,7 @@ declare namespace ExtractEntitiesRequest {
         text: string;
         languageCode: string;
         intentName: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -60169,8 +61544,8 @@ declare class ExtractEntitiesFuzzyRequest implements GrpcMessage {
     set minimalScore(value: number);
     get allowOverlaps(): boolean;
     set allowOverlaps(value: boolean);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60201,7 +61576,7 @@ declare namespace ExtractEntitiesFuzzyRequest {
         potentialEntities?: EntityTypeFuzzyNerConfig.AsObject[];
         minimalScore: number;
         allowOverlaps: boolean;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ExtractEntitiesFuzzyRequest
@@ -60212,7 +61587,7 @@ declare namespace ExtractEntitiesFuzzyRequest {
         potentialEntities: EntityTypeFuzzyNerConfig.AsProtobufJSON[] | null;
         minimalScore: number;
         allowOverlaps: boolean;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -60512,8 +61887,8 @@ declare class GetAlternativeSentencesRequest implements GrpcMessage {
     set protectedWords(value: string[]);
     get wordsToChange(): string[];
     set wordsToChange(value: string[]);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60545,7 +61920,7 @@ declare namespace GetAlternativeSentencesRequest {
         parent: string;
         protectedWords: string[];
         wordsToChange: string[];
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAlternativeSentencesRequest
@@ -60557,7 +61932,7 @@ declare namespace GetAlternativeSentencesRequest {
         parent: string;
         protectedWords: string[];
         wordsToChange: string[];
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -60605,8 +61980,8 @@ declare class GenerateUserSaysRequest implements GrpcMessage {
     set nRepeatSynonym(value: number);
     get branch(): string;
     set branch(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60636,7 +62011,7 @@ declare namespace GenerateUserSaysRequest {
         parent: string;
         nRepeatSynonym: number;
         branch: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GenerateUserSaysRequest
@@ -60646,7 +62021,7 @@ declare namespace GenerateUserSaysRequest {
         parent: string;
         nRepeatSynonym: number;
         branch: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -60697,8 +62072,8 @@ declare class GenerateResponsesRequest implements GrpcMessage {
     set branch(value: string);
     get dropUnknownParameters(): boolean;
     set dropUnknownParameters(value: boolean);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60729,7 +62104,7 @@ declare namespace GenerateResponsesRequest {
         nRepeatSynonym: number;
         branch: string;
         dropUnknownParameters: boolean;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GenerateResponsesRequest
@@ -60740,7 +62115,7 @@ declare namespace GenerateResponsesRequest {
         nRepeatSynonym: number;
         branch: string;
         dropUnknownParameters: boolean;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -60806,8 +62181,8 @@ declare class GetAlternativeTrainingPhrasesRequest implements GrpcMessage {
     set wordsToChange(value: string[]);
     get branch(): string;
     set branch(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60843,7 +62218,7 @@ declare namespace GetAlternativeTrainingPhrasesRequest {
         protectedWords: string[];
         wordsToChange: string[];
         branch: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetAlternativeTrainingPhrasesRequest
@@ -60859,7 +62234,7 @@ declare namespace GetAlternativeTrainingPhrasesRequest {
         protectedWords: string[];
         wordsToChange: string[];
         branch: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -60907,8 +62282,8 @@ declare class GetSynonymsRequest implements GrpcMessage {
     set languageCode(value: string);
     get parent(): string;
     set parent(value: string);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60938,7 +62313,7 @@ declare namespace GetSynonymsRequest {
         word: string;
         languageCode: string;
         parent: string;
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for GetSynonymsRequest
@@ -60948,7 +62323,7 @@ declare namespace GetSynonymsRequest {
         word: string;
         languageCode: string;
         parent: string;
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -62397,8 +63772,8 @@ declare class ClassifyIntentsRequest implements GrpcMessage {
     set mode(value: Mode);
     get algorithms(): IntentAlgorithms[];
     set algorithms(value: IntentAlgorithms[]);
-    get fieldMask(): googleProtobuf005.FieldMask | undefined;
-    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get fieldMask(): googleProtobuf003.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf003.FieldMask | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -62431,7 +63806,7 @@ declare namespace ClassifyIntentsRequest {
         contextNames: string[];
         mode: Mode;
         algorithms: IntentAlgorithms[];
-        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        fieldMask?: googleProtobuf003.FieldMask.AsObject;
     }
     /**
      * Protobuf JSON representation for ClassifyIntentsRequest
@@ -62444,7 +63819,7 @@ declare namespace ClassifyIntentsRequest {
         contextNames: string[];
         mode: string;
         algorithms: string[];
-        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
     }
 }
 /**
@@ -62899,7 +64274,7 @@ declare class SessionsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
          */
-        deleteSessionStep: (requestData: DeleteSessionStepRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteSessionStep: (requestData: DeleteSessionStepRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Sessions/DeleteSession
          *
@@ -62907,7 +64282,7 @@ declare class SessionsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
          */
-        deleteSession: (requestData: DeleteSessionRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteSession: (requestData: DeleteSessionRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Sessions/ListSessionLabels
          *
@@ -63085,6 +64460,78 @@ declare class SessionsClient {
          */
         listSessionCommentsOfAllSessions: (requestData: ListSessionCommentsOfAllSessionsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListSessionCommentsResponse>>;
         /**
+         * Unary call: /ondewo.nlu.Sessions/AddSessionFeedback
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.SessionFeedback>>
+         */
+        addSessionFeedback: (requestData: AddSessionFeedbackRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<SessionFeedback>>;
+        /**
+         * Unary call: /ondewo.nlu.Sessions/AddSessionStepFeedback
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.SessionFeedback>>
+         */
+        addSessionStepFeedback: (requestData: AddSessionStepFeedbackRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<SessionFeedback>>;
+        /**
+         * Unary call: /ondewo.nlu.Sessions/GetSessionFeedback
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.SessionFeedback>>
+         */
+        getSessionFeedback: (requestData: GetSessionFeedbackRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<SessionFeedback>>;
+        /**
+         * Unary call: /ondewo.nlu.Sessions/UpdateSessionFeedback
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.SessionFeedback>>
+         */
+        updateSessionFeedback: (requestData: UpdateSessionFeedbackRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<SessionFeedback>>;
+        /**
+         * Unary call: /ondewo.nlu.Sessions/DeleteSessionFeedback
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf008.Empty>>
+         */
+        deleteSessionFeedback: (requestData: DeleteSessionFeedbackRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
+        /**
+         * Unary call: /ondewo.nlu.Sessions/ListSessionFeedback
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListSessionFeedbackResponse>>
+         */
+        listSessionFeedback: (requestData: ListSessionFeedbackRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListSessionFeedbackResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Sessions/ListSessionFeedbackOfAllSessions
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListSessionFeedbackResponse>>
+         */
+        listSessionFeedbackOfAllSessions: (requestData: ListSessionFeedbackOfAllSessionsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListSessionFeedbackResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Sessions/GetFeedbackStatistics
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetFeedbackStatisticsResponse>>
+         */
+        getFeedbackStatistics: (requestData: GetFeedbackStatisticsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<GetFeedbackStatisticsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Sessions/GetFeedbackStatisticsTimeSeries
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.GetFeedbackStatisticsTimeSeriesResponse>>
+         */
+        getFeedbackStatisticsTimeSeries: (requestData: GetFeedbackStatisticsTimeSeriesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<GetFeedbackStatisticsTimeSeriesResponse>>;
+        /**
          * Unary call: /ondewo.nlu.Sessions/ListSessionReviews
          *
          * @param requestMessage Request message
@@ -63229,7 +64676,7 @@ declare class SessionsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf008.Empty>
      */
-    deleteSessionStep(requestData: DeleteSessionStepRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteSessionStep(requestData: DeleteSessionStepRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Sessions/DeleteSession
      *
@@ -63237,7 +64684,7 @@ declare class SessionsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf008.Empty>
      */
-    deleteSession(requestData: DeleteSessionRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteSession(requestData: DeleteSessionRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Sessions/ListSessionLabels
      *
@@ -63414,6 +64861,78 @@ declare class SessionsClient {
      * @returns Observable<thisProto.ListSessionCommentsResponse>
      */
     listSessionCommentsOfAllSessions(requestData: ListSessionCommentsOfAllSessionsRequest, requestMetadata?: GrpcMetadata): Observable<ListSessionCommentsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/AddSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.SessionFeedback>
+     */
+    addSessionFeedback(requestData: AddSessionFeedbackRequest, requestMetadata?: GrpcMetadata): Observable<SessionFeedback>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/AddSessionStepFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.SessionFeedback>
+     */
+    addSessionStepFeedback(requestData: AddSessionStepFeedbackRequest, requestMetadata?: GrpcMetadata): Observable<SessionFeedback>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/GetSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.SessionFeedback>
+     */
+    getSessionFeedback(requestData: GetSessionFeedbackRequest, requestMetadata?: GrpcMetadata): Observable<SessionFeedback>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/UpdateSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.SessionFeedback>
+     */
+    updateSessionFeedback(requestData: UpdateSessionFeedbackRequest, requestMetadata?: GrpcMetadata): Observable<SessionFeedback>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/DeleteSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf008.Empty>
+     */
+    deleteSessionFeedback(requestData: DeleteSessionFeedbackRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/ListSessionFeedback
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListSessionFeedbackResponse>
+     */
+    listSessionFeedback(requestData: ListSessionFeedbackRequest, requestMetadata?: GrpcMetadata): Observable<ListSessionFeedbackResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/ListSessionFeedbackOfAllSessions
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListSessionFeedbackResponse>
+     */
+    listSessionFeedbackOfAllSessions(requestData: ListSessionFeedbackOfAllSessionsRequest, requestMetadata?: GrpcMetadata): Observable<ListSessionFeedbackResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/GetFeedbackStatistics
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetFeedbackStatisticsResponse>
+     */
+    getFeedbackStatistics(requestData: GetFeedbackStatisticsRequest, requestMetadata?: GrpcMetadata): Observable<GetFeedbackStatisticsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/GetFeedbackStatisticsTimeSeries
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.GetFeedbackStatisticsTimeSeriesResponse>
+     */
+    getFeedbackStatisticsTimeSeries(requestData: GetFeedbackStatisticsTimeSeriesRequest, requestMetadata?: GrpcMetadata): Observable<GetFeedbackStatisticsTimeSeriesResponse>;
     /**
      * Unary call @/ondewo.nlu.Sessions/ListSessionReviews
      *
@@ -63619,7 +65138,7 @@ declare class OperationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
          */
-        deleteOperation: (requestData: DeleteOperationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteOperation: (requestData: DeleteOperationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Operations/CancelOperation
          *
@@ -63627,7 +65146,7 @@ declare class OperationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf007.Empty>>
          */
-        cancelOperation: (requestData: CancelOperationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        cancelOperation: (requestData: CancelOperationRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Server streaming: /ondewo.nlu.Operations/StreamRemoteOperationContainerLogs
          *
@@ -63677,7 +65196,7 @@ declare class OperationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf007.Empty>
      */
-    deleteOperation(requestData: DeleteOperationRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteOperation(requestData: DeleteOperationRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Operations/CancelOperation
      *
@@ -63685,7 +65204,7 @@ declare class OperationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf007.Empty>
      */
-    cancelOperation(requestData: CancelOperationRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    cancelOperation(requestData: CancelOperationRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Server streaming @/ondewo.nlu.Operations/StreamRemoteOperationContainerLogs
      *
@@ -63765,7 +65284,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteDataset: (requestData: DeleteLlmEvaluationDatasetRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteDataset: (requestData: DeleteLlmEvaluationDatasetRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationAddExample
          *
@@ -63813,7 +65332,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteExample: (requestData: DeleteLlmEvaluationExampleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteExample: (requestData: DeleteLlmEvaluationExampleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationRunExperiment
          *
@@ -63853,7 +65372,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteExperiment: (requestData: DeleteLlmEvaluationExperimentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteExperiment: (requestData: DeleteLlmEvaluationExperimentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationCancelExperiment
          *
@@ -63893,7 +65412,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteFeedback: (requestData: DeleteLlmEvaluationFeedbackRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteFeedback: (requestData: DeleteLlmEvaluationFeedbackRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateFeedback
          *
@@ -63941,7 +65460,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteReleaseGate: (requestData: DeleteLlmEvaluationReleaseGateRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteReleaseGate: (requestData: DeleteLlmEvaluationReleaseGateRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationRunReleaseGate
          *
@@ -64005,7 +65524,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteScorecard: (requestData: DeleteLlmEvaluationScorecardRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteScorecard: (requestData: DeleteLlmEvaluationScorecardRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetProjectSettings
          *
@@ -64085,7 +65604,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteSchedule: (requestData: DeleteLlmEvaluationScheduleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteSchedule: (requestData: DeleteLlmEvaluationScheduleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationCreateReport
          *
@@ -64117,7 +65636,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteReport: (requestData: DeleteLlmEvaluationReportRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteReport: (requestData: DeleteLlmEvaluationReportRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationCreateAbExperiment
          *
@@ -64157,7 +65676,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteAbExperiment: (requestData: DeleteLlmEvaluationAbExperimentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteAbExperiment: (requestData: DeleteLlmEvaluationAbExperimentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationStartAbExperiment
          *
@@ -64253,7 +65772,7 @@ declare class LlmEvaluationsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
          */
-        llmEvaluationDeleteOnlineConfig: (requestData: DeleteLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        llmEvaluationDeleteOnlineConfig: (requestData: DeleteLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineResult
          *
@@ -64343,7 +65862,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteDataset(requestData: DeleteLlmEvaluationDatasetRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteDataset(requestData: DeleteLlmEvaluationDatasetRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationAddExample
      *
@@ -64391,7 +65910,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteExample(requestData: DeleteLlmEvaluationExampleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteExample(requestData: DeleteLlmEvaluationExampleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationRunExperiment
      *
@@ -64431,7 +65950,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteExperiment(requestData: DeleteLlmEvaluationExperimentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteExperiment(requestData: DeleteLlmEvaluationExperimentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationCancelExperiment
      *
@@ -64471,7 +65990,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteFeedback(requestData: DeleteLlmEvaluationFeedbackRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteFeedback(requestData: DeleteLlmEvaluationFeedbackRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateFeedback
      *
@@ -64519,7 +66038,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteReleaseGate(requestData: DeleteLlmEvaluationReleaseGateRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteReleaseGate(requestData: DeleteLlmEvaluationReleaseGateRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationRunReleaseGate
      *
@@ -64583,7 +66102,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteScorecard(requestData: DeleteLlmEvaluationScorecardRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteScorecard(requestData: DeleteLlmEvaluationScorecardRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetProjectSettings
      *
@@ -64663,7 +66182,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteSchedule(requestData: DeleteLlmEvaluationScheduleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteSchedule(requestData: DeleteLlmEvaluationScheduleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateReport
      *
@@ -64695,7 +66214,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteReport(requestData: DeleteLlmEvaluationReportRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteReport(requestData: DeleteLlmEvaluationReportRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateAbExperiment
      *
@@ -64735,7 +66254,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteAbExperiment(requestData: DeleteLlmEvaluationAbExperimentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteAbExperiment(requestData: DeleteLlmEvaluationAbExperimentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationStartAbExperiment
      *
@@ -64831,7 +66350,7 @@ declare class LlmEvaluationsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf002.Empty>
      */
-    llmEvaluationDeleteOnlineConfig(requestData: DeleteLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    llmEvaluationDeleteOnlineConfig(requestData: DeleteLlmEvaluationOnlineConfigRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineResult
      *
@@ -64933,7 +66452,7 @@ declare class AgentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
          */
-        deleteAgent: (requestData: DeleteAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteAgent: (requestData: DeleteAgentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/DeleteAllAgents
          *
@@ -64941,7 +66460,7 @@ declare class AgentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
          */
-        deleteAllAgents: (requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteAllAgents: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ListAgents
          *
@@ -64973,7 +66492,7 @@ declare class AgentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
          */
-        addUserToProject: (requestData: AddUserToProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        addUserToProject: (requestData: AddUserToProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/RemoveUserFromProject
          *
@@ -64981,7 +66500,7 @@ declare class AgentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
          */
-        removeUserFromProject: (requestData: RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        removeUserFromProject: (requestData: RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ListUsersInProject
          *
@@ -64997,7 +66516,7 @@ declare class AgentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<thisProto.GetPlatformInfoResponse>>
          */
-        getPlatformInfo: (requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<GetPlatformInfoResponse>>;
+        getPlatformInfo: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<GetPlatformInfoResponse>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ListProjectPermissions
          *
@@ -65109,7 +66628,7 @@ declare class AgentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
          */
-        setResources: (requestData: SetResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        setResources: (requestData: SetResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/DeleteResources
          *
@@ -65117,7 +66636,7 @@ declare class AgentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
          */
-        deleteResources: (requestData: DeleteResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteResources: (requestData: DeleteResourcesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/ExportResources
          *
@@ -65261,7 +66780,7 @@ declare class AgentsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf009.Empty>>
          */
-        deleteProjectTechnicalUser: (requestData: DeleteProjectTechnicalUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteProjectTechnicalUser: (requestData: DeleteProjectTechnicalUserRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Agents/RotateProjectTechnicalUserPassword
          *
@@ -65303,7 +66822,7 @@ declare class AgentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf009.Empty>
      */
-    deleteAgent(requestData: DeleteAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteAgent(requestData: DeleteAgentRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/DeleteAllAgents
      *
@@ -65311,7 +66830,7 @@ declare class AgentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf009.Empty>
      */
-    deleteAllAgents(requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteAllAgents(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/ListAgents
      *
@@ -65343,7 +66862,7 @@ declare class AgentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf009.Empty>
      */
-    addUserToProject(requestData: AddUserToProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    addUserToProject(requestData: AddUserToProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/RemoveUserFromProject
      *
@@ -65351,7 +66870,7 @@ declare class AgentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf009.Empty>
      */
-    removeUserFromProject(requestData: RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    removeUserFromProject(requestData: RemoveUserFromProjectRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/ListUsersInProject
      *
@@ -65367,7 +66886,7 @@ declare class AgentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<thisProto.GetPlatformInfoResponse>
      */
-    getPlatformInfo(requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata): Observable<GetPlatformInfoResponse>;
+    getPlatformInfo(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<GetPlatformInfoResponse>;
     /**
      * Unary call @/ondewo.nlu.Agents/ListProjectPermissions
      *
@@ -65479,7 +66998,7 @@ declare class AgentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf009.Empty>
      */
-    setResources(requestData: SetResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    setResources(requestData: SetResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/DeleteResources
      *
@@ -65487,7 +67006,7 @@ declare class AgentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf009.Empty>
      */
-    deleteResources(requestData: DeleteResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteResources(requestData: DeleteResourcesRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/ExportResources
      *
@@ -65631,7 +67150,7 @@ declare class AgentsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf009.Empty>
      */
-    deleteProjectTechnicalUser(requestData: DeleteProjectTechnicalUserRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteProjectTechnicalUser(requestData: DeleteProjectTechnicalUserRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Agents/RotateProjectTechnicalUserPassword
      *
@@ -65695,7 +67214,7 @@ declare class ContextsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteContext: (requestData: DeleteContextRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteContext: (requestData: DeleteContextRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.Contexts/DeleteAllContexts
          *
@@ -65703,7 +67222,7 @@ declare class ContextsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteAllContexts: (requestData: DeleteAllContextsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteAllContexts: (requestData: DeleteAllContextsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -65745,7 +67264,7 @@ declare class ContextsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteContext(requestData: DeleteContextRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteContext(requestData: DeleteContextRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.Contexts/DeleteAllContexts
      *
@@ -65753,7 +67272,7 @@ declare class ContextsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteAllContexts(requestData: DeleteAllContextsRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteAllContexts(requestData: DeleteAllContextsRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     static ɵfac: i0.ɵɵFactoryDeclaration<ContextsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<ContextsClient>;
 }
@@ -65793,7 +67312,7 @@ declare class ProjectRolesClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
          */
-        deleteProjectRole: (requestData: DeleteProjectRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf005.Empty>>;
+        deleteProjectRole: (requestData: DeleteProjectRoleRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<googleProtobuf003.Empty>>;
         /**
          * Unary call: /ondewo.nlu.ProjectRoles/UpdateProjectRole
          *
@@ -65835,7 +67354,7 @@ declare class ProjectRolesClient {
      * @param requestMetadata Request metadata
      * @returns Observable<googleProtobuf003.Empty>
      */
-    deleteProjectRole(requestData: DeleteProjectRoleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf005.Empty>;
+    deleteProjectRole(requestData: DeleteProjectRoleRequest, requestMetadata?: GrpcMetadata): Observable<googleProtobuf003.Empty>;
     /**
      * Unary call @/ondewo.nlu.ProjectRoles/UpdateProjectRole
      *
@@ -65899,7 +67418,7 @@ declare class ServerStatisticsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<ondewoNlu007.StatResponse>>
          */
-        getProjectCount: (requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<StatResponse>>;
+        getProjectCount: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<StatResponse>>;
         /**
          * Unary call: /ondewo.nlu.ServerStatistics/GetUserProjectCount
          *
@@ -65915,7 +67434,7 @@ declare class ServerStatisticsClient {
          * @param requestMetadata Request metadata
          * @returns Observable<GrpcEvent<ondewoNlu007.StatResponse>>
          */
-        getUserCount: (requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<StatResponse>>;
+        getUserCount: (requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<StatResponse>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -65925,7 +67444,7 @@ declare class ServerStatisticsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<ondewoNlu007.StatResponse>
      */
-    getProjectCount(requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata): Observable<StatResponse>;
+    getProjectCount(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<StatResponse>;
     /**
      * Unary call @/ondewo.nlu.ServerStatistics/GetUserProjectCount
      *
@@ -65941,7 +67460,7 @@ declare class ServerStatisticsClient {
      * @param requestMetadata Request metadata
      * @returns Observable<ondewoNlu007.StatResponse>
      */
-    getUserCount(requestData: googleProtobuf005.Empty, requestMetadata?: GrpcMetadata): Observable<StatResponse>;
+    getUserCount(requestData: googleProtobuf003.Empty, requestMetadata?: GrpcMetadata): Observable<StatResponse>;
     static ɵfac: i0.ɵɵFactoryDeclaration<ServerStatisticsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<ServerStatisticsClient>;
 }
@@ -66220,4 +67739,4 @@ declare namespace CustomHttpPattern {
     }
 }
 
-export { AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionLabelsRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KeyValuePair, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
+export { AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionFeedbackRequest, AddSessionLabelsRequest, AddSessionStepFeedbackRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionFeedbackRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FeedbackAuthorType, FeedbackBreakdownBucket, FeedbackRating, FeedbackStatistics, FeedbackTimeSeriesBucket, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetFeedbackStatisticsRequest, GetFeedbackStatisticsResponse, GetFeedbackStatisticsTimeSeriesRequest, GetFeedbackStatisticsTimeSeriesResponse, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionFeedbackRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KeyValuePair, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionFeedbackOfAllSessionsRequest, ListSessionFeedbackRequest, ListSessionFeedbackResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFeedback, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionFeedbackRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig };
