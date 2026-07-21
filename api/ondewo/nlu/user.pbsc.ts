@@ -485,6 +485,27 @@ export class UsersClient {
       });
     },
     /**
+     * Server streaming: /ondewo.nlu.Users/StreamNotifications
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<ondewoNlu008.Notification>>
+     */
+    streamNotifications: (
+      requestData: ondewoNlu008.StreamNotificationsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<ondewoNlu008.Notification>> => {
+      return this.handler.handle({
+        type: GrpcCallType.serverStream,
+        client: this.client,
+        path: '/ondewo.nlu.Users/StreamNotifications',
+        requestData,
+        requestMetadata,
+        requestClass: ondewoNlu008.StreamNotificationsRequest,
+        responseClass: ondewoNlu008.Notification
+      });
+    },
+    /**
      * Unary call: /ondewo.nlu.Users/GetUserPreferences
      *
      * @param requestMessage Request message
@@ -911,6 +932,22 @@ export class UsersClient {
   ): Observable<googleProtobuf003.Empty> {
     return this.$raw
       .deleteNotifications(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Server streaming @/ondewo.nlu.Users/StreamNotifications
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<ondewoNlu008.Notification>
+   */
+  streamNotifications(
+    requestData: ondewoNlu008.StreamNotificationsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<ondewoNlu008.Notification> {
+    return this.$raw
+      .streamNotifications(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 

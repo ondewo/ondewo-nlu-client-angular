@@ -3072,6 +3072,178 @@ export module DeleteNotificationsRequest {
 }
 
 /**
+ * Message implementation for ondewo.nlu.StreamNotificationsRequest
+ */
+export class StreamNotificationsRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.StreamNotificationsRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new StreamNotificationsRequest();
+    StreamNotificationsRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: StreamNotificationsRequest) {
+    _instance.notificationFilter = _instance.notificationFilter || undefined;
+    _instance.includeExisting = _instance.includeExisting || false;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: StreamNotificationsRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.notificationFilter = new NotificationFilter();
+          _reader.readMessage(
+            _instance.notificationFilter,
+            NotificationFilter.deserializeBinaryFromReader
+          );
+          break;
+        case 2:
+          _instance.includeExisting = _reader.readBool();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    StreamNotificationsRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: StreamNotificationsRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.notificationFilter) {
+      _writer.writeMessage(
+        1,
+        _instance.notificationFilter as any,
+        NotificationFilter.serializeBinaryToWriter
+      );
+    }
+    if (_instance.includeExisting) {
+      _writer.writeBool(2, _instance.includeExisting);
+    }
+  }
+
+  private _notificationFilter?: NotificationFilter;
+  private _includeExisting: boolean;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of StreamNotificationsRequest to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<StreamNotificationsRequest.AsObject>) {
+    _value = _value || {};
+    this.notificationFilter = _value.notificationFilter
+      ? new NotificationFilter(_value.notificationFilter)
+      : undefined;
+    this.includeExisting = _value.includeExisting;
+    StreamNotificationsRequest.refineValues(this);
+  }
+  get notificationFilter(): NotificationFilter | undefined {
+    return this._notificationFilter;
+  }
+  set notificationFilter(value: NotificationFilter | undefined) {
+    this._notificationFilter = value;
+  }
+  get includeExisting(): boolean {
+    return this._includeExisting;
+  }
+  set includeExisting(value: boolean) {
+    this._includeExisting = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    StreamNotificationsRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): StreamNotificationsRequest.AsObject {
+    return {
+      notificationFilter: this.notificationFilter
+        ? this.notificationFilter.toObject()
+        : undefined,
+      includeExisting: this.includeExisting
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): StreamNotificationsRequest.AsProtobufJSON {
+    return {
+      notificationFilter: this.notificationFilter
+        ? this.notificationFilter.toProtobufJSON(options)
+        : null,
+      includeExisting: this.includeExisting
+    };
+  }
+}
+export module StreamNotificationsRequest {
+  /**
+   * Standard JavaScript object representation for StreamNotificationsRequest
+   */
+  export interface AsObject {
+    notificationFilter?: NotificationFilter.AsObject;
+    includeExisting: boolean;
+  }
+
+  /**
+   * Protobuf JSON representation for StreamNotificationsRequest
+   */
+  export interface AsProtobufJSON {
+    notificationFilter: NotificationFilter.AsProtobufJSON | null;
+    includeExisting: boolean;
+  }
+}
+
+/**
  * Message implementation for ondewo.nlu.KeyValuePair
  */
 export class KeyValuePair implements GrpcMessage {
