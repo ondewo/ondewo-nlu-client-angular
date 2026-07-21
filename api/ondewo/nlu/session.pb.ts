@@ -75,6 +75,19 @@ export enum FeedbackAuthorType {
   FEEDBACK_AUTHOR_TYPE_TECHNICAL_USER = 2,
   FEEDBACK_AUTHOR_TYPE_END_USER_ANONYMOUS = 3
 }
+export enum FeedbackScope {
+  FEEDBACK_SCOPE_UNSPECIFIED = 0,
+  FEEDBACK_SCOPE_SESSION_LEVEL = 1,
+  FEEDBACK_SCOPE_STEP_LEVEL = 2
+}
+export enum FeedbackTimeGranularity {
+  FEEDBACK_TIME_GRANULARITY_UNSPECIFIED = 0,
+  FEEDBACK_TIME_GRANULARITY_HOUR = 1,
+  FEEDBACK_TIME_GRANULARITY_DAY = 2,
+  FEEDBACK_TIME_GRANULARITY_WEEK = 3,
+  FEEDBACK_TIME_GRANULARITY_MONTH = 4,
+  FEEDBACK_TIME_GRANULARITY_YEAR = 5
+}
 export enum ResourceView {
   RESOURCE_VIEW_UNSPECIFIED = 0,
   RESOURCE_VIEW_FULL = 1,
@@ -26166,6 +26179,8 @@ export class ListSessionFeedbackOfAllSessionsRequest implements GrpcMessage {
     _instance.sessionFilter = _instance.sessionFilter || undefined;
     _instance.pageToken = _instance.pageToken || '';
     _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.feedbackFilter = _instance.feedbackFilter || undefined;
+    _instance.orderBy = _instance.orderBy || '';
   }
 
   /**
@@ -26200,6 +26215,16 @@ export class ListSessionFeedbackOfAllSessionsRequest implements GrpcMessage {
             _instance.fieldMask,
             googleProtobuf003.FieldMask.deserializeBinaryFromReader
           );
+          break;
+        case 5:
+          _instance.feedbackFilter = new FeedbackFilter();
+          _reader.readMessage(
+            _instance.feedbackFilter,
+            FeedbackFilter.deserializeBinaryFromReader
+          );
+          break;
+        case 6:
+          _instance.orderBy = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -26238,12 +26263,24 @@ export class ListSessionFeedbackOfAllSessionsRequest implements GrpcMessage {
         googleProtobuf003.FieldMask.serializeBinaryToWriter
       );
     }
+    if (_instance.feedbackFilter) {
+      _writer.writeMessage(
+        5,
+        _instance.feedbackFilter as any,
+        FeedbackFilter.serializeBinaryToWriter
+      );
+    }
+    if (_instance.orderBy) {
+      _writer.writeString(6, _instance.orderBy);
+    }
   }
 
   private _parent: string;
   private _sessionFilter?: SessionFilter;
   private _pageToken: string;
   private _fieldMask?: googleProtobuf003.FieldMask;
+  private _feedbackFilter?: FeedbackFilter;
+  private _orderBy: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -26261,6 +26298,10 @@ export class ListSessionFeedbackOfAllSessionsRequest implements GrpcMessage {
     this.fieldMask = _value.fieldMask
       ? new googleProtobuf003.FieldMask(_value.fieldMask)
       : undefined;
+    this.feedbackFilter = _value.feedbackFilter
+      ? new FeedbackFilter(_value.feedbackFilter)
+      : undefined;
+    this.orderBy = _value.orderBy;
     ListSessionFeedbackOfAllSessionsRequest.refineValues(this);
   }
   get parent(): string {
@@ -26287,6 +26328,18 @@ export class ListSessionFeedbackOfAllSessionsRequest implements GrpcMessage {
   set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
     this._fieldMask = value;
   }
+  get feedbackFilter(): FeedbackFilter | undefined {
+    return this._feedbackFilter;
+  }
+  set feedbackFilter(value: FeedbackFilter | undefined) {
+    this._feedbackFilter = value;
+  }
+  get orderBy(): string {
+    return this._orderBy;
+  }
+  set orderBy(value: string) {
+    this._orderBy = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -26311,7 +26364,11 @@ export class ListSessionFeedbackOfAllSessionsRequest implements GrpcMessage {
         ? this.sessionFilter.toObject()
         : undefined,
       pageToken: this.pageToken,
-      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      feedbackFilter: this.feedbackFilter
+        ? this.feedbackFilter.toObject()
+        : undefined,
+      orderBy: this.orderBy
     };
   }
 
@@ -26337,7 +26394,11 @@ export class ListSessionFeedbackOfAllSessionsRequest implements GrpcMessage {
         ? this.sessionFilter.toProtobufJSON(options)
         : null,
       pageToken: this.pageToken,
-      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      feedbackFilter: this.feedbackFilter
+        ? this.feedbackFilter.toProtobufJSON(options)
+        : null,
+      orderBy: this.orderBy
     };
   }
 }
@@ -26350,6 +26411,8 @@ export module ListSessionFeedbackOfAllSessionsRequest {
     sessionFilter?: SessionFilter.AsObject;
     pageToken: string;
     fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    feedbackFilter?: FeedbackFilter.AsObject;
+    orderBy: string;
   }
 
   /**
@@ -26360,6 +26423,8 @@ export module ListSessionFeedbackOfAllSessionsRequest {
     sessionFilter: SessionFilter.AsProtobufJSON | null;
     pageToken: string;
     fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    feedbackFilter: FeedbackFilter.AsProtobufJSON | null;
+    orderBy: string;
   }
 }
 
@@ -26389,6 +26454,7 @@ export class ListSessionFeedbackResponse implements GrpcMessage {
   static refineValues(_instance: ListSessionFeedbackResponse) {
     _instance.feedback = _instance.feedback || [];
     _instance.nextPageToken = _instance.nextPageToken || '';
+    _instance.totalCount = _instance.totalCount || 0;
   }
 
   /**
@@ -26417,6 +26483,9 @@ export class ListSessionFeedbackResponse implements GrpcMessage {
         case 2:
           _instance.nextPageToken = _reader.readString();
           break;
+        case 3:
+          _instance.totalCount = _reader.readInt32();
+          break;
         default:
           _reader.skipField();
       }
@@ -26444,10 +26513,14 @@ export class ListSessionFeedbackResponse implements GrpcMessage {
     if (_instance.nextPageToken) {
       _writer.writeString(2, _instance.nextPageToken);
     }
+    if (_instance.totalCount) {
+      _writer.writeInt32(3, _instance.totalCount);
+    }
   }
 
   private _feedback?: SessionFeedback[];
   private _nextPageToken: string;
+  private _totalCount: number;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -26457,6 +26530,7 @@ export class ListSessionFeedbackResponse implements GrpcMessage {
     _value = _value || {};
     this.feedback = (_value.feedback || []).map(m => new SessionFeedback(m));
     this.nextPageToken = _value.nextPageToken;
+    this.totalCount = _value.totalCount;
     ListSessionFeedbackResponse.refineValues(this);
   }
   get feedback(): SessionFeedback[] | undefined {
@@ -26470,6 +26544,12 @@ export class ListSessionFeedbackResponse implements GrpcMessage {
   }
   set nextPageToken(value: string) {
     this._nextPageToken = value;
+  }
+  get totalCount(): number {
+    return this._totalCount;
+  }
+  set totalCount(value: number) {
+    this._totalCount = value;
   }
 
   /**
@@ -26488,7 +26568,8 @@ export class ListSessionFeedbackResponse implements GrpcMessage {
   toObject(): ListSessionFeedbackResponse.AsObject {
     return {
       feedback: (this.feedback || []).map(m => m.toObject()),
-      nextPageToken: this.nextPageToken
+      nextPageToken: this.nextPageToken,
+      totalCount: this.totalCount
     };
   }
 
@@ -26510,7 +26591,8 @@ export class ListSessionFeedbackResponse implements GrpcMessage {
   ): ListSessionFeedbackResponse.AsProtobufJSON {
     return {
       feedback: (this.feedback || []).map(m => m.toProtobufJSON(options)),
-      nextPageToken: this.nextPageToken
+      nextPageToken: this.nextPageToken,
+      totalCount: this.totalCount
     };
   }
 }
@@ -26521,6 +26603,7 @@ export module ListSessionFeedbackResponse {
   export interface AsObject {
     feedback?: SessionFeedback.AsObject[];
     nextPageToken: string;
+    totalCount: number;
   }
 
   /**
@@ -26529,6 +26612,390 @@ export module ListSessionFeedbackResponse {
   export interface AsProtobufJSON {
     feedback: SessionFeedback.AsProtobufJSON[] | null;
     nextPageToken: string;
+    totalCount: number;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.FeedbackFilter
+ */
+export class FeedbackFilter implements GrpcMessage {
+  static id = 'ondewo.nlu.FeedbackFilter';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new FeedbackFilter();
+    FeedbackFilter.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: FeedbackFilter) {
+    _instance.ratings = _instance.ratings || [];
+    _instance.authorTypes = _instance.authorTypes || [];
+    _instance.hasComment = _instance.hasComment || false;
+    _instance.earliest = _instance.earliest || undefined;
+    _instance.latest = _instance.latest || undefined;
+    _instance.criteria = _instance.criteria || [];
+    _instance.languageCodes = _instance.languageCodes || [];
+    _instance.annotatorUserIds = _instance.annotatorUserIds || [];
+    _instance.originIds = _instance.originIds || [];
+    _instance.scoreMin = _instance.scoreMin || 0;
+    _instance.scoreMax = _instance.scoreMax || 0;
+    _instance.scope = _instance.scope || 0;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: FeedbackFilter,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _reader.readPackableEnumInto(
+            (_instance.ratings = _instance.ratings || [])
+          );
+          break;
+        case 2:
+          _reader.readPackableEnumInto(
+            (_instance.authorTypes = _instance.authorTypes || [])
+          );
+          break;
+        case 3:
+          _instance.hasComment = _reader.readBool();
+          break;
+        case 4:
+          _instance.earliest = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.earliest,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 5:
+          _instance.latest = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.latest,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 6:
+          (_instance.criteria = _instance.criteria || []).push(
+            _reader.readString()
+          );
+          break;
+        case 7:
+          (_instance.languageCodes = _instance.languageCodes || []).push(
+            _reader.readString()
+          );
+          break;
+        case 8:
+          (_instance.annotatorUserIds = _instance.annotatorUserIds || []).push(
+            _reader.readString()
+          );
+          break;
+        case 9:
+          (_instance.originIds = _instance.originIds || []).push(
+            _reader.readString()
+          );
+          break;
+        case 10:
+          _instance.scoreMin = _reader.readFloat();
+          break;
+        case 11:
+          _instance.scoreMax = _reader.readFloat();
+          break;
+        case 12:
+          _instance.scope = _reader.readEnum();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    FeedbackFilter.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: FeedbackFilter,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.ratings && _instance.ratings.length) {
+      _writer.writePackedEnum(1, _instance.ratings);
+    }
+    if (_instance.authorTypes && _instance.authorTypes.length) {
+      _writer.writePackedEnum(2, _instance.authorTypes);
+    }
+    if (_instance.hasComment) {
+      _writer.writeBool(3, _instance.hasComment);
+    }
+    if (_instance.earliest) {
+      _writer.writeMessage(
+        4,
+        _instance.earliest as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.latest) {
+      _writer.writeMessage(
+        5,
+        _instance.latest as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.criteria && _instance.criteria.length) {
+      _writer.writeRepeatedString(6, _instance.criteria);
+    }
+    if (_instance.languageCodes && _instance.languageCodes.length) {
+      _writer.writeRepeatedString(7, _instance.languageCodes);
+    }
+    if (_instance.annotatorUserIds && _instance.annotatorUserIds.length) {
+      _writer.writeRepeatedString(8, _instance.annotatorUserIds);
+    }
+    if (_instance.originIds && _instance.originIds.length) {
+      _writer.writeRepeatedString(9, _instance.originIds);
+    }
+    if (_instance.scoreMin) {
+      _writer.writeFloat(10, _instance.scoreMin);
+    }
+    if (_instance.scoreMax) {
+      _writer.writeFloat(11, _instance.scoreMax);
+    }
+    if (_instance.scope) {
+      _writer.writeEnum(12, _instance.scope);
+    }
+  }
+
+  private _ratings: FeedbackRating[];
+  private _authorTypes: FeedbackAuthorType[];
+  private _hasComment: boolean;
+  private _earliest?: googleProtobuf005.Timestamp;
+  private _latest?: googleProtobuf005.Timestamp;
+  private _criteria: string[];
+  private _languageCodes: string[];
+  private _annotatorUserIds: string[];
+  private _originIds: string[];
+  private _scoreMin: number;
+  private _scoreMax: number;
+  private _scope: FeedbackScope;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of FeedbackFilter to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<FeedbackFilter.AsObject>) {
+    _value = _value || {};
+    this.ratings = (_value.ratings || []).slice();
+    this.authorTypes = (_value.authorTypes || []).slice();
+    this.hasComment = _value.hasComment;
+    this.earliest = _value.earliest
+      ? new googleProtobuf005.Timestamp(_value.earliest)
+      : undefined;
+    this.latest = _value.latest
+      ? new googleProtobuf005.Timestamp(_value.latest)
+      : undefined;
+    this.criteria = (_value.criteria || []).slice();
+    this.languageCodes = (_value.languageCodes || []).slice();
+    this.annotatorUserIds = (_value.annotatorUserIds || []).slice();
+    this.originIds = (_value.originIds || []).slice();
+    this.scoreMin = _value.scoreMin;
+    this.scoreMax = _value.scoreMax;
+    this.scope = _value.scope;
+    FeedbackFilter.refineValues(this);
+  }
+  get ratings(): FeedbackRating[] {
+    return this._ratings;
+  }
+  set ratings(value: FeedbackRating[]) {
+    this._ratings = value;
+  }
+  get authorTypes(): FeedbackAuthorType[] {
+    return this._authorTypes;
+  }
+  set authorTypes(value: FeedbackAuthorType[]) {
+    this._authorTypes = value;
+  }
+  get hasComment(): boolean {
+    return this._hasComment;
+  }
+  set hasComment(value: boolean) {
+    this._hasComment = value;
+  }
+  get earliest(): googleProtobuf005.Timestamp | undefined {
+    return this._earliest;
+  }
+  set earliest(value: googleProtobuf005.Timestamp | undefined) {
+    this._earliest = value;
+  }
+  get latest(): googleProtobuf005.Timestamp | undefined {
+    return this._latest;
+  }
+  set latest(value: googleProtobuf005.Timestamp | undefined) {
+    this._latest = value;
+  }
+  get criteria(): string[] {
+    return this._criteria;
+  }
+  set criteria(value: string[]) {
+    this._criteria = value;
+  }
+  get languageCodes(): string[] {
+    return this._languageCodes;
+  }
+  set languageCodes(value: string[]) {
+    this._languageCodes = value;
+  }
+  get annotatorUserIds(): string[] {
+    return this._annotatorUserIds;
+  }
+  set annotatorUserIds(value: string[]) {
+    this._annotatorUserIds = value;
+  }
+  get originIds(): string[] {
+    return this._originIds;
+  }
+  set originIds(value: string[]) {
+    this._originIds = value;
+  }
+  get scoreMin(): number {
+    return this._scoreMin;
+  }
+  set scoreMin(value: number) {
+    this._scoreMin = value;
+  }
+  get scoreMax(): number {
+    return this._scoreMax;
+  }
+  set scoreMax(value: number) {
+    this._scoreMax = value;
+  }
+  get scope(): FeedbackScope {
+    return this._scope;
+  }
+  set scope(value: FeedbackScope) {
+    this._scope = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    FeedbackFilter.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): FeedbackFilter.AsObject {
+    return {
+      ratings: (this.ratings || []).slice(),
+      authorTypes: (this.authorTypes || []).slice(),
+      hasComment: this.hasComment,
+      earliest: this.earliest ? this.earliest.toObject() : undefined,
+      latest: this.latest ? this.latest.toObject() : undefined,
+      criteria: (this.criteria || []).slice(),
+      languageCodes: (this.languageCodes || []).slice(),
+      annotatorUserIds: (this.annotatorUserIds || []).slice(),
+      originIds: (this.originIds || []).slice(),
+      scoreMin: this.scoreMin,
+      scoreMax: this.scoreMax,
+      scope: this.scope
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): FeedbackFilter.AsProtobufJSON {
+    return {
+      ratings: (this.ratings || []).map(v => FeedbackRating[v]),
+      authorTypes: (this.authorTypes || []).map(v => FeedbackAuthorType[v]),
+      hasComment: this.hasComment,
+      earliest: this.earliest ? this.earliest.toProtobufJSON(options) : null,
+      latest: this.latest ? this.latest.toProtobufJSON(options) : null,
+      criteria: (this.criteria || []).slice(),
+      languageCodes: (this.languageCodes || []).slice(),
+      annotatorUserIds: (this.annotatorUserIds || []).slice(),
+      originIds: (this.originIds || []).slice(),
+      scoreMin: this.scoreMin,
+      scoreMax: this.scoreMax,
+      scope:
+        FeedbackScope[
+          this.scope === null || this.scope === undefined ? 0 : this.scope
+        ]
+    };
+  }
+}
+export module FeedbackFilter {
+  /**
+   * Standard JavaScript object representation for FeedbackFilter
+   */
+  export interface AsObject {
+    ratings: FeedbackRating[];
+    authorTypes: FeedbackAuthorType[];
+    hasComment: boolean;
+    earliest?: googleProtobuf005.Timestamp.AsObject;
+    latest?: googleProtobuf005.Timestamp.AsObject;
+    criteria: string[];
+    languageCodes: string[];
+    annotatorUserIds: string[];
+    originIds: string[];
+    scoreMin: number;
+    scoreMax: number;
+    scope: FeedbackScope;
+  }
+
+  /**
+   * Protobuf JSON representation for FeedbackFilter
+   */
+  export interface AsProtobufJSON {
+    ratings: string[];
+    authorTypes: string[];
+    hasComment: boolean;
+    earliest: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    latest: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    criteria: string[];
+    languageCodes: string[];
+    annotatorUserIds: string[];
+    originIds: string[];
+    scoreMin: number;
+    scoreMax: number;
+    scope: string;
   }
 }
 
@@ -26763,6 +27230,11 @@ export class FeedbackStatistics implements GrpcMessage {
     _instance.byLanguage = _instance.byLanguage || [];
     _instance.byIntent = _instance.byIntent || [];
     _instance.byAuthorType = _instance.byAuthorType || [];
+    _instance.unspecifiedRatingCount = _instance.unspecifiedRatingCount || 0;
+    _instance.scoredCount = _instance.scoredCount || 0;
+    _instance.averageScore = _instance.averageScore || 0;
+    _instance.byOrigin = _instance.byOrigin || [];
+    _instance.byCriterion = _instance.byCriterion || [];
   }
 
   /**
@@ -26832,6 +27304,35 @@ export class FeedbackStatistics implements GrpcMessage {
             messageInitializer11
           );
           break;
+        case 12:
+          _instance.unspecifiedRatingCount = _reader.readInt32();
+          break;
+        case 13:
+          _instance.scoredCount = _reader.readInt32();
+          break;
+        case 14:
+          _instance.averageScore = _reader.readFloat();
+          break;
+        case 15:
+          const messageInitializer15 = new FeedbackBreakdownBucket();
+          _reader.readMessage(
+            messageInitializer15,
+            FeedbackBreakdownBucket.deserializeBinaryFromReader
+          );
+          (_instance.byOrigin = _instance.byOrigin || []).push(
+            messageInitializer15
+          );
+          break;
+        case 16:
+          const messageInitializer16 = new FeedbackBreakdownBucket();
+          _reader.readMessage(
+            messageInitializer16,
+            FeedbackBreakdownBucket.deserializeBinaryFromReader
+          );
+          (_instance.byCriterion = _instance.byCriterion || []).push(
+            messageInitializer16
+          );
+          break;
         default:
           _reader.skipField();
       }
@@ -26894,6 +27395,29 @@ export class FeedbackStatistics implements GrpcMessage {
         FeedbackBreakdownBucket.serializeBinaryToWriter
       );
     }
+    if (_instance.unspecifiedRatingCount) {
+      _writer.writeInt32(12, _instance.unspecifiedRatingCount);
+    }
+    if (_instance.scoredCount) {
+      _writer.writeInt32(13, _instance.scoredCount);
+    }
+    if (_instance.averageScore) {
+      _writer.writeFloat(14, _instance.averageScore);
+    }
+    if (_instance.byOrigin && _instance.byOrigin.length) {
+      _writer.writeRepeatedMessage(
+        15,
+        _instance.byOrigin as any,
+        FeedbackBreakdownBucket.serializeBinaryToWriter
+      );
+    }
+    if (_instance.byCriterion && _instance.byCriterion.length) {
+      _writer.writeRepeatedMessage(
+        16,
+        _instance.byCriterion as any,
+        FeedbackBreakdownBucket.serializeBinaryToWriter
+      );
+    }
   }
 
   private _totalFeedback: number;
@@ -26907,6 +27431,11 @@ export class FeedbackStatistics implements GrpcMessage {
   private _byLanguage?: FeedbackBreakdownBucket[];
   private _byIntent?: FeedbackBreakdownBucket[];
   private _byAuthorType?: FeedbackBreakdownBucket[];
+  private _unspecifiedRatingCount: number;
+  private _scoredCount: number;
+  private _averageScore: number;
+  private _byOrigin?: FeedbackBreakdownBucket[];
+  private _byCriterion?: FeedbackBreakdownBucket[];
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -26929,6 +27458,15 @@ export class FeedbackStatistics implements GrpcMessage {
       m => new FeedbackBreakdownBucket(m)
     );
     this.byAuthorType = (_value.byAuthorType || []).map(
+      m => new FeedbackBreakdownBucket(m)
+    );
+    this.unspecifiedRatingCount = _value.unspecifiedRatingCount;
+    this.scoredCount = _value.scoredCount;
+    this.averageScore = _value.averageScore;
+    this.byOrigin = (_value.byOrigin || []).map(
+      m => new FeedbackBreakdownBucket(m)
+    );
+    this.byCriterion = (_value.byCriterion || []).map(
       m => new FeedbackBreakdownBucket(m)
     );
     FeedbackStatistics.refineValues(this);
@@ -26999,6 +27537,36 @@ export class FeedbackStatistics implements GrpcMessage {
   set byAuthorType(value: FeedbackBreakdownBucket[] | undefined) {
     this._byAuthorType = value;
   }
+  get unspecifiedRatingCount(): number {
+    return this._unspecifiedRatingCount;
+  }
+  set unspecifiedRatingCount(value: number) {
+    this._unspecifiedRatingCount = value;
+  }
+  get scoredCount(): number {
+    return this._scoredCount;
+  }
+  set scoredCount(value: number) {
+    this._scoredCount = value;
+  }
+  get averageScore(): number {
+    return this._averageScore;
+  }
+  set averageScore(value: number) {
+    this._averageScore = value;
+  }
+  get byOrigin(): FeedbackBreakdownBucket[] | undefined {
+    return this._byOrigin;
+  }
+  set byOrigin(value: FeedbackBreakdownBucket[] | undefined) {
+    this._byOrigin = value;
+  }
+  get byCriterion(): FeedbackBreakdownBucket[] | undefined {
+    return this._byCriterion;
+  }
+  set byCriterion(value: FeedbackBreakdownBucket[] | undefined) {
+    this._byCriterion = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -27025,7 +27593,12 @@ export class FeedbackStatistics implements GrpcMessage {
       sessionCommentCount: this.sessionCommentCount,
       byLanguage: (this.byLanguage || []).map(m => m.toObject()),
       byIntent: (this.byIntent || []).map(m => m.toObject()),
-      byAuthorType: (this.byAuthorType || []).map(m => m.toObject())
+      byAuthorType: (this.byAuthorType || []).map(m => m.toObject()),
+      unspecifiedRatingCount: this.unspecifiedRatingCount,
+      scoredCount: this.scoredCount,
+      averageScore: this.averageScore,
+      byOrigin: (this.byOrigin || []).map(m => m.toObject()),
+      byCriterion: (this.byCriterion || []).map(m => m.toObject())
     };
   }
 
@@ -27058,7 +27631,12 @@ export class FeedbackStatistics implements GrpcMessage {
       byIntent: (this.byIntent || []).map(m => m.toProtobufJSON(options)),
       byAuthorType: (this.byAuthorType || []).map(m =>
         m.toProtobufJSON(options)
-      )
+      ),
+      unspecifiedRatingCount: this.unspecifiedRatingCount,
+      scoredCount: this.scoredCount,
+      averageScore: this.averageScore,
+      byOrigin: (this.byOrigin || []).map(m => m.toProtobufJSON(options)),
+      byCriterion: (this.byCriterion || []).map(m => m.toProtobufJSON(options))
     };
   }
 }
@@ -27078,6 +27656,11 @@ export module FeedbackStatistics {
     byLanguage?: FeedbackBreakdownBucket.AsObject[];
     byIntent?: FeedbackBreakdownBucket.AsObject[];
     byAuthorType?: FeedbackBreakdownBucket.AsObject[];
+    unspecifiedRatingCount: number;
+    scoredCount: number;
+    averageScore: number;
+    byOrigin?: FeedbackBreakdownBucket.AsObject[];
+    byCriterion?: FeedbackBreakdownBucket.AsObject[];
   }
 
   /**
@@ -27095,6 +27678,11 @@ export module FeedbackStatistics {
     byLanguage: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
     byIntent: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
     byAuthorType: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
+    unspecifiedRatingCount: number;
+    scoredCount: number;
+    averageScore: number;
+    byOrigin: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
+    byCriterion: FeedbackBreakdownBucket.AsProtobufJSON[] | null;
   }
 }
 
@@ -27127,6 +27715,7 @@ export class GetFeedbackStatisticsRequest implements GrpcMessage {
     _instance.includeReviewAndCommentRollup =
       _instance.includeReviewAndCommentRollup || false;
     _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.feedbackFilter = _instance.feedbackFilter || undefined;
   }
 
   /**
@@ -27160,6 +27749,13 @@ export class GetFeedbackStatisticsRequest implements GrpcMessage {
           _reader.readMessage(
             _instance.fieldMask,
             googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 5:
+          _instance.feedbackFilter = new FeedbackFilter();
+          _reader.readMessage(
+            _instance.feedbackFilter,
+            FeedbackFilter.deserializeBinaryFromReader
           );
           break;
         default:
@@ -27199,12 +27795,20 @@ export class GetFeedbackStatisticsRequest implements GrpcMessage {
         googleProtobuf003.FieldMask.serializeBinaryToWriter
       );
     }
+    if (_instance.feedbackFilter) {
+      _writer.writeMessage(
+        5,
+        _instance.feedbackFilter as any,
+        FeedbackFilter.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
   private _sessionFilter?: SessionFilter;
   private _includeReviewAndCommentRollup: boolean;
   private _fieldMask?: googleProtobuf003.FieldMask;
+  private _feedbackFilter?: FeedbackFilter;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -27221,6 +27825,9 @@ export class GetFeedbackStatisticsRequest implements GrpcMessage {
     this.includeReviewAndCommentRollup = _value.includeReviewAndCommentRollup;
     this.fieldMask = _value.fieldMask
       ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    this.feedbackFilter = _value.feedbackFilter
+      ? new FeedbackFilter(_value.feedbackFilter)
       : undefined;
     GetFeedbackStatisticsRequest.refineValues(this);
   }
@@ -27248,6 +27855,12 @@ export class GetFeedbackStatisticsRequest implements GrpcMessage {
   set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
     this._fieldMask = value;
   }
+  get feedbackFilter(): FeedbackFilter | undefined {
+    return this._feedbackFilter;
+  }
+  set feedbackFilter(value: FeedbackFilter | undefined) {
+    this._feedbackFilter = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -27269,7 +27882,10 @@ export class GetFeedbackStatisticsRequest implements GrpcMessage {
         ? this.sessionFilter.toObject()
         : undefined,
       includeReviewAndCommentRollup: this.includeReviewAndCommentRollup,
-      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      feedbackFilter: this.feedbackFilter
+        ? this.feedbackFilter.toObject()
+        : undefined
     };
   }
 
@@ -27295,7 +27911,10 @@ export class GetFeedbackStatisticsRequest implements GrpcMessage {
         ? this.sessionFilter.toProtobufJSON(options)
         : null,
       includeReviewAndCommentRollup: this.includeReviewAndCommentRollup,
-      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      feedbackFilter: this.feedbackFilter
+        ? this.feedbackFilter.toProtobufJSON(options)
+        : null
     };
   }
 }
@@ -27308,6 +27927,7 @@ export module GetFeedbackStatisticsRequest {
     sessionFilter?: SessionFilter.AsObject;
     includeReviewAndCommentRollup: boolean;
     fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    feedbackFilter?: FeedbackFilter.AsObject;
   }
 
   /**
@@ -27318,6 +27938,7 @@ export module GetFeedbackStatisticsRequest {
     sessionFilter: SessionFilter.AsProtobufJSON | null;
     includeReviewAndCommentRollup: boolean;
     fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    feedbackFilter: FeedbackFilter.AsProtobufJSON | null;
   }
 }
 
@@ -27502,6 +28123,7 @@ export class FeedbackTimeSeriesBucket implements GrpcMessage {
     _instance.thumbsUpCount = _instance.thumbsUpCount || 0;
     _instance.thumbsDownCount = _instance.thumbsDownCount || 0;
     _instance.total = _instance.total || 0;
+    _instance.bucketEnd = _instance.bucketEnd || undefined;
   }
 
   /**
@@ -27532,6 +28154,13 @@ export class FeedbackTimeSeriesBucket implements GrpcMessage {
           break;
         case 4:
           _instance.total = _reader.readInt32();
+          break;
+        case 5:
+          _instance.bucketEnd = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.bucketEnd,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
           break;
         default:
           _reader.skipField();
@@ -27566,12 +28195,20 @@ export class FeedbackTimeSeriesBucket implements GrpcMessage {
     if (_instance.total) {
       _writer.writeInt32(4, _instance.total);
     }
+    if (_instance.bucketEnd) {
+      _writer.writeMessage(
+        5,
+        _instance.bucketEnd as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
   }
 
   private _bucketStart?: googleProtobuf005.Timestamp;
   private _thumbsUpCount: number;
   private _thumbsDownCount: number;
   private _total: number;
+  private _bucketEnd?: googleProtobuf005.Timestamp;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -27585,6 +28222,9 @@ export class FeedbackTimeSeriesBucket implements GrpcMessage {
     this.thumbsUpCount = _value.thumbsUpCount;
     this.thumbsDownCount = _value.thumbsDownCount;
     this.total = _value.total;
+    this.bucketEnd = _value.bucketEnd
+      ? new googleProtobuf005.Timestamp(_value.bucketEnd)
+      : undefined;
     FeedbackTimeSeriesBucket.refineValues(this);
   }
   get bucketStart(): googleProtobuf005.Timestamp | undefined {
@@ -27611,6 +28251,12 @@ export class FeedbackTimeSeriesBucket implements GrpcMessage {
   set total(value: number) {
     this._total = value;
   }
+  get bucketEnd(): googleProtobuf005.Timestamp | undefined {
+    return this._bucketEnd;
+  }
+  set bucketEnd(value: googleProtobuf005.Timestamp | undefined) {
+    this._bucketEnd = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -27630,7 +28276,8 @@ export class FeedbackTimeSeriesBucket implements GrpcMessage {
       bucketStart: this.bucketStart ? this.bucketStart.toObject() : undefined,
       thumbsUpCount: this.thumbsUpCount,
       thumbsDownCount: this.thumbsDownCount,
-      total: this.total
+      total: this.total,
+      bucketEnd: this.bucketEnd ? this.bucketEnd.toObject() : undefined
     };
   }
 
@@ -27656,7 +28303,8 @@ export class FeedbackTimeSeriesBucket implements GrpcMessage {
         : null,
       thumbsUpCount: this.thumbsUpCount,
       thumbsDownCount: this.thumbsDownCount,
-      total: this.total
+      total: this.total,
+      bucketEnd: this.bucketEnd ? this.bucketEnd.toProtobufJSON(options) : null
     };
   }
 }
@@ -27669,6 +28317,7 @@ export module FeedbackTimeSeriesBucket {
     thumbsUpCount: number;
     thumbsDownCount: number;
     total: number;
+    bucketEnd?: googleProtobuf005.Timestamp.AsObject;
   }
 
   /**
@@ -27679,6 +28328,7 @@ export module FeedbackTimeSeriesBucket {
     thumbsUpCount: number;
     thumbsDownCount: number;
     total: number;
+    bucketEnd: googleProtobuf005.Timestamp.AsProtobufJSON | null;
   }
 }
 
@@ -27711,6 +28361,11 @@ export class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
     _instance.bucketWidthSeconds = _instance.bucketWidthSeconds || 0;
     _instance.maxBuckets = _instance.maxBuckets || 0;
     _instance.fieldMask = _instance.fieldMask || undefined;
+    _instance.feedbackFilter = _instance.feedbackFilter || undefined;
+    _instance.granularity = _instance.granularity || 0;
+    _instance.timeZone = _instance.timeZone || '';
+    _instance.start = _instance.start || undefined;
+    _instance.end = _instance.end || undefined;
   }
 
   /**
@@ -27747,6 +28402,33 @@ export class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
           _reader.readMessage(
             _instance.fieldMask,
             googleProtobuf003.FieldMask.deserializeBinaryFromReader
+          );
+          break;
+        case 6:
+          _instance.feedbackFilter = new FeedbackFilter();
+          _reader.readMessage(
+            _instance.feedbackFilter,
+            FeedbackFilter.deserializeBinaryFromReader
+          );
+          break;
+        case 7:
+          _instance.granularity = _reader.readEnum();
+          break;
+        case 8:
+          _instance.timeZone = _reader.readString();
+          break;
+        case 9:
+          _instance.start = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.start,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 10:
+          _instance.end = new googleProtobuf005.Timestamp();
+          _reader.readMessage(
+            _instance.end,
+            googleProtobuf005.Timestamp.deserializeBinaryFromReader
           );
           break;
         default:
@@ -27789,6 +28471,33 @@ export class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
         googleProtobuf003.FieldMask.serializeBinaryToWriter
       );
     }
+    if (_instance.feedbackFilter) {
+      _writer.writeMessage(
+        6,
+        _instance.feedbackFilter as any,
+        FeedbackFilter.serializeBinaryToWriter
+      );
+    }
+    if (_instance.granularity) {
+      _writer.writeEnum(7, _instance.granularity);
+    }
+    if (_instance.timeZone) {
+      _writer.writeString(8, _instance.timeZone);
+    }
+    if (_instance.start) {
+      _writer.writeMessage(
+        9,
+        _instance.start as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.end) {
+      _writer.writeMessage(
+        10,
+        _instance.end as any,
+        googleProtobuf005.Timestamp.serializeBinaryToWriter
+      );
+    }
   }
 
   private _parent: string;
@@ -27796,6 +28505,11 @@ export class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
   private _bucketWidthSeconds: number;
   private _maxBuckets: number;
   private _fieldMask?: googleProtobuf003.FieldMask;
+  private _feedbackFilter?: FeedbackFilter;
+  private _granularity: FeedbackTimeGranularity;
+  private _timeZone: string;
+  private _start?: googleProtobuf005.Timestamp;
+  private _end?: googleProtobuf005.Timestamp;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -27813,6 +28527,17 @@ export class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
     this.maxBuckets = _value.maxBuckets;
     this.fieldMask = _value.fieldMask
       ? new googleProtobuf003.FieldMask(_value.fieldMask)
+      : undefined;
+    this.feedbackFilter = _value.feedbackFilter
+      ? new FeedbackFilter(_value.feedbackFilter)
+      : undefined;
+    this.granularity = _value.granularity;
+    this.timeZone = _value.timeZone;
+    this.start = _value.start
+      ? new googleProtobuf005.Timestamp(_value.start)
+      : undefined;
+    this.end = _value.end
+      ? new googleProtobuf005.Timestamp(_value.end)
       : undefined;
     GetFeedbackStatisticsTimeSeriesRequest.refineValues(this);
   }
@@ -27846,6 +28571,36 @@ export class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
   set fieldMask(value: googleProtobuf003.FieldMask | undefined) {
     this._fieldMask = value;
   }
+  get feedbackFilter(): FeedbackFilter | undefined {
+    return this._feedbackFilter;
+  }
+  set feedbackFilter(value: FeedbackFilter | undefined) {
+    this._feedbackFilter = value;
+  }
+  get granularity(): FeedbackTimeGranularity {
+    return this._granularity;
+  }
+  set granularity(value: FeedbackTimeGranularity) {
+    this._granularity = value;
+  }
+  get timeZone(): string {
+    return this._timeZone;
+  }
+  set timeZone(value: string) {
+    this._timeZone = value;
+  }
+  get start(): googleProtobuf005.Timestamp | undefined {
+    return this._start;
+  }
+  set start(value: googleProtobuf005.Timestamp | undefined) {
+    this._start = value;
+  }
+  get end(): googleProtobuf005.Timestamp | undefined {
+    return this._end;
+  }
+  set end(value: googleProtobuf005.Timestamp | undefined) {
+    this._end = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -27871,7 +28626,14 @@ export class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
         : undefined,
       bucketWidthSeconds: this.bucketWidthSeconds,
       maxBuckets: this.maxBuckets,
-      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+      fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+      feedbackFilter: this.feedbackFilter
+        ? this.feedbackFilter.toObject()
+        : undefined,
+      granularity: this.granularity,
+      timeZone: this.timeZone,
+      start: this.start ? this.start.toObject() : undefined,
+      end: this.end ? this.end.toObject() : undefined
     };
   }
 
@@ -27898,7 +28660,19 @@ export class GetFeedbackStatisticsTimeSeriesRequest implements GrpcMessage {
         : null,
       bucketWidthSeconds: this.bucketWidthSeconds,
       maxBuckets: this.maxBuckets,
-      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+      fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+      feedbackFilter: this.feedbackFilter
+        ? this.feedbackFilter.toProtobufJSON(options)
+        : null,
+      granularity:
+        FeedbackTimeGranularity[
+          this.granularity === null || this.granularity === undefined
+            ? 0
+            : this.granularity
+        ],
+      timeZone: this.timeZone,
+      start: this.start ? this.start.toProtobufJSON(options) : null,
+      end: this.end ? this.end.toProtobufJSON(options) : null
     };
   }
 }
@@ -27912,6 +28686,11 @@ export module GetFeedbackStatisticsTimeSeriesRequest {
     bucketWidthSeconds: number;
     maxBuckets: number;
     fieldMask?: googleProtobuf003.FieldMask.AsObject;
+    feedbackFilter?: FeedbackFilter.AsObject;
+    granularity: FeedbackTimeGranularity;
+    timeZone: string;
+    start?: googleProtobuf005.Timestamp.AsObject;
+    end?: googleProtobuf005.Timestamp.AsObject;
   }
 
   /**
@@ -27923,6 +28702,11 @@ export module GetFeedbackStatisticsTimeSeriesRequest {
     bucketWidthSeconds: number;
     maxBuckets: number;
     fieldMask: googleProtobuf003.FieldMask.AsProtobufJSON | null;
+    feedbackFilter: FeedbackFilter.AsProtobufJSON | null;
+    granularity: string;
+    timeZone: string;
+    start: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    end: googleProtobuf005.Timestamp.AsProtobufJSON | null;
   }
 }
 
