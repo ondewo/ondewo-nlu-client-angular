@@ -193,6 +193,29 @@ export class OperationsClient {
         requestClass: thisProto.GetRemoteOperationContainerStatusRequest,
         responseClass: thisProto.RemoteOperationContainerStatus
       });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Operations/ListRemoteOperationContainers
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.ListRemoteOperationContainersResponse>>
+     */
+    listRemoteOperationContainers: (
+      requestData: thisProto.ListRemoteOperationContainersRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<
+      GrpcEvent<thisProto.ListRemoteOperationContainersResponse>
+    > => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Operations/ListRemoteOperationContainers',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.ListRemoteOperationContainersRequest,
+        responseClass: thisProto.ListRemoteOperationContainersResponse
+      });
     }
   };
 
@@ -313,6 +336,22 @@ export class OperationsClient {
   ): Observable<thisProto.RemoteOperationContainerStatus> {
     return this.$raw
       .getRemoteOperationContainerStatus(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Operations/ListRemoteOperationContainers
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.ListRemoteOperationContainersResponse>
+   */
+  listRemoteOperationContainers(
+    requestData: thisProto.ListRemoteOperationContainersRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.ListRemoteOperationContainersResponse> {
+    return this.$raw
+      .listRemoteOperationContainers(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 }

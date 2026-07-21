@@ -1476,6 +1476,7 @@ export class StreamRemoteOperationContainerLogsRequest implements GrpcMessage {
     _instance.name = _instance.name || '';
     _instance.minLogLevel = _instance.minLogLevel || 0;
     _instance.tailLines = _instance.tailLines || 0;
+    _instance.containerId = _instance.containerId || '';
   }
 
   /**
@@ -1499,6 +1500,9 @@ export class StreamRemoteOperationContainerLogsRequest implements GrpcMessage {
           break;
         case 3:
           _instance.tailLines = _reader.readInt32();
+          break;
+        case 4:
+          _instance.containerId = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -1526,11 +1530,15 @@ export class StreamRemoteOperationContainerLogsRequest implements GrpcMessage {
     if (_instance.tailLines) {
       _writer.writeInt32(3, _instance.tailLines);
     }
+    if (_instance.containerId) {
+      _writer.writeString(4, _instance.containerId);
+    }
   }
 
   private _name: string;
   private _minLogLevel: ondewoNlu010.LogSeverity;
   private _tailLines: number;
+  private _containerId: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -1545,6 +1553,7 @@ export class StreamRemoteOperationContainerLogsRequest implements GrpcMessage {
     this.name = _value.name;
     this.minLogLevel = _value.minLogLevel;
     this.tailLines = _value.tailLines;
+    this.containerId = _value.containerId;
     StreamRemoteOperationContainerLogsRequest.refineValues(this);
   }
   get name(): string {
@@ -1564,6 +1573,12 @@ export class StreamRemoteOperationContainerLogsRequest implements GrpcMessage {
   }
   set tailLines(value: number) {
     this._tailLines = value;
+  }
+  get containerId(): string {
+    return this._containerId;
+  }
+  set containerId(value: string) {
+    this._containerId = value;
   }
 
   /**
@@ -1586,7 +1601,8 @@ export class StreamRemoteOperationContainerLogsRequest implements GrpcMessage {
     return {
       name: this.name,
       minLogLevel: this.minLogLevel,
-      tailLines: this.tailLines
+      tailLines: this.tailLines,
+      containerId: this.containerId
     };
   }
 
@@ -1614,7 +1630,8 @@ export class StreamRemoteOperationContainerLogsRequest implements GrpcMessage {
             ? 0
             : this.minLogLevel
         ],
-      tailLines: this.tailLines
+      tailLines: this.tailLines,
+      containerId: this.containerId
     };
   }
 }
@@ -1626,6 +1643,7 @@ export module StreamRemoteOperationContainerLogsRequest {
     name: string;
     minLogLevel: ondewoNlu010.LogSeverity;
     tailLines: number;
+    containerId: string;
   }
 
   /**
@@ -1635,6 +1653,7 @@ export module StreamRemoteOperationContainerLogsRequest {
     name: string;
     minLogLevel: string;
     tailLines: number;
+    containerId: string;
   }
 }
 
@@ -1668,6 +1687,7 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     _instance.endTime = _instance.endTime || undefined;
     _instance.maxLines = _instance.maxLines || 0;
     _instance.regex = _instance.regex || '';
+    _instance.containerId = _instance.containerId || '';
   }
 
   /**
@@ -1708,6 +1728,9 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
           break;
         case 6:
           _instance.regex = _reader.readString();
+          break;
+        case 7:
+          _instance.containerId = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -1752,6 +1775,9 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     if (_instance.regex) {
       _writer.writeString(6, _instance.regex);
     }
+    if (_instance.containerId) {
+      _writer.writeString(7, _instance.containerId);
+    }
   }
 
   private _name: string;
@@ -1760,6 +1786,7 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
   private _endTime?: googleProtobuf003.Timestamp;
   private _maxLines: number;
   private _regex: string;
+  private _containerId: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -1779,6 +1806,7 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
       : undefined;
     this.maxLines = _value.maxLines;
     this.regex = _value.regex;
+    this.containerId = _value.containerId;
     GetRemoteOperationContainerLogsRequest.refineValues(this);
   }
   get name(): string {
@@ -1817,6 +1845,12 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
   set regex(value: string) {
     this._regex = value;
   }
+  get containerId(): string {
+    return this._containerId;
+  }
+  set containerId(value: string) {
+    this._containerId = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -1841,7 +1875,8 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
       startTime: this.startTime ? this.startTime.toObject() : undefined,
       endTime: this.endTime ? this.endTime.toObject() : undefined,
       maxLines: this.maxLines,
-      regex: this.regex
+      regex: this.regex,
+      containerId: this.containerId
     };
   }
 
@@ -1872,7 +1907,8 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
       startTime: this.startTime ? this.startTime.toProtobufJSON(options) : null,
       endTime: this.endTime ? this.endTime.toProtobufJSON(options) : null,
       maxLines: this.maxLines,
-      regex: this.regex
+      regex: this.regex,
+      containerId: this.containerId
     };
   }
 }
@@ -1887,6 +1923,7 @@ export module GetRemoteOperationContainerLogsRequest {
     endTime?: googleProtobuf003.Timestamp.AsObject;
     maxLines: number;
     regex: string;
+    containerId: string;
   }
 
   /**
@@ -1899,6 +1936,7 @@ export module GetRemoteOperationContainerLogsRequest {
     endTime: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     maxLines: number;
     regex: string;
+    containerId: string;
   }
 }
 
@@ -2105,6 +2143,8 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
     _instance.timestamp = _instance.timestamp || undefined;
     _instance.level = _instance.level || 0;
     _instance.message = _instance.message || '';
+    _instance.containerId = _instance.containerId || '';
+    _instance.containerName = _instance.containerName || '';
   }
 
   /**
@@ -2132,6 +2172,12 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
           break;
         case 3:
           _instance.message = _reader.readString();
+          break;
+        case 4:
+          _instance.containerId = _reader.readString();
+          break;
+        case 5:
+          _instance.containerName = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -2163,11 +2209,19 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
     if (_instance.message) {
       _writer.writeString(3, _instance.message);
     }
+    if (_instance.containerId) {
+      _writer.writeString(4, _instance.containerId);
+    }
+    if (_instance.containerName) {
+      _writer.writeString(5, _instance.containerName);
+    }
   }
 
   private _timestamp?: googleProtobuf003.Timestamp;
   private _level: ondewoNlu010.LogSeverity;
   private _message: string;
+  private _containerId: string;
+  private _containerName: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2182,6 +2236,8 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
       : undefined;
     this.level = _value.level;
     this.message = _value.message;
+    this.containerId = _value.containerId;
+    this.containerName = _value.containerName;
     RemoteOperationContainerLogLine.refineValues(this);
   }
   get timestamp(): googleProtobuf003.Timestamp | undefined {
@@ -2202,6 +2258,18 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
   set message(value: string) {
     this._message = value;
   }
+  get containerId(): string {
+    return this._containerId;
+  }
+  set containerId(value: string) {
+    this._containerId = value;
+  }
+  get containerName(): string {
+    return this._containerName;
+  }
+  set containerName(value: string) {
+    this._containerName = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -2220,7 +2288,9 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
     return {
       timestamp: this.timestamp ? this.timestamp.toObject() : undefined,
       level: this.level,
-      message: this.message
+      message: this.message,
+      containerId: this.containerId,
+      containerName: this.containerName
     };
   }
 
@@ -2246,7 +2316,9 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
         ondewoNlu010.LogSeverity[
           this.level === null || this.level === undefined ? 0 : this.level
         ],
-      message: this.message
+      message: this.message,
+      containerId: this.containerId,
+      containerName: this.containerName
     };
   }
 }
@@ -2258,6 +2330,8 @@ export module RemoteOperationContainerLogLine {
     timestamp?: googleProtobuf003.Timestamp.AsObject;
     level: ondewoNlu010.LogSeverity;
     message: string;
+    containerId: string;
+    containerName: string;
   }
 
   /**
@@ -2267,6 +2341,8 @@ export module RemoteOperationContainerLogLine {
     timestamp: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     level: string;
     message: string;
+    containerId: string;
+    containerName: string;
   }
 }
 
@@ -2295,6 +2371,7 @@ export class GetRemoteOperationContainerStatusRequest implements GrpcMessage {
    */
   static refineValues(_instance: GetRemoteOperationContainerStatusRequest) {
     _instance.name = _instance.name || '';
+    _instance.containerId = _instance.containerId || '';
   }
 
   /**
@@ -2312,6 +2389,9 @@ export class GetRemoteOperationContainerStatusRequest implements GrpcMessage {
       switch (_reader.getFieldNumber()) {
         case 1:
           _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.containerId = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -2333,9 +2413,13 @@ export class GetRemoteOperationContainerStatusRequest implements GrpcMessage {
     if (_instance.name) {
       _writer.writeString(1, _instance.name);
     }
+    if (_instance.containerId) {
+      _writer.writeString(2, _instance.containerId);
+    }
   }
 
   private _name: string;
+  private _containerId: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2346,6 +2430,7 @@ export class GetRemoteOperationContainerStatusRequest implements GrpcMessage {
   ) {
     _value = _value || {};
     this.name = _value.name;
+    this.containerId = _value.containerId;
     GetRemoteOperationContainerStatusRequest.refineValues(this);
   }
   get name(): string {
@@ -2353,6 +2438,12 @@ export class GetRemoteOperationContainerStatusRequest implements GrpcMessage {
   }
   set name(value: string) {
     this._name = value;
+  }
+  get containerId(): string {
+    return this._containerId;
+  }
+  set containerId(value: string) {
+    this._containerId = value;
   }
 
   /**
@@ -2373,7 +2464,8 @@ export class GetRemoteOperationContainerStatusRequest implements GrpcMessage {
    */
   toObject(): GetRemoteOperationContainerStatusRequest.AsObject {
     return {
-      name: this.name
+      name: this.name,
+      containerId: this.containerId
     };
   }
 
@@ -2394,7 +2486,8 @@ export class GetRemoteOperationContainerStatusRequest implements GrpcMessage {
     options?: ToProtobufJSONOptions
   ): GetRemoteOperationContainerStatusRequest.AsProtobufJSON {
     return {
-      name: this.name
+      name: this.name,
+      containerId: this.containerId
     };
   }
 }
@@ -2404,6 +2497,7 @@ export module GetRemoteOperationContainerStatusRequest {
    */
   export interface AsObject {
     name: string;
+    containerId: string;
   }
 
   /**
@@ -2411,6 +2505,7 @@ export module GetRemoteOperationContainerStatusRequest {
    */
   export interface AsProtobufJSON {
     name: string;
+    containerId: string;
   }
 }
 
@@ -2442,6 +2537,7 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
     _instance.lifecycleState = _instance.lifecycleState || 0;
     _instance.hostName = _instance.hostName || '';
     _instance.containerName = _instance.containerName || '';
+    _instance.containerId = _instance.containerId || '';
     _instance.exitCode = _instance.exitCode || 0;
     _instance.oomKilled = _instance.oomKilled || false;
     _instance.healthStatus = _instance.healthStatus || '';
@@ -2474,6 +2570,9 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
           break;
         case 4:
           _instance.containerName = _reader.readString();
+          break;
+        case 11:
+          _instance.containerId = _reader.readString();
           break;
         case 5:
           _instance.exitCode = _reader.readInt32();
@@ -2534,6 +2633,9 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
     if (_instance.containerName) {
       _writer.writeString(4, _instance.containerName);
     }
+    if (_instance.containerId) {
+      _writer.writeString(11, _instance.containerId);
+    }
     if (_instance.exitCode) {
       _writer.writeInt32(5, _instance.exitCode);
     }
@@ -2570,6 +2672,7 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
   private _lifecycleState: RemoteOperationContainerLifecycleState;
   private _hostName: string;
   private _containerName: string;
+  private _containerId: string;
   private _exitCode: number;
   private _oomKilled: boolean;
   private _healthStatus: string;
@@ -2589,6 +2692,7 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
     this.lifecycleState = _value.lifecycleState;
     this.hostName = _value.hostName;
     this.containerName = _value.containerName;
+    this.containerId = _value.containerId;
     this.exitCode = _value.exitCode;
     this.oomKilled = _value.oomKilled;
     this.healthStatus = _value.healthStatus;
@@ -2626,6 +2730,12 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
   }
   set containerName(value: string) {
     this._containerName = value;
+  }
+  get containerId(): string {
+    return this._containerId;
+  }
+  set containerId(value: string) {
+    this._containerId = value;
   }
   get exitCode(): number {
     return this._exitCode;
@@ -2683,6 +2793,7 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
       lifecycleState: this.lifecycleState,
       hostName: this.hostName,
       containerName: this.containerName,
+      containerId: this.containerId,
       exitCode: this.exitCode,
       oomKilled: this.oomKilled,
       healthStatus: this.healthStatus,
@@ -2718,6 +2829,7 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
         ],
       hostName: this.hostName,
       containerName: this.containerName,
+      containerId: this.containerId,
       exitCode: this.exitCode,
       oomKilled: this.oomKilled,
       healthStatus: this.healthStatus,
@@ -2740,6 +2852,7 @@ export module RemoteOperationContainerStatus {
     lifecycleState: RemoteOperationContainerLifecycleState;
     hostName: string;
     containerName: string;
+    containerId: string;
     exitCode: number;
     oomKilled: boolean;
     healthStatus: string;
@@ -2756,11 +2869,701 @@ export module RemoteOperationContainerStatus {
     lifecycleState: string;
     hostName: string;
     containerName: string;
+    containerId: string;
     exitCode: number;
     oomKilled: boolean;
     healthStatus: string;
     startedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     finishedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     observedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.RemoteOperationContainer
+ */
+export class RemoteOperationContainer implements GrpcMessage {
+  static id = 'ondewo.nlu.RemoteOperationContainer';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new RemoteOperationContainer();
+    RemoteOperationContainer.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: RemoteOperationContainer) {
+    _instance.containerId = _instance.containerId || '';
+    _instance.containerName = _instance.containerName || '';
+    _instance.hostName = _instance.hostName || '';
+    _instance.lifecycleState = _instance.lifecycleState || 0;
+    _instance.operationName = _instance.operationName || '';
+    _instance.image = _instance.image || '';
+    _instance.phase = _instance.phase || '';
+    _instance.exitCode = _instance.exitCode || 0;
+    _instance.oomKilled = _instance.oomKilled || false;
+    _instance.startedAt = _instance.startedAt || undefined;
+    _instance.finishedAt = _instance.finishedAt || undefined;
+    _instance.logsAvailable = _instance.logsAvailable || false;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: RemoteOperationContainer,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.containerId = _reader.readString();
+          break;
+        case 2:
+          _instance.containerName = _reader.readString();
+          break;
+        case 3:
+          _instance.hostName = _reader.readString();
+          break;
+        case 4:
+          _instance.lifecycleState = _reader.readEnum();
+          break;
+        case 5:
+          _instance.operationName = _reader.readString();
+          break;
+        case 6:
+          _instance.image = _reader.readString();
+          break;
+        case 7:
+          _instance.phase = _reader.readString();
+          break;
+        case 8:
+          _instance.exitCode = _reader.readInt32();
+          break;
+        case 9:
+          _instance.oomKilled = _reader.readBool();
+          break;
+        case 10:
+          _instance.startedAt = new googleProtobuf003.Timestamp();
+          _reader.readMessage(
+            _instance.startedAt,
+            googleProtobuf003.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 11:
+          _instance.finishedAt = new googleProtobuf003.Timestamp();
+          _reader.readMessage(
+            _instance.finishedAt,
+            googleProtobuf003.Timestamp.deserializeBinaryFromReader
+          );
+          break;
+        case 12:
+          _instance.logsAvailable = _reader.readBool();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    RemoteOperationContainer.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: RemoteOperationContainer,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.containerId) {
+      _writer.writeString(1, _instance.containerId);
+    }
+    if (_instance.containerName) {
+      _writer.writeString(2, _instance.containerName);
+    }
+    if (_instance.hostName) {
+      _writer.writeString(3, _instance.hostName);
+    }
+    if (_instance.lifecycleState) {
+      _writer.writeEnum(4, _instance.lifecycleState);
+    }
+    if (_instance.operationName) {
+      _writer.writeString(5, _instance.operationName);
+    }
+    if (_instance.image) {
+      _writer.writeString(6, _instance.image);
+    }
+    if (_instance.phase) {
+      _writer.writeString(7, _instance.phase);
+    }
+    if (_instance.exitCode) {
+      _writer.writeInt32(8, _instance.exitCode);
+    }
+    if (_instance.oomKilled) {
+      _writer.writeBool(9, _instance.oomKilled);
+    }
+    if (_instance.startedAt) {
+      _writer.writeMessage(
+        10,
+        _instance.startedAt as any,
+        googleProtobuf003.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.finishedAt) {
+      _writer.writeMessage(
+        11,
+        _instance.finishedAt as any,
+        googleProtobuf003.Timestamp.serializeBinaryToWriter
+      );
+    }
+    if (_instance.logsAvailable) {
+      _writer.writeBool(12, _instance.logsAvailable);
+    }
+  }
+
+  private _containerId: string;
+  private _containerName: string;
+  private _hostName: string;
+  private _lifecycleState: RemoteOperationContainerLifecycleState;
+  private _operationName: string;
+  private _image: string;
+  private _phase: string;
+  private _exitCode: number;
+  private _oomKilled: boolean;
+  private _startedAt?: googleProtobuf003.Timestamp;
+  private _finishedAt?: googleProtobuf003.Timestamp;
+  private _logsAvailable: boolean;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of RemoteOperationContainer to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<RemoteOperationContainer.AsObject>) {
+    _value = _value || {};
+    this.containerId = _value.containerId;
+    this.containerName = _value.containerName;
+    this.hostName = _value.hostName;
+    this.lifecycleState = _value.lifecycleState;
+    this.operationName = _value.operationName;
+    this.image = _value.image;
+    this.phase = _value.phase;
+    this.exitCode = _value.exitCode;
+    this.oomKilled = _value.oomKilled;
+    this.startedAt = _value.startedAt
+      ? new googleProtobuf003.Timestamp(_value.startedAt)
+      : undefined;
+    this.finishedAt = _value.finishedAt
+      ? new googleProtobuf003.Timestamp(_value.finishedAt)
+      : undefined;
+    this.logsAvailable = _value.logsAvailable;
+    RemoteOperationContainer.refineValues(this);
+  }
+  get containerId(): string {
+    return this._containerId;
+  }
+  set containerId(value: string) {
+    this._containerId = value;
+  }
+  get containerName(): string {
+    return this._containerName;
+  }
+  set containerName(value: string) {
+    this._containerName = value;
+  }
+  get hostName(): string {
+    return this._hostName;
+  }
+  set hostName(value: string) {
+    this._hostName = value;
+  }
+  get lifecycleState(): RemoteOperationContainerLifecycleState {
+    return this._lifecycleState;
+  }
+  set lifecycleState(value: RemoteOperationContainerLifecycleState) {
+    this._lifecycleState = value;
+  }
+  get operationName(): string {
+    return this._operationName;
+  }
+  set operationName(value: string) {
+    this._operationName = value;
+  }
+  get image(): string {
+    return this._image;
+  }
+  set image(value: string) {
+    this._image = value;
+  }
+  get phase(): string {
+    return this._phase;
+  }
+  set phase(value: string) {
+    this._phase = value;
+  }
+  get exitCode(): number {
+    return this._exitCode;
+  }
+  set exitCode(value: number) {
+    this._exitCode = value;
+  }
+  get oomKilled(): boolean {
+    return this._oomKilled;
+  }
+  set oomKilled(value: boolean) {
+    this._oomKilled = value;
+  }
+  get startedAt(): googleProtobuf003.Timestamp | undefined {
+    return this._startedAt;
+  }
+  set startedAt(value: googleProtobuf003.Timestamp | undefined) {
+    this._startedAt = value;
+  }
+  get finishedAt(): googleProtobuf003.Timestamp | undefined {
+    return this._finishedAt;
+  }
+  set finishedAt(value: googleProtobuf003.Timestamp | undefined) {
+    this._finishedAt = value;
+  }
+  get logsAvailable(): boolean {
+    return this._logsAvailable;
+  }
+  set logsAvailable(value: boolean) {
+    this._logsAvailable = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    RemoteOperationContainer.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): RemoteOperationContainer.AsObject {
+    return {
+      containerId: this.containerId,
+      containerName: this.containerName,
+      hostName: this.hostName,
+      lifecycleState: this.lifecycleState,
+      operationName: this.operationName,
+      image: this.image,
+      phase: this.phase,
+      exitCode: this.exitCode,
+      oomKilled: this.oomKilled,
+      startedAt: this.startedAt ? this.startedAt.toObject() : undefined,
+      finishedAt: this.finishedAt ? this.finishedAt.toObject() : undefined,
+      logsAvailable: this.logsAvailable
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): RemoteOperationContainer.AsProtobufJSON {
+    return {
+      containerId: this.containerId,
+      containerName: this.containerName,
+      hostName: this.hostName,
+      lifecycleState:
+        RemoteOperationContainerLifecycleState[
+          this.lifecycleState === null || this.lifecycleState === undefined
+            ? 0
+            : this.lifecycleState
+        ],
+      operationName: this.operationName,
+      image: this.image,
+      phase: this.phase,
+      exitCode: this.exitCode,
+      oomKilled: this.oomKilled,
+      startedAt: this.startedAt ? this.startedAt.toProtobufJSON(options) : null,
+      finishedAt: this.finishedAt
+        ? this.finishedAt.toProtobufJSON(options)
+        : null,
+      logsAvailable: this.logsAvailable
+    };
+  }
+}
+export module RemoteOperationContainer {
+  /**
+   * Standard JavaScript object representation for RemoteOperationContainer
+   */
+  export interface AsObject {
+    containerId: string;
+    containerName: string;
+    hostName: string;
+    lifecycleState: RemoteOperationContainerLifecycleState;
+    operationName: string;
+    image: string;
+    phase: string;
+    exitCode: number;
+    oomKilled: boolean;
+    startedAt?: googleProtobuf003.Timestamp.AsObject;
+    finishedAt?: googleProtobuf003.Timestamp.AsObject;
+    logsAvailable: boolean;
+  }
+
+  /**
+   * Protobuf JSON representation for RemoteOperationContainer
+   */
+  export interface AsProtobufJSON {
+    containerId: string;
+    containerName: string;
+    hostName: string;
+    lifecycleState: string;
+    operationName: string;
+    image: string;
+    phase: string;
+    exitCode: number;
+    oomKilled: boolean;
+    startedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+    finishedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+    logsAvailable: boolean;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListRemoteOperationContainersRequest
+ */
+export class ListRemoteOperationContainersRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.ListRemoteOperationContainersRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListRemoteOperationContainersRequest();
+    ListRemoteOperationContainersRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListRemoteOperationContainersRequest) {
+    _instance.name = _instance.name || '';
+    _instance.includeSubOperations = _instance.includeSubOperations || false;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListRemoteOperationContainersRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.name = _reader.readString();
+          break;
+        case 2:
+          _instance.includeSubOperations = _reader.readBool();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListRemoteOperationContainersRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListRemoteOperationContainersRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.name) {
+      _writer.writeString(1, _instance.name);
+    }
+    if (_instance.includeSubOperations) {
+      _writer.writeBool(2, _instance.includeSubOperations);
+    }
+  }
+
+  private _name: string;
+  private _includeSubOperations: boolean;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListRemoteOperationContainersRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<ListRemoteOperationContainersRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.name = _value.name;
+    this.includeSubOperations = _value.includeSubOperations;
+    ListRemoteOperationContainersRequest.refineValues(this);
+  }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
+  get includeSubOperations(): boolean {
+    return this._includeSubOperations;
+  }
+  set includeSubOperations(value: boolean) {
+    this._includeSubOperations = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListRemoteOperationContainersRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListRemoteOperationContainersRequest.AsObject {
+    return {
+      name: this.name,
+      includeSubOperations: this.includeSubOperations
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListRemoteOperationContainersRequest.AsProtobufJSON {
+    return {
+      name: this.name,
+      includeSubOperations: this.includeSubOperations
+    };
+  }
+}
+export module ListRemoteOperationContainersRequest {
+  /**
+   * Standard JavaScript object representation for ListRemoteOperationContainersRequest
+   */
+  export interface AsObject {
+    name: string;
+    includeSubOperations: boolean;
+  }
+
+  /**
+   * Protobuf JSON representation for ListRemoteOperationContainersRequest
+   */
+  export interface AsProtobufJSON {
+    name: string;
+    includeSubOperations: boolean;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.ListRemoteOperationContainersResponse
+ */
+export class ListRemoteOperationContainersResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.ListRemoteOperationContainersResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new ListRemoteOperationContainersResponse();
+    ListRemoteOperationContainersResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: ListRemoteOperationContainersResponse) {
+    _instance.containers = _instance.containers || [];
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: ListRemoteOperationContainersResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          const messageInitializer1 = new RemoteOperationContainer();
+          _reader.readMessage(
+            messageInitializer1,
+            RemoteOperationContainer.deserializeBinaryFromReader
+          );
+          (_instance.containers = _instance.containers || []).push(
+            messageInitializer1
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    ListRemoteOperationContainersResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: ListRemoteOperationContainersResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.containers && _instance.containers.length) {
+      _writer.writeRepeatedMessage(
+        1,
+        _instance.containers as any,
+        RemoteOperationContainer.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _containers?: RemoteOperationContainer[];
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of ListRemoteOperationContainersResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<ListRemoteOperationContainersResponse.AsObject>
+  ) {
+    _value = _value || {};
+    this.containers = (_value.containers || []).map(
+      m => new RemoteOperationContainer(m)
+    );
+    ListRemoteOperationContainersResponse.refineValues(this);
+  }
+  get containers(): RemoteOperationContainer[] | undefined {
+    return this._containers;
+  }
+  set containers(value: RemoteOperationContainer[] | undefined) {
+    this._containers = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    ListRemoteOperationContainersResponse.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): ListRemoteOperationContainersResponse.AsObject {
+    return {
+      containers: (this.containers || []).map(m => m.toObject())
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): ListRemoteOperationContainersResponse.AsProtobufJSON {
+    return {
+      containers: (this.containers || []).map(m => m.toProtobufJSON(options))
+    };
+  }
+}
+export module ListRemoteOperationContainersResponse {
+  /**
+   * Standard JavaScript object representation for ListRemoteOperationContainersResponse
+   */
+  export interface AsObject {
+    containers?: RemoteOperationContainer.AsObject[];
+  }
+
+  /**
+   * Protobuf JSON representation for ListRemoteOperationContainersResponse
+   */
+  export interface AsProtobufJSON {
+    containers: RemoteOperationContainer.AsProtobufJSON[] | null;
   }
 }
