@@ -1688,6 +1688,8 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     _instance.maxLines = _instance.maxLines || 0;
     _instance.regex = _instance.regex || '';
     _instance.containerId = _instance.containerId || '';
+    _instance.beforeSeq = _instance.beforeSeq || '0';
+    _instance.afterSeq = _instance.afterSeq || '0';
   }
 
   /**
@@ -1731,6 +1733,12 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
           break;
         case 7:
           _instance.containerId = _reader.readString();
+          break;
+        case 8:
+          _instance.beforeSeq = _reader.readInt64String();
+          break;
+        case 9:
+          _instance.afterSeq = _reader.readInt64String();
           break;
         default:
           _reader.skipField();
@@ -1778,6 +1786,12 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     if (_instance.containerId) {
       _writer.writeString(7, _instance.containerId);
     }
+    if (_instance.beforeSeq) {
+      _writer.writeInt64String(8, _instance.beforeSeq);
+    }
+    if (_instance.afterSeq) {
+      _writer.writeInt64String(9, _instance.afterSeq);
+    }
   }
 
   private _name: string;
@@ -1787,6 +1801,8 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
   private _maxLines: number;
   private _regex: string;
   private _containerId: string;
+  private _beforeSeq: string;
+  private _afterSeq: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -1807,6 +1823,8 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     this.maxLines = _value.maxLines;
     this.regex = _value.regex;
     this.containerId = _value.containerId;
+    this.beforeSeq = _value.beforeSeq;
+    this.afterSeq = _value.afterSeq;
     GetRemoteOperationContainerLogsRequest.refineValues(this);
   }
   get name(): string {
@@ -1851,6 +1869,18 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
   set containerId(value: string) {
     this._containerId = value;
   }
+  get beforeSeq(): string {
+    return this._beforeSeq;
+  }
+  set beforeSeq(value: string) {
+    this._beforeSeq = value;
+  }
+  get afterSeq(): string {
+    return this._afterSeq;
+  }
+  set afterSeq(value: string) {
+    this._afterSeq = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -1876,7 +1906,9 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
       endTime: this.endTime ? this.endTime.toObject() : undefined,
       maxLines: this.maxLines,
       regex: this.regex,
-      containerId: this.containerId
+      containerId: this.containerId,
+      beforeSeq: this.beforeSeq,
+      afterSeq: this.afterSeq
     };
   }
 
@@ -1908,7 +1940,9 @@ export class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
       endTime: this.endTime ? this.endTime.toProtobufJSON(options) : null,
       maxLines: this.maxLines,
       regex: this.regex,
-      containerId: this.containerId
+      containerId: this.containerId,
+      beforeSeq: this.beforeSeq,
+      afterSeq: this.afterSeq
     };
   }
 }
@@ -1924,6 +1958,8 @@ export module GetRemoteOperationContainerLogsRequest {
     maxLines: number;
     regex: string;
     containerId: string;
+    beforeSeq: string;
+    afterSeq: string;
   }
 
   /**
@@ -1937,6 +1973,8 @@ export module GetRemoteOperationContainerLogsRequest {
     maxLines: number;
     regex: string;
     containerId: string;
+    beforeSeq: string;
+    afterSeq: string;
   }
 }
 
@@ -1966,6 +2004,9 @@ export class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
   static refineValues(_instance: GetRemoteOperationContainerLogsResponse) {
     _instance.logLines = _instance.logLines || [];
     _instance.truncated = _instance.truncated || false;
+    _instance.minAvailableSeq = _instance.minAvailableSeq || '0';
+    _instance.maxAvailableSeq = _instance.maxAvailableSeq || '0';
+    _instance.hasMoreOlder = _instance.hasMoreOlder || false;
   }
 
   /**
@@ -1994,6 +2035,15 @@ export class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
         case 2:
           _instance.truncated = _reader.readBool();
           break;
+        case 3:
+          _instance.minAvailableSeq = _reader.readInt64String();
+          break;
+        case 4:
+          _instance.maxAvailableSeq = _reader.readInt64String();
+          break;
+        case 5:
+          _instance.hasMoreOlder = _reader.readBool();
+          break;
         default:
           _reader.skipField();
       }
@@ -2021,10 +2071,22 @@ export class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
     if (_instance.truncated) {
       _writer.writeBool(2, _instance.truncated);
     }
+    if (_instance.minAvailableSeq) {
+      _writer.writeInt64String(3, _instance.minAvailableSeq);
+    }
+    if (_instance.maxAvailableSeq) {
+      _writer.writeInt64String(4, _instance.maxAvailableSeq);
+    }
+    if (_instance.hasMoreOlder) {
+      _writer.writeBool(5, _instance.hasMoreOlder);
+    }
   }
 
   private _logLines?: RemoteOperationContainerLogLine[];
   private _truncated: boolean;
+  private _minAvailableSeq: string;
+  private _maxAvailableSeq: string;
+  private _hasMoreOlder: boolean;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2038,6 +2100,9 @@ export class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
       m => new RemoteOperationContainerLogLine(m)
     );
     this.truncated = _value.truncated;
+    this.minAvailableSeq = _value.minAvailableSeq;
+    this.maxAvailableSeq = _value.maxAvailableSeq;
+    this.hasMoreOlder = _value.hasMoreOlder;
     GetRemoteOperationContainerLogsResponse.refineValues(this);
   }
   get logLines(): RemoteOperationContainerLogLine[] | undefined {
@@ -2051,6 +2116,24 @@ export class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
   }
   set truncated(value: boolean) {
     this._truncated = value;
+  }
+  get minAvailableSeq(): string {
+    return this._minAvailableSeq;
+  }
+  set minAvailableSeq(value: string) {
+    this._minAvailableSeq = value;
+  }
+  get maxAvailableSeq(): string {
+    return this._maxAvailableSeq;
+  }
+  set maxAvailableSeq(value: string) {
+    this._maxAvailableSeq = value;
+  }
+  get hasMoreOlder(): boolean {
+    return this._hasMoreOlder;
+  }
+  set hasMoreOlder(value: boolean) {
+    this._hasMoreOlder = value;
   }
 
   /**
@@ -2072,7 +2155,10 @@ export class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
   toObject(): GetRemoteOperationContainerLogsResponse.AsObject {
     return {
       logLines: (this.logLines || []).map(m => m.toObject()),
-      truncated: this.truncated
+      truncated: this.truncated,
+      minAvailableSeq: this.minAvailableSeq,
+      maxAvailableSeq: this.maxAvailableSeq,
+      hasMoreOlder: this.hasMoreOlder
     };
   }
 
@@ -2094,7 +2180,10 @@ export class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
   ): GetRemoteOperationContainerLogsResponse.AsProtobufJSON {
     return {
       logLines: (this.logLines || []).map(m => m.toProtobufJSON(options)),
-      truncated: this.truncated
+      truncated: this.truncated,
+      minAvailableSeq: this.minAvailableSeq,
+      maxAvailableSeq: this.maxAvailableSeq,
+      hasMoreOlder: this.hasMoreOlder
     };
   }
 }
@@ -2105,6 +2194,9 @@ export module GetRemoteOperationContainerLogsResponse {
   export interface AsObject {
     logLines?: RemoteOperationContainerLogLine.AsObject[];
     truncated: boolean;
+    minAvailableSeq: string;
+    maxAvailableSeq: string;
+    hasMoreOlder: boolean;
   }
 
   /**
@@ -2113,6 +2205,9 @@ export module GetRemoteOperationContainerLogsResponse {
   export interface AsProtobufJSON {
     logLines: RemoteOperationContainerLogLine.AsProtobufJSON[] | null;
     truncated: boolean;
+    minAvailableSeq: string;
+    maxAvailableSeq: string;
+    hasMoreOlder: boolean;
   }
 }
 
@@ -2145,6 +2240,7 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
     _instance.message = _instance.message || '';
     _instance.containerId = _instance.containerId || '';
     _instance.containerName = _instance.containerName || '';
+    _instance.seq = _instance.seq || '0';
   }
 
   /**
@@ -2178,6 +2274,9 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
           break;
         case 5:
           _instance.containerName = _reader.readString();
+          break;
+        case 6:
+          _instance.seq = _reader.readInt64String();
           break;
         default:
           _reader.skipField();
@@ -2215,6 +2314,9 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
     if (_instance.containerName) {
       _writer.writeString(5, _instance.containerName);
     }
+    if (_instance.seq) {
+      _writer.writeInt64String(6, _instance.seq);
+    }
   }
 
   private _timestamp?: googleProtobuf003.Timestamp;
@@ -2222,6 +2324,7 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
   private _message: string;
   private _containerId: string;
   private _containerName: string;
+  private _seq: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2238,6 +2341,7 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
     this.message = _value.message;
     this.containerId = _value.containerId;
     this.containerName = _value.containerName;
+    this.seq = _value.seq;
     RemoteOperationContainerLogLine.refineValues(this);
   }
   get timestamp(): googleProtobuf003.Timestamp | undefined {
@@ -2270,6 +2374,12 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
   set containerName(value: string) {
     this._containerName = value;
   }
+  get seq(): string {
+    return this._seq;
+  }
+  set seq(value: string) {
+    this._seq = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -2290,7 +2400,8 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
       level: this.level,
       message: this.message,
       containerId: this.containerId,
-      containerName: this.containerName
+      containerName: this.containerName,
+      seq: this.seq
     };
   }
 
@@ -2318,7 +2429,8 @@ export class RemoteOperationContainerLogLine implements GrpcMessage {
         ],
       message: this.message,
       containerId: this.containerId,
-      containerName: this.containerName
+      containerName: this.containerName,
+      seq: this.seq
     };
   }
 }
@@ -2332,6 +2444,7 @@ export module RemoteOperationContainerLogLine {
     message: string;
     containerId: string;
     containerName: string;
+    seq: string;
   }
 
   /**
@@ -2343,6 +2456,7 @@ export module RemoteOperationContainerLogLine {
     message: string;
     containerId: string;
     containerName: string;
+    seq: string;
   }
 }
 
@@ -2544,6 +2658,14 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
     _instance.startedAt = _instance.startedAt || undefined;
     _instance.finishedAt = _instance.finishedAt || undefined;
     _instance.observedAt = _instance.observedAt || undefined;
+    _instance.environmentVariables = _instance.environmentVariables || {};
+    _instance.command = _instance.command || [];
+    _instance.memoryLimitBytes = _instance.memoryLimitBytes || '0';
+    _instance.nanoCpus = _instance.nanoCpus || '0';
+    _instance.cpusetCpus = _instance.cpusetCpus || '';
+    _instance.cpuQuota = _instance.cpuQuota || '0';
+    _instance.cpuPeriod = _instance.cpuPeriod || '0';
+    _instance.image = _instance.image || '';
   }
 
   /**
@@ -2603,6 +2725,39 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
             _instance.observedAt,
             googleProtobuf003.Timestamp.deserializeBinaryFromReader
           );
+          break;
+        case 12:
+          const msg_12 = {} as any;
+          _reader.readMessage(
+            msg_12,
+            RemoteOperationContainerStatus.EnvironmentVariablesEntry
+              .deserializeBinaryFromReader
+          );
+          _instance.environmentVariables = _instance.environmentVariables || {};
+          _instance.environmentVariables[msg_12.key] = msg_12.value;
+          break;
+        case 13:
+          (_instance.command = _instance.command || []).push(
+            _reader.readString()
+          );
+          break;
+        case 14:
+          _instance.memoryLimitBytes = _reader.readInt64String();
+          break;
+        case 15:
+          _instance.nanoCpus = _reader.readInt64String();
+          break;
+        case 16:
+          _instance.cpusetCpus = _reader.readString();
+          break;
+        case 17:
+          _instance.cpuQuota = _reader.readInt64String();
+          break;
+        case 18:
+          _instance.cpuPeriod = _reader.readInt64String();
+          break;
+        case 19:
+          _instance.image = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -2666,6 +2821,46 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
         googleProtobuf003.Timestamp.serializeBinaryToWriter
       );
     }
+    if (!!_instance.environmentVariables) {
+      const keys_12 = Object.keys(_instance.environmentVariables as any);
+
+      if (keys_12.length) {
+        const repeated_12 = keys_12
+          .map(key => ({
+            key: key,
+            value: (_instance.environmentVariables as any)[key]
+          }))
+          .reduce((r, v) => [...r, v], [] as any[]);
+
+        _writer.writeRepeatedMessage(
+          12,
+          repeated_12,
+          RemoteOperationContainerStatus.EnvironmentVariablesEntry
+            .serializeBinaryToWriter
+        );
+      }
+    }
+    if (_instance.command && _instance.command.length) {
+      _writer.writeRepeatedString(13, _instance.command);
+    }
+    if (_instance.memoryLimitBytes) {
+      _writer.writeInt64String(14, _instance.memoryLimitBytes);
+    }
+    if (_instance.nanoCpus) {
+      _writer.writeInt64String(15, _instance.nanoCpus);
+    }
+    if (_instance.cpusetCpus) {
+      _writer.writeString(16, _instance.cpusetCpus);
+    }
+    if (_instance.cpuQuota) {
+      _writer.writeInt64String(17, _instance.cpuQuota);
+    }
+    if (_instance.cpuPeriod) {
+      _writer.writeInt64String(18, _instance.cpuPeriod);
+    }
+    if (_instance.image) {
+      _writer.writeString(19, _instance.image);
+    }
   }
 
   private _name: string;
@@ -2679,6 +2874,14 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
   private _startedAt?: googleProtobuf003.Timestamp;
   private _finishedAt?: googleProtobuf003.Timestamp;
   private _observedAt?: googleProtobuf003.Timestamp;
+  private _environmentVariables: { [prop: string]: string };
+  private _command: string[];
+  private _memoryLimitBytes: string;
+  private _nanoCpus: string;
+  private _cpusetCpus: string;
+  private _cpuQuota: string;
+  private _cpuPeriod: string;
+  private _image: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2705,6 +2908,19 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
     this.observedAt = _value.observedAt
       ? new googleProtobuf003.Timestamp(_value.observedAt)
       : undefined;
+    (this.environmentVariables = _value!.environmentVariables
+      ? Object.keys(_value!.environmentVariables).reduce(
+          (r, k) => ({ ...r, [k]: _value!.environmentVariables![k] }),
+          {}
+        )
+      : {}),
+      (this.command = (_value.command || []).slice());
+    this.memoryLimitBytes = _value.memoryLimitBytes;
+    this.nanoCpus = _value.nanoCpus;
+    this.cpusetCpus = _value.cpusetCpus;
+    this.cpuQuota = _value.cpuQuota;
+    this.cpuPeriod = _value.cpuPeriod;
+    this.image = _value.image;
     RemoteOperationContainerStatus.refineValues(this);
   }
   get name(): string {
@@ -2773,6 +2989,54 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
   set observedAt(value: googleProtobuf003.Timestamp | undefined) {
     this._observedAt = value;
   }
+  get environmentVariables(): { [prop: string]: string } {
+    return this._environmentVariables;
+  }
+  set environmentVariables(value: { [prop: string]: string }) {
+    this._environmentVariables = value;
+  }
+  get command(): string[] {
+    return this._command;
+  }
+  set command(value: string[]) {
+    this._command = value;
+  }
+  get memoryLimitBytes(): string {
+    return this._memoryLimitBytes;
+  }
+  set memoryLimitBytes(value: string) {
+    this._memoryLimitBytes = value;
+  }
+  get nanoCpus(): string {
+    return this._nanoCpus;
+  }
+  set nanoCpus(value: string) {
+    this._nanoCpus = value;
+  }
+  get cpusetCpus(): string {
+    return this._cpusetCpus;
+  }
+  set cpusetCpus(value: string) {
+    this._cpusetCpus = value;
+  }
+  get cpuQuota(): string {
+    return this._cpuQuota;
+  }
+  set cpuQuota(value: string) {
+    this._cpuQuota = value;
+  }
+  get cpuPeriod(): string {
+    return this._cpuPeriod;
+  }
+  set cpuPeriod(value: string) {
+    this._cpuPeriod = value;
+  }
+  get image(): string {
+    return this._image;
+  }
+  set image(value: string) {
+    this._image = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -2799,7 +3063,20 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
       healthStatus: this.healthStatus,
       startedAt: this.startedAt ? this.startedAt.toObject() : undefined,
       finishedAt: this.finishedAt ? this.finishedAt.toObject() : undefined,
-      observedAt: this.observedAt ? this.observedAt.toObject() : undefined
+      observedAt: this.observedAt ? this.observedAt.toObject() : undefined,
+      environmentVariables: this.environmentVariables
+        ? Object.keys(this.environmentVariables).reduce(
+            (r, k) => ({ ...r, [k]: this.environmentVariables![k] }),
+            {}
+          )
+        : {},
+      command: (this.command || []).slice(),
+      memoryLimitBytes: this.memoryLimitBytes,
+      nanoCpus: this.nanoCpus,
+      cpusetCpus: this.cpusetCpus,
+      cpuQuota: this.cpuQuota,
+      cpuPeriod: this.cpuPeriod,
+      image: this.image
     };
   }
 
@@ -2839,7 +3116,20 @@ export class RemoteOperationContainerStatus implements GrpcMessage {
         : null,
       observedAt: this.observedAt
         ? this.observedAt.toProtobufJSON(options)
-        : null
+        : null,
+      environmentVariables: this.environmentVariables
+        ? Object.keys(this.environmentVariables).reduce(
+            (r, k) => ({ ...r, [k]: this.environmentVariables![k] }),
+            {}
+          )
+        : {},
+      command: (this.command || []).slice(),
+      memoryLimitBytes: this.memoryLimitBytes,
+      nanoCpus: this.nanoCpus,
+      cpusetCpus: this.cpusetCpus,
+      cpuQuota: this.cpuQuota,
+      cpuPeriod: this.cpuPeriod,
+      image: this.image
     };
   }
 }
@@ -2859,6 +3149,14 @@ export module RemoteOperationContainerStatus {
     startedAt?: googleProtobuf003.Timestamp.AsObject;
     finishedAt?: googleProtobuf003.Timestamp.AsObject;
     observedAt?: googleProtobuf003.Timestamp.AsObject;
+    environmentVariables: { [prop: string]: string };
+    command: string[];
+    memoryLimitBytes: string;
+    nanoCpus: string;
+    cpusetCpus: string;
+    cpuQuota: string;
+    cpuPeriod: string;
+    image: string;
   }
 
   /**
@@ -2876,6 +3174,173 @@ export module RemoteOperationContainerStatus {
     startedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     finishedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     observedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
+    environmentVariables: { [prop: string]: string };
+    command: string[];
+    memoryLimitBytes: string;
+    nanoCpus: string;
+    cpusetCpus: string;
+    cpuQuota: string;
+    cpuPeriod: string;
+    image: string;
+  }
+
+  /**
+   * Message implementation for ondewo.nlu.RemoteOperationContainerStatus.EnvironmentVariablesEntry
+   */
+  export class EnvironmentVariablesEntry implements GrpcMessage {
+    static id =
+      'ondewo.nlu.RemoteOperationContainerStatus.EnvironmentVariablesEntry';
+
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource) {
+      const instance = new EnvironmentVariablesEntry();
+      EnvironmentVariablesEntry.deserializeBinaryFromReader(
+        instance,
+        new BinaryReader(bytes)
+      );
+      return instance;
+    }
+
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EnvironmentVariablesEntry) {
+      _instance.key = _instance.key || '';
+      _instance.value = _instance.value || '';
+    }
+
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(
+      _instance: EnvironmentVariablesEntry,
+      _reader: BinaryReader
+    ) {
+      while (_reader.nextField()) {
+        if (_reader.isEndGroup()) break;
+
+        switch (_reader.getFieldNumber()) {
+          case 1:
+            _instance.key = _reader.readString();
+            break;
+          case 2:
+            _instance.value = _reader.readString();
+            break;
+          default:
+            _reader.skipField();
+        }
+      }
+
+      EnvironmentVariablesEntry.refineValues(_instance);
+    }
+
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(
+      _instance: EnvironmentVariablesEntry,
+      _writer: BinaryWriter
+    ) {
+      if (_instance.key) {
+        _writer.writeString(1, _instance.key);
+      }
+      if (_instance.value) {
+        _writer.writeString(2, _instance.value);
+      }
+    }
+
+    private _key: string;
+    private _value: string;
+
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EnvironmentVariablesEntry to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<EnvironmentVariablesEntry.AsObject>) {
+      _value = _value || {};
+      this.key = _value.key;
+      this.value = _value.value;
+      EnvironmentVariablesEntry.refineValues(this);
+    }
+    get key(): string {
+      return this._key;
+    }
+    set key(value: string) {
+      this._key = value;
+    }
+    get value(): string {
+      return this._value;
+    }
+    set value(value: string) {
+      this._value = value;
+    }
+
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+      const writer = new BinaryWriter();
+      EnvironmentVariablesEntry.serializeBinaryToWriter(this, writer);
+      return writer.getResultBuffer();
+    }
+
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EnvironmentVariablesEntry.AsObject {
+      return {
+        key: this.key,
+        value: this.value
+      };
+    }
+
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+      return this.toObject();
+    }
+
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+      // @ts-ignore
+      options?: ToProtobufJSONOptions
+    ): EnvironmentVariablesEntry.AsProtobufJSON {
+      return {
+        key: this.key,
+        value: this.value
+      };
+    }
+  }
+  export module EnvironmentVariablesEntry {
+    /**
+     * Standard JavaScript object representation for EnvironmentVariablesEntry
+     */
+    export interface AsObject {
+      key: string;
+      value: string;
+    }
+
+    /**
+     * Protobuf JSON representation for EnvironmentVariablesEntry
+     */
+    export interface AsProtobufJSON {
+      key: string;
+      value: string;
+    }
   }
 }
 
@@ -2915,6 +3380,13 @@ export class RemoteOperationContainer implements GrpcMessage {
     _instance.startedAt = _instance.startedAt || undefined;
     _instance.finishedAt = _instance.finishedAt || undefined;
     _instance.logsAvailable = _instance.logsAvailable || false;
+    _instance.environmentVariables = _instance.environmentVariables || {};
+    _instance.command = _instance.command || [];
+    _instance.memoryLimitBytes = _instance.memoryLimitBytes || '0';
+    _instance.nanoCpus = _instance.nanoCpus || '0';
+    _instance.cpusetCpus = _instance.cpusetCpus || '';
+    _instance.cpuQuota = _instance.cpuQuota || '0';
+    _instance.cpuPeriod = _instance.cpuPeriod || '0';
   }
 
   /**
@@ -2973,6 +3445,36 @@ export class RemoteOperationContainer implements GrpcMessage {
           break;
         case 12:
           _instance.logsAvailable = _reader.readBool();
+          break;
+        case 13:
+          const msg_13 = {} as any;
+          _reader.readMessage(
+            msg_13,
+            RemoteOperationContainer.EnvironmentVariablesEntry
+              .deserializeBinaryFromReader
+          );
+          _instance.environmentVariables = _instance.environmentVariables || {};
+          _instance.environmentVariables[msg_13.key] = msg_13.value;
+          break;
+        case 14:
+          (_instance.command = _instance.command || []).push(
+            _reader.readString()
+          );
+          break;
+        case 15:
+          _instance.memoryLimitBytes = _reader.readInt64String();
+          break;
+        case 16:
+          _instance.nanoCpus = _reader.readInt64String();
+          break;
+        case 17:
+          _instance.cpusetCpus = _reader.readString();
+          break;
+        case 18:
+          _instance.cpuQuota = _reader.readInt64String();
+          break;
+        case 19:
+          _instance.cpuPeriod = _reader.readInt64String();
           break;
         default:
           _reader.skipField();
@@ -3035,6 +3537,43 @@ export class RemoteOperationContainer implements GrpcMessage {
     if (_instance.logsAvailable) {
       _writer.writeBool(12, _instance.logsAvailable);
     }
+    if (!!_instance.environmentVariables) {
+      const keys_13 = Object.keys(_instance.environmentVariables as any);
+
+      if (keys_13.length) {
+        const repeated_13 = keys_13
+          .map(key => ({
+            key: key,
+            value: (_instance.environmentVariables as any)[key]
+          }))
+          .reduce((r, v) => [...r, v], [] as any[]);
+
+        _writer.writeRepeatedMessage(
+          13,
+          repeated_13,
+          RemoteOperationContainer.EnvironmentVariablesEntry
+            .serializeBinaryToWriter
+        );
+      }
+    }
+    if (_instance.command && _instance.command.length) {
+      _writer.writeRepeatedString(14, _instance.command);
+    }
+    if (_instance.memoryLimitBytes) {
+      _writer.writeInt64String(15, _instance.memoryLimitBytes);
+    }
+    if (_instance.nanoCpus) {
+      _writer.writeInt64String(16, _instance.nanoCpus);
+    }
+    if (_instance.cpusetCpus) {
+      _writer.writeString(17, _instance.cpusetCpus);
+    }
+    if (_instance.cpuQuota) {
+      _writer.writeInt64String(18, _instance.cpuQuota);
+    }
+    if (_instance.cpuPeriod) {
+      _writer.writeInt64String(19, _instance.cpuPeriod);
+    }
   }
 
   private _containerId: string;
@@ -3049,6 +3588,13 @@ export class RemoteOperationContainer implements GrpcMessage {
   private _startedAt?: googleProtobuf003.Timestamp;
   private _finishedAt?: googleProtobuf003.Timestamp;
   private _logsAvailable: boolean;
+  private _environmentVariables: { [prop: string]: string };
+  private _command: string[];
+  private _memoryLimitBytes: string;
+  private _nanoCpus: string;
+  private _cpusetCpus: string;
+  private _cpuQuota: string;
+  private _cpuPeriod: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -3072,6 +3618,18 @@ export class RemoteOperationContainer implements GrpcMessage {
       ? new googleProtobuf003.Timestamp(_value.finishedAt)
       : undefined;
     this.logsAvailable = _value.logsAvailable;
+    (this.environmentVariables = _value!.environmentVariables
+      ? Object.keys(_value!.environmentVariables).reduce(
+          (r, k) => ({ ...r, [k]: _value!.environmentVariables![k] }),
+          {}
+        )
+      : {}),
+      (this.command = (_value.command || []).slice());
+    this.memoryLimitBytes = _value.memoryLimitBytes;
+    this.nanoCpus = _value.nanoCpus;
+    this.cpusetCpus = _value.cpusetCpus;
+    this.cpuQuota = _value.cpuQuota;
+    this.cpuPeriod = _value.cpuPeriod;
     RemoteOperationContainer.refineValues(this);
   }
   get containerId(): string {
@@ -3146,6 +3704,48 @@ export class RemoteOperationContainer implements GrpcMessage {
   set logsAvailable(value: boolean) {
     this._logsAvailable = value;
   }
+  get environmentVariables(): { [prop: string]: string } {
+    return this._environmentVariables;
+  }
+  set environmentVariables(value: { [prop: string]: string }) {
+    this._environmentVariables = value;
+  }
+  get command(): string[] {
+    return this._command;
+  }
+  set command(value: string[]) {
+    this._command = value;
+  }
+  get memoryLimitBytes(): string {
+    return this._memoryLimitBytes;
+  }
+  set memoryLimitBytes(value: string) {
+    this._memoryLimitBytes = value;
+  }
+  get nanoCpus(): string {
+    return this._nanoCpus;
+  }
+  set nanoCpus(value: string) {
+    this._nanoCpus = value;
+  }
+  get cpusetCpus(): string {
+    return this._cpusetCpus;
+  }
+  set cpusetCpus(value: string) {
+    this._cpusetCpus = value;
+  }
+  get cpuQuota(): string {
+    return this._cpuQuota;
+  }
+  set cpuQuota(value: string) {
+    this._cpuQuota = value;
+  }
+  get cpuPeriod(): string {
+    return this._cpuPeriod;
+  }
+  set cpuPeriod(value: string) {
+    this._cpuPeriod = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -3173,7 +3773,19 @@ export class RemoteOperationContainer implements GrpcMessage {
       oomKilled: this.oomKilled,
       startedAt: this.startedAt ? this.startedAt.toObject() : undefined,
       finishedAt: this.finishedAt ? this.finishedAt.toObject() : undefined,
-      logsAvailable: this.logsAvailable
+      logsAvailable: this.logsAvailable,
+      environmentVariables: this.environmentVariables
+        ? Object.keys(this.environmentVariables).reduce(
+            (r, k) => ({ ...r, [k]: this.environmentVariables![k] }),
+            {}
+          )
+        : {},
+      command: (this.command || []).slice(),
+      memoryLimitBytes: this.memoryLimitBytes,
+      nanoCpus: this.nanoCpus,
+      cpusetCpus: this.cpusetCpus,
+      cpuQuota: this.cpuQuota,
+      cpuPeriod: this.cpuPeriod
     };
   }
 
@@ -3212,7 +3824,19 @@ export class RemoteOperationContainer implements GrpcMessage {
       finishedAt: this.finishedAt
         ? this.finishedAt.toProtobufJSON(options)
         : null,
-      logsAvailable: this.logsAvailable
+      logsAvailable: this.logsAvailable,
+      environmentVariables: this.environmentVariables
+        ? Object.keys(this.environmentVariables).reduce(
+            (r, k) => ({ ...r, [k]: this.environmentVariables![k] }),
+            {}
+          )
+        : {},
+      command: (this.command || []).slice(),
+      memoryLimitBytes: this.memoryLimitBytes,
+      nanoCpus: this.nanoCpus,
+      cpusetCpus: this.cpusetCpus,
+      cpuQuota: this.cpuQuota,
+      cpuPeriod: this.cpuPeriod
     };
   }
 }
@@ -3233,6 +3857,13 @@ export module RemoteOperationContainer {
     startedAt?: googleProtobuf003.Timestamp.AsObject;
     finishedAt?: googleProtobuf003.Timestamp.AsObject;
     logsAvailable: boolean;
+    environmentVariables: { [prop: string]: string };
+    command: string[];
+    memoryLimitBytes: string;
+    nanoCpus: string;
+    cpusetCpus: string;
+    cpuQuota: string;
+    cpuPeriod: string;
   }
 
   /**
@@ -3251,6 +3882,171 @@ export module RemoteOperationContainer {
     startedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     finishedAt: googleProtobuf003.Timestamp.AsProtobufJSON | null;
     logsAvailable: boolean;
+    environmentVariables: { [prop: string]: string };
+    command: string[];
+    memoryLimitBytes: string;
+    nanoCpus: string;
+    cpusetCpus: string;
+    cpuQuota: string;
+    cpuPeriod: string;
+  }
+
+  /**
+   * Message implementation for ondewo.nlu.RemoteOperationContainer.EnvironmentVariablesEntry
+   */
+  export class EnvironmentVariablesEntry implements GrpcMessage {
+    static id = 'ondewo.nlu.RemoteOperationContainer.EnvironmentVariablesEntry';
+
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource) {
+      const instance = new EnvironmentVariablesEntry();
+      EnvironmentVariablesEntry.deserializeBinaryFromReader(
+        instance,
+        new BinaryReader(bytes)
+      );
+      return instance;
+    }
+
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: EnvironmentVariablesEntry) {
+      _instance.key = _instance.key || '';
+      _instance.value = _instance.value || '';
+    }
+
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(
+      _instance: EnvironmentVariablesEntry,
+      _reader: BinaryReader
+    ) {
+      while (_reader.nextField()) {
+        if (_reader.isEndGroup()) break;
+
+        switch (_reader.getFieldNumber()) {
+          case 1:
+            _instance.key = _reader.readString();
+            break;
+          case 2:
+            _instance.value = _reader.readString();
+            break;
+          default:
+            _reader.skipField();
+        }
+      }
+
+      EnvironmentVariablesEntry.refineValues(_instance);
+    }
+
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(
+      _instance: EnvironmentVariablesEntry,
+      _writer: BinaryWriter
+    ) {
+      if (_instance.key) {
+        _writer.writeString(1, _instance.key);
+      }
+      if (_instance.value) {
+        _writer.writeString(2, _instance.value);
+      }
+    }
+
+    private _key: string;
+    private _value: string;
+
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of EnvironmentVariablesEntry to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<EnvironmentVariablesEntry.AsObject>) {
+      _value = _value || {};
+      this.key = _value.key;
+      this.value = _value.value;
+      EnvironmentVariablesEntry.refineValues(this);
+    }
+    get key(): string {
+      return this._key;
+    }
+    set key(value: string) {
+      this._key = value;
+    }
+    get value(): string {
+      return this._value;
+    }
+    set value(value: string) {
+      this._value = value;
+    }
+
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+      const writer = new BinaryWriter();
+      EnvironmentVariablesEntry.serializeBinaryToWriter(this, writer);
+      return writer.getResultBuffer();
+    }
+
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): EnvironmentVariablesEntry.AsObject {
+      return {
+        key: this.key,
+        value: this.value
+      };
+    }
+
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+      return this.toObject();
+    }
+
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+      // @ts-ignore
+      options?: ToProtobufJSONOptions
+    ): EnvironmentVariablesEntry.AsProtobufJSON {
+      return {
+        key: this.key,
+        value: this.value
+      };
+    }
+  }
+  export module EnvironmentVariablesEntry {
+    /**
+     * Standard JavaScript object representation for EnvironmentVariablesEntry
+     */
+    export interface AsObject {
+      key: string;
+      value: string;
+    }
+
+    /**
+     * Protobuf JSON representation for EnvironmentVariablesEntry
+     */
+    export interface AsProtobufJSON {
+      key: string;
+      value: string;
+    }
   }
 }
 

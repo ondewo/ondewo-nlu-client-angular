@@ -39347,6 +39347,8 @@ declare class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     private _maxLines;
     private _regex;
     private _containerId;
+    private _beforeSeq;
+    private _afterSeq;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetRemoteOperationContainerLogsRequest to deeply clone from
@@ -39366,6 +39368,10 @@ declare class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     set regex(value: string);
     get containerId(): string;
     set containerId(value: string);
+    get beforeSeq(): string;
+    set beforeSeq(value: string);
+    get afterSeq(): string;
+    set afterSeq(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -39398,6 +39404,8 @@ declare namespace GetRemoteOperationContainerLogsRequest {
         maxLines: number;
         regex: string;
         containerId: string;
+        beforeSeq: string;
+        afterSeq: string;
     }
     /**
      * Protobuf JSON representation for GetRemoteOperationContainerLogsRequest
@@ -39410,6 +39418,8 @@ declare namespace GetRemoteOperationContainerLogsRequest {
         maxLines: number;
         regex: string;
         containerId: string;
+        beforeSeq: string;
+        afterSeq: string;
     }
 }
 /**
@@ -39441,6 +39451,9 @@ declare class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
     static serializeBinaryToWriter(_instance: GetRemoteOperationContainerLogsResponse, _writer: BinaryWriter): void;
     private _logLines?;
     private _truncated;
+    private _minAvailableSeq;
+    private _maxAvailableSeq;
+    private _hasMoreOlder;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetRemoteOperationContainerLogsResponse to deeply clone from
@@ -39450,6 +39463,12 @@ declare class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
     set logLines(value: RemoteOperationContainerLogLine[] | undefined);
     get truncated(): boolean;
     set truncated(value: boolean);
+    get minAvailableSeq(): string;
+    set minAvailableSeq(value: string);
+    get maxAvailableSeq(): string;
+    set maxAvailableSeq(value: string);
+    get hasMoreOlder(): boolean;
+    set hasMoreOlder(value: boolean);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -39477,6 +39496,9 @@ declare namespace GetRemoteOperationContainerLogsResponse {
     interface AsObject {
         logLines?: RemoteOperationContainerLogLine.AsObject[];
         truncated: boolean;
+        minAvailableSeq: string;
+        maxAvailableSeq: string;
+        hasMoreOlder: boolean;
     }
     /**
      * Protobuf JSON representation for GetRemoteOperationContainerLogsResponse
@@ -39484,6 +39506,9 @@ declare namespace GetRemoteOperationContainerLogsResponse {
     interface AsProtobufJSON {
         logLines: RemoteOperationContainerLogLine.AsProtobufJSON[] | null;
         truncated: boolean;
+        minAvailableSeq: string;
+        maxAvailableSeq: string;
+        hasMoreOlder: boolean;
     }
 }
 /**
@@ -39518,6 +39543,7 @@ declare class RemoteOperationContainerLogLine implements GrpcMessage {
     private _message;
     private _containerId;
     private _containerName;
+    private _seq;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of RemoteOperationContainerLogLine to deeply clone from
@@ -39533,6 +39559,8 @@ declare class RemoteOperationContainerLogLine implements GrpcMessage {
     set containerId(value: string);
     get containerName(): string;
     set containerName(value: string);
+    get seq(): string;
+    set seq(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -39563,6 +39591,7 @@ declare namespace RemoteOperationContainerLogLine {
         message: string;
         containerId: string;
         containerName: string;
+        seq: string;
     }
     /**
      * Protobuf JSON representation for RemoteOperationContainerLogLine
@@ -39573,6 +39602,7 @@ declare namespace RemoteOperationContainerLogLine {
         message: string;
         containerId: string;
         containerName: string;
+        seq: string;
     }
 }
 /**
@@ -39687,6 +39717,14 @@ declare class RemoteOperationContainerStatus implements GrpcMessage {
     private _startedAt?;
     private _finishedAt?;
     private _observedAt?;
+    private _environmentVariables;
+    private _command;
+    private _memoryLimitBytes;
+    private _nanoCpus;
+    private _cpusetCpus;
+    private _cpuQuota;
+    private _cpuPeriod;
+    private _image;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of RemoteOperationContainerStatus to deeply clone from
@@ -39714,6 +39752,26 @@ declare class RemoteOperationContainerStatus implements GrpcMessage {
     set finishedAt(value: googleProtobuf005.Timestamp | undefined);
     get observedAt(): googleProtobuf005.Timestamp | undefined;
     set observedAt(value: googleProtobuf005.Timestamp | undefined);
+    get environmentVariables(): {
+        [prop: string]: string;
+    };
+    set environmentVariables(value: {
+        [prop: string]: string;
+    });
+    get command(): string[];
+    set command(value: string[]);
+    get memoryLimitBytes(): string;
+    set memoryLimitBytes(value: string);
+    get nanoCpus(): string;
+    set nanoCpus(value: string);
+    get cpusetCpus(): string;
+    set cpusetCpus(value: string);
+    get cpuQuota(): string;
+    set cpuQuota(value: string);
+    get cpuPeriod(): string;
+    set cpuPeriod(value: string);
+    get image(): string;
+    set image(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -39750,6 +39808,16 @@ declare namespace RemoteOperationContainerStatus {
         startedAt?: googleProtobuf005.Timestamp.AsObject;
         finishedAt?: googleProtobuf005.Timestamp.AsObject;
         observedAt?: googleProtobuf005.Timestamp.AsObject;
+        environmentVariables: {
+            [prop: string]: string;
+        };
+        command: string[];
+        memoryLimitBytes: string;
+        nanoCpus: string;
+        cpusetCpus: string;
+        cpuQuota: string;
+        cpuPeriod: string;
+        image: string;
     }
     /**
      * Protobuf JSON representation for RemoteOperationContainerStatus
@@ -39766,6 +39834,90 @@ declare namespace RemoteOperationContainerStatus {
         startedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
         finishedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
         observedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        environmentVariables: {
+            [prop: string]: string;
+        };
+        command: string[];
+        memoryLimitBytes: string;
+        nanoCpus: string;
+        cpusetCpus: string;
+        cpuQuota: string;
+        cpuPeriod: string;
+        image: string;
+    }
+    /**
+     * Message implementation for ondewo.nlu.RemoteOperationContainerStatus.EnvironmentVariablesEntry
+     */
+    class EnvironmentVariablesEntry implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): EnvironmentVariablesEntry;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: EnvironmentVariablesEntry): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: EnvironmentVariablesEntry, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: EnvironmentVariablesEntry, _writer: BinaryWriter): void;
+        private _key;
+        private _value;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of EnvironmentVariablesEntry to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<EnvironmentVariablesEntry.AsObject>);
+        get key(): string;
+        set key(value: string);
+        get value(): string;
+        set value(value: string);
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): EnvironmentVariablesEntry.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): EnvironmentVariablesEntry.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): EnvironmentVariablesEntry.AsProtobufJSON;
+    }
+    namespace EnvironmentVariablesEntry {
+        /**
+         * Standard JavaScript object representation for EnvironmentVariablesEntry
+         */
+        interface AsObject {
+            key: string;
+            value: string;
+        }
+        /**
+         * Protobuf JSON representation for EnvironmentVariablesEntry
+         */
+        interface AsProtobufJSON {
+            key: string;
+            value: string;
+        }
     }
 }
 /**
@@ -39807,6 +39959,13 @@ declare class RemoteOperationContainer implements GrpcMessage {
     private _startedAt?;
     private _finishedAt?;
     private _logsAvailable;
+    private _environmentVariables;
+    private _command;
+    private _memoryLimitBytes;
+    private _nanoCpus;
+    private _cpusetCpus;
+    private _cpuQuota;
+    private _cpuPeriod;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of RemoteOperationContainer to deeply clone from
@@ -39836,6 +39995,24 @@ declare class RemoteOperationContainer implements GrpcMessage {
     set finishedAt(value: googleProtobuf005.Timestamp | undefined);
     get logsAvailable(): boolean;
     set logsAvailable(value: boolean);
+    get environmentVariables(): {
+        [prop: string]: string;
+    };
+    set environmentVariables(value: {
+        [prop: string]: string;
+    });
+    get command(): string[];
+    set command(value: string[]);
+    get memoryLimitBytes(): string;
+    set memoryLimitBytes(value: string);
+    get nanoCpus(): string;
+    set nanoCpus(value: string);
+    get cpusetCpus(): string;
+    set cpusetCpus(value: string);
+    get cpuQuota(): string;
+    set cpuQuota(value: string);
+    get cpuPeriod(): string;
+    set cpuPeriod(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -39873,6 +40050,15 @@ declare namespace RemoteOperationContainer {
         startedAt?: googleProtobuf005.Timestamp.AsObject;
         finishedAt?: googleProtobuf005.Timestamp.AsObject;
         logsAvailable: boolean;
+        environmentVariables: {
+            [prop: string]: string;
+        };
+        command: string[];
+        memoryLimitBytes: string;
+        nanoCpus: string;
+        cpusetCpus: string;
+        cpuQuota: string;
+        cpuPeriod: string;
     }
     /**
      * Protobuf JSON representation for RemoteOperationContainer
@@ -39890,6 +40076,89 @@ declare namespace RemoteOperationContainer {
         startedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
         finishedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
         logsAvailable: boolean;
+        environmentVariables: {
+            [prop: string]: string;
+        };
+        command: string[];
+        memoryLimitBytes: string;
+        nanoCpus: string;
+        cpusetCpus: string;
+        cpuQuota: string;
+        cpuPeriod: string;
+    }
+    /**
+     * Message implementation for ondewo.nlu.RemoteOperationContainer.EnvironmentVariablesEntry
+     */
+    class EnvironmentVariablesEntry implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): EnvironmentVariablesEntry;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: EnvironmentVariablesEntry): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: EnvironmentVariablesEntry, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: EnvironmentVariablesEntry, _writer: BinaryWriter): void;
+        private _key;
+        private _value;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of EnvironmentVariablesEntry to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<EnvironmentVariablesEntry.AsObject>);
+        get key(): string;
+        set key(value: string);
+        get value(): string;
+        set value(value: string);
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): EnvironmentVariablesEntry.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): EnvironmentVariablesEntry.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): EnvironmentVariablesEntry.AsProtobufJSON;
+    }
+    namespace EnvironmentVariablesEntry {
+        /**
+         * Standard JavaScript object representation for EnvironmentVariablesEntry
+         */
+        interface AsObject {
+            key: string;
+            value: string;
+        }
+        /**
+         * Protobuf JSON representation for EnvironmentVariablesEntry
+         */
+        interface AsProtobufJSON {
+            key: string;
+            value: string;
+        }
     }
 }
 /**
