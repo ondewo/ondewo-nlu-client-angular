@@ -26206,6 +26206,7 @@ declare class LlmTelemetry implements GrpcMessage {
     private _ccaiServiceProvider;
     private _llmSafetyAssessment?;
     private _llmRetrievalMetadata?;
+    private _llmCallId;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of LlmTelemetry to deeply clone from
@@ -26335,6 +26336,8 @@ declare class LlmTelemetry implements GrpcMessage {
     set llmSafetyAssessment(value: LlmSafetyAssessment | undefined);
     get llmRetrievalMetadata(): LlmRetrievalMetadata | undefined;
     set llmRetrievalMetadata(value: LlmRetrievalMetadata | undefined);
+    get llmCallId(): string;
+    set llmCallId(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -26422,6 +26425,7 @@ declare namespace LlmTelemetry {
         ccaiServiceProvider: CcaiServiceProvider;
         llmSafetyAssessment?: LlmSafetyAssessment.AsObject;
         llmRetrievalMetadata?: LlmRetrievalMetadata.AsObject;
+        llmCallId: string;
     }
     /**
      * Protobuf JSON representation for LlmTelemetry
@@ -26489,6 +26493,7 @@ declare namespace LlmTelemetry {
         ccaiServiceProvider: string;
         llmSafetyAssessment: LlmSafetyAssessment.AsProtobufJSON | null;
         llmRetrievalMetadata: LlmRetrievalMetadata.AsProtobufJSON | null;
+        llmCallId: string;
     }
 }
 /**
@@ -27480,6 +27485,9 @@ declare class LlmToolUsage implements GrpcMessage {
     private _durationSecondsTotal;
     private _meanDurationSeconds;
     private _llmTokenUsage?;
+    private _arguments?;
+    private _llmCallId;
+    private _toolCallId;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of LlmToolUsage to deeply clone from
@@ -27499,6 +27507,12 @@ declare class LlmToolUsage implements GrpcMessage {
     set meanDurationSeconds(value: number);
     get llmTokenUsage(): LlmTokenUsage | undefined;
     set llmTokenUsage(value: LlmTokenUsage | undefined);
+    get arguments(): googleProtobuf005.Struct | undefined;
+    set arguments(value: googleProtobuf005.Struct | undefined);
+    get llmCallId(): string;
+    set llmCallId(value: string);
+    get toolCallId(): string;
+    set toolCallId(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -27531,6 +27545,9 @@ declare namespace LlmToolUsage {
         durationSecondsTotal: number;
         meanDurationSeconds: number;
         llmTokenUsage?: LlmTokenUsage.AsObject;
+        arguments?: googleProtobuf005.Struct.AsObject;
+        llmCallId: string;
+        toolCallId: string;
     }
     /**
      * Protobuf JSON representation for LlmToolUsage
@@ -27543,6 +27560,9 @@ declare namespace LlmToolUsage {
         durationSecondsTotal: number;
         meanDurationSeconds: number;
         llmTokenUsage: LlmTokenUsage.AsProtobufJSON | null;
+        arguments: googleProtobuf005.Struct.AsProtobufJSON | null;
+        llmCallId: string;
+        toolCallId: string;
     }
 }
 /**

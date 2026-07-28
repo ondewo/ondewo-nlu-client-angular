@@ -2468,6 +2468,7 @@ export class LlmTelemetry implements GrpcMessage {
     _instance.llmSafetyAssessment = _instance.llmSafetyAssessment || undefined;
     _instance.llmRetrievalMetadata =
       _instance.llmRetrievalMetadata || undefined;
+    _instance.llmCallId = _instance.llmCallId || '';
   }
 
   /**
@@ -2742,6 +2743,9 @@ export class LlmTelemetry implements GrpcMessage {
             _instance.llmRetrievalMetadata,
             LlmRetrievalMetadata.deserializeBinaryFromReader
           );
+          break;
+        case 63:
+          _instance.llmCallId = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -3020,6 +3024,9 @@ export class LlmTelemetry implements GrpcMessage {
         LlmRetrievalMetadata.serializeBinaryToWriter
       );
     }
+    if (_instance.llmCallId) {
+      _writer.writeString(63, _instance.llmCallId);
+    }
   }
 
   private _provider: string;
@@ -3084,6 +3091,7 @@ export class LlmTelemetry implements GrpcMessage {
   private _ccaiServiceProvider: ondewoNlu013.CcaiServiceProvider;
   private _llmSafetyAssessment?: LlmSafetyAssessment;
   private _llmRetrievalMetadata?: LlmRetrievalMetadata;
+  private _llmCallId: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -3187,6 +3195,7 @@ export class LlmTelemetry implements GrpcMessage {
     this.llmRetrievalMetadata = _value.llmRetrievalMetadata
       ? new LlmRetrievalMetadata(_value.llmRetrievalMetadata)
       : undefined;
+    this.llmCallId = _value.llmCallId;
     LlmTelemetry.refineValues(this);
   }
   get provider(): string {
@@ -3565,6 +3574,12 @@ export class LlmTelemetry implements GrpcMessage {
   set llmRetrievalMetadata(value: LlmRetrievalMetadata | undefined) {
     this._llmRetrievalMetadata = value;
   }
+  get llmCallId(): string {
+    return this._llmCallId;
+  }
+  set llmCallId(value: string) {
+    this._llmCallId = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -3662,7 +3677,8 @@ export class LlmTelemetry implements GrpcMessage {
         : undefined,
       llmRetrievalMetadata: this.llmRetrievalMetadata
         ? this.llmRetrievalMetadata.toObject()
-        : undefined
+        : undefined,
+      llmCallId: this.llmCallId
     };
   }
 
@@ -3777,7 +3793,8 @@ export class LlmTelemetry implements GrpcMessage {
         : null,
       llmRetrievalMetadata: this.llmRetrievalMetadata
         ? this.llmRetrievalMetadata.toProtobufJSON(options)
-        : null
+        : null,
+      llmCallId: this.llmCallId
     };
   }
 }
@@ -3848,6 +3865,7 @@ export module LlmTelemetry {
     ccaiServiceProvider: ondewoNlu013.CcaiServiceProvider;
     llmSafetyAssessment?: LlmSafetyAssessment.AsObject;
     llmRetrievalMetadata?: LlmRetrievalMetadata.AsObject;
+    llmCallId: string;
   }
 
   /**
@@ -3918,6 +3936,7 @@ export module LlmTelemetry {
     ccaiServiceProvider: string;
     llmSafetyAssessment: LlmSafetyAssessment.AsProtobufJSON | null;
     llmRetrievalMetadata: LlmRetrievalMetadata.AsProtobufJSON | null;
+    llmCallId: string;
   }
 }
 
@@ -6461,6 +6480,9 @@ export class LlmToolUsage implements GrpcMessage {
     _instance.durationSecondsTotal = _instance.durationSecondsTotal || 0;
     _instance.meanDurationSeconds = _instance.meanDurationSeconds || 0;
     _instance.llmTokenUsage = _instance.llmTokenUsage || undefined;
+    _instance.arguments = _instance.arguments || undefined;
+    _instance.llmCallId = _instance.llmCallId || '';
+    _instance.toolCallId = _instance.toolCallId || '';
   }
 
   /**
@@ -6500,6 +6522,19 @@ export class LlmToolUsage implements GrpcMessage {
             _instance.llmTokenUsage,
             LlmTokenUsage.deserializeBinaryFromReader
           );
+          break;
+        case 8:
+          _instance.arguments = new googleProtobuf004.Struct();
+          _reader.readMessage(
+            _instance.arguments,
+            googleProtobuf004.Struct.deserializeBinaryFromReader
+          );
+          break;
+        case 9:
+          _instance.llmCallId = _reader.readString();
+          break;
+        case 10:
+          _instance.toolCallId = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -6543,6 +6578,19 @@ export class LlmToolUsage implements GrpcMessage {
         LlmTokenUsage.serializeBinaryToWriter
       );
     }
+    if (_instance.arguments) {
+      _writer.writeMessage(
+        8,
+        _instance.arguments as any,
+        googleProtobuf004.Struct.serializeBinaryToWriter
+      );
+    }
+    if (_instance.llmCallId) {
+      _writer.writeString(9, _instance.llmCallId);
+    }
+    if (_instance.toolCallId) {
+      _writer.writeString(10, _instance.toolCallId);
+    }
   }
 
   private _toolName: string;
@@ -6552,6 +6600,9 @@ export class LlmToolUsage implements GrpcMessage {
   private _durationSecondsTotal: number;
   private _meanDurationSeconds: number;
   private _llmTokenUsage?: LlmTokenUsage;
+  private _arguments?: googleProtobuf004.Struct;
+  private _llmCallId: string;
+  private _toolCallId: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -6568,6 +6619,11 @@ export class LlmToolUsage implements GrpcMessage {
     this.llmTokenUsage = _value.llmTokenUsage
       ? new LlmTokenUsage(_value.llmTokenUsage)
       : undefined;
+    this.arguments = _value.arguments
+      ? new googleProtobuf004.Struct(_value.arguments)
+      : undefined;
+    this.llmCallId = _value.llmCallId;
+    this.toolCallId = _value.toolCallId;
     LlmToolUsage.refineValues(this);
   }
   get toolName(): string {
@@ -6612,6 +6668,24 @@ export class LlmToolUsage implements GrpcMessage {
   set llmTokenUsage(value: LlmTokenUsage | undefined) {
     this._llmTokenUsage = value;
   }
+  get arguments(): googleProtobuf004.Struct | undefined {
+    return this._arguments;
+  }
+  set arguments(value: googleProtobuf004.Struct | undefined) {
+    this._arguments = value;
+  }
+  get llmCallId(): string {
+    return this._llmCallId;
+  }
+  set llmCallId(value: string) {
+    this._llmCallId = value;
+  }
+  get toolCallId(): string {
+    return this._toolCallId;
+  }
+  set toolCallId(value: string) {
+    this._toolCallId = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -6636,7 +6710,10 @@ export class LlmToolUsage implements GrpcMessage {
       meanDurationSeconds: this.meanDurationSeconds,
       llmTokenUsage: this.llmTokenUsage
         ? this.llmTokenUsage.toObject()
-        : undefined
+        : undefined,
+      arguments: this.arguments ? this.arguments.toObject() : undefined,
+      llmCallId: this.llmCallId,
+      toolCallId: this.toolCallId
     };
   }
 
@@ -6665,7 +6742,10 @@ export class LlmToolUsage implements GrpcMessage {
       meanDurationSeconds: this.meanDurationSeconds,
       llmTokenUsage: this.llmTokenUsage
         ? this.llmTokenUsage.toProtobufJSON(options)
-        : null
+        : null,
+      arguments: this.arguments ? this.arguments.toProtobufJSON(options) : null,
+      llmCallId: this.llmCallId,
+      toolCallId: this.toolCallId
     };
   }
 }
@@ -6681,6 +6761,9 @@ export module LlmToolUsage {
     durationSecondsTotal: number;
     meanDurationSeconds: number;
     llmTokenUsage?: LlmTokenUsage.AsObject;
+    arguments?: googleProtobuf004.Struct.AsObject;
+    llmCallId: string;
+    toolCallId: string;
   }
 
   /**
@@ -6694,6 +6777,9 @@ export module LlmToolUsage {
     durationSecondsTotal: number;
     meanDurationSeconds: number;
     llmTokenUsage: LlmTokenUsage.AsProtobufJSON | null;
+    arguments: googleProtobuf004.Struct.AsProtobufJSON | null;
+    llmCallId: string;
+    toolCallId: string;
   }
 }
 
