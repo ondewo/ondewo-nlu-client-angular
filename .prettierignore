@@ -25,3 +25,6 @@ npm/
 dist/
 .test-build/
 .test-build-examples/
+# jest's `coverageDirectory` output (gitignored); `make prettier PRETTIER_WRITE=-w`
+# in .husky/pre-commit would otherwise rewrite the generated lcov-report HTML.
+coverage/

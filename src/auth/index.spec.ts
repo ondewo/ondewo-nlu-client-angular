@@ -5,7 +5,7 @@ import * as authApi from "./index";
  * the auth surface must remain re-exported so consumers importing from
  * `@ondewo/nlu-client-angular` keep a stable public API.
  */
-describe("auth public API barrel", () => {
+describe("auth public API barrel", (): void => {
   /** All interceptors, helpers, constants and the DI token are re-exported. */
   it("re-exports the full hand-written auth surface", (): void => {
     expect(typeof authApi.authHttpInterceptor).toBe("function");

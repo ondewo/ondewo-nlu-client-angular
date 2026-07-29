@@ -1,4 +1,4 @@
-import { firstValueFrom, Observable, of, Subject, Subscription, throwError } from "rxjs";
+import { firstValueFrom, Observable, of, Subject, Subscription, throwError, toArray } from "rxjs";
 import {
   AUTHORIZATION_HEADER,
   BEARER_PREFIX,
@@ -15,7 +15,7 @@ const TOKEN: string = "eyJhbGciOi.payload.signature";
  * the wire contract (canonical `Authorization` header name, standard `Bearer `
  * scheme), so they are pinned here rather than left to drift.
  */
-describe("constants", () => {
+describe("constants", (): void => {
   /** The header name is the canonical `Authorization` form. */
   it("uses the canonical Authorization header name", (): void => {
     expect(AUTHORIZATION_HEADER).toBe("Authorization");
@@ -34,7 +34,7 @@ describe("constants", () => {
  * values to `null`, trim real tokens, propagate source errors, and tear down its
  * upstream subscription on unsubscribe.
  */
-describe("resolveToken", () => {
+describe("resolveToken", (): void => {
   /** A ready synchronous string token is emitted unchanged. */
   it("resolves a synchronous string token", async (): Promise<void> => {
     await expect(firstValueFrom(resolveToken(TOKEN))).resolves.toBe(TOKEN);
@@ -92,7 +92,7 @@ describe("resolveToken", () => {
   /** An erroring `Observable` source surfaces as an error, not a silent `null`. */
   it("propagates an error from an Observable token source", async (): Promise<void> => {
     const boom: Error = new Error("token stream failed");
-    await expect(firstValueFrom(resolveToken(throwError(() => boom)))).rejects.toBe(boom);
+    await expect(firstValueFrom(resolveToken(throwError((): Error => boom)))).rejects.toBe(boom);
   });
 
   /** Unsubscribing from the result unsubscribes from the upstream source. */
@@ -103,6 +103,19 @@ describe("resolveToken", () => {
     subscription.unsubscribe();
     expect(source.observed).toBe(false);
   });
+
+  /** Every emission of a multi-emission `Observable` source is forwarded, normalized. */
+  it("forwards every emission of a multi-emission Observable source", async (): Promise<void> => {
+    // Pins the pass-through behaviour: an `Observable` source is not reduced to its
+    // first value, so one normalized emission is produced per source emission. This
+    // matters because both interceptors `switchMap` over this observable — a second
+    // emission re-issues the downstream request.
+    const source: Observable<string | null> = of("  t1  ", "t2  ");
+    /** Every value the resolved observable emitted, in order. */
+    const emissions: (string | null)[] = await firstValueFrom(resolveToken(source).pipe(toArray()));
+    expect(emissions).toHaveLength(2);
+    expect(emissions).toEqual(["t1", "t2"]);
+  });
 });
 
 /**
@@ -110,7 +123,7 @@ describe("resolveToken", () => {
  * bearer scheme and maps the "no token" `null` straight through to `null` so the
  * interceptors never emit an empty `Bearer` header.
  */
-describe("buildBearerValue", () => {
+describe("buildBearerValue", (): void => {
   /** A real token is prefixed with the `Bearer ` scheme. */
   it("prefixes a real token with the bearer scheme", (): void => {
     expect(buildBearerValue(TOKEN)).toBe(`${BEARER_PREFIX}${TOKEN}`);
@@ -120,6 +133,16 @@ describe("buildBearerValue", () => {
   it("returns null for a null token", (): void => {
     expect(buildBearerValue(null)).toBeNull();
   });
+
+  /** An empty-string token is prefixed as-is, yielding the bare `Bearer ` value. */
+  it("returns the bare bearer prefix for an empty-string token", (): void => {
+    // Only `null` short-circuits here: an empty string takes the prefixing branch and
+    // produces the malformed empty-`Bearer` value. The "no usable token" guard lives in
+    // `normalizeToken` (applied by `resolveToken`), not in this function, so internal
+    // callers via `resolveBearerValue` never reach this state — but `buildBearerValue`
+    // is exported public API, so an external caller passing `""` gets exactly this.
+    expect(buildBearerValue("")).toBe(BEARER_PREFIX);
+  });
 });
 
 /**
@@ -127,7 +150,7 @@ describe("buildBearerValue", () => {
  * with {@link buildBearerValue}, emitting a ready `Authorization` header value or
  * `null`, propagating source errors, and tearing down its upstream subscription.
  */
-describe("resolveBearerValue", () => {
+describe("resolveBearerValue", (): void => {
   /** A present token yields the full `Bearer <token>` header value. */
   it("emits the bearer header value for a present token", async (): Promise<void> => {
     await expect(firstValueFrom(resolveBearerValue(TOKEN))).resolves.toBe(`${BEARER_PREFIX}${TOKEN}`);
@@ -146,7 +169,7 @@ describe("resolveBearerValue", () => {
   /** A source error propagates through the bearer-value wrapper. */
   it("propagates an error from the token source", async (): Promise<void> => {
     const boom: Error = new Error("nope");
-    await expect(firstValueFrom(resolveBearerValue(throwError(() => boom)))).rejects.toBe(boom);
+    await expect(firstValueFrom(resolveBearerValue(throwError((): Error => boom)))).rejects.toBe(boom);
   });
 
   /** Unsubscribing from the result unsubscribes from the upstream source. */

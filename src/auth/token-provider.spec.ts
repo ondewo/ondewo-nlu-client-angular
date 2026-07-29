@@ -6,7 +6,7 @@ import { TOKEN_PROVIDER } from "./token-provider";
  * be a real `InjectionToken` carrying the library-scoped description so it never
  * collides with another token in the consuming application's injector.
  */
-describe("TOKEN_PROVIDER", () => {
+describe("TOKEN_PROVIDER", (): void => {
   /** The token is an actual `InjectionToken` and exposes its descriptive name. */
   it("is an InjectionToken with a descriptive name", (): void => {
     expect(TOKEN_PROVIDER).toBeInstanceOf(InjectionToken);

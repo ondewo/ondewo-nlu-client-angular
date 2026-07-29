@@ -18,7 +18,7 @@ const DISPLAY_NAME: string = "Demo Agent";
  * @param getAgent the mock standing in for `AgentsClient.getAgent`.
  * @returns a structural `AgentsClient` backed by the mock.
  */
-function buildClient(getAgent: jest.Mock): AgentsClient {
+function buildClient(getAgent: jest.Mock<Observable<Agent>, [GetAgentRequest]>): AgentsClient {
   return { getAgent } as unknown as AgentsClient;
 }
 
@@ -27,14 +27,16 @@ function buildClient(getAgent: jest.Mock): AgentsClient {
  * the correct `GetAgentRequest` and correctly maps / propagates the client's
  * response — entirely against a mocked gRPC client, with no live server.
  */
-describe("GetAgentExampleService", () => {
+describe("GetAgentExampleService", (): void => {
   /** The happy path: build a `GetAgentRequest` with the given parent and map the display name. */
   it("requests the configured agent and maps its display name", async (): Promise<void> => {
     let capturedRequest: GetAgentRequest | undefined;
-    const getAgent: jest.Mock = jest.fn((request: GetAgentRequest): Observable<Agent> => {
-      capturedRequest = request;
-      return of(new Agent({ displayName: DISPLAY_NAME }));
-    });
+    const getAgent: jest.Mock<Observable<Agent>, [GetAgentRequest]> = jest.fn(
+      (request: GetAgentRequest): Observable<Agent> => {
+        capturedRequest = request;
+        return of(new Agent({ displayName: DISPLAY_NAME }));
+      }
+    );
     const service: GetAgentExampleService = new GetAgentExampleService(buildClient(getAgent));
 
     const displayName: string = await firstValueFrom(service.getAgentDisplayName(AGENT_PARENT));
@@ -48,7 +50,9 @@ describe("GetAgentExampleService", () => {
   /** The failure path: a gRPC error from the client surfaces unchanged to the caller. */
   it("propagates a gRPC error raised by the client", async (): Promise<void> => {
     const notFound: Error = new Error("5 NOT_FOUND: agent does not exist");
-    const getAgent: jest.Mock = jest.fn((): Observable<Agent> => throwError((): Error => notFound));
+    const getAgent: jest.Mock<Observable<Agent>, [GetAgentRequest]> = jest.fn<Observable<Agent>, [GetAgentRequest]>(
+      (): Observable<Agent> => throwError((): Error => notFound)
+    );
     const service: GetAgentExampleService = new GetAgentExampleService(buildClient(getAgent));
 
     await expect(firstValueFrom(service.getAgentDisplayName(AGENT_PARENT))).rejects.toBe(notFound);

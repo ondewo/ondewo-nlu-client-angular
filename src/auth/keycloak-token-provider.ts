@@ -135,7 +135,7 @@ interface KeycloakTokenResponse {
  *    bounded loop has lapsed), so the auth interceptors never block on the
  *    network.
  *
- * Register it through {@link provideOndewoNluAuth} after supplying a
+ * Register it through `provideOndewoNluAuth` after supplying a
  * {@link KEYCLOAK_TOKEN_PROVIDER_CONFIG}. The first login is kicked off lazily on
  * construction; call {@link whenReady} to await it explicitly (e.g. in an
  * `APP_INITIALIZER`).
