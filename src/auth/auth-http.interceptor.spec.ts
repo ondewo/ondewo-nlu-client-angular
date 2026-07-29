@@ -86,7 +86,10 @@ function run(tokenResult: TokenResult, request: HttpRequest<unknown>): RunResult
  * @returns a new `HttpRequest` for the interceptor to process.
  */
 function newRequest(headers?: HttpHeaders): HttpRequest<unknown> {
-  return new HttpRequest("GET", URL, headers === undefined ? undefined : { headers });
+  if (headers === undefined) {
+    return new HttpRequest("GET", URL);
+  }
+  return new HttpRequest("GET", URL, { headers });
 }
 
 /**

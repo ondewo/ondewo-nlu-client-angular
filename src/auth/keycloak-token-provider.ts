@@ -277,7 +277,7 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
     }
 
     if (this.config.tokenExpirationInS !== undefined) {
-      this.deadlineInMs = Date.now() + this.config.tokenExpirationInS * 1000;
+      this.deadlineInMs = Date.now() + (this.config.tokenExpirationInS * 1000);
     }
     this.scheduleRefresh(response.expires_in);
   }
@@ -329,8 +329,10 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
     if (this.stopped) {
       return;
     }
-    const expiresInS: number =
-      expiresInRaw !== undefined && expiresInRaw > 0 ? expiresInRaw : MIN_REFRESH_DELAY_IN_S;
+    let expiresInS: number = MIN_REFRESH_DELAY_IN_S;
+    if (expiresInRaw !== undefined && expiresInRaw > 0) {
+      expiresInS = expiresInRaw;
+    }
     let delayInS: number = Math.max(expiresInS - REFRESH_SKEW_IN_S, MIN_REFRESH_DELAY_IN_S);
 
     if (this.deadlineInMs !== null) {
