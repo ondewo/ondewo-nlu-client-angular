@@ -5,11 +5,18 @@ import { provideOndewoNluAuth } from "./auth.providers";
 import { TOKEN_PROVIDER, TokenProvider, TokenResult } from "./token-provider";
 
 /**
- * A concrete `TokenProvider` implementation standing in for one the consumer
- * would register (e.g. a `keycloak-js` / `keycloak-angular` wrapper).
+ * A local test double standing in for whatever `TokenProvider` implementation a
+ * consumer registers. It deliberately carries the same name as the real
+ * `KeycloakTokenProvider` the library exports from `./keycloak-token-provider`,
+ * so that the wiring assertions read exactly like consumer code — but it is a
+ * plain, unrelated class defined here and shadows that export inside this file.
+ * {@link provideOndewoNluAuth} only stores the class reference it is handed, so
+ * no Keycloak behaviour is exercised or required by these tests.
  */
 class KeycloakTokenProvider implements TokenProvider {
   /**
+   * Returns a canned token without contacting Keycloak.
+   *
    * @returns a fixed sample access token.
    */
   public getToken(): TokenResult {
@@ -36,7 +43,7 @@ function flatten(environmentProviders: EnvironmentProviders): Provider[] {
  * and register {@link AuthGrpcInterceptor} as a multi `GRPC_INTERCEPTORS`
  * provider — the exact wiring a consuming application relies on.
  */
-describe("provideOndewoNluAuth", () => {
+describe("provideOndewoNluAuth", (): void => {
   /** The supplied provider class is registered so Angular can instantiate it. */
   it("registers the supplied TokenProvider class so it is instantiable", (): void => {
     const providers: Provider[] = flatten(provideOndewoNluAuth(KeycloakTokenProvider));

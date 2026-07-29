@@ -9,15 +9,13 @@
 #   - generated Angular bundles: esm2022/, fesm2022/                                        #
 #   - generated proto stubs: api/, *_pb.js, *_pb.d.ts, *_grpc_pb.js, *_pb2*                 #
 #   - git submodules: src/ondewo-nlu-api, ondewo-proto-compiler (+ any ondewo-*-api)        #
-#   - generated top-level type defs / metadata: index.d.ts,                                 #
-#     ondewo-nlu-client-angular.d.ts(.map)/.metadata.json, public-api.d.ts.map              #
+#   - generated top-level type defs: index.d.ts, public-api.d.ts.map                        #
 #   - package-lock.json                                                                     #
-exclude: '(^|/)(node_modules|lib|dist|build|npm|esm2022|fesm2022|coverage|\.venv)/|_(grpc_)?pb\.(js|d\.ts)$|_pb2(_grpc)?\.pyi?$|^(api|src/ondewo-.*-api|ondewo-.*-api|ondewo-proto-compiler)(/|$)|^(index\.d\.ts|ondewo-nlu-client-angular\.d\.ts|ondewo-nlu-client-angular\.d\.ts\.map|ondewo-nlu-client-angular\.metadata\.json|public-api\.d\.ts\.map|package-lock\.json)$'
+exclude: '(^|/)(node_modules|lib|dist|build|npm|esm2022|fesm2022|coverage|\.venv)/|_(grpc_)?pb\.(js|d\.ts)$|_pb2(_grpc)?\.pyi?$|^(api|src/ondewo-.*-api|ondewo-.*-api|ondewo-proto-compiler)(/|$)|^(index\.d\.ts|public-api\.d\.ts\.map|package-lock\.json)$'
 
 fail_fast: false
 
 repos:
-
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.23.0
     hooks:
@@ -27,8 +25,8 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-added-large-files
-        args: [ maxkb=1024 ]
-      - id: check-json          # validate (does NOT reformat) json/package.json
+        args: [maxkb=1024]
+      - id: check-json # validate (does NOT reformat) json/package.json
       - id: check-yaml
       - id: check-xml
       - id: check-merge-conflict
@@ -38,16 +36,25 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
 
-  - repo: https://github.com/milin/giticket
-    rev: '1.92'
-    hooks:
-      - id: giticket
-        args: [ '--regex=(?:(?:feature|bugfix|support|hotfix)/)?(OND[0-9]{3}-[0-9]{1,5})[_-][\w-]+',
-                '--format=[{ticket}] {commit_msg}',
-                '--mode=regex_match' ]
-
+  # ORDER MATTERS: both of the hooks below run at the commit-msg stage, and
+  # pre-commit runs them in the order the repos are declared here.
+  # giticket rewrites the subject to "[OND211-2418] feat: …", which is no
+  # longer valid Conventional Commits — so it MUST come after the validation.
+  # With giticket first, every commit on a ticket branch failed the
+  # Conventional Commit hook and could only be made with --no-verify.
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v4.4.0
     hooks:
       - id: conventional-pre-commit
-        stages: [ commit-msg ]
+        stages: [commit-msg]
+
+  - repo: https://github.com/milin/giticket
+    rev: '1.92'
+    hooks:
+      - id: giticket
+        args:
+          [
+            '--regex=(?:(?:feature|bugfix|support|hotfix)/)?(OND[0-9]{3}-[0-9]{1,5})[_-][\w-]+',
+            '--format=[{ticket}] {commit_msg}',
+            '--mode=regex_match'
+          ]

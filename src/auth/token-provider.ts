@@ -33,6 +33,9 @@ export interface TokenProvider {
   /**
    * Return the current access token, or `null` when the user is not
    * authenticated. May be synchronous or asynchronous.
+   *
+   * @returns the current token as a `string`, `null`, or a `Promise` /
+   *   `Observable` resolving to either.
    */
   getToken(): TokenResult;
 }

@@ -16,20 +16,33 @@ export const BEARER_PREFIX: string = "Bearer ";
 
 /**
  * Normalize the value returned by a `TokenProvider.getToken()` call — which may
- * be a `string`, `null`, a `Promise` or an `Observable` — into a single
- * `Observable<string | null>` that emits exactly once.
+ * be a `string`, `null`, a `Promise` or an `Observable` — into an
+ * `Observable<string | null>` that mirrors the source, normalizing every value
+ * it emits.
+ *
+ * A `string`, `null` or `Promise` source is wrapped with `from` and therefore
+ * emits exactly once before completing. An `Observable` source is subscribed
+ * as-is: *every* `next` is forwarded (normalized), and its `error` / `complete`
+ * pass through unchanged — a provider that re-emits on each token refresh
+ * therefore yields a multi-emission observable here too. Both auth interceptors
+ * `switchMap` over it (through {@link resolveBearerValue}), so a later emission
+ * supersedes the request issued for the previous one.
  *
  * A non-empty token is returned trimmed; `null`, `undefined`, an empty string
  * and a whitespace-only string are all collapsed to `null` so callers have a
  * single "no usable token" signal and never build an empty `Bearer` header.
  *
  * @param result the raw value returned by `TokenProvider.getToken()`.
- * @returns an observable emitting the usable token, or `null` when absent.
+ * @returns an observable mirroring the source's emissions, each one a usable
+ *   token or `null` when absent.
  */
 export function resolveToken(result: TokenResult): Observable<string | null> {
-  const source: Observable<string | null> = isObservable(result)
-    ? result
-    : from(Promise.resolve(result));
+  let source: Observable<string | null>;
+  if (isObservable(result)) {
+    source = result;
+  } else {
+    source = from(Promise.resolve(result));
+  }
 
   return new Observable<string | null>((subscriber: Subscriber<string | null>): (() => void) => {
     const subscription: Subscription = source.subscribe({
@@ -49,7 +62,10 @@ export function resolveToken(result: TokenResult): Observable<string | null> {
  * @returns the `"Bearer <token>"` string, or `null` when there is no token.
  */
 export function buildBearerValue(token: string | null): string | null {
-  return token === null ? null : `${BEARER_PREFIX}${token}`;
+  if (token === null) {
+    return null;
+  }
+  return `${BEARER_PREFIX}${token}`;
 }
 
 /**
@@ -81,5 +97,8 @@ function normalizeToken(token: string | null | undefined): string | null {
     return null;
   }
   const trimmed: string = token.trim();
-  return trimmed.length === 0 ? null : trimmed;
+  if (trimmed.length === 0) {
+    return null;
+  }
+  return trimmed;
 }

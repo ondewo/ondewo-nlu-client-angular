@@ -317,27 +317,6 @@ export class UsersClient {
       });
     },
     /**
-     * Unary call: /ondewo.nlu.Users/Login
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<thisProto.LoginResponse>>
-     */
-    login: (
-      requestData: thisProto.LoginRequest,
-      requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<thisProto.LoginResponse>> => {
-      return this.handler.handle({
-        type: GrpcCallType.unary,
-        client: this.client,
-        path: '/ondewo.nlu.Users/Login',
-        requestData,
-        requestMetadata,
-        requestClass: thisProto.LoginRequest,
-        responseClass: thisProto.LoginResponse
-      });
-    },
-    /**
      * Unary call: /ondewo.nlu.Users/CheckLogin
      *
      * @param requestMessage Request message
@@ -419,6 +398,111 @@ export class UsersClient {
         requestMetadata,
         requestClass: ondewoNlu008.SetNotificationsReadStatusRequest,
         responseClass: ondewoNlu008.ListNotificationsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Users/AddNotifications
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<ondewoNlu008.AddNotificationsResponse>>
+     */
+    addNotifications: (
+      requestData: ondewoNlu008.AddNotificationsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<ondewoNlu008.AddNotificationsResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Users/AddNotifications',
+        requestData,
+        requestMetadata,
+        requestClass: ondewoNlu008.AddNotificationsRequest,
+        responseClass: ondewoNlu008.AddNotificationsResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Users/GetNotification
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<ondewoNlu008.Notification>>
+     */
+    getNotification: (
+      requestData: ondewoNlu008.GetNotificationRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<ondewoNlu008.Notification>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Users/GetNotification',
+        requestData,
+        requestMetadata,
+        requestClass: ondewoNlu008.GetNotificationRequest,
+        responseClass: ondewoNlu008.Notification
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Users/UpdateNotification
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<ondewoNlu008.Notification>>
+     */
+    updateNotification: (
+      requestData: ondewoNlu008.UpdateNotificationRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<ondewoNlu008.Notification>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Users/UpdateNotification',
+        requestData,
+        requestMetadata,
+        requestClass: ondewoNlu008.UpdateNotificationRequest,
+        responseClass: ondewoNlu008.Notification
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Users/DeleteNotifications
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<googleProtobuf003.Empty>>
+     */
+    deleteNotifications: (
+      requestData: ondewoNlu008.DeleteNotificationsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<googleProtobuf003.Empty>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Users/DeleteNotifications',
+        requestData,
+        requestMetadata,
+        requestClass: ondewoNlu008.DeleteNotificationsRequest,
+        responseClass: googleProtobuf003.Empty
+      });
+    },
+    /**
+     * Server streaming: /ondewo.nlu.Users/StreamNotifications
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<ondewoNlu008.Notification>>
+     */
+    streamNotifications: (
+      requestData: ondewoNlu008.StreamNotificationsRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<ondewoNlu008.Notification>> => {
+      return this.handler.handle({
+        type: GrpcCallType.serverStream,
+        client: this.client,
+        path: '/ondewo.nlu.Users/StreamNotifications',
+        requestData,
+        requestMetadata,
+        requestClass: ondewoNlu008.StreamNotificationsRequest,
+        responseClass: ondewoNlu008.Notification
       });
     },
     /**
@@ -724,22 +808,6 @@ export class UsersClient {
   }
 
   /**
-   * Unary call @/ondewo.nlu.Users/Login
-   *
-   * @param requestMessage Request message
-   * @param requestMetadata Request metadata
-   * @returns Observable<thisProto.LoginResponse>
-   */
-  login(
-    requestData: thisProto.LoginRequest,
-    requestMetadata = new GrpcMetadata()
-  ): Observable<thisProto.LoginResponse> {
-    return this.$raw
-      .login(requestData, requestMetadata)
-      .pipe(throwStatusErrors(), takeMessages());
-  }
-
-  /**
    * Unary call @/ondewo.nlu.Users/CheckLogin
    *
    * @param requestMessage Request message
@@ -800,6 +868,86 @@ export class UsersClient {
   ): Observable<ondewoNlu008.ListNotificationsResponse> {
     return this.$raw
       .setNotificationsReadStatus(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Users/AddNotifications
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<ondewoNlu008.AddNotificationsResponse>
+   */
+  addNotifications(
+    requestData: ondewoNlu008.AddNotificationsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<ondewoNlu008.AddNotificationsResponse> {
+    return this.$raw
+      .addNotifications(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Users/GetNotification
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<ondewoNlu008.Notification>
+   */
+  getNotification(
+    requestData: ondewoNlu008.GetNotificationRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<ondewoNlu008.Notification> {
+    return this.$raw
+      .getNotification(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Users/UpdateNotification
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<ondewoNlu008.Notification>
+   */
+  updateNotification(
+    requestData: ondewoNlu008.UpdateNotificationRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<ondewoNlu008.Notification> {
+    return this.$raw
+      .updateNotification(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Users/DeleteNotifications
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<googleProtobuf003.Empty>
+   */
+  deleteNotifications(
+    requestData: ondewoNlu008.DeleteNotificationsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<googleProtobuf003.Empty> {
+    return this.$raw
+      .deleteNotifications(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Server streaming @/ondewo.nlu.Users/StreamNotifications
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<ondewoNlu008.Notification>
+   */
+  streamNotifications(
+    requestData: ondewoNlu008.StreamNotificationsRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<ondewoNlu008.Notification> {
+    return this.$raw
+      .streamNotifications(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 

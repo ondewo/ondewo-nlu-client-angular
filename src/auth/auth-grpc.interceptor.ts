@@ -8,7 +8,7 @@ import { TOKEN_PROVIDER, TokenProvider } from "./token-provider";
 /**
  * `@ngx-grpc` interceptor that attaches the current Keycloak access token as an
  * `authorization: Bearer <token>` entry on the gRPC-web request metadata. This
- * is the gRPC-web counterpart of {@link authHttpInterceptor} and matches the
+ * is the gRPC-web counterpart of `authHttpInterceptor` and matches the
  * `@ngx-grpc` client style used by every generated `*.pbsc.ts` service client in
  * this library.
  *
@@ -31,6 +31,10 @@ import { TOKEN_PROVIDER, TokenProvider } from "./token-provider";
  */
 @Injectable()
 export class AuthGrpcInterceptor implements GrpcInterceptor {
+  /**
+   * @param tokenProvider the application's token provider, injected under
+   *   {@link TOKEN_PROVIDER}.
+   */
   public constructor(@Inject(TOKEN_PROVIDER) private readonly tokenProvider: TokenProvider) {}
 
   /**

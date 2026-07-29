@@ -18,6 +18,8 @@ const BEARER: string = `${BEARER_PREFIX}${TOKEN}`;
  */
 class StubTokenProvider implements TokenProvider {
   /**
+   * Capture the single `TokenResult` this stub hands back on every call.
+   *
    * @param value the fixed `TokenResult` every `getToken` call returns.
    */
   public constructor(private readonly value: TokenResult) {}
@@ -36,14 +38,18 @@ class StubTokenProvider implements TokenProvider {
  * transport.
  */
 class FakeMetadata {
+  /** The stored entries, keyed case-sensitively exactly as the caller spelled them. */
   private readonly map: Map<string, string> = new Map<string, string>();
 
   /**
+   * Create metadata that starts empty unless seed entries are supplied.
+   *
    * @param initial optional seed entries to pre-populate the metadata map with.
    */
   public constructor(initial?: Record<string, string>) {
     if (initial !== undefined) {
-      for (const key of Object.keys(initial)) {
+      const keys: string[] = Object.keys(initial);
+      for (const key of keys) {
         this.map.set(key, initial[key]);
       }
     }
@@ -73,6 +79,13 @@ class FakeMetadata {
    */
   public get(name: string): string | undefined {
     return this.map.get(name);
+  }
+
+  /**
+   * @returns how many entries are currently stored.
+   */
+  public get size(): number {
+    return this.map.size;
   }
 }
 
@@ -133,7 +146,7 @@ function run(tokenResult: TokenResult, metadata: FakeMetadata): RunResult {
  * next handler, and propagate token-source errors instead of sending an
  * unauthenticated request.
  */
-describe("AuthGrpcInterceptor", () => {
+describe("AuthGrpcInterceptor", (): void => {
   /** A synchronous token is set as the bearer metadata entry. */
   it("sets the bearer metadata when a synchronous token is present", async (): Promise<void> => {
     const result: RunResult = run(TOKEN, new FakeMetadata());
@@ -195,10 +208,42 @@ describe("AuthGrpcInterceptor", () => {
     expect(getTokenSpy).not.toHaveBeenCalled();
   });
 
+  /**
+   * Pins today's behaviour rather than endorsing it: a **lowercase**
+   * caller-supplied `authorization` entry is NOT honoured by the gRPC
+   * interceptor. `AUTHORIZATION_HEADER` is the capitalized `"Authorization"` and
+   * `@ngx-grpc`'s `GrpcMetadata` is a plain case-SENSITIVE map, so the `has`
+   * probe misses the lowercase spelling — the form gRPC-web / HTTP2 actually
+   * puts on the wire — and the interceptor consults the token provider and adds
+   * a second, capitalized entry beside it. The HTTP interceptor does not share
+   * this quirk, because Angular's `HttpHeaders` lower-cases every lookup.
+   */
+  it("does not honour a lowercase authorization entry and adds a second capitalized one", async (): Promise<void> => {
+    const lowercaseHeader: string = "authorization";
+    const preset: string = `${BEARER_PREFIX}caller-supplied`;
+    const provider: StubTokenProvider = new StubTokenProvider(TOKEN);
+    const getTokenSpy: jest.SpyInstance<TokenResult, []> = jest.spyOn(provider, "getToken");
+    const interceptor: AuthGrpcInterceptor = new AuthGrpcInterceptor(provider);
+    const metadata: FakeMetadata = new FakeMetadata({ [lowercaseHeader]: preset });
+    const request: GrpcRequest<GrpcMessage, GrpcMessage> = {
+      requestMetadata: metadata
+    } as unknown as GrpcRequest<GrpcMessage, GrpcMessage>;
+    const next: GrpcHandler = {
+      handle: (): Observable<GrpcEvent<GrpcMessage>> => of(SENTINEL)
+    } as unknown as GrpcHandler;
+
+    await firstValueFrom(interceptor.intercept(request, next));
+
+    expect(getTokenSpy).toHaveBeenCalledTimes(1);
+    expect(metadata.get(lowercaseHeader)).toBe(preset);
+    expect(metadata.get(AUTHORIZATION_HEADER)).toBe(BEARER);
+    expect(metadata.size).toBe(2);
+  });
+
   /** A token-source error propagates and the request is never delegated. */
   it("propagates an error raised by the token source without delegating", async (): Promise<void> => {
     const boom: Error = new Error("token refresh failed");
-    const result: RunResult = run(throwError(() => boom), new FakeMetadata());
+    const result: RunResult = run(throwError((): Error => boom), new FakeMetadata());
     await expect(firstValueFrom(result.events)).rejects.toBe(boom);
   });
 });

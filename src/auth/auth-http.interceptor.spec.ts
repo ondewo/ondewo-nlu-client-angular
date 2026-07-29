@@ -21,6 +21,8 @@ const URL: string = "https://api.example.com/ondewo.nlu.Agents/ListAgents";
  */
 class StubTokenProvider implements TokenProvider {
   /**
+   * Create a stub that hands out the same `TokenResult` on every call.
+   *
    * @param value the fixed `TokenResult` every `getToken` call returns.
    */
   public constructor(private readonly value: TokenResult) {}
@@ -69,6 +71,11 @@ function run(tokenResult: TokenResult, request: HttpRequest<unknown>): RunResult
   // `forwarded` is assigned synchronously only for the sync-token paths; the
   // caller awaits `events` before reading it for async paths.
   return {
+    /**
+     * @returns the request the fake `next` handler received.
+     * @throws Error when `next` was never invoked — a test asserting on the
+     *   forwarded request would otherwise silently read `undefined` and pass.
+     */
     get forwarded(): HttpRequest<unknown> {
       if (forwarded === undefined) {
         throw new Error("next handler was not invoked");
@@ -86,7 +93,10 @@ function run(tokenResult: TokenResult, request: HttpRequest<unknown>): RunResult
  * @returns a new `HttpRequest` for the interceptor to process.
  */
 function newRequest(headers?: HttpHeaders): HttpRequest<unknown> {
-  return new HttpRequest("GET", URL, headers === undefined ? undefined : { headers });
+  if (headers === undefined) {
+    return new HttpRequest("GET", URL);
+  }
+  return new HttpRequest("GET", URL, { headers });
 }
 
 /**
@@ -96,7 +106,7 @@ function newRequest(headers?: HttpHeaders): HttpRequest<unknown> {
  * `Authorization` header, and propagate token-source errors instead of sending an
  * unauthenticated request.
  */
-describe("authHttpInterceptor", () => {
+describe("authHttpInterceptor", (): void => {
   /** A synchronous token is attached as the bearer header on the forwarded request. */
   it("attaches the bearer header when a synchronous token is present", async (): Promise<void> => {
     const result: RunResult = run(TOKEN, newRequest());
@@ -154,10 +164,43 @@ describe("authHttpInterceptor", () => {
     expect(result.forwarded.headers.get(AUTHORIZATION_HEADER)).toBe(preset);
   });
 
+  /**
+   * A lowercase `authorization` header set by the caller also wins, and the
+   * provider is never consulted.
+   *
+   * This pins Angular's case-insensitive `HttpHeaders` lookup, which deliberately
+   * DIFFERS from the gRPC interceptor: `GrpcMetadata` keys are matched
+   * case-sensitively there, so a lowercase entry does NOT short-circuit it.
+   * Asserting the HTTP behaviour here means a future attempt to "unify" the two
+   * interceptors cannot silently break one of them.
+   */
+  it("honours a lowercase authorization header and skips the token provider", async (): Promise<void> => {
+    const preset: string = `${BEARER_PREFIX}caller-supplied`;
+    const provider: StubTokenProvider = new StubTokenProvider(TOKEN);
+    const getTokenSpy: jest.SpyInstance<TokenResult, []> = jest.spyOn(provider, "getToken");
+    const injector: Injector = Injector.create({
+      providers: [{ provide: TOKEN_PROVIDER, useValue: provider }]
+    });
+    const request: HttpRequest<unknown> = newRequest(new HttpHeaders({ authorization: preset }));
+
+    let forwarded: HttpRequest<unknown> | undefined;
+    const next: HttpHandlerFn = (req: HttpRequest<unknown>): Observable<HttpEvent<unknown>> => {
+      forwarded = req;
+      return of({ type: 0 } as HttpEvent<unknown>);
+    };
+
+    await firstValueFrom(
+      runInInjectionContext(injector, (): Observable<HttpEvent<unknown>> => authHttpInterceptor(request, next))
+    );
+
+    expect(forwarded).toBe(request);
+    expect(getTokenSpy).not.toHaveBeenCalled();
+  });
+
   /** A token-source error propagates and the request is never sent. */
   it("propagates an error raised by the token source without sending the request", async (): Promise<void> => {
     const boom: Error = new Error("token refresh failed");
-    const result: RunResult = run(throwError(() => boom), newRequest());
+    const result: RunResult = run(throwError((): Error => boom), newRequest());
     await expect(firstValueFrom(result.events)).rejects.toBe(boom);
   });
 });

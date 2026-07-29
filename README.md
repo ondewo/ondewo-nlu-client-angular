@@ -113,22 +113,22 @@ host application; this client only reads the current token through a `TokenProvi
 ### 1. Implement a `TokenProvider` backed by `keycloak-js`
 
 ```ts
-import { Injectable } from '@angular/core';
-import Keycloak from 'keycloak-js';
-import { TokenProvider, TokenResult } from '@ondewo/nlu-client-angular';
+import { Injectable } from "@angular/core";
+import Keycloak from "keycloak-js";
+import { TokenProvider, TokenResult } from "@ondewo/nlu-client-angular";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class KeycloakTokenProvider implements TokenProvider {
- constructor(private readonly keycloak: Keycloak) {}
+  constructor(private readonly keycloak: Keycloak) {}
 
- // Refresh the token if it expires within 30s, then return the current one.
- // Returning a Promise lets the interceptor await the refresh before sending.
- getToken(): TokenResult {
-  return this.keycloak
-   .updateToken(30)
-   .then(() => this.keycloak.token ?? null)
-   .catch(() => null);
- }
+  // Refresh the token if it expires within 30s, then return the current one.
+  // Returning a Promise lets the interceptor await the refresh before sending.
+  getToken(): TokenResult {
+    return this.keycloak
+      .updateToken(30)
+      .then(() => this.keycloak.token ?? null)
+      .catch(() => null);
+  }
 }
 ```
 
@@ -139,26 +139,26 @@ instead inject `KeycloakService` and call `this.keycloakService.getToken()`.
 ### 2. Register the provider and the interceptors
 
 ```ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authHttpInterceptor, provideOndewoNluAuth } from '@ondewo/nlu-client-angular';
-import { KeycloakTokenProvider } from './keycloak-token-provider';
+import { bootstrapApplication } from "@angular/platform-browser";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { authHttpInterceptor, provideOndewoNluAuth } from "@ondewo/nlu-client-angular";
+import { KeycloakTokenProvider } from "./keycloak-token-provider";
 
 bootstrapApplication(AppComponent, {
- providers: [
-  // Binds TOKEN_PROVIDER to your implementation and registers the
-  // @ngx-grpc AuthGrpcInterceptor for all generated *.pbsc.ts clients.
-  provideOndewoNluAuth(KeycloakTokenProvider),
-  // For plain HTTP requests, also register the functional HTTP interceptor.
-  provideHttpClient(withInterceptors([authHttpInterceptor]))
- ]
+  providers: [
+    // Binds TOKEN_PROVIDER to your implementation and registers the
+    // @ngx-grpc AuthGrpcInterceptor for all generated *.pbsc.ts clients.
+    provideOndewoNluAuth(KeycloakTokenProvider),
+    // For plain HTTP requests, also register the functional HTTP interceptor.
+    provideHttpClient(withInterceptors([authHttpInterceptor]))
+  ]
 });
 ```
 
 That is all the wiring required: every NLU service client request now carries `authorization: Bearer <token>`
 whenever a token is available, and is sent unchanged when it is not.
 
-[comment]: <> 'START OF GITHUB README'
+[comment]: <> (START OF GITHUB README)
 
 ## Build
 
@@ -216,4 +216,4 @@ TODO after PR merge:
 
 > :warning: The Release Automation checks if the build has created all the proto-code files, but it does not check the code-integrity. Please build and test the generated code prior to starting the release process.
 
-[comment]: <> 'END OF GITHUB README'
+[comment]: <> (END OF GITHUB README)

@@ -20,8 +20,8 @@ import * as googleProtobuf006 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
 import * as googleRpc008 from '../../google/rpc/status.pb';
 import * as ondewoNlu009 from '../../ondewo/nlu/operation-metadata.pb';
-import * as ondewoNlu010 from '../../ondewo/nlu/context.pb';
-import * as ondewoNlu011 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu011 from '../../ondewo/nlu/context.pb';
 import * as ondewoNlu012 from '../../ondewo/nlu/operations.pb';
 export enum IntentView {
   INTENT_VIEW_UNSPECIFIED = 0,
@@ -145,10 +145,10 @@ export class Intent implements GrpcMessage {
           _instance.action = _reader.readString();
           break;
         case 11:
-          const messageInitializer11 = new ondewoNlu010.Context();
+          const messageInitializer11 = new ondewoNlu011.Context();
           _reader.readMessage(
             messageInitializer11,
-            ondewoNlu010.Context.deserializeBinaryFromReader
+            ondewoNlu011.Context.deserializeBinaryFromReader
           );
           (_instance.outputContexts = _instance.outputContexts || []).push(
             messageInitializer11
@@ -305,7 +305,7 @@ export class Intent implements GrpcMessage {
       _writer.writeRepeatedMessage(
         11,
         _instance.outputContexts as any,
-        ondewoNlu010.Context.serializeBinaryToWriter
+        ondewoNlu011.Context.serializeBinaryToWriter
       );
     }
     if (_instance.resetContexts) {
@@ -411,7 +411,7 @@ export class Intent implements GrpcMessage {
   private _events: string[];
   private _trainingPhrases?: Intent.TrainingPhrase[];
   private _action: string;
-  private _outputContexts?: ondewoNlu010.Context[];
+  private _outputContexts?: ondewoNlu011.Context[];
   private _resetContexts: boolean;
   private _parameters?: Intent.Parameter[];
   private _messages?: Intent.Message[];
@@ -452,7 +452,7 @@ export class Intent implements GrpcMessage {
     );
     this.action = _value.action;
     this.outputContexts = (_value.outputContexts || []).map(
-      m => new ondewoNlu010.Context(m)
+      m => new ondewoNlu011.Context(m)
     );
     this.resetContexts = _value.resetContexts;
     this.parameters = (_value.parameters || []).map(
@@ -550,10 +550,10 @@ export class Intent implements GrpcMessage {
   set action(value: string) {
     this._action = value;
   }
-  get outputContexts(): ondewoNlu010.Context[] | undefined {
+  get outputContexts(): ondewoNlu011.Context[] | undefined {
     return this._outputContexts;
   }
-  set outputContexts(value: ondewoNlu010.Context[] | undefined) {
+  set outputContexts(value: ondewoNlu011.Context[] | undefined) {
     this._outputContexts = value;
   }
   get resetContexts(): boolean {
@@ -812,7 +812,7 @@ export module Intent {
     events: string[];
     trainingPhrases?: Intent.TrainingPhrase.AsObject[];
     action: string;
-    outputContexts?: ondewoNlu010.Context.AsObject[];
+    outputContexts?: ondewoNlu011.Context.AsObject[];
     resetContexts: boolean;
     parameters?: Intent.Parameter.AsObject[];
     messages?: Intent.Message.AsObject[];
@@ -849,7 +849,7 @@ export module Intent {
     events: string[];
     trainingPhrases: Intent.TrainingPhrase.AsProtobufJSON[] | null;
     action: string;
-    outputContexts: ondewoNlu010.Context.AsProtobufJSON[] | null;
+    outputContexts: ondewoNlu011.Context.AsProtobufJSON[] | null;
     resetContexts: boolean;
     parameters: Intent.Parameter.AsProtobufJSON[] | null;
     messages: Intent.Message.AsProtobufJSON[] | null;
@@ -8780,7 +8780,7 @@ export class IntentSorting implements GrpcMessage {
   }
 
   private _sortingField: IntentSorting.IntentSortingField;
-  private _sortingMode: ondewoNlu011.SortingMode;
+  private _sortingMode: ondewoNlu010.SortingMode;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -8798,10 +8798,10 @@ export class IntentSorting implements GrpcMessage {
   set sortingField(value: IntentSorting.IntentSortingField) {
     this._sortingField = value;
   }
-  get sortingMode(): ondewoNlu011.SortingMode {
+  get sortingMode(): ondewoNlu010.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu011.SortingMode) {
+  set sortingMode(value: ondewoNlu010.SortingMode) {
     this._sortingMode = value;
   }
 
@@ -8849,7 +8849,7 @@ export class IntentSorting implements GrpcMessage {
             : this.sortingField
         ],
       sortingMode:
-        ondewoNlu011.SortingMode[
+        ondewoNlu010.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -8863,7 +8863,7 @@ export module IntentSorting {
    */
   export interface AsObject {
     sortingField: IntentSorting.IntentSortingField;
-    sortingMode: ondewoNlu011.SortingMode;
+    sortingMode: ondewoNlu010.SortingMode;
   }
 
   /**

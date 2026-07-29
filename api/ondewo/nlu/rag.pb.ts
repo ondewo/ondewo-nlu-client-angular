@@ -19,9 +19,9 @@ import * as googleProtobuf004 from '@ngx-grpc/well-known-types';
 import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
 import * as googleRpc006 from '../../google/rpc/status.pb';
 import * as ondewoNlu007 from '../../ondewo/nlu/operation-metadata.pb';
-import * as googleType008 from '../../google/type/latlng.pb';
-import * as ondewoNlu009 from '../../ondewo/nlu/ccai-project.pb';
-import * as ondewoNlu010 from '../../ondewo/nlu/common.pb';
+import * as ondewoNlu008 from '../../ondewo/nlu/common.pb';
+import * as googleType009 from '../../google/type/latlng.pb';
+import * as ondewoNlu010 from '../../ondewo/nlu/ccai-project.pb';
 import * as ondewoNlu011 from '../../ondewo/nlu/context.pb';
 import * as ondewoNlu012 from '../../ondewo/nlu/entity-type.pb';
 import * as ondewoNlu013 from '../../ondewo/nlu/intent.pb';
@@ -98,6 +98,11 @@ export enum RagCrawlerAuthenticationExecutionType {
   RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_UNSPECIFIED = 0,
   RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_SERVER_SIDE = 1,
   RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_CLIENT_SIDE = 2
+}
+export enum RagCrawlerPruningThresholdType {
+  RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_UNSPECIFIED = 0,
+  RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED = 1,
+  RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_DYNAMIC = 2
 }
 export enum RagCrawlerMetaDataExtractorType {
   RAG_CRAWLER_META_DATA_EXTRACTOR_TPYE_UNSPECIFIED = 0,
@@ -2941,7 +2946,7 @@ export class RagListDatasetsRequest implements GrpcMessage {
   private _name: string;
   private _orderby: string;
   private _desc: boolean;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
   private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
@@ -3005,10 +3010,10 @@ export class RagListDatasetsRequest implements GrpcMessage {
   set desc(value: boolean) {
     this._desc = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
   get fieldMask(): googleProtobuf000.FieldMask | undefined {
@@ -3070,7 +3075,7 @@ export class RagListDatasetsRequest implements GrpcMessage {
       orderby: this.orderby,
       desc: this.desc,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -3091,7 +3096,7 @@ export module RagListDatasetsRequest {
     name: string;
     orderby: string;
     desc: boolean;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
@@ -5040,7 +5045,7 @@ export class RagListDocumentsRequest implements GrpcMessage {
   private _createTimeFrom?: googleProtobuf002.Timestamp;
   private _createTimeTo?: googleProtobuf002.Timestamp;
   private _metadataCondition?: RagMetadataConditions;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
   private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
@@ -5159,10 +5164,10 @@ export class RagListDocumentsRequest implements GrpcMessage {
   set metadataCondition(value: RagMetadataConditions | undefined) {
     this._metadataCondition = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
   get fieldMask(): googleProtobuf000.FieldMask | undefined {
@@ -5250,7 +5255,7 @@ export class RagListDocumentsRequest implements GrpcMessage {
         ? this.metadataCondition.toProtobufJSON(options)
         : null,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -5278,7 +5283,7 @@ export module RagListDocumentsRequest {
     createTimeFrom?: googleProtobuf002.Timestamp.AsObject;
     createTimeTo?: googleProtobuf002.Timestamp.AsObject;
     metadataCondition?: RagMetadataConditions.AsObject;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
@@ -8487,7 +8492,7 @@ export class RagListCrawlersRequest implements GrpcMessage {
   private _datasetName: string;
   private _crawlerName: string;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
   private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
@@ -8544,10 +8549,10 @@ export class RagListCrawlersRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
   get fieldMask(): googleProtobuf000.FieldMask | undefined {
@@ -8607,7 +8612,7 @@ export class RagListCrawlersRequest implements GrpcMessage {
       crawlerName: this.crawlerName,
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -8627,7 +8632,7 @@ export module RagListCrawlersRequest {
     datasetName: string;
     crawlerName: string;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
@@ -11579,6 +11584,7 @@ export class RagCrawlerConfig implements GrpcMessage {
     _instance.concurrencyConfig = _instance.concurrencyConfig || undefined;
     _instance.deepCrawlerConfig = _instance.deepCrawlerConfig || undefined;
     _instance.outputConfig = _instance.outputConfig || undefined;
+    _instance.statusFilter = _instance.statusFilter || undefined;
   }
 
   /**
@@ -11613,6 +11619,13 @@ export class RagCrawlerConfig implements GrpcMessage {
           _reader.readMessage(
             _instance.outputConfig,
             RagCrawlerResultsConfig.deserializeBinaryFromReader
+          );
+          break;
+        case 4:
+          _instance.statusFilter = new RagCrawlerStatusFilter();
+          _reader.readMessage(
+            _instance.statusFilter,
+            RagCrawlerStatusFilter.deserializeBinaryFromReader
           );
           break;
         default:
@@ -11653,11 +11666,19 @@ export class RagCrawlerConfig implements GrpcMessage {
         RagCrawlerResultsConfig.serializeBinaryToWriter
       );
     }
+    if (_instance.statusFilter) {
+      _writer.writeMessage(
+        4,
+        _instance.statusFilter as any,
+        RagCrawlerStatusFilter.serializeBinaryToWriter
+      );
+    }
   }
 
   private _concurrencyConfig?: RagCrawlerConcurrencyConfig;
   private _deepCrawlerConfig?: RagCrawlerDeepCrawlerConfig;
   private _outputConfig?: RagCrawlerResultsConfig;
+  private _statusFilter?: RagCrawlerStatusFilter;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -11673,6 +11694,9 @@ export class RagCrawlerConfig implements GrpcMessage {
       : undefined;
     this.outputConfig = _value.outputConfig
       ? new RagCrawlerResultsConfig(_value.outputConfig)
+      : undefined;
+    this.statusFilter = _value.statusFilter
+      ? new RagCrawlerStatusFilter(_value.statusFilter)
       : undefined;
     RagCrawlerConfig.refineValues(this);
   }
@@ -11693,6 +11717,12 @@ export class RagCrawlerConfig implements GrpcMessage {
   }
   set outputConfig(value: RagCrawlerResultsConfig | undefined) {
     this._outputConfig = value;
+  }
+  get statusFilter(): RagCrawlerStatusFilter | undefined {
+    return this._statusFilter;
+  }
+  set statusFilter(value: RagCrawlerStatusFilter | undefined) {
+    this._statusFilter = value;
   }
 
   /**
@@ -11716,7 +11746,10 @@ export class RagCrawlerConfig implements GrpcMessage {
       deepCrawlerConfig: this.deepCrawlerConfig
         ? this.deepCrawlerConfig.toObject()
         : undefined,
-      outputConfig: this.outputConfig ? this.outputConfig.toObject() : undefined
+      outputConfig: this.outputConfig
+        ? this.outputConfig.toObject()
+        : undefined,
+      statusFilter: this.statusFilter ? this.statusFilter.toObject() : undefined
     };
   }
 
@@ -11745,6 +11778,9 @@ export class RagCrawlerConfig implements GrpcMessage {
         : null,
       outputConfig: this.outputConfig
         ? this.outputConfig.toProtobufJSON(options)
+        : null,
+      statusFilter: this.statusFilter
+        ? this.statusFilter.toProtobufJSON(options)
         : null
     };
   }
@@ -11757,6 +11793,7 @@ export module RagCrawlerConfig {
     concurrencyConfig?: RagCrawlerConcurrencyConfig.AsObject;
     deepCrawlerConfig?: RagCrawlerDeepCrawlerConfig.AsObject;
     outputConfig?: RagCrawlerResultsConfig.AsObject;
+    statusFilter?: RagCrawlerStatusFilter.AsObject;
   }
 
   /**
@@ -11766,6 +11803,7 @@ export module RagCrawlerConfig {
     concurrencyConfig: RagCrawlerConcurrencyConfig.AsProtobufJSON | null;
     deepCrawlerConfig: RagCrawlerDeepCrawlerConfig.AsProtobufJSON | null;
     outputConfig: RagCrawlerResultsConfig.AsProtobufJSON | null;
+    statusFilter: RagCrawlerStatusFilter.AsProtobufJSON | null;
   }
 }
 
@@ -11798,6 +11836,7 @@ export class RagCrawlerDeepCrawlerConfig implements GrpcMessage {
     _instance.maxDepth = _instance.maxDepth || 0;
     _instance.maxPages = _instance.maxPages || 0;
     _instance.deepCrawlerFilters = _instance.deepCrawlerFilters || undefined;
+    _instance.normalizeUrlCase = _instance.normalizeUrlCase || false;
   }
 
   /**
@@ -11831,6 +11870,9 @@ export class RagCrawlerDeepCrawlerConfig implements GrpcMessage {
             _instance.deepCrawlerFilters,
             RagCrawlerFilters.deserializeBinaryFromReader
           );
+          break;
+        case 6:
+          _instance.normalizeUrlCase = _reader.readBool();
           break;
         default:
           _reader.skipField();
@@ -11868,6 +11910,9 @@ export class RagCrawlerDeepCrawlerConfig implements GrpcMessage {
         RagCrawlerFilters.serializeBinaryToWriter
       );
     }
+    if (_instance.normalizeUrlCase) {
+      _writer.writeBool(6, _instance.normalizeUrlCase);
+    }
   }
 
   private _isActive: boolean;
@@ -11875,6 +11920,7 @@ export class RagCrawlerDeepCrawlerConfig implements GrpcMessage {
   private _maxDepth: number;
   private _maxPages: number;
   private _deepCrawlerFilters?: RagCrawlerFilters;
+  private _normalizeUrlCase: boolean;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -11889,6 +11935,7 @@ export class RagCrawlerDeepCrawlerConfig implements GrpcMessage {
     this.deepCrawlerFilters = _value.deepCrawlerFilters
       ? new RagCrawlerFilters(_value.deepCrawlerFilters)
       : undefined;
+    this.normalizeUrlCase = _value.normalizeUrlCase;
     RagCrawlerDeepCrawlerConfig.refineValues(this);
   }
   get isActive(): boolean {
@@ -11921,6 +11968,12 @@ export class RagCrawlerDeepCrawlerConfig implements GrpcMessage {
   set deepCrawlerFilters(value: RagCrawlerFilters | undefined) {
     this._deepCrawlerFilters = value;
   }
+  get normalizeUrlCase(): boolean {
+    return this._normalizeUrlCase;
+  }
+  set normalizeUrlCase(value: boolean) {
+    this._normalizeUrlCase = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -11943,7 +11996,8 @@ export class RagCrawlerDeepCrawlerConfig implements GrpcMessage {
       maxPages: this.maxPages,
       deepCrawlerFilters: this.deepCrawlerFilters
         ? this.deepCrawlerFilters.toObject()
-        : undefined
+        : undefined,
+      normalizeUrlCase: this.normalizeUrlCase
     };
   }
 
@@ -11975,7 +12029,8 @@ export class RagCrawlerDeepCrawlerConfig implements GrpcMessage {
       maxPages: this.maxPages,
       deepCrawlerFilters: this.deepCrawlerFilters
         ? this.deepCrawlerFilters.toProtobufJSON(options)
-        : null
+        : null,
+      normalizeUrlCase: this.normalizeUrlCase
     };
   }
 }
@@ -11989,6 +12044,7 @@ export module RagCrawlerDeepCrawlerConfig {
     maxDepth: number;
     maxPages: number;
     deepCrawlerFilters?: RagCrawlerFilters.AsObject;
+    normalizeUrlCase: boolean;
   }
 
   /**
@@ -12000,6 +12056,7 @@ export module RagCrawlerDeepCrawlerConfig {
     maxDepth: number;
     maxPages: number;
     deepCrawlerFilters: RagCrawlerFilters.AsProtobufJSON | null;
+    normalizeUrlCase: boolean;
   }
 }
 
@@ -12029,6 +12086,8 @@ export class RagCrawlerResultsConfig implements GrpcMessage {
   static refineValues(_instance: RagCrawlerResultsConfig) {
     _instance.injectFrontmatter = _instance.injectFrontmatter || false;
     _instance.metaDataExtractors = _instance.metaDataExtractors || [];
+    _instance.contentScope = _instance.contentScope || undefined;
+    _instance.densityPruning = _instance.densityPruning || undefined;
   }
 
   /**
@@ -12055,6 +12114,20 @@ export class RagCrawlerResultsConfig implements GrpcMessage {
           );
           (_instance.metaDataExtractors =
             _instance.metaDataExtractors || []).push(messageInitializer2);
+          break;
+        case 3:
+          _instance.contentScope = new RagCrawlerContentScope();
+          _reader.readMessage(
+            _instance.contentScope,
+            RagCrawlerContentScope.deserializeBinaryFromReader
+          );
+          break;
+        case 4:
+          _instance.densityPruning = new RagCrawlerDensityPruning();
+          _reader.readMessage(
+            _instance.densityPruning,
+            RagCrawlerDensityPruning.deserializeBinaryFromReader
+          );
           break;
         default:
           _reader.skipField();
@@ -12083,10 +12156,26 @@ export class RagCrawlerResultsConfig implements GrpcMessage {
         RagCrawlerMetaDataExtractor.serializeBinaryToWriter
       );
     }
+    if (_instance.contentScope) {
+      _writer.writeMessage(
+        3,
+        _instance.contentScope as any,
+        RagCrawlerContentScope.serializeBinaryToWriter
+      );
+    }
+    if (_instance.densityPruning) {
+      _writer.writeMessage(
+        4,
+        _instance.densityPruning as any,
+        RagCrawlerDensityPruning.serializeBinaryToWriter
+      );
+    }
   }
 
   private _injectFrontmatter: boolean;
   private _metaDataExtractors?: RagCrawlerMetaDataExtractor[];
+  private _contentScope?: RagCrawlerContentScope;
+  private _densityPruning?: RagCrawlerDensityPruning;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -12098,6 +12187,12 @@ export class RagCrawlerResultsConfig implements GrpcMessage {
     this.metaDataExtractors = (_value.metaDataExtractors || []).map(
       m => new RagCrawlerMetaDataExtractor(m)
     );
+    this.contentScope = _value.contentScope
+      ? new RagCrawlerContentScope(_value.contentScope)
+      : undefined;
+    this.densityPruning = _value.densityPruning
+      ? new RagCrawlerDensityPruning(_value.densityPruning)
+      : undefined;
     RagCrawlerResultsConfig.refineValues(this);
   }
   get injectFrontmatter(): boolean {
@@ -12111,6 +12206,18 @@ export class RagCrawlerResultsConfig implements GrpcMessage {
   }
   set metaDataExtractors(value: RagCrawlerMetaDataExtractor[] | undefined) {
     this._metaDataExtractors = value;
+  }
+  get contentScope(): RagCrawlerContentScope | undefined {
+    return this._contentScope;
+  }
+  set contentScope(value: RagCrawlerContentScope | undefined) {
+    this._contentScope = value;
+  }
+  get densityPruning(): RagCrawlerDensityPruning | undefined {
+    return this._densityPruning;
+  }
+  set densityPruning(value: RagCrawlerDensityPruning | undefined) {
+    this._densityPruning = value;
   }
 
   /**
@@ -12129,7 +12236,15 @@ export class RagCrawlerResultsConfig implements GrpcMessage {
   toObject(): RagCrawlerResultsConfig.AsObject {
     return {
       injectFrontmatter: this.injectFrontmatter,
-      metaDataExtractors: (this.metaDataExtractors || []).map(m => m.toObject())
+      metaDataExtractors: (this.metaDataExtractors || []).map(m =>
+        m.toObject()
+      ),
+      contentScope: this.contentScope
+        ? this.contentScope.toObject()
+        : undefined,
+      densityPruning: this.densityPruning
+        ? this.densityPruning.toObject()
+        : undefined
     };
   }
 
@@ -12153,7 +12268,13 @@ export class RagCrawlerResultsConfig implements GrpcMessage {
       injectFrontmatter: this.injectFrontmatter,
       metaDataExtractors: (this.metaDataExtractors || []).map(m =>
         m.toProtobufJSON(options)
-      )
+      ),
+      contentScope: this.contentScope
+        ? this.contentScope.toProtobufJSON(options)
+        : null,
+      densityPruning: this.densityPruning
+        ? this.densityPruning.toProtobufJSON(options)
+        : null
     };
   }
 }
@@ -12164,6 +12285,8 @@ export module RagCrawlerResultsConfig {
   export interface AsObject {
     injectFrontmatter: boolean;
     metaDataExtractors?: RagCrawlerMetaDataExtractor.AsObject[];
+    contentScope?: RagCrawlerContentScope.AsObject;
+    densityPruning?: RagCrawlerDensityPruning.AsObject;
   }
 
   /**
@@ -12172,6 +12295,371 @@ export module RagCrawlerResultsConfig {
   export interface AsProtobufJSON {
     injectFrontmatter: boolean;
     metaDataExtractors: RagCrawlerMetaDataExtractor.AsProtobufJSON[] | null;
+    contentScope: RagCrawlerContentScope.AsProtobufJSON | null;
+    densityPruning: RagCrawlerDensityPruning.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.RagCrawlerContentScope
+ */
+export class RagCrawlerContentScope implements GrpcMessage {
+  static id = 'ondewo.nlu.RagCrawlerContentScope';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new RagCrawlerContentScope();
+    RagCrawlerContentScope.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: RagCrawlerContentScope) {
+    _instance.includeSelectors = _instance.includeSelectors || [];
+    _instance.excludeSelectors = _instance.excludeSelectors || [];
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: RagCrawlerContentScope,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          (_instance.includeSelectors = _instance.includeSelectors || []).push(
+            _reader.readString()
+          );
+          break;
+        case 2:
+          (_instance.excludeSelectors = _instance.excludeSelectors || []).push(
+            _reader.readString()
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    RagCrawlerContentScope.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: RagCrawlerContentScope,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.includeSelectors && _instance.includeSelectors.length) {
+      _writer.writeRepeatedString(1, _instance.includeSelectors);
+    }
+    if (_instance.excludeSelectors && _instance.excludeSelectors.length) {
+      _writer.writeRepeatedString(2, _instance.excludeSelectors);
+    }
+  }
+
+  private _includeSelectors: string[];
+  private _excludeSelectors: string[];
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of RagCrawlerContentScope to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<RagCrawlerContentScope.AsObject>) {
+    _value = _value || {};
+    this.includeSelectors = (_value.includeSelectors || []).slice();
+    this.excludeSelectors = (_value.excludeSelectors || []).slice();
+    RagCrawlerContentScope.refineValues(this);
+  }
+  get includeSelectors(): string[] {
+    return this._includeSelectors;
+  }
+  set includeSelectors(value: string[]) {
+    this._includeSelectors = value;
+  }
+  get excludeSelectors(): string[] {
+    return this._excludeSelectors;
+  }
+  set excludeSelectors(value: string[]) {
+    this._excludeSelectors = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    RagCrawlerContentScope.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): RagCrawlerContentScope.AsObject {
+    return {
+      includeSelectors: (this.includeSelectors || []).slice(),
+      excludeSelectors: (this.excludeSelectors || []).slice()
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): RagCrawlerContentScope.AsProtobufJSON {
+    return {
+      includeSelectors: (this.includeSelectors || []).slice(),
+      excludeSelectors: (this.excludeSelectors || []).slice()
+    };
+  }
+}
+export module RagCrawlerContentScope {
+  /**
+   * Standard JavaScript object representation for RagCrawlerContentScope
+   */
+  export interface AsObject {
+    includeSelectors: string[];
+    excludeSelectors: string[];
+  }
+
+  /**
+   * Protobuf JSON representation for RagCrawlerContentScope
+   */
+  export interface AsProtobufJSON {
+    includeSelectors: string[];
+    excludeSelectors: string[];
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.RagCrawlerDensityPruning
+ */
+export class RagCrawlerDensityPruning implements GrpcMessage {
+  static id = 'ondewo.nlu.RagCrawlerDensityPruning';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new RagCrawlerDensityPruning();
+    RagCrawlerDensityPruning.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: RagCrawlerDensityPruning) {
+    _instance.isActive = _instance.isActive || false;
+    _instance.threshold = _instance.threshold || 0;
+    _instance.thresholdType = _instance.thresholdType || 0;
+    _instance.minWordThreshold = _instance.minWordThreshold || 0;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: RagCrawlerDensityPruning,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.isActive = _reader.readBool();
+          break;
+        case 2:
+          _instance.threshold = _reader.readFloat();
+          break;
+        case 3:
+          _instance.thresholdType = _reader.readEnum();
+          break;
+        case 4:
+          _instance.minWordThreshold = _reader.readInt32();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    RagCrawlerDensityPruning.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: RagCrawlerDensityPruning,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.isActive) {
+      _writer.writeBool(1, _instance.isActive);
+    }
+    if (_instance.threshold) {
+      _writer.writeFloat(2, _instance.threshold);
+    }
+    if (_instance.thresholdType) {
+      _writer.writeEnum(3, _instance.thresholdType);
+    }
+    if (_instance.minWordThreshold) {
+      _writer.writeInt32(4, _instance.minWordThreshold);
+    }
+  }
+
+  private _isActive: boolean;
+  private _threshold: number;
+  private _thresholdType: RagCrawlerPruningThresholdType;
+  private _minWordThreshold: number;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of RagCrawlerDensityPruning to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<RagCrawlerDensityPruning.AsObject>) {
+    _value = _value || {};
+    this.isActive = _value.isActive;
+    this.threshold = _value.threshold;
+    this.thresholdType = _value.thresholdType;
+    this.minWordThreshold = _value.minWordThreshold;
+    RagCrawlerDensityPruning.refineValues(this);
+  }
+  get isActive(): boolean {
+    return this._isActive;
+  }
+  set isActive(value: boolean) {
+    this._isActive = value;
+  }
+  get threshold(): number {
+    return this._threshold;
+  }
+  set threshold(value: number) {
+    this._threshold = value;
+  }
+  get thresholdType(): RagCrawlerPruningThresholdType {
+    return this._thresholdType;
+  }
+  set thresholdType(value: RagCrawlerPruningThresholdType) {
+    this._thresholdType = value;
+  }
+  get minWordThreshold(): number {
+    return this._minWordThreshold;
+  }
+  set minWordThreshold(value: number) {
+    this._minWordThreshold = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    RagCrawlerDensityPruning.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): RagCrawlerDensityPruning.AsObject {
+    return {
+      isActive: this.isActive,
+      threshold: this.threshold,
+      thresholdType: this.thresholdType,
+      minWordThreshold: this.minWordThreshold
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): RagCrawlerDensityPruning.AsProtobufJSON {
+    return {
+      isActive: this.isActive,
+      threshold: this.threshold,
+      thresholdType:
+        RagCrawlerPruningThresholdType[
+          this.thresholdType === null || this.thresholdType === undefined
+            ? 0
+            : this.thresholdType
+        ],
+      minWordThreshold: this.minWordThreshold
+    };
+  }
+}
+export module RagCrawlerDensityPruning {
+  /**
+   * Standard JavaScript object representation for RagCrawlerDensityPruning
+   */
+  export interface AsObject {
+    isActive: boolean;
+    threshold: number;
+    thresholdType: RagCrawlerPruningThresholdType;
+    minWordThreshold: number;
+  }
+
+  /**
+   * Protobuf JSON representation for RagCrawlerDensityPruning
+   */
+  export interface AsProtobufJSON {
+    isActive: boolean;
+    threshold: number;
+    thresholdType: string;
+    minWordThreshold: number;
   }
 }
 
@@ -12510,6 +12998,167 @@ export module RagCrawlerRetryConfig {
   export interface AsProtobufJSON {
     pageLoadTimeoutSeconds: number;
     retryMaxAttempts: number;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.RagCrawlerStatusFilter
+ */
+export class RagCrawlerStatusFilter implements GrpcMessage {
+  static id = 'ondewo.nlu.RagCrawlerStatusFilter';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new RagCrawlerStatusFilter();
+    RagCrawlerStatusFilter.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: RagCrawlerStatusFilter) {
+    _instance.isActive = _instance.isActive || false;
+    _instance.acceptedStatusCodes = _instance.acceptedStatusCodes || [];
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: RagCrawlerStatusFilter,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.isActive = _reader.readBool();
+          break;
+        case 2:
+          _reader.readPackableInt32Into(
+            (_instance.acceptedStatusCodes =
+              _instance.acceptedStatusCodes || [])
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    RagCrawlerStatusFilter.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: RagCrawlerStatusFilter,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.isActive) {
+      _writer.writeBool(1, _instance.isActive);
+    }
+    if (_instance.acceptedStatusCodes && _instance.acceptedStatusCodes.length) {
+      _writer.writePackedInt32(2, _instance.acceptedStatusCodes);
+    }
+  }
+
+  private _isActive: boolean;
+  private _acceptedStatusCodes: number[];
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of RagCrawlerStatusFilter to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<RagCrawlerStatusFilter.AsObject>) {
+    _value = _value || {};
+    this.isActive = _value.isActive;
+    this.acceptedStatusCodes = (_value.acceptedStatusCodes || []).slice();
+    RagCrawlerStatusFilter.refineValues(this);
+  }
+  get isActive(): boolean {
+    return this._isActive;
+  }
+  set isActive(value: boolean) {
+    this._isActive = value;
+  }
+  get acceptedStatusCodes(): number[] {
+    return this._acceptedStatusCodes;
+  }
+  set acceptedStatusCodes(value: number[]) {
+    this._acceptedStatusCodes = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    RagCrawlerStatusFilter.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): RagCrawlerStatusFilter.AsObject {
+    return {
+      isActive: this.isActive,
+      acceptedStatusCodes: (this.acceptedStatusCodes || []).slice()
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): RagCrawlerStatusFilter.AsProtobufJSON {
+    return {
+      isActive: this.isActive,
+      acceptedStatusCodes: (this.acceptedStatusCodes || []).slice()
+    };
+  }
+}
+export module RagCrawlerStatusFilter {
+  /**
+   * Standard JavaScript object representation for RagCrawlerStatusFilter
+   */
+  export interface AsObject {
+    isActive: boolean;
+    acceptedStatusCodes: number[];
+  }
+
+  /**
+   * Protobuf JSON representation for RagCrawlerStatusFilter
+   */
+  export interface AsProtobufJSON {
+    isActive: boolean;
+    acceptedStatusCodes: number[];
   }
 }
 
@@ -13667,7 +14316,7 @@ export class RagListCrawlerRunsRequest implements GrpcMessage {
   private _pageToken: string;
   private _status: ondewoNlu007.OperationMetadata.Status;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -13720,10 +14369,10 @@ export class RagListCrawlerRunsRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
 
@@ -13779,7 +14428,7 @@ export class RagListCrawlerRunsRequest implements GrpcMessage {
         ],
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -13798,7 +14447,7 @@ export module RagListCrawlerRunsRequest {
     pageToken: string;
     status: ondewoNlu007.OperationMetadata.Status;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
   }
 
   /**
@@ -14812,7 +15461,7 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
   private _urlQuery: string;
   private _fieldMask?: googleProtobuf000.FieldMask;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -14874,10 +15523,10 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
 
@@ -14932,7 +15581,7 @@ export class RagGetCrawlerResultsRequest implements GrpcMessage {
       fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -14952,7 +15601,7 @@ export module RagGetCrawlerResultsRequest {
     urlQuery: string;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
   }
 
   /**
@@ -15965,7 +16614,7 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
   private _pageToken: string;
   private _fieldMask?: googleProtobuf000.FieldMask;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -16029,10 +16678,10 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
 
@@ -16087,7 +16736,7 @@ export class RagGetCrawlerAttachedDatasetsRequest implements GrpcMessage {
       fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -16107,7 +16756,7 @@ export module RagGetCrawlerAttachedDatasetsRequest {
     pageToken: string;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
   }
 
   /**
@@ -16483,14 +17132,14 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
   private _operationName: string;
   private _pageToken: string;
   private _pageSize: number;
-  private _levelFilters: ondewoNlu010.LogSeverity[];
+  private _levelFilters: ondewoNlu008.LogSeverity[];
   private _phaseFilter: string;
   private _searchQuery: string;
   private _startTime?: googleProtobuf002.Timestamp;
   private _endTime?: googleProtobuf002.Timestamp;
   private _sourceUrlFilter: string;
   private _orderby: string;
-  private _sortingMode: ondewoNlu010.SortingMode;
+  private _sortingMode: ondewoNlu008.SortingMode;
   private _fieldMask?: googleProtobuf000.FieldMask;
 
   /**
@@ -16551,10 +17200,10 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
   set pageSize(value: number) {
     this._pageSize = value;
   }
-  get levelFilters(): ondewoNlu010.LogSeverity[] {
+  get levelFilters(): ondewoNlu008.LogSeverity[] {
     return this._levelFilters;
   }
-  set levelFilters(value: ondewoNlu010.LogSeverity[]) {
+  set levelFilters(value: ondewoNlu008.LogSeverity[]) {
     this._levelFilters = value;
   }
   get phaseFilter(): string {
@@ -16593,10 +17242,10 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
   set orderby(value: string) {
     this._orderby = value;
   }
-  get sortingMode(): ondewoNlu010.SortingMode {
+  get sortingMode(): ondewoNlu008.SortingMode {
     return this._sortingMode;
   }
-  set sortingMode(value: ondewoNlu010.SortingMode) {
+  set sortingMode(value: ondewoNlu008.SortingMode) {
     this._sortingMode = value;
   }
   get fieldMask(): googleProtobuf000.FieldMask | undefined {
@@ -16661,7 +17310,7 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
       pageToken: this.pageToken,
       pageSize: this.pageSize,
       levelFilters: (this.levelFilters || []).map(
-        v => ondewoNlu010.LogSeverity[v]
+        v => ondewoNlu008.LogSeverity[v]
       ),
       phaseFilter: this.phaseFilter,
       searchQuery: this.searchQuery,
@@ -16670,7 +17319,7 @@ export class RagGetCrawlerRunLogsRequest implements GrpcMessage {
       sourceUrlFilter: this.sourceUrlFilter,
       orderby: this.orderby,
       sortingMode:
-        ondewoNlu010.SortingMode[
+        ondewoNlu008.SortingMode[
           this.sortingMode === null || this.sortingMode === undefined
             ? 0
             : this.sortingMode
@@ -16689,14 +17338,14 @@ export module RagGetCrawlerRunLogsRequest {
     operationName: string;
     pageToken: string;
     pageSize: number;
-    levelFilters: ondewoNlu010.LogSeverity[];
+    levelFilters: ondewoNlu008.LogSeverity[];
     phaseFilter: string;
     searchQuery: string;
     startTime?: googleProtobuf002.Timestamp.AsObject;
     endTime?: googleProtobuf002.Timestamp.AsObject;
     sourceUrlFilter: string;
     orderby: string;
-    sortingMode: ondewoNlu010.SortingMode;
+    sortingMode: ondewoNlu008.SortingMode;
     fieldMask?: googleProtobuf000.FieldMask.AsObject;
   }
 
@@ -16776,10 +17425,10 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
           _instance.status = _reader.readEnum();
           break;
         case 4:
-          const messageInitializer4 = new ondewoNlu010.LogEntry();
+          const messageInitializer4 = new ondewoNlu008.LogEntry();
           _reader.readMessage(
             messageInitializer4,
-            ondewoNlu010.LogEntry.deserializeBinaryFromReader
+            ondewoNlu008.LogEntry.deserializeBinaryFromReader
           );
           (_instance.entries = _instance.entries || []).push(
             messageInitializer4
@@ -16821,7 +17470,7 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
       _writer.writeRepeatedMessage(
         4,
         _instance.entries as any,
-        ondewoNlu010.LogEntry.serializeBinaryToWriter
+        ondewoNlu008.LogEntry.serializeBinaryToWriter
       );
     }
     if (_instance.nextPageToken) {
@@ -16835,7 +17484,7 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
   private _operationName: string;
   private _crawlerName: string;
   private _status: ondewoNlu007.OperationMetadata.Status;
-  private _entries?: ondewoNlu010.LogEntry[];
+  private _entries?: ondewoNlu008.LogEntry[];
   private _nextPageToken: string;
   private _totalLogEntries: number;
 
@@ -16851,7 +17500,7 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
     this.crawlerName = _value.crawlerName;
     this.status = _value.status;
     this.entries = (_value.entries || []).map(
-      m => new ondewoNlu010.LogEntry(m)
+      m => new ondewoNlu008.LogEntry(m)
     );
     this.nextPageToken = _value.nextPageToken;
     this.totalLogEntries = _value.totalLogEntries;
@@ -16875,10 +17524,10 @@ export class RagGetCrawlerRunLogsResponse implements GrpcMessage {
   set status(value: ondewoNlu007.OperationMetadata.Status) {
     this._status = value;
   }
-  get entries(): ondewoNlu010.LogEntry[] | undefined {
+  get entries(): ondewoNlu008.LogEntry[] | undefined {
     return this._entries;
   }
-  set entries(value: ondewoNlu010.LogEntry[] | undefined) {
+  set entries(value: ondewoNlu008.LogEntry[] | undefined) {
     this._entries = value;
   }
   get nextPageToken(): string {
@@ -16955,7 +17604,7 @@ export module RagGetCrawlerRunLogsResponse {
     operationName: string;
     crawlerName: string;
     status: ondewoNlu007.OperationMetadata.Status;
-    entries?: ondewoNlu010.LogEntry.AsObject[];
+    entries?: ondewoNlu008.LogEntry.AsObject[];
     nextPageToken: string;
     totalLogEntries: number;
   }
@@ -16967,7 +17616,7 @@ export module RagGetCrawlerRunLogsResponse {
     operationName: string;
     crawlerName: string;
     status: string;
-    entries: ondewoNlu010.LogEntry.AsProtobufJSON[] | null;
+    entries: ondewoNlu008.LogEntry.AsProtobufJSON[] | null;
     nextPageToken: string;
     totalLogEntries: number;
   }

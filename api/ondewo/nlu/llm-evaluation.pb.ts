@@ -18,8 +18,9 @@ import * as googleProtobuf003 from '@ngx-grpc/well-known-types';
 import * as googleRpc004 from '../../google/rpc/status.pb';
 import * as googleProtobuf005 from '@ngx-grpc/well-known-types';
 import * as ondewoNlu006 from '../../ondewo/nlu/operation-metadata.pb';
-import * as googleProtobuf007 from '@ngx-grpc/well-known-types';
-import * as ondewoNlu008 from '../../ondewo/nlu/operations.pb';
+import * as ondewoNlu007 from '../../ondewo/nlu/common.pb';
+import * as googleProtobuf008 from '@ngx-grpc/well-known-types';
+import * as ondewoNlu009 from '../../ondewo/nlu/operations.pb';
 export enum LlmEvaluationExperimentStatus {
   LLM_EVALUATION_EXPERIMENT_STATUS_UNSPECIFIED = 0,
   LLM_EVALUATION_EXPERIMENT_STATUS_PENDING = 1,
@@ -565,24 +566,24 @@ export class LlmEvaluationExample implements GrpcMessage {
           _instance.description = _reader.readString();
           break;
         case 4:
-          _instance.inputs = new googleProtobuf007.Struct();
+          _instance.inputs = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.inputs,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 5:
-          _instance.expectedOutputs = new googleProtobuf007.Struct();
+          _instance.expectedOutputs = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.expectedOutputs,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 6:
-          _instance.metadata = new googleProtobuf007.Struct();
+          _instance.metadata = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.metadata,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 7:
@@ -644,21 +645,21 @@ export class LlmEvaluationExample implements GrpcMessage {
       _writer.writeMessage(
         4,
         _instance.inputs as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.expectedOutputs) {
       _writer.writeMessage(
         5,
         _instance.expectedOutputs as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.metadata) {
       _writer.writeMessage(
         6,
         _instance.metadata as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.llmEvaluationDatasetName) {
@@ -695,9 +696,9 @@ export class LlmEvaluationExample implements GrpcMessage {
   private _name: string;
   private _displayName: string;
   private _description: string;
-  private _inputs?: googleProtobuf007.Struct;
-  private _expectedOutputs?: googleProtobuf007.Struct;
-  private _metadata?: googleProtobuf007.Struct;
+  private _inputs?: googleProtobuf008.Struct;
+  private _expectedOutputs?: googleProtobuf008.Struct;
+  private _metadata?: googleProtobuf008.Struct;
   private _llmEvaluationDatasetName: string;
   private _createdAt?: googleProtobuf005.Timestamp;
   private _createdBy: string;
@@ -716,13 +717,13 @@ export class LlmEvaluationExample implements GrpcMessage {
     this.displayName = _value.displayName;
     this.description = _value.description;
     this.inputs = _value.inputs
-      ? new googleProtobuf007.Struct(_value.inputs)
+      ? new googleProtobuf008.Struct(_value.inputs)
       : undefined;
     this.expectedOutputs = _value.expectedOutputs
-      ? new googleProtobuf007.Struct(_value.expectedOutputs)
+      ? new googleProtobuf008.Struct(_value.expectedOutputs)
       : undefined;
     this.metadata = _value.metadata
-      ? new googleProtobuf007.Struct(_value.metadata)
+      ? new googleProtobuf008.Struct(_value.metadata)
       : undefined;
     this.llmEvaluationDatasetName = _value.llmEvaluationDatasetName;
     this.createdAt = _value.createdAt
@@ -755,22 +756,22 @@ export class LlmEvaluationExample implements GrpcMessage {
   set description(value: string) {
     this._description = value;
   }
-  get inputs(): googleProtobuf007.Struct | undefined {
+  get inputs(): googleProtobuf008.Struct | undefined {
     return this._inputs;
   }
-  set inputs(value: googleProtobuf007.Struct | undefined) {
+  set inputs(value: googleProtobuf008.Struct | undefined) {
     this._inputs = value;
   }
-  get expectedOutputs(): googleProtobuf007.Struct | undefined {
+  get expectedOutputs(): googleProtobuf008.Struct | undefined {
     return this._expectedOutputs;
   }
-  set expectedOutputs(value: googleProtobuf007.Struct | undefined) {
+  set expectedOutputs(value: googleProtobuf008.Struct | undefined) {
     this._expectedOutputs = value;
   }
-  get metadata(): googleProtobuf007.Struct | undefined {
+  get metadata(): googleProtobuf008.Struct | undefined {
     return this._metadata;
   }
-  set metadata(value: googleProtobuf007.Struct | undefined) {
+  set metadata(value: googleProtobuf008.Struct | undefined) {
     this._metadata = value;
   }
   get llmEvaluationDatasetName(): string {
@@ -894,9 +895,9 @@ export module LlmEvaluationExample {
     name: string;
     displayName: string;
     description: string;
-    inputs?: googleProtobuf007.Struct.AsObject;
-    expectedOutputs?: googleProtobuf007.Struct.AsObject;
-    metadata?: googleProtobuf007.Struct.AsObject;
+    inputs?: googleProtobuf008.Struct.AsObject;
+    expectedOutputs?: googleProtobuf008.Struct.AsObject;
+    metadata?: googleProtobuf008.Struct.AsObject;
     llmEvaluationDatasetName: string;
     createdAt?: googleProtobuf005.Timestamp.AsObject;
     createdBy: string;
@@ -913,9 +914,9 @@ export module LlmEvaluationExample {
     name: string;
     displayName: string;
     description: string;
-    inputs: googleProtobuf007.Struct.AsProtobufJSON | null;
-    expectedOutputs: googleProtobuf007.Struct.AsProtobufJSON | null;
-    metadata: googleProtobuf007.Struct.AsProtobufJSON | null;
+    inputs: googleProtobuf008.Struct.AsProtobufJSON | null;
+    expectedOutputs: googleProtobuf008.Struct.AsProtobufJSON | null;
+    metadata: googleProtobuf008.Struct.AsProtobufJSON | null;
     llmEvaluationDatasetName: string;
     createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
     createdBy: string;
@@ -1022,10 +1023,10 @@ export class LlmEvaluationExperiment implements GrpcMessage {
           _instance.modelName = _reader.readString();
           break;
         case 8:
-          _instance.config = new googleProtobuf007.Struct();
+          _instance.config = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.config,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 9:
@@ -1156,7 +1157,7 @@ export class LlmEvaluationExperiment implements GrpcMessage {
       _writer.writeMessage(
         8,
         _instance.config as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (
@@ -1251,7 +1252,7 @@ export class LlmEvaluationExperiment implements GrpcMessage {
   private _gitSha: string;
   private _promptVersion: string;
   private _modelName: string;
-  private _config?: googleProtobuf007.Struct;
+  private _config?: googleProtobuf008.Struct;
   private _llmEvaluationEvaluatorRuns?: LlmEvaluationEvaluatorRun[];
   private _startedAt?: googleProtobuf005.Timestamp;
   private _finishedAt?: googleProtobuf005.Timestamp;
@@ -1287,7 +1288,7 @@ export class LlmEvaluationExperiment implements GrpcMessage {
     this.promptVersion = _value.promptVersion;
     this.modelName = _value.modelName;
     this.config = _value.config
-      ? new googleProtobuf007.Struct(_value.config)
+      ? new googleProtobuf008.Struct(_value.config)
       : undefined;
     this.llmEvaluationEvaluatorRuns = (
       _value.llmEvaluationEvaluatorRuns || []
@@ -1365,10 +1366,10 @@ export class LlmEvaluationExperiment implements GrpcMessage {
   set modelName(value: string) {
     this._modelName = value;
   }
-  get config(): googleProtobuf007.Struct | undefined {
+  get config(): googleProtobuf008.Struct | undefined {
     return this._config;
   }
-  set config(value: googleProtobuf007.Struct | undefined) {
+  set config(value: googleProtobuf008.Struct | undefined) {
     this._config = value;
   }
   get llmEvaluationEvaluatorRuns(): LlmEvaluationEvaluatorRun[] | undefined {
@@ -1622,7 +1623,7 @@ export module LlmEvaluationExperiment {
     gitSha: string;
     promptVersion: string;
     modelName: string;
-    config?: googleProtobuf007.Struct.AsObject;
+    config?: googleProtobuf008.Struct.AsObject;
     llmEvaluationEvaluatorRuns?: LlmEvaluationEvaluatorRun.AsObject[];
     startedAt?: googleProtobuf005.Timestamp.AsObject;
     finishedAt?: googleProtobuf005.Timestamp.AsObject;
@@ -1656,7 +1657,7 @@ export module LlmEvaluationExperiment {
     gitSha: string;
     promptVersion: string;
     modelName: string;
-    config: googleProtobuf007.Struct.AsProtobufJSON | null;
+    config: googleProtobuf008.Struct.AsProtobufJSON | null;
     llmEvaluationEvaluatorRuns:
       | LlmEvaluationEvaluatorRun.AsProtobufJSON[]
       | null;
@@ -1821,10 +1822,10 @@ export class LlmEvaluationEvaluatorRun implements GrpcMessage {
           _instance.repetitionIndex = _reader.readInt32();
           break;
         case 17:
-          _instance.actualOutput = new googleProtobuf007.Struct();
+          _instance.actualOutput = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.actualOutput,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         default:
@@ -1926,7 +1927,7 @@ export class LlmEvaluationEvaluatorRun implements GrpcMessage {
       _writer.writeMessage(
         17,
         _instance.actualOutput as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
   }
@@ -1947,7 +1948,7 @@ export class LlmEvaluationEvaluatorRun implements GrpcMessage {
   private _modifiedBy: string;
   private _llmEvaluationTurnResults?: LlmEvaluationTurnResult[];
   private _repetitionIndex: number;
-  private _actualOutput?: googleProtobuf007.Struct;
+  private _actualOutput?: googleProtobuf008.Struct;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -1984,7 +1985,7 @@ export class LlmEvaluationEvaluatorRun implements GrpcMessage {
     );
     this.repetitionIndex = _value.repetitionIndex;
     this.actualOutput = _value.actualOutput
-      ? new googleProtobuf007.Struct(_value.actualOutput)
+      ? new googleProtobuf008.Struct(_value.actualOutput)
       : undefined;
     LlmEvaluationEvaluatorRun.refineValues(this);
   }
@@ -2084,10 +2085,10 @@ export class LlmEvaluationEvaluatorRun implements GrpcMessage {
   set repetitionIndex(value: number) {
     this._repetitionIndex = value;
   }
-  get actualOutput(): googleProtobuf007.Struct | undefined {
+  get actualOutput(): googleProtobuf008.Struct | undefined {
     return this._actualOutput;
   }
-  set actualOutput(value: googleProtobuf007.Struct | undefined) {
+  set actualOutput(value: googleProtobuf008.Struct | undefined) {
     this._actualOutput = value;
   }
 
@@ -2204,7 +2205,7 @@ export module LlmEvaluationEvaluatorRun {
     modifiedBy: string;
     llmEvaluationTurnResults?: LlmEvaluationTurnResult.AsObject[];
     repetitionIndex: number;
-    actualOutput?: googleProtobuf007.Struct.AsObject;
+    actualOutput?: googleProtobuf008.Struct.AsObject;
   }
 
   /**
@@ -2227,7 +2228,7 @@ export module LlmEvaluationEvaluatorRun {
     modifiedBy: string;
     llmEvaluationTurnResults: LlmEvaluationTurnResult.AsProtobufJSON[] | null;
     repetitionIndex: number;
-    actualOutput: googleProtobuf007.Struct.AsProtobufJSON | null;
+    actualOutput: googleProtobuf008.Struct.AsProtobufJSON | null;
   }
 }
 
@@ -2317,10 +2318,10 @@ export class LlmEvaluationFeedback implements GrpcMessage {
           );
           break;
         case 9:
-          _instance.raw = new googleProtobuf007.Struct();
+          _instance.raw = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.raw,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 10:
@@ -2394,7 +2395,7 @@ export class LlmEvaluationFeedback implements GrpcMessage {
       _writer.writeMessage(
         9,
         _instance.raw as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.llmEvaluationEvaluatorRunName) {
@@ -2429,7 +2430,7 @@ export class LlmEvaluationFeedback implements GrpcMessage {
   private _comment: string;
   private _annotatorUserId: string;
   private _createdAt?: googleProtobuf005.Timestamp;
-  private _raw?: googleProtobuf007.Struct;
+  private _raw?: googleProtobuf008.Struct;
   private _llmEvaluationEvaluatorRunName: string;
   private _llmEvaluationExperimentName: string;
   private _llmEvaluationExampleName: string;
@@ -2454,7 +2455,7 @@ export class LlmEvaluationFeedback implements GrpcMessage {
       ? new googleProtobuf005.Timestamp(_value.createdAt)
       : undefined;
     this.raw = _value.raw
-      ? new googleProtobuf007.Struct(_value.raw)
+      ? new googleProtobuf008.Struct(_value.raw)
       : undefined;
     this.llmEvaluationEvaluatorRunName = _value.llmEvaluationEvaluatorRunName;
     this.llmEvaluationExperimentName = _value.llmEvaluationExperimentName;
@@ -2514,10 +2515,10 @@ export class LlmEvaluationFeedback implements GrpcMessage {
   set createdAt(value: googleProtobuf005.Timestamp | undefined) {
     this._createdAt = value;
   }
-  get raw(): googleProtobuf007.Struct | undefined {
+  get raw(): googleProtobuf008.Struct | undefined {
     return this._raw;
   }
-  set raw(value: googleProtobuf007.Struct | undefined) {
+  set raw(value: googleProtobuf008.Struct | undefined) {
     this._raw = value;
   }
   get llmEvaluationEvaluatorRunName(): string {
@@ -2640,7 +2641,7 @@ export module LlmEvaluationFeedback {
     comment: string;
     annotatorUserId: string;
     createdAt?: googleProtobuf005.Timestamp.AsObject;
-    raw?: googleProtobuf007.Struct.AsObject;
+    raw?: googleProtobuf008.Struct.AsObject;
     llmEvaluationEvaluatorRunName: string;
     llmEvaluationExperimentName: string;
     llmEvaluationExampleName: string;
@@ -2661,7 +2662,7 @@ export module LlmEvaluationFeedback {
     comment: string;
     annotatorUserId: string;
     createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
-    raw: googleProtobuf007.Struct.AsProtobufJSON | null;
+    raw: googleProtobuf008.Struct.AsProtobufJSON | null;
     llmEvaluationEvaluatorRunName: string;
     llmEvaluationExperimentName: string;
     llmEvaluationExampleName: string;
@@ -2750,10 +2751,10 @@ export class LlmEvaluationComparison implements GrpcMessage {
           );
           break;
         case 6:
-          _instance.aggregate = new googleProtobuf007.Struct();
+          _instance.aggregate = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.aggregate,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 7:
@@ -2822,7 +2823,7 @@ export class LlmEvaluationComparison implements GrpcMessage {
       _writer.writeMessage(
         6,
         _instance.aggregate as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.createdAt) {
@@ -2852,7 +2853,7 @@ export class LlmEvaluationComparison implements GrpcMessage {
   private _llmEvaluationExperimentNames: string[];
   private _llmEvaluationBaselineExperimentName: string;
   private _llmEvaluationPairwiseResults?: LlmEvaluationPairwiseResult[];
-  private _aggregate?: googleProtobuf007.Struct;
+  private _aggregate?: googleProtobuf008.Struct;
   private _createdAt?: googleProtobuf005.Timestamp;
   private _modifiedAt?: googleProtobuf005.Timestamp;
   private _createdBy: string;
@@ -2875,7 +2876,7 @@ export class LlmEvaluationComparison implements GrpcMessage {
       _value.llmEvaluationPairwiseResults || []
     ).map(m => new LlmEvaluationPairwiseResult(m));
     this.aggregate = _value.aggregate
-      ? new googleProtobuf007.Struct(_value.aggregate)
+      ? new googleProtobuf008.Struct(_value.aggregate)
       : undefined;
     this.createdAt = _value.createdAt
       ? new googleProtobuf005.Timestamp(_value.createdAt)
@@ -2921,10 +2922,10 @@ export class LlmEvaluationComparison implements GrpcMessage {
   ) {
     this._llmEvaluationPairwiseResults = value;
   }
-  get aggregate(): googleProtobuf007.Struct | undefined {
+  get aggregate(): googleProtobuf008.Struct | undefined {
     return this._aggregate;
   }
-  set aggregate(value: googleProtobuf007.Struct | undefined) {
+  set aggregate(value: googleProtobuf008.Struct | undefined) {
     this._aggregate = value;
   }
   get createdAt(): googleProtobuf005.Timestamp | undefined {
@@ -3032,7 +3033,7 @@ export module LlmEvaluationComparison {
     llmEvaluationExperimentNames: string[];
     llmEvaluationBaselineExperimentName: string;
     llmEvaluationPairwiseResults?: LlmEvaluationPairwiseResult.AsObject[];
-    aggregate?: googleProtobuf007.Struct.AsObject;
+    aggregate?: googleProtobuf008.Struct.AsObject;
     createdAt?: googleProtobuf005.Timestamp.AsObject;
     modifiedAt?: googleProtobuf005.Timestamp.AsObject;
     createdBy: string;
@@ -3050,7 +3051,7 @@ export module LlmEvaluationComparison {
     llmEvaluationPairwiseResults:
       | LlmEvaluationPairwiseResult.AsProtobufJSON[]
       | null;
-    aggregate: googleProtobuf007.Struct.AsProtobufJSON | null;
+    aggregate: googleProtobuf008.Struct.AsProtobufJSON | null;
     createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
     modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
     createdBy: string;
@@ -6651,10 +6652,10 @@ export class RunLlmEvaluationExperimentRequest implements GrpcMessage {
           _instance.modelName = _reader.readString();
           break;
         case 7:
-          _instance.config = new googleProtobuf007.Struct();
+          _instance.config = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.config,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 8:
@@ -6681,10 +6682,10 @@ export class RunLlmEvaluationExperimentRequest implements GrpcMessage {
           _instance.llmEvaluationExperimentKind = _reader.readEnum();
           break;
         case 14:
-          _instance.evaluatorConfigs = new googleProtobuf007.Struct();
+          _instance.evaluatorConfigs = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.evaluatorConfigs,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         default:
@@ -6726,7 +6727,7 @@ export class RunLlmEvaluationExperimentRequest implements GrpcMessage {
       _writer.writeMessage(
         7,
         _instance.config as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (
@@ -6754,7 +6755,7 @@ export class RunLlmEvaluationExperimentRequest implements GrpcMessage {
       _writer.writeMessage(
         14,
         _instance.evaluatorConfigs as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
   }
@@ -6765,14 +6766,14 @@ export class RunLlmEvaluationExperimentRequest implements GrpcMessage {
   private _gitSha: string;
   private _promptVersion: string;
   private _modelName: string;
-  private _config?: googleProtobuf007.Struct;
+  private _config?: googleProtobuf008.Struct;
   private _llmEvaluationEvaluatorNames: string[];
   private _llmEvaluationBaselineExperimentName: string;
   private _languageCode: string;
   private _ccaiServiceNames: string[];
   private _repetitions: number;
   private _llmEvaluationExperimentKind: LlmEvaluationExperimentKind;
-  private _evaluatorConfigs?: googleProtobuf007.Struct;
+  private _evaluatorConfigs?: googleProtobuf008.Struct;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -6789,7 +6790,7 @@ export class RunLlmEvaluationExperimentRequest implements GrpcMessage {
     this.promptVersion = _value.promptVersion;
     this.modelName = _value.modelName;
     this.config = _value.config
-      ? new googleProtobuf007.Struct(_value.config)
+      ? new googleProtobuf008.Struct(_value.config)
       : undefined;
     this.llmEvaluationEvaluatorNames = (
       _value.llmEvaluationEvaluatorNames || []
@@ -6801,7 +6802,7 @@ export class RunLlmEvaluationExperimentRequest implements GrpcMessage {
     this.repetitions = _value.repetitions;
     this.llmEvaluationExperimentKind = _value.llmEvaluationExperimentKind;
     this.evaluatorConfigs = _value.evaluatorConfigs
-      ? new googleProtobuf007.Struct(_value.evaluatorConfigs)
+      ? new googleProtobuf008.Struct(_value.evaluatorConfigs)
       : undefined;
     RunLlmEvaluationExperimentRequest.refineValues(this);
   }
@@ -6841,10 +6842,10 @@ export class RunLlmEvaluationExperimentRequest implements GrpcMessage {
   set modelName(value: string) {
     this._modelName = value;
   }
-  get config(): googleProtobuf007.Struct | undefined {
+  get config(): googleProtobuf008.Struct | undefined {
     return this._config;
   }
-  set config(value: googleProtobuf007.Struct | undefined) {
+  set config(value: googleProtobuf008.Struct | undefined) {
     this._config = value;
   }
   get llmEvaluationEvaluatorNames(): string[] {
@@ -6883,10 +6884,10 @@ export class RunLlmEvaluationExperimentRequest implements GrpcMessage {
   set llmEvaluationExperimentKind(value: LlmEvaluationExperimentKind) {
     this._llmEvaluationExperimentKind = value;
   }
-  get evaluatorConfigs(): googleProtobuf007.Struct | undefined {
+  get evaluatorConfigs(): googleProtobuf008.Struct | undefined {
     return this._evaluatorConfigs;
   }
-  set evaluatorConfigs(value: googleProtobuf007.Struct | undefined) {
+  set evaluatorConfigs(value: googleProtobuf008.Struct | undefined) {
     this._evaluatorConfigs = value;
   }
 
@@ -6983,14 +6984,14 @@ export module RunLlmEvaluationExperimentRequest {
     gitSha: string;
     promptVersion: string;
     modelName: string;
-    config?: googleProtobuf007.Struct.AsObject;
+    config?: googleProtobuf008.Struct.AsObject;
     llmEvaluationEvaluatorNames: string[];
     llmEvaluationBaselineExperimentName: string;
     languageCode: string;
     ccaiServiceNames: string[];
     repetitions: number;
     llmEvaluationExperimentKind: LlmEvaluationExperimentKind;
-    evaluatorConfigs?: googleProtobuf007.Struct.AsObject;
+    evaluatorConfigs?: googleProtobuf008.Struct.AsObject;
   }
 
   /**
@@ -7003,14 +7004,14 @@ export module RunLlmEvaluationExperimentRequest {
     gitSha: string;
     promptVersion: string;
     modelName: string;
-    config: googleProtobuf007.Struct.AsProtobufJSON | null;
+    config: googleProtobuf008.Struct.AsProtobufJSON | null;
     llmEvaluationEvaluatorNames: string[];
     llmEvaluationBaselineExperimentName: string;
     languageCode: string;
     ccaiServiceNames: string[];
     repetitions: number;
     llmEvaluationExperimentKind: string;
-    evaluatorConfigs: googleProtobuf007.Struct.AsProtobufJSON | null;
+    evaluatorConfigs: googleProtobuf008.Struct.AsProtobufJSON | null;
   }
 }
 
@@ -10089,24 +10090,24 @@ export class LlmEvaluationTurnResult implements GrpcMessage {
           _instance.turnIndex = _reader.readInt32();
           break;
         case 2:
-          _instance.userInput = new googleProtobuf007.Struct();
+          _instance.userInput = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.userInput,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 3:
-          _instance.expectedOutput = new googleProtobuf007.Struct();
+          _instance.expectedOutput = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.expectedOutput,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 4:
-          _instance.actualOutput = new googleProtobuf007.Struct();
+          _instance.actualOutput = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.actualOutput,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 5:
@@ -10151,21 +10152,21 @@ export class LlmEvaluationTurnResult implements GrpcMessage {
       _writer.writeMessage(
         2,
         _instance.userInput as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.expectedOutput) {
       _writer.writeMessage(
         3,
         _instance.expectedOutput as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.actualOutput) {
       _writer.writeMessage(
         4,
         _instance.actualOutput as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.llmTelemetryRunId) {
@@ -10190,9 +10191,9 @@ export class LlmEvaluationTurnResult implements GrpcMessage {
   }
 
   private _turnIndex: number;
-  private _userInput?: googleProtobuf007.Struct;
-  private _expectedOutput?: googleProtobuf007.Struct;
-  private _actualOutput?: googleProtobuf007.Struct;
+  private _userInput?: googleProtobuf008.Struct;
+  private _expectedOutput?: googleProtobuf008.Struct;
+  private _actualOutput?: googleProtobuf008.Struct;
   private _llmTelemetryRunId: string;
   private _sessionStepName: string;
   private _llmEvaluationFeedbacks?: LlmEvaluationFeedback[];
@@ -10206,13 +10207,13 @@ export class LlmEvaluationTurnResult implements GrpcMessage {
     _value = _value || {};
     this.turnIndex = _value.turnIndex;
     this.userInput = _value.userInput
-      ? new googleProtobuf007.Struct(_value.userInput)
+      ? new googleProtobuf008.Struct(_value.userInput)
       : undefined;
     this.expectedOutput = _value.expectedOutput
-      ? new googleProtobuf007.Struct(_value.expectedOutput)
+      ? new googleProtobuf008.Struct(_value.expectedOutput)
       : undefined;
     this.actualOutput = _value.actualOutput
-      ? new googleProtobuf007.Struct(_value.actualOutput)
+      ? new googleProtobuf008.Struct(_value.actualOutput)
       : undefined;
     this.llmTelemetryRunId = _value.llmTelemetryRunId;
     this.sessionStepName = _value.sessionStepName;
@@ -10228,22 +10229,22 @@ export class LlmEvaluationTurnResult implements GrpcMessage {
   set turnIndex(value: number) {
     this._turnIndex = value;
   }
-  get userInput(): googleProtobuf007.Struct | undefined {
+  get userInput(): googleProtobuf008.Struct | undefined {
     return this._userInput;
   }
-  set userInput(value: googleProtobuf007.Struct | undefined) {
+  set userInput(value: googleProtobuf008.Struct | undefined) {
     this._userInput = value;
   }
-  get expectedOutput(): googleProtobuf007.Struct | undefined {
+  get expectedOutput(): googleProtobuf008.Struct | undefined {
     return this._expectedOutput;
   }
-  set expectedOutput(value: googleProtobuf007.Struct | undefined) {
+  set expectedOutput(value: googleProtobuf008.Struct | undefined) {
     this._expectedOutput = value;
   }
-  get actualOutput(): googleProtobuf007.Struct | undefined {
+  get actualOutput(): googleProtobuf008.Struct | undefined {
     return this._actualOutput;
   }
-  set actualOutput(value: googleProtobuf007.Struct | undefined) {
+  set actualOutput(value: googleProtobuf008.Struct | undefined) {
     this._actualOutput = value;
   }
   get llmTelemetryRunId(): string {
@@ -10343,9 +10344,9 @@ export module LlmEvaluationTurnResult {
    */
   export interface AsObject {
     turnIndex: number;
-    userInput?: googleProtobuf007.Struct.AsObject;
-    expectedOutput?: googleProtobuf007.Struct.AsObject;
-    actualOutput?: googleProtobuf007.Struct.AsObject;
+    userInput?: googleProtobuf008.Struct.AsObject;
+    expectedOutput?: googleProtobuf008.Struct.AsObject;
+    actualOutput?: googleProtobuf008.Struct.AsObject;
     llmTelemetryRunId: string;
     sessionStepName: string;
     llmEvaluationFeedbacks?: LlmEvaluationFeedback.AsObject[];
@@ -10357,9 +10358,9 @@ export module LlmEvaluationTurnResult {
    */
   export interface AsProtobufJSON {
     turnIndex: number;
-    userInput: googleProtobuf007.Struct.AsProtobufJSON | null;
-    expectedOutput: googleProtobuf007.Struct.AsProtobufJSON | null;
-    actualOutput: googleProtobuf007.Struct.AsProtobufJSON | null;
+    userInput: googleProtobuf008.Struct.AsProtobufJSON | null;
+    expectedOutput: googleProtobuf008.Struct.AsProtobufJSON | null;
+    actualOutput: googleProtobuf008.Struct.AsProtobufJSON | null;
     llmTelemetryRunId: string;
     sessionStepName: string;
     llmEvaluationFeedbacks: LlmEvaluationFeedback.AsProtobufJSON[] | null;
@@ -10885,10 +10886,10 @@ export class LlmEvaluationReleaseGate implements GrpcMessage {
           );
           break;
         case 10:
-          _instance.weights = new googleProtobuf007.Struct();
+          _instance.weights = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.weights,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 11:
@@ -10987,7 +10988,7 @@ export class LlmEvaluationReleaseGate implements GrpcMessage {
       _writer.writeMessage(
         10,
         _instance.weights as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.passCutoffScore) {
@@ -11036,7 +11037,7 @@ export class LlmEvaluationReleaseGate implements GrpcMessage {
   private _llmEvaluationEvaluatorNames: string[];
   private _thresholds?: LlmEvaluationReleaseGateThresholds;
   private _safety?: LlmEvaluationReleaseGateSafetyConfig;
-  private _weights?: googleProtobuf007.Struct;
+  private _weights?: googleProtobuf008.Struct;
   private _passCutoffScore: number;
   private _stalenessWindowDays: number;
   private _ccaiServiceNames: string[];
@@ -11070,7 +11071,7 @@ export class LlmEvaluationReleaseGate implements GrpcMessage {
       ? new LlmEvaluationReleaseGateSafetyConfig(_value.safety)
       : undefined;
     this.weights = _value.weights
-      ? new googleProtobuf007.Struct(_value.weights)
+      ? new googleProtobuf008.Struct(_value.weights)
       : undefined;
     this.passCutoffScore = _value.passCutoffScore;
     this.stalenessWindowDays = _value.stalenessWindowDays;
@@ -11141,10 +11142,10 @@ export class LlmEvaluationReleaseGate implements GrpcMessage {
   set safety(value: LlmEvaluationReleaseGateSafetyConfig | undefined) {
     this._safety = value;
   }
-  get weights(): googleProtobuf007.Struct | undefined {
+  get weights(): googleProtobuf008.Struct | undefined {
     return this._weights;
   }
-  set weights(value: googleProtobuf007.Struct | undefined) {
+  set weights(value: googleProtobuf008.Struct | undefined) {
     this._weights = value;
   }
   get passCutoffScore(): number {
@@ -11302,7 +11303,7 @@ export module LlmEvaluationReleaseGate {
     llmEvaluationEvaluatorNames: string[];
     thresholds?: LlmEvaluationReleaseGateThresholds.AsObject;
     safety?: LlmEvaluationReleaseGateSafetyConfig.AsObject;
-    weights?: googleProtobuf007.Struct.AsObject;
+    weights?: googleProtobuf008.Struct.AsObject;
     passCutoffScore: number;
     stalenessWindowDays: number;
     ccaiServiceNames: string[];
@@ -11327,7 +11328,7 @@ export module LlmEvaluationReleaseGate {
     llmEvaluationEvaluatorNames: string[];
     thresholds: LlmEvaluationReleaseGateThresholds.AsProtobufJSON | null;
     safety: LlmEvaluationReleaseGateSafetyConfig.AsProtobufJSON | null;
-    weights: googleProtobuf007.Struct.AsProtobufJSON | null;
+    weights: googleProtobuf008.Struct.AsProtobufJSON | null;
     passCutoffScore: number;
     stalenessWindowDays: number;
     ccaiServiceNames: string[];
@@ -11666,10 +11667,10 @@ export class LlmEvaluationReleaseGateRun implements GrpcMessage {
           _instance.gateRevision = _reader.readInt32();
           break;
         case 4:
-          _instance.gateSnapshot = new googleProtobuf007.Struct();
+          _instance.gateSnapshot = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.gateSnapshot,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 5:
@@ -11762,7 +11763,7 @@ export class LlmEvaluationReleaseGateRun implements GrpcMessage {
       _writer.writeMessage(
         4,
         _instance.gateSnapshot as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.llmEvaluationExperimentName) {
@@ -11829,7 +11830,7 @@ export class LlmEvaluationReleaseGateRun implements GrpcMessage {
   private _name: string;
   private _llmEvaluationReleaseGateName: string;
   private _gateRevision: number;
-  private _gateSnapshot?: googleProtobuf007.Struct;
+  private _gateSnapshot?: googleProtobuf008.Struct;
   private _llmEvaluationExperimentName: string;
   private _llmEvaluationSafetyExperimentName: string;
   private _llmEvaluationBaselineExperimentName: string;
@@ -11854,7 +11855,7 @@ export class LlmEvaluationReleaseGateRun implements GrpcMessage {
     this.llmEvaluationReleaseGateName = _value.llmEvaluationReleaseGateName;
     this.gateRevision = _value.gateRevision;
     this.gateSnapshot = _value.gateSnapshot
-      ? new googleProtobuf007.Struct(_value.gateSnapshot)
+      ? new googleProtobuf008.Struct(_value.gateSnapshot)
       : undefined;
     this.llmEvaluationExperimentName = _value.llmEvaluationExperimentName;
     this.llmEvaluationSafetyExperimentName =
@@ -11902,10 +11903,10 @@ export class LlmEvaluationReleaseGateRun implements GrpcMessage {
   set gateRevision(value: number) {
     this._gateRevision = value;
   }
-  get gateSnapshot(): googleProtobuf007.Struct | undefined {
+  get gateSnapshot(): googleProtobuf008.Struct | undefined {
     return this._gateSnapshot;
   }
-  set gateSnapshot(value: googleProtobuf007.Struct | undefined) {
+  set gateSnapshot(value: googleProtobuf008.Struct | undefined) {
     this._gateSnapshot = value;
   }
   get llmEvaluationExperimentName(): string {
@@ -12083,7 +12084,7 @@ export module LlmEvaluationReleaseGateRun {
     name: string;
     llmEvaluationReleaseGateName: string;
     gateRevision: number;
-    gateSnapshot?: googleProtobuf007.Struct.AsObject;
+    gateSnapshot?: googleProtobuf008.Struct.AsObject;
     llmEvaluationExperimentName: string;
     llmEvaluationSafetyExperimentName: string;
     llmEvaluationBaselineExperimentName: string;
@@ -12106,7 +12107,7 @@ export module LlmEvaluationReleaseGateRun {
     name: string;
     llmEvaluationReleaseGateName: string;
     gateRevision: number;
-    gateSnapshot: googleProtobuf007.Struct.AsProtobufJSON | null;
+    gateSnapshot: googleProtobuf008.Struct.AsProtobufJSON | null;
     llmEvaluationExperimentName: string;
     llmEvaluationSafetyExperimentName: string;
     llmEvaluationBaselineExperimentName: string;
@@ -16620,10 +16621,10 @@ export class LlmEvaluationJudgeConfig implements GrpcMessage {
           _instance.verboseReasoning = _reader.readBool();
           break;
         case 5:
-          _instance.evaluatorOverrides = new googleProtobuf007.Struct();
+          _instance.evaluatorOverrides = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.evaluatorOverrides,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         default:
@@ -16659,7 +16660,7 @@ export class LlmEvaluationJudgeConfig implements GrpcMessage {
       _writer.writeMessage(
         5,
         _instance.evaluatorOverrides as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
   }
@@ -16668,7 +16669,7 @@ export class LlmEvaluationJudgeConfig implements GrpcMessage {
   private _modelName: string;
   private _temperature: number;
   private _verboseReasoning: boolean;
-  private _evaluatorOverrides?: googleProtobuf007.Struct;
+  private _evaluatorOverrides?: googleProtobuf008.Struct;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -16681,7 +16682,7 @@ export class LlmEvaluationJudgeConfig implements GrpcMessage {
     this.temperature = _value.temperature;
     this.verboseReasoning = _value.verboseReasoning;
     this.evaluatorOverrides = _value.evaluatorOverrides
-      ? new googleProtobuf007.Struct(_value.evaluatorOverrides)
+      ? new googleProtobuf008.Struct(_value.evaluatorOverrides)
       : undefined;
     LlmEvaluationJudgeConfig.refineValues(this);
   }
@@ -16709,10 +16710,10 @@ export class LlmEvaluationJudgeConfig implements GrpcMessage {
   set verboseReasoning(value: boolean) {
     this._verboseReasoning = value;
   }
-  get evaluatorOverrides(): googleProtobuf007.Struct | undefined {
+  get evaluatorOverrides(): googleProtobuf008.Struct | undefined {
     return this._evaluatorOverrides;
   }
-  set evaluatorOverrides(value: googleProtobuf007.Struct | undefined) {
+  set evaluatorOverrides(value: googleProtobuf008.Struct | undefined) {
     this._evaluatorOverrides = value;
   }
 
@@ -16777,7 +16778,7 @@ export module LlmEvaluationJudgeConfig {
     modelName: string;
     temperature: number;
     verboseReasoning: boolean;
-    evaluatorOverrides?: googleProtobuf007.Struct.AsObject;
+    evaluatorOverrides?: googleProtobuf008.Struct.AsObject;
   }
 
   /**
@@ -16788,7 +16789,7 @@ export module LlmEvaluationJudgeConfig {
     modelName: string;
     temperature: number;
     verboseReasoning: boolean;
-    evaluatorOverrides: googleProtobuf007.Struct.AsProtobufJSON | null;
+    evaluatorOverrides: googleProtobuf008.Struct.AsProtobufJSON | null;
   }
 }
 
@@ -16854,10 +16855,10 @@ export class LlmEvaluationProjectSettings implements GrpcMessage {
           );
           break;
         case 3:
-          _instance.defaultWeights = new googleProtobuf007.Struct();
+          _instance.defaultWeights = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.defaultWeights,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 4:
@@ -16923,7 +16924,7 @@ export class LlmEvaluationProjectSettings implements GrpcMessage {
       _writer.writeMessage(
         3,
         _instance.defaultWeights as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.defaultPassCutoffScore) {
@@ -16962,7 +16963,7 @@ export class LlmEvaluationProjectSettings implements GrpcMessage {
 
   private _name: string;
   private _llmEvaluationJudgeConfig?: LlmEvaluationJudgeConfig;
-  private _defaultWeights?: googleProtobuf007.Struct;
+  private _defaultWeights?: googleProtobuf008.Struct;
   private _defaultPassCutoffScore: number;
   private _defaultScorecardName: string;
   private _createdAt?: googleProtobuf005.Timestamp;
@@ -16985,7 +16986,7 @@ export class LlmEvaluationProjectSettings implements GrpcMessage {
       ? new LlmEvaluationJudgeConfig(_value.llmEvaluationJudgeConfig)
       : undefined;
     this.defaultWeights = _value.defaultWeights
-      ? new googleProtobuf007.Struct(_value.defaultWeights)
+      ? new googleProtobuf008.Struct(_value.defaultWeights)
       : undefined;
     this.defaultPassCutoffScore = _value.defaultPassCutoffScore;
     this.defaultScorecardName = _value.defaultScorecardName;
@@ -17013,10 +17014,10 @@ export class LlmEvaluationProjectSettings implements GrpcMessage {
   set llmEvaluationJudgeConfig(value: LlmEvaluationJudgeConfig | undefined) {
     this._llmEvaluationJudgeConfig = value;
   }
-  get defaultWeights(): googleProtobuf007.Struct | undefined {
+  get defaultWeights(): googleProtobuf008.Struct | undefined {
     return this._defaultWeights;
   }
-  set defaultWeights(value: googleProtobuf007.Struct | undefined) {
+  set defaultWeights(value: googleProtobuf008.Struct | undefined) {
     this._defaultWeights = value;
   }
   get defaultPassCutoffScore(): number {
@@ -17145,7 +17146,7 @@ export module LlmEvaluationProjectSettings {
   export interface AsObject {
     name: string;
     llmEvaluationJudgeConfig?: LlmEvaluationJudgeConfig.AsObject;
-    defaultWeights?: googleProtobuf007.Struct.AsObject;
+    defaultWeights?: googleProtobuf008.Struct.AsObject;
     defaultPassCutoffScore: number;
     defaultScorecardName: string;
     createdAt?: googleProtobuf005.Timestamp.AsObject;
@@ -17162,7 +17163,7 @@ export module LlmEvaluationProjectSettings {
   export interface AsProtobufJSON {
     name: string;
     llmEvaluationJudgeConfig: LlmEvaluationJudgeConfig.AsProtobufJSON | null;
-    defaultWeights: googleProtobuf007.Struct.AsProtobufJSON | null;
+    defaultWeights: googleProtobuf008.Struct.AsProtobufJSON | null;
     defaultPassCutoffScore: number;
     defaultScorecardName: string;
     createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
@@ -19312,10 +19313,10 @@ export class SimulateLlmEvaluationConversationsRequest implements GrpcMessage {
           _instance.languageCode = _reader.readString();
           break;
         case 8:
-          _instance.config = new googleProtobuf007.Struct();
+          _instance.config = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.config,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 9:
@@ -19375,7 +19376,7 @@ export class SimulateLlmEvaluationConversationsRequest implements GrpcMessage {
       _writer.writeMessage(
         8,
         _instance.config as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.llmEvaluationSimulationKind) {
@@ -19393,7 +19394,7 @@ export class SimulateLlmEvaluationConversationsRequest implements GrpcMessage {
   private _maxTurns: number;
   private _ccaiServiceNames: string[];
   private _languageCode: string;
-  private _config?: googleProtobuf007.Struct;
+  private _config?: googleProtobuf008.Struct;
   private _llmEvaluationSimulationKind: LlmEvaluationSimulationKind;
   private _attackTypes: string[];
 
@@ -19417,7 +19418,7 @@ export class SimulateLlmEvaluationConversationsRequest implements GrpcMessage {
     this.ccaiServiceNames = (_value.ccaiServiceNames || []).slice();
     this.languageCode = _value.languageCode;
     this.config = _value.config
-      ? new googleProtobuf007.Struct(_value.config)
+      ? new googleProtobuf008.Struct(_value.config)
       : undefined;
     this.llmEvaluationSimulationKind = _value.llmEvaluationSimulationKind;
     this.attackTypes = (_value.attackTypes || []).slice();
@@ -19469,10 +19470,10 @@ export class SimulateLlmEvaluationConversationsRequest implements GrpcMessage {
   set languageCode(value: string) {
     this._languageCode = value;
   }
-  get config(): googleProtobuf007.Struct | undefined {
+  get config(): googleProtobuf008.Struct | undefined {
     return this._config;
   }
-  set config(value: googleProtobuf007.Struct | undefined) {
+  set config(value: googleProtobuf008.Struct | undefined) {
     this._config = value;
   }
   get llmEvaluationSimulationKind(): LlmEvaluationSimulationKind {
@@ -19571,7 +19572,7 @@ export module SimulateLlmEvaluationConversationsRequest {
     maxTurns: number;
     ccaiServiceNames: string[];
     languageCode: string;
-    config?: googleProtobuf007.Struct.AsObject;
+    config?: googleProtobuf008.Struct.AsObject;
     llmEvaluationSimulationKind: LlmEvaluationSimulationKind;
     attackTypes: string[];
   }
@@ -19589,7 +19590,7 @@ export module SimulateLlmEvaluationConversationsRequest {
     maxTurns: number;
     ccaiServiceNames: string[];
     languageCode: string;
-    config: googleProtobuf007.Struct.AsProtobufJSON | null;
+    config: googleProtobuf008.Struct.AsProtobufJSON | null;
     llmEvaluationSimulationKind: string;
     attackTypes: string[];
   }
@@ -21665,10 +21666,10 @@ export class LlmEvaluationReport implements GrpcMessage {
           _instance.payload = _reader.readBytes();
           break;
         case 7:
-          _instance.metadata = new googleProtobuf007.Struct();
+          _instance.metadata = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.metadata,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 8:
@@ -21736,7 +21737,7 @@ export class LlmEvaluationReport implements GrpcMessage {
       _writer.writeMessage(
         7,
         _instance.metadata as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.createdAt) {
@@ -21773,7 +21774,7 @@ export class LlmEvaluationReport implements GrpcMessage {
   private _reportType: string;
   private _mimeType: string;
   private _payload: Uint8Array;
-  private _metadata?: googleProtobuf007.Struct;
+  private _metadata?: googleProtobuf008.Struct;
   private _createdAt?: googleProtobuf005.Timestamp;
   private _createdBy: string;
   private _modifiedAt?: googleProtobuf005.Timestamp;
@@ -21794,7 +21795,7 @@ export class LlmEvaluationReport implements GrpcMessage {
     this.mimeType = _value.mimeType;
     this.payload = _value.payload;
     this.metadata = _value.metadata
-      ? new googleProtobuf007.Struct(_value.metadata)
+      ? new googleProtobuf008.Struct(_value.metadata)
       : undefined;
     this.createdAt = _value.createdAt
       ? new googleProtobuf005.Timestamp(_value.createdAt)
@@ -21844,10 +21845,10 @@ export class LlmEvaluationReport implements GrpcMessage {
   set payload(value: Uint8Array) {
     this._payload = value;
   }
-  get metadata(): googleProtobuf007.Struct | undefined {
+  get metadata(): googleProtobuf008.Struct | undefined {
     return this._metadata;
   }
-  set metadata(value: googleProtobuf007.Struct | undefined) {
+  set metadata(value: googleProtobuf008.Struct | undefined) {
     this._metadata = value;
   }
   get createdAt(): googleProtobuf005.Timestamp | undefined {
@@ -21964,7 +21965,7 @@ export module LlmEvaluationReport {
     reportType: string;
     mimeType: string;
     payload: Uint8Array;
-    metadata?: googleProtobuf007.Struct.AsObject;
+    metadata?: googleProtobuf008.Struct.AsObject;
     createdAt?: googleProtobuf005.Timestamp.AsObject;
     createdBy: string;
     modifiedAt?: googleProtobuf005.Timestamp.AsObject;
@@ -21983,7 +21984,7 @@ export module LlmEvaluationReport {
     reportType: string;
     mimeType: string;
     payload: string;
-    metadata: googleProtobuf007.Struct.AsProtobufJSON | null;
+    metadata: googleProtobuf008.Struct.AsProtobufJSON | null;
     createdAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
     createdBy: string;
     modifiedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
@@ -23602,10 +23603,10 @@ export class LlmEvaluationAbVariant implements GrpcMessage {
           _instance.promptVersion = _reader.readString();
           break;
         case 8:
-          _instance.config = new googleProtobuf007.Struct();
+          _instance.config = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.config,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 9:
@@ -23657,7 +23658,7 @@ export class LlmEvaluationAbVariant implements GrpcMessage {
       _writer.writeMessage(
         8,
         _instance.config as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.ragVariantConfig) {
@@ -23676,7 +23677,7 @@ export class LlmEvaluationAbVariant implements GrpcMessage {
   private _isControl: boolean;
   private _modelName: string;
   private _promptVersion: string;
-  private _config?: googleProtobuf007.Struct;
+  private _config?: googleProtobuf008.Struct;
   private _ragVariantConfig?: RagVariantConfig;
 
   /**
@@ -23693,7 +23694,7 @@ export class LlmEvaluationAbVariant implements GrpcMessage {
     this.modelName = _value.modelName;
     this.promptVersion = _value.promptVersion;
     this.config = _value.config
-      ? new googleProtobuf007.Struct(_value.config)
+      ? new googleProtobuf008.Struct(_value.config)
       : undefined;
     this.ragVariantConfig = _value.ragVariantConfig
       ? new RagVariantConfig(_value.ragVariantConfig)
@@ -23742,10 +23743,10 @@ export class LlmEvaluationAbVariant implements GrpcMessage {
   set promptVersion(value: string) {
     this._promptVersion = value;
   }
-  get config(): googleProtobuf007.Struct | undefined {
+  get config(): googleProtobuf008.Struct | undefined {
     return this._config;
   }
-  set config(value: googleProtobuf007.Struct | undefined) {
+  set config(value: googleProtobuf008.Struct | undefined) {
     this._config = value;
   }
   get ragVariantConfig(): RagVariantConfig | undefined {
@@ -23827,7 +23828,7 @@ export module LlmEvaluationAbVariant {
     isControl: boolean;
     modelName: string;
     promptVersion: string;
-    config?: googleProtobuf007.Struct.AsObject;
+    config?: googleProtobuf008.Struct.AsObject;
     ragVariantConfig?: RagVariantConfig.AsObject;
   }
 
@@ -23842,7 +23843,7 @@ export module LlmEvaluationAbVariant {
     isControl: boolean;
     modelName: string;
     promptVersion: string;
-    config: googleProtobuf007.Struct.AsProtobufJSON | null;
+    config: googleProtobuf008.Struct.AsProtobufJSON | null;
     ragVariantConfig: RagVariantConfig.AsProtobufJSON | null;
   }
 }
@@ -24378,17 +24379,17 @@ export class LlmEvaluationAbVariantResult implements GrpcMessage {
           _instance.sessionCount = _reader.readInt64String();
           break;
         case 3:
-          _instance.telemetry = new googleProtobuf007.Struct();
+          _instance.telemetry = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.telemetry,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         case 4:
-          _instance.derivedMetrics = new googleProtobuf007.Struct();
+          _instance.derivedMetrics = new googleProtobuf008.Struct();
           _reader.readMessage(
             _instance.derivedMetrics,
-            googleProtobuf007.Struct.deserializeBinaryFromReader
+            googleProtobuf008.Struct.deserializeBinaryFromReader
           );
           break;
         default:
@@ -24418,22 +24419,22 @@ export class LlmEvaluationAbVariantResult implements GrpcMessage {
       _writer.writeMessage(
         3,
         _instance.telemetry as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
     if (_instance.derivedMetrics) {
       _writer.writeMessage(
         4,
         _instance.derivedMetrics as any,
-        googleProtobuf007.Struct.serializeBinaryToWriter
+        googleProtobuf008.Struct.serializeBinaryToWriter
       );
     }
   }
 
   private _variantId: string;
   private _sessionCount: string;
-  private _telemetry?: googleProtobuf007.Struct;
-  private _derivedMetrics?: googleProtobuf007.Struct;
+  private _telemetry?: googleProtobuf008.Struct;
+  private _derivedMetrics?: googleProtobuf008.Struct;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -24446,10 +24447,10 @@ export class LlmEvaluationAbVariantResult implements GrpcMessage {
     this.variantId = _value.variantId;
     this.sessionCount = _value.sessionCount;
     this.telemetry = _value.telemetry
-      ? new googleProtobuf007.Struct(_value.telemetry)
+      ? new googleProtobuf008.Struct(_value.telemetry)
       : undefined;
     this.derivedMetrics = _value.derivedMetrics
-      ? new googleProtobuf007.Struct(_value.derivedMetrics)
+      ? new googleProtobuf008.Struct(_value.derivedMetrics)
       : undefined;
     LlmEvaluationAbVariantResult.refineValues(this);
   }
@@ -24465,16 +24466,16 @@ export class LlmEvaluationAbVariantResult implements GrpcMessage {
   set sessionCount(value: string) {
     this._sessionCount = value;
   }
-  get telemetry(): googleProtobuf007.Struct | undefined {
+  get telemetry(): googleProtobuf008.Struct | undefined {
     return this._telemetry;
   }
-  set telemetry(value: googleProtobuf007.Struct | undefined) {
+  set telemetry(value: googleProtobuf008.Struct | undefined) {
     this._telemetry = value;
   }
-  get derivedMetrics(): googleProtobuf007.Struct | undefined {
+  get derivedMetrics(): googleProtobuf008.Struct | undefined {
     return this._derivedMetrics;
   }
-  set derivedMetrics(value: googleProtobuf007.Struct | undefined) {
+  set derivedMetrics(value: googleProtobuf008.Struct | undefined) {
     this._derivedMetrics = value;
   }
 
@@ -24535,8 +24536,8 @@ export module LlmEvaluationAbVariantResult {
   export interface AsObject {
     variantId: string;
     sessionCount: string;
-    telemetry?: googleProtobuf007.Struct.AsObject;
-    derivedMetrics?: googleProtobuf007.Struct.AsObject;
+    telemetry?: googleProtobuf008.Struct.AsObject;
+    derivedMetrics?: googleProtobuf008.Struct.AsObject;
   }
 
   /**
@@ -24545,8 +24546,8 @@ export module LlmEvaluationAbVariantResult {
   export interface AsProtobufJSON {
     variantId: string;
     sessionCount: string;
-    telemetry: googleProtobuf007.Struct.AsProtobufJSON | null;
-    derivedMetrics: googleProtobuf007.Struct.AsProtobufJSON | null;
+    telemetry: googleProtobuf008.Struct.AsProtobufJSON | null;
+    derivedMetrics: googleProtobuf008.Struct.AsProtobufJSON | null;
   }
 }
 

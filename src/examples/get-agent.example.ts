@@ -6,7 +6,8 @@
  * the Keycloak **bearer** token is attached transparently by this library's auth
  * interceptors (see below). Under the Keycloak migration the only supported auth
  * is an `Authorization: Bearer <token>` credential fed from `keycloak-js` /
- * `keycloak-angular` through a {@link TokenProvider}.
+ * `keycloak-angular` through a `TokenProvider` (exported by this library from
+ * `src/auth/token-provider.ts`).
  *
  * Wiring the auth once at application bootstrap is all that is required — every
  * generated `*Client` (here {@link AgentsClient}) then carries the bearer
