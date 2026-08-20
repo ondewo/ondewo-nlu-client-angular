@@ -104,13 +104,99 @@ npm
 
 ## Authentication (Keycloak bearer token)
 
-The hand-written auth surface lives in [`src/auth/`](src/auth) and attaches the consumer's current
-Keycloak access token as an `Authorization: Bearer <token>` credential to every outgoing gRPC-web and HTTP
-request. This library performs **no** OAuth/OIDC flow itself — it never sees a password and never stores a
-token. Acquiring and refreshing the token is the responsibility of `keycloak-js` / `keycloak-angular` in the
-host application; this client only reads the current token through a `TokenProvider` and forwards it.
+The hand-written auth surface lives in [`src/auth/`](src/auth) and attaches the current Keycloak access
+token as an `Authorization: Bearer <token>` credential to every outgoing gRPC-web and HTTP request. It is
+exported from the package entry point, so consumers never re-implement token acquisition or refresh.
 
-### 1. Implement a `TokenProvider` backed by `keycloak-js`
+There are two ways to feed it a token; pick the one that matches the account type.
+
+### Technical users — let this library log in and refresh
+
+A technical user is a service account with 2FA disabled, so the Resource Owner Password Credentials grant
+is usable. `KeycloakTokenProvider` performs that login once against the public SDK client, then refreshes
+the access token in the background `REFRESH_SKEW_IN_S` (30s) before it expires, for as long as the
+application lives. Nothing else has to run a timer.
+
+```ts
+import { bootstrapApplication } from "@angular/platform-browser";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import {
+  authHttpInterceptor,
+  KEYCLOAK_TOKEN_PROVIDER_CONFIG,
+  KeycloakTokenProvider,
+  provideOndewoNluAuth
+} from "@ondewo/nlu-client-angular";
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    {
+      provide: KEYCLOAK_TOKEN_PROVIDER_CONFIG,
+      useValue: {
+        keycloakUrl: "https://keycloak.example.com",
+        realm: "ondewo",
+        clientId: "ondewo-nlu-cai-sdk-public",
+        username: "technical-user",
+        password: "..."
+      }
+    },
+    provideOndewoNluAuth(KeycloakTokenProvider),
+    provideHttpClient(withInterceptors([authHttpInterceptor]))
+  ]
+});
+```
+
+A long-lived `offlineToken` can be supplied instead of `username` + `password`; `tokenExpirationInS`
+bounds the refresh loop when the session must not outlive a fixed window. The Keycloak client must have
+direct access grants and the `offline_access` scope enabled, otherwise the token response carries no
+refresh token and `KeycloakTokenProvider` reports a `KeycloakAuthenticationError`.
+
+The password grant is deliberately limited to technical users: for a human account with 2FA enabled it
+cannot work, and sending a human's password to the token endpoint from the browser is not acceptable.
+
+#### Credentials that are only known at runtime
+
+An embedded widget usually learns its technical user from its own URL, long after the application has
+bootstrapped, so there is nothing to put in `KEYCLOAK_TOKEN_PROVIDER_CONFIG` at startup. In that case
+register the provider without a config and call `configure()` once the credentials are known:
+
+```ts
+await tokenProvider.configure({
+  keycloakUrl: issuerFromQueryParams,
+  realm: "ondewo-ccai-platform",
+  clientId: "ondewo-nlu-cai-sdk-public",
+  username: techUserFromQueryParams,
+  password: techSecretFromQueryParams
+});
+```
+
+Registered without a config the provider stays idle — it issues no request and `getToken()` returns
+`null` — until `configure()` is called. Calling `configure()` again re-points the provider at different
+credentials: the pending refresh is cancelled and the cached tokens are dropped before the new login
+runs, so no stale bearer can be served in between and the provider need not be re-created.
+
+#### Renewing on demand
+
+The background timer keeps the token fresh on its own, but a transport that must never send a dead
+bearer — and must recover when the server rejects one — can drive the renewal directly:
+
+```ts
+// Pre-flight: renews only if the token has lapsed or is within REFRESH_SKEW_IN_S of doing so.
+const bearer = await tokenProvider.ensureFreshToken();
+
+// Recovery: after the server answered UNAUTHENTICATED, renew unconditionally and replay once.
+const renewed = await tokenProvider.ensureFreshToken({ force: true });
+```
+
+`force` matters because a cached expiry cannot be trusted after a rejection — the token may have been
+revoked, or the local clock may run ahead of Keycloak's. Concurrent calls are single-flighted, so a burst
+of requests arriving on an expired token issues one grant rather than one per request. If the refresh
+token itself has been revoked, `ensureFreshToken` falls back to a full re-login with the configured
+credentials; it returns `null` when the provider has no config yet.
+
+### Interactive users — supply the token from the host application
+
+When a real person logs in (2FA, authorization-code flow), the host application owns the OIDC session and
+only hands the current token over through a `TokenProvider`:
 
 ```ts
 import { Injectable } from "@angular/core";
@@ -118,7 +204,7 @@ import Keycloak from "keycloak-js";
 import { TokenProvider, TokenResult } from "@ondewo/nlu-client-angular";
 
 @Injectable({ providedIn: "root" })
-export class KeycloakTokenProvider implements TokenProvider {
+export class HostSessionTokenProvider implements TokenProvider {
   constructor(private readonly keycloak: Keycloak) {}
 
   // Refresh the token if it expires within 30s, then return the current one.
@@ -132,31 +218,18 @@ export class KeycloakTokenProvider implements TokenProvider {
 }
 ```
 
+Register it the same way: `provideOndewoNluAuth(HostSessionTokenProvider)`.
+
 `getToken()` may return a `string`, `null` (unauthenticated — the request is sent without an `Authorization`
 header), a `Promise<string | null>`, or an `Observable<string | null>`. With `keycloak-angular` you would
 instead inject `KeycloakService` and call `this.keycloakService.getToken()`.
 
-### 2. Register the provider and the interceptors
+### What the registration does
 
-```ts
-import { bootstrapApplication } from "@angular/platform-browser";
-import { provideHttpClient, withInterceptors } from "@angular/common/http";
-import { authHttpInterceptor, provideOndewoNluAuth } from "@ondewo/nlu-client-angular";
-import { KeycloakTokenProvider } from "./keycloak-token-provider";
-
-bootstrapApplication(AppComponent, {
-  providers: [
-    // Binds TOKEN_PROVIDER to your implementation and registers the
-    // @ngx-grpc AuthGrpcInterceptor for all generated *.pbsc.ts clients.
-    provideOndewoNluAuth(KeycloakTokenProvider),
-    // For plain HTTP requests, also register the functional HTTP interceptor.
-    provideHttpClient(withInterceptors([authHttpInterceptor]))
-  ]
-});
-```
-
-That is all the wiring required: every NLU service client request now carries `authorization: Bearer <token>`
-whenever a token is available, and is sent unchanged when it is not.
+`provideOndewoNluAuth` binds `TOKEN_PROVIDER` to your implementation and registers the `@ngx-grpc`
+`AuthGrpcInterceptor` for all generated `*.pbsc.ts` clients. Adding `authHttpInterceptor` covers plain
+HTTP requests. Every request then carries `authorization: Bearer <token>` whenever a token is available,
+and is sent unchanged when it is not.
 
 [comment]: <> (START OF GITHUB README)
 
