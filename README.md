@@ -153,6 +153,46 @@ refresh token and `KeycloakTokenProvider` reports a `KeycloakAuthenticationError
 The password grant is deliberately limited to technical users: for a human account with 2FA enabled it
 cannot work, and sending a human's password to the token endpoint from the browser is not acceptable.
 
+#### Credentials that are only known at runtime
+
+An embedded widget usually learns its technical user from its own URL, long after the application has
+bootstrapped, so there is nothing to put in `KEYCLOAK_TOKEN_PROVIDER_CONFIG` at startup. In that case
+register the provider without a config and call `configure()` once the credentials are known:
+
+```ts
+await tokenProvider.configure({
+  keycloakUrl: issuerFromQueryParams,
+  realm: "ondewo-ccai-platform",
+  clientId: "ondewo-nlu-cai-sdk-public",
+  username: techUserFromQueryParams,
+  password: techSecretFromQueryParams
+});
+```
+
+Registered without a config the provider stays idle — it issues no request and `getToken()` returns
+`null` — until `configure()` is called. Calling `configure()` again re-points the provider at different
+credentials: the pending refresh is cancelled and the cached tokens are dropped before the new login
+runs, so no stale bearer can be served in between and the provider need not be re-created.
+
+#### Renewing on demand
+
+The background timer keeps the token fresh on its own, but a transport that must never send a dead
+bearer — and must recover when the server rejects one — can drive the renewal directly:
+
+```ts
+// Pre-flight: renews only if the token has lapsed or is within REFRESH_SKEW_IN_S of doing so.
+const bearer = await tokenProvider.ensureFreshToken();
+
+// Recovery: after the server answered UNAUTHENTICATED, renew unconditionally and replay once.
+const renewed = await tokenProvider.ensureFreshToken({ force: true });
+```
+
+`force` matters because a cached expiry cannot be trusted after a rejection — the token may have been
+revoked, or the local clock may run ahead of Keycloak's. Concurrent calls are single-flighted, so a burst
+of requests arriving on an expired token issues one grant rather than one per request. If the refresh
+token itself has been revoked, `ensureFreshToken` falls back to a full re-login with the configured
+credentials; it returns `null` when the provider has no config yet.
+
 ### Interactive users — supply the token from the host application
 
 When a real person logs in (2FA, authorization-code flow), the host application owns the OIDC session and
