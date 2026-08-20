@@ -1,10 +1,12 @@
 /**
  * Public auth surface for `@ondewo/nlu-client-angular`.
  *
- * The consuming application supplies the current Keycloak access token through a
- * {@link TokenProvider} (fed from `keycloak-js` / `keycloak-angular`); this
- * library attaches it as an `Authorization: Bearer <token>` credential to
- * outgoing gRPC-web and HTTP requests. No OAuth/OIDC flow is performed here.
+ * The current Keycloak access token is served by a {@link TokenProvider} and
+ * attached as an `Authorization: Bearer <token>` credential to outgoing gRPC-web
+ * and HTTP requests. For a technical user the built-in
+ * {@link KeycloakTokenProvider} logs in and refreshes the token itself; for an
+ * interactive (2FA) user the consuming application implements
+ * {@link TokenProvider} on top of `keycloak-js` / `keycloak-angular`.
  */
 export { TOKEN_PROVIDER, TokenProvider, TokenResult } from "./token-provider";
 export {

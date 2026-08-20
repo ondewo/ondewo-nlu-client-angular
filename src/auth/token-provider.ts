@@ -18,12 +18,19 @@ export type TokenResult = string | null | Promise<string | null> | Observable<st
  * Contract the consuming application implements to feed the current Keycloak
  * access token into this library's auth interceptors.
  *
- * SECURITY: this client deliberately does NOT perform any OAuth/OIDC flow
- * itself — no Resource Owner Password Credentials grant, no client secret, no
- * token storage. Acquiring, refreshing and storing the token is the
- * responsibility of a dedicated, browser-safe library (`keycloak-js` /
- * `keycloak-angular`) in the host application. This client only reads the
- * current token and attaches it as a bearer credential to outgoing requests.
+ * Two kinds of implementation are expected:
+ *
+ * - **Interactive users** — the host application owns the OIDC flow (an
+ *   authorization-code login through `keycloak-js` / `keycloak-angular`, the
+ *   only browser-safe option once 2FA is enforced) and implements this interface
+ *   to hand the current token over. Nothing is acquired or stored here.
+ * - **Technical users** — the built-in `KeycloakTokenProvider` performs the
+ *   Resource Owner Password Credentials grant itself and keeps the token fresh
+ *   in the background, so consumers do not re-implement token refresh. It is
+ *   meant ONLY for service accounts that have 2FA disabled; never point it at a
+ *   human user's credentials.
+ *
+ * No client secret is ever used: both paths rely on a public Keycloak client.
  *
  * Implementations should return the freshest token they have. Returning a
  * `Promise`/`Observable` lets the implementation refresh a soon-to-expire token
