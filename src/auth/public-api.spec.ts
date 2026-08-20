@@ -20,4 +20,26 @@ describe("package public API entry point", (): void => {
 
     expect(entryPoint).toMatch(/export \* from ['"]\.\/src\/auth['"];/);
   });
+
+  /**
+   * The auth barrel re-exports an explicit list of names, so a type added to
+   * `keycloak-token-provider.ts` but forgotten here never reaches consumers — the same
+   * declared-but-not-exported failure this entry-point guard exists for, one level down.
+   * Types are erased at runtime, so the barrel is asserted as text.
+   */
+  it("re-exports every public type of the Keycloak provider from the auth barrel", (): void => {
+    const barrel: string = readFileSync(join(__dirname, "index.ts"), "utf8");
+
+    for (const name of [
+      "KeycloakTokenProvider",
+      "KeycloakTokenProviderConfig",
+      "KEYCLOAK_TOKEN_PROVIDER_CONFIG",
+      "KeycloakAuthenticationError",
+      "EnsureFreshTokenOptions",
+      "REFRESH_SKEW_IN_S",
+      "MIN_REFRESH_DELAY_IN_S"
+    ]) {
+      expect(barrel).toContain(name);
+    }
+  });
 });
