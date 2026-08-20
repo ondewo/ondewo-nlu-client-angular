@@ -23,4 +23,20 @@ describe("auth public API barrel", (): void => {
     expect(authApi.REFRESH_SKEW_IN_S).toBe(30);
     expect(authApi.MIN_REFRESH_DELAY_IN_S).toBe(1);
   });
+
+  /** The runtime-configuration and on-demand-renewal entry points are part of the public surface. */
+  it("exposes configure() and ensureFreshToken() on KeycloakTokenProvider", (): void => {
+    expect(typeof authApi.KeycloakTokenProvider.prototype.configure).toBe("function");
+    expect(typeof authApi.KeycloakTokenProvider.prototype.ensureFreshToken).toBe("function");
+  });
+
+  /**
+   * `ensureFreshToken`'s options type must be re-exported too, otherwise a consumer can call the
+   * method but cannot name its argument type. This annotation fails to compile if it is not.
+   */
+  it("re-exports the EnsureFreshTokenOptions type", (): void => {
+    const options: authApi.EnsureFreshTokenOptions = { force: true };
+
+    expect(options.force).toBe(true);
+  });
 });

@@ -122,6 +122,44 @@ This repo now runs the pre-commit framework (markdownlint-cli2, pre-commit-hooks
 - **markdownlint MD053 is disabled** in `.markdownlint-cli2.yaml`. Its auto-fix DELETES the `[comment]: <> (START/END OF GITHUB README)` reference-definition markers that the release Makefile slices the published README with (`perl … /START OF GITHUB README/../END OF GITHUB README/`). **Never re-enable MD053 here** — it silently breaks the README slice.
 - **RELEASE.md is the authoritative changelog and the release tag holds the complete history.** A markdownlint/`--all-files` pass (or a careless manual "dedup") can drop `## Release … X.Y.Z` headings; if that happens, restore `RELEASE.md` + `src/RELEASE.md` from the latest release tag.
 
+## Generated vs. authoritative files — edit the source, not the copy (hard-won 2026-08-20)
+
+Several files at the repo root are **build artifacts** that `make build` overwrites. Editing them looks
+like it works — tests and lint pass, the diff is committed — and the change is silently reverted by the
+next build. Always edit the source:
+
+| Root file (artifact)                      | Authoritative source | Produced by                                                  |
+| ----------------------------------------- | -------------------- | ------------------------------------------------------------ |
+| `README.md`                               | `src/README.md`      | `src/package.json` `postbuild`: `cp README.md ../.`          |
+| `RELEASE.md`                              | `src/RELEASE.md`     | `src/package.json` `postbuild`: `cp RELEASE.md ../.`         |
+| `public-api.ts`                           | _(none — generated)_ | the proto compiler, `rm -f`'d and regenerated on every build |
+| `api/`, `fesm2022/`, `index.d.ts`, `npm/` | _(none — generated)_ | the proto compiler                                           |
+
+- **`public-api.ts` is not the compiled entry point.** `compile-proto-2-angular.sh` builds the library
+  from an entry file generated _inside the container_ from the mounted `src/` directory, then separately
+  `rm -f`s and regenerates the root `public-api.ts` as an artifact copy. Hand-adding an export to the root
+  file therefore never reaches `npm/index.d.ts` or `npm/fesm2022/` — the published package. Verify a public
+  API claim against `npm/index.d.ts`, never against `public-api.ts`.
+- **Hand-written sources reach the bundle only because the compiler exports them.** `src/auth` is bundled
+  because `generate-public-api.sh` (proto compiler **≥ 5.13.0**) star-exports `auth/index.ts` when it
+  exists — `./auth` in the entry file `ng build` compiles, `./src/auth` in the root artifact copy. Adding a
+  second hand-written top-level directory under `src/` needs a compiler change, not a repo change.
+- `src/auth/public-api.spec.ts` guards that the root artifact keeps the `./src/auth` line; it is a
+  regression signal, not the mechanism.
+
+## Submodule pins — the Makefile tag and the recorded pointer must agree
+
+`check_out_correct_submodule_versions` runs `git -C <submodule> checkout ${..._GIT_BRANCH}` on **every**
+`make build`. When the Makefile tag and the commit recorded in the index disagree, each build silently
+checks the submodule back out at the Makefile's tag and leaves a dirty submodule pointer in `git status`
+— and the codegen runs with the _Makefile's_ version, not the committed one. This repo drifted exactly
+that way (pointer at `ondewo-proto-compiler` 5.12.0, `ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.11.0`).
+After bumping either, bump the other and re-run `git submodule status` until it shows no `+`.
+
+**Release the compiler first.** Pinning `tags/X` before that tag exists makes `make build` fail in
+`check_out_correct_submodule_versions`. Order: release ondewo-proto-compiler → tag exists → bump the pin
+here → `make build` → release this client.
+
 ## Jenkins — never trigger a multibranch scan or branch indexing
 
 **NEVER trigger a Jenkins multibranch scan or branch indexing.** Do not call a multibranch/folder job's

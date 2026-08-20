@@ -1,14 +1,16 @@
 # Release History
 
-***************** 
-## Release ONDEWO NLU Angular Client 7.0.0 
- 
-### Breaking Changes 
- * Tracking API Version [7.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) 
- * BREAKING: the `Login` RPC and its `LoginRequest` / `LoginResponse` messages are removed, together with the `POST /v2/login` HTTP binding. Authentication is Keycloak-only - obtain an access token from Keycloak and send it as the `Authorization: Bearer &lt;token&gt;` header on every call. 
- * Migration: construct the client with `keycloak_url`, `realm`, `client_id`, `user_name` and `password` in the `ClientConfig` and it mints and refreshes the token itself. The identity used must be exempt from 2FA, so create one with `CreateProjectTechnicalUser` and pass its `username` (not an e-mail). `CheckLogin` is not affected and remains the way to probe whether a token is still valid. 
- * Also in this release: session-feedback CRUD and analytics RPCs on `Sessions`, full notification CRUD on `Users`, and remote-operation container logs/status RPCs on `Operations`. 
+*****************
 
+## Release ONDEWO NLU Angular Client 7.0.1
+
+### Bug Fixes
+
+* [[OND221-2830]](https://ondewo.atlassian.net/browse/OND221-2830) The hand-written auth surface is exported from the package entry point. `src/auth` was compiled but never bundled, because the generated `public-api.ts` listed only the proto stubs — `import { KeycloakTokenProvider } from "@ondewo/nlu-client-angular"` did not resolve for any consumer, and applications had to re-implement token acquisition and refresh themselves. The barrel is emitted by the proto compiler from [5.13.0](https://github.com/ondewo/ondewo-proto-compiler/releases/tag/5.13.0) on, so it survives a regeneration of the stubs.
+* [[OND221-2830]](https://ondewo.atlassian.net/browse/OND221-2830) `KeycloakTokenProvider.configure()` accepts the Keycloak credentials at runtime, for an application that only learns them after bootstrap (an embedded widget reading a technical user from its own URL). Registered without a `KEYCLOAK_TOKEN_PROVIDER_CONFIG` the provider stays idle — no request is issued and `getToken()` returns `null` — until `configure()` is called; calling it again re-points the provider at different credentials, cancelling the pending refresh and dropping the cached tokens first so no stale bearer is served in between.
+* [[OND221-2830]](https://ondewo.atlassian.net/browse/OND221-2830) `KeycloakTokenProvider.ensureFreshToken()` renews the access token on demand: without arguments it renews only a token that has lapsed or is within `REFRESH_SKEW_IN_S` of doing so, and with `{ force: true }` it renews unconditionally, which is what a transport needs after the server answered `UNAUTHENTICATED` and the cached expiry can no longer be trusted. Concurrent calls are single-flighted into one grant, and a revoked refresh token falls back to a full re-login.
+* [[OND221-2830]](https://ondewo.atlassian.net/browse/OND221-2830) `whenReady()` no longer hangs forever when the first login is started by `configure()` and fails — it now rejects with the `KeycloakAuthenticationError`, and a login failure that nothing awaits no longer surfaces as an unhandled promise rejection.
+* [[OND221-2830]](https://ondewo.atlassian.net/browse/OND221-2830) `EnsureFreshTokenOptions` is re-exported from the auth barrel, so a consumer can name the argument type of `ensureFreshToken()`.
 
 *****************
 

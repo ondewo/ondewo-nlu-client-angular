@@ -62,6 +62,20 @@ function setup(config: KeycloakTokenProviderConfig): SetupResult {
   return { provider, httpMock };
 }
 
+/**
+ * Stand up a `TestBed` with NO {@link KEYCLOAK_TOKEN_PROVIDER_CONFIG} registered, so the
+ * provider is constructed idle and awaits a runtime `configure()` call.
+ *
+ * @returns the instantiated provider and the `HttpTestingController`.
+ */
+function setupUnconfigured(): SetupResult {
+  const providers: (Provider | EnvironmentProviders)[] = [provideHttpClient(), provideHttpClientTesting()];
+  TestBed.configureTestingModule({ providers });
+  const provider: KeycloakTokenProvider = TestBed.inject(KeycloakTokenProvider);
+  const httpMock: HttpTestingController = TestBed.inject(HttpTestingController);
+  return { provider, httpMock };
+}
+
 /** A password-grant config (ROPC login). */
 const PASSWORD_CONFIG: KeycloakTokenProviderConfig = {
   keycloakUrl: KEYCLOAK_URL,
@@ -111,6 +125,18 @@ describe("KeycloakTokenProvider", (): void => {
     expect(request.request.body as string).toContain(`grant_type=${grant}`);
     request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
     await provider.whenReady();
+  }
+
+  /**
+   * Drain the microtask queue so a promise chain that spans several `await`s (a
+   * rejected refresh falling through to a full re-login) reaches its next HTTP call.
+   *
+   * @returns a promise that resolves once the queued microtasks have run.
+   */
+  async function flushMicrotasks(): Promise<void> {
+    for (let i: number = 0; i < 10; i++) {
+      await Promise.resolve();
+    }
   }
 
   /** Before the login resolves, `getToken` reports no token (interceptors must not block). */
@@ -512,4 +538,236 @@ describe("KeycloakTokenProvider", (): void => {
     httpMock.expectOne(TOKEN_ENDPOINT).flush("server error", { status: 500, statusText: "Server Error" });
     await expect(provider.whenReady()).rejects.toThrow(/failed with status 500/);
   });
+
+  describe("configure (credentials supplied at runtime)", (): void => {
+    /** Without a config the provider stays idle: no login is attempted and no token is served. */
+    it("stays idle and issues no request when constructed without a config", (): void => {
+      const { provider, httpMock }: SetupResult = setupUnconfigured();
+      expect(provider.getToken()).toBeNull();
+      httpMock.expectNone(TOKEN_ENDPOINT);
+    });
+
+    /** configure() supplies the credentials after bootstrap and performs the login. */
+    it("logs in with a config supplied after construction", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setupUnconfigured();
+      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
+      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(request.request.body as string).toContain("grant_type=password");
+      request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await configured;
+      expect(provider.getToken()).toBe(ACCESS_TOKEN);
+      await provider.whenReady();
+    });
+
+    /** Re-configuring re-points the provider at different credentials and discards the old token. */
+    it("replaces an earlier config and re-logs in with the new credentials", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(provider, httpMock, "password");
+      expect(provider.getToken()).toBe(ACCESS_TOKEN);
+
+      const configured: Promise<void> = provider.configure({
+        ...PASSWORD_CONFIG,
+        username: "other-technical-user@example.com"
+      });
+      // The previous token is dropped immediately, so nothing stale can be sent.
+      expect(provider.getToken()).toBeNull();
+      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(request.request.body as string).toContain("username=other-technical-user");
+      request.flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await configured;
+      expect(provider.getToken()).toBe(ACCESS_TOKEN_2);
+    });
+
+    /** Re-configuring cancels the timer armed by the previous config (only one refresh stays armed). */
+    it("cancels the refresh armed by the previous config", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(provider, httpMock, "password");
+
+      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
+      httpMock
+        .expectOne(TOKEN_ENDPOINT)
+        .flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await configured;
+
+      // Advancing past the schedule must fire exactly ONE refresh (the new config's).
+      // If the timer armed by the previous config had survived, expectOne() would see two.
+      jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
+      await Promise.resolve();
+      httpMock
+        .expectOne(TOKEN_ENDPOINT)
+        .flush({ access_token: "access-token-3", refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+    });
+
+    /** A configure() whose login fails leaves the provider unauthenticated and reports the error. */
+    it("rejects and serves no token when the runtime login fails", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setupUnconfigured();
+      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
+      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
+      await expect(configured).rejects.toBeInstanceOf(KeycloakAuthenticationError);
+      expect(provider.getToken()).toBeNull();
+    });
+
+    /**
+     * A provider constructed without a config has its first login in configure(), so a failure
+     * there must settle whenReady() too — otherwise every awaiter hangs forever.
+     */
+    it("rejects whenReady() when the first runtime login fails", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setupUnconfigured();
+      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
+      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
+      await expect(configured).rejects.toBeInstanceOf(KeycloakAuthenticationError);
+
+      await expect(provider.whenReady()).rejects.toBeInstanceOf(KeycloakAuthenticationError);
+    });
+
+    /** The first successful runtime login resolves whenReady() for an initially idle provider. */
+    it("resolves whenReady() once the first runtime login succeeds", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setupUnconfigured();
+      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
+      httpMock
+        .expectOne(TOKEN_ENDPOINT)
+        .flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await configured;
+
+      await expect(provider.whenReady()).resolves.toBeUndefined();
+    });
+  });
+
+  describe("ensureFreshToken (pre-flight and forced renewal)", (): void => {
+    /** An unconfigured provider has nothing to renew and must not attempt a grant. */
+    it("returns null and issues no request when unconfigured", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setupUnconfigured();
+      await expect(provider.ensureFreshToken()).resolves.toBeNull();
+      httpMock.expectNone(TOKEN_ENDPOINT);
+    });
+
+    /** A token comfortably inside its lifetime is served straight back, with no network call. */
+    it("returns the cached token without a request while it is still valid", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(provider, httpMock, "password");
+      await expect(provider.ensureFreshToken()).resolves.toBe(ACCESS_TOKEN);
+      httpMock.expectNone(TOKEN_ENDPOINT);
+    });
+
+    /** A response without expires_in leaves the expiry unknown; the cached token is still served. */
+    it("serves the cached token when the expiry is unknown", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
+      await provider.whenReady();
+      await expect(provider.ensureFreshToken()).resolves.toBe(ACCESS_TOKEN);
+      httpMock.expectNone(TOKEN_ENDPOINT);
+    });
+
+    /** Inside the skew window the token counts as spent and is renewed before being handed out. */
+    it("renews a token that is within the refresh skew of expiring", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(provider, httpMock, "password");
+
+      // Sit just inside the skew window, before the scheduled timer would have fired.
+      jest.setSystemTime(Date.now() + ((EXPIRES_IN - REFRESH_SKEW_IN_S + 1) * 1000));
+      const fresh: Promise<string | null> = provider.ensureFreshToken();
+      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(request.request.body as string).toContain("grant_type=refresh_token");
+      request.flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await expect(fresh).resolves.toBe(ACCESS_TOKEN_2);
+    });
+
+    /** force renews even a token that still looks perfectly valid (post-UNAUTHENTICATED recovery). */
+    it("renews unconditionally when force is set", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(provider, httpMock, "password");
+
+      const fresh: Promise<string | null> = provider.ensureFreshToken({ force: true });
+      httpMock
+        .expectOne(TOKEN_ENDPOINT)
+        .flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await expect(fresh).resolves.toBe(ACCESS_TOKEN_2);
+    });
+
+    /** Concurrent callers share one renewal rather than stampeding the token endpoint. */
+    it("single-flights concurrent renewals into one grant", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(provider, httpMock, "password");
+
+      const first: Promise<string | null> = provider.ensureFreshToken({ force: true });
+      const second: Promise<string | null> = provider.ensureFreshToken({ force: true });
+      const third: Promise<string | null> = provider.ensureFreshToken({ force: true });
+      // expectOne() fails outright if the burst produced more than a single request.
+      httpMock
+        .expectOne(TOKEN_ENDPOINT)
+        .flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await expect(Promise.all([first, second, third])).resolves.toEqual([
+        ACCESS_TOKEN_2,
+        ACCESS_TOKEN_2,
+        ACCESS_TOKEN_2
+      ]);
+    });
+
+    /** A renewal after a completed one issues a fresh grant (the single-flight slot is released). */
+    it("allows a further renewal once the in-flight one has settled", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(provider, httpMock, "password");
+
+      const first: Promise<string | null> = provider.ensureFreshToken({ force: true });
+      httpMock
+        .expectOne(TOKEN_ENDPOINT)
+        .flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await first;
+
+      const second: Promise<string | null> = provider.ensureFreshToken({ force: true });
+      httpMock
+        .expectOne(TOKEN_ENDPOINT)
+        .flush({ access_token: "access-token-3", refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await expect(second).resolves.toBe("access-token-3");
+    });
+
+    /** A dead refresh token falls back to a full re-login with the configured credentials. */
+    it("falls back to a full re-login when the refresh grant is rejected", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(provider, httpMock, "password");
+
+      const fresh: Promise<string | null> = provider.ensureFreshToken({ force: true });
+      const refreshRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(refreshRequest.request.body as string).toContain("grant_type=refresh_token");
+      refreshRequest.flush("revoked", { status: 400, statusText: "Bad Request" });
+      await flushMicrotasks();
+
+      const loginRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(loginRequest.request.body as string).toContain("grant_type=password");
+      loginRequest.flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await expect(fresh).resolves.toBe(ACCESS_TOKEN_2);
+    });
+
+    /**
+     * With a config present but no token yet cached (an earlier login failed), a
+     * plain pre-flight call has nothing usable to serve and logs in from scratch.
+     */
+    it("logs in from scratch when configured but holding no token", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setupUnconfigured();
+      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
+      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
+      await expect(configured).rejects.toBeInstanceOf(KeycloakAuthenticationError);
+      expect(provider.getToken()).toBeNull();
+
+      // No force: the cached token is absent, so this must still trigger a login.
+      const fresh: Promise<string | null> = provider.ensureFreshToken();
+      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(request.request.body as string).toContain("grant_type=password");
+      request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await expect(fresh).resolves.toBe(ACCESS_TOKEN);
+    });
+
+    /** When even the re-login fails the caller sees the authentication error. */
+    it("rejects when the fallback re-login also fails", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(provider, httpMock, "password");
+
+      const fresh: Promise<string | null> = provider.ensureFreshToken({ force: true });
+      httpMock.expectOne(TOKEN_ENDPOINT).flush("revoked", { status: 400, statusText: "Bad Request" });
+      await flushMicrotasks();
+      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
+      await expect(fresh).rejects.toBeInstanceOf(KeycloakAuthenticationError);
+    });
+  });
+
 });
