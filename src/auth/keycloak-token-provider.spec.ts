@@ -606,6 +606,31 @@ describe("KeycloakTokenProvider", (): void => {
       await expect(configured).rejects.toBeInstanceOf(KeycloakAuthenticationError);
       expect(provider.getToken()).toBeNull();
     });
+
+    /**
+     * A provider constructed without a config has its first login in configure(), so a failure
+     * there must settle whenReady() too — otherwise every awaiter hangs forever.
+     */
+    it("rejects whenReady() when the first runtime login fails", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setupUnconfigured();
+      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
+      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
+      await expect(configured).rejects.toBeInstanceOf(KeycloakAuthenticationError);
+
+      await expect(provider.whenReady()).rejects.toBeInstanceOf(KeycloakAuthenticationError);
+    });
+
+    /** The first successful runtime login resolves whenReady() for an initially idle provider. */
+    it("resolves whenReady() once the first runtime login succeeds", async (): Promise<void> => {
+      const { provider, httpMock }: SetupResult = setupUnconfigured();
+      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
+      httpMock
+        .expectOne(TOKEN_ENDPOINT)
+        .flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      await configured;
+
+      await expect(provider.whenReady()).resolves.toBeUndefined();
+    });
   });
 
   describe("ensureFreshToken (pre-flight and forced renewal)", (): void => {

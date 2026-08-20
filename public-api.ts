@@ -56,7 +56,7 @@ export * from './api/ondewo/qa/qa.pb';
 export * from './api/ondewo/qa/qa.pbconf';
 export * from './api/ondewo/qa/qa.pbsc';
 
-// Hand-written auth surface (bearer credential + Keycloak token provider). Not emitted by the
-// proto compiler: keep this line when regenerating the stubs above, otherwise `src/auth` is
-// compiled but never bundled and consumers cannot import any auth symbol.
+// Hand-written auth surface (bearer credential + Keycloak token provider). Emitted by the proto
+// compiler from 5.13.0 on, which star-exports `auth/index.ts` when the source volume has one --
+// before that the barrel was compiled but never bundled and no auth symbol was importable.
 export * from './src/auth';

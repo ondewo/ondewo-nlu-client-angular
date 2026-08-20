@@ -191,11 +191,17 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
   private accessTokenExpiresAtInMs: number | null = null;
   /** In-flight {@link ensureFreshToken} renewal, shared so concurrent callers issue one grant. */
   private inFlightRenewal: Promise<void> | null = null;
-  /** Promise resolving once the first login has completed (or rejecting if it failed). */
+  /**
+   * Promise settled by the *first* login attempt — the one started by the constructor when a
+   * config was injected, otherwise the one started by the first {@link configure} call. It
+   * resolves when that login succeeds and rejects when it fails; later attempts leave it as-is
+   * (a settled promise cannot be re-settled), so callers tracking a re-{@link configure} must
+   * await the promise `configure()` returns rather than {@link whenReady}.
+   */
   private readonly ready: Promise<void>;
   /** Settles {@link ready} on the first successful login. */
   private resolveReady!: () => void;
-  /** Settles {@link ready} when a login configured at construction fails. */
+  /** Settles {@link ready} when the first login fails. */
   private rejectReady!: (reason: unknown) => void;
 
   /**
@@ -210,6 +216,10 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
       this.resolveReady = resolve;
       this.rejectReady = reject;
     });
+    // Nothing is obliged to call whenReady(), so mark `ready` as observed here: a rejected login
+    // that no one awaits would otherwise surface as an unhandled promise rejection (a console
+    // error in the browser, a process warning under node). whenReady() callers still see it.
+    void this.ready.catch((): void => undefined);
     if (this.config === null) {
       // No config at construction: stay idle until configure() supplies credentials.
       return;
@@ -231,6 +241,9 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
    * login runs, so a provider can be re-pointed at a different technical user
    * without being re-created.
    *
+   * When this is the provider's first login attempt it also settles {@link whenReady}; a later
+   * re-configure does not, so track those through the promise returned here.
+   *
    * @param config the configuration to adopt, replacing any earlier one.
    * @returns a promise that resolves once the login with `config` has completed.
    * @throws KeycloakAuthenticationError when the login fails (the provider is
@@ -245,7 +258,14 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
     this.deadlineInMs = null;
     this.inFlightRenewal = null;
     this.applyConfig(config);
-    await this.bootstrap();
+    try {
+      await this.bootstrap();
+    } catch (error: unknown) {
+      // A provider constructed without a config has its first login here, so `ready` is still
+      // pending; reject it rather than leaving every whenReady() awaiter hanging forever.
+      this.rejectReady(error);
+      throw error;
+    }
     this.resolveReady();
   }
 
@@ -266,8 +286,10 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
    *
    * @param options renewal options; `force` renews even when the cached token
    *   still looks valid.
-   * @returns the usable access token, or `null` when the provider is
-   *   unconfigured or the renewal failed.
+   * @returns the usable access token, or `null` when the provider has no config
+   *   yet (nothing to renew with).
+   * @throws KeycloakAuthenticationError when the renewal — and the full re-login
+   *   it falls back to — both fail.
    */
   public async ensureFreshToken(options: EnsureFreshTokenOptions = {}): Promise<string | null> {
     const force: boolean = options.force ?? false;
@@ -314,6 +336,10 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
   /**
    * Await the first login so callers can guarantee a token is present before
    * issuing requests (e.g. from an `APP_INITIALIZER`).
+   *
+   * The first login is the constructor's when a config was injected, otherwise the
+   * first {@link configure} call's. Subsequent re-configures do not re-arm this
+   * promise — await the one `configure()` returns for those.
    *
    * @returns a promise that resolves once the first access token is stored, or
    *   rejects with the {@link KeycloakAuthenticationError} from a failed login.

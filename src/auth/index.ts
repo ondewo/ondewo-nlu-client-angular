@@ -10,6 +10,7 @@
  */
 export { TOKEN_PROVIDER, TokenProvider, TokenResult } from "./token-provider";
 export {
+  EnsureFreshTokenOptions,
   KEYCLOAK_TOKEN_PROVIDER_CONFIG,
   KeycloakAuthenticationError,
   KeycloakTokenProvider,

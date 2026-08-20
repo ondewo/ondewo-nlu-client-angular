@@ -9,9 +9,10 @@ import { join } from "path";
  * `fesm2022` bundle: `import { KeycloakTokenProvider } from "@ondewo/nlu-client-angular"` did not
  * resolve for any consumer, and applications were forced to re-implement token refresh themselves.
  *
- * `public-api.ts` is rewritten whenever the stubs are regenerated, which is exactly how the export
- * was lost, so the entry point is asserted as text here rather than imported (importing it would
- * pull in every generated protobuf module for no added signal).
+ * `public-api.ts` is deleted and rewritten whenever the stubs are regenerated, so the line is only
+ * there because the proto compiler emits it (5.13.0+ star-exports `auth/index.ts`). This asserts the
+ * artifact as text rather than importing it -- importing would pull in every generated protobuf
+ * module for no added signal -- and fails if a compiler downgrade drops the barrel again.
  */
 describe("package public API entry point", (): void => {
   /** The auth barrel must stay re-exported from the entry point the build bundles. */
