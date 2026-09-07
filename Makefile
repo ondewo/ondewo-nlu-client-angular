@@ -114,7 +114,6 @@ release: ## Create Github and NPM Release
 	make run_precommit_hooks
 	git status
 	git add api
-	-git add esm2022
 	git add fesm2022
 	git add src
 	git add README.md
@@ -251,10 +250,16 @@ check_out_correct_submodule_versions: ## Fetches all Submodules and checks out s
 	git submodule update --init --recursive
 	git -C ${NLU_APIS_DIR} fetch --all
 	git -C ${NLU_APIS_DIR} checkout ${NLU_API_GIT_BRANCH}
-	-git -C ${NLU_APIS_DIR} pull
+	@# The *_GIT_BRANCH vars normally pin a tag (tags/<version>), which leaves the submodule on a
+	@# detached HEAD and makes `git pull` fail with "You are not currently on a branch" on every
+	@# release. They have also held a real branch during feature work (NLU_API_GIT_BRANCH=
+	@# OND211-2418-add-keycloak-for-2-fa, ONDEWO_PROTO_COMPILER_GIT_BRANCH=master), where the pull is
+	@# what advances the checkout past what `fetch --all` left behind - so pull only when HEAD is on
+	@# a branch, and stay non-fatal.
+	-if git -C ${NLU_APIS_DIR} symbolic-ref -q HEAD >/dev/null; then git -C ${NLU_APIS_DIR} pull; fi
 	git -C ${ONDEWO_PROTO_COMPILER_DIR} fetch --all
 	git -C ${ONDEWO_PROTO_COMPILER_DIR} checkout ${ONDEWO_PROTO_COMPILER_GIT_BRANCH}
-	-git -C ${ONDEWO_PROTO_COMPILER_DIR} pull
+	-if git -C ${ONDEWO_PROTO_COMPILER_DIR} symbolic-ref -q HEAD >/dev/null; then git -C ${ONDEWO_PROTO_COMPILER_DIR} pull; fi
 	@echo "DONE checking out correct submodule versions."
 
 npm_run_build: ## Runs the build command in package.json
