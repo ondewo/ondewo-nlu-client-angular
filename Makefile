@@ -115,6 +115,11 @@ release: ## Create Github and NPM Release
 	git status
 	git add api
 	git add fesm2022
+	@# index.d.ts and public-api.ts are rewritten by every build - the compiler deletes and
+	@# regenerates public-api.ts, ng-packagr rewrites index.d.ts - and both are tracked, so
+	@# leaving them unstaged lets the release commit describe a package npm never receives.
+	git add public-api.ts
+	git add index.d.ts
 	git add src
 	git add README.md
 	git add RELEASE.md
