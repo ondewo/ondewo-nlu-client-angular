@@ -981,7 +981,6 @@ class Comment {
         _instance.modifiedAt = _instance.modifiedAt || undefined;
         _instance.createdBy = _instance.createdBy || '';
         _instance.modifiedBy = _instance.modifiedBy || '';
-        _instance.isResolved = _instance.isResolved || false;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -1064,7 +1063,7 @@ class Comment {
         if (_instance.modifiedBy) {
             _writer.writeString(9, _instance.modifiedBy);
         }
-        if (_instance.isResolved) {
+        if (_instance.isResolved !== undefined && _instance.isResolved !== null) {
             _writer.writeBool(10, _instance.isResolved);
         }
     }
@@ -7531,7 +7530,6 @@ class Context {
         _instance.name = _instance.name || '';
         _instance.lifespanCount = _instance.lifespanCount || 0;
         _instance.parameters = _instance.parameters || {};
-        _instance.lifespanTime = _instance.lifespanTime || 0;
         _instance.createdAt = _instance.createdAt || undefined;
         _instance.modifiedAt = _instance.modifiedAt || undefined;
         _instance.createdBy = _instance.createdBy || '';
@@ -7603,7 +7601,8 @@ class Context {
                 _writer.writeRepeatedMessage(3, repeated_3, Context.ParametersEntry.serializeBinaryToWriter);
             }
         }
-        if (_instance.lifespanTime) {
+        if (_instance.lifespanTime !== undefined &&
+            _instance.lifespanTime !== null) {
             _writer.writeFloat(4, _instance.lifespanTime);
         }
         if (_instance.createdAt) {
@@ -29494,7 +29493,6 @@ class LlmEvaluationFeedback {
         _instance.name = _instance.name || '';
         _instance.displayName = _instance.displayName || '';
         _instance.criterion = _instance.criterion || '';
-        _instance.score = _instance.score || 0;
         _instance.categoricalValue = _instance.categoricalValue || '';
         _instance.comment = _instance.comment || '';
         _instance.annotatorUserId = _instance.annotatorUserId || '';
@@ -29589,7 +29587,7 @@ class LlmEvaluationFeedback {
         if (_instance.criterion) {
             _writer.writeString(3, _instance.criterion);
         }
-        if (_instance.score) {
+        if (_instance.score !== undefined && _instance.score !== null) {
             _writer.writeDouble(4, _instance.score);
         }
         if (_instance.categoricalValue) {
@@ -35397,8 +35395,6 @@ class LlmEvaluationReleaseGateThresholds {
      */
     static refineValues(_instance) {
         _instance.minPassRate = _instance.minPassRate || 0;
-        _instance.maxRegressionPerCriterion =
-            _instance.maxRegressionPerCriterion || 0;
         _instance.maxP95LatencySeconds = _instance.maxP95LatencySeconds || 0;
         _instance.acceptanceMustPass = _instance.acceptanceMustPass || false;
     }
@@ -35439,7 +35435,8 @@ class LlmEvaluationReleaseGateThresholds {
         if (_instance.minPassRate) {
             _writer.writeDouble(1, _instance.minPassRate);
         }
-        if (_instance.maxRegressionPerCriterion) {
+        if (_instance.maxRegressionPerCriterion !== undefined &&
+            _instance.maxRegressionPerCriterion !== null) {
             _writer.writeDouble(2, _instance.maxRegressionPerCriterion);
         }
         if (_instance.maxP95LatencySeconds) {
@@ -35549,8 +35546,6 @@ class LlmEvaluationReleaseGateSafetyConfig {
         _instance.enabled = _instance.enabled || false;
         _instance.adversarialDatasetName = _instance.adversarialDatasetName || '';
         _instance.evaluatorNames = _instance.evaluatorNames || [];
-        _instance.maxToxicity = _instance.maxToxicity || 0;
-        _instance.maxBias = _instance.maxBias || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -35598,10 +35593,10 @@ class LlmEvaluationReleaseGateSafetyConfig {
         if (_instance.evaluatorNames && _instance.evaluatorNames.length) {
             _writer.writeRepeatedString(3, _instance.evaluatorNames);
         }
-        if (_instance.maxToxicity) {
+        if (_instance.maxToxicity !== undefined && _instance.maxToxicity !== null) {
             _writer.writeDouble(4, _instance.maxToxicity);
         }
-        if (_instance.maxBias) {
+        if (_instance.maxBias !== undefined && _instance.maxBias !== null) {
             _writer.writeDouble(5, _instance.maxBias);
         }
     }
@@ -49058,7 +49053,6 @@ class LlmEvaluationOnlineConfig {
         _instance.sampleRate = _instance.sampleRate || 0;
         _instance.enabled = _instance.enabled || false;
         _instance.targetDatasetName = _instance.targetDatasetName || '';
-        _instance.failThreshold = _instance.failThreshold || 0;
         _instance.settleSeconds = _instance.settleSeconds || 0;
         _instance.requireTelemetry = _instance.requireTelemetry || false;
         _instance.llmEvaluationOnlineSessionFilter =
@@ -49176,7 +49170,8 @@ class LlmEvaluationOnlineConfig {
         if (_instance.targetDatasetName) {
             _writer.writeString(7, _instance.targetDatasetName);
         }
-        if (_instance.failThreshold) {
+        if (_instance.failThreshold !== undefined &&
+            _instance.failThreshold !== null) {
             _writer.writeDouble(8, _instance.failThreshold);
         }
         if (_instance.settleSeconds) {
@@ -54563,14 +54558,7 @@ class LlmTelemetry {
         _instance.baseUrl = _instance.baseUrl || '';
         _instance.defaultHeaders = _instance.defaultHeaders || undefined;
         _instance.defaultQuery = _instance.defaultQuery || undefined;
-        _instance.frequencyPenalty = _instance.frequencyPenalty || 0;
         _instance.openaiMetadata = _instance.openaiMetadata || undefined;
-        _instance.presencePenalty = _instance.presencePenalty || 0;
-        _instance.reasoningEffort = _instance.reasoningEffort || 0;
-        _instance.user = _instance.user || '';
-        _instance.timeout = _instance.timeout || 0;
-        _instance.strictResponseValidation =
-            _instance.strictResponseValidation || false;
         _instance.extraHeaders = _instance.extraHeaders || undefined;
         _instance.extraQuery = _instance.extraQuery || undefined;
         _instance.extraBody = _instance.extraBody || undefined;
@@ -54961,25 +54949,29 @@ class LlmTelemetry {
         if (_instance.defaultQuery) {
             _writer.writeMessage(49, _instance.defaultQuery, googleProtobuf005.Struct.serializeBinaryToWriter);
         }
-        if (_instance.frequencyPenalty) {
+        if (_instance.frequencyPenalty !== undefined &&
+            _instance.frequencyPenalty !== null) {
             _writer.writeFloat(50, _instance.frequencyPenalty);
         }
         if (_instance.openaiMetadata) {
             _writer.writeMessage(51, _instance.openaiMetadata, googleProtobuf005.Struct.serializeBinaryToWriter);
         }
-        if (_instance.presencePenalty) {
+        if (_instance.presencePenalty !== undefined &&
+            _instance.presencePenalty !== null) {
             _writer.writeFloat(52, _instance.presencePenalty);
         }
-        if (_instance.reasoningEffort) {
+        if (_instance.reasoningEffort !== undefined &&
+            _instance.reasoningEffort !== null) {
             _writer.writeEnum(53, _instance.reasoningEffort);
         }
-        if (_instance.user) {
+        if (_instance.user !== undefined && _instance.user !== null) {
             _writer.writeString(54, _instance.user);
         }
-        if (_instance.timeout) {
+        if (_instance.timeout !== undefined && _instance.timeout !== null) {
             _writer.writeFloat(55, _instance.timeout);
         }
-        if (_instance.strictResponseValidation) {
+        if (_instance.strictResponseValidation !== undefined &&
+            _instance.strictResponseValidation !== null) {
             _writer.writeBool(56, _instance.strictResponseValidation);
         }
         if (_instance.extraHeaders) {
@@ -70361,7 +70353,6 @@ class ListSessionCommentsRequest {
         _instance.sessionId = _instance.sessionId || '';
         _instance.pageToken = _instance.pageToken || '';
         _instance.fieldMask = _instance.fieldMask || undefined;
-        _instance.isResolved = _instance.isResolved || false;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -70407,7 +70398,7 @@ class ListSessionCommentsRequest {
         if (_instance.fieldMask) {
             _writer.writeMessage(3, _instance.fieldMask, googleProtobuf005.FieldMask.serializeBinaryToWriter);
         }
-        if (_instance.isResolved) {
+        if (_instance.isResolved !== undefined && _instance.isResolved !== null) {
             _writer.writeBool(4, _instance.isResolved);
         }
     }
@@ -70514,7 +70505,6 @@ class ListSessionCommentsOfAllSessionsRequest {
         _instance.sessionFilter = _instance.sessionFilter || undefined;
         _instance.pageToken = _instance.pageToken || '';
         _instance.fieldMask = _instance.fieldMask || undefined;
-        _instance.isResolved = _instance.isResolved || false;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -70567,7 +70557,7 @@ class ListSessionCommentsOfAllSessionsRequest {
         if (_instance.fieldMask) {
             _writer.writeMessage(4, _instance.fieldMask, googleProtobuf005.FieldMask.serializeBinaryToWriter);
         }
-        if (_instance.isResolved) {
+        if (_instance.isResolved !== undefined && _instance.isResolved !== null) {
             _writer.writeBool(5, _instance.isResolved);
         }
     }
@@ -70812,7 +70802,6 @@ class SessionFeedback {
             _instance.sessionStepLlmTelemetryId || '';
         _instance.rating = _instance.rating || 0;
         _instance.categoricalValue = _instance.categoricalValue || '';
-        _instance.score = _instance.score || 0;
         _instance.comment = _instance.comment || '';
         _instance.criterion = _instance.criterion || '';
         _instance.authorType = _instance.authorType || 0;
@@ -70928,7 +70917,7 @@ class SessionFeedback {
         if (_instance.categoricalValue) {
             _writer.writeString(7, _instance.categoricalValue);
         }
-        if (_instance.score) {
+        if (_instance.score !== undefined && _instance.score !== null) {
             _writer.writeFloat(8, _instance.score);
         }
         if (_instance.comment) {
@@ -72280,15 +72269,12 @@ class FeedbackFilter {
     static refineValues(_instance) {
         _instance.ratings = _instance.ratings || [];
         _instance.authorTypes = _instance.authorTypes || [];
-        _instance.hasComment = _instance.hasComment || false;
         _instance.earliest = _instance.earliest || undefined;
         _instance.latest = _instance.latest || undefined;
         _instance.criteria = _instance.criteria || [];
         _instance.languageCodes = _instance.languageCodes || [];
         _instance.annotatorUserIds = _instance.annotatorUserIds || [];
         _instance.originIds = _instance.originIds || [];
-        _instance.scoreMin = _instance.scoreMin || 0;
-        _instance.scoreMax = _instance.scoreMax || 0;
         _instance.scope = _instance.scope || 0;
     }
     /**
@@ -72357,7 +72343,7 @@ class FeedbackFilter {
         if (_instance.authorTypes && _instance.authorTypes.length) {
             _writer.writePackedEnum(2, _instance.authorTypes);
         }
-        if (_instance.hasComment) {
+        if (_instance.hasComment !== undefined && _instance.hasComment !== null) {
             _writer.writeBool(3, _instance.hasComment);
         }
         if (_instance.earliest) {
@@ -72378,10 +72364,10 @@ class FeedbackFilter {
         if (_instance.originIds && _instance.originIds.length) {
             _writer.writeRepeatedString(9, _instance.originIds);
         }
-        if (_instance.scoreMin) {
+        if (_instance.scoreMin !== undefined && _instance.scoreMin !== null) {
             _writer.writeFloat(10, _instance.scoreMin);
         }
-        if (_instance.scoreMax) {
+        if (_instance.scoreMax !== undefined && _instance.scoreMax !== null) {
             _writer.writeFloat(11, _instance.scoreMax);
         }
         if (_instance.scope) {
@@ -95486,10 +95472,10 @@ class AgentsClient {
             .rotateProjectTechnicalUserPassword(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AgentsClient, deps: [{ token: GRPC_AGENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AgentsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: AgentsClient, deps: [{ token: GRPC_AGENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: AgentsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AgentsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: AgentsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -101362,10 +101348,10 @@ class AiServicesClient {
             .listLlmModels(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AiServicesClient, deps: [{ token: GRPC_AI_SERVICES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AiServicesClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: AiServicesClient, deps: [{ token: GRPC_AI_SERVICES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: AiServicesClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AiServicesClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: AiServicesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -101591,10 +101577,10 @@ class CcaiProjectsClient {
             .getCcaiService(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: CcaiProjectsClient, deps: [{ token: GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: CcaiProjectsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: CcaiProjectsClient, deps: [{ token: GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: CcaiProjectsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: CcaiProjectsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: CcaiProjectsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -101820,10 +101806,10 @@ class ContextsClient {
             .deleteAllContexts(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ContextsClient, deps: [{ token: GRPC_CONTEXTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ContextsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ContextsClient, deps: [{ token: GRPC_CONTEXTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ContextsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ContextsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ContextsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -102349,10 +102335,10 @@ class EntityTypesClient {
             .listEntities(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: EntityTypesClient, deps: [{ token: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: EntityTypesClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: EntityTypesClient, deps: [{ token: GRPC_ENTITY_TYPES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: EntityTypesClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: EntityTypesClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: EntityTypesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -103208,10 +103194,10 @@ class IntentsClient {
             .listTrainingPhrasesofIntentsWithEnrichment(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: IntentsClient, deps: [{ token: GRPC_INTENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: IntentsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: IntentsClient, deps: [{ token: GRPC_INTENTS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: IntentsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: IntentsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: IntentsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -105417,10 +105403,10 @@ class LlmEvaluationsClient {
             .llmEvaluationPromoteAnnotationQueueItem(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: LlmEvaluationsClient, deps: [{ token: GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: LlmEvaluationsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: LlmEvaluationsClient, deps: [{ token: GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: LlmEvaluationsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: LlmEvaluationsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: LlmEvaluationsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -105706,10 +105692,10 @@ class OperationsClient {
             .listRemoteOperationContainers(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: OperationsClient, deps: [{ token: GRPC_OPERATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: OperationsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: OperationsClient, deps: [{ token: GRPC_OPERATIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: OperationsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: OperationsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: OperationsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -105905,10 +105891,10 @@ class ProjectRolesClient {
             .listProjectRoles(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ProjectRolesClient, deps: [{ token: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ProjectRolesClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ProjectRolesClient, deps: [{ token: GRPC_PROJECT_ROLES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ProjectRolesClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ProjectRolesClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ProjectRolesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -106651,10 +106637,10 @@ class ProjectStatisticsClient {
             .getEntitySynonymCount(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ProjectStatisticsClient, deps: [{ token: GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ProjectStatisticsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ProjectStatisticsClient, deps: [{ token: GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ProjectStatisticsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ProjectStatisticsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ProjectStatisticsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -107266,15 +107252,11 @@ class RagParserConfig {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.autoKeywords = _instance.autoKeywords || 0;
-        _instance.autoQuestions = _instance.autoQuestions || 0;
         _instance.chunkTokenNum = _instance.chunkTokenNum || 0;
         _instance.delimiter = _instance.delimiter || '';
-        _instance.html4excel = _instance.html4excel || false;
         _instance.layoutRecognize = _instance.layoutRecognize || '';
         _instance.tagKbIds = _instance.tagKbIds || [];
         _instance.topnTags = _instance.topnTags || 0;
-        _instance.filenameEmbdWeight = _instance.filenameEmbdWeight || 0;
         _instance.taskPageSize = _instance.taskPageSize || 0;
         _instance.raptor = _instance.raptor || undefined;
         _instance.graphrag = _instance.graphrag || undefined;
@@ -107339,10 +107321,12 @@ class RagParserConfig {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.autoKeywords) {
+        if (_instance.autoKeywords !== undefined &&
+            _instance.autoKeywords !== null) {
             _writer.writeInt32(1, _instance.autoKeywords);
         }
-        if (_instance.autoQuestions) {
+        if (_instance.autoQuestions !== undefined &&
+            _instance.autoQuestions !== null) {
             _writer.writeInt32(2, _instance.autoQuestions);
         }
         if (_instance.chunkTokenNum) {
@@ -107351,7 +107335,7 @@ class RagParserConfig {
         if (_instance.delimiter) {
             _writer.writeString(4, _instance.delimiter);
         }
-        if (_instance.html4excel) {
+        if (_instance.html4excel !== undefined && _instance.html4excel !== null) {
             _writer.writeBool(5, _instance.html4excel);
         }
         if (_instance.layoutRecognize) {
@@ -107363,7 +107347,8 @@ class RagParserConfig {
         if (_instance.topnTags) {
             _writer.writeInt32(8, _instance.topnTags);
         }
-        if (_instance.filenameEmbdWeight) {
+        if (_instance.filenameEmbdWeight !== undefined &&
+            _instance.filenameEmbdWeight !== null) {
             _writer.writeFloat(9, _instance.filenameEmbdWeight);
         }
         if (_instance.taskPageSize) {
@@ -107549,12 +107534,9 @@ class RagRaptorConfig {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.useRaptor = _instance.useRaptor || false;
         _instance.prompt = _instance.prompt || '';
         _instance.maxToken = _instance.maxToken || 0;
-        _instance.threshold = _instance.threshold || 0;
         _instance.maxCluster = _instance.maxCluster || 0;
-        _instance.randomSeed = _instance.randomSeed || '0';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -107596,7 +107578,7 @@ class RagRaptorConfig {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.useRaptor) {
+        if (_instance.useRaptor !== undefined && _instance.useRaptor !== null) {
             _writer.writeBool(1, _instance.useRaptor);
         }
         if (_instance.prompt) {
@@ -107605,13 +107587,13 @@ class RagRaptorConfig {
         if (_instance.maxToken) {
             _writer.writeInt32(3, _instance.maxToken);
         }
-        if (_instance.threshold) {
+        if (_instance.threshold !== undefined && _instance.threshold !== null) {
             _writer.writeFloat(4, _instance.threshold);
         }
         if (_instance.maxCluster) {
             _writer.writeInt32(5, _instance.maxCluster);
         }
-        if (_instance.randomSeed) {
+        if (_instance.randomSeed !== undefined && _instance.randomSeed !== null) {
             _writer.writeInt64String(6, _instance.randomSeed);
         }
     }
@@ -107730,11 +107712,8 @@ class RagGraphRagConfig {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.useGraphrag = _instance.useGraphrag || false;
         _instance.entityTypes = _instance.entityTypes || [];
         _instance.method = _instance.method || 0;
-        _instance.community = _instance.community || false;
-        _instance.resolution = _instance.resolution || false;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -107773,7 +107752,7 @@ class RagGraphRagConfig {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.useGraphrag) {
+        if (_instance.useGraphrag !== undefined && _instance.useGraphrag !== null) {
             _writer.writeBool(1, _instance.useGraphrag);
         }
         if (_instance.entityTypes && _instance.entityTypes.length) {
@@ -107782,10 +107761,10 @@ class RagGraphRagConfig {
         if (_instance.method) {
             _writer.writeEnum(3, _instance.method);
         }
-        if (_instance.community) {
+        if (_instance.community !== undefined && _instance.community !== null) {
             _writer.writeBool(4, _instance.community);
         }
-        if (_instance.resolution) {
+        if (_instance.resolution !== undefined && _instance.resolution !== null) {
             _writer.writeBool(5, _instance.resolution);
         }
     }
@@ -107899,12 +107878,8 @@ class RagDataset {
         _instance.avatar = _instance.avatar || '';
         _instance.name = _instance.name || '';
         _instance.description = _instance.description || '';
-        _instance.documentCount = _instance.documentCount || 0;
-        _instance.tokenNum = _instance.tokenNum || 0;
-        _instance.chunkCount = _instance.chunkCount || 0;
         _instance.chunkMethod = _instance.chunkMethod || 0;
         _instance.parserConfig = _instance.parserConfig || undefined;
-        _instance.pagerank = _instance.pagerank || 0;
         _instance.parsingStatus = _instance.parsingStatus || undefined;
         _instance.createTime = _instance.createTime || undefined;
         _instance.updateTime = _instance.updateTime || undefined;
@@ -107991,13 +107966,14 @@ class RagDataset {
         if (_instance.description) {
             _writer.writeString(4, _instance.description);
         }
-        if (_instance.documentCount) {
+        if (_instance.documentCount !== undefined &&
+            _instance.documentCount !== null) {
             _writer.writeInt32(5, _instance.documentCount);
         }
-        if (_instance.tokenNum) {
+        if (_instance.tokenNum !== undefined && _instance.tokenNum !== null) {
             _writer.writeInt32(6, _instance.tokenNum);
         }
-        if (_instance.chunkCount) {
+        if (_instance.chunkCount !== undefined && _instance.chunkCount !== null) {
             _writer.writeInt32(7, _instance.chunkCount);
         }
         if (_instance.chunkMethod) {
@@ -108006,7 +107982,7 @@ class RagDataset {
         if (_instance.parserConfig) {
             _writer.writeMessage(9, _instance.parserConfig, RagParserConfig.serializeBinaryToWriter);
         }
-        if (_instance.pagerank) {
+        if (_instance.pagerank !== undefined && _instance.pagerank !== null) {
             _writer.writeInt32(10, _instance.pagerank);
         }
         if (_instance.parsingStatus) {
@@ -108400,11 +108376,8 @@ class RagUpdateDatasetRequest {
         _instance.languageCode = _instance.languageCode || '';
         _instance.datasetId = _instance.datasetId || '';
         _instance.name = _instance.name || '';
-        _instance.description = _instance.description || '';
-        _instance.avatar = _instance.avatar || '';
         _instance.chunkMethod = _instance.chunkMethod || 0;
         _instance.parserConfig = _instance.parserConfig || undefined;
-        _instance.pagerank = _instance.pagerank || 0;
         _instance.updateMask = _instance.updateMask || undefined;
         _instance.fieldMask = _instance.fieldMask || undefined;
         _instance.embeddingModelCcaiServiceName =
@@ -108483,10 +108456,10 @@ class RagUpdateDatasetRequest {
         if (_instance.name) {
             _writer.writeString(4, _instance.name);
         }
-        if (_instance.description) {
+        if (_instance.description !== undefined && _instance.description !== null) {
             _writer.writeString(5, _instance.description);
         }
-        if (_instance.avatar) {
+        if (_instance.avatar !== undefined && _instance.avatar !== null) {
             _writer.writeString(6, _instance.avatar);
         }
         if (_instance.chunkMethod) {
@@ -108495,7 +108468,7 @@ class RagUpdateDatasetRequest {
         if (_instance.parserConfig) {
             _writer.writeMessage(8, _instance.parserConfig, RagParserConfig.serializeBinaryToWriter);
         }
-        if (_instance.pagerank) {
+        if (_instance.pagerank !== undefined && _instance.pagerank !== null) {
             _writer.writeInt32(9, _instance.pagerank);
         }
         if (_instance.updateMask) {
@@ -108846,7 +108819,6 @@ class RagListDatasetsRequest {
         _instance.id = _instance.id || '';
         _instance.name = _instance.name || '';
         _instance.orderby = _instance.orderby || '';
-        _instance.desc = _instance.desc || false;
         _instance.sortingMode = _instance.sortingMode || 0;
         _instance.fieldMask = _instance.fieldMask || undefined;
     }
@@ -108918,7 +108890,7 @@ class RagListDatasetsRequest {
         if (_instance.orderby) {
             _writer.writeString(6, _instance.orderby);
         }
-        if (_instance.desc) {
+        if (_instance.desc !== undefined && _instance.desc !== null) {
             _writer.writeBool(7, _instance.desc);
         }
         if (_instance.sortingMode) {
@@ -109384,13 +109356,8 @@ class RagDocument {
         _instance.parserConfig = _instance.parserConfig || undefined;
         _instance.type = _instance.type || 0;
         _instance.name = _instance.name || '';
-        _instance.size = _instance.size || '0';
-        _instance.chunkCount = _instance.chunkCount || 0;
-        _instance.tokenCount = _instance.tokenCount || 0;
-        _instance.progress = _instance.progress || 0;
         _instance.progressMsg = _instance.progressMsg || '';
         _instance.processBeginAt = _instance.processBeginAt || undefined;
-        _instance.processDuration = _instance.processDuration || 0;
         _instance.metaFields = _instance.metaFields || undefined;
         _instance.run = _instance.run || 0;
         _instance.status = _instance.status || '';
@@ -109502,16 +109469,16 @@ class RagDocument {
         if (_instance.name) {
             _writer.writeString(7, _instance.name);
         }
-        if (_instance.size) {
+        if (_instance.size !== undefined && _instance.size !== null) {
             _writer.writeInt64String(8, _instance.size);
         }
-        if (_instance.chunkCount) {
+        if (_instance.chunkCount !== undefined && _instance.chunkCount !== null) {
             _writer.writeInt32(9, _instance.chunkCount);
         }
-        if (_instance.tokenCount) {
+        if (_instance.tokenCount !== undefined && _instance.tokenCount !== null) {
             _writer.writeInt32(10, _instance.tokenCount);
         }
-        if (_instance.progress) {
+        if (_instance.progress !== undefined && _instance.progress !== null) {
             _writer.writeFloat(11, _instance.progress);
         }
         if (_instance.progressMsg) {
@@ -109520,7 +109487,8 @@ class RagDocument {
         if (_instance.processBeginAt) {
             _writer.writeMessage(13, _instance.processBeginAt, googleProtobuf005.Timestamp.serializeBinaryToWriter);
         }
-        if (_instance.processDuration) {
+        if (_instance.processDuration !== undefined &&
+            _instance.processDuration !== null) {
             _writer.writeFloat(14, _instance.processDuration);
         }
         if (_instance.metaFields) {
@@ -109804,7 +109772,6 @@ class RagUpdateDocumentRequest {
         _instance.name = _instance.name || '';
         _instance.chunkMethod = _instance.chunkMethod || 0;
         _instance.parserConfig = _instance.parserConfig || undefined;
-        _instance.enabled = _instance.enabled || false;
         _instance.metaFields = _instance.metaFields || undefined;
         _instance.updateMask = _instance.updateMask || undefined;
         _instance.fieldMask = _instance.fieldMask || undefined;
@@ -109889,7 +109856,7 @@ class RagUpdateDocumentRequest {
         if (_instance.parserConfig) {
             _writer.writeMessage(7, _instance.parserConfig, RagParserConfig.serializeBinaryToWriter);
         }
-        if (_instance.enabled) {
+        if (_instance.enabled !== undefined && _instance.enabled !== null) {
             _writer.writeBool(8, _instance.enabled);
         }
         if (_instance.metaFields) {
@@ -110356,7 +110323,6 @@ class RagListDocumentsRequest {
         _instance.name = _instance.name || '';
         _instance.pageToken = _instance.pageToken || '';
         _instance.orderby = _instance.orderby || '';
-        _instance.desc = _instance.desc || false;
         _instance.keywords = _instance.keywords || '';
         _instance.suffix = _instance.suffix || [];
         _instance.runStatus = _instance.runStatus || [];
@@ -110461,7 +110427,7 @@ class RagListDocumentsRequest {
         if (_instance.orderby) {
             _writer.writeString(7, _instance.orderby);
         }
-        if (_instance.desc) {
+        if (_instance.desc !== undefined && _instance.desc !== null) {
             _writer.writeBool(8, _instance.desc);
         }
         if (_instance.keywords) {
@@ -111426,17 +111392,11 @@ class RagRetrievalRequest {
         _instance.pageToken = _instance.pageToken || '';
         _instance.question = _instance.question || '';
         _instance.documentIds = _instance.documentIds || [];
-        _instance.useKg = _instance.useKg || false;
         _instance.crossLanguages = _instance.crossLanguages || [];
         _instance.metadataCondition = _instance.metadataCondition || undefined;
-        _instance.similarityThreshold = _instance.similarityThreshold || 0;
-        _instance.vectorSimilarityWeight = _instance.vectorSimilarityWeight || 0;
         _instance.topK = _instance.topK || 0;
-        _instance.highlight = _instance.highlight || false;
-        _instance.keyword = _instance.keyword || false;
         _instance.fieldMask = _instance.fieldMask || undefined;
-        _instance.rerankModelCcaiServiceName =
-            _instance.rerankModelCcaiServiceName || '';
+        _instance.rerankCandidates = _instance.rerankCandidates || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -111498,6 +111458,15 @@ class RagRetrievalRequest {
                 case 16:
                     _instance.rerankModelCcaiServiceName = _reader.readString();
                     break;
+                case 17:
+                    _instance.rerankCandidates = _reader.readInt32();
+                    break;
+                case 18:
+                    _instance.dedupThreshold = _reader.readFloat();
+                    break;
+                case 19:
+                    _instance.dedupBeforeRerank = _reader.readBool();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -111528,7 +111497,7 @@ class RagRetrievalRequest {
         if (_instance.documentIds && _instance.documentIds.length) {
             _writer.writeRepeatedString(6, _instance.documentIds);
         }
-        if (_instance.useKg) {
+        if (_instance.useKg !== undefined && _instance.useKg !== null) {
             _writer.writeBool(7, _instance.useKg);
         }
         if (_instance.crossLanguages && _instance.crossLanguages.length) {
@@ -111537,26 +111506,40 @@ class RagRetrievalRequest {
         if (_instance.metadataCondition) {
             _writer.writeMessage(9, _instance.metadataCondition, RagMetadataConditions.serializeBinaryToWriter);
         }
-        if (_instance.similarityThreshold) {
+        if (_instance.similarityThreshold !== undefined &&
+            _instance.similarityThreshold !== null) {
             _writer.writeFloat(10, _instance.similarityThreshold);
         }
-        if (_instance.vectorSimilarityWeight) {
+        if (_instance.vectorSimilarityWeight !== undefined &&
+            _instance.vectorSimilarityWeight !== null) {
             _writer.writeFloat(11, _instance.vectorSimilarityWeight);
         }
         if (_instance.topK) {
             _writer.writeInt32(12, _instance.topK);
         }
-        if (_instance.highlight) {
+        if (_instance.highlight !== undefined && _instance.highlight !== null) {
             _writer.writeBool(13, _instance.highlight);
         }
-        if (_instance.keyword) {
+        if (_instance.keyword !== undefined && _instance.keyword !== null) {
             _writer.writeBool(14, _instance.keyword);
         }
         if (_instance.fieldMask) {
             _writer.writeMessage(15, _instance.fieldMask, googleProtobuf005.FieldMask.serializeBinaryToWriter);
         }
-        if (_instance.rerankModelCcaiServiceName) {
+        if (_instance.rerankModelCcaiServiceName !== undefined &&
+            _instance.rerankModelCcaiServiceName !== null) {
             _writer.writeString(16, _instance.rerankModelCcaiServiceName);
+        }
+        if (_instance.rerankCandidates) {
+            _writer.writeInt32(17, _instance.rerankCandidates);
+        }
+        if (_instance.dedupThreshold !== undefined &&
+            _instance.dedupThreshold !== null) {
+            _writer.writeFloat(18, _instance.dedupThreshold);
+        }
+        if (_instance.dedupBeforeRerank !== undefined &&
+            _instance.dedupBeforeRerank !== null) {
+            _writer.writeBool(19, _instance.dedupBeforeRerank);
         }
     }
     /**
@@ -111585,6 +111568,9 @@ class RagRetrievalRequest {
             ? new googleProtobuf005.FieldMask(_value.fieldMask)
             : undefined;
         this.rerankModelCcaiServiceName = _value.rerankModelCcaiServiceName;
+        this.rerankCandidates = _value.rerankCandidates;
+        this.dedupThreshold = _value.dedupThreshold;
+        this.dedupBeforeRerank = _value.dedupBeforeRerank;
         RagRetrievalRequest.refineValues(this);
     }
     get parent() {
@@ -111683,6 +111669,24 @@ class RagRetrievalRequest {
     set rerankModelCcaiServiceName(value) {
         this._rerankModelCcaiServiceName = value;
     }
+    get rerankCandidates() {
+        return this._rerankCandidates;
+    }
+    set rerankCandidates(value) {
+        this._rerankCandidates = value;
+    }
+    get dedupThreshold() {
+        return this._dedupThreshold;
+    }
+    set dedupThreshold(value) {
+        this._dedupThreshold = value;
+    }
+    get dedupBeforeRerank() {
+        return this._dedupBeforeRerank;
+    }
+    set dedupBeforeRerank(value) {
+        this._dedupBeforeRerank = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -111714,7 +111718,10 @@ class RagRetrievalRequest {
             highlight: this.highlight,
             keyword: this.keyword,
             fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
-            rerankModelCcaiServiceName: this.rerankModelCcaiServiceName
+            rerankModelCcaiServiceName: this.rerankModelCcaiServiceName,
+            rerankCandidates: this.rerankCandidates,
+            dedupThreshold: this.dedupThreshold,
+            dedupBeforeRerank: this.dedupBeforeRerank
         };
     }
     /**
@@ -111749,7 +111756,10 @@ class RagRetrievalRequest {
             highlight: this.highlight,
             keyword: this.keyword,
             fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
-            rerankModelCcaiServiceName: this.rerankModelCcaiServiceName
+            rerankModelCcaiServiceName: this.rerankModelCcaiServiceName,
+            rerankCandidates: this.rerankCandidates,
+            dedupThreshold: this.dedupThreshold,
+            dedupBeforeRerank: this.dedupBeforeRerank
         };
     }
 }
@@ -111935,7 +111945,6 @@ class RagChunk {
         _instance.positions = _instance.positions || [];
         _instance.createTime = _instance.createTime || undefined;
         _instance.documentKeyword = _instance.documentKeyword || '';
-        _instance.similarity = _instance.similarity || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -112026,7 +112035,7 @@ class RagChunk {
         if (_instance.documentKeyword) {
             _writer.writeString(10, _instance.documentKeyword);
         }
-        if (_instance.similarity) {
+        if (_instance.similarity !== undefined && _instance.similarity !== null) {
             _writer.writeFloat(11, _instance.similarity);
         }
     }
@@ -112990,7 +112999,6 @@ class RagListCrawlersRequest {
         _instance.datasetName = _instance.datasetName || '';
         _instance.crawlerName = _instance.crawlerName || '';
         _instance.orderby = _instance.orderby || '';
-        _instance.sortingMode = _instance.sortingMode || 0;
         _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
@@ -113058,7 +113066,7 @@ class RagListCrawlersRequest {
         if (_instance.orderby) {
             _writer.writeString(6, _instance.orderby);
         }
-        if (_instance.sortingMode) {
+        if (_instance.sortingMode !== undefined && _instance.sortingMode !== null) {
             _writer.writeEnum(7, _instance.sortingMode);
         }
         if (_instance.fieldMask) {
@@ -114938,7 +114946,6 @@ class RagCrawlerBrowserConfig {
     static refineValues(_instance) {
         _instance.crawlerHeaders = _instance.crawlerHeaders || [];
         _instance.crawlerCookies = _instance.crawlerCookies || [];
-        _instance.crawlerUserAgent = _instance.crawlerUserAgent || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -114981,7 +114988,8 @@ class RagCrawlerBrowserConfig {
         if (_instance.crawlerCookies && _instance.crawlerCookies.length) {
             _writer.writeRepeatedMessage(2, _instance.crawlerCookies, RagCrawlerCookie.serializeBinaryToWriter);
         }
-        if (_instance.crawlerUserAgent) {
+        if (_instance.crawlerUserAgent !== undefined &&
+            _instance.crawlerUserAgent !== null) {
             _writer.writeString(3, _instance.crawlerUserAgent);
         }
     }
@@ -115327,6 +115335,7 @@ class RagCrawlerConfig {
         _instance.deepCrawlerConfig = _instance.deepCrawlerConfig || undefined;
         _instance.outputConfig = _instance.outputConfig || undefined;
         _instance.statusFilter = _instance.statusFilter || undefined;
+        _instance.incrementalConfig = _instance.incrementalConfig || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -115354,6 +115363,10 @@ class RagCrawlerConfig {
                     _instance.statusFilter = new RagCrawlerStatusFilter();
                     _reader.readMessage(_instance.statusFilter, RagCrawlerStatusFilter.deserializeBinaryFromReader);
                     break;
+                case 5:
+                    _instance.incrementalConfig = new RagCrawlerIncrementalConfig();
+                    _reader.readMessage(_instance.incrementalConfig, RagCrawlerIncrementalConfig.deserializeBinaryFromReader);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -115378,6 +115391,9 @@ class RagCrawlerConfig {
         if (_instance.statusFilter) {
             _writer.writeMessage(4, _instance.statusFilter, RagCrawlerStatusFilter.serializeBinaryToWriter);
         }
+        if (_instance.incrementalConfig) {
+            _writer.writeMessage(5, _instance.incrementalConfig, RagCrawlerIncrementalConfig.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -115396,6 +115412,9 @@ class RagCrawlerConfig {
             : undefined;
         this.statusFilter = _value.statusFilter
             ? new RagCrawlerStatusFilter(_value.statusFilter)
+            : undefined;
+        this.incrementalConfig = _value.incrementalConfig
+            ? new RagCrawlerIncrementalConfig(_value.incrementalConfig)
             : undefined;
         RagCrawlerConfig.refineValues(this);
     }
@@ -115423,6 +115442,12 @@ class RagCrawlerConfig {
     set statusFilter(value) {
         this._statusFilter = value;
     }
+    get incrementalConfig() {
+        return this._incrementalConfig;
+    }
+    set incrementalConfig(value) {
+        this._incrementalConfig = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -115446,7 +115471,12 @@ class RagCrawlerConfig {
             outputConfig: this.outputConfig
                 ? this.outputConfig.toObject()
                 : undefined,
-            statusFilter: this.statusFilter ? this.statusFilter.toObject() : undefined
+            statusFilter: this.statusFilter
+                ? this.statusFilter.toObject()
+                : undefined,
+            incrementalConfig: this.incrementalConfig
+                ? this.incrementalConfig.toObject()
+                : undefined
         };
     }
     /**
@@ -115475,6 +115505,9 @@ class RagCrawlerConfig {
                 : null,
             statusFilter: this.statusFilter
                 ? this.statusFilter.toProtobufJSON(options)
+                : null,
+            incrementalConfig: this.incrementalConfig
+                ? this.incrementalConfig.toProtobufJSON(options)
                 : null
         };
     }
@@ -115500,10 +115533,8 @@ class RagCrawlerDeepCrawlerConfig {
     static refineValues(_instance) {
         _instance.isActive = _instance.isActive || false;
         _instance.crawlStrategy = _instance.crawlStrategy || 0;
-        _instance.maxDepth = _instance.maxDepth || 0;
         _instance.maxPages = _instance.maxPages || 0;
         _instance.deepCrawlerFilters = _instance.deepCrawlerFilters || undefined;
-        _instance.normalizeUrlCase = _instance.normalizeUrlCase || false;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -115552,7 +115583,7 @@ class RagCrawlerDeepCrawlerConfig {
         if (_instance.crawlStrategy) {
             _writer.writeEnum(2, _instance.crawlStrategy);
         }
-        if (_instance.maxDepth) {
+        if (_instance.maxDepth !== undefined && _instance.maxDepth !== null) {
             _writer.writeInt32(3, _instance.maxDepth);
         }
         if (_instance.maxPages) {
@@ -115561,7 +115592,8 @@ class RagCrawlerDeepCrawlerConfig {
         if (_instance.deepCrawlerFilters) {
             _writer.writeMessage(5, _instance.deepCrawlerFilters, RagCrawlerFilters.serializeBinaryToWriter);
         }
-        if (_instance.normalizeUrlCase) {
+        if (_instance.normalizeUrlCase !== undefined &&
+            _instance.normalizeUrlCase !== null) {
             _writer.writeBool(6, _instance.normalizeUrlCase);
         }
     }
@@ -115688,10 +115720,10 @@ class RagCrawlerResultsConfig {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.injectFrontmatter = _instance.injectFrontmatter || false;
         _instance.metaDataExtractors = _instance.metaDataExtractors || [];
         _instance.contentScope = _instance.contentScope || undefined;
         _instance.densityPruning = _instance.densityPruning || undefined;
+        _instance.discoveryOnlyUrlRegex = _instance.discoveryOnlyUrlRegex || [];
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -115720,6 +115752,10 @@ class RagCrawlerResultsConfig {
                     _instance.densityPruning = new RagCrawlerDensityPruning();
                     _reader.readMessage(_instance.densityPruning, RagCrawlerDensityPruning.deserializeBinaryFromReader);
                     break;
+                case 5:
+                    (_instance.discoveryOnlyUrlRegex =
+                        _instance.discoveryOnlyUrlRegex || []).push(_reader.readString());
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -115732,7 +115768,8 @@ class RagCrawlerResultsConfig {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.injectFrontmatter) {
+        if (_instance.injectFrontmatter !== undefined &&
+            _instance.injectFrontmatter !== null) {
             _writer.writeBool(1, _instance.injectFrontmatter);
         }
         if (_instance.metaDataExtractors && _instance.metaDataExtractors.length) {
@@ -115743,6 +115780,10 @@ class RagCrawlerResultsConfig {
         }
         if (_instance.densityPruning) {
             _writer.writeMessage(4, _instance.densityPruning, RagCrawlerDensityPruning.serializeBinaryToWriter);
+        }
+        if (_instance.discoveryOnlyUrlRegex &&
+            _instance.discoveryOnlyUrlRegex.length) {
+            _writer.writeRepeatedString(5, _instance.discoveryOnlyUrlRegex);
         }
     }
     /**
@@ -115759,6 +115800,7 @@ class RagCrawlerResultsConfig {
         this.densityPruning = _value.densityPruning
             ? new RagCrawlerDensityPruning(_value.densityPruning)
             : undefined;
+        this.discoveryOnlyUrlRegex = (_value.discoveryOnlyUrlRegex || []).slice();
         RagCrawlerResultsConfig.refineValues(this);
     }
     get injectFrontmatter() {
@@ -115785,6 +115827,12 @@ class RagCrawlerResultsConfig {
     set densityPruning(value) {
         this._densityPruning = value;
     }
+    get discoveryOnlyUrlRegex() {
+        return this._discoveryOnlyUrlRegex;
+    }
+    set discoveryOnlyUrlRegex(value) {
+        this._discoveryOnlyUrlRegex = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -115806,7 +115854,8 @@ class RagCrawlerResultsConfig {
                 : undefined,
             densityPruning: this.densityPruning
                 ? this.densityPruning.toObject()
-                : undefined
+                : undefined,
+            discoveryOnlyUrlRegex: (this.discoveryOnlyUrlRegex || []).slice()
         };
     }
     /**
@@ -115831,7 +115880,8 @@ class RagCrawlerResultsConfig {
                 : null,
             densityPruning: this.densityPruning
                 ? this.densityPruning.toProtobufJSON(options)
-                : null
+                : null,
+            discoveryOnlyUrlRegex: (this.discoveryOnlyUrlRegex || []).slice()
         };
     }
 }
@@ -115971,10 +116021,6 @@ class RagCrawlerDensityPruning {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
-        _instance.threshold = _instance.threshold || 0;
-        _instance.thresholdType = _instance.thresholdType || 0;
-        _instance.minWordThreshold = _instance.minWordThreshold || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -116010,16 +116056,18 @@ class RagCrawlerDensityPruning {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
+        if (_instance.isActive !== undefined && _instance.isActive !== null) {
             _writer.writeBool(1, _instance.isActive);
         }
-        if (_instance.threshold) {
+        if (_instance.threshold !== undefined && _instance.threshold !== null) {
             _writer.writeFloat(2, _instance.threshold);
         }
-        if (_instance.thresholdType) {
+        if (_instance.thresholdType !== undefined &&
+            _instance.thresholdType !== null) {
             _writer.writeEnum(3, _instance.thresholdType);
         }
-        if (_instance.minWordThreshold) {
+        if (_instance.minWordThreshold !== undefined &&
+            _instance.minWordThreshold !== null) {
             _writer.writeInt32(4, _instance.minWordThreshold);
         }
     }
@@ -116255,8 +116303,6 @@ class RagCrawlerRetryConfig {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.pageLoadTimeoutSeconds = _instance.pageLoadTimeoutSeconds || 0;
-        _instance.retryMaxAttempts = _instance.retryMaxAttempts || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -116274,6 +116320,12 @@ class RagCrawlerRetryConfig {
                 case 2:
                     _instance.retryMaxAttempts = _reader.readInt32();
                     break;
+                case 3:
+                    _instance.retryBackoffSeconds = _reader.readFloat();
+                    break;
+                case 4:
+                    _instance.maxStallSeconds = _reader.readInt32();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -116286,11 +116338,21 @@ class RagCrawlerRetryConfig {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.pageLoadTimeoutSeconds) {
+        if (_instance.pageLoadTimeoutSeconds !== undefined &&
+            _instance.pageLoadTimeoutSeconds !== null) {
             _writer.writeInt32(1, _instance.pageLoadTimeoutSeconds);
         }
-        if (_instance.retryMaxAttempts) {
+        if (_instance.retryMaxAttempts !== undefined &&
+            _instance.retryMaxAttempts !== null) {
             _writer.writeInt32(2, _instance.retryMaxAttempts);
+        }
+        if (_instance.retryBackoffSeconds !== undefined &&
+            _instance.retryBackoffSeconds !== null) {
+            _writer.writeFloat(3, _instance.retryBackoffSeconds);
+        }
+        if (_instance.maxStallSeconds !== undefined &&
+            _instance.maxStallSeconds !== null) {
+            _writer.writeInt32(4, _instance.maxStallSeconds);
         }
     }
     /**
@@ -116301,6 +116363,8 @@ class RagCrawlerRetryConfig {
         _value = _value || {};
         this.pageLoadTimeoutSeconds = _value.pageLoadTimeoutSeconds;
         this.retryMaxAttempts = _value.retryMaxAttempts;
+        this.retryBackoffSeconds = _value.retryBackoffSeconds;
+        this.maxStallSeconds = _value.maxStallSeconds;
         RagCrawlerRetryConfig.refineValues(this);
     }
     get pageLoadTimeoutSeconds() {
@@ -116314,6 +116378,18 @@ class RagCrawlerRetryConfig {
     }
     set retryMaxAttempts(value) {
         this._retryMaxAttempts = value;
+    }
+    get retryBackoffSeconds() {
+        return this._retryBackoffSeconds;
+    }
+    set retryBackoffSeconds(value) {
+        this._retryBackoffSeconds = value;
+    }
+    get maxStallSeconds() {
+        return this._maxStallSeconds;
+    }
+    set maxStallSeconds(value) {
+        this._maxStallSeconds = value;
     }
     /**
      * Serialize message to binary data
@@ -116330,7 +116406,9 @@ class RagCrawlerRetryConfig {
     toObject() {
         return {
             pageLoadTimeoutSeconds: this.pageLoadTimeoutSeconds,
-            retryMaxAttempts: this.retryMaxAttempts
+            retryMaxAttempts: this.retryMaxAttempts,
+            retryBackoffSeconds: this.retryBackoffSeconds,
+            maxStallSeconds: this.maxStallSeconds
         };
     }
     /**
@@ -116349,7 +116427,9 @@ class RagCrawlerRetryConfig {
     options) {
         return {
             pageLoadTimeoutSeconds: this.pageLoadTimeoutSeconds,
-            retryMaxAttempts: this.retryMaxAttempts
+            retryMaxAttempts: this.retryMaxAttempts,
+            retryBackoffSeconds: this.retryBackoffSeconds,
+            maxStallSeconds: this.maxStallSeconds
         };
     }
 }
@@ -116372,7 +116452,6 @@ class RagCrawlerStatusFilter {
      * @param _instance message instance
      */
     static refineValues(_instance) {
-        _instance.isActive = _instance.isActive || false;
         _instance.acceptedStatusCodes = _instance.acceptedStatusCodes || [];
     }
     /**
@@ -116404,7 +116483,7 @@ class RagCrawlerStatusFilter {
      * @param _writer binary writer instance
      */
     static serializeBinaryToWriter(_instance, _writer) {
-        if (_instance.isActive) {
+        if (_instance.isActive !== undefined && _instance.isActive !== null) {
             _writer.writeBool(1, _instance.isActive);
         }
         if (_instance.acceptedStatusCodes && _instance.acceptedStatusCodes.length) {
@@ -116472,6 +116551,122 @@ class RagCrawlerStatusFilter {
     }
 }
 /**
+ * Message implementation for ondewo.nlu.RagCrawlerIncrementalConfig
+ */
+class RagCrawlerIncrementalConfig {
+    static { this.id = 'ondewo.nlu.RagCrawlerIncrementalConfig'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new RagCrawlerIncrementalConfig();
+        RagCrawlerIncrementalConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.isActive = _instance.isActive || false;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.isActive = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.maxAgeDays = _reader.readInt32();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        RagCrawlerIncrementalConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.isActive) {
+            _writer.writeBool(1, _instance.isActive);
+        }
+        if (_instance.maxAgeDays !== undefined && _instance.maxAgeDays !== null) {
+            _writer.writeInt32(2, _instance.maxAgeDays);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of RagCrawlerIncrementalConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.isActive = _value.isActive;
+        this.maxAgeDays = _value.maxAgeDays;
+        RagCrawlerIncrementalConfig.refineValues(this);
+    }
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(value) {
+        this._isActive = value;
+    }
+    get maxAgeDays() {
+        return this._maxAgeDays;
+    }
+    set maxAgeDays(value) {
+        this._maxAgeDays = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        RagCrawlerIncrementalConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            isActive: this.isActive,
+            maxAgeDays: this.maxAgeDays
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            isActive: this.isActive,
+            maxAgeDays: this.maxAgeDays
+        };
+    }
+}
+/**
  * Message implementation for ondewo.nlu.RagCrawlerContentResult
  */
 class RagCrawlerContentResult {
@@ -116491,7 +116686,6 @@ class RagCrawlerContentResult {
      */
     static refineValues(_instance) {
         _instance.metadata = _instance.metadata || undefined;
-        _instance.markdown = _instance.markdown || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -116525,7 +116719,7 @@ class RagCrawlerContentResult {
         if (_instance.metadata) {
             _writer.writeMessage(1, _instance.metadata, googleProtobuf005.Struct.serializeBinaryToWriter);
         }
-        if (_instance.markdown) {
+        if (_instance.markdown !== undefined && _instance.markdown !== null) {
             _writer.writeString(2, _instance.markdown);
         }
     }
@@ -116611,8 +116805,6 @@ class RagCrawlerExecutionInfo {
      */
     static refineValues(_instance) {
         _instance.sslCertificate = _instance.sslCertificate || undefined;
-        _instance.success = _instance.success || false;
-        _instance.errorMessage = _instance.errorMessage || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -116649,10 +116841,11 @@ class RagCrawlerExecutionInfo {
         if (_instance.sslCertificate) {
             _writer.writeMessage(1, _instance.sslCertificate, googleProtobuf005.Struct.serializeBinaryToWriter);
         }
-        if (_instance.success) {
+        if (_instance.success !== undefined && _instance.success !== null) {
             _writer.writeBool(2, _instance.success);
         }
-        if (_instance.errorMessage) {
+        if (_instance.errorMessage !== undefined &&
+            _instance.errorMessage !== null) {
             _writer.writeString(3, _instance.errorMessage);
         }
     }
@@ -117263,7 +117456,6 @@ class RagListCrawlerRunsRequest {
         _instance.pageToken = _instance.pageToken || '';
         _instance.status = _instance.status || 0;
         _instance.orderby = _instance.orderby || '';
-        _instance.sortingMode = _instance.sortingMode || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -117326,7 +117518,7 @@ class RagListCrawlerRunsRequest {
         if (_instance.orderby) {
             _writer.writeString(6, _instance.orderby);
         }
-        if (_instance.sortingMode) {
+        if (_instance.sortingMode !== undefined && _instance.sortingMode !== null) {
             _writer.writeEnum(7, _instance.sortingMode);
         }
     }
@@ -118098,7 +118290,6 @@ class RagGetCrawlerResultsRequest {
         _instance.urlQuery = _instance.urlQuery || '';
         _instance.fieldMask = _instance.fieldMask || undefined;
         _instance.orderby = _instance.orderby || '';
-        _instance.sortingMode = _instance.sortingMode || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -118168,7 +118359,7 @@ class RagGetCrawlerResultsRequest {
         if (_instance.orderby) {
             _writer.writeString(7, _instance.orderby);
         }
-        if (_instance.sortingMode) {
+        if (_instance.sortingMode !== undefined && _instance.sortingMode !== null) {
             _writer.writeEnum(8, _instance.sortingMode);
         }
     }
@@ -118951,7 +119142,6 @@ class RagGetCrawlerAttachedDatasetsRequest {
         _instance.pageToken = _instance.pageToken || '';
         _instance.fieldMask = _instance.fieldMask || undefined;
         _instance.orderby = _instance.orderby || '';
-        _instance.sortingMode = _instance.sortingMode || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -119021,7 +119211,7 @@ class RagGetCrawlerAttachedDatasetsRequest {
         if (_instance.orderby) {
             _writer.writeString(7, _instance.orderby);
         }
-        if (_instance.sortingMode) {
+        if (_instance.sortingMode !== undefined && _instance.sortingMode !== null) {
             _writer.writeEnum(8, _instance.sortingMode);
         }
     }
@@ -119293,7 +119483,6 @@ class RagGetCrawlerRunLogsRequest {
         _instance.endTime = _instance.endTime || undefined;
         _instance.sourceUrlFilter = _instance.sourceUrlFilter || '';
         _instance.orderby = _instance.orderby || '';
-        _instance.sortingMode = _instance.sortingMode || 0;
         _instance.fieldMask = _instance.fieldMask || undefined;
     }
     /**
@@ -119399,7 +119588,7 @@ class RagGetCrawlerRunLogsRequest {
         if (_instance.orderby) {
             _writer.writeString(12, _instance.orderby);
         }
-        if (_instance.sortingMode) {
+        if (_instance.sortingMode !== undefined && _instance.sortingMode !== null) {
             _writer.writeEnum(13, _instance.sortingMode);
         }
         if (_instance.fieldMask) {
@@ -120669,10 +120858,10 @@ class RagsClient {
             .ragGetCrawlerRunLogs(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: RagsClient, deps: [{ token: GRPC_RAGS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: RagsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: RagsClient, deps: [{ token: GRPC_RAGS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: RagsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: RagsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: RagsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -120910,10 +121099,10 @@ class ServerStatisticsClient {
             .getUserCount(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ServerStatisticsClient, deps: [{ token: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ServerStatisticsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ServerStatisticsClient, deps: [{ token: GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ServerStatisticsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: ServerStatisticsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: ServerStatisticsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -122459,10 +122648,10 @@ class SessionsClient {
             .listAudioFiles(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: SessionsClient, deps: [{ token: GRPC_SESSIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: SessionsClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: SessionsClient, deps: [{ token: GRPC_SESSIONS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: SessionsClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: SessionsClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: SessionsClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -123288,10 +123477,10 @@ class UsersClient {
             .deleteAllUserPreferences(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: UsersClient, deps: [{ token: GRPC_USERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: UsersClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: UsersClient, deps: [{ token: GRPC_USERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: UsersClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: UsersClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: UsersClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -126875,10 +127064,10 @@ class UtilitiesClient {
             .addTrainingPhrasesFromCSV(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: UtilitiesClient, deps: [{ token: GRPC_UTILITIES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: UtilitiesClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: UtilitiesClient, deps: [{ token: GRPC_UTILITIES_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: UtilitiesClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: UtilitiesClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: UtilitiesClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -128693,10 +128882,10 @@ class WebhookClient {
             .deleteSessionEntityType(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: WebhookClient, deps: [{ token: GRPC_WEBHOOK_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: WebhookClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: WebhookClient, deps: [{ token: GRPC_WEBHOOK_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: WebhookClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: WebhookClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: WebhookClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -130459,10 +130648,10 @@ class QAClient {
             .getProjectConfig(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: QAClient, deps: [{ token: GRPC_QA_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: QAClient, providedIn: 'any' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: QAClient, deps: [{ token: GRPC_QA_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: QAClient, providedIn: 'any' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: QAClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: QAClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -130965,10 +131154,10 @@ class KeycloakTokenProvider {
             this.refreshToken = response.refresh_token;
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: KeycloakTokenProvider, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: KeycloakTokenProvider, providedIn: "root" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: KeycloakTokenProvider, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: KeycloakTokenProvider, providedIn: "root" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: KeycloakTokenProvider, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: KeycloakTokenProvider, decorators: [{
             type: Injectable,
             args: [{ providedIn: "root" }]
         }], ctorParameters: () => [] });
@@ -131164,10 +131353,10 @@ class AuthGrpcInterceptor {
             return next.handle(request);
         }));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AuthGrpcInterceptor, deps: [{ token: TOKEN_PROVIDER }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AuthGrpcInterceptor }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: AuthGrpcInterceptor, deps: [{ token: TOKEN_PROVIDER }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: AuthGrpcInterceptor }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AuthGrpcInterceptor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.31", ngImport: i0, type: AuthGrpcInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -131227,5 +131416,5 @@ function provideOndewoNluAuth(tokenProvider) {
  * Generated bundle index. Do not edit.
  */
 
-export { AUTHORIZATION_HEADER, AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionFeedbackRequest, AddSessionLabelsRequest, AddSessionStepFeedbackRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, AuthGrpcInterceptor, BEARER_PREFIX, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteNotificationsRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionFeedbackRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FeedbackAuthorType, FeedbackBreakdownBucket, FeedbackFilter, FeedbackRating, FeedbackScope, FeedbackStatistics, FeedbackTimeGranularity, FeedbackTimeSeriesBucket, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetFeedbackStatisticsRequest, GetFeedbackStatisticsResponse, GetFeedbackStatisticsTimeSeriesRequest, GetFeedbackStatisticsTimeSeriesResponse, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetNotificationRequest, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionFeedbackRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeyValuePair, KeycloakAuthenticationError, KeycloakTokenProvider, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListRemoteOperationContainersRequest, ListRemoteOperationContainersResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionFeedbackOfAllSessionsRequest, ListSessionFeedbackRequest, ListSessionFeedbackResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, MIN_REFRESH_DELAY_IN_S, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, REFRESH_SKEW_IN_S, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerContentScope, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerDensityPruning, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerPruningThresholdType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCrawlerStatusFilter, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainer, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFeedback, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamNotificationsRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TOKEN_PROVIDER, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateNotificationRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionFeedbackRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig, authHttpInterceptor, buildBearerValue, provideOndewoNluAuth, resolveBearerValue, resolveToken };
+export { AUTHORIZATION_HEADER, AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionFeedbackRequest, AddSessionLabelsRequest, AddSessionStepFeedbackRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, AuthGrpcInterceptor, BEARER_PREFIX, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteNotificationsRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionFeedbackRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FeedbackAuthorType, FeedbackBreakdownBucket, FeedbackFilter, FeedbackRating, FeedbackScope, FeedbackStatistics, FeedbackTimeGranularity, FeedbackTimeSeriesBucket, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetFeedbackStatisticsRequest, GetFeedbackStatisticsResponse, GetFeedbackStatisticsTimeSeriesRequest, GetFeedbackStatisticsTimeSeriesResponse, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetNotificationRequest, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionFeedbackRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeyValuePair, KeycloakAuthenticationError, KeycloakTokenProvider, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListRemoteOperationContainersRequest, ListRemoteOperationContainersResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionFeedbackOfAllSessionsRequest, ListSessionFeedbackRequest, ListSessionFeedbackResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, MIN_REFRESH_DELAY_IN_S, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, REFRESH_SKEW_IN_S, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerContentScope, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerDensityPruning, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerIncrementalConfig, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerPruningThresholdType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCrawlerStatusFilter, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainer, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFeedback, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamNotificationsRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TOKEN_PROVIDER, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateNotificationRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionFeedbackRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig, authHttpInterceptor, buildBearerValue, provideOndewoNluAuth, resolveBearerValue, resolveToken };
 //# sourceMappingURL=ondewo-nlu-client-angular.mjs.map

@@ -14,10 +14,10 @@ export
 # 		Variables
 ########################################################
 
-ONDEWO_NLU_VERSION=7.0.1
+ONDEWO_NLU_VERSION=7.1.0
 
-NLU_API_GIT_BRANCH=tags/7.0.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.13.0
+NLU_API_GIT_BRANCH=tags/7.1.0
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.14.0
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 NLU_APIS_DIR=src/ondewo-nlu-api
 NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
@@ -257,8 +257,8 @@ check_out_correct_submodule_versions: ## Fetches all Submodules and checks out s
 	git -C ${NLU_APIS_DIR} checkout ${NLU_API_GIT_BRANCH}
 	@# The *_GIT_BRANCH vars normally pin a tag (tags/<version>), which leaves the submodule on a
 	@# detached HEAD and makes `git pull` fail with "You are not currently on a branch" on every
-	@# release. They have also held a real branch during feature work (NLU_API_GIT_BRANCH=
-	@# OND211-2418-add-keycloak-for-2-fa, ONDEWO_PROTO_COMPILER_GIT_BRANCH=master), where the pull is
+	@# release. They have also held a real branch during feature work (NLU_API_GIT_BRANCH=tags/7.1.0
+	@# OND211-2418-add-keycloak-for-2-fa, ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.14.0
 	@# what advances the checkout past what `fetch --all` left behind - so pull only when HEAD is on
 	@# a branch, and stay non-fatal.
 	-if git -C ${NLU_APIS_DIR} symbolic-ref -q HEAD >/dev/null; then git -C ${NLU_APIS_DIR} pull; fi
