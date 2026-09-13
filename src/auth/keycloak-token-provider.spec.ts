@@ -329,8 +329,8 @@ describe("KeycloakTokenProvider", (): void => {
     expect(provider.getToken()).toBe(ACCESS_TOKEN);
   });
 
-  /** A background-refresh HTTP failure is swallowed; the previous token stays served. */
-  it("swallows a failed background refresh and keeps the previous token", async (): Promise<void> => {
+  /** A background-refresh HTTP failure keeps the previous token AND re-arms the timer. */
+  it("keeps the previous token and re-arms after a failed background refresh", async (): Promise<void> => {
     const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
     await completeLogin(provider, httpMock, "password");
 
@@ -341,6 +341,22 @@ describe("KeycloakTokenProvider", (): void => {
     await Promise.resolve();
     await Promise.resolve();
     expect(provider.getToken()).toBe(ACCESS_TOKEN);
+
+    // The catch must RE-ARM. `refresh()` reschedules on its last line, after the `await`
+    // that threw, so the catch is the only thing that can keep proactive renewal alive --
+    // without it one transient 401 ended renewal for the life of the provider and every
+    // later token came from the UNAUTHENTICATED fallback. The re-arm uses the floor delay.
+    jest.advanceTimersByTime(MIN_REFRESH_DELAY_IN_S * 1000);
+    const rearmedRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+    rearmedRequest.flush({
+      access_token: "re-armed-access-token",
+      refresh_token: REFRESH_TOKEN,
+      expires_in: EXPIRES_IN
+    });
+    await Promise.resolve();
+    await Promise.resolve();
+    // ...and having re-armed, it recovers: the transient failure self-heals.
+    expect(provider.getToken()).toBe("re-armed-access-token");
   });
 
   /** A failed initial login rejects `whenReady` with a `KeycloakAuthenticationError`. */

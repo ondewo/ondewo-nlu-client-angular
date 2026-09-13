@@ -544,6 +544,16 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
         // Swallow a transient background-refresh failure: the next interceptor read
         // gets the stale (possibly expired) token and the server replies
         // UNAUTHENTICATED, prompting the consumer to re-login.
+        //
+        // But RE-ARM. `refresh()` reschedules on its last line, which is AFTER the
+        // `await` that just threw, so without this a single failed refresh left no
+        // timer armed and proactive renewal was over for the life of the provider --
+        // one transient answer from the token endpoint (a 502 from a proxy, a DNS blip,
+        // a restarting Keycloak) and every later token came from the UNAUTHENTICATED
+        // fallback instead. `undefined` makes `scheduleRefresh` use its minimum delay,
+        // bounding the retry, and the `stopped`/deadline guards at the top of
+        // `scheduleRefresh` still apply, so a destroyed provider re-arms nothing.
+        this.scheduleRefresh(undefined);
       });
     }, delayInS * 1000);
   }
