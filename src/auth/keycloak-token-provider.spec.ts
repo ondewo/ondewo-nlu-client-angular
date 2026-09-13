@@ -8,6 +8,7 @@ import {
   KeycloakTokenProvider,
   KeycloakTokenProviderConfig,
   MIN_REFRESH_DELAY_IN_S,
+  REFRESH_RETRY_BASE_DELAY_IN_S,
   REFRESH_SKEW_IN_S
 } from "./keycloak-token-provider";
 
@@ -331,7 +332,12 @@ describe("KeycloakTokenProvider", (): void => {
 
   /** A background-refresh HTTP failure keeps the previous token AND re-arms the timer. */
   it("keeps the previous token and re-arms after a failed background refresh", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
+    // randomFraction 0 puts the retry at the base of its window, so the delay is exactly
+    // REFRESH_RETRY_BASE_DELAY_IN_S rather than drawn.
+    const { provider, httpMock }: SetupResult = setup({
+      ...PASSWORD_CONFIG,
+      randomFraction: (): number => 0
+    });
     await completeLogin(provider, httpMock, "password");
 
     jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
@@ -345,8 +351,11 @@ describe("KeycloakTokenProvider", (): void => {
     // The catch must RE-ARM. `refresh()` reschedules on its last line, after the `await`
     // that threw, so the catch is the only thing that can keep proactive renewal alive --
     // without it one transient 401 ended renewal for the life of the provider and every
-    // later token came from the UNAUTHENTICATED fallback. The re-arm uses the floor delay.
-    jest.advanceTimersByTime(MIN_REFRESH_DELAY_IN_S * 1000);
+    // later token came from the UNAUTHENTICATED fallback. The re-arm waits the failure
+    // backoff base (5 s): 7.1.1 used MIN_REFRESH_DELAY_IN_S, a 1 Hz poll for a whole outage.
+    jest.advanceTimersByTime(REFRESH_RETRY_BASE_DELAY_IN_S * 1000 - 1);
+    httpMock.expectNone(TOKEN_ENDPOINT);
+    jest.advanceTimersByTime(1);
     const rearmedRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
     rearmedRequest.flush({
       access_token: "re-armed-access-token",
@@ -357,6 +366,74 @@ describe("KeycloakTokenProvider", (): void => {
     await Promise.resolve();
     // ...and having re-armed, it recovers: the transient failure self-heals.
     expect(provider.getToken()).toBe("re-armed-access-token");
+  });
+
+  /** Consecutive failures back off exponentially and stop growing at the ceiling. */
+  it("backs off exponentially while refreshes keep failing, capped at the ceiling", async (): Promise<void> => {
+    // randomFraction 1 puts every retry at the TOP of its window, i.e. exactly the ceiling
+    // for that failure count -- which is what makes the ladder observable at all.
+    const { provider, httpMock }: SetupResult = setup({
+      ...PASSWORD_CONFIG,
+      randomFraction: (): number => 1
+    });
+    await completeLogin(provider, httpMock, "password");
+
+    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
+    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
+    await flushMicrotasks();
+
+    // base * 2^(failures-1), capped at REFRESH_RETRY_MAX_DELAY_IN_S. The cap is the point:
+    // without it a long outage would push the next attempt out by hours.
+    const expectedDelaysInS: number[] = [5, 10, 20, 40, 80, 160, 300, 300];
+    for (const delayInS of expectedDelaysInS) {
+      jest.advanceTimersByTime(delayInS * 1000 - 1);
+      httpMock.expectNone(TOKEN_ENDPOINT);
+
+      jest.advanceTimersByTime(1);
+      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
+      await flushMicrotasks();
+    }
+    expect(provider.getToken()).toBe(ACCESS_TOKEN);
+  });
+
+  /** A successful refresh resets the ladder, so the next failure waits the base again. */
+  it("resets the backoff ladder after a successful refresh", async (): Promise<void> => {
+    const { provider, httpMock }: SetupResult = setup({
+      ...PASSWORD_CONFIG,
+      randomFraction: (): number => 1
+    });
+    await completeLogin(provider, httpMock, "password");
+
+    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
+    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
+    await flushMicrotasks();
+
+    // Failure 1 -> 5 s, and this attempt fails too.
+    jest.advanceTimersByTime(5000);
+    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
+    await flushMicrotasks();
+
+    // Failure 2 -> 10 s, and this attempt SUCCEEDS.
+    jest.advanceTimersByTime(10000);
+    httpMock.expectOne(TOKEN_ENDPOINT).flush({
+      access_token: ACCESS_TOKEN_2,
+      refresh_token: REFRESH_TOKEN,
+      expires_in: EXPIRES_IN
+    });
+    await flushMicrotasks();
+    expect(provider.getToken()).toBe(ACCESS_TOKEN_2);
+
+    // Back on the success schedule, and that attempt fails again.
+    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
+    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
+    await flushMicrotasks();
+
+    // Because the ladder was reset it must wait 5 s, not 20 s.
+    jest.advanceTimersByTime(4999);
+    httpMock.expectNone(TOKEN_ENDPOINT);
+    jest.advanceTimersByTime(1);
+    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
+    await flushMicrotasks();
   });
 
   /** A failed initial login rejects `whenReady` with a `KeycloakAuthenticationError`. */

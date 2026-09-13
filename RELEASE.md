@@ -2,6 +2,32 @@
 
 *****************
 
+## Release ONDEWO NLU Angular Client 7.1.2
+
+### Bug fixes
+
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) **The retry cadence introduced
+  in 7.1.1 polled the token endpoint once a second for the whole of an outage.** Re-arming the loop
+  fixed the dead-timer half of the defect and exposed a second one: the re-arm went through
+  `scheduleRefresh(undefined)`, which falls back to `MIN_REFRESH_DELAY_IN_S` (1 s). One client at
+  1 Hz is harmless; ondewo runs **one client per call container**, so the clients whose refreshes
+  fail together then retry together -- the same thundering-herd shape as the login burst the
+  offline-token hand-off exists to remove.
+* **The failure path now backs off, and it jitters.** The ceiling grows `5 s * 2 ** (failures - 1)`
+  up to a `300 s` cap, and the actual wait is drawn uniformly from `[base, ceiling]`. The jitter is
+  the load-bearing half -- a shared ladder without it keeps N clients in lockstep however long the
+  delays get. A successful refresh resets the counter, and the `stopped` and deadline guards still
+  bound every re-arm.
+* **An `onRefreshError` handler that throws no longer kills the refresh loop**, and its error no
+  longer escapes the timer callback as an `unhandledRejection` -- which Node terminates the process
+  on by default.
+* The healthy schedule is untouched: the counter is zero unless a refresh has actually failed, so a
+  client that never fails computes exactly the delays 7.1.1 did. The login options take a new
+  optional `randomFraction` for the jitter, defaulting to `Math.random`, so a test can make a retry
+  delay exact.
+
+*****************
+
 ## Release ONDEWO NLU Angular Client 7.1.1
 
 ### Bug fixes

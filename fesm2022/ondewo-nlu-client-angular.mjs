@@ -130692,6 +130692,17 @@ const REFRESH_SKEW_IN_S = 30;
  */
 const MIN_REFRESH_DELAY_IN_S = 1;
 /**
+ * First retry delay (seconds) after a FAILED background refresh. Deliberately far above
+ * {@link MIN_REFRESH_DELAY_IN_S}: 7.1.1 re-armed the failure path at that 1 s floor, which turns a
+ * Keycloak outage into a 1 Hz poll per client -- and ondewo runs one client per call container, so
+ * the clients that fail together then retry together against a realm they all share.
+ */
+const REFRESH_RETRY_BASE_DELAY_IN_S = 5;
+/** Ceiling (seconds) for the failure backoff: a persistent outage is retried at most this often. */
+const REFRESH_RETRY_MAX_DELAY_IN_S = 300;
+/** Exponent cap so `2 ** n` cannot grow without bound; 5 * 2^6 = 320 already exceeds the ceiling. */
+const MAX_REFRESH_RETRY_EXPONENT = 6;
+/**
  * DI token under which the consuming application supplies the
  * {@link KeycloakTokenProviderConfig} for {@link KeycloakTokenProvider}.
  *
@@ -130788,6 +130799,14 @@ class KeycloakTokenProvider {
         this.timer = null;
         /** Whether {@link ngOnDestroy} has run; suppresses any further (re-)scheduling. */
         this.stopped = false;
+        /** Consecutive failed background refreshes; drives the retry backoff, reset on every success. */
+        this.consecutiveRefreshFailures = 0;
+        /**
+         * [0,1) random source used for the failure-backoff jitter (test-injectable).
+         * Not `readonly`: `applyConfig` can re-adopt a configuration, exactly as it does
+         * for `verifySsl`, so the default is set at the declaration too.
+         */
+        this.randomFraction = Math.random;
         /** Absolute epoch-ms deadline for the bounded loop, or `null` when unbounded. */
         this.deadlineInMs = null;
         /** Epoch-ms at which the current access token lapses, or `null` when unknown. */
@@ -130944,6 +130963,7 @@ class KeycloakTokenProvider {
         this.config = config;
         // Stored for cross-SDK config parity; a no-op on the browser transport (see field doc).
         this.verifySsl = config.keycloakVerifySsl ?? true;
+        this.randomFraction = config.randomFraction ?? Math.random;
         const base = config.keycloakUrl.replace(/\/+$/, "");
         this.tokenEndpoint = `${base}/realms/${encodeURIComponent(config.realm)}/protocol/openid-connect/token`;
     }
@@ -131076,24 +131096,54 @@ class KeycloakTokenProvider {
      *   {@link MIN_REFRESH_DELAY_IN_S}.
      */
     scheduleRefresh(expiresInRaw) {
+        // Only ever reached after a token exchange SUCCEEDED, so the backoff ladder resets here.
+        this.consecutiveRefreshFailures = 0;
+        let expiresInS = MIN_REFRESH_DELAY_IN_S;
+        if (expiresInRaw !== undefined && expiresInRaw > 0) {
+            expiresInS = expiresInRaw;
+        }
+        this.armRefreshTimer(Math.max(expiresInS - REFRESH_SKEW_IN_S, MIN_REFRESH_DELAY_IN_S));
+    }
+    /**
+     * Arm the next attempt after a FAILED refresh, using bounded exponential backoff
+     * with full jitter.
+     *
+     * The ceiling grows `REFRESH_RETRY_BASE_DELAY_IN_S * 2 ** (failures - 1)` up to
+     * {@link REFRESH_RETRY_MAX_DELAY_IN_S}, and the actual wait is drawn uniformly from
+     * `[base, ceiling]`. The jitter is the load-bearing half: N clients whose refreshes
+     * fail in the same instant would otherwise retry in lockstep for the whole outage.
+     */
+    scheduleRetryAfterFailure() {
+        this.consecutiveRefreshFailures += 1;
+        const exponent = Math.min(this.consecutiveRefreshFailures - 1, MAX_REFRESH_RETRY_EXPONENT);
+        const growthFactor = 2 ** exponent;
+        const ceilingInS = Math.min(REFRESH_RETRY_BASE_DELAY_IN_S * growthFactor, REFRESH_RETRY_MAX_DELAY_IN_S);
+        const jitteredInS = REFRESH_RETRY_BASE_DELAY_IN_S + (this.randomFraction() * (ceilingInS - REFRESH_RETRY_BASE_DELAY_IN_S));
+        this.armRefreshTimer(jitteredInS);
+    }
+    /**
+     * Arm the single refresh timer `delayInS` from now, clamped to the bounded deadline.
+     * Shared by the success path ({@link scheduleRefresh}) and the failure path
+     * ({@link scheduleRetryAfterFailure}) so the clear-before-arm, the `stopped` guard and
+     * the deadline clamp are written exactly once.
+     *
+     * @param delayInS seconds to wait before the next refresh attempt.
+     */
+    armRefreshTimer(delayInS) {
         // An on-demand ensureFreshToken() renewal can land while the previous timer is
         // still armed; drop it so only one refresh is ever scheduled.
         this.clearTimer();
         if (this.stopped) {
             return;
         }
-        let expiresInS = MIN_REFRESH_DELAY_IN_S;
-        if (expiresInRaw !== undefined && expiresInRaw > 0) {
-            expiresInS = expiresInRaw;
-        }
-        let delayInS = Math.max(expiresInS - REFRESH_SKEW_IN_S, MIN_REFRESH_DELAY_IN_S);
+        let effectiveDelayInS = delayInS;
         if (this.deadlineInMs !== null) {
             const remainingInMs = this.deadlineInMs - Date.now();
             if (remainingInMs <= 0) {
                 this.ngOnDestroy();
                 return;
             }
-            delayInS = Math.min(delayInS, remainingInMs / 1000);
+            effectiveDelayInS = Math.min(effectiveDelayInS, remainingInMs / 1000);
         }
         this.timer = setTimeout(() => {
             void this.refresh().catch(() => {
@@ -131106,12 +131156,16 @@ class KeycloakTokenProvider {
                 // timer armed and proactive renewal was over for the life of the provider --
                 // one transient answer from the token endpoint (a 502 from a proxy, a DNS blip,
                 // a restarting Keycloak) and every later token came from the UNAUTHENTICATED
-                // fallback instead. `undefined` makes `scheduleRefresh` use its minimum delay,
-                // bounding the retry, and the `stopped`/deadline guards at the top of
-                // `scheduleRefresh` still apply, so a destroyed provider re-arms nothing.
-                this.scheduleRefresh(undefined);
+                // fallback instead.
+                //
+                // 7.1.1 re-armed via `scheduleRefresh(undefined)`, which falls back to
+                // MIN_REFRESH_DELAY_IN_S -- a 1 s retry, i.e. a 1 Hz poll for the whole outage,
+                // in lockstep across every client that failed at the same moment. The failure
+                // path has its own backed-off, jittered ladder now; the `stopped`/deadline
+                // guards still apply, so a destroyed provider re-arms nothing.
+                this.scheduleRetryAfterFailure();
             });
-        }, delayInS * 1000);
+        }, effectiveDelayInS * 1000);
     }
     /**
      * POST an `application/x-www-form-urlencoded` body to the token endpoint and

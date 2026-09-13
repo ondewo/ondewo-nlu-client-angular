@@ -69452,6 +69452,11 @@ interface KeycloakTokenProviderConfig {
      * endpoint, the certificate must be trusted at the browser/OS level instead.
      */
     keycloakVerifySsl?: boolean;
+    /**
+     * Optional [0,1) random source for the failure-backoff jitter; defaults to
+     * `Math.random`. Tests inject a constant to make the retry delay exact.
+     */
+    randomFraction?: () => number;
 }
 /**
  * DI token under which the consuming application supplies the
@@ -69537,6 +69542,14 @@ declare class KeycloakTokenProvider implements TokenProvider, OnDestroy {
     private timer;
     /** Whether {@link ngOnDestroy} has run; suppresses any further (re-)scheduling. */
     private stopped;
+    /** Consecutive failed background refreshes; drives the retry backoff, reset on every success. */
+    private consecutiveRefreshFailures;
+    /**
+     * [0,1) random source used for the failure-backoff jitter (test-injectable).
+     * Not `readonly`: `applyConfig` can re-adopt a configuration, exactly as it does
+     * for `verifySsl`, so the default is set at the declaration too.
+     */
+    private randomFraction;
     /** Absolute epoch-ms deadline for the bounded loop, or `null` when unbounded. */
     private deadlineInMs;
     /** Epoch-ms at which the current access token lapses, or `null` when unknown. */
@@ -69693,6 +69706,25 @@ declare class KeycloakTokenProvider implements TokenProvider, OnDestroy {
      *   {@link MIN_REFRESH_DELAY_IN_S}.
      */
     private scheduleRefresh;
+    /**
+     * Arm the next attempt after a FAILED refresh, using bounded exponential backoff
+     * with full jitter.
+     *
+     * The ceiling grows `REFRESH_RETRY_BASE_DELAY_IN_S * 2 ** (failures - 1)` up to
+     * {@link REFRESH_RETRY_MAX_DELAY_IN_S}, and the actual wait is drawn uniformly from
+     * `[base, ceiling]`. The jitter is the load-bearing half: N clients whose refreshes
+     * fail in the same instant would otherwise retry in lockstep for the whole outage.
+     */
+    private scheduleRetryAfterFailure;
+    /**
+     * Arm the single refresh timer `delayInS` from now, clamped to the bounded deadline.
+     * Shared by the success path ({@link scheduleRefresh}) and the failure path
+     * ({@link scheduleRetryAfterFailure}) so the clear-before-arm, the `stopped` guard and
+     * the deadline clamp are written exactly once.
+     *
+     * @param delayInS seconds to wait before the next refresh attempt.
+     */
+    private armRefreshTimer;
     /**
      * POST an `application/x-www-form-urlencoded` body to the token endpoint and
      * return the parsed JSON.
