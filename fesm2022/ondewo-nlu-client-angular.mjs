@@ -90862,6 +90862,7 @@ class OperationMetadata {
         OperationType[OperationType["ADD_RAG_CRAWLER_RESULT_TO_DATASET"] = 11] = "ADD_RAG_CRAWLER_RESULT_TO_DATASET";
         OperationType[OperationType["REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET"] = 12] = "REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET";
         OperationType[OperationType["CHANGE_DATASET_EMBEDDING_MODEL"] = 13] = "CHANGE_DATASET_EMBEDDING_MODEL";
+        OperationType[OperationType["REPARSE_DATASET"] = 14] = "REPARSE_DATASET";
     })(OperationType = OperationMetadata.OperationType || (OperationMetadata.OperationType = {}));
 })(OperationMetadata || (OperationMetadata = {}));
 
