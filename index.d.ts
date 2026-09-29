@@ -60863,6 +60863,7 @@ declare class RagCrawlerConfig implements GrpcMessage {
     private _outputConfig?;
     private _statusFilter?;
     private _incrementalConfig?;
+    private _maxPages;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of RagCrawlerConfig to deeply clone from
@@ -60878,6 +60879,8 @@ declare class RagCrawlerConfig implements GrpcMessage {
     set statusFilter(value: RagCrawlerStatusFilter | undefined);
     get incrementalConfig(): RagCrawlerIncrementalConfig | undefined;
     set incrementalConfig(value: RagCrawlerIncrementalConfig | undefined);
+    get maxPages(): number;
+    set maxPages(value: number);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -60908,6 +60911,7 @@ declare namespace RagCrawlerConfig {
         outputConfig?: RagCrawlerResultsConfig.AsObject;
         statusFilter?: RagCrawlerStatusFilter.AsObject;
         incrementalConfig?: RagCrawlerIncrementalConfig.AsObject;
+        maxPages: number;
     }
     /**
      * Protobuf JSON representation for RagCrawlerConfig
@@ -60918,6 +60922,7 @@ declare namespace RagCrawlerConfig {
         outputConfig: RagCrawlerResultsConfig.AsProtobufJSON | null;
         statusFilter: RagCrawlerStatusFilter.AsProtobufJSON | null;
         incrementalConfig: RagCrawlerIncrementalConfig.AsProtobufJSON | null;
+        maxPages: number;
     }
 }
 /**
