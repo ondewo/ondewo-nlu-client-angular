@@ -397,7 +397,7 @@
 
 ## Release ONDEWO NLU Angular Client 2.9.1
 
-* Track version 2.9.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.9.0)
+* Bug fix and track version 2.9.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/2.9.0)
 
 *****************
 
@@ -468,9 +468,17 @@
 
 *****************
 
+## Release ONDEWO NLU Angular Client 1.1.0
+
+* Update to NLU client version tag 1.1.0
+* Fixed build script
+
+*****************
+
 ## Release ONDEWO NLU Angular Client 1.0.3
 
 * Track version 1.0.3 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/1.0.3)
+* Release on [NPM](https://www.npmjs.com/package/@ondewo/nlu-client-angular)
 
 *****************
 
@@ -483,9 +491,13 @@ Skipped version due to NPM registry issues
 ## Release ONDEWO NLU Angular Client 1.0.1
 
 * Track version 1.0.1 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/1.0.1)
+* Upgraded ngx-grpc from 0.3.1 to 2.1.0
+* Release on [NPM](https://www.npmjs.com/package/@ondewo/nlu-client-angular)
 
 *****************
 
 ## Release ONDEWO NLU Angular Client 1.0.0
 
 * Track version 1.0.0 of [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api/releases/1.0.0)
+
+*****************
