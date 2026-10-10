@@ -63384,14 +63384,6 @@ declare class RagsClient {
          */
         ragListDatasets: (requestData: RagListDatasetsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<RagDatasetList>>;
         /**
-         * Client streaming: /ondewo.nlu.Rags/RagUploadDocument
-         *
-         * @param requestMessage Request message
-         * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<thisProto.RagDocument>>
-         */
-        ragUploadDocument: (requestData: Observable<RagUploadDocumentRequest>, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<RagDocument>>;
-        /**
          * Unary call: /ondewo.nlu.Rags/RagUpdateDocument
          *
          * @param requestMessage Request message
@@ -63617,14 +63609,6 @@ declare class RagsClient {
      * @returns Observable<thisProto.RagDatasetList>
      */
     ragListDatasets(requestData: RagListDatasetsRequest, requestMetadata?: GrpcMetadata): Observable<RagDatasetList>;
-    /**
-     * Client streaming @/ondewo.nlu.Rags/RagUploadDocument
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.RagDocument>
-     */
-    ragUploadDocument(requestData: Observable<RagUploadDocumentRequest>, requestMetadata?: GrpcMetadata): Observable<RagDocument>;
     /**
      * Unary call @/ondewo.nlu.Rags/RagUpdateDocument
      *
@@ -63989,14 +63973,6 @@ declare class SessionsClient {
          * @returns Observable<GrpcEvent<thisProto.DetectIntentResponse>>
          */
         detectIntent: (requestData: DetectIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<DetectIntentResponse>>;
-        /**
-         * Bidirectional streaming: /ondewo.nlu.Sessions/StreamingDetectIntent
-         *
-         * @param requestMessage Request message
-         * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<thisProto.StreamingDetectIntentResponse>>
-         */
-        streamingDetectIntent: (requestData: Observable<StreamingDetectIntentRequest>, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<StreamingDetectIntentResponse>>;
         /**
          * Unary call: /ondewo.nlu.Sessions/ListSessions
          *
@@ -64391,14 +64367,6 @@ declare class SessionsClient {
      * @returns Observable<thisProto.DetectIntentResponse>
      */
     detectIntent(requestData: DetectIntentRequest, requestMetadata?: GrpcMetadata): Observable<DetectIntentResponse>;
-    /**
-     * Bidirectional streaming @/ondewo.nlu.Sessions/StreamingDetectIntent
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.StreamingDetectIntentResponse>
-     */
-    streamingDetectIntent(requestData: Observable<StreamingDetectIntentRequest>, requestMetadata?: GrpcMetadata): Observable<StreamingDetectIntentResponse>;
     /**
      * Unary call @/ondewo.nlu.Sessions/ListSessions
      *

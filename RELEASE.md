@@ -2,6 +2,27 @@
 
 *****************
 
+## Release ONDEWO NLU Angular Client 7.3.2
+
+### Bug Fixes
+
+* Removed the service-client methods of the client-streaming and bidirectional-streaming RPCs, because they never
+  worked in a browser: gRPC-web, the protocol this library speaks, carries unary and server-streaming calls only. The
+  methods (plain and `$raw`) are gone from `SessionsClient.streamingDetectIntent` and `RagsClient.ragUploadDocument`.
+  Their request and response messages are still exported, and every unary and server-streaming method (e.g.
+  `streamingLlmGenerate`) is unchanged. **Migration:** use `detectIntent` from a browser; a client that has to send a
+  request stream uses a native SDK such as `ondewo-nlu-client` (python, PyPI) or `@ondewo/nlu-client-nodejs`. The js
+  and typescript SDKs never generated these methods.
+* Generated with ondewo-proto-compiler [5.15.7](https://github.com/ondewo/ondewo-proto-compiler/releases/tag/5.15.7),
+  which omits these methods for the angular target. `src/auth/no-client-streaming.spec.ts` fails if the public
+  typings (`index.d.ts`) expose a method whose request is an `Observable`.
+* Release automation: the GitHub and npm tokens no longer reach a process argv. The release `docker run` passes
+  `-e GITHUB_GH_TOKEN` / `-e NPM_AUTOMATION_TOKEN` by name, `gh auth login` reads the token from the environment, npm
+  substitutes `${NPM_AUTOMATION_TOKEN}` from its config instead of receiving the value, and the NPM user name is no
+  longer echoed. Pinned by `src/auth/release-credentials.spec.ts`.
+
+*****************
+
 ## Release ONDEWO NLU Angular Client 7.3.1
 
 ### Improvements
