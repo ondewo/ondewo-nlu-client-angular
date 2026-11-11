@@ -10594,7 +10594,6 @@ export class ReferencedChunk implements GrpcMessage {
     _instance.similarity = _instance.similarity || 0;
     _instance.documentUrl = _instance.documentUrl || '';
     _instance.deepLinkUrl = _instance.deepLinkUrl || '';
-    _instance.documentTitle = _instance.documentTitle || '';
   }
 
   /**
@@ -10636,9 +10635,6 @@ export class ReferencedChunk implements GrpcMessage {
           break;
         case 9:
           _instance.deepLinkUrl = _reader.readString();
-          break;
-        case 10:
-          _instance.documentTitle = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -10684,9 +10680,6 @@ export class ReferencedChunk implements GrpcMessage {
     if (_instance.deepLinkUrl) {
       _writer.writeString(9, _instance.deepLinkUrl);
     }
-    if (_instance.documentTitle) {
-      _writer.writeString(10, _instance.documentTitle);
-    }
   }
 
   private _referenceIndex: number;
@@ -10698,7 +10691,6 @@ export class ReferencedChunk implements GrpcMessage {
   private _similarity: number;
   private _documentUrl: string;
   private _deepLinkUrl: string;
-  private _documentTitle: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -10715,7 +10707,6 @@ export class ReferencedChunk implements GrpcMessage {
     this.similarity = _value.similarity;
     this.documentUrl = _value.documentUrl;
     this.deepLinkUrl = _value.deepLinkUrl;
-    this.documentTitle = _value.documentTitle;
     ReferencedChunk.refineValues(this);
   }
   get referenceIndex(): number {
@@ -10772,12 +10763,6 @@ export class ReferencedChunk implements GrpcMessage {
   set deepLinkUrl(value: string) {
     this._deepLinkUrl = value;
   }
-  get documentTitle(): string {
-    return this._documentTitle;
-  }
-  set documentTitle(value: string) {
-    this._documentTitle = value;
-  }
 
   /**
    * Serialize message to binary data
@@ -10802,8 +10787,7 @@ export class ReferencedChunk implements GrpcMessage {
       content: this.content,
       similarity: this.similarity,
       documentUrl: this.documentUrl,
-      deepLinkUrl: this.deepLinkUrl,
-      documentTitle: this.documentTitle
+      deepLinkUrl: this.deepLinkUrl
     };
   }
 
@@ -10832,8 +10816,7 @@ export class ReferencedChunk implements GrpcMessage {
       content: this.content,
       similarity: this.similarity,
       documentUrl: this.documentUrl,
-      deepLinkUrl: this.deepLinkUrl,
-      documentTitle: this.documentTitle
+      deepLinkUrl: this.deepLinkUrl
     };
   }
 }
@@ -10851,7 +10834,6 @@ export module ReferencedChunk {
     similarity: number;
     documentUrl: string;
     deepLinkUrl: string;
-    documentTitle: string;
   }
 
   /**
@@ -10867,7 +10849,6 @@ export module ReferencedChunk {
     similarity: number;
     documentUrl: string;
     deepLinkUrl: string;
-    documentTitle: string;
   }
 }
 
