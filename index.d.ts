@@ -32052,6 +32052,7 @@ declare class ReferencedChunk implements GrpcMessage {
     private _similarity;
     private _documentUrl;
     private _deepLinkUrl;
+    private _documentTitle;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of ReferencedChunk to deeply clone from
@@ -32075,6 +32076,8 @@ declare class ReferencedChunk implements GrpcMessage {
     set documentUrl(value: string);
     get deepLinkUrl(): string;
     set deepLinkUrl(value: string);
+    get documentTitle(): string;
+    set documentTitle(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32109,6 +32112,7 @@ declare namespace ReferencedChunk {
         similarity: number;
         documentUrl: string;
         deepLinkUrl: string;
+        documentTitle: string;
     }
     /**
      * Protobuf JSON representation for ReferencedChunk
@@ -32123,6 +32127,7 @@ declare namespace ReferencedChunk {
         similarity: number;
         documentUrl: string;
         deepLinkUrl: string;
+        documentTitle: string;
     }
 }
 /**
