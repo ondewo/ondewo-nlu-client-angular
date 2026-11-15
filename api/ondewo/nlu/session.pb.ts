@@ -82,6 +82,32 @@ export enum TurnControlAckStatus {
   TURN_CONTROL_ACK_STATUS_HEARD_STALE = 6,
   TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED = 7
 }
+export enum WarmTransferIntroTextSource {
+  WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED = 0,
+  WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE = 1,
+  WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY = 2
+}
+export enum WarmTransferIntroDecision {
+  WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED = 0,
+  WARM_TRANSFER_INTRO_DECISION_PENDING = 1,
+  WARM_TRANSFER_INTRO_DECISION_ACCEPTED = 2,
+  WARM_TRANSFER_INTRO_DECISION_DECLINED = 3,
+  WARM_TRANSFER_INTRO_DECISION_NO_DECISION = 4
+}
+export enum WarmTransferIntroDecidedBy {
+  WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED = 0,
+  WARM_TRANSFER_INTRO_DECIDED_BY_DTMF = 1,
+  WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH = 2,
+  WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT = 3
+}
+export enum WarmTransferIntroStage {
+  WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED = 0,
+  WARM_TRANSFER_INTRO_STAGE_PREPARED = 1,
+  WARM_TRANSFER_INTRO_STAGE_READY_ASKED = 2,
+  WARM_TRANSFER_INTRO_STAGE_INTRO_SPOKEN = 3,
+  WARM_TRANSFER_INTRO_STAGE_REASON_ASKED = 4,
+  WARM_TRANSFER_INTRO_STAGE_CLOSED = 5
+}
 export enum AudioEncoding {
   AUDIO_ENCODING_UNSPECIFIED = 0,
   AUDIO_ENCODING_LINEAR_16 = 1,
@@ -14095,6 +14121,1239 @@ export module InterruptTurnResponse {
    */
   export interface AsProtobufJSON {
     turnControlAck: TurnControlAck.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.WarmTransferIntroConfig
+ */
+export class WarmTransferIntroConfig implements GrpcMessage {
+  static id = 'ondewo.nlu.WarmTransferIntroConfig';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new WarmTransferIntroConfig();
+    WarmTransferIntroConfig.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: WarmTransferIntroConfig) {
+    _instance.introPrompt = _instance.introPrompt || '';
+    _instance.textSource = _instance.textSource || 0;
+    _instance.readyQuestion = _instance.readyQuestion || '';
+    _instance.acceptQuestion = _instance.acceptQuestion || '';
+    _instance.callerDeclinedMessage = _instance.callerDeclinedMessage || '';
+    _instance.callerUnreachableMessage =
+      _instance.callerUnreachableMessage || '';
+    _instance.acceptDtmf = _instance.acceptDtmf || '';
+    _instance.declineDtmf = _instance.declineDtmf || '';
+    _instance.calleeDisplayName = _instance.calleeDisplayName || '';
+    _instance.calleeDescription = _instance.calleeDescription || '';
+    _instance.llmCcaiServiceName = _instance.llmCcaiServiceName || '';
+    _instance.maxHistorySteps = _instance.maxHistorySteps || 0;
+    _instance.decisionTimeoutS = _instance.decisionTimeoutS || 0;
+    _instance.projectDisplayName = _instance.projectDisplayName || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: WarmTransferIntroConfig,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.introPrompt = _reader.readString();
+          break;
+        case 2:
+          _instance.textSource = _reader.readEnum();
+          break;
+        case 3:
+          _instance.readyQuestion = _reader.readString();
+          break;
+        case 4:
+          _instance.confirmHumanBeforeIntro = _reader.readBool();
+          break;
+        case 5:
+          _instance.acceptQuestion = _reader.readString();
+          break;
+        case 6:
+          _instance.declineReasonQuestion = _reader.readString();
+          break;
+        case 7:
+          _instance.callerDeclinedMessage = _reader.readString();
+          break;
+        case 8:
+          _instance.callerUnreachableMessage = _reader.readString();
+          break;
+        case 9:
+          _instance.acceptDtmf = _reader.readString();
+          break;
+        case 10:
+          _instance.declineDtmf = _reader.readString();
+          break;
+        case 11:
+          _instance.calleeDisplayName = _reader.readString();
+          break;
+        case 12:
+          _instance.calleeDescription = _reader.readString();
+          break;
+        case 13:
+          _instance.llmCcaiServiceName = _reader.readString();
+          break;
+        case 14:
+          _instance.maxHistorySteps = _reader.readInt32();
+          break;
+        case 15:
+          _instance.decisionTimeoutS = _reader.readInt32();
+          break;
+        case 16:
+          _instance.projectDisplayName = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    WarmTransferIntroConfig.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: WarmTransferIntroConfig,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.introPrompt) {
+      _writer.writeString(1, _instance.introPrompt);
+    }
+    if (_instance.textSource) {
+      _writer.writeEnum(2, _instance.textSource);
+    }
+    if (_instance.readyQuestion) {
+      _writer.writeString(3, _instance.readyQuestion);
+    }
+    if (
+      _instance.confirmHumanBeforeIntro !== undefined &&
+      _instance.confirmHumanBeforeIntro !== null
+    ) {
+      _writer.writeBool(4, _instance.confirmHumanBeforeIntro);
+    }
+    if (_instance.acceptQuestion) {
+      _writer.writeString(5, _instance.acceptQuestion);
+    }
+    if (
+      _instance.declineReasonQuestion !== undefined &&
+      _instance.declineReasonQuestion !== null
+    ) {
+      _writer.writeString(6, _instance.declineReasonQuestion);
+    }
+    if (_instance.callerDeclinedMessage) {
+      _writer.writeString(7, _instance.callerDeclinedMessage);
+    }
+    if (_instance.callerUnreachableMessage) {
+      _writer.writeString(8, _instance.callerUnreachableMessage);
+    }
+    if (_instance.acceptDtmf) {
+      _writer.writeString(9, _instance.acceptDtmf);
+    }
+    if (_instance.declineDtmf) {
+      _writer.writeString(10, _instance.declineDtmf);
+    }
+    if (_instance.calleeDisplayName) {
+      _writer.writeString(11, _instance.calleeDisplayName);
+    }
+    if (_instance.calleeDescription) {
+      _writer.writeString(12, _instance.calleeDescription);
+    }
+    if (_instance.llmCcaiServiceName) {
+      _writer.writeString(13, _instance.llmCcaiServiceName);
+    }
+    if (_instance.maxHistorySteps) {
+      _writer.writeInt32(14, _instance.maxHistorySteps);
+    }
+    if (_instance.decisionTimeoutS) {
+      _writer.writeInt32(15, _instance.decisionTimeoutS);
+    }
+    if (_instance.projectDisplayName) {
+      _writer.writeString(16, _instance.projectDisplayName);
+    }
+  }
+
+  private _introPrompt: string;
+  private _textSource: WarmTransferIntroTextSource;
+  private _readyQuestion: string;
+  private _confirmHumanBeforeIntro: boolean;
+  private _acceptQuestion: string;
+  private _declineReasonQuestion: string;
+  private _callerDeclinedMessage: string;
+  private _callerUnreachableMessage: string;
+  private _acceptDtmf: string;
+  private _declineDtmf: string;
+  private _calleeDisplayName: string;
+  private _calleeDescription: string;
+  private _llmCcaiServiceName: string;
+  private _maxHistorySteps: number;
+  private _decisionTimeoutS: number;
+  private _projectDisplayName: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of WarmTransferIntroConfig to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<WarmTransferIntroConfig.AsObject>) {
+    _value = _value || {};
+    this.introPrompt = _value.introPrompt;
+    this.textSource = _value.textSource;
+    this.readyQuestion = _value.readyQuestion;
+    this.confirmHumanBeforeIntro = _value.confirmHumanBeforeIntro;
+    this.acceptQuestion = _value.acceptQuestion;
+    this.declineReasonQuestion = _value.declineReasonQuestion;
+    this.callerDeclinedMessage = _value.callerDeclinedMessage;
+    this.callerUnreachableMessage = _value.callerUnreachableMessage;
+    this.acceptDtmf = _value.acceptDtmf;
+    this.declineDtmf = _value.declineDtmf;
+    this.calleeDisplayName = _value.calleeDisplayName;
+    this.calleeDescription = _value.calleeDescription;
+    this.llmCcaiServiceName = _value.llmCcaiServiceName;
+    this.maxHistorySteps = _value.maxHistorySteps;
+    this.decisionTimeoutS = _value.decisionTimeoutS;
+    this.projectDisplayName = _value.projectDisplayName;
+    WarmTransferIntroConfig.refineValues(this);
+  }
+  get introPrompt(): string {
+    return this._introPrompt;
+  }
+  set introPrompt(value: string) {
+    this._introPrompt = value;
+  }
+  get textSource(): WarmTransferIntroTextSource {
+    return this._textSource;
+  }
+  set textSource(value: WarmTransferIntroTextSource) {
+    this._textSource = value;
+  }
+  get readyQuestion(): string {
+    return this._readyQuestion;
+  }
+  set readyQuestion(value: string) {
+    this._readyQuestion = value;
+  }
+  get confirmHumanBeforeIntro(): boolean {
+    return this._confirmHumanBeforeIntro;
+  }
+  set confirmHumanBeforeIntro(value: boolean) {
+    this._confirmHumanBeforeIntro = value;
+  }
+  get acceptQuestion(): string {
+    return this._acceptQuestion;
+  }
+  set acceptQuestion(value: string) {
+    this._acceptQuestion = value;
+  }
+  get declineReasonQuestion(): string {
+    return this._declineReasonQuestion;
+  }
+  set declineReasonQuestion(value: string) {
+    this._declineReasonQuestion = value;
+  }
+  get callerDeclinedMessage(): string {
+    return this._callerDeclinedMessage;
+  }
+  set callerDeclinedMessage(value: string) {
+    this._callerDeclinedMessage = value;
+  }
+  get callerUnreachableMessage(): string {
+    return this._callerUnreachableMessage;
+  }
+  set callerUnreachableMessage(value: string) {
+    this._callerUnreachableMessage = value;
+  }
+  get acceptDtmf(): string {
+    return this._acceptDtmf;
+  }
+  set acceptDtmf(value: string) {
+    this._acceptDtmf = value;
+  }
+  get declineDtmf(): string {
+    return this._declineDtmf;
+  }
+  set declineDtmf(value: string) {
+    this._declineDtmf = value;
+  }
+  get calleeDisplayName(): string {
+    return this._calleeDisplayName;
+  }
+  set calleeDisplayName(value: string) {
+    this._calleeDisplayName = value;
+  }
+  get calleeDescription(): string {
+    return this._calleeDescription;
+  }
+  set calleeDescription(value: string) {
+    this._calleeDescription = value;
+  }
+  get llmCcaiServiceName(): string {
+    return this._llmCcaiServiceName;
+  }
+  set llmCcaiServiceName(value: string) {
+    this._llmCcaiServiceName = value;
+  }
+  get maxHistorySteps(): number {
+    return this._maxHistorySteps;
+  }
+  set maxHistorySteps(value: number) {
+    this._maxHistorySteps = value;
+  }
+  get decisionTimeoutS(): number {
+    return this._decisionTimeoutS;
+  }
+  set decisionTimeoutS(value: number) {
+    this._decisionTimeoutS = value;
+  }
+  get projectDisplayName(): string {
+    return this._projectDisplayName;
+  }
+  set projectDisplayName(value: string) {
+    this._projectDisplayName = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    WarmTransferIntroConfig.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): WarmTransferIntroConfig.AsObject {
+    return {
+      introPrompt: this.introPrompt,
+      textSource: this.textSource,
+      readyQuestion: this.readyQuestion,
+      confirmHumanBeforeIntro: this.confirmHumanBeforeIntro,
+      acceptQuestion: this.acceptQuestion,
+      declineReasonQuestion: this.declineReasonQuestion,
+      callerDeclinedMessage: this.callerDeclinedMessage,
+      callerUnreachableMessage: this.callerUnreachableMessage,
+      acceptDtmf: this.acceptDtmf,
+      declineDtmf: this.declineDtmf,
+      calleeDisplayName: this.calleeDisplayName,
+      calleeDescription: this.calleeDescription,
+      llmCcaiServiceName: this.llmCcaiServiceName,
+      maxHistorySteps: this.maxHistorySteps,
+      decisionTimeoutS: this.decisionTimeoutS,
+      projectDisplayName: this.projectDisplayName
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): WarmTransferIntroConfig.AsProtobufJSON {
+    return {
+      introPrompt: this.introPrompt,
+      textSource:
+        WarmTransferIntroTextSource[
+          this.textSource === null || this.textSource === undefined
+            ? 0
+            : this.textSource
+        ],
+      readyQuestion: this.readyQuestion,
+      confirmHumanBeforeIntro: this.confirmHumanBeforeIntro,
+      acceptQuestion: this.acceptQuestion,
+      declineReasonQuestion: this.declineReasonQuestion,
+      callerDeclinedMessage: this.callerDeclinedMessage,
+      callerUnreachableMessage: this.callerUnreachableMessage,
+      acceptDtmf: this.acceptDtmf,
+      declineDtmf: this.declineDtmf,
+      calleeDisplayName: this.calleeDisplayName,
+      calleeDescription: this.calleeDescription,
+      llmCcaiServiceName: this.llmCcaiServiceName,
+      maxHistorySteps: this.maxHistorySteps,
+      decisionTimeoutS: this.decisionTimeoutS,
+      projectDisplayName: this.projectDisplayName
+    };
+  }
+}
+export module WarmTransferIntroConfig {
+  /**
+   * Standard JavaScript object representation for WarmTransferIntroConfig
+   */
+  export interface AsObject {
+    introPrompt: string;
+    textSource: WarmTransferIntroTextSource;
+    readyQuestion: string;
+    confirmHumanBeforeIntro: boolean;
+    acceptQuestion: string;
+    declineReasonQuestion: string;
+    callerDeclinedMessage: string;
+    callerUnreachableMessage: string;
+    acceptDtmf: string;
+    declineDtmf: string;
+    calleeDisplayName: string;
+    calleeDescription: string;
+    llmCcaiServiceName: string;
+    maxHistorySteps: number;
+    decisionTimeoutS: number;
+    projectDisplayName: string;
+  }
+
+  /**
+   * Protobuf JSON representation for WarmTransferIntroConfig
+   */
+  export interface AsProtobufJSON {
+    introPrompt: string;
+    textSource: string;
+    readyQuestion: string;
+    confirmHumanBeforeIntro: boolean;
+    acceptQuestion: string;
+    declineReasonQuestion: string;
+    callerDeclinedMessage: string;
+    callerUnreachableMessage: string;
+    acceptDtmf: string;
+    declineDtmf: string;
+    calleeDisplayName: string;
+    calleeDescription: string;
+    llmCcaiServiceName: string;
+    maxHistorySteps: number;
+    decisionTimeoutS: number;
+    projectDisplayName: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.PrepareWarmTransferIntroRequest
+ */
+export class PrepareWarmTransferIntroRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.PrepareWarmTransferIntroRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new PrepareWarmTransferIntroRequest();
+    PrepareWarmTransferIntroRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: PrepareWarmTransferIntroRequest) {
+    _instance.introSession = _instance.introSession || '';
+    _instance.sourceSession = _instance.sourceSession || '';
+    _instance.config = _instance.config || undefined;
+    _instance.languageCode = _instance.languageCode || '';
+    _instance.transferRequestId = _instance.transferRequestId || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: PrepareWarmTransferIntroRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.introSession = _reader.readString();
+          break;
+        case 2:
+          _instance.sourceSession = _reader.readString();
+          break;
+        case 3:
+          _instance.config = new WarmTransferIntroConfig();
+          _reader.readMessage(
+            _instance.config,
+            WarmTransferIntroConfig.deserializeBinaryFromReader
+          );
+          break;
+        case 4:
+          _instance.languageCode = _reader.readString();
+          break;
+        case 5:
+          _instance.transferRequestId = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    PrepareWarmTransferIntroRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: PrepareWarmTransferIntroRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.introSession) {
+      _writer.writeString(1, _instance.introSession);
+    }
+    if (_instance.sourceSession) {
+      _writer.writeString(2, _instance.sourceSession);
+    }
+    if (_instance.config) {
+      _writer.writeMessage(
+        3,
+        _instance.config as any,
+        WarmTransferIntroConfig.serializeBinaryToWriter
+      );
+    }
+    if (_instance.languageCode) {
+      _writer.writeString(4, _instance.languageCode);
+    }
+    if (_instance.transferRequestId) {
+      _writer.writeString(5, _instance.transferRequestId);
+    }
+  }
+
+  private _introSession: string;
+  private _sourceSession: string;
+  private _config?: WarmTransferIntroConfig;
+  private _languageCode: string;
+  private _transferRequestId: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of PrepareWarmTransferIntroRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<PrepareWarmTransferIntroRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.introSession = _value.introSession;
+    this.sourceSession = _value.sourceSession;
+    this.config = _value.config
+      ? new WarmTransferIntroConfig(_value.config)
+      : undefined;
+    this.languageCode = _value.languageCode;
+    this.transferRequestId = _value.transferRequestId;
+    PrepareWarmTransferIntroRequest.refineValues(this);
+  }
+  get introSession(): string {
+    return this._introSession;
+  }
+  set introSession(value: string) {
+    this._introSession = value;
+  }
+  get sourceSession(): string {
+    return this._sourceSession;
+  }
+  set sourceSession(value: string) {
+    this._sourceSession = value;
+  }
+  get config(): WarmTransferIntroConfig | undefined {
+    return this._config;
+  }
+  set config(value: WarmTransferIntroConfig | undefined) {
+    this._config = value;
+  }
+  get languageCode(): string {
+    return this._languageCode;
+  }
+  set languageCode(value: string) {
+    this._languageCode = value;
+  }
+  get transferRequestId(): string {
+    return this._transferRequestId;
+  }
+  set transferRequestId(value: string) {
+    this._transferRequestId = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    PrepareWarmTransferIntroRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): PrepareWarmTransferIntroRequest.AsObject {
+    return {
+      introSession: this.introSession,
+      sourceSession: this.sourceSession,
+      config: this.config ? this.config.toObject() : undefined,
+      languageCode: this.languageCode,
+      transferRequestId: this.transferRequestId
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): PrepareWarmTransferIntroRequest.AsProtobufJSON {
+    return {
+      introSession: this.introSession,
+      sourceSession: this.sourceSession,
+      config: this.config ? this.config.toProtobufJSON(options) : null,
+      languageCode: this.languageCode,
+      transferRequestId: this.transferRequestId
+    };
+  }
+}
+export module PrepareWarmTransferIntroRequest {
+  /**
+   * Standard JavaScript object representation for PrepareWarmTransferIntroRequest
+   */
+  export interface AsObject {
+    introSession: string;
+    sourceSession: string;
+    config?: WarmTransferIntroConfig.AsObject;
+    languageCode: string;
+    transferRequestId: string;
+  }
+
+  /**
+   * Protobuf JSON representation for PrepareWarmTransferIntroRequest
+   */
+  export interface AsProtobufJSON {
+    introSession: string;
+    sourceSession: string;
+    config: WarmTransferIntroConfig.AsProtobufJSON | null;
+    languageCode: string;
+    transferRequestId: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.PrepareWarmTransferIntroResponse
+ */
+export class PrepareWarmTransferIntroResponse implements GrpcMessage {
+  static id = 'ondewo.nlu.PrepareWarmTransferIntroResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new PrepareWarmTransferIntroResponse();
+    PrepareWarmTransferIntroResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: PrepareWarmTransferIntroResponse) {
+    _instance.textSourceUsed = _instance.textSourceUsed || 0;
+    _instance.textFellBack = _instance.textFellBack || false;
+    _instance.introTextChars = _instance.introTextChars || 0;
+    _instance.promptDigest = _instance.promptDigest || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: PrepareWarmTransferIntroResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.textSourceUsed = _reader.readEnum();
+          break;
+        case 2:
+          _instance.textFellBack = _reader.readBool();
+          break;
+        case 3:
+          _instance.introTextChars = _reader.readInt32();
+          break;
+        case 4:
+          _instance.promptDigest = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    PrepareWarmTransferIntroResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: PrepareWarmTransferIntroResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.textSourceUsed) {
+      _writer.writeEnum(1, _instance.textSourceUsed);
+    }
+    if (_instance.textFellBack) {
+      _writer.writeBool(2, _instance.textFellBack);
+    }
+    if (_instance.introTextChars) {
+      _writer.writeInt32(3, _instance.introTextChars);
+    }
+    if (_instance.promptDigest) {
+      _writer.writeString(4, _instance.promptDigest);
+    }
+  }
+
+  private _textSourceUsed: WarmTransferIntroTextSource;
+  private _textFellBack: boolean;
+  private _introTextChars: number;
+  private _promptDigest: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of PrepareWarmTransferIntroResponse to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<PrepareWarmTransferIntroResponse.AsObject>
+  ) {
+    _value = _value || {};
+    this.textSourceUsed = _value.textSourceUsed;
+    this.textFellBack = _value.textFellBack;
+    this.introTextChars = _value.introTextChars;
+    this.promptDigest = _value.promptDigest;
+    PrepareWarmTransferIntroResponse.refineValues(this);
+  }
+  get textSourceUsed(): WarmTransferIntroTextSource {
+    return this._textSourceUsed;
+  }
+  set textSourceUsed(value: WarmTransferIntroTextSource) {
+    this._textSourceUsed = value;
+  }
+  get textFellBack(): boolean {
+    return this._textFellBack;
+  }
+  set textFellBack(value: boolean) {
+    this._textFellBack = value;
+  }
+  get introTextChars(): number {
+    return this._introTextChars;
+  }
+  set introTextChars(value: number) {
+    this._introTextChars = value;
+  }
+  get promptDigest(): string {
+    return this._promptDigest;
+  }
+  set promptDigest(value: string) {
+    this._promptDigest = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    PrepareWarmTransferIntroResponse.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): PrepareWarmTransferIntroResponse.AsObject {
+    return {
+      textSourceUsed: this.textSourceUsed,
+      textFellBack: this.textFellBack,
+      introTextChars: this.introTextChars,
+      promptDigest: this.promptDigest
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): PrepareWarmTransferIntroResponse.AsProtobufJSON {
+    return {
+      textSourceUsed:
+        WarmTransferIntroTextSource[
+          this.textSourceUsed === null || this.textSourceUsed === undefined
+            ? 0
+            : this.textSourceUsed
+        ],
+      textFellBack: this.textFellBack,
+      introTextChars: this.introTextChars,
+      promptDigest: this.promptDigest
+    };
+  }
+}
+export module PrepareWarmTransferIntroResponse {
+  /**
+   * Standard JavaScript object representation for PrepareWarmTransferIntroResponse
+   */
+  export interface AsObject {
+    textSourceUsed: WarmTransferIntroTextSource;
+    textFellBack: boolean;
+    introTextChars: number;
+    promptDigest: string;
+  }
+
+  /**
+   * Protobuf JSON representation for PrepareWarmTransferIntroResponse
+   */
+  export interface AsProtobufJSON {
+    textSourceUsed: string;
+    textFellBack: boolean;
+    introTextChars: number;
+    promptDigest: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.GetWarmTransferIntroOutcomeRequest
+ */
+export class GetWarmTransferIntroOutcomeRequest implements GrpcMessage {
+  static id = 'ondewo.nlu.GetWarmTransferIntroOutcomeRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new GetWarmTransferIntroOutcomeRequest();
+    GetWarmTransferIntroOutcomeRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: GetWarmTransferIntroOutcomeRequest) {
+    _instance.introSession = _instance.introSession || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: GetWarmTransferIntroOutcomeRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.introSession = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    GetWarmTransferIntroOutcomeRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: GetWarmTransferIntroOutcomeRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.introSession) {
+      _writer.writeString(1, _instance.introSession);
+    }
+  }
+
+  private _introSession: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of GetWarmTransferIntroOutcomeRequest to deeply clone from
+   */
+  constructor(
+    _value?: RecursivePartial<GetWarmTransferIntroOutcomeRequest.AsObject>
+  ) {
+    _value = _value || {};
+    this.introSession = _value.introSession;
+    GetWarmTransferIntroOutcomeRequest.refineValues(this);
+  }
+  get introSession(): string {
+    return this._introSession;
+  }
+  set introSession(value: string) {
+    this._introSession = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    GetWarmTransferIntroOutcomeRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): GetWarmTransferIntroOutcomeRequest.AsObject {
+    return {
+      introSession: this.introSession
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): GetWarmTransferIntroOutcomeRequest.AsProtobufJSON {
+    return {
+      introSession: this.introSession
+    };
+  }
+}
+export module GetWarmTransferIntroOutcomeRequest {
+  /**
+   * Standard JavaScript object representation for GetWarmTransferIntroOutcomeRequest
+   */
+  export interface AsObject {
+    introSession: string;
+  }
+
+  /**
+   * Protobuf JSON representation for GetWarmTransferIntroOutcomeRequest
+   */
+  export interface AsProtobufJSON {
+    introSession: string;
+  }
+}
+
+/**
+ * Message implementation for ondewo.nlu.WarmTransferIntroOutcome
+ */
+export class WarmTransferIntroOutcome implements GrpcMessage {
+  static id = 'ondewo.nlu.WarmTransferIntroOutcome';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new WarmTransferIntroOutcome();
+    WarmTransferIntroOutcome.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: WarmTransferIntroOutcome) {
+    _instance.decision = _instance.decision || 0;
+    _instance.decidedBy = _instance.decidedBy || 0;
+    _instance.declineReasonPresent = _instance.declineReasonPresent || false;
+    _instance.stage = _instance.stage || 0;
+    _instance.cause = _instance.cause || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: WarmTransferIntroOutcome,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.decision = _reader.readEnum();
+          break;
+        case 2:
+          _instance.decidedBy = _reader.readEnum();
+          break;
+        case 3:
+          _instance.declineReasonPresent = _reader.readBool();
+          break;
+        case 4:
+          _instance.stage = _reader.readEnum();
+          break;
+        case 5:
+          _instance.cause = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    WarmTransferIntroOutcome.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: WarmTransferIntroOutcome,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.decision) {
+      _writer.writeEnum(1, _instance.decision);
+    }
+    if (_instance.decidedBy) {
+      _writer.writeEnum(2, _instance.decidedBy);
+    }
+    if (_instance.declineReasonPresent) {
+      _writer.writeBool(3, _instance.declineReasonPresent);
+    }
+    if (_instance.stage) {
+      _writer.writeEnum(4, _instance.stage);
+    }
+    if (_instance.cause) {
+      _writer.writeString(5, _instance.cause);
+    }
+  }
+
+  private _decision: WarmTransferIntroDecision;
+  private _decidedBy: WarmTransferIntroDecidedBy;
+  private _declineReasonPresent: boolean;
+  private _stage: WarmTransferIntroStage;
+  private _cause: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of WarmTransferIntroOutcome to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<WarmTransferIntroOutcome.AsObject>) {
+    _value = _value || {};
+    this.decision = _value.decision;
+    this.decidedBy = _value.decidedBy;
+    this.declineReasonPresent = _value.declineReasonPresent;
+    this.stage = _value.stage;
+    this.cause = _value.cause;
+    WarmTransferIntroOutcome.refineValues(this);
+  }
+  get decision(): WarmTransferIntroDecision {
+    return this._decision;
+  }
+  set decision(value: WarmTransferIntroDecision) {
+    this._decision = value;
+  }
+  get decidedBy(): WarmTransferIntroDecidedBy {
+    return this._decidedBy;
+  }
+  set decidedBy(value: WarmTransferIntroDecidedBy) {
+    this._decidedBy = value;
+  }
+  get declineReasonPresent(): boolean {
+    return this._declineReasonPresent;
+  }
+  set declineReasonPresent(value: boolean) {
+    this._declineReasonPresent = value;
+  }
+  get stage(): WarmTransferIntroStage {
+    return this._stage;
+  }
+  set stage(value: WarmTransferIntroStage) {
+    this._stage = value;
+  }
+  get cause(): string {
+    return this._cause;
+  }
+  set cause(value: string) {
+    this._cause = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    WarmTransferIntroOutcome.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): WarmTransferIntroOutcome.AsObject {
+    return {
+      decision: this.decision,
+      decidedBy: this.decidedBy,
+      declineReasonPresent: this.declineReasonPresent,
+      stage: this.stage,
+      cause: this.cause
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): WarmTransferIntroOutcome.AsProtobufJSON {
+    return {
+      decision:
+        WarmTransferIntroDecision[
+          this.decision === null || this.decision === undefined
+            ? 0
+            : this.decision
+        ],
+      decidedBy:
+        WarmTransferIntroDecidedBy[
+          this.decidedBy === null || this.decidedBy === undefined
+            ? 0
+            : this.decidedBy
+        ],
+      declineReasonPresent: this.declineReasonPresent,
+      stage:
+        WarmTransferIntroStage[
+          this.stage === null || this.stage === undefined ? 0 : this.stage
+        ],
+      cause: this.cause
+    };
+  }
+}
+export module WarmTransferIntroOutcome {
+  /**
+   * Standard JavaScript object representation for WarmTransferIntroOutcome
+   */
+  export interface AsObject {
+    decision: WarmTransferIntroDecision;
+    decidedBy: WarmTransferIntroDecidedBy;
+    declineReasonPresent: boolean;
+    stage: WarmTransferIntroStage;
+    cause: string;
+  }
+
+  /**
+   * Protobuf JSON representation for WarmTransferIntroOutcome
+   */
+  export interface AsProtobufJSON {
+    decision: string;
+    decidedBy: string;
+    declineReasonPresent: boolean;
+    stage: string;
+    cause: string;
   }
 }
 

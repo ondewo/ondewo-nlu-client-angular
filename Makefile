@@ -14,9 +14,9 @@ export
 # 		Variables
 ########################################################
 
-ONDEWO_NLU_VERSION=7.5.0
+ONDEWO_NLU_VERSION=7.6.0
 
-NLU_API_GIT_BRANCH=feature/OND236-120-barge-in-cancel
+NLU_API_GIT_BRANCH=09169d1b766c4d19c123b9c072e80ff693fec3d9
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.15.7
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 NLU_APIS_DIR=src/ondewo-nlu-api

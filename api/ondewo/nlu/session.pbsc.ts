@@ -94,6 +94,48 @@ export class SessionsClient {
       });
     },
     /**
+     * Unary call: /ondewo.nlu.Sessions/PrepareWarmTransferIntro
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.PrepareWarmTransferIntroResponse>>
+     */
+    prepareWarmTransferIntro: (
+      requestData: thisProto.PrepareWarmTransferIntroRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.PrepareWarmTransferIntroResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/PrepareWarmTransferIntro',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.PrepareWarmTransferIntroRequest,
+        responseClass: thisProto.PrepareWarmTransferIntroResponse
+      });
+    },
+    /**
+     * Unary call: /ondewo.nlu.Sessions/GetWarmTransferIntroOutcome
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.WarmTransferIntroOutcome>>
+     */
+    getWarmTransferIntroOutcome: (
+      requestData: thisProto.GetWarmTransferIntroOutcomeRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.WarmTransferIntroOutcome>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/GetWarmTransferIntroOutcome',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetWarmTransferIntroOutcomeRequest,
+        responseClass: thisProto.WarmTransferIntroOutcome
+      });
+    },
+    /**
      * Unary call: /ondewo.nlu.Sessions/ListSessions
      *
      * @param requestMessage Request message
@@ -1142,6 +1184,38 @@ export class SessionsClient {
   ): Observable<thisProto.InterruptTurnResponse> {
     return this.$raw
       .interruptTurn(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/PrepareWarmTransferIntro
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.PrepareWarmTransferIntroResponse>
+   */
+  prepareWarmTransferIntro(
+    requestData: thisProto.PrepareWarmTransferIntroRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.PrepareWarmTransferIntroResponse> {
+    return this.$raw
+      .prepareWarmTransferIntro(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/GetWarmTransferIntroOutcome
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.WarmTransferIntroOutcome>
+   */
+  getWarmTransferIntroOutcome(
+    requestData: thisProto.GetWarmTransferIntroOutcomeRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.WarmTransferIntroOutcome> {
+    return this.$raw
+      .getWarmTransferIntroOutcome(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 

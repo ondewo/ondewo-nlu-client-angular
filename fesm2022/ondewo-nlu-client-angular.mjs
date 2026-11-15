@@ -52806,6 +52806,36 @@ var TurnControlAckStatus;
     TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_HEARD_STALE"] = 6] = "TURN_CONTROL_ACK_STATUS_HEARD_STALE";
     TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED"] = 7] = "TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED";
 })(TurnControlAckStatus || (TurnControlAckStatus = {}));
+var WarmTransferIntroTextSource;
+(function (WarmTransferIntroTextSource) {
+    WarmTransferIntroTextSource[WarmTransferIntroTextSource["WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED"] = 0] = "WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED";
+    WarmTransferIntroTextSource[WarmTransferIntroTextSource["WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE"] = 1] = "WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE";
+    WarmTransferIntroTextSource[WarmTransferIntroTextSource["WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY"] = 2] = "WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY";
+})(WarmTransferIntroTextSource || (WarmTransferIntroTextSource = {}));
+var WarmTransferIntroDecision;
+(function (WarmTransferIntroDecision) {
+    WarmTransferIntroDecision[WarmTransferIntroDecision["WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED"] = 0] = "WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED";
+    WarmTransferIntroDecision[WarmTransferIntroDecision["WARM_TRANSFER_INTRO_DECISION_PENDING"] = 1] = "WARM_TRANSFER_INTRO_DECISION_PENDING";
+    WarmTransferIntroDecision[WarmTransferIntroDecision["WARM_TRANSFER_INTRO_DECISION_ACCEPTED"] = 2] = "WARM_TRANSFER_INTRO_DECISION_ACCEPTED";
+    WarmTransferIntroDecision[WarmTransferIntroDecision["WARM_TRANSFER_INTRO_DECISION_DECLINED"] = 3] = "WARM_TRANSFER_INTRO_DECISION_DECLINED";
+    WarmTransferIntroDecision[WarmTransferIntroDecision["WARM_TRANSFER_INTRO_DECISION_NO_DECISION"] = 4] = "WARM_TRANSFER_INTRO_DECISION_NO_DECISION";
+})(WarmTransferIntroDecision || (WarmTransferIntroDecision = {}));
+var WarmTransferIntroDecidedBy;
+(function (WarmTransferIntroDecidedBy) {
+    WarmTransferIntroDecidedBy[WarmTransferIntroDecidedBy["WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED"] = 0] = "WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED";
+    WarmTransferIntroDecidedBy[WarmTransferIntroDecidedBy["WARM_TRANSFER_INTRO_DECIDED_BY_DTMF"] = 1] = "WARM_TRANSFER_INTRO_DECIDED_BY_DTMF";
+    WarmTransferIntroDecidedBy[WarmTransferIntroDecidedBy["WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH"] = 2] = "WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH";
+    WarmTransferIntroDecidedBy[WarmTransferIntroDecidedBy["WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT"] = 3] = "WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT";
+})(WarmTransferIntroDecidedBy || (WarmTransferIntroDecidedBy = {}));
+var WarmTransferIntroStage;
+(function (WarmTransferIntroStage) {
+    WarmTransferIntroStage[WarmTransferIntroStage["WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED"] = 0] = "WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED";
+    WarmTransferIntroStage[WarmTransferIntroStage["WARM_TRANSFER_INTRO_STAGE_PREPARED"] = 1] = "WARM_TRANSFER_INTRO_STAGE_PREPARED";
+    WarmTransferIntroStage[WarmTransferIntroStage["WARM_TRANSFER_INTRO_STAGE_READY_ASKED"] = 2] = "WARM_TRANSFER_INTRO_STAGE_READY_ASKED";
+    WarmTransferIntroStage[WarmTransferIntroStage["WARM_TRANSFER_INTRO_STAGE_INTRO_SPOKEN"] = 3] = "WARM_TRANSFER_INTRO_STAGE_INTRO_SPOKEN";
+    WarmTransferIntroStage[WarmTransferIntroStage["WARM_TRANSFER_INTRO_STAGE_REASON_ASKED"] = 4] = "WARM_TRANSFER_INTRO_STAGE_REASON_ASKED";
+    WarmTransferIntroStage[WarmTransferIntroStage["WARM_TRANSFER_INTRO_STAGE_CLOSED"] = 5] = "WARM_TRANSFER_INTRO_STAGE_CLOSED";
+})(WarmTransferIntroStage || (WarmTransferIntroStage = {}));
 var AudioEncoding;
 (function (AudioEncoding) {
     AudioEncoding[AudioEncoding["AUDIO_ENCODING_UNSPECIFIED"] = 0] = "AUDIO_ENCODING_UNSPECIFIED";
@@ -63194,6 +63224,939 @@ class InterruptTurnResponse {
             turnControlAck: this.turnControlAck
                 ? this.turnControlAck.toProtobufJSON(options)
                 : null
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.WarmTransferIntroConfig
+ */
+class WarmTransferIntroConfig {
+    static { this.id = 'ondewo.nlu.WarmTransferIntroConfig'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new WarmTransferIntroConfig();
+        WarmTransferIntroConfig.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.introPrompt = _instance.introPrompt || '';
+        _instance.textSource = _instance.textSource || 0;
+        _instance.readyQuestion = _instance.readyQuestion || '';
+        _instance.acceptQuestion = _instance.acceptQuestion || '';
+        _instance.callerDeclinedMessage = _instance.callerDeclinedMessage || '';
+        _instance.callerUnreachableMessage =
+            _instance.callerUnreachableMessage || '';
+        _instance.acceptDtmf = _instance.acceptDtmf || '';
+        _instance.declineDtmf = _instance.declineDtmf || '';
+        _instance.calleeDisplayName = _instance.calleeDisplayName || '';
+        _instance.calleeDescription = _instance.calleeDescription || '';
+        _instance.llmCcaiServiceName = _instance.llmCcaiServiceName || '';
+        _instance.maxHistorySteps = _instance.maxHistorySteps || 0;
+        _instance.decisionTimeoutS = _instance.decisionTimeoutS || 0;
+        _instance.projectDisplayName = _instance.projectDisplayName || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.introPrompt = _reader.readString();
+                    break;
+                case 2:
+                    _instance.textSource = _reader.readEnum();
+                    break;
+                case 3:
+                    _instance.readyQuestion = _reader.readString();
+                    break;
+                case 4:
+                    _instance.confirmHumanBeforeIntro = _reader.readBool();
+                    break;
+                case 5:
+                    _instance.acceptQuestion = _reader.readString();
+                    break;
+                case 6:
+                    _instance.declineReasonQuestion = _reader.readString();
+                    break;
+                case 7:
+                    _instance.callerDeclinedMessage = _reader.readString();
+                    break;
+                case 8:
+                    _instance.callerUnreachableMessage = _reader.readString();
+                    break;
+                case 9:
+                    _instance.acceptDtmf = _reader.readString();
+                    break;
+                case 10:
+                    _instance.declineDtmf = _reader.readString();
+                    break;
+                case 11:
+                    _instance.calleeDisplayName = _reader.readString();
+                    break;
+                case 12:
+                    _instance.calleeDescription = _reader.readString();
+                    break;
+                case 13:
+                    _instance.llmCcaiServiceName = _reader.readString();
+                    break;
+                case 14:
+                    _instance.maxHistorySteps = _reader.readInt32();
+                    break;
+                case 15:
+                    _instance.decisionTimeoutS = _reader.readInt32();
+                    break;
+                case 16:
+                    _instance.projectDisplayName = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        WarmTransferIntroConfig.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.introPrompt) {
+            _writer.writeString(1, _instance.introPrompt);
+        }
+        if (_instance.textSource) {
+            _writer.writeEnum(2, _instance.textSource);
+        }
+        if (_instance.readyQuestion) {
+            _writer.writeString(3, _instance.readyQuestion);
+        }
+        if (_instance.confirmHumanBeforeIntro !== undefined &&
+            _instance.confirmHumanBeforeIntro !== null) {
+            _writer.writeBool(4, _instance.confirmHumanBeforeIntro);
+        }
+        if (_instance.acceptQuestion) {
+            _writer.writeString(5, _instance.acceptQuestion);
+        }
+        if (_instance.declineReasonQuestion !== undefined &&
+            _instance.declineReasonQuestion !== null) {
+            _writer.writeString(6, _instance.declineReasonQuestion);
+        }
+        if (_instance.callerDeclinedMessage) {
+            _writer.writeString(7, _instance.callerDeclinedMessage);
+        }
+        if (_instance.callerUnreachableMessage) {
+            _writer.writeString(8, _instance.callerUnreachableMessage);
+        }
+        if (_instance.acceptDtmf) {
+            _writer.writeString(9, _instance.acceptDtmf);
+        }
+        if (_instance.declineDtmf) {
+            _writer.writeString(10, _instance.declineDtmf);
+        }
+        if (_instance.calleeDisplayName) {
+            _writer.writeString(11, _instance.calleeDisplayName);
+        }
+        if (_instance.calleeDescription) {
+            _writer.writeString(12, _instance.calleeDescription);
+        }
+        if (_instance.llmCcaiServiceName) {
+            _writer.writeString(13, _instance.llmCcaiServiceName);
+        }
+        if (_instance.maxHistorySteps) {
+            _writer.writeInt32(14, _instance.maxHistorySteps);
+        }
+        if (_instance.decisionTimeoutS) {
+            _writer.writeInt32(15, _instance.decisionTimeoutS);
+        }
+        if (_instance.projectDisplayName) {
+            _writer.writeString(16, _instance.projectDisplayName);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WarmTransferIntroConfig to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.introPrompt = _value.introPrompt;
+        this.textSource = _value.textSource;
+        this.readyQuestion = _value.readyQuestion;
+        this.confirmHumanBeforeIntro = _value.confirmHumanBeforeIntro;
+        this.acceptQuestion = _value.acceptQuestion;
+        this.declineReasonQuestion = _value.declineReasonQuestion;
+        this.callerDeclinedMessage = _value.callerDeclinedMessage;
+        this.callerUnreachableMessage = _value.callerUnreachableMessage;
+        this.acceptDtmf = _value.acceptDtmf;
+        this.declineDtmf = _value.declineDtmf;
+        this.calleeDisplayName = _value.calleeDisplayName;
+        this.calleeDescription = _value.calleeDescription;
+        this.llmCcaiServiceName = _value.llmCcaiServiceName;
+        this.maxHistorySteps = _value.maxHistorySteps;
+        this.decisionTimeoutS = _value.decisionTimeoutS;
+        this.projectDisplayName = _value.projectDisplayName;
+        WarmTransferIntroConfig.refineValues(this);
+    }
+    get introPrompt() {
+        return this._introPrompt;
+    }
+    set introPrompt(value) {
+        this._introPrompt = value;
+    }
+    get textSource() {
+        return this._textSource;
+    }
+    set textSource(value) {
+        this._textSource = value;
+    }
+    get readyQuestion() {
+        return this._readyQuestion;
+    }
+    set readyQuestion(value) {
+        this._readyQuestion = value;
+    }
+    get confirmHumanBeforeIntro() {
+        return this._confirmHumanBeforeIntro;
+    }
+    set confirmHumanBeforeIntro(value) {
+        this._confirmHumanBeforeIntro = value;
+    }
+    get acceptQuestion() {
+        return this._acceptQuestion;
+    }
+    set acceptQuestion(value) {
+        this._acceptQuestion = value;
+    }
+    get declineReasonQuestion() {
+        return this._declineReasonQuestion;
+    }
+    set declineReasonQuestion(value) {
+        this._declineReasonQuestion = value;
+    }
+    get callerDeclinedMessage() {
+        return this._callerDeclinedMessage;
+    }
+    set callerDeclinedMessage(value) {
+        this._callerDeclinedMessage = value;
+    }
+    get callerUnreachableMessage() {
+        return this._callerUnreachableMessage;
+    }
+    set callerUnreachableMessage(value) {
+        this._callerUnreachableMessage = value;
+    }
+    get acceptDtmf() {
+        return this._acceptDtmf;
+    }
+    set acceptDtmf(value) {
+        this._acceptDtmf = value;
+    }
+    get declineDtmf() {
+        return this._declineDtmf;
+    }
+    set declineDtmf(value) {
+        this._declineDtmf = value;
+    }
+    get calleeDisplayName() {
+        return this._calleeDisplayName;
+    }
+    set calleeDisplayName(value) {
+        this._calleeDisplayName = value;
+    }
+    get calleeDescription() {
+        return this._calleeDescription;
+    }
+    set calleeDescription(value) {
+        this._calleeDescription = value;
+    }
+    get llmCcaiServiceName() {
+        return this._llmCcaiServiceName;
+    }
+    set llmCcaiServiceName(value) {
+        this._llmCcaiServiceName = value;
+    }
+    get maxHistorySteps() {
+        return this._maxHistorySteps;
+    }
+    set maxHistorySteps(value) {
+        this._maxHistorySteps = value;
+    }
+    get decisionTimeoutS() {
+        return this._decisionTimeoutS;
+    }
+    set decisionTimeoutS(value) {
+        this._decisionTimeoutS = value;
+    }
+    get projectDisplayName() {
+        return this._projectDisplayName;
+    }
+    set projectDisplayName(value) {
+        this._projectDisplayName = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        WarmTransferIntroConfig.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            introPrompt: this.introPrompt,
+            textSource: this.textSource,
+            readyQuestion: this.readyQuestion,
+            confirmHumanBeforeIntro: this.confirmHumanBeforeIntro,
+            acceptQuestion: this.acceptQuestion,
+            declineReasonQuestion: this.declineReasonQuestion,
+            callerDeclinedMessage: this.callerDeclinedMessage,
+            callerUnreachableMessage: this.callerUnreachableMessage,
+            acceptDtmf: this.acceptDtmf,
+            declineDtmf: this.declineDtmf,
+            calleeDisplayName: this.calleeDisplayName,
+            calleeDescription: this.calleeDescription,
+            llmCcaiServiceName: this.llmCcaiServiceName,
+            maxHistorySteps: this.maxHistorySteps,
+            decisionTimeoutS: this.decisionTimeoutS,
+            projectDisplayName: this.projectDisplayName
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            introPrompt: this.introPrompt,
+            textSource: WarmTransferIntroTextSource[this.textSource === null || this.textSource === undefined
+                ? 0
+                : this.textSource],
+            readyQuestion: this.readyQuestion,
+            confirmHumanBeforeIntro: this.confirmHumanBeforeIntro,
+            acceptQuestion: this.acceptQuestion,
+            declineReasonQuestion: this.declineReasonQuestion,
+            callerDeclinedMessage: this.callerDeclinedMessage,
+            callerUnreachableMessage: this.callerUnreachableMessage,
+            acceptDtmf: this.acceptDtmf,
+            declineDtmf: this.declineDtmf,
+            calleeDisplayName: this.calleeDisplayName,
+            calleeDescription: this.calleeDescription,
+            llmCcaiServiceName: this.llmCcaiServiceName,
+            maxHistorySteps: this.maxHistorySteps,
+            decisionTimeoutS: this.decisionTimeoutS,
+            projectDisplayName: this.projectDisplayName
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.PrepareWarmTransferIntroRequest
+ */
+class PrepareWarmTransferIntroRequest {
+    static { this.id = 'ondewo.nlu.PrepareWarmTransferIntroRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new PrepareWarmTransferIntroRequest();
+        PrepareWarmTransferIntroRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.introSession = _instance.introSession || '';
+        _instance.sourceSession = _instance.sourceSession || '';
+        _instance.config = _instance.config || undefined;
+        _instance.languageCode = _instance.languageCode || '';
+        _instance.transferRequestId = _instance.transferRequestId || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.introSession = _reader.readString();
+                    break;
+                case 2:
+                    _instance.sourceSession = _reader.readString();
+                    break;
+                case 3:
+                    _instance.config = new WarmTransferIntroConfig();
+                    _reader.readMessage(_instance.config, WarmTransferIntroConfig.deserializeBinaryFromReader);
+                    break;
+                case 4:
+                    _instance.languageCode = _reader.readString();
+                    break;
+                case 5:
+                    _instance.transferRequestId = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        PrepareWarmTransferIntroRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.introSession) {
+            _writer.writeString(1, _instance.introSession);
+        }
+        if (_instance.sourceSession) {
+            _writer.writeString(2, _instance.sourceSession);
+        }
+        if (_instance.config) {
+            _writer.writeMessage(3, _instance.config, WarmTransferIntroConfig.serializeBinaryToWriter);
+        }
+        if (_instance.languageCode) {
+            _writer.writeString(4, _instance.languageCode);
+        }
+        if (_instance.transferRequestId) {
+            _writer.writeString(5, _instance.transferRequestId);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PrepareWarmTransferIntroRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.introSession = _value.introSession;
+        this.sourceSession = _value.sourceSession;
+        this.config = _value.config
+            ? new WarmTransferIntroConfig(_value.config)
+            : undefined;
+        this.languageCode = _value.languageCode;
+        this.transferRequestId = _value.transferRequestId;
+        PrepareWarmTransferIntroRequest.refineValues(this);
+    }
+    get introSession() {
+        return this._introSession;
+    }
+    set introSession(value) {
+        this._introSession = value;
+    }
+    get sourceSession() {
+        return this._sourceSession;
+    }
+    set sourceSession(value) {
+        this._sourceSession = value;
+    }
+    get config() {
+        return this._config;
+    }
+    set config(value) {
+        this._config = value;
+    }
+    get languageCode() {
+        return this._languageCode;
+    }
+    set languageCode(value) {
+        this._languageCode = value;
+    }
+    get transferRequestId() {
+        return this._transferRequestId;
+    }
+    set transferRequestId(value) {
+        this._transferRequestId = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        PrepareWarmTransferIntroRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            introSession: this.introSession,
+            sourceSession: this.sourceSession,
+            config: this.config ? this.config.toObject() : undefined,
+            languageCode: this.languageCode,
+            transferRequestId: this.transferRequestId
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            introSession: this.introSession,
+            sourceSession: this.sourceSession,
+            config: this.config ? this.config.toProtobufJSON(options) : null,
+            languageCode: this.languageCode,
+            transferRequestId: this.transferRequestId
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.PrepareWarmTransferIntroResponse
+ */
+class PrepareWarmTransferIntroResponse {
+    static { this.id = 'ondewo.nlu.PrepareWarmTransferIntroResponse'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new PrepareWarmTransferIntroResponse();
+        PrepareWarmTransferIntroResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.textSourceUsed = _instance.textSourceUsed || 0;
+        _instance.textFellBack = _instance.textFellBack || false;
+        _instance.introTextChars = _instance.introTextChars || 0;
+        _instance.promptDigest = _instance.promptDigest || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.textSourceUsed = _reader.readEnum();
+                    break;
+                case 2:
+                    _instance.textFellBack = _reader.readBool();
+                    break;
+                case 3:
+                    _instance.introTextChars = _reader.readInt32();
+                    break;
+                case 4:
+                    _instance.promptDigest = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        PrepareWarmTransferIntroResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.textSourceUsed) {
+            _writer.writeEnum(1, _instance.textSourceUsed);
+        }
+        if (_instance.textFellBack) {
+            _writer.writeBool(2, _instance.textFellBack);
+        }
+        if (_instance.introTextChars) {
+            _writer.writeInt32(3, _instance.introTextChars);
+        }
+        if (_instance.promptDigest) {
+            _writer.writeString(4, _instance.promptDigest);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of PrepareWarmTransferIntroResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.textSourceUsed = _value.textSourceUsed;
+        this.textFellBack = _value.textFellBack;
+        this.introTextChars = _value.introTextChars;
+        this.promptDigest = _value.promptDigest;
+        PrepareWarmTransferIntroResponse.refineValues(this);
+    }
+    get textSourceUsed() {
+        return this._textSourceUsed;
+    }
+    set textSourceUsed(value) {
+        this._textSourceUsed = value;
+    }
+    get textFellBack() {
+        return this._textFellBack;
+    }
+    set textFellBack(value) {
+        this._textFellBack = value;
+    }
+    get introTextChars() {
+        return this._introTextChars;
+    }
+    set introTextChars(value) {
+        this._introTextChars = value;
+    }
+    get promptDigest() {
+        return this._promptDigest;
+    }
+    set promptDigest(value) {
+        this._promptDigest = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        PrepareWarmTransferIntroResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            textSourceUsed: this.textSourceUsed,
+            textFellBack: this.textFellBack,
+            introTextChars: this.introTextChars,
+            promptDigest: this.promptDigest
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            textSourceUsed: WarmTransferIntroTextSource[this.textSourceUsed === null || this.textSourceUsed === undefined
+                ? 0
+                : this.textSourceUsed],
+            textFellBack: this.textFellBack,
+            introTextChars: this.introTextChars,
+            promptDigest: this.promptDigest
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetWarmTransferIntroOutcomeRequest
+ */
+class GetWarmTransferIntroOutcomeRequest {
+    static { this.id = 'ondewo.nlu.GetWarmTransferIntroOutcomeRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetWarmTransferIntroOutcomeRequest();
+        GetWarmTransferIntroOutcomeRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.introSession = _instance.introSession || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.introSession = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetWarmTransferIntroOutcomeRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.introSession) {
+            _writer.writeString(1, _instance.introSession);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetWarmTransferIntroOutcomeRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.introSession = _value.introSession;
+        GetWarmTransferIntroOutcomeRequest.refineValues(this);
+    }
+    get introSession() {
+        return this._introSession;
+    }
+    set introSession(value) {
+        this._introSession = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetWarmTransferIntroOutcomeRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            introSession: this.introSession
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            introSession: this.introSession
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.WarmTransferIntroOutcome
+ */
+class WarmTransferIntroOutcome {
+    static { this.id = 'ondewo.nlu.WarmTransferIntroOutcome'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new WarmTransferIntroOutcome();
+        WarmTransferIntroOutcome.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.decision = _instance.decision || 0;
+        _instance.decidedBy = _instance.decidedBy || 0;
+        _instance.declineReasonPresent = _instance.declineReasonPresent || false;
+        _instance.stage = _instance.stage || 0;
+        _instance.cause = _instance.cause || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.decision = _reader.readEnum();
+                    break;
+                case 2:
+                    _instance.decidedBy = _reader.readEnum();
+                    break;
+                case 3:
+                    _instance.declineReasonPresent = _reader.readBool();
+                    break;
+                case 4:
+                    _instance.stage = _reader.readEnum();
+                    break;
+                case 5:
+                    _instance.cause = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        WarmTransferIntroOutcome.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.decision) {
+            _writer.writeEnum(1, _instance.decision);
+        }
+        if (_instance.decidedBy) {
+            _writer.writeEnum(2, _instance.decidedBy);
+        }
+        if (_instance.declineReasonPresent) {
+            _writer.writeBool(3, _instance.declineReasonPresent);
+        }
+        if (_instance.stage) {
+            _writer.writeEnum(4, _instance.stage);
+        }
+        if (_instance.cause) {
+            _writer.writeString(5, _instance.cause);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WarmTransferIntroOutcome to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.decision = _value.decision;
+        this.decidedBy = _value.decidedBy;
+        this.declineReasonPresent = _value.declineReasonPresent;
+        this.stage = _value.stage;
+        this.cause = _value.cause;
+        WarmTransferIntroOutcome.refineValues(this);
+    }
+    get decision() {
+        return this._decision;
+    }
+    set decision(value) {
+        this._decision = value;
+    }
+    get decidedBy() {
+        return this._decidedBy;
+    }
+    set decidedBy(value) {
+        this._decidedBy = value;
+    }
+    get declineReasonPresent() {
+        return this._declineReasonPresent;
+    }
+    set declineReasonPresent(value) {
+        this._declineReasonPresent = value;
+    }
+    get stage() {
+        return this._stage;
+    }
+    set stage(value) {
+        this._stage = value;
+    }
+    get cause() {
+        return this._cause;
+    }
+    set cause(value) {
+        this._cause = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        WarmTransferIntroOutcome.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            decision: this.decision,
+            decidedBy: this.decidedBy,
+            declineReasonPresent: this.declineReasonPresent,
+            stage: this.stage,
+            cause: this.cause
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            decision: WarmTransferIntroDecision[this.decision === null || this.decision === undefined
+                ? 0
+                : this.decision],
+            decidedBy: WarmTransferIntroDecidedBy[this.decidedBy === null || this.decidedBy === undefined
+                ? 0
+                : this.decidedBy],
+            declineReasonPresent: this.declineReasonPresent,
+            stage: WarmTransferIntroStage[this.stage === null || this.stage === undefined ? 0 : this.stage],
+            cause: this.cause
         };
     }
 }
@@ -78871,6 +79834,8 @@ class Agent {
         _instance.modifiedAt = _instance.modifiedAt || undefined;
         _instance.createdBy = _instance.createdBy || '';
         _instance.modifiedBy = _instance.modifiedBy || '';
+        _instance.warmTransferSettings =
+            _instance.warmTransferSettings || undefined;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -78928,6 +79893,10 @@ class Agent {
                 case 14:
                     _instance.modifiedBy = _reader.readString();
                     break;
+                case 15:
+                    _instance.warmTransferSettings = new WarmTransferAgentSettings();
+                    _reader.readMessage(_instance.warmTransferSettings, WarmTransferAgentSettings.deserializeBinaryFromReader);
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -78983,6 +79952,9 @@ class Agent {
         if (_instance.modifiedBy) {
             _writer.writeString(14, _instance.modifiedBy);
         }
+        if (_instance.warmTransferSettings) {
+            _writer.writeMessage(15, _instance.warmTransferSettings, WarmTransferAgentSettings.serializeBinaryToWriter);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -79010,6 +79982,9 @@ class Agent {
             : undefined;
         this.createdBy = _value.createdBy;
         this.modifiedBy = _value.modifiedBy;
+        this.warmTransferSettings = _value.warmTransferSettings
+            ? new WarmTransferAgentSettings(_value.warmTransferSettings)
+            : undefined;
         Agent.refineValues(this);
     }
     get parent() {
@@ -79096,6 +80071,12 @@ class Agent {
     set modifiedBy(value) {
         this._modifiedBy = value;
     }
+    get warmTransferSettings() {
+        return this._warmTransferSettings;
+    }
+    set warmTransferSettings(value) {
+        this._warmTransferSettings = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -79123,7 +80104,10 @@ class Agent {
             createdAt: this.createdAt ? this.createdAt.toObject() : undefined,
             modifiedAt: this.modifiedAt ? this.modifiedAt.toObject() : undefined,
             createdBy: this.createdBy,
-            modifiedBy: this.modifiedBy
+            modifiedBy: this.modifiedBy,
+            warmTransferSettings: this.warmTransferSettings
+                ? this.warmTransferSettings.toObject()
+                : undefined
         };
     }
     /**
@@ -79156,7 +80140,749 @@ class Agent {
                 ? this.modifiedAt.toProtobufJSON(options)
                 : null,
             createdBy: this.createdBy,
-            modifiedBy: this.modifiedBy
+            modifiedBy: this.modifiedBy,
+            warmTransferSettings: this.warmTransferSettings
+                ? this.warmTransferSettings.toProtobufJSON(options)
+                : null
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.WarmTransferAgentSettings
+ */
+class WarmTransferAgentSettings {
+    static { this.id = 'ondewo.nlu.WarmTransferAgentSettings'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new WarmTransferAgentSettings();
+        WarmTransferAgentSettings.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.llmCcaiServiceName = _instance.llmCcaiServiceName || '';
+        _instance.defaultTexts = _instance.defaultTexts || {};
+        _instance.extraLexicon = _instance.extraLexicon || {};
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.enabled = _reader.readBool();
+                    break;
+                case 2:
+                    _instance.llmCcaiServiceName = _reader.readString();
+                    break;
+                case 3:
+                    const msg_3 = {};
+                    _reader.readMessage(msg_3, WarmTransferAgentSettings.DefaultTextsEntry
+                        .deserializeBinaryFromReader);
+                    _instance.defaultTexts = _instance.defaultTexts || {};
+                    _instance.defaultTexts[msg_3.key] = msg_3.value;
+                    break;
+                case 4:
+                    const msg_4 = {};
+                    _reader.readMessage(msg_4, WarmTransferAgentSettings.ExtraLexiconEntry
+                        .deserializeBinaryFromReader);
+                    _instance.extraLexicon = _instance.extraLexicon || {};
+                    _instance.extraLexicon[msg_4.key] = msg_4.value;
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        WarmTransferAgentSettings.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.enabled !== undefined && _instance.enabled !== null) {
+            _writer.writeBool(1, _instance.enabled);
+        }
+        if (_instance.llmCcaiServiceName) {
+            _writer.writeString(2, _instance.llmCcaiServiceName);
+        }
+        if (!!_instance.defaultTexts) {
+            const keys_3 = Object.keys(_instance.defaultTexts);
+            if (keys_3.length) {
+                const repeated_3 = keys_3
+                    .map(key => ({
+                    key: key,
+                    value: _instance.defaultTexts[key]
+                }))
+                    .reduce((r, v) => [...r, v], []);
+                _writer.writeRepeatedMessage(3, repeated_3, WarmTransferAgentSettings.DefaultTextsEntry.serializeBinaryToWriter);
+            }
+        }
+        if (!!_instance.extraLexicon) {
+            const keys_4 = Object.keys(_instance.extraLexicon);
+            if (keys_4.length) {
+                const repeated_4 = keys_4
+                    .map(key => ({
+                    key: key,
+                    value: _instance.extraLexicon[key]
+                }))
+                    .reduce((r, v) => [...r, v], []);
+                _writer.writeRepeatedMessage(4, repeated_4, WarmTransferAgentSettings.ExtraLexiconEntry.serializeBinaryToWriter);
+            }
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WarmTransferAgentSettings to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.enabled = _value.enabled;
+        this.llmCcaiServiceName = _value.llmCcaiServiceName;
+        (this.defaultTexts = _value.defaultTexts
+            ? Object.keys(_value.defaultTexts).reduce((r, k) => ({
+                ...r,
+                [k]: _value.defaultTexts[k]
+                    ? new WarmTransferAgentTexts(_value.defaultTexts[k])
+                    : undefined
+            }), {})
+            : {}),
+            (this.extraLexicon = _value.extraLexicon
+                ? Object.keys(_value.extraLexicon).reduce((r, k) => ({
+                    ...r,
+                    [k]: _value.extraLexicon[k]
+                        ? new WarmTransferAgentLexicon(_value.extraLexicon[k])
+                        : undefined
+                }), {})
+                : {}),
+            WarmTransferAgentSettings.refineValues(this);
+    }
+    get enabled() {
+        return this._enabled;
+    }
+    set enabled(value) {
+        this._enabled = value;
+    }
+    get llmCcaiServiceName() {
+        return this._llmCcaiServiceName;
+    }
+    set llmCcaiServiceName(value) {
+        this._llmCcaiServiceName = value;
+    }
+    get defaultTexts() {
+        return this._defaultTexts;
+    }
+    set defaultTexts(value) {
+        this._defaultTexts = value;
+    }
+    get extraLexicon() {
+        return this._extraLexicon;
+    }
+    set extraLexicon(value) {
+        this._extraLexicon = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        WarmTransferAgentSettings.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            enabled: this.enabled,
+            llmCcaiServiceName: this.llmCcaiServiceName,
+            defaultTexts: this.defaultTexts
+                ? Object.keys(this.defaultTexts).reduce((r, k) => ({
+                    ...r,
+                    [k]: this.defaultTexts[k]
+                        ? this.defaultTexts[k].toObject()
+                        : undefined
+                }), {})
+                : {},
+            extraLexicon: this.extraLexicon
+                ? Object.keys(this.extraLexicon).reduce((r, k) => ({
+                    ...r,
+                    [k]: this.extraLexicon[k]
+                        ? this.extraLexicon[k].toObject()
+                        : undefined
+                }), {})
+                : {}
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            enabled: this.enabled,
+            llmCcaiServiceName: this.llmCcaiServiceName,
+            defaultTexts: this.defaultTexts
+                ? Object.keys(this.defaultTexts).reduce((r, k) => ({
+                    ...r,
+                    [k]: this.defaultTexts[k] ? this.defaultTexts[k].toJSON() : null
+                }), {})
+                : {},
+            extraLexicon: this.extraLexicon
+                ? Object.keys(this.extraLexicon).reduce((r, k) => ({
+                    ...r,
+                    [k]: this.extraLexicon[k] ? this.extraLexicon[k].toJSON() : null
+                }), {})
+                : {}
+        };
+    }
+}
+(function (WarmTransferAgentSettings) {
+    /**
+     * Message implementation for ondewo.nlu.WarmTransferAgentSettings.DefaultTextsEntry
+     */
+    class DefaultTextsEntry {
+        static { this.id = 'ondewo.nlu.WarmTransferAgentSettings.DefaultTextsEntry'; }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes) {
+            const instance = new DefaultTextsEntry();
+            DefaultTextsEntry.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+            return instance;
+        }
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance) {
+            _instance.key = _instance.key || '';
+            _instance.value = _instance.value || undefined;
+        }
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.key = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.value = new WarmTransferAgentTexts();
+                        _reader.readMessage(_instance.value, WarmTransferAgentTexts.deserializeBinaryFromReader);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            DefaultTextsEntry.refineValues(_instance);
+        }
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance, _writer) {
+            if (_instance.key) {
+                _writer.writeString(1, _instance.key);
+            }
+            if (_instance.value) {
+                _writer.writeMessage(2, _instance.value, WarmTransferAgentTexts.serializeBinaryToWriter);
+            }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of DefaultTextsEntry to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.key = _value.key;
+            this.value = _value.value
+                ? new WarmTransferAgentTexts(_value.value)
+                : undefined;
+            DefaultTextsEntry.refineValues(this);
+        }
+        get key() {
+            return this._key;
+        }
+        set key(value) {
+            this._key = value;
+        }
+        get value() {
+            return this._value;
+        }
+        set value(value) {
+            this._value = value;
+        }
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary() {
+            const writer = new BinaryWriter();
+            DefaultTextsEntry.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        }
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject() {
+            return {
+                key: this.key,
+                value: this.value ? this.value.toObject() : undefined
+            };
+        }
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON() {
+            return this.toObject();
+        }
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(
+        // @ts-ignore
+        options) {
+            return {
+                key: this.key,
+                value: this.value ? this.value.toProtobufJSON(options) : null
+            };
+        }
+    }
+    WarmTransferAgentSettings.DefaultTextsEntry = DefaultTextsEntry;
+    /**
+     * Message implementation for ondewo.nlu.WarmTransferAgentSettings.ExtraLexiconEntry
+     */
+    class ExtraLexiconEntry {
+        static { this.id = 'ondewo.nlu.WarmTransferAgentSettings.ExtraLexiconEntry'; }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes) {
+            const instance = new ExtraLexiconEntry();
+            ExtraLexiconEntry.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+            return instance;
+        }
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance) {
+            _instance.key = _instance.key || '';
+            _instance.value = _instance.value || undefined;
+        }
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.key = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.value = new WarmTransferAgentLexicon();
+                        _reader.readMessage(_instance.value, WarmTransferAgentLexicon.deserializeBinaryFromReader);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ExtraLexiconEntry.refineValues(_instance);
+        }
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance, _writer) {
+            if (_instance.key) {
+                _writer.writeString(1, _instance.key);
+            }
+            if (_instance.value) {
+                _writer.writeMessage(2, _instance.value, WarmTransferAgentLexicon.serializeBinaryToWriter);
+            }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ExtraLexiconEntry to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.key = _value.key;
+            this.value = _value.value
+                ? new WarmTransferAgentLexicon(_value.value)
+                : undefined;
+            ExtraLexiconEntry.refineValues(this);
+        }
+        get key() {
+            return this._key;
+        }
+        set key(value) {
+            this._key = value;
+        }
+        get value() {
+            return this._value;
+        }
+        set value(value) {
+            this._value = value;
+        }
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary() {
+            const writer = new BinaryWriter();
+            ExtraLexiconEntry.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        }
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject() {
+            return {
+                key: this.key,
+                value: this.value ? this.value.toObject() : undefined
+            };
+        }
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON() {
+            return this.toObject();
+        }
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(
+        // @ts-ignore
+        options) {
+            return {
+                key: this.key,
+                value: this.value ? this.value.toProtobufJSON(options) : null
+            };
+        }
+    }
+    WarmTransferAgentSettings.ExtraLexiconEntry = ExtraLexiconEntry;
+})(WarmTransferAgentSettings || (WarmTransferAgentSettings = {}));
+/**
+ * Message implementation for ondewo.nlu.WarmTransferAgentTexts
+ */
+class WarmTransferAgentTexts {
+    static { this.id = 'ondewo.nlu.WarmTransferAgentTexts'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new WarmTransferAgentTexts();
+        WarmTransferAgentTexts.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.readyQuestion = _instance.readyQuestion || '';
+        _instance.acceptQuestion = _instance.acceptQuestion || '';
+        _instance.callerDeclinedMessage = _instance.callerDeclinedMessage || '';
+        _instance.callerUnreachableMessage =
+            _instance.callerUnreachableMessage || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.readyQuestion = _reader.readString();
+                    break;
+                case 2:
+                    _instance.acceptQuestion = _reader.readString();
+                    break;
+                case 3:
+                    _instance.declineReasonQuestion = _reader.readString();
+                    break;
+                case 4:
+                    _instance.callerDeclinedMessage = _reader.readString();
+                    break;
+                case 5:
+                    _instance.callerUnreachableMessage = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        WarmTransferAgentTexts.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.readyQuestion) {
+            _writer.writeString(1, _instance.readyQuestion);
+        }
+        if (_instance.acceptQuestion) {
+            _writer.writeString(2, _instance.acceptQuestion);
+        }
+        if (_instance.declineReasonQuestion !== undefined &&
+            _instance.declineReasonQuestion !== null) {
+            _writer.writeString(3, _instance.declineReasonQuestion);
+        }
+        if (_instance.callerDeclinedMessage) {
+            _writer.writeString(4, _instance.callerDeclinedMessage);
+        }
+        if (_instance.callerUnreachableMessage) {
+            _writer.writeString(5, _instance.callerUnreachableMessage);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WarmTransferAgentTexts to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.readyQuestion = _value.readyQuestion;
+        this.acceptQuestion = _value.acceptQuestion;
+        this.declineReasonQuestion = _value.declineReasonQuestion;
+        this.callerDeclinedMessage = _value.callerDeclinedMessage;
+        this.callerUnreachableMessage = _value.callerUnreachableMessage;
+        WarmTransferAgentTexts.refineValues(this);
+    }
+    get readyQuestion() {
+        return this._readyQuestion;
+    }
+    set readyQuestion(value) {
+        this._readyQuestion = value;
+    }
+    get acceptQuestion() {
+        return this._acceptQuestion;
+    }
+    set acceptQuestion(value) {
+        this._acceptQuestion = value;
+    }
+    get declineReasonQuestion() {
+        return this._declineReasonQuestion;
+    }
+    set declineReasonQuestion(value) {
+        this._declineReasonQuestion = value;
+    }
+    get callerDeclinedMessage() {
+        return this._callerDeclinedMessage;
+    }
+    set callerDeclinedMessage(value) {
+        this._callerDeclinedMessage = value;
+    }
+    get callerUnreachableMessage() {
+        return this._callerUnreachableMessage;
+    }
+    set callerUnreachableMessage(value) {
+        this._callerUnreachableMessage = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        WarmTransferAgentTexts.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            readyQuestion: this.readyQuestion,
+            acceptQuestion: this.acceptQuestion,
+            declineReasonQuestion: this.declineReasonQuestion,
+            callerDeclinedMessage: this.callerDeclinedMessage,
+            callerUnreachableMessage: this.callerUnreachableMessage
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            readyQuestion: this.readyQuestion,
+            acceptQuestion: this.acceptQuestion,
+            declineReasonQuestion: this.declineReasonQuestion,
+            callerDeclinedMessage: this.callerDeclinedMessage,
+            callerUnreachableMessage: this.callerUnreachableMessage
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.WarmTransferAgentLexicon
+ */
+class WarmTransferAgentLexicon {
+    static { this.id = 'ondewo.nlu.WarmTransferAgentLexicon'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new WarmTransferAgentLexicon();
+        WarmTransferAgentLexicon.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.acceptPhrases = _instance.acceptPhrases || [];
+        _instance.declinePhrases = _instance.declinePhrases || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    (_instance.acceptPhrases = _instance.acceptPhrases || []).push(_reader.readString());
+                    break;
+                case 2:
+                    (_instance.declinePhrases = _instance.declinePhrases || []).push(_reader.readString());
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        WarmTransferAgentLexicon.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.acceptPhrases && _instance.acceptPhrases.length) {
+            _writer.writeRepeatedString(1, _instance.acceptPhrases);
+        }
+        if (_instance.declinePhrases && _instance.declinePhrases.length) {
+            _writer.writeRepeatedString(2, _instance.declinePhrases);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of WarmTransferAgentLexicon to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.acceptPhrases = (_value.acceptPhrases || []).slice();
+        this.declinePhrases = (_value.declinePhrases || []).slice();
+        WarmTransferAgentLexicon.refineValues(this);
+    }
+    get acceptPhrases() {
+        return this._acceptPhrases;
+    }
+    set acceptPhrases(value) {
+        this._acceptPhrases = value;
+    }
+    get declinePhrases() {
+        return this._declinePhrases;
+    }
+    set declinePhrases(value) {
+        this._declinePhrases = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        WarmTransferAgentLexicon.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            acceptPhrases: (this.acceptPhrases || []).slice(),
+            declinePhrases: (this.declinePhrases || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            acceptPhrases: (this.acceptPhrases || []).slice(),
+            declinePhrases: (this.declinePhrases || []).slice()
         };
     }
 }
@@ -126663,6 +128389,42 @@ class SessionsClient {
                 });
             },
             /**
+             * Unary call: /ondewo.nlu.Sessions/PrepareWarmTransferIntro
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.PrepareWarmTransferIntroResponse>>
+             */
+            prepareWarmTransferIntro: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/PrepareWarmTransferIntro',
+                    requestData,
+                    requestMetadata,
+                    requestClass: PrepareWarmTransferIntroRequest,
+                    responseClass: PrepareWarmTransferIntroResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Sessions/GetWarmTransferIntroOutcome
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.WarmTransferIntroOutcome>>
+             */
+            getWarmTransferIntroOutcome: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/GetWarmTransferIntroOutcome',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetWarmTransferIntroOutcomeRequest,
+                    responseClass: WarmTransferIntroOutcome
+                });
+            },
+            /**
              * Unary call: /ondewo.nlu.Sessions/ListSessions
              *
              * @param requestMessage Request message
@@ -127551,6 +129313,30 @@ class SessionsClient {
     interruptTurn(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
             .interruptTurn(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/PrepareWarmTransferIntro
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.PrepareWarmTransferIntroResponse>
+     */
+    prepareWarmTransferIntro(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .prepareWarmTransferIntro(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/GetWarmTransferIntroOutcome
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.WarmTransferIntroOutcome>
+     */
+    getWarmTransferIntroOutcome(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getWarmTransferIntroOutcome(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
@@ -137086,5 +138872,5 @@ function warnInsecure(authority) {
  * Generated bundle index. Do not edit.
  */
 
-export { AUTHORIZATION_HEADER, AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionFeedbackRequest, AddSessionLabelsRequest, AddSessionStepFeedbackRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, AuthGrpcInterceptor, BEARER_PREFIX, BROWSER_UNSUPPORTED_TLS_FIELDS, BackgroundWorkPolicy, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CaiLogCaptureState, CaiLogEntry, CaiLogExportFormat, CaiLogFilter, CaiLogFilterField, CaiLogSource, CaiLogStream, CaiLogStreamChannel, CaiLogStreamEndReason, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CancelTurn, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteLogsRequest, DeleteLogsResponse, DeleteNotificationsRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionFeedbackRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DiscardDraft, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportLogsRequest, ExportLogsResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FeedbackAuthorType, FeedbackBreakdownBucket, FeedbackFilter, FeedbackRating, FeedbackScope, FeedbackStatistics, FeedbackTimeGranularity, FeedbackTimeSeriesBucket, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_LOGS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetFeedbackStatisticsRequest, GetFeedbackStatisticsResponse, GetFeedbackStatisticsTimeSeriesRequest, GetFeedbackStatisticsTimeSeriesResponse, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetLogStreamRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetNotificationRequest, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionFeedbackRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, GrpcWebEndpointError, HeardMessage, HeardReport, HeardTextPrecision, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, InterruptTurnRequest, InterruptTurnResponse, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeyValuePair, KeycloakAuthenticationError, KeycloakTokenProvider, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListLogStreamsRequest, ListLogStreamsResponse, ListLogsRequest, ListLogsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListRemoteOperationContainersRequest, ListRemoteOperationContainersResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionFeedbackOfAllSessionsRequest, ListSessionFeedbackRequest, ListSessionFeedbackResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentNodeEvent, LlmAgentNodePhase, LlmAgentUsage, LlmBaseUrlUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, LogsClient, MIN_REFRESH_DELAY_IN_S, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, REFRESH_SKEW_IN_S, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerContentScope, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerDensityPruning, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerIncrementalConfig, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerPruningThresholdType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCrawlerStatusFilter, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainer, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFeedback, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamLogsRequest, StreamLogsResponse, StreamNotificationsRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TOKEN_PROVIDER, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, TurnControl, TurnControlAck, TurnControlAckStatus, TurnInterruptionReason, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateNotificationRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionFeedbackRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig, authHttpInterceptor, buildBearerValue, buildGrpcWebHost, provideOndewoNluAuth, resolveBearerValue, resolveToken };
+export { AUTHORIZATION_HEADER, AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionFeedbackRequest, AddSessionLabelsRequest, AddSessionStepFeedbackRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, AuthGrpcInterceptor, BEARER_PREFIX, BROWSER_UNSUPPORTED_TLS_FIELDS, BackgroundWorkPolicy, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CaiLogCaptureState, CaiLogEntry, CaiLogExportFormat, CaiLogFilter, CaiLogFilterField, CaiLogSource, CaiLogStream, CaiLogStreamChannel, CaiLogStreamEndReason, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CancelTurn, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteLogsRequest, DeleteLogsResponse, DeleteNotificationsRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionFeedbackRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DiscardDraft, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportLogsRequest, ExportLogsResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FeedbackAuthorType, FeedbackBreakdownBucket, FeedbackFilter, FeedbackRating, FeedbackScope, FeedbackStatistics, FeedbackTimeGranularity, FeedbackTimeSeriesBucket, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_LOGS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetFeedbackStatisticsRequest, GetFeedbackStatisticsResponse, GetFeedbackStatisticsTimeSeriesRequest, GetFeedbackStatisticsTimeSeriesResponse, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetLogStreamRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetNotificationRequest, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionFeedbackRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GetWarmTransferIntroOutcomeRequest, GloVeEnrichmentConfig, GrpcWebEndpointError, HeardMessage, HeardReport, HeardTextPrecision, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, InterruptTurnRequest, InterruptTurnResponse, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeyValuePair, KeycloakAuthenticationError, KeycloakTokenProvider, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListLogStreamsRequest, ListLogStreamsResponse, ListLogsRequest, ListLogsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListRemoteOperationContainersRequest, ListRemoteOperationContainersResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionFeedbackOfAllSessionsRequest, ListSessionFeedbackRequest, ListSessionFeedbackResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentNodeEvent, LlmAgentNodePhase, LlmAgentUsage, LlmBaseUrlUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, LogsClient, MIN_REFRESH_DELAY_IN_S, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, PrepareWarmTransferIntroRequest, PrepareWarmTransferIntroResponse, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, REFRESH_SKEW_IN_S, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerContentScope, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerDensityPruning, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerIncrementalConfig, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerPruningThresholdType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCrawlerStatusFilter, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainer, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFeedback, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamLogsRequest, StreamLogsResponse, StreamNotificationsRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TOKEN_PROVIDER, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, TurnControl, TurnControlAck, TurnControlAckStatus, TurnInterruptionReason, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateNotificationRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionFeedbackRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WarmTransferAgentLexicon, WarmTransferAgentSettings, WarmTransferAgentTexts, WarmTransferIntroConfig, WarmTransferIntroDecidedBy, WarmTransferIntroDecision, WarmTransferIntroOutcome, WarmTransferIntroStage, WarmTransferIntroTextSource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig, authHttpInterceptor, buildBearerValue, buildGrpcWebHost, provideOndewoNluAuth, resolveBearerValue, resolveToken };
 //# sourceMappingURL=ondewo-nlu-client-angular.mjs.map
