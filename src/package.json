@@ -19,7 +19,7 @@
     "prebuild": "pwd && cd ../ondewo-proto-compiler/angular && sh build.sh && cd ../../src && pwd # cp ondewo-nlu-api/googleapis/google ondewo-nlu-api/ -R",
     "postbuild": "cp README.md ../. && cp RELEASE.md ../.",
     "submodule_update": "git submodule update --init --recursive",
-    "generate": "docker run -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-nlu-api ondewo",
+    "generate": "docker run -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ${CODEGEN_IMAGE:-ondewo-angular-proto-compiler} ondewo-nlu-api ondewo",
     "debug": "docker run --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
     "publish-npm": "npm publish ../npm --access public",
     "test-in-ondewo-aim": "npm run build && rm -rf ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/* && cp ../npm/* ../../ondewo-aim/node_modules/@ondewo/nlu-client-angular/. -R",

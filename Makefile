@@ -19,6 +19,9 @@ ONDEWO_NLU_VERSION=7.6.0
 NLU_API_GIT_BRANCH=09169d1b766c4d19c123b9c072e80ff693fec3d9
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.16.0
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
+# The codegen image, tagged with the proto-compiler version the submodule is pinned to (build.sh only tags
+# :latest, and a stale :latest once emitted client-streaming methods gRPC-web cannot carry).
+CODEGEN_IMAGE=ondewo-angular-proto-compiler:$(patsubst tags/%,%,${ONDEWO_PROTO_COMPILER_GIT_BRANCH})
 NLU_APIS_DIR=src/ondewo-nlu-api
 NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
 # GOOGLE_APIS_DIR=${NLU_APIS_DIR}/googleapis
@@ -170,8 +173,9 @@ build_gh_release: ## Generate Github Release with CLI
 push_to_gh: login_to_gh build_gh_release ##Logs into Github CLI and Releases
 	@echo 'Released to Github'
 
-build_compiler: ## Builds Ondewo-Proto-Compiler
+build_compiler: ## Builds Ondewo-Proto-Compiler and tags it with the pinned compiler version
 	cd ondewo-proto-compiler/angular && sh build.sh
+	docker tag ondewo-angular-proto-compiler:latest $(CODEGEN_IMAGE)
 
 release_to_github_via_docker_image: ## Release to Github via docker
 	@docker run --rm \
