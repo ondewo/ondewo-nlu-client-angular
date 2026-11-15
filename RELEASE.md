@@ -2,6 +2,16 @@
 
 *****************
 
+## Release ONDEWO NLU Angular Client 7.6.0
+
+### New Features
+
+* Tracking API Version [7.6.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.6.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) Warm transfer intros: the `Sessions` client gains `prepareWarmTransferIntro` and `getWarmTransferIntroOutcome`, with `WarmTransferIntroConfig`, `PrepareWarmTransferIntroRequest` / `PrepareWarmTransferIntroResponse`, `GetWarmTransferIntroOutcomeRequest`, `WarmTransferIntroOutcome` and the enums `WarmTransferIntroTextSource`, `WarmTransferIntroDecision`, `WarmTransferIntroDecidedBy` and `WarmTransferIntroStage`.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `Agent.warmTransferSettings` (field 15) with `WarmTransferAgentSettings`, `WarmTransferAgentTexts` and `WarmTransferAgentLexicon`, the per-agent warm transfer defaults.
+
+*****************
+
 ## Release ONDEWO NLU Angular Client 7.5.0
 
 ### Improvements
