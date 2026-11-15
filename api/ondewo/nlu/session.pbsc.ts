@@ -73,6 +73,27 @@ export class SessionsClient {
       });
     },
     /**
+     * Unary call: /ondewo.nlu.Sessions/InterruptTurn
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.InterruptTurnResponse>>
+     */
+    interruptTurn: (
+      requestData: thisProto.InterruptTurnRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.InterruptTurnResponse>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.nlu.Sessions/InterruptTurn',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.InterruptTurnRequest,
+        responseClass: thisProto.InterruptTurnResponse
+      });
+    },
+    /**
      * Unary call: /ondewo.nlu.Sessions/ListSessions
      *
      * @param requestMessage Request message
@@ -1105,6 +1126,22 @@ export class SessionsClient {
   ): Observable<thisProto.DetectIntentResponse> {
     return this.$raw
       .detectIntent(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.nlu.Sessions/InterruptTurn
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.InterruptTurnResponse>
+   */
+  interruptTurn(
+    requestData: thisProto.InterruptTurnRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.InterruptTurnResponse> {
+    return this.$raw
+      .interruptTurn(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 

@@ -52771,6 +52771,41 @@ var LlmAgentNodePhase;
     LlmAgentNodePhase[LlmAgentNodePhase["LLM_AGENT_NODE_PHASE_COMPLETED"] = 2] = "LLM_AGENT_NODE_PHASE_COMPLETED";
     LlmAgentNodePhase[LlmAgentNodePhase["LLM_AGENT_NODE_PHASE_FAILED"] = 3] = "LLM_AGENT_NODE_PHASE_FAILED";
 })(LlmAgentNodePhase || (LlmAgentNodePhase = {}));
+var TurnInterruptionReason;
+(function (TurnInterruptionReason) {
+    TurnInterruptionReason[TurnInterruptionReason["TURN_INTERRUPTION_REASON_UNSPECIFIED"] = 0] = "TURN_INTERRUPTION_REASON_UNSPECIFIED";
+    TurnInterruptionReason[TurnInterruptionReason["TURN_INTERRUPTION_REASON_BARGE_IN"] = 1] = "TURN_INTERRUPTION_REASON_BARGE_IN";
+    TurnInterruptionReason[TurnInterruptionReason["TURN_INTERRUPTION_REASON_CALLER_SPOKE_WHILE_THINKING"] = 2] = "TURN_INTERRUPTION_REASON_CALLER_SPOKE_WHILE_THINKING";
+    TurnInterruptionReason[TurnInterruptionReason["TURN_INTERRUPTION_REASON_CALL_ENDED"] = 3] = "TURN_INTERRUPTION_REASON_CALL_ENDED";
+    TurnInterruptionReason[TurnInterruptionReason["TURN_INTERRUPTION_REASON_FILLER_CUT"] = 4] = "TURN_INTERRUPTION_REASON_FILLER_CUT";
+    TurnInterruptionReason[TurnInterruptionReason["TURN_INTERRUPTION_REASON_NO_FINAL_TIMEOUT"] = 5] = "TURN_INTERRUPTION_REASON_NO_FINAL_TIMEOUT";
+    TurnInterruptionReason[TurnInterruptionReason["TURN_INTERRUPTION_REASON_OPERATOR_TAKEOVER"] = 6] = "TURN_INTERRUPTION_REASON_OPERATOR_TAKEOVER";
+    TurnInterruptionReason[TurnInterruptionReason["TURN_INTERRUPTION_REASON_BOT_MUTED"] = 7] = "TURN_INTERRUPTION_REASON_BOT_MUTED";
+})(TurnInterruptionReason || (TurnInterruptionReason = {}));
+var BackgroundWorkPolicy;
+(function (BackgroundWorkPolicy) {
+    BackgroundWorkPolicy[BackgroundWorkPolicy["BACKGROUND_WORK_POLICY_KEEP"] = 0] = "BACKGROUND_WORK_POLICY_KEEP";
+    BackgroundWorkPolicy[BackgroundWorkPolicy["BACKGROUND_WORK_POLICY_CANCEL_PENDING"] = 1] = "BACKGROUND_WORK_POLICY_CANCEL_PENDING";
+})(BackgroundWorkPolicy || (BackgroundWorkPolicy = {}));
+var HeardTextPrecision;
+(function (HeardTextPrecision) {
+    HeardTextPrecision[HeardTextPrecision["HEARD_TEXT_PRECISION_UNSPECIFIED"] = 0] = "HEARD_TEXT_PRECISION_UNSPECIFIED";
+    HeardTextPrecision[HeardTextPrecision["HEARD_TEXT_PRECISION_NONE_HEARD"] = 1] = "HEARD_TEXT_PRECISION_NONE_HEARD";
+    HeardTextPrecision[HeardTextPrecision["HEARD_TEXT_PRECISION_FULL"] = 2] = "HEARD_TEXT_PRECISION_FULL";
+    HeardTextPrecision[HeardTextPrecision["HEARD_TEXT_PRECISION_ESTIMATED_SERVER"] = 3] = "HEARD_TEXT_PRECISION_ESTIMATED_SERVER";
+    HeardTextPrecision[HeardTextPrecision["HEARD_TEXT_PRECISION_PROPORTIONAL"] = 4] = "HEARD_TEXT_PRECISION_PROPORTIONAL";
+})(HeardTextPrecision || (HeardTextPrecision = {}));
+var TurnControlAckStatus;
+(function (TurnControlAckStatus) {
+    TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_UNSPECIFIED"] = 0] = "TURN_CONTROL_ACK_STATUS_UNSPECIFIED";
+    TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_CANCELLED"] = 1] = "TURN_CONTROL_ACK_STATUS_CANCELLED";
+    TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_CANCELLED_QUEUED"] = 2] = "TURN_CONTROL_ACK_STATUS_CANCELLED_QUEUED";
+    TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_ALREADY_FINISHED"] = 3] = "TURN_CONTROL_ACK_STATUS_ALREADY_FINISHED";
+    TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN"] = 4] = "TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN";
+    TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_HEARD_APPLIED"] = 5] = "TURN_CONTROL_ACK_STATUS_HEARD_APPLIED";
+    TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_HEARD_STALE"] = 6] = "TURN_CONTROL_ACK_STATUS_HEARD_STALE";
+    TurnControlAckStatus[TurnControlAckStatus["TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED"] = 7] = "TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED";
+})(TurnControlAckStatus || (TurnControlAckStatus = {}));
 var AudioEncoding;
 (function (AudioEncoding) {
     AudioEncoding[AudioEncoding["AUDIO_ENCODING_UNSPECIFIED"] = 0] = "AUDIO_ENCODING_UNSPECIFIED";
@@ -53195,6 +53230,7 @@ class QueryParameters {
         _instance.originId = _instance.originId || '';
         _instance.identifiedUserId = _instance.identifiedUserId || '';
         _instance.transcriptions = _instance.transcriptions || [];
+        _instance.preemptiveDraft = _instance.preemptiveDraft || false;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -53251,6 +53287,9 @@ class QueryParameters {
                     _reader.readMessage(messageInitializer14, S2tTranscription.deserializeBinaryFromReader);
                     (_instance.transcriptions = _instance.transcriptions || []).push(messageInitializer14);
                     break;
+                case 15:
+                    _instance.preemptiveDraft = _reader.readBool();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -53302,6 +53341,9 @@ class QueryParameters {
         if (_instance.transcriptions && _instance.transcriptions.length) {
             _writer.writeRepeatedMessage(14, _instance.transcriptions, S2tTranscription.serializeBinaryToWriter);
         }
+        if (_instance.preemptiveDraft) {
+            _writer.writeBool(15, _instance.preemptiveDraft);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -53326,6 +53368,7 @@ class QueryParameters {
         this.originId = _value.originId;
         this.identifiedUserId = _value.identifiedUserId;
         this.transcriptions = (_value.transcriptions || []).map(m => new S2tTranscription(m));
+        this.preemptiveDraft = _value.preemptiveDraft;
         QueryParameters.refineValues(this);
     }
     get timeZone() {
@@ -53406,6 +53449,12 @@ class QueryParameters {
     set transcriptions(value) {
         this._transcriptions = value;
     }
+    get preemptiveDraft() {
+        return this._preemptiveDraft;
+    }
+    set preemptiveDraft(value) {
+        this._preemptiveDraft = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -53432,7 +53481,8 @@ class QueryParameters {
             datastreamId: this.datastreamId,
             originId: this.originId,
             identifiedUserId: this.identifiedUserId,
-            transcriptions: (this.transcriptions || []).map(m => m.toObject())
+            transcriptions: (this.transcriptions || []).map(m => m.toObject()),
+            preemptiveDraft: this.preemptiveDraft
         };
     }
     /**
@@ -53464,7 +53514,8 @@ class QueryParameters {
             datastreamId: this.datastreamId,
             originId: this.originId,
             identifiedUserId: this.identifiedUserId,
-            transcriptions: (this.transcriptions || []).map(m => m.toProtobufJSON(options))
+            transcriptions: (this.transcriptions || []).map(m => m.toProtobufJSON(options)),
+            preemptiveDraft: this.preemptiveDraft
         };
     }
 }
@@ -61248,6 +61299,8 @@ class StreamingDetectIntentRequest {
         _instance.queryInput = _instance.queryInput || undefined;
         _instance.singleUtterance = _instance.singleUtterance || false;
         _instance.inputAudio = _instance.inputAudio || new Uint8Array();
+        _instance.turnControl = _instance.turnControl || undefined;
+        _instance.clientTurnId = _instance.clientTurnId || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -61276,6 +61329,13 @@ class StreamingDetectIntentRequest {
                 case 6:
                     _instance.inputAudio = _reader.readBytes();
                     break;
+                case 7:
+                    _instance.turnControl = new TurnControl();
+                    _reader.readMessage(_instance.turnControl, TurnControl.deserializeBinaryFromReader);
+                    break;
+                case 8:
+                    _instance.clientTurnId = _reader.readString();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -61303,6 +61363,12 @@ class StreamingDetectIntentRequest {
         if (_instance.inputAudio && _instance.inputAudio.length) {
             _writer.writeBytes(6, _instance.inputAudio);
         }
+        if (_instance.turnControl) {
+            _writer.writeMessage(7, _instance.turnControl, TurnControl.serializeBinaryToWriter);
+        }
+        if (_instance.clientTurnId) {
+            _writer.writeString(8, _instance.clientTurnId);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -61319,6 +61385,10 @@ class StreamingDetectIntentRequest {
             : undefined;
         this.singleUtterance = _value.singleUtterance;
         this.inputAudio = _value.inputAudio;
+        this.turnControl = _value.turnControl
+            ? new TurnControl(_value.turnControl)
+            : undefined;
+        this.clientTurnId = _value.clientTurnId;
         StreamingDetectIntentRequest.refineValues(this);
     }
     get session() {
@@ -61351,6 +61421,18 @@ class StreamingDetectIntentRequest {
     set inputAudio(value) {
         this._inputAudio = value;
     }
+    get turnControl() {
+        return this._turnControl;
+    }
+    set turnControl(value) {
+        this._turnControl = value;
+    }
+    get clientTurnId() {
+        return this._clientTurnId;
+    }
+    set clientTurnId(value) {
+        this._clientTurnId = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -61371,7 +61453,9 @@ class StreamingDetectIntentRequest {
             singleUtterance: this.singleUtterance,
             inputAudio: this.inputAudio
                 ? this.inputAudio.subarray(0)
-                : new Uint8Array()
+                : new Uint8Array(),
+            turnControl: this.turnControl ? this.turnControl.toObject() : undefined,
+            clientTurnId: this.clientTurnId
         };
     }
     /**
@@ -61397,7 +61481,11 @@ class StreamingDetectIntentRequest {
                 ? this.queryInput.toProtobufJSON(options)
                 : null,
             singleUtterance: this.singleUtterance,
-            inputAudio: this.inputAudio ? uint8ArrayToBase64(this.inputAudio) : ''
+            inputAudio: this.inputAudio ? uint8ArrayToBase64(this.inputAudio) : '',
+            turnControl: this.turnControl
+                ? this.turnControl.toProtobufJSON(options)
+                : null,
+            clientTurnId: this.clientTurnId
         };
     }
 }
@@ -61424,6 +61512,8 @@ class StreamingDetectIntentResponse {
         _instance.recognitionResult = _instance.recognitionResult || undefined;
         _instance.queryResult = _instance.queryResult || undefined;
         _instance.webhookStatus = _instance.webhookStatus || undefined;
+        _instance.turnControlAck = _instance.turnControlAck || undefined;
+        _instance.clientTurnId = _instance.clientTurnId || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -61478,6 +61568,13 @@ class StreamingDetectIntentResponse {
                     _instance.llmAgentNodeEvent = new LlmAgentNodeEvent();
                     _reader.readMessage(_instance.llmAgentNodeEvent, LlmAgentNodeEvent.deserializeBinaryFromReader);
                     break;
+                case 12:
+                    _instance.turnControlAck = new TurnControlAck();
+                    _reader.readMessage(_instance.turnControlAck, TurnControlAck.deserializeBinaryFromReader);
+                    break;
+                case 13:
+                    _instance.clientTurnId = _reader.readString();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -61523,6 +61620,12 @@ class StreamingDetectIntentResponse {
         if (_instance.llmAgentNodeEvent) {
             _writer.writeMessage(11, _instance.llmAgentNodeEvent, LlmAgentNodeEvent.serializeBinaryToWriter);
         }
+        if (_instance.turnControlAck) {
+            _writer.writeMessage(12, _instance.turnControlAck, TurnControlAck.serializeBinaryToWriter);
+        }
+        if (_instance.clientTurnId) {
+            _writer.writeString(13, _instance.clientTurnId);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -61562,6 +61665,10 @@ class StreamingDetectIntentResponse {
         this.llmAgentNodeEvent = _value.llmAgentNodeEvent
             ? new LlmAgentNodeEvent(_value.llmAgentNodeEvent)
             : undefined;
+        this.turnControlAck = _value.turnControlAck
+            ? new TurnControlAck(_value.turnControlAck)
+            : undefined;
+        this.clientTurnId = _value.clientTurnId;
         StreamingDetectIntentResponse.refineValues(this);
     }
     get responseId() {
@@ -61665,6 +61772,18 @@ class StreamingDetectIntentResponse {
         }
         this._llmAgentNodeEvent = value;
     }
+    get turnControlAck() {
+        return this._turnControlAck;
+    }
+    set turnControlAck(value) {
+        this._turnControlAck = value;
+    }
+    get clientTurnId() {
+        return this._clientTurnId;
+    }
+    set clientTurnId(value) {
+        this._clientTurnId = value;
+    }
     get telemetryEvent() {
         return this._telemetryEvent;
     }
@@ -61710,7 +61829,11 @@ class StreamingDetectIntentResponse {
                 : undefined,
             llmAgentNodeEvent: this.llmAgentNodeEvent
                 ? this.llmAgentNodeEvent.toObject()
-                : undefined
+                : undefined,
+            turnControlAck: this.turnControlAck
+                ? this.turnControlAck.toObject()
+                : undefined,
+            clientTurnId: this.clientTurnId
         };
     }
     /**
@@ -61758,7 +61881,11 @@ class StreamingDetectIntentResponse {
                 : null,
             llmAgentNodeEvent: this.llmAgentNodeEvent
                 ? this.llmAgentNodeEvent.toProtobufJSON(options)
-                : null
+                : null,
+            turnControlAck: this.turnControlAck
+                ? this.turnControlAck.toProtobufJSON(options)
+                : null,
+            clientTurnId: this.clientTurnId
         };
     }
 }
@@ -61775,6 +61902,1301 @@ class StreamingDetectIntentResponse {
         TelemetryEventCase[TelemetryEventCase["llmAgentNodeEvent"] = 7] = "llmAgentNodeEvent";
     })(TelemetryEventCase = StreamingDetectIntentResponse.TelemetryEventCase || (StreamingDetectIntentResponse.TelemetryEventCase = {}));
 })(StreamingDetectIntentResponse || (StreamingDetectIntentResponse = {}));
+/**
+ * Message implementation for ondewo.nlu.TurnControl
+ */
+class TurnControl {
+    static { this.id = 'ondewo.nlu.TurnControl'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new TurnControl();
+        TurnControl.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) { }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.cancelTurn = new CancelTurn();
+                    _reader.readMessage(_instance.cancelTurn, CancelTurn.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.heardReport = new HeardReport();
+                    _reader.readMessage(_instance.heardReport, HeardReport.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.discardDraft = new DiscardDraft();
+                    _reader.readMessage(_instance.discardDraft, DiscardDraft.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        TurnControl.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.cancelTurn) {
+            _writer.writeMessage(1, _instance.cancelTurn, CancelTurn.serializeBinaryToWriter);
+        }
+        if (_instance.heardReport) {
+            _writer.writeMessage(2, _instance.heardReport, HeardReport.serializeBinaryToWriter);
+        }
+        if (_instance.discardDraft) {
+            _writer.writeMessage(3, _instance.discardDraft, DiscardDraft.serializeBinaryToWriter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TurnControl to deeply clone from
+     */
+    constructor(_value) {
+        this._turnControl = TurnControl.TurnControlCase.none;
+        _value = _value || {};
+        this.cancelTurn = _value.cancelTurn
+            ? new CancelTurn(_value.cancelTurn)
+            : undefined;
+        this.heardReport = _value.heardReport
+            ? new HeardReport(_value.heardReport)
+            : undefined;
+        this.discardDraft = _value.discardDraft
+            ? new DiscardDraft(_value.discardDraft)
+            : undefined;
+        TurnControl.refineValues(this);
+    }
+    get cancelTurn() {
+        return this._cancelTurn;
+    }
+    set cancelTurn(value) {
+        if (value !== undefined && value !== null) {
+            this._heardReport = this._discardDraft = undefined;
+            this._turnControl = TurnControl.TurnControlCase.cancelTurn;
+        }
+        this._cancelTurn = value;
+    }
+    get heardReport() {
+        return this._heardReport;
+    }
+    set heardReport(value) {
+        if (value !== undefined && value !== null) {
+            this._cancelTurn = this._discardDraft = undefined;
+            this._turnControl = TurnControl.TurnControlCase.heardReport;
+        }
+        this._heardReport = value;
+    }
+    get discardDraft() {
+        return this._discardDraft;
+    }
+    set discardDraft(value) {
+        if (value !== undefined && value !== null) {
+            this._cancelTurn = this._heardReport = undefined;
+            this._turnControl = TurnControl.TurnControlCase.discardDraft;
+        }
+        this._discardDraft = value;
+    }
+    get turnControl() {
+        return this._turnControl;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        TurnControl.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            cancelTurn: this.cancelTurn ? this.cancelTurn.toObject() : undefined,
+            heardReport: this.heardReport ? this.heardReport.toObject() : undefined,
+            discardDraft: this.discardDraft ? this.discardDraft.toObject() : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            cancelTurn: this.cancelTurn
+                ? this.cancelTurn.toProtobufJSON(options)
+                : null,
+            heardReport: this.heardReport
+                ? this.heardReport.toProtobufJSON(options)
+                : null,
+            discardDraft: this.discardDraft
+                ? this.discardDraft.toProtobufJSON(options)
+                : null
+        };
+    }
+}
+(function (TurnControl) {
+    let TurnControlCase;
+    (function (TurnControlCase) {
+        TurnControlCase[TurnControlCase["none"] = 0] = "none";
+        TurnControlCase[TurnControlCase["cancelTurn"] = 1] = "cancelTurn";
+        TurnControlCase[TurnControlCase["heardReport"] = 2] = "heardReport";
+        TurnControlCase[TurnControlCase["discardDraft"] = 3] = "discardDraft";
+    })(TurnControlCase = TurnControl.TurnControlCase || (TurnControl.TurnControlCase = {}));
+})(TurnControl || (TurnControl = {}));
+/**
+ * Message implementation for ondewo.nlu.CancelTurn
+ */
+class CancelTurn {
+    static { this.id = 'ondewo.nlu.CancelTurn'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new CancelTurn();
+        CancelTurn.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.responseId = _instance.responseId || '';
+        _instance.clientTurnId = _instance.clientTurnId || '';
+        _instance.turnInterruptionReason = _instance.turnInterruptionReason || 0;
+        _instance.decidedAt = _instance.decidedAt || undefined;
+        _instance.backgroundWorkPolicy = _instance.backgroundWorkPolicy || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.responseId = _reader.readString();
+                    break;
+                case 2:
+                    _instance.clientTurnId = _reader.readString();
+                    break;
+                case 3:
+                    _instance.turnInterruptionReason = _reader.readEnum();
+                    break;
+                case 4:
+                    _instance.decidedAt = new googleProtobuf005.Timestamp();
+                    _reader.readMessage(_instance.decidedAt, googleProtobuf005.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 5:
+                    _instance.backgroundWorkPolicy = _reader.readEnum();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        CancelTurn.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.responseId) {
+            _writer.writeString(1, _instance.responseId);
+        }
+        if (_instance.clientTurnId) {
+            _writer.writeString(2, _instance.clientTurnId);
+        }
+        if (_instance.turnInterruptionReason) {
+            _writer.writeEnum(3, _instance.turnInterruptionReason);
+        }
+        if (_instance.decidedAt) {
+            _writer.writeMessage(4, _instance.decidedAt, googleProtobuf005.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.backgroundWorkPolicy) {
+            _writer.writeEnum(5, _instance.backgroundWorkPolicy);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CancelTurn to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseId = _value.responseId;
+        this.clientTurnId = _value.clientTurnId;
+        this.turnInterruptionReason = _value.turnInterruptionReason;
+        this.decidedAt = _value.decidedAt
+            ? new googleProtobuf005.Timestamp(_value.decidedAt)
+            : undefined;
+        this.backgroundWorkPolicy = _value.backgroundWorkPolicy;
+        CancelTurn.refineValues(this);
+    }
+    get responseId() {
+        return this._responseId;
+    }
+    set responseId(value) {
+        this._responseId = value;
+    }
+    get clientTurnId() {
+        return this._clientTurnId;
+    }
+    set clientTurnId(value) {
+        this._clientTurnId = value;
+    }
+    get turnInterruptionReason() {
+        return this._turnInterruptionReason;
+    }
+    set turnInterruptionReason(value) {
+        this._turnInterruptionReason = value;
+    }
+    get decidedAt() {
+        return this._decidedAt;
+    }
+    set decidedAt(value) {
+        this._decidedAt = value;
+    }
+    get backgroundWorkPolicy() {
+        return this._backgroundWorkPolicy;
+    }
+    set backgroundWorkPolicy(value) {
+        this._backgroundWorkPolicy = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        CancelTurn.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            responseId: this.responseId,
+            clientTurnId: this.clientTurnId,
+            turnInterruptionReason: this.turnInterruptionReason,
+            decidedAt: this.decidedAt ? this.decidedAt.toObject() : undefined,
+            backgroundWorkPolicy: this.backgroundWorkPolicy
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            responseId: this.responseId,
+            clientTurnId: this.clientTurnId,
+            turnInterruptionReason: TurnInterruptionReason[this.turnInterruptionReason === null ||
+                this.turnInterruptionReason === undefined
+                ? 0
+                : this.turnInterruptionReason],
+            decidedAt: this.decidedAt ? this.decidedAt.toProtobufJSON(options) : null,
+            backgroundWorkPolicy: BackgroundWorkPolicy[this.backgroundWorkPolicy === null ||
+                this.backgroundWorkPolicy === undefined
+                ? 0
+                : this.backgroundWorkPolicy]
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.HeardMessage
+ */
+class HeardMessage {
+    static { this.id = 'ondewo.nlu.HeardMessage'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new HeardMessage();
+        HeardMessage.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.fulfillmentMessageIndex = _instance.fulfillmentMessageIndex || 0;
+        _instance.platform = _instance.platform || 0;
+        _instance.fullText = _instance.fullText || '';
+        _instance.heardText = _instance.heardText || '';
+        _instance.heardCharCount = _instance.heardCharCount || 0;
+        _instance.heardAudioDurationInS = _instance.heardAudioDurationInS || 0;
+        _instance.totalAudioDurationInS = _instance.totalAudioDurationInS || 0;
+        _instance.completed = _instance.completed || false;
+        _instance.neverStarted = _instance.neverStarted || false;
+        _instance.skippedSipTrigger = _instance.skippedSipTrigger || false;
+        _instance.fillerId = _instance.fillerId || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.fulfillmentMessageIndex = _reader.readInt32();
+                    break;
+                case 2:
+                    _instance.platform = _reader.readEnum();
+                    break;
+                case 3:
+                    _instance.fullText = _reader.readString();
+                    break;
+                case 4:
+                    _instance.heardText = _reader.readString();
+                    break;
+                case 5:
+                    _instance.heardCharCount = _reader.readInt32();
+                    break;
+                case 6:
+                    _instance.heardAudioDurationInS = _reader.readFloat();
+                    break;
+                case 7:
+                    _instance.totalAudioDurationInS = _reader.readFloat();
+                    break;
+                case 8:
+                    _instance.completed = _reader.readBool();
+                    break;
+                case 9:
+                    _instance.neverStarted = _reader.readBool();
+                    break;
+                case 10:
+                    _instance.skippedSipTrigger = _reader.readBool();
+                    break;
+                case 11:
+                    _instance.fillerId = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        HeardMessage.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.fulfillmentMessageIndex) {
+            _writer.writeInt32(1, _instance.fulfillmentMessageIndex);
+        }
+        if (_instance.platform) {
+            _writer.writeEnum(2, _instance.platform);
+        }
+        if (_instance.fullText) {
+            _writer.writeString(3, _instance.fullText);
+        }
+        if (_instance.heardText) {
+            _writer.writeString(4, _instance.heardText);
+        }
+        if (_instance.heardCharCount) {
+            _writer.writeInt32(5, _instance.heardCharCount);
+        }
+        if (_instance.heardAudioDurationInS) {
+            _writer.writeFloat(6, _instance.heardAudioDurationInS);
+        }
+        if (_instance.totalAudioDurationInS) {
+            _writer.writeFloat(7, _instance.totalAudioDurationInS);
+        }
+        if (_instance.completed) {
+            _writer.writeBool(8, _instance.completed);
+        }
+        if (_instance.neverStarted) {
+            _writer.writeBool(9, _instance.neverStarted);
+        }
+        if (_instance.skippedSipTrigger) {
+            _writer.writeBool(10, _instance.skippedSipTrigger);
+        }
+        if (_instance.fillerId) {
+            _writer.writeString(11, _instance.fillerId);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of HeardMessage to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.fulfillmentMessageIndex = _value.fulfillmentMessageIndex;
+        this.platform = _value.platform;
+        this.fullText = _value.fullText;
+        this.heardText = _value.heardText;
+        this.heardCharCount = _value.heardCharCount;
+        this.heardAudioDurationInS = _value.heardAudioDurationInS;
+        this.totalAudioDurationInS = _value.totalAudioDurationInS;
+        this.completed = _value.completed;
+        this.neverStarted = _value.neverStarted;
+        this.skippedSipTrigger = _value.skippedSipTrigger;
+        this.fillerId = _value.fillerId;
+        HeardMessage.refineValues(this);
+    }
+    get fulfillmentMessageIndex() {
+        return this._fulfillmentMessageIndex;
+    }
+    set fulfillmentMessageIndex(value) {
+        this._fulfillmentMessageIndex = value;
+    }
+    get platform() {
+        return this._platform;
+    }
+    set platform(value) {
+        this._platform = value;
+    }
+    get fullText() {
+        return this._fullText;
+    }
+    set fullText(value) {
+        this._fullText = value;
+    }
+    get heardText() {
+        return this._heardText;
+    }
+    set heardText(value) {
+        this._heardText = value;
+    }
+    get heardCharCount() {
+        return this._heardCharCount;
+    }
+    set heardCharCount(value) {
+        this._heardCharCount = value;
+    }
+    get heardAudioDurationInS() {
+        return this._heardAudioDurationInS;
+    }
+    set heardAudioDurationInS(value) {
+        this._heardAudioDurationInS = value;
+    }
+    get totalAudioDurationInS() {
+        return this._totalAudioDurationInS;
+    }
+    set totalAudioDurationInS(value) {
+        this._totalAudioDurationInS = value;
+    }
+    get completed() {
+        return this._completed;
+    }
+    set completed(value) {
+        this._completed = value;
+    }
+    get neverStarted() {
+        return this._neverStarted;
+    }
+    set neverStarted(value) {
+        this._neverStarted = value;
+    }
+    get skippedSipTrigger() {
+        return this._skippedSipTrigger;
+    }
+    set skippedSipTrigger(value) {
+        this._skippedSipTrigger = value;
+    }
+    get fillerId() {
+        return this._fillerId;
+    }
+    set fillerId(value) {
+        this._fillerId = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        HeardMessage.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            fulfillmentMessageIndex: this.fulfillmentMessageIndex,
+            platform: this.platform,
+            fullText: this.fullText,
+            heardText: this.heardText,
+            heardCharCount: this.heardCharCount,
+            heardAudioDurationInS: this.heardAudioDurationInS,
+            totalAudioDurationInS: this.totalAudioDurationInS,
+            completed: this.completed,
+            neverStarted: this.neverStarted,
+            skippedSipTrigger: this.skippedSipTrigger,
+            fillerId: this.fillerId
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            fulfillmentMessageIndex: this.fulfillmentMessageIndex,
+            platform: Intent.Message.Platform[this.platform === null || this.platform === undefined
+                ? 0
+                : this.platform],
+            fullText: this.fullText,
+            heardText: this.heardText,
+            heardCharCount: this.heardCharCount,
+            heardAudioDurationInS: this.heardAudioDurationInS,
+            totalAudioDurationInS: this.totalAudioDurationInS,
+            completed: this.completed,
+            neverStarted: this.neverStarted,
+            skippedSipTrigger: this.skippedSipTrigger,
+            fillerId: this.fillerId
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.HeardReport
+ */
+class HeardReport {
+    static { this.id = 'ondewo.nlu.HeardReport'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new HeardReport();
+        HeardReport.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.responseId = _instance.responseId || '';
+        _instance.clientTurnId = _instance.clientTurnId || '';
+        _instance.revision = _instance.revision || 0;
+        _instance.turnInterruptionReason = _instance.turnInterruptionReason || 0;
+        _instance.heardMessages = _instance.heardMessages || [];
+        _instance.heardTextPrecision = _instance.heardTextPrecision || 0;
+        _instance.callerOverlapDurationInS =
+            _instance.callerOverlapDurationInS || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.responseId = _reader.readString();
+                    break;
+                case 2:
+                    _instance.clientTurnId = _reader.readString();
+                    break;
+                case 3:
+                    _instance.revision = _reader.readInt32();
+                    break;
+                case 4:
+                    _instance.turnInterruptionReason = _reader.readEnum();
+                    break;
+                case 5:
+                    const messageInitializer5 = new HeardMessage();
+                    _reader.readMessage(messageInitializer5, HeardMessage.deserializeBinaryFromReader);
+                    (_instance.heardMessages = _instance.heardMessages || []).push(messageInitializer5);
+                    break;
+                case 6:
+                    _instance.heardTextPrecision = _reader.readEnum();
+                    break;
+                case 7:
+                    _instance.callerOverlapDurationInS = _reader.readFloat();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        HeardReport.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.responseId) {
+            _writer.writeString(1, _instance.responseId);
+        }
+        if (_instance.clientTurnId) {
+            _writer.writeString(2, _instance.clientTurnId);
+        }
+        if (_instance.revision) {
+            _writer.writeInt32(3, _instance.revision);
+        }
+        if (_instance.turnInterruptionReason) {
+            _writer.writeEnum(4, _instance.turnInterruptionReason);
+        }
+        if (_instance.heardMessages && _instance.heardMessages.length) {
+            _writer.writeRepeatedMessage(5, _instance.heardMessages, HeardMessage.serializeBinaryToWriter);
+        }
+        if (_instance.heardTextPrecision) {
+            _writer.writeEnum(6, _instance.heardTextPrecision);
+        }
+        if (_instance.callerOverlapDurationInS) {
+            _writer.writeFloat(7, _instance.callerOverlapDurationInS);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of HeardReport to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseId = _value.responseId;
+        this.clientTurnId = _value.clientTurnId;
+        this.revision = _value.revision;
+        this.turnInterruptionReason = _value.turnInterruptionReason;
+        this.heardMessages = (_value.heardMessages || []).map(m => new HeardMessage(m));
+        this.heardTextPrecision = _value.heardTextPrecision;
+        this.callerOverlapDurationInS = _value.callerOverlapDurationInS;
+        HeardReport.refineValues(this);
+    }
+    get responseId() {
+        return this._responseId;
+    }
+    set responseId(value) {
+        this._responseId = value;
+    }
+    get clientTurnId() {
+        return this._clientTurnId;
+    }
+    set clientTurnId(value) {
+        this._clientTurnId = value;
+    }
+    get revision() {
+        return this._revision;
+    }
+    set revision(value) {
+        this._revision = value;
+    }
+    get turnInterruptionReason() {
+        return this._turnInterruptionReason;
+    }
+    set turnInterruptionReason(value) {
+        this._turnInterruptionReason = value;
+    }
+    get heardMessages() {
+        return this._heardMessages;
+    }
+    set heardMessages(value) {
+        this._heardMessages = value;
+    }
+    get heardTextPrecision() {
+        return this._heardTextPrecision;
+    }
+    set heardTextPrecision(value) {
+        this._heardTextPrecision = value;
+    }
+    get callerOverlapDurationInS() {
+        return this._callerOverlapDurationInS;
+    }
+    set callerOverlapDurationInS(value) {
+        this._callerOverlapDurationInS = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        HeardReport.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            responseId: this.responseId,
+            clientTurnId: this.clientTurnId,
+            revision: this.revision,
+            turnInterruptionReason: this.turnInterruptionReason,
+            heardMessages: (this.heardMessages || []).map(m => m.toObject()),
+            heardTextPrecision: this.heardTextPrecision,
+            callerOverlapDurationInS: this.callerOverlapDurationInS
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            responseId: this.responseId,
+            clientTurnId: this.clientTurnId,
+            revision: this.revision,
+            turnInterruptionReason: TurnInterruptionReason[this.turnInterruptionReason === null ||
+                this.turnInterruptionReason === undefined
+                ? 0
+                : this.turnInterruptionReason],
+            heardMessages: (this.heardMessages || []).map(m => m.toProtobufJSON(options)),
+            heardTextPrecision: HeardTextPrecision[this.heardTextPrecision === null ||
+                this.heardTextPrecision === undefined
+                ? 0
+                : this.heardTextPrecision],
+            callerOverlapDurationInS: this.callerOverlapDurationInS
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DiscardDraft
+ */
+class DiscardDraft {
+    static { this.id = 'ondewo.nlu.DiscardDraft'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new DiscardDraft();
+        DiscardDraft.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.responseId = _instance.responseId || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.responseId = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        DiscardDraft.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.responseId) {
+            _writer.writeString(1, _instance.responseId);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DiscardDraft to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseId = _value.responseId;
+        DiscardDraft.refineValues(this);
+    }
+    get responseId() {
+        return this._responseId;
+    }
+    set responseId(value) {
+        this._responseId = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        DiscardDraft.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            responseId: this.responseId
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            responseId: this.responseId
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.TurnControlAck
+ */
+class TurnControlAck {
+    static { this.id = 'ondewo.nlu.TurnControlAck'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new TurnControlAck();
+        TurnControlAck.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.responseId = _instance.responseId || '';
+        _instance.clientTurnId = _instance.clientTurnId || '';
+        _instance.turnControlAckStatus = _instance.turnControlAckStatus || 0;
+        _instance.serverCancelDurationInS = _instance.serverCancelDurationInS || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.responseId = _reader.readString();
+                    break;
+                case 2:
+                    _instance.clientTurnId = _reader.readString();
+                    break;
+                case 3:
+                    _instance.turnControlAckStatus = _reader.readEnum();
+                    break;
+                case 4:
+                    _instance.serverCancelDurationInS = _reader.readFloat();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        TurnControlAck.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.responseId) {
+            _writer.writeString(1, _instance.responseId);
+        }
+        if (_instance.clientTurnId) {
+            _writer.writeString(2, _instance.clientTurnId);
+        }
+        if (_instance.turnControlAckStatus) {
+            _writer.writeEnum(3, _instance.turnControlAckStatus);
+        }
+        if (_instance.serverCancelDurationInS) {
+            _writer.writeFloat(4, _instance.serverCancelDurationInS);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TurnControlAck to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.responseId = _value.responseId;
+        this.clientTurnId = _value.clientTurnId;
+        this.turnControlAckStatus = _value.turnControlAckStatus;
+        this.serverCancelDurationInS = _value.serverCancelDurationInS;
+        TurnControlAck.refineValues(this);
+    }
+    get responseId() {
+        return this._responseId;
+    }
+    set responseId(value) {
+        this._responseId = value;
+    }
+    get clientTurnId() {
+        return this._clientTurnId;
+    }
+    set clientTurnId(value) {
+        this._clientTurnId = value;
+    }
+    get turnControlAckStatus() {
+        return this._turnControlAckStatus;
+    }
+    set turnControlAckStatus(value) {
+        this._turnControlAckStatus = value;
+    }
+    get serverCancelDurationInS() {
+        return this._serverCancelDurationInS;
+    }
+    set serverCancelDurationInS(value) {
+        this._serverCancelDurationInS = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        TurnControlAck.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            responseId: this.responseId,
+            clientTurnId: this.clientTurnId,
+            turnControlAckStatus: this.turnControlAckStatus,
+            serverCancelDurationInS: this.serverCancelDurationInS
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            responseId: this.responseId,
+            clientTurnId: this.clientTurnId,
+            turnControlAckStatus: TurnControlAckStatus[this.turnControlAckStatus === null ||
+                this.turnControlAckStatus === undefined
+                ? 0
+                : this.turnControlAckStatus],
+            serverCancelDurationInS: this.serverCancelDurationInS
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.InterruptTurnRequest
+ */
+class InterruptTurnRequest {
+    static { this.id = 'ondewo.nlu.InterruptTurnRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new InterruptTurnRequest();
+        InterruptTurnRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.session = _instance.session || '';
+        _instance.turnControl = _instance.turnControl || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.session = _reader.readString();
+                    break;
+                case 2:
+                    _instance.turnControl = new TurnControl();
+                    _reader.readMessage(_instance.turnControl, TurnControl.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        InterruptTurnRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.session) {
+            _writer.writeString(1, _instance.session);
+        }
+        if (_instance.turnControl) {
+            _writer.writeMessage(2, _instance.turnControl, TurnControl.serializeBinaryToWriter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of InterruptTurnRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.session = _value.session;
+        this.turnControl = _value.turnControl
+            ? new TurnControl(_value.turnControl)
+            : undefined;
+        InterruptTurnRequest.refineValues(this);
+    }
+    get session() {
+        return this._session;
+    }
+    set session(value) {
+        this._session = value;
+    }
+    get turnControl() {
+        return this._turnControl;
+    }
+    set turnControl(value) {
+        this._turnControl = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        InterruptTurnRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            session: this.session,
+            turnControl: this.turnControl ? this.turnControl.toObject() : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            session: this.session,
+            turnControl: this.turnControl
+                ? this.turnControl.toProtobufJSON(options)
+                : null
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.InterruptTurnResponse
+ */
+class InterruptTurnResponse {
+    static { this.id = 'ondewo.nlu.InterruptTurnResponse'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new InterruptTurnResponse();
+        InterruptTurnResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.turnControlAck = _instance.turnControlAck || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.turnControlAck = new TurnControlAck();
+                    _reader.readMessage(_instance.turnControlAck, TurnControlAck.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        InterruptTurnResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.turnControlAck) {
+            _writer.writeMessage(1, _instance.turnControlAck, TurnControlAck.serializeBinaryToWriter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of InterruptTurnResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.turnControlAck = _value.turnControlAck
+            ? new TurnControlAck(_value.turnControlAck)
+            : undefined;
+        InterruptTurnResponse.refineValues(this);
+    }
+    get turnControlAck() {
+        return this._turnControlAck;
+    }
+    set turnControlAck(value) {
+        this._turnControlAck = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        InterruptTurnResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            turnControlAck: this.turnControlAck
+                ? this.turnControlAck.toObject()
+                : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            turnControlAck: this.turnControlAck
+                ? this.turnControlAck.toProtobufJSON(options)
+                : null
+        };
+    }
+}
 /**
  * Message implementation for ondewo.nlu.StreamingRecognitionResult
  */
@@ -92437,6 +93859,8 @@ class StreamRemoteOperationContainerLogsRequest {
         _instance.minLogLevel = _instance.minLogLevel || 0;
         _instance.tailLines = _instance.tailLines || 0;
         _instance.containerId = _instance.containerId || '';
+        _instance.regex = _instance.regex || '';
+        _instance.resumeToken = _instance.resumeToken || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -92459,6 +93883,12 @@ class StreamRemoteOperationContainerLogsRequest {
                     break;
                 case 4:
                     _instance.containerId = _reader.readString();
+                    break;
+                case 5:
+                    _instance.regex = _reader.readString();
+                    break;
+                case 6:
+                    _instance.resumeToken = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
@@ -92484,6 +93914,12 @@ class StreamRemoteOperationContainerLogsRequest {
         if (_instance.containerId) {
             _writer.writeString(4, _instance.containerId);
         }
+        if (_instance.regex) {
+            _writer.writeString(5, _instance.regex);
+        }
+        if (_instance.resumeToken) {
+            _writer.writeString(6, _instance.resumeToken);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -92495,6 +93931,8 @@ class StreamRemoteOperationContainerLogsRequest {
         this.minLogLevel = _value.minLogLevel;
         this.tailLines = _value.tailLines;
         this.containerId = _value.containerId;
+        this.regex = _value.regex;
+        this.resumeToken = _value.resumeToken;
         StreamRemoteOperationContainerLogsRequest.refineValues(this);
     }
     get name() {
@@ -92521,6 +93959,18 @@ class StreamRemoteOperationContainerLogsRequest {
     set containerId(value) {
         this._containerId = value;
     }
+    get regex() {
+        return this._regex;
+    }
+    set regex(value) {
+        this._regex = value;
+    }
+    get resumeToken() {
+        return this._resumeToken;
+    }
+    set resumeToken(value) {
+        this._resumeToken = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -92538,7 +93988,9 @@ class StreamRemoteOperationContainerLogsRequest {
             name: this.name,
             minLogLevel: this.minLogLevel,
             tailLines: this.tailLines,
-            containerId: this.containerId
+            containerId: this.containerId,
+            regex: this.regex,
+            resumeToken: this.resumeToken
         };
     }
     /**
@@ -92561,7 +94013,9 @@ class StreamRemoteOperationContainerLogsRequest {
                 ? 0
                 : this.minLogLevel],
             tailLines: this.tailLines,
-            containerId: this.containerId
+            containerId: this.containerId,
+            regex: this.regex,
+            resumeToken: this.resumeToken
         };
     }
 }
@@ -92593,6 +94047,8 @@ class GetRemoteOperationContainerLogsRequest {
         _instance.containerId = _instance.containerId || '';
         _instance.beforeSeq = _instance.beforeSeq || '0';
         _instance.afterSeq = _instance.afterSeq || '0';
+        _instance.fieldMask = _instance.fieldMask || undefined;
+        _instance.resumeToken = _instance.resumeToken || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -92633,6 +94089,13 @@ class GetRemoteOperationContainerLogsRequest {
                 case 9:
                     _instance.afterSeq = _reader.readInt64String();
                     break;
+                case 10:
+                    _instance.fieldMask = new googleProtobuf005.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf005.FieldMask.deserializeBinaryFromReader);
+                    break;
+                case 11:
+                    _instance.resumeToken = _reader.readString();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -92672,6 +94135,12 @@ class GetRemoteOperationContainerLogsRequest {
         if (_instance.afterSeq) {
             _writer.writeInt64String(9, _instance.afterSeq);
         }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(10, _instance.fieldMask, googleProtobuf005.FieldMask.serializeBinaryToWriter);
+        }
+        if (_instance.resumeToken) {
+            _writer.writeString(11, _instance.resumeToken);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -92692,6 +94161,10 @@ class GetRemoteOperationContainerLogsRequest {
         this.containerId = _value.containerId;
         this.beforeSeq = _value.beforeSeq;
         this.afterSeq = _value.afterSeq;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf005.FieldMask(_value.fieldMask)
+            : undefined;
+        this.resumeToken = _value.resumeToken;
         GetRemoteOperationContainerLogsRequest.refineValues(this);
     }
     get name() {
@@ -92748,6 +94221,18 @@ class GetRemoteOperationContainerLogsRequest {
     set afterSeq(value) {
         this._afterSeq = value;
     }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
+    get resumeToken() {
+        return this._resumeToken;
+    }
+    set resumeToken(value) {
+        this._resumeToken = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -92770,7 +94255,9 @@ class GetRemoteOperationContainerLogsRequest {
             regex: this.regex,
             containerId: this.containerId,
             beforeSeq: this.beforeSeq,
-            afterSeq: this.afterSeq
+            afterSeq: this.afterSeq,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+            resumeToken: this.resumeToken
         };
     }
     /**
@@ -92798,7 +94285,9 @@ class GetRemoteOperationContainerLogsRequest {
             regex: this.regex,
             containerId: this.containerId,
             beforeSeq: this.beforeSeq,
-            afterSeq: this.afterSeq
+            afterSeq: this.afterSeq,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+            resumeToken: this.resumeToken
         };
     }
 }
@@ -92826,6 +94315,8 @@ class GetRemoteOperationContainerLogsResponse {
         _instance.minAvailableSeq = _instance.minAvailableSeq || '0';
         _instance.maxAvailableSeq = _instance.maxAvailableSeq || '0';
         _instance.hasMoreOlder = _instance.hasMoreOlder || false;
+        _instance.nextResumeToken = _instance.nextResumeToken || '';
+        _instance.hasMoreNewer = _instance.hasMoreNewer || false;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -92854,6 +94345,12 @@ class GetRemoteOperationContainerLogsResponse {
                 case 5:
                     _instance.hasMoreOlder = _reader.readBool();
                     break;
+                case 6:
+                    _instance.nextResumeToken = _reader.readString();
+                    break;
+                case 7:
+                    _instance.hasMoreNewer = _reader.readBool();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -92881,6 +94378,12 @@ class GetRemoteOperationContainerLogsResponse {
         if (_instance.hasMoreOlder) {
             _writer.writeBool(5, _instance.hasMoreOlder);
         }
+        if (_instance.nextResumeToken) {
+            _writer.writeString(6, _instance.nextResumeToken);
+        }
+        if (_instance.hasMoreNewer) {
+            _writer.writeBool(7, _instance.hasMoreNewer);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -92893,6 +94396,8 @@ class GetRemoteOperationContainerLogsResponse {
         this.minAvailableSeq = _value.minAvailableSeq;
         this.maxAvailableSeq = _value.maxAvailableSeq;
         this.hasMoreOlder = _value.hasMoreOlder;
+        this.nextResumeToken = _value.nextResumeToken;
+        this.hasMoreNewer = _value.hasMoreNewer;
         GetRemoteOperationContainerLogsResponse.refineValues(this);
     }
     get logLines() {
@@ -92925,6 +94430,18 @@ class GetRemoteOperationContainerLogsResponse {
     set hasMoreOlder(value) {
         this._hasMoreOlder = value;
     }
+    get nextResumeToken() {
+        return this._nextResumeToken;
+    }
+    set nextResumeToken(value) {
+        this._nextResumeToken = value;
+    }
+    get hasMoreNewer() {
+        return this._hasMoreNewer;
+    }
+    set hasMoreNewer(value) {
+        this._hasMoreNewer = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -92943,7 +94460,9 @@ class GetRemoteOperationContainerLogsResponse {
             truncated: this.truncated,
             minAvailableSeq: this.minAvailableSeq,
             maxAvailableSeq: this.maxAvailableSeq,
-            hasMoreOlder: this.hasMoreOlder
+            hasMoreOlder: this.hasMoreOlder,
+            nextResumeToken: this.nextResumeToken,
+            hasMoreNewer: this.hasMoreNewer
         };
     }
     /**
@@ -92965,7 +94484,9 @@ class GetRemoteOperationContainerLogsResponse {
             truncated: this.truncated,
             minAvailableSeq: this.minAvailableSeq,
             maxAvailableSeq: this.maxAvailableSeq,
-            hasMoreOlder: this.hasMoreOlder
+            hasMoreOlder: this.hasMoreOlder,
+            nextResumeToken: this.nextResumeToken,
+            hasMoreNewer: this.hasMoreNewer
         };
     }
 }
@@ -92994,6 +94515,7 @@ class RemoteOperationContainerLogLine {
         _instance.containerId = _instance.containerId || '';
         _instance.containerName = _instance.containerName || '';
         _instance.seq = _instance.seq || '0';
+        _instance.logStream = _instance.logStream || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -93023,6 +94545,9 @@ class RemoteOperationContainerLogLine {
                     break;
                 case 6:
                     _instance.seq = _reader.readInt64String();
+                    break;
+                case 7:
+                    _instance.logStream = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
@@ -93054,6 +94579,9 @@ class RemoteOperationContainerLogLine {
         if (_instance.seq) {
             _writer.writeInt64String(6, _instance.seq);
         }
+        if (_instance.logStream) {
+            _writer.writeString(7, _instance.logStream);
+        }
     }
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -93069,6 +94597,7 @@ class RemoteOperationContainerLogLine {
         this.containerId = _value.containerId;
         this.containerName = _value.containerName;
         this.seq = _value.seq;
+        this.logStream = _value.logStream;
         RemoteOperationContainerLogLine.refineValues(this);
     }
     get timestamp() {
@@ -93107,6 +94636,12 @@ class RemoteOperationContainerLogLine {
     set seq(value) {
         this._seq = value;
     }
+    get logStream() {
+        return this._logStream;
+    }
+    set logStream(value) {
+        this._logStream = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -93126,7 +94661,8 @@ class RemoteOperationContainerLogLine {
             message: this.message,
             containerId: this.containerId,
             containerName: this.containerName,
-            seq: this.seq
+            seq: this.seq,
+            logStream: this.logStream
         };
     }
     /**
@@ -93149,7 +94685,8 @@ class RemoteOperationContainerLogLine {
             message: this.message,
             containerId: this.containerId,
             containerName: this.containerName,
-            seq: this.seq
+            seq: this.seq,
+            logStream: this.logStream
         };
     }
 }
@@ -105917,6 +107454,3462 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.35", ngImpo
                 }, {
                     type: Inject,
                     args: [GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS]
+                }] }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [GRPC_CLIENT_FACTORY]
+                }] }, { type: i1.GrpcHandler }] });
+
+/* tslint:disable */
+/* eslint-disable */
+// @ts-nocheck
+//
+// THIS IS A GENERATED FILE
+// DO NOT MODIFY IT! YOUR CHANGES WILL BE LOST
+var CaiLogSource;
+(function (CaiLogSource) {
+    CaiLogSource[CaiLogSource["CAI_LOG_SOURCE_UNSPECIFIED"] = 0] = "CAI_LOG_SOURCE_UNSPECIFIED";
+    CaiLogSource[CaiLogSource["CAI_LOG_SOURCE_SERVER"] = 1] = "CAI_LOG_SOURCE_SERVER";
+    CaiLogSource[CaiLogSource["CAI_LOG_SOURCE_REMOTE_OPERATION_CONTAINER"] = 2] = "CAI_LOG_SOURCE_REMOTE_OPERATION_CONTAINER";
+    CaiLogSource[CaiLogSource["CAI_LOG_SOURCE_HELPER_CONTAINER"] = 3] = "CAI_LOG_SOURCE_HELPER_CONTAINER";
+})(CaiLogSource || (CaiLogSource = {}));
+var CaiLogStreamChannel;
+(function (CaiLogStreamChannel) {
+    CaiLogStreamChannel[CaiLogStreamChannel["CAI_LOG_STREAM_CHANNEL_UNSPECIFIED"] = 0] = "CAI_LOG_STREAM_CHANNEL_UNSPECIFIED";
+    CaiLogStreamChannel[CaiLogStreamChannel["CAI_LOG_STREAM_CHANNEL_STDOUT"] = 1] = "CAI_LOG_STREAM_CHANNEL_STDOUT";
+    CaiLogStreamChannel[CaiLogStreamChannel["CAI_LOG_STREAM_CHANNEL_STDERR"] = 2] = "CAI_LOG_STREAM_CHANNEL_STDERR";
+})(CaiLogStreamChannel || (CaiLogStreamChannel = {}));
+var CaiLogCaptureState;
+(function (CaiLogCaptureState) {
+    CaiLogCaptureState[CaiLogCaptureState["CAI_LOG_CAPTURE_STATE_UNSPECIFIED"] = 0] = "CAI_LOG_CAPTURE_STATE_UNSPECIFIED";
+    CaiLogCaptureState[CaiLogCaptureState["CAI_LOG_CAPTURE_STATE_CAPTURING"] = 1] = "CAI_LOG_CAPTURE_STATE_CAPTURING";
+    CaiLogCaptureState[CaiLogCaptureState["CAI_LOG_CAPTURE_STATE_STOPPED"] = 2] = "CAI_LOG_CAPTURE_STATE_STOPPED";
+    CaiLogCaptureState[CaiLogCaptureState["CAI_LOG_CAPTURE_STATE_FAILED"] = 3] = "CAI_LOG_CAPTURE_STATE_FAILED";
+    CaiLogCaptureState[CaiLogCaptureState["CAI_LOG_CAPTURE_STATE_DETACHED"] = 4] = "CAI_LOG_CAPTURE_STATE_DETACHED";
+})(CaiLogCaptureState || (CaiLogCaptureState = {}));
+var CaiLogFilterField;
+(function (CaiLogFilterField) {
+    CaiLogFilterField[CaiLogFilterField["CAI_LOG_FILTER_FIELD_UNSPECIFIED"] = 0] = "CAI_LOG_FILTER_FIELD_UNSPECIFIED";
+    CaiLogFilterField[CaiLogFilterField["CAI_LOG_FILTER_FIELD_TEXT"] = 1] = "CAI_LOG_FILTER_FIELD_TEXT";
+    CaiLogFilterField[CaiLogFilterField["CAI_LOG_FILTER_FIELD_REGEX"] = 2] = "CAI_LOG_FILTER_FIELD_REGEX";
+    CaiLogFilterField[CaiLogFilterField["CAI_LOG_FILTER_FIELD_LOG_SOURCES"] = 3] = "CAI_LOG_FILTER_FIELD_LOG_SOURCES";
+    CaiLogFilterField[CaiLogFilterField["CAI_LOG_FILTER_FIELD_EMITTER_PREFIXES"] = 4] = "CAI_LOG_FILTER_FIELD_EMITTER_PREFIXES";
+    CaiLogFilterField[CaiLogFilterField["CAI_LOG_FILTER_FIELD_THREAD_NAMES"] = 5] = "CAI_LOG_FILTER_FIELD_THREAD_NAMES";
+    CaiLogFilterField[CaiLogFilterField["CAI_LOG_FILTER_FIELD_PROCESS_NAMES"] = 6] = "CAI_LOG_FILTER_FIELD_PROCESS_NAMES";
+})(CaiLogFilterField || (CaiLogFilterField = {}));
+var CaiLogStreamEndReason;
+(function (CaiLogStreamEndReason) {
+    CaiLogStreamEndReason[CaiLogStreamEndReason["CAI_LOG_STREAM_END_REASON_UNSPECIFIED"] = 0] = "CAI_LOG_STREAM_END_REASON_UNSPECIFIED";
+    CaiLogStreamEndReason[CaiLogStreamEndReason["CAI_LOG_STREAM_END_REASON_ALL_CAPTURES_TERMINATED"] = 1] = "CAI_LOG_STREAM_END_REASON_ALL_CAPTURES_TERMINATED";
+    CaiLogStreamEndReason[CaiLogStreamEndReason["CAI_LOG_STREAM_END_REASON_MAX_DURATION"] = 2] = "CAI_LOG_STREAM_END_REASON_MAX_DURATION";
+    CaiLogStreamEndReason[CaiLogStreamEndReason["CAI_LOG_STREAM_END_REASON_SERVER_SHUTDOWN"] = 3] = "CAI_LOG_STREAM_END_REASON_SERVER_SHUTDOWN";
+    CaiLogStreamEndReason[CaiLogStreamEndReason["CAI_LOG_STREAM_END_REASON_PERMISSION_REVOKED"] = 4] = "CAI_LOG_STREAM_END_REASON_PERMISSION_REVOKED";
+    CaiLogStreamEndReason[CaiLogStreamEndReason["CAI_LOG_STREAM_END_REASON_CREDENTIALS_EXPIRED"] = 5] = "CAI_LOG_STREAM_END_REASON_CREDENTIALS_EXPIRED";
+})(CaiLogStreamEndReason || (CaiLogStreamEndReason = {}));
+var CaiLogExportFormat;
+(function (CaiLogExportFormat) {
+    CaiLogExportFormat[CaiLogExportFormat["CAI_LOG_EXPORT_FORMAT_UNSPECIFIED"] = 0] = "CAI_LOG_EXPORT_FORMAT_UNSPECIFIED";
+    CaiLogExportFormat[CaiLogExportFormat["CAI_LOG_EXPORT_FORMAT_TEXT"] = 1] = "CAI_LOG_EXPORT_FORMAT_TEXT";
+    CaiLogExportFormat[CaiLogExportFormat["CAI_LOG_EXPORT_FORMAT_NDJSON"] = 2] = "CAI_LOG_EXPORT_FORMAT_NDJSON";
+    CaiLogExportFormat[CaiLogExportFormat["CAI_LOG_EXPORT_FORMAT_CSV"] = 3] = "CAI_LOG_EXPORT_FORMAT_CSV";
+})(CaiLogExportFormat || (CaiLogExportFormat = {}));
+/**
+ * Message implementation for ondewo.nlu.CaiLogEntry
+ */
+class CaiLogEntry {
+    static { this.id = 'ondewo.nlu.CaiLogEntry'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new CaiLogEntry();
+        CaiLogEntry.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.seq = _instance.seq || '0';
+        _instance.timestamp = _instance.timestamp || undefined;
+        _instance.timestampIsExact = _instance.timestampIsExact || false;
+        _instance.level = _instance.level || 0;
+        _instance.message = _instance.message || '';
+        _instance.logSource = _instance.logSource || 0;
+        _instance.channel = _instance.channel || 0;
+        _instance.emitter = _instance.emitter || '';
+        _instance.threadName = _instance.threadName || '';
+        _instance.processName = _instance.processName || '';
+        _instance.logStream = _instance.logStream || '';
+        _instance.operationName = _instance.operationName || '';
+        _instance.projectParent = _instance.projectParent || '';
+        _instance.containerId = _instance.containerId || '';
+        _instance.containerName = _instance.containerName || '';
+        _instance.replicaId = _instance.replicaId || '';
+        _instance.traceId = _instance.traceId || '';
+        _instance.physicalLineCount = _instance.physicalLineCount || 0;
+        _instance.operationType = _instance.operationType || 0;
+        _instance.phase = _instance.phase || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.seq = _reader.readInt64String();
+                    break;
+                case 2:
+                    _instance.timestamp = new googleProtobuf005.Timestamp();
+                    _reader.readMessage(_instance.timestamp, googleProtobuf005.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 3:
+                    _instance.timestampIsExact = _reader.readBool();
+                    break;
+                case 4:
+                    _instance.level = _reader.readEnum();
+                    break;
+                case 5:
+                    _instance.message = _reader.readString();
+                    break;
+                case 6:
+                    _instance.logSource = _reader.readEnum();
+                    break;
+                case 7:
+                    _instance.channel = _reader.readEnum();
+                    break;
+                case 8:
+                    _instance.emitter = _reader.readString();
+                    break;
+                case 9:
+                    _instance.threadName = _reader.readString();
+                    break;
+                case 10:
+                    _instance.processName = _reader.readString();
+                    break;
+                case 11:
+                    _instance.logStream = _reader.readString();
+                    break;
+                case 12:
+                    _instance.operationName = _reader.readString();
+                    break;
+                case 13:
+                    _instance.projectParent = _reader.readString();
+                    break;
+                case 14:
+                    _instance.containerId = _reader.readString();
+                    break;
+                case 15:
+                    _instance.containerName = _reader.readString();
+                    break;
+                case 16:
+                    _instance.replicaId = _reader.readString();
+                    break;
+                case 17:
+                    _instance.traceId = _reader.readString();
+                    break;
+                case 18:
+                    _instance.physicalLineCount = _reader.readInt32();
+                    break;
+                case 19:
+                    _instance.operationType = _reader.readEnum();
+                    break;
+                case 20:
+                    _instance.phase = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        CaiLogEntry.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.seq) {
+            _writer.writeInt64String(1, _instance.seq);
+        }
+        if (_instance.timestamp) {
+            _writer.writeMessage(2, _instance.timestamp, googleProtobuf005.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.timestampIsExact) {
+            _writer.writeBool(3, _instance.timestampIsExact);
+        }
+        if (_instance.level) {
+            _writer.writeEnum(4, _instance.level);
+        }
+        if (_instance.message) {
+            _writer.writeString(5, _instance.message);
+        }
+        if (_instance.logSource) {
+            _writer.writeEnum(6, _instance.logSource);
+        }
+        if (_instance.channel) {
+            _writer.writeEnum(7, _instance.channel);
+        }
+        if (_instance.emitter) {
+            _writer.writeString(8, _instance.emitter);
+        }
+        if (_instance.threadName) {
+            _writer.writeString(9, _instance.threadName);
+        }
+        if (_instance.processName) {
+            _writer.writeString(10, _instance.processName);
+        }
+        if (_instance.logStream) {
+            _writer.writeString(11, _instance.logStream);
+        }
+        if (_instance.operationName) {
+            _writer.writeString(12, _instance.operationName);
+        }
+        if (_instance.projectParent) {
+            _writer.writeString(13, _instance.projectParent);
+        }
+        if (_instance.containerId) {
+            _writer.writeString(14, _instance.containerId);
+        }
+        if (_instance.containerName) {
+            _writer.writeString(15, _instance.containerName);
+        }
+        if (_instance.replicaId) {
+            _writer.writeString(16, _instance.replicaId);
+        }
+        if (_instance.traceId) {
+            _writer.writeString(17, _instance.traceId);
+        }
+        if (_instance.physicalLineCount) {
+            _writer.writeInt32(18, _instance.physicalLineCount);
+        }
+        if (_instance.operationType) {
+            _writer.writeEnum(19, _instance.operationType);
+        }
+        if (_instance.phase) {
+            _writer.writeString(20, _instance.phase);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CaiLogEntry to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.seq = _value.seq;
+        this.timestamp = _value.timestamp
+            ? new googleProtobuf005.Timestamp(_value.timestamp)
+            : undefined;
+        this.timestampIsExact = _value.timestampIsExact;
+        this.level = _value.level;
+        this.message = _value.message;
+        this.logSource = _value.logSource;
+        this.channel = _value.channel;
+        this.emitter = _value.emitter;
+        this.threadName = _value.threadName;
+        this.processName = _value.processName;
+        this.logStream = _value.logStream;
+        this.operationName = _value.operationName;
+        this.projectParent = _value.projectParent;
+        this.containerId = _value.containerId;
+        this.containerName = _value.containerName;
+        this.replicaId = _value.replicaId;
+        this.traceId = _value.traceId;
+        this.physicalLineCount = _value.physicalLineCount;
+        this.operationType = _value.operationType;
+        this.phase = _value.phase;
+        CaiLogEntry.refineValues(this);
+    }
+    get seq() {
+        return this._seq;
+    }
+    set seq(value) {
+        this._seq = value;
+    }
+    get timestamp() {
+        return this._timestamp;
+    }
+    set timestamp(value) {
+        this._timestamp = value;
+    }
+    get timestampIsExact() {
+        return this._timestampIsExact;
+    }
+    set timestampIsExact(value) {
+        this._timestampIsExact = value;
+    }
+    get level() {
+        return this._level;
+    }
+    set level(value) {
+        this._level = value;
+    }
+    get message() {
+        return this._message;
+    }
+    set message(value) {
+        this._message = value;
+    }
+    get logSource() {
+        return this._logSource;
+    }
+    set logSource(value) {
+        this._logSource = value;
+    }
+    get channel() {
+        return this._channel;
+    }
+    set channel(value) {
+        this._channel = value;
+    }
+    get emitter() {
+        return this._emitter;
+    }
+    set emitter(value) {
+        this._emitter = value;
+    }
+    get threadName() {
+        return this._threadName;
+    }
+    set threadName(value) {
+        this._threadName = value;
+    }
+    get processName() {
+        return this._processName;
+    }
+    set processName(value) {
+        this._processName = value;
+    }
+    get logStream() {
+        return this._logStream;
+    }
+    set logStream(value) {
+        this._logStream = value;
+    }
+    get operationName() {
+        return this._operationName;
+    }
+    set operationName(value) {
+        this._operationName = value;
+    }
+    get projectParent() {
+        return this._projectParent;
+    }
+    set projectParent(value) {
+        this._projectParent = value;
+    }
+    get containerId() {
+        return this._containerId;
+    }
+    set containerId(value) {
+        this._containerId = value;
+    }
+    get containerName() {
+        return this._containerName;
+    }
+    set containerName(value) {
+        this._containerName = value;
+    }
+    get replicaId() {
+        return this._replicaId;
+    }
+    set replicaId(value) {
+        this._replicaId = value;
+    }
+    get traceId() {
+        return this._traceId;
+    }
+    set traceId(value) {
+        this._traceId = value;
+    }
+    get physicalLineCount() {
+        return this._physicalLineCount;
+    }
+    set physicalLineCount(value) {
+        this._physicalLineCount = value;
+    }
+    get operationType() {
+        return this._operationType;
+    }
+    set operationType(value) {
+        this._operationType = value;
+    }
+    get phase() {
+        return this._phase;
+    }
+    set phase(value) {
+        this._phase = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        CaiLogEntry.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            seq: this.seq,
+            timestamp: this.timestamp ? this.timestamp.toObject() : undefined,
+            timestampIsExact: this.timestampIsExact,
+            level: this.level,
+            message: this.message,
+            logSource: this.logSource,
+            channel: this.channel,
+            emitter: this.emitter,
+            threadName: this.threadName,
+            processName: this.processName,
+            logStream: this.logStream,
+            operationName: this.operationName,
+            projectParent: this.projectParent,
+            containerId: this.containerId,
+            containerName: this.containerName,
+            replicaId: this.replicaId,
+            traceId: this.traceId,
+            physicalLineCount: this.physicalLineCount,
+            operationType: this.operationType,
+            phase: this.phase
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            seq: this.seq,
+            timestamp: this.timestamp ? this.timestamp.toProtobufJSON(options) : null,
+            timestampIsExact: this.timestampIsExact,
+            level: LogSeverity[this.level === null || this.level === undefined ? 0 : this.level],
+            message: this.message,
+            logSource: CaiLogSource[this.logSource === null || this.logSource === undefined
+                ? 0
+                : this.logSource],
+            channel: CaiLogStreamChannel[this.channel === null || this.channel === undefined ? 0 : this.channel],
+            emitter: this.emitter,
+            threadName: this.threadName,
+            processName: this.processName,
+            logStream: this.logStream,
+            operationName: this.operationName,
+            projectParent: this.projectParent,
+            containerId: this.containerId,
+            containerName: this.containerName,
+            replicaId: this.replicaId,
+            traceId: this.traceId,
+            physicalLineCount: this.physicalLineCount,
+            operationType: OperationMetadata.OperationType[this.operationType === null || this.operationType === undefined
+                ? 0
+                : this.operationType],
+            phase: this.phase
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.CaiLogFilter
+ */
+class CaiLogFilter {
+    static { this.id = 'ondewo.nlu.CaiLogFilter'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new CaiLogFilter();
+        CaiLogFilter.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.logStreamNames = _instance.logStreamNames || [];
+        _instance.operationNames = _instance.operationNames || [];
+        _instance.includeSubOperations = _instance.includeSubOperations || false;
+        _instance.projectParents = _instance.projectParents || [];
+        _instance.containerIds = _instance.containerIds || [];
+        _instance.containerNames = _instance.containerNames || [];
+        _instance.replicaIds = _instance.replicaIds || [];
+        _instance.operationTypes = _instance.operationTypes || [];
+        _instance.phases = _instance.phases || [];
+        _instance.logSources = _instance.logSources || [];
+        _instance.channels = _instance.channels || [];
+        _instance.minLogLevel = _instance.minLogLevel || 0;
+        _instance.logLevels = _instance.logLevels || [];
+        _instance.emitterPrefixes = _instance.emitterPrefixes || [];
+        _instance.threadNames = _instance.threadNames || [];
+        _instance.processNames = _instance.processNames || [];
+        _instance.traceIds = _instance.traceIds || [];
+        _instance.startTime = _instance.startTime || undefined;
+        _instance.endTime = _instance.endTime || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    (_instance.logStreamNames = _instance.logStreamNames || []).push(_reader.readString());
+                    break;
+                case 2:
+                    (_instance.operationNames = _instance.operationNames || []).push(_reader.readString());
+                    break;
+                case 3:
+                    _instance.includeSubOperations = _reader.readBool();
+                    break;
+                case 4:
+                    (_instance.projectParents = _instance.projectParents || []).push(_reader.readString());
+                    break;
+                case 5:
+                    (_instance.containerIds = _instance.containerIds || []).push(_reader.readString());
+                    break;
+                case 6:
+                    (_instance.containerNames = _instance.containerNames || []).push(_reader.readString());
+                    break;
+                case 7:
+                    (_instance.replicaIds = _instance.replicaIds || []).push(_reader.readString());
+                    break;
+                case 8:
+                    _reader.readPackableEnumInto((_instance.operationTypes = _instance.operationTypes || []));
+                    break;
+                case 9:
+                    (_instance.phases = _instance.phases || []).push(_reader.readString());
+                    break;
+                case 20:
+                    _reader.readPackableEnumInto((_instance.logSources = _instance.logSources || []));
+                    break;
+                case 21:
+                    _reader.readPackableEnumInto((_instance.channels = _instance.channels || []));
+                    break;
+                case 22:
+                    _instance.minLogLevel = _reader.readEnum();
+                    break;
+                case 23:
+                    _reader.readPackableEnumInto((_instance.logLevels = _instance.logLevels || []));
+                    break;
+                case 24:
+                    _instance.includeUnleveledLines = _reader.readBool();
+                    break;
+                case 25:
+                    _instance.text = _reader.readString();
+                    break;
+                case 26:
+                    _instance.regex = _reader.readString();
+                    break;
+                case 27:
+                    (_instance.emitterPrefixes = _instance.emitterPrefixes || []).push(_reader.readString());
+                    break;
+                case 28:
+                    (_instance.threadNames = _instance.threadNames || []).push(_reader.readString());
+                    break;
+                case 29:
+                    (_instance.processNames = _instance.processNames || []).push(_reader.readString());
+                    break;
+                case 30:
+                    (_instance.traceIds = _instance.traceIds || []).push(_reader.readString());
+                    break;
+                case 31:
+                    _instance.startTime = new googleProtobuf005.Timestamp();
+                    _reader.readMessage(_instance.startTime, googleProtobuf005.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 32:
+                    _instance.endTime = new googleProtobuf005.Timestamp();
+                    _reader.readMessage(_instance.endTime, googleProtobuf005.Timestamp.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        CaiLogFilter.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.logStreamNames && _instance.logStreamNames.length) {
+            _writer.writeRepeatedString(1, _instance.logStreamNames);
+        }
+        if (_instance.operationNames && _instance.operationNames.length) {
+            _writer.writeRepeatedString(2, _instance.operationNames);
+        }
+        if (_instance.includeSubOperations) {
+            _writer.writeBool(3, _instance.includeSubOperations);
+        }
+        if (_instance.projectParents && _instance.projectParents.length) {
+            _writer.writeRepeatedString(4, _instance.projectParents);
+        }
+        if (_instance.containerIds && _instance.containerIds.length) {
+            _writer.writeRepeatedString(5, _instance.containerIds);
+        }
+        if (_instance.containerNames && _instance.containerNames.length) {
+            _writer.writeRepeatedString(6, _instance.containerNames);
+        }
+        if (_instance.replicaIds && _instance.replicaIds.length) {
+            _writer.writeRepeatedString(7, _instance.replicaIds);
+        }
+        if (_instance.operationTypes && _instance.operationTypes.length) {
+            _writer.writePackedEnum(8, _instance.operationTypes);
+        }
+        if (_instance.phases && _instance.phases.length) {
+            _writer.writeRepeatedString(9, _instance.phases);
+        }
+        if (_instance.logSources && _instance.logSources.length) {
+            _writer.writePackedEnum(20, _instance.logSources);
+        }
+        if (_instance.channels && _instance.channels.length) {
+            _writer.writePackedEnum(21, _instance.channels);
+        }
+        if (_instance.minLogLevel) {
+            _writer.writeEnum(22, _instance.minLogLevel);
+        }
+        if (_instance.logLevels && _instance.logLevels.length) {
+            _writer.writePackedEnum(23, _instance.logLevels);
+        }
+        if (_instance.includeUnleveledLines !== undefined &&
+            _instance.includeUnleveledLines !== null) {
+            _writer.writeBool(24, _instance.includeUnleveledLines);
+        }
+        if (_instance.text !== undefined && _instance.text !== null) {
+            _writer.writeString(25, _instance.text);
+        }
+        if (_instance.regex !== undefined && _instance.regex !== null) {
+            _writer.writeString(26, _instance.regex);
+        }
+        if (_instance.emitterPrefixes && _instance.emitterPrefixes.length) {
+            _writer.writeRepeatedString(27, _instance.emitterPrefixes);
+        }
+        if (_instance.threadNames && _instance.threadNames.length) {
+            _writer.writeRepeatedString(28, _instance.threadNames);
+        }
+        if (_instance.processNames && _instance.processNames.length) {
+            _writer.writeRepeatedString(29, _instance.processNames);
+        }
+        if (_instance.traceIds && _instance.traceIds.length) {
+            _writer.writeRepeatedString(30, _instance.traceIds);
+        }
+        if (_instance.startTime) {
+            _writer.writeMessage(31, _instance.startTime, googleProtobuf005.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.endTime) {
+            _writer.writeMessage(32, _instance.endTime, googleProtobuf005.Timestamp.serializeBinaryToWriter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CaiLogFilter to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.logStreamNames = (_value.logStreamNames || []).slice();
+        this.operationNames = (_value.operationNames || []).slice();
+        this.includeSubOperations = _value.includeSubOperations;
+        this.projectParents = (_value.projectParents || []).slice();
+        this.containerIds = (_value.containerIds || []).slice();
+        this.containerNames = (_value.containerNames || []).slice();
+        this.replicaIds = (_value.replicaIds || []).slice();
+        this.operationTypes = (_value.operationTypes || []).slice();
+        this.phases = (_value.phases || []).slice();
+        this.logSources = (_value.logSources || []).slice();
+        this.channels = (_value.channels || []).slice();
+        this.minLogLevel = _value.minLogLevel;
+        this.logLevels = (_value.logLevels || []).slice();
+        this.includeUnleveledLines = _value.includeUnleveledLines;
+        this.text = _value.text;
+        this.regex = _value.regex;
+        this.emitterPrefixes = (_value.emitterPrefixes || []).slice();
+        this.threadNames = (_value.threadNames || []).slice();
+        this.processNames = (_value.processNames || []).slice();
+        this.traceIds = (_value.traceIds || []).slice();
+        this.startTime = _value.startTime
+            ? new googleProtobuf005.Timestamp(_value.startTime)
+            : undefined;
+        this.endTime = _value.endTime
+            ? new googleProtobuf005.Timestamp(_value.endTime)
+            : undefined;
+        CaiLogFilter.refineValues(this);
+    }
+    get logStreamNames() {
+        return this._logStreamNames;
+    }
+    set logStreamNames(value) {
+        this._logStreamNames = value;
+    }
+    get operationNames() {
+        return this._operationNames;
+    }
+    set operationNames(value) {
+        this._operationNames = value;
+    }
+    get includeSubOperations() {
+        return this._includeSubOperations;
+    }
+    set includeSubOperations(value) {
+        this._includeSubOperations = value;
+    }
+    get projectParents() {
+        return this._projectParents;
+    }
+    set projectParents(value) {
+        this._projectParents = value;
+    }
+    get containerIds() {
+        return this._containerIds;
+    }
+    set containerIds(value) {
+        this._containerIds = value;
+    }
+    get containerNames() {
+        return this._containerNames;
+    }
+    set containerNames(value) {
+        this._containerNames = value;
+    }
+    get replicaIds() {
+        return this._replicaIds;
+    }
+    set replicaIds(value) {
+        this._replicaIds = value;
+    }
+    get operationTypes() {
+        return this._operationTypes;
+    }
+    set operationTypes(value) {
+        this._operationTypes = value;
+    }
+    get phases() {
+        return this._phases;
+    }
+    set phases(value) {
+        this._phases = value;
+    }
+    get logSources() {
+        return this._logSources;
+    }
+    set logSources(value) {
+        this._logSources = value;
+    }
+    get channels() {
+        return this._channels;
+    }
+    set channels(value) {
+        this._channels = value;
+    }
+    get minLogLevel() {
+        return this._minLogLevel;
+    }
+    set minLogLevel(value) {
+        this._minLogLevel = value;
+    }
+    get logLevels() {
+        return this._logLevels;
+    }
+    set logLevels(value) {
+        this._logLevels = value;
+    }
+    get includeUnleveledLines() {
+        return this._includeUnleveledLines;
+    }
+    set includeUnleveledLines(value) {
+        this._includeUnleveledLines = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    get regex() {
+        return this._regex;
+    }
+    set regex(value) {
+        this._regex = value;
+    }
+    get emitterPrefixes() {
+        return this._emitterPrefixes;
+    }
+    set emitterPrefixes(value) {
+        this._emitterPrefixes = value;
+    }
+    get threadNames() {
+        return this._threadNames;
+    }
+    set threadNames(value) {
+        this._threadNames = value;
+    }
+    get processNames() {
+        return this._processNames;
+    }
+    set processNames(value) {
+        this._processNames = value;
+    }
+    get traceIds() {
+        return this._traceIds;
+    }
+    set traceIds(value) {
+        this._traceIds = value;
+    }
+    get startTime() {
+        return this._startTime;
+    }
+    set startTime(value) {
+        this._startTime = value;
+    }
+    get endTime() {
+        return this._endTime;
+    }
+    set endTime(value) {
+        this._endTime = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        CaiLogFilter.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            logStreamNames: (this.logStreamNames || []).slice(),
+            operationNames: (this.operationNames || []).slice(),
+            includeSubOperations: this.includeSubOperations,
+            projectParents: (this.projectParents || []).slice(),
+            containerIds: (this.containerIds || []).slice(),
+            containerNames: (this.containerNames || []).slice(),
+            replicaIds: (this.replicaIds || []).slice(),
+            operationTypes: (this.operationTypes || []).slice(),
+            phases: (this.phases || []).slice(),
+            logSources: (this.logSources || []).slice(),
+            channels: (this.channels || []).slice(),
+            minLogLevel: this.minLogLevel,
+            logLevels: (this.logLevels || []).slice(),
+            includeUnleveledLines: this.includeUnleveledLines,
+            text: this.text,
+            regex: this.regex,
+            emitterPrefixes: (this.emitterPrefixes || []).slice(),
+            threadNames: (this.threadNames || []).slice(),
+            processNames: (this.processNames || []).slice(),
+            traceIds: (this.traceIds || []).slice(),
+            startTime: this.startTime ? this.startTime.toObject() : undefined,
+            endTime: this.endTime ? this.endTime.toObject() : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            logStreamNames: (this.logStreamNames || []).slice(),
+            operationNames: (this.operationNames || []).slice(),
+            includeSubOperations: this.includeSubOperations,
+            projectParents: (this.projectParents || []).slice(),
+            containerIds: (this.containerIds || []).slice(),
+            containerNames: (this.containerNames || []).slice(),
+            replicaIds: (this.replicaIds || []).slice(),
+            operationTypes: (this.operationTypes || []).map(v => OperationMetadata.OperationType[v]),
+            phases: (this.phases || []).slice(),
+            logSources: (this.logSources || []).map(v => CaiLogSource[v]),
+            channels: (this.channels || []).map(v => CaiLogStreamChannel[v]),
+            minLogLevel: LogSeverity[this.minLogLevel === null || this.minLogLevel === undefined
+                ? 0
+                : this.minLogLevel],
+            logLevels: (this.logLevels || []).map(v => LogSeverity[v]),
+            includeUnleveledLines: this.includeUnleveledLines,
+            text: this.text,
+            regex: this.regex,
+            emitterPrefixes: (this.emitterPrefixes || []).slice(),
+            threadNames: (this.threadNames || []).slice(),
+            processNames: (this.processNames || []).slice(),
+            traceIds: (this.traceIds || []).slice(),
+            startTime: this.startTime ? this.startTime.toProtobufJSON(options) : null,
+            endTime: this.endTime ? this.endTime.toProtobufJSON(options) : null
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.CaiLogStream
+ */
+class CaiLogStream {
+    static { this.id = 'ondewo.nlu.CaiLogStream'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new CaiLogStream();
+        CaiLogStream.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.name = _instance.name || '';
+        _instance.logSource = _instance.logSource || 0;
+        _instance.channel = _instance.channel || 0;
+        _instance.projectParent = _instance.projectParent || '';
+        _instance.operationName = _instance.operationName || '';
+        _instance.containerId = _instance.containerId || '';
+        _instance.containerName = _instance.containerName || '';
+        _instance.host = _instance.host || '';
+        _instance.replicaId = _instance.replicaId || '';
+        _instance.processName = _instance.processName || '';
+        _instance.phase = _instance.phase || '';
+        _instance.captureState = _instance.captureState || 0;
+        _instance.captureError = _instance.captureError || '';
+        _instance.captureStartedAt = _instance.captureStartedAt || undefined;
+        _instance.captureFinishedAt = _instance.captureFinishedAt || undefined;
+        _instance.partialCapture = _instance.partialCapture || false;
+        _instance.minAvailableSeq = _instance.minAvailableSeq || '0';
+        _instance.maxAvailableSeq = _instance.maxAvailableSeq || '0';
+        _instance.lineCount = _instance.lineCount || '0';
+        _instance.droppedLineCount = _instance.droppedLineCount || '0';
+        _instance.operationType = _instance.operationType || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.name = _reader.readString();
+                    break;
+                case 2:
+                    _instance.logSource = _reader.readEnum();
+                    break;
+                case 3:
+                    _instance.channel = _reader.readEnum();
+                    break;
+                case 4:
+                    _instance.projectParent = _reader.readString();
+                    break;
+                case 5:
+                    _instance.operationName = _reader.readString();
+                    break;
+                case 6:
+                    _instance.containerId = _reader.readString();
+                    break;
+                case 7:
+                    _instance.containerName = _reader.readString();
+                    break;
+                case 8:
+                    _instance.host = _reader.readString();
+                    break;
+                case 9:
+                    _instance.replicaId = _reader.readString();
+                    break;
+                case 10:
+                    _instance.processName = _reader.readString();
+                    break;
+                case 11:
+                    _instance.phase = _reader.readString();
+                    break;
+                case 12:
+                    _instance.captureState = _reader.readEnum();
+                    break;
+                case 13:
+                    _instance.captureError = _reader.readString();
+                    break;
+                case 14:
+                    _instance.captureStartedAt = new googleProtobuf005.Timestamp();
+                    _reader.readMessage(_instance.captureStartedAt, googleProtobuf005.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 15:
+                    _instance.captureFinishedAt = new googleProtobuf005.Timestamp();
+                    _reader.readMessage(_instance.captureFinishedAt, googleProtobuf005.Timestamp.deserializeBinaryFromReader);
+                    break;
+                case 16:
+                    _instance.partialCapture = _reader.readBool();
+                    break;
+                case 17:
+                    _instance.minAvailableSeq = _reader.readInt64String();
+                    break;
+                case 18:
+                    _instance.maxAvailableSeq = _reader.readInt64String();
+                    break;
+                case 19:
+                    _instance.lineCount = _reader.readInt64String();
+                    break;
+                case 20:
+                    _instance.droppedLineCount = _reader.readInt64String();
+                    break;
+                case 21:
+                    _instance.operationType = _reader.readEnum();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        CaiLogStream.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.name) {
+            _writer.writeString(1, _instance.name);
+        }
+        if (_instance.logSource) {
+            _writer.writeEnum(2, _instance.logSource);
+        }
+        if (_instance.channel) {
+            _writer.writeEnum(3, _instance.channel);
+        }
+        if (_instance.projectParent) {
+            _writer.writeString(4, _instance.projectParent);
+        }
+        if (_instance.operationName) {
+            _writer.writeString(5, _instance.operationName);
+        }
+        if (_instance.containerId) {
+            _writer.writeString(6, _instance.containerId);
+        }
+        if (_instance.containerName) {
+            _writer.writeString(7, _instance.containerName);
+        }
+        if (_instance.host) {
+            _writer.writeString(8, _instance.host);
+        }
+        if (_instance.replicaId) {
+            _writer.writeString(9, _instance.replicaId);
+        }
+        if (_instance.processName) {
+            _writer.writeString(10, _instance.processName);
+        }
+        if (_instance.phase) {
+            _writer.writeString(11, _instance.phase);
+        }
+        if (_instance.captureState) {
+            _writer.writeEnum(12, _instance.captureState);
+        }
+        if (_instance.captureError) {
+            _writer.writeString(13, _instance.captureError);
+        }
+        if (_instance.captureStartedAt) {
+            _writer.writeMessage(14, _instance.captureStartedAt, googleProtobuf005.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.captureFinishedAt) {
+            _writer.writeMessage(15, _instance.captureFinishedAt, googleProtobuf005.Timestamp.serializeBinaryToWriter);
+        }
+        if (_instance.partialCapture) {
+            _writer.writeBool(16, _instance.partialCapture);
+        }
+        if (_instance.minAvailableSeq) {
+            _writer.writeInt64String(17, _instance.minAvailableSeq);
+        }
+        if (_instance.maxAvailableSeq) {
+            _writer.writeInt64String(18, _instance.maxAvailableSeq);
+        }
+        if (_instance.lineCount) {
+            _writer.writeInt64String(19, _instance.lineCount);
+        }
+        if (_instance.droppedLineCount) {
+            _writer.writeInt64String(20, _instance.droppedLineCount);
+        }
+        if (_instance.operationType) {
+            _writer.writeEnum(21, _instance.operationType);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CaiLogStream to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.logSource = _value.logSource;
+        this.channel = _value.channel;
+        this.projectParent = _value.projectParent;
+        this.operationName = _value.operationName;
+        this.containerId = _value.containerId;
+        this.containerName = _value.containerName;
+        this.host = _value.host;
+        this.replicaId = _value.replicaId;
+        this.processName = _value.processName;
+        this.phase = _value.phase;
+        this.captureState = _value.captureState;
+        this.captureError = _value.captureError;
+        this.captureStartedAt = _value.captureStartedAt
+            ? new googleProtobuf005.Timestamp(_value.captureStartedAt)
+            : undefined;
+        this.captureFinishedAt = _value.captureFinishedAt
+            ? new googleProtobuf005.Timestamp(_value.captureFinishedAt)
+            : undefined;
+        this.partialCapture = _value.partialCapture;
+        this.minAvailableSeq = _value.minAvailableSeq;
+        this.maxAvailableSeq = _value.maxAvailableSeq;
+        this.lineCount = _value.lineCount;
+        this.droppedLineCount = _value.droppedLineCount;
+        this.operationType = _value.operationType;
+        CaiLogStream.refineValues(this);
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    get logSource() {
+        return this._logSource;
+    }
+    set logSource(value) {
+        this._logSource = value;
+    }
+    get channel() {
+        return this._channel;
+    }
+    set channel(value) {
+        this._channel = value;
+    }
+    get projectParent() {
+        return this._projectParent;
+    }
+    set projectParent(value) {
+        this._projectParent = value;
+    }
+    get operationName() {
+        return this._operationName;
+    }
+    set operationName(value) {
+        this._operationName = value;
+    }
+    get containerId() {
+        return this._containerId;
+    }
+    set containerId(value) {
+        this._containerId = value;
+    }
+    get containerName() {
+        return this._containerName;
+    }
+    set containerName(value) {
+        this._containerName = value;
+    }
+    get host() {
+        return this._host;
+    }
+    set host(value) {
+        this._host = value;
+    }
+    get replicaId() {
+        return this._replicaId;
+    }
+    set replicaId(value) {
+        this._replicaId = value;
+    }
+    get processName() {
+        return this._processName;
+    }
+    set processName(value) {
+        this._processName = value;
+    }
+    get phase() {
+        return this._phase;
+    }
+    set phase(value) {
+        this._phase = value;
+    }
+    get captureState() {
+        return this._captureState;
+    }
+    set captureState(value) {
+        this._captureState = value;
+    }
+    get captureError() {
+        return this._captureError;
+    }
+    set captureError(value) {
+        this._captureError = value;
+    }
+    get captureStartedAt() {
+        return this._captureStartedAt;
+    }
+    set captureStartedAt(value) {
+        this._captureStartedAt = value;
+    }
+    get captureFinishedAt() {
+        return this._captureFinishedAt;
+    }
+    set captureFinishedAt(value) {
+        this._captureFinishedAt = value;
+    }
+    get partialCapture() {
+        return this._partialCapture;
+    }
+    set partialCapture(value) {
+        this._partialCapture = value;
+    }
+    get minAvailableSeq() {
+        return this._minAvailableSeq;
+    }
+    set minAvailableSeq(value) {
+        this._minAvailableSeq = value;
+    }
+    get maxAvailableSeq() {
+        return this._maxAvailableSeq;
+    }
+    set maxAvailableSeq(value) {
+        this._maxAvailableSeq = value;
+    }
+    get lineCount() {
+        return this._lineCount;
+    }
+    set lineCount(value) {
+        this._lineCount = value;
+    }
+    get droppedLineCount() {
+        return this._droppedLineCount;
+    }
+    set droppedLineCount(value) {
+        this._droppedLineCount = value;
+    }
+    get operationType() {
+        return this._operationType;
+    }
+    set operationType(value) {
+        this._operationType = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        CaiLogStream.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            name: this.name,
+            logSource: this.logSource,
+            channel: this.channel,
+            projectParent: this.projectParent,
+            operationName: this.operationName,
+            containerId: this.containerId,
+            containerName: this.containerName,
+            host: this.host,
+            replicaId: this.replicaId,
+            processName: this.processName,
+            phase: this.phase,
+            captureState: this.captureState,
+            captureError: this.captureError,
+            captureStartedAt: this.captureStartedAt
+                ? this.captureStartedAt.toObject()
+                : undefined,
+            captureFinishedAt: this.captureFinishedAt
+                ? this.captureFinishedAt.toObject()
+                : undefined,
+            partialCapture: this.partialCapture,
+            minAvailableSeq: this.minAvailableSeq,
+            maxAvailableSeq: this.maxAvailableSeq,
+            lineCount: this.lineCount,
+            droppedLineCount: this.droppedLineCount,
+            operationType: this.operationType
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            name: this.name,
+            logSource: CaiLogSource[this.logSource === null || this.logSource === undefined
+                ? 0
+                : this.logSource],
+            channel: CaiLogStreamChannel[this.channel === null || this.channel === undefined ? 0 : this.channel],
+            projectParent: this.projectParent,
+            operationName: this.operationName,
+            containerId: this.containerId,
+            containerName: this.containerName,
+            host: this.host,
+            replicaId: this.replicaId,
+            processName: this.processName,
+            phase: this.phase,
+            captureState: CaiLogCaptureState[this.captureState === null || this.captureState === undefined
+                ? 0
+                : this.captureState],
+            captureError: this.captureError,
+            captureStartedAt: this.captureStartedAt
+                ? this.captureStartedAt.toProtobufJSON(options)
+                : null,
+            captureFinishedAt: this.captureFinishedAt
+                ? this.captureFinishedAt.toProtobufJSON(options)
+                : null,
+            partialCapture: this.partialCapture,
+            minAvailableSeq: this.minAvailableSeq,
+            maxAvailableSeq: this.maxAvailableSeq,
+            lineCount: this.lineCount,
+            droppedLineCount: this.droppedLineCount,
+            operationType: OperationMetadata.OperationType[this.operationType === null || this.operationType === undefined
+                ? 0
+                : this.operationType]
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.StreamLogsRequest
+ */
+class StreamLogsRequest {
+    static { this.id = 'ondewo.nlu.StreamLogsRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new StreamLogsRequest();
+        StreamLogsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.filter = _instance.filter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.filter = new CaiLogFilter();
+                    _reader.readMessage(_instance.filter, CaiLogFilter.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.tailLines = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.resumeToken = _reader.readString();
+                    break;
+                case 4:
+                    _instance.afterSeq = _reader.readInt64String();
+                    break;
+                case 5:
+                    _instance.fieldMask = new googleProtobuf005.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf005.FieldMask.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        StreamLogsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.filter) {
+            _writer.writeMessage(1, _instance.filter, CaiLogFilter.serializeBinaryToWriter);
+        }
+        if (_instance.tailLines !== undefined && _instance.tailLines !== null) {
+            _writer.writeInt32(2, _instance.tailLines);
+        }
+        if (_instance.resumeToken !== undefined && _instance.resumeToken !== null) {
+            _writer.writeString(3, _instance.resumeToken);
+        }
+        if (_instance.afterSeq !== undefined && _instance.afterSeq !== null) {
+            _writer.writeInt64String(4, _instance.afterSeq);
+        }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(5, _instance.fieldMask, googleProtobuf005.FieldMask.serializeBinaryToWriter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamLogsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.filter = _value.filter ? new CaiLogFilter(_value.filter) : undefined;
+        this.tailLines = _value.tailLines;
+        this.resumeToken = _value.resumeToken;
+        this.afterSeq = _value.afterSeq;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf005.FieldMask(_value.fieldMask)
+            : undefined;
+        StreamLogsRequest.refineValues(this);
+    }
+    get filter() {
+        return this._filter;
+    }
+    set filter(value) {
+        this._filter = value;
+    }
+    get tailLines() {
+        return this._tailLines;
+    }
+    set tailLines(value) {
+        this._tailLines = value;
+    }
+    get resumeToken() {
+        return this._resumeToken;
+    }
+    set resumeToken(value) {
+        this._resumeToken = value;
+    }
+    get afterSeq() {
+        return this._afterSeq;
+    }
+    set afterSeq(value) {
+        this._afterSeq = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        StreamLogsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            filter: this.filter ? this.filter.toObject() : undefined,
+            tailLines: this.tailLines,
+            resumeToken: this.resumeToken,
+            afterSeq: this.afterSeq,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            filter: this.filter ? this.filter.toProtobufJSON(options) : null,
+            tailLines: this.tailLines,
+            resumeToken: this.resumeToken,
+            afterSeq: this.afterSeq,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.StreamLogsResponse
+ */
+class StreamLogsResponse {
+    static { this.id = 'ondewo.nlu.StreamLogsResponse'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new StreamLogsResponse();
+        StreamLogsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.logEntries = _instance.logEntries || [];
+        _instance.captureState = _instance.captureState || 0;
+        _instance.captureError = _instance.captureError || '';
+        _instance.droppedLineCount = _instance.droppedLineCount || '0';
+        _instance.resumeToken = _instance.resumeToken || '';
+        _instance.endReason = _instance.endReason || '';
+        _instance.endReasonCode = _instance.endReasonCode || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new CaiLogEntry();
+                    _reader.readMessage(messageInitializer1, CaiLogEntry.deserializeBinaryFromReader);
+                    (_instance.logEntries = _instance.logEntries || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    _instance.captureState = _reader.readEnum();
+                    break;
+                case 3:
+                    _instance.captureError = _reader.readString();
+                    break;
+                case 4:
+                    _instance.droppedLineCount = _reader.readInt64String();
+                    break;
+                case 5:
+                    _instance.resumeToken = _reader.readString();
+                    break;
+                case 6:
+                    _instance.endReason = _reader.readString();
+                    break;
+                case 7:
+                    _instance.endReasonCode = _reader.readEnum();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        StreamLogsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.logEntries && _instance.logEntries.length) {
+            _writer.writeRepeatedMessage(1, _instance.logEntries, CaiLogEntry.serializeBinaryToWriter);
+        }
+        if (_instance.captureState) {
+            _writer.writeEnum(2, _instance.captureState);
+        }
+        if (_instance.captureError) {
+            _writer.writeString(3, _instance.captureError);
+        }
+        if (_instance.droppedLineCount) {
+            _writer.writeInt64String(4, _instance.droppedLineCount);
+        }
+        if (_instance.resumeToken) {
+            _writer.writeString(5, _instance.resumeToken);
+        }
+        if (_instance.endReason) {
+            _writer.writeString(6, _instance.endReason);
+        }
+        if (_instance.endReasonCode) {
+            _writer.writeEnum(7, _instance.endReasonCode);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamLogsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.logEntries = (_value.logEntries || []).map(m => new CaiLogEntry(m));
+        this.captureState = _value.captureState;
+        this.captureError = _value.captureError;
+        this.droppedLineCount = _value.droppedLineCount;
+        this.resumeToken = _value.resumeToken;
+        this.endReason = _value.endReason;
+        this.endReasonCode = _value.endReasonCode;
+        StreamLogsResponse.refineValues(this);
+    }
+    get logEntries() {
+        return this._logEntries;
+    }
+    set logEntries(value) {
+        this._logEntries = value;
+    }
+    get captureState() {
+        return this._captureState;
+    }
+    set captureState(value) {
+        this._captureState = value;
+    }
+    get captureError() {
+        return this._captureError;
+    }
+    set captureError(value) {
+        this._captureError = value;
+    }
+    get droppedLineCount() {
+        return this._droppedLineCount;
+    }
+    set droppedLineCount(value) {
+        this._droppedLineCount = value;
+    }
+    get resumeToken() {
+        return this._resumeToken;
+    }
+    set resumeToken(value) {
+        this._resumeToken = value;
+    }
+    get endReason() {
+        return this._endReason;
+    }
+    set endReason(value) {
+        this._endReason = value;
+    }
+    get endReasonCode() {
+        return this._endReasonCode;
+    }
+    set endReasonCode(value) {
+        this._endReasonCode = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        StreamLogsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            logEntries: (this.logEntries || []).map(m => m.toObject()),
+            captureState: this.captureState,
+            captureError: this.captureError,
+            droppedLineCount: this.droppedLineCount,
+            resumeToken: this.resumeToken,
+            endReason: this.endReason,
+            endReasonCode: this.endReasonCode
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            logEntries: (this.logEntries || []).map(m => m.toProtobufJSON(options)),
+            captureState: CaiLogCaptureState[this.captureState === null || this.captureState === undefined
+                ? 0
+                : this.captureState],
+            captureError: this.captureError,
+            droppedLineCount: this.droppedLineCount,
+            resumeToken: this.resumeToken,
+            endReason: this.endReason,
+            endReasonCode: CaiLogStreamEndReason[this.endReasonCode === null || this.endReasonCode === undefined
+                ? 0
+                : this.endReasonCode]
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLogsRequest
+ */
+class ListLogsRequest {
+    static { this.id = 'ondewo.nlu.ListLogsRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ListLogsRequest();
+        ListLogsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.filter = _instance.filter || undefined;
+        _instance.fieldMask = _instance.fieldMask || undefined;
+        _instance.includeCounts = _instance.includeCounts || false;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.filter = new CaiLogFilter();
+                    _reader.readMessage(_instance.filter, CaiLogFilter.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.maxLines = _reader.readInt32();
+                    break;
+                case 3:
+                    _instance.beforeSeq = _reader.readInt64String();
+                    break;
+                case 4:
+                    _instance.afterSeq = _reader.readInt64String();
+                    break;
+                case 5:
+                    _instance.resumeToken = _reader.readString();
+                    break;
+                case 6:
+                    _instance.oldestFirst = _reader.readBool();
+                    break;
+                case 7:
+                    _instance.fieldMask = new googleProtobuf005.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf005.FieldMask.deserializeBinaryFromReader);
+                    break;
+                case 8:
+                    _instance.includeCounts = _reader.readBool();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ListLogsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.filter) {
+            _writer.writeMessage(1, _instance.filter, CaiLogFilter.serializeBinaryToWriter);
+        }
+        if (_instance.maxLines !== undefined && _instance.maxLines !== null) {
+            _writer.writeInt32(2, _instance.maxLines);
+        }
+        if (_instance.beforeSeq !== undefined && _instance.beforeSeq !== null) {
+            _writer.writeInt64String(3, _instance.beforeSeq);
+        }
+        if (_instance.afterSeq !== undefined && _instance.afterSeq !== null) {
+            _writer.writeInt64String(4, _instance.afterSeq);
+        }
+        if (_instance.resumeToken !== undefined && _instance.resumeToken !== null) {
+            _writer.writeString(5, _instance.resumeToken);
+        }
+        if (_instance.oldestFirst !== undefined && _instance.oldestFirst !== null) {
+            _writer.writeBool(6, _instance.oldestFirst);
+        }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(7, _instance.fieldMask, googleProtobuf005.FieldMask.serializeBinaryToWriter);
+        }
+        if (_instance.includeCounts) {
+            _writer.writeBool(8, _instance.includeCounts);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLogsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.filter = _value.filter ? new CaiLogFilter(_value.filter) : undefined;
+        this.maxLines = _value.maxLines;
+        this.beforeSeq = _value.beforeSeq;
+        this.afterSeq = _value.afterSeq;
+        this.resumeToken = _value.resumeToken;
+        this.oldestFirst = _value.oldestFirst;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf005.FieldMask(_value.fieldMask)
+            : undefined;
+        this.includeCounts = _value.includeCounts;
+        ListLogsRequest.refineValues(this);
+    }
+    get filter() {
+        return this._filter;
+    }
+    set filter(value) {
+        this._filter = value;
+    }
+    get maxLines() {
+        return this._maxLines;
+    }
+    set maxLines(value) {
+        this._maxLines = value;
+    }
+    get beforeSeq() {
+        return this._beforeSeq;
+    }
+    set beforeSeq(value) {
+        this._beforeSeq = value;
+    }
+    get afterSeq() {
+        return this._afterSeq;
+    }
+    set afterSeq(value) {
+        this._afterSeq = value;
+    }
+    get resumeToken() {
+        return this._resumeToken;
+    }
+    set resumeToken(value) {
+        this._resumeToken = value;
+    }
+    get oldestFirst() {
+        return this._oldestFirst;
+    }
+    set oldestFirst(value) {
+        this._oldestFirst = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
+    get includeCounts() {
+        return this._includeCounts;
+    }
+    set includeCounts(value) {
+        this._includeCounts = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ListLogsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            filter: this.filter ? this.filter.toObject() : undefined,
+            maxLines: this.maxLines,
+            beforeSeq: this.beforeSeq,
+            afterSeq: this.afterSeq,
+            resumeToken: this.resumeToken,
+            oldestFirst: this.oldestFirst,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+            includeCounts: this.includeCounts
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            filter: this.filter ? this.filter.toProtobufJSON(options) : null,
+            maxLines: this.maxLines,
+            beforeSeq: this.beforeSeq,
+            afterSeq: this.afterSeq,
+            resumeToken: this.resumeToken,
+            oldestFirst: this.oldestFirst,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+            includeCounts: this.includeCounts
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLogsResponse
+ */
+class ListLogsResponse {
+    static { this.id = 'ondewo.nlu.ListLogsResponse'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ListLogsResponse();
+        ListLogsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.logEntries = _instance.logEntries || [];
+        _instance.truncated = _instance.truncated || false;
+        _instance.minAvailableSeq = _instance.minAvailableSeq || '0';
+        _instance.maxAvailableSeq = _instance.maxAvailableSeq || '0';
+        _instance.hasMoreOlder = _instance.hasMoreOlder || false;
+        _instance.hasMoreNewer = _instance.hasMoreNewer || false;
+        _instance.nextResumeToken = _instance.nextResumeToken || '';
+        _instance.scopeLimitedFilters = _instance.scopeLimitedFilters || [];
+        _instance.countByLevel = _instance.countByLevel || {};
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new CaiLogEntry();
+                    _reader.readMessage(messageInitializer1, CaiLogEntry.deserializeBinaryFromReader);
+                    (_instance.logEntries = _instance.logEntries || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    _instance.truncated = _reader.readBool();
+                    break;
+                case 3:
+                    _instance.minAvailableSeq = _reader.readInt64String();
+                    break;
+                case 4:
+                    _instance.maxAvailableSeq = _reader.readInt64String();
+                    break;
+                case 5:
+                    _instance.hasMoreOlder = _reader.readBool();
+                    break;
+                case 6:
+                    _instance.hasMoreNewer = _reader.readBool();
+                    break;
+                case 7:
+                    _instance.nextResumeToken = _reader.readString();
+                    break;
+                case 8:
+                    _reader.readPackableEnumInto((_instance.scopeLimitedFilters =
+                        _instance.scopeLimitedFilters || []));
+                    break;
+                case 9:
+                    _instance.totalMatchingCount = _reader.readInt64String();
+                    break;
+                case 10:
+                    const msg_10 = {};
+                    _reader.readMessage(msg_10, ListLogsResponse.CountByLevelEntry.deserializeBinaryFromReader);
+                    _instance.countByLevel = _instance.countByLevel || {};
+                    _instance.countByLevel[msg_10.key] = msg_10.value;
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ListLogsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.logEntries && _instance.logEntries.length) {
+            _writer.writeRepeatedMessage(1, _instance.logEntries, CaiLogEntry.serializeBinaryToWriter);
+        }
+        if (_instance.truncated) {
+            _writer.writeBool(2, _instance.truncated);
+        }
+        if (_instance.minAvailableSeq) {
+            _writer.writeInt64String(3, _instance.minAvailableSeq);
+        }
+        if (_instance.maxAvailableSeq) {
+            _writer.writeInt64String(4, _instance.maxAvailableSeq);
+        }
+        if (_instance.hasMoreOlder) {
+            _writer.writeBool(5, _instance.hasMoreOlder);
+        }
+        if (_instance.hasMoreNewer) {
+            _writer.writeBool(6, _instance.hasMoreNewer);
+        }
+        if (_instance.nextResumeToken) {
+            _writer.writeString(7, _instance.nextResumeToken);
+        }
+        if (_instance.scopeLimitedFilters && _instance.scopeLimitedFilters.length) {
+            _writer.writePackedEnum(8, _instance.scopeLimitedFilters);
+        }
+        if (_instance.totalMatchingCount !== undefined &&
+            _instance.totalMatchingCount !== null) {
+            _writer.writeInt64String(9, _instance.totalMatchingCount);
+        }
+        if (!!_instance.countByLevel) {
+            const keys_10 = Object.keys(_instance.countByLevel);
+            if (keys_10.length) {
+                const repeated_10 = keys_10
+                    .map(key => ({
+                    key: key,
+                    value: _instance.countByLevel[key]
+                }))
+                    .reduce((r, v) => [...r, v], []);
+                _writer.writeRepeatedMessage(10, repeated_10, ListLogsResponse.CountByLevelEntry.serializeBinaryToWriter);
+            }
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLogsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.logEntries = (_value.logEntries || []).map(m => new CaiLogEntry(m));
+        this.truncated = _value.truncated;
+        this.minAvailableSeq = _value.minAvailableSeq;
+        this.maxAvailableSeq = _value.maxAvailableSeq;
+        this.hasMoreOlder = _value.hasMoreOlder;
+        this.hasMoreNewer = _value.hasMoreNewer;
+        this.nextResumeToken = _value.nextResumeToken;
+        this.scopeLimitedFilters = (_value.scopeLimitedFilters || []).slice();
+        this.totalMatchingCount = _value.totalMatchingCount;
+        (this.countByLevel = _value.countByLevel
+            ? Object.keys(_value.countByLevel).reduce((r, k) => ({ ...r, [k]: _value.countByLevel[k] }), {})
+            : {}),
+            ListLogsResponse.refineValues(this);
+    }
+    get logEntries() {
+        return this._logEntries;
+    }
+    set logEntries(value) {
+        this._logEntries = value;
+    }
+    get truncated() {
+        return this._truncated;
+    }
+    set truncated(value) {
+        this._truncated = value;
+    }
+    get minAvailableSeq() {
+        return this._minAvailableSeq;
+    }
+    set minAvailableSeq(value) {
+        this._minAvailableSeq = value;
+    }
+    get maxAvailableSeq() {
+        return this._maxAvailableSeq;
+    }
+    set maxAvailableSeq(value) {
+        this._maxAvailableSeq = value;
+    }
+    get hasMoreOlder() {
+        return this._hasMoreOlder;
+    }
+    set hasMoreOlder(value) {
+        this._hasMoreOlder = value;
+    }
+    get hasMoreNewer() {
+        return this._hasMoreNewer;
+    }
+    set hasMoreNewer(value) {
+        this._hasMoreNewer = value;
+    }
+    get nextResumeToken() {
+        return this._nextResumeToken;
+    }
+    set nextResumeToken(value) {
+        this._nextResumeToken = value;
+    }
+    get scopeLimitedFilters() {
+        return this._scopeLimitedFilters;
+    }
+    set scopeLimitedFilters(value) {
+        this._scopeLimitedFilters = value;
+    }
+    get totalMatchingCount() {
+        return this._totalMatchingCount;
+    }
+    set totalMatchingCount(value) {
+        this._totalMatchingCount = value;
+    }
+    get countByLevel() {
+        return this._countByLevel;
+    }
+    set countByLevel(value) {
+        this._countByLevel = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ListLogsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            logEntries: (this.logEntries || []).map(m => m.toObject()),
+            truncated: this.truncated,
+            minAvailableSeq: this.minAvailableSeq,
+            maxAvailableSeq: this.maxAvailableSeq,
+            hasMoreOlder: this.hasMoreOlder,
+            hasMoreNewer: this.hasMoreNewer,
+            nextResumeToken: this.nextResumeToken,
+            scopeLimitedFilters: (this.scopeLimitedFilters || []).slice(),
+            totalMatchingCount: this.totalMatchingCount,
+            countByLevel: this.countByLevel
+                ? Object.keys(this.countByLevel).reduce((r, k) => ({ ...r, [k]: this.countByLevel[k] }), {})
+                : {}
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            logEntries: (this.logEntries || []).map(m => m.toProtobufJSON(options)),
+            truncated: this.truncated,
+            minAvailableSeq: this.minAvailableSeq,
+            maxAvailableSeq: this.maxAvailableSeq,
+            hasMoreOlder: this.hasMoreOlder,
+            hasMoreNewer: this.hasMoreNewer,
+            nextResumeToken: this.nextResumeToken,
+            scopeLimitedFilters: (this.scopeLimitedFilters || []).map(v => CaiLogFilterField[v]),
+            totalMatchingCount: this.totalMatchingCount,
+            countByLevel: this.countByLevel
+                ? Object.keys(this.countByLevel).reduce((r, k) => ({ ...r, [k]: this.countByLevel[k] }), {})
+                : {}
+        };
+    }
+}
+(function (ListLogsResponse) {
+    /**
+     * Message implementation for ondewo.nlu.ListLogsResponse.CountByLevelEntry
+     */
+    class CountByLevelEntry {
+        static { this.id = 'ondewo.nlu.ListLogsResponse.CountByLevelEntry'; }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes) {
+            const instance = new CountByLevelEntry();
+            CountByLevelEntry.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+            return instance;
+        }
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance) {
+            _instance.key = _instance.key || '';
+            _instance.value = _instance.value || '0';
+        }
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.key = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.value = _reader.readInt64String();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CountByLevelEntry.refineValues(_instance);
+        }
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance, _writer) {
+            if (_instance.key) {
+                _writer.writeString(1, _instance.key);
+            }
+            if (_instance.value) {
+                _writer.writeInt64String(2, _instance.value);
+            }
+        }
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CountByLevelEntry to deeply clone from
+         */
+        constructor(_value) {
+            _value = _value || {};
+            this.key = _value.key;
+            this.value = _value.value;
+            CountByLevelEntry.refineValues(this);
+        }
+        get key() {
+            return this._key;
+        }
+        set key(value) {
+            this._key = value;
+        }
+        get value() {
+            return this._value;
+        }
+        set value(value) {
+            this._value = value;
+        }
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary() {
+            const writer = new BinaryWriter();
+            CountByLevelEntry.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        }
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject() {
+            return {
+                key: this.key,
+                value: this.value
+            };
+        }
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON() {
+            return this.toObject();
+        }
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(
+        // @ts-ignore
+        options) {
+            return {
+                key: this.key,
+                value: this.value
+            };
+        }
+    }
+    ListLogsResponse.CountByLevelEntry = CountByLevelEntry;
+})(ListLogsResponse || (ListLogsResponse = {}));
+/**
+ * Message implementation for ondewo.nlu.GetLogStreamRequest
+ */
+class GetLogStreamRequest {
+    static { this.id = 'ondewo.nlu.GetLogStreamRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new GetLogStreamRequest();
+        GetLogStreamRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.name = _instance.name || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.name = _reader.readString();
+                    break;
+                case 2:
+                    _instance.fieldMask = new googleProtobuf005.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf005.FieldMask.deserializeBinaryFromReader);
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        GetLogStreamRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.name) {
+            _writer.writeString(1, _instance.name);
+        }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(2, _instance.fieldMask, googleProtobuf005.FieldMask.serializeBinaryToWriter);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetLogStreamRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.name = _value.name;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf005.FieldMask(_value.fieldMask)
+            : undefined;
+        GetLogStreamRequest.refineValues(this);
+    }
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        GetLogStreamRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            name: this.name,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            name: this.name,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLogStreamsRequest
+ */
+class ListLogStreamsRequest {
+    static { this.id = 'ondewo.nlu.ListLogStreamsRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ListLogStreamsRequest();
+        ListLogStreamsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.filter = _instance.filter || undefined;
+        _instance.pageToken = _instance.pageToken || '';
+        _instance.fieldMask = _instance.fieldMask || undefined;
+        _instance.captureStates = _instance.captureStates || [];
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.filter = new CaiLogFilter();
+                    _reader.readMessage(_instance.filter, CaiLogFilter.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.pageToken = _reader.readString();
+                    break;
+                case 3:
+                    _instance.fieldMask = new googleProtobuf005.FieldMask();
+                    _reader.readMessage(_instance.fieldMask, googleProtobuf005.FieldMask.deserializeBinaryFromReader);
+                    break;
+                case 4:
+                    _reader.readPackableEnumInto((_instance.captureStates = _instance.captureStates || []));
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ListLogStreamsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.filter) {
+            _writer.writeMessage(1, _instance.filter, CaiLogFilter.serializeBinaryToWriter);
+        }
+        if (_instance.pageToken) {
+            _writer.writeString(2, _instance.pageToken);
+        }
+        if (_instance.fieldMask) {
+            _writer.writeMessage(3, _instance.fieldMask, googleProtobuf005.FieldMask.serializeBinaryToWriter);
+        }
+        if (_instance.captureStates && _instance.captureStates.length) {
+            _writer.writePackedEnum(4, _instance.captureStates);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLogStreamsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.filter = _value.filter ? new CaiLogFilter(_value.filter) : undefined;
+        this.pageToken = _value.pageToken;
+        this.fieldMask = _value.fieldMask
+            ? new googleProtobuf005.FieldMask(_value.fieldMask)
+            : undefined;
+        this.captureStates = (_value.captureStates || []).slice();
+        ListLogStreamsRequest.refineValues(this);
+    }
+    get filter() {
+        return this._filter;
+    }
+    set filter(value) {
+        this._filter = value;
+    }
+    get pageToken() {
+        return this._pageToken;
+    }
+    set pageToken(value) {
+        this._pageToken = value;
+    }
+    get fieldMask() {
+        return this._fieldMask;
+    }
+    set fieldMask(value) {
+        this._fieldMask = value;
+    }
+    get captureStates() {
+        return this._captureStates;
+    }
+    set captureStates(value) {
+        this._captureStates = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ListLogStreamsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            filter: this.filter ? this.filter.toObject() : undefined,
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toObject() : undefined,
+            captureStates: (this.captureStates || []).slice()
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            filter: this.filter ? this.filter.toProtobufJSON(options) : null,
+            pageToken: this.pageToken,
+            fieldMask: this.fieldMask ? this.fieldMask.toProtobufJSON(options) : null,
+            captureStates: (this.captureStates || []).map(v => CaiLogCaptureState[v])
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLogStreamsResponse
+ */
+class ListLogStreamsResponse {
+    static { this.id = 'ondewo.nlu.ListLogStreamsResponse'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ListLogStreamsResponse();
+        ListLogStreamsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.logStreams = _instance.logStreams || [];
+        _instance.nextPageToken = _instance.nextPageToken || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    const messageInitializer1 = new CaiLogStream();
+                    _reader.readMessage(messageInitializer1, CaiLogStream.deserializeBinaryFromReader);
+                    (_instance.logStreams = _instance.logStreams || []).push(messageInitializer1);
+                    break;
+                case 2:
+                    _instance.nextPageToken = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ListLogStreamsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.logStreams && _instance.logStreams.length) {
+            _writer.writeRepeatedMessage(1, _instance.logStreams, CaiLogStream.serializeBinaryToWriter);
+        }
+        if (_instance.nextPageToken) {
+            _writer.writeString(2, _instance.nextPageToken);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLogStreamsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.logStreams = (_value.logStreams || []).map(m => new CaiLogStream(m));
+        this.nextPageToken = _value.nextPageToken;
+        ListLogStreamsResponse.refineValues(this);
+    }
+    get logStreams() {
+        return this._logStreams;
+    }
+    set logStreams(value) {
+        this._logStreams = value;
+    }
+    get nextPageToken() {
+        return this._nextPageToken;
+    }
+    set nextPageToken(value) {
+        this._nextPageToken = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ListLogStreamsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            logStreams: (this.logStreams || []).map(m => m.toObject()),
+            nextPageToken: this.nextPageToken
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            logStreams: (this.logStreams || []).map(m => m.toProtobufJSON(options)),
+            nextPageToken: this.nextPageToken
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ExportLogsRequest
+ */
+class ExportLogsRequest {
+    static { this.id = 'ondewo.nlu.ExportLogsRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ExportLogsRequest();
+        ExportLogsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.filter = _instance.filter || undefined;
+        _instance.format = _instance.format || 0;
+        _instance.includeMetadata = _instance.includeMetadata || false;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.filter = new CaiLogFilter();
+                    _reader.readMessage(_instance.filter, CaiLogFilter.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.format = _reader.readEnum();
+                    break;
+                case 3:
+                    _instance.includeMetadata = _reader.readBool();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ExportLogsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.filter) {
+            _writer.writeMessage(1, _instance.filter, CaiLogFilter.serializeBinaryToWriter);
+        }
+        if (_instance.format) {
+            _writer.writeEnum(2, _instance.format);
+        }
+        if (_instance.includeMetadata) {
+            _writer.writeBool(3, _instance.includeMetadata);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportLogsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.filter = _value.filter ? new CaiLogFilter(_value.filter) : undefined;
+        this.format = _value.format;
+        this.includeMetadata = _value.includeMetadata;
+        ExportLogsRequest.refineValues(this);
+    }
+    get filter() {
+        return this._filter;
+    }
+    set filter(value) {
+        this._filter = value;
+    }
+    get format() {
+        return this._format;
+    }
+    set format(value) {
+        this._format = value;
+    }
+    get includeMetadata() {
+        return this._includeMetadata;
+    }
+    set includeMetadata(value) {
+        this._includeMetadata = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ExportLogsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            filter: this.filter ? this.filter.toObject() : undefined,
+            format: this.format,
+            includeMetadata: this.includeMetadata
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            filter: this.filter ? this.filter.toProtobufJSON(options) : null,
+            format: CaiLogExportFormat[this.format === null || this.format === undefined ? 0 : this.format],
+            includeMetadata: this.includeMetadata
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ExportLogsResponse
+ */
+class ExportLogsResponse {
+    static { this.id = 'ondewo.nlu.ExportLogsResponse'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new ExportLogsResponse();
+        ExportLogsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.chunk = _instance.chunk || new Uint8Array();
+        _instance.entryCount = _instance.entryCount || '0';
+        _instance.last = _instance.last || false;
+        _instance.truncated = _instance.truncated || false;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.chunk = _reader.readBytes();
+                    break;
+                case 2:
+                    _instance.entryCount = _reader.readInt64String();
+                    break;
+                case 3:
+                    _instance.last = _reader.readBool();
+                    break;
+                case 4:
+                    _instance.truncated = _reader.readBool();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        ExportLogsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.chunk && _instance.chunk.length) {
+            _writer.writeBytes(1, _instance.chunk);
+        }
+        if (_instance.entryCount) {
+            _writer.writeInt64String(2, _instance.entryCount);
+        }
+        if (_instance.last) {
+            _writer.writeBool(3, _instance.last);
+        }
+        if (_instance.truncated) {
+            _writer.writeBool(4, _instance.truncated);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportLogsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.chunk = _value.chunk;
+        this.entryCount = _value.entryCount;
+        this.last = _value.last;
+        this.truncated = _value.truncated;
+        ExportLogsResponse.refineValues(this);
+    }
+    get chunk() {
+        return this._chunk;
+    }
+    set chunk(value) {
+        this._chunk = value;
+    }
+    get entryCount() {
+        return this._entryCount;
+    }
+    set entryCount(value) {
+        this._entryCount = value;
+    }
+    get last() {
+        return this._last;
+    }
+    set last(value) {
+        this._last = value;
+    }
+    get truncated() {
+        return this._truncated;
+    }
+    set truncated(value) {
+        this._truncated = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        ExportLogsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            chunk: this.chunk ? this.chunk.subarray(0) : new Uint8Array(),
+            entryCount: this.entryCount,
+            last: this.last,
+            truncated: this.truncated
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            chunk: this.chunk ? uint8ArrayToBase64(this.chunk) : '',
+            entryCount: this.entryCount,
+            last: this.last,
+            truncated: this.truncated
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DeleteLogsRequest
+ */
+class DeleteLogsRequest {
+    static { this.id = 'ondewo.nlu.DeleteLogsRequest'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new DeleteLogsRequest();
+        DeleteLogsRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.filter = _instance.filter || undefined;
+        _instance.validateOnly = _instance.validateOnly || false;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.filter = new CaiLogFilter();
+                    _reader.readMessage(_instance.filter, CaiLogFilter.deserializeBinaryFromReader);
+                    break;
+                case 2:
+                    _instance.validateOnly = _reader.readBool();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        DeleteLogsRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.filter) {
+            _writer.writeMessage(1, _instance.filter, CaiLogFilter.serializeBinaryToWriter);
+        }
+        if (_instance.validateOnly) {
+            _writer.writeBool(2, _instance.validateOnly);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteLogsRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.filter = _value.filter ? new CaiLogFilter(_value.filter) : undefined;
+        this.validateOnly = _value.validateOnly;
+        DeleteLogsRequest.refineValues(this);
+    }
+    get filter() {
+        return this._filter;
+    }
+    set filter(value) {
+        this._filter = value;
+    }
+    get validateOnly() {
+        return this._validateOnly;
+    }
+    set validateOnly(value) {
+        this._validateOnly = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        DeleteLogsRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            filter: this.filter ? this.filter.toObject() : undefined,
+            validateOnly: this.validateOnly
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            filter: this.filter ? this.filter.toProtobufJSON(options) : null,
+            validateOnly: this.validateOnly
+        };
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DeleteLogsResponse
+ */
+class DeleteLogsResponse {
+    static { this.id = 'ondewo.nlu.DeleteLogsResponse'; }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new DeleteLogsResponse();
+        DeleteLogsResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.deletedLogEntryCount = _instance.deletedLogEntryCount || '0';
+        _instance.deletedLogStreamCount = _instance.deletedLogStreamCount || '0';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.deletedLogEntryCount = _reader.readInt64String();
+                    break;
+                case 2:
+                    _instance.deletedLogStreamCount = _reader.readInt64String();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        DeleteLogsResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.deletedLogEntryCount) {
+            _writer.writeInt64String(1, _instance.deletedLogEntryCount);
+        }
+        if (_instance.deletedLogStreamCount) {
+            _writer.writeInt64String(2, _instance.deletedLogStreamCount);
+        }
+    }
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteLogsResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.deletedLogEntryCount = _value.deletedLogEntryCount;
+        this.deletedLogStreamCount = _value.deletedLogStreamCount;
+        DeleteLogsResponse.refineValues(this);
+    }
+    get deletedLogEntryCount() {
+        return this._deletedLogEntryCount;
+    }
+    set deletedLogEntryCount(value) {
+        this._deletedLogEntryCount = value;
+    }
+    get deletedLogStreamCount() {
+        return this._deletedLogStreamCount;
+    }
+    set deletedLogStreamCount(value) {
+        this._deletedLogStreamCount = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        DeleteLogsResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            deletedLogEntryCount: this.deletedLogEntryCount,
+            deletedLogStreamCount: this.deletedLogStreamCount
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            deletedLogEntryCount: this.deletedLogEntryCount,
+            deletedLogStreamCount: this.deletedLogStreamCount
+        };
+    }
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @ts-nocheck
+//
+// THIS IS A GENERATED FILE
+// DO NOT MODIFY IT! YOUR CHANGES WILL BE LOST
+/**
+ * Specific GrpcClientSettings for Logs.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_LOGS_CLIENT_SETTINGS = new InjectionToken('GRPC_LOGS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/* eslint-disable */
+// @ts-nocheck
+//
+// THIS IS A GENERATED FILE
+// DO NOT MODIFY IT! YOUR CHANGES WILL BE LOST
+/**
+ * Service client implementation for ondewo.nlu.Logs
+ */
+class LogsClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Server streaming: /ondewo.nlu.Logs/StreamLogs
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.StreamLogsResponse>>
+             */
+            streamLogs: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.serverStream,
+                    client: this.client,
+                    path: '/ondewo.nlu.Logs/StreamLogs',
+                    requestData,
+                    requestMetadata,
+                    requestClass: StreamLogsRequest,
+                    responseClass: StreamLogsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Logs/ListLogs
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListLogsResponse>>
+             */
+            listLogs: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Logs/ListLogs',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListLogsRequest,
+                    responseClass: ListLogsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Logs/GetLogStream
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.CaiLogStream>>
+             */
+            getLogStream: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Logs/GetLogStream',
+                    requestData,
+                    requestMetadata,
+                    requestClass: GetLogStreamRequest,
+                    responseClass: CaiLogStream
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Logs/ListLogStreams
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListLogStreamsResponse>>
+             */
+            listLogStreams: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Logs/ListLogStreams',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListLogStreamsRequest,
+                    responseClass: ListLogStreamsResponse
+                });
+            },
+            /**
+             * Server streaming: /ondewo.nlu.Logs/ExportLogs
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ExportLogsResponse>>
+             */
+            exportLogs: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.serverStream,
+                    client: this.client,
+                    path: '/ondewo.nlu.Logs/ExportLogs',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ExportLogsRequest,
+                    responseClass: ExportLogsResponse
+                });
+            },
+            /**
+             * Unary call: /ondewo.nlu.Logs/DeleteLogs
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.DeleteLogsResponse>>
+             */
+            deleteLogs: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Logs/DeleteLogs',
+                    requestData,
+                    requestMetadata,
+                    requestClass: DeleteLogsRequest,
+                    responseClass: DeleteLogsResponse
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.nlu.Logs', settings);
+    }
+    /**
+     * Server streaming @/ondewo.nlu.Logs/StreamLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.StreamLogsResponse>
+     */
+    streamLogs(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .streamLogs(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Logs/ListLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListLogsResponse>
+     */
+    listLogs(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listLogs(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Logs/GetLogStream
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.CaiLogStream>
+     */
+    getLogStream(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getLogStream(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Logs/ListLogStreams
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListLogStreamsResponse>
+     */
+    listLogStreams(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listLogStreams(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Server streaming @/ondewo.nlu.Logs/ExportLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ExportLogsResponse>
+     */
+    exportLogs(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .exportLogs(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Logs/DeleteLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.DeleteLogsResponse>
+     */
+    deleteLogs(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .deleteLogs(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.35", ngImport: i0, type: LogsClient, deps: [{ token: GRPC_LOGS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.35", ngImport: i0, type: LogsClient, providedIn: 'any' }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.35", ngImport: i0, type: LogsClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: () => [{ type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [GRPC_LOGS_CLIENT_SETTINGS]
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [GRPC_CLIENT_FACTORY]
@@ -121652,6 +126645,24 @@ class SessionsClient {
                 });
             },
             /**
+             * Unary call: /ondewo.nlu.Sessions/InterruptTurn
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.InterruptTurnResponse>>
+             */
+            interruptTurn: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.nlu.Sessions/InterruptTurn',
+                    requestData,
+                    requestMetadata,
+                    requestClass: InterruptTurnRequest,
+                    responseClass: InterruptTurnResponse
+                });
+            },
+            /**
              * Unary call: /ondewo.nlu.Sessions/ListSessions
              *
              * @param requestMessage Request message
@@ -122528,6 +127539,18 @@ class SessionsClient {
     detectIntent(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
             .detectIntent(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.nlu.Sessions/InterruptTurn
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.InterruptTurnResponse>
+     */
+    interruptTurn(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .interruptTurn(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
@@ -132063,5 +137086,5 @@ function warnInsecure(authority) {
  * Generated bundle index. Do not edit.
  */
 
-export { AUTHORIZATION_HEADER, AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionFeedbackRequest, AddSessionLabelsRequest, AddSessionStepFeedbackRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, AuthGrpcInterceptor, BEARER_PREFIX, BROWSER_UNSUPPORTED_TLS_FIELDS, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteNotificationsRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionFeedbackRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FeedbackAuthorType, FeedbackBreakdownBucket, FeedbackFilter, FeedbackRating, FeedbackScope, FeedbackStatistics, FeedbackTimeGranularity, FeedbackTimeSeriesBucket, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetFeedbackStatisticsRequest, GetFeedbackStatisticsResponse, GetFeedbackStatisticsTimeSeriesRequest, GetFeedbackStatisticsTimeSeriesResponse, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetNotificationRequest, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionFeedbackRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, GrpcWebEndpointError, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeyValuePair, KeycloakAuthenticationError, KeycloakTokenProvider, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListRemoteOperationContainersRequest, ListRemoteOperationContainersResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionFeedbackOfAllSessionsRequest, ListSessionFeedbackRequest, ListSessionFeedbackResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentNodeEvent, LlmAgentNodePhase, LlmAgentUsage, LlmBaseUrlUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, MIN_REFRESH_DELAY_IN_S, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, REFRESH_SKEW_IN_S, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerContentScope, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerDensityPruning, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerIncrementalConfig, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerPruningThresholdType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCrawlerStatusFilter, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainer, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFeedback, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamNotificationsRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TOKEN_PROVIDER, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateNotificationRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionFeedbackRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig, authHttpInterceptor, buildBearerValue, buildGrpcWebHost, provideOndewoNluAuth, resolveBearerValue, resolveToken };
+export { AUTHORIZATION_HEADER, AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionFeedbackRequest, AddSessionLabelsRequest, AddSessionStepFeedbackRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, AuthGrpcInterceptor, BEARER_PREFIX, BROWSER_UNSUPPORTED_TLS_FIELDS, BackgroundWorkPolicy, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CaiLogCaptureState, CaiLogEntry, CaiLogExportFormat, CaiLogFilter, CaiLogFilterField, CaiLogSource, CaiLogStream, CaiLogStreamChannel, CaiLogStreamEndReason, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CancelTurn, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteLogsRequest, DeleteLogsResponse, DeleteNotificationsRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionFeedbackRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DiscardDraft, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportLogsRequest, ExportLogsResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FeedbackAuthorType, FeedbackBreakdownBucket, FeedbackFilter, FeedbackRating, FeedbackScope, FeedbackStatistics, FeedbackTimeGranularity, FeedbackTimeSeriesBucket, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_LOGS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetFeedbackStatisticsRequest, GetFeedbackStatisticsResponse, GetFeedbackStatisticsTimeSeriesRequest, GetFeedbackStatisticsTimeSeriesResponse, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetLogStreamRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetNotificationRequest, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionFeedbackRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, GrpcWebEndpointError, HeardMessage, HeardReport, HeardTextPrecision, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, InterruptTurnRequest, InterruptTurnResponse, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeyValuePair, KeycloakAuthenticationError, KeycloakTokenProvider, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListLogStreamsRequest, ListLogStreamsResponse, ListLogsRequest, ListLogsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListRemoteOperationContainersRequest, ListRemoteOperationContainersResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionFeedbackOfAllSessionsRequest, ListSessionFeedbackRequest, ListSessionFeedbackResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentNodeEvent, LlmAgentNodePhase, LlmAgentUsage, LlmBaseUrlUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, LogsClient, MIN_REFRESH_DELAY_IN_S, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, REFRESH_SKEW_IN_S, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerContentScope, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerDensityPruning, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerIncrementalConfig, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerPruningThresholdType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCrawlerStatusFilter, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainer, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFeedback, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamLogsRequest, StreamLogsResponse, StreamNotificationsRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TOKEN_PROVIDER, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, TurnControl, TurnControlAck, TurnControlAckStatus, TurnInterruptionReason, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateNotificationRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionFeedbackRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig, authHttpInterceptor, buildBearerValue, buildGrpcWebHost, provideOndewoNluAuth, resolveBearerValue, resolveToken };
 //# sourceMappingURL=ondewo-nlu-client-angular.mjs.map

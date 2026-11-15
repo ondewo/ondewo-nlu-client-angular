@@ -28353,6 +28353,37 @@ declare enum LlmAgentNodePhase {
     LLM_AGENT_NODE_PHASE_COMPLETED = 2,
     LLM_AGENT_NODE_PHASE_FAILED = 3
 }
+declare enum TurnInterruptionReason {
+    TURN_INTERRUPTION_REASON_UNSPECIFIED = 0,
+    TURN_INTERRUPTION_REASON_BARGE_IN = 1,
+    TURN_INTERRUPTION_REASON_CALLER_SPOKE_WHILE_THINKING = 2,
+    TURN_INTERRUPTION_REASON_CALL_ENDED = 3,
+    TURN_INTERRUPTION_REASON_FILLER_CUT = 4,
+    TURN_INTERRUPTION_REASON_NO_FINAL_TIMEOUT = 5,
+    TURN_INTERRUPTION_REASON_OPERATOR_TAKEOVER = 6,
+    TURN_INTERRUPTION_REASON_BOT_MUTED = 7
+}
+declare enum BackgroundWorkPolicy {
+    BACKGROUND_WORK_POLICY_KEEP = 0,
+    BACKGROUND_WORK_POLICY_CANCEL_PENDING = 1
+}
+declare enum HeardTextPrecision {
+    HEARD_TEXT_PRECISION_UNSPECIFIED = 0,
+    HEARD_TEXT_PRECISION_NONE_HEARD = 1,
+    HEARD_TEXT_PRECISION_FULL = 2,
+    HEARD_TEXT_PRECISION_ESTIMATED_SERVER = 3,
+    HEARD_TEXT_PRECISION_PROPORTIONAL = 4
+}
+declare enum TurnControlAckStatus {
+    TURN_CONTROL_ACK_STATUS_UNSPECIFIED = 0,
+    TURN_CONTROL_ACK_STATUS_CANCELLED = 1,
+    TURN_CONTROL_ACK_STATUS_CANCELLED_QUEUED = 2,
+    TURN_CONTROL_ACK_STATUS_ALREADY_FINISHED = 3,
+    TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN = 4,
+    TURN_CONTROL_ACK_STATUS_HEARD_APPLIED = 5,
+    TURN_CONTROL_ACK_STATUS_HEARD_STALE = 6,
+    TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED = 7
+}
 declare enum AudioEncoding {
     AUDIO_ENCODING_UNSPECIFIED = 0,
     AUDIO_ENCODING_LINEAR_16 = 1,
@@ -28616,6 +28647,7 @@ declare class QueryParameters implements GrpcMessage {
     private _originId;
     private _identifiedUserId;
     private _transcriptions?;
+    private _preemptiveDraft;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of QueryParameters to deeply clone from
@@ -28647,6 +28679,8 @@ declare class QueryParameters implements GrpcMessage {
     set identifiedUserId(value: string);
     get transcriptions(): S2tTranscription[] | undefined;
     set transcriptions(value: S2tTranscription[] | undefined);
+    get preemptiveDraft(): boolean;
+    set preemptiveDraft(value: boolean);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -28685,6 +28719,7 @@ declare namespace QueryParameters {
         originId: string;
         identifiedUserId: string;
         transcriptions?: S2tTranscription.AsObject[];
+        preemptiveDraft: boolean;
     }
     /**
      * Protobuf JSON representation for QueryParameters
@@ -28703,6 +28738,7 @@ declare namespace QueryParameters {
         originId: string;
         identifiedUserId: string;
         transcriptions: S2tTranscription.AsProtobufJSON[] | null;
+        preemptiveDraft: boolean;
     }
 }
 /**
@@ -32316,6 +32352,8 @@ declare class StreamingDetectIntentRequest implements GrpcMessage {
     private _queryInput?;
     private _singleUtterance;
     private _inputAudio;
+    private _turnControl?;
+    private _clientTurnId;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of StreamingDetectIntentRequest to deeply clone from
@@ -32331,6 +32369,10 @@ declare class StreamingDetectIntentRequest implements GrpcMessage {
     set singleUtterance(value: boolean);
     get inputAudio(): Uint8Array;
     set inputAudio(value: Uint8Array);
+    get turnControl(): TurnControl | undefined;
+    set turnControl(value: TurnControl | undefined);
+    get clientTurnId(): string;
+    set clientTurnId(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -32361,6 +32403,8 @@ declare namespace StreamingDetectIntentRequest {
         queryInput?: QueryInput.AsObject;
         singleUtterance: boolean;
         inputAudio: Uint8Array;
+        turnControl?: TurnControl.AsObject;
+        clientTurnId: string;
     }
     /**
      * Protobuf JSON representation for StreamingDetectIntentRequest
@@ -32371,6 +32415,8 @@ declare namespace StreamingDetectIntentRequest {
         queryInput: QueryInput.AsProtobufJSON | null;
         singleUtterance: boolean;
         inputAudio: string;
+        turnControl: TurnControl.AsProtobufJSON | null;
+        clientTurnId: string;
     }
 }
 /**
@@ -32411,6 +32457,8 @@ declare class StreamingDetectIntentResponse implements GrpcMessage {
     private _llmThinkingDelta?;
     private _llmTokenUsageUpdate?;
     private _llmAgentNodeEvent?;
+    private _turnControlAck?;
+    private _clientTurnId;
     private _telemetryEvent;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -32439,6 +32487,10 @@ declare class StreamingDetectIntentResponse implements GrpcMessage {
     set llmTokenUsageUpdate(value: LlmTokenUsageUpdateEvent | undefined);
     get llmAgentNodeEvent(): LlmAgentNodeEvent | undefined;
     set llmAgentNodeEvent(value: LlmAgentNodeEvent | undefined);
+    get turnControlAck(): TurnControlAck | undefined;
+    set turnControlAck(value: TurnControlAck | undefined);
+    get clientTurnId(): string;
+    set clientTurnId(value: string);
     get telemetryEvent(): StreamingDetectIntentResponse.TelemetryEventCase;
     /**
      * Serialize message to binary data
@@ -32476,6 +32528,8 @@ declare namespace StreamingDetectIntentResponse {
         llmThinkingDelta?: LlmThinkingDeltaEvent.AsObject;
         llmTokenUsageUpdate?: LlmTokenUsageUpdateEvent.AsObject;
         llmAgentNodeEvent?: LlmAgentNodeEvent.AsObject;
+        turnControlAck?: TurnControlAck.AsObject;
+        clientTurnId: string;
     }
     /**
      * Protobuf JSON representation for StreamingDetectIntentResponse
@@ -32492,6 +32546,8 @@ declare namespace StreamingDetectIntentResponse {
         llmThinkingDelta: LlmThinkingDeltaEvent.AsProtobufJSON | null;
         llmTokenUsageUpdate: LlmTokenUsageUpdateEvent.AsProtobufJSON | null;
         llmAgentNodeEvent: LlmAgentNodeEvent.AsProtobufJSON | null;
+        turnControlAck: TurnControlAck.AsProtobufJSON | null;
+        clientTurnId: string;
     }
     enum TelemetryEventCase {
         none = 0,
@@ -32502,6 +32558,696 @@ declare namespace StreamingDetectIntentResponse {
         llmThinkingDelta = 5,
         llmTokenUsageUpdate = 6,
         llmAgentNodeEvent = 7
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.TurnControl
+ */
+declare class TurnControl implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): TurnControl;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: TurnControl): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: TurnControl, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: TurnControl, _writer: BinaryWriter): void;
+    private _cancelTurn?;
+    private _heardReport?;
+    private _discardDraft?;
+    private _turnControl;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TurnControl to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<TurnControl.AsObject>);
+    get cancelTurn(): CancelTurn | undefined;
+    set cancelTurn(value: CancelTurn | undefined);
+    get heardReport(): HeardReport | undefined;
+    set heardReport(value: HeardReport | undefined);
+    get discardDraft(): DiscardDraft | undefined;
+    set discardDraft(value: DiscardDraft | undefined);
+    get turnControl(): TurnControl.TurnControlCase;
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): TurnControl.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): TurnControl.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): TurnControl.AsProtobufJSON;
+}
+declare namespace TurnControl {
+    /**
+     * Standard JavaScript object representation for TurnControl
+     */
+    interface AsObject {
+        cancelTurn?: CancelTurn.AsObject;
+        heardReport?: HeardReport.AsObject;
+        discardDraft?: DiscardDraft.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for TurnControl
+     */
+    interface AsProtobufJSON {
+        cancelTurn: CancelTurn.AsProtobufJSON | null;
+        heardReport: HeardReport.AsProtobufJSON | null;
+        discardDraft: DiscardDraft.AsProtobufJSON | null;
+    }
+    enum TurnControlCase {
+        none = 0,
+        cancelTurn = 1,
+        heardReport = 2,
+        discardDraft = 3
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.CancelTurn
+ */
+declare class CancelTurn implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): CancelTurn;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: CancelTurn): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: CancelTurn, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: CancelTurn, _writer: BinaryWriter): void;
+    private _responseId;
+    private _clientTurnId;
+    private _turnInterruptionReason;
+    private _decidedAt?;
+    private _backgroundWorkPolicy;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CancelTurn to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<CancelTurn.AsObject>);
+    get responseId(): string;
+    set responseId(value: string);
+    get clientTurnId(): string;
+    set clientTurnId(value: string);
+    get turnInterruptionReason(): TurnInterruptionReason;
+    set turnInterruptionReason(value: TurnInterruptionReason);
+    get decidedAt(): googleProtobuf005.Timestamp | undefined;
+    set decidedAt(value: googleProtobuf005.Timestamp | undefined);
+    get backgroundWorkPolicy(): BackgroundWorkPolicy;
+    set backgroundWorkPolicy(value: BackgroundWorkPolicy);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): CancelTurn.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): CancelTurn.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): CancelTurn.AsProtobufJSON;
+}
+declare namespace CancelTurn {
+    /**
+     * Standard JavaScript object representation for CancelTurn
+     */
+    interface AsObject {
+        responseId: string;
+        clientTurnId: string;
+        turnInterruptionReason: TurnInterruptionReason;
+        decidedAt?: googleProtobuf005.Timestamp.AsObject;
+        backgroundWorkPolicy: BackgroundWorkPolicy;
+    }
+    /**
+     * Protobuf JSON representation for CancelTurn
+     */
+    interface AsProtobufJSON {
+        responseId: string;
+        clientTurnId: string;
+        turnInterruptionReason: string;
+        decidedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        backgroundWorkPolicy: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.HeardMessage
+ */
+declare class HeardMessage implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): HeardMessage;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: HeardMessage): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: HeardMessage, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: HeardMessage, _writer: BinaryWriter): void;
+    private _fulfillmentMessageIndex;
+    private _platform;
+    private _fullText;
+    private _heardText;
+    private _heardCharCount;
+    private _heardAudioDurationInS;
+    private _totalAudioDurationInS;
+    private _completed;
+    private _neverStarted;
+    private _skippedSipTrigger;
+    private _fillerId;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of HeardMessage to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<HeardMessage.AsObject>);
+    get fulfillmentMessageIndex(): number;
+    set fulfillmentMessageIndex(value: number);
+    get platform(): Intent.Message.Platform;
+    set platform(value: Intent.Message.Platform);
+    get fullText(): string;
+    set fullText(value: string);
+    get heardText(): string;
+    set heardText(value: string);
+    get heardCharCount(): number;
+    set heardCharCount(value: number);
+    get heardAudioDurationInS(): number;
+    set heardAudioDurationInS(value: number);
+    get totalAudioDurationInS(): number;
+    set totalAudioDurationInS(value: number);
+    get completed(): boolean;
+    set completed(value: boolean);
+    get neverStarted(): boolean;
+    set neverStarted(value: boolean);
+    get skippedSipTrigger(): boolean;
+    set skippedSipTrigger(value: boolean);
+    get fillerId(): string;
+    set fillerId(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): HeardMessage.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): HeardMessage.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): HeardMessage.AsProtobufJSON;
+}
+declare namespace HeardMessage {
+    /**
+     * Standard JavaScript object representation for HeardMessage
+     */
+    interface AsObject {
+        fulfillmentMessageIndex: number;
+        platform: Intent.Message.Platform;
+        fullText: string;
+        heardText: string;
+        heardCharCount: number;
+        heardAudioDurationInS: number;
+        totalAudioDurationInS: number;
+        completed: boolean;
+        neverStarted: boolean;
+        skippedSipTrigger: boolean;
+        fillerId: string;
+    }
+    /**
+     * Protobuf JSON representation for HeardMessage
+     */
+    interface AsProtobufJSON {
+        fulfillmentMessageIndex: number;
+        platform: string;
+        fullText: string;
+        heardText: string;
+        heardCharCount: number;
+        heardAudioDurationInS: number;
+        totalAudioDurationInS: number;
+        completed: boolean;
+        neverStarted: boolean;
+        skippedSipTrigger: boolean;
+        fillerId: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.HeardReport
+ */
+declare class HeardReport implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): HeardReport;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: HeardReport): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: HeardReport, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: HeardReport, _writer: BinaryWriter): void;
+    private _responseId;
+    private _clientTurnId;
+    private _revision;
+    private _turnInterruptionReason;
+    private _heardMessages?;
+    private _heardTextPrecision;
+    private _callerOverlapDurationInS;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of HeardReport to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<HeardReport.AsObject>);
+    get responseId(): string;
+    set responseId(value: string);
+    get clientTurnId(): string;
+    set clientTurnId(value: string);
+    get revision(): number;
+    set revision(value: number);
+    get turnInterruptionReason(): TurnInterruptionReason;
+    set turnInterruptionReason(value: TurnInterruptionReason);
+    get heardMessages(): HeardMessage[] | undefined;
+    set heardMessages(value: HeardMessage[] | undefined);
+    get heardTextPrecision(): HeardTextPrecision;
+    set heardTextPrecision(value: HeardTextPrecision);
+    get callerOverlapDurationInS(): number;
+    set callerOverlapDurationInS(value: number);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): HeardReport.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): HeardReport.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): HeardReport.AsProtobufJSON;
+}
+declare namespace HeardReport {
+    /**
+     * Standard JavaScript object representation for HeardReport
+     */
+    interface AsObject {
+        responseId: string;
+        clientTurnId: string;
+        revision: number;
+        turnInterruptionReason: TurnInterruptionReason;
+        heardMessages?: HeardMessage.AsObject[];
+        heardTextPrecision: HeardTextPrecision;
+        callerOverlapDurationInS: number;
+    }
+    /**
+     * Protobuf JSON representation for HeardReport
+     */
+    interface AsProtobufJSON {
+        responseId: string;
+        clientTurnId: string;
+        revision: number;
+        turnInterruptionReason: string;
+        heardMessages: HeardMessage.AsProtobufJSON[] | null;
+        heardTextPrecision: string;
+        callerOverlapDurationInS: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DiscardDraft
+ */
+declare class DiscardDraft implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DiscardDraft;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DiscardDraft): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DiscardDraft, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DiscardDraft, _writer: BinaryWriter): void;
+    private _responseId;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DiscardDraft to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<DiscardDraft.AsObject>);
+    get responseId(): string;
+    set responseId(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DiscardDraft.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DiscardDraft.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DiscardDraft.AsProtobufJSON;
+}
+declare namespace DiscardDraft {
+    /**
+     * Standard JavaScript object representation for DiscardDraft
+     */
+    interface AsObject {
+        responseId: string;
+    }
+    /**
+     * Protobuf JSON representation for DiscardDraft
+     */
+    interface AsProtobufJSON {
+        responseId: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.TurnControlAck
+ */
+declare class TurnControlAck implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): TurnControlAck;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: TurnControlAck): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: TurnControlAck, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: TurnControlAck, _writer: BinaryWriter): void;
+    private _responseId;
+    private _clientTurnId;
+    private _turnControlAckStatus;
+    private _serverCancelDurationInS;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of TurnControlAck to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<TurnControlAck.AsObject>);
+    get responseId(): string;
+    set responseId(value: string);
+    get clientTurnId(): string;
+    set clientTurnId(value: string);
+    get turnControlAckStatus(): TurnControlAckStatus;
+    set turnControlAckStatus(value: TurnControlAckStatus);
+    get serverCancelDurationInS(): number;
+    set serverCancelDurationInS(value: number);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): TurnControlAck.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): TurnControlAck.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): TurnControlAck.AsProtobufJSON;
+}
+declare namespace TurnControlAck {
+    /**
+     * Standard JavaScript object representation for TurnControlAck
+     */
+    interface AsObject {
+        responseId: string;
+        clientTurnId: string;
+        turnControlAckStatus: TurnControlAckStatus;
+        serverCancelDurationInS: number;
+    }
+    /**
+     * Protobuf JSON representation for TurnControlAck
+     */
+    interface AsProtobufJSON {
+        responseId: string;
+        clientTurnId: string;
+        turnControlAckStatus: string;
+        serverCancelDurationInS: number;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.InterruptTurnRequest
+ */
+declare class InterruptTurnRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): InterruptTurnRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: InterruptTurnRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: InterruptTurnRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: InterruptTurnRequest, _writer: BinaryWriter): void;
+    private _session;
+    private _turnControl?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of InterruptTurnRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<InterruptTurnRequest.AsObject>);
+    get session(): string;
+    set session(value: string);
+    get turnControl(): TurnControl | undefined;
+    set turnControl(value: TurnControl | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): InterruptTurnRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): InterruptTurnRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): InterruptTurnRequest.AsProtobufJSON;
+}
+declare namespace InterruptTurnRequest {
+    /**
+     * Standard JavaScript object representation for InterruptTurnRequest
+     */
+    interface AsObject {
+        session: string;
+        turnControl?: TurnControl.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for InterruptTurnRequest
+     */
+    interface AsProtobufJSON {
+        session: string;
+        turnControl: TurnControl.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.InterruptTurnResponse
+ */
+declare class InterruptTurnResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): InterruptTurnResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: InterruptTurnResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: InterruptTurnResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: InterruptTurnResponse, _writer: BinaryWriter): void;
+    private _turnControlAck?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of InterruptTurnResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<InterruptTurnResponse.AsObject>);
+    get turnControlAck(): TurnControlAck | undefined;
+    set turnControlAck(value: TurnControlAck | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): InterruptTurnResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): InterruptTurnResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): InterruptTurnResponse.AsProtobufJSON;
+}
+declare namespace InterruptTurnResponse {
+    /**
+     * Standard JavaScript object representation for InterruptTurnResponse
+     */
+    interface AsObject {
+        turnControlAck?: TurnControlAck.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for InterruptTurnResponse
+     */
+    interface AsProtobufJSON {
+        turnControlAck: TurnControlAck.AsProtobufJSON | null;
     }
 }
 /**
@@ -48739,6 +49485,8 @@ declare class StreamRemoteOperationContainerLogsRequest implements GrpcMessage {
     private _minLogLevel;
     private _tailLines;
     private _containerId;
+    private _regex;
+    private _resumeToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of StreamRemoteOperationContainerLogsRequest to deeply clone from
@@ -48752,6 +49500,10 @@ declare class StreamRemoteOperationContainerLogsRequest implements GrpcMessage {
     set tailLines(value: number);
     get containerId(): string;
     set containerId(value: string);
+    get regex(): string;
+    set regex(value: string);
+    get resumeToken(): string;
+    set resumeToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -48781,6 +49533,8 @@ declare namespace StreamRemoteOperationContainerLogsRequest {
         minLogLevel: LogSeverity;
         tailLines: number;
         containerId: string;
+        regex: string;
+        resumeToken: string;
     }
     /**
      * Protobuf JSON representation for StreamRemoteOperationContainerLogsRequest
@@ -48790,6 +49544,8 @@ declare namespace StreamRemoteOperationContainerLogsRequest {
         minLogLevel: string;
         tailLines: number;
         containerId: string;
+        regex: string;
+        resumeToken: string;
     }
 }
 /**
@@ -48828,6 +49584,8 @@ declare class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     private _containerId;
     private _beforeSeq;
     private _afterSeq;
+    private _fieldMask?;
+    private _resumeToken;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetRemoteOperationContainerLogsRequest to deeply clone from
@@ -48851,6 +49609,10 @@ declare class GetRemoteOperationContainerLogsRequest implements GrpcMessage {
     set beforeSeq(value: string);
     get afterSeq(): string;
     set afterSeq(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get resumeToken(): string;
+    set resumeToken(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -48885,6 +49647,8 @@ declare namespace GetRemoteOperationContainerLogsRequest {
         containerId: string;
         beforeSeq: string;
         afterSeq: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        resumeToken: string;
     }
     /**
      * Protobuf JSON representation for GetRemoteOperationContainerLogsRequest
@@ -48899,6 +49663,8 @@ declare namespace GetRemoteOperationContainerLogsRequest {
         containerId: string;
         beforeSeq: string;
         afterSeq: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        resumeToken: string;
     }
 }
 /**
@@ -48933,6 +49699,8 @@ declare class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
     private _minAvailableSeq;
     private _maxAvailableSeq;
     private _hasMoreOlder;
+    private _nextResumeToken;
+    private _hasMoreNewer;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of GetRemoteOperationContainerLogsResponse to deeply clone from
@@ -48948,6 +49716,10 @@ declare class GetRemoteOperationContainerLogsResponse implements GrpcMessage {
     set maxAvailableSeq(value: string);
     get hasMoreOlder(): boolean;
     set hasMoreOlder(value: boolean);
+    get nextResumeToken(): string;
+    set nextResumeToken(value: string);
+    get hasMoreNewer(): boolean;
+    set hasMoreNewer(value: boolean);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -48978,6 +49750,8 @@ declare namespace GetRemoteOperationContainerLogsResponse {
         minAvailableSeq: string;
         maxAvailableSeq: string;
         hasMoreOlder: boolean;
+        nextResumeToken: string;
+        hasMoreNewer: boolean;
     }
     /**
      * Protobuf JSON representation for GetRemoteOperationContainerLogsResponse
@@ -48988,6 +49762,8 @@ declare namespace GetRemoteOperationContainerLogsResponse {
         minAvailableSeq: string;
         maxAvailableSeq: string;
         hasMoreOlder: boolean;
+        nextResumeToken: string;
+        hasMoreNewer: boolean;
     }
 }
 /**
@@ -49023,6 +49799,7 @@ declare class RemoteOperationContainerLogLine implements GrpcMessage {
     private _containerId;
     private _containerName;
     private _seq;
+    private _logStream;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of RemoteOperationContainerLogLine to deeply clone from
@@ -49040,6 +49817,8 @@ declare class RemoteOperationContainerLogLine implements GrpcMessage {
     set containerName(value: string);
     get seq(): string;
     set seq(value: string);
+    get logStream(): string;
+    set logStream(value: string);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -49071,6 +49850,7 @@ declare namespace RemoteOperationContainerLogLine {
         containerId: string;
         containerName: string;
         seq: string;
+        logStream: string;
     }
     /**
      * Protobuf JSON representation for RemoteOperationContainerLogLine
@@ -49082,6 +49862,7 @@ declare namespace RemoteOperationContainerLogLine {
         containerId: string;
         containerName: string;
         seq: string;
+        logStream: string;
     }
 }
 /**
@@ -55950,6 +56731,1706 @@ declare class LlmEvaluationsClient {
     llmEvaluationPromoteAnnotationQueueItem(requestData: PromoteLlmEvaluationAnnotationQueueItemRequest, requestMetadata?: GrpcMetadata): Observable<PromoteLlmEvaluationAnnotationQueueItemResponse>;
     static ɵfac: i0.ɵɵFactoryDeclaration<LlmEvaluationsClient, [{ optional: true; }, null, null]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<LlmEvaluationsClient>;
+}
+
+declare enum CaiLogSource {
+    CAI_LOG_SOURCE_UNSPECIFIED = 0,
+    CAI_LOG_SOURCE_SERVER = 1,
+    CAI_LOG_SOURCE_REMOTE_OPERATION_CONTAINER = 2,
+    CAI_LOG_SOURCE_HELPER_CONTAINER = 3
+}
+declare enum CaiLogStreamChannel {
+    CAI_LOG_STREAM_CHANNEL_UNSPECIFIED = 0,
+    CAI_LOG_STREAM_CHANNEL_STDOUT = 1,
+    CAI_LOG_STREAM_CHANNEL_STDERR = 2
+}
+declare enum CaiLogCaptureState {
+    CAI_LOG_CAPTURE_STATE_UNSPECIFIED = 0,
+    CAI_LOG_CAPTURE_STATE_CAPTURING = 1,
+    CAI_LOG_CAPTURE_STATE_STOPPED = 2,
+    CAI_LOG_CAPTURE_STATE_FAILED = 3,
+    CAI_LOG_CAPTURE_STATE_DETACHED = 4
+}
+declare enum CaiLogFilterField {
+    CAI_LOG_FILTER_FIELD_UNSPECIFIED = 0,
+    CAI_LOG_FILTER_FIELD_TEXT = 1,
+    CAI_LOG_FILTER_FIELD_REGEX = 2,
+    CAI_LOG_FILTER_FIELD_LOG_SOURCES = 3,
+    CAI_LOG_FILTER_FIELD_EMITTER_PREFIXES = 4,
+    CAI_LOG_FILTER_FIELD_THREAD_NAMES = 5,
+    CAI_LOG_FILTER_FIELD_PROCESS_NAMES = 6
+}
+declare enum CaiLogStreamEndReason {
+    CAI_LOG_STREAM_END_REASON_UNSPECIFIED = 0,
+    CAI_LOG_STREAM_END_REASON_ALL_CAPTURES_TERMINATED = 1,
+    CAI_LOG_STREAM_END_REASON_MAX_DURATION = 2,
+    CAI_LOG_STREAM_END_REASON_SERVER_SHUTDOWN = 3,
+    CAI_LOG_STREAM_END_REASON_PERMISSION_REVOKED = 4,
+    CAI_LOG_STREAM_END_REASON_CREDENTIALS_EXPIRED = 5
+}
+declare enum CaiLogExportFormat {
+    CAI_LOG_EXPORT_FORMAT_UNSPECIFIED = 0,
+    CAI_LOG_EXPORT_FORMAT_TEXT = 1,
+    CAI_LOG_EXPORT_FORMAT_NDJSON = 2,
+    CAI_LOG_EXPORT_FORMAT_CSV = 3
+}
+/**
+ * Message implementation for ondewo.nlu.CaiLogEntry
+ */
+declare class CaiLogEntry implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): CaiLogEntry;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: CaiLogEntry): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: CaiLogEntry, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: CaiLogEntry, _writer: BinaryWriter): void;
+    private _seq;
+    private _timestamp?;
+    private _timestampIsExact;
+    private _level;
+    private _message;
+    private _logSource;
+    private _channel;
+    private _emitter;
+    private _threadName;
+    private _processName;
+    private _logStream;
+    private _operationName;
+    private _projectParent;
+    private _containerId;
+    private _containerName;
+    private _replicaId;
+    private _traceId;
+    private _physicalLineCount;
+    private _operationType;
+    private _phase;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CaiLogEntry to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<CaiLogEntry.AsObject>);
+    get seq(): string;
+    set seq(value: string);
+    get timestamp(): googleProtobuf005.Timestamp | undefined;
+    set timestamp(value: googleProtobuf005.Timestamp | undefined);
+    get timestampIsExact(): boolean;
+    set timestampIsExact(value: boolean);
+    get level(): LogSeverity;
+    set level(value: LogSeverity);
+    get message(): string;
+    set message(value: string);
+    get logSource(): CaiLogSource;
+    set logSource(value: CaiLogSource);
+    get channel(): CaiLogStreamChannel;
+    set channel(value: CaiLogStreamChannel);
+    get emitter(): string;
+    set emitter(value: string);
+    get threadName(): string;
+    set threadName(value: string);
+    get processName(): string;
+    set processName(value: string);
+    get logStream(): string;
+    set logStream(value: string);
+    get operationName(): string;
+    set operationName(value: string);
+    get projectParent(): string;
+    set projectParent(value: string);
+    get containerId(): string;
+    set containerId(value: string);
+    get containerName(): string;
+    set containerName(value: string);
+    get replicaId(): string;
+    set replicaId(value: string);
+    get traceId(): string;
+    set traceId(value: string);
+    get physicalLineCount(): number;
+    set physicalLineCount(value: number);
+    get operationType(): OperationMetadata.OperationType;
+    set operationType(value: OperationMetadata.OperationType);
+    get phase(): string;
+    set phase(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): CaiLogEntry.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): CaiLogEntry.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): CaiLogEntry.AsProtobufJSON;
+}
+declare namespace CaiLogEntry {
+    /**
+     * Standard JavaScript object representation for CaiLogEntry
+     */
+    interface AsObject {
+        seq: string;
+        timestamp?: googleProtobuf005.Timestamp.AsObject;
+        timestampIsExact: boolean;
+        level: LogSeverity;
+        message: string;
+        logSource: CaiLogSource;
+        channel: CaiLogStreamChannel;
+        emitter: string;
+        threadName: string;
+        processName: string;
+        logStream: string;
+        operationName: string;
+        projectParent: string;
+        containerId: string;
+        containerName: string;
+        replicaId: string;
+        traceId: string;
+        physicalLineCount: number;
+        operationType: OperationMetadata.OperationType;
+        phase: string;
+    }
+    /**
+     * Protobuf JSON representation for CaiLogEntry
+     */
+    interface AsProtobufJSON {
+        seq: string;
+        timestamp: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        timestampIsExact: boolean;
+        level: string;
+        message: string;
+        logSource: string;
+        channel: string;
+        emitter: string;
+        threadName: string;
+        processName: string;
+        logStream: string;
+        operationName: string;
+        projectParent: string;
+        containerId: string;
+        containerName: string;
+        replicaId: string;
+        traceId: string;
+        physicalLineCount: number;
+        operationType: string;
+        phase: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.CaiLogFilter
+ */
+declare class CaiLogFilter implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): CaiLogFilter;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: CaiLogFilter): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: CaiLogFilter, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: CaiLogFilter, _writer: BinaryWriter): void;
+    private _logStreamNames;
+    private _operationNames;
+    private _includeSubOperations;
+    private _projectParents;
+    private _containerIds;
+    private _containerNames;
+    private _replicaIds;
+    private _operationTypes;
+    private _phases;
+    private _logSources;
+    private _channels;
+    private _minLogLevel;
+    private _logLevels;
+    private _includeUnleveledLines;
+    private _text;
+    private _regex;
+    private _emitterPrefixes;
+    private _threadNames;
+    private _processNames;
+    private _traceIds;
+    private _startTime?;
+    private _endTime?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CaiLogFilter to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<CaiLogFilter.AsObject>);
+    get logStreamNames(): string[];
+    set logStreamNames(value: string[]);
+    get operationNames(): string[];
+    set operationNames(value: string[]);
+    get includeSubOperations(): boolean;
+    set includeSubOperations(value: boolean);
+    get projectParents(): string[];
+    set projectParents(value: string[]);
+    get containerIds(): string[];
+    set containerIds(value: string[]);
+    get containerNames(): string[];
+    set containerNames(value: string[]);
+    get replicaIds(): string[];
+    set replicaIds(value: string[]);
+    get operationTypes(): OperationMetadata.OperationType[];
+    set operationTypes(value: OperationMetadata.OperationType[]);
+    get phases(): string[];
+    set phases(value: string[]);
+    get logSources(): CaiLogSource[];
+    set logSources(value: CaiLogSource[]);
+    get channels(): CaiLogStreamChannel[];
+    set channels(value: CaiLogStreamChannel[]);
+    get minLogLevel(): LogSeverity;
+    set minLogLevel(value: LogSeverity);
+    get logLevels(): LogSeverity[];
+    set logLevels(value: LogSeverity[]);
+    get includeUnleveledLines(): boolean;
+    set includeUnleveledLines(value: boolean);
+    get text(): string;
+    set text(value: string);
+    get regex(): string;
+    set regex(value: string);
+    get emitterPrefixes(): string[];
+    set emitterPrefixes(value: string[]);
+    get threadNames(): string[];
+    set threadNames(value: string[]);
+    get processNames(): string[];
+    set processNames(value: string[]);
+    get traceIds(): string[];
+    set traceIds(value: string[]);
+    get startTime(): googleProtobuf005.Timestamp | undefined;
+    set startTime(value: googleProtobuf005.Timestamp | undefined);
+    get endTime(): googleProtobuf005.Timestamp | undefined;
+    set endTime(value: googleProtobuf005.Timestamp | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): CaiLogFilter.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): CaiLogFilter.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): CaiLogFilter.AsProtobufJSON;
+}
+declare namespace CaiLogFilter {
+    /**
+     * Standard JavaScript object representation for CaiLogFilter
+     */
+    interface AsObject {
+        logStreamNames: string[];
+        operationNames: string[];
+        includeSubOperations: boolean;
+        projectParents: string[];
+        containerIds: string[];
+        containerNames: string[];
+        replicaIds: string[];
+        operationTypes: OperationMetadata.OperationType[];
+        phases: string[];
+        logSources: CaiLogSource[];
+        channels: CaiLogStreamChannel[];
+        minLogLevel: LogSeverity;
+        logLevels: LogSeverity[];
+        includeUnleveledLines: boolean;
+        text: string;
+        regex: string;
+        emitterPrefixes: string[];
+        threadNames: string[];
+        processNames: string[];
+        traceIds: string[];
+        startTime?: googleProtobuf005.Timestamp.AsObject;
+        endTime?: googleProtobuf005.Timestamp.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for CaiLogFilter
+     */
+    interface AsProtobufJSON {
+        logStreamNames: string[];
+        operationNames: string[];
+        includeSubOperations: boolean;
+        projectParents: string[];
+        containerIds: string[];
+        containerNames: string[];
+        replicaIds: string[];
+        operationTypes: string[];
+        phases: string[];
+        logSources: string[];
+        channels: string[];
+        minLogLevel: string;
+        logLevels: string[];
+        includeUnleveledLines: boolean;
+        text: string;
+        regex: string;
+        emitterPrefixes: string[];
+        threadNames: string[];
+        processNames: string[];
+        traceIds: string[];
+        startTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        endTime: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.CaiLogStream
+ */
+declare class CaiLogStream implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): CaiLogStream;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: CaiLogStream): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: CaiLogStream, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: CaiLogStream, _writer: BinaryWriter): void;
+    private _name;
+    private _logSource;
+    private _channel;
+    private _projectParent;
+    private _operationName;
+    private _containerId;
+    private _containerName;
+    private _host;
+    private _replicaId;
+    private _processName;
+    private _phase;
+    private _captureState;
+    private _captureError;
+    private _captureStartedAt?;
+    private _captureFinishedAt?;
+    private _partialCapture;
+    private _minAvailableSeq;
+    private _maxAvailableSeq;
+    private _lineCount;
+    private _droppedLineCount;
+    private _operationType;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of CaiLogStream to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<CaiLogStream.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get logSource(): CaiLogSource;
+    set logSource(value: CaiLogSource);
+    get channel(): CaiLogStreamChannel;
+    set channel(value: CaiLogStreamChannel);
+    get projectParent(): string;
+    set projectParent(value: string);
+    get operationName(): string;
+    set operationName(value: string);
+    get containerId(): string;
+    set containerId(value: string);
+    get containerName(): string;
+    set containerName(value: string);
+    get host(): string;
+    set host(value: string);
+    get replicaId(): string;
+    set replicaId(value: string);
+    get processName(): string;
+    set processName(value: string);
+    get phase(): string;
+    set phase(value: string);
+    get captureState(): CaiLogCaptureState;
+    set captureState(value: CaiLogCaptureState);
+    get captureError(): string;
+    set captureError(value: string);
+    get captureStartedAt(): googleProtobuf005.Timestamp | undefined;
+    set captureStartedAt(value: googleProtobuf005.Timestamp | undefined);
+    get captureFinishedAt(): googleProtobuf005.Timestamp | undefined;
+    set captureFinishedAt(value: googleProtobuf005.Timestamp | undefined);
+    get partialCapture(): boolean;
+    set partialCapture(value: boolean);
+    get minAvailableSeq(): string;
+    set minAvailableSeq(value: string);
+    get maxAvailableSeq(): string;
+    set maxAvailableSeq(value: string);
+    get lineCount(): string;
+    set lineCount(value: string);
+    get droppedLineCount(): string;
+    set droppedLineCount(value: string);
+    get operationType(): OperationMetadata.OperationType;
+    set operationType(value: OperationMetadata.OperationType);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): CaiLogStream.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): CaiLogStream.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): CaiLogStream.AsProtobufJSON;
+}
+declare namespace CaiLogStream {
+    /**
+     * Standard JavaScript object representation for CaiLogStream
+     */
+    interface AsObject {
+        name: string;
+        logSource: CaiLogSource;
+        channel: CaiLogStreamChannel;
+        projectParent: string;
+        operationName: string;
+        containerId: string;
+        containerName: string;
+        host: string;
+        replicaId: string;
+        processName: string;
+        phase: string;
+        captureState: CaiLogCaptureState;
+        captureError: string;
+        captureStartedAt?: googleProtobuf005.Timestamp.AsObject;
+        captureFinishedAt?: googleProtobuf005.Timestamp.AsObject;
+        partialCapture: boolean;
+        minAvailableSeq: string;
+        maxAvailableSeq: string;
+        lineCount: string;
+        droppedLineCount: string;
+        operationType: OperationMetadata.OperationType;
+    }
+    /**
+     * Protobuf JSON representation for CaiLogStream
+     */
+    interface AsProtobufJSON {
+        name: string;
+        logSource: string;
+        channel: string;
+        projectParent: string;
+        operationName: string;
+        containerId: string;
+        containerName: string;
+        host: string;
+        replicaId: string;
+        processName: string;
+        phase: string;
+        captureState: string;
+        captureError: string;
+        captureStartedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        captureFinishedAt: googleProtobuf005.Timestamp.AsProtobufJSON | null;
+        partialCapture: boolean;
+        minAvailableSeq: string;
+        maxAvailableSeq: string;
+        lineCount: string;
+        droppedLineCount: string;
+        operationType: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.StreamLogsRequest
+ */
+declare class StreamLogsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): StreamLogsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: StreamLogsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: StreamLogsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: StreamLogsRequest, _writer: BinaryWriter): void;
+    private _filter?;
+    private _tailLines;
+    private _resumeToken;
+    private _afterSeq;
+    private _fieldMask?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamLogsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<StreamLogsRequest.AsObject>);
+    get filter(): CaiLogFilter | undefined;
+    set filter(value: CaiLogFilter | undefined);
+    get tailLines(): number;
+    set tailLines(value: number);
+    get resumeToken(): string;
+    set resumeToken(value: string);
+    get afterSeq(): string;
+    set afterSeq(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): StreamLogsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): StreamLogsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): StreamLogsRequest.AsProtobufJSON;
+}
+declare namespace StreamLogsRequest {
+    /**
+     * Standard JavaScript object representation for StreamLogsRequest
+     */
+    interface AsObject {
+        filter?: CaiLogFilter.AsObject;
+        tailLines: number;
+        resumeToken: string;
+        afterSeq: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for StreamLogsRequest
+     */
+    interface AsProtobufJSON {
+        filter: CaiLogFilter.AsProtobufJSON | null;
+        tailLines: number;
+        resumeToken: string;
+        afterSeq: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.StreamLogsResponse
+ */
+declare class StreamLogsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): StreamLogsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: StreamLogsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: StreamLogsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: StreamLogsResponse, _writer: BinaryWriter): void;
+    private _logEntries?;
+    private _captureState;
+    private _captureError;
+    private _droppedLineCount;
+    private _resumeToken;
+    private _endReason;
+    private _endReasonCode;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of StreamLogsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<StreamLogsResponse.AsObject>);
+    get logEntries(): CaiLogEntry[] | undefined;
+    set logEntries(value: CaiLogEntry[] | undefined);
+    get captureState(): CaiLogCaptureState;
+    set captureState(value: CaiLogCaptureState);
+    get captureError(): string;
+    set captureError(value: string);
+    get droppedLineCount(): string;
+    set droppedLineCount(value: string);
+    get resumeToken(): string;
+    set resumeToken(value: string);
+    get endReason(): string;
+    set endReason(value: string);
+    get endReasonCode(): CaiLogStreamEndReason;
+    set endReasonCode(value: CaiLogStreamEndReason);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): StreamLogsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): StreamLogsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): StreamLogsResponse.AsProtobufJSON;
+}
+declare namespace StreamLogsResponse {
+    /**
+     * Standard JavaScript object representation for StreamLogsResponse
+     */
+    interface AsObject {
+        logEntries?: CaiLogEntry.AsObject[];
+        captureState: CaiLogCaptureState;
+        captureError: string;
+        droppedLineCount: string;
+        resumeToken: string;
+        endReason: string;
+        endReasonCode: CaiLogStreamEndReason;
+    }
+    /**
+     * Protobuf JSON representation for StreamLogsResponse
+     */
+    interface AsProtobufJSON {
+        logEntries: CaiLogEntry.AsProtobufJSON[] | null;
+        captureState: string;
+        captureError: string;
+        droppedLineCount: string;
+        resumeToken: string;
+        endReason: string;
+        endReasonCode: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLogsRequest
+ */
+declare class ListLogsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLogsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLogsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLogsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLogsRequest, _writer: BinaryWriter): void;
+    private _filter?;
+    private _maxLines;
+    private _beforeSeq;
+    private _afterSeq;
+    private _resumeToken;
+    private _oldestFirst;
+    private _fieldMask?;
+    private _includeCounts;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLogsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLogsRequest.AsObject>);
+    get filter(): CaiLogFilter | undefined;
+    set filter(value: CaiLogFilter | undefined);
+    get maxLines(): number;
+    set maxLines(value: number);
+    get beforeSeq(): string;
+    set beforeSeq(value: string);
+    get afterSeq(): string;
+    set afterSeq(value: string);
+    get resumeToken(): string;
+    set resumeToken(value: string);
+    get oldestFirst(): boolean;
+    set oldestFirst(value: boolean);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get includeCounts(): boolean;
+    set includeCounts(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLogsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLogsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLogsRequest.AsProtobufJSON;
+}
+declare namespace ListLogsRequest {
+    /**
+     * Standard JavaScript object representation for ListLogsRequest
+     */
+    interface AsObject {
+        filter?: CaiLogFilter.AsObject;
+        maxLines: number;
+        beforeSeq: string;
+        afterSeq: string;
+        resumeToken: string;
+        oldestFirst: boolean;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        includeCounts: boolean;
+    }
+    /**
+     * Protobuf JSON representation for ListLogsRequest
+     */
+    interface AsProtobufJSON {
+        filter: CaiLogFilter.AsProtobufJSON | null;
+        maxLines: number;
+        beforeSeq: string;
+        afterSeq: string;
+        resumeToken: string;
+        oldestFirst: boolean;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        includeCounts: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLogsResponse
+ */
+declare class ListLogsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLogsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLogsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLogsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLogsResponse, _writer: BinaryWriter): void;
+    private _logEntries?;
+    private _truncated;
+    private _minAvailableSeq;
+    private _maxAvailableSeq;
+    private _hasMoreOlder;
+    private _hasMoreNewer;
+    private _nextResumeToken;
+    private _scopeLimitedFilters;
+    private _totalMatchingCount;
+    private _countByLevel;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLogsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLogsResponse.AsObject>);
+    get logEntries(): CaiLogEntry[] | undefined;
+    set logEntries(value: CaiLogEntry[] | undefined);
+    get truncated(): boolean;
+    set truncated(value: boolean);
+    get minAvailableSeq(): string;
+    set minAvailableSeq(value: string);
+    get maxAvailableSeq(): string;
+    set maxAvailableSeq(value: string);
+    get hasMoreOlder(): boolean;
+    set hasMoreOlder(value: boolean);
+    get hasMoreNewer(): boolean;
+    set hasMoreNewer(value: boolean);
+    get nextResumeToken(): string;
+    set nextResumeToken(value: string);
+    get scopeLimitedFilters(): CaiLogFilterField[];
+    set scopeLimitedFilters(value: CaiLogFilterField[]);
+    get totalMatchingCount(): string;
+    set totalMatchingCount(value: string);
+    get countByLevel(): {
+        [prop: string]: string;
+    };
+    set countByLevel(value: {
+        [prop: string]: string;
+    });
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLogsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLogsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLogsResponse.AsProtobufJSON;
+}
+declare namespace ListLogsResponse {
+    /**
+     * Standard JavaScript object representation for ListLogsResponse
+     */
+    interface AsObject {
+        logEntries?: CaiLogEntry.AsObject[];
+        truncated: boolean;
+        minAvailableSeq: string;
+        maxAvailableSeq: string;
+        hasMoreOlder: boolean;
+        hasMoreNewer: boolean;
+        nextResumeToken: string;
+        scopeLimitedFilters: CaiLogFilterField[];
+        totalMatchingCount: string;
+        countByLevel: {
+            [prop: string]: string;
+        };
+    }
+    /**
+     * Protobuf JSON representation for ListLogsResponse
+     */
+    interface AsProtobufJSON {
+        logEntries: CaiLogEntry.AsProtobufJSON[] | null;
+        truncated: boolean;
+        minAvailableSeq: string;
+        maxAvailableSeq: string;
+        hasMoreOlder: boolean;
+        hasMoreNewer: boolean;
+        nextResumeToken: string;
+        scopeLimitedFilters: string[];
+        totalMatchingCount: string;
+        countByLevel: {
+            [prop: string]: string;
+        };
+    }
+    /**
+     * Message implementation for ondewo.nlu.ListLogsResponse.CountByLevelEntry
+     */
+    class CountByLevelEntry implements GrpcMessage {
+        static id: string;
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        static deserializeBinary(bytes: ByteSource): CountByLevelEntry;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        static refineValues(_instance: CountByLevelEntry): void;
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        static deserializeBinaryFromReader(_instance: CountByLevelEntry, _reader: BinaryReader): void;
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        static serializeBinaryToWriter(_instance: CountByLevelEntry, _writer: BinaryWriter): void;
+        private _key;
+        private _value;
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CountByLevelEntry to deeply clone from
+         */
+        constructor(_value?: RecursivePartial<CountByLevelEntry.AsObject>);
+        get key(): string;
+        set key(value: string);
+        get value(): string;
+        set value(value: string);
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        serializeBinary(): any;
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        toObject(): CountByLevelEntry.AsObject;
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        toJSON(): CountByLevelEntry.AsObject;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        toProtobufJSON(options?: ToProtobufJSONOptions): CountByLevelEntry.AsProtobufJSON;
+    }
+    namespace CountByLevelEntry {
+        /**
+         * Standard JavaScript object representation for CountByLevelEntry
+         */
+        interface AsObject {
+            key: string;
+            value: string;
+        }
+        /**
+         * Protobuf JSON representation for CountByLevelEntry
+         */
+        interface AsProtobufJSON {
+            key: string;
+            value: string;
+        }
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.GetLogStreamRequest
+ */
+declare class GetLogStreamRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): GetLogStreamRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: GetLogStreamRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: GetLogStreamRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: GetLogStreamRequest, _writer: BinaryWriter): void;
+    private _name;
+    private _fieldMask?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of GetLogStreamRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<GetLogStreamRequest.AsObject>);
+    get name(): string;
+    set name(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): GetLogStreamRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): GetLogStreamRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): GetLogStreamRequest.AsProtobufJSON;
+}
+declare namespace GetLogStreamRequest {
+    /**
+     * Standard JavaScript object representation for GetLogStreamRequest
+     */
+    interface AsObject {
+        name: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for GetLogStreamRequest
+     */
+    interface AsProtobufJSON {
+        name: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLogStreamsRequest
+ */
+declare class ListLogStreamsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLogStreamsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLogStreamsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLogStreamsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLogStreamsRequest, _writer: BinaryWriter): void;
+    private _filter?;
+    private _pageToken;
+    private _fieldMask?;
+    private _captureStates;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLogStreamsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLogStreamsRequest.AsObject>);
+    get filter(): CaiLogFilter | undefined;
+    set filter(value: CaiLogFilter | undefined);
+    get pageToken(): string;
+    set pageToken(value: string);
+    get fieldMask(): googleProtobuf005.FieldMask | undefined;
+    set fieldMask(value: googleProtobuf005.FieldMask | undefined);
+    get captureStates(): CaiLogCaptureState[];
+    set captureStates(value: CaiLogCaptureState[]);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLogStreamsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLogStreamsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLogStreamsRequest.AsProtobufJSON;
+}
+declare namespace ListLogStreamsRequest {
+    /**
+     * Standard JavaScript object representation for ListLogStreamsRequest
+     */
+    interface AsObject {
+        filter?: CaiLogFilter.AsObject;
+        pageToken: string;
+        fieldMask?: googleProtobuf005.FieldMask.AsObject;
+        captureStates: CaiLogCaptureState[];
+    }
+    /**
+     * Protobuf JSON representation for ListLogStreamsRequest
+     */
+    interface AsProtobufJSON {
+        filter: CaiLogFilter.AsProtobufJSON | null;
+        pageToken: string;
+        fieldMask: googleProtobuf005.FieldMask.AsProtobufJSON | null;
+        captureStates: string[];
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ListLogStreamsResponse
+ */
+declare class ListLogStreamsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ListLogStreamsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ListLogStreamsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ListLogStreamsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ListLogStreamsResponse, _writer: BinaryWriter): void;
+    private _logStreams?;
+    private _nextPageToken;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ListLogStreamsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ListLogStreamsResponse.AsObject>);
+    get logStreams(): CaiLogStream[] | undefined;
+    set logStreams(value: CaiLogStream[] | undefined);
+    get nextPageToken(): string;
+    set nextPageToken(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ListLogStreamsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ListLogStreamsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ListLogStreamsResponse.AsProtobufJSON;
+}
+declare namespace ListLogStreamsResponse {
+    /**
+     * Standard JavaScript object representation for ListLogStreamsResponse
+     */
+    interface AsObject {
+        logStreams?: CaiLogStream.AsObject[];
+        nextPageToken: string;
+    }
+    /**
+     * Protobuf JSON representation for ListLogStreamsResponse
+     */
+    interface AsProtobufJSON {
+        logStreams: CaiLogStream.AsProtobufJSON[] | null;
+        nextPageToken: string;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ExportLogsRequest
+ */
+declare class ExportLogsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ExportLogsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ExportLogsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ExportLogsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ExportLogsRequest, _writer: BinaryWriter): void;
+    private _filter?;
+    private _format;
+    private _includeMetadata;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportLogsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ExportLogsRequest.AsObject>);
+    get filter(): CaiLogFilter | undefined;
+    set filter(value: CaiLogFilter | undefined);
+    get format(): CaiLogExportFormat;
+    set format(value: CaiLogExportFormat);
+    get includeMetadata(): boolean;
+    set includeMetadata(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ExportLogsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ExportLogsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ExportLogsRequest.AsProtobufJSON;
+}
+declare namespace ExportLogsRequest {
+    /**
+     * Standard JavaScript object representation for ExportLogsRequest
+     */
+    interface AsObject {
+        filter?: CaiLogFilter.AsObject;
+        format: CaiLogExportFormat;
+        includeMetadata: boolean;
+    }
+    /**
+     * Protobuf JSON representation for ExportLogsRequest
+     */
+    interface AsProtobufJSON {
+        filter: CaiLogFilter.AsProtobufJSON | null;
+        format: string;
+        includeMetadata: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.ExportLogsResponse
+ */
+declare class ExportLogsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): ExportLogsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: ExportLogsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: ExportLogsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: ExportLogsResponse, _writer: BinaryWriter): void;
+    private _chunk;
+    private _entryCount;
+    private _last;
+    private _truncated;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of ExportLogsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<ExportLogsResponse.AsObject>);
+    get chunk(): Uint8Array;
+    set chunk(value: Uint8Array);
+    get entryCount(): string;
+    set entryCount(value: string);
+    get last(): boolean;
+    set last(value: boolean);
+    get truncated(): boolean;
+    set truncated(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): ExportLogsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): ExportLogsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): ExportLogsResponse.AsProtobufJSON;
+}
+declare namespace ExportLogsResponse {
+    /**
+     * Standard JavaScript object representation for ExportLogsResponse
+     */
+    interface AsObject {
+        chunk: Uint8Array;
+        entryCount: string;
+        last: boolean;
+        truncated: boolean;
+    }
+    /**
+     * Protobuf JSON representation for ExportLogsResponse
+     */
+    interface AsProtobufJSON {
+        chunk: string;
+        entryCount: string;
+        last: boolean;
+        truncated: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DeleteLogsRequest
+ */
+declare class DeleteLogsRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DeleteLogsRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DeleteLogsRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DeleteLogsRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DeleteLogsRequest, _writer: BinaryWriter): void;
+    private _filter?;
+    private _validateOnly;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteLogsRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<DeleteLogsRequest.AsObject>);
+    get filter(): CaiLogFilter | undefined;
+    set filter(value: CaiLogFilter | undefined);
+    get validateOnly(): boolean;
+    set validateOnly(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DeleteLogsRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DeleteLogsRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DeleteLogsRequest.AsProtobufJSON;
+}
+declare namespace DeleteLogsRequest {
+    /**
+     * Standard JavaScript object representation for DeleteLogsRequest
+     */
+    interface AsObject {
+        filter?: CaiLogFilter.AsObject;
+        validateOnly: boolean;
+    }
+    /**
+     * Protobuf JSON representation for DeleteLogsRequest
+     */
+    interface AsProtobufJSON {
+        filter: CaiLogFilter.AsProtobufJSON | null;
+        validateOnly: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.nlu.DeleteLogsResponse
+ */
+declare class DeleteLogsResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): DeleteLogsResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: DeleteLogsResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: DeleteLogsResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: DeleteLogsResponse, _writer: BinaryWriter): void;
+    private _deletedLogEntryCount;
+    private _deletedLogStreamCount;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of DeleteLogsResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<DeleteLogsResponse.AsObject>);
+    get deletedLogEntryCount(): string;
+    set deletedLogEntryCount(value: string);
+    get deletedLogStreamCount(): string;
+    set deletedLogStreamCount(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): DeleteLogsResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): DeleteLogsResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): DeleteLogsResponse.AsProtobufJSON;
+}
+declare namespace DeleteLogsResponse {
+    /**
+     * Standard JavaScript object representation for DeleteLogsResponse
+     */
+    interface AsObject {
+        deletedLogEntryCount: string;
+        deletedLogStreamCount: string;
+    }
+    /**
+     * Protobuf JSON representation for DeleteLogsResponse
+     */
+    interface AsProtobufJSON {
+        deletedLogEntryCount: string;
+        deletedLogStreamCount: string;
+    }
+}
+
+/**
+ * Specific GrpcClientSettings for Logs.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+declare const GRPC_LOGS_CLIENT_SETTINGS: InjectionToken<any>;
+
+/**
+ * Service client implementation for ondewo.nlu.Logs
+ */
+declare class LogsClient {
+    private handler;
+    private client;
+    /**
+     * Raw RPC implementation for each service client method.
+     * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+     * Attention: these methods do not throw errors when non-zero status codes are received.
+     */
+    $raw: {
+        /**
+         * Server streaming: /ondewo.nlu.Logs/StreamLogs
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.StreamLogsResponse>>
+         */
+        streamLogs: (requestData: StreamLogsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<StreamLogsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Logs/ListLogs
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListLogsResponse>>
+         */
+        listLogs: (requestData: ListLogsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListLogsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Logs/GetLogStream
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.CaiLogStream>>
+         */
+        getLogStream: (requestData: GetLogStreamRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<CaiLogStream>>;
+        /**
+         * Unary call: /ondewo.nlu.Logs/ListLogStreams
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListLogStreamsResponse>>
+         */
+        listLogStreams: (requestData: ListLogStreamsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ListLogStreamsResponse>>;
+        /**
+         * Server streaming: /ondewo.nlu.Logs/ExportLogs
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ExportLogsResponse>>
+         */
+        exportLogs: (requestData: ExportLogsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<ExportLogsResponse>>;
+        /**
+         * Unary call: /ondewo.nlu.Logs/DeleteLogs
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.DeleteLogsResponse>>
+         */
+        deleteLogs: (requestData: DeleteLogsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<DeleteLogsResponse>>;
+    };
+    constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
+    /**
+     * Server streaming @/ondewo.nlu.Logs/StreamLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.StreamLogsResponse>
+     */
+    streamLogs(requestData: StreamLogsRequest, requestMetadata?: GrpcMetadata): Observable<StreamLogsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Logs/ListLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListLogsResponse>
+     */
+    listLogs(requestData: ListLogsRequest, requestMetadata?: GrpcMetadata): Observable<ListLogsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Logs/GetLogStream
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.CaiLogStream>
+     */
+    getLogStream(requestData: GetLogStreamRequest, requestMetadata?: GrpcMetadata): Observable<CaiLogStream>;
+    /**
+     * Unary call @/ondewo.nlu.Logs/ListLogStreams
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListLogStreamsResponse>
+     */
+    listLogStreams(requestData: ListLogStreamsRequest, requestMetadata?: GrpcMetadata): Observable<ListLogStreamsResponse>;
+    /**
+     * Server streaming @/ondewo.nlu.Logs/ExportLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ExportLogsResponse>
+     */
+    exportLogs(requestData: ExportLogsRequest, requestMetadata?: GrpcMetadata): Observable<ExportLogsResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Logs/DeleteLogs
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.DeleteLogsResponse>
+     */
+    deleteLogs(requestData: DeleteLogsRequest, requestMetadata?: GrpcMetadata): Observable<DeleteLogsResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LogsClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<LogsClient>;
 }
 
 /**
@@ -64199,6 +66680,14 @@ declare class SessionsClient {
          */
         detectIntent: (requestData: DetectIntentRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<DetectIntentResponse>>;
         /**
+         * Unary call: /ondewo.nlu.Sessions/InterruptTurn
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.InterruptTurnResponse>>
+         */
+        interruptTurn: (requestData: InterruptTurnRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<InterruptTurnResponse>>;
+        /**
          * Unary call: /ondewo.nlu.Sessions/ListSessions
          *
          * @param requestMessage Request message
@@ -64592,6 +67081,14 @@ declare class SessionsClient {
      * @returns Observable<thisProto.DetectIntentResponse>
      */
     detectIntent(requestData: DetectIntentRequest, requestMetadata?: GrpcMetadata): Observable<DetectIntentResponse>;
+    /**
+     * Unary call @/ondewo.nlu.Sessions/InterruptTurn
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.InterruptTurnResponse>
+     */
+    interruptTurn(requestData: InterruptTurnRequest, requestMetadata?: GrpcMetadata): Observable<InterruptTurnResponse>;
     /**
      * Unary call @/ondewo.nlu.Sessions/ListSessions
      *
@@ -70154,5 +72651,5 @@ declare class GrpcWebEndpointError extends Error {
  */
 declare function buildGrpcWebHost(config: GrpcWebEndpointConfig): string;
 
-export { AUTHORIZATION_HEADER, AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionFeedbackRequest, AddSessionLabelsRequest, AddSessionStepFeedbackRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, AuthGrpcInterceptor, BEARER_PREFIX, BROWSER_UNSUPPORTED_TLS_FIELDS, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteNotificationsRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionFeedbackRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FeedbackAuthorType, FeedbackBreakdownBucket, FeedbackFilter, FeedbackRating, FeedbackScope, FeedbackStatistics, FeedbackTimeGranularity, FeedbackTimeSeriesBucket, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetFeedbackStatisticsRequest, GetFeedbackStatisticsResponse, GetFeedbackStatisticsTimeSeriesRequest, GetFeedbackStatisticsTimeSeriesResponse, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetNotificationRequest, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionFeedbackRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, GrpcWebEndpointError, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeyValuePair, KeycloakAuthenticationError, KeycloakTokenProvider, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListRemoteOperationContainersRequest, ListRemoteOperationContainersResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionFeedbackOfAllSessionsRequest, ListSessionFeedbackRequest, ListSessionFeedbackResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentNodeEvent, LlmAgentNodePhase, LlmAgentUsage, LlmBaseUrlUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, MIN_REFRESH_DELAY_IN_S, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, REFRESH_SKEW_IN_S, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerContentScope, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerDensityPruning, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerIncrementalConfig, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerPruningThresholdType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCrawlerStatusFilter, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainer, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFeedback, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamNotificationsRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TOKEN_PROVIDER, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateNotificationRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionFeedbackRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig, authHttpInterceptor, buildBearerValue, buildGrpcWebHost, provideOndewoNluAuth, resolveBearerValue, resolveToken };
+export { AUTHORIZATION_HEADER, AddAudioFilesRequest, AddAudioFilesResponse, AddLlmEvaluationExampleRequest, AddLlmEvaluationExamplesRequest, AddLlmEvaluationExamplesResponse, AddNotificationsRequest, AddNotificationsResponse, AddSessionCommentRequest, AddSessionFeedbackRequest, AddSessionLabelsRequest, AddSessionStepFeedbackRequest, AddTrainingPhrasesFromCSVRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, AddUserToProjectRequest, Agent, AgentOfUserWithOwner, AgentSorting, AgentStatus, AgentView, AgentWithOwner, AgentsClient, AiServicesClient, AltSentence, AltTrainingPhrase, ApplyLlmEvaluationAbRolloutRequest, AudioEncoding, AudioFileResource, AudioFileResourceType, AuthGrpcInterceptor, BEARER_PREFIX, BROWSER_UNSUPPORTED_TLS_FIELDS, BackgroundWorkPolicy, BatchCreateEntitiesRequest, BatchCreateParametersRequest, BatchCreateResponseMessagesRequest, BatchCreateTrainingPhrasesRequest, BatchDeleteEntitiesRequest, BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchDeleteIntentsRequest, BatchDeleteParametersRequest, BatchDeleteParametersResponse, BatchDeleteResponseMessagesRequest, BatchDeleteResponseMessagesResponse, BatchDeleteTrainingPhrasesRequest, BatchDeleteTrainingPhrasesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest, BatchGetParametersRequest, BatchGetResponseMessagesRequest, BatchGetTrainingPhrasesRequest, BatchParametersStatusResponse, BatchResponseMessagesStatusResponse, BatchTrainingPhrasesStatusResponse, BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, BatchUpdateEntityTypesResponse, BatchUpdateIntentsRequest, BatchUpdateIntentsResponse, BatchUpdateParametersRequest, BatchUpdateResponseMessagesRequest, BatchUpdateTrainingPhrasesRequest, BertAugEnrichmentConfig, BuildCacheRequest, CaiLogCaptureState, CaiLogEntry, CaiLogExportFormat, CaiLogFilter, CaiLogFilterField, CaiLogSource, CaiLogStream, CaiLogStreamChannel, CaiLogStreamEndReason, CancelLlmEvaluationExperimentRequest, CancelOperationRequest, CancelTurn, CcaiProject, CcaiProjectSorting, CcaiProjectStatus, CcaiProjectView, CcaiProjectsClient, CcaiService, CcaiServiceFilter, CcaiServiceList, CcaiServiceProvider, CcaiServiceType, ClassifyIntentsRequest, ClassifyIntentsResponse, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanAllIntentsRequest, CleanAllIntentsResponse, CleanEntityTypeRequest, CleanEntityTypeResponse, CleanIntentRequest, CleanIntentResponse, Comment, CompareLlmEvaluationExperimentsRequest, ComparisonOperator, Context, ContextFilter, ContextsClient, CreateAgentRequest, CreateCcaiProjectRequest, CreateCcaiProjectResponse, CreateContextRequest, CreateEntityRequest, CreateEntityTypeRequest, CreateIntentRequest, CreateLlmEvaluationAbExperimentRequest, CreateLlmEvaluationDatasetRequest, CreateLlmEvaluationExamplesFromSessionRequest, CreateLlmEvaluationExamplesFromSessionResponse, CreateLlmEvaluationOnlineConfigRequest, CreateLlmEvaluationReleaseGateRequest, CreateLlmEvaluationReportRequest, CreateLlmEvaluationScheduleRequest, CreateLlmEvaluationScorecardRequest, CreateProjectRoleRequest, CreateProjectTechnicalUserRequest, CreateProjectTechnicalUserResponse, CreateServerRoleRequest, CreateSessionEntityTypeRequest, CreateSessionRequest, CreateSessionReviewRequest, CreateSessionStepRequest, CreateUserRequest, CustomHttpPattern, CustomPlatformInfo, DataEnrichmentConfig, DefaultProjectRole, DefaultServerRole, DeleteAgentRequest, DeleteAllContextsRequest, DeleteAllUserPreferencesRequest, DeleteAudioFilesRequest, DeleteAudioFilesResponse, DeleteCcaiProjectRequest, DeleteCcaiProjectResponse, DeleteContextRequest, DeleteEntityRequest, DeleteEntityStatus, DeleteEntityTypeRequest, DeleteIntentRequest, DeleteLlmEvaluationAbExperimentRequest, DeleteLlmEvaluationDatasetRequest, DeleteLlmEvaluationExampleRequest, DeleteLlmEvaluationExperimentRequest, DeleteLlmEvaluationFeedbackRequest, DeleteLlmEvaluationOnlineConfigRequest, DeleteLlmEvaluationReleaseGateRequest, DeleteLlmEvaluationReportRequest, DeleteLlmEvaluationScheduleRequest, DeleteLlmEvaluationScorecardRequest, DeleteLogsRequest, DeleteLogsResponse, DeleteNotificationsRequest, DeleteOperationRequest, DeleteProjectRoleRequest, DeleteProjectTechnicalUserRequest, DeleteResourcesRequest, DeleteServerRoleRequest, DeleteSessionCommentsRequest, DeleteSessionEntityTypeRequest, DeleteSessionFeedbackRequest, DeleteSessionLabelsRequest, DeleteSessionRequest, DeleteSessionStepRequest, DeleteUserPreferencesRequest, DeleteUserPreferencesResponse, DeleteUserRequest, DetectIntentRequest, DetectIntentResponse, DetectedIntent, DiscardDraft, DocumentFileResource, EntityDetected, EntityEnrichmentConfig, EntityStatus, EntityType, EntityTypeBatch, EntityTypeCategory, EntityTypeFuzzyNerConfig, EntityTypeSorting, EntityTypeUpdate, EntityTypeView, EntityTypesClient, EntityValueSorting, EventInput, ExportAgentRequest, ExportAgentResponse, ExportBenchmarkAgentRequest, ExportBenchmarkAgentResponse, ExportLogsRequest, ExportLogsResponse, ExportResourcesRequest, ExportResourcesResponse, ExtractEntitiesFuzzyRequest, ExtractEntitiesRequest, ExtractEntitiesResponse, FeedbackAuthorType, FeedbackBreakdownBucket, FeedbackFilter, FeedbackRating, FeedbackScope, FeedbackStatistics, FeedbackTimeGranularity, FeedbackTimeSeriesBucket, FileResource, FullTextSearchRequest, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym, FullTextSearchResponseEntityType, FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentParameters, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentUsersays, GPT2EnrichmentConfig, GRPC_AGENTS_CLIENT_SETTINGS, GRPC_AI_SERVICES_CLIENT_SETTINGS, GRPC_CCAI_PROJECTS_CLIENT_SETTINGS, GRPC_CONTEXTS_CLIENT_SETTINGS, GRPC_ENTITY_TYPES_CLIENT_SETTINGS, GRPC_INTENTS_CLIENT_SETTINGS, GRPC_LLM_EVALUATIONS_CLIENT_SETTINGS, GRPC_LOGS_CLIENT_SETTINGS, GRPC_OPERATIONS_CLIENT_SETTINGS, GRPC_PROJECT_ROLES_CLIENT_SETTINGS, GRPC_PROJECT_STATISTICS_CLIENT_SETTINGS, GRPC_QA_CLIENT_SETTINGS, GRPC_RAGS_CLIENT_SETTINGS, GRPC_SERVER_STATISTICS_CLIENT_SETTINGS, GRPC_SESSIONS_CLIENT_SETTINGS, GRPC_USERS_CLIENT_SETTINGS, GRPC_UTILITIES_CLIENT_SETTINGS, GRPC_WEBHOOK_CLIENT_SETTINGS, GenerateResponsesRequest, GenerateResponsesResponse, GenerateUserSaysRequest, GenerateUserSaysResponse, GetAgentRequest, GetAgentStatisticsRequest, GetAgentStatisticsResponse, GetAllIntentTagsRequest, GetAlternativeSentencesRequest, GetAlternativeSentencesResponse, GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, GetAnswerRequest, GetAnswerResponse, GetAudioFileOfSessionRequest, GetAudioFilesRequest, GetAudioFilesResponse, GetCcaiProjectRequest, GetCcaiServiceRequest, GetContextRequest, GetEntityRequest, GetEntityTypeCountRequest, GetEntityTypeRequest, GetFeedbackStatisticsRequest, GetFeedbackStatisticsResponse, GetFeedbackStatisticsTimeSeriesRequest, GetFeedbackStatisticsTimeSeriesResponse, GetIntentCountRequest, GetIntentRequest, GetIntentTagsRequest, GetIntentTagsResponse, GetLatestSessionReviewRequest, GetLlmEvaluationAbExperimentRequest, GetLlmEvaluationAbExperimentResultsRequest, GetLlmEvaluationAbExperimentResultsResponse, GetLlmEvaluationAbRolloutDecisionRequest, GetLlmEvaluationAbRolloutRecommendationRequest, GetLlmEvaluationAnnotationQueueItemRequest, GetLlmEvaluationDatasetRequest, GetLlmEvaluationExampleRequest, GetLlmEvaluationExperimentRequest, GetLlmEvaluationOnlineConfigRequest, GetLlmEvaluationOnlineResultRequest, GetLlmEvaluationProjectSettingsRequest, GetLlmEvaluationReleaseGateRequest, GetLlmEvaluationReleaseGateRunRequest, GetLlmEvaluationReportRequest, GetLlmEvaluationScheduleRequest, GetLlmEvaluationScorecardRequest, GetLogStreamRequest, GetModelStatusesRequest, GetModelStatusesResponse, GetNotificationRequest, GetOperationRequest, GetPlatformInfoResponse, GetPlatformMappingRequest, GetProjectConfigRequest, GetProjectConfigResponse, GetProjectElementStatRequest, GetProjectRoleRequest, GetProjectStatRequest, GetRemoteOperationContainerLogsRequest, GetRemoteOperationContainerLogsResponse, GetRemoteOperationContainerStatusRequest, GetServerRoleRequest, GetServerStateResponse, GetSessionEntityTypeRequest, GetSessionFeedbackRequest, GetSessionRequest, GetSessionReviewRequest, GetSessionStepRequest, GetSessionsStatisticsRequest, GetSessionsStatisticsResponse, GetSessionsStatisticsTimeSeriesRequest, GetSessionsStatisticsTimeSeriesResponse, GetSynonymsRequest, GetSynonymsResponse, GetUserPreferencesRequest, GetUserPreferencesResponse, GetUserProjectCountRequest, GetUserRequest, GloVeEnrichmentConfig, GrpcWebEndpointError, HeardMessage, HeardReport, HeardTextPrecision, Http, HttpRule, ImageFileResource, ImportAgentRequest, InitiationProtocol, InputAudioConfig, Intent, IntentAlgorithms, IntentBatch, IntentCategory, IntentClassified, IntentSorting, IntentTagRequest, IntentUpdate, IntentView, IntentsClient, InterruptTurnRequest, InterruptTurnResponse, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeyValuePair, KeycloakAuthenticationError, KeycloakTokenProvider, LatLng, ListAccountIdsOfAllSessionsRequest, ListAccountIdsResponse, ListAgentsOfUserResponse, ListAgentsRequest, ListAgentsResponse, ListAudioFilesRequest, ListAudioFilesResponse, ListCcaiProjectsRequest, ListCcaiProjectsResponse, ListContextsRequest, ListContextsResponse, ListDatastreamIdsOfAllSessionsRequest, ListDatastreamIdsResponse, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, ListEntityTypesResponse, ListIdentifiedUserIdsOfAllSessionsRequest, ListIdentifiedUserIdsResponse, ListInputContextsOfAllSessionsRequest, ListInputContextsResponse, ListIntentsRequest, ListIntentsResponse, ListLanguageCodesOfAllSessionsRequest, ListLanguageCodesResponse, ListLlmEvaluationAbExperimentsRequest, ListLlmEvaluationAbExperimentsResponse, ListLlmEvaluationAbRolloutDecisionsRequest, ListLlmEvaluationAbRolloutDecisionsResponse, ListLlmEvaluationAnnotationQueueItemsRequest, ListLlmEvaluationAnnotationQueueItemsResponse, ListLlmEvaluationDatasetsRequest, ListLlmEvaluationDatasetsResponse, ListLlmEvaluationEvaluatorsRequest, ListLlmEvaluationEvaluatorsResponse, ListLlmEvaluationExamplesRequest, ListLlmEvaluationExamplesResponse, ListLlmEvaluationExperimentsRequest, ListLlmEvaluationExperimentsResponse, ListLlmEvaluationFeedbackRequest, ListLlmEvaluationFeedbackResponse, ListLlmEvaluationOnlineConfigsRequest, ListLlmEvaluationOnlineConfigsResponse, ListLlmEvaluationOnlineResultsRequest, ListLlmEvaluationOnlineResultsResponse, ListLlmEvaluationReleaseGateRunsRequest, ListLlmEvaluationReleaseGateRunsResponse, ListLlmEvaluationReleaseGatesRequest, ListLlmEvaluationReleaseGatesResponse, ListLlmEvaluationReportsRequest, ListLlmEvaluationReportsResponse, ListLlmEvaluationSchedulesRequest, ListLlmEvaluationSchedulesResponse, ListLlmEvaluationScorecardsRequest, ListLlmEvaluationScorecardsResponse, ListLlmModelsRequest, ListLlmModelsResponse, ListLogStreamsRequest, ListLogStreamsResponse, ListLogsRequest, ListLogsResponse, ListMatchedEntityTypesOfAllSessionsRequest, ListMatchedEntityTypesResponse, ListMatchedIntentsOfAllSessionsRequest, ListMatchedIntentsResponse, ListNotificationsRequest, ListNotificationsResponse, ListOperationsRequest, ListOperationsResponse, ListOriginIdsOfAllSessionsRequest, ListOriginIdsResponse, ListOutputContextsOfAllSessionsRequest, ListOutputContextsResponse, ListParametersRequest, ListParametersResponse, ListPlatformsOfAllSessionsRequest, ListPlatformsResponse, ListProjectIdsResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, ListProjectRolesRequest, ListProjectRolesResponse, ListProjectTechnicalUsersRequest, ListProjectTechnicalUsersResponse, ListPropertyIdsOfAllSessionsRequest, ListPropertyIdsResponse, ListRemoteOperationContainersRequest, ListRemoteOperationContainersResponse, ListResponseMessagesRequest, ListResponseMessagesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, ListServerRolesRequest, ListServerRolesResponse, ListSessionCommentsOfAllSessionsRequest, ListSessionCommentsRequest, ListSessionCommentsResponse, ListSessionEntityTypesRequest, ListSessionEntityTypesResponse, ListSessionFeedbackOfAllSessionsRequest, ListSessionFeedbackRequest, ListSessionFeedbackResponse, ListSessionLabelsOfAllSessionsRequest, ListSessionLabelsRequest, ListSessionLabelsResponse, ListSessionReviewsRequest, ListSessionReviewsResponse, ListSessionsRequest, ListSessionsResponse, ListTagsOfAllSessionsRequest, ListTagsResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, ListTrainingPhrasesofIntentsWithEnrichmentRequest, ListTrainingPhrasesofIntentsWithEnrichmentResponse, ListUserIdsOfAllSessionsRequest, ListUserIdsResponse, ListUserInfosResponse, ListUserPreferencesRequest, ListUserPreferencesResponse, ListUsersInProjectRequest, ListUsersInProjectResponse, ListUsersRequest, ListUsersResponse, LlmAgentNodeEvent, LlmAgentNodePhase, LlmAgentUsage, LlmBaseUrlUsage, LlmCacheStats, LlmCallFinishedEvent, LlmCallStartedEvent, LlmCcaiServiceUsage, LlmEnrichmentConfig, LlmErrorStat, LlmErrorStats, LlmEvaluationAbExperiment, LlmEvaluationAbExperimentFilter, LlmEvaluationAbExperimentStatus, LlmEvaluationAbOptimizeMetric, LlmEvaluationAbRolloutDecision, LlmEvaluationAbRolloutDecisionFilter, LlmEvaluationAbRolloutRecommendation, LlmEvaluationAbTrafficConfig, LlmEvaluationAbVariant, LlmEvaluationAbVariantResult, LlmEvaluationAnnotationQueueItem, LlmEvaluationAnnotationQueueItemFilter, LlmEvaluationAnnotationStatus, LlmEvaluationComparison, LlmEvaluationDataset, LlmEvaluationDatasetFilter, LlmEvaluationDatasetType, LlmEvaluationEvaluatorCategory, LlmEvaluationEvaluatorParameterSpec, LlmEvaluationEvaluatorRun, LlmEvaluationEvaluatorSpec, LlmEvaluationEvaluatorType, LlmEvaluationExample, LlmEvaluationExampleExtractionMode, LlmEvaluationExampleFilter, LlmEvaluationExperiment, LlmEvaluationExperimentFilter, LlmEvaluationExperimentKind, LlmEvaluationExperimentStatus, LlmEvaluationFeedback, LlmEvaluationFeedbackFilter, LlmEvaluationJudgeConfig, LlmEvaluationOnlineConfig, LlmEvaluationOnlineConfigFilter, LlmEvaluationOnlineResult, LlmEvaluationOnlineResultFilter, LlmEvaluationOnlineSessionFilter, LlmEvaluationPairwiseResult, LlmEvaluationProjectSettings, LlmEvaluationReleaseGate, LlmEvaluationReleaseGateCheck, LlmEvaluationReleaseGateFilter, LlmEvaluationReleaseGateRun, LlmEvaluationReleaseGateRunFilter, LlmEvaluationReleaseGateSafetyConfig, LlmEvaluationReleaseGateThresholds, LlmEvaluationReleaseGateVerdict, LlmEvaluationReport, LlmEvaluationReportFilter, LlmEvaluationSchedule, LlmEvaluationScheduleAction, LlmEvaluationScheduleFilter, LlmEvaluationScorecard, LlmEvaluationScorecardComponent, LlmEvaluationScorecardFilter, LlmEvaluationSimulationKind, LlmEvaluationSimulationPersona, LlmEvaluationTurnResult, LlmEvaluationsClient, LlmFinishReasonStat, LlmGenerateRequest, LlmGenerateResponse, LlmLatencyStats, LlmModel, LlmModelUsage, LlmProviderUsage, LlmReasoningEffortStat, LlmRetrievalMetadata, LlmRetrievedChunk, LlmSafetyAssessment, LlmSafetyCategoryStat, LlmSafetyFinding, LlmSafetyLocation, LlmSafetyStats, LlmTelemetry, LlmTelemetryReport, LlmTelemetryTimeSeriesBucket, LlmThinkingDeltaEvent, LlmThinkingMetadata, LlmTokenUsage, LlmTokenUsageUpdateEvent, LlmToolCallFinishedEvent, LlmToolCallMetadata, LlmToolCallStartedEvent, LlmToolUsage, LogEntry, LogSeverity, LogsClient, MIN_REFRESH_DELAY_IN_S, MigrateAgentRequest, Mode, ModelStatus, Notification, NotificationFilter, NotificationFlaggedStatus, NotificationOrigin, NotificationReadStatus, NotificationType, NotificationVisibility, Operation, OperationFilter, OperationMetadata, OperationsClient, OptimizeRankingMatchRequest, OptimizeRankingMatchResponse, OriginalDetectIntentRequest, PingRequest, PingResponse, PlatformMapping, ProjectRole, ProjectRoleView, ProjectRolesClient, ProjectStatisticsClient, ProjectTechnicalUser, PromoteLlmEvaluationAnnotationQueueItemRequest, PromoteLlmEvaluationAnnotationQueueItemResponse, QAClient, QueryInput, QueryParameters, QueryResult, REFRESH_SKEW_IN_S, RagAddCrawlerResultsToDatasetsRequest, RagChunk, RagChunkMethod, RagComparisonOperator, RagCrawler, RagCrawlerAuth, RagCrawlerAuthenticationExecutionType, RagCrawlerBrowserConfig, RagCrawlerConcurrencyConfig, RagCrawlerConfig, RagCrawlerContentResult, RagCrawlerContentScope, RagCrawlerCookie, RagCrawlerCrawlStrategy, RagCrawlerDeepCrawlerConfig, RagCrawlerDensityPruning, RagCrawlerExecutionInfo, RagCrawlerFilters, RagCrawlerHtmlAuth, RagCrawlerHttpAuth, RagCrawlerIncrementalConfig, RagCrawlerMetaDataExtractor, RagCrawlerMetaDataExtractorType, RagCrawlerPruningThresholdType, RagCrawlerResult, RagCrawlerResultsConfig, RagCrawlerRetryConfig, RagCrawlerSeedUrlFilters, RagCrawlerSelectorType, RagCrawlerSources, RagCrawlerStatusFilter, RagCreateCrawlerRequest, RagCreateDatasetRequest, RagDataset, RagDatasetList, RagDatasetParsingStatus, RagDeleteCrawlerRequest, RagDeleteCrawlerResponse, RagDeleteCrawlerRunsRequest, RagDeleteCrawlerRunsResponse, RagDeleteCrawlersRequest, RagDeleteCrawlersResponse, RagDeleteDocumentsRequest, RagDeleteRequest, RagDocAgg, RagDocument, RagDocumentIdsRequest, RagDocumentList, RagDocumentStatus, RagDocumentType, RagDownloadDocumentRequest, RagFileChunk, RagFileMetadata, RagGetCrawlerAttachedDatasetsRequest, RagGetCrawlerAttachedDatasetsResponse, RagGetCrawlerRequest, RagGetCrawlerResultRequest, RagGetCrawlerResultsRequest, RagGetCrawlerResultsResponse, RagGetCrawlerRunLogsRequest, RagGetCrawlerRunLogsResponse, RagGetCrawlerRunRequest, RagGraphRagConfig, RagGraphRagMethod, RagListCrawlerRunsRequest, RagListCrawlerRunsResponse, RagListCrawlersRequest, RagListCrawlersResponse, RagListDatasetsRequest, RagListDocumentsRequest, RagLogic, RagMetadataCondition, RagMetadataConditions, RagParserConfig, RagPartialSuccess, RagRaptorConfig, RagRemoveCrawlerResultsFromDatasetsRequest, RagRetrievalRequest, RagRetrievalResponse, RagStartCrawlerRequest, RagStopCrawlerRequest, RagStopCrawlerResponse, RagUpdateCrawlerRequest, RagUpdateDatasetRequest, RagUpdateDocumentRequest, RagUploadDocumentRequest, RagVariantConfig, RagsClient, RankingMatchOptimizationConfig, ReannotateEntitiesOptions, ReasoningEffort, ReferencedChunk, ReindexAgentRequest, RemoteOperationContainer, RemoteOperationContainerLifecycleState, RemoteOperationContainerLogLine, RemoteOperationContainerStatus, RemoveUserFromProjectRequest, ReportFormat, ReportType, ResourceView, RestoreAgentRequest, RotateProjectTechnicalUserPasswordRequest, RotateProjectTechnicalUserPasswordResponse, RunLlmEvaluationExperimentRequest, RunLlmEvaluationReleaseGateRequest, RunScraperRequest, RunScraperResponse, RunTrainingResponse, S2tTranscription, ServerRole, ServerStatisticsClient, Session, SessionEntityType, SessionFeedback, SessionFilter, SessionInfo, SessionReview, SessionReviewStep, SessionStep, SessionsClient, SessionsReportType, SetAgentStatusRequest, SetNotificationsFlaggedStatusRequest, SetNotificationsReadStatusRequest, SetResourcesRequest, SetUserPreferencesRequest, SetUserPreferencesResponse, SimulateLlmEvaluationConversationsRequest, SortingMode, StartLlmEvaluationAbExperimentRequest, StatResponse, Status, StopLlmEvaluationAbExperimentRequest, StreamLogsRequest, StreamLogsResponse, StreamNotificationsRequest, StreamRemoteOperationContainerLogsRequest, StreamingDetectIntentRequest, StreamingDetectIntentResponse, StreamingLlmGenerateResponse, StreamingRecognitionResult, StringUpdate, SubmitLlmEvaluationFeedbackRequest, Synonym, TOKEN_PROVIDER, TextInput, ThesaurusEnrichmentConfig, TrainAgentRequest, TrainingPhraseCleanerOptions, TrainingPhraseStatus, TranscriptionType, TurnControl, TurnControlAck, TurnControlAckStatus, TurnInterruptionReason, UpdateAgentRequest, UpdateCcaiProjectRequest, UpdateCcaiProjectResponse, UpdateContextRequest, UpdateDatabaseRequest, UpdateDatabaseResponse, UpdateEntityRequest, UpdateEntityTypeRequest, UpdateIntentRequest, UpdateLlmEvaluationAbExperimentRequest, UpdateLlmEvaluationAnnotationQueueItemRequest, UpdateLlmEvaluationDatasetRequest, UpdateLlmEvaluationExampleRequest, UpdateLlmEvaluationExperimentRequest, UpdateLlmEvaluationFeedbackRequest, UpdateLlmEvaluationOnlineConfigRequest, UpdateLlmEvaluationProjectSettingsRequest, UpdateLlmEvaluationReleaseGateRequest, UpdateLlmEvaluationScheduleRequest, UpdateLlmEvaluationScorecardRequest, UpdateNotificationRequest, UpdateProjectRoleRequest, UpdateServerRoleRequest, UpdateSessionCommentsRequest, UpdateSessionEntityTypeRequest, UpdateSessionFeedbackRequest, UpdateSessionStepRequest, UpdateUserRequest, UrlFilter, User, UserInProject, UserInfo, UsersClient, UtilitiesClient, ValidateEmbeddedRegexRequest, ValidateEmbeddedRegexResponse, ValidateRegexRequest, ValidateRegexResponse, VideoFileResource, WebhookClient, WebhookRequest, WebhookResponse, Word2VecEnrichmentConfig, WordNetAugEnrichmentConfig, XLNetAugEnrichmentConfig, authHttpInterceptor, buildBearerValue, buildGrpcWebHost, provideOndewoNluAuth, resolveBearerValue, resolveToken };
 export type { EnsureFreshTokenOptions, GrpcWebEndpointConfig, KeycloakTokenProviderConfig, TokenProvider, TokenResult };
