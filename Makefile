@@ -76,6 +76,9 @@ help: ## Print usage info about help targets
 makefile_chapters: ## Shows all sections of Makefile
 	@echo `cat Makefile| grep "########################################################" -A 1 | grep -v "########################################################"`
 
+test_angular_compat: ## Prove the generated library (npm/) works on every Angular the proto compiler supports (Docker + network; run make build first)
+	sh ondewo-proto-compiler/tests/angular-compat/run-compat.sh npm
+
 check_build: ## Checks if all built proto-code is there
 	@rm -rf build_check.txt
 	@rm -rf build_check_temp.txt
@@ -115,11 +118,11 @@ release: ## Create Github and NPM Release
 	git status
 	git add api
 	git add fesm2022
-	@# index.d.ts and public-api.ts are rewritten by every build - the compiler deletes and
-	@# regenerates public-api.ts, ng-packagr rewrites index.d.ts - and both are tracked, so
+	@# types/ and public-api.ts are rewritten by every build - the compiler deletes and
+	@# regenerates public-api.ts, ng-packagr rewrites types/ - and both are tracked, so
 	@# leaving them unstaged lets the release commit describe a package npm never receives.
 	git add public-api.ts
-	git add index.d.ts
+	git add types
 	git add src
 	git add README.md
 	git add RELEASE.md
