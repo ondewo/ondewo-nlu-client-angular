@@ -9,6 +9,7 @@
 * Tracking API Version [7.6.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.6.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 * [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) Warm transfer intros: the `Sessions` client gains `prepareWarmTransferIntro` and `getWarmTransferIntroOutcome`, with `WarmTransferIntroConfig`, `PrepareWarmTransferIntroRequest` / `PrepareWarmTransferIntroResponse`, `GetWarmTransferIntroOutcomeRequest`, `WarmTransferIntroOutcome` and the enums `WarmTransferIntroTextSource`, `WarmTransferIntroDecision`, `WarmTransferIntroDecidedBy` and `WarmTransferIntroStage`.
 * [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `Agent.warmTransferSettings` (field 15) with `WarmTransferAgentSettings`, `WarmTransferAgentTexts` and `WarmTransferAgentLexicon`, the per-agent warm transfer defaults.
+* Generated with ondewo-proto-compiler 5.17.0. New runtime floors: `@ngx-grpc/common` / `@ngx-grpc/core` ~3.1.2 (was `>=3.1.2`, which floated to 5.0.0) and `google-protobuf` ~3.21.4; an app that uses `@ngx-grpc/grpc-web-client` needs `"grpc-web": "2.1.1"` as an exact direct dependency plus `"overrides": { "grpc-web": "$grpc-web" }`, because that package still declares the peer `grpc-web ^1.2.1`.
 
 *****************
 

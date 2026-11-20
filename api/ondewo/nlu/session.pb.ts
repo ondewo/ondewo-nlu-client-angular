@@ -710,8 +710,8 @@ export class QueryParameters implements GrpcMessage {
           );
           break;
         case 8:
-          _reader.readPackableEnumInto(
-            (_instance.platforms = _instance.platforms || [])
+          (_instance.platforms = _instance.platforms || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 9:
@@ -18263,8 +18263,8 @@ export class SessionFilter implements GrpcMessage {
           _instance.durationInSRoundedMax = _reader.readFloat();
           break;
         case 42:
-          _reader.readPackableEnumInto(
-            (_instance.platforms = _instance.platforms || [])
+          (_instance.platforms = _instance.platforms || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 43:
@@ -19338,8 +19338,8 @@ export class SessionInfo implements GrpcMessage {
           _instance.durationInSRounded = _reader.readFloat();
           break;
         case 26:
-          _reader.readPackableEnumInto(
-            (_instance.platforms = _instance.platforms || [])
+          (_instance.platforms = _instance.platforms || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 27:
@@ -21457,8 +21457,8 @@ export class SessionReviewStep implements GrpcMessage {
           _instance.queryTextOriginal = _reader.readString();
           break;
         case 8:
-          _reader.readPackableEnumInto(
-            (_instance.platforms = _instance.platforms || [])
+          (_instance.platforms = _instance.platforms || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 9:
@@ -30509,13 +30509,13 @@ export class FeedbackFilter implements GrpcMessage {
 
       switch (_reader.getFieldNumber()) {
         case 1:
-          _reader.readPackableEnumInto(
-            (_instance.ratings = _instance.ratings || [])
+          (_instance.ratings = _instance.ratings || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 2:
-          _reader.readPackableEnumInto(
-            (_instance.authorTypes = _instance.authorTypes || [])
+          (_instance.authorTypes = _instance.authorTypes || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 3:

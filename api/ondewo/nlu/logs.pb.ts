@@ -669,8 +669,8 @@ export class CaiLogFilter implements GrpcMessage {
           );
           break;
         case 8:
-          _reader.readPackableEnumInto(
-            (_instance.operationTypes = _instance.operationTypes || [])
+          (_instance.operationTypes = _instance.operationTypes || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 9:
@@ -679,21 +679,21 @@ export class CaiLogFilter implements GrpcMessage {
           );
           break;
         case 20:
-          _reader.readPackableEnumInto(
-            (_instance.logSources = _instance.logSources || [])
+          (_instance.logSources = _instance.logSources || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 21:
-          _reader.readPackableEnumInto(
-            (_instance.channels = _instance.channels || [])
+          (_instance.channels = _instance.channels || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 22:
           _instance.minLogLevel = _reader.readEnum();
           break;
         case 23:
-          _reader.readPackableEnumInto(
-            (_instance.logLevels = _instance.logLevels || [])
+          (_instance.logLevels = _instance.logLevels || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 24:
@@ -2600,9 +2600,9 @@ export class ListLogsResponse implements GrpcMessage {
           _instance.nextResumeToken = _reader.readString();
           break;
         case 8:
-          _reader.readPackableEnumInto(
-            (_instance.scopeLimitedFilters =
-              _instance.scopeLimitedFilters || [])
+          (_instance.scopeLimitedFilters =
+            _instance.scopeLimitedFilters || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         case 9:
@@ -3274,8 +3274,8 @@ export class ListLogStreamsRequest implements GrpcMessage {
           );
           break;
         case 4:
-          _reader.readPackableEnumInto(
-            (_instance.captureStates = _instance.captureStates || [])
+          (_instance.captureStates = _instance.captureStates || []).push(
+            ...(_reader.readPackedEnum() || [])
           );
           break;
         default:

@@ -20,8 +20,8 @@
   "peerDependencies": {
     "@angular/common": ">=20.0.0 <23.0.0",
     "@angular/core": ">=20.0.0 <23.0.0",
-    "@ngx-grpc/common": ">=3.1.2",
-    "@ngx-grpc/core": ">=3.1.2"
+    "@ngx-grpc/common": "~3.1.2",
+    "@ngx-grpc/core": "~3.1.2"
   },
   "module": "fesm2022/ondewo-nlu-client-angular.mjs",
   "typings": "types/ondewo-nlu-client-angular.d.ts",
@@ -60,7 +60,8 @@
     "@typescript-eslint/typescript-estree": "^8.62.1",
     "eslint": "^10.6.0",
     "global": "^4.4.0",
-    "google-protobuf": "^3.21.4",
+    "google-protobuf": "~3.21.4",
+    "grpc-web": "2.1.1",
     "husky": "^9.1.7",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
@@ -72,5 +73,8 @@
     "ts-jest": "29.2.5",
     "typescript": "5.8.3",
     "zone.js": "^0.15.1"
+  },
+  "overrides": {
+    "grpc-web": "$grpc-web"
   }
 }
