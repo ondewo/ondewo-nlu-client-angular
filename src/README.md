@@ -145,10 +145,36 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-A long-lived `offlineToken` can be supplied instead of `username` + `password`; `tokenExpirationInS`
-bounds the refresh loop when the session must not outlive a fixed window. The Keycloak client must have
-direct access grants and the `offline_access` scope enabled, otherwise the token response carries no
-refresh token and `KeycloakTokenProvider` reports a `KeycloakAuthenticationError`.
+A handed-off Keycloak **offline token** can be supplied instead of `username` + `password`, which is what a
+fleet of clients sharing one technical user should do: start-up is then one `refresh_token` grant, and a
+refused token is never answered with a password login (Keycloak's brute-force detection counts failed
+password logins, not refresh grants). `offlineToken` is still accepted as a deprecated alias.
+
+```ts
+{
+  provide: KEYCLOAK_TOKEN_PROVIDER_CONFIG,
+  useValue: {
+    keycloakUrl: "https://keycloak.example.com",
+    realm: "ondewo",
+    clientId: "ondewo-nlu-cai-sdk-public",
+    refreshToken: offlineTokenFromYourSecretStore
+  }
+}
+```
+
+`keycloakUrl`, `realm` and `clientId` are all-or-nothing: all three empty means "no Keycloak" (no login, no
+`authorization` header), any other partial set is rejected. With Keycloak configured, `password` or
+`refreshToken` is mandatory. `tokenExpirationInS` bounds the auto-refresh when the session must not outlive
+a fixed window; `keycloakVerifySsl` is accepted for parity with the other SDKs but cannot change a browser's
+TLS verification. Every string rendering of the provider shows a set secret as `***REDACTED***`.
+
+The refresh behaves exactly as in every other ONDEWO client SDK: a refresh `REFRESH_SKEW_IN_S` (30 s) before
+expiry; a failed refresh is retried after a jittered backoff (5 s, doubling to 300 s) and never ends the
+refresh loop; while it fails, `getToken()` keeps serving the still-valid token, and only a token that has
+expired and cannot be refreshed is reported as a `KeycloakAuthenticationError`. One WARNING is logged per
+failed attempt and one INFO on recovery (through the optional `logger`, default the console), never with a
+credential. Providers with the same credentials on the same `HttpClient` share one login. The
+framework-free core is exported as `KeycloakTokenSession` for use outside Angular DI.
 
 The password grant is deliberately limited to technical users: for a human account with 2FA enabled it
 cannot work, and sending a human's password to the token endpoint from the browser is not acceptable.
@@ -171,8 +197,8 @@ await tokenProvider.configure({
 
 Registered without a config the provider stays idle — it issues no request and `getToken()` returns
 `null` — until `configure()` is called. Calling `configure()` again re-points the provider at different
-credentials: the pending refresh is cancelled and the cached tokens are dropped before the new login
-runs, so no stale bearer can be served in between and the provider need not be re-created.
+credentials: the previous login is released (and its refresh stopped) before the new login runs, so no
+stale bearer can be served in between and the provider need not be re-created.
 
 #### Renewing on demand
 
@@ -189,9 +215,9 @@ const renewed = await tokenProvider.ensureFreshToken({ force: true });
 
 `force` matters because a cached expiry cannot be trusted after a rejection — the token may have been
 revoked, or the local clock may run ahead of Keycloak's. Concurrent calls are single-flighted, so a burst
-of requests arriving on an expired token issues one grant rather than one per request. If the refresh
-token itself has been revoked, `ensureFreshToken` falls back to a full re-login with the configured
-credentials; it returns `null` when the provider has no config yet.
+of requests arriving on an expired token issues one grant rather than one per request, and a running
+failure backoff is honoured. A refresh never falls back to a password login; if the first login failed,
+`ensureFreshToken` runs the start-up again. It returns `null` when the provider has no config yet.
 
 ### Interactive users — supply the token from the host application
 

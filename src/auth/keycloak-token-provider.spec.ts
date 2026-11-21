@@ -1,4 +1,4 @@
-import { provideHttpClient } from "@angular/common/http";
+import { HttpClient, provideHttpClient } from "@angular/common/http";
 import { HttpTestingController, provideHttpClientTesting, TestRequest } from "@angular/common/http/testing";
 import { EnvironmentProviders, Provider } from "@angular/core";
 import { TestBed } from "@angular/core/testing";
@@ -11,6 +11,8 @@ import {
   REFRESH_RETRY_BASE_DELAY_IN_S,
   REFRESH_SKEW_IN_S
 } from "./keycloak-token-provider";
+import { KeycloakLogger, KeycloakTransportError } from "./keycloak-token-session";
+import { TokenResult } from "./token-provider";
 
 /** Base Keycloak URL used across the tests; a trailing slash exercises the URL normalisation. */
 const KEYCLOAK_URL: string = "https://auth.example.com/auth/";
@@ -30,11 +32,32 @@ const ACCESS_TOKEN: string = "access-token-1";
 /** The refresh token returned by the initial login. */
 const REFRESH_TOKEN: string = "refresh-token-1";
 
-/** The access token returned by the first background refresh. */
+/** The access token returned by the first refresh. */
 const ACCESS_TOKEN_2: string = "access-token-2";
 
 /** The access-token lifetime (seconds) reported by Keycloak in the test responses. */
 const EXPIRES_IN: number = 300;
+
+/** A logger that swallows (and records) the refresh lines, so the console stays quiet. */
+class SilentLogger implements KeycloakLogger {
+  /** Every WARNING line. */
+  public readonly warnings: string[] = [];
+
+  /** @param message the line. */
+  public warn(message: string): void {
+    this.warnings.push(message);
+  }
+
+  /** Ignored. */
+  public info(): void {
+    // ignored
+  }
+
+  /** Ignored. */
+  public debug(): void {
+    // ignored
+  }
+}
 
 /** The captured result of standing up a `TestBed` for the provider under test. */
 interface SetupResult {
@@ -45,37 +68,26 @@ interface SetupResult {
 }
 
 /**
- * Stand up a fresh `TestBed` configured with the testing HTTP backend and the
- * given provider config, then instantiate the provider through DI.
+ * Stand up a fresh `TestBed` with the testing HTTP backend and, when given, the provider config,
+ * then instantiate the provider through DI.
  *
- * @param config the runtime config to register under {@link KEYCLOAK_TOKEN_PROVIDER_CONFIG}.
+ * @param config the runtime config to register under {@link KEYCLOAK_TOKEN_PROVIDER_CONFIG}, or
+ *   `null` for an idle provider awaiting `configure()`.
  * @returns the instantiated provider and the `HttpTestingController`.
  */
-function setup(config: KeycloakTokenProviderConfig): SetupResult {
-  const providers: (Provider | EnvironmentProviders)[] = [
-    provideHttpClient(),
-    provideHttpClientTesting(),
-    { provide: KEYCLOAK_TOKEN_PROVIDER_CONFIG, useValue: config }
-  ];
+function setup(config: KeycloakTokenProviderConfig | null): SetupResult {
+  const providers: (Provider | EnvironmentProviders)[] = [provideHttpClient(), provideHttpClientTesting()];
+  if (config !== null) {
+    providers.push({ provide: KEYCLOAK_TOKEN_PROVIDER_CONFIG, useValue: config });
+  }
   TestBed.configureTestingModule({ providers });
   const provider: KeycloakTokenProvider = TestBed.inject(KeycloakTokenProvider);
   const httpMock: HttpTestingController = TestBed.inject(HttpTestingController);
   return { provider, httpMock };
 }
 
-/**
- * Stand up a `TestBed` with NO {@link KEYCLOAK_TOKEN_PROVIDER_CONFIG} registered, so the
- * provider is constructed idle and awaits a runtime `configure()` call.
- *
- * @returns the instantiated provider and the `HttpTestingController`.
- */
-function setupUnconfigured(): SetupResult {
-  const providers: (Provider | EnvironmentProviders)[] = [provideHttpClient(), provideHttpClientTesting()];
-  TestBed.configureTestingModule({ providers });
-  const provider: KeycloakTokenProvider = TestBed.inject(KeycloakTokenProvider);
-  const httpMock: HttpTestingController = TestBed.inject(HttpTestingController);
-  return { provider, httpMock };
-}
+/** The logger every config of this file uses. */
+let logger: SilentLogger = new SilentLogger();
 
 /** A password-grant config (ROPC login). */
 const PASSWORD_CONFIG: KeycloakTokenProviderConfig = {
@@ -83,784 +95,571 @@ const PASSWORD_CONFIG: KeycloakTokenProviderConfig = {
   realm: REALM,
   clientId: CLIENT_ID,
   username: "technical-user@example.com",
-  password: "s3cret"
+  password: "s3cret",
+  randomFraction: (): number => 0,
+  get logger(): KeycloakLogger {
+    return logger;
+  }
+};
+
+/** A token-only config (offline token, no password). */
+const TOKEN_CONFIG: KeycloakTokenProviderConfig = {
+  keycloakUrl: KEYCLOAK_URL,
+  realm: REALM,
+  clientId: CLIENT_ID,
+  refreshToken: "configured-offline-token",
+  randomFraction: (): number => 0,
+  get logger(): KeycloakLogger {
+    return logger;
+  }
 };
 
 /**
- * Unit tests for {@link KeycloakTokenProvider}: it logs in once (offline-token or
- * ROPC password grant) against the public Keycloak client, serves the current
- * access token synchronously through `getToken`, and refreshes it on a background
- * timer shortly before expiry — clamped to an optional bounded deadline. Network
- * is mocked with the Angular HTTP testing backend; the refresh schedule is driven
- * with Jest fake timers.
+ * @param request the pending token request.
+ * @returns the decoded form fields of its body.
+ */
+function formOf(request: TestRequest): Record<string, string> {
+  return Object.fromEntries(new URLSearchParams(request.request.body as string).entries());
+}
+
+/**
+ * Answer a pending token request with a token response (as the raw text Keycloak sends).
+ *
+ * @param request the pending token request.
+ * @param accessToken the access token to hand out.
+ * @param extra further fields; `refresh_token` and `expires_in` default to the test constants.
+ */
+function flushToken(request: TestRequest, accessToken: string, extra: Record<string, unknown> = {}): void {
+  request.flush(JSON.stringify({ access_token: accessToken, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN, ...extra }));
+}
+
+/**
+ * Drain the microtask queue so a promise chain spanning several `await`s reaches its next step.
+ *
+ * @returns a promise that resolves once the queued microtasks have run.
+ */
+async function flushMicrotasks(): Promise<void> {
+  for (let index: number = 0; index < 20; index++) {
+    await Promise.resolve();
+  }
+}
+
+/**
+ * Await `promise` and return what it rejected with.
+ *
+ * @param promise a promise expected to reject.
+ * @returns the rejection reason.
+ */
+async function rejectionOf(promise: Promise<unknown>): Promise<unknown> {
+  try {
+    await promise;
+  } catch (error: unknown) {
+    return error;
+  }
+  throw new Error("expected the promise to reject");
+}
+
+/**
+ * Unit tests for the DI adapter {@link KeycloakTokenProvider}: the configuration rules (T55-T62 of
+ * the cross-SDK catalogue), the `HttpClient` transport (status, body, timeout, network failure), the
+ * lazy `getToken` path, runtime re-configuration and the shared login. The refresh semantics
+ * themselves are pinned in keycloak-token-session.spec.ts. Network is the Angular HTTP testing
+ * backend; time is Jest's fake timers (which also drive `performance.now`).
  */
 describe("KeycloakTokenProvider", (): void => {
-  /** Drive the provider's setTimeout-based refresh schedule with Jest fake timers. */
   beforeEach((): void => {
     jest.useFakeTimers();
+    logger = new SilentLogger();
   });
 
-  /** Clear any armed refresh timer and hand the clock back to the real timers. */
   afterEach((): void => {
+    TestBed.resetTestingModule();
     jest.clearAllTimers();
     jest.useRealTimers();
   });
 
   /**
-   * Flush the initial login request, assert its shape, respond with tokens and
-   * await the provider's readiness.
+   * Answer the start-up request and await readiness.
    *
-   * @param provider the provider under test.
-   * @param httpMock the testing HTTP controller.
-   * @param grant the expected `grant_type` of the login request.
-   * @returns a promise that resolves once the login response has been flushed and the provider is ready.
+   * @param setupResult the provider and its HTTP mock.
+   * @param grant the expected `grant_type`.
+   * @returns the start-up request.
    */
-  async function completeLogin(
-    provider: KeycloakTokenProvider,
-    httpMock: HttpTestingController,
-    grant: string
-  ): Promise<void> {
-    const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+  async function completeLogin(setupResult: SetupResult, grant: string = "password"): Promise<TestRequest> {
+    const request: TestRequest = setupResult.httpMock.expectOne(TOKEN_ENDPOINT);
     expect(request.request.method).toBe("POST");
     expect(request.request.headers.get("Content-Type")).toBe("application/x-www-form-urlencoded");
-    expect(request.request.body as string).toContain(`grant_type=${grant}`);
-    request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-    await provider.whenReady();
+    expect(formOf(request)["grant_type"]).toBe(grant);
+    flushToken(request, ACCESS_TOKEN);
+    await setupResult.provider.whenReady();
+    return request;
   }
 
-  /**
-   * Drain the microtask queue so a promise chain that spans several `await`s (a
-   * rejected refresh falling through to a full re-login) reaches its next HTTP call.
-   *
-   * @returns a promise that resolves once the queued microtasks have run.
-   */
-  async function flushMicrotasks(): Promise<void> {
-    for (let i: number = 0; i < 10; i++) {
-      await Promise.resolve();
-    }
-  }
-
-  /** Before the login resolves, `getToken` reports no token (interceptors must not block). */
-  it("returns null before the first login completes", (): void => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    expect(provider.getToken()).toBeNull();
-    httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
-  });
-
-  /** A ROPC login POSTs `grant_type=password` + `scope=offline_access` and stores the token. */
-  it("logs in with username + password and serves the access token", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    const body: string = request.request.body as string;
-    expect(body).toContain("grant_type=password");
-    expect(body).toContain("scope=offline_access");
-    expect(body).toContain(`client_id=${CLIENT_ID}`);
-    expect(body).toContain("username=technical-user");
-    expect(body).not.toContain("client_secret");
-    request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-    await provider.whenReady();
-    expect(provider.getToken()).toBe(ACCESS_TOKEN);
-  });
-
-  /** A configured offline token bootstraps directly via a `refresh_token` grant (no password). */
-  it("bootstraps from a configured offline token via the refresh_token grant", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup({
-      keycloakUrl: KEYCLOAK_URL,
-      realm: REALM,
-      clientId: CLIENT_ID,
-      offlineToken: "configured-offline-token"
+  describe("start-up", (): void => {
+    it("returns null before the first login completes", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      expect(result.provider.getToken()).toBeNull();
+      await completeLogin(result);
     });
-    const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    const body: string = request.request.body as string;
-    expect(body).toContain("grant_type=refresh_token");
-    expect(body).toContain("refresh_token=configured-offline-token");
-    expect(body).not.toContain("grant_type=password");
-    request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-    await provider.whenReady();
-    expect(provider.getToken()).toBe(ACCESS_TOKEN);
-  });
 
-  /** An empty `offlineToken` is no token at all: it falls through to the ROPC branch. */
-  it("falls through to the password grant when the offlineToken is empty", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup({ ...PASSWORD_CONFIG, offlineToken: "" });
-    const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    const body: string = request.request.body as string;
-    expect(body).toContain("grant_type=password");
-    expect(body).toContain("scope=offline_access");
-    // No blank `refresh_token` grant was attempted for the empty offline token.
-    expect(body).not.toContain("grant_type=refresh_token");
-    request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-    await provider.whenReady();
-    expect(provider.getToken()).toBe(ACCESS_TOKEN);
-  });
-
-  /** A background refresh fires `REFRESH_SKEW_IN_S` before expiry and swaps in the new token. */
-  it("refreshes the access token shortly before it expires", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    await completeLogin(provider, httpMock, "password");
-    expect(provider.getToken()).toBe(ACCESS_TOKEN);
-
-    // The refresh is armed for (EXPIRES_IN - REFRESH_SKEW_IN_S) seconds.
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    const refreshRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    const body: string = refreshRequest.request.body as string;
-    expect(body).toContain("grant_type=refresh_token");
-    expect(body).toContain(`refresh_token=${REFRESH_TOKEN}`);
-    refreshRequest.flush({ access_token: ACCESS_TOKEN_2, refresh_token: "refresh-token-2", expires_in: EXPIRES_IN });
-    // Let the awaited postTokenRequest promise settle so the new token is stored.
-    await Promise.resolve();
-    expect(provider.getToken()).toBe(ACCESS_TOKEN_2);
-  });
-
-  /** A refresh response that omits `refresh_token` keeps the previous one for the next refresh. */
-  it("retains the previous refresh token when a refresh response omits it", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    await completeLogin(provider, httpMock, "password");
-
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN_2, expires_in: EXPIRES_IN });
-    await Promise.resolve();
-
-    // The next refresh must reuse the original (un-rotated) refresh token.
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    const next: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    expect(next.request.body as string).toContain(`refresh_token=${REFRESH_TOKEN}`);
-    next.flush({ access_token: "access-token-3", expires_in: EXPIRES_IN });
-    await Promise.resolve();
-    expect(provider.getToken()).toBe("access-token-3");
-  });
-
-  /** A blank rotated `refresh_token` must not wipe the stored offline token either. */
-  it("retains the previous refresh token when a refresh response carries an empty one", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    await completeLogin(provider, httpMock, "password");
-
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    httpMock
-      .expectOne(TOKEN_ENDPOINT)
-      .flush({ access_token: ACCESS_TOKEN_2, refresh_token: "", expires_in: EXPIRES_IN });
-    await Promise.resolve();
-
-    // The blank rotation was discarded: the next refresh still carries the original token.
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    const next: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    expect(next.request.body as string).toContain(`refresh_token=${REFRESH_TOKEN}`);
-    next.flush({ access_token: "access-token-3", expires_in: EXPIRES_IN });
-    await Promise.resolve();
-    expect(provider.getToken()).toBe("access-token-3");
-  });
-
-  /** A missing / non-positive `expires_in` floors the refresh delay at `MIN_REFRESH_DELAY_IN_S`. */
-  it("floors the refresh delay when expires_in is absent", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    const login: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    login.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
-    await provider.whenReady();
-
-    jest.advanceTimersByTime(MIN_REFRESH_DELAY_IN_S * 1000);
-    const refreshRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    refreshRequest.flush({ access_token: ACCESS_TOKEN_2, refresh_token: "refresh-token-2", expires_in: EXPIRES_IN });
-    await Promise.resolve();
-    expect(provider.getToken()).toBe(ACCESS_TOKEN_2);
-  });
-
-  /** An `expires_in` of 0 is non-positive and must floor the delay, not arm a zero-delay hot loop. */
-  it("floors the refresh delay when expires_in is zero", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    const login: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    login.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: 0 });
-    await provider.whenReady();
-
-    // Nothing fires before the floor elapses (a zero delay would already have refreshed).
-    jest.advanceTimersByTime((MIN_REFRESH_DELAY_IN_S * 1000) - 1);
-    httpMock.expectNone(TOKEN_ENDPOINT);
-
-    jest.advanceTimersByTime(1);
-    const refreshRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    refreshRequest.flush({ access_token: ACCESS_TOKEN_2, refresh_token: "refresh-token-2", expires_in: EXPIRES_IN });
-    await Promise.resolve();
-    expect(provider.getToken()).toBe(ACCESS_TOKEN_2);
-  });
-
-  /** A negative `expires_in` is likewise discarded in favour of `MIN_REFRESH_DELAY_IN_S`. */
-  it("floors the refresh delay when expires_in is negative", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    const login: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    login.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: -5 });
-    await provider.whenReady();
-
-    // A negative delay would fire on the first tick; the floor holds the refresh back.
-    jest.advanceTimersByTime((MIN_REFRESH_DELAY_IN_S * 1000) - 1);
-    httpMock.expectNone(TOKEN_ENDPOINT);
-
-    jest.advanceTimersByTime(1);
-    const refreshRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    refreshRequest.flush({ access_token: ACCESS_TOKEN_2, refresh_token: "refresh-token-2", expires_in: EXPIRES_IN });
-    await Promise.resolve();
-    expect(provider.getToken()).toBe(ACCESS_TOKEN_2);
-  });
-
-  /** The bounded deadline clamps the scheduled delay below the skew-based delay. */
-  it("clamps the refresh delay to the bounded tokenExpirationInS deadline", async (): Promise<void> => {
-    // tokenExpirationInS (10s) is shorter than (expires_in - skew) so the timer is clamped to ~10s.
-    const { provider, httpMock }: SetupResult = setup({ ...PASSWORD_CONFIG, tokenExpirationInS: 10 });
-    await completeLogin(provider, httpMock, "password");
-
-    // No refresh yet at 9s (the un-clamped delay would be 270s).
-    jest.advanceTimersByTime(9 * 1000);
-    httpMock.expectNone(TOKEN_ENDPOINT);
-
-    // At ~10s the clamped timer fires; the deadline has now elapsed so the loop stops with no HTTP call.
-    jest.advanceTimersByTime(2 * 1000);
-    httpMock.expectNone(TOKEN_ENDPOINT);
-    // The previously-issued access token is still served (it has not been cleared).
-    expect(provider.getToken()).toBe(ACCESS_TOKEN);
-  });
-
-  /** A bounded deadline already in the past at schedule time stops the loop immediately. */
-  it("stops scheduling when the deadline is already in the past after login", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup({ ...PASSWORD_CONFIG, tokenExpirationInS: 0 });
-    const login: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    login.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-    await provider.whenReady();
-
-    // deadlineInMs == now at schedule time -> remainingInMs <= 0 -> no timer armed.
-    jest.advanceTimersByTime(EXPIRES_IN * 1000);
-    httpMock.expectNone(TOKEN_ENDPOINT);
-    expect(provider.getToken()).toBe(ACCESS_TOKEN);
-  });
-
-  /** A background-refresh HTTP failure keeps the previous token AND re-arms the timer. */
-  it("keeps the previous token and re-arms after a failed background refresh", async (): Promise<void> => {
-    // randomFraction 0 puts the retry at the base of its window, so the delay is exactly
-    // REFRESH_RETRY_BASE_DELAY_IN_S rather than drawn.
-    const { provider, httpMock }: SetupResult = setup({
-      ...PASSWORD_CONFIG,
-      randomFraction: (): number => 0
+    it("T36 logs in with exactly the five password-grant fields and serves the token", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      const request: TestRequest = await completeLogin(result);
+      expect(formOf(request)).toEqual({
+        grant_type: "password",
+        client_id: CLIENT_ID,
+        username: "technical-user@example.com",
+        password: "s3cret",
+        scope: "offline_access"
+      });
+      expect(request.request.headers.get("Accept")).toBe("application/json");
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN);
     });
-    await completeLogin(provider, httpMock, "password");
 
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    const refreshRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    refreshRequest.flush("nope", { status: 401, statusText: "Unauthorized" });
-    // Drain the rejected refresh promise + its swallowing catch handler.
-    await Promise.resolve();
-    await Promise.resolve();
-    expect(provider.getToken()).toBe(ACCESS_TOKEN);
-
-    // The catch must RE-ARM. `refresh()` reschedules on its last line, after the `await`
-    // that threw, so the catch is the only thing that can keep proactive renewal alive --
-    // without it one transient 401 ended renewal for the life of the provider and every
-    // later token came from the UNAUTHENTICATED fallback. The re-arm waits the failure
-    // backoff base (5 s): 7.1.1 used MIN_REFRESH_DELAY_IN_S, a 1 Hz poll for a whole outage.
-    jest.advanceTimersByTime(REFRESH_RETRY_BASE_DELAY_IN_S * 1000 - 1);
-    httpMock.expectNone(TOKEN_ENDPOINT);
-    jest.advanceTimersByTime(1);
-    const rearmedRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-    rearmedRequest.flush({
-      access_token: "re-armed-access-token",
-      refresh_token: REFRESH_TOKEN,
-      expires_in: EXPIRES_IN
+    it("T42/T60 starts a token-only config with one refresh grant and no password", async (): Promise<void> => {
+      const result: SetupResult = setup(TOKEN_CONFIG);
+      const request: TestRequest = await completeLogin(result, "refresh_token");
+      expect(formOf(request)).toEqual({
+        grant_type: "refresh_token",
+        client_id: CLIENT_ID,
+        refresh_token: "configured-offline-token"
+      });
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN);
     });
-    await Promise.resolve();
-    await Promise.resolve();
-    // ...and having re-armed, it recovers: the transient failure self-heals.
-    expect(provider.getToken()).toBe("re-armed-access-token");
+
+    it("accepts the deprecated offlineToken alias, and refreshToken wins over it", async (): Promise<void> => {
+      const alias: SetupResult = setup({ ...PASSWORD_CONFIG, offlineToken: "legacy-offline-token" });
+      const aliasRequest: TestRequest = await completeLogin(alias, "refresh_token");
+      expect(formOf(aliasRequest)["refresh_token"]).toBe("legacy-offline-token");
+      TestBed.resetTestingModule();
+      const both: SetupResult = setup({ ...TOKEN_CONFIG, offlineToken: "legacy-offline-token" });
+      const bothRequest: TestRequest = await completeLogin(both, "refresh_token");
+      expect(formOf(bothRequest)["refresh_token"]).toBe("configured-offline-token");
+    });
+
+    it("treats an empty token as no token: it falls through to the password grant", async (): Promise<void> => {
+      const result: SetupResult = setup({ ...PASSWORD_CONFIG, offlineToken: "", refreshToken: "" });
+      await completeLogin(result, "password");
+    });
+
+    it("T44 a refused start-up token rejects whenReady without a password fallback", async (): Promise<void> => {
+      const result: SetupResult = setup({ ...TOKEN_CONFIG, username: "u", password: "configured-too" });
+      result.httpMock
+        .expectOne(TOKEN_ENDPOINT)
+        .flush(JSON.stringify({ error: "invalid_grant" }), { status: 400, statusText: "Bad Request" });
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect(error).toBeInstanceOf(KeycloakAuthenticationError);
+      expect((error as Error).message).toBe('Keycloak token refresh failed with status 400: {"error":"invalid_grant"}');
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+      expect(result.provider.getToken()).toBeNull();
+    });
+
+    it("no longer requires a refresh_token in the login response", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush(JSON.stringify({ access_token: ACCESS_TOKEN, expires_in: 300 }));
+      await result.provider.whenReady();
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN);
+    });
   });
 
-  /** Consecutive failures back off exponentially and stop growing at the ceiling. */
-  it("backs off exponentially while refreshes keep failing, capped at the ceiling", async (): Promise<void> => {
-    // randomFraction 1 puts every retry at the TOP of its window, i.e. exactly the ceiling
-    // for that failure count -- which is what makes the ladder observable at all.
-    const { provider, httpMock }: SetupResult = setup({
-      ...PASSWORD_CONFIG,
-      randomFraction: (): number => 1
+  describe("configuration rules", (): void => {
+    it.each([
+      ["only keycloakUrl", { realm: "", clientId: "" }],
+      ["only realm", { keycloakUrl: "", clientId: "" }],
+      ["only clientId", { keycloakUrl: "", realm: "" }],
+      ["keycloakUrl and realm", { clientId: "" }],
+      ["realm and clientId", { keycloakUrl: "" }],
+      ["keycloakUrl and clientId", { realm: "" }]
+    ])("T61 rejects a partial triple (%s) before any request", async (_case: string, change: Partial<KeycloakTokenProviderConfig>): Promise<void> => {
+      const result: SetupResult = setup({ ...PASSWORD_CONFIG, ...change });
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect(error).toBeInstanceOf(KeycloakAuthenticationError);
+      expect((error as Error).message).toBe(
+        "The Keycloak fields `keycloakUrl`, `realm`, and `clientId` must be provided together in KeycloakTokenProviderConfig."
+      );
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
     });
-    await completeLogin(provider, httpMock, "password");
 
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
-    await flushMicrotasks();
+    it("T57 rejects a triple with neither a password nor a refresh token", async (): Promise<void> => {
+      const result: SetupResult = setup({ keycloakUrl: KEYCLOAK_URL, realm: REALM, clientId: CLIENT_ID, username: "u" });
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect((error as Error).message).toContain("`password`");
+      expect((error as Error).message).toContain("refresh_token");
+      expect((error as Error).message).toContain("`refreshToken`");
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+    });
 
-    // base * 2^(failures-1), capped at REFRESH_RETRY_MAX_DELAY_IN_S. The cap is the point:
-    // without it a long outage would push the next attempt out by hours.
-    const expectedDelaysInS: number[] = [5, 10, 20, 40, 80, 160, 300, 300];
-    for (const delayInS of expectedDelaysInS) {
-      jest.advanceTimersByTime(delayInS * 1000 - 1);
-      httpMock.expectNone(TOKEN_ENDPOINT);
+    it("keeps the username rule of the password grant", async (): Promise<void> => {
+      const result: SetupResult = setup({ ...PASSWORD_CONFIG, username: "" });
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect((error as Error).message).toBe(
+        "KeycloakTokenProvider requires either an offlineToken or a username + password pair"
+      );
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+    });
 
+    it("T56 a token-only config needs no username and no password", async (): Promise<void> => {
+      const result: SetupResult = setup({ ...TOKEN_CONFIG, username: undefined, password: undefined });
+      await completeLogin(result, "refresh_token");
+    });
+
+    it("T58 a password config still constructs and logs in", async (): Promise<void> => {
+      await completeLogin(setup(PASSWORD_CONFIG));
+    });
+
+    it("T62 builds nothing and attaches nothing without a Keycloak triple", async (): Promise<void> => {
+      const result: SetupResult = setup({ keycloakUrl: "", realm: "", clientId: "", password: "pw" });
+      await result.provider.whenReady();
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+      expect(result.provider.getToken()).toBeNull();
+      expect(await result.provider.ensureFreshToken()).toBeNull();
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+    });
+
+    it("T62 tolerates absent triple fields at runtime", async (): Promise<void> => {
+      const result: SetupResult = setup({} as KeycloakTokenProviderConfig);
+      await result.provider.whenReady();
+      expect(result.provider.getToken()).toBeNull();
+    });
+
+    it("T55 has no positional surface: config and options are objects", (): void => {
+      // The provider is built by DI with no parameters, so there is no argument order to keep stable.
+      expect(KeycloakTokenProvider.length).toBe(0);
+    });
+
+    it("T59 renders the configuration redacted: a non-empty secret is masked, an empty one stays empty", async (): Promise<void> => {
+      const result: SetupResult = setup({ ...PASSWORD_CONFIG, refreshToken: "secret-offline-77", offlineToken: "" });
+      const rendered: string = `${String(result.provider)} ${JSON.stringify(result.provider)}`;
+      expect(rendered).toContain("***REDACTED***");
+      expect(rendered).not.toContain("secret-offline-77");
+      expect(rendered).not.toContain("s3cret");
+      expect(result.provider.toJSON()["offlineToken"]).toBe("");
+      expect(result.provider.toJSON()["realm"]).toBe(REALM);
+      expect(String(result.provider).startsWith("KeycloakTokenProvider(")).toBe(true);
+      await completeLogin(result, "refresh_token");
+    });
+
+    it("renders an unconfigured provider as an empty object", (): void => {
+      expect(setup(null).provider.toJSON()).toEqual({});
+    });
+  });
+
+  describe("HttpClient transport", (): void => {
+    it("quotes the raw error body of a non-2xx answer", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush("<html>bad gateway</html>", { status: 502, statusText: "Bad Gateway" });
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect((error as Error).message).toBe("Keycloak token login failed with status 502: <html>bad gateway</html>");
+    });
+
+    it("quotes an empty body when the error answer carried no text", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).error(new ProgressEvent("error"), { status: 500, statusText: "Internal" });
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect((error as Error).message).toBe("Keycloak token login failed with status 500: ");
+    });
+
+    it("reports a status-0 answer as an unreachable endpoint, with the HTTP error as the cause", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).error(new ProgressEvent("error"));
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect((error as Error).message).toContain("Keycloak token login could not reach the token endpoint (HttpErrorResponse:");
+      expect((error as Error).cause).toBeInstanceOf(KeycloakTransportError);
+    });
+
+    it("times a hanging token request out after 10 s", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      const request: TestRequest = result.httpMock.expectOne(TOKEN_ENDPOINT);
+      jest.advanceTimersByTime(9999);
+      expect(request.cancelled).toBe(false);
       jest.advanceTimersByTime(1);
-      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect((error as Error).message).toBe(
+        "Keycloak token login could not reach the token endpoint (TimeoutError: Timeout has occurred)"
+      );
+      expect(request.cancelled).toBe(true);
+    });
+
+    it("rejects a 200 whose body is empty", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush("");
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect((error as Error).message).toBe("Keycloak token login returned status 200 with a body that is not JSON");
+    });
+
+    it("rejects a bodiless 204", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush(null);
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect((error as Error).message).toBe("Keycloak token login returned status 204 with a body that is not JSON");
+    });
+
+    it("rejects a 200 whose JSON is an array", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush("[]");
+      const error: unknown = await rejectionOf(result.provider.whenReady());
+      expect((error as Error).message).toBe("Keycloak token login returned a JSON array instead of an object");
+    });
+  });
+
+  describe("refresh", (): void => {
+    it("refreshes in the background shortly before expiry", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(result);
+      jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
+      const refresh: TestRequest = result.httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(formOf(refresh)).toEqual({ grant_type: "refresh_token", client_id: CLIENT_ID, refresh_token: REFRESH_TOKEN });
+      flushToken(refresh, ACCESS_TOKEN_2);
       await flushMicrotasks();
-    }
-    expect(provider.getToken()).toBe(ACCESS_TOKEN);
-  });
-
-  /** A successful refresh resets the ladder, so the next failure waits the base again. */
-  it("resets the backoff ladder after a successful refresh", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup({
-      ...PASSWORD_CONFIG,
-      randomFraction: (): number => 1
-    });
-    await completeLogin(provider, httpMock, "password");
-
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
-    await flushMicrotasks();
-
-    // Failure 1 -> 5 s, and this attempt fails too.
-    jest.advanceTimersByTime(5000);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
-    await flushMicrotasks();
-
-    // Failure 2 -> 10 s, and this attempt SUCCEEDS.
-    jest.advanceTimersByTime(10000);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush({
-      access_token: ACCESS_TOKEN_2,
-      refresh_token: REFRESH_TOKEN,
-      expires_in: EXPIRES_IN
-    });
-    await flushMicrotasks();
-    expect(provider.getToken()).toBe(ACCESS_TOKEN_2);
-
-    // Back on the success schedule, and that attempt fails again.
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
-    await flushMicrotasks();
-
-    // Because the ladder was reset it must wait 5 s, not 20 s.
-    jest.advanceTimersByTime(4999);
-    httpMock.expectNone(TOKEN_ENDPOINT);
-    jest.advanceTimersByTime(1);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 503, statusText: "Unavailable" });
-    await flushMicrotasks();
-  });
-
-  /** A failed initial login rejects `whenReady` with a `KeycloakAuthenticationError`. */
-  it("rejects whenReady with KeycloakAuthenticationError on a failed login", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush("bad credentials", { status: 401, statusText: "Unauthorized" });
-    await expect(provider.whenReady()).rejects.toBeInstanceOf(KeycloakAuthenticationError);
-    expect(provider.getToken()).toBeNull();
-  });
-
-  /** A login response without an `access_token` rejects with a descriptive error. */
-  it("rejects when the login response carries no access_token", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush({ refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-    await expect(provider.whenReady()).rejects.toThrow(/did not contain an access_token/);
-  });
-
-  /** An empty-string `access_token` is as unusable as an absent one and must not be stored. */
-  it("rejects when the login response carries an empty access_token", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    httpMock
-      .expectOne(TOKEN_ENDPOINT)
-      .flush({ access_token: "", refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-    await expect(provider.whenReady()).rejects.toThrow(/did not contain an access_token/);
-    expect(provider.getToken()).toBeNull();
-  });
-
-  /** A login response without a `refresh_token` rejects (the client lacks offline_access). */
-  it("rejects when the login response carries no refresh_token", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, expires_in: EXPIRES_IN });
-    await expect(provider.whenReady()).rejects.toThrow(/did not contain a refresh_token/);
-  });
-
-  /** An empty-string `refresh_token` leaves nothing to refresh with and rejects likewise. */
-  it("rejects when the login response carries an empty refresh_token", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    httpMock
-      .expectOne(TOKEN_ENDPOINT)
-      .flush({ access_token: ACCESS_TOKEN, refresh_token: "", expires_in: EXPIRES_IN });
-    await expect(provider.whenReady()).rejects.toThrow(/did not contain a refresh_token/);
-  });
-
-  /** Neither an offline token nor a username + password pair is configured. */
-  it("rejects when no credentials are configured", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup({ keycloakUrl: KEYCLOAK_URL, realm: REALM, clientId: CLIENT_ID });
-    // Probed before the await: a wrongly-issued POST is already registered when `setup` returns,
-    // and it would never be flushed, so `whenReady` would hang instead of failing this assertion.
-    httpMock.expectNone(TOKEN_ENDPOINT);
-    await expect(provider.whenReady()).rejects.toThrow(/requires either an offlineToken or a username/);
-  });
-
-  /** An empty username is not a credential, even alongside a password. */
-  it("rejects when the configured username is empty", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup({
-      keycloakUrl: KEYCLOAK_URL,
-      realm: REALM,
-      clientId: CLIENT_ID,
-      username: "",
-      password: "s3cret"
-    });
-    httpMock.expectNone(TOKEN_ENDPOINT);
-    await expect(provider.whenReady()).rejects.toThrow(/requires either an offlineToken or a username/);
-  });
-
-  /** A username without any password cannot drive the ROPC grant. */
-  it("rejects when the password is omitted", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup({
-      keycloakUrl: KEYCLOAK_URL,
-      realm: REALM,
-      clientId: CLIENT_ID,
-      username: "u@e.com"
-    });
-    httpMock.expectNone(TOKEN_ENDPOINT);
-    await expect(provider.whenReady()).rejects.toThrow(/requires either an offlineToken or a username/);
-  });
-
-  /** An empty password is rejected rather than sent as a blank ROPC credential. */
-  it("rejects when the configured password is empty", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup({
-      keycloakUrl: KEYCLOAK_URL,
-      realm: REALM,
-      clientId: CLIENT_ID,
-      username: "u@e.com",
-      password: ""
-    });
-    httpMock.expectNone(TOKEN_ENDPOINT);
-    await expect(provider.whenReady()).rejects.toThrow(/requires either an offlineToken or a username/);
-  });
-
-  /** ngOnDestroy stops the refresh loop so an armed timer never fires. */
-  it("stops the refresh loop on destroy", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    await completeLogin(provider, httpMock, "password");
-
-    provider.ngOnDestroy();
-    jest.advanceTimersByTime(EXPIRES_IN * 1000);
-    httpMock.expectNone(TOKEN_ENDPOINT);
-    // Idempotent: a second destroy is a no-op.
-    provider.ngOnDestroy();
-  });
-
-  /** A destroy mid-refresh skips re-arming the next timer once the in-flight call resolves. */
-  it("does not re-arm the timer when destroyed while a refresh is in flight", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    await completeLogin(provider, httpMock, "password");
-
-    // Fire the armed refresh; it issues the HTTP call and awaits the response.
-    jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-    const refreshRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-
-    // Destroy while the refresh is awaiting the network, then let it resolve: storeTokens
-    // runs but scheduleRefresh sees `stopped` and arms no further timer.
-    provider.ngOnDestroy();
-    refreshRequest.flush({ access_token: ACCESS_TOKEN_2, refresh_token: "refresh-token-2", expires_in: EXPIRES_IN });
-    await Promise.resolve();
-
-    expect(provider.getToken()).toBe(ACCESS_TOKEN_2);
-    jest.advanceTimersByTime(EXPIRES_IN * 1000);
-    httpMock.expectNone(TOKEN_ENDPOINT);
-  });
-
-  /**
-   * The `keycloakVerifySsl` flag is carried for cross-SDK config parity with the
-   * Python/Node.js clients but is inert in the browser (the user agent owns the
-   * TLS handshake). These tests pin the config -> provider threading for every
-   * value and prove the flag never reaches — or breaks — the token request.
-   */
-  describe("keycloakVerifySsl (browser no-op, config -> provider parity)", (): void => {
-    /** An offline-token config that logs in via a `refresh_token` grant. */
-    const OFFLINE_CONFIG: KeycloakTokenProviderConfig = {
-      keycloakUrl: KEYCLOAK_URL,
-      realm: REALM,
-      clientId: CLIENT_ID,
-      offlineToken: "configured-offline-token"
-    };
-
-    /** Omitting the field defaults the stored flag to verification-ON (secure). */
-    it("defaults the stored flag to true when keycloakVerifySsl is omitted", (): void => {
-      const { provider, httpMock }: SetupResult = setup(OFFLINE_CONFIG);
-      expect(provider.keycloakVerifySsl).toBe(true);
-      httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN_2);
     });
 
-    /** An explicit true is stored as true. */
-    it("stores an explicit keycloakVerifySsl: true as true", (): void => {
-      const { provider, httpMock }: SetupResult = setup({ ...OFFLINE_CONFIG, keycloakVerifySsl: true });
-      expect(provider.keycloakVerifySsl).toBe(true);
-      httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
+    it("floors the refresh delay when expires_in is absent", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush(JSON.stringify({ access_token: ACCESS_TOKEN }));
+      await result.provider.whenReady();
+      jest.advanceTimersByTime((MIN_REFRESH_DELAY_IN_S * 1000) - 1);
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+      jest.advanceTimersByTime(1);
+      flushToken(result.httpMock.expectOne(TOKEN_ENDPOINT), ACCESS_TOKEN_2);
+      await flushMicrotasks();
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN_2);
     });
 
-    /** An explicit false is threaded from config through to the provider field. */
-    it("stores keycloakVerifySsl: false as false (threaded config -> provider)", (): void => {
-      const { provider, httpMock }: SetupResult = setup({ ...OFFLINE_CONFIG, keycloakVerifySsl: false });
-      expect(provider.keycloakVerifySsl).toBe(false);
-      httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
+    it("keeps the previous token and re-arms with the backoff base after a failed background refresh", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(result);
+      jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
+      await flushMicrotasks();
+      // Inside the leeway getToken goes through the shared decision: backing off, still valid.
+      expect(await result.provider.getToken()).toBe(ACCESS_TOKEN);
+      expect(logger.warnings).toHaveLength(1);
+      // Never a password login on a refresh path.
+      jest.advanceTimersByTime((REFRESH_RETRY_BASE_DELAY_IN_S * 1000) - 1);
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+      jest.advanceTimersByTime(1);
+      const retry: TestRequest = result.httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(formOf(retry)["grant_type"]).toBe("refresh_token");
+      flushToken(retry, "re-armed-access-token");
+      await flushMicrotasks();
+      expect(result.provider.getToken()).toBe("re-armed-access-token");
     });
 
-    /**
-     * The flag is inert at the transport layer: with keycloakVerifySsl: false the
-     * provider issues the SAME single POST (same URL, method, headers, body) and
-     * logs in exactly as with the field omitted — proving it is a no-op, not wired
-     * to TLS.
-     */
-    it("does not alter or break the token request when keycloakVerifySsl is false", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup({ ...OFFLINE_CONFIG, keycloakVerifySsl: false });
-      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+    it("stops the background refresh when the tokenExpirationInS deadline is reached", async (): Promise<void> => {
+      const result: SetupResult = setup({ ...PASSWORD_CONFIG, tokenExpirationInS: 100 });
+      await completeLogin(result);
+      jest.advanceTimersByTime(100 * 1000);
+      await flushMicrotasks();
+      jest.advanceTimersByTime(EXPIRES_IN * 1000);
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+      // Past the deadline the token is served as-is and allowed to lapse.
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN);
+    });
 
-      expect(request.request.method).toBe("POST");
-      expect(request.request.headers.get("Content-Type")).toBe("application/x-www-form-urlencoded");
-      const body: string = request.request.body as string;
-      expect(body).toContain("grant_type=refresh_token");
-      expect(body).toContain(`client_id=${CLIENT_ID}`);
-      expect(body).toContain("refresh_token=configured-offline-token");
+    it("T19 getToken inside the leeway runs the shared refresh and serves the still-valid token on failure", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(result);
+      result.provider.ngOnDestroy();
+      jest.advanceTimersByTime(271 * 1000);
+      const first: TokenResult = result.provider.getToken();
+      const second: TokenResult = result.provider.getToken();
+      expect(typeof (first as Promise<string | null>).then).toBe("function");
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush("down", { status: 503, statusText: "Unavailable" });
+      expect(await first).toBe(ACCESS_TOKEN);
+      expect(await second).toBe(ACCESS_TOKEN);
+      expect(logger.warnings[0]).toContain("refresh failed (attempt 1)");
+    });
 
-      request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await provider.whenReady();
-
-      expect(provider.getToken()).toBe(ACCESS_TOKEN);
-      provider.ngOnDestroy();
+    it("T22 getToken rejects for an expired token whose refresh fails", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(result);
+      result.provider.ngOnDestroy();
+      jest.advanceTimersByTime(400 * 1000);
+      const token: TokenResult = result.provider.getToken();
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush("refused", { status: 400, statusText: "Bad Request" });
+      const error: unknown = await rejectionOf(token as Promise<string | null>);
+      expect(error).toBeInstanceOf(KeycloakAuthenticationError);
+      expect((error as Error).message).toContain("status 400");
     });
   });
 
-  /** KeycloakAuthenticationError carries the expected name + message. */
-  it("KeycloakAuthenticationError exposes its name and message", (): void => {
-    const error: KeycloakAuthenticationError = new KeycloakAuthenticationError("boom");
-    expect(error).toBeInstanceOf(Error);
-    expect(error.name).toBe("KeycloakAuthenticationError");
-    expect(error.message).toBe("boom");
-  });
+  describe("ensureFreshToken", (): void => {
+    it("returns null and issues no request when unconfigured", async (): Promise<void> => {
+      const result: SetupResult = setup(null);
+      expect(await result.provider.ensureFreshToken()).toBeNull();
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+    });
 
-  /** The error message includes the HTTP status from a failed token request. */
-  it("includes the HTTP status in the authentication error message", async (): Promise<void> => {
-    const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-    httpMock.expectOne(TOKEN_ENDPOINT).flush("server error", { status: 500, statusText: "Server Error" });
-    await expect(provider.whenReady()).rejects.toThrow(/failed with status 500/);
+    it("returns the cached token without a request while it is still valid", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(result);
+      expect(await result.provider.ensureFreshToken()).toBe(ACCESS_TOKEN);
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+    });
+
+    it("renews unconditionally when force is set, with a refresh grant", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(result);
+      const renewed: Promise<string | null> = result.provider.ensureFreshToken({ force: true });
+      await flushMicrotasks();
+      const request: TestRequest = result.httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(formOf(request)["grant_type"]).toBe("refresh_token");
+      flushToken(request, ACCESS_TOKEN_2);
+      expect(await renewed).toBe(ACCESS_TOKEN_2);
+    });
+
+    it("waits for a start-up that is still running", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      const token: Promise<string | null> = result.provider.ensureFreshToken();
+      flushToken(result.httpMock.expectOne(TOKEN_ENDPOINT), ACCESS_TOKEN);
+      expect(await token).toBe(ACCESS_TOKEN);
+    });
+
+    it("runs the start-up again after it failed, and rejects when it fails again", async (): Promise<void> => {
+      const result: SetupResult = setup(TOKEN_CONFIG);
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush("refused", { status: 400, statusText: "Bad Request" });
+      await rejectionOf(result.provider.whenReady());
+      const retry: Promise<string | null> = result.provider.ensureFreshToken();
+      await flushMicrotasks();
+      const again: TestRequest = result.httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(formOf(again)["grant_type"]).toBe("refresh_token");
+      again.flush("refused", { status: 400, statusText: "Bad Request" });
+      expect(await rejectionOf(retry)).toBeInstanceOf(KeycloakAuthenticationError);
+      const recovered: Promise<string | null> = result.provider.ensureFreshToken();
+      await flushMicrotasks();
+      flushToken(result.httpMock.expectOne(TOKEN_ENDPOINT), ACCESS_TOKEN);
+      expect(await recovered).toBe(ACCESS_TOKEN);
+    });
   });
 
   describe("configure (credentials supplied at runtime)", (): void => {
-    /** Without a config the provider stays idle: no login is attempted and no token is served. */
     it("stays idle and issues no request when constructed without a config", (): void => {
-      const { provider, httpMock }: SetupResult = setupUnconfigured();
-      expect(provider.getToken()).toBeNull();
-      httpMock.expectNone(TOKEN_ENDPOINT);
+      const result: SetupResult = setup(null);
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+      expect(result.provider.getToken()).toBeNull();
     });
 
-    /** configure() supplies the credentials after bootstrap and performs the login. */
-    it("logs in with a config supplied after construction", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setupUnconfigured();
-      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
-      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-      expect(request.request.body as string).toContain("grant_type=password");
-      request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+    it("logs in with a config supplied after construction and resolves whenReady", async (): Promise<void> => {
+      const result: SetupResult = setup(null);
+      const configured: Promise<void> = result.provider.configure(PASSWORD_CONFIG);
+      await flushMicrotasks();
+      flushToken(result.httpMock.expectOne(TOKEN_ENDPOINT), ACCESS_TOKEN);
       await configured;
-      expect(provider.getToken()).toBe(ACCESS_TOKEN);
-      await provider.whenReady();
+      await result.provider.whenReady();
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN);
     });
 
-    /** Re-configuring re-points the provider at different credentials and discards the old token. */
-    it("replaces an earlier config and re-logs in with the new credentials", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      await completeLogin(provider, httpMock, "password");
-      expect(provider.getToken()).toBe(ACCESS_TOKEN);
-
-      const configured: Promise<void> = provider.configure({
-        ...PASSWORD_CONFIG,
-        username: "other-technical-user@example.com"
-      });
-      // The previous token is dropped immediately, so nothing stale can be sent.
-      expect(provider.getToken()).toBeNull();
-      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-      expect(request.request.body as string).toContain("username=other-technical-user");
-      request.flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await configured;
-      expect(provider.getToken()).toBe(ACCESS_TOKEN_2);
+    it("rejects configure() and whenReady() when the first runtime login fails", async (): Promise<void> => {
+      const result: SetupResult = setup(null);
+      const configured: Promise<void> = result.provider.configure(PASSWORD_CONFIG);
+      await flushMicrotasks();
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
+      expect(await rejectionOf(configured)).toBeInstanceOf(KeycloakAuthenticationError);
+      expect(await rejectionOf(result.provider.whenReady())).toBeInstanceOf(KeycloakAuthenticationError);
+      expect(result.provider.getToken()).toBeNull();
     });
 
-    /** Re-configuring cancels the timer armed by the previous config (only one refresh stays armed). */
-    it("cancels the refresh armed by the previous config", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      await completeLogin(provider, httpMock, "password");
-
-      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
-      httpMock
-        .expectOne(TOKEN_ENDPOINT)
-        .flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await configured;
-
-      // Advancing past the schedule must fire exactly ONE refresh (the new config's).
-      // If the timer armed by the previous config had survived, expectOne() would see two.
+    it("replaces an earlier config and stops the refresh it had armed", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(result);
+      const reconfigured: Promise<void> = result.provider.configure({ ...PASSWORD_CONFIG, username: "other-user" });
+      await flushMicrotasks();
+      const login: TestRequest = result.httpMock.expectOne(TOKEN_ENDPOINT);
+      expect(formOf(login)["username"]).toBe("other-user");
+      flushToken(login, ACCESS_TOKEN_2, { expires_in: 3600 });
+      await reconfigured;
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN_2);
+      // The first login's refresh (due at 270 s) is gone with its released session.
       jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
-      await Promise.resolve();
-      httpMock
-        .expectOne(TOKEN_ENDPOINT)
-        .flush({ access_token: "access-token-3", refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
     });
 
-    /** A configure() whose login fails leaves the provider unauthenticated and reports the error. */
-    it("rejects and serves no token when the runtime login fails", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setupUnconfigured();
-      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
-      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
-      await expect(configured).rejects.toBeInstanceOf(KeycloakAuthenticationError);
-      expect(provider.getToken()).toBeNull();
+    it("drops a login superseded by a later configure()", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      const first: TestRequest = result.httpMock.expectOne(TOKEN_ENDPOINT);
+      const reconfigured: Promise<void> = result.provider.configure({ ...PASSWORD_CONFIG, username: "other-user" });
+      await flushMicrotasks();
+      const second: TestRequest = result.httpMock.expectOne(TOKEN_ENDPOINT);
+      flushToken(second, ACCESS_TOKEN_2);
+      await reconfigured;
+      flushToken(first, "superseded-token");
+      await result.provider.whenReady();
+      await flushMicrotasks();
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN_2);
+      // The superseded session was released: its refresh never fires.
+      jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
+      const refreshes: TestRequest[] = result.httpMock.match(TOKEN_ENDPOINT);
+      expect(refreshes).toHaveLength(1);
+      expect(formOf(refreshes[0])["refresh_token"]).toBe(REFRESH_TOKEN);
+      flushToken(refreshes[0], "access-token-3");
+    });
+  });
+
+  describe("lifecycle and sharing", (): void => {
+    it("stops the background refresh on destroy, keeping the lazy path", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      await completeLogin(result);
+      result.provider.ngOnDestroy();
+      result.provider.ngOnDestroy();
+      jest.advanceTimersByTime(EXPIRES_IN * 1000 * 2);
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+      const token: TokenResult = result.provider.getToken();
+      flushToken(result.httpMock.expectOne(TOKEN_ENDPOINT), ACCESS_TOKEN_2);
+      expect(await token).toBe(ACCESS_TOKEN_2);
     });
 
-    /**
-     * A provider constructed without a config has its first login in configure(), so a failure
-     * there must settle whenReady() too — otherwise every awaiter hangs forever.
-     */
-    it("rejects whenReady() when the first runtime login fails", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setupUnconfigured();
-      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
-      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
-      await expect(configured).rejects.toBeInstanceOf(KeycloakAuthenticationError);
-
-      await expect(provider.whenReady()).rejects.toBeInstanceOf(KeycloakAuthenticationError);
+    it("releases a login that completes after destroy, without arming a refresh", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      const login: TestRequest = result.httpMock.expectOne(TOKEN_ENDPOINT);
+      result.provider.ngOnDestroy();
+      flushToken(login, ACCESS_TOKEN);
+      await result.provider.whenReady();
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN);
+      jest.advanceTimersByTime(EXPIRES_IN * 1000);
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
     });
 
-    /** The first successful runtime login resolves whenReady() for an initially idle provider. */
-    it("resolves whenReady() once the first runtime login succeeds", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setupUnconfigured();
-      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
-      httpMock
-        .expectOne(TOKEN_ENDPOINT)
-        .flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
+    it("shares one login between providers with the same credentials on one HttpClient", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      const second: KeycloakTokenProvider = TestBed.runInInjectionContext(
+        (): KeycloakTokenProvider => new KeycloakTokenProvider()
+      );
+      await completeLogin(result);
+      await second.whenReady();
+      expect(second.getToken()).toBe(ACCESS_TOKEN);
+      // Destroying one keeps the shared refresh alive for the other.
+      result.provider.ngOnDestroy();
+      jest.advanceTimersByTime((EXPIRES_IN - REFRESH_SKEW_IN_S) * 1000);
+      flushToken(result.httpMock.expectOne(TOKEN_ENDPOINT), ACCESS_TOKEN_2);
+      await flushMicrotasks();
+      expect(second.getToken()).toBe(ACCESS_TOKEN_2);
+      expect(TestBed.inject(HttpClient)).toBeDefined();
+    });
+  });
+
+  describe("keycloakVerifySsl (browser no-op, config -> provider parity)", (): void => {
+    it("defaults the stored flag to true", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      expect(result.provider.keycloakVerifySsl).toBe(true);
+      await completeLogin(result);
+    });
+
+    it("stores keycloakVerifySsl: false and leaves the token request unchanged", async (): Promise<void> => {
+      const result: SetupResult = setup({ ...PASSWORD_CONFIG, keycloakVerifySsl: false });
+      expect(result.provider.keycloakVerifySsl).toBe(false);
+      await completeLogin(result);
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN);
+    });
+
+    it("is unset on an idle provider and adopted by configure()", async (): Promise<void> => {
+      const result: SetupResult = setup(null);
+      expect(result.provider.keycloakVerifySsl).toBe(true);
+      const configured: Promise<void> = result.provider.configure({ ...PASSWORD_CONFIG, keycloakVerifySsl: false });
+      expect(result.provider.keycloakVerifySsl).toBe(false);
+      await flushMicrotasks();
+      flushToken(result.httpMock.expectOne(TOKEN_ENDPOINT), ACCESS_TOKEN);
       await configured;
-
-      await expect(provider.whenReady()).resolves.toBeUndefined();
     });
   });
-
-  describe("ensureFreshToken (pre-flight and forced renewal)", (): void => {
-    /** An unconfigured provider has nothing to renew and must not attempt a grant. */
-    it("returns null and issues no request when unconfigured", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setupUnconfigured();
-      await expect(provider.ensureFreshToken()).resolves.toBeNull();
-      httpMock.expectNone(TOKEN_ENDPOINT);
-    });
-
-    /** A token comfortably inside its lifetime is served straight back, with no network call. */
-    it("returns the cached token without a request while it is still valid", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      await completeLogin(provider, httpMock, "password");
-      await expect(provider.ensureFreshToken()).resolves.toBe(ACCESS_TOKEN);
-      httpMock.expectNone(TOKEN_ENDPOINT);
-    });
-
-    /** A response without expires_in leaves the expiry unknown; the cached token is still served. */
-    it("serves the cached token when the expiry is unknown", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      httpMock.expectOne(TOKEN_ENDPOINT).flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN });
-      await provider.whenReady();
-      await expect(provider.ensureFreshToken()).resolves.toBe(ACCESS_TOKEN);
-      httpMock.expectNone(TOKEN_ENDPOINT);
-    });
-
-    /** Inside the skew window the token counts as spent and is renewed before being handed out. */
-    it("renews a token that is within the refresh skew of expiring", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      await completeLogin(provider, httpMock, "password");
-
-      // Sit just inside the skew window, before the scheduled timer would have fired.
-      jest.setSystemTime(Date.now() + ((EXPIRES_IN - REFRESH_SKEW_IN_S + 1) * 1000));
-      const fresh: Promise<string | null> = provider.ensureFreshToken();
-      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-      expect(request.request.body as string).toContain("grant_type=refresh_token");
-      request.flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await expect(fresh).resolves.toBe(ACCESS_TOKEN_2);
-    });
-
-    /** force renews even a token that still looks perfectly valid (post-UNAUTHENTICATED recovery). */
-    it("renews unconditionally when force is set", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      await completeLogin(provider, httpMock, "password");
-
-      const fresh: Promise<string | null> = provider.ensureFreshToken({ force: true });
-      httpMock
-        .expectOne(TOKEN_ENDPOINT)
-        .flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await expect(fresh).resolves.toBe(ACCESS_TOKEN_2);
-    });
-
-    /** Concurrent callers share one renewal rather than stampeding the token endpoint. */
-    it("single-flights concurrent renewals into one grant", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      await completeLogin(provider, httpMock, "password");
-
-      const first: Promise<string | null> = provider.ensureFreshToken({ force: true });
-      const second: Promise<string | null> = provider.ensureFreshToken({ force: true });
-      const third: Promise<string | null> = provider.ensureFreshToken({ force: true });
-      // expectOne() fails outright if the burst produced more than a single request.
-      httpMock
-        .expectOne(TOKEN_ENDPOINT)
-        .flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await expect(Promise.all([first, second, third])).resolves.toEqual([
-        ACCESS_TOKEN_2,
-        ACCESS_TOKEN_2,
-        ACCESS_TOKEN_2
-      ]);
-    });
-
-    /** A renewal after a completed one issues a fresh grant (the single-flight slot is released). */
-    it("allows a further renewal once the in-flight one has settled", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      await completeLogin(provider, httpMock, "password");
-
-      const first: Promise<string | null> = provider.ensureFreshToken({ force: true });
-      httpMock
-        .expectOne(TOKEN_ENDPOINT)
-        .flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await first;
-
-      const second: Promise<string | null> = provider.ensureFreshToken({ force: true });
-      httpMock
-        .expectOne(TOKEN_ENDPOINT)
-        .flush({ access_token: "access-token-3", refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await expect(second).resolves.toBe("access-token-3");
-    });
-
-    /** A dead refresh token falls back to a full re-login with the configured credentials. */
-    it("falls back to a full re-login when the refresh grant is rejected", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      await completeLogin(provider, httpMock, "password");
-
-      const fresh: Promise<string | null> = provider.ensureFreshToken({ force: true });
-      const refreshRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-      expect(refreshRequest.request.body as string).toContain("grant_type=refresh_token");
-      refreshRequest.flush("revoked", { status: 400, statusText: "Bad Request" });
-      await flushMicrotasks();
-
-      const loginRequest: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-      expect(loginRequest.request.body as string).toContain("grant_type=password");
-      loginRequest.flush({ access_token: ACCESS_TOKEN_2, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await expect(fresh).resolves.toBe(ACCESS_TOKEN_2);
-    });
-
-    /**
-     * With a config present but no token yet cached (an earlier login failed), a
-     * plain pre-flight call has nothing usable to serve and logs in from scratch.
-     */
-    it("logs in from scratch when configured but holding no token", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setupUnconfigured();
-      const configured: Promise<void> = provider.configure(PASSWORD_CONFIG);
-      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
-      await expect(configured).rejects.toBeInstanceOf(KeycloakAuthenticationError);
-      expect(provider.getToken()).toBeNull();
-
-      // No force: the cached token is absent, so this must still trigger a login.
-      const fresh: Promise<string | null> = provider.ensureFreshToken();
-      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
-      expect(request.request.body as string).toContain("grant_type=password");
-      request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN });
-      await expect(fresh).resolves.toBe(ACCESS_TOKEN);
-    });
-
-    /** When even the re-login fails the caller sees the authentication error. */
-    it("rejects when the fallback re-login also fails", async (): Promise<void> => {
-      const { provider, httpMock }: SetupResult = setup(PASSWORD_CONFIG);
-      await completeLogin(provider, httpMock, "password");
-
-      const fresh: Promise<string | null> = provider.ensureFreshToken({ force: true });
-      httpMock.expectOne(TOKEN_ENDPOINT).flush("revoked", { status: 400, statusText: "Bad Request" });
-      await flushMicrotasks();
-      httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
-      await expect(fresh).rejects.toBeInstanceOf(KeycloakAuthenticationError);
-    });
-  });
-
 });
