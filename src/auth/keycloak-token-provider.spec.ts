@@ -196,10 +196,37 @@ describe("KeycloakTokenProvider", (): void => {
   }
 
   describe("start-up", (): void => {
-    it("returns null before the first login completes", async (): Promise<void> => {
+    it("serves the first token through a promise while the first login is in flight", async (): Promise<void> => {
       const result: SetupResult = setup(PASSWORD_CONFIG);
-      expect(result.provider.getToken()).toBeNull();
+      const pending: TokenResult = result.provider.getToken();
+      expect(pending).toBeInstanceOf(Promise);
       await completeLogin(result);
+      expect(await pending).toBe(ACCESS_TOKEN);
+      expect(result.provider.getToken()).toBe(ACCESS_TOKEN);
+    });
+
+    it("yields null from that promise when the first login fails, and null afterwards", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      const pending: TokenResult = result.provider.getToken();
+      result.httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 401, statusText: "Unauthorized" });
+      expect(await pending).toBeNull();
+      expect(await rejectionOf(result.provider.whenReady())).toBeInstanceOf(KeycloakAuthenticationError);
+      expect(result.provider.getToken()).toBeNull();
+    });
+
+    it("yields null from that promise when no Keycloak is configured", async (): Promise<void> => {
+      const result: SetupResult = setup({ keycloakUrl: "", realm: "", clientId: "" });
+      expect(await result.provider.getToken()).toBeNull();
+      result.httpMock.expectNone(TOKEN_ENDPOINT);
+    });
+
+    it("yields null from that promise when a re-configure supersedes the first login", async (): Promise<void> => {
+      const result: SetupResult = setup(PASSWORD_CONFIG);
+      const pending: TokenResult = result.provider.getToken();
+      const reconfigured: Promise<void> = result.provider.configure({ keycloakUrl: "", realm: "", clientId: "" });
+      flushToken(result.httpMock.expectOne(TOKEN_ENDPOINT), ACCESS_TOKEN);
+      await reconfigured;
+      expect(await pending).toBeNull();
     });
 
     it("T36 logs in with exactly the five password-grant fields and serves the token", async (): Promise<void> => {

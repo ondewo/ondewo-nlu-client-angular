@@ -408,12 +408,25 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
    * @returns the access token synchronously while it is comfortably valid; a
    *   promise running the shared refresh when it is inside the leeway (rejecting
    *   with a {@link KeycloakAuthenticationError} only when the token has expired
-   *   and cannot be refreshed); `null` before the first login completes or
-   *   without a Keycloak config.
+   *   and cannot be refreshed); while the first login is still in flight, a
+   *   promise that waits for it and yields its token (`null` when it fails), so
+   *   a request issued right after bootstrap is not sent unauthenticated; `null`
+   *   without a Keycloak config or after a failed first login.
    */
   public getToken(): TokenResult {
     if (this.session === null) {
-      return null;
+      if (this.starting === null) {
+        return null;
+      }
+      return this.starting.then(
+        (): Promise<string> | null => {
+          if (this.session === null) {
+            return null;
+          }
+          return this.session.getAccessToken();
+        },
+        (): null => null
+      );
     }
     const token: string | null = this.session.peekAccessToken();
     if (token !== null) {
